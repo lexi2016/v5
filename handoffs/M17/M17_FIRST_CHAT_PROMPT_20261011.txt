@@ -1,0 +1,159 @@
+V5 M17｜尾盘量价发现与持续跟踪
+
+这是原18模块的M17首次实现任务，立即交付可应用、可独立核验的实际代码候选。请在实际选择的GPT6极高思考、Superpowers与GitHub插件环境中执行，实际技能/插件调用需可核，不以文字声称替代。用户现要求GitHub主流程：使用提交消息中经核实的lexi2016/v5专属M17分支固定commit和可读工程树，先读START_HERE及完整任务书。ZIP仅保留审计身份，不作为默认输入。不要只返回设计、接口草案、空壳、假runner或“等下个交易日再写”。
+GitHub开发分支权限：用户已授权在本模块由指定发布者明确分配的独立开发分支直接交完整实现、测试、manifest与原始日志commit。先核提交消息中的准确分支和固定输入commit再写；禁止改其他模块、V4、main或合并。若本Chat实际工具不能写，报告真实限制并交可验证完整候选树和正/反补丁，由指定发布者接续，不预先把分支工作禁掉。Mac负责对最终固定commit独立实测；代码commit不等于业务/页面/自然运行通过。
+
+
+一、固定依据与材料
+- donor F=f7cb731c384ee6890a87d16c19a5b5a621779477，原仓库lexi2016/v4只读。
+- 原总计划：https://github.com/lexi2016/v4/blob/24c6d60d524f43fcf4209ec8b078ec02cb34417e/V5/docs/superpowers/plans/2026-10-09-v5-master-delivery.md 。原18模块不改号，M17是尾盘量价发现与持续跟踪，独立于M14超跌、M07/M08 Stage和M16公开资料任务。
+- 原M17_SOURCE_AND_TESTS_20261010.zip：220248 bytes，SHA256=d121e3fd0ba2ab8c2d08ee713a5f39d3c3d2389d64f07b6d0bed51af09a6f3b5，45 archive entries，37件源件（35件F源码/测试/参考+2份固定计划），逐件SHA256/Git blob与CRC重核匹配。
+- 另有M17_FIXED_F_IMPORT_SUPPLEMENT_20261011可读源树，95件固定F原件；可选审计ZIP为639294 bytes，SHA256=15a592f391de5e14726eb9d9b62710a29fdbe08fc256afa8a7a8784af49133d8。所有原文Git blob/bytes/SHA256及ZIP成员重核匹配。它补manager_close_attempt、workspace_plan/projection/read_control、原shared_data依赖、late PyTDX contracts/futu_minute/probe、原universe owner、原package initializer顶层依赖及PDF vendor，并附原UI/dispatcher/stage_jobs/日历只读对照。
+- 这些是来源材料身份，不是产品测试通过。核源码实际import/调用点后构建M17最小生产闭包。全局调度的其他业务分支和真实Mac外部依赖不在完整装配证明内，不能假称全仓可运行；发现实际缺件列准确路径/符号/调用点，不扩大为全仓重构。
+- 从真实GitHub插件读发布者提供的模块分支固定commit；普通网页打不开私有repo不代表插件不能读取。具体链接/branch/commit只接受已验证值，不猜造。读失败报实际工具错误，继续可独立完成的候选工作。
+- 新目标是独立私有lexi2016/v5。只有本次提交消息明确授权的模块专属分支才可写；否则交完整候选给指定发布者。不合并主分支、不部署、不改V4/8910/原数据、不交易/改BUY门、不扩凭据或系统权限。保留RESEARCH_ONLY与原生产/下单禁止标志。
+- 固定材料的V5/属于旧donor路径空间，不等于已核实新仓库布局。REPO_PATH_MAP.json分别列donor path、after包相对路径、提议新repo路径和待整合项，不能猜路径前像。
+
+二、此次实际代码深度与最小装配
+1. 保留原算法和严格/近似/未知语义，真实调用原prepare_universe/materialize/recapture_close_minutes及规则/证据/跟踪reader，不用Stage或M14结果改名，也不把M18只读投影当生产者。
+2. 给两条固定原路径各自可运行的默认装配。1530现场与late PyTDX分别保留原窗口/身份/产物，运行mode须明确已核绑定，UNKNOWN拒绝，不默认选一个、不并行双采。缺Mac活动mode只阻真实执行，不能阻挡先完成两路候选、原contract测试及共享集成候选。
+3. 生产默认路径真实原owner→M17独占私有存储→完整artifact/receipt/attempt/prior→独立reader重开落盘字节并核同run/SHA→可供API、原UI、M18消费及实际daily触发。不能靠外部测试注入runner、固定空结果或内存对象自比。M02/M04/M06已提交输入只读复用，同源只一个采集owner。
+4. 原1530的pre-capture history、snapshot/universe attestation、当时available/cutoff/日历/资格及currency/单位必须完整；不能用窗口结束后的panel填补事前历史。late原source_trade_date/next plan_trade_date/captured_at、received_not_historical_1530、非最终收盘/单位未核语义不变，原15:45窗口及精确截止（包含原+5秒规则的地方）以固定原contracts为准，不凭自然语言概述重写边界。
+5. 持续跟踪必须真正执行原verified prior规则、first_seen/last_seen、prior run/SHA、新催化PIT、旧event不能充新催化、原失效条件。缺后续行情/事件不能自动当确认失效或新日成功；同输入幂等，失败/重试保留旧成功但只作标明历史/过期，不在新attempt失败/运行时继续显示旧卡片为当前READY。
+6. 普通GET/页面刷新只读产物，不prepare universe、不抓quote、不materialize、不开写store、不恢复journal。worker独立，API失败/未知/真实空/partial/pending分开，展示非秘密reason codes。
+7. 不要求未来交易日真实数据才能写候选；历史已存在材料与SIMULATED测试分别标HISTORICAL/SIMULATED，不能把改clock、假provider或人工恢复写为NATURAL。现场窗口错过的真实1530验收保持NOT_RUN，不用今天quote回填，不扩大late原current/previous session范围；真实窗口/下一适用日证据由既有Mac独验。
+8. API/UI/daily不能只留设计TODO。本模块侧交实际可调用入口、装配函数、路由/产物合同与测试；必要共享改动交独立integration-candidate/和INTEGRATION_REQUEST.md，注明fixed前像、最小插入点、route/date/market/slot、polling或触发、原manager页映射与回滚。共享前像缺失标WAITING_BASE，不猜完整新文件，不覆盖其他模块/gateway/UI/调度/M18候选。原Stage失败后late仍能独立尝试，late成功不得升级Stage标签。
+
+三、交付包硬性结构
+- 完整after/：每个新增/修改文件的完整内容及必要原owner私有冻结闭包；不能只有patch、截断片段或伪代码。
+- forward.patch与真正reverse.patch：反patch必须从候选恢复精确前像，不是正patch改文件名；新增文件反向删除，删除文件反向恢复。
+- FILE_MANIFEST.json：逐文件before/after SHA256与字节数，新增/删除用显式ABSENT，不拿空文件哈希冒ABSENT；另列donor commit/path/Git blob/SHA256/用途与写权限。
+- 在临时拷贝中真实执行forward check→apply→after SHA比对→reverse check→reverse→before SHA比对，保留命令、退出码和完整原始日志。未执行要写NOT_RUN，不能给“预计通过”。局部源件subset不能假称全仓回归。
+- 原测试及新增失败测试的完整代码、命令、解释器、退出码、原始stdout/stderr，覆盖失败→最小修复→最终固定候选再测。分别列pass/fail/skip/NOT_RUN；不能叠加旧测试数字。
+- DEFAULT_ASSEMBLY.md：生产默认入口、模块私有根、只读来源与原provider绑定、独立reader、产物和job状态、适用触发、缺件/阻断原因、单模块回滚。附INTEGRATION_REQUEST.md、隔离整合候选及REPO_PATH_MAP.json。
+- 优先交可读完整after工程树、forward/reverse.patch、manifest、原始日志和任务说明；使用经授权的专属GitHub分支时必须真实提交并返回固定commit/逐文件链接，否则给指定发布者完整候选。ZIP仅可作为可选便携副本，不以ZIP或一张README替代工程树。若本会话确实没有文件工具，明确限制并交所有必要完整文本及可在既有环境直接生成工程树的脚本，不能杜撰附件/commit/测试。
+- 代码候选、真实数据通过、API接入、页面可用、自动接续和完整验收分别列证据。现阶段无Mac/UI/自然触发证据就保持NOT_RUN；不以候选交付算完成M17。
+
+四、补件边界与执行次序
+先核材料和原import/调用点→补会失败的V5契约测试→最小实际实现及默认装配→固定after与可逆补丁→原回归/新增测试原始日志→独立读回→单独共享整合候选/现役Mac验收步骤。对global executor_registry其他分支不要无边界移植；它与原stage_jobs只读对照用于既有唯一调度挂载。M17 source补件里出现ManagerResearchJobService是原包initializer所需导入，不授权M17替M16发公开资料job或修改其状态。source补件出现workspace_plan及rebound算术是原1530 history/witness依赖，不代表M14/M18已完成或允许跨模块写根。
+
+以下是原业务交接全文。若交付方式与以上GitHub主流程、完整after、真反patch、原始日志、默认生产装配和隔离整合候选不同，以本次要求为准；原算法、PIT、窗口、资格与研究安全约束均保留。
+
+# 给Chat的M17任务
+
+## 必须使用用户指定的 Superpowers 插件
+
+用户明确指定已安装的 Superpowers（plugin://superpowers@openai-curated-remote）。本会话须实际选择并使用该插件的相关技能，不能只在正文写插件名称当作已调用。先按 using-superpowers 判断应使用的流程；修复按 systematic-debugging，必要设计/计划在本模块范围内完成，再按 test-driven-development、requesting-code-review 与 verification-before-completion交代码和可核验证据。复用既有总体计划，不再发起全仓设计或仅交第二份计划。
+
+如果本会话无法访问该插件，说明实际入口/可见限制，不声称已启用；把这一问题回传嘻嘻。仍如实区分候选、静态检查、实际测试和Mac验收，禁止伪造执行。
+
+
+请给尾盘量价发现与持续跟踪一个最小具体V5代码候选。先按固定源码和Mac活动证据核唯一owner、当前capture mode和完整闭包，再列V4 donor→已有/拟新增V5路径、输入、独占输出、API和原页面映射。不要另写策略，也不要把超跌或Stage结果改名当M17。
+
+## 先明确原两条路径
+
+- 1530现场：prepare_universe/materialize、原universe owner、fetch_futu_snapshot、snapshot attestation、pre-capture history、catalyst/prior验证、原payload与独立readback。
+- late PyTDX：recapture_close_minutes及原1555 executor连接，源交易日/下一计划日/真实capture time分开，精确D1池和原窗口绑定；不得写1530 lane。选哪条运行遵从既有Mac活动mode，不擅自切换。
+
+原materializer内clock/fetcher注入仅用于SIMULATED测试，不暴露为生产CLI时间覆盖。半日/非Connect交易日没有1530现场，不能猜半日槽。Late合同只允许原current或previous适用session，不能扩大历史任意回填。
+
+## 代码交付重点
+
+1. 封装原owner至本模块私有根；读M02/M04/M06已提交输入，避免重复采同源。原默认root、APP_ROOT检查和provider闭包都要明确隔离绑定，不能只是替换目录字符串就宣称迁移完成。
+2. 1530缺原窗口不重采当前行情，不造received_at/available_at。预捕获history缺失就阻断，不能用更新后的面板填补。late的received_not_historical_1530与非最终收盘、量纲未核标志原样保留。
+3. 保留原币种/单位/历史完整性、重复quote冲突、PIT/催化出处验证、strict/near/unknown研究观察语义。M14可共用只读原authority但不能共用结果身份、写根或补丁owner。
+4. 实现按原实际合同持续跟踪：只接完整verified prior，保留first_seen/last_seen/prior run/SHA、后续新催化及原失效条件。没有后续quote/来源不能假装失效已确认；旧event时间不能充新催化。每天适用触发是否存在须实际绑定，不凭文本创建额外collector。
+5. 相同输入身份重复触发幂等；失败/中断新attempt保留前成功及当时证据。原reader要求新失败/运行不能当作当前旧卡片，历史成功只允许明确历史/过期区显示，不掩盖本次失败。
+6. GET与页面刷新只读artifact/receipt，不准备universe、不抓行情、不物化跟踪。后台worker与API隔离；成功必须原计算、保存及独立reader同SHA，不只HTTP200。
+
+## 集成请求与交付
+
+本Chat不写前端、gateway、全局调度或M18。另给INTEGRATION_REQUEST.md：原/api/v4/manager/workbench-research的date/market/slot只读合同、1530与CLOSE_RECAPTURE分列、跟踪理由/失效条件、M18已提交引用、活动mode/真实时段绑定。原Stage失败后late仍可独立尝试，不把它的成功反向升级Stage。
+
+交精确patch与SHA256、base/candidate commit、每文件前后SHA、原闭包manifest、原回归和新增失败测试、Mac实际步骤、回滚和缺件。代码、真实输入、页面、自动接续、完整验收分别汇报；仅旧投影/模拟通过不能关闭M17。
+
+活动mode未知不阻挡静态适配候选：按两条固定原路径交代码及契约测试。生产入口必须显式绑定已核mode，unknown拒绝执行，不默认选择、不同时双采；实际mode由Mac部署前核实绑定。
+
+
+# M17固定来源与目标
+
+原总计划24c6d60d524f43fcf4209ec8b078ec02cb34417e / V5/docs/superpowers/plans/2026-10-09-v5-master-delivery.md：M17/P4。
+迁移d1bf034640ca2e5957423de2745a98e159b69af2 / V5/docs/superpowers/plans/2026-10-10-v5-migration-execution.md：M17（旧盘点16）。
+代码固定f7cb731c384ee6890a87d16c19a5b5a621779477，完整树无close_discovery_daily.py。以下源码已读，非活动Mac匹配/运行证明。
+
+## Donor → V5
+
+- canonical/ops/materialize_manager_close_discovery.py::prepare_universe/materialize/recapture_close_minutes → 拟新增V5/vendor/close_discovery_baseline完整owner闭包；候选V5/src/v5_shadow/close_discovery_daily.py只封装当前活动模式。
+- canonical/domains/manager_close_discovery.py、manager_close_rebound.py → 原1530观察规则/历史witness，在M17私有baseline只读固定；文件含rebound名称但PHASE=SNAPSHOT_1530_NOT_FINAL_CLOSE，不能当M14 daily超跌完成。
+- canonical/domains/manager_catalyst_tracking.py::read_catalyst_events/read_prior_evidence → 原PIT与prior校验、持续跟踪；只通过完整validator的prior可建立lineage。
+- canonical/domains/manager_research_evidence.py → 原universe/snapshot attestation，source实际available不等同quote时间。
+- canonical/apps/api/v35_api/manager_workbench_router.py → 只读合同对照；V5挂载共享集成请求，不能让M17改M18或其他router。
+- canonical/infrastructure/scheduling/manager_close_executor.py → 当前mode与真实窗口合同对照，调度绑定由单一集成者改。
+- 已有V5/vendor/manager_plan_baseline/v4/manager_research/workspace_discovery.py及V5/src/v5_shadow/manager_panel_observation.py → 已存在其他投影参考，不是M17生产，禁止跨写。
+
+原1530产物workbench_research/{date}/1530.json及1530.receipt.json；late产物close_recapture.json/receipt/candidates与inputs/close_recapture_pytdx.json分列。V5必须映射到本模块私有root，不默认实际现役路径。完整owner依赖、当前模式和真实首次/后续receipt待Mac核，不因历史文件已找到而宣称全部迁移。
+
+## 已读文件与Git blob
+
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_close_executor_rework.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_close_executor_rework.py)
+  - Git blob SHA：38fa6bbf4200fbbb53599fdb01132b3472970ad5
+- [handoff/v4-running-source-20261005/canonical/ops/materialize_manager_close_discovery.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/materialize_manager_close_discovery.py)
+  - Git blob SHA：85529d94684e4afd0a6efdebb6d8c4549d1e46f7
+- [handoff/v4-running-source-20261005/canonical/domains/manager_close_rebound.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/domains/manager_close_rebound.py)
+  - Git blob SHA：1c39affd1bfcf181654c4e9d00e2c501c1d5bfc5
+- [handoff/v4-running-source-20261005/canonical/domains/manager_close_discovery.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/domains/manager_close_discovery.py)
+  - Git blob SHA：4aae1db0cba7495a3b1997ecfda10146317e977c
+- [handoff/v4-running-source-20261005/canonical/domains/manager_catalyst_tracking.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/domains/manager_catalyst_tracking.py)
+  - Git blob SHA：cbc1688cc08c48bcfe7dc395d1f00a42442b95ab
+- [handoff/v4-running-source-20261005/canonical/tests/test_stage_jobs_manager_close_recapture.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_stage_jobs_manager_close_recapture.py)
+  - Git blob SHA：965e45fc21b3f796b249787736567fbf6e200c48
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_materializer_rework.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_materializer_rework.py)
+  - Git blob SHA：228b107393c1eb284aaf9717499ab4111755efc9
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_r2_rework.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_r2_rework.py)
+  - Git blob SHA：8d88482f13fa0e46b8af07f6e44562b191fa1cf4
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_workbench_research_router.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_workbench_research_router.py)
+  - Git blob SHA：c6bcfe8831a03b90abc80f963163cfc9dc0511d3
+- [handoff/v4-running-source-20261005/canonical/apps/api/v35_api/manager_workbench_router.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/manager_workbench_router.py)
+  - Git blob SHA：793a8687601d34a042565f14b14b607bf0c46c10
+- [handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/manager_close_executor.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/manager_close_executor.py)
+  - Git blob SHA：943f324e235da0fb146501ad49eae5eaed7b824f
+- [handoff/v4-running-source-20261005/canonical/domains/manager_research_evidence.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/domains/manager_research_evidence.py)
+  - Git blob SHA：9255d425083e3c3627d4940d7556eed79e3bc00f
+- [V5/vendor/manager_plan_baseline/v4/manager_research/workspace_discovery.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/workspace_discovery.py)
+  - Git blob SHA：d27203bc60a41534f312907d8f6cd6d5e3628b1f
+- [V5/src/v5_shadow/manager_panel_observation.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/manager_panel_observation.py)
+  - Git blob SHA：2724a231efdcc91f4db7d9d464edf480a6a89803
+
+Git blob不等于patch SHA256。Chat新候选另交patch及每文件before/after SHA256，遇实际前像不符先明确差异，不整包覆盖。持续跟踪和尾盘接口不从Stage、M14或M16借成功标签。
+
+
+# M17验收与回滚
+
+本清单待执行。状态统一为：代码接入、真实数据通过、页面可用、自动接续、完整验收。工程测试单列证据，不替代真实数据、页面或自然接续。
+
+## 原回归
+
+完整隔离原闭包内保留以下测试；本包只读，未运行：
+- tests/test_manager_materializer_rework.py：单原bridge调用、真实artifact与ASGI读回、失败非零候选成功、late不抓不回填、迟返回不当1530、错日拒绝、mandatory root/origin、prior完整B1验证
+- tests/test_manager_r2_rework.py：币种单位不猜、原amount严格边界、snapshot/universe/hash绑定、重复quote、原新催化PIT、旧时间不充新催化、弱prior拒绝、新失败/运行不显示旧卡片、数值bool不冒predicate
+- tests/test_manager_workbench_research_router.py：exact date/market/slot、pending/not-run/input-missing不同、future/nested/safety/schema拒绝、全predicate真才qualified、显式null保留、读路由零写
+- tests/test_manager_close_executor_rework.py：1500前置、1530超时不越过15:32排他截止、late PyTDX不写1530
+- tests/test_stage_jobs_manager_close_recapture.py：1555原recapture及store读回、Stage失败不妨碍独立late尝试且不升级Stage、late模式不启1530/1500
+- 1530 V3 rebound及持续跟踪的额外原回归按完整闭包找齐；不把M14两门测试当本模块全覆盖。
+
+新增V5 test_close_discovery_daily.py：同身份并发/重试、snapshot/history/receipt任一漂移、错mode、late/current/previous session边界、前成功保留、请求发生真实时点、纯GET零写、跨日prior更新/缺失、M14/Stage身份与输出根不混。测试命令、解释器、fixture与真实输入分别标注；旧总测试数字不得替当前固定回归。
+
+## Mac真实业务与页面
+
+1. 核实际运行mode、唯一采集owner、固定源码SHA、真实root/日历/资格/历史/新闻binding，保存V4及M14/M16/M18摘要。不得凭源码默认值启用另一mode。
+2. 若现场模式，用真实1530输入且actual available<15:32，原pre-capture history及资格当时可用，计算→receipt→独立readback同run/SHA。无历史窗口则NOT_RUN/错过，不改clock补。
+3. 若late模式，保留15:45—15:55原窗口、source_trade_date、next plan_trade_date、actual captured_at、received_not_historical_1530，1530根字节不变。100条覆盖是原合同要求，不可用默认100伪装实际完整；缺量纲/最终收盘仍明确。
+4. 对下一适用日持续跟踪，原verified prior链保持、首次时间不重置、原新增催化/失效规则生效。缺上游正确阻断，旧成功只作为明确历史。源/产物/前后跟踪SHA均记录。
+5. 真实V5浏览器查看经理尾盘/持续跟踪区，切日、1530/recapture区别、展开理由/缺口/失效条件、刷新、返回与重复动作。页面与API同identity；普通GET零collector/zero write。记录实际URL、代码/生成版本、截图。
+6. 按当前原合同自然触发与跨日自动更新，人工恢复不冒自然。P5连续适用日要求仍保留；周末/缺窗口不能即时签全完成。共享回归与预览发布由唯一集成者执行。
+
+## 回滚及反馈
+
+仅发布M17自己的代码/worker与generation；预存旧指针并用平台expected-generation/CAS，先核进程真实身份。失败只恢复M17旧binding/引用，保留所有snapshot/history/attempt/成功/跟踪证据；不删除窗口文件、不回滚Stage/M14、不触动V4。不让新旧两个worker同写运行根。
+
+回同一Chat：固定commit/patch SHA、mode、source/plan日期、window/capture/available时间、输入/历史/产物/prior SHA、原错误码与完整非秘密日志、API/UI和其他模块不变量、回滚状态。真实证据或活动绑定缺少明确BLOCKED，不能以文件存在或HTTP200算完成。

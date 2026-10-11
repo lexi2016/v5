@@ -1,0 +1,13 @@
+{
+  "module": "17",
+  "zip_name": "M17_SOURCE_AND_TESTS_20261010.zip",
+  "zip_bytes": 220248,
+  "zip_sha256": "d121e3fd0ba2ab8c2d08ee713a5f39d3c3d2389d64f07b6d0bed51af09a6f3b5",
+  "archive_entries": 45,
+  "source_files": 37,
+  "source_blobs": "MATCHED",
+  "zip_crc": "PASS",
+  "zip_member_sha256": "PASS",
+  "product_tests": "NOT_RUN",
+  "mac_data_included": false
+}

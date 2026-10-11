@@ -1,0 +1,15 @@
+M17固定F最小装配补件（输入材料，不是产品候选）
+原M17包保留不改。本补件从固定f7cb731c384ee6890a87d16c19a5b5a621779477取原文，逐件重算Git blob、SHA256和bytes。7件直接缺件及固定集成参考从GitHub固定F读回，其余重用本地同blob原件。
+
+补齐理由：
+- materialize_manager_close_discovery._status与原reader引用manager_close_attempt。
+- 原1530 history/arithmetic依赖workspace_plan、workspace_projection、workspace_read_control，原history引用hk_daily_supplement/hk_security_master。
+- 原fetch_futu_snapshot模块顶层需要shared_data allowlist/consumer/hk_0_2/store等。
+- 原late PyTDX路径固定验证并导入contracts、futu_minute、pytdx_exhq_probe。
+- 原1500 universe调用需要stage_center/hk_universe_preflight，活动binding仍必须Mac核实。
+- 原v4.manager_research.__init__会导入service/provider等，所以补顶层导入依赖及原PDF vendor，不能靠空__init__或假模块证明原owner可执行。这些原件只供私有冻结复用，不授权M17改M16/M18或调用它们另起财务研究。
+- 原UI与executor_registry只作集成参考，禁止当本模块允许覆盖的文件。
+
+验证范围：材料装配及字节身份。没有导入产品、跑产品测试、连接provider、读Mac或真实运行。此补件不是全仓、完整site-packages、真实业务数据/凭据或所有调度分支闭包。原全局executor_registry有其他模块惰性依赖；本任务只做M17挂载，由唯一整合者在真实全仓执行集成回归，不因此要求全仓重构。
+
+制作M17候选时仍须按实际走到的生产路径补齐完整owner manifest。对真实源缺口列精确import/调用点，不把缺数据改空成功。静态、历史与SIMULATED测试可先完成，不等下一交易日才交代码。

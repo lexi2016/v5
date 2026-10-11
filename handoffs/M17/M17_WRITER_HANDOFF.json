@@ -1,0 +1,17 @@
+{
+  "module": "M17",
+  "title": "V5 M17｜尾盘量价发现与持续跟踪",
+  "delivery_mode": "GITHUB_PRIMARY_READABLE_ENGINEERING_TREE",
+  "prompt_path": "/workspace/shared/m16_m17_initial_submission_20261011/M17_FIRST_CHAT_PROMPT_20261011.txt",
+  "prompt_bytes": 23990,
+  "prompt_sha256": "c1ad187b21ddc90bbc39d5ac89cd9ce1e586ab2fa2cdc3e211eb0de5d286ea32",
+  "source_tree": "/workspace/shared/v5-module17-source-20261010",
+  "source_manifest": "/workspace/shared/v5-module17-source-20261010/SOURCE_MANIFEST.json",
+  "supplement_tree": "/workspace/shared/m16_m17_initial_submission_20261011/M17_FIXED_F_IMPORT_SUPPLEMENT_20261011",
+  "supplement_manifest": "/workspace/shared/m16_m17_initial_submission_20261011/M17_FIXED_F_IMPORT_SUPPLEMENT_20261011/SOURCE_MANIFEST.json",
+  "original_zip": "/workspace/shared/v5-module17-source-20261010/M17_SOURCE_AND_TESTS_20261010.zip",
+  "supplement_zip": "/workspace/shared/m16_m17_initial_submission_20261011/M17_FIXED_F_IMPORT_SUPPLEMENT_20261011.zip",
+  "library_file_id": null,
+  "writer_instructions": "实际选择GPT6极高、Superpowers和GitHub插件。使用指定发布者已核分支固定commit，完整发送本TXT；源ZIP仅审计/可选备用，默认提供可读工程树。",
+  "github_write_scope": "Only exact separately assigned M17 development branch; implementation/tests/raw logs commit authorized, no V4/main/other module/merge."
+}

@@ -1,0 +1,225 @@
+{
+  "files": [
+    {
+      "path": "PACKAGE_CHECKS.json",
+      "bytes": 567,
+      "sha256": "40fea9ae604c1e62164493fd8895e8a65701b48033935f11a57d7b710726f788"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 27207,
+      "sha256": "399983a4e0bba5a0d9eef6652745a33a1c569d3bae454790dd8636b71b25bf75"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 3303,
+      "sha256": "4f26632c269d8eddfe9f6e6dec1d78de258f35020fcd0534651e5a557421cbc0"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/src/v5_shadow/contracts.py",
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/src/v5_shadow/digests.py",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/src/v5_shadow/manager_panel_observation.py",
+      "bytes": 2859,
+      "sha256": "ef5144fa13e844e4045522304bdb34b28ae367c5f57ae48a5303f9b8c13071fd"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/src/v5_shadow/module_api.py",
+      "bytes": 15282,
+      "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/src/v5_shadow/module_artifacts.py",
+      "bytes": 7936,
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/src/v5_shadow/run_ledger.py",
+      "bytes": 6105,
+      "sha256": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd"
+    },
+    {
+      "path": "fixed-f7cb731c/V5/vendor/manager_plan_baseline/v4/manager_research/workspace_discovery.py",
+      "bytes": 23129,
+      "sha256": "ed9188a44a4adb6bf2fd08836d465ed3ea7e7d2b8dd7075da99b7aaabc5c5c1a"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/manager_workbench_router.py",
+      "bytes": 57619,
+      "sha256": "95ccda85ff50d44cffbb18fc655e417f926c14b27a60cfa4c5fad17a3cbd1b5e"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/runtime_tasks.py",
+      "bytes": 3350,
+      "sha256": "f9923462342eaaeafba6255e9f8adda54f9852ea4996cf6da0cf82e4faf32965"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "bytes": 10239,
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_catalyst_tracking.py",
+      "bytes": 24351,
+      "sha256": "3432d0c75b82dd4b06c1204cf59e378a32bc4ccc5403a695417ba47789dc05a7"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_close_discovery.py",
+      "bytes": 16974,
+      "sha256": "f983b5e2bea03d1d5309467e75c2e2da0157636813183221035fac5ef2704b6b"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_close_rebound.py",
+      "bytes": 27594,
+      "sha256": "aef0a7a3b767d5f74e3ef24fb1205897032d4a3be9d9995a028207c02a708b95"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_condition_evidence.py",
+      "bytes": 30940,
+      "sha256": "9e1c7a9fb04c7a3f00d11ba1c4c3c4922c86b6536190df7caa9d2205804ee3f6"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_research_evidence.py",
+      "bytes": 30848,
+      "sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "bytes": 10704,
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "bytes": 7514,
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/manager_input_attestation.py",
+      "bytes": 10179,
+      "sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "bytes": 9354,
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "bytes": 2251,
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/manager_close_executor.py",
+      "bytes": 43944,
+      "sha256": "ddb39500c3a426b259b14c1a6bada16b4734c738c9715ac969469368305c26d3"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "bytes": 2597,
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/ops/materialize_manager_close_discovery.py",
+      "bytes": 58783,
+      "sha256": "84b584713fdb1513379dd2513735d5f3a2e23cdfff9f07756526f7592de339e1"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_close_executor_rework.py",
+      "bytes": 13165,
+      "sha256": "30db31bd7c2937b2075fd0982776d15503560295b423e24e3b8e9cdbacc257db"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_condition_evidence.py",
+      "bytes": 21125,
+      "sha256": "3537cc06a431d6dcdf48d0f2036721ada74f1dfc685d62d0d0696303f89294fe"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_materializer_rework.py",
+      "bytes": 12259,
+      "sha256": "e9ee71d43a123d783dc49a939334046d72f3155c67655f600263ea600becf75c"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_pytdx_scheduler_runtime_route.py",
+      "bytes": 9357,
+      "sha256": "fa2879894f58a1d9dfa8e58987aef9b9a8696a559d41a5efb7e20c4d7d0ca6d5"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_r2_rework.py",
+      "bytes": 13388,
+      "sha256": "241699abf81e55df505306b96be0c51a7aae2f82ffbe541d8d74f3b4e7a5a4d5"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_rebound_grouping_equivalence.py",
+      "bytes": 9971,
+      "sha256": "62c04f9e01bcbe1dc61f95177a22baa5b32a23b9c2a04e2d3caa0fc8a39f496d"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_rebound_two_gate_screen.py",
+      "bytes": 13601,
+      "sha256": "e43d25c0e375edc91dbce940e1ab8d2108b5fa08b8a515d348a23d334bbb13f4"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_workbench_research_router.py",
+      "bytes": 14141,
+      "sha256": "d30f0f0e5a46fce4d6ba73638e99ce42dfedf48078885d26fd4297b606d32060"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_stage_jobs_manager_close_recapture.py",
+      "bytes": 10784,
+      "sha256": "f09b583b911494e60064e255615f3a9a1ce0bcdec0568a84e3fbf8442afea210"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq.py",
+      "bytes": 8534,
+      "sha256": "19946fd9c09033a77b460fe5a68f70969623d3b1c26f058091349e702d482fdd"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_auction_0920.py",
+      "bytes": 24181,
+      "sha256": "879196347ca3691262b015c412e07ca0281a50e14bce24a45a5b52be02a5f09d"
+    },
+    {
+      "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_security_master.py",
+      "bytes": 14396,
+      "sha256": "ac2c16669236d24d6d03cac183238ca8dccd8fd23895ae14ad34cef40c049008"
+    },
+    {
+      "path": "handoff/ACCEPTANCE.md",
+      "bytes": 3874,
+      "sha256": "eddc4cc73cdc4c453916f0b395f5de276f78acc327afd78820cde1e8d9d47761"
+    },
+    {
+      "path": "handoff/PROMPT_FOR_CHAT.md",
+      "bytes": 4215,
+      "sha256": "8bb8c47eb4464665ee586dac34def76b26cd62077494ec3013ef7d635b07d4e7"
+    },
+    {
+      "path": "handoff/SOURCE_MAP.md",
+      "bytes": 6680,
+      "sha256": "1572bab7147325cba9ab80ff2556e93501e6a9623ebe9bff99cd2ee378b8b279"
+    },
+    {
+      "path": "handoff/START_HERE.md",
+      "bytes": 3311,
+      "sha256": "0d477b46162e6f0acb2566e93777c1bd580400a757199de2f9d701fbcb3dab47"
+    },
+    {
+      "path": "reference-plans/master-24c6d60d.md",
+      "bytes": 16779,
+      "sha256": "daa69decc1ff83797fb20571f0bd54c5435d07109906f4a6c132918dd401d9b8"
+    },
+    {
+      "path": "reference-plans/migration-d1bf0346.md",
+      "bytes": 56388,
+      "sha256": "ae709a0827feb42b24995e521830a38c90bfb7e118c45d92e125ed6d67f73e71"
+    }
+  ],
+  "self_excluded": true
+}

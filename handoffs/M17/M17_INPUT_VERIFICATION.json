@@ -1,0 +1,16 @@
+{
+  "module": "M17",
+  "verified_at": "2026-10-11T12:18:00Z",
+  "source_zip_path": "/workspace/shared/v5-module17-source-20261010/M17_SOURCE_AND_TESTS_20261010.zip",
+  "bytes": 220248,
+  "sha256": "d121e3fd0ba2ab8c2d08ee713a5f39d3c3d2389d64f07b6d0bed51af09a6f3b5",
+  "entries": 45,
+  "source_files": 37,
+  "source_sha256_and_git_blob_matches": true,
+  "mismatches": [],
+  "zip_crc": "PASS",
+  "product_tests": "NOT_RUN",
+  "mac": "NOT_RUN",
+  "library_file_id": null,
+  "library_status": "Exact-filename Library search did not return this source ZIP; use confirmed local file, do not invent ID."
+}

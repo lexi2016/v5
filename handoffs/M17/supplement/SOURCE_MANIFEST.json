@@ -1,0 +1,952 @@
+[
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/apps/web/src/api/managerWorkspace.ts",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/api/managerWorkspace.ts",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "307cd499916cb52eedd98671d8bec3e7d6e1c3a0",
+    "bytes": 92561,
+    "sha256": "d47bcef9c51b913b3932d4e9d281d8c24f85c2ca76c7751b1f0925afcc9e79a9",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/api/managerWorkspace.ts"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/apps/web/src/views/ManagerSelectionView.vue",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ManagerSelectionView.vue",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "75b848172dd2a3fbc00b44dfb720759867209e42",
+    "bytes": 202767,
+    "sha256": "3db9731126b88555fecf60ac1a12e952b06ed70f838e078207fad9da32c2bed5",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ManagerSelectionView.vue"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+    "bytes": 3473,
+    "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar_2026.json",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar_2026.json",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "a5248566bb87551a71c173ca80ae7d242625a384",
+    "bytes": 660,
+    "sha256": "703bafff4c81f23e0b4a52418a34f78a8f79fad76064040c18e02031a36e6eb2",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar_2026.json"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/manager_close_attempt.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/manager_close_attempt.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "296418d926c73c18343ef6321809228ced4e3d0b",
+    "bytes": 4720,
+    "sha256": "ecbe2ab89bcb4837f00ff4a9c04219393cf37225a9bbafc145e0904de7ffb006",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/manager_close_attempt.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/stage_jobs.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/stage_jobs.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "ed2f02711a5bf151e347783153f3b378e42d5c67",
+    "bytes": 8911,
+    "sha256": "03441fa3f36422b67b7b19847ea887df79bbee11075db67f3eee076417cc786f",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/stage_jobs.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/executor_registry.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/executor_registry.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "58f2094c687289667598a2d7fb1088ea050289c0",
+    "bytes": 24448,
+    "sha256": "5c7ec48515dee5927b3a5cf9c5457dea299b2b6280b6c90fa452b945466faef9",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/executor_registry.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/stage_center/hk_universe_preflight.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/stage_center/hk_universe_preflight.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "be2e34e43b09cbce549aec6f45828c3fcca1baa6",
+    "bytes": 40555,
+    "sha256": "9d3d2c2d5ff3bd1c7713a9485e88000ae882f58b0a457b734656094606ba2941",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/stage_center/hk_universe_preflight.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/contracts.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/contracts.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2db1935847c4f7c4639442a9980004513230fe5b",
+    "bytes": 3252,
+    "sha256": "776569b71a9db060186362fe04cce3e8b0f707d8b4a77f80288f8031a2f14fcc",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/contracts.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/futu_minute.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/futu_minute.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9518999f52a44d4b1c5c7fe8398413edb22cde9b",
+    "bytes": 4507,
+    "sha256": "af4cc0efea026eb3f6fa084389d6ee8351a286d38765e337147ced88fda150da",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/futu_minute.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq_probe.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq_probe.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b5124bfee8068e77e873dff76d5b80da0ba207db",
+    "bytes": 5981,
+    "sha256": "9ce612fb06f022601841828bb25d11d1850cd4e3ab09de775babd56f7b8d0399",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq_probe.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "afa173a579a48919b4653381fd528d901f3241d6",
+    "bytes": 3011,
+    "sha256": "a5e307f15416fe422a0ad36f60d6996f6a3f74753581dc589ef93149178dd206",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5c234353c4c92f19ec39d928ae37f3603f06494d",
+    "bytes": 8200,
+    "sha256": "f59dc7f70939a033fcde715aef33c5e063cb10b20c98caf17ee3a42c4884c159",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/constants.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/constants.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2c9beeeaf2a748ac15df6c7b6c1ef2dade37ed77",
+    "bytes": 2604,
+    "sha256": "706ea95054bcfcf3bab12a234e79a1d25bb412ba32ab0e5b5a6f3f3f6b725df8",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/constants.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/consumer.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/consumer.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3e9fa17abafde3ebf70aab31f7fd21e5e53678b1",
+    "bytes": 2788,
+    "sha256": "bd3b19a188907a2273d09a51ee06c448f41ea94277c30a56658350ed6f3843ba",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/consumer.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "045b93ffb4311c431f1f43ee8223fde1d7a30266",
+    "bytes": 1027,
+    "sha256": "d4bce5d9337f07ec8c3594367b0203f4eb8de71b5380f14734b5944cf45dcca6",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_0_2.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_0_2.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b2b366c2cbfd89ba9fed437620057fdb01f1e561",
+    "bytes": 67647,
+    "sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_0_2.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_daily_supplement.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_daily_supplement.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "4f215a304c55987ccd2e8ef3755232b4aa9fc477",
+    "bytes": 32662,
+    "sha256": "fa7dcbce4ee026b0a02c47220820d0407af183553d3304afcc5db425dce33cbd",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_daily_supplement.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9202f4dff68915569c9c25dd2bd34e1de476ff4e",
+    "bytes": 3986,
+    "sha256": "3007691db34aa721cf9549e79d9f9782bf7490ccb5d9f6ca2895f968525afdb3",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "273dc301ff7e8fe9d91e9d3e3c7c427817dc3976",
+    "bytes": 27895,
+    "sha256": "87042083dad178442c75386e59ae4b2fd9bab0a3c92b5c3a090ddb90e6b52a16",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "66f16815275fc940cf0e193a1bb592d8919d9a7d",
+    "bytes": 1005,
+    "sha256": "7902d6b467cacfa763ca6adef297b823c924c573cdb79df2c2e04ec758c38cc4",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "793d4f104b76736b4656aed98d50cd5a9dc0f948",
+    "bytes": 1283,
+    "sha256": "612ff566b4378c13c7b1180cb2da89ac0b6cde5500a63fe530e30ae6a88b1b9c",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_cmap.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_cmap.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "fb19541f2d45060e6cd980c714df38a74f8c2d63",
+    "bytes": 12572,
+    "sha256": "0b8eea205808d522a7e4bad3e222b39c6964752b58a3a3b7259904292ee09241",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_cmap.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3693a5a87b8e212fe3919e9cef6700cfe71a1428",
+    "bytes": 1373,
+    "sha256": "035d44440b70b56ae91953b34d296b0b56b74fd1c29562c1591c067b7fcf7eed",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/_codecs.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/_codecs.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "93f95e5aad3aaf9c65ba15bbedb7acc88b2ba85f",
+    "bytes": 10555,
+    "sha256": "e3aa11649c92c06c42269d648c87abee3b3f4d84a38f81acda2d9471edeff9e1",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/_codecs.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/adobe_glyphs.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/adobe_glyphs.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "72d5ed3247b24e4c6887bf2e51001906ee2a3ffb",
+    "bytes": 447213,
+    "sha256": "b7770314f0eac08cf5c3d07481d5738dd73c7842bd02e4639397fb95a130fdf6",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/adobe_glyphs.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/core_font_metrics.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/core_font_metrics.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "f086ef7a5155332de371f9e97e4982cb5a5a21f9",
+    "bytes": 114968,
+    "sha256": "14b3d66d3678871790597820d63a397b8a972821642846397bce54d9b2c533a9",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/core_font_metrics.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/pdfdoc.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/pdfdoc.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "306357a59c4d9a0fd846bb52e5b6774d82c6ae51",
+    "bytes": 4269,
+    "sha256": "c5f4af30562cbf1b9a490d14bbdbd90ca681d16bbce61d6e0a20758bdac07145",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/pdfdoc.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/std.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/std.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "a6057ff3c7a90e9c31389d2bab1bd0f6058ad724",
+    "bytes": 2630,
+    "sha256": "0f240cb84a40184a52f6ecb58d67f87278fe92a4a13ce0228f9b08ed0d580fc1",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/std.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/symbol.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/symbol.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "4c0d680ff242a475d3f48916ad6b7998b30ff76a",
+    "bytes": 3734,
+    "sha256": "9c86864089615822623cc1ebc149661871fefdf397c842af82e466b8a5dc1809",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/symbol.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/zapfding.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/zapfding.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9b6cdbcc0bca199f3eb8cca9e2cc7fe6001a34fb",
+    "bytes": 3742,
+    "sha256": "3d0c63c510bad7a778d711777b15713f55bc9cce10ad97e33b7966b4bc6913fb",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/zapfding.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "215a2586062052a81ae2eed1b829d5ba50251d88",
+    "bytes": 3054,
+    "sha256": "2b767a02e5e15d579780b7adf93ba4ab682df47eba3a076ea6cbf1212d429a42",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_base.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_base.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "894025f3bca1ae5f9b7797fa34404bb0abd0e733",
+    "bytes": 1711,
+    "sha256": "fdfe77323eaf8af84464c438bcdc4de46d083a0158fa7e7f95e91ed1cfea88d5",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_base.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_cryptography.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_cryptography.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b3a3d2e6dd7b328dd460a4706a399e08e0d10319",
+    "bytes": 4460,
+    "sha256": "f733a4933312b17e1a974454934a8cd1d29f7dc1e47b8c1f9845caf64c28450f",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_cryptography.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_fallback.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_fallback.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "0412211278290605c1a9b18f82f5c131b15b018d",
+    "bytes": 3334,
+    "sha256": "bec628a30475602015feaf87add21986451cac26fa1ef44134c626d3742d094f",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_fallback.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_pycryptodome.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_pycryptodome.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3f66581e172b4dd4ea0b02f275f60ba3b26bc66f",
+    "bytes": 3280,
+    "sha256": "bb8bed2e8ecdbfa02a6513671f5a0d3425af4d86a8c1f4957febe5916def4fab",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_pycryptodome.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_doc_common.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_doc_common.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3d0e93b6c87e48795fe1f9a5a12c343dfcf06b5d",
+    "bytes": 54398,
+    "sha256": "54a5f4cd06ba5f658a9ed175b9c6224134b3dcf9f98ab11fc4da1f36e02a262e",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_doc_common.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_encryption.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_encryption.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b57191e802f16386cd2f62a75aa45023eb97559c",
+    "bytes": 49546,
+    "sha256": "319f3e012455b473ceb9c51df87f4a45f94eab902f88f14f8e5769901540a1ce",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_encryption.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_font.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_font.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "236a372d88932124b92844740e25bcc83aff8a11",
+    "bytes": 14256,
+    "sha256": "50ad53071d7979e53daa4661bf38a0e1823eb6365382007eca20b414b73767bb",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_font.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "383be98f4ded2a651091b4e0b545d1dd273fb001",
+    "bytes": 90193,
+    "sha256": "f93c459a77c433dbd2541e94d1fdfa599e486ca5fe3e3efe9348eaf94552639c",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page_labels.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page_labels.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "7a4358226053110502d71a7bb5ff72f7355984cb",
+    "bytes": 8626,
+    "sha256": "bfa0a9bba3495c2f5143f05e19d866d39695f19eb3c623d1367eaa129d41b951",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page_labels.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_protocols.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_protocols.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "ac24abbbe200c4ffd201d04d73196eb7a8c419bf",
+    "bytes": 2123,
+    "sha256": "eeacfdd8b55d3eb6244a97543e9029f54e065b98f13414df55ca545b052110ea",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_protocols.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_reader.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_reader.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "ffbffebbf3de0e6625615e5e82ab32b4ce4e44d2",
+    "bytes": 57708,
+    "sha256": "9aaa6780e62c061509f0d3b658dbdac185404fecadac01f7f9d35ac009ce2024",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_reader.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "fd51c243acb8b621f2c0f2f8f4c2657278d13ade",
+    "bytes": 8515,
+    "sha256": "6b7677deb4154e230a1adc2deff6df5e53e8b1b493f2bcc42e8367b74e77fd0c",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "d3151600e9bc1029a6d85c2bc9e53e9e36fd07df",
+    "bytes": 340,
+    "sha256": "454408c22530ce778db5c9639d533a8e445a7a6ea980fee6383dbe3019ada6fc",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_fixed_width_page.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_fixed_width_page.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "48f654ebb4c680494bdab5c17582e632f1e3ab54",
+    "bytes": 15370,
+    "sha256": "789bde0dbc8ca281bdef4a893a13394706fd668cb2243ca7cd6a55f5aec84b6d",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_fixed_width_page.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_manager.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_manager.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "947cdd4165008319f82913ac0b11c531f356fe1f",
+    "bytes": 8221,
+    "sha256": "5d5ac88de4dde6349d31ec41431b34b4be48e5150e8ad4663759842ce70a626e",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_manager.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_params.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_params.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5203f12733f4b97dcb025e9f0366c4ae8dd54b68",
+    "bytes": 5481,
+    "sha256": "872c3aa670bcba9064a055542772c7f21048207acdc22a9aa9c632cc8232afa6",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_params.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_text_extractor.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_text_extractor.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "866f1fdbf346acd469efa3ca0e6f6124547987ea",
+    "bytes": 14388,
+    "sha256": "b54a9bbc2ebd305706406501b7f63caeab1535ffbcb0c171003c8a9da8b4a232",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_text_extractor.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_utils.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_utils.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "0396ca6f32c6ca00759e98bc2e4ffa4ca2b76378",
+    "bytes": 20814,
+    "sha256": "2df8188c0ad153b97d19201bb681b3bbdbd507e7243e2d657b4eb543a7072656",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_utils.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_version.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_version.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "608ddc3e604b92f258566be3bc84d8736443d501",
+    "bytes": 23,
+    "sha256": "2416f2ebd53fb332339ad719e9569c95eedc0157bb9e1573ee0205d0d07716aa",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_version.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_writer.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_writer.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "fc2d40af3b0f3f733bfc40853e8a79a8d874133f",
+    "bytes": 131834,
+    "sha256": "1819e02d0b0bcd9c1fa483dc5c22e2a7849be22c93474c33c235dd6dd076a4e3",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_writer.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "44ed1dab5cacdfc7dbc9c07605e164e757a927b5",
+    "bytes": 990,
+    "sha256": "7f693ffa3027dfd082076ecac50fdef771a29e7ce40076d49e749e1899758f21",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_base.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_base.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "dc065e1595f7608a9cd39f248f9573955f119184",
+    "bytes": 961,
+    "sha256": "79ea1cf6fdb0d798c05212978f8f25d5b07ae98801815fb6bf92085091febf0b",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_base.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_markup_annotations.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_markup_annotations.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "25eb0dfc48cc776513d27ca38e0a9a5c42602281",
+    "bytes": 11862,
+    "sha256": "b162a1181086ed7f688c0bc4691304a093fe7d8e8572b94574e9ad79f219066d",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_markup_annotations.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_non_markup_annotations.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_non_markup_annotations.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "144546094f2a8b0499073342410c3b0185db08f2",
+    "bytes": 3649,
+    "sha256": "676214bdc08e713729261497adec7ff6b8983360fae17c4543fbda735d013515",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_non_markup_annotations.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/constants.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/constants.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "c1069b69ab39cd21e9f8bf39d52056c382946a3f",
+    "bytes": 23634,
+    "sha256": "9f672ef873a6a16e7feb14165442a8e36ad2249d0ff7484bd6cf33fa9174a1cb",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/constants.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/errors.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/errors.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8fec6e13a279b9de013e41c91890d91873fbf1da",
+    "bytes": 1947,
+    "sha256": "070d56f61c4eb03830ab053a628436974f89894c93aba979423542afe5b81850",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/errors.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/filters.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/filters.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "39abc8c988ee46c0ad7133be0f448219af0d7e42",
+    "bytes": 30420,
+    "sha256": "237c2d528bdaeccdd68233730b2a74ac634854a9899a34bcebc8d8af5c0b347f",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/filters.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/__init__.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "bde1628fb7a02f9dab04666123c1f3d8bdeeb94b",
+    "bytes": 3468,
+    "sha256": "56ba9d61fb5010278f0d4dab5d532012a45a60547ccce57f7ef260a35f71feec",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/__init__.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_appearance_stream.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_appearance_stream.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "cee5c79ec7955175cfb357c3f53801de68f7f568",
+    "bytes": 26834,
+    "sha256": "31c0cbd2070a34df4d5cd53a64fc60b7b398a25dbe168356615980c20030e0f3",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_appearance_stream.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_base.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_base.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "bf6f66c53bd1119b9ef4138eea3f14fbc6fb0c8e",
+    "bytes": 32755,
+    "sha256": "f488de45b70b1eb73f94b1947d564c8ee83ca3eb7af17ece35295f9c32a73e64",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_base.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_data_structures.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_data_structures.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "dc03fabbf125ea98bc37b2f1476fcd80493124c5",
+    "bytes": 65869,
+    "sha256": "35f76eb49aa9f253fb1cd3e5eb9e3875b80f9bbc2616c755e376bde054e7b782",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_data_structures.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_files.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_files.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "f29fa770f6ccb1d6d6d4bd235f81323a7cad4423",
+    "bytes": 16238,
+    "sha256": "36d4a4468e890608ac8b840ecab56778ef3dd5ba15b2e636e614708a3e97f510",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_files.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_fit.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_fit.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "293066ad37cbab19401312c41c6d070fdb6a7971",
+    "bytes": 5515,
+    "sha256": "5ff8800c98f5618e0f512b52eeb1560b6c51d8b5154af2ad500932d001402033",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_fit.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_inline.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_inline.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "bd119704972a1f2eef39b188e853b2e291b58a2e",
+    "bytes": 12819,
+    "sha256": "2a5000fd91a2446ce368f1b74af6eda8619e36a6d065517e515536302f2efd28",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_inline.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_xobject.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_xobject.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "a29b9b271d80d55a02f1f4050d8dacb360dcaace",
+    "bytes": 21965,
+    "sha256": "7f560334bae2f927a5faaa72ca75c0ee7c7e662493a8061433ce9338414883af",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_xobject.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_link.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_link.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "f92c75c7caff2e0274af6f90023972403850070e",
+    "bytes": 5929,
+    "sha256": "b4da99d86616c6a80566c948d032d97a85e59ed6b182c1c2f1791615f496c781",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_link.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_outline.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_outline.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "d5d4bb132c412567fe69d75cb71c4c3da1d4bbfe",
+    "bytes": 1094,
+    "sha256": "a8a6cc5f8d8e59faa7a2922213a054cba12f7532c67b766d8da89637ce49a5a6",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_outline.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_rectangle.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_rectangle.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "ba7865ae583bb00930d5ffe253edf46b2519a058",
+    "bytes": 3785,
+    "sha256": "94ea927c58af43180137d2d4f5aa87a313c7f1a08f4c350d81166c34451de9f7",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_rectangle.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_utils.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_utils.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "1b81fd23b0f8d7f4be86e6dfb3e583275e3716c5",
+    "bytes": 7258,
+    "sha256": "bd30c07ac7c6f9c24d0ca8a5cff91b805a1d0084f37797a3a695871a3bc2a279",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_utils.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_viewerpref.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_viewerpref.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "04f95858be78a13e18109637e60883870c4b660f",
+    "bytes": 6774,
+    "sha256": "b6a5445a6bddfc359316848ca51393b25d528a338d9ef71267e8d74e8fdc8cea",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_viewerpref.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/pagerange.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/pagerange.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2ff4613f2de87f964c22edeef4028bdeb28e50d8",
+    "bytes": 7108,
+    "sha256": "d9bb76d634199bef5aab66d57f74d7b87f3fc06571edbf53e94acc1570842614",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/pagerange.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/papersizes.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/papersizes.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "ed09f341f6a27e9805f0b49430bd09d4d24d70a3",
+    "bytes": 1413,
+    "sha256": "e93cf9b1f34dff724e51aa58f3753e95a928867a57600d2148440d98e54b14bf",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/papersizes.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/types.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/types.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "a1c4e495a5710812ff122f13a4580599c380f8a3",
+    "bytes": 1915,
+    "sha256": "b09ef01f393b111fc227b90ffacf2ef5ac459e40979c5a6bf27cdc8f50314dab",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/types.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/xmp.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/xmp.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "e6c066fb5ddcdb35131454af168c96cd855a07d0",
+    "bytes": 30239,
+    "sha256": "00289e95b3fb680b03cb67e67b8a3d61de32ec7e0a7c46d4337494c4c97c8c8e",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/xmp.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/cache_contract.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/cache_contract.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5c4f431d28a1c9807945cbab8b87853a320ae357",
+    "bytes": 1949,
+    "sha256": "0dabc0d2787fae9af2e3c0fb3f5bf3e49c71d28649ffd30c07c31f5e8d071b7f",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/cache_contract.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/catalyst_projection.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/catalyst_projection.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "21f50142999e6dd690bb1546f200c979f9f3137f",
+    "bytes": 15975,
+    "sha256": "f0824db4b6ca7723c0e4ec47d6a34f9c1bb32a7c978974da0149ff525f5e7e13",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/catalyst_projection.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/contracts.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/contracts.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "643abdd5bff9a196bb993275e5f57bea79881e90",
+    "bytes": 12756,
+    "sha256": "d90f0027a8383f20a299e3058d69716e62737e9e5300afc61a8ef2ed949d402f",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/contracts.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/errors.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/errors.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b21b534f4c361a3c16f755025cf92399f24f3619",
+    "bytes": 263,
+    "sha256": "324e0f53301d4ba1007e1a69c86559472347bb7124f6c216f2b3c18e2c80bc1a",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/errors.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/event_source.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/event_source.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "95a23aecc73db041c92677d6238c35b77d6516e1",
+    "bytes": 92966,
+    "sha256": "a61bcc463b5c0cffdd4dbb4b5d6c8fe17315119dd07c221b95911ec1233d5585",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/event_source.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/financial_projection.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/financial_projection.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2da27b9b690f537aae2f1e1f5d4ea982ff762b61",
+    "bytes": 37491,
+    "sha256": "c5aec263ae59791fe28e07ab38ac0062b39563a2a7006d6840dde43580e3372c",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/financial_projection.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8b7aa95d7ff93a6aed32a92a0f0897b3cfaee240",
+    "bytes": 40133,
+    "sha256": "7bc565f9c7a210bc4966622cfde60875ec9f002f7b38a5d9063c467a9499d56d",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/material_transport.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/material_transport.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "891dc20d7d8a737c8aaecbb50c3615763195a616",
+    "bytes": 7239,
+    "sha256": "497c52c915e5485f34de27cb1fb2caca3971c77f531385a0d1f80d4587fc6ab5",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/material_transport.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/materials.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/materials.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "555d285fa5b5cd7714c68a5c582797577c3ffaea",
+    "bytes": 9292,
+    "sha256": "0d3c6c3fa0404c7006e5a8127b6123b99f7fff7c4d99af04b524fc04cb0e1ac2",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/materials.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "0294e489d5f8fb58b36a086ba1787c0022e01fd0",
+    "bytes": 41935,
+    "sha256": "0ddf7fd5510333c70060af7de2a25dd4e6c9ac2880a0d8b97d95e84542a03383",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/ports.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/ports.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b4fad4ff57694f5d4a7ea27071160ffaf7f85036",
+    "bytes": 1569,
+    "sha256": "d55f0bd6b5ade41ec78c429cbaea3986bb24a4723f473ef94ac0e5ad7d08afea",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/ports.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/reader_source.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/reader_source.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "016596f0945a99492f85d8085bed2eb23c1dddd9",
+    "bytes": 26075,
+    "sha256": "41d1abd481f043ad4309c39c04f179e3b9f2f0c511f89b32c3d4554bd7ac42f4",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/reader_source.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/recommendation.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/recommendation.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "88d5184c1d61e0c662921821425c786d4e2b3b7c",
+    "bytes": 53414,
+    "sha256": "5a26bd6145a30d3314f8268a9fcffc57fc35f329e75492b97d9726b6c3eeffb4",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/recommendation.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/safety.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/safety.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "117439469386ffb3d58c9d047766c6c5cccbd06a",
+    "bytes": 3272,
+    "sha256": "c82fcdee6845e765783584f5ac46a9d4ca6b6b9fda1c3c2e919c17ab17c7f3e8",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/safety.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8c7cc0357aa9c203fe088edb1fd88900290c9aec",
+    "bytes": 91569,
+    "sha256": "1d1ffc81991c32aeb66b3b4704db8421a9131896bc76597f3596d4510bfbccdd",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "c9af9a6ae87858ebee111766d4db0fd0639943b5",
+    "bytes": 19988,
+    "sha256": "79e077d2133f8c0bd33dde253e752bc6482423565ec11e9217d88b86f02cc07e",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "60e42475616d53480da470dec32d69fceb164497",
+    "bytes": 97369,
+    "sha256": "ef0269a8510b9168e2d135de6c1b4d28146a22d0d691aee8dd3fe80f95a698f0",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_projection.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_projection.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5799baef183dd4a93bdbc24c817a5df3d9e3cc33",
+    "bytes": 30841,
+    "sha256": "027d855613e675e1f569b401b9a8344e40766b88c31e987e791d05a0b3a2f200",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_projection.py"
+  },
+  {
+    "repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_read_control.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_read_control.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2ef88175e1a232d669dc23a05f35c48e27309bcf",
+    "bytes": 10927,
+    "sha256": "491e3569e8f00586ca6f4e9982e182584d2f2a0437f83da66767b7ffdbf1fb25",
+    "role": "READ_ONLY_ORIGINAL_DONOR_OR_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_read_control.py"
+  }
+]

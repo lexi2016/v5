@@ -1,0 +1,10 @@
+{
+  "path": "/workspace/shared/m16_m17_initial_submission_20261011/M17_FIXED_F_IMPORT_SUPPLEMENT_20261011.zip",
+  "bytes": 639294,
+  "sha256": "15a592f391de5e14726eb9d9b62710a29fdbe08fc256afa8a7a8784af49133d8",
+  "source_files": 95,
+  "source_sha256_and_git_blob": "MATCHED",
+  "zip_crc": "PASS",
+  "product_tests": "NOT_RUN",
+  "library_file_id": null
+}
