@@ -1,0 +1,15 @@
+{
+  "base": "R11-after",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/us_source_daily.py",
+      "before": "R11-after",
+      "after": "78cff69c77097aa45507596becf78b762498ca966a18438101340c15a9a14334"
+    },
+    {
+      "path": "V5/tests/test_us_reader_slice.py",
+      "before": "ABSENT",
+      "after": "005ed686d064531adda8d3e857afca7a1a8f773b3e965840374cec3f7beb0f99"
+    }
+  ]
+}

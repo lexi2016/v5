@@ -1,0 +1,15 @@
+{
+  "base": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/us_source_daily.py",
+      "before": "ABSENT",
+      "after": "cad93cdef991ed53468337e2850e04bd4c31767a095a09f18ec0fc92a35e1f98"
+    },
+    {
+      "path": "V5/tests/test_us_source_daily.py",
+      "before": "ABSENT",
+      "after": "f1c57bc6500b0616e003bc8659be66adc65b084f7e944b5cae518c91980b2a7a"
+    }
+  ]
+}

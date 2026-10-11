@@ -1,0 +1,1632 @@
+{
+  "schema": "v5.m03.published_scope.v1",
+  "status": "SOURCE_HANDOFF_LATEST_R13_INCOMPLETE_NOT_RUNTIME",
+  "repository": "lexi2016/v5",
+  "branch": "dev/m03-github-handoff-20261011",
+  "base_commit": "2489ea1e04a26a9e2f318f498ac3f5f8c970fe48",
+  "original_chat": "https://chatgpt.com/c/6aca49ea-c2fc-83ec-b79f-64ec937123e8",
+  "latest_reply": "https://chatgpt.com/c/6aca49ea-c2fc-83ec-b79f-64ec937123e8?messageId=d43d66a7-7977-4c55-8c3c-8fe92821393f",
+  "scope_manifest_sha256": "191be3550796f9338c9a7eaf19f7a4b7c8ab76958631f4b4bbce07b0e1b11ff4",
+  "archives": [
+    {
+      "role": "source",
+      "file_name": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "bytes": 163761,
+      "sha256": "4d5cc792923aed31bc0867ff8abbca85b1cb6fbdabd882a3581c827bb91e4d45",
+      "git_blob_sha": "949c6e2e96f191eaa7c576a0d53e8e84a1a783d4",
+      "expected_sha256": "4d5cc792923aed31bc0867ff8abbca85b1cb6fbdabd882a3581c827bb91e4d45"
+    },
+    {
+      "role": "r9",
+      "file_name": "V5_M03_R9_DELIVERY_20261010.zip",
+      "bytes": 7145,
+      "sha256": "8374c79b5eced12b4a40507439ec827a390afeaf5eaf4a4106144e76a0eac4ab",
+      "git_blob_sha": "6ac5600d4fde24d65fcedba739794997f4f1fad9",
+      "expected_sha256": "8374c79b5eced12b4a40507439ec827a390afeaf5eaf4a4106144e76a0eac4ab"
+    },
+    {
+      "role": "r11",
+      "file_name": "V5_M03_R11_DELIVERY_20261010.zip",
+      "bytes": 6468,
+      "sha256": "a771029a5ea97ac98fb53d85ef826c022fe7fcc7e4b75505d3f9a73c8e796fa5",
+      "git_blob_sha": "a07d295fe4e46244ae78370b8f63d73a18728a31",
+      "expected_sha256": "a771029a5ea97ac98fb53d85ef826c022fe7fcc7e4b75505d3f9a73c8e796fa5"
+    },
+    {
+      "role": "r13",
+      "file_name": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "bytes": 5042,
+      "sha256": "f731e6edca95ba8da171ad47f81728eaad2e21a7d9a55d947af97aeaec96ba4f",
+      "git_blob_sha": "417d65ef77c3e79442cfbc00612ae25170a442f5",
+      "expected_sha256": "f731e6edca95ba8da171ad47f81728eaad2e21a7d9a55d947af97aeaec96ba4f"
+    }
+  ],
+  "counts": {
+    "exact_original_files": 76,
+    "exact_original_bytes": 577816,
+    "source_kept": 64,
+    "source_old_docs_excluded": 5,
+    "candidate_versions": 3,
+    "candidate_source_test_manifest_kept": 9,
+    "candidate_logs_excluded": 6,
+    "candidate_invalid_patches_excluded": 6,
+    "historical_static_review_and_guide": 3,
+    "derived_documents_expected": 4,
+    "total_expected_files": 80,
+    "total_published_files": 80
+  },
+  "source_check": {
+    "source_originals": 63,
+    "all_bytes_sha_blob_matched": true,
+    "collector_owner_files": 48,
+    "descriptor_sha256": "34f45318dd89132a496ac0edf98147455b41d9ea926198d83ce1bd8810c20d8b",
+    "owner_commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+    "all48_descriptor_bytes_sha_matched": true
+  },
+  "included_files": [
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "SOURCE_MANIFEST.json",
+      "bytes": 41411,
+      "sha256": "4e9a0951d0f0c9711cc8c95448b00a3c9df0e48ddc9d3c1fa71d05e8833d09f9",
+      "git_blob_sha": "99bf8915c2c5e5f40d1024ad629289318168be07",
+      "source_identity": null,
+      "target_path": "handoffs/M03/source/SOURCE_MANIFEST.json",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/contracts/cloud_us_collector_sources.json",
+      "bytes": 14503,
+      "sha256": "34f45318dd89132a496ac0edf98147455b41d9ea926198d83ce1bd8810c20d8b",
+      "git_blob_sha": "9f0c558326b6cffd2519d1e190b988fecd73a334",
+      "source_identity": {
+        "package_path": "V5/contracts/cloud_us_collector_sources.json",
+        "repository_path": "V5/contracts/cloud_us_collector_sources.json",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "9f0c558326b6cffd2519d1e190b988fecd73a334",
+        "sha256": "34f45318dd89132a496ac0edf98147455b41d9ea926198d83ce1bd8810c20d8b",
+        "bytes": 14503,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/contracts/cloud_us_collector_sources.json"
+      },
+      "target_path": "handoffs/M03/source/V5/contracts/cloud_us_collector_sources.json",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/src/v5_shadow/__init__.py",
+      "bytes": 83,
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "git_blob_sha": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+      "source_identity": {
+        "package_path": "V5/src/v5_shadow/__init__.py",
+        "repository_path": "V5/src/v5_shadow/__init__.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+        "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+        "bytes": 83,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/__init__.py"
+      },
+      "target_path": "handoffs/M03/source/V5/src/v5_shadow/__init__.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/src/v5_shadow/cloud_transport.py",
+      "bytes": 3335,
+      "sha256": "b3430662338cac674ca4f0f8d241a84f6d5ff6891b89a1bd0c519c4d7affed89",
+      "git_blob_sha": "81964a78093b1afff5a3ac935b6600776961f473",
+      "source_identity": {
+        "package_path": "V5/src/v5_shadow/cloud_transport.py",
+        "repository_path": "V5/src/v5_shadow/cloud_transport.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "81964a78093b1afff5a3ac935b6600776961f473",
+        "sha256": "b3430662338cac674ca4f0f8d241a84f6d5ff6891b89a1bd0c519c4d7affed89",
+        "bytes": 3335,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/cloud_transport.py"
+      },
+      "target_path": "handoffs/M03/source/V5/src/v5_shadow/cloud_transport.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/src/v5_shadow/cloud_us_collector.py",
+      "bytes": 7975,
+      "sha256": "8a98fba4022d775852685d12343e753f0d31ffe7f46a3bd8e9243f11eb4cdd06",
+      "git_blob_sha": "7647e20aaa7b4cc4f56aa638596c3aea2f3c8b12",
+      "source_identity": {
+        "package_path": "V5/src/v5_shadow/cloud_us_collector.py",
+        "repository_path": "V5/src/v5_shadow/cloud_us_collector.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "7647e20aaa7b4cc4f56aa638596c3aea2f3c8b12",
+        "sha256": "8a98fba4022d775852685d12343e753f0d31ffe7f46a3bd8e9243f11eb4cdd06",
+        "bytes": 7975,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/cloud_us_collector.py"
+      },
+      "target_path": "handoffs/M03/source/V5/src/v5_shadow/cloud_us_collector.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/src/v5_shadow/composition.py",
+      "bytes": 5297,
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "git_blob_sha": "d22723df42b71537210aa621afb05dfab6be517f",
+      "source_identity": {
+        "package_path": "V5/src/v5_shadow/composition.py",
+        "repository_path": "V5/src/v5_shadow/composition.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "d22723df42b71537210aa621afb05dfab6be517f",
+        "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+        "bytes": 5297,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/composition.py"
+      },
+      "target_path": "handoffs/M03/source/V5/src/v5_shadow/composition.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/src/v5_shadow/contracts.py",
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "git_blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "source_identity": {
+        "package_path": "V5/src/v5_shadow/contracts.py",
+        "repository_path": "V5/src/v5_shadow/contracts.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+        "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+        "bytes": 7256,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/contracts.py"
+      },
+      "target_path": "handoffs/M03/source/V5/src/v5_shadow/contracts.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/src/v5_shadow/digests.py",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "git_blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "source_identity": {
+        "package_path": "V5/src/v5_shadow/digests.py",
+        "repository_path": "V5/src/v5_shadow/digests.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+        "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+        "bytes": 425,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/digests.py"
+      },
+      "target_path": "handoffs/M03/source/V5/src/v5_shadow/digests.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/tests/test_cloud_transport.py",
+      "bytes": 5993,
+      "sha256": "99881cb9fe4369d283435ec4b8f429d8e7a34c48db23064f99e029f37690cb0d",
+      "git_blob_sha": "806a6e3b633fc85bdf447a540004f20f9b85dfed",
+      "source_identity": {
+        "package_path": "V5/tests/test_cloud_transport.py",
+        "repository_path": "V5/tests/test_cloud_transport.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "806a6e3b633fc85bdf447a540004f20f9b85dfed",
+        "sha256": "99881cb9fe4369d283435ec4b8f429d8e7a34c48db23064f99e029f37690cb0d",
+        "bytes": 5993,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_cloud_transport.py"
+      },
+      "target_path": "handoffs/M03/source/V5/tests/test_cloud_transport.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/tests/test_cloud_us_collector.py",
+      "bytes": 12384,
+      "sha256": "92693193ab39f43211fe861f55a4d8e33aea6d0ac0a11e334e1f4f129708fba3",
+      "git_blob_sha": "8d166f3b0b9d1674ed38ffd3d7a4bec3c6566c2d",
+      "source_identity": {
+        "package_path": "V5/tests/test_cloud_us_collector.py",
+        "repository_path": "V5/tests/test_cloud_us_collector.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "8d166f3b0b9d1674ed38ffd3d7a4bec3c6566c2d",
+        "sha256": "92693193ab39f43211fe861f55a4d8e33aea6d0ac0a11e334e1f4f129708fba3",
+        "bytes": 12384,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_cloud_us_collector.py"
+      },
+      "target_path": "handoffs/M03/source/V5/tests/test_cloud_us_collector.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/tools/cloud_preview/assemble_us_collector.py",
+      "bytes": 1115,
+      "sha256": "b0dfb56445396d1a1614c59e446ec3aaccfcec11d6f9dcdfe03a0bb4042d00a3",
+      "git_blob_sha": "06ac053c0716483b1f9a7b2d48da2182e3782be8",
+      "source_identity": {
+        "package_path": "V5/tools/cloud_preview/assemble_us_collector.py",
+        "repository_path": "V5/tools/cloud_preview/assemble_us_collector.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "06ac053c0716483b1f9a7b2d48da2182e3782be8",
+        "sha256": "b0dfb56445396d1a1614c59e446ec3aaccfcec11d6f9dcdfe03a0bb4042d00a3",
+        "bytes": 1115,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tools/cloud_preview/assemble_us_collector.py"
+      },
+      "target_path": "handoffs/M03/source/V5/tools/cloud_preview/assemble_us_collector.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "V5/vendor/us_mapping_baseline/infrastructure/http_transport.py",
+      "bytes": 9429,
+      "sha256": "b34f906be69051da0f0f5e2f4980bf9b4c310d88ad9fc1b50b3246fceffccc69",
+      "git_blob_sha": "cbb430291831b8998d4eeebdf1760e5af2cd6bf8",
+      "source_identity": {
+        "package_path": "V5/vendor/us_mapping_baseline/infrastructure/http_transport.py",
+        "repository_path": "V5/vendor/us_mapping_baseline/infrastructure/http_transport.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "cbb430291831b8998d4eeebdf1760e5af2cd6bf8",
+        "sha256": "b34f906be69051da0f0f5e2f4980bf9b4c310d88ad9fc1b50b3246fceffccc69",
+        "bytes": 9429,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/us_mapping_baseline/infrastructure/http_transport.py"
+      },
+      "target_path": "handoffs/M03/source/V5/vendor/us_mapping_baseline/infrastructure/http_transport.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/contracts/__init__.py",
+      "bytes": 55,
+      "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+      "git_blob_sha": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+      "source_identity": {
+        "package_path": "collector_owner/contracts/__init__.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+        "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+        "bytes": 55,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/contracts/__init__.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/contracts/__init__.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/contracts/us_equity_calendar.py",
+      "bytes": 3603,
+      "sha256": "73f223fb032e6c3a3a9f462f41b29fd029365ecfc98942bc5413a911faeba452",
+      "git_blob_sha": "825a88fd532f12845b4ffb9a794bf11b07a0ca0c",
+      "source_identity": {
+        "package_path": "collector_owner/contracts/us_equity_calendar.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/us_equity_calendar.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "825a88fd532f12845b4ffb9a794bf11b07a0ca0c",
+        "sha256": "73f223fb032e6c3a3a9f462f41b29fd029365ecfc98942bc5413a911faeba452",
+        "bytes": 3603,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/contracts/us_equity_calendar.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/contracts/us_equity_calendar.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/contracts/us_equity_calendar_2026.json",
+      "bytes": 603,
+      "sha256": "cd8eac440e985be8fe9700983584dd1108873b68d5cc91cae2cbe8f7283a422f",
+      "git_blob_sha": "58ac5e41c1d3ed8c0be5616ec316c955f35afb63",
+      "source_identity": {
+        "package_path": "collector_owner/contracts/us_equity_calendar_2026.json",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/us_equity_calendar_2026.json",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "58ac5e41c1d3ed8c0be5616ec316c955f35afb63",
+        "sha256": "cd8eac440e985be8fe9700983584dd1108873b68d5cc91cae2cbe8f7283a422f",
+        "bytes": 603,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/contracts/us_equity_calendar_2026.json"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/contracts/us_equity_calendar_2026.json",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/__init__.py",
+      "bytes": 68,
+      "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+      "git_blob_sha": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/__init__.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+        "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+        "bytes": 68,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/__init__.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/_namespace.py",
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "git_blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/_namespace.py",
+        "repository_path": "V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/_namespace.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+        "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+        "bytes": 527,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/_namespace.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/_namespace.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/envelope_validation.py",
+      "bytes": 15267,
+      "sha256": "9b068a58500d557d34ccda6c6e08e9520d2989ae15a189e337498e184b37347f",
+      "git_blob_sha": "c63c65425c81bd19446bc58d6df5cb591a19679d",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/envelope_validation.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/envelope_validation.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "c63c65425c81bd19446bc58d6df5cb591a19679d",
+        "sha256": "9b068a58500d557d34ccda6c6e08e9520d2989ae15a189e337498e184b37347f",
+        "bytes": 15267,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/envelope_validation.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/envelope_validation.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/historical_backfill.py",
+      "bytes": 5055,
+      "sha256": "6852f000947b739c984b77ac7fedfe1baab07e3127c323e421ff13ab5445ea78",
+      "git_blob_sha": "fd041559b2e2236114493a8e536a0b021b7d7a24",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/historical_backfill.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/historical_backfill.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "fd041559b2e2236114493a8e536a0b021b7d7a24",
+        "sha256": "6852f000947b739c984b77ac7fedfe1baab07e3127c323e421ff13ab5445ea78",
+        "bytes": 5055,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/historical_backfill.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/historical_backfill.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/market_validation.py",
+      "bytes": 22416,
+      "sha256": "7f6b3912b11c6c0af9e7027c57b564df1652c7b3c6a60b4690887e2ff62cb01e",
+      "git_blob_sha": "82473ea2759c3f327aba256f4785bfa62c9a2323",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/market_validation.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/market_validation.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "82473ea2759c3f327aba256f4785bfa62c9a2323",
+        "sha256": "7f6b3912b11c6c0af9e7027c57b564df1652c7b3c6a60b4690887e2ff62cb01e",
+        "bytes": 22416,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/market_validation.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/market_validation.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/primitives.py",
+      "bytes": 1195,
+      "sha256": "e113c739623317ce562b9c24703524f094f7f7b8b370041bbc0ee3efdc567a8a",
+      "git_blob_sha": "d8d8299ff2167fd3aefadd1425593aedf7b9ebad",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/primitives.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/primitives.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "d8d8299ff2167fd3aefadd1425593aedf7b9ebad",
+        "sha256": "e113c739623317ce562b9c24703524f094f7f7b8b370041bbc0ee3efdc567a8a",
+        "bytes": 1195,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/primitives.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/primitives.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/publish_read.py",
+      "bytes": 7889,
+      "sha256": "b51dea0a9c7b0e303f20e0fa76070e10008769592024ad062a032240fdfd3150",
+      "git_blob_sha": "63a7be703ff1f4e19b8379ab84d3b46b5a194b84",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/publish_read.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/publish_read.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "63a7be703ff1f4e19b8379ab84d3b46b5a194b84",
+        "sha256": "b51dea0a9c7b0e303f20e0fa76070e10008769592024ad062a032240fdfd3150",
+        "bytes": 7889,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/publish_read.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/publish_read.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/refresh_audit.py",
+      "bytes": 6121,
+      "sha256": "438eb20519728758c84f825894a9804515aaa11cb3cbdf229caa93f147b8f16e",
+      "git_blob_sha": "1182855dd5a8c7020731a7c1e1c6181c57b8c5ca",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/refresh_audit.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/refresh_audit.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "1182855dd5a8c7020731a7c1e1c6181c57b8c5ca",
+        "sha256": "438eb20519728758c84f825894a9804515aaa11cb3cbdf229caa93f147b8f16e",
+        "bytes": 6121,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/refresh_audit.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/refresh_audit.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/replacement.py",
+      "bytes": 5123,
+      "sha256": "7494d0633d749dfe62998239a4a1496de6d9d9575eac8990da827852bf2d3828",
+      "git_blob_sha": "0c5b4f989b80e942456352a56b3b77d0926cb30a",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/replacement.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/replacement.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "0c5b4f989b80e942456352a56b3b77d0926cb30a",
+        "sha256": "7494d0633d749dfe62998239a4a1496de6d9d9575eac8990da827852bf2d3828",
+        "bytes": 5123,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/replacement.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/replacement.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/_research_peripheral_store_parts/session_validation.py",
+      "bytes": 10545,
+      "sha256": "48b6ec629083ff16ccaa9df4d0db50f1e43b2033edbcb10bed03d0b043a52145",
+      "git_blob_sha": "48685dc90d51e3aa496348e11a08ac8a89d8af26",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/_research_peripheral_store_parts/session_validation.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/session_validation.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "48685dc90d51e3aa496348e11a08ac8a89d8af26",
+        "sha256": "48b6ec629083ff16ccaa9df4d0db50f1e43b2033edbcb10bed03d0b043a52145",
+        "bytes": 10545,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/_research_peripheral_store_parts/session_validation.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/_research_peripheral_store_parts/session_validation.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/data_store.py",
+      "bytes": 10704,
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "git_blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/data_store.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+        "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+        "bytes": 10704,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/data_store.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/http_transport.py",
+      "bytes": 9429,
+      "sha256": "b34f906be69051da0f0f5e2f4980bf9b4c310d88ad9fc1b50b3246fceffccc69",
+      "git_blob_sha": "cbb430291831b8998d4eeebdf1760e5af2cd6bf8",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/http_transport.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/http_transport.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "cbb430291831b8998d4eeebdf1760e5af2cd6bf8",
+        "sha256": "b34f906be69051da0f0f5e2f4980bf9b4c310d88ad9fc1b50b3246fceffccc69",
+        "bytes": 9429,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/http_transport.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/http_transport.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/interprocess_lock.py",
+      "bytes": 7514,
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "git_blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/interprocess_lock.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+        "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+        "bytes": 7514,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/interprocess_lock.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/market_time.py",
+      "bytes": 960,
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "git_blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/market_time.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+        "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+        "bytes": 960,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/market_time.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/owned_io.py",
+      "bytes": 9354,
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/owned_io.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+        "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+        "bytes": 9354,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/owned_io.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/owned_path.py",
+      "bytes": 2251,
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "git_blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/owned_path.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+        "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+        "bytes": 2251,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/owned_path.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/research_peripheral_store.py",
+      "bytes": 15114,
+      "sha256": "ec5ca1e32232946bacf04834d0ec0e0ed6e772ce1d3470fdb65b35522dc2faab",
+      "git_blob_sha": "9bc740c094697370208b4e84a07e724648a80a8a",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/research_peripheral_store.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/research_peripheral_store.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "9bc740c094697370208b4e84a07e724648a80a8a",
+        "sha256": "ec5ca1e32232946bacf04834d0ec0e0ed6e772ce1d3470fdb65b35522dc2faab",
+        "bytes": 15114,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/research_peripheral_store.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/research_peripheral_store.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/infrastructure/trading_safety.py",
+      "bytes": 2597,
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "git_blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "source_identity": {
+        "package_path": "collector_owner/infrastructure/trading_safety.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+        "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+        "bytes": 2597,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/infrastructure/trading_safety.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/_namespace.py",
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "git_blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/_namespace.py",
+        "repository_path": "V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/_namespace.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+        "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+        "bytes": 527,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/_namespace.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/_namespace.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/ai_feeds.py",
+      "bytes": 10219,
+      "sha256": "c58fc7c92051c61d32b52285bf170a869fab94a183218e2c36b2a220a3a47f01",
+      "git_blob_sha": "dfae01a6a2698d75c250f734861d21863bea1cdf",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/ai_feeds.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/ai_feeds.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "dfae01a6a2698d75c250f734861d21863bea1cdf",
+        "sha256": "c58fc7c92051c61d32b52285bf170a869fab94a183218e2c36b2a220a3a47f01",
+        "bytes": 10219,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/ai_feeds.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/ai_feeds.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/cli.py",
+      "bytes": 7912,
+      "sha256": "4935a2a7e258c11837b54c4cc795724f63cd4759f388a7a9988625d30be7dc23",
+      "git_blob_sha": "fb1b6daadbe31f2d2295fc0d0f17a8a8fbb4baf6",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/cli.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/cli.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "fb1b6daadbe31f2d2295fc0d0f17a8a8fbb4baf6",
+        "sha256": "4935a2a7e258c11837b54c4cc795724f63cd4759f388a7a9988625d30be7dc23",
+        "bytes": 7912,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/cli.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/cli.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/entity_topics.py",
+      "bytes": 2914,
+      "sha256": "e3106c7600986f0f2265ad1b6d28d1360a642b5ae66908adeeaa6e0479760435",
+      "git_blob_sha": "ee0239a57ee7c6428a820b7636211e027a036ff4",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/entity_topics.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/entity_topics.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "ee0239a57ee7c6428a820b7636211e027a036ff4",
+        "sha256": "e3106c7600986f0f2265ad1b6d28d1360a642b5ae66908adeeaa6e0479760435",
+        "bytes": 2914,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/entity_topics.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/entity_topics.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/feed_admission.py",
+      "bytes": 3941,
+      "sha256": "22cad4c7e3cc84396462377101020092a004f91484a8994ee900e0a0cc23d4e6",
+      "git_blob_sha": "790cc42c3e248b225b5d332d6b206eb1f1cc21a3",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/feed_admission.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/feed_admission.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "790cc42c3e248b225b5d332d6b206eb1f1cc21a3",
+        "sha256": "22cad4c7e3cc84396462377101020092a004f91484a8994ee900e0a0cc23d4e6",
+        "bytes": 3941,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/feed_admission.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/feed_admission.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/feed_fetch.py",
+      "bytes": 3501,
+      "sha256": "02bb9c6b116012968a8c6d55390ba1d6b7de64db1f37ef00c3d77843e46b0fdd",
+      "git_blob_sha": "53804f39b867bc2ece85083952582305ad585c7b",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/feed_fetch.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/feed_fetch.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "53804f39b867bc2ece85083952582305ad585c7b",
+        "sha256": "02bb9c6b116012968a8c6d55390ba1d6b7de64db1f37ef00c3d77843e46b0fdd",
+        "bytes": 3501,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/feed_fetch.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/feed_fetch.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/finance_payload.py",
+      "bytes": 8134,
+      "sha256": "1c9a69bc38619635a93829e853093b9d1d4adfee92eb8dbcb55e20c6fe31cf61",
+      "git_blob_sha": "36edaea2a2682edacd76e59e835577ec7c236fa2",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/finance_payload.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/finance_payload.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "36edaea2a2682edacd76e59e835577ec7c236fa2",
+        "sha256": "1c9a69bc38619635a93829e853093b9d1d4adfee92eb8dbcb55e20c6fe31cf61",
+        "bytes": 8134,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/finance_payload.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/finance_payload.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/google_redirects.py",
+      "bytes": 4698,
+      "sha256": "9758936b73525823b8bec68eb6897ca0add7fc29c989834070e1de242a1f6b77",
+      "git_blob_sha": "37c918c29cb40815cde2a726ad88c5454b9f96ad",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/google_redirects.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/google_redirects.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "37c918c29cb40815cde2a726ad88c5454b9f96ad",
+        "sha256": "9758936b73525823b8bec68eb6897ca0add7fc29c989834070e1de242a1f6b77",
+        "bytes": 4698,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/google_redirects.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/google_redirects.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/materialization.py",
+      "bytes": 2049,
+      "sha256": "a89c08a46628b9e2e83a1749ebba4a40bcdbc890ef4da0cd983a5a6a66501a79",
+      "git_blob_sha": "6b8192064c87daad6bb6e9799576f9009fd884b9",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/materialization.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/materialization.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "6b8192064c87daad6bb6e9799576f9009fd884b9",
+        "sha256": "a89c08a46628b9e2e83a1749ebba4a40bcdbc890ef4da0cd983a5a6a66501a79",
+        "bytes": 2049,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/materialization.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/materialization.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/rss_parse.py",
+      "bytes": 4446,
+      "sha256": "00b14a6564c01eb7e9f1f684faebb48a38e4257a29052b6253966af0456c96fe",
+      "git_blob_sha": "95a1d018652f25b0bc157eff8097c89d73afca83",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/rss_parse.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/rss_parse.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "95a1d018652f25b0bc157eff8097c89d73afca83",
+        "sha256": "00b14a6564c01eb7e9f1f684faebb48a38e4257a29052b6253966af0456c96fe",
+        "bytes": 4446,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/rss_parse.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/rss_parse.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/schema_values.py",
+      "bytes": 14001,
+      "sha256": "2647cfffb684d91f152358368244e49c07b33e73b36f9183ca130879f14e609c",
+      "git_blob_sha": "98ad3c7c1efcea09932c29e5a9be3d68a0b02bd4",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/schema_values.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/schema_values.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "98ad3c7c1efcea09932c29e5a9be3d68a0b02bd4",
+        "sha256": "2647cfffb684d91f152358368244e49c07b33e73b36f9183ca130879f14e609c",
+        "bytes": 14001,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/schema_values.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/schema_values.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/translation_rows.py",
+      "bytes": 17694,
+      "sha256": "fd91c9b35ce45dd0eb0419d9a2818d3825170bb8b6d6f0cfa4df1c93a8f05e6d",
+      "git_blob_sha": "db4c1acb735496b8d611073959ef46a5ae04036c",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/translation_rows.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/translation_rows.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "db4c1acb735496b8d611073959ef46a5ae04036c",
+        "sha256": "fd91c9b35ce45dd0eb0419d9a2818d3825170bb8b6d6f0cfa4df1c93a8f05e6d",
+        "bytes": 17694,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/translation_rows.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/translation_rows.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_materialize_research_peripherals_parts/translation_validation.py",
+      "bytes": 3528,
+      "sha256": "ac4fc66fbe842c3cba28291c4808018a0c898b29c5fcc264a4bdfcede3310291",
+      "git_blob_sha": "89351b1e4d1b78fc7fe7e0f23429f28e74828aa8",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_materialize_research_peripherals_parts/translation_validation.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/translation_validation.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "89351b1e4d1b78fc7fe7e0f23429f28e74828aa8",
+        "sha256": "ac4fc66fbe842c3cba28291c4808018a0c898b29c5fcc264a4bdfcede3310291",
+        "bytes": 3528,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_materialize_research_peripherals_parts/translation_validation.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_materialize_research_peripherals_parts/translation_validation.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/_namespace.py",
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "git_blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/_namespace.py",
+        "repository_path": "V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/_namespace.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+        "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+        "bytes": 527,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/_namespace.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/_namespace.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/capture_merge.py",
+      "bytes": 5382,
+      "sha256": "ee76f91ad9aecadaf1f7bda12a71798c8d4446b5c91880612195e2635201709e",
+      "git_blob_sha": "8cac73475f463c3395e1b85c9223a054cf5602ca",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/capture_merge.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/capture_merge.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "8cac73475f463c3395e1b85c9223a054cf5602ca",
+        "sha256": "ee76f91ad9aecadaf1f7bda12a71798c8d4446b5c91880612195e2635201709e",
+        "bytes": 5382,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/capture_merge.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/capture_merge.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/capture_metadata.py",
+      "bytes": 6199,
+      "sha256": "b6f7fb81bc6aa90cb48e1196b868dc05033b99c9054e145f295014afc81528a3",
+      "git_blob_sha": "c5ac2d96e93a2f3a49b20f2475941dd019dcc908",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/capture_metadata.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/capture_metadata.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "c5ac2d96e93a2f3a49b20f2475941dd019dcc908",
+        "sha256": "b6f7fb81bc6aa90cb48e1196b868dc05033b99c9054e145f295014afc81528a3",
+        "bytes": 6199,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/capture_metadata.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/capture_metadata.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/cli_primitives.py",
+      "bytes": 10041,
+      "sha256": "973b0f35e9e03082e15ab74ab7912068ef5fffdcf0bbe4d82b5a93d786d416c9",
+      "git_blob_sha": "4c8564bcb1f9985620171f55070446c6f9d59e11",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/cli_primitives.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/cli_primitives.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "4c8564bcb1f9985620171f55070446c6f9d59e11",
+        "sha256": "973b0f35e9e03082e15ab74ab7912068ef5fffdcf0bbe4d82b5a93d786d416c9",
+        "bytes": 10041,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/cli_primitives.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/cli_primitives.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/historical_payload.py",
+      "bytes": 5697,
+      "sha256": "f13767b18dcc3745e8f727f76b07d171b9e89987287e6e6e0f1e7313794e07b1",
+      "git_blob_sha": "8647d98d2724bb4229fef892727097148406d6ab",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/historical_payload.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/historical_payload.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "8647d98d2724bb4229fef892727097148406d6ab",
+        "sha256": "f13767b18dcc3745e8f727f76b07d171b9e89987287e6e6e0f1e7313794e07b1",
+        "bytes": 5697,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/historical_payload.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/historical_payload.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/market_snapshot.py",
+      "bytes": 14768,
+      "sha256": "649d1f706f7ddbe662191b876fa46102c7b3f0f1d7f9cb2f8039a4d8b8e6287e",
+      "git_blob_sha": "1d214eac8b1e0fab01cd7982e8c4f28e23b653cf",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/market_snapshot.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/market_snapshot.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "1d214eac8b1e0fab01cd7982e8c4f28e23b653cf",
+        "sha256": "649d1f706f7ddbe662191b876fa46102c7b3f0f1d7f9cb2f8039a4d8b8e6287e",
+        "bytes": 14768,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/market_snapshot.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/market_snapshot.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/phase_merge.py",
+      "bytes": 7719,
+      "sha256": "0503d21b0ed348c825da70a2fd650aacf2e52306c2c083a74ca5e4882c95d464",
+      "git_blob_sha": "7af6425f8c5e1a2ccbec0b0f912247fc335143bb",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/phase_merge.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/phase_merge.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "7af6425f8c5e1a2ccbec0b0f912247fc335143bb",
+        "sha256": "0503d21b0ed348c825da70a2fd650aacf2e52306c2c083a74ca5e4882c95d464",
+        "bytes": 7719,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/phase_merge.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/phase_merge.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/phase_payload.py",
+      "bytes": 12153,
+      "sha256": "23011471e0918b5ef97fb71749afde5d6d091238b756fe66fbf89d4c67686abe",
+      "git_blob_sha": "90cc22a0395c1cc3d1e0b4586058f28f02b7da70",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/phase_payload.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/phase_payload.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "90cc22a0395c1cc3d1e0b4586058f28f02b7da70",
+        "sha256": "23011471e0918b5ef97fb71749afde5d6d091238b756fe66fbf89d4c67686abe",
+        "bytes": 12153,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/phase_payload.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/phase_payload.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/phase_publication.py",
+      "bytes": 18565,
+      "sha256": "d6668723844000577eedb789914d03b005f6ee076f4d5161883d8fbf204d380f",
+      "git_blob_sha": "a8c0072be6aca16e0d4bdceca7adde7c95cbe981",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/phase_publication.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/phase_publication.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "a8c0072be6aca16e0d4bdceca7adde7c95cbe981",
+        "sha256": "d6668723844000577eedb789914d03b005f6ee076f4d5161883d8fbf204d380f",
+        "bytes": 18565,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/phase_publication.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/phase_publication.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/quote_parsing.py",
+      "bytes": 10597,
+      "sha256": "b2acf3b603248b13b8aed1b1e1da78fb64d2d9fa19b6d7d6e243fab8f7e6eb3e",
+      "git_blob_sha": "bb7f25ccc7ac4d3ed5965c2052a41b7a03b6b68c",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/quote_parsing.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/quote_parsing.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "bb7f25ccc7ac4d3ed5965c2052a41b7a03b6b68c",
+        "sha256": "b2acf3b603248b13b8aed1b1e1da78fb64d2d9fa19b6d7d6e243fab8f7e6eb3e",
+        "bytes": 10597,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/quote_parsing.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/quote_parsing.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/session_windows.py",
+      "bytes": 6350,
+      "sha256": "608f4fead6c1ed236fd3180d724c6698a380f53c81e5df7852a71a078f969759",
+      "git_blob_sha": "5d7c88a81c39dd0076f8375fcb58f663e7c3ffd1",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/session_windows.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/session_windows.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "5d7c88a81c39dd0076f8375fcb58f663e7c3ffd1",
+        "sha256": "608f4fead6c1ed236fd3180d724c6698a380f53c81e5df7852a71a078f969759",
+        "bytes": 6350,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/session_windows.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/session_windows.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/_us_market_digest_parts/snapshot_merge.py",
+      "bytes": 2535,
+      "sha256": "2fdb99354861f5afbfad5cdcfef532050ed36720e474981cfddf69b1efbf4bf5",
+      "git_blob_sha": "907984b6b031c40a4b26fc053fa6b475b94d1b0c",
+      "source_identity": {
+        "package_path": "collector_owner/ops/_us_market_digest_parts/snapshot_merge.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/snapshot_merge.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "907984b6b031c40a4b26fc053fa6b475b94d1b0c",
+        "sha256": "2fdb99354861f5afbfad5cdcfef532050ed36720e474981cfddf69b1efbf4bf5",
+        "bytes": 2535,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/_us_market_digest_parts/snapshot_merge.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/_us_market_digest_parts/snapshot_merge.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/materialize_research_peripherals.py",
+      "bytes": 31490,
+      "sha256": "712fb09f36f47f1e821793b2ba94a612396d474eb688036d40061458805ca512",
+      "git_blob_sha": "1bbf9095e59b1040945d7a9be054da96a48c7e0f",
+      "source_identity": {
+        "package_path": "collector_owner/ops/materialize_research_peripherals.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/materialize_research_peripherals.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "1bbf9095e59b1040945d7a9be054da96a48c7e0f",
+        "sha256": "712fb09f36f47f1e821793b2ba94a612396d474eb688036d40061458805ca512",
+        "bytes": 31490,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/materialize_research_peripherals.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/materialize_research_peripherals.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "collector_owner/ops/us_market_digest.py",
+      "bytes": 33600,
+      "sha256": "5e814bc2ddffeec45a2ed7a593d3fa20128826c7c4951e0f10a95f3bdc0f552c",
+      "git_blob_sha": "89eda5798fdd598c24a310aaa3588f4492c291ea",
+      "source_identity": {
+        "package_path": "collector_owner/ops/us_market_digest.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/us_market_digest.py",
+        "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+        "blob_sha": "89eda5798fdd598c24a310aaa3588f4492c291ea",
+        "sha256": "5e814bc2ddffeec45a2ed7a593d3fa20128826c7c4951e0f10a95f3bdc0f552c",
+        "bytes": 33600,
+        "source_manifest": "V5/contracts/cloud_us_collector_sources.json",
+        "url": "https://github.com/lexi2016/v4/blob/164c010c7eaa1659db9bfed0ff5f123c7a39eefc/handoff/v4-running-source-20261005/canonical/ops/us_market_digest.py"
+      },
+      "target_path": "handoffs/M03/source/collector_owner/ops/us_market_digest.py",
+      "reason": "Original fixed source/identity metadata; all48 frozen owner files kept in original relative layout",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/us_digest.py",
+      "bytes": 14764,
+      "sha256": "6515b81f47749e73206754d890d9ec9f58bbbe772b91f4716b55868c069a3452",
+      "git_blob_sha": "4a63572d32ce3e12be34f26aa08d41f85eda4125",
+      "source_identity": {
+        "package_path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/us_digest.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/us_digest.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "4a63572d32ce3e12be34f26aa08d41f85eda4125",
+        "sha256": "6515b81f47749e73206754d890d9ec9f58bbbe772b91f4716b55868c069a3452",
+        "bytes": 14764,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/us_digest.py"
+      },
+      "target_path": "handoffs/M03/source/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/us_digest.py",
+      "reason": "Original US slot/executor/test reference only, not a complete scheduler runtime",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "handoff/v4-running-source-20261005/canonical/ops/run_us_market_slot.py",
+      "bytes": 9035,
+      "sha256": "e2e9cf1e22844f6375948db2877f9ae73bfd5fdd6bd980bd6bf648dbf6ac43e6",
+      "git_blob_sha": "033663ade7b8436925e12b54d49b4f4f00a4d716",
+      "source_identity": {
+        "package_path": "handoff/v4-running-source-20261005/canonical/ops/run_us_market_slot.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/ops/run_us_market_slot.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "033663ade7b8436925e12b54d49b4f4f00a4d716",
+        "sha256": "e2e9cf1e22844f6375948db2877f9ae73bfd5fdd6bd980bd6bf648dbf6ac43e6",
+        "bytes": 9035,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/run_us_market_slot.py"
+      },
+      "target_path": "handoffs/M03/source/handoff/v4-running-source-20261005/canonical/ops/run_us_market_slot.py",
+      "reason": "Original US slot/executor/test reference only, not a complete scheduler runtime",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "handoff/v4-running-source-20261005/canonical/tests/test_us_canary_fresh_capture.py",
+      "bytes": 12875,
+      "sha256": "f4ad6e957e4560419b8a2d4f99847312f5944ee07520929636a87afc62610d14",
+      "git_blob_sha": "75630691714b84e98c88adb3a86f9fe58feb39d0",
+      "source_identity": {
+        "package_path": "handoff/v4-running-source-20261005/canonical/tests/test_us_canary_fresh_capture.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/tests/test_us_canary_fresh_capture.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "75630691714b84e98c88adb3a86f9fe58feb39d0",
+        "sha256": "f4ad6e957e4560419b8a2d4f99847312f5944ee07520929636a87afc62610d14",
+        "bytes": 12875,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_us_canary_fresh_capture.py"
+      },
+      "target_path": "handoffs/M03/source/handoff/v4-running-source-20261005/canonical/tests/test_us_canary_fresh_capture.py",
+      "reason": "Original US slot/executor/test reference only, not a complete scheduler runtime",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "handoff/v4-running-source-20261005/canonical/tests/test_v4_us_digest_recovery.py",
+      "bytes": 13779,
+      "sha256": "5fdc1c64460e9cfd001c805ad7bab0dbbfad48025866dbbca08545956b8db3ef",
+      "git_blob_sha": "eedeaf281f3c8c3231476281264845b1e335f300",
+      "source_identity": {
+        "package_path": "handoff/v4-running-source-20261005/canonical/tests/test_v4_us_digest_recovery.py",
+        "repository_path": "handoff/v4-running-source-20261005/canonical/tests/test_v4_us_digest_recovery.py",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "blob_sha": "eedeaf281f3c8c3231476281264845b1e335f300",
+        "sha256": "5fdc1c64460e9cfd001c805ad7bab0dbbfad48025866dbbca08545956b8db3ef",
+        "bytes": 13779,
+        "source_manifest": null,
+        "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_v4_us_digest_recovery.py"
+      },
+      "target_path": "handoffs/M03/source/handoff/v4-running-source-20261005/canonical/tests/test_v4_us_digest_recovery.py",
+      "reason": "Original US slot/executor/test reference only, not a complete scheduler runtime",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "SHA256_MANIFEST.json",
+      "bytes": 418,
+      "sha256": "fe0c5710b8b5fa85bf9ff8f20c3d7a6ce1baeaa9acb4fd2dcefde653cd7893ab",
+      "git_blob_sha": "b7e4184fc145b43ce6508926f9ffb686d2b9dc73",
+      "target_path": "handoffs/M03/candidate_r9_historical_rejected/SHA256_MANIFEST.json",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "after/V5/tests/test_us_source_daily.py",
+      "bytes": 693,
+      "sha256": "f1c57bc6500b0616e003bc8659be66adc65b084f7e944b5cae518c91980b2a7a",
+      "git_blob_sha": "21050fe6c6c0d7ca85e439cccb6bf932ac822d87",
+      "target_path": "handoffs/M03/candidate_r9_historical_rejected/after/V5/tests/test_us_source_daily.py",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "after/V5/src/v5_shadow/us_source_daily.py",
+      "bytes": 3896,
+      "sha256": "cad93cdef991ed53468337e2850e04bd4c31767a095a09f18ec0fc92a35e1f98",
+      "git_blob_sha": "ab332dfc9d7a47d332662f88797ac44de5bd14fb",
+      "target_path": "handoffs/M03/candidate_r9_historical_rejected/after/V5/src/v5_shadow/us_source_daily.py",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "SHA256_MANIFEST.json",
+      "bytes": 334,
+      "sha256": "631c77804b110dbf2a67fc51be7dd7bbb8a6eac7ea5b20476e86c33c0f293dc8",
+      "git_blob_sha": "7eac3d7827c0d814b03f218cd8c1b9007e451fa3",
+      "target_path": "handoffs/M03/candidate_r11_historical_rejected/SHA256_MANIFEST.json",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "after/V5/tests/test_us_source_daily.py",
+      "bytes": 365,
+      "sha256": "955e510024565bb833f3ab276c1179b1b6ddd62ee9c27a023f0688ad71255bf8",
+      "git_blob_sha": "1c7d7d66eab3a393d8d0fe555728cbb2a44e495b",
+      "target_path": "handoffs/M03/candidate_r11_historical_rejected/after/V5/tests/test_us_source_daily.py",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "after/V5/src/v5_shadow/us_source_daily.py",
+      "bytes": 3545,
+      "sha256": "464faaf371bd5eb6e3cea899842131173544292e0452e6c39063e121925ed4d8",
+      "git_blob_sha": "f050aa1decd2287881835e592215495f214df559",
+      "target_path": "handoffs/M03/candidate_r11_historical_rejected/after/V5/src/v5_shadow/us_source_daily.py",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "SHA256_MANIFEST.json",
+      "bytes": 390,
+      "sha256": "8aaa5935424bb3980bb01395b54ca0a4802a264c5e506c4eaf189c5e7bce9cdb",
+      "git_blob_sha": "312df78c8b68f8b13b4fdd421d276bf1639255cc",
+      "target_path": "handoffs/M03/candidate_r13_latest_incomplete/SHA256_MANIFEST.json",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "after/V5/tests/test_us_reader_slice.py",
+      "bytes": 350,
+      "sha256": "005ed686d064531adda8d3e857afca7a1a8f773b3e965840374cec3f7beb0f99",
+      "git_blob_sha": "7ec9f477b79ce86a43cab40091aeece616689250",
+      "target_path": "handoffs/M03/candidate_r13_latest_incomplete/after/V5/tests/test_us_reader_slice.py",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "after/V5/src/v5_shadow/us_source_daily.py",
+      "bytes": 2122,
+      "sha256": "78cff69c77097aa45507596becf78b762498ca966a18438101340c15a9a14334",
+      "git_blob_sha": "85bba7bc7be707fe00fffbee74e066d7d8d98e47",
+      "target_path": "handoffs/M03/candidate_r13_latest_incomplete/after/V5/src/v5_shadow/us_source_daily.py",
+      "reason": "Original isolated candidate source/test/author manifest; not installed or merged; latest R13 is reader slice only",
+      "byte_policy": "EXACT_ORIGINAL"
+    },
+    {
+      "target_path": "handoffs/M03/review/REVIEW_M03_R9_STATIC_20261011.md",
+      "bytes": 7325,
+      "sha256": "ab569aaab844f8103e7a6d79eebe82418168aab6544b482778422ee9e57469c8",
+      "git_blob_sha": "a5b842571e38915de8a657772e4fd1b44fe30196",
+      "byte_policy": "EXACT_ORIGINAL",
+      "reason": "Historical static source review/assembly guidance only; tool paths retained, no Mac logs/results or actual private data",
+      "input_file_name": "REVIEW_M03_R9_STATIC_20261011.md"
+    },
+    {
+      "target_path": "handoffs/M03/review/REVIEW_M03_R12_STATIC_20261011.md",
+      "bytes": 5730,
+      "sha256": "edf87976391fa8a36afc25f982d659d0e83f0f9fa3e2c70ed95c612d4cc77555",
+      "git_blob_sha": "fa5f996fe5c75084217592b275ae6413848df6d6",
+      "byte_policy": "EXACT_ORIGINAL",
+      "reason": "Historical static source review/assembly guidance only; tool paths retained, no Mac logs/results or actual private data",
+      "input_file_name": "REVIEW_M03_R12_STATIC_20261011.md"
+    },
+    {
+      "target_path": "handoffs/M03/reference/M03_SOURCE_TEMP_ASSEMBLY_GUIDE_20261011.md",
+      "bytes": 7412,
+      "sha256": "f406b0782276779e104a4e9761c2d06d80d5520b2e12aa517704a2b6e55c7533",
+      "git_blob_sha": "94bf9dc83f358970f1496bb0a00a87880d175125",
+      "byte_policy": "EXACT_ORIGINAL",
+      "reason": "Historical static source review/assembly guidance only; tool paths retained, no Mac logs/results or actual private data",
+      "input_file_name": "M03_SOURCE_TEMP_ASSEMBLY_GUIDE_20261011.md"
+    }
+  ],
+  "excluded_files": [
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "START_HERE.md",
+      "bytes": 2789,
+      "sha256": "3a5782a0e07d7b0d636601910553afe7b505e41c923ecc2e565ed03ce72e6903",
+      "git_blob_sha": "f9d2298e9283e5714ae7f4d684aa70c659ed1462",
+      "source_identity": null,
+      "reason": "Old package/task entry replaced by current GitHub-first scope"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "TASK_DOCUMENTS/ACCEPTANCE.md",
+      "bytes": 3417,
+      "sha256": "e42529e6a48ce3397608c9b1f0a9ae9f17bdcf2065fbae271dddaffbeaac98d2",
+      "git_blob_sha": "4c2a7dbba9517bf61c701275a34225bc2d7b0b7f",
+      "source_identity": null,
+      "reason": "Old package/task entry replaced by current GitHub-first scope"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "TASK_DOCUMENTS/PROMPT_FOR_CHAT.md",
+      "bytes": 3905,
+      "sha256": "78c76a9c6dc494e37b84a1c65b6b74fb4a0d38f2e5f8f22c178bead0cbb37fec",
+      "git_blob_sha": "204d30a7e1a3a847d7f81c09bb4bf10443906486",
+      "source_identity": null,
+      "reason": "Old package/task entry replaced by current GitHub-first scope"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "TASK_DOCUMENTS/SOURCE_MAP.md",
+      "bytes": 5595,
+      "sha256": "9449c9a77bcb17bbb1dab8f28dbd512e4d9ffe7b215de0cf162259ec9a40aee6",
+      "git_blob_sha": "5fe7a62a6e6d23602def44afcff06980598fefa9",
+      "source_identity": null,
+      "reason": "Old package/task entry replaced by current GitHub-first scope"
+    },
+    {
+      "input_archive": "V5_M03_SOURCE_REVIEW_20261010.zip",
+      "input_member": "TASK_DOCUMENTS/START_HERE.md",
+      "bytes": 2859,
+      "sha256": "5a87cc9492fda6cdcd2af83cf073e22c4d599d3788d7a98316bed907dc3dee9f",
+      "git_blob_sha": "5dbd41c2364c9163cdaa3e39adfb3a395d6fb23a",
+      "source_identity": null,
+      "reason": "Old package/task entry replaced by current GitHub-first scope"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "APPLY_ROUNDTRIP_LOG.md",
+      "bytes": 228,
+      "sha256": "5e0b257ac223e85e7ec88939e393f451cfbed525d91acb3ef1ca7cbd312f20ab",
+      "git_blob_sha": "2537c12f67cdce24fef18f28f885b5ec152f9d6f",
+      "reason": "Author log/roundtrip note excluded; no new runtime proof"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "TEST_LOG.md",
+      "bytes": 1356,
+      "sha256": "b67c03ea8016c165d9f808ef0f7493c6c214c7c4b4abf0aa583e0f3b44d04041",
+      "git_blob_sha": "44e105d060a25f78def34206c2944616900f24a3",
+      "reason": "Author log/roundtrip note excluded; no new runtime proof"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "patch/runtime.patch",
+      "bytes": 5392,
+      "sha256": "39ce80bd7c07f99d5dab0b667dc04d27b08b28d1f6a242a5c88cd9252cc72d77",
+      "git_blob_sha": "f1d47c46c72941b48e4f9cffa189ad4e7f6f48d8",
+      "reason": "Forward/reverse identical and noncanonical paths; exclude misleading patch, retain identity and defect in scope"
+    },
+    {
+      "input_archive": "V5_M03_R9_DELIVERY_20261010.zip",
+      "input_member": "patch/reverse.patch",
+      "bytes": 5392,
+      "sha256": "39ce80bd7c07f99d5dab0b667dc04d27b08b28d1f6a242a5c88cd9252cc72d77",
+      "git_blob_sha": "f1d47c46c72941b48e4f9cffa189ad4e7f6f48d8",
+      "reason": "Forward/reverse identical and noncanonical paths; exclude misleading patch, retain identity and defect in scope"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "TEST_LOG.md",
+      "bytes": 209,
+      "sha256": "a55002a02c1c24ffc8d252958d834fa54ff47c7579c9451c327f811134c58d80",
+      "git_blob_sha": "f96728290e401057eae40393ec9814af83197bf4",
+      "reason": "Author log/roundtrip note excluded; no new runtime proof"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "APPLY_ROUNDTRIP_LOG.md",
+      "bytes": 47,
+      "sha256": "c8fb8537349a4e4ac53d655355b77a4e0ae3ef153405fa9a5c65ffc986074b53",
+      "git_blob_sha": "4a4c99c5adf520ba87ace04340306cf3d4510737",
+      "reason": "Author log/roundtrip note excluded; no new runtime proof"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "patch/runtime.patch",
+      "bytes": 4695,
+      "sha256": "04c1a66597c19cf8470efa33af7317465ddba95e0d1b8afc5e03d71e5a131bf5",
+      "git_blob_sha": "2f4ccffb37af5d7862702ee2ec6c3ddeeb8aaca9",
+      "reason": "Forward/reverse identical and noncanonical paths; exclude misleading patch, retain identity and defect in scope"
+    },
+    {
+      "input_archive": "V5_M03_R11_DELIVERY_20261010.zip",
+      "input_member": "patch/reverse.patch",
+      "bytes": 4695,
+      "sha256": "04c1a66597c19cf8470efa33af7317465ddba95e0d1b8afc5e03d71e5a131bf5",
+      "git_blob_sha": "2f4ccffb37af5d7862702ee2ec6c3ddeeb8aaca9",
+      "reason": "Forward/reverse identical and noncanonical paths; exclude misleading patch, retain identity and defect in scope"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "TEST_LOG.md",
+      "bytes": 1358,
+      "sha256": "d6818facfc69e614637f25d63ad2f83ba7883b4cb28e1700ff473dbda7cc8db4",
+      "git_blob_sha": "c3e800d34fbe41f9155eac2557eec17e1ca11c7c",
+      "reason": "Author log/roundtrip note excluded; no new runtime proof"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "APPLY_ROUNDTRIP_LOG.md",
+      "bytes": 59,
+      "sha256": "30b65bf5947aa2e119faac4519a264d5878842961bcedb90581709da64104ab8",
+      "git_blob_sha": "9713f06cfe0b95715234c59b704b1fca243014e1",
+      "reason": "Author log/roundtrip note excluded; no new runtime proof"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "patch/runtime.patch",
+      "bytes": 3294,
+      "sha256": "e36e938b380916db05b08a8bc3ececfc3921923e6e8f6628e77ef9eaaa774628",
+      "git_blob_sha": "cb5779ed773e75499a19f401899760d6fe361e3b",
+      "reason": "Forward/reverse identical and noncanonical paths; exclude misleading patch, retain identity and defect in scope"
+    },
+    {
+      "input_archive": "V5_M03_R13_READER_SLICE_DELIVERY_20261010.zip",
+      "input_member": "patch/reverse.patch",
+      "bytes": 3294,
+      "sha256": "e36e938b380916db05b08a8bc3ececfc3921923e6e8f6628e77ef9eaaa774628",
+      "git_blob_sha": "cb5779ed773e75499a19f401899760d6fe361e3b",
+      "reason": "Forward/reverse identical and noncanonical paths; exclude misleading patch, retain identity and defect in scope"
+    }
+  ],
+  "derived_documents": [
+    {
+      "target_path": "handoffs/M03/START_HERE.md",
+      "bytes": 4616,
+      "sha256": "dc2badcce0444bebbc9d047f51298d97fae84d1c0d7c3429814412d97ade6f93",
+      "git_blob_sha": "639ebc036106298ca613f00175e6989f96d5cee6",
+      "status": "DERIVED_STATIC_DESCRIPTION_NOT_RUNTIME_EVIDENCE"
+    },
+    {
+      "target_path": "handoffs/M03/STATIC_TASK.md",
+      "bytes": 4910,
+      "sha256": "4a1c30ab3ea2d85f755b9ee38dfda8fd1ae5e9bd80c6f6acfc47ddaa26394dca",
+      "git_blob_sha": "bcd4695fe21c0fb9ffc5700e1cca32e85c0c6e9b",
+      "status": "DERIVED_STATIC_DESCRIPTION_NOT_RUNTIME_EVIDENCE"
+    },
+    {
+      "target_path": "handoffs/M03/review/REVIEW_M03_R13_HANDOFF_STATIC_20261011.md",
+      "bytes": 9009,
+      "sha256": "f1f2d46a2869fa6f12d774f941ff7608f20fc9d744f2b87c23ee23f45de48d2d",
+      "git_blob_sha": "6dfba088d16c12f403ab57c0d6568fed7b3338bb",
+      "status": "DERIVED_STATIC_DESCRIPTION_NOT_RUNTIME_EVIDENCE"
+    }
+  ],
+  "known_code_gaps": [
+    "R13 latest source is only reader slice at same us_source_daily.py path and lacks R11 classes/helpers; cannot overwrite full R11 with slice.",
+    "R11 lacks run_us_source/defaultreader; R9 retains incomplete historical workflow. Need explicit cumulative full candidate without reverting existing checks.",
+    "Stable same-source snapshot, original SafeRoot/cross-process lock publication, immutable reuse/reference revalidation and true producer-to-reader fixtures remain to be implemented or verified.",
+    "Latest author tests only bootstrap AST/name checks; no actual default reader invocation; no runtime or Mac PASS inferred."
+  ],
+  "self_hash_policy": "Publication receipt verifies all80 fixed-commit files including this self-unhashed scope.",
+  "runtime_installation": false,
+  "product_tests": "NOT_RUN",
+  "full_distribution": false
+}
