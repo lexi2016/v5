@@ -1,0 +1,30 @@
+--- /tmp/m14_delivery/workspace_plan.before.py	2026-10-10 14:45:18.926048915 +0000
++++ /tmp/m14_delivery/workspace_plan.after.py	2026-10-10 14:45:18.927200166 +0000
+@@ -932,10 +932,23 @@
+                               if current_volume is not None and previous20_mean not in (None, 0) else None)
+             close_position = ((close - low) / (high - low)
+                               if close is not None and low is not None and high is not None and high > low else None)
+-            oversold = (bool(close <= _REBOUND_OVERSOLD_RATIO * prior60_high)
+-                        if prior60_high is not None and close is not None else None)
+-            volume_flag = (bool(volume_ratio >= _REBOUND_VOLUME_GATE)
+-                           if volume_ratio is not None else None)
++            from decimal import Decimal, InvalidOperation
++
++            def _decimal_screen(value):
++                if value is None:
++                    return None
++                try:
++                    return Decimal(str(value))
++                except (InvalidOperation, ValueError, TypeError):
++                    return None
++
++            close_decimal = _decimal_screen(close)
++            prior60_high_decimal = _decimal_screen(prior60_high)
++            volume_ratio_decimal = _decimal_screen(volume_ratio)
++            oversold = (bool(close_decimal <= Decimal('0.8') * prior60_high_decimal)
++                        if close_decimal is not None and prior60_high_decimal is not None else None)
++            volume_flag = (bool(volume_ratio_decimal >= Decimal('1.5'))
++                           if volume_ratio_decimal is not None else None)
+             # Retained as display context only. It is not an admission gate.
+             rebound_flag = (bool(rebound >= _REBOUND_CLOSE_LOW_GATE)
+                             if rebound is not None else None)
