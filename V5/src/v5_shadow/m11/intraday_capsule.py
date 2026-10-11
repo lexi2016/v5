@@ -9,31 +9,35 @@ from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
 
-
 M11_SLOTS = ("09:25", "09:35", "10:00", "11:30", "14:00", "15:00")
-_STORE_LOCK = threading.Lock()
+_STATES = {"REQUEST_IN_FLIGHT", "REQUEST_ATTEMPTED", "ATTEMPT_UNKNOWN", "FAILED_NO_REQUEST", "SUCCEEDED"}
+_LOCK = threading.Lock()
 
 
 def _digest(value: object) -> str:
     return hashlib.sha256(json.dumps(value, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
 
-def _safe_date(value: str) -> str:
+def _date(value: str) -> str:
     if not isinstance(value, str):
         raise ValueError("target_date_invalid")
     return date.fromisoformat(value).isoformat()
 
 
-def _safe_root(root: str | Path) -> Path:
-    raw = Path(root)
-    if raw.is_absolute() is False:
-        raise ValueError("root_must_be_absolute")
-    if ".." in raw.parts:
-        raise ValueError("root_escape")
-    resolved = raw.resolve(strict=False)
-    if resolved != raw.absolute().resolve(strict=False):
-        raise ValueError("root_resolution_mismatch")
-    return resolved
+def _root(root: str | Path) -> Path:
+    p = Path(root)
+    if not p.is_absolute() or ".." in p.parts:
+        raise ValueError("root_boundary_invalid")
+    # Do not use resolved path as authorization. Existing symlink components are rejected.
+    current = p
+    parts = []
+    while current != current.parent:
+        parts.append(current)
+        current = current.parent
+    for item in reversed(parts):
+        if item.exists() and item.is_symlink():
+            raise ValueError("root_symlink_rejected")
+    return p
 
 
 @dataclass(frozen=True)
@@ -45,25 +49,25 @@ class M11Slot:
     run_id: str
 
     def identity(self) -> str:
-        _safe_date(self.target_date)
+        _date(self.target_date)
         if self.slot not in M11_SLOTS:
             raise ValueError("slot_invalid")
         return _digest(self.__dict__)
 
 
 class IntradayCapsuleStore:
-    """M11 producer/store/reader path.
+    """Private M11 artifact writer/reader.
 
-    This is intentionally private storage. A caller cannot replace an existing
-    artifact and readers always verify the identity and digest again.
+    The business producer is expected to call this only after the original
+    intraday owner has produced its evidence/receipt. This class never creates
+    a research result itself.
     """
 
     def __init__(self, root: str | Path):
-        self.root = _safe_root(root)
+        self.root = _root(root)
 
     def _artifact_dir(self, slot: M11Slot) -> Path:
-        day = _safe_date(slot.target_date)
-        target = self.root / day / slot.slot.replace(":", "") / slot.identity()
+        target = self.root / _date(slot.target_date) / slot.slot.replace(":", "") / slot.identity()
         if self.root not in target.parents:
             raise ValueError("artifact_outside_root")
         return target
@@ -74,22 +78,44 @@ class IntradayCapsuleStore:
             "identity": slot.identity(),
             "slot": slot.__dict__,
             "source_sha": source_sha,
-            "created_at": datetime.utcnow().isoformat() + "Z",
             "payload_sha": _digest(payload),
-            "state": "latest_success",
+            "created_at": datetime.utcnow().isoformat() + "Z",
+            "state": "SUCCEEDED",
         }
-        with _STORE_LOCK:
+        with _LOCK:
             if target.exists():
-                raise FileExistsError("immutable artifact already exists")
+                raise FileExistsError("artifact_exists")
             target.parent.mkdir(parents=True, exist_ok=True)
-            with tempfile.TemporaryDirectory(dir=str(target.parent)) as tmp:
-                tmp_path = Path(tmp)
-                (tmp_path / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
-                (tmp_path / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
+            temp_dir = Path(tempfile.mkdtemp(prefix="m11-", dir=str(target.parent)))
+            try:
+                (temp_dir / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+                (temp_dir / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
+                os.link(temp_dir / "manifest.json", temp_dir / "manifest.link")
                 os.mkdir(target)
-                os.replace(tmp_path / "payload.json", target / "payload.json")
-                os.replace(tmp_path / "manifest.json", target / "manifest.json")
+                os.rename(temp_dir / "payload.json", target / "payload.json")
+                os.rename(temp_dir / "manifest.json", target / "manifest.json")
+            except Exception:
+                if target.exists() and not (target / "manifest.json").exists():
+                    try:
+                        target.rmdir()
+                    except OSError:
+                        pass
+                raise
+            finally:
+                if temp_dir.exists():
+                    for child in temp_dir.iterdir():
+                        child.unlink(missing_ok=True)
+                    temp_dir.rmdir()
         return manifest
+
+    def write_attempt(self, slot: M11Slot, state: str, error_code: str | None = None) -> dict:
+        if state not in _STATES:
+            raise ValueError("attempt_state_invalid")
+        path = self.root / _date(slot.target_date) / "attempts" / slot.slot.replace(":", "")
+        path.mkdir(parents=True, exist_ok=True)
+        record = {"slot": slot.__dict__, "state": state, "error_code": error_code}
+        (path / "latest_attempt.json").write_text(json.dumps(record, sort_keys=True), encoding="utf-8")
+        return record
 
     def read_verified(self, slot: M11Slot) -> dict:
         target = self._artifact_dir(slot)
