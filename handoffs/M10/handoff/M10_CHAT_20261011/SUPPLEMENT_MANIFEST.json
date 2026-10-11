@@ -1,0 +1,295 @@
+{
+  "baseline_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "files": [
+    {
+      "path": "V5/contracts/daily_schedule_sources.json",
+      "blob_sha": "3fc35490212813fa136f18d026ab72a5ada94caf",
+      "sha256": "60a460f8c0e3d97a232481214c497e10ccd12c8e2508ab11cf746acaa3c71144",
+      "bytes": 955,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/contracts/daily_schedule_sources.json",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/contracts/daily_schedule_sources.json"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_owner_adapters.py",
+      "blob_sha": "31f08e44addf677b0eb393a9c87819577234ffa0",
+      "sha256": "4bb109ef0a83be48a631bc295fbf2819a88f54b425eac0c21976ebb6b6dac762",
+      "bytes": 5047,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/daily_owner_adapters.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/daily_owner_adapters.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_tick.py",
+      "blob_sha": "3a02ec28f7eb7beee95d3f8b023358b1c1973690",
+      "sha256": "d206b5497ddc37f0b66427cdc78b4b0c6984e5df7f1242a85aa7e05118137623",
+      "bytes": 7072,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/daily_tick.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/daily_tick.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/hk_preselection.py",
+      "blob_sha": "b6bcce7e4fadddf7b3faf06a5cdf07d05c322f70",
+      "sha256": "00ccdaa1890675335836351d33c4fea5f9458a8dd287e3724efb9f0cb0fb1b21",
+      "bytes": 12289,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/hk_preselection.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/hk_preselection.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/source_capsule.py",
+      "blob_sha": "29f8d5a7c0580e676e728dc357ecac67ae995606",
+      "sha256": "be0dfb967916e0ff699306b8aa80d222cf48c5031d8de84f8b2aa55a9eb6d2a9",
+      "bytes": 3487,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/source_capsule.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/source_capsule.py"
+    },
+    {
+      "path": "V5/tests/daily_ledger_fixture.py",
+      "blob_sha": "94cebf77d66faaebd3abe27c52abbc9a61390d17",
+      "sha256": "4405e953b28613c06c82d8bb07d84d5a687d066c1346904a94778e730fdae7b4",
+      "bytes": 840,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/daily_ledger_fixture.py"
+    },
+    {
+      "path": "V5/tests/fixtures/hk_pool_factory.py",
+      "blob_sha": "ca11740df3ebb9dc9921661204773c0b8b844fdf",
+      "sha256": "b92ae0a18fe89fdc3d4eba606666437dbca308678132577afe620ff7c82c3613",
+      "bytes": 5490,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module06-source-20261010/V5/tests/fixtures/hk_pool_factory.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/fixtures/hk_pool_factory.py"
+    },
+    {
+      "path": "V5/tests/test_daily_dispatch.py",
+      "blob_sha": "dc4b536099be22ec85aaf4cf7fac8a6162b2824c",
+      "sha256": "562494578bd09a9fa729465ad25c1bf9429743797ae7b40dbd521c48a9b9526a",
+      "bytes": 3683,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_daily_dispatch.py"
+    },
+    {
+      "path": "V5/tests/test_daily_owner_adapters.py",
+      "blob_sha": "a8252b67e407c999f0e5e5fadc9c04505763fbe4",
+      "sha256": "ec0b59cb024d513e4f5b5d137bcfb5b649b4b1c4f057aa60b525592036bd6f48",
+      "bytes": 7072,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_daily_owner_adapters.py"
+    },
+    {
+      "path": "V5/tests/test_module_artifacts.py",
+      "blob_sha": "3ae254828099b68896723b24273cf5249c6e53ea",
+      "sha256": "81a69a76187fe011ae7d83f2e7743309a17c0d3c7f52539f383278a36477f57e",
+      "bytes": 13212,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_module_artifacts.py"
+    },
+    {
+      "path": "V5/tests/test_source_capsule.py",
+      "blob_sha": "fab5dad5719fd1b8474f6ebfda3c7f5398e0c8fd",
+      "sha256": "96f1a10e41aeedadd47f8cec690cc7833819389e5d39ee5af4cee9d132601140",
+      "bytes": 2379,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module14-source-20261010/BASELINE_F/V5/tests/test_source_capsule.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_source_capsule.py"
+    },
+    {
+      "path": "handoff/hk-close-daily-20261007/candidate/HK_CLOSE_DAILY_REVIEW_SUMMARY_SANITIZED.json",
+      "blob_sha": "791c4cde84f4c2f622f4f801ec1c2887f1142e0c",
+      "sha256": "87705c8b2c4e77355c0095ea8d730ecfdf1c7ac9e4ecdf62d035181115dfa290",
+      "bytes": 9514,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-daily-20261007/candidate/HK_CLOSE_DAILY_REVIEW_SUMMARY_SANITIZED.json"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/HANDOFF_SUMMARY.md",
+      "blob_sha": "9a98fbf752c9ac20a8f42476047f59897018f20d",
+      "sha256": "50ce9c24571c2e857d46c798cb0aab3220fa5733f8e17d9ae3e972b87714128c",
+      "bytes": 3549,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/HANDOFF_SUMMARY.md"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/apps/api/v35_api/_review_router_parts/http_routes.py",
+      "blob_sha": "48c29c49cb0aa1f699a141d61c916fec277f2eb9",
+      "sha256": "d15e4fef682fd877d1e06fba74c3a65afa3031e51bb675646c3ffa34ba49cdae",
+      "bytes": 12020,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/apps/api/v35_api/_review_router_parts/http_routes.py"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/app_shell/timeline.ts",
+      "blob_sha": "22e030dfe641d3c776455f503f549e05defe69f0",
+      "sha256": "58cb16b14b6791c25dc69fcfa1c1fd2c1980bd593a0ed407b3c5ea98b08470e8",
+      "bytes": 1369,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/app_shell/timeline.ts"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/components/review/HkCloseReviewPanel.spec.ts",
+      "blob_sha": "bb38acc6bec3e28163cf4f71986de502279679c1",
+      "sha256": "6610c82b122eb3500cbff9dd32c0c01490e236743dedc3fef041396c9d84247b",
+      "bytes": 4308,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/components/review/HkCloseReviewPanel.spec.ts"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/components/review/HkCloseReviewPanel.vue",
+      "blob_sha": "1f834be8ca0753a501335239a78d84ea5314fe9e",
+      "sha256": "6b7f177f62438e9673d1a7cc8febf8a1670de45292c8dc8ca536f2be4a489351",
+      "bytes": 10754,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/components/review/HkCloseReviewPanel.vue"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/views/ReviewView.vue",
+      "blob_sha": "d13905d24aaa1cbae62b2d16f6ea35db899f8854",
+      "sha256": "51e691f04f2e82d4da49324aa078aca5cb6129a1fadf453d1fb94d244e2d6318",
+      "bytes": 3479,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/apps/web/src/views/ReviewView.vue"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/ops/run_scheduled_slot.py",
+      "blob_sha": "8740dae9779c0a0142428caddb721bbbb9a8d530",
+      "sha256": "654efa76eebe3246759729dd60603826bdca351af83375b0155257aba1610974",
+      "bytes": 12146,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/ops/run_scheduled_slot.py"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/canonical/tests/test_hk_close_daily_binding.py",
+      "blob_sha": "159dc5697aae5549414c738d4e9568752dae29e8",
+      "sha256": "9fca1e558a3db868e77c6c43b1b6ff13b89a44dd9d3f3a7543473e3dfa9960b0",
+      "bytes": 10349,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/canonical/tests/test_hk_close_daily_binding.py"
+    },
+    {
+      "path": "handoff/hk-close-hk-calendar-20261007/scheduler/ops/run_scheduled_slot.py",
+      "blob_sha": "1d2d8361be74a293275ae642bef2f3cb2a0c782e",
+      "sha256": "c9ce4a348c9232e2690457c9b54c4d9d393b27c4ddac04d318fb6a2e93636b2b",
+      "bytes": 11043,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/hk-close-hk-calendar-20261007/scheduler/ops/run_scheduled_slot.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/api/review.ts",
+      "blob_sha": "892eeef9ff696c7ddce1fb4948f80fd1f34ea413",
+      "sha256": "fc2c7551fe386a9b01375d6d82d7f633990bba169f48e9b918386e31baa6dd7d",
+      "bytes": 1436,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/api/review.ts"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/app_shell/timeline.ts",
+      "blob_sha": "f6731f14d6311bff84ddda7b4b6cc40c9b5ac480",
+      "sha256": "0a2a912d22a4b6193a3e5dffdbbf9682275119636ab28bc6beb1b17e233a41cd",
+      "bytes": 1369,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/app_shell/timeline.ts"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/HkCloseReviewPanel.vue",
+      "blob_sha": "aed5c34043a30c7e87e2866c351d0cb3fcf3431d",
+      "sha256": "e9e3c69df42c7fbd4149a0628d6c57f46e29edeae5681d918dea0f3a9621f7bd",
+      "bytes": 10514,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/HkCloseReviewPanel.vue"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.vue",
+      "blob_sha": "30fd187165747a5556d4589f0aeca3ef2787a44e",
+      "sha256": "e1562043e5d98561e3bb19f808215269005c575e49b291efa9f12d93b7a37d78",
+      "bytes": 3479,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.vue"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/close_review.py",
+      "blob_sha": "d9c3445443689500f82d29b9a339bf4b7b9f3d69",
+      "sha256": "6b387283995e89668c9bf92d16a1a5a1229fe72fb4d49758275d2f5360293650",
+      "bytes": 8573,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/close_review.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/executor_registry.py",
+      "blob_sha": "58f2094c687289667598a2d7fb1088ea050289c0",
+      "sha256": "5c7ec48515dee5927b3a5cf9c5457dea299b2b6280b6c90fa452b945466faef9",
+      "bytes": 24448,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/executor_registry.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/ops/run_scheduled_slot.py",
+      "blob_sha": "8da8d773a3dd335fa0dfc0230280e58d75a1f6dd",
+      "sha256": "fcfa36a1a12200af5f60b752674806a6c8ff3caf11139371a9cf746949d98cf9",
+      "bytes": 10279,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "existing M10 fixed supplement",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/run_scheduled_slot.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/stage_center/consumer.py",
+      "blob_sha": "491f832e98d0cf8af87bd45eaa7c15d5f16779a6",
+      "sha256": "865c2ea8183e5e6aeb9145ce2bfbb3e5b442825904b14c47fe024593a9205489",
+      "bytes": 32471,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module07-source-20261010/source/handoff/v4-running-source-20261005/canonical/stage_center/consumer.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/stage_center/consumer.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_close_review_producer.py",
+      "blob_sha": "45ba46bfdd1a1d84446e87743fca93f1a8cb5507",
+      "sha256": "d20504fcaff6b7cfdc8509e73530df1e04e4da28f0a0eb0ca78f821a85a81447",
+      "bytes": 13169,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_close_review_producer.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_close_review_verified_inputs.py",
+      "blob_sha": "38cc5643fff23235e0a8ef42a31da0b108f88064",
+      "sha256": "2be3e11c169faf458055d9767dbe6cf85b01ff8e3b9f91ee296e18473b826d50",
+      "bytes": 5156,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_close_review_verified_inputs.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_close_snapshot_idempotent_reuse.py",
+      "blob_sha": "6c9be774fc98c245055965ed498745875299c7e0",
+      "sha256": "bffc5419861fa1b1274f8403bf9259b9471b94ad2aba5b1ca75c78218038f9fc",
+      "bytes": 3065,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_close_snapshot_idempotent_reuse.py"
+    }
+  ],
+  "all_files_verified_against_fixed_tree": true,
+  "status": "READ_ONLY_ATTACHMENT_NO_PRODUCT_EXECUTION"
+}

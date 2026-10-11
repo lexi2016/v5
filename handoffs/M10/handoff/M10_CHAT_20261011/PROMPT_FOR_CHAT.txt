@@ -1,0 +1,57 @@
+V5 M10｜港股收盘复盘
+
+这是原18模块中的M10/P3首次完整编码任务，用户已经授权现在提交并继续实现。范围沿原计划，不新增M19，不再次等待逐模块讨论或范围确认。请直接完成代码交付，不停在第二份计划、骨架、待注入回调、待未来交易日或缺件清单。以下本轮任务优先于旧SOURCE任务中2026-10-10旧prompt里“只交方案”“只静态”“等活动合同再开始”等过时表述；安全边界、原算法与业务范围仍保留。
+
+一、会话与固定依据
+请实际使用GPT-6、极高思考强度，并实际选择已安装的Superpowers插件及相关技能。遵循using-superpowers、必要systematic-debugging/局部设计、test-driven-development、requesting-code-review、verification-before-completion。正文提及名字不代表已选中；不能选择时准确说明可见状态，不伪称启用。沿用既有总体计划，不重新设计全仓。
+原总计划：https://github.com/lexi2016/v4/blob/24c6d60d524f43fcf4209ec8b078ec02cb34417e/V5/docs/superpowers/plans/2026-10-09-v5-master-delivery.md
+原迁移计划：https://github.com/lexi2016/v4/blob/d1bf034640ca2e5957423de2745a98e159b69af2/V5/docs/superpowers/plans/2026-10-10-v5-migration-execution.md
+固定源码F=f7cb731c384ee6890a87d16c19a5b5a621779477，donor仓库lexi2016/v4。新交付目的仓库为独立私有lexi2016/v5；本任务不以材料分支/commit冒充实现或部署完成。请在本模块已授权开发分支dev/m10-github-handoff-20261011上提交完整实现、测试与原始日志；共享集成由唯一集成者核前像后处理。不得修改main、其他模块分支或假造commit。
+
+二、GitHub主流程与可读工程树
+本轮按用户最新要求使用GitHub插件读取发布者提供的独立私有lexi2016/v5本模块分支固定commit及START_HERE.md。先核实际分支/commit/路径，再读取可读工程树，本轮仅用GitHub交付；允许写入本模块开发分支dev/m10-github-handoff-20261011，不得写入main或其他模块分支。发布者会附已核固定链接；未给出前不猜分支名或commit。
+工程树直接保留V5/与handoff/原仓库相对路径。原SOURCE含106份同F原件，本轮最小补件32份，共138份可读源码，逐Git blob/SHA-256/bytes已核，无同路径覆盖。handoff/M10_CHAT_20261011/中给SOURCE_MANIFEST.json、SUPPLEMENT_MANIFEST.json、SOURCE_FACTS.md及完整任务；START_HERE.md给阅读入口。
+原始源码字节保持不变；新仓库commit是本轮材料交付身份，原算法来源仍逐文件追溯lexi2016/v4@f7cb731c384ee6890a87d16c19a5b5a621779477，两者不要混同。它们均不能冒充当前Mac工作树。
+若GitHub插件无法读取精确路径，说明具体失败项和已尝试的固定路径；需要备用已交工程树时由父端提供已核本地包，不请用户重复整理源码。任务直接进入实现，不能停在再次研究总体范围。
+
+三、唯一目标：默认可执行的M10新日链
+交付真实默认producer → V5私有不可变store → 独立reader → 可接现有普通API/UI与调度的实际代码。历史bridge保留作对照。调用方不传测试回调或monkeypatch时也必须完成原计算和保存；测试替身仅用于外部I/O边界。新日执行与历史fixture重放明确分账，禁止把旧bridge读取20/100称为新计算。
+模块内允许必要修改V5/src/v5_shadow/hk_close_review.py、V5/tests/test_hk_close_review.py；新增hk_close_daily.py、test_hk_close_daily.py、V5/docs/M10_HK_CLOSE_HANDOFF.md；若独立reader/store确需HK私有文件，请列精确新增路径和不存在证明，保持M10内最小闭包。
+实现输入绑定、默认原owner调用、原生保存/manifest/receipt、独立读取校验、幂等与失败留痕、调度owner适配、API投影及HK页面接入候选。不要仅给函数签名或叫下一位自行实现。使用已有module_artifacts、ledger和原store合同，不另造18套服务器、页面或平行调度。
+
+四、已经确认的原链，不得误判
+路径C/=handoff/v4-running-source-20261005/canonical/。
+原专用调度C/infrastructure/scheduling/executor_registry.py::_hk_connect_close_review委派到_executor_registry_parts/close_review.py；已先collect_hkconnect_close_snapshot，再build_close_review，并传--stage-selection-root。只看catalog裸command而声称“原调度没有collector/没有stage-root”是错误。原TIMEOUT/cutoff重试120秒、累计1200秒是历史行为证据，不等于V5已启用。
+原collector验证已有同日CloseSnapshotStore快照后IDEMPOTENT_REUSE；未有合格快照才限制真实当天16:10以后采集。历史日只读已存在合格快照，禁止今天报价填旧日、倒填capture/available或为了HTTP空重复采集。
+原builder按CloseSnapshotStore → exact-date PreselectionPoolStore(hkconnect_d1_top100) → StageSelectionConsumer → build_native_close_review → ReviewStore.publish_native(expected_sha256)。原consumer补件来自同F canonical，不能用另一个archive_reader版本代替。
+F中hk_close_daily.py不存在；现有run_hk_close_review仅SYNTHETIC/RECORDED_INPUT_REPLAY，review_bridge只读旧成品，两者均不是默认daily producer。
+
+五、原算法、缺证和日期合同必须完整保留
+1. 收盘涨幅=(close/pre_close-1)*100，按涨幅降序、amount降序、code升序取Top20。原0.2模型按原rank/code选Top100；覆盖、precision、七阶段并集与逐股归因复用原build_native_close_review，不写近似简化算法。
+2. 原七阶段严格为STAGE_0925、STAGE_0930_0935、STAGE_0935_0940、STAGE_0940_0945、STAGE_0945_1030、STAGE_1300_1315、STAGE_1445_1500。M08的Stage8独立，不能补缺失七阶段。
+3. 同一交易日的M02港股通收盘集合与资格、M06严格Top100、M08原七阶段，必须保留原输入run/manifest/receipt、SHA、source/config/code/calendar身份与原PARTIAL原因。原builder把READY/PARTIAL_WITH_ROWS降成rows时丢失的证据，要在V5包装和存储中补回。
+4. 模型缺/坏、阶段缺或PARTIAL时，已有合格Top20仍能展示，不能整个清空；不可确认的归因/命中保持null/CANNOT_CONFIRM/PARTIAL，不以0替代。None缺源与已验证合法空不同；不能仅凭[]断言READY_EMPTY。
+5. M02集合数量>=600不是成员资格证明。重复、混日、坏prev_close、缺成员/PIT不能被静默过滤后声称完整；保留错误与原拒绝码。M06 exact-date、STRICT_0_2_READY、100唯一HK/HKCONNECT、原安全标志和原source_role准入不放宽。
+6. 全天自然调度沿已冻结16:10及HK_SECURITIES_TRADE_DAY；旧16:08与回放代码的半日12:10都不能成为新生产触发。香港证券日历与港股通资格分开。半日活动合同未核时明确SCHEDULE_BINDING_UNVERIFIED，代码仍应完成已知全天路径及阻断测试。
+
+六、不可变发布与可接入交付
+producer以目标日、输入内容及source/code/config/calendar版本形成可追溯计算身份，使用V5私有根。精确重试应复用成功、不重复采/算；变更输入或日期产生新run。原ReviewStore expected SHA与V5 generation CAS两层身份都保留，不相互代替。失败attempt保留，不能覆盖latest_success。
+独立reader必须重新从磁盘验证payload、manifest、receipt、run与输入身份，不只返回producer内存结果；API/页面显示同一已提交run/generation，保留缺证原因、旧日期和数据种类。
+普通GET、刷新、返回、日期切换不得调用producer。共享/api/v3/review同时服务A股，M10新接入与回滚必须保留M09现有A内容；HK旧研究prefix区域不改。
+真正实现可接入API/UI/调度的候选代码：公共文件变更放integration_candidates/M10/，给精确固定前像、函数级正反patch、完整候选文件和兼容测试，不直接覆盖其他模块的当前公共文件。不能只交“请集成者接线”的文字。统一集成者负责重核当前前像、归并冲突和实际发布。
+vendor与来源manifest保持只读。若默认路径需新冻结原producer闭包，请交隔离的CAPSULE_INTEGRATION_CANDIDATE与逐原件blob/SHA映射、导入测试、装配说明，供唯一集成者核准纳入；禁止在候选主树静默改manifest或重写原算法。已知C/_selection_parts/_namespace.py和调度_namespace.py在F树不存在，附vendor同用途文件不能未经验证伪装成该canonical原件。
+
+七、现在就用已有材料完成代码与验证
+真实未来交易日、完整七阶段当天运行、活动Mac合同都不是开始或交付代码的前置条件。先用已交工程树已有原历史日期fixture与原测试验证计算等价、保存→独立读回、幂等、失败、PARTIAL、有效空、坏SHA、时间与资格拒绝，覆盖默认装配而不是只测注入回调。明确哪些是合成测试fixture、录制重放、真实旧产物，不把它们升级自然运行。
+原test_close_review_producer.py、test_close_review_verified_inputs.py、test_close_snapshot_idempotent_reuse.py、test_hk_close_review.py与hk_pool_factory.py均可直接阅读复用；只补精确所需反例，不换数据凑通过。测试必须按固定候选实际执行并附原始stdout/stderr、命令、开始/结束、退出码及passed/failed/skipped。缺环境的项目写NOT_RUN和精确缺项；不能伪造日志或把旧报告当本轮。Mac独立测试、实际普通API/UI验收、下一适用日自然运行另列，不混成当前工程通过。
+
+八、必须一次交回的交付包
+1. 完整after/目录，所有新增/修改文件正文齐备。不是只给零散patch或伪实现。
+2. before/或可重建固定前像、每文件before/after SHA-256/bytes，新增路径ABSENT证据；source/candidate/包身份与donor→V5映射。
+3. 标准可应用forward.patch和真正reverse.patch（方向为after→before，不能把正向patch另取名）；对准确前像完成apply --check、应用、reverse --check、反向恢复并核SHA的原始日志。共享候选独立放置，不覆盖本模块主树或其他Chat候选。
+4. 失败先行测试源码、原算法逐字段等价表、实际定向测试原日志、未跑清单，完整默认producer/store/reader链的证明。至少覆盖模型/阶段缺证仍有Top20、PARTIAL_WITH_ROWS原原因保留、合法空、幂等、篡改、CAS旧前像、写失败留上次成功、HK变更不动A。
+5. 可执行命令/CLI与默认配置示例、只读API及HK UI/调度接线的真实候选；输入输出schema示例使用已有fixture，保留原安全标志。
+6. Mac应用/验证/回滚说明，代码、数据generation、API/UI版本身份分别核；A1/B1→A2/B1→A2/B2→仅回A1/B2，不回滚B。仅数据generation切换不冒称代码/UI独立回滚。不能reset --hard或覆盖活动改动。
+7. 五层状态分开：代码工程、真实输入、页面、自动接续、完整验收。完整自然验收沿原计划连续两个适用交易日，不影响本轮先交实现。仅材料齐备或离线测试通过不能称M10完整完成。
+
+保留全部V4系统、数据、服务和8910；不交易、不下单、不改BUY门、不扩大凭据/安全/网络权限、不上传秘密。M02/M06/M08/M09及其他模块只读。请先读已交工程树并开始实际实现，有精确缺件就只报该缺件，同时继续不依赖它的代码和测试。
