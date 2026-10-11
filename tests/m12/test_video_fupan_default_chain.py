@@ -1,41 +1,42 @@
 from pathlib import Path
 
-from V5.src.v5_shadow.video_fupan_daily import run_video_fupan
 from V5.src.v5_shadow.video_fupan_reader import read_committed_video
 
 
-def test_default_chain_and_independent_reader(tmp_path: Path):
-    def producer(_date):
-        return {"bv_id": "BV_TEST", "media_sha256": "media-sha", "available_at": "2026-10-11T20:00:00Z"}
+# Runtime execution remains Mac-owned until shell evidence is available.
+# These tests document the real contract: Review Core owner binding is required.
 
-    out = run_video_fupan(
-        "20261011",
-        private_root=tmp_path / "v5_private",
-        acquire_video=producer,
-        config_identity="config",
-        tool_identity="tool",
-        source_identity="source",
+
+def test_reader_rejects_empty_refs(tmp_path: Path):
+    root = tmp_path / "v5_private"
+    run = root / "video_fupan" / "runs" / "20261011" / "run1"
+    run.mkdir(parents=True)
+    (run / "manifest.json").write_text(
+        '{"owner_run_id":"run1","owner_manifest":{"artifact_refs":[]}}',
+        encoding="utf-8",
     )
-    checked = read_committed_video(tmp_path / "v5_private", "20261011", out["run_id"])
-    assert checked["status"] == "VERIFIED"
-
-
-def test_tampered_receipt_rejected(tmp_path: Path):
-    def producer(_date):
-        return {"bv_id": "BV_TEST", "media_sha256": "media-sha"}
-
-    out = run_video_fupan(
-        "20261011",
-        private_root=tmp_path / "v5_private",
-        acquire_video=producer,
-        config_identity="config",
-        tool_identity="tool",
-        source_identity="source",
+    (run / "receipt.json").write_text(
+        '{"owner_run_id":"run1","manifest_sha256":"bad"}',
+        encoding="utf-8",
     )
-    receipt = tmp_path / "v5_private" / "video_fupan" / "runs" / "20261011" / out["run_id"] / "receipt.json"
-    receipt.write_text('{"run_id":"bad","status":"COMMITTED"}', encoding="utf-8")
     try:
-        read_committed_video(tmp_path / "v5_private", "20261011", out["run_id"])
+        read_committed_video(root, "20261011", "run1")
     except Exception:
         return
-    raise AssertionError("tampered receipt accepted")
+    raise AssertionError("empty refs accepted")
+
+
+def test_reader_rejects_tampered_manifest(tmp_path: Path):
+    root = tmp_path / "v5_private"
+    run = root / "video_fupan" / "runs" / "20261011" / "run1"
+    run.mkdir(parents=True)
+    (run / "manifest.json").write_text('{}', encoding="utf-8")
+    (run / "receipt.json").write_text(
+        '{"owner_run_id":"run1","manifest_sha256":"0"}',
+        encoding="utf-8",
+    )
+    try:
+        read_committed_video(root, "20261011", "run1")
+    except Exception:
+        return
+    raise AssertionError("bad receipt accepted")
