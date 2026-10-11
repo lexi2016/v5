@@ -1,25 +1,16 @@
-"""M12 Video FUPAN V5 private immutable default chain.
+"""M12 Video FUPAN V5 private immutable chain.
 
-This module owns orchestration only. The review_core producer remains the
-algorithm owner. It materializes a private run, receipt and manifest.
+The Review Core producer remains the owner of discovery/capture/ASR/video
+algorithms. This layer only binds the approved owner into a V5 private root and
+persists the returned evidence identity.
 """
 from __future__ import annotations
 
 import hashlib
 import json
 import os
-from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Mapping
-
-
-@dataclass(frozen=True)
-class VideoIdentity:
-    trade_date: str
-    bv_id: str
-    source_sha256: str
-    config_sha256: str
-    tool_sha256: str
 
 
 class VideoArtifactError(RuntimeError):
@@ -27,65 +18,84 @@ class VideoArtifactError(RuntimeError):
 
 
 def _sha(value: Any) -> str:
-    if isinstance(value, bytes):
-        data = value
-    else:
-        data = str(value).encode("utf-8")
-    return hashlib.sha256(data).hexdigest()
+    return hashlib.sha256(str(value).encode("utf-8")).hexdigest()
 
 
 def _write_json(path: Path, payload: Mapping[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + ".tmp")
-    tmp.write_text(json.dumps(payload, ensure_ascii=False, sort_keys=True), encoding="utf-8")
+    tmp_dir = path.parent / ".staging"
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    tmp = tmp_dir / (path.name + ".tmp")
+    tmp.write_text(json.dumps(dict(payload), ensure_ascii=False, sort_keys=True), encoding="utf-8")
     os.replace(tmp, path)
+
+
+def _require_private_root(root: Path) -> Path:
+    root = root.absolute()
+    if "v5" not in str(root).lower():
+        raise VideoArtifactError("M12 requires explicit V5 private root")
+    return root
+
+
+def _bind_review_core():
+    """Import boundary kept in one place for the frozen vendor closure."""
+    from .review_core.core import run_video
+    from .review_core.config import ProducerConfig
+    from .review_core.producer import AcquisitionTools
+    return run_video, ProducerConfig, AcquisitionTools
 
 
 def run_video_fupan(
     trade_date: str,
     *,
     private_root: Path | str,
-    acquire_video: Any,
-    config_identity: str,
-    tool_identity: str,
+    tools: Any,
     source_identity: str,
+    tool_identity: str,
+    config_identity: str,
+    allow_network: bool = False,
 ) -> dict[str, Any]:
-    """Run the first M12 default chain.
+    root = _require_private_root(Path(private_root))
+    run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
 
-    acquire_video is the original Review Core owner callable. It is injected
-    only as a binding seam; the caller cannot replace storage or verification.
-    """
-    root = Path(private_root).absolute()
-    if "v5" not in str(root).lower():
-        raise VideoArtifactError("M12 requires a V5 private root")
+    config = ProducerConfig(data_root=root)
+    if Path(config.data_root).absolute() != root:
+        raise VideoArtifactError("producer config escaped private root")
+    if not isinstance(tools, AcquisitionTools):
+        raise VideoArtifactError("explicit AcquisitionTools binding required")
 
-    result = acquire_video(trade_date)
-    if not isinstance(result, Mapping):
-        raise VideoArtifactError("producer returned non mapping")
-
-    bv_id = str(result.get("bv_id") or "")
-    media_sha = str(result.get("media_sha256") or "")
-    if not bv_id or not media_sha:
-        raise VideoArtifactError("producer evidence missing BV/media identity")
-
-    identity = VideoIdentity(
-        trade_date=str(trade_date),
-        bv_id=bv_id,
-        source_sha256=_sha(source_identity),
-        config_sha256=_sha(config_identity),
-        tool_sha256=_sha(tool_identity),
+    result = run_video(
+        trade_date,
+        mode="acquire",
+        data_root=root,
+        config=config,
+        tools=tools,
+        allow_network=allow_network,
     )
-    run_id = _sha(json.dumps(asdict(identity), sort_keys=True))
+    if not isinstance(result, Mapping):
+        raise VideoArtifactError("review_core returned non mapping")
+
+    manifest = dict(result.get("manifest") or {})
+    if not manifest:
+        raise VideoArtifactError("missing producer manifest")
+
+    identity = {
+        "trade_date": str(trade_date),
+        "bv_id": str(manifest.get("bv_id") or ""),
+        "source_sha256": _sha(source_identity),
+        "config_sha256": _sha(config_identity),
+        "tool_sha256": _sha(tool_identity),
+    }
+    run_id = _sha(json.dumps(identity, sort_keys=True))
     run_root = root / "video_fupan" / "runs" / str(trade_date) / run_id
 
-    manifest = {
-        "identity": asdict(identity),
-        "run_id": run_id,
-        "status": "COMMITTED",
-        "available_at": result.get("available_at"),
-        "artifact_sha256": media_sha,
-    }
-    _write_json(run_root / "manifest.json", manifest)
-    _write_json(run_root / "receipt.json", {"run_id": run_id, "status": "COMMITTED"})
+    persisted = dict(manifest)
+    persisted["identity"] = identity
+    persisted["run_id"] = run_id
+    persisted["technical_state"] = "COMMITTED"
+    persisted["business_status"] = manifest.get("status", "UNKNOWN")
+
+    _write_json(run_root / "manifest.json", persisted)
+    _write_json(run_root / "receipt.json", {"run_id": run_id, "manifest_sha256": _sha(json.dumps(persisted, sort_keys=True))})
     _write_json(root / "video_fupan" / str(trade_date) / "current.json", {"run_id": run_id})
-    return {"run_id": run_id, "manifest": manifest}
+    return {"run_id": run_id, "manifest": persisted}
