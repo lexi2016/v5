@@ -1,0 +1,55 @@
+GitHub 已授权工作目标：lexi2016/v5，开发分支 dev/m11-github-handoff-20261011，输入目录 handoffs/M11/。收到发布者给出的固定 commit 后真实读取并核验，继续在该分支提交完整代码、测试、日志和集成候选；不 force、不改 main、不混入其他模块。用户最新要求所有交付均通过 GitHub，覆盖原材料中 ZIP/附件措辞。
+
+V5 M11｜盘中研究与研究复盘
+
+本轮以独立私有 lexi2016/v5 的本模块固定 GitHub commit 为唯一主交接。请实际使用 GitHub 插件读取发送者提供的精确 commit 下 START_HERE.md、PROMPT_FOR_CHAT.txt、原源码与补件 manifest，然后读取全部必要源文件；不要只看目录清单或README就返回。分支和 commit 链接由发布者核实后在 Chat 正文给出，本文不编造已有分支/commit。GitHub读取确实失败时报告精确调用与错误；所有模块通过 GitHub 处理，不默认改为 ZIP 交付。
+
+本分支是源码交接材料，不是已经实现、测试通过或部署的产品。original_source/fixed-f7cb731c/ 保存 F 的原始源码字节；integration_source_supplement/fixed-f7cb731c/ 保存 F 的只读共享接线前像。两个SOURCE_MANIFEST保留repo/commit/path/blob/SHA256/bytes，原总计划与迁移计划在 original_source/reference-plans/。原 source ZIP 与补件ZIP SHA可在父交接manifest核对，但不需要先下载ZIP才能工作。逐文件按manifest核验源码，不把交接commit当产品候选commit。
+
+本轮为原18模块总计划内的首次完整实现交接，立即编写代码并持续完成整个模块交付。不要另开全仓规划，不改模块编号，不将单个 wrapper、测试数量或接口读到旧成品当作整模块完成。必须实际选择 GPT-6、极高推理，并真正调用已安装 Superpowers 插件相关技能；至少按真实任务使用 using-superpowers、executing-plans、systematic-debugging（有缺陷时）、test-driven-development、requesting-code-review、verification-before-completion。仅写名称或宣称启用不算调用。若模型/技能确不可用，先如实报告当前实际状态，不能伪称使用，也不能因此只交计划。
+
+一、固定范围、仓库与安全边界
+原总计划：https://github.com/lexi2016/v4/blob/24c6d60d524f43fcf4209ec8b078ec02cb34417e/V5/docs/superpowers/plans/2026-10-09-v5-master-delivery.md
+原迁移计划：https://github.com/lexi2016/v4/blob/d1bf034640ca2e5957423de2745a98e159b69af2/V5/docs/superpowers/plans/2026-10-10-v5-migration-execution.md
+固定 donor F=f7cb731c384ee6890a87d16c19a5b5a621779477。目标交付仓库为独立私有 lexi2016/v5；lexi2016/v4 仅是历史来源，不是本轮写入目的仓库。未实际创建、核读分支/提交前不得宣称已建或已提交。若本 Chat 无 GitHub 写权限，完整交付候选文件和补丁给统一集成者；不要把没有真实 commit 的离线候选冒写为 commit。
+保留 V4 的代码、服务、8910、业务根与既有结果；不交易、不发单、不改 BUY 门、不扩大系统权限或凭据访问、不安装额外软件。原源码中的账号、默认服务端口、默认根和工具路径是接口事实，绝不是新访问授权。所有新输出在明确绑定的 V5 本模块私有根，严禁回退 V4 根或 HOME 自动搜索。不得扫描、复制或外传凭据、媒体、用户业务原件。
+
+二、最终目标与默认生产入口
+要求真实原 owner 算法 → V5 私有不可变保存 → 新进程/独立 reader 校验读回 → 实际调度 binding、API、原页面接线代码。必须有默认可装配入口，按固定源码实际调用原函数/CLI；允许依赖注入用于测试，但不能把所有关键行为留给调用者提供 runner/store/reader，不能以 stub、lambda、返回静态 dict、TODO 或重新命名状态代替真实链。
+冻结输入、代码、配置、原 owner、依赖摘要与 target/cutoff/trigger/run 身份；只有独立读回比对 artifact/manifest/receipt 后才能返回提交成功。读取只接受已提交身份，拒绝损坏、过期、不匹配、路径逃逸和 symlink；并发同输入只有一个有效写入；输入/配置/代码变化为不同身份；成功和失败 attempt 分离，失败不抹掉 latest_success。原 owner 的拒绝、未知、部分结果不得靠外围标签变成 VERIFIED/READY。
+
+三、可写范围与共享集成的完整交付
+本模块私有 worker、vendor capsule、adapter、合同及测试可以直接交完整 after。共享 run_ledger.py、module_artifacts.py、api_gateway.py、daily_dispatch.py、原 review_router.py、ReviewView.vue、共享前端合同、调度与其他模块源码均受保护；固定源包中的这些文件是精确前像参考，不得整文件覆盖上线。
+但“共享保护”不能被理解为只交 INTEGRATION_REQUEST.md：请在独立 integration_candidate/ 目录提供实际调度/API/页面所需的完整函数或组件源码、精确锚点、前像 SHA、最小正反 patch、接口契约测试和应用顺序。写清哪些共享文件会受影响及与 M04/M05/M09/M10/M18 的兼容边界；由统一集成者核现役前像、处理已变化文件并单窗口落地。旧 handoff 中“仅给接线建议”的限制以本条升级：不直接覆盖共享文件，但必须交可核的整合代码。
+
+四、测试与证据不能替代
+先跑并保留原回归，再补正常/失败/并发/中断/恢复/晚到等测试。离线可完成的默认装配、原算法调用、私有写入、新进程读回与契约测试立即完成；缺真实 provider、模型、媒体或 Mac 配置只阻断依赖它的真实运行，不阻断其余代码。不能声称 fixture 就是自然来源，不能把 mock 测试变成实盘或页面通过。没有依赖时写准确命令、原始 stderr、退出码和 NOT_RUN/BLOCKED 的具体原因；不要造测试日志、版本、模型调用或自然交易日证据。
+五项分别登记：代码接入、真实数据通过、页面可用、自动接续、完整验收。工程测试单列；Mac 独验、生产/历史恢复/手动/自然运行分别记。现在不是两个适用交易日自然证据的替代；不为非交易时段造证据。
+
+五、必须完整返回的交付目录
+1. README、SOURCE_MANIFEST（逐 donor repo/commit/path/Git blob/SHA256/bytes）、DEPENDENCIES/CLOSURE、SOURCE_TO_TARGET_MAP、固定前像说明。
+2. before/ 与完整 after/（每个改动文件完整文本；新增文件明确 before 不存在），保留已有公共函数和安全校验；不要只返最新小切片。
+3. 真实 runtime.patch 与 reverse.patch，方向互逆且非同一文件；在隔离前像实测 apply --check、正向后逐文件 SHA、反向还原 SHA。路径合法，新增/删除正确，不用截断占位 diff。
+4. CHANGE_MANIFEST.json 列每文件 before/after SHA256、bytes、状态及目标路径；SHA256SUMS 不循环哈希自身。将所有完整候选文件与校验清单直接提交 GitHub 本模块开发分支，返回最终固定 commit 与可读取目录；不以 ZIP 交付。
+5. tests/、测试执行脚本、原始 stdout/stderr、每命令工作目录/解释器版本/完整命令/起止/exit code；同时给未执行项。不能只写“X passed”而无原日志，不相加历史批次当当前全套。
+6. integration_candidate/ 内的实际调度/API/页面代码与独立 patch、共享前像 SHA、compatibility tests；另给 INTEGRATION_REQUEST.md 说明落地次序和待确认活动 binding。
+7. MAC_ACCEPTANCE.md：固定候选独立验真实输入→原计算→保存→新进程读回→同 run API/UI→按实际合同触发→跨日/单模块回滚；不要求测试者另写第二版实现。
+8. ROLLBACK.md、五项状态矩阵、已完成/真实阻断/精确缺件清单。
+交付是完整代码候选，不是答应稍后继续、不只是设计方案或缺件清单。请连续完成可离线实现的全部链路；真正外部依赖缺口单列，别重做无关全仓调查。
+
+六、M11 原算法和盘中 PIT 专项
+M11 是原 P4「盘中研究与研究复盘」，依赖 M04 与已提交市场/阶段证据。拟新增 V5/src/v5_shadow/research_review_daily.py、V5/vendor/research_review_baseline/ 的完整原闭包及对应 tests；固定树没有上述 daily，不要宣称已有服务。原核心：domains/intraday_research.py::capture_intraday/read_intraday_day；domains/research_review_generation/assembly.py::assemble_runtime 与 generation.py::run_generation；domains/daily_research_review.py 精确日 reader。所有函数签名以实际包内源码为准，不自行猜测。
+1. M11 六槽是 Asia/Shanghai 的 09:25、09:35、10:00、11:30、14:00、15:00；保留原 8 分钟窗口边界、原前一交易日引用、覆盖率、live pool、聚合及 cannot_confirm。READY 仍可有 missing_slots，不能显示“全天完整”。竞价只能引用真实前一交易日已提交研究总结。
+2. 输入区分 event_time/published_at/observed_at/available_at、target_date、slot 和 cutoff。晚到、未知 available_at、收盘数据、当天最终 cache、后补阶段结果不能冒充早盘已知输入。来源原始时点不得重写为业务目标日；带有明确 cutoff 的历史恢复只能用当时可用证据，不能修改时钟/把当前行情补造过去。
+3. 保留原 REQUEST_IN_FLIGHT、REQUEST_ATTEMPTED、ATTEMPT_UNKNOWN、FAILED_NO_REQUEST 状态和原拒绝。只有原 owner 可证明没有请求发生的分支可按规则重试；超时/断电/坏 marker 不可删标记重抓。恢复时核同 slot input/config/source/output SHA；成功不多抓一次，不跨槽 fallback。
+4. 盘中各槽与收盘研究各有独立不可变 artifact/manifest/receipt。日总结保留原 same-date lock、原模型身份、原 section/date/provenance/source 校验；普通刷新不得隐式 --replace。显式再生成也应新 attempt/generation，保留旧成功；collect 与 bound snapshot 两种模式严格按原 owner，不换 provider 或研究算法。
+5. 输出根与 input/source/cache/V4 活动根明确不重叠；HTTP 不能接任意本机路径。固定 config/profile/source manifest SHA 由核实绑定提供。固定 F 缺 canonical/domains/research_review_generation/OWNED_SOURCE_MANIFEST.json，owned_runtime.verify_owned_sources 要求其原件及外部固定摘要：不得伪造“原 manifest”、禁用校验、编造现役配置或把自行生成 manifest 说成原件。可实现独立命名的 V5 capsule manifest 及准确默认装配/验证代码；如原 owner 仍缺受信任原件，该真实执行门维持 BLOCKED，给精确缺件及不依赖它的原函数/fixture合同测试，不能以缺件为由只交骨架。
+
+七、M11 页面与调度纠偏
+固定补件显示原 ReviewView.vue 将 current.research_review 与 current.intraday_research 传给 DailyResearchReviewPanel.vue；原 api/review.ts、contracts/review.ts 与对应 spec 已附，应以这里实现 M11 实际页面接线。
+特别注意：DailyResearchCommandView.vue 及 components/daily-research-command/types.ts 属于 M04 小时研究日聚合，槽为 1000/1100/1200/1300/1400/1500/1600/1700，不能拿来替代 M11 六槽或覆盖 M04。原包对此只作为共享 consumer 参考的提法需要此处澄清。保留 M04 原视图与调度；若要在指挥台增加 M11 引用，只做独立只读链接/分区，不混合产物身份。
+调度候选只绑定原六槽入口与原交易日/窗口/重试合同；原测试明确无自动 daily-generation scheduler，不擅加每日研究总结定时任务。研究总结提供真实显式触发和异步任务状态，GET/刷新/切日/返回不得生成或写锁/cache/job；慢研究不阻塞普通 API。
+页面要展示 target/slot/cutoff/run/available_at/来源 SHA、缺槽/未知/过期/慢任务，保留日期与选择，重复操作幂等，并保持 M09/M10 共享复盘字段。
+
+八、M11 最低新增测试
+保留原 test_v4_intraday_research.py、test_research_review_generation.py、test_daily_research_review.py；新增默认装配实际调用原 owner（不是只有传入假 runner）、六槽聚合 parity、8 分钟边界、跨交易日、并发单写、跨进程独立读回、发布中断、损坏/换 SHA/路径逃逸/symlink、GET 零副作用、旧成功保留、配置变更新身份、来源晚到与 unknown available_at 拒绝、请求不明不重试、FAILED_NO_REQUEST 允许重试、日总结显式新 generation、M04 与 M09/M10 合同兼容。单个有效真实 slot 与真实研究日总结的 Mac 证明独立登记，不捏造全六槽或自然运行。

@@ -1,0 +1,10 @@
+{
+  "source_files": 73,
+  "source_blob_and_byte_checks": "MATCHED",
+  "product_modules_imported": false,
+  "product_tests": "NOT_RUN",
+  "mac_data_included": false,
+  "credential_pattern_hits": [],
+  "deployment": "NOT_RUN",
+  "known_limits": "固定树缺 domains/research_review_generation/OWNED_SOURCE_MANIFEST.json；owned_runtime.verify_owned_sources 明确要求此原件及外部固定摘要。本包不伪造该原manifest，不将固定源码subset称完整Mac运行环境。完整研究generation Python目录与profile源码已附；真实运行前由Mac核原manifest、config/profile/source摘要与已有绑定。六slot窗口和请求发生状态按原代码；日总结不自动新增scheduler。"
+}
