@@ -1,0 +1,286 @@
+{
+  "baseline_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "files": [
+    {
+      "path": "V5/contracts/daily_schedule_sources.json",
+      "blob_sha": "3fc35490212813fa136f18d026ab72a5ada94caf",
+      "sha256": "60a460f8c0e3d97a232481214c497e10ccd12c8e2508ab11cf746acaa3c71144",
+      "bytes": 955,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/contracts/daily_schedule_sources.json",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/contracts/daily_schedule_sources.json"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_close_plan.py",
+      "blob_sha": "b816802e512a8f22d736716168c515f5ade61ca0",
+      "sha256": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6",
+      "bytes": 5807,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/daily_close_plan.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/daily_close_plan.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_owner_adapters.py",
+      "blob_sha": "31f08e44addf677b0eb393a9c87819577234ffa0",
+      "sha256": "4bb109ef0a83be48a631bc295fbf2819a88f54b425eac0c21976ebb6b6dac762",
+      "bytes": 5047,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/daily_owner_adapters.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/daily_owner_adapters.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_tick.py",
+      "blob_sha": "3a02ec28f7eb7beee95d3f8b023358b1c1973690",
+      "sha256": "d206b5497ddc37f0b66427cdc78b4b0c6984e5df7f1242a85aa7e05118137623",
+      "bytes": 7072,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/daily_tick.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/daily_tick.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/hk_preselection.py",
+      "blob_sha": "b6bcce7e4fadddf7b3faf06a5cdf07d05c322f70",
+      "sha256": "00ccdaa1890675335836351d33c4fea5f9458a8dd287e3724efb9f0cb0fb1b21",
+      "bytes": 12289,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/hk_preselection.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/hk_preselection.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/source_capsule.py",
+      "blob_sha": "29f8d5a7c0580e676e728dc357ecac67ae995606",
+      "sha256": "be0dfb967916e0ff699306b8aa80d222cf48c5031d8de84f8b2aa55a9eb6d2a9",
+      "bytes": 3487,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/src/v5_shadow/source_capsule.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/source_capsule.py"
+    },
+    {
+      "path": "V5/tests/daily_ledger_fixture.py",
+      "blob_sha": "94cebf77d66faaebd3abe27c52abbc9a61390d17",
+      "sha256": "4405e953b28613c06c82d8bb07d84d5a687d066c1346904a94778e730fdae7b4",
+      "bytes": 840,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/daily_ledger_fixture.py"
+    },
+    {
+      "path": "V5/tests/fixtures/hk_pool_factory.py",
+      "blob_sha": "ca11740df3ebb9dc9921661204773c0b8b844fdf",
+      "sha256": "b92ae0a18fe89fdc3d4eba606666437dbca308678132577afe620ff7c82c3613",
+      "bytes": 5490,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module06-source-20261010/V5/tests/fixtures/hk_pool_factory.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/fixtures/hk_pool_factory.py"
+    },
+    {
+      "path": "V5/tests/test_daily_dispatch.py",
+      "blob_sha": "dc4b536099be22ec85aaf4cf7fac8a6162b2824c",
+      "sha256": "562494578bd09a9fa729465ad25c1bf9429743797ae7b40dbd521c48a9b9526a",
+      "bytes": 3683,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_daily_dispatch.py"
+    },
+    {
+      "path": "V5/tests/test_daily_owner_adapters.py",
+      "blob_sha": "a8252b67e407c999f0e5e5fadc9c04505763fbe4",
+      "sha256": "ec0b59cb024d513e4f5b5d137bcfb5b649b4b1c4f057aa60b525592036bd6f48",
+      "bytes": 7072,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_daily_owner_adapters.py"
+    },
+    {
+      "path": "V5/tests/test_module_artifacts.py",
+      "blob_sha": "3ae254828099b68896723b24273cf5249c6e53ea",
+      "sha256": "81a69a76187fe011ae7d83f2e7743309a17c0d3c7f52539f383278a36477f57e",
+      "bytes": 13212,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_module_artifacts.py"
+    },
+    {
+      "path": "V5/tests/test_source_capsule.py",
+      "blob_sha": "fab5dad5719fd1b8474f6ebfda3c7f5398e0c8fd",
+      "sha256": "96f1a10e41aeedadd47f8cec690cc7833819389e5d39ee5af4cee9d132601140",
+      "bytes": 2379,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module14-source-20261010/BASELINE_F/V5/tests/test_source_capsule.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/tests/test_source_capsule.py"
+    },
+    {
+      "path": "V5/vendor/daily_schedule_baseline/contracts/market_calendar_2026.json",
+      "blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+      "bytes": 3473,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/announcement_readback_baseline/contracts/market_calendar_2026.json",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/daily_schedule_baseline/contracts/market_calendar_2026.json"
+    },
+    {
+      "path": "V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json",
+      "blob_sha": "abdcae3adfcd56b4c33b2752e14c8fffb844f351",
+      "sha256": "7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef",
+      "bytes": 51682,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m09_m18_reader_1108/m09_candidate/unpacked/repository/V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json"
+    },
+    {
+      "path": "V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py",
+      "blob_sha": "dc18a1ac447242a15a0e543606aa8076ca452fbc",
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "bytes": 9291,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/announcement_readback_baseline/contracts/trading_calendar.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/api/managerStageSelection.ts",
+      "blob_sha": "35a5aec6ba5745cd5e56b62822c021cd1a823a68",
+      "sha256": "f7854ab5dabc2441a29546a88517e5cf27eb8c90491f750fe02669374654b56a",
+      "bytes": 1116,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m18_delivery_1002/independent_patch_copy/frontend/src/api/managerStageSelection.ts",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/api/managerStageSelection.ts"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/contracts/managerStageSelection.ts",
+      "blob_sha": "616ef77c51b3b5e30e3d1fde66c289316c015cd6",
+      "sha256": "53893ac1e9b7b1e3cad031d2eb1cdc9d63230d1a011e0969f82ac472eea5df6c",
+      "bytes": 12620,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m18_delivery_1002/independent_patch_copy/frontend/src/contracts/managerStageSelection.ts",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/contracts/managerStageSelection.ts"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/hkStageDisplay.spec.ts",
+      "blob_sha": "10bed469fb056a42385c1ca483904b54b95c8a0a",
+      "sha256": "2c066eab418b31886affd6af3ae49fe40712d16a4e156175dcf117f93829dde0",
+      "bytes": 5180,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m18_delivery_1002/independent_patch_copy/frontend/src/hkStageDisplay.spec.ts",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/hkStageDisplay.spec.ts"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "bytes": 10704,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m03_r1_static_review/source/collector_owner/infrastructure/data_store.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "bytes": 960,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m03_r1_static_review/source/collector_owner/infrastructure/market_time.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "bytes": 2251,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m03_r1_static_review/source/collector_owner/infrastructure/owned_path.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_readers.py",
+      "blob_sha": "da6a4cd1f25095a45ebeb356ac58c0e6b5ecd4da",
+      "sha256": "949b16526e2b55ae23d121ca3909b4d33509483164d1899e65c94aef6d5781c1",
+      "bytes": 5432,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/hk_preselection_baseline/infrastructure/preselection_pool_readers.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_readers.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_sources.py",
+      "blob_sha": "12790ab2e2815097762d4aa21cd63f2ea5cc76a2",
+      "sha256": "cc683561201453e3f7ca975b2b7cdb6a3836b1ecbe63e001a5abd181f38813d6",
+      "bytes": 5798,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/hk_preselection_baseline/infrastructure/preselection_pool_sources.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_sources.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_store.py",
+      "blob_sha": "0e9df7a85177fe031241d8b8743d6a1996d985c7",
+      "sha256": "a6260549e63fd2a904d77bd7b2856d8c3883557efb691a2715b9595128e27aaa",
+      "bytes": 48603,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/hk_preselection_baseline/infrastructure/preselection_pool_store.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_store.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_transactions.py",
+      "blob_sha": "6b8ade94068811f6e46fe2d1233938eb9f4c0da5",
+      "sha256": "22cca047d8d2da3ec9b1c4d3d18fd09026887ee48a95868757bfc598d094d58d",
+      "bytes": 15569,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/hk_preselection_baseline/infrastructure/preselection_pool_transactions.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_transactions.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/scope_gate.py",
+      "blob_sha": "33539d4b64b5374f8b1b9839ae30c494e30fb5ae",
+      "sha256": "5620d1ee89fbae998d4c801c2a7c4cffac50f890ad0b6951f99230c591dcff68",
+      "bytes": 16258,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/v5-module04-source-20261010/fixed-f7cb731c/V5/vendor/hk_preselection_baseline/infrastructure/scope_gate.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scope_gate.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "bytes": 2597,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "reused_from": "/workspace/shared/m03_r1_static_review/source/collector_owner/infrastructure/trading_safety.py",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_hk_open_stage_exact_pool_20261002.py",
+      "blob_sha": "a35eb13cecbaaf9a4184c8acd579d2301467513e",
+      "sha256": "77d8b291304e7090f4b79a8e3ee73024615b6afd29992717875111d8b04c8010",
+      "bytes": 15800,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_hk_open_stage_exact_pool_20261002.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_hk_stage8_v4_recovery.py",
+      "blob_sha": "bffe40520a48bfb8a22e6d56c7819fbe3259b2eb",
+      "sha256": "39555ccd12d4a71dc80059fd06a55e5a83b21ff172a9a66b0fd437c6cea9de2d",
+      "bytes": 16238,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_hk_stage8_v4_recovery.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_hk_stage_display.py",
+      "blob_sha": "70582e3b2a0f0e5b127347b004259393a6527008",
+      "sha256": "5cf5ef998550c678c0984c845e9766096162af7ec6d2c5664b97298a95f88ca0",
+      "bytes": 16323,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_hk_stage_display.py"
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_hkconnect_0915_0920_capture.py",
+      "blob_sha": "6871622beb513b858748dbde03ea115ec8c5ab7b",
+      "sha256": "73fc3c8977c6baedccca5c20cf10fc408903a99a4f9513613ad94bb799935a29",
+      "bytes": 23308,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "retrieved_from": "fixed GitHub fetch",
+      "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_hkconnect_0915_0920_capture.py"
+    }
+  ],
+  "all_files_verified_against_fixed_tree": true,
+  "status": "READ_ONLY_ATTACHMENT_NO_PRODUCT_EXECUTION"
+}
