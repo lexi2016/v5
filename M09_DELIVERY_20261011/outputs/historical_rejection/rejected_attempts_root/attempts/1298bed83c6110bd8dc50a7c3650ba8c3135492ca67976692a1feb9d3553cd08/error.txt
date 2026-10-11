@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily.py", line 767, in run_a_close_daily
+    raise _InputError(admitted['diagnostic']['issues'])
+v5_shadow.a_close_daily._InputError: M09_INPUT_NOT_ADMITTED:SOURCE_IDENTITY_MISSING,SOURCE_TIME_INVALID_OR_UNKNOWN,MEMBERSHIP_IDENTITY_MISSING,MEMBERSHIP_TIME_INVALID_OR_UNKNOWN,SOURCE_AUTHORITY_NOT_READY,SOURCE_COVERAGE_INCOMPLETE,SOURCE_RECEIPT_NOT_BOUND,PANEL_DECODE_OR_FORMAT_FAILED

@@ -1,0 +1,14 @@
+test_api_rejects_unbound_raw_review_digest (__main__.RawDigestLinkReview.test_api_rejects_unbound_raw_review_digest) ... FAIL
+
+======================================================================
+FAIL: test_api_rejects_unbound_raw_review_digest (__main__.RawDigestLinkReview.test_api_rejects_unbound_raw_review_digest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_api_raw_digest.py", line 30, in test_api_rejects_unbound_raw_review_digest
+    self.assertNotEqual(evidence["read_status"], "VERIFIED",
+AssertionError: 'VERIFIED' == 'VERIFIED' : The pure API projection accepts a raw review digest unrelated to the hashed record
+
+----------------------------------------------------------------------
+Ran 1 test in 0.841s
+
+FAILED (failures=1)

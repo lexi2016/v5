@@ -1,0 +1,8 @@
+test_crash_after_head_switch_preserves_previous_success (__main__.IndependentM09Review.test_crash_after_head_switch_preserves_previous_success) ... ok
+test_loaded_daily_code_does_not_claim_changed_on_disk_implementation (__main__.IndependentM09Review.test_loaded_daily_code_does_not_claim_changed_on_disk_implementation) ... ok
+test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.656s
+
+OK

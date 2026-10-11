@@ -1,0 +1,30 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T10:55:19.293843+00:00",
+  "end_utc": "2026-10-11T10:55:22.119558+00:00",
+  "start_shanghai": "2026-10-11T18:55:19.293843+08:00",
+  "end_shanghai": "2026-10-11T18:55:22.119558+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "independent_final_core_green.stdout.log",
+    "bytes": 1228,
+    "sha256": "38a16e45ca2bed387217fbbb3830a640fdb2ae8a9f2ec34655f9cf82ca03a360"
+  },
+  "stderr": {
+    "path": "independent_final_core_green.stderr.log",
+    "bytes": 581,
+    "sha256": "10a706de03dd79cdf3305a0835b6667b80936bd25cdb11c0d73fb740ee8821b0"
+  }
+}

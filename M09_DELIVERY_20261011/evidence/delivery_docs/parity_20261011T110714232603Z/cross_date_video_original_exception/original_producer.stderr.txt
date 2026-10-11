@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 396, in <module>
+    _original_producer_worker()
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 95, in _original_producer_worker
+    result = namespace["build_review_from_panel"](
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/original/source/handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py", line 98, in build_review_from_panel
+    close_chain = build_close_review_chain(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/original/source/handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py", line 137, in build_close_review_chain
+    video_status, video_reason, video_evidence, asr_status, asr_reason = _video_state(
+                                                                         ^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/original/source/handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py", line 60, in _video_state
+    raise ValueError("video acceptance date does not match close-review date")
+ValueError: video acceptance date does not match close-review date

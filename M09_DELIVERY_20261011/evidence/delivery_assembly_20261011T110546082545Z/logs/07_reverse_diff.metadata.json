@@ -1,0 +1,47 @@
+{
+  "command_name": "07_reverse_diff",
+  "argv": [
+    "git",
+    "--git-dir=/workspace/scratch/a5458cb06b78/m09_work/after/.git",
+    "--work-tree=/workspace/scratch/a5458cb06b78/m09_work/delivery/after",
+    "-c",
+    "core.autocrlf=false",
+    "-c",
+    "core.filemode=true",
+    "diff",
+    "--cached",
+    "--binary",
+    "--full-index",
+    "--no-ext-diff",
+    "--no-textconv",
+    "--no-renames",
+    "--src-prefix=a/",
+    "--dst-prefix=b/",
+    "-R",
+    "e45aee9e185dda6f9d4b5032e6d60231cce27809",
+    "--"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/delivery/after",
+  "environment_overrides": {
+    "GIT_INDEX_FILE": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_assembly_20261011T110546082545Z/snapshot.index",
+    "GIT_OBJECT_DIRECTORY": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_assembly_20261011T110546082545Z/objects",
+    "GIT_ALTERNATE_OBJECT_DIRECTORIES": "/workspace/scratch/a5458cb06b78/m09_work/after/.git/objects"
+  },
+  "started_at_utc": "2026-10-11T11:05:46.239278+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.247217+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.239278+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.247217+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "07_reverse_diff.stdout.log",
+      "bytes": 315503,
+      "sha256": "0329091c7b7be083033092b4988dbec51dc5f866d8a911fa96980fff5259301a"
+    },
+    "stderr": {
+      "filename": "07_reverse_diff.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

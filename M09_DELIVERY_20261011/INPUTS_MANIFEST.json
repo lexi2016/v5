@@ -1,0 +1,987 @@
+{
+  "schema_version": "v5.m09.delivery_inputs_manifest.v1",
+  "document_role": "DELIVERY_INPUT_INVENTORY_AND_READ_ONLY_OBSERVATIONS_NOT_ADMISSION_MANIFEST",
+  "trade_date": "20261009",
+  "observed_at_utc": "2026-10-11T10:56:31.011674+00:00",
+  "source_classification": {
+    "originals": "REAL_HISTORICAL_INPUTS_SUPPLIED",
+    "new_m09_model_run": "NOT_RUN_IN_THIS_INPUT_AUDIT",
+    "natural_1605_1710_execution": "NOT_RUN_NOT_PROVEN_BY_THIS_MATERIAL",
+    "source_data_relabelled_synthetic": false
+  },
+  "fixed_source_identity": {
+    "original_donor_repository": "lexi2016/v4",
+    "original_donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "v5_integration_repository": "lexi2016/v5",
+    "v5_handoff_branch": "v5/m09-handoff-20261011",
+    "v5_handoff_commit": "782bfc9ae91ff9cfe897afffc52aad43b7c1b78c",
+    "v5_handoff_evidence_scope": "USER_PROVIDED_FIXED_HANDOFF_IDENTITY; NOT_ASSIGNED_TO_MAC_FILES",
+    "active_mac_source_commit": null,
+    "active_mac_source_commit_status": "UNKNOWN"
+  },
+  "input_archives": [
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/v5-module09-source-20261010.zip",
+      "bytes": 145374,
+      "raw_sha256": "ee45e1cb627df660d15574a5a0a023be00e7fac0a29e983109b202e7e3af25fa",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+      "bytes": 7577304,
+      "raw_sha256": "24eb6689e336c45e63d0bc071722ea0379c9b98a2961a60a54dd8807999f2f44",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip",
+      "bytes": 14163,
+      "raw_sha256": "482cd87266a1ea36cd9c045cffac2432229791b79b843dfc8a600baa15e730ba",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    }
+  ],
+  "specification_sources": [
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/TASK_M09.md",
+      "bytes": 9472,
+      "raw_sha256": "48daf7a8eb42790e6bb9983d5f5220ecad524a51db6fdd05286fbc9ba099f6ab",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/DELIVERY_CONTRACT.md",
+      "bytes": 6918,
+      "raw_sha256": "61579128a49b0d027016cacd1376b30b84114613da3d6c943f503a49e0372b3f",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/FINAL_SUPPLEMENT_R3.md",
+      "bytes": 2602,
+      "raw_sha256": "87f5261369bbb073bb04e6300b78a3ffba29a5e42f63d7b1bd5cf84d69695c87",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    {
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/RUNTIME_INPUT_ADDENDUM_R2.md",
+      "bytes": 8662,
+      "raw_sha256": "38a4b9a4c4b3e458cce3d5d4dcef1062a70c458a928573063b72991069e8376d",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    }
+  ],
+  "runtime_package": {
+    "root": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011",
+    "manifest": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+      "bytes": 6951,
+      "raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "listed_file_count": 40,
+    "actual_regular_file_count_including_manifest": 41,
+    "all_listed_raw_bytes_match_attached_manifest": true,
+    "files": [
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/GAPS.json",
+        "bytes": 1439,
+        "raw_sha256": "b986d355e2919665f62e1c0c6ce239bd20570af13f5c5a94720a2fecc3cd40ee",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "GAPS.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/README.md",
+        "bytes": 1345,
+        "raw_sha256": "891c2f32ddc0dbf8c7a5e54b1a5727b6441488dbfa2e5713c0b209fd4454f89d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "README.md",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/active_api_headers.txt",
+        "bytes": 129,
+        "raw_sha256": "166023b37c4b206e24f04f7289c396fafbf8369fddead601684cd50c921783a5",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "active_api_headers.txt",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/active_api_review_20261009.json",
+        "bytes": 381549,
+        "raw_sha256": "751d24d856138508111d49a5e2e20cb0cb8284f0ece1eb0c9a11363708085ede",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "active_api_review_20261009.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/actual_api_binding.json",
+        "bytes": 1295,
+        "raw_sha256": "da627bd4f4aa7010e744fe7e66bca703467b2db2bdf60f980823405e6381d0c8",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "actual_api_binding.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/api/v35_api/app.py",
+        "bytes": 327501,
+        "raw_sha256": "ba40457e4fc6d4f60155c55e4202ac82e870467598d49ea36bcbc2aab5c70eb3",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/apps/api/v35_api/app.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/api/v35_api/app.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/api/v35_api/review_router.py",
+        "bytes": 42184,
+        "raw_sha256": "ef6e870077fecd1e025ec1a0741ec3f766b76ef914b60661e4f32937acc9e28d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/apps/api/v35_api/review_router.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/api/v35_api/review_router.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/web/src/App.vue",
+        "bytes": 133644,
+        "raw_sha256": "d87285a8a1de1611ca83add16d70101979ea469d2c7fb093dc1f9ca5961baef0",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/apps/web/src/App.vue",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/web/src/api/review.ts",
+        "bytes": 1436,
+        "raw_sha256": "fc2c7551fe386a9b01375d6d82d7f633990bba169f48e9b918386e31baa6dd7d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/apps/web/src/api/review.ts",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/web/src/contracts/review.ts",
+        "bytes": 10012,
+        "raw_sha256": "079adf7971e346a8da5d40c49bc3c1fdfb2307aaf6ed70df5ed4d9312699c507",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/apps/web/src/contracts/review.ts",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/web/src/views/ReviewView.vue",
+        "bytes": 3441,
+        "raw_sha256": "cb1f4f19d9b8100d0caf86a5563990a90b627fdb72699b9ccbe499b1e9542c71",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/apps/web/src/views/ReviewView.vue",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/views/ReviewView.vue",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/domains/review_evidence_layers.py",
+        "bytes": 24730,
+        "raw_sha256": "96886aa56318968625bfb57e484fde39ba267388591234fe7ed9e3f2939d77a7",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/domains/review_evidence_layers.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/domains/review_evidence_layers.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/infrastructure/a_share_review_store.py",
+        "bytes": 10176,
+        "raw_sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/infrastructure/a_share_review_store.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/infrastructure/a_share_review_store.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/uv.lock",
+        "bytes": 26522,
+        "raw_sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/active_api/uv.lock",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/contracts/close_timeline.py",
+        "bytes": 4753,
+        "raw_sha256": "b900a8677316ef0993d3569bb83a7157e7b9465a9cdc9ed45265f7ff3bc9476b",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/contracts/close_timeline.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/contracts/close_timeline.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/contracts/market_calendar_2026.json",
+        "bytes": 3473,
+        "raw_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/contracts/market_calendar_2026.json",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/contracts/market_calendar_2026.json",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/contracts/runtime_workloads.json",
+        "bytes": 51682,
+        "raw_sha256": "7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/contracts/runtime_workloads.json",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/contracts/runtime_workloads.json",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/infrastructure/scheduling/executor_registry_review.py",
+        "bytes": 34476,
+        "raw_sha256": "b4802f59a5faed70cbc17501780cecbd51ecdf1bd87ded5c260abfe545bce324",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/infrastructure/scheduling/executor_registry_review.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/infrastructure/scheduling/executor_registry_review.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/ops/build_a_share_close_review.py",
+        "bytes": 8360,
+        "raw_sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/ops/build_a_share_close_review.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/ops/build_a_share_close_review.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/ops/launch_v35_macos_scheduler.sh",
+        "bytes": 3982,
+        "raw_sha256": "0c577ae83b1f182dabf3b62e642a5bd5f0f8708b48e1806d8c653b691d2ec952",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/ops/launch_v35_macos_scheduler.sh",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/ops/launch_v35_macos_scheduler.sh",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/ops/run_v35_macos_scheduler.py",
+        "bytes": 25218,
+        "raw_sha256": "f707df50c31f03fd51e439eece0d86dd60647d8d989e9a760f2ef1f2222c6f0d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/ops/run_v35_macos_scheduler.py",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/ops/run_v35_macos_scheduler.py",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/uv.lock",
+        "bytes": 26522,
+        "raw_sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "binding_source/scheduler/uv.lock",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/collect.py",
+        "bytes": 5340,
+        "raw_sha256": "8a24cc0402766111c80d13c1ff66def09a94f2896630b5fd3db827edc081146c",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "collect.py",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/finalize.py",
+        "bytes": 7244,
+        "raw_sha256": "f996192f172b9fbe0a83bb6868797ef1d01b9f77aa4e0110d6ac15793714af09",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "finalize.py",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/optional_input_inventory.json",
+        "bytes": 2520,
+        "raw_sha256": "f65b7671bbb011f76ad93ec166cf4084c15acf9b1e1e9170aac792554f23622e",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "optional_input_inventory.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/original_schema.txt",
+        "bytes": 4952,
+        "raw_sha256": "c7181db7cfabf21ae5659342d772ecd5976d3efaea9c7ec340722bcc2d6f0827",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "original_schema.txt",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/CURRENT_SELECTOR_READY_PANEL.txt",
+        "bytes": 242,
+        "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/CURRENT_SELECTOR_READY_PANEL.txt",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/workspace/数据/data_layer_interface_current/CURRENT_SELECTOR_READY_PANEL.txt",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/a_share_existing_receipt.json",
+        "bytes": 279,
+        "raw_sha256": "13caff745adce20e67c56cf67d095282249c20634f5922d2e154c0579eaf8b8d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/a_share_existing_receipt.json",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/a_share_reviews/receipts/20261009.json",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/a_share_existing_review.json",
+        "bytes": 36132,
+        "raw_sha256": "2da9682e6b1e16e209f193697260e95f6b743b030c4f23924a20cf5c53ef8d88",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/a_share_existing_review.json",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/a_share_reviews/20261009.json",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/daily_pointer.txt",
+        "bytes": 242,
+        "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/daily_pointer.txt",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/.daily_tmp/selector_panel_pointer.txt",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/dispatcher_pointer.txt",
+        "bytes": 242,
+        "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/dispatcher_pointer.txt",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/.dispatcher_tmp/selector_panel_pointer.txt",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/membership_20261009.txt",
+        "bytes": 51260,
+        "raw_sha256": "b1f561b1d18a5341784c4906b0e3bbbf21d7d092823e4a60c2787fdf004d91fb",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/membership_20261009.txt",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/panel_20261009_required8.parquet",
+        "bytes": 279209,
+        "raw_sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/panel_20261009_required8.parquet",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/panel_source_receipt.json",
+        "bytes": 80017050,
+        "raw_sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/panel_source_receipt.json",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/research_panel_daily/receipts/a-20261009.json",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/panel_evidence.json",
+        "bytes": 1958,
+        "raw_sha256": "0bd67e9d752274ee29d36defb76400c11eb3c0c51474bbac0a2915c6baf611e7",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "panel_evidence.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/runtime_bindings.json",
+        "bytes": 4574,
+        "raw_sha256": "658fcced6c368863b1bdfdc999ecc77bc48d1753f3fe50deb2d1f268e6e79e53",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "runtime_bindings.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/schedule_binding.json",
+        "bytes": 647,
+        "raw_sha256": "def1c5b34109f623ae7a4d8cb4a00d67661c8b1a0a714310df29f28947c78f04",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "schedule_binding.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/source_copy_index.json",
+        "bytes": 6128,
+        "raw_sha256": "17cfb90bae302a09ff34c36013314ebaee201b1d5a2a937dd5b97fc78bf8d6aa",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "source_copy_index.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/timing_and_authority.json",
+        "bytes": 813,
+        "raw_sha256": "04f3198763d7a4a2cc1fa54d9e5bafa87a70a8f62090e4e57e161a8bcb9e793e",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "timing_and_authority.json",
+        "attached_manifest_match": true
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/versions.json",
+        "bytes": 247,
+        "raw_sha256": "a33c136c9ddcf2bf2aabe7fe4aa178ff9d7558208b463b2aad0ea1da62314b28",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "versions.json",
+        "attached_manifest_match": true
+      }
+    ]
+  },
+  "original_panel_projection": {
+    "artifact": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/panel_20261009_required8.parquet",
+      "bytes": 279209,
+      "raw_sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47",
+      "observation": "DIRECT_LOCAL_RAW_BYTES",
+      "package_relative_path": "originals/panel_20261009_required8.parquet",
+      "attached_manifest_match": true
+    },
+    "data_kind": "REAL",
+    "trade_date": "20261009",
+    "required_columns": [
+      "trade_date",
+      "ts_code",
+      "name",
+      "pct_chg",
+      "amount",
+      "bar_close_pos",
+      "tdx_industry_code",
+      "tdx_industry_name"
+    ],
+    "column_order_and_arrow_types": "SUPPLIED_MAC_EXTRACTION_REPORT; NOT_REDECODED_HERE",
+    "reported_row_count": 5126,
+    "local_parquet_row_count": null,
+    "local_parquet_decode_status": "NOT_RUN_NO_PYARROW_OR_FASTPARQUET",
+    "source_report": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/panel_evidence.json",
+      "bytes": 1958,
+      "raw_sha256": "0bd67e9d752274ee29d36defb76400c11eb3c0c51474bbac0a2915c6baf611e7",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "claimed_transform": "All source rows matching T retained, original order and Arrow types; only required 8 columns selected. No filtering, deduplication, fill, synthesis. This is complete membership of source T rows, NOT proof of complete market coverage.",
+    "cleaning_applied_by_this_audit": false
+  },
+  "membership": {
+    "artifact": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/membership_20261009.txt",
+      "bytes": 51260,
+      "raw_sha256": "b1f561b1d18a5341784c4906b0e3bbbf21d7d092823e4a60c2787fdf004d91fb",
+      "observation": "DIRECT_LOCAL_RAW_BYTES",
+      "package_relative_path": "originals/membership_20261009.txt",
+      "attached_manifest_match": true
+    },
+    "observation": "DIRECT_LOCAL_UTF8_TEXT_SPLITLINES",
+    "line_count": 5126,
+    "unique_count": 5126,
+    "duplicate_line_count": 0,
+    "invalid_code_line_count": 0,
+    "declared_scope": "COMPLETE_SOURCE_T_ROWS_AS_REPORTED_BY_COLLECTOR",
+    "independent_full_market_membership_verified": false,
+    "parquet_member_set_compared_here": false,
+    "membership_source_id": null,
+    "membership_source_version": null,
+    "membership_captured_at": null,
+    "membership_available_at": null
+  },
+  "source_reported_uncleaned_panel_statistics": {
+    "observation": "ATTACHED_MAC_EXTRACTION_REPORT_ONLY_NOT_RECOMPUTED_FROM_PARQUET_HERE",
+    "source": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/panel_evidence.json",
+      "bytes": 1958,
+      "raw_sha256": "0bd67e9d752274ee29d36defb76400c11eb3c0c51474bbac0a2915c6baf611e7",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "reported_row_count": 5126,
+    "reported_unique_members": 5126,
+    "reported_duplicate_code_rows": 0,
+    "reported_missing_or_nan": {
+      "trade_date": 0,
+      "ts_code": 0,
+      "name": 0,
+      "pct_chg": 0,
+      "amount": 0,
+      "bar_close_pos": 2,
+      "tdx_industry_code": 0,
+      "tdx_industry_name": 0
+    },
+    "reported_empty_strings": {
+      "trade_date": 0,
+      "ts_code": 0,
+      "name": 137,
+      "pct_chg": 0,
+      "amount": 0,
+      "bar_close_pos": 0,
+      "tdx_industry_code": 240,
+      "tdx_industry_name": 240
+    },
+    "must_not_fill_filter_deduplicate_or_synthesize": true,
+    "no_combined_bad_row_count_inferred_from_column_counts": true
+  },
+  "full_source_panel_not_attached": {
+    "mac_path_reported": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/workspace/数据/selector_ready_panels/data_layer_daily_formula_increment_update_v1/selector_ready_current_to_20261009_20261009_170917/selector_ready_current_to_20261009.parquet",
+    "reported_bytes": 1383142544,
+    "reported_raw_sha256": "25aaa10f2080a72f0f9266a9456a3c3968dd1370068f31b0fb9106ea34434485",
+    "local_original_full_file_present": false,
+    "local_verification": "NOT_POSSIBLE_FULL_1383142544_BYTE_FILE_NOT_SUPPLIED",
+    "projection_hash_is_a_different_object": true,
+    "source": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/panel_evidence.json",
+      "bytes": 1958,
+      "raw_sha256": "0bd67e9d752274ee29d36defb76400c11eb3c0c51474bbac0a2915c6baf611e7",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    }
+  },
+  "original_pointer_binding": {
+    "artifacts": [
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/CURRENT_SELECTOR_READY_PANEL.txt",
+        "bytes": 242,
+        "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/CURRENT_SELECTOR_READY_PANEL.txt",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/workspace/数据/data_layer_interface_current/CURRENT_SELECTOR_READY_PANEL.txt",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/dispatcher_pointer.txt",
+        "bytes": 242,
+        "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/dispatcher_pointer.txt",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/.dispatcher_tmp/selector_panel_pointer.txt",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      },
+      {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/daily_pointer.txt",
+        "bytes": 242,
+        "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d",
+        "observation": "DIRECT_LOCAL_RAW_BYTES",
+        "package_relative_path": "originals/daily_pointer.txt",
+        "attached_manifest_match": true,
+        "supplied_mac_origin": {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/.daily_tmp/selector_panel_pointer.txt",
+          "is_symlink_reported": false,
+          "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+        }
+      }
+    ],
+    "actual_pointer_text": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/workspace/数据/selector_ready_panels/data_layer_daily_formula_increment_update_v1/selector_ready_current_to_20261009_20261009_170917/selector_ready_current_to_20261009.parquet",
+    "original_resolution_rule_reported": "Path(pointer text), relative to process cwd, NOT pointer parent",
+    "original_process_cwd_reported": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app",
+    "pointer_followed_here": false,
+    "pointer_rewritten": false,
+    "candidate_local_pointer_created": false,
+    "foreign_absolute_path_is_evidence_only": true
+  },
+  "source_receipt": {
+    "artifact": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/panel_source_receipt.json",
+      "bytes": 80017050,
+      "raw_sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e",
+      "observation": "DIRECT_LOCAL_RAW_BYTES",
+      "package_relative_path": "originals/panel_source_receipt.json",
+      "attached_manifest_match": true,
+      "supplied_mac_origin": {
+        "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/research_panel_daily/receipts/a-20261009.json",
+        "is_symlink_reported": false,
+        "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+      }
+    },
+    "payload_observation": "DIRECT_JSON_PARSE_OF_ATTACHED_ORIGINAL_BYTES; MAC_PROVENANCE_REMAINS_SUPPLIED",
+    "observed_root_fields": {
+      "schema_version": {
+        "json_pointer": "/schema_version",
+        "value": "v3.macos.research_panel_receipt.v1"
+      },
+      "target_date": {
+        "json_pointer": "/target_date",
+        "value": "20261009"
+      },
+      "status": {
+        "json_pointer": "/status",
+        "value": "PARTIAL"
+      },
+      "authority_status": {
+        "json_pointer": "/authority_status",
+        "value": "REBUILD_REQUIRED"
+      },
+      "coverage_rate": {
+        "json_pointer": "/coverage_rate",
+        "value": 0.8858620689655172
+      },
+      "accepted_count": {
+        "json_pointer": "/accepted_count",
+        "value": 5138
+      },
+      "target_count": {
+        "json_pointer": "/target_count",
+        "value": 5800
+      },
+      "selector_sha256": {
+        "json_pointer": "/selector_sha256",
+        "value": "25aaa10f2080a72f0f9266a9456a3c3968dd1370068f31b0fb9106ea34434485"
+      }
+    },
+    "root_fields_absent": {
+      "trade_date": true,
+      "source_id": true,
+      "version": true,
+      "captured_at": true,
+      "available_at": true,
+      "acquired_at": true
+    },
+    "sync_run_id": {
+      "json_pointer": "/sync/authority/run_id",
+      "value": "20261009-e663c5e385206afd-1791536464719255000"
+    },
+    "symbol_recorded_at_range": {
+      "value": [
+        "2026-10-09T17:01:05.003487+08:00",
+        "2026-10-09T17:09:06.622525+08:00"
+      ],
+      "method": "min/max of nonempty /sync/authority/by_symbol/*/recorded_at in attached bytes",
+      "not_final_panel_available_at": true
+    },
+    "formula_times": {
+      "started_at": "2026-10-09T17:09:17",
+      "finished_at": "2026-10-09T17:11:27",
+      "json_parent": "/formula/authority",
+      "timezone_suffix_present": false,
+      "timezone_added_or_inferred": false
+    },
+    "authority_independently_verified": false,
+    "count_distinction": {
+      "source_accepted_count": 5138,
+      "source_target_count": 5800,
+      "membership_text_line_count": 5126,
+      "panel_row_count_reported": 5126,
+      "cause_of_5138_vs_5126_difference": "UNKNOWN_NOT_INFERRED"
+    }
+  },
+  "final_panel_timing": {
+    "available_at": null,
+    "captured_at": null,
+    "acquired_at": null,
+    "status": "NOT_EXPLICITLY_PROVIDED_FOR_FINAL_PANEL",
+    "source": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/timing_and_authority.json",
+      "bytes": 813,
+      "raw_sha256": "04f3198763d7a4a2cc1fa54d9e5bafa87a70a8f62090e4e57e161a8bcb9e793e",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "mtime_filename_copy_time_used_as_time_evidence": false,
+    "formula_finish_used_as_available_at": false,
+    "available_before_1605_verified": false,
+    "available_before_1710_verified": false,
+    "strict_1500_pit_verified": false
+  },
+  "optional_m07_m12_inputs": {
+    "committed_m07_reference_supplied": false,
+    "committed_m12_reference_supplied": false,
+    "status": "NO_COMMITTED_REFERENCE_ESTABLISHED_IN_SUPPLIED_SCOPE",
+    "source_gap_report": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/GAPS.json",
+      "bytes": 1439,
+      "raw_sha256": "b986d355e2919665f62e1c0c6ce239bd20570af13f5c5a94720a2fecc3cd40ee",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "reported_inventory": {
+      "source": {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/optional_input_inventory.json",
+        "bytes": 2520,
+        "raw_sha256": "f65b7671bbb011f76ad93ec166cf4084c15acf9b1e1e9170aac792554f23622e",
+        "observation": "DIRECT_LOCAL_RAW_BYTES"
+      },
+      "scope": "ATTACHED_MAC_PATH_CHECK_CLAIMS; NOT_CURRENT_MAC_SCAN",
+      "entries": [
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/selector_pointer.txt",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/transcript_stockdict/current_asr_pointer.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/stock_mentions.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/video_ocr_alignment/alignment_pointer.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/video_gap/video_gap_audit.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/video_session.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/selector_pointer.txt",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/transcript_stockdict/current_asr_pointer.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/stock_mentions.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/video_ocr_alignment/alignment_pointer.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/video_gap/video_gap_audit.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/video_session.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/review_core_runtime/review_bundle/20261009/current.json",
+          "exists": false
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.review-core.local/state/data/review_bundle/20261009/current.json",
+          "exists": false
+        }
+      ]
+    },
+    "correct_stock_mentions_paths": {
+      "source": {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/supplement/M09_SUPPLEMENT/SOURCE_SUMMARY.json",
+        "bytes": 3224,
+        "raw_sha256": "863451417b0cc522360dd833802f57fcf4252ad9eb8788b999f7d91bb16a422f",
+        "observation": "DIRECT_LOCAL_RAW_BYTES"
+      },
+      "reported_checked_at_utc": "2026-10-11T09:53:26.599589+00:00",
+      "checks": [
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/transcript_stockdict/stock_mentions.json",
+          "exists": false,
+          "is_file": false,
+          "is_symlink": false,
+          "status": "MISSING",
+          "sha256": null,
+          "available_at": null
+        },
+        {
+          "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/transcript_stockdict/stock_mentions.json",
+          "exists": false,
+          "is_file": false,
+          "is_symlink": false,
+          "status": "MISSING",
+          "sha256": null,
+          "available_at": null
+        }
+      ],
+      "status": "BOTH_EXACT_PATHS_REPORTED_MISSING; NOT_WAITING_FOR_A_THIRD_SUPPLEMENT",
+      "time_evidence_note": "Both exact files absent; no payload SHA or capture/available_at evidence exists at these paths. Inspection timestamp is collection time only; mtime not used. current_asr_pointer was not rechecked."
+    },
+    "global_absence_claimed": false,
+    "existing_current_asr_pointer_rechecked_in_r3": false,
+    "optional_gaps_do_not_block_base_implementation": true
+  },
+  "historical_outputs_supplied_as_reference_only": {
+    "new_m09_output": false,
+    "review": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/a_share_existing_review.json",
+      "bytes": 36132,
+      "raw_sha256": "2da9682e6b1e16e209f193697260e95f6b743b030c4f23924a20cf5c53ef8d88",
+      "observation": "DIRECT_LOCAL_RAW_BYTES",
+      "package_relative_path": "originals/a_share_existing_review.json",
+      "attached_manifest_match": true,
+      "supplied_mac_origin": {
+        "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/a_share_reviews/20261009.json",
+        "is_symlink_reported": false,
+        "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+      }
+    },
+    "receipt": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/originals/a_share_existing_receipt.json",
+      "bytes": 279,
+      "raw_sha256": "13caff745adce20e67c56cf67d095282249c20634f5922d2e154c0579eaf8b8d",
+      "observation": "DIRECT_LOCAL_RAW_BYTES",
+      "package_relative_path": "originals/a_share_existing_receipt.json",
+      "attached_manifest_match": true,
+      "supplied_mac_origin": {
+        "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/a_share_reviews/receipts/20261009.json",
+        "is_symlink_reported": false,
+        "observation": "ATTACHED_MAC_COLLECTION_CLAIM_NOT_CURRENT_MAC_CHECK"
+      }
+    },
+    "observed_model_run_id": "REPLAY_RESEARCH_V1_20261009_001",
+    "observed_model_status": "INDEPENDENT_CLOSE_REVIEW_READY",
+    "observed_model_as_of": "2026-10-09T15:30:00+08:00",
+    "role": "EXISTING_HISTORICAL_REPLAY_BASELINE_NOT_NEW_GENERATION_OR_NATURAL_RECEIPT",
+    "original_store_manifest_in_this_runtime_package": false,
+    "independent_original_store_read_executed_by_this_audit": false
+  },
+  "api_snapshot_supplied_as_reference_only": {
+    "artifact": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/active_api_review_20261009.json",
+      "bytes": 381549,
+      "raw_sha256": "751d24d856138508111d49a5e2e20cb0cb8284f0ece1eb0c9a11363708085ede",
+      "observation": "DIRECT_LOCAL_RAW_BYTES",
+      "package_relative_path": "active_api_review_20261009.json",
+      "attached_manifest_match": true
+    },
+    "observed_from_json": {
+      "trade_date": "20261009",
+      "a_status": "PARTIAL_STAGE_EVIDENCE",
+      "a_source_role": "V3_5_STAGE_EVIDENCE_PARTIAL"
+    },
+    "binding_claim_source": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/actual_api_binding.json",
+      "bytes": 1295,
+      "raw_sha256": "da627bd4f4aa7010e744fe7e66bca703467b2db2bdf60f980823405e6381d0c8",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "current_get_executed_here": false,
+    "new_m09_api_response": false
+  },
+  "read_only_raw_guard_observation": {
+    "report": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/RAW_HISTORICAL_INPUT_DIAGNOSIS.json",
+      "bytes": 10260,
+      "raw_sha256": "d4e6ac3677d724a65dd270f87c6907173357f76c5f5d01f07d2960756480be65",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "execution_record": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/RAW_HISTORICAL_INPUT_DIAGNOSIS.execution.json",
+      "bytes": 1538,
+      "raw_sha256": "54c0294838c7a1257c23b6c71b9c080afb3f491a18f59a3fa460b772fd38f857",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "helper": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/raw_historical_input_diagnosis.py",
+      "bytes": 7678,
+      "raw_sha256": "acf6af4bbb558d81a20bfc71e92c381be4c215ac487279314587b7bda4116c0b",
+      "observation": "DIRECT_LOCAL_RAW_BYTES"
+    },
+    "probe": {
+      "limit_bytes": 16777216,
+      "actual_receipt_bytes": 80017050,
+      "excess_bytes": 63239834,
+      "candidate_module": {
+        "path": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily.py",
+        "bytes": 53812,
+        "raw_sha256": "ddad211724d275d740974b10704cf042eab6fdd8f1d17725c37bee1dcf13100d"
+      },
+      "called": "frozen.safe_root(runtime_inputs).read_bytes(original_receipt, max_bytes=MAX_JSON_BYTES)",
+      "full_admission_called": false,
+      "status": "READ_REJECTED",
+      "exception_type": "OwnedIOError",
+      "exception_text": "OWNED_FILE_TOO_LARGE",
+      "candidate_module_bytes_unchanged": true
+    },
+    "original_bytes_unchanged": true,
+    "full_candidate_admission": "NOT_RUN_NO_RELOCATED_MANIFEST",
+    "original_price_model": "NOT_RUN",
+    "new_review_receipt_generation": "NOT_CREATED",
+    "interpretation": "The actual original source receipt read is rejected by the unchanged candidate 16 MiB guard. This is an observed guard failure, not a complete admission run or real-price-model success."
+  },
+  "admission_constraints_not_repaired": {
+    "original_status": "PARTIAL",
+    "original_authority_status": "REBUILD_REQUIRED",
+    "coverage_rate": 0.8858620689655172,
+    "final_panel_available_at": null,
+    "source_id_and_version_missing_at_receipt_root": true,
+    "membership_provenance_missing": true,
+    "source_receipt_exceeds_candidate_max_json_bytes": true,
+    "panel_defect_counts_preserved_as_source_report_only": true,
+    "source_summary_not_wrapped_into_ready_receipt": true,
+    "unknown_source_fields_not_fabricated": true
+  },
+  "separation_from_outputs": {
+    "no_new_model_output_required_as_input": true,
+    "new_model_review_store_receipts_generations_belong_in_outputs_manifest": true,
+    "generated_audit_report_paths_are_evidence_not_original_inputs": true,
+    "related_environment_report": "ENVIRONMENT.json"
+  },
+  "safety": {
+    "research_only": true,
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "collection_run": false,
+    "scheduler_run": false,
+    "deployment_run": false,
+    "active_mac_write": false
+  }
+}

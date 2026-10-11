@@ -1,0 +1,37 @@
+{
+  "schema_version": "m09.mac_engineering_walkthrough.v1",
+  "status": "ENGINEERING_WALKTHROUGH_PASSED",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+    "pandas": "2.2.3",
+    "pyarrow": null,
+    "numpy": "2.3.5",
+    "pytest": null,
+    "dependencies_changed_by_check": false,
+    "declared_constraints": "Python>=3.14; pandas>=2.3,<3; pyarrow>=21,<25",
+    "acceptance_class": "UNCERTIFIED_RUNTIME_DIAGNOSTIC"
+  },
+  "fixture_class": "SYNTHETIC",
+  "execution_kind": "ENGINEERING",
+  "restored_identity": {
+    "trade_date": "20261009",
+    "model_run_id": "m09-921906ac8377814cbd6f4c33a0fed49c-d7c94c18ae95",
+    "canonical_review_sha256": "2abec42064c0c742aaaa0e6f7a9c2b9ae47f4ff27cde7d23a250c423593825eb",
+    "raw_review_sha256": "2abec42064c0c742aaaa0e6f7a9c2b9ae47f4ff27cde7d23a250c423593825eb",
+    "source_sha256": "7c6276e3a6138472d659b9861cab4383639b677d899c1867581ec6be60146f4d",
+    "record_sha256": "6502298e83096e80d4c50a028967dd5a003795dd1687e000d86772085c70a078",
+    "generation_sha256": "570fe119b389dce6d58b84b5c6937531a8b5b75ee922bd7b1526773adce6f78c"
+  },
+  "private_root": "/workspace/scratch/a5458cb06b78/m09_work/evidence/mac_draft/cloud_walkthrough_smoke_02/private_m09",
+  "two_slots_distinct_receipts_one_calculation": true,
+  "new_configuration_new_run": true,
+  "cas_and_bad_input_preserve_success": true,
+  "rollback_preserves_all_runs": true,
+  "read_side_effects": false,
+  "HK_sentinel_unchanged": true,
+  "actual_HK_service_acceptance": "NOT_RUN",
+  "real_input_acceptance": "NOT_RUN",
+  "natural_acceptance": "NOT_RUN"
+}

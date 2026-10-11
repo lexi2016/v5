@@ -1,0 +1,36 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "V5/tests",
+    "-p",
+    "test_a_close_daily.py",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "M09_REVIEW_SNAPSHOT": null,
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T10:51:47.125355+00:00",
+  "end_utc": "2026-10-11T10:52:19.554865+00:00",
+  "start_shanghai": "2026-10-11T18:51:47.125355+08:00",
+  "end_shanghai": "2026-10-11T18:52:19.554865+08:00",
+  "exit_code": 1,
+  "stdout": {
+    "path": "daily_remaining_fault_matrix_red.stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "path": "daily_remaining_fault_matrix_red.stderr.log",
+    "bytes": 8719,
+    "sha256": "8439b63506d40c21b1fba64ea34a9712bc48a5548609469b26d5f45bdbf56e24"
+  }
+}

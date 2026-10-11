@@ -1,0 +1,33 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "V5/tests",
+    "-p",
+    "test_a_close_daily.py",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_utc": "2026-10-11T10:36:37.451036+00:00",
+  "end_utc": "2026-10-11T10:36:39.229703+00:00",
+  "start_shanghai": "2026-10-11T18:36:37.451036+08:00",
+  "end_shanghai": "2026-10-11T18:36:39.229703+08:00",
+  "exit_code": 1,
+  "stdout": {
+    "path": "daily_first_green_attempt.stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "path": "daily_first_green_attempt.stderr.log",
+    "bytes": 16640,
+    "sha256": "b99054e9f35e81b1f0830749c1e16b537e46e8d31c9cc2a49e25eff0ea7a091e"
+  }
+}

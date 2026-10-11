@@ -1,0 +1,58 @@
+{
+  "status": "DELIVERY_EVIDENCE_WRITTEN",
+  "source_dependencies": {
+    "path": "evidence/delivery_docs/SOURCE_DEPENDENCIES.json",
+    "sha256": "85bf38d0f4a5496845cab901d88627a287328be4e40af2e0cfd45855209d2340",
+    "bytes": 64937
+  },
+  "algorithm_parity": {
+    "path": "evidence/delivery_docs/ALGORITHM_PARITY.json",
+    "sha256": "7fec6bb969fdb48433b11ad401c1c80df8434708113e8db03a0fb58992c30824",
+    "bytes": 9713
+  },
+  "failure_matrix": {
+    "path": "evidence/delivery_docs/FAILURE_MATRIX.json",
+    "sha256": "42b6c4215909641a5e50f03f52052bd23916744bcb1d1a10fba6b72477ba29c0",
+    "bytes": 57602
+  },
+  "fresh_parity_directory": "evidence/delivery_docs/parity_20261011T110714232603Z",
+  "successful_full_cases": 2,
+  "original_exception_cases": 1,
+  "regression": {
+    "status": "COMMAND_COMPLETED",
+    "metadata": {
+      "path": "evidence/logs/final_candidate_regression.json",
+      "sha256": "d6f1eeaab232135ab4ff7339d4572c9a19ce55c48bd2d4f9cba947aa45f15a2e",
+      "bytes": 1041
+    },
+    "stderr": {
+      "path": "evidence/logs/final_candidate_regression.stderr.log",
+      "sha256": "7b7dff03f977757a3c638a747f9302f86779d4ada88319e9dbce87d7ea46fbbd",
+      "bytes": 19802
+    },
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "V5/tests",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "exit_code": 0,
+    "discovered": 125,
+    "passed": 121,
+    "skipped": 4,
+    "failed": 0,
+    "errors": 0,
+    "skipped_details": [
+      "test_parquet_missing_column_is_rejected_before_producer (test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_column_is_rejected_before_producer) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'",
+      "test_parquet_missing_values_are_preserved_and_rejected (test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_values_are_preserved_and_rejected) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'",
+      "test_parquet_numeric_string_schema_is_not_coerced (test_a_close_daily.ParquetEngineeringTests.test_parquet_numeric_string_schema_is_not_coerced) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'",
+      "test_real_parquet_decoder_to_full_original_engineering_chain (test_a_close_daily.ParquetEngineeringTests.test_real_parquet_decoder_to_full_original_engineering_chain) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'"
+    ],
+    "started_at_utc": "2026-10-11T11:00:46.330578+00:00",
+    "ended_at_utc": "2026-10-11T11:01:34.371611+00:00"
+  }
+}

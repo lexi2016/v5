@@ -1,0 +1,77 @@
+{
+  "checked_at_utc": "2026-10-11T09:53:26.599589+00:00",
+  "release_id": "hk-dated-name-20261011-r2",
+  "supplements_library_file_id": "libfile_aa3fb8314fd88191aaa9dac51e058111",
+  "trade_date": "20261009",
+  "source_files": [
+    {
+      "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/views/ReviewView.vue",
+      "package_path": "source/apps/web/src/views/ReviewView.vue",
+      "bytes": 3441,
+      "sha256": "cb1f4f19d9b8100d0caf86a5563990a90b627fdb72699b9ccbe499b1e9542c71",
+      "is_symlink": false
+    },
+    {
+      "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/components/review/AshareReviewPanel.vue",
+      "package_path": "source/apps/web/src/components/review/AshareReviewPanel.vue",
+      "bytes": 25639,
+      "sha256": "f9deaf8d15a3273d3237458b083b847a72f6dcda86824d37731103c13d6672bf",
+      "is_symlink": false
+    },
+    {
+      "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/contracts/review.ts",
+      "package_path": "source/apps/web/src/contracts/review.ts",
+      "bytes": 10012,
+      "sha256": "079adf7971e346a8da5d40c49bc3c1fdfb2307aaf6ed70df5ed4d9312699c507",
+      "is_symlink": false
+    }
+  ],
+  "import_edges": [
+    {
+      "from": "apps/web/src/views/ReviewView.vue",
+      "specifier": "../components/review/AshareReviewPanel.vue",
+      "resolved": "apps/web/src/components/review/AshareReviewPanel.vue",
+      "prop": "current.market_reviews.A"
+    },
+    {
+      "from": "apps/web/src/components/review/AshareReviewPanel.vue",
+      "specifier": "../../contracts/review",
+      "resolved": "apps/web/src/contracts/review.ts",
+      "imported_types": [
+        "AShareCloseBoard",
+        "AShareCloseModel",
+        "AShareCloseRole",
+        "AShareRichRow",
+        "AShareReview"
+      ]
+    }
+  ],
+  "panel_import_specifiers": [
+    "vue",
+    "../../contracts/review"
+  ],
+  "direct_internal_components": [],
+  "contract_import_specifiers": [],
+  "stock_mentions_exact_path_checks": [
+    {
+      "path": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/data/close_review_sources/20261009/bilibili/transcript_stockdict/stock_mentions.json",
+      "exists": false,
+      "is_file": false,
+      "is_symlink": false,
+      "status": "MISSING",
+      "sha256": null,
+      "available_at": null
+    },
+    {
+      "path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/state/data/close_review_sources/20261009/bilibili/transcript_stockdict/stock_mentions.json",
+      "exists": false,
+      "is_file": false,
+      "is_symlink": false,
+      "status": "MISSING",
+      "sha256": null,
+      "available_at": null
+    }
+  ],
+  "time_evidence_note": "Both exact files absent; no payload SHA or capture/available_at evidence exists at these paths. Inspection timestamp is collection time only; mtime not used. current_asr_pointer was not rechecked.",
+  "scope": "Read-only exact active frontend dependency and two exact stock_mentions paths. No code, permissions, collection, tests, scheduler, or deployment changes."
+}

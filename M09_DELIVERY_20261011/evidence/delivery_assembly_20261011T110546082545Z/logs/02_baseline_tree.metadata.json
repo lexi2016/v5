@@ -1,0 +1,30 @@
+{
+  "command_name": "02_baseline_tree",
+  "argv": [
+    "git",
+    "ls-tree",
+    "-r",
+    "-z",
+    "--full-tree",
+    "e45aee9e185dda6f9d4b5032e6d60231cce27809"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment_overrides": {},
+  "started_at_utc": "2026-10-11T11:05:46.122063+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.126747+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.122063+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.126747+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "02_baseline_tree.stdout.log",
+      "bytes": 5894,
+      "sha256": "4ed16a1fd21f21615969d1e643ec0c389310898fcc5b627ca547211aa0d1cd29"
+    },
+    "stderr": {
+      "filename": "02_baseline_tree.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -1,0 +1,428 @@
+{
+  "schema_version": "m09.fixed_source_full_tree_verification.v1",
+  "repository": "lexi2016/v4",
+  "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "read_only": true,
+  "endpoint": "https://api.github.com/repos/lexi2016/v4/git/trees/f7cb731c384ee6890a87d16c19a5b5a621779477?recursive=1",
+  "retrieved_at": "2026-10-11T10:59:16.881Z",
+  "response_tree_sha": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "truncated": false,
+  "all_tree_entries": 2746,
+  "new_paths": [
+    {
+      "path": "V5/contracts/m09_a_close_daily_source_manifest.json",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/docs/M09_A_CLOSE_HANDOFF.md",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/src/v5_shadow/a_close_daily.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/src/v5_shadow/a_close_daily_api.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/src/v5_shadow/a_close_daily_sources.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/src/v5_shadow/a_close_daily_worker.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/tests/test_a_close_daily.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/tests/test_a_close_daily_api.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/tests/test_a_close_daily_sources.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/contracts/__init__.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/contracts/a_share_review.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/contracts/market_calendar_2026.json",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/contracts/trading_calendar.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/domains/a_share_close_model.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/domains/a_share_review.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/domains/close_review_chain.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/__init__.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/a_share_review_store.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/data_store.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/interprocess_lock.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/market_time.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/owned_io.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/owned_path.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/infrastructure/trading_safety.py",
+      "present_in_fixed_F": false
+    },
+    {
+      "path": "V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py",
+      "present_in_fixed_F": false
+    }
+  ],
+  "unchanged_sources": [
+    {
+      "path": "V5/README.md",
+      "git_blob_sha": "4e44173cee5f43e034f9aef3710ba9a15873b225",
+      "remote_git_blob_sha": "4e44173cee5f43e034f9aef3710ba9a15873b225",
+      "match": true
+    },
+    {
+      "path": "V5/contracts/a_close_source_manifest.json",
+      "git_blob_sha": "71eac2236bd97c202cf887ce341911e603d4d241",
+      "remote_git_blob_sha": "71eac2236bd97c202cf887ce341911e603d4d241",
+      "match": true
+    },
+    {
+      "path": "V5/pyproject.toml",
+      "git_blob_sha": "94de0b747be243f6309da810fa3ce058e643b52a",
+      "remote_git_blob_sha": "94de0b747be243f6309da810fa3ce058e643b52a",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/__init__.py",
+      "git_blob_sha": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+      "remote_git_blob_sha": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/a_close_review.py",
+      "git_blob_sha": "8696f56b59475e73a4432a2b7f0874251ab89bed",
+      "remote_git_blob_sha": "8696f56b59475e73a4432a2b7f0874251ab89bed",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/a_preselection.py",
+      "git_blob_sha": "05dd0b28f14bd794890f514e130d8090a1b0438b",
+      "remote_git_blob_sha": "05dd0b28f14bd794890f514e130d8090a1b0438b",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/api_gateway.py",
+      "git_blob_sha": "c5677fb59a4847a24f16a12d5412fce293168fc0",
+      "remote_git_blob_sha": "c5677fb59a4847a24f16a12d5412fce293168fc0",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/composition.py",
+      "git_blob_sha": "d22723df42b71537210aa621afb05dfab6be517f",
+      "remote_git_blob_sha": "d22723df42b71537210aa621afb05dfab6be517f",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/contracts.py",
+      "git_blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "remote_git_blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_close_plan.py",
+      "git_blob_sha": "b816802e512a8f22d736716168c515f5ade61ca0",
+      "remote_git_blob_sha": "b816802e512a8f22d736716168c515f5ade61ca0",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_dispatch.py",
+      "git_blob_sha": "f5d45abea6a159f01756decb23049b825cd0f906",
+      "remote_git_blob_sha": "f5d45abea6a159f01756decb23049b825cd0f906",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/digests.py",
+      "git_blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "remote_git_blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "git_blob_sha": "3fdea5f256b2dc70df141a0e70dbbc1396abb859",
+      "remote_git_blob_sha": "3fdea5f256b2dc70df141a0e70dbbc1396abb859",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/module_artifacts.py",
+      "git_blob_sha": "acf2195fee3711f594982269f1e6ab81da40a905",
+      "remote_git_blob_sha": "acf2195fee3711f594982269f1e6ab81da40a905",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/provider_evidence.py",
+      "git_blob_sha": "5d72d3b2d54c0449576e46e7eba7be4fbc7884d6",
+      "remote_git_blob_sha": "5d72d3b2d54c0449576e46e7eba7be4fbc7884d6",
+      "match": true
+    },
+    {
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "git_blob_sha": "1187e3b7633682d61985984afdf0699508cefd59",
+      "remote_git_blob_sha": "1187e3b7633682d61985984afdf0699508cefd59",
+      "match": true
+    },
+    {
+      "path": "V5/tests/test_a_close_review.py",
+      "git_blob_sha": "7d02a794ad918fb1cb19f1198281d8b7ee83ad3d",
+      "remote_git_blob_sha": "7d02a794ad918fb1cb19f1198281d8b7ee83ad3d",
+      "match": true
+    },
+    {
+      "path": "V5/tests/test_daily_close_plan.py",
+      "git_blob_sha": "4ad9d199b9dcf0020755ae53c2aecbb83b62baff",
+      "remote_git_blob_sha": "4ad9d199b9dcf0020755ae53c2aecbb83b62baff",
+      "match": true
+    },
+    {
+      "path": "V5/vendor/a_close_baseline/contracts/market_calendar_2026.json",
+      "git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "remote_git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "match": true
+    },
+    {
+      "path": "V5/vendor/a_close_baseline/contracts/trading_calendar.py",
+      "git_blob_sha": "dc18a1ac447242a15a0e543606aa8076ca452fbc",
+      "remote_git_blob_sha": "dc18a1ac447242a15a0e543606aa8076ca452fbc",
+      "match": true
+    },
+    {
+      "path": "V5/vendor/a_close_baseline/domains/a_share_close_model.py",
+      "git_blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "remote_git_blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "match": true
+    },
+    {
+      "path": "V5/vendor/daily_schedule_baseline/contracts/market_calendar_2026.json",
+      "git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "remote_git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "match": true
+    },
+    {
+      "path": "V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json",
+      "git_blob_sha": "abdcae3adfcd56b4c33b2752e14c8fffb844f351",
+      "remote_git_blob_sha": "abdcae3adfcd56b4c33b2752e14c8fffb844f351",
+      "match": true
+    },
+    {
+      "path": "V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py",
+      "git_blob_sha": "dc18a1ac447242a15a0e543606aa8076ca452fbc",
+      "remote_git_blob_sha": "dc18a1ac447242a15a0e543606aa8076ca452fbc",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/http_routes.py",
+      "git_blob_sha": "f884abb7215902e8e42b8d598458a14ca49dfbc9",
+      "remote_git_blob_sha": "f884abb7215902e8e42b8d598458a14ca49dfbc9",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/stage_partial.py",
+      "git_blob_sha": "ad0b161ea8b7452a318797bdb56eaba13038087e",
+      "remote_git_blob_sha": "ad0b161ea8b7452a318797bdb56eaba13038087e",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/stage_rows.py",
+      "git_blob_sha": "ede71d8edb71d03603ab72a81ceda6d5503ea453",
+      "remote_git_blob_sha": "ede71d8edb71d03603ab72a81ceda6d5503ea453",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+      "git_blob_sha": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+      "remote_git_blob_sha": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "git_blob_sha": "af2110155081887e723f329652f7f73feb88d273",
+      "remote_git_blob_sha": "af2110155081887e723f329652f7f73feb88d273",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+      "git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "remote_git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/stages.py",
+      "git_blob_sha": "41bf1ba5de290c23a22695d9454b4991976c3e39",
+      "remote_git_blob_sha": "41bf1ba5de290c23a22695d9454b4991976c3e39",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "git_blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "remote_git_blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "git_blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "remote_git_blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "git_blob_sha": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+      "remote_git_blob_sha": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "git_blob_sha": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+      "remote_git_blob_sha": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/domains/review_envelope.py",
+      "git_blob_sha": "221f0917aeceab608fe1d484b225df39fb46d5e7",
+      "remote_git_blob_sha": "221f0917aeceab608fe1d484b225df39fb46d5e7",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+      "git_blob_sha": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+      "remote_git_blob_sha": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "git_blob_sha": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+      "remote_git_blob_sha": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "git_blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "remote_git_blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "git_blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "remote_git_blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "git_blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "remote_git_blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "remote_git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "git_blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "remote_git_blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "git_blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "remote_git_blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "git_blob_sha": "d8295efa1d082917522d93f3d9396ee154a0926f",
+      "remote_git_blob_sha": "d8295efa1d082917522d93f3d9396ee154a0926f",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/ops/import_a_share_review_reference.py",
+      "git_blob_sha": "7808c1d71ec4c0adb1b2fee79ce8882ef968d5c2",
+      "remote_git_blob_sha": "7808c1d71ec4c0adb1b2fee79ce8882ef968d5c2",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/ops/run_v35_close_review_node.py",
+      "git_blob_sha": "6635895c84d53b81378889d99b27015aa0e38324",
+      "remote_git_blob_sha": "6635895c84d53b81378889d99b27015aa0e38324",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/ops/run_v35_close_review_slot.py",
+      "git_blob_sha": "4535a1a6883cd9ea5aa1d60e1565f5b87f3fa585",
+      "remote_git_blob_sha": "4535a1a6883cd9ea5aa1d60e1565f5b87f3fa585",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_close_model.py",
+      "git_blob_sha": "6cc2a43d7c0bc3982b5768ee98ac058546d8e68b",
+      "remote_git_blob_sha": "6cc2a43d7c0bc3982b5768ee98ac058546d8e68b",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_review.py",
+      "git_blob_sha": "3fe2333f9a8441e95c16593e96b4644da12ec9e1",
+      "remote_git_blob_sha": "3fe2333f9a8441e95c16593e96b4644da12ec9e1",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_review_store.py",
+      "git_blob_sha": "f97fabd893e1625983e27211e2bf28203c19c3f4",
+      "remote_git_blob_sha": "f97fabd893e1625983e27211e2bf28203c19c3f4",
+      "match": true
+    },
+    {
+      "path": "handoff/v4-running-source-20261005/canonical/tests/test_close_review_chain.py",
+      "git_blob_sha": "e28ee3f56f403f79d772b87c1f896aee8e022c98",
+      "remote_git_blob_sha": "e28ee3f56f403f79d772b87c1f896aee8e022c98",
+      "match": true
+    }
+  ]
+}
+

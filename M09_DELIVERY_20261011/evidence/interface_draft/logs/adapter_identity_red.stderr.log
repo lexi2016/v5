@@ -1,0 +1,17 @@
+test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata (test_a_close_daily_api.M09ReadProjectionTests.test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata) ... FAIL
+
+======================================================================
+FAIL: test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata (test_a_close_daily_api.M09ReadProjectionTests.test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_api.py", line 139, in test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata
+    self.assertEqual("v5.m09.read_evidence.v1", preview["m09_publication"]["schema_version"])
+AssertionError: 'v5.m09.read_evidence.v1' != 'untrusted-schema'
+- v5.m09.read_evidence.v1
++ untrusted-schema
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (failures=1)

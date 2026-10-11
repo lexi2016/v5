@@ -1,0 +1,28 @@
+{
+  "command_name": "11_forward_check",
+  "argv": [
+    "git",
+    "apply",
+    "--check",
+    "/workspace/scratch/a5458cb06b78/m09_work/delivery/forward.patch"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_assembly_20261011T110546082545Z/apply_verification_tree",
+  "environment_overrides": {},
+  "started_at_utc": "2026-10-11T11:05:46.287509+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.292415+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.287509+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.292415+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "11_forward_check.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "filename": "11_forward_check.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

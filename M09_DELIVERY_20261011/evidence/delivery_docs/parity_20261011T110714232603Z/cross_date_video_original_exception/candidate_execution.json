@@ -1,0 +1,10 @@
+{
+  "call": "v5_shadow.a_close_daily_sources.build_from_admitted_panel",
+  "started_at_utc": "2026-10-11T11:07:17.258682+00:00",
+  "ended_at_utc": "2026-10-11T11:07:17.330450+00:00",
+  "exception": {
+    "type": "ValueError",
+    "message": "video acceptance date does not match close-review date",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/build_source_and_parity_docs.py\", line 177, in parity_case\n    candidate_result = sources.build_from_admitted_panel(case / \"candidate\", T, pointer, frame, digest(raw), run_id, context)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily_sources.py\", line 398, in build_from_admitted_panel\n    result = producer.build_review_from_panel(root, trade_date, panel_pointer=pointer, run_id=run_id, **frozen_context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py\", line 98, in build_review_from_panel\n    close_chain = build_close_review_chain(\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/vendor/m09_a_close_daily/domains/close_review_chain.py\", line 137, in build_close_review_chain\n    video_status, video_reason, video_evidence, asr_status, asr_reason = _video_state(\n                                                                         ^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/vendor/m09_a_close_daily/domains/close_review_chain.py\", line 60, in _video_state\n    raise ValueError(\"video acceptance date does not match close-review date\")\nValueError: video acceptance date does not match close-review date\n"
+  }
+}

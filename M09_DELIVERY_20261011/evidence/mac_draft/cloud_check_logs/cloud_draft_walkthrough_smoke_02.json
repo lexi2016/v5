@@ -1,0 +1,34 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/mac_draft/mac_generation_walkthrough.py",
+    "--after",
+    "/workspace/scratch/a5458cb06b78/m09_work/review_snapshot",
+    "--out",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/mac_draft/cloud_walkthrough_smoke_02"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/review_snapshot",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": null,
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T10:55:00.489575+00:00",
+  "end_utc": "2026-10-11T10:55:02.100983+00:00",
+  "start_shanghai": "2026-10-11T18:55:00.489575+08:00",
+  "end_shanghai": "2026-10-11T18:55:02.100983+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "cloud_draft_walkthrough_smoke_02.stdout.log",
+    "bytes": 1755,
+    "sha256": "35f8ed5b1a92faf26cf031376679b6c43c09e0f6dc2dd502ac522a0f63e9d1c9"
+  },
+  "stderr": {
+    "path": "cloud_draft_walkthrough_smoke_02.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

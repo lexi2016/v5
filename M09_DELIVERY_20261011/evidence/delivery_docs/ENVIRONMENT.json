@@ -1,0 +1,908 @@
+{
+  "assessment": {
+    "live_api_browser_scheduler_deployment_validation": "NOT_RUN",
+    "local_primary_declared_environment_compatible": false,
+    "local_real_parquet_decode_status": "BLOCKED_NO_USABLE_PANDAS_PARQUET_ENGINE",
+    "local_system_declared_environment_compatible": false,
+    "mac_claimed_versions_satisfy_all_declared_bounds": false,
+    "mac_runtime_compatibility_independently_verified": false,
+    "source_time_membership_authority_acceptance": "NOT_ESTABLISHED_BY_ENVIRONMENT_PROBES"
+  },
+  "declared_v5_contract": {
+    "bounds_preserved_without_relaxation": true,
+    "dependencies": [
+      "pandas>=2.3,<3",
+      "pyarrow>=21,<25"
+    ],
+    "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "donor_repository": "lexi2016/v4",
+    "pytest_dependency_in_this_pyproject": null,
+    "pytest_note": "The fixed V5 pyproject does not declare pytest. The separately attached V3.5 lockfiles contain pytest 9.1.1; neither fact establishes a locally installed pytest.",
+    "repository_relative_path": "V5/pyproject.toml",
+    "requires_python": ">=3.14",
+    "source_ref": "SRC_FIXED_PYPROJECT"
+  },
+  "evidence_refs": [
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/PACKAGE_MANIFEST.json",
+        "manifest_raw_sha256": "d3fc80b66a0185f5b5b942eb3084e1fbc2713d85dec9455b36fe3fb538850f01",
+        "member_path": "TASK_M09.md",
+        "status": "MATCH"
+      },
+      "bytes": 9472,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_TASK",
+      "kind": "TASK_CONSTRAINT",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/TASK_M09.md",
+      "raw_sha256": "48daf7a8eb42790e6bb9983d5f5220ecad524a51db6fdd05286fbc9ba099f6ab"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/PACKAGE_MANIFEST.json",
+        "manifest_raw_sha256": "d3fc80b66a0185f5b5b942eb3084e1fbc2713d85dec9455b36fe3fb538850f01",
+        "member_path": "DELIVERY_CONTRACT.md",
+        "status": "MATCH"
+      },
+      "bytes": 6918,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_DELIVERY_CONTRACT",
+      "kind": "DELIVERY_CONSTRAINT",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/DELIVERY_CONTRACT.md",
+      "raw_sha256": "61579128a49b0d027016cacd1376b30b84114613da3d6c943f503a49e0372b3f"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/PACKAGE_MANIFEST.json",
+        "manifest_raw_sha256": "d3fc80b66a0185f5b5b942eb3084e1fbc2713d85dec9455b36fe3fb538850f01",
+        "member_path": "RUNTIME_INPUT_ADDENDUM_R2.md",
+        "status": "MATCH"
+      },
+      "bytes": 8662,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_R2",
+      "kind": "ATTACHED_RUNTIME_NARRATIVE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/RUNTIME_INPUT_ADDENDUM_R2.md",
+      "raw_sha256": "38a4b9a4c4b3e458cce3d5d4dcef1062a70c458a928573063b72991069e8376d"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/PACKAGE_MANIFEST.json",
+        "manifest_raw_sha256": "d3fc80b66a0185f5b5b942eb3084e1fbc2713d85dec9455b36fe3fb538850f01",
+        "member_path": "FINAL_SUPPLEMENT_R3.md",
+        "status": "MATCH"
+      },
+      "bytes": 2602,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_R3",
+      "kind": "FINAL_SUPPLEMENT_NARRATIVE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/FINAL_SUPPLEMENT_R3.md",
+      "raw_sha256": "87f5261369bbb073bb04e6300b78a3ffba29a5e42f63d7b1bd5cf84d69695c87"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/original/SOURCE_MANIFEST.json",
+        "manifest_raw_sha256": "0ccf865c7c4e5834676fb35fc271c71fb10e91217fc8b10f2a9162fc4e6f09e1",
+        "member_path": "V5/pyproject.toml",
+        "status": "MATCH"
+      },
+      "bytes": 262,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_FIXED_PYPROJECT",
+      "kind": "IMMUTABLE_DONOR_DECLARATION",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/original/source/V5/pyproject.toml",
+      "raw_sha256": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "versions.json",
+        "status": "MATCH"
+      },
+      "bytes": 247,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_MAC_VERSIONS",
+      "kind": "ATTACHED_MAC_COLLECTION_RECEIPT",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/versions.json",
+      "raw_sha256": "a33c136c9ddcf2bf2aabe7fe4aa178ff9d7558208b463b2aad0ea1da62314b28"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "collect.py",
+        "status": "MATCH"
+      },
+      "bytes": 5340,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_MAC_COLLECTOR",
+      "kind": "COLLECTION_SOURCE_NOT_EXECUTED_HERE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/collect.py",
+      "raw_sha256": "8a24cc0402766111c80d13c1ff66def09a94f2896630b5fd3db827edc081146c"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "finalize.py",
+        "status": "MATCH"
+      },
+      "bytes": 7244,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_MAC_FINALIZER",
+      "kind": "COLLECTION_SOURCE_NOT_EXECUTED_HERE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/finalize.py",
+      "raw_sha256": "f996192f172b9fbe0a83bb6868797ef1d01b9f77aa4e0110d6ac15793714af09"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "binding_source/active_api/uv.lock",
+        "status": "MATCH"
+      },
+      "bytes": 26522,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_API_LOCK",
+      "kind": "ATTACHED_ACTIVE_API_LOCK",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/uv.lock",
+      "raw_sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "binding_source/scheduler/uv.lock",
+        "status": "MATCH"
+      },
+      "bytes": 26522,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_SCHEDULER_LOCK",
+      "kind": "ATTACHED_SCHEDULER_LOCK",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/uv.lock",
+      "raw_sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "runtime_bindings.json",
+        "status": "MATCH"
+      },
+      "bytes": 4574,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_RUNTIME_BINDINGS",
+      "kind": "ATTACHED_MAC_RUNTIME_BINDING",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/runtime_bindings.json",
+      "raw_sha256": "658fcced6c368863b1bdfdc999ecc77bc48d1753f3fe50deb2d1f268e6e79e53"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "README.md",
+        "status": "MATCH"
+      },
+      "bytes": 1345,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_RUNTIME_README",
+      "kind": "ATTACHED_COLLECTION_SCOPE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/README.md",
+      "raw_sha256": "891c2f32ddc0dbf8c7a5e54b1a5727b6441488dbfa2e5713c0b209fd4454f89d"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "GAPS.json",
+        "status": "MATCH"
+      },
+      "bytes": 1439,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_RUNTIME_GAPS",
+      "kind": "ATTACHED_COLLECTION_LIMITATIONS",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/GAPS.json",
+      "raw_sha256": "b986d355e2919665f62e1c0c6ce239bd20570af13f5c5a94720a2fecc3cd40ee"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "actual_api_binding.json",
+        "status": "MATCH"
+      },
+      "bytes": 1295,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_ACTUAL_API_BINDING",
+      "kind": "ATTACHED_API_SNAPSHOT",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/actual_api_binding.json",
+      "raw_sha256": "da627bd4f4aa7010e744fe7e66bca703467b2db2bdf60f980823405e6381d0c8"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "panel_evidence.json",
+        "status": "MATCH"
+      },
+      "bytes": 1958,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_PANEL_EVIDENCE",
+      "kind": "ATTACHED_PARQUET_COLLECTION_METADATA",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/panel_evidence.json",
+      "raw_sha256": "0bd67e9d752274ee29d36defb76400c11eb3c0c51474bbac0a2915c6baf611e7"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+        "manifest_raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e",
+        "member_path": "schedule_binding.json",
+        "status": "MATCH"
+      },
+      "bytes": 647,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_SCHEDULE_BINDING",
+      "kind": "ATTACHED_SCHEDULE_ONLY_EVIDENCE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/schedule_binding.json",
+      "raw_sha256": "def1c5b34109f623ae7a4d8cb4a00d67661c8b1a0a714310df29f28947c78f04"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/supplement/M09_SUPPLEMENT/MANIFEST.json",
+        "manifest_raw_sha256": "9752e260787064b10c60867e4d32d6f33a88cbf4db1fe81ab9b1115ebaa51652",
+        "member_path": "README.md",
+        "status": "MATCH"
+      },
+      "bytes": 964,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_SUPPLEMENT_README",
+      "kind": "FINAL_SUPPLEMENT_SCOPE",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/supplement/M09_SUPPLEMENT/README.md",
+      "raw_sha256": "c0743ffba3e347606184d947f32a13390e187ed34b81905b0c748c51484a6c61"
+    },
+    {
+      "attached_manifest_verification": {
+        "manifest_path": "/workspace/scratch/a5458cb06b78/m09_work/supplement/M09_SUPPLEMENT/MANIFEST.json",
+        "manifest_raw_sha256": "9752e260787064b10c60867e4d32d6f33a88cbf4db1fe81ab9b1115ebaa51652",
+        "member_path": "SOURCE_SUMMARY.json",
+        "status": "MATCH"
+      },
+      "bytes": 3224,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_SUPPLEMENT_SUMMARY",
+      "kind": "ATTACHED_MAC_SUPPLEMENT_RECEIPT",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/supplement/M09_SUPPLEMENT/SOURCE_SUMMARY.json",
+      "raw_sha256": "863451417b0cc522360dd833802f57fcf4252ad9eb8788b999f7d91bb16a422f"
+    },
+    {
+      "attached_manifest_verification": {
+        "status": "SELF_OR_EXTERNAL_MANIFEST_NOT_ASSERTED"
+      },
+      "bytes": 4483,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_PACKAGE_MANIFEST",
+      "kind": "ATTACHED_MANIFEST",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_input/m09_handoff_20261011/PACKAGE_MANIFEST.json",
+      "raw_sha256": "d3fc80b66a0185f5b5b942eb3084e1fbc2713d85dec9455b36fe3fb538850f01"
+    },
+    {
+      "attached_manifest_verification": {
+        "status": "SELF_OR_EXTERNAL_MANIFEST_NOT_ASSERTED"
+      },
+      "bytes": 6951,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_RUNTIME_MANIFEST",
+      "kind": "ATTACHED_MANIFEST",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/MANIFEST.json",
+      "raw_sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e"
+    },
+    {
+      "attached_manifest_verification": {
+        "status": "SELF_OR_EXTERNAL_MANIFEST_NOT_ASSERTED"
+      },
+      "bytes": 876,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_SUPPLEMENT_MANIFEST",
+      "kind": "ATTACHED_MANIFEST",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/supplement/M09_SUPPLEMENT/MANIFEST.json",
+      "raw_sha256": "9752e260787064b10c60867e4d32d6f33a88cbf4db1fe81ab9b1115ebaa51652"
+    },
+    {
+      "attached_manifest_verification": {
+        "status": "SELF_OR_EXTERNAL_MANIFEST_NOT_ASSERTED"
+      },
+      "bytes": 39356,
+      "content_assertions_independently_verified_on_mac": false,
+      "id": "SRC_DONOR_SOURCE_MANIFEST",
+      "kind": "IMMUTABLE_DONOR_SOURCE_MANIFEST",
+      "local_raw_bytes_directly_verified": true,
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/original/SOURCE_MANIFEST.json",
+      "raw_sha256": "0ccf865c7c4e5834676fb35fc271c71fb10e91217fc8b10f2a9162fc4e6f09e1"
+    }
+  ],
+  "generated_at_utc": "2026-10-11T10:54:10.930202+00:00",
+  "local_direct_observations": [
+    {
+      "command_argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-c",
+        "import datetime, importlib, importlib.metadata as md, importlib.util, json, os, platform, sys\nout = {\n    \"started_at_utc\": datetime.datetime.now(datetime.timezone.utc).isoformat(),\n    \"sys_executable\": sys.executable, \"resolved_executable\": os.path.realpath(sys.executable),\n    \"sys_version\": sys.version, \"python_version\": platform.python_version(),\n    \"implementation\": platform.python_implementation(), \"sys_prefix\": sys.prefix,\n    \"sys_base_prefix\": sys.base_prefix, \"platform_system\": platform.system(),\n    \"platform_release\": platform.release(), \"machine\": platform.machine(),\n    \"platform\": platform.platform(), \"packages\": {}, \"engine_checks\": {}\n}\nfor name in (\"pandas\", \"pyarrow\", \"fastparquet\", \"pytest\", \"numpy\"):\n    try:\n        dist = md.distribution(name)\n        version = dist.version\n        meta = next((dist.locate_file(f) for f in (dist.files or []) if str(f).endswith(\".dist-info/METADATA\")), None)\n        metadata_path = None if meta is None else str(meta)\n    except md.PackageNotFoundError:\n        version = metadata_path = None\n    try:\n        spec = importlib.util.find_spec(name)\n        origin = None if spec is None else spec.origin\n    except Exception as error:\n        origin = {\"error_type\": type(error).__name__, \"error\": str(error)}\n    out[\"packages\"][name] = {\"installed_distribution_version\": version, \"metadata_path\": metadata_path, \"import_spec_origin\": origin}\nfor name in (\"pyarrow\", \"fastparquet\"):\n    try:\n        module = importlib.import_module(name)\n        out[\"engine_checks\"][name] = {\"status\": \"IMPORTABLE\", \"imported_version\": getattr(module, \"__version__\", None), \"module_file\": getattr(module, \"__file__\", None)}\n    except Exception as error:\n        out[\"engine_checks\"][name] = {\"status\": \"IMPORT_FAILED\", \"error_type\": type(error).__name__, \"error\": str(error)}\ntry:\n    import pandas as pd\n    out[\"pandas_import\"] = {\"status\": \"IMPORTABLE\", \"version\": pd.__version__, \"module_file\": pd.__file__}\n    try:\n        engine = pd.io.parquet.get_engine(\"auto\")\n        out[\"parquet_auto_selection\"] = {\"status\": \"ENGINE_AVAILABLE\", \"engine_type\": type(engine).__module__ + \".\" + type(engine).__name__}\n    except Exception as error:\n        out[\"parquet_auto_selection\"] = {\"status\": \"ENGINE_UNAVAILABLE\", \"error_type\": type(error).__name__, \"error\": str(error)}\nexcept Exception as error:\n    out[\"pandas_import\"] = {\"status\": \"IMPORT_FAILED\", \"error_type\": type(error).__name__, \"error\": str(error)}\n    out[\"parquet_auto_selection\"] = {\"status\": \"NOT_RUN_PANDAS_UNAVAILABLE\"}\nout[\"real_parquet_decoded\"] = False\nout[\"packages_installed_or_changed\"] = False\nout[\"finished_at_utc\"] = datetime.datetime.now(datetime.timezone.utc).isoformat()\nprint(json.dumps(out, ensure_ascii=False, sort_keys=True, indent=2))\n"
+      ],
+      "cwd": "/workspace/scratch/a5458cb06b78",
+      "evidence_status": "DIRECTLY_OBSERVED_LOCAL_SUBPROCESS",
+      "exit_code": 0,
+      "id": "LOCAL_PRIMARY",
+      "observation": {
+        "engine_checks": {
+          "fastparquet": {
+            "error": "No module named 'fastparquet'",
+            "error_type": "ModuleNotFoundError",
+            "status": "IMPORT_FAILED"
+          },
+          "pyarrow": {
+            "error": "No module named 'pyarrow'",
+            "error_type": "ModuleNotFoundError",
+            "status": "IMPORT_FAILED"
+          }
+        },
+        "executable_file_identity": {
+          "bytes": 30894944,
+          "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+          "raw_sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+        },
+        "finished_at_utc": "2026-10-11T10:54:10.628323+00:00",
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "fastparquet": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          },
+          "numpy": {
+            "import_spec_origin": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__init__.py",
+            "installed_distribution_version": "2.3.5",
+            "metadata_file_identity": {
+              "bytes": 62117,
+              "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy-2.3.5.dist-info/METADATA",
+              "raw_sha256": "6002f29765e5bc1a3be4a1b92ed56b64968a0fecba73e7f81cd536d0c40f4fa3"
+            },
+            "metadata_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy-2.3.5.dist-info/METADATA"
+          },
+          "pandas": {
+            "import_spec_origin": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/__init__.py",
+            "installed_distribution_version": "2.2.3",
+            "metadata_file_identity": {
+              "bytes": 89901,
+              "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas-2.2.3.dist-info/METADATA",
+              "raw_sha256": "f05423139806d0d75d527aba42689260084dc7a2dad1f4f32b16770f97d1f70f"
+            },
+            "metadata_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas-2.2.3.dist-info/METADATA"
+          },
+          "pyarrow": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          },
+          "pytest": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          }
+        },
+        "packages_installed_or_changed": false,
+        "pandas_import": {
+          "module_file": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/__init__.py",
+          "status": "IMPORTABLE",
+          "version": "2.2.3"
+        },
+        "parquet_auto_selection": {
+          "error": "Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\nA suitable version of pyarrow or fastparquet is required for parquet support.\nTrying to import the above resulted in these errors:\n - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.\n - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.",
+          "error_type": "ImportError",
+          "status": "ENGINE_UNAVAILABLE"
+        },
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "platform_release": "6.18.44",
+        "platform_system": "Linux",
+        "python_version": "3.12.14",
+        "real_parquet_decoded": false,
+        "resolved_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "started_at_utc": "2026-10-11T10:54:09.864196+00:00",
+        "sys_base_prefix": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python",
+        "sys_executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "sys_prefix": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python",
+        "sys_version": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]"
+      },
+      "role": "DEFAULT_TASK_INTERPRETER",
+      "stderr_bytes": 0,
+      "stderr_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_utf8": "",
+      "stdout_bytes": 3077,
+      "stdout_raw_sha256": "443ed8ffab5b1a4e76db5d997008176e869d66fc589d6af122cfa3c0bed415f1",
+      "stdout_utf8": "{\n  \"engine_checks\": {\n    \"fastparquet\": {\n      \"error\": \"No module named 'fastparquet'\",\n      \"error_type\": \"ModuleNotFoundError\",\n      \"status\": \"IMPORT_FAILED\"\n    },\n    \"pyarrow\": {\n      \"error\": \"No module named 'pyarrow'\",\n      \"error_type\": \"ModuleNotFoundError\",\n      \"status\": \"IMPORT_FAILED\"\n    }\n  },\n  \"finished_at_utc\": \"2026-10-11T10:54:10.628323+00:00\",\n  \"implementation\": \"CPython\",\n  \"machine\": \"x86_64\",\n  \"packages\": {\n    \"fastparquet\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    },\n    \"numpy\": {\n      \"import_spec_origin\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy/__init__.py\",\n      \"installed_distribution_version\": \"2.3.5\",\n      \"metadata_path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/numpy-2.3.5.dist-info/METADATA\"\n    },\n    \"pandas\": {\n      \"import_spec_origin\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/__init__.py\",\n      \"installed_distribution_version\": \"2.2.3\",\n      \"metadata_path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas-2.2.3.dist-info/METADATA\"\n    },\n    \"pyarrow\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    },\n    \"pytest\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    }\n  },\n  \"packages_installed_or_changed\": false,\n  \"pandas_import\": {\n    \"module_file\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/pandas/__init__.py\",\n    \"status\": \"IMPORTABLE\",\n    \"version\": \"2.2.3\"\n  },\n  \"parquet_auto_selection\": {\n    \"error\": \"Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.\\nA suitable version of pyarrow or fastparquet is required for parquet support.\\nTrying to import the above resulted in these errors:\\n - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.\\n - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.\",\n    \"error_type\": \"ImportError\",\n    \"status\": \"ENGINE_UNAVAILABLE\"\n  },\n  \"platform\": \"Linux-6.18.44-x86_64-with-glibc2.39\",\n  \"platform_release\": \"6.18.44\",\n  \"platform_system\": \"Linux\",\n  \"python_version\": \"3.12.14\",\n  \"real_parquet_decoded\": false,\n  \"resolved_executable\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12\",\n  \"started_at_utc\": \"2026-10-11T10:54:09.864196+00:00\",\n  \"sys_base_prefix\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python\",\n  \"sys_executable\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python\",\n  \"sys_prefix\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python\",\n  \"sys_version\": \"3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]\"\n}\n"
+    },
+    {
+      "command_argv": [
+        "/usr/bin/python3",
+        "-B",
+        "-c",
+        "import datetime, importlib, importlib.metadata as md, importlib.util, json, os, platform, sys\nout = {\n    \"started_at_utc\": datetime.datetime.now(datetime.timezone.utc).isoformat(),\n    \"sys_executable\": sys.executable, \"resolved_executable\": os.path.realpath(sys.executable),\n    \"sys_version\": sys.version, \"python_version\": platform.python_version(),\n    \"implementation\": platform.python_implementation(), \"sys_prefix\": sys.prefix,\n    \"sys_base_prefix\": sys.base_prefix, \"platform_system\": platform.system(),\n    \"platform_release\": platform.release(), \"machine\": platform.machine(),\n    \"platform\": platform.platform(), \"packages\": {}, \"engine_checks\": {}\n}\nfor name in (\"pandas\", \"pyarrow\", \"fastparquet\", \"pytest\", \"numpy\"):\n    try:\n        dist = md.distribution(name)\n        version = dist.version\n        meta = next((dist.locate_file(f) for f in (dist.files or []) if str(f).endswith(\".dist-info/METADATA\")), None)\n        metadata_path = None if meta is None else str(meta)\n    except md.PackageNotFoundError:\n        version = metadata_path = None\n    try:\n        spec = importlib.util.find_spec(name)\n        origin = None if spec is None else spec.origin\n    except Exception as error:\n        origin = {\"error_type\": type(error).__name__, \"error\": str(error)}\n    out[\"packages\"][name] = {\"installed_distribution_version\": version, \"metadata_path\": metadata_path, \"import_spec_origin\": origin}\nfor name in (\"pyarrow\", \"fastparquet\"):\n    try:\n        module = importlib.import_module(name)\n        out[\"engine_checks\"][name] = {\"status\": \"IMPORTABLE\", \"imported_version\": getattr(module, \"__version__\", None), \"module_file\": getattr(module, \"__file__\", None)}\n    except Exception as error:\n        out[\"engine_checks\"][name] = {\"status\": \"IMPORT_FAILED\", \"error_type\": type(error).__name__, \"error\": str(error)}\ntry:\n    import pandas as pd\n    out[\"pandas_import\"] = {\"status\": \"IMPORTABLE\", \"version\": pd.__version__, \"module_file\": pd.__file__}\n    try:\n        engine = pd.io.parquet.get_engine(\"auto\")\n        out[\"parquet_auto_selection\"] = {\"status\": \"ENGINE_AVAILABLE\", \"engine_type\": type(engine).__module__ + \".\" + type(engine).__name__}\n    except Exception as error:\n        out[\"parquet_auto_selection\"] = {\"status\": \"ENGINE_UNAVAILABLE\", \"error_type\": type(error).__name__, \"error\": str(error)}\nexcept Exception as error:\n    out[\"pandas_import\"] = {\"status\": \"IMPORT_FAILED\", \"error_type\": type(error).__name__, \"error\": str(error)}\n    out[\"parquet_auto_selection\"] = {\"status\": \"NOT_RUN_PANDAS_UNAVAILABLE\"}\nout[\"real_parquet_decoded\"] = False\nout[\"packages_installed_or_changed\"] = False\nout[\"finished_at_utc\"] = datetime.datetime.now(datetime.timezone.utc).isoformat()\nprint(json.dumps(out, ensure_ascii=False, sort_keys=True, indent=2))\n"
+      ],
+      "cwd": "/workspace/scratch/a5458cb06b78",
+      "evidence_status": "DIRECTLY_OBSERVED_LOCAL_SUBPROCESS",
+      "exit_code": 0,
+      "id": "LOCAL_SYSTEM",
+      "observation": {
+        "engine_checks": {
+          "fastparquet": {
+            "error": "No module named 'fastparquet'",
+            "error_type": "ModuleNotFoundError",
+            "status": "IMPORT_FAILED"
+          },
+          "pyarrow": {
+            "error": "No module named 'pyarrow'",
+            "error_type": "ModuleNotFoundError",
+            "status": "IMPORT_FAILED"
+          }
+        },
+        "executable_file_identity": {
+          "bytes": 8025024,
+          "path": "/usr/bin/python3.12",
+          "raw_sha256": "a92f0f95e883390c7256b2e441484aac06b1002dbe1d924141a77c8d82f96223"
+        },
+        "finished_at_utc": "2026-10-11T10:54:10.862795+00:00",
+        "implementation": "CPython",
+        "machine": "x86_64",
+        "packages": {
+          "fastparquet": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          },
+          "numpy": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          },
+          "pandas": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          },
+          "pyarrow": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          },
+          "pytest": {
+            "import_spec_origin": null,
+            "installed_distribution_version": null,
+            "metadata_file_identity": null,
+            "metadata_path": null
+          }
+        },
+        "packages_installed_or_changed": false,
+        "pandas_import": {
+          "error": "No module named 'pandas'",
+          "error_type": "ModuleNotFoundError",
+          "status": "IMPORT_FAILED"
+        },
+        "parquet_auto_selection": {
+          "status": "NOT_RUN_PANDAS_UNAVAILABLE"
+        },
+        "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+        "platform_release": "6.18.44",
+        "platform_system": "Linux",
+        "python_version": "3.12.3",
+        "real_parquet_decoded": false,
+        "resolved_executable": "/usr/bin/python3.12",
+        "started_at_utc": "2026-10-11T10:54:10.854279+00:00",
+        "sys_base_prefix": "/usr",
+        "sys_executable": "/usr/bin/python3",
+        "sys_prefix": "/usr",
+        "sys_version": "3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]"
+      },
+      "role": "READ_ONLY_PROBE_OF_EXISTING_SYSTEM_INTERPRETER_NOT_SELECTED_FOR_PRODUCT",
+      "stderr_bytes": 0,
+      "stderr_raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_utf8": "",
+      "stdout_bytes": 1817,
+      "stdout_raw_sha256": "3b11be8cb4ddf1366c7270dceb970aaa4e5e38c98b76cbc2388d74d186e40da9",
+      "stdout_utf8": "{\n  \"engine_checks\": {\n    \"fastparquet\": {\n      \"error\": \"No module named 'fastparquet'\",\n      \"error_type\": \"ModuleNotFoundError\",\n      \"status\": \"IMPORT_FAILED\"\n    },\n    \"pyarrow\": {\n      \"error\": \"No module named 'pyarrow'\",\n      \"error_type\": \"ModuleNotFoundError\",\n      \"status\": \"IMPORT_FAILED\"\n    }\n  },\n  \"finished_at_utc\": \"2026-10-11T10:54:10.862795+00:00\",\n  \"implementation\": \"CPython\",\n  \"machine\": \"x86_64\",\n  \"packages\": {\n    \"fastparquet\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    },\n    \"numpy\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    },\n    \"pandas\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    },\n    \"pyarrow\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    },\n    \"pytest\": {\n      \"import_spec_origin\": null,\n      \"installed_distribution_version\": null,\n      \"metadata_path\": null\n    }\n  },\n  \"packages_installed_or_changed\": false,\n  \"pandas_import\": {\n    \"error\": \"No module named 'pandas'\",\n    \"error_type\": \"ModuleNotFoundError\",\n    \"status\": \"IMPORT_FAILED\"\n  },\n  \"parquet_auto_selection\": {\n    \"status\": \"NOT_RUN_PANDAS_UNAVAILABLE\"\n  },\n  \"platform\": \"Linux-6.18.44-x86_64-with-glibc2.39\",\n  \"platform_release\": \"6.18.44\",\n  \"platform_system\": \"Linux\",\n  \"python_version\": \"3.12.3\",\n  \"real_parquet_decoded\": false,\n  \"resolved_executable\": \"/usr/bin/python3.12\",\n  \"started_at_utc\": \"2026-10-11T10:54:10.854279+00:00\",\n  \"sys_base_prefix\": \"/usr\",\n  \"sys_executable\": \"/usr/bin/python3\",\n  \"sys_prefix\": \"/usr\",\n  \"sys_version\": \"3.12.3 (main, Jul 15 2026, 23:46:41) [GCC 13.3.0]\"\n}\n"
+    }
+  ],
+  "local_runtime_owned_paths": {
+    "CODEX_PRIMARY_RUNTIME_BUNDLE_VERSION": "26.1004.11800",
+    "CODEX_PRIMARY_RUNTIME_NODE": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "CODEX_PRIMARY_RUNTIME_NODE_MODULES": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/node_modules",
+    "CODEX_PRIMARY_RUNTIME_PYTHON": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "CODEX_PRIMARY_RUNTIME_ROOT": "/opt/codex/runtimes/codex-primary-runtime"
+  },
+  "mac_reported_environment": {
+    "active_api_binding_source_ref": "SRC_ACTUAL_API_BINDING",
+    "active_api_release_claim": "hk-dated-name-20261011-r2",
+    "active_api_source_commit": null,
+    "active_api_source_commit_status": "UNKNOWN",
+    "claims": [
+      {
+        "field": "python",
+        "json_pointer": "/python",
+        "method_source_ref": "SRC_MAC_COLLECTOR",
+        "reported_collection_method": "sys.version",
+        "source_ref": "SRC_MAC_VERSIONS",
+        "status": "ATTACHED_COLLECTION_CLAIM_NOT_REPROBED_ON_MAC",
+        "value": "3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]"
+      },
+      {
+        "field": "executable",
+        "json_pointer": "/executable",
+        "method_source_ref": "SRC_MAC_COLLECTOR",
+        "reported_collection_method": "sys.executable",
+        "source_ref": "SRC_MAC_VERSIONS",
+        "status": "ATTACHED_COLLECTION_CLAIM_NOT_REPROBED_ON_MAC",
+        "value": "/Users/lexi/Library/Application Support/com.lexi.v4.local/runtime/venvs/v3.5-mac/bin/python"
+      },
+      {
+        "field": "pandas",
+        "json_pointer": "/pandas",
+        "method_source_ref": "SRC_MAC_COLLECTOR",
+        "reported_collection_method": "importlib.metadata.version",
+        "source_ref": "SRC_MAC_VERSIONS",
+        "status": "ATTACHED_COLLECTION_CLAIM_NOT_REPROBED_ON_MAC",
+        "value": "3.0.5"
+      },
+      {
+        "field": "pyarrow",
+        "json_pointer": "/pyarrow",
+        "method_source_ref": "SRC_MAC_COLLECTOR",
+        "reported_collection_method": "importlib.metadata.version",
+        "source_ref": "SRC_MAC_VERSIONS",
+        "status": "ATTACHED_COLLECTION_CLAIM_NOT_REPROBED_ON_MAC",
+        "value": "25.0.1"
+      },
+      {
+        "field": "pytest",
+        "json_pointer": "/pytest",
+        "method_source_ref": "SRC_MAC_COLLECTOR",
+        "reported_collection_method": "importlib.metadata.version",
+        "source_ref": "SRC_MAC_VERSIONS",
+        "status": "ATTACHED_COLLECTION_CLAIM_NOT_REPROBED_ON_MAC",
+        "value": "9.1.1"
+      }
+    ],
+    "collection_interpreter_claim_scope": "versions.json reports the collector interpreter and installed distribution metadata at collection; active API and scheduler process interpreter identities are not independently established by that report.",
+    "evidence_status": "ATTACHED_MAC_COLLECTION_RECEIPT_NOT_DIRECT_CURRENT_MAC_PROBE",
+    "exact_collection_timestamp": null,
+    "exact_remote_path_of_versions_json": null,
+    "mac_machine_architecture": null,
+    "mac_os_version": null,
+    "remote_path_note": "collect.py places versions.json next to itself; its absolute collector directory is not established by the attached script. The exact attached evidence path/raw hash/bytes is SRC_MAC_VERSIONS.",
+    "reported_collection_date": "2026-10-11",
+    "runtime_binding_source_ref": "SRC_RUNTIME_BINDINGS",
+    "scheduler_release_claim": "hk-auto-d1-20261011-r1",
+    "uv_lock_evidence": [
+      {
+        "claimed_mac_source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/uv.lock",
+        "mac_path_basis": "SRC_MAC_FINALIZER explicit release roots and copy targets",
+        "note": "Both attached lockfiles omit pandas, pyarrow, fastparquet and numpy; pytest 9.1.1 is present. A lock entry is a declaration, not proof of an installed or running interpreter.",
+        "pandas_pyarrow_installed_versions_proven_by_lock": false,
+        "requires_python": ">=3.14",
+        "runtime_install_state": "NOT_PROVEN_BY_LOCK",
+        "selected_package_entries": {
+          "fastparquet": [],
+          "numpy": [],
+          "pandas": [],
+          "pyarrow": [],
+          "pytest": [
+            "9.1.1"
+          ]
+        },
+        "source_ref": "SRC_API_LOCK"
+      },
+      {
+        "claimed_mac_source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-auto-d1-20261011-r1/app/uv.lock",
+        "mac_path_basis": "SRC_MAC_FINALIZER explicit release roots and copy targets",
+        "note": "Both attached lockfiles omit pandas, pyarrow, fastparquet and numpy; pytest 9.1.1 is present. A lock entry is a declaration, not proof of an installed or running interpreter.",
+        "pandas_pyarrow_installed_versions_proven_by_lock": false,
+        "requires_python": ">=3.14",
+        "runtime_install_state": "NOT_PROVEN_BY_LOCK",
+        "selected_package_entries": {
+          "fastparquet": [],
+          "numpy": [],
+          "pandas": [],
+          "pyarrow": [],
+          "pytest": [
+            "9.1.1"
+          ]
+        },
+        "source_ref": "SRC_SCHEDULER_LOCK"
+      }
+    ]
+  },
+  "material_discrepancies": [
+    {
+      "code": "LOCAL_PYTHON_BELOW_DECLARED_MINIMUM",
+      "detail": "Primary CPython 3.12.14 and system CPython 3.12.3 are below >=3.14.",
+      "evidence_refs": [
+        "LOCAL_PRIMARY",
+        "LOCAL_SYSTEM",
+        "SRC_FIXED_PYPROJECT"
+      ]
+    },
+    {
+      "code": "LOCAL_PANDAS_BELOW_DECLARED_MINIMUM",
+      "detail": "Primary pandas 2.2.3 imports but does not satisfy >=2.3,<3.",
+      "evidence_refs": [
+        "LOCAL_PRIMARY",
+        "SRC_FIXED_PYPROJECT"
+      ]
+    },
+    {
+      "code": "LOCAL_PARQUET_ENGINES_UNAVAILABLE",
+      "detail": "pyarrow and fastparquet cannot import; pandas auto engine selection raises ImportError. No real Parquet decoding was performed.",
+      "evidence_refs": [
+        "LOCAL_PRIMARY"
+      ]
+    },
+    {
+      "code": "LOCAL_PYTEST_UNAVAILABLE",
+      "detail": "No pytest distribution or import spec under either probed interpreter. This does not negate separately logged unittest or other engineering checks.",
+      "evidence_refs": [
+        "LOCAL_PRIMARY",
+        "LOCAL_SYSTEM"
+      ]
+    },
+    {
+      "code": "MAC_CLAIMED_PANDAS_PYARROW_EXCEED_BOUNDS",
+      "detail": "Attached pandas 3.0.5 and pyarrow 25.0.1 exceed the fixed exclusive upper bounds. Mac Python 3.14.6 matches only the Python version predicate.",
+      "evidence_refs": [
+        "SRC_MAC_VERSIONS",
+        "SRC_R2",
+        "SRC_FIXED_PYPROJECT"
+      ]
+    },
+    {
+      "code": "ATTACHED_LOCKS_DO_NOT_PIN_ANALYTICAL_PACKAGES",
+      "detail": "The two lockfiles have identical bytes and do not contain pandas, pyarrow, fastparquet or numpy entries. Their pytest entry and requires-python declaration do not independently prove the Mac analytical environment.",
+      "evidence_refs": [
+        "SRC_API_LOCK",
+        "SRC_SCHEDULER_LOCK"
+      ]
+    },
+    {
+      "code": "MAC_COLLECTION_INTERPRETER_NOT_PROCESS_PROOF",
+      "detail": "The collector-reported executable path is not an independently verified executable/version binding for each current API and scheduler process.",
+      "evidence_refs": [
+        "SRC_MAC_VERSIONS",
+        "SRC_MAC_COLLECTOR",
+        "SRC_RUNTIME_BINDINGS"
+      ]
+    }
+  ],
+  "parquet_engine_conclusion": {
+    "actual_parquet_bytes_decoded": false,
+    "evidence_ref": "LOCAL_PRIMARY",
+    "fastparquet_import_status": "IMPORT_FAILED",
+    "known_supplied_parquet_metadata_source_ref": "SRC_PANEL_EVIDENCE",
+    "pandas_auto_engine_status": "ENGINE_UNAVAILABLE",
+    "pandas_import_succeeded": true,
+    "pyarrow_import_status": "IMPORT_FAILED",
+    "qualification": "Successful pandas import is a limited local import observation, not declared-version compatibility, a real Parquet decode, original producer parity, or Mac validation. Engine error text contains library installation suggestions; no installation was attempted."
+  },
+  "r3_and_runtime_qualification": {
+    "attached_collection_not_candidate_validation": true,
+    "old_replay_or_declared_schedule_counts_as_new_natural_success": false,
+    "r3_environment_bounds_waived": false,
+    "r3_scope": "R3 supplies the active A-panel direct source dependencies and reports absence at two exact stock_mentions paths. It preserves previous environment, source authority, availability/PIT and natural-run limitations.",
+    "runtime_bindings_are_snapshots": true,
+    "source_refs": [
+      "SRC_R3",
+      "SRC_R2",
+      "SRC_SUPPLEMENT_README",
+      "SRC_SUPPLEMENT_SUMMARY",
+      "SRC_RUNTIME_README",
+      "SRC_RUNTIME_GAPS"
+    ],
+    "stock_mentions_claim_scope": "Only the exact two paths in SRC_SUPPLEMENT_SUMMARY; not a global absence claim."
+  },
+  "requirement_comparisons": [
+    {
+      "component": "python",
+      "declared": ">=3.14",
+      "environment": "LOCAL_PRIMARY",
+      "evidence_refs": [
+        "LOCAL_PRIMARY",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed": "3.12.14",
+      "reason": "BELOW_MINIMUM",
+      "satisfies_declared_bound": false
+    },
+    {
+      "component": "pandas",
+      "declared": ">=2.3,<3",
+      "environment": "LOCAL_PRIMARY",
+      "evidence_refs": [
+        "LOCAL_PRIMARY",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed": "2.2.3",
+      "reason": "BELOW_MINIMUM_DESPITE_SUCCESSFUL_IMPORT",
+      "satisfies_declared_bound": false
+    },
+    {
+      "component": "pyarrow",
+      "declared": ">=21,<25",
+      "environment": "LOCAL_PRIMARY",
+      "evidence_refs": [
+        "LOCAL_PRIMARY",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed": null,
+      "reason": "DISTRIBUTION_AND_MODULE_UNAVAILABLE",
+      "satisfies_declared_bound": false
+    },
+    {
+      "component": "python",
+      "declared": ">=3.14",
+      "environment": "LOCAL_SYSTEM",
+      "evidence_refs": [
+        "LOCAL_SYSTEM",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed": "3.12.3",
+      "reason": "BELOW_MINIMUM",
+      "satisfies_declared_bound": false
+    },
+    {
+      "component": "pandas",
+      "declared": ">=2.3,<3",
+      "environment": "LOCAL_SYSTEM",
+      "evidence_refs": [
+        "LOCAL_SYSTEM",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed": null,
+      "reason": "DISTRIBUTION_AND_MODULE_UNAVAILABLE",
+      "satisfies_declared_bound": false
+    },
+    {
+      "component": "pyarrow",
+      "declared": ">=21,<25",
+      "environment": "LOCAL_SYSTEM",
+      "evidence_refs": [
+        "LOCAL_SYSTEM",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed": null,
+      "reason": "DISTRIBUTION_AND_MODULE_UNAVAILABLE",
+      "satisfies_declared_bound": false
+    },
+    {
+      "component": "python",
+      "declared": ">=3.14",
+      "environment": "MAC_ATTACHED_CLAIM",
+      "evidence_refs": [
+        "SRC_MAC_VERSIONS",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed_claim": "3.14.6",
+      "reason": "REPORTED_VERSION_MATCH_ONLY",
+      "reported_version_satisfies_declared_bound": true,
+      "runtime_compatibility_verified": false
+    },
+    {
+      "component": "pandas",
+      "declared": ">=2.3,<3",
+      "environment": "MAC_ATTACHED_CLAIM",
+      "evidence_refs": [
+        "SRC_MAC_VERSIONS",
+        "SRC_R2",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed_claim": "3.0.5",
+      "reason": "ABOVE_EXCLUSIVE_UPPER_BOUND",
+      "reported_version_satisfies_declared_bound": false,
+      "runtime_compatibility_verified": false
+    },
+    {
+      "component": "pyarrow",
+      "declared": ">=21,<25",
+      "environment": "MAC_ATTACHED_CLAIM",
+      "evidence_refs": [
+        "SRC_MAC_VERSIONS",
+        "SRC_R2",
+        "SRC_FIXED_PYPROJECT"
+      ],
+      "observed_claim": "25.0.1",
+      "reason": "ABOVE_EXCLUSIVE_UPPER_BOUND",
+      "reported_version_satisfies_declared_bound": false,
+      "runtime_compatibility_verified": false
+    }
+  ],
+  "schema_version": "v5.m09.environment_evidence.v1",
+  "scope": {
+    "after_tree_edits_performed": false,
+    "artifact_kind": "DOCUMENTATION_ONLY_ENVIRONMENT_EVIDENCE",
+    "buy_gate_updated": false,
+    "candidate_test_results": "NOT_ENUMERATED_HERE_SEE_SEPARATE_EXECUTION_LOGS",
+    "dependency_bounds_changed": false,
+    "mac_execution_performed": false,
+    "natural_verified": false,
+    "orders_sent": false,
+    "owned_output": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/ENVIRONMENT.json",
+    "package_install_upgrade_downgrade_performed": false,
+    "product_execution_performed_by_this_probe": false,
+    "production_allowed": false,
+    "real_parquet_decode_performed_by_this_probe": false,
+    "source_edits_performed": false,
+    "strict_1500_pit_verified": false
+  },
+  "unknowns_and_not_run": [
+    {
+      "item": "CURRENT_MAC_OS_VERSION_ARCHITECTURE_AND_EXECUTABLE_BYTES",
+      "reason": "No direct Mac probe in this task; attached version receipt omits OS version and architecture.",
+      "status": "UNKNOWN"
+    },
+    {
+      "item": "CURRENT_MAC_ACTIVE_API_AND_SCHEDULER_PACKAGE_IMPORTS",
+      "reason": "Runtime binding snapshots and collector metadata cannot replace current per-process environment verification.",
+      "status": "NOT_RUN"
+    },
+    {
+      "item": "MAC_PANDAS3_PYARROW25_COMPATIBILITY_WITH_FROZEN_PRODUCER",
+      "reason": "Reported versions are outside preserved dependency bounds; no bound waiver or environment change made.",
+      "status": "NOT_RUN"
+    },
+    {
+      "item": "LOCAL_REAL_PARQUET_DECODE_AND_ORIGINAL_PRODUCER_PARITY",
+      "reason": "Both pyarrow and fastparquet unavailable in the default local interpreter; environment probe ran no real-input product.",
+      "status": "BLOCKED_ENGINE_UNAVAILABLE"
+    },
+    {
+      "item": "LARGE_SOURCE_RECEIPT_ADMISSION_OR_SIZE_LIMIT_DIAGNOSIS",
+      "reason": "This artifact does not infer or replace the parent core receipt/input admission diagnostic.",
+      "status": "OUT_OF_SCOPE_SEPARATE_EVIDENCE"
+    },
+    {
+      "item": "SOURCE_AVAILABLE_AT_STRICT_1500_PIT_FULL_MARKET_MEMBERSHIP",
+      "reason": "Environment observations cannot establish source timing or universe authority.",
+      "status": "NOT_ESTABLISHED"
+    },
+    {
+      "item": "NATURAL_1605_1710_EXECUTION_LIVE_API_BROWSER_ROLLBACK",
+      "reason": "No Mac, browser, scheduled trigger, deployment or live rollback exercised by this environment task.",
+      "status": "NOT_RUN"
+    }
+  ]
+}

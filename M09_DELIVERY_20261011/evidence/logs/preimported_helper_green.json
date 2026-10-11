@@ -1,0 +1,29 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_preimported_helper_identity.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "M09_REVIEW_SNAPSHOT": "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T10:57:34.808835+00:00",
+  "end_utc": "2026-10-11T10:57:35.289228+00:00",
+  "start_shanghai": "2026-10-11T18:57:34.808835+08:00",
+  "end_shanghai": "2026-10-11T18:57:35.289228+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "preimported_helper_green.stdout.log",
+    "bytes": 281,
+    "sha256": "fd2aa69cf5dc08d8ac144ebabf42ba0828ec057b0e0e3cf29e91138c382c31cd"
+  },
+  "stderr": {
+    "path": "preimported_helper_green.stderr.log",
+    "bytes": 279,
+    "sha256": "1c66e17a5d23e5e60db10529e98c127371e21e79cb46b04032f9edf809753579"
+  }
+}

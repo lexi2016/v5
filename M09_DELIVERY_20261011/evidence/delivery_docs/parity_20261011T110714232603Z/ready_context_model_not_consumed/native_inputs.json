@@ -1,0 +1,136 @@
+{
+  "trade_date": "20261009",
+  "run_id": "m09-source-parity-ready_context_model_not_consumed",
+  "data_kind": "SYNTHETIC",
+  "execution_kind": "ENGINEERING",
+  "columns_in_order": [
+    "trade_date",
+    "ts_code",
+    "name",
+    "pct_chg",
+    "amount",
+    "bar_close_pos",
+    "tdx_industry_code",
+    "tdx_industry_name"
+  ],
+  "dtypes": [
+    "object",
+    "object",
+    "object",
+    "float64",
+    "float64",
+    "float64",
+    "object",
+    "object"
+  ],
+  "rows_in_order": [
+    {
+      "trade_date": "20261009",
+      "ts_code": "600001.SH",
+      "name": "Alpha",
+      "pct_chg": 4.0,
+      "amount": 500000000.0,
+      "bar_close_pos": 0.9,
+      "tdx_industry_code": "A",
+      "tdx_industry_name": "Resilient"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "000002.SZ",
+      "name": "Beta",
+      "pct_chg": 2.0,
+      "amount": 800000000.0,
+      "bar_close_pos": 0.8,
+      "tdx_industry_code": "A",
+      "tdx_industry_name": "Resilient"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "600003.SH",
+      "name": "Gamma",
+      "pct_chg": -10.0,
+      "amount": 400000000.0,
+      "bar_close_pos": 0.1,
+      "tdx_industry_code": "B",
+      "tdx_industry_name": "Risk"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "000004.SZ",
+      "name": "Delta",
+      "pct_chg": -6.0,
+      "amount": 200000000.0,
+      "bar_close_pos": 0.2,
+      "tdx_industry_code": "B",
+      "tdx_industry_name": "Risk"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "830005.BJ",
+      "name": "Epsilon",
+      "pct_chg": 0.0,
+      "amount": 100000000.0,
+      "bar_close_pos": 0.5,
+      "tdx_industry_code": "C",
+      "tdx_industry_name": "Flat"
+    }
+  ],
+  "ordered_codes": [
+    "600001.SH",
+    "000002.SZ",
+    "600003.SH",
+    "000004.SZ",
+    "830005.BJ"
+  ],
+  "row_count": 5,
+  "context": {
+    "video_acceptance": {
+      "trade_date": "20261009",
+      "today_bv_status": "TODAY_BV_LOCKED",
+      "status": "VIDEO_METADATA_READY",
+      "asr_status": "ASR_READY",
+      "checks": {
+        "same_day_video_count": 1
+      }
+    },
+    "video_capture": {
+      "trade_date": "20261009",
+      "status": "ASR_READY",
+      "videos": [
+        {
+          "fixture": "SYNTHETIC"
+        }
+      ]
+    },
+    "stockdict_pointer": {
+      "trade_date": "20261009",
+      "status": "CURRENT_ASR_STOCKDICT_READY_EXACT_ONLY"
+    },
+    "ocr_alignment_pointer": {
+      "trade_date": "20261009",
+      "status": "VIDEO_TABLE_ASR_NEWS_ALIGNMENT_READY",
+      "row_count": 1
+    },
+    "video_gap_pointer": {
+      "trade_date": "20261009",
+      "status": "VIDEO_GAP_AUDIT_READY",
+      "gap_row_count": 1
+    }
+  },
+  "source_panel": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/ready_context_model_not_consumed/engineering_panel.json",
+    "sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+    "bytes": 982
+  },
+  "source_pointer": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/ready_context_model_not_consumed/panel_pointer.txt",
+    "sha256": "169752ece5bd92003a99bee825f4817c3af25951dea5560aacf53e352d5cd3d2",
+    "bytes": 149
+  },
+  "original_request": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/ready_context_model_not_consumed/original_producer_request.json",
+    "sha256": "97f8a2169fc94b6a0b1c9e7b5df013574f6eb7ea6d2bd7701c7c8871d3a7e40f",
+    "bytes": 4496
+  },
+  "parquet_decoding": "NOT_RUN; these bytes are explicitly engineering JSON consumed through the admitted-frame I/O bridge"
+}

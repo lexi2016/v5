@@ -1,0 +1,278 @@
+{
+  "sha": "aa29ae3a72ee902d3dc471bf6dd09e4ec2ff2fc8",
+  "url": "https://api.github.com/repos/lexi2016/v5/git/trees/aa29ae3a72ee902d3dc471bf6dd09e4ec2ff2fc8",
+  "tree": [
+    {
+      "path": "PUBLICATION_FILES.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bfb06c32058be9b2191702983bcf25e6379fcc8d",
+      "size": 7544,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/bfb06c32058be9b2191702983bcf25e6379fcc8d"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f8b50f3ba34218b3f7e9e141ae7fc40c8d6f4b19",
+      "size": 448,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/f8b50f3ba34218b3f7e9e141ae7fc40c8d6f4b19"
+    },
+    {
+      "path": "START_HERE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eedd2523a29290e2271a04063ac168275df97e61",
+      "size": 1507,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/eedd2523a29290e2271a04063ac168275df97e61"
+    },
+    {
+      "path": "handoff",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f940f25a0f2c4f6ce38410baa779fbefcb74db1e",
+      "url": "https://api.github.com/repos/lexi2016/v5/git/trees/f940f25a0f2c4f6ce38410baa779fbefcb74db1e"
+    },
+    {
+      "path": "handoff/m09-20261011",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e844e7e03b99bda9a3093ccfb7dd1ea0e4c826cf",
+      "url": "https://api.github.com/repos/lexi2016/v5/git/trees/e844e7e03b99bda9a3093ccfb7dd1ea0e4c826cf"
+    },
+    {
+      "path": "handoff/m09-20261011/ASSEMBLY.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c022e44b19772e41230d18ff24cccc1f4bb0731f",
+      "size": 9462,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/c022e44b19772e41230d18ff24cccc1f4bb0731f"
+    },
+    {
+      "path": "handoff/m09-20261011/BASELINE_VERIFICATION.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da0c83061d0845e9ad77826f7f34d8fac66796d9",
+      "size": 851,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/da0c83061d0845e9ad77826f7f34d8fac66796d9"
+    },
+    {
+      "path": "handoff/m09-20261011/CHAT_SUBMISSION_TEXT.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "825d538724c24bafbfdf773e5c594ae2176d4b2c",
+      "size": 2624,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/825d538724c24bafbfdf773e5c594ae2176d4b2c"
+    },
+    {
+      "path": "handoff/m09-20261011/DELIVERY_CONTRACT.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f102cfb6e593948e46df0100dc8a58a35eb5b31",
+      "size": 6918,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/5f102cfb6e593948e46df0100dc8a58a35eb5b31"
+    },
+    {
+      "path": "handoff/m09-20261011/DELIVERY_STATUS.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "41347d580437a1e09e3654f6607cdc404d38b314",
+      "size": 1482,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/41347d580437a1e09e3654f6607cdc404d38b314"
+    },
+    {
+      "path": "handoff/m09-20261011/DEPENDENCY_MANIFEST.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "11a9346122b4c584cc9ec1d8f5761d71f1b674de",
+      "size": 86868,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/11a9346122b4c584cc9ec1d8f5761d71f1b674de"
+    },
+    {
+      "path": "handoff/m09-20261011/FINAL_SUPPLEMENT_FILES_MANIFEST.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2897f9a636304423f824935307f0dd44b0428b7b",
+      "size": 876,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/2897f9a636304423f824935307f0dd44b0428b7b"
+    },
+    {
+      "path": "handoff/m09-20261011/FINAL_SUPPLEMENT_R3.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5577f4eefdae50c0f5661e10654298c53ac52215",
+      "size": 2602,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/5577f4eefdae50c0f5661e10654298c53ac52215"
+    },
+    {
+      "path": "handoff/m09-20261011/FIRST_DELIVERY.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "89938aa1587f388710d1d2364dbd5b528fc0ac08",
+      "size": 4361,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/89938aa1587f388710d1d2364dbd5b528fc0ac08"
+    },
+    {
+      "path": "handoff/m09-20261011/M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "55e730a02cecad095f909abb2a07aed79f0baeaf",
+      "size": 14163,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/55e730a02cecad095f909abb2a07aed79f0baeaf"
+    },
+    {
+      "path": "handoff/m09-20261011/M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip.sha256",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3cd11a037163e8866f8d70946b01f8829c0661d5",
+      "size": 117,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/3cd11a037163e8866f8d70946b01f8829c0661d5"
+    },
+    {
+      "path": "handoff/m09-20261011/M09_HANDOFF_SOURCE_AND_TASK_20261011_R3_FINAL.zip",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "83710d4ea883485face1aa470a408d3a2943208b",
+      "size": 7424890,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/83710d4ea883485face1aa470a408d3a2943208b"
+    },
+    {
+      "path": "handoff/m09-20261011/M09_HANDOFF_SOURCE_AND_TASK_20261011_R3_FINAL.zip.sha256",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58aac4d7040139b292db067133c6f516f768d0bf",
+      "size": 116,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/58aac4d7040139b292db067133c6f516f768d0bf"
+    },
+    {
+      "path": "handoff/m09-20261011/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26133b210467c9e5ad64aaf97cac3a85d519972a",
+      "size": 7577304,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/26133b210467c9e5ad64aaf97cac3a85d519972a"
+    },
+    {
+      "path": "handoff/m09-20261011/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip.sha256",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e947b7ebe89a7358ba39ff1e244d97c0aa6e406c",
+      "size": 116,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/e947b7ebe89a7358ba39ff1e244d97c0aa6e406c"
+    },
+    {
+      "path": "handoff/m09-20261011/MAC_INPUT_FILES_MANIFEST.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ebcd6f7de3bb6941de0a21c92320f913c36b03c1",
+      "size": 6951,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/ebcd6f7de3bb6941de0a21c92320f913c36b03c1"
+    },
+    {
+      "path": "handoff/m09-20261011/MAC_READONLY_TAKEOUT.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "097e45cd3c82a154005d6c245f74a320c2946044",
+      "size": 10397,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/097e45cd3c82a154005d6c245f74a320c2946044"
+    },
+    {
+      "path": "handoff/m09-20261011/ORIGINAL_SOURCE_MANIFEST.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9205e6240ebd5a4a6697c26ed25dae0ddea9c241",
+      "size": 39356,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/9205e6240ebd5a4a6697c26ed25dae0ddea9c241"
+    },
+    {
+      "path": "handoff/m09-20261011/PACKAGE_MANIFEST.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e30d96e91988e02b8d65ecda45c153bb26783ae",
+      "size": 4483,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/9e30d96e91988e02b8d65ecda45c153bb26783ae"
+    },
+    {
+      "path": "handoff/m09-20261011/PROMPT_FOR_CHAT.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a4c79123201cd7a5643502f4964c3b6b16d9ef2e",
+      "size": 5837,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/a4c79123201cd7a5643502f4964c3b6b16d9ef2e"
+    },
+    {
+      "path": "handoff/m09-20261011/PUBLICATION_IDENTITY.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fb9d19d19205afc953c6659f02219c6cb21df9b4",
+      "size": 984,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/fb9d19d19205afc953c6659f02219c6cb21df9b4"
+    },
+    {
+      "path": "handoff/m09-20261011/REVISION_HISTORY.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ad3c00fd664e5c57b418eecea92f05ec0a4c3f9",
+      "size": 1663,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/8ad3c00fd664e5c57b418eecea92f05ec0a4c3f9"
+    },
+    {
+      "path": "handoff/m09-20261011/RUNTIME_INPUT_ADDENDUM_R2.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ea9b5129bd2a36a3a9a0d3a3cc0b8bb1ce38a5a3",
+      "size": 8662,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/ea9b5129bd2a36a3a9a0d3a3cc0b8bb1ce38a5a3"
+    },
+    {
+      "path": "handoff/m09-20261011/RUNTIME_INPUT_VERIFICATION.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9823e9b492ae9b8ddebc15e4eb81e2e8625fd9f7",
+      "size": 1674,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/9823e9b492ae9b8ddebc15e4eb81e2e8625fd9f7"
+    },
+    {
+      "path": "handoff/m09-20261011/SOURCE_PATHS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0924b3ccec8a29a473a10c335e75b22605f7d9e0",
+      "size": 15929,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/0924b3ccec8a29a473a10c335e75b22605f7d9e0"
+    },
+    {
+      "path": "handoff/m09-20261011/START_HERE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c9291de88f3ac7d4cdf5165031180d3dd17d4315",
+      "size": 2982,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/c9291de88f3ac7d4cdf5165031180d3dd17d4315"
+    },
+    {
+      "path": "handoff/m09-20261011/TASK_M09.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1345d28344fbc5052122c526d63f01b2e1a5585f",
+      "size": 9472,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/1345d28344fbc5052122c526d63f01b2e1a5585f"
+    },
+    {
+      "path": "handoff/m09-20261011/v5-module09-source-20261010.zip",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d904f0e73d461adec64c3f283c0c7da656d3cca9",
+      "size": 145374,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/d904f0e73d461adec64c3f283c0c7da656d3cca9"
+    },
+    {
+      "path": "handoff/m09-20261011/v5-module09-source-20261010.zip.sha256",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "37be83194afaa814c412c2885fa3c7800c3767ef",
+      "size": 98,
+      "url": "https://api.github.com/repos/lexi2016/v5/git/blobs/37be83194afaa814c412c2885fa3c7800c3767ef"
+    }
+  ],
+  "truncated": false
+}
+

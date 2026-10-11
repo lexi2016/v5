@@ -1,0 +1,255 @@
+{
+  "schema_version": "v5.m09.raw_historical_read_diagnosis.v1",
+  "trade_date": "20261009",
+  "classification": "READ_ONLY_HISTORICAL_INPUT_OBSERVATION",
+  "observed_at_utc": "2026-10-11T10:54:44.631641+00:00",
+  "files_created_by_helper": false,
+  "input_cleaning_applied": false,
+  "parquet_decode": "NOT_RUN",
+  "full_candidate_admission": "NOT_RUN_NO_RELOCATED_MANIFEST",
+  "original_price_model": "NOT_RUN",
+  "product_publication": "NOT_RUN",
+  "natural_acceptance": "NOT_RUN",
+  "strict_1500_pit_verified": false,
+  "original_files": {
+    "GAPS.json": {
+      "bytes": 1439,
+      "raw_sha256": "b986d355e2919665f62e1c0c6ce239bd20570af13f5c5a94720a2fecc3cd40ee"
+    },
+    "README.md": {
+      "bytes": 1345,
+      "raw_sha256": "891c2f32ddc0dbf8c7a5e54b1a5727b6441488dbfa2e5713c0b209fd4454f89d"
+    },
+    "active_api_headers.txt": {
+      "bytes": 129,
+      "raw_sha256": "166023b37c4b206e24f04f7289c396fafbf8369fddead601684cd50c921783a5"
+    },
+    "active_api_review_20261009.json": {
+      "bytes": 381549,
+      "raw_sha256": "751d24d856138508111d49a5e2e20cb0cb8284f0ece1eb0c9a11363708085ede"
+    },
+    "actual_api_binding.json": {
+      "bytes": 1295,
+      "raw_sha256": "da627bd4f4aa7010e744fe7e66bca703467b2db2bdf60f980823405e6381d0c8"
+    },
+    "binding_source/active_api/apps/api/v35_api/app.py": {
+      "bytes": 327501,
+      "raw_sha256": "ba40457e4fc6d4f60155c55e4202ac82e870467598d49ea36bcbc2aab5c70eb3"
+    },
+    "binding_source/active_api/apps/api/v35_api/review_router.py": {
+      "bytes": 42184,
+      "raw_sha256": "ef6e870077fecd1e025ec1a0741ec3f766b76ef914b60661e4f32937acc9e28d"
+    },
+    "binding_source/active_api/apps/web/src/App.vue": {
+      "bytes": 133644,
+      "raw_sha256": "d87285a8a1de1611ca83add16d70101979ea469d2c7fb093dc1f9ca5961baef0"
+    },
+    "binding_source/active_api/apps/web/src/api/review.ts": {
+      "bytes": 1436,
+      "raw_sha256": "fc2c7551fe386a9b01375d6d82d7f633990bba169f48e9b918386e31baa6dd7d"
+    },
+    "binding_source/active_api/apps/web/src/contracts/review.ts": {
+      "bytes": 10012,
+      "raw_sha256": "079adf7971e346a8da5d40c49bc3c1fdfb2307aaf6ed70df5ed4d9312699c507"
+    },
+    "binding_source/active_api/apps/web/src/views/ReviewView.vue": {
+      "bytes": 3441,
+      "raw_sha256": "cb1f4f19d9b8100d0caf86a5563990a90b627fdb72699b9ccbe499b1e9542c71"
+    },
+    "binding_source/active_api/domains/review_evidence_layers.py": {
+      "bytes": 24730,
+      "raw_sha256": "96886aa56318968625bfb57e484fde39ba267388591234fe7ed9e3f2939d77a7"
+    },
+    "binding_source/active_api/infrastructure/a_share_review_store.py": {
+      "bytes": 10176,
+      "raw_sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482"
+    },
+    "binding_source/active_api/uv.lock": {
+      "bytes": 26522,
+      "raw_sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c"
+    },
+    "binding_source/scheduler/contracts/close_timeline.py": {
+      "bytes": 4753,
+      "raw_sha256": "b900a8677316ef0993d3569bb83a7157e7b9465a9cdc9ed45265f7ff3bc9476b"
+    },
+    "binding_source/scheduler/contracts/market_calendar_2026.json": {
+      "bytes": 3473,
+      "raw_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+    },
+    "binding_source/scheduler/contracts/runtime_workloads.json": {
+      "bytes": 51682,
+      "raw_sha256": "7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef"
+    },
+    "binding_source/scheduler/infrastructure/scheduling/executor_registry_review.py": {
+      "bytes": 34476,
+      "raw_sha256": "b4802f59a5faed70cbc17501780cecbd51ecdf1bd87ded5c260abfe545bce324"
+    },
+    "binding_source/scheduler/ops/build_a_share_close_review.py": {
+      "bytes": 8360,
+      "raw_sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53"
+    },
+    "binding_source/scheduler/ops/launch_v35_macos_scheduler.sh": {
+      "bytes": 3982,
+      "raw_sha256": "0c577ae83b1f182dabf3b62e642a5bd5f0f8708b48e1806d8c653b691d2ec952"
+    },
+    "binding_source/scheduler/ops/run_v35_macos_scheduler.py": {
+      "bytes": 25218,
+      "raw_sha256": "f707df50c31f03fd51e439eece0d86dd60647d8d989e9a760f2ef1f2222c6f0d"
+    },
+    "binding_source/scheduler/uv.lock": {
+      "bytes": 26522,
+      "raw_sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c"
+    },
+    "collect.py": {
+      "bytes": 5340,
+      "raw_sha256": "8a24cc0402766111c80d13c1ff66def09a94f2896630b5fd3db827edc081146c"
+    },
+    "finalize.py": {
+      "bytes": 7244,
+      "raw_sha256": "f996192f172b9fbe0a83bb6868797ef1d01b9f77aa4e0110d6ac15793714af09"
+    },
+    "optional_input_inventory.json": {
+      "bytes": 2520,
+      "raw_sha256": "f65b7671bbb011f76ad93ec166cf4084c15acf9b1e1e9170aac792554f23622e"
+    },
+    "original_schema.txt": {
+      "bytes": 4952,
+      "raw_sha256": "c7181db7cfabf21ae5659342d772ecd5976d3efaea9c7ec340722bcc2d6f0827"
+    },
+    "originals/CURRENT_SELECTOR_READY_PANEL.txt": {
+      "bytes": 242,
+      "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d"
+    },
+    "originals/a_share_existing_receipt.json": {
+      "bytes": 279,
+      "raw_sha256": "13caff745adce20e67c56cf67d095282249c20634f5922d2e154c0579eaf8b8d"
+    },
+    "originals/a_share_existing_review.json": {
+      "bytes": 36132,
+      "raw_sha256": "2da9682e6b1e16e209f193697260e95f6b743b030c4f23924a20cf5c53ef8d88"
+    },
+    "originals/daily_pointer.txt": {
+      "bytes": 242,
+      "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d"
+    },
+    "originals/dispatcher_pointer.txt": {
+      "bytes": 242,
+      "raw_sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d"
+    },
+    "originals/membership_20261009.txt": {
+      "bytes": 51260,
+      "raw_sha256": "b1f561b1d18a5341784c4906b0e3bbbf21d7d092823e4a60c2787fdf004d91fb"
+    },
+    "originals/panel_20261009_required8.parquet": {
+      "bytes": 279209,
+      "raw_sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47"
+    },
+    "originals/panel_source_receipt.json": {
+      "bytes": 80017050,
+      "raw_sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e"
+    },
+    "panel_evidence.json": {
+      "bytes": 1958,
+      "raw_sha256": "0bd67e9d752274ee29d36defb76400c11eb3c0c51474bbac0a2915c6baf611e7"
+    },
+    "runtime_bindings.json": {
+      "bytes": 4574,
+      "raw_sha256": "658fcced6c368863b1bdfdc999ecc77bc48d1753f3fe50deb2d1f268e6e79e53"
+    },
+    "schedule_binding.json": {
+      "bytes": 647,
+      "raw_sha256": "def1c5b34109f623ae7a4d8cb4a00d67661c8b1a0a714310df29f28947c78f04"
+    },
+    "source_copy_index.json": {
+      "bytes": 6128,
+      "raw_sha256": "17cfb90bae302a09ff34c36013314ebaee201b1d5a2a937dd5b97fc78bf8d6aa"
+    },
+    "timing_and_authority.json": {
+      "bytes": 813,
+      "raw_sha256": "04f3198763d7a4a2cc1fa54d9e5bafa87a70a8f62090e4e57e161a8bcb9e793e"
+    },
+    "versions.json": {
+      "bytes": 247,
+      "raw_sha256": "a33c136c9ddcf2bf2aabe7fe4aa178ff9d7558208b463b2aad0ea1da62314b28"
+    }
+  },
+  "observed_membership_text": {
+    "path": "originals/membership_20261009.txt",
+    "line_count": 5126,
+    "unique_count": 5126,
+    "duplicate_line_count": 0,
+    "invalid_code_line_count": 0,
+    "full_market_membership_verified": false
+  },
+  "attached_mac_panel_statistics": {
+    "evidence_path": "panel_evidence.json",
+    "recomputed_here": false,
+    "scope": "SUPPLIED_MAC_EXTRACTION_REPORT_ONLY",
+    "row_count": 5126,
+    "unique_members": 5126,
+    "missing_or_nan": {
+      "trade_date": 0,
+      "ts_code": 0,
+      "name": 0,
+      "pct_chg": 0,
+      "amount": 0,
+      "bar_close_pos": 2,
+      "tdx_industry_code": 0,
+      "tdx_industry_name": 0
+    },
+    "empty_strings": {
+      "trade_date": 0,
+      "ts_code": 0,
+      "name": 137,
+      "pct_chg": 0,
+      "amount": 0,
+      "bar_close_pos": 0,
+      "tdx_industry_code": 240,
+      "tdx_industry_name": 240
+    }
+  },
+  "attached_timing_authority": {
+    "source_receipt_sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e",
+    "selector_sha_matches_original": true,
+    "source_authority_status": "REBUILD_REQUIRED",
+    "coverage_rate": 0.8858620689655172,
+    "accepted_count": 5138,
+    "target_count": 5800,
+    "sync_run_id": "20261009-e663c5e385206afd-1791536464719255000",
+    "symbol_recorded_at_range": [
+      "2026-10-09T17:01:05.003487+08:00",
+      "2026-10-09T17:09:06.622525+08:00"
+    ],
+    "formula_started_at": "2026-10-09T17:09:17",
+    "formula_finished_at": "2026-10-09T17:11:27",
+    "available_at": "NOT_EXPLICITLY_PROVIDED_FOR_FINAL_PANEL",
+    "interpretation": "recorded_at is existing sync evidence; formula timestamps lack timezone suffix; no mtime used as capture time, no assertion of 15:00 PIT or panel availability at 16:05/17:10."
+  },
+  "final_panel_available_at": null,
+  "available_at_note": "Unknown; no inference from copy time, mtime, filename, sync records or timezone-free formula timestamps.",
+  "original_pointer": {
+    "text": "/Users/lexi/Library/Application Support/com.lexi.v35.local/state/workspace/数据/selector_ready_panels/data_layer_daily_formula_increment_update_v1/selector_ready_current_to_20261009_20261009_170917/selector_ready_current_to_20261009.parquet",
+    "followed": false,
+    "rewritten": false,
+    "binding_status": "FOREIGN_ABSOLUTE_MAC_PATH_RETAINED_AS_EVIDENCE"
+  },
+  "candidate_receipt_guard_probe": {
+    "limit_bytes": 16777216,
+    "actual_receipt_bytes": 80017050,
+    "excess_bytes": 63239834,
+    "candidate_module": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily.py",
+      "bytes": 53812,
+      "raw_sha256": "ddad211724d275d740974b10704cf042eab6fdd8f1d17725c37bee1dcf13100d"
+    },
+    "called": "frozen.safe_root(runtime_inputs).read_bytes(original_receipt, max_bytes=MAX_JSON_BYTES)",
+    "full_admission_called": false,
+    "status": "READ_REJECTED",
+    "exception_type": "OwnedIOError",
+    "exception_text": "OWNED_FILE_TOO_LARGE",
+    "candidate_module_bytes_unchanged": true
+  },
+  "original_file_bytes_unchanged": true,
+  "observation_status": "OBSERVED_REJECTION_NOT_PRODUCT_ACCEPTANCE",
+  "finished_at_utc": "2026-10-11T10:54:44.906449+00:00"
+}

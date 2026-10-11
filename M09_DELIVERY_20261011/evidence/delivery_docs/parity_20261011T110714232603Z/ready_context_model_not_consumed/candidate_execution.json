@@ -1,0 +1,6 @@
+{
+  "call": "v5_shadow.a_close_daily_sources.build_from_admitted_panel",
+  "started_at_utc": "2026-10-11T11:07:16.128794+00:00",
+  "ended_at_utc": "2026-10-11T11:07:16.240301+00:00",
+  "exception": null
+}

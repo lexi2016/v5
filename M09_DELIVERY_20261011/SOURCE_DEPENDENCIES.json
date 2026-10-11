@@ -1,0 +1,1320 @@
+{
+  "schema_version": "v5.m09.source_dependencies.delivery.v1",
+  "generated_at_utc": "2026-10-11T11:07:14.232603+00:00",
+  "fixed_donor": {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "role": "Immutable historical algorithm source; never a candidate destination"
+  },
+  "published_handoff": {
+    "repository": "lexi2016/v5",
+    "branch": "v5/m09-handoff-20261011",
+    "commit": "782bfc9ae91ff9cfe897afffc52aad43b7c1b78c",
+    "role": "Parent-verified published handoff identity; distinct from new local candidate"
+  },
+  "local_candidate": {
+    "commit": null,
+    "commit_status": "FINAL_PACKAGING_OWNER_BINDS_CANDIDATE_COMMIT; THIS_REPORT_IDENTIFIES_EXACT_LOCAL_BYTES",
+    "candidate_python_files": {
+      "V5/src/v5_shadow/__init__.py": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "V5/src/v5_shadow/a_close_daily.py": "23b4200ffb29e83041b761927c6f285ff84d6b92a3cf8b2fc3e527a9d8ae1d9c",
+      "V5/src/v5_shadow/a_close_daily_api.py": "74c4925c4ba5aa0d973ead806fed57cdf3416db08db0c1124b2e5fcf84003c16",
+      "V5/src/v5_shadow/a_close_daily_sources.py": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+      "V5/src/v5_shadow/a_close_daily_worker.py": "29eaf1e3a912d7bd09c0150dc3a260e371f982479a6afaf42f9b86a84a109611",
+      "V5/src/v5_shadow/a_close_review.py": "b288b916f43a41cfc7bd95511ad6decfd537a4cccf64ba5875f13dc04fad1933",
+      "V5/src/v5_shadow/a_preselection.py": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+      "V5/src/v5_shadow/api_gateway.py": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+      "V5/src/v5_shadow/composition.py": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "V5/src/v5_shadow/contracts.py": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "V5/src/v5_shadow/daily_close_plan.py": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6",
+      "V5/src/v5_shadow/daily_dispatch.py": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+      "V5/src/v5_shadow/digests.py": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "V5/src/v5_shadow/module_api.py": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+      "V5/src/v5_shadow/module_artifacts.py": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "V5/src/v5_shadow/provider_evidence.py": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+      "V5/src/v5_shadow/run_ledger.py": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd",
+      "V5/tests/test_a_close_daily.py": "c8d83504465efba96543db2363e79b74903e3af76bb99ef34f786bd807eb045a",
+      "V5/tests/test_a_close_daily_api.py": "bfa1476b2f9de7ee2c5733d84a436ddee25784c33e2c90083f64b41ce850e777",
+      "V5/tests/test_a_close_daily_sources.py": "24a63dc3186d6fe681910a064dfd9861bc7c3bcba42b879638618de17e351804",
+      "V5/tests/test_a_close_review.py": "fe331baa493299720380d6e8332947aa635b0e52d3b24a2b291bfdd20ca8c1f8",
+      "V5/tests/test_daily_close_plan.py": "23f0ff9eb5938d96eb46611064d1b74861f14194507c6a7b859562ef67cc9f6e",
+      "V5/vendor/a_close_baseline/contracts/trading_calendar.py": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "V5/vendor/a_close_baseline/domains/a_share_close_model.py": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "V5/vendor/m09_a_close_daily/contracts/__init__.py": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+      "V5/vendor/m09_a_close_daily/contracts/a_share_review.py": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+      "V5/vendor/m09_a_close_daily/contracts/trading_calendar.py": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+      "V5/vendor/m09_a_close_daily/domains/a_share_close_model.py": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "V5/vendor/m09_a_close_daily/domains/a_share_review.py": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+      "V5/vendor/m09_a_close_daily/domains/close_review_chain.py": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+      "V5/vendor/m09_a_close_daily/infrastructure/__init__.py": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+      "V5/vendor/m09_a_close_daily/infrastructure/a_share_review_store.py": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+      "V5/vendor/m09_a_close_daily/infrastructure/data_store.py": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "V5/vendor/m09_a_close_daily/infrastructure/interprocess_lock.py": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "V5/vendor/m09_a_close_daily/infrastructure/market_time.py": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "V5/vendor/m09_a_close_daily/infrastructure/owned_io.py": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "V5/vendor/m09_a_close_daily/infrastructure/owned_path.py": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "V5/vendor/m09_a_close_daily/infrastructure/trading_safety.py": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53"
+    }
+  },
+  "exact_original_references": {
+    "DEPENDENCY_MANIFEST": {
+      "path": "evidence/delivery_docs/source_references/DEPENDENCY_MANIFEST.json",
+      "sha256": "6e36670ecbd0a530654bfc45b7b85d3ca07ba62ea8363f44bf86b12d462337bc",
+      "bytes": 86868,
+      "role": "BYTE_EXACT_ORIGINAL_ATTACHMENT_MEMBER"
+    },
+    "ORIGINAL_SOURCE_MANIFEST": {
+      "path": "evidence/delivery_docs/source_references/ORIGINAL_SOURCE_MANIFEST.json",
+      "sha256": "0ccf865c7c4e5834676fb35fc271c71fb10e91217fc8b10f2a9162fc4e6f09e1",
+      "bytes": 39356,
+      "role": "BYTE_EXACT_ORIGINAL_ATTACHMENT_MEMBER"
+    }
+  },
+  "original_producer_static_closure": [
+    {
+      "module": "ops.build_a_share_close_review",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "blob_sha": "d8295efa1d082917522d93f3d9396ee154a0926f",
+      "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+      "bytes": 8360,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.data_store",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "bytes": 10704,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.trading_safety",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "bytes": 2597,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.market_time",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "bytes": 960,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.interprocess_lock",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "bytes": 7514,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/interprocess_lock.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.owned_io",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "bytes": 9354,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/owned_io.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.a_share_review_store",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "blob_sha": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+      "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+      "bytes": 10176,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.owned_path",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "bytes": 2251,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "domains.a_share_review",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "blob_sha": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+      "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+      "bytes": 7038,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "domains.close_review_chain",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "blob_sha": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+      "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+      "bytes": 10549,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "contracts.a_share_review",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "blob_sha": "af2110155081887e723f329652f7f73feb88d273",
+      "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+      "bytes": 261,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "domains.a_share_close_model",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "bytes": 12302,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "V5/vendor/a_close_baseline/domains/a_share_close_model.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    }
+  ],
+  "original_producer_static_count": 12,
+  "original_unresolved_internal_imports": [],
+  "new_m09_capsule_manifest": {
+    "path": "after/V5/contracts/m09_a_close_daily_source_manifest.json",
+    "sha256": "7e4f5eb41e0c8f6fc062d9d3f130af47a39eb5ae82a19389c9a5c0788a04901d",
+    "bytes": 13432
+  },
+  "new_m09_capsule_mapping": [
+    {
+      "relative_path": "contracts/__init__.py",
+      "target_path": "V5/vendor/m09_a_close_daily/contracts/__init__.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+      "source_git_blob_sha1": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+      "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+      "bytes": 55,
+      "imports": [],
+      "role": "PACKAGE_INITIALIZER",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+        "blob_sha": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+        "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+        "bytes": 55,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40"
+    },
+    {
+      "relative_path": "contracts/a_share_review.py",
+      "target_path": "V5/vendor/m09_a_close_daily/contracts/a_share_review.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "source_git_blob_sha1": "af2110155081887e723f329652f7f73feb88d273",
+      "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+      "bytes": 261,
+      "imports": [
+        "__future__"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+        "blob_sha": "af2110155081887e723f329652f7f73feb88d273",
+        "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+        "bytes": 261,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "af2110155081887e723f329652f7f73feb88d273"
+    },
+    {
+      "relative_path": "contracts/market_calendar_2026.json",
+      "target_path": "V5/vendor/m09_a_close_daily/contracts/market_calendar_2026.json",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+      "source_git_blob_sha1": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+      "bytes": 3473,
+      "imports": [],
+      "role": "DAILY_CALENDAR_ADMISSION",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+        "blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+        "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+        "bytes": 3473,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "c8177cfdeb55c038a88e915f206780eeba8b0d32"
+    },
+    {
+      "relative_path": "contracts/trading_calendar.py",
+      "target_path": "V5/vendor/m09_a_close_daily/contracts/trading_calendar.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "source_git_blob_sha1": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+      "bytes": 10239,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "enum",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "role": "DAILY_CALENDAR_ADMISSION",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+        "blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+        "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+        "bytes": 10239,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c"
+    },
+    {
+      "relative_path": "domains/a_share_close_model.py",
+      "target_path": "V5/vendor/m09_a_close_daily/domains/a_share_close_model.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "source_git_blob_sha1": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "bytes": 12302,
+      "imports": [
+        "__future__",
+        "datetime",
+        "pandas",
+        "typing"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+        "blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+        "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+        "bytes": 12302,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "V5/vendor/a_close_baseline/domains/a_share_close_model.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "96e914f73117d162f1ad7c1e4538ce07c23c1afb"
+    },
+    {
+      "relative_path": "domains/a_share_review.py",
+      "target_path": "V5/vendor/m09_a_close_daily/domains/a_share_review.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "source_git_blob_sha1": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+      "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+      "bytes": 7038,
+      "imports": [
+        "__future__",
+        "contracts.a_share_review",
+        "copy",
+        "domains.close_review_chain",
+        "infrastructure.data_store",
+        "re",
+        "typing"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+        "blob_sha": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+        "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+        "bytes": 7038,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c"
+    },
+    {
+      "relative_path": "domains/close_review_chain.py",
+      "target_path": "V5/vendor/m09_a_close_daily/domains/close_review_chain.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "source_git_blob_sha1": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+      "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+      "bytes": 10549,
+      "imports": [
+        "__future__",
+        "copy",
+        "infrastructure.data_store",
+        "typing"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+        "blob_sha": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+        "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+        "bytes": 10549,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "1adee020ca74c4efa5323f76b9bcfd7259e8a966"
+    },
+    {
+      "relative_path": "infrastructure/__init__.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/__init__.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+      "source_git_blob_sha1": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+      "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+      "bytes": 68,
+      "imports": [],
+      "role": "PACKAGE_INITIALIZER",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+        "blob_sha": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+        "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+        "bytes": 68,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/__init__.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "647f68415f88ab9dfb514686554c9f9abf4c1cd6"
+    },
+    {
+      "relative_path": "infrastructure/a_share_review_store.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/a_share_review_store.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "source_git_blob_sha1": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+      "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+      "bytes": 10176,
+      "imports": [
+        "__future__",
+        "contextlib",
+        "domains.a_share_review",
+        "infrastructure.data_store",
+        "infrastructure.interprocess_lock",
+        "infrastructure.owned_io",
+        "infrastructure.owned_path",
+        "json",
+        "os",
+        "pathlib",
+        "tempfile",
+        "time",
+        "typing",
+        "uuid"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+        "blob_sha": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+        "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+        "bytes": 10176,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415"
+    },
+    {
+      "relative_path": "infrastructure/data_store.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/data_store.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "source_git_blob_sha1": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "bytes": 10704,
+      "imports": [
+        "__future__",
+        "contextlib",
+        "datetime",
+        "hashlib",
+        "infrastructure.interprocess_lock",
+        "infrastructure.market_time",
+        "infrastructure.owned_io",
+        "infrastructure.trading_safety",
+        "json",
+        "os",
+        "pathlib",
+        "tempfile",
+        "typing"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+        "blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+        "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+        "bytes": 10704,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d"
+    },
+    {
+      "relative_path": "infrastructure/interprocess_lock.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/interprocess_lock.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "source_git_blob_sha1": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "bytes": 7514,
+      "imports": [
+        "__future__",
+        "contextlib",
+        "dataclasses",
+        "errno",
+        "infrastructure.owned_io",
+        "json",
+        "os",
+        "pathlib",
+        "stat",
+        "threading",
+        "time",
+        "typing",
+        "uuid"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+        "blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+        "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+        "bytes": 7514,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/interprocess_lock.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "a97e733725834235fbcc9129639ae198fa8770cd"
+    },
+    {
+      "relative_path": "infrastructure/market_time.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/market_time.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "source_git_blob_sha1": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "bytes": 960,
+      "imports": [
+        "__future__",
+        "datetime",
+        "zoneinfo"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+        "blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+        "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+        "bytes": 960,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0"
+    },
+    {
+      "relative_path": "infrastructure/owned_io.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/owned_io.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "source_git_blob_sha1": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "bytes": 9354,
+      "imports": [
+        "__future__",
+        "contextlib",
+        "fcntl",
+        "math",
+        "os",
+        "pathlib",
+        "stat",
+        "time",
+        "typing",
+        "uuid"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+        "blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+        "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+        "bytes": 9354,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/owned_io.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "1b6666551980c44ebb0b05f133c189909d79c7df"
+    },
+    {
+      "relative_path": "infrastructure/owned_path.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/owned_path.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "source_git_blob_sha1": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "bytes": 2251,
+      "imports": [
+        "__future__",
+        "pathlib",
+        "stat"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+        "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+        "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+        "bytes": 2251,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "2d9873a41c09a05c62975210a13a59bf350a1a5a"
+    },
+    {
+      "relative_path": "infrastructure/trading_safety.py",
+      "target_path": "V5/vendor/m09_a_close_daily/infrastructure/trading_safety.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "source_git_blob_sha1": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "bytes": 2597,
+      "imports": [
+        "__future__",
+        "typing"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+        "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+        "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+        "bytes": 2597,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "5f10cfb51cb3dacd327447475964e0f6867ee89f"
+    },
+    {
+      "relative_path": "ops/build_a_share_close_review.py",
+      "target_path": "V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "source_git_blob_sha1": "d8295efa1d082917522d93f3d9396ee154a0926f",
+      "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+      "bytes": 8360,
+      "imports": [
+        "__future__",
+        "argparse",
+        "domains.a_share_close_model",
+        "domains.a_share_review",
+        "domains.close_review_chain",
+        "hashlib",
+        "infrastructure.a_share_review_store",
+        "infrastructure.data_store",
+        "json",
+        "pathlib",
+        "pyarrow.dataset",
+        "typing"
+      ],
+      "role": "PRODUCER_IMPORT_CLOSURE",
+      "fixed_F_manifest_entry": {
+        "repository": "lexi2016/v4",
+        "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+        "blob_sha": "d8295efa1d082917522d93f3d9396ee154a0926f",
+        "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+        "bytes": 8360,
+        "archive_path": "source/handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+        "access": "READ_ONLY_HISTORICAL_DONOR",
+        "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+        "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+      },
+      "byte_exact_copy_verified": true,
+      "candidate_blob_sha1": "d8295efa1d082917522d93f3d9396ee154a0926f"
+    }
+  ],
+  "candidate_internal_import_closure": {
+    "entry_modules": [
+      "v5_shadow.a_close_daily",
+      "v5_shadow.a_close_daily_sources",
+      "v5_shadow.a_close_daily_worker",
+      "v5_shadow.a_close_daily_api",
+      "v5_shadow.a_close_review"
+    ],
+    "method": "AST import closure plus explicit subprocess worker entry; dynamic donor imports enumerated separately",
+    "modules": [
+      {
+        "module": "v5_shadow",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/__init__.py",
+          "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+          "bytes": 83
+        },
+        "imports": [],
+        "internal_imports": [],
+        "fixed_F_file_sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      },
+      {
+        "module": "v5_shadow.a_close_daily",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/a_close_daily.py",
+          "sha256": "23b4200ffb29e83041b761927c6f285ff84d6b92a3cf8b2fc3e527a9d8ae1d9c",
+          "bytes": 55584
+        },
+        "imports": [
+          "__future__",
+          "copy",
+          "datetime",
+          "hashlib",
+          "importlib.metadata",
+          "io",
+          "json",
+          "math",
+          "os",
+          "pathlib",
+          "pyarrow",
+          "pyarrow.parquet",
+          "re",
+          "stat",
+          "subprocess",
+          "sys",
+          "traceback",
+          "types",
+          "uuid",
+          "v5_shadow",
+          "v5_shadow.a_close_daily_sources",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow",
+          "v5_shadow.a_close_daily_sources",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": null,
+        "byte_equal_fixed_F": null,
+        "origin": "LOCAL_M09_CANDIDATE_NEW_FILE"
+      },
+      {
+        "module": "v5_shadow.a_close_daily_api",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/a_close_daily_api.py",
+          "sha256": "74c4925c4ba5aa0d973ead806fed57cdf3416db08db0c1124b2e5fcf84003c16",
+          "bytes": 17977
+        },
+        "imports": [
+          "__future__",
+          "copy",
+          "pathlib",
+          "typing",
+          "v5_shadow.a_close_daily",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow.a_close_daily",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": null,
+        "byte_equal_fixed_F": null,
+        "origin": "LOCAL_M09_CANDIDATE_NEW_FILE"
+      },
+      {
+        "module": "v5_shadow.a_close_daily_sources",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/a_close_daily_sources.py",
+          "sha256": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+          "bytes": 18587
+        },
+        "imports": [
+          "__future__",
+          "builtins",
+          "contextvars",
+          "copy",
+          "hashlib",
+          "importlib.machinery",
+          "importlib.metadata",
+          "json",
+          "math",
+          "numbers",
+          "os",
+          "pandas",
+          "pathlib",
+          "re",
+          "stat",
+          "sys",
+          "threading",
+          "types",
+          "typing",
+          "uuid"
+        ],
+        "internal_imports": [],
+        "fixed_F_file_sha256": null,
+        "byte_equal_fixed_F": null,
+        "origin": "LOCAL_M09_CANDIDATE_NEW_FILE"
+      },
+      {
+        "module": "v5_shadow.a_close_daily_worker",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/a_close_daily_worker.py",
+          "sha256": "29eaf1e3a912d7bd09c0150dc3a260e371f982479a6afaf42f9b86a84a109611",
+          "bytes": 2489
+        },
+        "imports": [
+          "json",
+          "pandas",
+          "pathlib",
+          "re",
+          "sys",
+          "traceback",
+          "v5_shadow.a_close_daily",
+          "v5_shadow.a_close_daily_sources",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow.a_close_daily",
+          "v5_shadow.a_close_daily_sources",
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": null,
+        "byte_equal_fixed_F": null,
+        "origin": "LOCAL_M09_CANDIDATE_NEW_FILE"
+      },
+      {
+        "module": "v5_shadow.a_close_review",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/a_close_review.py",
+          "sha256": "b288b916f43a41cfc7bd95511ad6decfd537a4cccf64ba5875f13dc04fad1933",
+          "bytes": 8008
+        },
+        "imports": [
+          "datetime",
+          "hashlib",
+          "importlib",
+          "json",
+          "math",
+          "pandas",
+          "pathlib",
+          "re",
+          "subprocess",
+          "sys",
+          "tempfile",
+          "v5_shadow",
+          "v5_shadow.a_preselection",
+          "v5_shadow.composition",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow",
+          "v5_shadow.a_preselection",
+          "v5_shadow.composition",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": "b288b916f43a41cfc7bd95511ad6decfd537a4cccf64ba5875f13dc04fad1933",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      },
+      {
+        "module": "v5_shadow.a_preselection",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/a_preselection.py",
+          "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+          "bytes": 29140
+        },
+        "imports": [
+          "builtins",
+          "contextlib",
+          "csv",
+          "datetime",
+          "errno",
+          "hashlib",
+          "importlib",
+          "importlib.abc",
+          "importlib.util",
+          "io",
+          "json",
+          "os",
+          "pathlib",
+          "stat",
+          "subprocess",
+          "sys",
+          "tempfile",
+          "v5_shadow.composition",
+          "v5_shadow.contracts",
+          "v5_shadow.digests",
+          "v5_shadow.provider_evidence"
+        ],
+        "internal_imports": [
+          "v5_shadow.composition",
+          "v5_shadow.contracts",
+          "v5_shadow.digests",
+          "v5_shadow.provider_evidence"
+        ],
+        "fixed_F_file_sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      },
+      {
+        "module": "v5_shadow.composition",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/composition.py",
+          "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+          "bytes": 5297
+        },
+        "imports": [
+          "dataclasses",
+          "fcntl",
+          "json",
+          "os",
+          "pathlib",
+          "stat",
+          "tempfile",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      },
+      {
+        "module": "v5_shadow.contracts",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/contracts.py",
+          "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+          "bytes": 7256
+        },
+        "imports": [
+          "dataclasses",
+          "datetime",
+          "pathlib",
+          "re",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      },
+      {
+        "module": "v5_shadow.digests",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/digests.py",
+          "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+          "bytes": 425
+        },
+        "imports": [
+          "hashlib",
+          "json"
+        ],
+        "internal_imports": [],
+        "fixed_F_file_sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      },
+      {
+        "module": "v5_shadow.provider_evidence",
+        "candidate": {
+          "path": "after/V5/src/v5_shadow/provider_evidence.py",
+          "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+          "bytes": 6446
+        },
+        "imports": [
+          "base64",
+          "collections.abc",
+          "datetime",
+          "decimal",
+          "math",
+          "numbers",
+          "re",
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "internal_imports": [
+          "v5_shadow.contracts",
+          "v5_shadow.digests"
+        ],
+        "fixed_F_file_sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+        "byte_equal_fixed_F": true,
+        "origin": "EXISTING_FIXED_F_FILE"
+      }
+    ],
+    "unresolved_internal_imports": []
+  },
+  "dynamic_reads": [
+    {
+      "module": "contracts.trading_calendar",
+      "path": "contracts/market_calendar_2026.json",
+      "handling": "PINNED_BYTES_EXPLICIT_PATH_CAPABILITY"
+    },
+    {
+      "module": "ops.build_a_share_close_review",
+      "paths": [
+        "caller_admitted_panel_pointer",
+        "caller_admitted_panel_snapshot"
+      ],
+      "handling": "BEFORE_AFTER_NOFOLLOW_DIGEST_AND_INODE_CHECKS"
+    },
+    {
+      "module": "infrastructure.a_share_review_store",
+      "paths": [
+        "a_share_reviews/{T}.json",
+        "a_share_reviews/receipts/{T}.json",
+        "a_share_reviews/manifest.json"
+      ],
+      "handling": "ORIGINAL_SAFEROOT_RUN_PRIVATE_STORE"
+    }
+  ],
+  "external_imports_original_producer": {
+    "pyarrow.dataset": [
+      {
+        "from": "ops.build_a_share_close_review",
+        "line": 10
+      }
+    ],
+    "pandas": [
+      {
+        "from": "domains.a_share_close_model",
+        "line": 7
+      }
+    ]
+  },
+  "declared_environment": {
+    "pandas": ">=2.3,<3",
+    "pyarrow": ">=21,<25",
+    "python": ">=3.14",
+    "os": "POSIX O_NOFOLLOW directory-relative I/O and fcntl; original fail-closed behavior"
+  },
+  "actual_source_execution_identity": {
+    "schema_version": "v5.m09.a_close_daily_sources.v1",
+    "descriptor_sha256": "7e4f5eb41e0c8f6fc062d9d3f130af47a39eb5ae82a19389c9a5c0788a04901d",
+    "donor_repository": "lexi2016/v4",
+    "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "files": {
+      "contracts/__init__.py": {
+        "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+        "bytes": 55,
+        "git_blob_sha1": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+        "source_path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+        "target_path": "V5/vendor/m09_a_close_daily/contracts/__init__.py"
+      },
+      "contracts/a_share_review.py": {
+        "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+        "bytes": 261,
+        "git_blob_sha1": "af2110155081887e723f329652f7f73feb88d273",
+        "source_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+        "target_path": "V5/vendor/m09_a_close_daily/contracts/a_share_review.py"
+      },
+      "contracts/market_calendar_2026.json": {
+        "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+        "bytes": 3473,
+        "git_blob_sha1": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+        "source_path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+        "target_path": "V5/vendor/m09_a_close_daily/contracts/market_calendar_2026.json"
+      },
+      "contracts/trading_calendar.py": {
+        "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+        "bytes": 10239,
+        "git_blob_sha1": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+        "source_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+        "target_path": "V5/vendor/m09_a_close_daily/contracts/trading_calendar.py"
+      },
+      "domains/a_share_close_model.py": {
+        "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+        "bytes": 12302,
+        "git_blob_sha1": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+        "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+        "target_path": "V5/vendor/m09_a_close_daily/domains/a_share_close_model.py"
+      },
+      "domains/a_share_review.py": {
+        "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+        "bytes": 7038,
+        "git_blob_sha1": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+        "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+        "target_path": "V5/vendor/m09_a_close_daily/domains/a_share_review.py"
+      },
+      "domains/close_review_chain.py": {
+        "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+        "bytes": 10549,
+        "git_blob_sha1": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+        "source_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+        "target_path": "V5/vendor/m09_a_close_daily/domains/close_review_chain.py"
+      },
+      "infrastructure/__init__.py": {
+        "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+        "bytes": 68,
+        "git_blob_sha1": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/__init__.py"
+      },
+      "infrastructure/a_share_review_store.py": {
+        "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+        "bytes": 10176,
+        "git_blob_sha1": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/a_share_review_store.py"
+      },
+      "infrastructure/data_store.py": {
+        "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+        "bytes": 10704,
+        "git_blob_sha1": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/data_store.py"
+      },
+      "infrastructure/interprocess_lock.py": {
+        "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+        "bytes": 7514,
+        "git_blob_sha1": "a97e733725834235fbcc9129639ae198fa8770cd",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/interprocess_lock.py"
+      },
+      "infrastructure/market_time.py": {
+        "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+        "bytes": 960,
+        "git_blob_sha1": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/market_time.py"
+      },
+      "infrastructure/owned_io.py": {
+        "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+        "bytes": 9354,
+        "git_blob_sha1": "1b6666551980c44ebb0b05f133c189909d79c7df",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/owned_io.py"
+      },
+      "infrastructure/owned_path.py": {
+        "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+        "bytes": 2251,
+        "git_blob_sha1": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/owned_path.py"
+      },
+      "infrastructure/trading_safety.py": {
+        "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+        "bytes": 2597,
+        "git_blob_sha1": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+        "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+        "target_path": "V5/vendor/m09_a_close_daily/infrastructure/trading_safety.py"
+      },
+      "ops/build_a_share_close_review.py": {
+        "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+        "bytes": 8360,
+        "git_blob_sha1": "d8295efa1d082917522d93f3d9396ee154a0926f",
+        "source_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+        "target_path": "V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py"
+      }
+    },
+    "loader_sha256": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "runtime_dependencies": {
+      "pandas": "2.2.3",
+      "pyarrow": null,
+      "numpy": "2.3.5",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.4",
+      "tzdata": "2026.4",
+      "six": "1.17.0"
+    },
+    "producer_io_adaptation": "ADMITTED_FRAME_DATASET_ADAPTER"
+  },
+  "prior_verified_dependency_report": {
+    "path": "evidence/sources_dependency_report.json",
+    "sha256": "d24fa857eefa32a44f81bc6868cf251b0821a2f2677e0c3cda3a07486bcd2fe2",
+    "bytes": 26410
+  },
+  "project_declaration": {
+    "path": "after/V5/pyproject.toml",
+    "sha256": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584",
+    "bytes": 262
+  },
+  "attached_reference_locks": [
+    {
+      "path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/uv.lock",
+      "sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c",
+      "bytes": 26522,
+      "role": "MAC_REFERENCE_LOCK_NOT_CLOUD_ENVIRONMENT_LOCK"
+    },
+    {
+      "path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/scheduler/uv.lock",
+      "sha256": "53e998f444eaa6d0e926fda277183b7086c4e53ce5fddb49ce663a2e6d66d91c",
+      "bytes": 26522,
+      "role": "MAC_REFERENCE_LOCK_NOT_CLOUD_ENVIRONMENT_LOCK"
+    }
+  ],
+  "scope_limits_from_original_inventory": [
+    "API/router fragments and video/node runners are read-only references, not complete application closure.",
+    "Dynamic facade name lookup in router _namespace is not resolved by AST import audit.",
+    "No actual Python interpreter/library installation or Mac runtime has been inspected.",
+    "Do not copy the original shared slot/video runner into M09 or acquire missing unrelated providers just to close all reference imports."
+  ],
+  "reference_only_missing_from_original_inventory": [
+    "apps/api/v35_api/_review_router_parts/_namespace.py",
+    "apps/api/v35_api/review_router.py and applicable facade-bound helpers",
+    "domains/intraday_research.py",
+    "domains/runtime_policy.py",
+    "infrastructure/isolated_package_loader.py",
+    "ops/_run_v35_close_review_node_parts/* named by import inventory",
+    "ops/build_bilibili_stockdict.py",
+    "ops/build_video_gap_audit.py",
+    "ops/build_video_ocr_alignment.py",
+    "ops/capture_bilibili_fupan.py",
+    "ops/check_bilibili_fupan.py",
+    "ops/daily_materialize.py"
+  ],
+  "scope_limit_update": "Original static inventory is preserved verbatim. R2/R3 supplied active API/UI reference pieces, but active Mac/API/UI integration remains unexecuted here. Missing reference-only video/orchestration modules are not dependencies of the 12-module original producer closure.",
+  "evidence_status": {
+    "static_presence_and_byte_mapping": "VERIFIED",
+    "private_donor_imports": "EXERCISED",
+    "full_producer_original_store_independent_reader": "EXERCISED_WITH_ADMITTED_FRAME_IO",
+    "real_parquet_decode": "NOT_RUN_PYARROW_ABSENT",
+    "original_donor_pytest_suites": "BLOCKED_PYTEST_ABSENT",
+    "declared_environment_acceptance": "NOT_SATISFIED_PYTHON_3_12_PANDAS_2_2_AND_NO_PYARROW",
+    "mac_runtime": "NOT_RUN"
+  },
+  "io_adaptation": {
+    "algorithm_bytes_changed": false,
+    "description": "Only original producer pyarrow.dataset binding is replaced privately by a checked admitted-frame capability. Default real daily admission must decode actual parquet using real installed pyarrow before this call.",
+    "global_bare_modules_installed": false,
+    "loader_sys_path_mutation": false,
+    "worker_bootstrap": "Separate isolated subprocess adds its own candidate V5/src path to import its private entry; this is distinct from the namespaced donor loader."
+  }
+}

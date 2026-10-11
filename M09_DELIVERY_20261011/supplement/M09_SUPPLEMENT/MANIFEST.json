@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 964,
+      "sha256": "c0743ffba3e347606184d947f32a13390e187ed34b81905b0c748c51484a6c61"
+    },
+    {
+      "path": "SOURCE_SUMMARY.json",
+      "bytes": 3224,
+      "sha256": "863451417b0cc522360dd833802f57fcf4252ad9eb8788b999f7d91bb16a422f"
+    },
+    {
+      "path": "source/apps/web/src/components/review/AshareReviewPanel.vue",
+      "bytes": 25639,
+      "sha256": "f9deaf8d15a3273d3237458b083b847a72f6dcda86824d37731103c13d6672bf"
+    },
+    {
+      "path": "source/apps/web/src/contracts/review.ts",
+      "bytes": 10012,
+      "sha256": "079adf7971e346a8da5d40c49bc3c1fdfb2307aaf6ed70df5ed4d9312699c507"
+    },
+    {
+      "path": "source/apps/web/src/views/ReviewView.vue",
+      "bytes": 3441,
+      "sha256": "cb1f4f19d9b8100d0caf86a5563990a90b627fdb72699b9ccbe499b1e9542c71"
+    }
+  ],
+  "count": 5
+}

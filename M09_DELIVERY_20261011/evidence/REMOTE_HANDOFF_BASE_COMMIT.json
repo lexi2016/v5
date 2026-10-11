@@ -1,0 +1,36 @@
+{
+  "sha": "782bfc9ae91ff9cfe897afffc52aad43b7c1b78c",
+  "node_id": "C_kwDOVEriztoAKDc4MmJmYzlhZTkxZmY5Y2ZlODk3YWZmZmM1MmFhZDQzYjdjMWI3OGM",
+  "url": "https://api.github.com/repos/lexi2016/v5/git/commits/782bfc9ae91ff9cfe897afffc52aad43b7c1b78c",
+  "html_url": "https://github.com/lexi2016/v5/commit/782bfc9ae91ff9cfe897afffc52aad43b7c1b78c",
+  "author": {
+    "name": "lexi2016",
+    "email": "1540990260@qq.com",
+    "date": "2026-10-11T10:14:19Z"
+  },
+  "committer": {
+    "name": "lexi2016",
+    "email": "1540990260@qq.com",
+    "date": "2026-10-11T10:14:19Z"
+  },
+  "tree": {
+    "sha": "aa29ae3a72ee902d3dc471bf6dd09e4ec2ff2fc8",
+    "url": "https://api.github.com/repos/lexi2016/v5/git/trees/aa29ae3a72ee902d3dc471bf6dd09e4ec2ff2fc8"
+  },
+  "message": "handoff(m09): publish exact R3 final source inputs and module task",
+  "parents": [
+    {
+      "sha": "2489ea1e04a26a9e2f318f498ac3f5f8c970fe48",
+      "url": "https://api.github.com/repos/lexi2016/v5/git/commits/2489ea1e04a26a9e2f318f498ac3f5f8c970fe48",
+      "html_url": "https://github.com/lexi2016/v5/commit/2489ea1e04a26a9e2f318f498ac3f5f8c970fe48"
+    }
+  ],
+  "verification": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  }
+}
+

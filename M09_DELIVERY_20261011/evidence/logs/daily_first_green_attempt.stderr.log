@@ -1,0 +1,138 @@
+test_bad_numeric_types_and_quality_are_not_normalized (test_a_close_daily.DailyBehaviorTests.test_bad_numeric_types_and_quality_are_not_normalized) ... ok
+test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation) ... ERROR
+test_configuration_change_creates_a_new_immutable_run (test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run) ... FAIL
+test_duplicate_and_invalid_suffix_rejected (test_a_close_daily.DailyBehaviorTests.test_duplicate_and_invalid_suffix_rejected) ... ok
+test_exact_same_attempt_returns_receipt_without_producing (test_a_close_daily.DailyBehaviorTests.test_exact_same_attempt_returns_receipt_without_producing) ... ok
+test_initialize_refuses_existing_nonempty_root (test_a_close_daily.DailyBehaviorTests.test_initialize_refuses_existing_nonempty_root) ... ok
+test_late_or_naive_source_time_rejected (test_a_close_daily.DailyBehaviorTests.test_late_or_naive_source_time_rejected) ... ok
+test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success) ... ERROR
+test_missing_declared_members_rejected (test_a_close_daily.DailyBehaviorTests.test_missing_declared_members_rejected) ... ok
+test_missing_field_rejected_before_algorithm (test_a_close_daily.DailyBehaviorTests.test_missing_field_rejected_before_algorithm) ... ok
+test_natural_trigger_cannot_claim_historical_day (test_a_close_daily.DailyBehaviorTests.test_natural_trigger_cannot_claim_historical_day) ... ok
+test_nonfinite_numeric_rejected (test_a_close_daily.DailyBehaviorTests.test_nonfinite_numeric_rejected) ... ok
+test_nontrading_or_invalid_date_and_third_slot_rejected (test_a_close_daily.DailyBehaviorTests.test_nontrading_or_invalid_date_and_third_slot_rejected) ... ok
+test_original_writer_failure_does_not_replace_old_run (test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run) ... ERROR
+test_panel_digest_and_manifest_digest_checked (test_a_close_daily.DailyBehaviorTests.test_panel_digest_and_manifest_digest_checked) ... ok
+test_pointer_traversal_and_symlink_fail_closed (test_a_close_daily.DailyBehaviorTests.test_pointer_traversal_and_symlink_fail_closed) ... ok
+test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields) ... FAIL
+test_read_is_exact_date_and_has_no_file_side_effects (test_a_close_daily.DailyBehaviorTests.test_read_is_exact_date_and_has_no_file_side_effects) ... ok
+test_rollback_preserves_both_runs_and_switches_only_this_date (test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date) ... ERROR
+test_source_changed_during_compute_never_publishes (test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes) ... FAIL
+test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected) ... ok
+test_synthetic_json_cannot_be_presented_as_real (test_a_close_daily.DailyBehaviorTests.test_synthetic_json_cannot_be_presented_as_real) ... ok
+test_tampered_payload_is_rejected_by_independent_reader (test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader) ... ERROR
+test_top_subset_cannot_claim_full_market (test_a_close_daily.DailyBehaviorTests.test_top_subset_cannot_claim_full_market) ... ok
+test_two_concurrent_attempts_share_one_calculation (test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation) ... FAIL
+test_two_slots_reuse_one_calculation_and_keep_two_receipts (test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts) ... FAIL
+test_unmarked_and_source_overlapping_roots_are_rejected (test_a_close_daily.DailyBehaviorTests.test_unmarked_and_source_overlapping_roots_are_rejected) ... ok
+test_unverified_or_unknown_source_is_not_promoted (test_a_close_daily.DailyBehaviorTests.test_unverified_or_unknown_source_is_not_promoted) ... ok
+test_wrong_date_type_or_day_rejected (test_a_close_daily.DailyBehaviorTests.test_wrong_date_type_or_day_rejected) ... ok
+test_complete_daily_entry_is_present (test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present) ... ok
+
+======================================================================
+ERROR: test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 158, in test_cas_conflict_keeps_served_generation
+    self.assertEqual(self.daily.read_a_close_daily(self.root,'20261009')['identity']['generation_sha256'],first['generation_sha256'])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 138, in test_later_failure_keeps_previous_success
+    self.assertEqual(current['identity']['model_run_id'],first['run_id'])
+                     ~~~~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_original_writer_failure_does_not_replace_old_run (test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 153, in test_original_writer_failure_does_not_replace_old_run
+    self.assertEqual(self.daily.read_a_close_daily(self.root,'20261009')['identity']['model_run_id'],first['run_id'])
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+TypeError: 'NoneType' object is not subscriptable
+
+======================================================================
+ERROR: test_rollback_preserves_both_runs_and_switches_only_this_date (test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 164, in test_rollback_preserves_both_runs_and_switches_only_this_date
+    out=self.daily.rollback_a_close_daily(self.root,'20261009',first['generation_sha256'],second['generation_sha256'],'independent engineering rollback')
+                                                               ~~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'generation_sha256'
+
+======================================================================
+ERROR: test_tampered_payload_is_rejected_by_independent_reader (test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 177, in test_tampered_payload_is_rejected_by_independent_reader
+    obj=json.loads(p.read_bytes());obj['market_regime']='tampered';p.write_bytes(canonical_bytes(obj))
+                   ^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/m09-engineering-pjyz_pcd/m09/runs/m09-37d51eba66ac12509b2c367065563aee-4195328da52c/product/a_share_reviews/20261009.json'
+
+======================================================================
+FAIL: test_configuration_change_creates_a_new_immutable_run (test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 131, in test_configuration_change_creates_a_new_immutable_run
+    self.assertEqual(second['status'],'SUCCEEDED',second);self.assertNotEqual(first['run_id'],second['run_id'])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'FAILED' != 'SUCCEEDED'
+- FAILED
++ SUCCEEDED
+ : {'schema_version': 'v5.m09.trigger_receipt.v1', 'trade_date': '20261009', 'slot': '17:10', 'cutoff': '2026-10-09T17:10:00+08:00', 'trigger': {'trade_date': '20261009', 'slot': '17:10', 'job_id': 'a_share_close_review_1710', 'attempt_id': 'config', 'execution_kind': 'ENGINEERING', 'triggered_at': '2026-10-11T10:36:38.152511+00:00'}, 'trigger_sha256': '5dbc51922e8b05d39b8a0b9223c1a32cf11f6d3c09e75501617322951504972c', 'request_sha256': 'c5c5ec12b9cef26136bf56b25107c4c925a576c0d90449c342467b41f7e81085', 'started_at': '2026-10-11T10:36:38.162768+00:00', 'natural_verified': False, 'safety': {'research_only': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}, 'status': 'FAILED', 'reason': 'ValueError:M09_ADMITTED_FRAME_SCHEMA', 'run_id': 'm09-7cfb6984a2f78585ce67315f9ada90e1-47ed28c52f2b', 'previous_success_generation_sha256': None, 'issues': [], 'finished_at': '2026-10-11T10:36:38.196522+00:00'}
+
+======================================================================
+FAIL: test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 92, in test_price_chain_writer_reader_preserves_native_fields
+    result=self.run_daily(); self.assertEqual(result['status'],'SUCCEEDED', result)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'FAILED' != 'SUCCEEDED'
+- FAILED
++ SUCCEEDED
+ : {'schema_version': 'v5.m09.trigger_receipt.v1', 'trade_date': '20261009', 'slot': '16:05', 'cutoff': '2026-10-09T16:05:00+08:00', 'trigger': {'trade_date': '20261009', 'slot': '16:05', 'job_id': 'a_share_close_review_1605', 'attempt_id': 'first', 'execution_kind': 'ENGINEERING', 'triggered_at': '2026-10-11T10:36:38.562416+00:00'}, 'trigger_sha256': '347ea11ba3c31285e5a41ef0b06e2d96a0d8a736d891007a5244671d37a62621', 'request_sha256': '38df16bbe9ccc9b508b904308574e0890a8aa7dd10ef5a2fc550dc8aed8f4169', 'started_at': '2026-10-11T10:36:38.568799+00:00', 'natural_verified': False, 'safety': {'research_only': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}, 'status': 'FAILED', 'reason': 'ValueError:M09_ADMITTED_FRAME_SCHEMA', 'run_id': 'm09-37d51eba66ac12509b2c367065563aee-46f2aa1b8e2a', 'previous_success_generation_sha256': None, 'issues': [], 'finished_at': '2026-10-11T10:36:38.599423+00:00'}
+
+======================================================================
+FAIL: test_source_changed_during_compute_never_publishes (test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 146, in test_source_changed_during_compute_never_publishes
+    self.assertIn('CHANGED',result['reason'])
+AssertionError: 'CHANGED' not found in 'ValueError:M09_ADMITTED_FRAME_SCHEMA'
+
+======================================================================
+FAIL: test_two_concurrent_attempts_share_one_calculation (test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 123, in test_two_concurrent_attempts_share_one_calculation
+    self.assertTrue(all(x['status']=='SUCCEEDED' for x in results),results)
+AssertionError: False is not true : [{'schema_version': 'v5.m09.trigger_receipt.v1', 'trade_date': '20261009', 'slot': '16:05', 'cutoff': '2026-10-09T16:05:00+08:00', 'trigger': {'trade_date': '20261009', 'slot': '16:05', 'job_id': 'a_share_close_review_1605', 'attempt_id': 'parallel-1', 'execution_kind': 'ENGINEERING', 'triggered_at': '2026-10-11T10:36:38.875336+00:00'}, 'trigger_sha256': '26294bab5ca7b87ecdd68f28a8855819f4af943de49f324d189c88aa85b76f45', 'request_sha256': '6710f766d90b4d4f1d06fa0effcee880fad25edaae7e8792878a606b9fe253db', 'started_at': '2026-10-11T10:36:38.944928+00:00', 'natural_verified': False, 'safety': {'research_only': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}, 'status': 'FAILED', 'reason': 'ValueError:M09_ADMITTED_FRAME_SCHEMA', 'run_id': 'm09-37d51eba66ac12509b2c367065563aee-835202f726cc', 'previous_success_generation_sha256': None, 'issues': [], 'finished_at': '2026-10-11T10:36:38.978955+00:00'}, {'schema_version': 'v5.m09.trigger_receipt.v1', 'trade_date': '20261009', 'slot': '16:05', 'cutoff': '2026-10-09T16:05:00+08:00', 'trigger': {'trade_date': '20261009', 'slot': '16:05', 'job_id': 'a_share_close_review_1605', 'attempt_id': 'parallel-2', 'execution_kind': 'ENGINEERING', 'triggered_at': '2026-10-11T10:36:38.875383+00:00'}, 'trigger_sha256': 'd2469c7e5517ae28118ddc7c501d310cd5b29b0e04be034197283298a664c290', 'request_sha256': '67b599a48d66b90c16576ed208a314c00f01beabdc0a4b142ef5bc4b9cff7c79', 'started_at': '2026-10-11T10:36:38.902076+00:00', 'natural_verified': False, 'safety': {'research_only': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}, 'status': 'FAILED', 'reason': 'ValueError:M09_ADMITTED_FRAME_SCHEMA', 'run_id': 'm09-37d51eba66ac12509b2c367065563aee-372c68542c21', 'previous_success_generation_sha256': None, 'issues': [], 'finished_at': '2026-10-11T10:36:38.935525+00:00'}]
+
+======================================================================
+FAIL: test_two_slots_reuse_one_calculation_and_keep_two_receipts (test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 108, in test_two_slots_reuse_one_calculation_and_keep_two_receipts
+    self.assertEqual(first['status'],'SUCCEEDED',first);self.assertTrue(second['reused'],second)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'FAILED' != 'SUCCEEDED'
+- FAILED
++ SUCCEEDED
+ : {'schema_version': 'v5.m09.trigger_receipt.v1', 'trade_date': '20261009', 'slot': '16:05', 'cutoff': '2026-10-09T16:05:00+08:00', 'trigger': {'trade_date': '20261009', 'slot': '16:05', 'job_id': 'a_share_close_review_1605', 'attempt_id': 'first', 'execution_kind': 'ENGINEERING', 'triggered_at': '2026-10-11T10:36:38.986972+00:00'}, 'trigger_sha256': 'dec76b35a584803973941af69816028e5581c1132e6a1d7ccdb40f1a3ce14836', 'request_sha256': '341af32073993b219a322e1defd01cb9195b2cd3092b5d1c604c5ab1d24c6ffa', 'started_at': '2026-10-11T10:36:38.992548+00:00', 'natural_verified': False, 'safety': {'research_only': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}, 'status': 'FAILED', 'reason': 'ValueError:M09_ADMITTED_FRAME_SCHEMA', 'run_id': 'm09-37d51eba66ac12509b2c367065563aee-bea2e9213137', 'previous_success_generation_sha256': None, 'issues': [], 'finished_at': '2026-10-11T10:36:39.022278+00:00'}
+
+----------------------------------------------------------------------
+Ran 30 tests in 1.572s
+
+FAILED (failures=5, errors=5)

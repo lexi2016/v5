@@ -1,0 +1,30 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_api_raw_digest.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T10:55:18.978707+00:00",
+  "end_utc": "2026-10-11T10:55:20.020516+00:00",
+  "start_shanghai": "2026-10-11T18:55:18.978707+08:00",
+  "end_shanghai": "2026-10-11T18:55:20.020516+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "independent_final_api_green.stdout.log",
+    "bytes": 169,
+    "sha256": "5cd88277974edc27e27390efbc0d5180bc2322e75275d0b9b290e9f2ef27238e"
+  },
+  "stderr": {
+    "path": "independent_final_api_green.stderr.log",
+    "bytes": 221,
+    "sha256": "3a2c0f8ac5dc45e11a8ea8a5a3c591ff6846846dfb9b137efc3ea8b187b32e18"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/tools/assemble_complete_delivery.py",
+    "--work",
+    "/workspace/scratch/a5458cb06b78/m09_work"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": null,
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T11:12:48.988009+00:00",
+  "end_utc": "2026-10-11T11:12:49.281953+00:00",
+  "start_shanghai": "2026-10-11T19:12:48.988009+08:00",
+  "end_shanghai": "2026-10-11T19:12:49.281953+08:00",
+  "exit_code": 1,
+  "stdout": {
+    "path": "complete_delivery_assembly.stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stderr": {
+    "path": "complete_delivery_assembly.stderr.log",
+    "bytes": 1460,
+    "sha256": "40344e88a37453ba413018d234b86c40826534c75eb5bad0ecd8b37d6523f86b"
+  }
+}

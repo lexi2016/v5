@@ -1,0 +1,6 @@
+test_api_rejects_unbound_raw_review_digest (__main__.RawDigestLinkReview.test_api_rejects_unbound_raw_review_digest) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.885s
+
+OK

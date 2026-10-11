@@ -1,0 +1,30 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_preimported_helper_identity.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T10:56:21.953132+00:00",
+  "end_utc": "2026-10-11T10:56:23.681348+00:00",
+  "start_shanghai": "2026-10-11T18:56:21.953132+08:00",
+  "end_shanghai": "2026-10-11T18:56:23.681348+08:00",
+  "exit_code": 1,
+  "stdout": {
+    "path": "independent_preimported_helper_red.stdout.log",
+    "bytes": 302,
+    "sha256": "d12947903d591fd9b2b5d8a0fb10c6ec362f7b076d5ccaed3fc91c9c9869482a"
+  },
+  "stderr": {
+    "path": "independent_preimported_helper_red.stderr.log",
+    "bytes": 1079,
+    "sha256": "034b377420dbddec7ce925ade69857d1b4425351d2d771497a2aaf9a966fc2c9"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/build_source_and_parity_docs.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": null,
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T11:07:13.484641+00:00",
+  "end_utc": "2026-10-11T11:07:17.670235+00:00",
+  "start_shanghai": "2026-10-11T19:07:13.484641+08:00",
+  "end_shanghai": "2026-10-11T19:07:17.670235+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "source_delivery_docs.stdout.log",
+    "bytes": 2775,
+    "sha256": "16a552cbb83e5dc9cb74de47503c03ed31b810abd7bc35500d80b816c4360aa7"
+  },
+  "stderr": {
+    "path": "source_delivery_docs.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,149 @@
+test_calendar_uses_original_2026_contract_and_refuses_future_year (test_a_close_daily_sources.SourceTests.test_calendar_uses_original_2026_contract_and_refuses_future_year) ... FAIL
+test_capsule_mutation_cannot_bypass_verification_through_module_cache (test_a_close_daily_sources.SourceTests.test_capsule_mutation_cannot_bypass_verification_through_module_cache) ... FAIL
+test_cross_date_frame_is_rejected_before_silent_original_filter (test_a_close_daily_sources.SourceTests.test_cross_date_frame_is_rejected_before_silent_original_filter) ... FAIL
+test_frozen_safe_root_rejects_symlink_destination (test_a_close_daily_sources.SourceTests.test_frozen_safe_root_rejects_symlink_destination) ... FAIL
+test_full_original_product_writer_and_independent_reader_keep_all_boundaries (test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries) ... FAIL
+test_identity_covers_original_producer_store_calendar_and_dynamic_json (test_a_close_daily_sources.SourceTests.test_identity_covers_original_producer_store_calendar_and_dynamic_json) ... FAIL
+test_loading_does_not_occupy_or_replace_bare_application_packages (test_a_close_daily_sources.SourceTests.test_loading_does_not_occupy_or_replace_bare_application_packages) ... FAIL
+test_original_reader_rejects_modified_payload (test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload) ... FAIL
+test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption (test_a_close_daily_sources.SourceTests.test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption) ... FAIL
+test_symlink_pointer_cannot_redirect_reads (test_a_close_daily_sources.SourceTests.test_symlink_pointer_cannot_redirect_reads) ... FAIL
+test_unknown_context_argument_cannot_reach_producer (test_a_close_daily_sources.SourceTests.test_unknown_context_argument_cannot_reach_producer) ... FAIL
+test_wrong_panel_sha_is_rejected_before_any_store_write (test_a_close_daily_sources.SourceTests.test_wrong_panel_sha_is_rejected_before_any_store_write) ... FAIL
+
+======================================================================
+FAIL: test_calendar_uses_original_2026_contract_and_refuses_future_year (test_a_close_daily_sources.SourceTests.test_calendar_uses_original_2026_contract_and_refuses_future_year)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 87, in test_calendar_uses_original_2026_contract_and_refuses_future_year
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_capsule_mutation_cannot_bypass_verification_through_module_cache (test_a_close_daily_sources.SourceTests.test_capsule_mutation_cannot_bypass_verification_through_module_cache)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 166, in test_capsule_mutation_cannot_bypass_verification_through_module_cache
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_cross_date_frame_is_rejected_before_silent_original_filter (test_a_close_daily_sources.SourceTests.test_cross_date_frame_is_rejected_before_silent_original_filter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 139, in test_cross_date_frame_is_rejected_before_silent_original_filter
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_frozen_safe_root_rejects_symlink_destination (test_a_close_daily_sources.SourceTests.test_frozen_safe_root_rejects_symlink_destination)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 190, in test_frozen_safe_root_rejects_symlink_destination
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_full_original_product_writer_and_independent_reader_keep_all_boundaries (test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 93, in test_full_original_product_writer_and_independent_reader_keep_all_boundaries
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_identity_covers_original_producer_store_calendar_and_dynamic_json (test_a_close_daily_sources.SourceTests.test_identity_covers_original_producer_store_calendar_and_dynamic_json)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 66, in test_identity_covers_original_producer_store_calendar_and_dynamic_json
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_loading_does_not_occupy_or_replace_bare_application_packages (test_a_close_daily_sources.SourceTests.test_loading_does_not_occupy_or_replace_bare_application_packages)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 76, in test_loading_does_not_occupy_or_replace_bare_application_packages
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_original_reader_rejects_modified_payload (test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 178, in test_original_reader_rejects_modified_payload
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption (test_a_close_daily_sources.SourceTests.test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 114, in test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_symlink_pointer_cannot_redirect_reads (test_a_close_daily_sources.SourceTests.test_symlink_pointer_cannot_redirect_reads)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 155, in test_symlink_pointer_cannot_redirect_reads
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_unknown_context_argument_cannot_reach_producer (test_a_close_daily_sources.SourceTests.test_unknown_context_argument_cannot_reach_producer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 149, in test_unknown_context_argument_cannot_reach_producer
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+======================================================================
+FAIL: test_wrong_panel_sha_is_rejected_before_any_store_write (test_a_close_daily_sources.SourceTests.test_wrong_panel_sha_is_rejected_before_any_store_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 131, in test_wrong_panel_sha_is_rejected_before_any_store_write
+    sources = self.sources()
+              ^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py", line 41, in sources
+    self.assertIsNotNone(importlib.util.find_spec(name), "M09 source adapter is not implemented")
+AssertionError: unexpectedly None : M09 source adapter is not implemented
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.004s
+
+FAILED (failures=12)

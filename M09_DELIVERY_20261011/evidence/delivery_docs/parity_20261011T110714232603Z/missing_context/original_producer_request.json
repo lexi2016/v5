@@ -1,0 +1,79 @@
+{
+  "donor_root": "/workspace/scratch/a5458cb06b78/m09_work/original/source/handoff/v4-running-source-20261005/canonical",
+  "source_files": {
+    "contracts/__init__.py": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+    "contracts/a_share_review.py": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+    "contracts/market_calendar_2026.json": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "contracts/trading_calendar.py": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+    "domains/a_share_close_model.py": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+    "domains/a_share_review.py": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+    "domains/close_review_chain.py": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+    "infrastructure/__init__.py": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+    "infrastructure/a_share_review_store.py": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+    "infrastructure/data_store.py": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+    "infrastructure/interprocess_lock.py": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+    "infrastructure/market_time.py": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+    "infrastructure/owned_io.py": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+    "infrastructure/owned_path.py": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+    "infrastructure/trading_safety.py": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+    "ops/build_a_share_close_review.py": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53"
+  },
+  "rows": [
+    {
+      "trade_date": "20261009",
+      "ts_code": "600001.SH",
+      "name": "Alpha",
+      "pct_chg": 4.0,
+      "amount": 500000000.0,
+      "bar_close_pos": 0.9,
+      "tdx_industry_code": "A",
+      "tdx_industry_name": "Resilient"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "000002.SZ",
+      "name": "Beta",
+      "pct_chg": 2.0,
+      "amount": 800000000.0,
+      "bar_close_pos": 0.8,
+      "tdx_industry_code": "A",
+      "tdx_industry_name": "Resilient"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "600003.SH",
+      "name": "Gamma",
+      "pct_chg": -10.0,
+      "amount": 400000000.0,
+      "bar_close_pos": 0.1,
+      "tdx_industry_code": "B",
+      "tdx_industry_name": "Risk"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "000004.SZ",
+      "name": "Delta",
+      "pct_chg": -6.0,
+      "amount": 200000000.0,
+      "bar_close_pos": 0.2,
+      "tdx_industry_code": "B",
+      "tdx_industry_name": "Risk"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "830005.BJ",
+      "name": "Epsilon",
+      "pct_chg": 0.0,
+      "amount": 100000000.0,
+      "bar_close_pos": 0.5,
+      "tdx_industry_code": "C",
+      "tdx_industry_name": "Flat"
+    }
+  ],
+  "trade_date": "20261009",
+  "panel_path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/engineering_panel.json",
+  "panel_pointer": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/panel_pointer.txt",
+  "run_root": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/original",
+  "run_id": "m09-source-parity-missing_context",
+  "context": {}
+}

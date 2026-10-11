@@ -1,0 +1,42 @@
+{
+  "phase": "GREEN_NATIVE_CHAIN_AND_RESEARCH_CONTRACT",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_a_close_daily_api.py",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after/V5",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_at_utc": "2026-10-11T10:40:52.025557+00:00",
+  "finished_at_utc": "2026-10-11T10:40:52.207495+00:00",
+  "started_at_shanghai": "2026-10-11T18:40:52.025557+08:00",
+  "finished_at_shanghai": "2026-10-11T18:40:52.207495+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_native_contract_green.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_native_contract_green.stderr.log",
+      "sha256": "75ac73f39bc2bf5673215570a48124a465c1b89e615828b700ce42f9f98d2ef5",
+      "bytes": 4583
+    }
+  },
+  "candidate_sha256": {
+    "src/v5_shadow/a_close_daily_api.py": "9097b3661b85c458c7f839f0f52c27edf63244f4726537c6d858be0aa0a5648b",
+    "tests/test_a_close_daily_api.py": "000040dbef99721bab39e9d20d3cbde622d86b4c9221fabb90fd6e49414b832e"
+  }
+}

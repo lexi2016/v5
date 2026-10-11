@@ -1,0 +1,154 @@
+{
+  "schema_version": "v5.m09.algorithm_parity.delivery.v1",
+  "generated_at_utc": "2026-10-11T11:07:14.232603+00:00",
+  "status": "PASS_SYNTHETIC_ADMITTED_FRAME_FULL_CHAIN",
+  "fixed_donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "original_model_sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+  "original_producer_sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+  "candidate_source_loader_sha256": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+  "candidate_donor_capsule_descriptor_sha256": "7e4f5eb41e0c8f6fc062d9d3f130af47a39eb5ae82a19389c9a5c0788a04901d",
+  "candidate_python_files": {
+    "V5/src/v5_shadow/__init__.py": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+    "V5/src/v5_shadow/a_close_daily.py": "23b4200ffb29e83041b761927c6f285ff84d6b92a3cf8b2fc3e527a9d8ae1d9c",
+    "V5/src/v5_shadow/a_close_daily_api.py": "74c4925c4ba5aa0d973ead806fed57cdf3416db08db0c1124b2e5fcf84003c16",
+    "V5/src/v5_shadow/a_close_daily_sources.py": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+    "V5/src/v5_shadow/a_close_daily_worker.py": "29eaf1e3a912d7bd09c0150dc3a260e371f982479a6afaf42f9b86a84a109611",
+    "V5/src/v5_shadow/a_close_review.py": "b288b916f43a41cfc7bd95511ad6decfd537a4cccf64ba5875f13dc04fad1933",
+    "V5/src/v5_shadow/a_preselection.py": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+    "V5/src/v5_shadow/api_gateway.py": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+    "V5/src/v5_shadow/composition.py": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+    "V5/src/v5_shadow/contracts.py": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+    "V5/src/v5_shadow/daily_close_plan.py": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6",
+    "V5/src/v5_shadow/daily_dispatch.py": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+    "V5/src/v5_shadow/digests.py": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+    "V5/src/v5_shadow/module_api.py": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+    "V5/src/v5_shadow/module_artifacts.py": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+    "V5/src/v5_shadow/provider_evidence.py": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+    "V5/src/v5_shadow/run_ledger.py": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd",
+    "V5/tests/test_a_close_daily.py": "c8d83504465efba96543db2363e79b74903e3af76bb99ef34f786bd807eb045a",
+    "V5/tests/test_a_close_daily_api.py": "bfa1476b2f9de7ee2c5733d84a436ddee25784c33e2c90083f64b41ce850e777",
+    "V5/tests/test_a_close_daily_sources.py": "24a63dc3186d6fe681910a064dfd9861bc7c3bcba42b879638618de17e351804",
+    "V5/tests/test_a_close_review.py": "fe331baa493299720380d6e8332947aa635b0e52d3b24a2b291bfdd20ca8c1f8",
+    "V5/tests/test_daily_close_plan.py": "23f0ff9eb5938d96eb46611064d1b74861f14194507c6a7b859562ef67cc9f6e",
+    "V5/vendor/a_close_baseline/contracts/trading_calendar.py": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+    "V5/vendor/a_close_baseline/domains/a_share_close_model.py": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+    "V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+    "V5/vendor/m09_a_close_daily/contracts/__init__.py": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+    "V5/vendor/m09_a_close_daily/contracts/a_share_review.py": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+    "V5/vendor/m09_a_close_daily/contracts/trading_calendar.py": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+    "V5/vendor/m09_a_close_daily/domains/a_share_close_model.py": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+    "V5/vendor/m09_a_close_daily/domains/a_share_review.py": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+    "V5/vendor/m09_a_close_daily/domains/close_review_chain.py": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+    "V5/vendor/m09_a_close_daily/infrastructure/__init__.py": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+    "V5/vendor/m09_a_close_daily/infrastructure/a_share_review_store.py": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+    "V5/vendor/m09_a_close_daily/infrastructure/data_store.py": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+    "V5/vendor/m09_a_close_daily/infrastructure/interprocess_lock.py": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+    "V5/vendor/m09_a_close_daily/infrastructure/market_time.py": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+    "V5/vendor/m09_a_close_daily/infrastructure/owned_io.py": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+    "V5/vendor/m09_a_close_daily/infrastructure/owned_path.py": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+    "V5/vendor/m09_a_close_daily/infrastructure/trading_safety.py": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+    "V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53"
+  },
+  "comparison": {
+    "field_exclusions": [],
+    "normalization": null,
+    "scalar_types": "EXACT",
+    "scalar_values": "EXACT",
+    "objects": "COMPLETE_KEY_SETS_AND_VALUES; JSON object insertion order is not semantic",
+    "lists": "ALL_LENGTHS_AND_POSITIONS_EXACT",
+    "run_id": "IDENTICAL_ON_BOTH_SIDES; NO_METADATA_EXCLUSION"
+  },
+  "successful_cases": [
+    {
+      "case": "missing_context",
+      "status": "PASS",
+      "detail": {
+        "path": "evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/detail.json",
+        "sha256": "46ad282f52c6b6284094877f2567474e0763ed223746365b581f3e1159b629ff",
+        "bytes": 339422
+      },
+      "checks": {
+        "full_producer_result": true,
+        "independent_store_reader": true,
+        "prepared_input_rows_and_all_industries": true
+      },
+      "field_inventory_count": 1239,
+      "differences": [],
+      "breadth_conservation": {
+        "up": 2,
+        "down": 2,
+        "flat": 1,
+        "admitted_rows": 5,
+        "sum_equals_admitted_rows": true
+      },
+      "close_chain_status": "PARTIAL_REVIEW",
+      "model_video_consumption": false
+    },
+    {
+      "case": "ready_context_model_not_consumed",
+      "status": "PASS",
+      "detail": {
+        "path": "evidence/delivery_docs/parity_20261011T110714232603Z/ready_context_model_not_consumed/detail.json",
+        "sha256": "265c2942816649cb1ca1f9bbd36c19c96bfb75fe55ca4bea241600d7ee95945c",
+        "bytes": 357345
+      },
+      "checks": {
+        "full_producer_result": true,
+        "independent_store_reader": true,
+        "prepared_input_rows_and_all_industries": true
+      },
+      "field_inventory_count": 1301,
+      "differences": [],
+      "breadth_conservation": {
+        "up": 2,
+        "down": 2,
+        "flat": 1,
+        "admitted_rows": 5,
+        "sum_equals_admitted_rows": true
+      },
+      "close_chain_status": "PARTIAL_REVIEW",
+      "model_video_consumption": false
+    }
+  ],
+  "original_exception_case": {
+    "status": "PASS",
+    "detail": {
+      "path": "evidence/delivery_docs/parity_20261011T110714232603Z/cross_date_video_original_exception/detail.json",
+      "sha256": "082f75f922d3138b31529ced023f462b9d785e5abcbe0fcac2666484e96fa819",
+      "bytes": 5774
+    },
+    "same_exception_type_and_message": true,
+    "original_trace_retained": true,
+    "candidate_trace_retained": true,
+    "product_created": false
+  },
+  "full_field_scope": [
+    "all same-day declared stock codes and row order before/after original preparation",
+    "up/down/flat conservation equals admitted input count",
+    "all industry metrics plus selected board order/ranks",
+    "role membership/order/amounts/pct/explanations/evidence/triggers/invalidation; original has no numeric score field",
+    "scenario 0.12/0.28/0.60 fixed constants and all trigger/invalidation text",
+    "market_regime/risk_tone",
+    "empty core_stocks and model core pool; observation/conditional/risk rows never promoted",
+    "quality_gate/source_role/source_evidence/source_sha256",
+    "all cannot_confirm/refusal/unknown/PIT/learning/generalization/video/LLM safety fields",
+    "all close_chain tasks/order/status/reasons/evidence",
+    "original writer publication and complete independent reader payloads"
+  ],
+  "probabilities_calibrated": false,
+  "video_semantically_consumed": false,
+  "legacy_model_as_of": "2026-10-09T15:30:00+08:00; preserved original model label, not actual availability or strict PIT proof",
+  "prior_matching_parity_artifact": {
+    "path": "evidence/sources_full_parity.stdout.json",
+    "sha256": "c5a048483f3ae525950b43a5db36e120f9b7b703fea17643dfd866014dafc065",
+    "bytes": 60314
+  },
+  "qualified_limits": {
+    "input_kind": "SYNTHETIC_ENGINEERING_ONLY",
+    "raw_parquet_decode_and_decoder_parity": "NOT_RUN_PYARROW_ABSENT",
+    "real_historical_original_model_exception_or_product": "NOT_RUN; no cleaning or substitute rows were used",
+    "declared_python_pandas_pyarrow_environment": "NOT_SATISFIED",
+    "full_natural_or_active_UI_acceptance": "NOT_RUN",
+    "coverage": "Two complete valid-input product cases and one original rejection case; no claim of exhaustive behavior over all possible market inputs"
+  }
+}

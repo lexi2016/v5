@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_api_raw_digest.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_utc": "2026-10-11T10:50:37.791438+00:00",
+  "end_utc": "2026-10-11T10:50:38.923042+00:00",
+  "start_shanghai": "2026-10-11T18:50:37.791438+08:00",
+  "end_shanghai": "2026-10-11T18:50:38.923042+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "independent_api_digest_green.stdout.log",
+    "bytes": 169,
+    "sha256": "9684fc3c7a497af38669d25763e713dc64882bf527e35083d102b088e22e22ce"
+  },
+  "stderr": {
+    "path": "independent_api_digest_green.stderr.log",
+    "bytes": 221,
+    "sha256": "d34a5650a9d902322b846230312e184ab67599350463f15e02b2f88a3885c468"
+  }
+}

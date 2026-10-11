@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-I",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily_sources.py",
+    "--original-producer-worker"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work",
+  "started_at_utc": "2026-10-11T11:07:15.629064+00:00",
+  "ended_at_utc": "2026-10-11T11:07:16.127771+00:00",
+  "started_at_shanghai": "2026-10-11T19:07:15.629064+08:00",
+  "ended_at_shanghai": "2026-10-11T19:07:16.127771+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/ready_context_model_not_consumed/original_producer.stdout.json",
+    "sha256": "c746bec6f6cfecc6318dcbf36870f9d44bf0a17b88f8e621d987e4cfebdad98f",
+    "bytes": 39274
+  },
+  "stderr": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/ready_context_model_not_consumed/original_producer.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "input_canonical_sha256": "9a2d90b523eb5e0a6a9c06a70123d0b496ea2bc39629f98dc8fd01df09d9f644"
+}

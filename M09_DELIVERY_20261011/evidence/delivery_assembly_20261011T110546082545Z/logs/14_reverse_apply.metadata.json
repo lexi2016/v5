@@ -1,0 +1,27 @@
+{
+  "command_name": "14_reverse_apply",
+  "argv": [
+    "git",
+    "apply",
+    "/workspace/scratch/a5458cb06b78/m09_work/delivery/reverse.patch"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_assembly_20261011T110546082545Z/apply_verification_tree",
+  "environment_overrides": {},
+  "started_at_utc": "2026-10-11T11:05:46.327606+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.335282+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.327606+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.335282+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "14_reverse_apply.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stderr": {
+      "filename": "14_reverse_apply.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

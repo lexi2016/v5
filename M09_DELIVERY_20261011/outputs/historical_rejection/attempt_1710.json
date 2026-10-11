@@ -1,0 +1,63 @@
+{
+  "cutoff": "2026-10-09T17:10:00+08:00",
+  "finished_at": "2026-10-11T11:02:03.412148+00:00",
+  "issues": [
+    {
+      "code": "SOURCE_IDENTITY_MISSING"
+    },
+    {
+      "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+      "detail": "CONTRACT_TIME_INVALID"
+    },
+    {
+      "code": "MEMBERSHIP_IDENTITY_MISSING"
+    },
+    {
+      "code": "MEMBERSHIP_TIME_INVALID_OR_UNKNOWN",
+      "detail": "CONTRACT_TIME_INVALID"
+    },
+    {
+      "authority_status": "REBUILD_REQUIRED",
+      "code": "SOURCE_AUTHORITY_NOT_READY",
+      "status": "PARTIAL"
+    },
+    {
+      "code": "SOURCE_COVERAGE_INCOMPLETE",
+      "coverage_rate": 0.8858620689655172
+    },
+    {
+      "code": "SOURCE_RECEIPT_NOT_BOUND",
+      "detail": "OWNED_FILE_TOO_LARGE"
+    },
+    {
+      "code": "PANEL_DECODE_OR_FORMAT_FAILED",
+      "detail": "PARQUET_ENGINE_UNAVAILABLE:No module named 'pyarrow'"
+    }
+  ],
+  "natural_verified": false,
+  "previous_success_generation_sha256": null,
+  "publication_recovery_status": "UNCHANGED",
+  "reason": "_InputError:M09_INPUT_NOT_ADMITTED:SOURCE_IDENTITY_MISSING,SOURCE_TIME_INVALID_OR_UNKNOWN,MEMBERSHIP_IDENTITY_MISSING,MEMBERSHIP_TIME_INVALID_OR_UNKNOWN,SOURCE_AUTHORITY_NOT_READY,SOURCE_COVERAGE_INCOMPLETE,SOURCE_RECEIPT_NOT_BOUND,PANEL_DECODE_OR_FORMAT_FAILED",
+  "request_sha256": "adbdfc313bbbece71618b9d452e62e4adc0f0104f8cbb10b99a87736c09858e8",
+  "run_id": null,
+  "safety": {
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "production_allowed": false,
+    "research_only": true
+  },
+  "schema_version": "v5.m09.trigger_receipt.v1",
+  "slot": "17:10",
+  "started_at": "2026-10-11T11:02:03.402249+00:00",
+  "status": "FAILED",
+  "trade_date": "20261009",
+  "trigger": {
+    "attempt_id": "raw_unchanged_1710",
+    "execution_kind": "RECORDED_INPUT_REPLAY",
+    "job_id": "m09_offline_historical_1710",
+    "slot": "17:10",
+    "trade_date": "20261009",
+    "triggered_at": "2026-10-11T11:02:03.396725+00:00"
+  },
+  "trigger_sha256": "aec714733b32242bf241ff8a640366f9bd75f2f51f853e101d74ba47a5f2219c"
+}

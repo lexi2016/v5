@@ -1,0 +1,27 @@
+{
+  "command_name": "01_source_head",
+  "argv": [
+    "git",
+    "rev-parse",
+    "HEAD"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment_overrides": {},
+  "started_at_utc": "2026-10-11T11:05:46.116840+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.121032+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.116840+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.121032+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "01_source_head.stdout.log",
+      "bytes": 41,
+      "sha256": "71596501982731f679d989e345f48fd1d691717ca0d026c491dc5b28142810ab"
+    },
+    "stderr": {
+      "filename": "01_source_head.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

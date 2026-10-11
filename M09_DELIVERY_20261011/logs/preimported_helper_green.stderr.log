@@ -1,0 +1,6 @@
+test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha (__main__.PreimportedHelperIdentityReview.test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.299s
+
+OK

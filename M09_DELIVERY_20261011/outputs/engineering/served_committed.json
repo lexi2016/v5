@@ -1,0 +1,867 @@
+{
+  "generation": {
+    "commit_request_sha256": "28c4169e13f42c08772d43396d4900ecb4215eca4d417039fb9e6788c0e44a33",
+    "commit_trigger_sha256": "f03ea5c64bca61fc0b68fdfcc14a63bab3bd6c9ce312b9ec3bd3f95af03f0c79",
+    "previous_generation_sha256": null,
+    "published_at": "2026-10-11T11:02:03.887136+00:00",
+    "record_sha256": "05ece0d9aede469a0aa6b8507c0f1d48766cc69a84b3eff56686ec17dc3ef71c",
+    "run_id": "m09-874de06f607a7e9f1c12dbbb809852ba-355c45c273d3",
+    "schema_version": "v5.m09.generation.v1",
+    "trade_date": "20261009"
+  },
+  "identity": {
+    "canonical_review_sha256": "7f8aa7021025c91e36dc01789178d326462b48dba89e3c3887f7103ab2db3836",
+    "generation_sha256": "967d489bf5013a51ad27ea53f9c2e9229b408dfb76e3cc309674b0961e303cda",
+    "model_run_id": "m09-874de06f607a7e9f1c12dbbb809852ba-355c45c273d3",
+    "raw_review_sha256": "7f8aa7021025c91e36dc01789178d326462b48dba89e3c3887f7103ab2db3836",
+    "record_sha256": "05ece0d9aede469a0aa6b8507c0f1d48766cc69a84b3eff56686ec17dc3ef71c",
+    "source_sha256": "7c6276e3a6138472d659b9861cab4383639b677d899c1867581ec6be60146f4d",
+    "trade_date": "20261009"
+  },
+  "latest_attempt": {
+    "cutoff": "2026-10-09T17:10:00+08:00",
+    "finished_at": "2026-10-11T11:02:07.424307+00:00",
+    "issues": [
+      {
+        "code": "PANEL_NUMBER_INVALID",
+        "field": "amount",
+        "row": 0
+      }
+    ],
+    "natural_verified": false,
+    "previous_success_generation_sha256": "b3c4096553df5f923f0d8ece08049466df43c85d15e080947d12f8a36aad6840",
+    "publication_recovery_status": "UNCHANGED",
+    "reason": "_InputError:M09_INPUT_NOT_ADMITTED:PANEL_NUMBER_INVALID",
+    "request_sha256": "d6edd21bd72f7c26eeb44a9f424570ffd2d197b5e9d9efd2ee792f62366619ba",
+    "run_id": null,
+    "safety": {
+      "buy_gate_updated": false,
+      "orders_sent": false,
+      "production_allowed": false,
+      "research_only": true
+    },
+    "schema_version": "v5.m09.trigger_receipt.v1",
+    "slot": "17:10",
+    "started_at": "2026-10-11T11:02:07.415398+00:00",
+    "status": "FAILED",
+    "trade_date": "20261009",
+    "trigger": {
+      "attempt_id": "bad-input-1710",
+      "execution_kind": "ENGINEERING",
+      "job_id": "m09_mac_engineering_1710",
+      "slot": "17:10",
+      "trade_date": "20261009",
+      "triggered_at": "2026-10-11T11:02:07.395713+00:00"
+    },
+    "trigger_sha256": "12603ac88aa93d6dd19cdafc7651b30e43d1b745c355bd75b8aa0972239ac119"
+  },
+  "record": {
+    "business_status": "PARTIAL",
+    "calculation_sha256": "874de06f607a7e9f1c12dbbb809852ba257dccb21476f5e109937f4e830c2c0d",
+    "cannot_confirm": [
+      "FULL_MARKET_MEMBERSHIP_NOT_VERIFIED",
+      "STRICT_1500_PIT_NOT_VERIFIED",
+      "NATURAL_TRIGGER_NOT_INDEPENDENTLY_VERIFIED"
+    ],
+    "computed_at": "2026-10-11T11:02:03.853039+00:00",
+    "data_kind": "SYNTHETIC",
+    "evidence_status": {
+      "ocr_alignment_pointer": {
+        "reason": "NO_COMMITTED_REFERENCE",
+        "status": "MISSING"
+      },
+      "stage_evidence": {
+        "reason": "NO_COMMITTED_REFERENCE",
+        "status": "MISSING"
+      },
+      "stockdict_pointer": {
+        "reason": "NO_COMMITTED_REFERENCE",
+        "status": "MISSING"
+      },
+      "video_acceptance": {
+        "reason": "NO_COMMITTED_REFERENCE",
+        "status": "MISSING"
+      },
+      "video_capture": {
+        "reason": "NO_COMMITTED_REFERENCE",
+        "status": "MISSING"
+      },
+      "video_gap_pointer": {
+        "reason": "NO_COMMITTED_REFERENCE",
+        "status": "MISSING"
+      }
+    },
+    "execution_kind": "ENGINEERING",
+    "implementation_identity": {
+      "capsule": {
+        "descriptor_sha256": "7e4f5eb41e0c8f6fc062d9d3f130af47a39eb5ae82a19389c9a5c0788a04901d",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "donor_repository": "lexi2016/v4",
+        "files": {
+          "contracts/__init__.py": {
+            "bytes": 55,
+            "git_blob_sha1": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+            "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+            "source_path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+            "target_path": "V5/vendor/m09_a_close_daily/contracts/__init__.py"
+          },
+          "contracts/a_share_review.py": {
+            "bytes": 261,
+            "git_blob_sha1": "af2110155081887e723f329652f7f73feb88d273",
+            "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+            "source_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+            "target_path": "V5/vendor/m09_a_close_daily/contracts/a_share_review.py"
+          },
+          "contracts/market_calendar_2026.json": {
+            "bytes": 3473,
+            "git_blob_sha1": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+            "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+            "source_path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+            "target_path": "V5/vendor/m09_a_close_daily/contracts/market_calendar_2026.json"
+          },
+          "contracts/trading_calendar.py": {
+            "bytes": 10239,
+            "git_blob_sha1": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+            "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+            "source_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+            "target_path": "V5/vendor/m09_a_close_daily/contracts/trading_calendar.py"
+          },
+          "domains/a_share_close_model.py": {
+            "bytes": 12302,
+            "git_blob_sha1": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+            "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+            "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+            "target_path": "V5/vendor/m09_a_close_daily/domains/a_share_close_model.py"
+          },
+          "domains/a_share_review.py": {
+            "bytes": 7038,
+            "git_blob_sha1": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+            "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+            "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+            "target_path": "V5/vendor/m09_a_close_daily/domains/a_share_review.py"
+          },
+          "domains/close_review_chain.py": {
+            "bytes": 10549,
+            "git_blob_sha1": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+            "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+            "source_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+            "target_path": "V5/vendor/m09_a_close_daily/domains/close_review_chain.py"
+          },
+          "infrastructure/__init__.py": {
+            "bytes": 68,
+            "git_blob_sha1": "647f68415f88ab9dfb514686554c9f9abf4c1cd6",
+            "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/__init__.py"
+          },
+          "infrastructure/a_share_review_store.py": {
+            "bytes": 10176,
+            "git_blob_sha1": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+            "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/a_share_review_store.py"
+          },
+          "infrastructure/data_store.py": {
+            "bytes": 10704,
+            "git_blob_sha1": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+            "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/data_store.py"
+          },
+          "infrastructure/interprocess_lock.py": {
+            "bytes": 7514,
+            "git_blob_sha1": "a97e733725834235fbcc9129639ae198fa8770cd",
+            "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/interprocess_lock.py"
+          },
+          "infrastructure/market_time.py": {
+            "bytes": 960,
+            "git_blob_sha1": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+            "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/market_time.py"
+          },
+          "infrastructure/owned_io.py": {
+            "bytes": 9354,
+            "git_blob_sha1": "1b6666551980c44ebb0b05f133c189909d79c7df",
+            "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/owned_io.py"
+          },
+          "infrastructure/owned_path.py": {
+            "bytes": 2251,
+            "git_blob_sha1": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+            "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/owned_path.py"
+          },
+          "infrastructure/trading_safety.py": {
+            "bytes": 2597,
+            "git_blob_sha1": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+            "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+            "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+            "target_path": "V5/vendor/m09_a_close_daily/infrastructure/trading_safety.py"
+          },
+          "ops/build_a_share_close_review.py": {
+            "bytes": 8360,
+            "git_blob_sha1": "d8295efa1d082917522d93f3d9396ee154a0926f",
+            "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+            "source_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+            "target_path": "V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py"
+          }
+        },
+        "loader_sha256": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+        "producer_io_adaptation": "ADMITTED_FRAME_DATASET_ADAPTER",
+        "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+        "runtime_dependencies": {
+          "numpy": "2.3.5",
+          "pandas": "2.2.3",
+          "pyarrow": null,
+          "python-dateutil": "2.9.0.post0",
+          "pytz": "2026.4",
+          "six": "1.17.0",
+          "tzdata": "2026.4"
+        },
+        "schema_version": "v5.m09.a_close_daily_sources.v1"
+      },
+      "environment": {
+        "declared_environment_compatible": false,
+        "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "os_compatibility_independently_verified": false,
+        "pandas": "2.2.3",
+        "pyarrow": null,
+        "python": "3.12.14"
+      },
+      "modules": {
+        "a_close_daily.py": "23b4200ffb29e83041b761927c6f285ff84d6b92a3cf8b2fc3e527a9d8ae1d9c",
+        "a_close_daily_sources.py": "b9c690059324d208c9fe510075efd2f3447135bc1e29f9b6f9be39afb41829b6",
+        "a_close_daily_worker.py": "29eaf1e3a912d7bd09c0150dc3a260e371f982479a6afaf42f9b86a84a109611",
+        "contracts.py": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+        "digests.py": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+      }
+    },
+    "input_files": {
+      "inputs/admitted_panel.json": {
+        "bytes": 1181,
+        "sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd"
+      },
+      "inputs/producer_pointer.txt": {
+        "bytes": 155,
+        "sha256": "398929ab3991f217764984062dca9f6ba9b092af37315e47c03eeea92e07dacc"
+      },
+      "inputs/source/input.json": {
+        "bytes": 1007,
+        "sha256": "692bf8552b045199e83d2065a243fda3ab64082acf84c6b41eab9e11c4385aca"
+      },
+      "inputs/source/members.txt": {
+        "bytes": 60,
+        "sha256": "9656a31b1b6d208af5542d2e9c6efc9d04e18bd93d5063fbc3a9ff8ad52e7f14"
+      },
+      "inputs/source/panel.json": {
+        "bytes": 1181,
+        "sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd"
+      },
+      "inputs/source/panel.txt": {
+        "bytes": 11,
+        "sha256": "ca0897c4da0e0ea98a1298f82fc6fc79075ed68dd95dd48e7c9c7154f2ad761b"
+      },
+      "inputs/source/receipt.json": {
+        "bytes": 280,
+        "sha256": "1a0201b85d14bcb32670b311aea699a5e9327fb06281c6db99d68fc931df0e9f"
+      }
+    },
+    "legacy_as_of": "2026-10-09T15:30:00+08:00",
+    "membership": {
+      "available_at": "2026-10-09T15:41:00+08:00",
+      "captured_at": "2026-10-09T15:40:00+08:00",
+      "path": "members.txt",
+      "scope": "DECLARED_UNIVERSE",
+      "sha256": "9656a31b1b6d208af5542d2e9c6efc9d04e18bd93d5063fbc3a9ff8ad52e7f14",
+      "source_id": "SYNTHETIC_MAC_MEMBERS",
+      "version": "engineering-v1"
+    },
+    "natural_verified": false,
+    "provenance": {
+      "acquired_at": "2026-10-09T15:40:00+08:00",
+      "authority_status": "VERIFIED",
+      "available_at": "2026-10-09T15:41:00+08:00",
+      "captured_at": "2026-10-09T15:40:00+08:00",
+      "coverage_rate": 1.0,
+      "receipt_path": "receipt.json",
+      "receipt_sha256": "1a0201b85d14bcb32670b311aea699a5e9327fb06281c6db99d68fc931df0e9f",
+      "source_id": "SYNTHETIC_MAC_PANEL",
+      "status": "READY",
+      "version": "engineering-v1"
+    },
+    "review_sha256": "7f8aa7021025c91e36dc01789178d326462b48dba89e3c3887f7103ab2db3836",
+    "run_id": "m09-874de06f607a7e9f1c12dbbb809852ba-355c45c273d3",
+    "run_root_at_creation": "/workspace/scratch/a5458cb06b78/m09_work/engineering_outputs/private_m09/runs/m09-874de06f607a7e9f1c12dbbb809852ba-355c45c273d3",
+    "safety": {
+      "buy_gate_updated": false,
+      "orders_sent": false,
+      "production_allowed": false,
+      "research_only": true
+    },
+    "scenario_probabilities_status": "FROZEN_LEGACY_CONSTANTS_NOT_CALIBRATED",
+    "schema_version": "v5.m09.record.v1",
+    "scope": "DECLARED_UNIVERSE_ONLY",
+    "source_provenance_independently_verified": false,
+    "source_sha256": "7c6276e3a6138472d659b9861cab4383639b677d899c1867581ec6be60146f4d",
+    "store_files": {
+      "a_share_reviews/20261009.json": {
+        "bytes": 14883,
+        "sha256": "7f8aa7021025c91e36dc01789178d326462b48dba89e3c3887f7103ab2db3836"
+      },
+      "a_share_reviews/manifest.json": {
+        "bytes": 100,
+        "sha256": "92a30ec1f7aa4aba824085368213bfebb07c113f9ad40e87e8b13b3caa5dde41"
+      },
+      "a_share_reviews/receipts/20261009.json": {
+        "bytes": 279,
+        "sha256": "ace9b418756fffdf197b8d4b646b9c568470f3a5fe632aa1468f0a260dee067c"
+      }
+    },
+    "strict_1500_pit_verified": false,
+    "trade_date": "20261009"
+  },
+  "review": {
+    "big_picture": [
+      {
+        "amount_yi": 6.0,
+        "boundary": "收盘事实可重算；收盘后面板不能证明严格15:00历史PIT版本。",
+        "down_count": 2,
+        "evidence_refs": [
+          "selector_ready_panel:20261009_close"
+        ],
+        "external_environment": "CANNOT_CONFIRM_EXTERNAL_MARKET_DETAIL",
+        "flat_count": 1,
+        "limit_down_count": 1,
+        "limit_up_count": 1,
+        "market_width": 0.5,
+        "producer_type": "DETERMINISTIC_PYTHON",
+        "regime": "divergence_or_weak_breadth",
+        "title": "市场总览",
+        "trade_date": "20261009",
+        "up_count": 3
+      }
+    ],
+    "buy_gate_updated": false,
+    "cannot_confirm": [
+      "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+      "CANNOT_CONFIRM_STRICT_D0_1500_PANEL",
+      "FORMAL_GENERALIZATION_PENDING"
+    ],
+    "close_chain": {
+      "buy_gate_updated": false,
+      "cannot_confirm": [
+        "FUPAN_VIDEO_CHECK",
+        "FUPAN_VIDEO_DOWNLOAD_ASR",
+        "FUPAN_STOCKDICT",
+        "FUPAN_VIDEO_TABLE_OCR_ALIGN",
+        "FUPAN_VIDEO_GAP"
+      ],
+      "nodes": [
+        {
+          "business_date": "20261009",
+          "evidence": [
+            {
+              "date_role": "business_date_close",
+              "raw_sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd",
+              "row_count": 6,
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009"
+            }
+          ],
+          "label": "收盘前总结材料",
+          "reason": "EXACT_DATE_CLOSE_SOURCE_FROZEN",
+          "slot": "15:00",
+          "status": "READY",
+          "task_id": "FUPAN_CLOSE_MATERIALS"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [
+            {
+              "date_role": "business_date_close",
+              "raw_sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd",
+              "row_count": 6,
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009"
+            }
+          ],
+          "label": "收盘后复盘启动",
+          "reason": "CLOSE_REVIEW_STARTED_FROM_FROZEN_SOURCE",
+          "slot": "15:55",
+          "status": "READY",
+          "task_id": "FUPAN_REVIEW_START"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [
+            {
+              "date_role": "business_date_close",
+              "raw_sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd",
+              "row_count": 6,
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009"
+            }
+          ],
+          "label": "A股收盘数据与题材骨架",
+          "reason": "DETERMINISTIC_A_SHARE_STRUCTURE_READY",
+          "slot": "16:05",
+          "status": "READY",
+          "task_id": "FUPAN_A_SHARE_STRUCTURE"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [],
+          "label": "最新复盘视频检查",
+          "reason": "SAME_DAY_VIDEO_NOT_LOCKED",
+          "slot": "20:30",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_VIDEO_CHECK"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [],
+          "label": "视频下载与转写",
+          "reason": "DEPENDENCY_FUPAN_VIDEO_CHECK_NOT_MATERIALIZED",
+          "slot": "20:40",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_VIDEO_DOWNLOAD_ASR"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [],
+          "label": "股票字典校正",
+          "reason": "DEPENDENCY_FUPAN_VIDEO_DOWNLOAD_ASR_NOT_READY",
+          "slot": "20:50",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_STOCKDICT"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [],
+          "label": "视频表格OCR/ASR/新闻对齐",
+          "reason": "DEPENDENCY_FUPAN_STOCKDICT_NOT_READY",
+          "slot": "21:05",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_VIDEO_TABLE_OCR_ALIGN"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [],
+          "label": "页面复盘对视频差距",
+          "reason": "DEPENDENCY_FUPAN_VIDEO_TABLE_OCR_ALIGN_NOT_READY",
+          "slot": "21:08",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_VIDEO_GAP"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [
+            {
+              "date_role": "business_date_close",
+              "raw_sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd",
+              "row_count": 6,
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009"
+            }
+          ],
+          "label": "第三版复盘发布",
+          "reason": "DETERMINISTIC_REVIEW_NOT_PUBLISHED_PENDING_DEPENDENCIES",
+          "slot": "21:10",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_V3_PUBLISH"
+        },
+        {
+          "business_date": "20261009",
+          "evidence": [
+            {
+              "date_role": "business_date_close",
+              "raw_sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd",
+              "row_count": 6,
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009"
+            }
+          ],
+          "label": "页面与接口验收",
+          "reason": "DEPENDENCY_FUPAN_V3_PUBLISH_NOT_READY",
+          "slot": "21:15",
+          "status": "NOT_MATERIALIZED",
+          "task_id": "FUPAN_8771_VERIFY"
+        }
+      ],
+      "orders_sent": false,
+      "production_allowed": false,
+      "schema_version": "v3_5.close_review_chain.v1",
+      "status": "PARTIAL_REVIEW",
+      "trade_date": "20261009"
+    },
+    "core_stocks": [],
+    "headline": "A股复盘 20261009",
+    "mainlines": [
+      {
+        "amount_yi": 3.0,
+        "board_name": "SYNTHETIC_INDUSTRY_A",
+        "board_rank": 1,
+        "board_role": "strong_branch",
+        "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+        "catalyst": "CANNOT_CONFIRM",
+        "counterevidence": "极弱市中的防御抗跌支线，不等同于进攻主线。",
+        "down_ratio": 0.3333,
+        "eligible_for_strict_d0_1500": false,
+        "evidence_refs": [
+          "sector_close:SYNTHETIC_INDUSTRY_A:20261009"
+        ],
+        "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。",
+        "limit_down_count": 1,
+        "limit_up_count": 1,
+        "mean_pct_change": 0.6667,
+        "median_pct_change": 2.0,
+        "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+        "source_available_at": "D0_CLOSE",
+        "stock_count": 3,
+        "trade_date": "20261009",
+        "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+        "up_ratio": 0.6667
+      },
+      {
+        "amount_yi": 3.0,
+        "board_name": "SYNTHETIC_INDUSTRY_B",
+        "board_rank": 2,
+        "board_role": "rotation",
+        "canonical_theme": "SYNTHETIC_INDUSTRY_B",
+        "catalyst": "CANNOT_CONFIRM",
+        "counterevidence": "相对抗跌或中性轮动，尚无持续进攻证据。",
+        "down_ratio": 0.3333,
+        "eligible_for_strict_d0_1500": false,
+        "evidence_refs": [
+          "sector_close:SYNTHETIC_INDUSTRY_B:20261009"
+        ],
+        "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。",
+        "limit_down_count": 0,
+        "limit_up_count": 0,
+        "mean_pct_change": 0.6667,
+        "median_pct_change": 0.0,
+        "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+        "source_available_at": "D0_CLOSE",
+        "stock_count": 3,
+        "trade_date": "20261009",
+        "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+        "up_ratio": 0.3333
+      }
+    ],
+    "market_regime": "divergence_or_weak_breadth",
+    "model_review": {
+      "anchor_role_rows": [
+        {
+          "board_name": "SYNTHETIC_INDUSTRY_A",
+          "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+          "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+          "evidence_refs": [
+            "stock_close:000001.SZ:20261009"
+          ],
+          "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+          "pct_change": 10.0,
+          "primary_role": "tomorrow_decider",
+          "recommendation_status": "WATCH_ONLY",
+          "role_explanation": "板块收盘涨幅前排；只作为次日强度定调锚。",
+          "stock_code": "000001",
+          "stock_name": "SYNTHETIC_MAC_1",
+          "trade_date": "20261009",
+          "trigger": "次日需同时验证个股承接和同板块广度。",
+          "turnover_amount_yi": 1.0
+        },
+        {
+          "board_name": "SYNTHETIC_INDUSTRY_A",
+          "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+          "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+          "evidence_refs": [
+            "stock_close:000002.SZ:20261009"
+          ],
+          "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+          "pct_change": 2.0,
+          "primary_role": "capacity_anchor",
+          "recommendation_status": "WATCH_ONLY",
+          "role_explanation": "板块正收益股票中成交额靠前，用于观察容量承接。",
+          "stock_code": "000002",
+          "stock_name": "SYNTHETIC_MAC_2",
+          "trade_date": "20261009",
+          "trigger": "次日需同时验证个股承接和同板块广度。",
+          "turnover_amount_yi": 1.0
+        }
+      ],
+      "as_of": "2026-10-09T15:30:00+08:00",
+      "board_rows": [
+        {
+          "amount_yi": 3.0,
+          "board_name": "SYNTHETIC_INDUSTRY_A",
+          "board_rank": 1,
+          "board_role": "strong_branch",
+          "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+          "catalyst": "CANNOT_CONFIRM",
+          "counterevidence": "极弱市中的防御抗跌支线，不等同于进攻主线。",
+          "down_ratio": 0.3333,
+          "eligible_for_strict_d0_1500": false,
+          "evidence_refs": [
+            "sector_close:SYNTHETIC_INDUSTRY_A:20261009"
+          ],
+          "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。",
+          "limit_down_count": 1,
+          "limit_up_count": 1,
+          "mean_pct_change": 0.6667,
+          "median_pct_change": 2.0,
+          "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+          "source_available_at": "D0_CLOSE",
+          "stock_count": 3,
+          "trade_date": "20261009",
+          "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+          "up_ratio": 0.6667
+        },
+        {
+          "amount_yi": 3.0,
+          "board_name": "SYNTHETIC_INDUSTRY_B",
+          "board_rank": 2,
+          "board_role": "rotation",
+          "canonical_theme": "SYNTHETIC_INDUSTRY_B",
+          "catalyst": "CANNOT_CONFIRM",
+          "counterevidence": "相对抗跌或中性轮动，尚无持续进攻证据。",
+          "down_ratio": 0.3333,
+          "eligible_for_strict_d0_1500": false,
+          "evidence_refs": [
+            "sector_close:SYNTHETIC_INDUSTRY_B:20261009"
+          ],
+          "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。",
+          "limit_down_count": 0,
+          "limit_up_count": 0,
+          "mean_pct_change": 0.6667,
+          "median_pct_change": 0.0,
+          "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+          "source_available_at": "D0_CLOSE",
+          "stock_count": 3,
+          "trade_date": "20261009",
+          "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+          "up_ratio": 0.3333
+        }
+      ],
+      "formal_generalization": "FORMAL_GENERALIZATION_PENDING",
+      "learning_status": "LEARNING_HYPOTHESIS_FAIL",
+      "market_summary": {
+        "amount_yi": 6.0,
+        "boundary": "收盘事实可重算；收盘后面板不能证明严格15:00历史PIT版本。",
+        "down_count": 2,
+        "evidence_refs": [
+          "selector_ready_panel:20261009_close"
+        ],
+        "external_environment": "CANNOT_CONFIRM_EXTERNAL_MARKET_DETAIL",
+        "flat_count": 1,
+        "limit_down_count": 1,
+        "limit_up_count": 1,
+        "market_width": 0.5,
+        "regime": "divergence_or_weak_breadth",
+        "up_count": 3
+      },
+      "model_promotion": "NO_MODEL_PROMOTED",
+      "objective": "20261009 D0独立完整复盘；同日视频未作为输入",
+      "previous_plan_realization": "CANNOT_CONFIRM_PREVIOUS_PLAN_REALIZATION_WITHOUT_BOUND_PRIOR_PLAN",
+      "producer_type": "DETERMINISTIC_PYTHON",
+      "review_date": "20261009",
+      "run_id": "m09-874de06f607a7e9f1c12dbbb809852ba-355c45c273d3",
+      "safety": {
+        "FORMAL_GENERALIZATION_PENDING": true,
+        "HOLDOUT_ACCESS_COUNT": 0,
+        "NOT_BUY_ADVICE": true,
+        "NO_BUY_GATE": true,
+        "NO_MODEL_PROMOTED": true,
+        "SHADOW_ONLY": true
+      },
+      "scenario_tree": {
+        "inline": {
+          "invalidation": [
+            "广度与风险线同步显著改善或同步恶化"
+          ],
+          "open_trigger": [
+            "指数企稳但个股仍分化"
+          ],
+          "probability": 0.28
+        },
+        "stronger": {
+          "invalidation": [
+            "只有指数权重护盘、个股广度仍弱"
+          ],
+          "open_trigger": [
+            "风险线负反馈快速收敛"
+          ],
+          "probability": 0.12
+        },
+        "weaker": {
+          "invalidation": [
+            "风险锚止跌、跌停显著收敛且市场宽度同步修复"
+          ],
+          "open_trigger": [
+            "风险锚继续低开并扩散"
+          ],
+          "probability": 0.6
+        }
+      },
+      "schema_version": "replay_model_v1",
+      "semantic_model_call_count": 0,
+      "semantic_model_status": "DISABLED_BY_V3_5_NO_LLM_PRODUCTION_RULE",
+      "shadow_watch_pool": {
+        "abstain": true,
+        "abstain_reason": "WEAK_MARKET_WIDTH_ALLOW_ABSTENTION",
+        "boundary": "SHADOW_ONLY",
+        "conditional": [
+          {
+            "board_name": "SYNTHETIC_INDUSTRY_A",
+            "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+            "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+            "evidence_refs": [
+              "stock_close:000001.SZ:20261009"
+            ],
+            "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+            "pct_change": 10.0,
+            "primary_role": "tomorrow_decider",
+            "recommendation_status": "WATCH_ONLY",
+            "role_explanation": "板块收盘涨幅前排；只作为次日强度定调锚。",
+            "stock_code": "000001",
+            "stock_name": "SYNTHETIC_MAC_1",
+            "trade_date": "20261009",
+            "trigger": "次日需同时验证个股承接和同板块广度。",
+            "turnover_amount_yi": 1.0
+          },
+          {
+            "board_name": "SYNTHETIC_INDUSTRY_A",
+            "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+            "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+            "evidence_refs": [
+              "stock_close:000002.SZ:20261009"
+            ],
+            "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+            "pct_change": 2.0,
+            "primary_role": "capacity_anchor",
+            "recommendation_status": "WATCH_ONLY",
+            "role_explanation": "板块正收益股票中成交额靠前，用于观察容量承接。",
+            "stock_code": "000002",
+            "stock_name": "SYNTHETIC_MAC_2",
+            "trade_date": "20261009",
+            "trigger": "次日需同时验证个股承接和同板块广度。",
+            "turnover_amount_yi": 1.0
+          }
+        ],
+        "core": [],
+        "not_buy_advice": true,
+        "observation_or_risk": [],
+        "shape": "3_CORE_4_CONDITIONAL_3_OBSERVATION_OR_RISK"
+      },
+      "status": "INDEPENDENT_CLOSE_REVIEW_READY",
+      "target_video_evidence_count": 0,
+      "target_video_review_status": "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+      "video_augmented_review_complete": false,
+      "visibility_stage": "POST_CLOSE_REVIEW_ONLY"
+    },
+    "next_day_trigger_tree": [
+      {
+        "direction": "stronger",
+        "invalidation": "只有指数权重护盘、个股广度仍弱",
+        "probability": 0.12,
+        "producer_type": "DETERMINISTIC_PYTHON",
+        "trade_date": "20261009",
+        "upgrade": "风险线负反馈快速收敛"
+      },
+      {
+        "direction": "inline",
+        "invalidation": "广度与风险线同步显著改善或同步恶化",
+        "probability": 0.28,
+        "producer_type": "DETERMINISTIC_PYTHON",
+        "trade_date": "20261009",
+        "upgrade": "指数企稳但个股仍分化"
+      },
+      {
+        "direction": "weaker",
+        "invalidation": "风险锚止跌、跌停显著收敛且市场宽度同步修复",
+        "probability": 0.6,
+        "producer_type": "DETERMINISTIC_PYTHON",
+        "trade_date": "20261009",
+        "upgrade": "风险锚继续低开并扩散"
+      }
+    ],
+    "observation_pool": [
+      {
+        "board_name": "SYNTHETIC_INDUSTRY_A",
+        "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+        "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+        "evidence_refs": [
+          "stock_close:000001.SZ:20261009"
+        ],
+        "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+        "pct_change": 10.0,
+        "primary_role": "tomorrow_decider",
+        "recommendation_status": "WATCH_ONLY",
+        "role_explanation": "板块收盘涨幅前排；只作为次日强度定调锚。",
+        "stock_code": "000001",
+        "stock_name": "SYNTHETIC_MAC_1",
+        "trade_date": "20261009",
+        "trigger": "次日需同时验证个股承接和同板块广度。",
+        "turnover_amount_yi": 1.0
+      },
+      {
+        "board_name": "SYNTHETIC_INDUSTRY_A",
+        "canonical_theme": "SYNTHETIC_INDUSTRY_A",
+        "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+        "evidence_refs": [
+          "stock_close:000002.SZ:20261009"
+        ],
+        "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+        "pct_change": 2.0,
+        "primary_role": "capacity_anchor",
+        "recommendation_status": "WATCH_ONLY",
+        "role_explanation": "板块正收益股票中成交额靠前，用于观察容量承接。",
+        "stock_code": "000002",
+        "stock_name": "SYNTHETIC_MAC_2",
+        "trade_date": "20261009",
+        "trigger": "次日需同时验证个股承接和同板块广度。",
+        "turnover_amount_yi": 1.0
+      }
+    ],
+    "orders_sent": false,
+    "production_allowed": false,
+    "quality_gate": [
+      {
+        "item": "同日视频",
+        "producer_type": "SOURCE_GATE",
+        "status": "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+        "trade_date": "20261009"
+      },
+      {
+        "item": "15:00 PIT",
+        "producer_type": "SOURCE_GATE",
+        "status": "CANNOT_CONFIRM_STRICT_D0_1500_PANEL",
+        "trade_date": "20261009"
+      },
+      {
+        "item": "LLM语义层",
+        "producer_type": "SOURCE_GATE",
+        "status": "DISABLED_BY_V3_5_NO_LLM_PRODUCTION_RULE",
+        "trade_date": "20261009"
+      }
+    ],
+    "risk_tone": "divergence_or_weak_breadth",
+    "schema_version": "v3_5.a_share_review.v1",
+    "source_evidence": [
+      {
+        "date_role": "business_date_close",
+        "raw_sha256": "90a8122c8b1d1ab82328d5fdcead25020e68f36d98ae109f51c736851b9e0dbd",
+        "row_count": 6,
+        "source_id": "selector_ready_panel",
+        "trade_date": "20261009"
+      }
+    ],
+    "source_role": "V3_5_NATIVE_CLOSE_MODEL",
+    "source_sha256": "7c6276e3a6138472d659b9861cab4383639b677d899c1867581ec6be60146f4d",
+    "trade_date": "20261009",
+    "write_policy": "review_only_read_only"
+  }
+}

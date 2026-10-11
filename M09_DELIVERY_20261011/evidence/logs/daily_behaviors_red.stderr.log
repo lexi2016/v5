@@ -1,0 +1,275 @@
+test_bad_numeric_types_and_quality_are_not_normalized (test_a_close_daily.DailyBehaviorTests.test_bad_numeric_types_and_quality_are_not_normalized) ... FAIL
+test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation) ... FAIL
+test_configuration_change_creates_a_new_immutable_run (test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run) ... FAIL
+test_duplicate_and_invalid_suffix_rejected (test_a_close_daily.DailyBehaviorTests.test_duplicate_and_invalid_suffix_rejected) ... FAIL
+test_exact_same_attempt_returns_receipt_without_producing (test_a_close_daily.DailyBehaviorTests.test_exact_same_attempt_returns_receipt_without_producing) ... FAIL
+test_initialize_refuses_existing_nonempty_root (test_a_close_daily.DailyBehaviorTests.test_initialize_refuses_existing_nonempty_root) ... FAIL
+test_late_or_naive_source_time_rejected (test_a_close_daily.DailyBehaviorTests.test_late_or_naive_source_time_rejected) ... FAIL
+test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success) ... FAIL
+test_missing_declared_members_rejected (test_a_close_daily.DailyBehaviorTests.test_missing_declared_members_rejected) ... FAIL
+test_missing_field_rejected_before_algorithm (test_a_close_daily.DailyBehaviorTests.test_missing_field_rejected_before_algorithm) ... FAIL
+test_natural_trigger_cannot_claim_historical_day (test_a_close_daily.DailyBehaviorTests.test_natural_trigger_cannot_claim_historical_day) ... FAIL
+test_nonfinite_numeric_rejected (test_a_close_daily.DailyBehaviorTests.test_nonfinite_numeric_rejected) ... FAIL
+test_nontrading_or_invalid_date_and_third_slot_rejected (test_a_close_daily.DailyBehaviorTests.test_nontrading_or_invalid_date_and_third_slot_rejected) ... FAIL
+test_original_writer_failure_does_not_replace_old_run (test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run) ... FAIL
+test_panel_digest_and_manifest_digest_checked (test_a_close_daily.DailyBehaviorTests.test_panel_digest_and_manifest_digest_checked) ... FAIL
+test_pointer_traversal_and_symlink_fail_closed (test_a_close_daily.DailyBehaviorTests.test_pointer_traversal_and_symlink_fail_closed) ... FAIL
+test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields) ... FAIL
+test_read_is_exact_date_and_has_no_file_side_effects (test_a_close_daily.DailyBehaviorTests.test_read_is_exact_date_and_has_no_file_side_effects) ... FAIL
+test_rollback_preserves_both_runs_and_switches_only_this_date (test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date) ... FAIL
+test_source_changed_during_compute_never_publishes (test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes) ... FAIL
+test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected) ... FAIL
+test_synthetic_json_cannot_be_presented_as_real (test_a_close_daily.DailyBehaviorTests.test_synthetic_json_cannot_be_presented_as_real) ... FAIL
+test_tampered_payload_is_rejected_by_independent_reader (test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader) ... FAIL
+test_top_subset_cannot_claim_full_market (test_a_close_daily.DailyBehaviorTests.test_top_subset_cannot_claim_full_market) ... FAIL
+test_two_concurrent_attempts_share_one_calculation (test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation) ... FAIL
+test_two_slots_reuse_one_calculation_and_keep_two_receipts (test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts) ... FAIL
+test_unmarked_and_source_overlapping_roots_are_rejected (test_a_close_daily.DailyBehaviorTests.test_unmarked_and_source_overlapping_roots_are_rejected) ... FAIL
+test_unverified_or_unknown_source_is_not_promoted (test_a_close_daily.DailyBehaviorTests.test_unverified_or_unknown_source_is_not_promoted) ... FAIL
+test_wrong_date_type_or_day_rejected (test_a_close_daily.DailyBehaviorTests.test_wrong_date_type_or_day_rejected) ... FAIL
+test_complete_daily_entry_is_present (test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present) ... FAIL
+
+======================================================================
+FAIL: test_bad_numeric_types_and_quality_are_not_normalized (test_a_close_daily.DailyBehaviorTests.test_bad_numeric_types_and_quality_are_not_normalized)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_configuration_change_creates_a_new_immutable_run (test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_duplicate_and_invalid_suffix_rejected (test_a_close_daily.DailyBehaviorTests.test_duplicate_and_invalid_suffix_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_exact_same_attempt_returns_receipt_without_producing (test_a_close_daily.DailyBehaviorTests.test_exact_same_attempt_returns_receipt_without_producing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_initialize_refuses_existing_nonempty_root (test_a_close_daily.DailyBehaviorTests.test_initialize_refuses_existing_nonempty_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_late_or_naive_source_time_rejected (test_a_close_daily.DailyBehaviorTests.test_late_or_naive_source_time_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_missing_declared_members_rejected (test_a_close_daily.DailyBehaviorTests.test_missing_declared_members_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_missing_field_rejected_before_algorithm (test_a_close_daily.DailyBehaviorTests.test_missing_field_rejected_before_algorithm)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_natural_trigger_cannot_claim_historical_day (test_a_close_daily.DailyBehaviorTests.test_natural_trigger_cannot_claim_historical_day)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_nonfinite_numeric_rejected (test_a_close_daily.DailyBehaviorTests.test_nonfinite_numeric_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_nontrading_or_invalid_date_and_third_slot_rejected (test_a_close_daily.DailyBehaviorTests.test_nontrading_or_invalid_date_and_third_slot_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_original_writer_failure_does_not_replace_old_run (test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_panel_digest_and_manifest_digest_checked (test_a_close_daily.DailyBehaviorTests.test_panel_digest_and_manifest_digest_checked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_pointer_traversal_and_symlink_fail_closed (test_a_close_daily.DailyBehaviorTests.test_pointer_traversal_and_symlink_fail_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_read_is_exact_date_and_has_no_file_side_effects (test_a_close_daily.DailyBehaviorTests.test_read_is_exact_date_and_has_no_file_side_effects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_rollback_preserves_both_runs_and_switches_only_this_date (test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_source_changed_during_compute_never_publishes (test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_synthetic_json_cannot_be_presented_as_real (test_a_close_daily.DailyBehaviorTests.test_synthetic_json_cannot_be_presented_as_real)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_tampered_payload_is_rejected_by_independent_reader (test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_top_subset_cannot_claim_full_market (test_a_close_daily.DailyBehaviorTests.test_top_subset_cannot_claim_full_market)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_two_concurrent_attempts_share_one_calculation (test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_two_slots_reuse_one_calculation_and_keep_two_receipts (test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_unmarked_and_source_overlapping_roots_are_rejected (test_a_close_daily.DailyBehaviorTests.test_unmarked_and_source_overlapping_roots_are_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_unverified_or_unknown_source_is_not_promoted (test_a_close_daily.DailyBehaviorTests.test_unverified_or_unknown_source_is_not_promoted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_wrong_date_type_or_day_rejected (test_a_close_daily.DailyBehaviorTests.test_wrong_date_type_or_day_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 60, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'), 'M09 daily is missing')
+AssertionError: unexpectedly None : M09 daily is missing
+
+======================================================================
+FAIL: test_complete_daily_entry_is_present (test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 278, in test_complete_daily_entry_is_present
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'),
+AssertionError: unexpectedly None : M09 daily producer/store/generation entry is missing
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.008s
+
+FAILED (failures=30)

@@ -1,0 +1,78 @@
+test_actual_generation_connects_to_pure_existing_page_projection (test_a_close_daily.DailyBehaviorTests.test_actual_generation_connects_to_pure_existing_page_projection) ... ok
+test_available_unknown_evidence_remains_partial (test_a_close_daily.DailyBehaviorTests.test_available_unknown_evidence_remains_partial) ... ok
+test_bad_numeric_types_and_quality_are_not_normalized (test_a_close_daily.DailyBehaviorTests.test_bad_numeric_types_and_quality_are_not_normalized) ... ok
+test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation) ... ok
+test_configuration_change_creates_a_new_immutable_run (test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run) ... ok
+test_duplicate_and_invalid_suffix_rejected (test_a_close_daily.DailyBehaviorTests.test_duplicate_and_invalid_suffix_rejected) ... ok
+test_error_after_head_replace_restores_previous_generation (test_a_close_daily.DailyBehaviorTests.test_error_after_head_replace_restores_previous_generation) ... FAIL
+test_exact_same_attempt_returns_receipt_without_producing (test_a_close_daily.DailyBehaviorTests.test_exact_same_attempt_returns_receipt_without_producing) ... ok
+test_final_receipt_write_failure_preserves_previous_success (test_a_close_daily.DailyBehaviorTests.test_final_receipt_write_failure_preserves_previous_success) ... ERROR
+test_initialize_refuses_existing_nonempty_root (test_a_close_daily.DailyBehaviorTests.test_initialize_refuses_existing_nonempty_root) ... ok
+test_late_or_naive_source_time_rejected (test_a_close_daily.DailyBehaviorTests.test_late_or_naive_source_time_rejected) ... ok
+test_late_stage_reference_only_enters_second_slot (test_a_close_daily.DailyBehaviorTests.test_late_stage_reference_only_enters_second_slot) ... ok
+test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success) ... ok
+test_missing_declared_members_rejected (test_a_close_daily.DailyBehaviorTests.test_missing_declared_members_rejected) ... ok
+test_missing_field_rejected_before_algorithm (test_a_close_daily.DailyBehaviorTests.test_missing_field_rejected_before_algorithm) ... ok
+test_natural_trigger_cannot_claim_historical_day (test_a_close_daily.DailyBehaviorTests.test_natural_trigger_cannot_claim_historical_day) ... ok
+test_nonfinite_numeric_rejected (test_a_close_daily.DailyBehaviorTests.test_nonfinite_numeric_rejected) ... ok
+test_nontrading_or_invalid_date_and_third_slot_rejected (test_a_close_daily.DailyBehaviorTests.test_nontrading_or_invalid_date_and_third_slot_rejected) ... ok
+test_original_writer_failure_does_not_replace_old_run (test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run) ... ok
+test_panel_digest_and_manifest_digest_checked (test_a_close_daily.DailyBehaviorTests.test_panel_digest_and_manifest_digest_checked) ... ok
+test_pointer_traversal_and_symlink_fail_closed (test_a_close_daily.DailyBehaviorTests.test_pointer_traversal_and_symlink_fail_closed) ... ok
+test_post_1710_video_is_not_even_read_for_either_old_slot (test_a_close_daily.DailyBehaviorTests.test_post_1710_video_is_not_even_read_for_either_old_slot) ... ok
+test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields) ... ok
+test_read_is_exact_date_and_has_no_file_side_effects (test_a_close_daily.DailyBehaviorTests.test_read_is_exact_date_and_has_no_file_side_effects) ... ok
+test_real_worker_timeout_keeps_old_generation (test_a_close_daily.DailyBehaviorTests.test_real_worker_timeout_keeps_old_generation) ... FAIL
+test_rollback_preserves_both_runs_and_switches_only_this_date (test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date) ... ok
+test_source_changed_during_compute_never_publishes (test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes) ... ok
+test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected) ... ok
+test_synthetic_json_cannot_be_presented_as_real (test_a_close_daily.DailyBehaviorTests.test_synthetic_json_cannot_be_presented_as_real) ... ok
+test_tampered_payload_is_rejected_by_independent_reader (test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader) ... ok
+test_top_subset_cannot_claim_full_market (test_a_close_daily.DailyBehaviorTests.test_top_subset_cannot_claim_full_market) ... ok
+test_two_concurrent_attempts_share_one_calculation (test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation) ... ok
+test_two_slots_reuse_one_calculation_and_keep_two_receipts (test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts) ... ok
+test_unmarked_and_source_overlapping_roots_are_rejected (test_a_close_daily.DailyBehaviorTests.test_unmarked_and_source_overlapping_roots_are_rejected) ... ok
+test_unverified_or_unknown_source_is_not_promoted (test_a_close_daily.DailyBehaviorTests.test_unverified_or_unknown_source_is_not_promoted) ... ok
+test_wrong_date_type_or_day_rejected (test_a_close_daily.DailyBehaviorTests.test_wrong_date_type_or_day_rejected) ... ok
+test_complete_daily_entry_is_present (test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present) ... ok
+
+======================================================================
+ERROR: test_final_receipt_write_failure_preserves_previous_success (test_a_close_daily.DailyBehaviorTests.test_final_receipt_write_failure_preserves_previous_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 328, in test_final_receipt_write_failure_preserves_previous_success
+    result=self.daily.run_a_close_daily(self.root,req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily.py", line 610, in run_a_close_daily
+    handle.write_bytes(attempt + '/receipt.json', canonical_bytes(result), require_absent=True)
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 325, in fail_receipt
+    raise OSError('injected trigger receipt failure')
+OSError: injected trigger receipt failure
+
+======================================================================
+FAIL: test_error_after_head_replace_restores_previous_generation (test_a_close_daily.DailyBehaviorTests.test_error_after_head_replace_restores_previous_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 318, in test_error_after_head_replace_restores_previous_generation
+    self.assertEqual(self.daily.read_a_close_daily(self.root,'20261009')['identity']['generation_sha256'],first['generation_sha256'])
+AssertionError: '6b5b84e5ce8c378ef13674202afdc072c87b1c0e00029360e8b3cfa386043bd9' != '1eb2dd3998ab0cd64e1c7f13c00ed38098d50c16aa3c07595fd988f5df636fd2'
+- 6b5b84e5ce8c378ef13674202afdc072c87b1c0e00029360e8b3cfa386043bd9
++ 1eb2dd3998ab0cd64e1c7f13c00ed38098d50c16aa3c07595fd988f5df636fd2
+
+
+======================================================================
+FAIL: test_real_worker_timeout_keeps_old_generation (test_a_close_daily.DailyBehaviorTests.test_real_worker_timeout_keeps_old_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 307, in test_real_worker_timeout_keeps_old_generation
+    self.assertEqual(result['status'],'FAILED',result);self.assertIn('TIMEOUT',result['reason'])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'SUCCEEDED' != 'FAILED'
+- SUCCEEDED
++ FAILED
+ : {'schema_version': 'v5.m09.trigger_receipt.v1', 'trade_date': '20261009', 'slot': '17:10', 'cutoff': '2026-10-09T17:10:00+08:00', 'trigger': {'trade_date': '20261009', 'slot': '17:10', 'job_id': 'a_share_close_review_1710', 'attempt_id': 'timeout', 'execution_kind': 'ENGINEERING', 'triggered_at': '2026-10-11T10:39:27.951628+00:00'}, 'trigger_sha256': '543723ea16279d661ae785237d5d014345dc6e37c8bdeb34bb2b0e013215e21b', 'request_sha256': '2bee16671734ee07c7a6d223ab6d0f6ae69f7ff77a91f8b8518a68d1b10f8622', 'started_at': '2026-10-11T10:39:27.957049+00:00', 'natural_verified': False, 'safety': {'research_only': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}, 'status': 'SUCCEEDED', 'reused': False, 'run_id': 'm09-24f20790d9b4953917e477744b588a6b-3c707f1feb5d', 'calculation_sha256': '24f20790d9b4953917e477744b588a6bc2e7bea5c5c15c5d901fd1144743b383', 'record_sha256': '1f43776df30260a95ac968a44b36437c4aa1cc84193a32f182875c6cfa6cee3f', 'generation_sha256': 'f309b4c28467e5b4f858651b571ce09c6c82dba1e06007105d09a45a881ca556', 'business_status': 'PARTIAL', 'data_kind': 'SYNTHETIC', 'evidence_status': {'stage_evidence': {'status': 'MISSING', 'reason': 'NO_COMMITTED_REFERENCE'}, 'video_acceptance': {'status': 'MISSING', 'reason': 'NO_COMMITTED_REFERENCE'}, 'video_capture': {'status': 'MISSING', 'reason': 'NO_COMMITTED_REFERENCE'}, 'stockdict_pointer': {'status': 'MISSING', 'reason': 'NO_COMMITTED_REFERENCE'}, 'ocr_alignment_pointer': {'status': 'MISSING', 'reason': 'NO_COMMITTED_REFERENCE'}, 'video_gap_pointer': {'status': 'MISSING', 'reason': 'NO_COMMITTED_REFERENCE'}}, 'finished_at': '2026-10-11T10:39:28.069255+00:00'}
+
+----------------------------------------------------------------------
+Ran 37 tests in 4.358s
+
+FAILED (failures=2, errors=1)

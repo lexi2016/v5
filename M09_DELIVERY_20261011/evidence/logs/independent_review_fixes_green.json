@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "start_utc": "2026-10-11T10:50:36.328168+00:00",
+  "end_utc": "2026-10-11T10:50:40.358690+00:00",
+  "start_shanghai": "2026-10-11T18:50:36.328168+08:00",
+  "end_shanghai": "2026-10-11T18:50:40.358690+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "independent_review_fixes_green.stdout.log",
+    "bytes": 1228,
+    "sha256": "8ee752a7ef9c7b8d356ea3f43c1163cf42bd7b4dac50b1680f4b4cc30b82f15d"
+  },
+  "stderr": {
+    "path": "independent_review_fixes_green.stderr.log",
+    "bytes": 581,
+    "sha256": "1db63adaefba50257c2633be0d4b678415bbd3491f46601758574995bbed7fc0"
+  }
+}

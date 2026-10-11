@@ -1,0 +1,17 @@
+test_hard_exit_after_head_never_serves_unreceipted_run (test_a_close_daily.DailyBehaviorTests.test_hard_exit_after_head_never_serves_unreceipted_run) ... FAIL
+
+======================================================================
+FAIL: test_hard_exit_after_head_never_serves_unreceipted_run (test_a_close_daily.DailyBehaviorTests.test_hard_exit_after_head_never_serves_unreceipted_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 392, in test_hard_exit_after_head_never_serves_unreceipted_run
+    self.assertEqual(current['identity']['generation_sha256'],first['generation_sha256'])
+AssertionError: '942f38d229f7f9d6cc24736b1688c8cb02c1e5d9e4e873861b54bf2435901f23' != '6a6c5e3a29092540a8c27c275af54591df9ef24571c8670da94d887542bc1f95'
+- 942f38d229f7f9d6cc24736b1688c8cb02c1e5d9e4e873861b54bf2435901f23
++ 6a6c5e3a29092540a8c27c275af54591df9ef24571c8670da94d887542bc1f95
+
+
+----------------------------------------------------------------------
+Ran 1 test in 2.044s
+
+FAILED (failures=1)

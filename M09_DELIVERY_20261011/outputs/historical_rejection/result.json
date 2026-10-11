@@ -1,0 +1,98 @@
+{
+  "Mac_execution": "NOT_RUN",
+  "both_slots": [
+    {
+      "admitted": false,
+      "attempt_status": "FAILED",
+      "declared_panel_row_count": 5126,
+      "issues": [
+        {
+          "code": "SOURCE_IDENTITY_MISSING"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "code": "MEMBERSHIP_IDENTITY_MISSING"
+        },
+        {
+          "code": "MEMBERSHIP_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "authority_status": "REBUILD_REQUIRED",
+          "code": "SOURCE_AUTHORITY_NOT_READY",
+          "status": "PARTIAL"
+        },
+        {
+          "code": "SOURCE_COVERAGE_INCOMPLETE",
+          "coverage_rate": 0.8858620689655172
+        },
+        {
+          "code": "SOURCE_RECEIPT_NOT_BOUND",
+          "detail": "OWNED_FILE_TOO_LARGE"
+        },
+        {
+          "code": "PANEL_DECODE_OR_FORMAT_FAILED",
+          "detail": "PARQUET_ENGINE_UNAVAILABLE:No module named 'pyarrow'"
+        }
+      ],
+      "observed_decoded_row_count": null,
+      "panel_decoded": false,
+      "read_status": "MISSING",
+      "slot": "16:05"
+    },
+    {
+      "admitted": false,
+      "attempt_status": "FAILED",
+      "declared_panel_row_count": 5126,
+      "issues": [
+        {
+          "code": "SOURCE_IDENTITY_MISSING"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "code": "MEMBERSHIP_IDENTITY_MISSING"
+        },
+        {
+          "code": "MEMBERSHIP_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "authority_status": "REBUILD_REQUIRED",
+          "code": "SOURCE_AUTHORITY_NOT_READY",
+          "status": "PARTIAL"
+        },
+        {
+          "code": "SOURCE_COVERAGE_INCOMPLETE",
+          "coverage_rate": 0.8858620689655172
+        },
+        {
+          "code": "SOURCE_RECEIPT_NOT_BOUND",
+          "detail": "OWNED_FILE_TOO_LARGE"
+        },
+        {
+          "code": "PANEL_DECODE_OR_FORMAT_FAILED",
+          "detail": "PARQUET_ENGINE_UNAVAILABLE:No module named 'pyarrow'"
+        }
+      ],
+      "observed_decoded_row_count": null,
+      "panel_decoded": false,
+      "read_status": "MISSING",
+      "slot": "17:10"
+    }
+  ],
+  "data_kind": "RECORDED_INPUT_REPLAY",
+  "finished_at": "2026-10-11T11:02:03.591963+00:00",
+  "market_success": false,
+  "natural_execution": "NOT_RUN",
+  "original_bytes_unchanged": true,
+  "real_original_producer": "NOT_RUN_INPUT_NOT_ADMITTED",
+  "real_pyarrow_decode": "NOT_RUN_ENGINE_UNAVAILABLE",
+  "schema_version": "m09.offline_actual_input_rejection.v1",
+  "status": "EXPECTED_REJECTION_CONFIRMED"
+}

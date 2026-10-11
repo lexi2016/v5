@@ -1,0 +1,1146 @@
+{
+  "schema_version": "v5.m09.failure_matrix.v1",
+  "method": "Exact existing unittest method names mapped to contract obligations; observed regression outcomes kept separate from test source inventory",
+  "final_regression": {
+    "status": "COMMAND_COMPLETED",
+    "metadata": {
+      "path": "evidence/logs/final_candidate_regression.json",
+      "sha256": "d6f1eeaab232135ab4ff7339d4572c9a19ce55c48bd2d4f9cba947aa45f15a2e",
+      "bytes": 1041
+    },
+    "stderr": {
+      "path": "evidence/logs/final_candidate_regression.stderr.log",
+      "sha256": "7b7dff03f977757a3c638a747f9302f86779d4ada88319e9dbce87d7ea46fbbd",
+      "bytes": 19802
+    },
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "V5/tests",
+      "-v"
+    ],
+    "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "exit_code": 0,
+    "discovered": 125,
+    "passed": 121,
+    "skipped": 4,
+    "failed": 0,
+    "errors": 0,
+    "skipped_details": [
+      "test_parquet_missing_column_is_rejected_before_producer (test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_column_is_rejected_before_producer) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'",
+      "test_parquet_missing_values_are_preserved_and_rejected (test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_values_are_preserved_and_rejected) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'",
+      "test_parquet_numeric_string_schema_is_not_coerced (test_a_close_daily.ParquetEngineeringTests.test_parquet_numeric_string_schema_is_not_coerced) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'",
+      "test_real_parquet_decoder_to_full_original_engineering_chain (test_a_close_daily.ParquetEngineeringTests.test_real_parquet_decoder_to_full_original_engineering_chain) ... skipped 'NOT_RUN: real pyarrow is not installed; no dependency/environment changes permitted'"
+    ],
+    "started_at_utc": "2026-10-11T11:00:46.330578+00:00",
+    "ended_at_utc": "2026-10-11T11:01:34.371611+00:00"
+  },
+  "suite_inventory": {
+    "test_a_close_daily.py": {
+      "source": {
+        "path": "after/V5/tests/test_a_close_daily.py",
+        "sha256": "c8d83504465efba96543db2363e79b74903e3af76bb99ef34f786bd807eb045a",
+        "bytes": 33785
+      },
+      "test_count": 51,
+      "tests": [
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields",
+          "name": "test_price_chain_writer_reader_preserves_native_fields",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts",
+          "name": "test_two_slots_reuse_one_calculation_and_keep_two_receipts",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_exact_same_attempt_returns_receipt_without_producing",
+          "name": "test_exact_same_attempt_returns_receipt_without_producing",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation",
+          "name": "test_two_concurrent_attempts_share_one_calculation",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run",
+          "name": "test_configuration_change_creates_a_new_immutable_run",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success",
+          "name": "test_later_failure_keeps_previous_success",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes",
+          "name": "test_source_changed_during_compute_never_publishes",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run",
+          "name": "test_original_writer_failure_does_not_replace_old_run",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation",
+          "name": "test_cas_conflict_keeps_served_generation",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date",
+          "name": "test_rollback_preserves_both_runs_and_switches_only_this_date",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_read_is_exact_date_and_has_no_file_side_effects",
+          "name": "test_read_is_exact_date_and_has_no_file_side_effects",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader",
+          "name": "test_tampered_payload_is_rejected_by_independent_reader",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_missing_field_rejected_before_algorithm",
+          "name": "test_missing_field_rejected_before_algorithm",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_bad_numeric_types_and_quality_are_not_normalized",
+          "name": "test_bad_numeric_types_and_quality_are_not_normalized",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_nonfinite_numeric_rejected",
+          "name": "test_nonfinite_numeric_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_wrong_date_type_or_day_rejected",
+          "name": "test_wrong_date_type_or_day_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_duplicate_and_invalid_suffix_rejected",
+          "name": "test_duplicate_and_invalid_suffix_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_missing_declared_members_rejected",
+          "name": "test_missing_declared_members_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_top_subset_cannot_claim_full_market",
+          "name": "test_top_subset_cannot_claim_full_market",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_unverified_or_unknown_source_is_not_promoted",
+          "name": "test_unverified_or_unknown_source_is_not_promoted",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected",
+          "name": "test_source_receipt_time_disagreement_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_late_or_naive_source_time_rejected",
+          "name": "test_late_or_naive_source_time_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_pointer_traversal_and_symlink_fail_closed",
+          "name": "test_pointer_traversal_and_symlink_fail_closed",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_panel_digest_and_manifest_digest_checked",
+          "name": "test_panel_digest_and_manifest_digest_checked",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_nontrading_or_invalid_date_and_third_slot_rejected",
+          "name": "test_nontrading_or_invalid_date_and_third_slot_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_synthetic_json_cannot_be_presented_as_real",
+          "name": "test_synthetic_json_cannot_be_presented_as_real",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_natural_trigger_cannot_claim_historical_day",
+          "name": "test_natural_trigger_cannot_claim_historical_day",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_unmarked_and_source_overlapping_roots_are_rejected",
+          "name": "test_unmarked_and_source_overlapping_roots_are_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_initialize_refuses_existing_nonempty_root",
+          "name": "test_initialize_refuses_existing_nonempty_root",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_late_stage_reference_only_enters_second_slot",
+          "name": "test_late_stage_reference_only_enters_second_slot",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_post_1710_video_is_not_even_read_for_either_old_slot",
+          "name": "test_post_1710_video_is_not_even_read_for_either_old_slot",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_available_unknown_evidence_remains_partial",
+          "name": "test_available_unknown_evidence_remains_partial",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_real_worker_timeout_keeps_old_generation",
+          "name": "test_real_worker_timeout_keeps_old_generation",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_error_after_head_replace_restores_previous_generation",
+          "name": "test_error_after_head_replace_restores_previous_generation",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_final_receipt_write_failure_preserves_previous_success",
+          "name": "test_final_receipt_write_failure_preserves_previous_success",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_actual_generation_connects_to_pure_existing_page_projection",
+          "name": "test_actual_generation_connects_to_pure_existing_page_projection",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_latest_failed_attempt_is_separate_from_served_success",
+          "name": "test_latest_failed_attempt_is_separate_from_served_success",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_restarted_unfinished_attempt_is_unknown_and_new_attempt_can_recover",
+          "name": "test_restarted_unfinished_attempt_is_unknown_and_new_attempt_can_recover",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_worker_rejects_unbound_external_product_root",
+          "name": "test_worker_rejects_unbound_external_product_root",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_hard_exit_after_head_never_serves_unreceipted_run",
+          "name": "test_hard_exit_after_head_never_serves_unreceipted_run",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_research_request_cannot_claim_a_future_slot",
+          "name": "test_research_request_cannot_claim_a_future_slot",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_missing_each_of_eight_required_columns_is_rejected",
+          "name": "test_missing_each_of_eight_required_columns_is_rejected",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_each_original_store_write_interruption_preserves_success",
+          "name": "test_each_original_store_write_interruption_preserves_success",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_independent_readback_mismatch_keeps_old_generation",
+          "name": "test_independent_readback_mismatch_keeps_old_generation",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_rollback_activation_exception_restores_previous_head",
+          "name": "test_rollback_activation_exception_restores_previous_head",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.DailyBehaviorTests.test_first_failed_attempt_remains_visible_without_fabricating_product",
+          "name": "test_first_failed_attempt_remains_visible_without_fabricating_product",
+          "class": "DailyBehaviorTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily.ParquetEngineeringTests.test_real_parquet_decoder_to_full_original_engineering_chain",
+          "name": "test_real_parquet_decoder_to_full_original_engineering_chain",
+          "class": "ParquetEngineeringTests",
+          "conditional_skip": true
+        },
+        {
+          "id": "test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_column_is_rejected_before_producer",
+          "name": "test_parquet_missing_column_is_rejected_before_producer",
+          "class": "ParquetEngineeringTests",
+          "conditional_skip": true
+        },
+        {
+          "id": "test_a_close_daily.ParquetEngineeringTests.test_parquet_numeric_string_schema_is_not_coerced",
+          "name": "test_parquet_numeric_string_schema_is_not_coerced",
+          "class": "ParquetEngineeringTests",
+          "conditional_skip": true
+        },
+        {
+          "id": "test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_values_are_preserved_and_rejected",
+          "name": "test_parquet_missing_values_are_preserved_and_rejected",
+          "class": "ParquetEngineeringTests",
+          "conditional_skip": true
+        },
+        {
+          "id": "test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present",
+          "name": "test_complete_daily_entry_is_present",
+          "class": "DailyEntryRedTests",
+          "conditional_skip": false
+        }
+      ]
+    },
+    "test_a_close_daily_api.py": {
+      "source": {
+        "path": "after/V5/tests/test_a_close_daily_api.py",
+        "sha256": "bfa1476b2f9de7ee2c5733d84a436ddee25784c33e2c90083f64b41ce850e777",
+        "bytes": 30206
+      },
+      "test_count": 33,
+      "tests": [
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_preserves_native_algorithm_and_date_fields",
+          "name": "test_preserves_native_algorithm_and_date_fields",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_metadata_names_distinct_digest_layers_and_computation_classification",
+          "name": "test_metadata_names_distinct_digest_layers_and_computation_classification",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_real_source_data_may_be_read_as_historical_replay_without_becoming_natural",
+          "name": "test_real_source_data_may_be_read_as_historical_replay_without_becoming_natural",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_record_scope_provenance_and_natural_limitations_are_visible",
+          "name": "test_record_scope_provenance_and_natural_limitations_are_visible",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_latest_failed_or_unknown_attempt_is_separate_from_served_success",
+          "name": "test_latest_failed_or_unknown_attempt_is_separate_from_served_success",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_no_latest_attempt_does_not_invent_a_trigger_status",
+          "name": "test_no_latest_attempt_does_not_invent_a_trigger_status",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_publication_recovery_stays_separate_from_served_generation_identity",
+          "name": "test_publication_recovery_stays_separate_from_served_generation_identity",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata",
+          "name": "test_unexpected_identity_fields_cannot_override_schema_or_leak_into_metadata",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_projection_does_not_alias_or_mutate_committed_result",
+          "name": "test_projection_does_not_alias_or_mutate_committed_result",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_unknown_source_times_remain_unknown_and_legacy_as_of_is_preserved",
+          "name": "test_unknown_source_times_remain_unknown_and_legacy_as_of_is_preserved",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_missing_result_has_exact_date_empty_arrays_and_no_fake_counts",
+          "name": "test_missing_result_has_exact_date_empty_arrays_and_no_fake_counts",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_bad_request_dates_are_rejected_before_reading",
+          "name": "test_bad_request_dates_are_rejected_before_reading",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_changed_review_record_or_generation_is_not_served",
+          "name": "test_changed_review_record_or_generation_is_not_served",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_raw_review_identity_is_bound_to_the_recorded_original_file",
+          "name": "test_raw_review_identity_is_bound_to_the_recorded_original_file",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_original_store_metadata_requires_exact_paths_hashes_and_sizes",
+          "name": "test_original_store_metadata_requires_exact_paths_hashes_and_sizes",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_cross_date_evidence_is_not_served",
+          "name": "test_resealed_cross_date_evidence_is_not_served",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_model_date_and_run_mismatches_are_not_served",
+          "name": "test_resealed_model_date_and_run_mismatches_are_not_served",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_source_mismatch_is_not_served",
+          "name": "test_resealed_source_mismatch_is_not_served",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_unsafe_boundaries_are_not_served",
+          "name": "test_resealed_unsafe_boundaries_are_not_served",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_missing_required_ui_array_is_not_repaired_into_success",
+          "name": "test_missing_required_ui_array_is_not_repaired_into_success",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_native_model_status_and_research_limits_are_enforced",
+          "name": "test_native_model_status_and_research_limits_are_enforced",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_missing_incomplete_or_unsafe_native_chain_is_not_verified",
+          "name": "test_missing_incomplete_or_unsafe_native_chain_is_not_verified",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_nonfinite_payload_fails_closed",
+          "name": "test_nonfinite_payload_fails_closed",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_invalid_schema_and_data_kind_pair_fail_closed",
+          "name": "test_invalid_schema_and_data_kind_pair_fail_closed",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_single_pinned_reader_result_is_consumed_without_writes",
+          "name": "test_single_pinned_reader_result_is_consumed_without_writes",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_first_failed_attempt_remains_visible_without_a_committed_generation",
+          "name": "test_first_failed_attempt_remains_visible_without_a_committed_generation",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_latest_attempt_read_failure_does_not_turn_missing_product_into_success",
+          "name": "test_latest_attempt_read_failure_does_not_turn_missing_product_into_success",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_reader_error_is_explicit_and_does_not_leak_local_path",
+          "name": "test_reader_error_is_explicit_and_does_not_leak_local_path",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09ReadProjectionTests.test_invalid_request_never_calls_generation_reader",
+          "name": "test_invalid_request_never_calls_generation_reader",
+          "class": "M09ReadProjectionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_preserves_hk_and_every_unrelated_top_key_exactly",
+          "name": "test_merge_preserves_hk_and_every_unrelated_top_key_exactly",
+          "class": "M09EnvelopeCompositionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_updates_a_legacy_aliases_and_removes_only_proven_a_attribution",
+          "name": "test_merge_updates_a_legacy_aliases_and_removes_only_proven_a_attribution",
+          "class": "M09EnvelopeCompositionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_missing_a_keeps_hk_and_never_reuses_old_a",
+          "name": "test_merge_missing_a_keeps_hk_and_never_reuses_old_a",
+          "class": "M09EnvelopeCompositionTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_refuses_cross_date_or_unsafe_preview",
+          "name": "test_merge_refuses_cross_date_or_unsafe_preview",
+          "class": "M09EnvelopeCompositionTests",
+          "conditional_skip": false
+        }
+      ]
+    },
+    "test_a_close_daily_sources.py": {
+      "source": {
+        "path": "after/V5/tests/test_a_close_daily_sources.py",
+        "sha256": "24a63dc3186d6fe681910a064dfd9861bc7c3bcba42b879638618de17e351804",
+        "bytes": 20769
+      },
+      "test_count": 18,
+      "tests": [
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_identity_covers_original_producer_store_calendar_and_dynamic_json",
+          "name": "test_identity_covers_original_producer_store_calendar_and_dynamic_json",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_loading_does_not_occupy_or_replace_bare_application_packages",
+          "name": "test_loading_does_not_occupy_or_replace_bare_application_packages",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_synthetic_namespace_packages_do_not_claim_missing_donor_initializers",
+          "name": "test_synthetic_namespace_packages_do_not_claim_missing_donor_initializers",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_calendar_uses_original_2026_contract_and_refuses_future_year",
+          "name": "test_calendar_uses_original_2026_contract_and_refuses_future_year",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries",
+          "name": "test_full_original_product_writer_and_independent_reader_keep_all_boundaries",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption",
+          "name": "test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_wrong_panel_sha_is_rejected_before_any_store_write",
+          "name": "test_wrong_panel_sha_is_rejected_before_any_store_write",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_cross_date_frame_is_rejected_before_silent_original_filter",
+          "name": "test_cross_date_frame_is_rejected_before_silent_original_filter",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_unknown_context_argument_cannot_reach_producer",
+          "name": "test_unknown_context_argument_cannot_reach_producer",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_symlink_pointer_cannot_redirect_reads",
+          "name": "test_symlink_pointer_cannot_redirect_reads",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_capsule_mutation_cannot_bypass_verification_through_module_cache",
+          "name": "test_capsule_mutation_cannot_bypass_verification_through_module_cache",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_loader_source_change_requires_process_restart",
+          "name": "test_loader_source_change_requires_process_restart",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload",
+          "name": "test_original_reader_rejects_modified_payload",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_frozen_safe_root_rejects_symlink_destination",
+          "name": "test_frozen_safe_root_rejects_symlink_destination",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_entire_original_product_and_writer_match_separate_process_oracle",
+          "name": "test_entire_original_product_and_writer_match_separate_process_oracle",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_parallel_admitted_frames_remain_bound_to_their_own_run",
+          "name": "test_parallel_admitted_frames_remain_bound_to_their_own_run",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_mutation_of_admitted_frame_during_original_model_fails",
+          "name": "test_mutation_of_admitted_frame_during_original_model_fails",
+          "class": "SourceTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_daily_sources.SourceTests.test_same_size_raw_mutation_with_restored_mtime_is_still_rejected",
+          "name": "test_same_size_raw_mutation_with_restored_mtime_is_still_rejected",
+          "class": "SourceTests",
+          "conditional_skip": false
+        }
+      ]
+    },
+    "test_a_close_review.py": {
+      "source": {
+        "path": "after/V5/tests/test_a_close_review.py",
+        "sha256": "fe331baa493299720380d6e8332947aa635b0e52d3b24a2b291bfdd20ca8c1f8",
+        "bytes": 3759
+      },
+      "test_count": 9,
+      "tests": [
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_original_summary_and_explicit_boundaries",
+          "name": "test_original_summary_and_explicit_boundaries",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_preclose_rejected",
+          "name": "test_preclose_rejected",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_missing_industry_not_filled",
+          "name": "test_missing_industry_not_filled",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_invalid_price_change_not_dropped",
+          "name": "test_invalid_price_change_not_dropped",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_duplicate_code_rejected",
+          "name": "test_duplicate_code_rejected",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_wrong_day_rows_rejected",
+          "name": "test_wrong_day_rows_rejected",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_changed_digest_rejected",
+          "name": "test_changed_digest_rejected",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_closed_market_rejected",
+          "name": "test_closed_market_rejected",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_a_close_review.ACloseReviewTests.test_actual_capture_distinct_from_frozen_label",
+          "name": "test_actual_capture_distinct_from_frozen_label",
+          "class": "ACloseReviewTests",
+          "conditional_skip": false
+        }
+      ]
+    },
+    "test_daily_close_plan.py": {
+      "source": {
+        "path": "after/V5/tests/test_daily_close_plan.py",
+        "sha256": "23f0ff9eb5938d96eb46611064d1b74861f14194507c6a7b859562ef67cc9f6e",
+        "bytes": 4958
+      },
+      "test_count": 14,
+      "tests": [
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_hk_open_when_a_and_connect_closed",
+          "name": "test_hk_open_when_a_and_connect_closed",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_data_floor_is_not_trigger",
+          "name": "test_data_floor_is_not_trigger",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_a_slots_are_separate",
+          "name": "test_a_slots_are_separate",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_second_slot_is_not_automatically_successful",
+          "name": "test_second_slot_is_not_automatically_successful",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_half_day_does_not_invent_trigger",
+          "name": "test_half_day_does_not_invent_trigger",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_utc_day_not_used_as_target_day",
+          "name": "test_utc_day_not_used_as_target_day",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_outside_frozen_calendar_blocks",
+          "name": "test_outside_frozen_calendar_blocks",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_naive_time_rejected",
+          "name": "test_naive_time_rejected",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_job_identity_stable_across_ticks",
+          "name": "test_job_identity_stable_across_ticks",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_next_day_has_different_identity",
+          "name": "test_next_day_has_different_identity",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_hk_deadline_inclusive",
+          "name": "test_hk_deadline_inclusive",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_plan_is_not_a_success_receipt",
+          "name": "test_plan_is_not_a_success_receipt",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_weekend_is_not_due",
+          "name": "test_weekend_is_not_due",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        },
+        {
+          "id": "test_daily_close_plan.DailyClosePlanTests.test_source_identity_is_returned",
+          "name": "test_source_identity_is_returned",
+          "class": "DailyClosePlanTests",
+          "conditional_skip": false
+        }
+      ]
+    }
+  },
+  "count_breakdown": {
+    "daily": {
+      "pass_expected": 47,
+      "conditional_real_parquet_skipped": 4
+    },
+    "api": {
+      "pass_expected": 33
+    },
+    "sources": {
+      "pass_expected": 18
+    },
+    "unchanged_original_v5_replay_and_schedule": {
+      "pass_expected": 23,
+      "replay": 9,
+      "schedule": 14
+    },
+    "all": {
+      "passed_observed": 121,
+      "skipped_observed": 4,
+      "discovered_observed": 125
+    }
+  },
+  "matrix": [
+    {
+      "id": "DATE_CALENDAR_TIMEZONE",
+      "obligation": "T is an actual A trading day; correct Shanghai day, exact row date/type and only two slots",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_nontrading_or_invalid_date_and_third_slot_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_wrong_date_type_or_day_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_natural_trigger_cannot_claim_historical_day",
+        "test_a_close_daily_sources.SourceTests.test_calendar_uses_original_2026_contract_and_refuses_future_year",
+        "test_daily_close_plan.DailyClosePlanTests.test_utc_day_not_used_as_target_day",
+        "test_daily_close_plan.DailyClosePlanTests.test_naive_time_rejected"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Live scheduler/business calendar acceptance is NOT_RUN; frozen 2026 contract and engineering clock checks exercised."
+    },
+    {
+      "id": "EIGHT_COLUMNS_NUMERIC_QUALITY",
+      "obligation": "Every required column, finite numeric types, no silent fill/drop, amount and close-position bounds, required industry/name",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_missing_each_of_eight_required_columns_is_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_missing_field_rejected_before_algorithm",
+        "test_a_close_daily.DailyBehaviorTests.test_bad_numeric_types_and_quality_are_not_normalized",
+        "test_a_close_daily.DailyBehaviorTests.test_nonfinite_numeric_rejected",
+        "test_a_close_review.ACloseReviewTests.test_missing_industry_not_filled",
+        "test_a_close_review.ACloseReviewTests.test_invalid_price_change_not_dropped"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Real parquet schema/decode tests are separately SKIPPED in this environment."
+    },
+    {
+      "id": "MEMBERSHIP_SCOPE",
+      "obligation": "Unique valid A codes and complete declared membership; a Top subset cannot claim full market",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_duplicate_and_invalid_suffix_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_missing_declared_members_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_top_subset_cannot_claim_full_market",
+        "test_a_close_review.ACloseReviewTests.test_duplicate_code_rejected",
+        "test_a_close_daily_sources.SourceTests.test_cross_date_frame_is_rejected_before_silent_original_filter"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Synthetic membership does not establish real full-market authority."
+    },
+    {
+      "id": "POINTER_RAW_SHA_ROOT",
+      "obligation": "Pointer containment, symlinks, manifest/panel SHA and changes during calculation fail closed",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_pointer_traversal_and_symlink_fail_closed",
+        "test_a_close_daily.DailyBehaviorTests.test_panel_digest_and_manifest_digest_checked",
+        "test_a_close_daily.DailyBehaviorTests.test_source_changed_during_compute_never_publishes",
+        "test_a_close_daily_sources.SourceTests.test_same_size_raw_mutation_with_restored_mtime_is_still_rejected",
+        "test_a_close_daily_sources.SourceTests.test_wrong_panel_sha_is_rejected_before_any_store_write",
+        "test_a_close_daily_sources.SourceTests.test_symlink_pointer_cannot_redirect_reads",
+        "test_a_close_daily.DailyBehaviorTests.test_unmarked_and_source_overlapping_roots_are_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_worker_rejects_unbound_external_product_root"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "No V4 root was written; engineering path boundaries do not certify a live Mac deployment root."
+    },
+    {
+      "id": "SOURCE_TIME_AND_AUTHORITY",
+      "obligation": "Unknown/unverified sources remain unconfirmed; source receipt and capture/available/cutoff consistency",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_unverified_or_unknown_source_is_not_promoted",
+        "test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_late_or_naive_source_time_rejected",
+        "test_a_close_daily.DailyBehaviorTests.test_research_request_cannot_claim_a_future_slot",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_unknown_source_times_remain_unknown_and_legacy_as_of_is_preserved"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Historical source available_at/PIT remain unknown; real natural admission NOT_RUN."
+    },
+    {
+      "id": "TWO_SLOT_IDENTITIES",
+      "obligation": "Same admitted inputs reuse a calculation but produce distinct 16:05/17:10 receipts; changed configuration/material causes new run",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_two_slots_reuse_one_calculation_and_keep_two_receipts",
+        "test_a_close_daily.DailyBehaviorTests.test_configuration_change_creates_a_new_immutable_run",
+        "test_a_close_daily.DailyBehaviorTests.test_late_stage_reference_only_enters_second_slot",
+        "test_daily_close_plan.DailyClosePlanTests.test_a_slots_are_separate",
+        "test_daily_close_plan.DailyClosePlanTests.test_second_slot_is_not_automatically_successful"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Actual scheduler slot receipts and continuous natural days NOT_RUN."
+    },
+    {
+      "id": "IDEMPOTENCY_CONCURRENCY",
+      "obligation": "Same attempt is side-effect-free; concurrent attempts share the calculation while keeping independent receipts",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_exact_same_attempt_returns_receipt_without_producing",
+        "test_a_close_daily.DailyBehaviorTests.test_two_concurrent_attempts_share_one_calculation",
+        "test_a_close_daily_sources.SourceTests.test_parallel_admitted_frames_remain_bound_to_their_own_run"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Local engineering concurrency only; no live distributed/network filesystem claim."
+    },
+    {
+      "id": "LATER_FAILURE_TIMEOUT",
+      "obligation": "A failed/timeout later attempt keeps the previous success visible",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success",
+        "test_a_close_daily.DailyBehaviorTests.test_real_worker_timeout_keeps_old_generation",
+        "test_a_close_daily.DailyBehaviorTests.test_latest_failed_attempt_is_separate_from_served_success",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_latest_failed_or_unknown_attempt_is_separate_from_served_success"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Timeout test uses an actual isolated process; it is an engineering fault, not a natural missed slot."
+    },
+    {
+      "id": "WRITER_READBACK_CAS",
+      "obligation": "Payload/receipt/manifest interruption, readback mismatch and CAS conflict never replace an existing served success",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_each_original_store_write_interruption_preserves_success",
+        "test_a_close_daily.DailyBehaviorTests.test_original_writer_failure_does_not_replace_old_run",
+        "test_a_close_daily.DailyBehaviorTests.test_independent_readback_mismatch_keeps_old_generation",
+        "test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation",
+        "test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload",
+        "test_a_close_daily.DailyBehaviorTests.test_tampered_payload_is_rejected_by_independent_reader"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Faults are deliberately injected against private engineering stores."
+    },
+    {
+      "id": "HEAD_AND_RECEIPT_CRASH",
+      "obligation": "Failed head activation, final receipt failure and hard process exit do not serve unreceipted runs",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_error_after_head_replace_restores_previous_generation",
+        "test_a_close_daily.DailyBehaviorTests.test_final_receipt_write_failure_preserves_previous_success",
+        "test_a_close_daily.DailyBehaviorTests.test_hard_exit_after_head_never_serves_unreceipted_run",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_publication_recovery_stays_separate_from_served_generation_identity"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Actual Mac power loss/sleep filesystem behavior NOT_RUN."
+    },
+    {
+      "id": "PARTIAL_STAGE_VIDEO_CHAIN",
+      "obligation": "M07/M12 gaps remain visible; after-17:10 material is not backfilled; metadata readiness never implies model video consumption",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_available_unknown_evidence_remains_partial",
+        "test_a_close_daily.DailyBehaviorTests.test_post_1710_video_is_not_even_read_for_either_old_slot",
+        "test_a_close_daily_sources.SourceTests.test_ready_context_does_not_claim_ui_acceptance_or_model_video_consumption",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_missing_incomplete_or_unsafe_native_chain_is_not_verified",
+        "test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "No M12 collection/rebuild or real video semantic consumption was performed."
+    },
+    {
+      "id": "ALGORITHM_PARITY_RESEARCH",
+      "obligation": "Complete original algorithms, field/order parity, constant probabilities, no core promotion, disabled LLM and research gates",
+      "engineering_tests": [
+        "test_a_close_daily_sources.SourceTests.test_entire_original_product_and_writer_match_separate_process_oracle",
+        "test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_preserves_native_algorithm_and_date_fields",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_native_model_status_and_research_limits_are_enforced",
+        "test_a_close_review.ACloseReviewTests.test_original_summary_and_explicit_boundaries"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Fresh full parity detail is SYNTHETIC and uses admitted-frame I/O; raw parquet decoder parity NOT_RUN."
+    },
+    {
+      "id": "CODE_DEPENDENCY_IDENTITY",
+      "obligation": "All donor bytes and manifest are pinned; altered cached capsule or changed loader is rejected",
+      "engineering_tests": [
+        "test_a_close_daily_sources.SourceTests.test_identity_covers_original_producer_store_calendar_and_dynamic_json",
+        "test_a_close_daily_sources.SourceTests.test_capsule_mutation_cannot_bypass_verification_through_module_cache",
+        "test_a_close_daily_sources.SourceTests.test_loader_source_change_requires_process_restart",
+        "test_a_close_daily_sources.SourceTests.test_loading_does_not_occupy_or_replace_bare_application_packages",
+        "test_a_close_daily_sources.SourceTests.test_synthetic_namespace_packages_do_not_claim_missing_donor_initializers"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Independent helper-identity regressions are additional evidence outside the 125 discovered tests."
+    },
+    {
+      "id": "DIGEST_DATE_RUN_CHAIN",
+      "obligation": "Source, raw review, canonical review, record, generation and run/date links retain their distinct meanings",
+      "engineering_tests": [
+        "test_a_close_daily_api.M09ReadProjectionTests.test_metadata_names_distinct_digest_layers_and_computation_classification",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_raw_review_identity_is_bound_to_the_recorded_original_file",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_original_store_metadata_requires_exact_paths_hashes_and_sizes",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_changed_review_record_or_generation_is_not_served",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_cross_date_evidence_is_not_served",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_model_date_and_run_mismatches_are_not_served",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_resealed_source_mismatch_is_not_served"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "These are committed-reader and projection proofs; active ordinary HTTP routing NOT_RUN."
+    },
+    {
+      "id": "READ_ONLY_EXACT_DATE",
+      "obligation": "Reads never compute/collect, do not change files, and do not substitute another date or fabricate values",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_read_is_exact_date_and_has_no_file_side_effects",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_single_pinned_reader_result_is_consumed_without_writes",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_missing_result_has_exact_date_empty_arrays_and_no_fake_counts",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_invalid_request_never_calls_generation_reader",
+        "test_a_close_daily.DailyBehaviorTests.test_actual_generation_connects_to_pure_existing_page_projection"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Browser refresh/back/date-switch click behavior and active ordinary endpoint NOT_RUN."
+    },
+    {
+      "id": "A_HK_ISOLATION",
+      "obligation": "Pure A projection/merge keeps HK and unrelated envelope values intact",
+      "engineering_tests": [
+        "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_preserves_hk_and_every_unrelated_top_key_exactly",
+        "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_updates_a_legacy_aliases_and_removes_only_proven_a_attribution",
+        "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_missing_a_keeps_hk_and_never_reuses_old_a",
+        "test_a_close_daily_api.M09EnvelopeCompositionTests.test_merge_refuses_cross_date_or_unsafe_preview"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Live A/H shared URL upgrade/rollback, HK response and V4 service checks NOT_RUN."
+    },
+    {
+      "id": "ROLLBACK_AND_RESTART",
+      "obligation": "Local rollback preserves old/new runs and restores the previous head; interrupted attempts remain unknown until new recovery",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_rollback_preserves_both_runs_and_switches_only_this_date",
+        "test_a_close_daily.DailyBehaviorTests.test_rollback_activation_exception_restores_previous_head",
+        "test_a_close_daily.DailyBehaviorTests.test_restarted_unfinished_attempt_is_unknown_and_new_attempt_can_recover",
+        "test_a_close_daily.DailyBehaviorTests.test_first_failed_attempt_remains_visible_without_fabricating_product",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_first_failed_attempt_remains_visible_without_a_committed_generation"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Mac sleep/restart/deployment rollback NOT_RUN."
+    },
+    {
+      "id": "REPLAY_IS_NOT_NATURAL",
+      "obligation": "Synthetic JSON or historical replay cannot claim real natural success; old replay and schedule guardrails remain",
+      "engineering_tests": [
+        "test_a_close_daily.DailyBehaviorTests.test_synthetic_json_cannot_be_presented_as_real",
+        "test_a_close_daily_api.M09ReadProjectionTests.test_real_source_data_may_be_read_as_historical_replay_without_becoming_natural",
+        "test_daily_close_plan.DailyClosePlanTests.test_plan_is_not_a_success_receipt",
+        "test_a_close_review.ACloseReviewTests.test_actual_capture_distinct_from_frozen_label",
+        "test_daily_close_plan.DailyClosePlanTests.test_job_identity_stable_across_ticks",
+        "test_daily_close_plan.DailyClosePlanTests.test_next_day_has_different_identity"
+      ],
+      "status": "PASS_ENGINEERING",
+      "limit": "Retained V5 replay/schedule tests are 23 PASS; original donor pytest suites are separately BLOCKED."
+    }
+  ],
+  "conditional_real_parquet_tests": {
+    "status": "SKIPPED_PYARROW_ABSENT",
+    "tests": [
+      "test_a_close_daily.ParquetEngineeringTests.test_real_parquet_decoder_to_full_original_engineering_chain",
+      "test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_column_is_rejected_before_producer",
+      "test_a_close_daily.ParquetEngineeringTests.test_parquet_numeric_string_schema_is_not_coerced",
+      "test_a_close_daily.ParquetEngineeringTests.test_parquet_missing_values_are_preserved_and_rejected"
+    ],
+    "purpose": "Real parquet I/O on ENGINEERING/SYNTHETIC rows when an already-approved pyarrow environment exists; not market/natural acceptance"
+  },
+  "not_run_layers": [
+    {
+      "layer": "Original donor pytest suites",
+      "status": "BLOCKED_ENVIRONMENT_PYTEST_NOT_INSTALLED",
+      "evidence": {
+        "path": "evidence/project_pytest_availability.json",
+        "sha256": "da03ea8c4301a35735de7caa43ba99d8b1f34e072657ba05a8b96b0a0549c262",
+        "bytes": 975
+      }
+    },
+    {
+      "layer": "Real historical full parquet/model parity",
+      "status": "NOT_RUN_PYARROW_ABSENT_AND_REAL_SOURCE_QUALITY_TIME_GAPS"
+    },
+    {
+      "layer": "Mac runtime and filesystem acceptance",
+      "status": "NOT_RUN_NO_MAC_EXECUTION"
+    },
+    {
+      "layer": "Active ordinary HTTP API and original ReviewView browser consumption",
+      "status": "NOT_RUN_INTEGRATION_NOT_ACTIVATED"
+    },
+    {
+      "layer": "Live A/H isolation and module rollback",
+      "status": "NOT_RUN_NO_ACTIVE_DEPLOYMENT"
+    },
+    {
+      "layer": "Natural two-slot execution and two consecutive eligible trading days",
+      "status": "NOT_RUN_NO_NATURAL_RECEIPTS"
+    }
+  ]
+}

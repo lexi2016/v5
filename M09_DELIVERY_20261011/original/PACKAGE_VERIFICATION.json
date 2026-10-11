@@ -1,0 +1,14 @@
+{
+  "module_id": "M09",
+  "source_files": 52,
+  "source_bytes": 404637,
+  "all_git_blobs_match_fixed_tree": true,
+  "all_sha256_and_bytes_match": true,
+  "all_materialized_bytes_identical": true,
+  "source_import_or_execution_performed": false,
+  "product_tests": "NOT_RUN",
+  "mac_actions": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "high_confidence_secret_pattern_matches": 0,
+  "zip_crc_validation": "See ZIP_VERIFICATION.json outside the ZIP; generated after archive closes."
+}

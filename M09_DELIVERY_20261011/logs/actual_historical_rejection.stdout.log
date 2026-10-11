@@ -1,0 +1,98 @@
+{
+  "schema_version": "m09.offline_actual_input_rejection.v1",
+  "status": "EXPECTED_REJECTION_CONFIRMED",
+  "data_kind": "RECORDED_INPUT_REPLAY",
+  "market_success": false,
+  "natural_execution": "NOT_RUN",
+  "Mac_execution": "NOT_RUN",
+  "real_original_producer": "NOT_RUN_INPUT_NOT_ADMITTED",
+  "real_pyarrow_decode": "NOT_RUN_ENGINE_UNAVAILABLE",
+  "both_slots": [
+    {
+      "slot": "16:05",
+      "attempt_status": "FAILED",
+      "admitted": false,
+      "panel_decoded": false,
+      "observed_decoded_row_count": null,
+      "declared_panel_row_count": 5126,
+      "read_status": "MISSING",
+      "issues": [
+        {
+          "code": "SOURCE_IDENTITY_MISSING"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "code": "MEMBERSHIP_IDENTITY_MISSING"
+        },
+        {
+          "code": "MEMBERSHIP_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "code": "SOURCE_AUTHORITY_NOT_READY",
+          "status": "PARTIAL",
+          "authority_status": "REBUILD_REQUIRED"
+        },
+        {
+          "code": "SOURCE_COVERAGE_INCOMPLETE",
+          "coverage_rate": 0.8858620689655172
+        },
+        {
+          "code": "SOURCE_RECEIPT_NOT_BOUND",
+          "detail": "OWNED_FILE_TOO_LARGE"
+        },
+        {
+          "code": "PANEL_DECODE_OR_FORMAT_FAILED",
+          "detail": "PARQUET_ENGINE_UNAVAILABLE:No module named 'pyarrow'"
+        }
+      ]
+    },
+    {
+      "slot": "17:10",
+      "attempt_status": "FAILED",
+      "admitted": false,
+      "panel_decoded": false,
+      "observed_decoded_row_count": null,
+      "declared_panel_row_count": 5126,
+      "read_status": "MISSING",
+      "issues": [
+        {
+          "code": "SOURCE_IDENTITY_MISSING"
+        },
+        {
+          "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "code": "MEMBERSHIP_IDENTITY_MISSING"
+        },
+        {
+          "code": "MEMBERSHIP_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        },
+        {
+          "code": "SOURCE_AUTHORITY_NOT_READY",
+          "status": "PARTIAL",
+          "authority_status": "REBUILD_REQUIRED"
+        },
+        {
+          "code": "SOURCE_COVERAGE_INCOMPLETE",
+          "coverage_rate": 0.8858620689655172
+        },
+        {
+          "code": "SOURCE_RECEIPT_NOT_BOUND",
+          "detail": "OWNED_FILE_TOO_LARGE"
+        },
+        {
+          "code": "PANEL_DECODE_OR_FORMAT_FAILED",
+          "detail": "PARQUET_ENGINE_UNAVAILABLE:No module named 'pyarrow'"
+        }
+      ]
+    }
+  ],
+  "original_bytes_unchanged": true,
+  "finished_at": "2026-10-11T11:02:03.591963+00:00"
+}

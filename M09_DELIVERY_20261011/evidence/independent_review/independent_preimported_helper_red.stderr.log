@@ -1,0 +1,14 @@
+test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha (__main__.PreimportedHelperIdentityReview.test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha) ... FAIL
+
+======================================================================
+FAIL: test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha (__main__.PreimportedHelperIdentityReview.test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_preimported_helper_identity.py", line 50, in test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha
+    self.assertNotEqual(answer["status"],"SUCCEEDED","Cached old helper code is recorded under the changed source SHA")
+AssertionError: 'SUCCEEDED' == 'SUCCEEDED' : Cached old helper code is recorded under the changed source SHA
+
+----------------------------------------------------------------------
+Ran 1 test in 1.410s
+
+FAILED (failures=1)

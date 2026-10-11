@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily.py", line 763, in run_a_close_daily
+    raise ValueError('M09_GENERATION_CAS_CONFLICT')
+ValueError: M09_GENERATION_CAS_CONFLICT

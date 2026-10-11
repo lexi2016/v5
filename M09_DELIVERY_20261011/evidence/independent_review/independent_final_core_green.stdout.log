@@ -1,0 +1,6 @@
+{"finding": "hard_crash_commit_window", "child_exit": 73, "old_generation": "a06c5565fefb31dbc46de2739dce62c30d73d35abfc6f4cd458d60fa49efbf71", "after_crash": "a06c5565fefb31dbc46de2739dce62c30d73d35abfc6f4cd458d60fa49efbf71", "retry_status": "UNKNOWN", "retry_reason": "INTERRUPTED_ATTEMPT_REQUIRES_NEW_ATTEMPT_ID", "after_resume": "a06c5565fefb31dbc46de2739dce62c30d73d35abfc6f4cd458d60fa49efbf71"}
+{"finding": "stale_loaded_daily_implementation", "status": "FAILED", "reason": "ValueError:M09_LOADED_IMPLEMENTATION_CHANGED_RESTART_REQUIRED", "old_source_sha": "ddad211724d275d740974b10704cf042eab6fdd8f1d17725c37bee1dcf13100d", "new_source_sha": "9a8bf58a3e69926838e70ed04f7ec12a977d3607a5e6f82fcac6f4cfbd286acb"}
+{"finding": "unverified_saved_calculation_and_inputs", "corrupted": "calculation.json", "read_status": "CANNOT_CONFIRM"}
+{"finding": "unverified_saved_calculation_and_inputs", "corrupted": "inputs/source/panel.json", "read_status": "CANNOT_CONFIRM"}
+{"finding": "unverified_saved_calculation_and_inputs", "corrupted": "inputs/admitted_panel.json", "read_status": "CANNOT_CONFIRM"}
+{"finding": "unverified_saved_calculation_and_inputs", "corrupted": "inputs/source/members.txt", "read_status": "CANNOT_CONFIRM"}

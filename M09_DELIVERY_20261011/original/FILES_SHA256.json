@@ -1,0 +1,242 @@
+{
+  "FIXED_TREE_SELECTION.json": {
+    "bytes": 16928,
+    "sha256": "56a16ef07547c3f89a89b93bcf6756a7eab13789cdc7dc6a4f6e5918e899b7fa"
+  },
+  "PACKAGE_VERIFICATION.json": {
+    "bytes": 480,
+    "sha256": "d2f3ba44296944491f999e216569c73a46c105297308edf90f5ad8db342d32a9"
+  },
+  "README.md": {
+    "bytes": 3676,
+    "sha256": "62f063ff768260952bd43c7c7561145d37bcc11b7883a1fb6b8f0f18ebcdb1ec"
+  },
+  "SOURCE_MANIFEST.json": {
+    "bytes": 39356,
+    "sha256": "0ccf865c7c4e5834676fb35fc271c71fb10e91217fc8b10f2a9162fc4e6f09e1"
+  },
+  "handoff/ACCEPTANCE.md": {
+    "bytes": 5159,
+    "sha256": "c1c4219c6a53416d176093c3023b9d9e4991e0e5ea23df3680eadb1f26367eb7"
+  },
+  "handoff/PROMPT_FOR_CHAT.md": {
+    "bytes": 4546,
+    "sha256": "3b700214f765656ad83ffa9c2d7c307718c533f143216b0450515039cfb52638"
+  },
+  "handoff/SOURCE_MAP.md": {
+    "bytes": 6705,
+    "sha256": "eed32c9ac4ea5e370a25c1d752c122c55f19f14e72b53d6ee723aeb44929e0c2"
+  },
+  "handoff/START_HERE.md": {
+    "bytes": 5287,
+    "sha256": "f60c5d626521c7e14c6a14672980085ebd595983c3968f28a29247cc7583f541"
+  },
+  "source/V5/README.md": {
+    "bytes": 2487,
+    "sha256": "7abaade6654d84cd93c378a609f4db3e9b9dec45db338ac7407f782ec34eee57"
+  },
+  "source/V5/contracts/a_close_source_manifest.json": {
+    "bytes": 1214,
+    "sha256": "1b433f3b88f97e21b6ff33d084b9fcdccde5b90a43a220eefbf7a6b8c5a55f27"
+  },
+  "source/V5/pyproject.toml": {
+    "bytes": 262,
+    "sha256": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584"
+  },
+  "source/V5/src/v5_shadow/__init__.py": {
+    "bytes": 83,
+    "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c"
+  },
+  "source/V5/src/v5_shadow/a_close_review.py": {
+    "bytes": 8008,
+    "sha256": "b288b916f43a41cfc7bd95511ad6decfd537a4cccf64ba5875f13dc04fad1933"
+  },
+  "source/V5/src/v5_shadow/a_preselection.py": {
+    "bytes": 29140,
+    "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b"
+  },
+  "source/V5/src/v5_shadow/api_gateway.py": {
+    "bytes": 16003,
+    "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225"
+  },
+  "source/V5/src/v5_shadow/composition.py": {
+    "bytes": 5297,
+    "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0"
+  },
+  "source/V5/src/v5_shadow/contracts.py": {
+    "bytes": 7256,
+    "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
+  },
+  "source/V5/src/v5_shadow/daily_close_plan.py": {
+    "bytes": 5807,
+    "sha256": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6"
+  },
+  "source/V5/src/v5_shadow/daily_dispatch.py": {
+    "bytes": 3438,
+    "sha256": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240"
+  },
+  "source/V5/src/v5_shadow/digests.py": {
+    "bytes": 425,
+    "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+  },
+  "source/V5/src/v5_shadow/module_api.py": {
+    "bytes": 15282,
+    "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca"
+  },
+  "source/V5/src/v5_shadow/module_artifacts.py": {
+    "bytes": 7936,
+    "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17"
+  },
+  "source/V5/src/v5_shadow/provider_evidence.py": {
+    "bytes": 6446,
+    "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5"
+  },
+  "source/V5/src/v5_shadow/run_ledger.py": {
+    "bytes": 6105,
+    "sha256": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd"
+  },
+  "source/V5/tests/test_a_close_review.py": {
+    "bytes": 3759,
+    "sha256": "fe331baa493299720380d6e8332947aa635b0e52d3b24a2b291bfdd20ca8c1f8"
+  },
+  "source/V5/tests/test_daily_close_plan.py": {
+    "bytes": 4958,
+    "sha256": "23f0ff9eb5938d96eb46611064d1b74861f14194507c6a7b859562ef67cc9f6e"
+  },
+  "source/V5/vendor/a_close_baseline/contracts/market_calendar_2026.json": {
+    "bytes": 3473,
+    "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+  },
+  "source/V5/vendor/a_close_baseline/contracts/trading_calendar.py": {
+    "bytes": 9291,
+    "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f"
+  },
+  "source/V5/vendor/a_close_baseline/domains/a_share_close_model.py": {
+    "bytes": 12302,
+    "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a"
+  },
+  "source/V5/vendor/daily_schedule_baseline/contracts/market_calendar_2026.json": {
+    "bytes": 3473,
+    "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+  },
+  "source/V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json": {
+    "bytes": 51682,
+    "sha256": "7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef"
+  },
+  "source/V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py": {
+    "bytes": 9291,
+    "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/http_routes.py": {
+    "bytes": 8579,
+    "sha256": "5d0f487f7396dcefdeb4e3fdb72926327714276ce0e5f0aff26788ec91eedde6"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/stage_partial.py": {
+    "bytes": 3940,
+    "sha256": "776be68ef0c44478d347527417fbbff873143ba7f206ba14d967fad9059d358f"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/stage_rows.py": {
+    "bytes": 9465,
+    "sha256": "54946d92b28bd8f5a6a6a004d92356b74e18efad245e309f03c67fae12b8baa3"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/contracts/__init__.py": {
+    "bytes": 55,
+    "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py": {
+    "bytes": 261,
+    "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json": {
+    "bytes": 3473,
+    "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/contracts/stages.py": {
+    "bytes": 2036,
+    "sha256": "d0ac1771a1005888e53e9a322da65f959cfbcbcc665357b8783d5eb4eda9c6df"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py": {
+    "bytes": 10239,
+    "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py": {
+    "bytes": 12302,
+    "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/domains/a_share_review.py": {
+    "bytes": 7038,
+    "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py": {
+    "bytes": 10549,
+    "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/domains/review_envelope.py": {
+    "bytes": 4067,
+    "sha256": "f18cc6f9e8242447ad404255e89918f5a6a399073e13699ffb415235cd33314e"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py": {
+    "bytes": 68,
+    "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py": {
+    "bytes": 10176,
+    "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py": {
+    "bytes": 10704,
+    "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py": {
+    "bytes": 7514,
+    "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py": {
+    "bytes": 960,
+    "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py": {
+    "bytes": 9354,
+    "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py": {
+    "bytes": 2251,
+    "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py": {
+    "bytes": 2597,
+    "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py": {
+    "bytes": 8360,
+    "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/ops/import_a_share_review_reference.py": {
+    "bytes": 2771,
+    "sha256": "13d4368d1677b158a3b6c7862d6b8d1b70a2e07895544699e92f610d93490524"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/ops/run_v35_close_review_node.py": {
+    "bytes": 17352,
+    "sha256": "e48e27969d79a1e09f31bdd4be35fb3ade0822ee5e80e43888ceb1abe3bda856"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/ops/run_v35_close_review_slot.py": {
+    "bytes": 10143,
+    "sha256": "08f46d928dc70fabf2c1ca49d96b5fa64dc67f113909ed3ce66b81bfcad67ae5"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/tests/test_a_share_close_model.py": {
+    "bytes": 4191,
+    "sha256": "bc0629b73daeb8e7bc2c6c49864bd22ad197eeb6489b7f4c9c7bf5af0b44a38f"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/tests/test_a_share_review.py": {
+    "bytes": 16004,
+    "sha256": "b909b4219c39d9124300fcc612ccbfa28a39cdfa8d876277dd0c706536292d19"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/tests/test_a_share_review_store.py": {
+    "bytes": 9426,
+    "sha256": "e6ecafecd3c0552113cc11e284ff9903e9a4d6089e99d0ce0ca0b128299441e3"
+  },
+  "source/handoff/v4-running-source-20261005/canonical/tests/test_close_review_chain.py": {
+    "bytes": 7344,
+    "sha256": "34b5ff1ada6e10df74ecb65d2ddf9b2bb5a8108da8887599c626231b5f8342f8"
+  }
+}

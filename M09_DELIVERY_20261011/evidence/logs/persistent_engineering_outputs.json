@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/mac_draft/mac_generation_walkthrough.py",
+    "--after",
+    "/workspace/scratch/a5458cb06b78/m09_work/after",
+    "--out",
+    "/workspace/scratch/a5458cb06b78/m09_work/engineering_outputs"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "M09_REVIEW_SNAPSHOT": null,
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T11:02:02.983278+00:00",
+  "end_utc": "2026-10-11T11:02:07.783545+00:00",
+  "start_shanghai": "2026-10-11T19:02:02.983278+08:00",
+  "end_shanghai": "2026-10-11T19:02:07.783545+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "persistent_engineering_outputs.stdout.log",
+    "bytes": 1729,
+    "sha256": "6be3de7b7446dfc3803f8e904247934f9baf03027dc4b97efa8daa3a2fc43c0b"
+  },
+  "stderr": {
+    "path": "persistent_engineering_outputs.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

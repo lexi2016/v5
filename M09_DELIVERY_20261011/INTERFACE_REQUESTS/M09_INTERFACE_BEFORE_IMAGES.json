@@ -1,0 +1,244 @@
+{
+  "schema_version": "v5.m09.interface_before_images.v1",
+  "document_status": "DRAFT_SHARED_OWNER_REQUEST_ONLY",
+  "local_byte_verification": "PERFORMED",
+  "active_source_commit_status": "UNKNOWN",
+  "user_reported_integration_baseline": {
+    "repository": "lexi2016/v5",
+    "branch": "v5/m09-handoff-20261011",
+    "commit": "782bfc9ae91ff9cfe897afffc52aad43b7c1b78c",
+    "verification": "USER_REPORTED_NOT_REMOTE_REVERIFIED_HERE"
+  },
+  "runtime_verification": {
+    "live_mac": "NOT_RUN",
+    "live_api": "NOT_RUN",
+    "browser": "NOT_RUN",
+    "deployment": "NOT_RUN"
+  },
+  "before_images": [
+    {
+      "name": "active_api:review_router.py",
+      "local_evidence_path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/api/v35_api/review_router.py",
+      "bytes": 42184,
+      "raw_sha256": "ef6e870077fecd1e025ec1a0741ec3f766b76ef914b60661e4f32937acc9e28d",
+      "git_blob_sha1_computed_from_bytes": "d94d76fe6bc7833438dbe41455585a9a06b7f2d9",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/api/v35_api/review_router.py",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_api:app.py",
+      "local_evidence_path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/api/v35_api/app.py",
+      "bytes": 327501,
+      "raw_sha256": "ba40457e4fc6d4f60155c55e4202ac82e870467598d49ea36bcbc2aab5c70eb3",
+      "git_blob_sha1_computed_from_bytes": "83c16d5edb66c186a8abf01293ee804958685633",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/api/v35_api/app.py",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_api:review_evidence_layers.py",
+      "local_evidence_path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/domains/review_evidence_layers.py",
+      "bytes": 24730,
+      "raw_sha256": "96886aa56318968625bfb57e484fde39ba267388591234fe7ed9e3f2939d77a7",
+      "git_blob_sha1_computed_from_bytes": "244dda3a8c94b98522cdcd2b4b11c95d84cc286c",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/domains/review_evidence_layers.py",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_ui:App.vue",
+      "local_evidence_path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/web/src/App.vue",
+      "bytes": 133644,
+      "raw_sha256": "d87285a8a1de1611ca83add16d70101979ea469d2c7fb093dc1f9ca5961baef0",
+      "git_blob_sha1_computed_from_bytes": "d8ac7d9fac1bb7117f21335d2ae2e507af20f4e9",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/App.vue",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_ui:api/review.ts",
+      "local_evidence_path": "runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011/binding_source/active_api/apps/web/src/api/review.ts",
+      "bytes": 1436,
+      "raw_sha256": "fc2c7551fe386a9b01375d6d82d7f633990bba169f48e9b918386e31baa6dd7d",
+      "git_blob_sha1_computed_from_bytes": "892eeef9ff696c7ddce1fb4948f80fd1f34ea413",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/api/review.ts",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_ui:ReviewView.vue",
+      "local_evidence_path": "supplement/M09_SUPPLEMENT/source/apps/web/src/views/ReviewView.vue",
+      "bytes": 3441,
+      "raw_sha256": "cb1f4f19d9b8100d0caf86a5563990a90b627fdb72699b9ccbe499b1e9542c71",
+      "git_blob_sha1_computed_from_bytes": "4f6b816a6e7ea05f9bc30240833116251c7f08b9",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/views/ReviewView.vue",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_ui:AshareReviewPanel.vue",
+      "local_evidence_path": "supplement/M09_SUPPLEMENT/source/apps/web/src/components/review/AshareReviewPanel.vue",
+      "bytes": 25639,
+      "raw_sha256": "f9deaf8d15a3273d3237458b083b847a72f6dcda86824d37731103c13d6672bf",
+      "git_blob_sha1_computed_from_bytes": "835e50335e67d129c7a3f797d3bda0b3dbc39d09",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/components/review/AshareReviewPanel.vue",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "active_ui:contracts/review.ts",
+      "local_evidence_path": "supplement/M09_SUPPLEMENT/source/apps/web/src/contracts/review.ts",
+      "bytes": 10012,
+      "raw_sha256": "079adf7971e346a8da5d40c49bc3c1fdfb2307aaf6ed70df5ed4d9312699c507",
+      "git_blob_sha1_computed_from_bytes": "24e99280741ca092b7ddbd2c006af41ce2d643f3",
+      "provenance": {
+        "kind": "ATTACHED_ACTIVE_MAC_SOURCE_COPY",
+        "release_id": "hk-dated-name-20261011-r2",
+        "source_path": "/Users/lexi/Library/Application Support/com.lexi.v4.local/releases/hk-dated-name-20261011-r2/app/apps/web/src/contracts/review.ts",
+        "source_commit": null,
+        "source_commit_status": "UNKNOWN"
+      }
+    },
+    {
+      "name": "fixed_v5:module_api.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/module_api.py",
+      "bytes": 15282,
+      "raw_sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+      "git_blob_sha1_computed_from_bytes": "3fdea5f256b2dc70df141a0e70dbbc1396abb859",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/module_api.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:module_artifacts.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/module_artifacts.py",
+      "bytes": 7936,
+      "raw_sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "git_blob_sha1_computed_from_bytes": "acf2195fee3711f594982269f1e6ab81da40a905",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/module_artifacts.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:api_gateway.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/api_gateway.py",
+      "bytes": 16003,
+      "raw_sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+      "git_blob_sha1_computed_from_bytes": "c5677fb59a4847a24f16a12d5412fce293168fc0",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/api_gateway.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:run_ledger.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/run_ledger.py",
+      "bytes": 6105,
+      "raw_sha256": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd",
+      "git_blob_sha1_computed_from_bytes": "1187e3b7633682d61985984afdf0699508cefd59",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/run_ledger.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:daily_dispatch.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/daily_dispatch.py",
+      "bytes": 3438,
+      "raw_sha256": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+      "git_blob_sha1_computed_from_bytes": "f5d45abea6a159f01756decb23049b825cd0f906",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/daily_dispatch.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:composition.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/composition.py",
+      "bytes": 5297,
+      "raw_sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "git_blob_sha1_computed_from_bytes": "d22723df42b71537210aa621afb05dfab6be517f",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/composition.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:daily_close_plan.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/daily_close_plan.py",
+      "bytes": 5807,
+      "raw_sha256": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6",
+      "git_blob_sha1_computed_from_bytes": "b816802e512a8f22d736716168c515f5ade61ca0",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/daily_close_plan.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    },
+    {
+      "name": "fixed_v5:digests.py",
+      "local_evidence_path": "before/V5/src/v5_shadow/digests.py",
+      "bytes": 425,
+      "raw_sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "git_blob_sha1_computed_from_bytes": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "provenance": {
+        "kind": "FIXED_PACKAGE_BEFORE_IMAGE",
+        "donor_repository": "lexi2016/v4",
+        "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+        "repository_relative_path": "V5/src/v5_shadow/digests.py",
+        "current_integration_match": "NOT_RECHECKED"
+      }
+    }
+  ]
+}

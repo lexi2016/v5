@@ -1,0 +1,33 @@
+{
+  "schema_version": "v5.m09.raw_diagnosis_execution.v1",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/raw_historical_input_diagnosis.py",
+    "--runtime-inputs",
+    "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011",
+    "--candidate-src",
+    "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "started_at_utc": "2026-10-11T10:54:44.580200+00:00",
+  "finished_at_utc": "2026-10-11T10:54:44.922768+00:00",
+  "started_at_shanghai": "2026-10-11T18:54:44.580200+08:00",
+  "finished_at_shanghai": "2026-10-11T18:54:44.922768+08:00",
+  "exit_code": 0,
+  "helper_sha256": "acf6af4bbb558d81a20bfc71e92c381be4c215ac487279314587b7bda4116c0b",
+  "logs": {
+    "stdout": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/RAW_HISTORICAL_INPUT_DIAGNOSIS.json",
+      "bytes": 10260,
+      "sha256": "d4e6ac3677d724a65dd270f87c6907173357f76c5f5d01f07d2960756480be65"
+    },
+    "stderr": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/RAW_HISTORICAL_INPUT_DIAGNOSIS.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "classification": "READ_ONLY_OBSERVATION_NOT_MODEL_OR_PRODUCT_EXECUTION"
+}

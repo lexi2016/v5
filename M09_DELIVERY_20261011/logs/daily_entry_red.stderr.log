@@ -1,0 +1,14 @@
+test_complete_daily_entry_is_present (test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present) ... FAIL
+
+======================================================================
+FAIL: test_complete_daily_entry_is_present (test_a_close_daily.DailyEntryRedTests.test_complete_daily_entry_is_present)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/after/V5/tests/test_a_close_daily.py", line 8, in test_complete_daily_entry_is_present
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.a_close_daily'),
+AssertionError: unexpectedly None : M09 daily producer/store/generation entry is missing
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (failures=1)

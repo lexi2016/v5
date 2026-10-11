@@ -1,0 +1,42 @@
+{
+  "phase": "GREEN_MISSING_PRODUCT_ATTEMPT_AND_SEPARATE_RECOVERY",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_a_close_daily_api.py",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after/V5",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_at_utc": "2026-10-11T10:48:10.745558+00:00",
+  "finished_at_utc": "2026-10-11T10:48:11.039316+00:00",
+  "started_at_shanghai": "2026-10-11T18:48:10.745558+08:00",
+  "finished_at_shanghai": "2026-10-11T18:48:11.039316+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_missing_attempt_recovery_green.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_missing_attempt_recovery_green.stderr.log",
+      "sha256": "ef38c47d3e98cb453a1354dbaf8a3100fa097c9d46d6c3b0629846677c65cc96",
+      "bytes": 5926
+    }
+  },
+  "candidate_sha256": {
+    "src/v5_shadow/a_close_daily_api.py": "74c4925c4ba5aa0d973ead806fed57cdf3416db08db0c1124b2e5fcf84003c16",
+    "tests/test_a_close_daily_api.py": "bfa1476b2f9de7ee2c5733d84a436ddee25784c33e2c90083f64b41ce850e777"
+  }
+}

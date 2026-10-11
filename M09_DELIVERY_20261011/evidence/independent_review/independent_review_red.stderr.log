@@ -1,0 +1,63 @@
+test_crash_after_head_switch_preserves_previous_success (__main__.IndependentM09Review.test_crash_after_head_switch_preserves_previous_success) ... FAIL
+test_loaded_daily_code_does_not_claim_changed_on_disk_implementation (__main__.IndependentM09Review.test_loaded_daily_code_does_not_claim_changed_on_disk_implementation) ... FAIL
+test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) ... 
+  test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='calculation.json') ... FAIL
+  test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='inputs/source/panel.json') ... FAIL
+  test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='inputs/admitted_panel.json') ... FAIL
+  test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='inputs/source/members.txt') ... FAIL
+
+======================================================================
+FAIL: test_crash_after_head_switch_preserves_previous_success (__main__.IndependentM09Review.test_crash_after_head_switch_preserves_previous_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py", line 72, in test_crash_after_head_switch_preserves_previous_success
+    self.assertEqual(after_resume["identity"]["generation_sha256"], first["generation_sha256"],
+AssertionError: 'efda38ebb93dacce7f7fba0bd570b3bf9daa52f9290144ed63f3b6534c5635b6' != '2efe4711c28ea63d941bf62249b6fe8ffa4d45ee7be70910fe9c93eb8cebe0f5'
+- efda38ebb93dacce7f7fba0bd570b3bf9daa52f9290144ed63f3b6534c5635b6
++ 2efe4711c28ea63d941bf62249b6fe8ffa4d45ee7be70910fe9c93eb8cebe0f5
+ : A hard-interrupted attempt remains the visible success even after retry returns UNKNOWN
+
+======================================================================
+FAIL: test_loaded_daily_code_does_not_claim_changed_on_disk_implementation (__main__.IndependentM09Review.test_loaded_daily_code_does_not_claim_changed_on_disk_implementation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py", line 118, in test_loaded_daily_code_does_not_claim_changed_on_disk_implementation
+    self.assertNotEqual(answer["status"], "SUCCEEDED", "Old loaded code runs and records the hash of different new on-disk code")
+AssertionError: 'SUCCEEDED' == 'SUCCEEDED' : Old loaded code runs and records the hash of different new on-disk code
+
+======================================================================
+FAIL: test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='calculation.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py", line 87, in test_reader_rejects_mutated_calculation_or_input_snapshot
+    self.assertNotEqual(status, "VERIFIED", "Saved immutable calculation/input corruption is served as VERIFIED")
+AssertionError: 'VERIFIED' == 'VERIFIED' : Saved immutable calculation/input corruption is served as VERIFIED
+
+======================================================================
+FAIL: test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='inputs/source/panel.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py", line 87, in test_reader_rejects_mutated_calculation_or_input_snapshot
+    self.assertNotEqual(status, "VERIFIED", "Saved immutable calculation/input corruption is served as VERIFIED")
+AssertionError: 'VERIFIED' == 'VERIFIED' : Saved immutable calculation/input corruption is served as VERIFIED
+
+======================================================================
+FAIL: test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='inputs/admitted_panel.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py", line 87, in test_reader_rejects_mutated_calculation_or_input_snapshot
+    self.assertNotEqual(status, "VERIFIED", "Saved immutable calculation/input corruption is served as VERIFIED")
+AssertionError: 'VERIFIED' == 'VERIFIED' : Saved immutable calculation/input corruption is served as VERIFIED
+
+======================================================================
+FAIL: test_reader_rejects_mutated_calculation_or_input_snapshot (__main__.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) (relative='inputs/source/members.txt')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/scratch/a5458cb06b78/m09_work/evidence/independent_review/test_review_findings.py", line 87, in test_reader_rejects_mutated_calculation_or_input_snapshot
+    self.assertNotEqual(status, "VERIFIED", "Saved immutable calculation/input corruption is served as VERIFIED")
+AssertionError: 'VERIFIED' == 'VERIFIED' : Saved immutable calculation/input corruption is served as VERIFIED
+
+----------------------------------------------------------------------
+Ran 3 tests in 3.385s
+
+FAILED (failures=6)

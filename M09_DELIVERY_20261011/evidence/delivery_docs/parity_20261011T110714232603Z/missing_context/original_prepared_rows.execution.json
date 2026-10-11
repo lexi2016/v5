@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-I",
+    "-B",
+    "-c",
+    "\nimport hashlib,importlib.util,json,pathlib,sys\nimport pandas as pd\nrequest=json.loads(sys.stdin.read())\npath=pathlib.Path(request['model_path'])\nassert hashlib.sha256(path.read_bytes()).hexdigest()==request['model_sha256']\nspec=importlib.util.spec_from_file_location('_m09_original_model_evidence',path)\nmodule=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)\nframe=pd.DataFrame(request['rows'],columns=request['columns'])\nprepared=module.prepare_close_rows(frame,request['trade_date'])\nprint(json.dumps({'columns':list(prepared.columns),'dtypes':[str(kind) for kind in prepared.dtypes],\n                  'rows':prepared.to_dict('records'),'industry_metrics':module._sector_rows(prepared)},\n                 ensure_ascii=False,sort_keys=True,allow_nan=False))\n"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work",
+  "started_at_utc": "2026-10-11T11:07:15.087734+00:00",
+  "ended_at_utc": "2026-10-11T11:07:15.511295+00:00",
+  "started_at_shanghai": "2026-10-11T19:07:15.087734+08:00",
+  "ended_at_shanghai": "2026-10-11T19:07:15.511295+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/original_prepared_rows.stdout.json",
+    "sha256": "c584c5510c0a4b9725a2a0630fb8a1c5e75939391ee7ec4c97d9caf01974ab7c",
+    "bytes": 2365
+  },
+  "stderr": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/original_prepared_rows.stderr.txt",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "input_canonical_sha256": "e3ea4e0e16f7e89d80ac69c08590480f0a9434207bec88420004afd779e4ef45"
+}

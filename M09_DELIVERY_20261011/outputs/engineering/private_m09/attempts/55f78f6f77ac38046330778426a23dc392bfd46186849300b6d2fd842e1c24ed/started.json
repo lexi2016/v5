@@ -1,0 +1,1 @@
+{"request_sha256":"849e59d781e7b1a1e1b7e86307ca5774055313f59db80cef1324306c7cd22220","schema_version":"v5.m09.attempt_start.v1","started_at":"2026-10-11T11:02:03.909582+00:00","trigger":{"attempt_id":"second-1710","execution_kind":"ENGINEERING","job_id":"m09_mac_engineering_1710","slot":"17:10","trade_date":"20261009","triggered_at":"2026-10-11T11:02:03.895506+00:00"}}

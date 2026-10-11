@@ -1,0 +1,3518 @@
+{
+  "schema": "m09.dependency_inventory.v1",
+  "baseline_repository": "lexi2016/v4",
+  "baseline_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "method": "AST-only import discovery; no product import, execution, test, network, or runtime completeness assertion",
+  "producer_entry": "ops.build_a_share_close_review",
+  "producer_static_internal_import_closure": [
+    {
+      "module": "ops.build_a_share_close_review",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "blob_sha": "d8295efa1d082917522d93f3d9396ee154a0926f",
+      "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+      "bytes": 8360,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.data_store",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "bytes": 10704,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.trading_safety",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "bytes": 2597,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.market_time",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "bytes": 960,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.interprocess_lock",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "bytes": 7514,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/interprocess_lock.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.owned_io",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "bytes": 9354,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "V5/vendor/stage_selection_baseline/infrastructure/owned_io.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.a_share_review_store",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "blob_sha": "cbe9fd6e29ab0b1fea6025fc18bcc2854f79f415",
+      "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+      "bytes": 10176,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "infrastructure.owned_path",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "bytes": 2251,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "domains.a_share_review",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "blob_sha": "09a6d078ab4bcf17d5e22c91e9750fbcf116411c",
+      "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+      "bytes": 7038,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "domains.close_review_chain",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "blob_sha": "1adee020ca74c4efa5323f76b9bcfd7259e8a966",
+      "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+      "bytes": 10549,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "contracts.a_share_review",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "blob_sha": "af2110155081887e723f329652f7f73feb88d273",
+      "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+      "bytes": 261,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    },
+    {
+      "module": "domains.a_share_close_model",
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "blob_sha": "96e914f73117d162f1ad7c1e4538ce07c23c1afb",
+      "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "bytes": 12302,
+      "archive_path": "source/handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "access": "READ_ONLY_HISTORICAL_DONOR",
+      "materialized_from_fetch_path": "V5/vendor/a_close_baseline/domains/a_share_close_model.py",
+      "provenance_note": "Exact bytes verified against the fixed tree blob; an equal-blob copy may be reused from another fetched repository path."
+    }
+  ],
+  "producer_static_internal_import_count": 12,
+  "producer_unresolved_internal_imports": [],
+  "producer_external_imports": {
+    "pyarrow.dataset": [
+      {
+        "from": "ops.build_a_share_close_review",
+        "line": 10
+      }
+    ],
+    "pandas": [
+      {
+        "from": "domains.a_share_close_model",
+        "line": 7
+      }
+    ]
+  },
+  "python_project_requires": ">=3.14",
+  "declared_runtime_dependencies": [
+    "pandas>=2.3,<3",
+    "pyarrow>=21,<25"
+  ],
+  "test_dependency_unpinned": [
+    "pytest"
+  ],
+  "operating_system_requirements": [
+    "fcntl import exists in owned_io; existing Mac compatibility must be tested in selected executor",
+    "SafeRoot uses directory-relative open and O_NOFOLLOW; do not relax permissions to bypass refusal"
+  ],
+  "v5_frozen_model_runtime_files": [
+    "V5/vendor/a_close_baseline/domains/a_share_close_model.py",
+    "V5/vendor/a_close_baseline/contracts/trading_calendar.py",
+    "V5/vendor/a_close_baseline/contracts/market_calendar_2026.json"
+  ],
+  "all_source_files_manifest": "ORIGINAL_SOURCE_MANIFEST.json",
+  "all_python_import_inventory": [
+    {
+      "source_path": "V5/src/v5_shadow/__init__.py",
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "imports": []
+    },
+    {
+      "source_path": "V5/src/v5_shadow/a_close_review.py",
+      "sha256": "b288b916f43a41cfc7bd95511ad6decfd537a4cccf64ba5875f13dc04fad1933",
+      "imports": [
+        {
+          "module": "sys",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "hashlib",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "importlib",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "math",
+          "line": 9,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "re",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "subprocess",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 12,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 13,
+          "kind": "from",
+          "names": [
+            "datetime",
+            "timezone",
+            "timedelta"
+          ]
+        },
+        {
+          "module": "v5_shadow",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "a_preselection"
+          ]
+        },
+        {
+          "module": "v5_shadow.contracts",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "aware",
+            "trade_date",
+            "exact_keys",
+            "sha"
+          ]
+        },
+        {
+          "module": "v5_shadow.digests",
+          "level": 0,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json",
+            "MAX_JSON_BYTES"
+          ]
+        },
+        {
+          "module": "v5_shadow.composition",
+          "level": 0,
+          "line": 17,
+          "kind": "from",
+          "names": [
+            "no_symlinks"
+          ]
+        },
+        {
+          "module": "pandas",
+          "line": 85,
+          "kind": "import",
+          "names": []
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/a_preselection.py",
+      "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+      "imports": [
+        {
+          "module": "sys",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "builtins",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "csv",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "errno",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 9,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "importlib",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "importlib.abc",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "importlib.util",
+          "line": 12,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "io",
+          "line": 13,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 14,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 15,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 16,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "subprocess",
+          "line": 17,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 18,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 19,
+          "kind": "from",
+          "names": [
+            "redirect_stdout"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 20,
+          "kind": "from",
+          "names": [
+            "datetime",
+            "timezone"
+          ]
+        },
+        {
+          "module": "v5_shadow.composition",
+          "level": 0,
+          "line": 22,
+          "kind": "from",
+          "names": [
+            "no_symlinks"
+          ]
+        },
+        {
+          "module": "v5_shadow.contracts",
+          "level": 0,
+          "line": 23,
+          "kind": "from",
+          "names": [
+            "sha",
+            "trade_date",
+            "exact_keys"
+          ]
+        },
+        {
+          "module": "v5_shadow.digests",
+          "level": 0,
+          "line": 24,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json",
+            "MAX_JSON_BYTES"
+          ]
+        },
+        {
+          "module": "v5_shadow.provider_evidence",
+          "level": 0,
+          "line": 25,
+          "kind": "from",
+          "names": [
+            "encode_sdk_value"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/api_gateway.py",
+      "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+      "imports": [
+        {
+          "module": "argparse",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "http.client",
+          "line": 3,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "composition",
+          "level": 1,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "no_symlinks"
+          ]
+        },
+        {
+          "module": "json",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "math",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "re",
+          "line": 9,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "socket",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 12,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "threading",
+          "line": 13,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "time",
+          "line": 14,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "http.server",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "BaseHTTPRequestHandler",
+            "ThreadingHTTPServer"
+          ]
+        },
+        {
+          "module": "urllib.parse",
+          "level": 0,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "urlsplit",
+            "parse_qs"
+          ]
+        },
+        {
+          "module": "contracts",
+          "level": 1,
+          "line": 17,
+          "kind": "from",
+          "names": [
+            "exact_keys"
+          ]
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 18,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/composition.py",
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "imports": [
+        {
+          "module": "fcntl",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 3,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "dataclasses",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "asdict"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "contracts",
+          "level": 1,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "Binding",
+            "Composition",
+            "ModuleManifest",
+            "exact_keys",
+            "parse_manifest",
+            "sha"
+          ]
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/contracts.py",
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "imports": [
+        {
+          "module": "dataclasses",
+          "level": 0,
+          "line": 1,
+          "kind": "from",
+          "names": [
+            "dataclass"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 20,
+          "kind": "from",
+          "names": [
+            "datetime",
+            "timezone",
+            "timedelta"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 21,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "re",
+          "line": 22,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 23,
+          "kind": "from",
+          "names": [
+            "canonical_bytes"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/daily_close_plan.py",
+      "sha256": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6",
+      "imports": [
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "datetime",
+            "timedelta",
+            "timezone"
+          ]
+        },
+        {
+          "module": "hashlib",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "sys",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "threading",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "types",
+          "line": 12,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "composition",
+          "level": 1,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "no_symlinks"
+          ]
+        },
+        {
+          "module": "contracts",
+          "level": 1,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "aware"
+          ]
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "sha256_json"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/daily_dispatch.py",
+      "sha256": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+      "imports": [
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "datetime",
+            "timezone",
+            "timedelta"
+          ]
+        },
+        {
+          "module": "v5_shadow.daily_close_plan",
+          "level": 0,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "_sources",
+            "_market_states"
+          ]
+        },
+        {
+          "module": "v5_shadow.contracts",
+          "level": 0,
+          "line": 4,
+          "kind": "from",
+          "names": [
+            "aware"
+          ]
+        },
+        {
+          "module": "v5_shadow.digests",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "sha256_json"
+          ]
+        },
+        {
+          "module": "v5_shadow.run_ledger",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "claim_run",
+            "finish_run"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/digests.py",
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "imports": [
+        {
+          "module": "hashlib",
+          "line": 1,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/module_api.py",
+      "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+      "imports": [
+        {
+          "module": "argparse",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "fcntl",
+          "line": 3,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "time",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "re",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "socket",
+          "line": 9,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "threading",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "http.server",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "BaseHTTPRequestHandler",
+            "ThreadingHTTPServer"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 13,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "urllib.parse",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "parse_qs",
+            "urlsplit"
+          ]
+        },
+        {
+          "module": "composition",
+          "level": 1,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "no_symlinks"
+          ]
+        },
+        {
+          "module": "contracts",
+          "level": 1,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "exact_keys",
+            "aware",
+            "sha"
+          ]
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 17,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json",
+            "MAX_JSON_BYTES"
+          ]
+        },
+        {
+          "module": "api_gateway",
+          "level": 1,
+          "line": 18,
+          "kind": "from",
+          "names": [
+            "_parse_response",
+            "_precheck_json",
+            "_bounded_json",
+            "_manager_response",
+            "MANAGER_WORKSPACE_PATH"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/module_artifacts.py",
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "imports": [
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "contextmanager"
+          ]
+        },
+        {
+          "module": "fcntl",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 9,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "re",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "uuid",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "uuid4"
+          ]
+        },
+        {
+          "module": "contracts",
+          "level": 1,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "sha"
+          ]
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "canonical_bytes"
+          ]
+        },
+        {
+          "module": "module_api",
+          "level": 1,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "_config",
+            "_generation_head",
+            "_load_generation",
+            "_read_at",
+            "_read_object",
+            "_parse_record",
+            "_validate_record",
+            "response_key"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/provider_evidence.py",
+      "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+      "imports": [
+        {
+          "module": "base64",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "collections.abc",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Mapping"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "date",
+            "datetime",
+            "time"
+          ]
+        },
+        {
+          "module": "decimal",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "Decimal"
+          ]
+        },
+        {
+          "module": "math",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "numbers",
+          "line": 12,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "re",
+          "line": 13,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "contracts",
+          "level": 1,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "aware"
+          ]
+        },
+        {
+          "module": "digests",
+          "level": 1,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/src/v5_shadow/run_ledger.py",
+      "sha256": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd",
+      "imports": [
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "contextmanager"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "datetime",
+            "timezone"
+          ]
+        },
+        {
+          "module": "fcntl",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "uuid",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "uuid4"
+          ]
+        },
+        {
+          "module": "v5_shadow.contracts",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "exact_keys",
+            "sha",
+            "trade_date",
+            "aware"
+          ]
+        },
+        {
+          "module": "v5_shadow.digests",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "canonical_bytes",
+            "sha256_json"
+          ]
+        },
+        {
+          "module": "v5_shadow.module_api",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "_open_directory",
+            "_read_at"
+          ]
+        },
+        {
+          "module": "v5_shadow.module_artifacts",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "_directory"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/tests/test_a_close_review.py",
+      "sha256": "fe331baa493299720380d6e8332947aa635b0e52d3b24a2b291bfdd20ca8c1f8",
+      "imports": [
+        {
+          "module": "copy",
+          "line": 1,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "unittest",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "v5_shadow.digests",
+          "level": 0,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "sha256_json"
+          ]
+        },
+        {
+          "module": "v5_shadow.a_close_review",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "run_a_close_review"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/tests/test_daily_close_plan.py",
+      "sha256": "23f0ff9eb5938d96eb46611064d1b74861f14194507c6a7b859562ef67cc9f6e",
+      "imports": [
+        {
+          "module": "unittest",
+          "line": 2,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "v5_shadow.daily_close_plan",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "plan_close_day"
+          ]
+        },
+        {
+          "module": "v5_shadow.daily_close_plan",
+          "level": 0,
+          "line": 94,
+          "kind": "from",
+          "names": [
+            "plan_close_day"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/vendor/a_close_baseline/contracts/trading_calendar.py",
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "json",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "dataclasses",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "dataclass"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "date",
+            "datetime",
+            "timedelta"
+          ]
+        },
+        {
+          "module": "enum",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "StrEnum"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "V5/vendor/a_close_baseline/domains/a_share_close_model.py",
+      "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 4,
+          "kind": "from",
+          "names": [
+            "datetime"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Any"
+          ]
+        },
+        {
+          "module": "pandas",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        }
+      ]
+    },
+    {
+      "source_path": "V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py",
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "json",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "dataclasses",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "dataclass"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "date",
+            "datetime",
+            "timedelta"
+          ]
+        },
+        {
+          "module": "enum",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "StrEnum"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/http_routes.py",
+      "sha256": "5d0f487f7396dcefdeb4e3fdb72926327714276ce0e5f0aff26788ec91eedde6",
+      "imports": [
+        {
+          "module": "_namespace",
+          "level": 1,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "read_global"
+          ]
+        },
+        {
+          "module": "domains.intraday_research",
+          "level": 0,
+          "line": 112,
+          "kind": "from",
+          "names": [
+            "read_intraday_day"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/stage_partial.py",
+      "sha256": "776be68ef0c44478d347527417fbbff873143ba7f206ba14d967fad9059d358f",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "_namespace",
+          "level": 1,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "read_global"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/stage_rows.py",
+      "sha256": "54946d92b28bd8f5a6a6a004d92356b74e18efad245e309f03c67fae12b8baa3",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "_namespace",
+          "level": 1,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "read_global"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/__init__.py",
+      "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
+      "imports": []
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/a_share_review.py",
+      "sha256": "2c6b845aea3186a416eb12ab297bd3c242cc6cc248961b47e32f43d1f1192fa6",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/stages.py",
+      "sha256": "d0ac1771a1005888e53e9a322da65f959cfbcbcc665357b8783d5eb4eda9c6df",
+      "imports": []
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "json",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "dataclasses",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "dataclass"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "date",
+            "datetime",
+            "timedelta"
+          ]
+        },
+        {
+          "module": "enum",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "StrEnum"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_close_model.py",
+      "sha256": "140d3aabb0f24a55d05d0c624e4563694af050fe2ac02910292fc026d7de7e4a",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 4,
+          "kind": "from",
+          "names": [
+            "datetime"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Any"
+          ]
+        },
+        {
+          "module": "pandas",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/a_share_review.py",
+      "sha256": "90845aa31a4cac828a0be73ff40a65c06d6a016dcdf0e723602e855311afceeb",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "re",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "copy",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "deepcopy"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        },
+        {
+          "module": "contracts.a_share_review",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "A_SHARE_REVIEW_SCHEMA",
+            "SAFETY_FLAGS"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "_date"
+          ]
+        },
+        {
+          "module": "domains.close_review_chain",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "validate_close_review_chain"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/close_review_chain.py",
+      "sha256": "207ed5f9c13531db66a54d0a3fd2f7502612aba3dcce8d5eb5a53f0291b4d63c",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "copy",
+          "level": 0,
+          "line": 4,
+          "kind": "from",
+          "names": [
+            "deepcopy"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "_date"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/domains/review_envelope.py",
+      "sha256": "f18cc6f9e8242447ad404255e89918f5a6a399073e13699ffb415235cd33314e",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "copy",
+          "level": 0,
+          "line": 4,
+          "kind": "from",
+          "names": [
+            "deepcopy"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        },
+        {
+          "module": "contracts.a_share_review",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "A_SHARE_REVIEW_SCHEMA",
+            "SAFETY_FLAGS"
+          ]
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "validate_a_share_review"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "_date"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/__init__.py",
+      "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+      "imports": []
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/a_share_review_store.py",
+      "sha256": "ce22b5f217cf5c9ac0f71650ff88b3b17088580f79e9bac670be795ed8894482",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "os",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "time",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "infrastructure.interprocess_lock",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "owned_interprocess_lock"
+          ]
+        },
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "contextmanager"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        },
+        {
+          "module": "uuid",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "uuid4"
+          ]
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 13,
+          "kind": "from",
+          "names": [
+            "validate_a_share_review"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "_canonical_bytes",
+            "_date",
+            "_sha256"
+          ]
+        },
+        {
+          "module": "infrastructure.owned_path",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "resolve_owned_path"
+          ]
+        },
+        {
+          "module": "infrastructure.owned_io",
+          "level": 0,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "SafeRoot"
+          ]
+        },
+        {
+          "module": "json",
+          "line": 28,
+          "kind": "import",
+          "names": []
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "hashlib",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "contextmanager"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "datetime"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "infrastructure.owned_io",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "SafeRoot"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        },
+        {
+          "module": "infrastructure.interprocess_lock",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "owned_interprocess_lock"
+          ]
+        },
+        {
+          "module": "infrastructure.market_time",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "shanghai_now"
+          ]
+        },
+        {
+          "module": "infrastructure.trading_safety",
+          "level": 0,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "assert_safe_tree",
+            "ACTION_KEYS",
+            "FALSE_ONLY_KEYS"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "errno",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "stat",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "threading",
+          "line": 8,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "dataclasses",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "dataclass"
+          ]
+        },
+        {
+          "module": "time",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "contextmanager"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 13,
+          "kind": "from",
+          "names": [
+            "Iterator"
+          ]
+        },
+        {
+          "module": "uuid",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "uuid4"
+          ]
+        },
+        {
+          "module": "infrastructure.owned_io",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "LockAcquireTimeout",
+            "SafeRoot"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 4,
+          "kind": "from",
+          "names": [
+            "datetime"
+          ]
+        },
+        {
+          "module": "zoneinfo",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "ZoneInfo"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "contextlib",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "contextmanager",
+            "suppress"
+          ]
+        },
+        {
+          "module": "math",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 11,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "Path",
+            "PurePosixPath",
+            "PureWindowsPath"
+          ]
+        },
+        {
+          "module": "stat",
+          "line": 13,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "time",
+          "line": 14,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "Iterator"
+          ]
+        },
+        {
+          "module": "uuid",
+          "level": 0,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "uuid4"
+          ]
+        },
+        {
+          "module": "fcntl",
+          "line": 187,
+          "kind": "import",
+          "names": []
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "stat",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Path",
+            "PureWindowsPath"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/build_a_share_close_review.py",
+      "sha256": "f3a465e3a79a32241971ce38d95c79767a211e41e40918989fbff8968b703f53",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "argparse",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Any"
+          ]
+        },
+        {
+          "module": "pyarrow.dataset",
+          "line": 10,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "domains.a_share_close_model",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "build_close_model"
+          ]
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 13,
+          "kind": "from",
+          "names": [
+            "build_a_share_review"
+          ]
+        },
+        {
+          "module": "domains.close_review_chain",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "build_close_review_chain"
+          ]
+        },
+        {
+          "module": "infrastructure.a_share_review_store",
+          "level": 0,
+          "line": 15,
+          "kind": "from",
+          "names": [
+            "AShareReviewStore"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 16,
+          "kind": "from",
+          "names": [
+            "_sha256"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/import_a_share_review_reference.py",
+      "sha256": "13d4368d1677b158a3b6c7862d6b8d1b70a2e07895544699e92f610d93490524",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 2,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "argparse",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Mapping"
+          ]
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "build_a_share_review"
+          ]
+        },
+        {
+          "module": "infrastructure.a_share_review_store",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "AShareReviewStore"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/run_v35_close_review_node.py",
+      "sha256": "e48e27969d79a1e09f31bdd4be35fb3ade0822ee5e80e43888ceb1abe3bda856",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 18,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "argparse",
+          "line": 20,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "csv",
+          "line": 21,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 22,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 23,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 24,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "re",
+          "line": 25,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "shutil",
+          "line": 26,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "subprocess",
+          "line": 27,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "sys",
+          "line": 28,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 29,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 30,
+          "kind": "from",
+          "names": [
+            "UTC",
+            "datetime"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 31,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 32,
+          "kind": "from",
+          "names": [
+            "Any",
+            "Callable"
+          ]
+        },
+        {
+          "module": "urllib.error",
+          "level": 0,
+          "line": 33,
+          "kind": "from",
+          "names": [
+            "HTTPError",
+            "URLError"
+          ]
+        },
+        {
+          "module": "urllib.parse",
+          "level": 0,
+          "line": 34,
+          "kind": "from",
+          "names": [
+            "urljoin",
+            "urlparse"
+          ]
+        },
+        {
+          "module": "urllib.request",
+          "level": 0,
+          "line": 35,
+          "kind": "from",
+          "names": [
+            "urlopen"
+          ]
+        },
+        {
+          "module": "infrastructure.owned_path",
+          "level": 0,
+          "line": 37,
+          "kind": "from",
+          "names": [
+            "resolve_owned_path"
+          ]
+        },
+        {
+          "module": "infrastructure.isolated_package_loader",
+          "level": 0,
+          "line": 38,
+          "kind": "from",
+          "names": [
+            "load_isolated_package_module"
+          ]
+        },
+        {
+          "module": "ops.build_bilibili_stockdict",
+          "level": 0,
+          "line": 39,
+          "kind": "from",
+          "names": [
+            "build_stockdict"
+          ]
+        },
+        {
+          "module": "ops.build_video_gap_audit",
+          "level": 0,
+          "line": 40,
+          "kind": "from",
+          "names": [
+            "materialize_gap_audit"
+          ]
+        },
+        {
+          "module": "ops.build_video_ocr_alignment",
+          "level": 0,
+          "line": 41,
+          "kind": "from",
+          "names": [
+            "materialize_alignment"
+          ]
+        },
+        {
+          "module": "ops.capture_bilibili_fupan",
+          "level": 0,
+          "line": 42,
+          "kind": "from",
+          "names": [
+            "_write"
+          ]
+        },
+        {
+          "module": "ops.capture_bilibili_fupan",
+          "level": 0,
+          "line": 43,
+          "kind": "from",
+          "names": [
+            "capture_locked_video"
+          ]
+        },
+        {
+          "module": "ops.check_bilibili_fupan",
+          "level": 0,
+          "line": 44,
+          "kind": "from",
+          "names": [
+            "discover_bilibili_fupan",
+            "write_discovery"
+          ]
+        },
+        {
+          "module": "ops.daily_materialize",
+          "level": 0,
+          "line": 45,
+          "kind": "from",
+          "names": [
+            "resolve_selector_panel"
+          ]
+        },
+        {
+          "module": "sys",
+          "line": 49,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 50,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.source_binding",
+          "level": 0,
+          "line": 84,
+          "kind": "from",
+          "names": [
+            "__required_review_core_binding_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.source_binding",
+          "level": 0,
+          "line": 89,
+          "kind": "from",
+          "names": [
+            "__review_core_package_parent_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.source_binding",
+          "level": 0,
+          "line": 105,
+          "kind": "from",
+          "names": [
+            "__load_shared_video_layer_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.source_binding",
+          "level": 0,
+          "line": 134,
+          "kind": "from",
+          "names": [
+            "__shared_video_result_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.receipt_io",
+          "level": 0,
+          "line": 187,
+          "kind": "from",
+          "names": [
+            "__is_reusable_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.receipt_io",
+          "level": 0,
+          "line": 192,
+          "kind": "from",
+          "names": [
+            "__atomic_write_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.node_cli",
+          "level": 0,
+          "line": 210,
+          "kind": "from",
+          "names": [
+            "__bilibili_nightly_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.fupan_publish",
+          "level": 0,
+          "line": 224,
+          "kind": "from",
+          "names": [
+            "__fupan_publish_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.http_verification",
+          "level": 0,
+          "line": 229,
+          "kind": "from",
+          "names": [
+            "__validate_loopback_url_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.http_verification",
+          "level": 0,
+          "line": 243,
+          "kind": "from",
+          "names": [
+            "__http_status_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.fupan_publish",
+          "level": 0,
+          "line": 257,
+          "kind": "from",
+          "names": [
+            "__verify_fupan_8771_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.node_cli",
+          "level": 0,
+          "line": 263,
+          "kind": "from",
+          "names": [
+            "__run_within_repo_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.video_download",
+          "level": 0,
+          "line": 291,
+          "kind": "from",
+          "names": [
+            "__video_check_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.video_download",
+          "level": 0,
+          "line": 305,
+          "kind": "from",
+          "names": [
+            "__video_download_asr_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.video_alignment",
+          "level": 0,
+          "line": 361,
+          "kind": "from",
+          "names": [
+            "__prepare_alignment_inputs_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.video_session",
+          "level": 0,
+          "line": 370,
+          "kind": "from",
+          "names": [
+            "__materialize_video_session_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.stock_dictionary",
+          "level": 0,
+          "line": 384,
+          "kind": "from",
+          "names": [
+            "__fupan_stockdict_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.video_alignment",
+          "level": 0,
+          "line": 398,
+          "kind": "from",
+          "names": [
+            "__fupan_video_table_ocr_align_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.video_gap",
+          "level": 0,
+          "line": 412,
+          "kind": "from",
+          "names": [
+            "__fupan_video_gap_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.receipt_io",
+          "level": 0,
+          "line": 417,
+          "kind": "from",
+          "names": [
+            "__atomic_write_str_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.node_cli",
+          "level": 0,
+          "line": 454,
+          "kind": "from",
+          "names": [
+            "_run_node_body"
+          ]
+        },
+        {
+          "module": "ops._run_v35_close_review_node_parts.node_cli",
+          "level": 0,
+          "line": 459,
+          "kind": "from",
+          "names": [
+            "_main_body"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/run_v35_close_review_slot.py",
+      "sha256": "08f46d928dc70fabf2c1ca49d96b5fa64dc67f113909ed3ce66b81bfcad67ae5",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "argparse",
+          "line": 14,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "json",
+          "line": 15,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "os",
+          "line": 16,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "tempfile",
+          "line": 17,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "datetime",
+          "level": 0,
+          "line": 18,
+          "kind": "from",
+          "names": [
+            "UTC",
+            "datetime"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 19,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "typing",
+          "level": 0,
+          "line": 20,
+          "kind": "from",
+          "names": [
+            "Any"
+          ]
+        },
+        {
+          "module": "zoneinfo",
+          "level": 0,
+          "line": 21,
+          "kind": "from",
+          "names": [
+            "ZoneInfo"
+          ]
+        },
+        {
+          "module": "contracts.trading_calendar",
+          "level": 0,
+          "line": 23,
+          "kind": "from",
+          "names": [
+            "MarketScope",
+            "RunPolicy",
+            "SessionRequirement"
+          ]
+        },
+        {
+          "module": "domains.runtime_policy",
+          "level": 0,
+          "line": 24,
+          "kind": "from",
+          "names": [
+            "evaluate_run_policy"
+          ]
+        },
+        {
+          "module": "ops.run_v35_close_review_node",
+          "level": 0,
+          "line": 25,
+          "kind": "from",
+          "names": [
+            "run_node"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_close_model.py",
+      "sha256": "bc0629b73daeb8e7bc2c6c49864bd22ad197eeb6489b7f4c9c7bf5af0b44a38f",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 1,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 3,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "pandas",
+          "line": 5,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pytest",
+          "line": 6,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "domains.a_share_close_model",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "build_close_model"
+          ]
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "validate_a_share_review"
+          ]
+        },
+        {
+          "module": "infrastructure.a_share_review_store",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "AShareReviewStore"
+          ]
+        },
+        {
+          "module": "ops.build_a_share_close_review",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "build_review_from_panel"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_review.py",
+      "sha256": "b909b4219c39d9124300fcc612ccbfa28a39cdfa8d876277dd0c706536292d19",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 1,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "pytest",
+          "line": 3,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "contracts.a_share_review",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "A_SHARE_REVIEW_SCHEMA"
+          ]
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 6,
+          "kind": "from",
+          "names": [
+            "build_a_share_review",
+            "validate_a_share_review"
+          ]
+        },
+        {
+          "module": "domains.review_envelope",
+          "level": 0,
+          "line": 7,
+          "kind": "from",
+          "names": [
+            "review_envelope"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 8,
+          "kind": "from",
+          "names": [
+            "_sha256"
+          ]
+        },
+        {
+          "module": "ops.import_a_share_review_reference",
+          "level": 0,
+          "line": 9,
+          "kind": "from",
+          "names": [
+            "normalize_a_share_review_reference"
+          ]
+        },
+        {
+          "module": "apps.api.v35_api",
+          "level": 0,
+          "line": 113,
+          "kind": "from",
+          "names": [
+            "review_router"
+          ]
+        },
+        {
+          "module": "sys",
+          "line": 196,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "types",
+          "line": 197,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "apps.api.v35_api",
+          "level": 0,
+          "line": 199,
+          "kind": "from",
+          "names": [
+            "review_router"
+          ]
+        },
+        {
+          "module": "sys",
+          "line": 306,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "types",
+          "line": 307,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "apps.api.v35_api",
+          "level": 0,
+          "line": 309,
+          "kind": "from",
+          "names": [
+            "review_router"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_review_store.py",
+      "sha256": "e6ecafecd3c0552113cc11e284ff9903e9a4d6089e99d0ce0ca0b128299441e3",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 1,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "json",
+          "line": 3,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "hashlib",
+          "line": 4,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "pathlib",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "Path"
+          ]
+        },
+        {
+          "module": "pytest",
+          "line": 7,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "infrastructure.owned_path",
+          "line": 9,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "domains.a_share_review",
+          "level": 0,
+          "line": 10,
+          "kind": "from",
+          "names": [
+            "build_a_share_review"
+          ]
+        },
+        {
+          "module": "infrastructure.a_share_review_store",
+          "level": 0,
+          "line": 11,
+          "kind": "from",
+          "names": [
+            "AShareReviewStore"
+          ]
+        },
+        {
+          "module": "infrastructure.data_store",
+          "level": 0,
+          "line": 12,
+          "kind": "from",
+          "names": [
+            "_sha256"
+          ]
+        },
+        {
+          "module": "infrastructure.owned_path",
+          "level": 0,
+          "line": 13,
+          "kind": "from",
+          "names": [
+            "resolve_owned_path"
+          ]
+        },
+        {
+          "module": "ops.import_a_share_review_reference",
+          "level": 0,
+          "line": 14,
+          "kind": "from",
+          "names": [
+            "import_reference_file",
+            "normalize_a_share_review_reference"
+          ]
+        }
+      ]
+    },
+    {
+      "source_path": "handoff/v4-running-source-20261005/canonical/tests/test_close_review_chain.py",
+      "sha256": "34b5ff1ada6e10df74ecb65d2ddf9b2bb5a8108da8887599c626231b5f8342f8",
+      "imports": [
+        {
+          "module": "__future__",
+          "level": 0,
+          "line": 1,
+          "kind": "from",
+          "names": [
+            "annotations"
+          ]
+        },
+        {
+          "module": "pytest",
+          "line": 3,
+          "kind": "import",
+          "names": []
+        },
+        {
+          "module": "domains.close_review_chain",
+          "level": 0,
+          "line": 5,
+          "kind": "from",
+          "names": [
+            "CHAIN_TASKS",
+            "build_close_review_chain",
+            "validate_close_review_chain"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "API/router fragments and video/node runners are read-only references, not complete application closure.",
+    "Dynamic facade name lookup in router _namespace is not resolved by AST import audit.",
+    "No actual Python interpreter/library installation or Mac runtime has been inspected.",
+    "Do not copy the original shared slot/video runner into M09 or acquire missing unrelated providers just to close all reference imports."
+  ],
+  "known_reference_only_missing": [
+    "apps/api/v35_api/_review_router_parts/_namespace.py",
+    "apps/api/v35_api/review_router.py and applicable facade-bound helpers",
+    "domains/intraday_research.py",
+    "domains/runtime_policy.py",
+    "infrastructure/isolated_package_loader.py",
+    "ops/_run_v35_close_review_node_parts/* named by import inventory",
+    "ops/build_bilibili_stockdict.py",
+    "ops/build_video_gap_audit.py",
+    "ops/build_video_ocr_alignment.py",
+    "ops/capture_bilibili_fupan.py",
+    "ops/check_bilibili_fupan.py",
+    "ops/daily_materialize.py"
+  ],
+  "not_inputs": [
+    "new M09 review JSON",
+    "new M09 store payload, receipt and manifest",
+    "new M09 API response",
+    "new M09 UI screenshots"
+  ],
+  "runtime_supplement": {
+    "archive": "M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+    "archive_sha256": "24eb6689e336c45e63d0bc071722ea0379c9b98a2961a60a54dd8807999f2f44",
+    "manifest": "MAC_INPUT_FILES_MANIFEST.json",
+    "baseline_replaced": false,
+    "python": "3.14.6",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "pytest": "9.1.1",
+    "declared_version_mismatch": [
+      "pandas<3 vs observed3.0.5",
+      "pyarrow<25 vs observed25.0.1"
+    ],
+    "runtime_source_note": "Four compared producer/store/catalog/calendar files match original baseline bytes; API/UI files are separate runtime reference evidence",
+    "do_not_execute": [
+      "collect.py",
+      "finalize.py"
+    ],
+    "final_supplement": {
+      "archive": "M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip",
+      "sha256": "482cd87266a1ea36cd9c045cffac2432229791b79b843dfc8a600baa15e730ba",
+      "bytes": 14163,
+      "frontend_a_panel_direct_internal_dependencies": "RESOLVED: contracts/review.ts only; Vue computed is external",
+      "stock_mentions_correct_paths": "MISSING_AT_BOTH_CHECKED_ROOTS; no available_at",
+      "source_manifest": "FINAL_SUPPLEMENT_FILES_MANIFEST.json"
+    }
+  }
+}

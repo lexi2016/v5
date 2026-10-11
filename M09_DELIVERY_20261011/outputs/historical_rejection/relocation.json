@@ -1,0 +1,38 @@
+{
+  "cleaning_applied": false,
+  "invented_source_timestamps": false,
+  "manifest_sha256": "13b959ad8ae3193f3ce59fe3d03782303a6326e66d571cb1fbb018dca427a494",
+  "new_pointer": {
+    "path": "candidate_projection_pointer.txt",
+    "sha256": "e5e7ceb2a74dfdd4e26507392c2ba3b7bace235e3a55e27ec39c334a7bdbbd2d"
+  },
+  "original_root": "/workspace/scratch/a5458cb06b78/m09_work/runtime_inputs/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011",
+  "originals": {
+    "CURRENT_SELECTOR_READY_PANEL.txt": {
+      "bytes": 242,
+      "sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d"
+    },
+    "daily_pointer.txt": {
+      "bytes": 242,
+      "sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d"
+    },
+    "dispatcher_pointer.txt": {
+      "bytes": 242,
+      "sha256": "91a52a4f28098a2525ca4c9af9dd96c082e1c028392a55787fc9bcfbcf2f946d"
+    },
+    "membership_20261009.txt": {
+      "bytes": 51260,
+      "sha256": "b1f561b1d18a5341784c4906b0e3bbbf21d7d092823e4a60c2787fdf004d91fb"
+    },
+    "panel_20261009_required8.parquet": {
+      "bytes": 279209,
+      "sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47"
+    },
+    "panel_source_receipt.json": {
+      "bytes": 80017050,
+      "sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e"
+    }
+  },
+  "source_copies_in_delivery": "Original bytes are already in the pinned R3/runtime archives; rerun this script to recreate these copied paths.",
+  "source_root": "/workspace/scratch/a5458cb06b78/m09_work/historical_rejection/relocated_source"
+}

@@ -1,0 +1,693 @@
+{
+  "review": {
+    "schema_version": "v3_5.a_share_review.v1",
+    "trade_date": "20261009",
+    "headline": "A股复盘 20261009",
+    "market_regime": "divergence_or_weak_breadth",
+    "risk_tone": "divergence_or_weak_breadth",
+    "big_picture": [
+      {
+        "trade_date": "20261009",
+        "title": "市场总览",
+        "regime": "divergence_or_weak_breadth",
+        "up_count": 2,
+        "down_count": 2,
+        "flat_count": 1,
+        "limit_up_count": 0,
+        "limit_down_count": 1,
+        "amount_yi": 20.0,
+        "market_width": 0.4,
+        "external_environment": "CANNOT_CONFIRM_EXTERNAL_MARKET_DETAIL",
+        "evidence_refs": [
+          "selector_ready_panel:20261009_close"
+        ],
+        "boundary": "收盘事实可重算；收盘后面板不能证明严格15:00历史PIT版本。",
+        "producer_type": "DETERMINISTIC_PYTHON"
+      }
+    ],
+    "mainlines": [
+      {
+        "board_name": "Resilient",
+        "stock_count": 2,
+        "median_pct_change": 3.0,
+        "mean_pct_change": 3.0,
+        "up_ratio": 1.0,
+        "down_ratio": 0.0,
+        "limit_up_count": 0,
+        "limit_down_count": 0,
+        "amount_yi": 13.0,
+        "trade_date": "20261009",
+        "board_rank": 1,
+        "board_role": "strong_branch",
+        "canonical_theme": "Resilient",
+        "catalyst": "CANNOT_CONFIRM",
+        "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+        "source_available_at": "D0_CLOSE",
+        "eligible_for_strict_d0_1500": false,
+        "evidence_refs": [
+          "sector_close:Resilient:20261009"
+        ],
+        "counterevidence": "极弱市中的防御抗跌支线，不等同于进攻主线。",
+        "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+        "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。"
+      },
+      {
+        "board_name": "Flat",
+        "stock_count": 1,
+        "median_pct_change": 0.0,
+        "mean_pct_change": 0.0,
+        "up_ratio": 0.0,
+        "down_ratio": 0.0,
+        "limit_up_count": 0,
+        "limit_down_count": 0,
+        "amount_yi": 1.0,
+        "trade_date": "20261009",
+        "board_rank": 2,
+        "board_role": "rotation",
+        "canonical_theme": "Flat",
+        "catalyst": "CANNOT_CONFIRM",
+        "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+        "source_available_at": "D0_CLOSE",
+        "eligible_for_strict_d0_1500": false,
+        "evidence_refs": [
+          "sector_close:Flat:20261009"
+        ],
+        "counterevidence": "相对抗跌或中性轮动，尚无持续进攻证据。",
+        "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+        "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。"
+      },
+      {
+        "board_name": "Risk",
+        "stock_count": 2,
+        "median_pct_change": -8.0,
+        "mean_pct_change": -8.0,
+        "up_ratio": 0.0,
+        "down_ratio": 1.0,
+        "limit_up_count": 0,
+        "limit_down_count": 1,
+        "amount_yi": 6.0,
+        "trade_date": "20261009",
+        "board_rank": 3,
+        "board_role": "risk_line",
+        "canonical_theme": "Risk",
+        "catalyst": "CANNOT_CONFIRM",
+        "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+        "source_available_at": "D0_CLOSE",
+        "eligible_for_strict_d0_1500": false,
+        "evidence_refs": [
+          "sector_close:Risk:20261009"
+        ],
+        "counterevidence": "下跌广度和跌停扩散均明显，属于主要亏钱效应来源。",
+        "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+        "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。"
+      }
+    ],
+    "core_stocks": [],
+    "observation_pool": [
+      {
+        "trade_date": "20261009",
+        "stock_code": "600001",
+        "stock_name": "Alpha",
+        "board_name": "Resilient",
+        "canonical_theme": "Resilient",
+        "primary_role": "tomorrow_decider",
+        "turnover_amount_yi": 5.0,
+        "pct_change": 4.0,
+        "role_explanation": "板块收盘涨幅前排；只作为次日强度定调锚。",
+        "evidence_refs": [
+          "stock_close:600001.SH:20261009"
+        ],
+        "trigger": "次日需同时验证个股承接和同板块广度。",
+        "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+        "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+        "recommendation_status": "WATCH_ONLY"
+      },
+      {
+        "trade_date": "20261009",
+        "stock_code": "000002",
+        "stock_name": "Beta",
+        "board_name": "Resilient",
+        "canonical_theme": "Resilient",
+        "primary_role": "capacity_anchor",
+        "turnover_amount_yi": 8.0,
+        "pct_change": 2.0,
+        "role_explanation": "板块正收益股票中成交额靠前，用于观察容量承接。",
+        "evidence_refs": [
+          "stock_close:000002.SZ:20261009"
+        ],
+        "trigger": "次日需同时验证个股承接和同板块广度。",
+        "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+        "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+        "recommendation_status": "WATCH_ONLY"
+      },
+      {
+        "trade_date": "20261009",
+        "stock_code": "600003",
+        "stock_name": "Gamma",
+        "board_name": "Risk",
+        "canonical_theme": "Risk",
+        "primary_role": "risk_anchor",
+        "turnover_amount_yi": 4.0,
+        "pct_change": -10.0,
+        "role_explanation": "板块跌幅前排，用于观察负反馈是否继续扩散。",
+        "evidence_refs": [
+          "stock_close:600003.SH:20261009"
+        ],
+        "trigger": "次日需同时验证个股承接和同板块广度。",
+        "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+        "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+        "recommendation_status": "WATCH_ONLY"
+      }
+    ],
+    "next_day_trigger_tree": [
+      {
+        "trade_date": "20261009",
+        "direction": "stronger",
+        "probability": 0.12,
+        "upgrade": "风险线负反馈快速收敛",
+        "invalidation": "只有指数权重护盘、个股广度仍弱",
+        "producer_type": "DETERMINISTIC_PYTHON"
+      },
+      {
+        "trade_date": "20261009",
+        "direction": "inline",
+        "probability": 0.28,
+        "upgrade": "指数企稳但个股仍分化",
+        "invalidation": "广度与风险线同步显著改善或同步恶化",
+        "producer_type": "DETERMINISTIC_PYTHON"
+      },
+      {
+        "trade_date": "20261009",
+        "direction": "weaker",
+        "probability": 0.6,
+        "upgrade": "风险锚继续低开并扩散",
+        "invalidation": "风险锚止跌、跌停显著收敛且市场宽度同步修复",
+        "producer_type": "DETERMINISTIC_PYTHON"
+      }
+    ],
+    "quality_gate": [
+      {
+        "trade_date": "20261009",
+        "item": "同日视频",
+        "status": "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+        "producer_type": "SOURCE_GATE"
+      },
+      {
+        "trade_date": "20261009",
+        "item": "15:00 PIT",
+        "status": "CANNOT_CONFIRM_STRICT_D0_1500_PANEL",
+        "producer_type": "SOURCE_GATE"
+      },
+      {
+        "trade_date": "20261009",
+        "item": "LLM语义层",
+        "status": "DISABLED_BY_V3_5_NO_LLM_PRODUCTION_RULE",
+        "producer_type": "SOURCE_GATE"
+      }
+    ],
+    "cannot_confirm": [
+      "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+      "CANNOT_CONFIRM_STRICT_D0_1500_PANEL",
+      "FORMAL_GENERALIZATION_PENDING"
+    ],
+    "model_review": {
+      "schema_version": "replay_model_v1",
+      "status": "INDEPENDENT_CLOSE_REVIEW_READY",
+      "run_id": "m09-source-parity-ready_context_model_not_consumed",
+      "review_date": "20261009",
+      "as_of": "2026-10-09T15:30:00+08:00",
+      "objective": "20261009 D0独立完整复盘；同日视频未作为输入",
+      "producer_type": "DETERMINISTIC_PYTHON",
+      "target_video_review_status": "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+      "target_video_evidence_count": 0,
+      "video_augmented_review_complete": false,
+      "market_summary": {
+        "regime": "divergence_or_weak_breadth",
+        "up_count": 2,
+        "down_count": 2,
+        "flat_count": 1,
+        "limit_up_count": 0,
+        "limit_down_count": 1,
+        "amount_yi": 20.0,
+        "market_width": 0.4,
+        "external_environment": "CANNOT_CONFIRM_EXTERNAL_MARKET_DETAIL",
+        "evidence_refs": [
+          "selector_ready_panel:20261009_close"
+        ],
+        "boundary": "收盘事实可重算；收盘后面板不能证明严格15:00历史PIT版本。"
+      },
+      "previous_plan_realization": "CANNOT_CONFIRM_PREVIOUS_PLAN_REALIZATION_WITHOUT_BOUND_PRIOR_PLAN",
+      "board_rows": [
+        {
+          "board_name": "Resilient",
+          "stock_count": 2,
+          "median_pct_change": 3.0,
+          "mean_pct_change": 3.0,
+          "up_ratio": 1.0,
+          "down_ratio": 0.0,
+          "limit_up_count": 0,
+          "limit_down_count": 0,
+          "amount_yi": 13.0,
+          "trade_date": "20261009",
+          "board_rank": 1,
+          "board_role": "strong_branch",
+          "canonical_theme": "Resilient",
+          "catalyst": "CANNOT_CONFIRM",
+          "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+          "source_available_at": "D0_CLOSE",
+          "eligible_for_strict_d0_1500": false,
+          "evidence_refs": [
+            "sector_close:Resilient:20261009"
+          ],
+          "counterevidence": "极弱市中的防御抗跌支线，不等同于进攻主线。",
+          "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+          "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。"
+        },
+        {
+          "board_name": "Flat",
+          "stock_count": 1,
+          "median_pct_change": 0.0,
+          "mean_pct_change": 0.0,
+          "up_ratio": 0.0,
+          "down_ratio": 0.0,
+          "limit_up_count": 0,
+          "limit_down_count": 0,
+          "amount_yi": 1.0,
+          "trade_date": "20261009",
+          "board_rank": 2,
+          "board_role": "rotation",
+          "canonical_theme": "Flat",
+          "catalyst": "CANNOT_CONFIRM",
+          "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+          "source_available_at": "D0_CLOSE",
+          "eligible_for_strict_d0_1500": false,
+          "evidence_refs": [
+            "sector_close:Flat:20261009"
+          ],
+          "counterevidence": "相对抗跌或中性轮动，尚无持续进攻证据。",
+          "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+          "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。"
+        },
+        {
+          "board_name": "Risk",
+          "stock_count": 2,
+          "median_pct_change": -8.0,
+          "mean_pct_change": -8.0,
+          "up_ratio": 0.0,
+          "down_ratio": 1.0,
+          "limit_up_count": 0,
+          "limit_down_count": 1,
+          "amount_yi": 6.0,
+          "trade_date": "20261009",
+          "board_rank": 3,
+          "board_role": "risk_line",
+          "canonical_theme": "Risk",
+          "catalyst": "CANNOT_CONFIRM",
+          "pricing_state": "CANNOT_CONFIRM_PRICE_CAUSAL_ORDER",
+          "source_available_at": "D0_CLOSE",
+          "eligible_for_strict_d0_1500": false,
+          "evidence_refs": [
+            "sector_close:Risk:20261009"
+          ],
+          "counterevidence": "下跌广度和跌停扩散均明显，属于主要亏钱效应来源。",
+          "trigger": "次日板块广度、容量承接和前排持续性同时改善才升级。",
+          "invalidation": "仅单股脉冲、板块中位数转弱或风险锚继续扩散则降级。"
+        }
+      ],
+      "anchor_role_rows": [
+        {
+          "trade_date": "20261009",
+          "stock_code": "600001",
+          "stock_name": "Alpha",
+          "board_name": "Resilient",
+          "canonical_theme": "Resilient",
+          "primary_role": "tomorrow_decider",
+          "turnover_amount_yi": 5.0,
+          "pct_change": 4.0,
+          "role_explanation": "板块收盘涨幅前排；只作为次日强度定调锚。",
+          "evidence_refs": [
+            "stock_close:600001.SH:20261009"
+          ],
+          "trigger": "次日需同时验证个股承接和同板块广度。",
+          "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+          "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+          "recommendation_status": "WATCH_ONLY"
+        },
+        {
+          "trade_date": "20261009",
+          "stock_code": "000002",
+          "stock_name": "Beta",
+          "board_name": "Resilient",
+          "canonical_theme": "Resilient",
+          "primary_role": "capacity_anchor",
+          "turnover_amount_yi": 8.0,
+          "pct_change": 2.0,
+          "role_explanation": "板块正收益股票中成交额靠前，用于观察容量承接。",
+          "evidence_refs": [
+            "stock_close:000002.SZ:20261009"
+          ],
+          "trigger": "次日需同时验证个股承接和同板块广度。",
+          "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+          "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+          "recommendation_status": "WATCH_ONLY"
+        },
+        {
+          "trade_date": "20261009",
+          "stock_code": "600003",
+          "stock_name": "Gamma",
+          "board_name": "Risk",
+          "canonical_theme": "Risk",
+          "primary_role": "risk_anchor",
+          "turnover_amount_yi": 4.0,
+          "pct_change": -10.0,
+          "role_explanation": "板块跌幅前排，用于观察负反馈是否继续扩散。",
+          "evidence_refs": [
+            "stock_close:600003.SH:20261009"
+          ],
+          "trigger": "次日需同时验证个股承接和同板块广度。",
+          "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+          "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+          "recommendation_status": "WATCH_ONLY"
+        }
+      ],
+      "scenario_tree": {
+        "stronger": {
+          "probability": 0.12,
+          "open_trigger": [
+            "风险线负反馈快速收敛"
+          ],
+          "invalidation": [
+            "只有指数权重护盘、个股广度仍弱"
+          ]
+        },
+        "inline": {
+          "probability": 0.28,
+          "open_trigger": [
+            "指数企稳但个股仍分化"
+          ],
+          "invalidation": [
+            "广度与风险线同步显著改善或同步恶化"
+          ]
+        },
+        "weaker": {
+          "probability": 0.6,
+          "open_trigger": [
+            "风险锚继续低开并扩散"
+          ],
+          "invalidation": [
+            "风险锚止跌、跌停显著收敛且市场宽度同步修复"
+          ]
+        }
+      },
+      "shadow_watch_pool": {
+        "shape": "3_CORE_4_CONDITIONAL_3_OBSERVATION_OR_RISK",
+        "boundary": "SHADOW_ONLY",
+        "not_buy_advice": true,
+        "abstain": true,
+        "abstain_reason": "WEAK_MARKET_WIDTH_ALLOW_ABSTENTION",
+        "core": [],
+        "conditional": [
+          {
+            "trade_date": "20261009",
+            "stock_code": "600001",
+            "stock_name": "Alpha",
+            "board_name": "Resilient",
+            "canonical_theme": "Resilient",
+            "primary_role": "tomorrow_decider",
+            "turnover_amount_yi": 5.0,
+            "pct_change": 4.0,
+            "role_explanation": "板块收盘涨幅前排；只作为次日强度定调锚。",
+            "evidence_refs": [
+              "stock_close:600001.SH:20261009"
+            ],
+            "trigger": "次日需同时验证个股承接和同板块广度。",
+            "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+            "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+            "recommendation_status": "WATCH_ONLY"
+          },
+          {
+            "trade_date": "20261009",
+            "stock_code": "000002",
+            "stock_name": "Beta",
+            "board_name": "Resilient",
+            "canonical_theme": "Resilient",
+            "primary_role": "capacity_anchor",
+            "turnover_amount_yi": 8.0,
+            "pct_change": 2.0,
+            "role_explanation": "板块正收益股票中成交额靠前，用于观察容量承接。",
+            "evidence_refs": [
+              "stock_close:000002.SZ:20261009"
+            ],
+            "trigger": "次日需同时验证个股承接和同板块广度。",
+            "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+            "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+            "recommendation_status": "WATCH_ONLY"
+          }
+        ],
+        "observation_or_risk": [
+          {
+            "trade_date": "20261009",
+            "stock_code": "600003",
+            "stock_name": "Gamma",
+            "board_name": "Risk",
+            "canonical_theme": "Risk",
+            "primary_role": "risk_anchor",
+            "turnover_amount_yi": 4.0,
+            "pct_change": -10.0,
+            "role_explanation": "板块跌幅前排，用于观察负反馈是否继续扩散。",
+            "evidence_refs": [
+              "stock_close:600003.SH:20261009"
+            ],
+            "trigger": "次日需同时验证个股承接和同板块广度。",
+            "invalidation": "个股放量失守且同板块无承接，或风险继续扩散。",
+            "counterevidence": "无逐笔封单、开板次数和盘中因果证据，角色仅基于收盘价量。",
+            "recommendation_status": "WATCH_ONLY"
+          }
+        ]
+      },
+      "learning_status": "LEARNING_HYPOTHESIS_FAIL",
+      "formal_generalization": "FORMAL_GENERALIZATION_PENDING",
+      "model_promotion": "NO_MODEL_PROMOTED",
+      "semantic_model_status": "DISABLED_BY_V3_5_NO_LLM_PRODUCTION_RULE",
+      "semantic_model_call_count": 0,
+      "visibility_stage": "POST_CLOSE_REVIEW_ONLY",
+      "safety": {
+        "SHADOW_ONLY": true,
+        "NOT_BUY_ADVICE": true,
+        "NO_BUY_GATE": true,
+        "HOLDOUT_ACCESS_COUNT": 0,
+        "FORMAL_GENERALIZATION_PENDING": true,
+        "NO_MODEL_PROMOTED": true
+      }
+    },
+    "source_evidence": [
+      {
+        "source_id": "selector_ready_panel",
+        "trade_date": "20261009",
+        "row_count": 5,
+        "raw_sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+        "date_role": "business_date_close"
+      }
+    ],
+    "source_role": "V3_5_NATIVE_CLOSE_MODEL",
+    "close_chain": {
+      "schema_version": "v3_5.close_review_chain.v1",
+      "trade_date": "20261009",
+      "status": "PARTIAL_REVIEW",
+      "nodes": [
+        {
+          "task_id": "FUPAN_CLOSE_MATERIALS",
+          "slot": "15:00",
+          "label": "收盘前总结材料",
+          "business_date": "20261009",
+          "status": "READY",
+          "reason": "EXACT_DATE_CLOSE_SOURCE_FROZEN",
+          "evidence": [
+            {
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009",
+              "row_count": 5,
+              "raw_sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+              "date_role": "business_date_close"
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_REVIEW_START",
+          "slot": "15:55",
+          "label": "收盘后复盘启动",
+          "business_date": "20261009",
+          "status": "READY",
+          "reason": "CLOSE_REVIEW_STARTED_FROM_FROZEN_SOURCE",
+          "evidence": [
+            {
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009",
+              "row_count": 5,
+              "raw_sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+              "date_role": "business_date_close"
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_A_SHARE_STRUCTURE",
+          "slot": "16:05",
+          "label": "A股收盘数据与题材骨架",
+          "business_date": "20261009",
+          "status": "READY",
+          "reason": "DETERMINISTIC_A_SHARE_STRUCTURE_READY",
+          "evidence": [
+            {
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009",
+              "row_count": 5,
+              "raw_sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+              "date_role": "business_date_close"
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_VIDEO_CHECK",
+          "slot": "20:30",
+          "label": "最新复盘视频检查",
+          "business_date": "20261009",
+          "status": "READY",
+          "reason": "SAME_DAY_VIDEO_LOCKED",
+          "evidence": [
+            {
+              "source_id": "bilibili_fupan_acceptance",
+              "trade_date": "20261009",
+              "status": "VIDEO_METADATA_READY",
+              "today_bv_status": "TODAY_BV_LOCKED",
+              "same_day_video_count": 1,
+              "asr_status": "ASR_READY"
+            },
+            {
+              "source_id": "bilibili_capture_manifest",
+              "trade_date": "20261009",
+              "status": "ASR_READY",
+              "video_count": 1
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_VIDEO_DOWNLOAD_ASR",
+          "slot": "20:40",
+          "label": "视频下载与转写",
+          "business_date": "20261009",
+          "status": "READY",
+          "reason": "SAME_DAY_ASR_READY",
+          "evidence": [
+            {
+              "source_id": "bilibili_fupan_acceptance",
+              "trade_date": "20261009",
+              "status": "VIDEO_METADATA_READY",
+              "today_bv_status": "TODAY_BV_LOCKED",
+              "same_day_video_count": 1,
+              "asr_status": "ASR_READY"
+            },
+            {
+              "source_id": "bilibili_capture_manifest",
+              "trade_date": "20261009",
+              "status": "ASR_READY",
+              "video_count": 1
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_STOCKDICT",
+          "slot": "20:50",
+          "label": "股票字典校正",
+          "business_date": "20261009",
+          "status": "READY_WITH_REVIEW_BOUNDARY",
+          "reason": "CURRENT_ASR_STOCKDICT_READY_EXACT_ONLY",
+          "evidence": [
+            {
+              "source_id": "current_asr_pointer",
+              "trade_date": "20261009",
+              "status": "CURRENT_ASR_STOCKDICT_READY_EXACT_ONLY"
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_VIDEO_TABLE_OCR_ALIGN",
+          "slot": "21:05",
+          "label": "视频表格OCR/ASR/新闻对齐",
+          "business_date": "20261009",
+          "status": "READY_WITH_REVIEW_BOUNDARY",
+          "reason": "VIDEO_TABLE_ASR_NEWS_ALIGNMENT_READY",
+          "evidence": [
+            {
+              "source_id": "video_ocr_alignment",
+              "trade_date": "20261009",
+              "row_count": 1
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_VIDEO_GAP",
+          "slot": "21:08",
+          "label": "页面复盘对视频差距",
+          "business_date": "20261009",
+          "status": "READY_WITH_REVIEW_BOUNDARY",
+          "reason": "VIDEO_GAP_AUDIT_READY",
+          "evidence": [
+            {
+              "source_id": "video_gap_audit",
+              "trade_date": "20261009",
+              "gap_row_count": 1
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_V3_PUBLISH",
+          "slot": "21:10",
+          "label": "第三版复盘发布",
+          "business_date": "20261009",
+          "status": "READY",
+          "reason": "DETERMINISTIC_REVIEW_READY_ALL_DEPENDENCIES_CLOSED",
+          "evidence": [
+            {
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009",
+              "row_count": 5,
+              "raw_sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+              "date_role": "business_date_close"
+            }
+          ]
+        },
+        {
+          "task_id": "FUPAN_8771_VERIFY",
+          "slot": "21:15",
+          "label": "页面与接口验收",
+          "business_date": "20261009",
+          "status": "NOT_MATERIALIZED",
+          "reason": "UI_ACCEPTANCE_PENDING",
+          "evidence": [
+            {
+              "source_id": "selector_ready_panel",
+              "trade_date": "20261009",
+              "row_count": 5,
+              "raw_sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+              "date_role": "business_date_close"
+            }
+          ]
+        }
+      ],
+      "cannot_confirm": [],
+      "production_allowed": false,
+      "buy_gate_updated": false,
+      "orders_sent": false
+    },
+    "source_sha256": "5dc18e83887d85f3d349ba99dea71acd5a4f819ebf34604aa42c7f8a961124d8",
+    "write_policy": "review_only_read_only",
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false
+  },
+  "publication": {
+    "sha256": "8698bb4d3742c6344cee2a16872523cf324221af70c220eef8ca5ceed953a809",
+    "payload_path": "a_share_reviews/20261009.json",
+    "receipt_path": "a_share_reviews/receipts/20261009.json"
+  }
+}

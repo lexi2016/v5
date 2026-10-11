@@ -1,0 +1,134 @@
+{
+  "case": "cross_date_video_original_exception",
+  "classification": "SYNTHETIC_ORIGINAL_EXCEPTION_PARITY",
+  "inputs": {
+    "trade_date": "20261009",
+    "run_id": "m09-source-parity-cross_date_video_original_exception",
+    "data_kind": "SYNTHETIC",
+    "execution_kind": "ENGINEERING",
+    "columns_in_order": [
+      "trade_date",
+      "ts_code",
+      "name",
+      "pct_chg",
+      "amount",
+      "bar_close_pos",
+      "tdx_industry_code",
+      "tdx_industry_name"
+    ],
+    "dtypes": [
+      "object",
+      "object",
+      "object",
+      "float64",
+      "float64",
+      "float64",
+      "object",
+      "object"
+    ],
+    "rows_in_order": [
+      {
+        "trade_date": "20261009",
+        "ts_code": "600001.SH",
+        "name": "Alpha",
+        "pct_chg": 4.0,
+        "amount": 500000000.0,
+        "bar_close_pos": 0.9,
+        "tdx_industry_code": "A",
+        "tdx_industry_name": "Resilient"
+      },
+      {
+        "trade_date": "20261009",
+        "ts_code": "000002.SZ",
+        "name": "Beta",
+        "pct_chg": 2.0,
+        "amount": 800000000.0,
+        "bar_close_pos": 0.8,
+        "tdx_industry_code": "A",
+        "tdx_industry_name": "Resilient"
+      },
+      {
+        "trade_date": "20261009",
+        "ts_code": "600003.SH",
+        "name": "Gamma",
+        "pct_chg": -10.0,
+        "amount": 400000000.0,
+        "bar_close_pos": 0.1,
+        "tdx_industry_code": "B",
+        "tdx_industry_name": "Risk"
+      },
+      {
+        "trade_date": "20261009",
+        "ts_code": "000004.SZ",
+        "name": "Delta",
+        "pct_chg": -6.0,
+        "amount": 200000000.0,
+        "bar_close_pos": 0.2,
+        "tdx_industry_code": "B",
+        "tdx_industry_name": "Risk"
+      },
+      {
+        "trade_date": "20261009",
+        "ts_code": "830005.BJ",
+        "name": "Epsilon",
+        "pct_chg": 0.0,
+        "amount": 100000000.0,
+        "bar_close_pos": 0.5,
+        "tdx_industry_code": "C",
+        "tdx_industry_name": "Flat"
+      }
+    ],
+    "ordered_codes": [
+      "600001.SH",
+      "000002.SZ",
+      "600003.SH",
+      "000004.SZ",
+      "830005.BJ"
+    ],
+    "row_count": 5,
+    "context": {
+      "video_acceptance": {
+        "trade_date": "20261008",
+        "checks": {}
+      }
+    },
+    "source_panel": {
+      "path": "evidence/delivery_docs/parity_20261011T110714232603Z/cross_date_video_original_exception/engineering_panel.json",
+      "sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+      "bytes": 982
+    },
+    "source_pointer": {
+      "path": "evidence/delivery_docs/parity_20261011T110714232603Z/cross_date_video_original_exception/panel_pointer.txt",
+      "sha256": "eccb719e5014691020a647e1a88b6b0e18c8f580c7efdfef29175fe6c53c9525",
+      "bytes": 152
+    },
+    "original_request": {
+      "path": "evidence/delivery_docs/parity_20261011T110714232603Z/cross_date_video_original_exception/original_producer_request.json",
+      "sha256": "a86ef5c14042ca8f49235ed1cadf5c08081353c9c20e1773004578d699f38383",
+      "bytes": 3778
+    },
+    "parquet_decoding": "NOT_RUN; these bytes are explicitly engineering JSON consumed through the admitted-frame I/O bridge"
+  },
+  "expected_exception": {
+    "type": "ValueError",
+    "message": "video acceptance date does not match close-review date"
+  },
+  "same_original_and_candidate_exception": true,
+  "original_execution": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/cross_date_video_original_exception/original_producer.execution.json",
+    "sha256": "92e219e1112fd04916cbfa6bd1970e25905696626d67c2f3504ade41be42f675",
+    "bytes": 1148
+  },
+  "original_trace": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/cross_date_video_original_exception/original_producer.stderr.txt",
+    "sha256": "c3d9f39ea84c1f1611b2c1948fb59d4a42bdd161af71535a8d5392043cd781db",
+    "bytes": 1358
+  },
+  "candidate_trace": {
+    "type": "ValueError",
+    "message": "video acceptance date does not match close-review date",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_docs/build_source_and_parity_docs.py\", line 177, in parity_case\n    candidate_result = sources.build_from_admitted_panel(case / \"candidate\", T, pointer, frame, digest(raw), run_id, context)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/src/v5_shadow/a_close_daily_sources.py\", line 398, in build_from_admitted_panel\n    result = producer.build_review_from_panel(root, trade_date, panel_pointer=pointer, run_id=run_id, **frozen_context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/vendor/m09_a_close_daily/ops/build_a_share_close_review.py\", line 98, in build_review_from_panel\n    close_chain = build_close_review_chain(\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/vendor/m09_a_close_daily/domains/close_review_chain.py\", line 137, in build_close_review_chain\n    video_status, video_reason, video_evidence, asr_status, asr_reason = _video_state(\n                                                                         ^^^^^^^^^^^^^\n  File \"/workspace/scratch/a5458cb06b78/m09_work/after/V5/vendor/m09_a_close_daily/domains/close_review_chain.py\", line 60, in _video_state\n    raise ValueError(\"video acceptance date does not match close-review date\")\nValueError: video acceptance date does not match close-review date\n"
+  },
+  "product_created": false,
+  "field_normalization": null
+}

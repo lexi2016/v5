@@ -1,0 +1,33 @@
+{
+  "command": [
+    "python3",
+    "/workspace/scratch/a5458cb06b78/m09_work/evidence/tools/extract_pinned_runtime.py",
+    "--archive",
+    "/workspace/scratch/a5458cb06b78/m09_work/repository_export/handoff/m09-20261011/M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+    "--out",
+    "/workspace/scratch/a5458cb06b78/m09_work/runtime_extractor_validation"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work",
+  "environment": {
+    "PYTHONPATH": null,
+    "PYTHONDONTWRITEBYTECODE": null,
+    "M09_REVIEW_SNAPSHOT": null,
+    "M09_ORIGINAL_ROOT": null,
+    "M09_TEST_SOURCE_ROOT": null
+  },
+  "start_utc": "2026-10-11T11:12:49.053247+00:00",
+  "end_utc": "2026-10-11T11:12:50.357111+00:00",
+  "start_shanghai": "2026-10-11T19:12:49.053247+08:00",
+  "end_shanghai": "2026-10-11T19:12:50.357111+08:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "pinned_runtime_extractor.stdout.log",
+    "bytes": 214,
+    "sha256": "fbc22f4f2313e47ea7cd16fac8cceb1f79a0e7aa33a598959bd15f6638e80d07"
+  },
+  "stderr": {
+    "path": "pinned_runtime_extractor.stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

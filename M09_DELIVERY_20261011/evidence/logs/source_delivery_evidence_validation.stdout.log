@@ -1,0 +1,83 @@
+{
+  "schema_version": "v5.m09.source_delivery_evidence_validation.v1",
+  "generated_at_utc": "2026-10-11T11:09:00.186540+00:00",
+  "status": "PASS",
+  "operation": "Read-only revalidation of generated evidence, exact original files, candidate SHA snapshot and retained test output; no candidate execution or source mutation",
+  "byte_exact_donor_files": 16,
+  "original_static_closure_count": 12,
+  "candidate_python_files_unchanged_count": 40,
+  "verified_reference_count": 73,
+  "full_parity_cases": [
+    {
+      "case": "missing_context",
+      "full_exact_comparison": "PASS",
+      "store_payload_receipt_manifest_raw_bytes_equal": true,
+      "fields_compared": 1239
+    },
+    {
+      "case": "ready_context_model_not_consumed",
+      "full_exact_comparison": "PASS",
+      "store_payload_receipt_manifest_raw_bytes_equal": true,
+      "fields_compared": 1301
+    }
+  ],
+  "same_original_exception_and_no_product": true,
+  "per_suite_observed_results": {
+    "test_a_close_daily.py": {
+      "discovered": 51,
+      "passed": 47,
+      "skipped": 4
+    },
+    "test_a_close_daily_api.py": {
+      "discovered": 33,
+      "passed": 33,
+      "skipped": 0
+    },
+    "test_a_close_daily_sources.py": {
+      "discovered": 18,
+      "passed": 18,
+      "skipped": 0
+    },
+    "test_a_close_review.py": {
+      "discovered": 9,
+      "passed": 9,
+      "skipped": 0
+    },
+    "test_daily_close_plan.py": {
+      "discovered": 14,
+      "passed": 14,
+      "skipped": 0
+    }
+  },
+  "not_run_claims_preserved": [
+    {
+      "layer": "Original donor pytest suites",
+      "status": "BLOCKED_ENVIRONMENT_PYTEST_NOT_INSTALLED",
+      "evidence": {
+        "path": "evidence/project_pytest_availability.json",
+        "sha256": "da03ea8c4301a35735de7caa43ba99d8b1f34e072657ba05a8b96b0a0549c262",
+        "bytes": 975
+      }
+    },
+    {
+      "layer": "Real historical full parquet/model parity",
+      "status": "NOT_RUN_PYARROW_ABSENT_AND_REAL_SOURCE_QUALITY_TIME_GAPS"
+    },
+    {
+      "layer": "Mac runtime and filesystem acceptance",
+      "status": "NOT_RUN_NO_MAC_EXECUTION"
+    },
+    {
+      "layer": "Active ordinary HTTP API and original ReviewView browser consumption",
+      "status": "NOT_RUN_INTEGRATION_NOT_ACTIVATED"
+    },
+    {
+      "layer": "Live A/H isolation and module rollback",
+      "status": "NOT_RUN_NO_ACTIVE_DEPLOYMENT"
+    },
+    {
+      "layer": "Natural two-slot execution and two consecutive eligible trading days",
+      "status": "NOT_RUN_NO_NATURAL_RECEIPTS"
+    }
+  ]
+}

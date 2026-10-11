@@ -1,0 +1,41 @@
+{
+  "command_name": "09_snapshot_name_status",
+  "argv": [
+    "git",
+    "--git-dir=/workspace/scratch/a5458cb06b78/m09_work/after/.git",
+    "--work-tree=/workspace/scratch/a5458cb06b78/m09_work/delivery/after",
+    "-c",
+    "core.autocrlf=false",
+    "-c",
+    "core.filemode=true",
+    "diff",
+    "--cached",
+    "--name-status",
+    "--no-renames",
+    "e45aee9e185dda6f9d4b5032e6d60231cce27809",
+    "--"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/delivery/after",
+  "environment_overrides": {
+    "GIT_INDEX_FILE": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_assembly_20261011T110546082545Z/snapshot.index",
+    "GIT_OBJECT_DIRECTORY": "/workspace/scratch/a5458cb06b78/m09_work/evidence/delivery_assembly_20261011T110546082545Z/objects",
+    "GIT_ALTERNATE_OBJECT_DIRECTORIES": "/workspace/scratch/a5458cb06b78/m09_work/after/.git/objects"
+  },
+  "started_at_utc": "2026-10-11T11:05:46.258268+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.261403+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.258268+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.261403+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "09_snapshot_name_status.stdout.log",
+      "bytes": 1328,
+      "sha256": "45fb3300da6ccc99b5eb0dc01da60b2f0a88cab91185f60e402fe20de590746c"
+    },
+    "stderr": {
+      "filename": "09_snapshot_name_status.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

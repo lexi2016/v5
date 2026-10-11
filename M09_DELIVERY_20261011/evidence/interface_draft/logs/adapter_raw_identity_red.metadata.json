@@ -1,0 +1,42 @@
+{
+  "phase": "RED_ORIGINAL_STORE_RAW_IDENTITY_BINDING",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_a_close_daily_api.py",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after/V5",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_at_utc": "2026-10-11T10:44:57.782511+00:00",
+  "finished_at_utc": "2026-10-11T10:44:57.970792+00:00",
+  "started_at_shanghai": "2026-10-11T18:44:57.782511+08:00",
+  "finished_at_shanghai": "2026-10-11T18:44:57.970792+08:00",
+  "exit_code": 1,
+  "logs": {
+    "stdout": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_raw_identity_red.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_raw_identity_red.stderr.log",
+      "sha256": "2354323c51340083b340ffd68f102e69943f42232a0205a921dc4927d142d6f9",
+      "bytes": 11639
+    }
+  },
+  "candidate_sha256": {
+    "src/v5_shadow/a_close_daily_api.py": "4ff4af80e3fd520eebe08791dafded740403408172b37ab228f2c936c118296d",
+    "tests/test_a_close_daily_api.py": "5b4a764197f39f9698f34acd8d85ea750813be01019e158021417f295297ecec"
+  }
+}

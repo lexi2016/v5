@@ -1,0 +1,37 @@
+{
+  "data_kind": "RECORDED_INPUT_REPLAY",
+  "evidence": {},
+  "membership": {
+    "available_at": null,
+    "captured_at": null,
+    "path": "membership_20261009.txt",
+    "scope": "DECLARED_UNIVERSE",
+    "sha256": "b1f561b1d18a5341784c4906b0e3bbbf21d7d092823e4a60c2787fdf004d91fb",
+    "source_id": null,
+    "version": null
+  },
+  "panel": {
+    "format": "PARQUET",
+    "pointer_path": "candidate_projection_pointer.txt",
+    "pointer_sha256": "e5e7ceb2a74dfdd4e26507392c2ba3b7bace235e3a55e27ec39c334a7bdbbd2d",
+    "row_count": 5126,
+    "sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47"
+  },
+  "provenance": {
+    "acquired_at": null,
+    "authority_status": "REBUILD_REQUIRED",
+    "available_at": null,
+    "captured_at": null,
+    "coverage_rate": 0.8858620689655172,
+    "receipt_fields": {
+      "trade_date": "/target_date"
+    },
+    "receipt_path": "panel_source_receipt.json",
+    "receipt_sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e",
+    "source_id": null,
+    "status": "PARTIAL",
+    "version": null
+  },
+  "schema_version": "v5.m09.input.v1",
+  "trade_date": "20261009"
+}

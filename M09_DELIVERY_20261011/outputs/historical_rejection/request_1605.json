@@ -1,0 +1,13 @@
+{
+  "attempt_id": "raw_unchanged_1605",
+  "configuration_revision": "m09-r3-uncleaned-diagnostic",
+  "execution_kind": "RECORDED_INPUT_REPLAY",
+  "input_manifest": "diagnostic_input.json",
+  "input_manifest_sha256": "13b959ad8ae3193f3ce59fe3d03782303a6326e66d571cb1fbb018dca427a494",
+  "job_id": "m09_offline_historical_1605",
+  "schema_version": "v5.m09.daily_request.v1",
+  "slot": "16:05",
+  "source_root": "/workspace/scratch/a5458cb06b78/m09_work/historical_rejection/relocated_source",
+  "trade_date": "20261009",
+  "triggered_at": "2026-10-11T11:02:03.364810+00:00"
+}

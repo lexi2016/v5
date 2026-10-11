@@ -1,0 +1,9 @@
+{
+  "status": "COMPLETE_DELIVERY_ASSEMBLED",
+  "delivery": "/workspace/scratch/a5458cb06b78/m09_work/delivery",
+  "file_count": 754,
+  "bytes": 8270172,
+  "source_files": 77,
+  "before_files": 52,
+  "source_unchanged": true
+}

@@ -1,0 +1,75 @@
+{
+  "admitted": false,
+  "cutoff": "2026-10-09T17:10:00+08:00",
+  "data_kind": "RECORDED_INPUT_REPLAY",
+  "declared_member_count": 5126,
+  "declared_panel_row_count": 5126,
+  "evidence_status": {
+    "ocr_alignment_pointer": {
+      "reason": "NO_COMMITTED_REFERENCE",
+      "status": "MISSING"
+    },
+    "stage_evidence": {
+      "reason": "NO_COMMITTED_REFERENCE",
+      "status": "MISSING"
+    },
+    "stockdict_pointer": {
+      "reason": "NO_COMMITTED_REFERENCE",
+      "status": "MISSING"
+    },
+    "video_acceptance": {
+      "reason": "NO_COMMITTED_REFERENCE",
+      "status": "MISSING"
+    },
+    "video_capture": {
+      "reason": "NO_COMMITTED_REFERENCE",
+      "status": "MISSING"
+    },
+    "video_gap_pointer": {
+      "reason": "NO_COMMITTED_REFERENCE",
+      "status": "MISSING"
+    }
+  },
+  "issues": [
+    {
+      "code": "SOURCE_IDENTITY_MISSING"
+    },
+    {
+      "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+      "detail": "CONTRACT_TIME_INVALID"
+    },
+    {
+      "code": "MEMBERSHIP_IDENTITY_MISSING"
+    },
+    {
+      "code": "MEMBERSHIP_TIME_INVALID_OR_UNKNOWN",
+      "detail": "CONTRACT_TIME_INVALID"
+    },
+    {
+      "authority_status": "REBUILD_REQUIRED",
+      "code": "SOURCE_AUTHORITY_NOT_READY",
+      "status": "PARTIAL"
+    },
+    {
+      "code": "SOURCE_COVERAGE_INCOMPLETE",
+      "coverage_rate": 0.8858620689655172
+    },
+    {
+      "code": "SOURCE_RECEIPT_NOT_BOUND",
+      "detail": "OWNED_FILE_TOO_LARGE"
+    },
+    {
+      "code": "PANEL_DECODE_OR_FORMAT_FAILED",
+      "detail": "PARQUET_ENGINE_UNAVAILABLE:No module named 'pyarrow'"
+    }
+  ],
+  "panel_decoded": false,
+  "panel_schema": null,
+  "row_count": null,
+  "schema_version": "v5.m09.admission.v1",
+  "scope": "DECLARED_UNIVERSE_ONLY",
+  "slot": "17:10",
+  "source_provenance_independently_verified": false,
+  "strict_1500_pit_verified": false,
+  "trade_date": "20261009"
+}

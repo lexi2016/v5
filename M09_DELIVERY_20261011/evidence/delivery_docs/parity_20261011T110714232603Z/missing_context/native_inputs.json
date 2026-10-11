@@ -1,0 +1,103 @@
+{
+  "trade_date": "20261009",
+  "run_id": "m09-source-parity-missing_context",
+  "data_kind": "SYNTHETIC",
+  "execution_kind": "ENGINEERING",
+  "columns_in_order": [
+    "trade_date",
+    "ts_code",
+    "name",
+    "pct_chg",
+    "amount",
+    "bar_close_pos",
+    "tdx_industry_code",
+    "tdx_industry_name"
+  ],
+  "dtypes": [
+    "object",
+    "object",
+    "object",
+    "float64",
+    "float64",
+    "float64",
+    "object",
+    "object"
+  ],
+  "rows_in_order": [
+    {
+      "trade_date": "20261009",
+      "ts_code": "600001.SH",
+      "name": "Alpha",
+      "pct_chg": 4.0,
+      "amount": 500000000.0,
+      "bar_close_pos": 0.9,
+      "tdx_industry_code": "A",
+      "tdx_industry_name": "Resilient"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "000002.SZ",
+      "name": "Beta",
+      "pct_chg": 2.0,
+      "amount": 800000000.0,
+      "bar_close_pos": 0.8,
+      "tdx_industry_code": "A",
+      "tdx_industry_name": "Resilient"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "600003.SH",
+      "name": "Gamma",
+      "pct_chg": -10.0,
+      "amount": 400000000.0,
+      "bar_close_pos": 0.1,
+      "tdx_industry_code": "B",
+      "tdx_industry_name": "Risk"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "000004.SZ",
+      "name": "Delta",
+      "pct_chg": -6.0,
+      "amount": 200000000.0,
+      "bar_close_pos": 0.2,
+      "tdx_industry_code": "B",
+      "tdx_industry_name": "Risk"
+    },
+    {
+      "trade_date": "20261009",
+      "ts_code": "830005.BJ",
+      "name": "Epsilon",
+      "pct_chg": 0.0,
+      "amount": 100000000.0,
+      "bar_close_pos": 0.5,
+      "tdx_industry_code": "C",
+      "tdx_industry_name": "Flat"
+    }
+  ],
+  "ordered_codes": [
+    "600001.SH",
+    "000002.SZ",
+    "600003.SH",
+    "000004.SZ",
+    "830005.BJ"
+  ],
+  "row_count": 5,
+  "context": {},
+  "source_panel": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/engineering_panel.json",
+    "sha256": "93b9fe30bc64ed876e756b5c0dc20606e8e70d5421a4b05d2adba4dec6776925",
+    "bytes": 982
+  },
+  "source_pointer": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/panel_pointer.txt",
+    "sha256": "5f2c19c75810db33899c92d53c403ee8016138aa921f01414912e6c2944d960f",
+    "bytes": 132
+  },
+  "original_request": {
+    "path": "evidence/delivery_docs/parity_20261011T110714232603Z/missing_context/original_producer_request.json",
+    "sha256": "67f10970a831ebb060f562cff4622c96d12eaffdafde738338a01583da5e1c59",
+    "bytes": 3612
+  },
+  "parquet_decoding": "NOT_RUN; these bytes are explicitly engineering JSON consumed through the admitted-frame I/O bridge"
+}

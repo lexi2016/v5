@@ -1,0 +1,14 @@
+{
+  "after_files_exact": 77,
+  "all_source_bytes_unchanged_since_final_test": true,
+  "before_files_exact": 52,
+  "both_mac_helper_sibling_copies_verified": true,
+  "complete_output_files_verified": 88,
+  "independent_test_copies_verified": 4,
+  "mac_active_http_ui_natural_or_deployment_claim": "NOT_RUN",
+  "observed_at_utc": "2026-10-11T11:15:10.317236+00:00",
+  "python_source_sha_bindings_verified": 40,
+  "schema_version": "v5.m09.delivery_validation.v1",
+  "scope": "Delivery byte and reference validation. This does not rerun or replace the retained product test evidence.",
+  "status": "VERIFIED"
+}

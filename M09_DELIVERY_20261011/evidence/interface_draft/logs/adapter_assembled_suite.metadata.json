@@ -1,0 +1,45 @@
+{
+  "phase": "ASSEMBLED_V5_SUITE",
+  "classification": "ENGINEERING_NOT_DECLARED_RUNTIME_COMPATIBILITY",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after/V5",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "environment": {
+    "PYTHONPATH": "/workspace/scratch/a5458cb06b78/m09_work/after/V5/src",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_at_utc": "2026-10-11T10:35:03.573814+00:00",
+  "finished_at_utc": "2026-10-11T10:35:12.050646+00:00",
+  "started_at_shanghai": "2026-10-11T18:35:03.573814+08:00",
+  "finished_at_shanghai": "2026-10-11T18:35:12.050646+08:00",
+  "exit_code": 1,
+  "logs": {
+    "stdout": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_assembled_suite.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stderr": {
+      "path": "/workspace/scratch/a5458cb06b78/m09_work/evidence/interface_draft/logs/adapter_assembled_suite.stderr.log",
+      "sha256": "189263c23131b42e451dc4f852f8e61f21eb7a95431086b3e52788e23122cd21",
+      "bytes": 31236
+    }
+  },
+  "tests_sha256_before": {
+    "tests/test_a_close_daily.py": "64c8be4d215a0129bc94fc3429bf0b8a7d1625710b8986e821d277fe19252732",
+    "tests/test_a_close_daily_api.py": "02ae234e441cad12f67cb3384e342e82f603b8a915b66324c984b8a7c31d395c",
+    "tests/test_a_close_daily_sources.py": "a9542d629fea3a3c35b305a4641ed97aec1b2ab303d7391b8fbbc3ffe68b7cce",
+    "tests/test_a_close_review.py": "fe331baa493299720380d6e8332947aa635b0e52d3b24a2b291bfdd20ca8c1f8",
+    "tests/test_daily_close_plan.py": "23f0ff9eb5938d96eb46611064d1b74861f14194507c6a7b859562ef67cc9f6e"
+  }
+}

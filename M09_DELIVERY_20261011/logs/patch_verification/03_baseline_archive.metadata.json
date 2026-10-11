@@ -1,0 +1,28 @@
+{
+  "command_name": "03_baseline_archive",
+  "argv": [
+    "git",
+    "archive",
+    "--format=tar",
+    "e45aee9e185dda6f9d4b5032e6d60231cce27809"
+  ],
+  "cwd": "/workspace/scratch/a5458cb06b78/m09_work/after",
+  "environment_overrides": {},
+  "started_at_utc": "2026-10-11T11:05:46.127516+00:00",
+  "finished_at_utc": "2026-10-11T11:05:46.139767+00:00",
+  "started_at_shanghai": "2026-10-11T19:05:46.127516+08:00",
+  "finished_at_shanghai": "2026-10-11T19:05:46.139767+08:00",
+  "exit_code": 0,
+  "logs": {
+    "stdout": {
+      "filename": "03_baseline_archive.stdout.log",
+      "bytes": 460800,
+      "sha256": "435cc44e997d24c26fc06f040d32e537b536c2cc2941f78be41dcb94c1abcaee"
+    },
+    "stderr": {
+      "filename": "03_baseline_archive.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}
