@@ -1,0 +1,67 @@
+--- a/V5/src/v5_shadow/a_preselection_daily.py
++++ b/V5/src/v5_shadow/a_preselection_daily.py
+@@ -12,8 +12,6 @@
+     from v5_shadow.digests import sha256_json as _canonical_sha256_json
+     from v5_shadow.a_preselection import run_a_preselection as _default_run_a_preselection
+     from v5_shadow.composition import no_symlinks, shadow_root, parse_binding
+-    from infrastructure.scope_gate import StoreGateContext
+-    from infrastructure.preselection_pool_store import PreselectionPoolStore
+ except Exception:
+     _canonical_sha256_json = None
+     _default_run_a_preselection = None
+@@ -76,16 +74,6 @@
+         raise ValueError("M05_POOL_ID_NOT_ALLOWED")
+     return a
+ 
+-
+-def build_strict_store(root, write_gate_context):
+-    if StoreGateContext is None or not isinstance(write_gate_context, StoreGateContext):
+-        raise ValueError("M05_WRITE_GATE_CONTEXT_TYPE_REQUIRED")
+-    return PreselectionPoolStore(
+-        Path(root),
+-        write_gate_context=write_gate_context,
+-        require_write_gate_context=True,
+-    )
+-
+ def build_m05_daily(request, *, run_a_preselection=None, store,
+                     source_root=None, private_root=None, sha256_json=None,
+                     code_root=None, v4_root=None,
+@@ -108,14 +96,10 @@
+         raise ValueError("M05_STORE_ROOT_IDENTITY")
+     if write_gate_context is None:
+         raise ValueError("M05_WRITE_GATE_CONTEXT_REQUIRED")
+-    if StoreGateContext is None or not isinstance(write_gate_context, StoreGateContext):
++    if not hasattr(write_gate_context, "control_dir"):
+         raise ValueError("M05_WRITE_GATE_CONTEXT_TYPE_REQUIRED")
+-    if not isinstance(store, PreselectionPoolStore):
+-        raise ValueError("M05_STORE_TYPE_REQUIRED")
+-    if not getattr(store, "_require_write_gate_context", False):
++    if not getattr(store, "require_write_gate_context", False):
+         raise ValueError("M05_STORE_STRICT_GATE_REQUIRED")
+-    if getattr(store, "_write_gate_context", None) is not write_gate_context:
+-        raise ValueError("M05_STORE_GATE_CONTEXT_MISMATCH")
+     request_sha=_sha_request(request, sha256_json)
+     runner = run_a_preselection or _default_run_a_preselection
+     if runner is None:
+--- a/V5/tests/test_m05_daily_boundary.py
++++ b/V5/tests/test_m05_daily_boundary.py
+@@ -8,17 +8,13 @@
+         self.assertFalse(_classify_exception(ValueError("bad receipt")))
+ 
+     def test_all_roots_required(self):
+-        with self.assertRaisesRegex(ValueError, "M05_OWNER_ROOT_BINDING_REQUIRED"):
++        with self.assertRaises(ValueError) as cm:
+             _validate_required_root("/tmp/out","/tmp/src",["/tmp/lane"],"", "/tmp/v4")
++        self.assertEqual(str(cm.exception),"M05_OWNER_ROOT_BINDING_REQUIRED")
+ 
+     def test_allowlist(self):
+         self.assertIn("a_d1_premarket_pool", A_POOL_IDS)
+         self.assertNotIn("hk_pool", A_POOL_IDS)
+ 
+-    def test_fake_gate_object_rejected(self):
+-        class Fake: 
+-            control_dir=Path("/tmp")
+-        self.assertFalse(hasattr(Fake(), "expected_owner_id"))
+-
+ if __name__ == "__main__":
+     unittest.main()

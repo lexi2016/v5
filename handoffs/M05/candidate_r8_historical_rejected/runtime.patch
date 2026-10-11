@@ -1,0 +1,23 @@
+--- a/V5/src/v5_shadow/a_preselection_daily.py
++++ b/V5/src/v5_shadow/a_preselection_daily.py
+@@ -38,11 +38,15 @@
+     out = shadow_root(Path(private_root))
+     if out != Path(private_root).resolve():
+         raise ValueError("M05_ROOT_IDENTITY")
+-    roots=[Path(source_root), *[Path(x) for x in lane_roots]]
+-    if code_root:
+-        roots.append(Path(code_root))
+-    if v4_root:
+-        roots.append(Path(v4_root))
++    roots=[Path(source_root)]
++    for item in lane_roots:
++        if not isinstance(item, str) or not item or not Path(item).is_absolute():
++            raise ValueError("M05_LANE_ROOT_BINDING_REQUIRED")
++        roots.append(Path(item))
++    for name, item in (("code_root", code_root), ("v4_root", v4_root)):
++        if not isinstance(item, str) or not item or not Path(item).is_absolute():
++            raise ValueError("M05_OWNER_ROOT_BINDING_REQUIRED")
++        roots.append(Path(item))
+     for r in roots:
+         a=no_symlinks(r)
+         if a == out or a in out.parents or out in a.parents:
