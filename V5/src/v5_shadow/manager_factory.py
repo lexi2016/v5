@@ -1,45 +1,34 @@
-"""M16 isolated production assembly boundary.
+"""M16 production assembly boundary.
 
-This module deliberately does not provide a fake observation source.  The
-application must bind an approved server-owned reader and provider through the
-resolver contract.  Missing activity binding fails closed.
+This factory owns assembly, not research logic. Missing real owner bindings fail
+closed; simulated providers are not production defaults.
 """
 from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, Protocol, Any
+from typing import Any
+
+from .manager_jobs import ManagerJobs
+from .manager_loader import OwnerClosure, load_owner
 
 
 class BindingMissing(RuntimeError):
     pass
 
 
-class OwnerFactory(Protocol):
-    def __call__(self, *, runtime_root: Path) -> Any: ...
-
-
 @dataclass(frozen=True)
 class M16RuntimeConfig:
     runtime_root: Path
+    owner_closure: OwnerClosure
 
 
-@dataclass(frozen=True)
-class M16Bindings:
-    service_factory: OwnerFactory
-
-
-def build_manager_jobs(*, config: M16RuntimeConfig, bindings: M16Bindings):
-    """Build the thin M16 facade over the original owner service.
-
-    Store/service/provider construction remains outside the facade and must be
-    supplied by an approved binding.  No network, credentials, or fallback
-    observation is created here.
-    """
-    if not callable(bindings.service_factory):
-        raise BindingMissing("M16_SERVICE_FACTORY_MISSING")
-    from .manager_jobs import ManagerJobs
-    service = bindings.service_factory(runtime_root=config.runtime_root)
+def build_manager_jobs(*, config: M16RuntimeConfig):
+    loaded = load_owner(config.owner_closure)
+    builder = loaded.get('factory')
+    if not callable(builder):
+        raise BindingMissing('M16_OWNER_FACTORY_NOT_BOUND')
+    service = builder(runtime_root=config.runtime_root)
     if service is None:
-        raise BindingMissing("M16_OWNER_SERVICE_UNAVAILABLE")
+        raise BindingMissing('M16_OWNER_SERVICE_UNAVAILABLE')
     return ManagerJobs(service=service)
