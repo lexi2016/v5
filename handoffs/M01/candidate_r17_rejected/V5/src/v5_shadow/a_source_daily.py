@@ -1,0 +1,103 @@
+"""M01 source binding. R17 minimal restoration from R15 with root entry seam."""
+from __future__ import annotations
+from dataclasses import dataclass, asdict
+from pathlib import Path
+from datetime import datetime
+import hashlib, json, re
+
+class M01BindingError(Exception):
+    pass
+
+@dataclass(frozen=True)
+class ASourceBinding:
+    schema:str; status:str; target_date:str; generation_id:str; generation_path:str
+    generation_sha256:str; manifest_sha256:str; manifest_evidence_sha256:str
+    sync_receipt_sha256:str; strict_source_verified:bool; cutoff_status:str
+
+FIELDS=set(ASourceBinding.__dataclass_fields__)
+
+def validate_date(v):
+    if type(v) is not str or re.fullmatch(r"[0-9]{8}", v) is None:
+        raise M01BindingError("date")
+    try: datetime.strptime(v,"%Y%m%d")
+    except ValueError as e: raise M01BindingError("date") from e
+    return v
+
+def validate_path(v):
+    if type(v) is not str or "\x00" in v or "\\" in v or ".." in Path(v).parts or not v.startswith("/"):
+        raise M01BindingError("path")
+    return v
+
+def sha(v):
+    if type(v) is not str or re.fullmatch(r"[0-9a-f]{64}",v) is None:
+        raise M01BindingError("sha")
+    return v
+
+def project(r):
+    if r.get("status")!="READY" or type(r.get("strict_source_verified")) is not bool or not r["strict_source_verified"]:
+        raise M01BindingError("reader")
+    return ASourceBinding(
+        "v5.m01.a_source_binding.r17","BOUND",
+        validate_date(r["target_date"]),r["generation_id"],validate_path(str(r["path"])),
+        sha(r["sha256"]),sha(r["input_manifest"]["manifest_sha256"]),
+        sha(r["input_manifest_evidence"]["sha256"]),sha(r["source"]["sync_receipt_sha256"]),
+        True,"UNVERIFIED")
+
+def identity(b):
+    return hashlib.sha256(json.dumps(asdict(b),sort_keys=True,separators=(",",":")).encode()).hexdigest()
+
+def binding_relative(b):
+    return f"m01/a_source/{b.target_date}/{identity(b)}/binding.json"
+
+def parse_binding(raw):
+    def dup(p):
+        d={}
+        for k,v in p:
+            if k in d: raise M01BindingError("duplicate")
+            d[k]=v
+        return d
+    try: obj=json.loads(raw.decode("utf-8"),object_pairs_hook=dup)
+    except M01BindingError: raise
+    except Exception as e: raise M01BindingError("json") from e
+    if type(obj) is not dict or set(obj)!=FIELDS: raise M01BindingError("fields")
+    b=ASourceBinding(**obj)
+    if b.schema!="v5.m01.a_source_binding.r17" or b.status!="BOUND": raise M01BindingError("schema")
+    if type(b.strict_source_verified) is not bool or not b.strict_source_verified: raise M01BindingError("strict")
+    if b.cutoff_status!="UNVERIFIED": raise M01BindingError("cutoff")
+    validate_date(b.target_date); validate_path(b.generation_path)
+    for x in (b.generation_sha256,b.manifest_sha256,b.manifest_evidence_sha256,b.sync_receipt_sha256): sha(x)
+    return b
+
+def verify_binding_bytes(raw, relative, reader, expected=None):
+    b=parse_binding(raw)
+    if relative != binding_relative(b): raise M01BindingError("relative")
+    current=project(reader(b.generation_path,expected_target_date=b.target_date,require_source=True))
+    if current != b or (expected is not None and current != expected): raise M01BindingError("drift")
+    return b
+
+def read_and_verify_binding(safe_root, relative, reader):
+    return verify_binding_bytes(safe_root.read_bytes(relative,max_bytes=65536),relative,reader)
+
+def create_binding(safe_root, generation_pointer, target_date, reader):
+    current=project(reader(generation_pointer,expected_target_date=validate_date(target_date),require_source=True))
+    rel=binding_relative(current); raw=json.dumps(asdict(current),sort_keys=True).encode()
+    with safe_root.kernel_lock("m01/.binding.lock",timeout=5):
+        try: old=safe_root.read_bytes(rel,max_bytes=65536)
+        except FileNotFoundError: old=None
+        if old is not None: return verify_binding_bytes(old,rel,reader,current)
+        safe_root.write_bytes(rel,raw,require_absent=True)
+        return verify_binding_bytes(safe_root.read_bytes(rel,max_bytes=65536),rel,reader,current)
+
+def create_binding_from_roots(*,private_root,source_root,generation_pointer,target_date,
+                              SafeRoot,reader,no_symlinks,shadow_root,pointer_name):
+    source=no_symlinks(Path(source_root)); output=shadow_root(Path(private_root))
+    if source==output or source in output.parents or output in source.parents: raise M01BindingError("root")
+    safe=SafeRoot(output)
+    if safe.read_bytes(".v5-shadow-root",max_bytes=64)!=b"v5.shadow-root.v1\n": raise M01BindingError("marker")
+    return create_binding(safe,generation_pointer,target_date,reader)
+
+def read_binding_from_roots(*,private_root,source_root,relative,
+                            SafeRoot,reader,no_symlinks,shadow_root,pointer_name):
+    source=no_symlinks(Path(source_root)); output=shadow_root(Path(private_root))
+    safe=SafeRoot(output)
+    return read_and_verify_binding(safe,relative,reader)

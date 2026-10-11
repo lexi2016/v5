@@ -1,0 +1,1 @@
+R17 candidate. Restores R15 core semantics while retaining root entry work. Runtime NOT_RUN.

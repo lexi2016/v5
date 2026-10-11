@@ -1,0 +1,3044 @@
+[
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 9,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 25,
+    "module": "datetime",
+    "level": 0,
+    "names": [
+      "datetime"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 26,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "dataclass"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 27,
+    "module": "numbers",
+    "level": 0,
+    "names": [
+      "Real"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 28,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 29,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Callable",
+      "Dict",
+      "Iterable",
+      "List",
+      "Mapping",
+      "Optional",
+      "Sequence",
+      "Tuple"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 34,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 39,
+    "module": "pytdx.config.hosts",
+    "level": 0,
+    "names": [
+      "hq_hosts"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 40,
+    "module": "pytdx.hq",
+    "level": 0,
+    "names": [
+      "TdxHq_API"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 41,
+    "module": "pytdx.errors",
+    "level": 0,
+    "names": [
+      "TdxFunctionCallError"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 193,
+    "module": "ops._a_share_daily_sync_parts.scope_validation",
+    "level": 0,
+    "names": [
+      "__deadline_guard_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 199,
+    "module": "ops._a_share_daily_sync_parts.cli_runtime",
+    "level": 0,
+    "names": [
+      "__atomic_write_bytes_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 204,
+    "module": "ops._a_share_daily_sync_parts.scope_validation",
+    "level": 0,
+    "names": [
+      "__target_scope_fingerprint_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 236,
+    "module": "ops._a_share_daily_sync_parts.scope_validation",
+    "level": 0,
+    "names": [
+      "__path_has_symlink_component_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 254,
+    "module": "ops._a_share_daily_sync_parts.cli_runtime",
+    "level": 0,
+    "names": [
+      "__file_sha256_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 266,
+    "module": "ops._a_share_daily_sync_parts.trusted_cas",
+    "level": 0,
+    "names": [
+      "__trusted_cas_read_json_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 289,
+    "module": "ops._a_share_daily_sync_parts.trusted_cas",
+    "level": 0,
+    "names": [
+      "__trusted_cas_map_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 299,
+    "module": "ops._a_share_daily_sync_parts.trusted_cas",
+    "level": 0,
+    "names": [
+      "__trusted_cas_load_inputs_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 313,
+    "module": "ops._a_share_daily_sync_parts.trusted_cas",
+    "level": 0,
+    "names": [
+      "__trusted_cas_local_reuse_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 355,
+    "module": "ops._a_share_daily_sync_parts.field_rules",
+    "level": 0,
+    "names": [
+      "__field_signature_violation_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 368,
+    "module": "ops._a_share_daily_sync_parts.field_rules",
+    "level": 0,
+    "names": [
+      "__local_field_signature_violations_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 381,
+    "module": "ops._a_share_daily_sync_parts.field_rules",
+    "level": 0,
+    "names": [
+      "__provider_field_signature_violation_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 387,
+    "module": "ops._a_share_daily_sync_parts.field_rules",
+    "level": 0,
+    "names": [
+      "__bars_equivalent_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 398,
+    "module": "ops._a_share_daily_sync_parts.progress",
+    "level": 0,
+    "names": [
+      "__local_history_status_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 403,
+    "module": "ops._a_share_daily_sync_parts.progress",
+    "level": 0,
+    "names": [
+      "__new_progress_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 408,
+    "module": "ops._a_share_daily_sync_parts.progress",
+    "level": 0,
+    "names": [
+      "__load_progress_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 425,
+    "module": "ops._a_share_daily_sync_parts.progress",
+    "level": 0,
+    "names": [
+      "__resume_target_order_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 473,
+    "module": "ops._a_share_daily_sync_parts.network_session",
+    "level": 0,
+    "names": [
+      "__exception_chain_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 479,
+    "module": "ops._a_share_daily_sync_parts.network_session",
+    "level": 0,
+    "names": [
+      "__protocol_response_details_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 504,
+    "module": "ops._a_share_daily_sync_parts.network_session",
+    "level": 0,
+    "names": [
+      "__fetch_valid_target_bars_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 546,
+    "module": "ops._a_share_daily_sync_parts.response_capture",
+    "level": 0,
+    "names": [
+      "__write_raw_response_snapshot_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 579,
+    "module": "ops._a_share_daily_sync_parts.sync_workflow",
+    "level": 0,
+    "names": [
+      "_run_sync_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 593,
+    "module": "ops._a_share_daily_sync_parts.day_file_format",
+    "level": 0,
+    "names": [
+      "_write_csv_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 625,
+    "module": "ops._a_share_daily_sync_parts.day_file_format",
+    "level": 0,
+    "names": [
+      "_valid_hq_bar_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 630,
+    "module": "ops._a_share_daily_sync_parts.day_file_format",
+    "level": 0,
+    "names": [
+      "_read_hq_day_bars_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 652,
+    "module": "ops._a_share_daily_sync_parts.rebuild",
+    "level": 0,
+    "names": [
+      "_build_rebuild_candidate_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 657,
+    "module": "ops._a_share_daily_sync_parts.cli_runtime",
+    "level": 0,
+    "names": [
+      "_discover_targets_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 662,
+    "module": "ops._a_share_daily_sync_parts.day_file_format",
+    "level": 0,
+    "names": [
+      "_append_bars_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 667,
+    "module": "ops._a_share_daily_sync_parts.cli_runtime",
+    "level": 0,
+    "names": [
+      "__runtime_host_candidates_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 685,
+    "module": "ops._a_share_daily_sync_parts.network_session",
+    "level": 0,
+    "names": [
+      "_connect_hq_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 690,
+    "module": "ops._a_share_daily_sync_parts.cli_runtime",
+    "level": 0,
+    "names": [
+      "_run_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "line": 695,
+    "module": "ops._a_share_daily_sync_parts.cli_runtime",
+    "level": 0,
+    "names": [
+      "_parse_args_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 10,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 19,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 20,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 24,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DAY_STRUCT",
+      "read_hq_day_bars",
+      "valid_hq_bar"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 25,
+    "module": "infrastructure.formula_generation",
+    "level": 0,
+    "names": [
+      "is_v4_formula_state_path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 30,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 122,
+    "module": "ops._a_formula_input_manifest_parts.source_io",
+    "level": 0,
+    "names": [
+      "__ensure_distinct_roots_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 127,
+    "module": "ops._a_formula_input_manifest_parts.source_io",
+    "level": 0,
+    "names": [
+      "__read_sync_receipt_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 137,
+    "module": "ops._a_formula_input_manifest_parts.source_io",
+    "level": 0,
+    "names": [
+      "__receipt_files_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 142,
+    "module": "ops._a_formula_input_manifest_parts.source_io",
+    "level": 0,
+    "names": [
+      "__frame_for_day_file_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 147,
+    "module": "ops._a_formula_input_manifest_parts.source_io",
+    "level": 0,
+    "names": [
+      "__write_parquet_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 166,
+    "module": "ops._a_formula_input_manifest_parts.manifest_generation",
+    "level": 0,
+    "names": [
+      "_build_a_formula_input_manifest_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 192,
+    "module": "ops._a_formula_input_manifest_parts.accepted_entries",
+    "level": 0,
+    "names": [
+      "__accepted_only_entries_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 207,
+    "module": "ops._a_formula_input_manifest_parts.accepted_entries",
+    "level": 0,
+    "names": [
+      "_build_accepted_only_a_formula_input_manifest_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "line": 212,
+    "module": "ops._a_formula_input_manifest_parts.source_io",
+    "level": 0,
+    "names": [
+      "_main_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 20,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 31,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 32,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping",
+      "Sequence"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 52,
+    "module": "infrastructure.interprocess_lock",
+    "level": 0,
+    "names": [
+      "owned_interprocess_lock"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 53,
+    "module": "infrastructure.owned_io",
+    "level": 0,
+    "names": [
+      "SafeRoot"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 54,
+    "module": "infrastructure.formula_generation",
+    "level": 0,
+    "names": [
+      "is_v4_formula_state_path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 55,
+    "module": "upstreams.v3_shared_data.shared_data",
+    "level": 0,
+    "names": [
+      "a_formula_authority"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 40,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 127,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__jsonable_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 148,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__path_has_symlink_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 175,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__safe_output_root_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 201,
+    "module": "ops._a_formula_increment_parts.input_manifest",
+    "level": 0,
+    "names": [
+      "__safe_manifest_file_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 206,
+    "module": "ops._a_formula_increment_parts.input_manifest",
+    "level": 0,
+    "names": [
+      "__load_input_manifest_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 211,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__normalize_date_series_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 216,
+    "module": "ops._a_formula_increment_parts.feature_computation",
+    "level": 0,
+    "names": [
+      "__normalize_input_frame_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 221,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__read_seed_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 249,
+    "module": "ops._a_formula_increment_parts.feature_computation",
+    "level": 0,
+    "names": [
+      "__backfill_increment_contract_columns_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 255,
+    "module": "ops._a_formula_increment_parts.feature_computation",
+    "level": 0,
+    "names": [
+      "_compute_formula_features_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 276,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__audit_increment_boundary_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 298,
+    "module": "ops._a_formula_increment_parts.retention",
+    "level": 0,
+    "names": [
+      "__retention_hash_table_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 315,
+    "module": "ops._a_formula_increment_parts.retention",
+    "level": 0,
+    "names": [
+      "__align_retention_hash_frames_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 338,
+    "module": "ops._a_formula_increment_parts.history_audit",
+    "level": 0,
+    "names": [
+      "__approved_history_gap_keys_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 358,
+    "module": "ops._a_formula_increment_parts.history_audit",
+    "level": 0,
+    "names": [
+      "__audit_existing_history_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 364,
+    "module": "ops._a_formula_increment_parts.history_audit",
+    "level": 0,
+    "names": [
+      "__historical_seed_health_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 369,
+    "module": "ops._a_formula_increment_parts.selector_contract",
+    "level": 0,
+    "names": [
+      "_load_authoritative_contract_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 374,
+    "module": "ops._a_formula_increment_parts.selector_contract",
+    "level": 0,
+    "names": [
+      "_build_contract_policy_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 399,
+    "module": "ops._a_formula_increment_parts.selector_contract",
+    "level": 0,
+    "names": [
+      "_validate_new_selector_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 404,
+    "module": "ops._a_formula_increment_parts.selector_contract",
+    "level": 0,
+    "names": [
+      "__validate_backtest_frame_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 432,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__append_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 437,
+    "module": "ops._a_formula_increment_parts.pointer_transaction",
+    "level": 0,
+    "names": [
+      "__atomic_parquet_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 473,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__generation_payload_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 499,
+    "module": "ops._a_formula_increment_parts.generation_evidence",
+    "level": 0,
+    "names": [
+      "__copy_generation_owned_file_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 517,
+    "module": "ops._a_formula_increment_parts.generation_evidence",
+    "level": 0,
+    "names": [
+      "__prepare_generation_owned_evidence_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 529,
+    "module": "ops._a_formula_increment_parts.pointer_transaction",
+    "level": 0,
+    "names": [
+      "__write_pointer_pair_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 552,
+    "module": "ops._a_formula_increment_parts.increment_workflow",
+    "level": 0,
+    "names": [
+      "__run_success_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 570,
+    "module": "ops._a_formula_increment_parts.increment_workflow",
+    "level": 0,
+    "names": [
+      "_run_increment_authority_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 575,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "__parser_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "line": 580,
+    "module": "ops._a_formula_increment_parts.primitives_cli",
+    "level": 0,
+    "names": [
+      "_main_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 12,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 26,
+    "module": "zoneinfo",
+    "level": 0,
+    "names": [
+      "ZoneInfo"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 27,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 28,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Callable",
+      "Iterable",
+      "Mapping",
+      "Sequence"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 30,
+    "module": "infrastructure.owned_io",
+    "level": 0,
+    "names": [
+      "SafeRoot"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 31,
+    "module": "infrastructure.formula_generation",
+    "level": 0,
+    "names": [
+      "FormulaGenerationError",
+      "is_v4_formula_state_owner",
+      "read_formula_generation"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 40,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 78,
+    "module": "ops._macos_research_panel_daily_parts.panel_primitives",
+    "level": 0,
+    "names": [
+      "__resolve_a_sync_run_budget_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 96,
+    "module": "ops._macos_research_panel_daily_parts.calendar_schedule",
+    "level": 0,
+    "names": [
+      "__scheduled_day_is_cross_market_trading_day_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 155,
+    "module": "ops._macos_research_panel_daily_parts.a_market_capture",
+    "level": 0,
+    "names": [
+      "_collect_a_pytdx_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 168,
+    "module": "ops._macos_research_panel_daily_parts.hk_market_capture",
+    "level": 0,
+    "names": [
+      "_collect_hk_futu_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 216,
+    "module": "ops._macos_research_panel_daily_parts.panel_primitives",
+    "level": 0,
+    "names": [
+      "__validate_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 229,
+    "module": "ops._macos_research_panel_daily_parts.panel_primitives",
+    "level": 0,
+    "names": [
+      "__atomic_write_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 247,
+    "module": "ops._macos_research_panel_daily_parts.a_market_capture",
+    "level": 0,
+    "names": [
+      "_bootstrap_a_vipdoc_from_panel_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 252,
+    "module": "ops._macos_research_panel_daily_parts.a_market_capture",
+    "level": 0,
+    "names": [
+      "__validate_seed_rows_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 257,
+    "module": "ops._macos_research_panel_daily_parts.bounded_execution",
+    "level": 0,
+    "names": [
+      "__load_authority_module_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 276,
+    "module": "ops._macos_research_panel_daily_parts.bounded_execution",
+    "level": 0,
+    "names": [
+      "_run_windows_a_sync_authority_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 302,
+    "module": "ops._macos_research_panel_daily_parts.formula_pointer",
+    "level": 0,
+    "names": [
+      "_selector_pointer_is_ready_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 319,
+    "module": "ops._macos_research_panel_daily_parts.formula_pointer",
+    "level": 0,
+    "names": [
+      "__formula_generation_target_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 324,
+    "module": "ops._macos_research_panel_daily_parts.formula_pointer",
+    "level": 0,
+    "names": [
+      "__read_formula_generation_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 329,
+    "module": "ops._macos_research_panel_daily_parts.formula_pointer",
+    "level": 0,
+    "names": [
+      "__find_formula_generation_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 377,
+    "module": "ops._macos_research_panel_daily_parts.scheduled_readiness",
+    "level": 0,
+    "names": [
+      "__fast_path_lane_detail_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 389,
+    "module": "ops._macos_research_panel_daily_parts.scheduled_readiness",
+    "level": 0,
+    "names": [
+      "__a_lane_receipt_ready_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 399,
+    "module": "ops._macos_research_panel_daily_parts.scheduled_readiness",
+    "level": 0,
+    "names": [
+      "__hk_lane_receipt_ready_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 423,
+    "module": "ops._macos_research_panel_daily_parts.scheduled_readiness",
+    "level": 0,
+    "names": [
+      "_ensure_after_1700_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 434,
+    "module": "ops._macos_research_panel_daily_parts.scheduled_readiness",
+    "level": 0,
+    "names": [
+      "_ensure_exit_code_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 439,
+    "module": "ops._macos_research_panel_daily_parts.panel_primitives",
+    "level": 0,
+    "names": [
+      "__ensure_pointer_seed_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 449,
+    "module": "ops._macos_research_panel_daily_parts.bounded_execution",
+    "level": 0,
+    "names": [
+      "_run_bounded_process_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 469,
+    "module": "ops._macos_research_panel_daily_parts.a_formula_execution",
+    "level": 0,
+    "names": [
+      "_run_v4_a_formula_offline_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 484,
+    "module": "ops._macos_research_panel_daily_parts.a_formula_execution",
+    "level": 0,
+    "names": [
+      "__strict_v4_path_root_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 507,
+    "module": "ops._macos_research_panel_daily_parts.a_formula_execution",
+    "level": 0,
+    "names": [
+      "_run_v4_a_live_generation_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 526,
+    "module": "ops._macos_research_panel_daily_parts.a_formula_execution",
+    "level": 0,
+    "names": [
+      "_run_windows_a_formula_authority_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 579,
+    "module": "ops._macos_research_panel_daily_parts.day_file_output",
+    "level": 0,
+    "names": [
+      "__pack_day_file_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 584,
+    "module": "ops._macos_research_panel_daily_parts.panel_primitives",
+    "level": 0,
+    "names": [
+      "__a_exchange_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 589,
+    "module": "ops._macos_research_panel_daily_parts.day_file_output",
+    "level": 0,
+    "names": [
+      "__grouped_result_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 594,
+    "module": "ops._macos_research_panel_daily_parts.day_file_output",
+    "level": 0,
+    "names": [
+      "_pack_a_day_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 599,
+    "module": "ops._macos_research_panel_daily_parts.day_file_output",
+    "level": 0,
+    "names": [
+      "_pack_hk_day_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 621,
+    "module": "ops._macos_research_panel_daily_parts.panel_primitives",
+    "level": 0,
+    "names": [
+      "_run_lanes_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 627,
+    "module": "ops._macos_research_panel_daily_parts.calendar_schedule",
+    "level": 0,
+    "names": [
+      "__non_trading_day_result_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 644,
+    "module": "ops._macos_research_panel_daily_parts.calendar_schedule",
+    "level": 0,
+    "names": [
+      "_run_scheduled_lanes_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 689,
+    "module": "ops._macos_research_panel_daily_parts.cli",
+    "level": 0,
+    "names": [
+      "__public_envelope_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "line": 694,
+    "module": "ops._macos_research_panel_daily_parts.cli",
+    "level": 0,
+    "names": [
+      "_main_body"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py",
+    "line": 10,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py",
+    "line": 16,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py",
+    "line": 17,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 9,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "dataclass"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 11,
+    "module": "contextlib",
+    "level": 0,
+    "names": [
+      "contextmanager"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 12,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 13,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Iterator"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 14,
+    "module": "uuid",
+    "level": 0,
+    "names": [
+      "uuid4"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "line": 15,
+    "module": "infrastructure.owned_io",
+    "level": 0,
+    "names": [
+      "LockAcquireTimeout",
+      "SafeRoot"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+    "line": 8,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+    "line": 9,
+    "module": "contextlib",
+    "level": 0,
+    "names": [
+      "contextmanager",
+      "suppress"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+    "line": 12,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path",
+      "PurePosixPath",
+      "PureWindowsPath"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+    "line": 15,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Iterator"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+    "line": 16,
+    "module": "uuid",
+    "level": 0,
+    "names": [
+      "uuid4"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+    "line": 5,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path",
+      "PureWindowsPath"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+    "line": 9,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+    "line": 11,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "line": 5,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "dataclass"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "line": 6,
+    "module": "datetime",
+    "level": 0,
+    "names": [
+      "date",
+      "datetime",
+      "timedelta"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "line": 7,
+    "module": "enum",
+    "level": 0,
+    "names": [
+      "StrEnum"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "line": 8,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "line": 9,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/a_formula_authority.py",
+    "line": 12,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/a_formula_authority.py",
+    "line": 14,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py",
+    "line": 6,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py",
+    "line": 7,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 8,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 15,
+    "module": "contextlib",
+    "level": 0,
+    "names": [
+      "contextmanager"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 16,
+    "module": "datetime",
+    "level": 0,
+    "names": [
+      "datetime"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 17,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 18,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 19,
+    "module": "uuid",
+    "level": 0,
+    "names": [
+      "uuid4"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 21,
+    "module": "allowlist",
+    "level": 1,
+    "names": [
+      "AllowlistRegistry"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 22,
+    "module": "collectors",
+    "level": 1,
+    "names": [
+      "get_collector"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 23,
+    "module": "constants",
+    "level": 1,
+    "names": [
+      "CANNOT_CONFIRM",
+      "EXPLICIT_STATUSES",
+      "FAILED",
+      "LATEST_SCHEMA_VERSION",
+      "OWNER_REGISTRY",
+      "OWNERS_SCHEMA_VERSION",
+      "READY",
+      "READY_EMPTY",
+      "RECEIPT_SCHEMA_VERSION",
+      "SAFETY_FLAG_KEYS",
+      "STORE_LOCK_NAME",
+      "STORE_LOCK_STALE_SECONDS",
+      "STORE_LOCK_TIMEOUT_SECONDS"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 38,
+    "module": "hashing",
+    "level": 1,
+    "names": [
+      "canonical_bytes",
+      "sha256_file",
+      "sha256_json"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "line": 39,
+    "module": "paths",
+    "level": 1,
+    "names": [
+      "resolve_under",
+      "validate_date",
+      "validate_role"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/constants.py",
+    "line": 6,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py",
+    "line": 6,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path",
+      "PurePosixPath"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py",
+    "line": 7,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "line": 10,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "line": 12,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "dataclass",
+      "field"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "line": 13,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "line": 15,
+    "module": "paths",
+    "level": 1,
+    "names": [
+      "validate_date",
+      "validate_role"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 13,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 17,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "dataclass",
+      "field"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 18,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 19,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Callable"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 21,
+    "module": "constants",
+    "level": 1,
+    "names": [
+      "CANNOT_CONFIRM",
+      "READY",
+      "READY_EMPTY"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 22,
+    "module": "hashing",
+    "level": 1,
+    "names": [
+      "sha256_file"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "line": 23,
+    "module": "allowlist",
+    "level": 1,
+    "names": [
+      "SourceSpec"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/__init__.py",
+    "line": 2,
+    "module": "constants",
+    "level": 1,
+    "names": [
+      "CANNOT_CONFIRM",
+      "READY",
+      "READY_EMPTY",
+      "SAFETY_FLAG_KEYS"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/__init__.py",
+    "line": 3,
+    "module": "store",
+    "level": 1,
+    "names": [
+      "ConflictError",
+      "LockTimeoutError",
+      "SafeRootStore",
+      "StoreError"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_authority.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_authority.py",
+    "line": 5,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_authority.py",
+    "line": 10,
+    "module": "ops",
+    "level": 0,
+    "names": [
+      "a_formula_increment"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_authority.py",
+    "line": 11,
+    "module": "upstreams.v3_shared_data.shared_data",
+    "level": 0,
+    "names": [
+      "a_formula_authority"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py",
+    "line": 7,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py",
+    "line": 14,
+    "module": "infrastructure.formula_generation",
+    "level": 0,
+    "names": [
+      "FormulaGenerationError",
+      "read_formula_generation"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py",
+    "line": 15,
+    "module": "ops",
+    "level": 0,
+    "names": [
+      "a_formula_increment"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py",
+    "line": 16,
+    "module": "ops",
+    "level": 0,
+    "names": [
+      "macos_research_panel_daily"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 1,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 5,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 29,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "pack_hq_bar"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 97,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "build_accepted_only_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 100,
+    "module": "ops.a_formula_increment",
+    "level": 0,
+    "names": [
+      "_load_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 132,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "build_accepted_only_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 155,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "InputManifestError",
+      "build_accepted_only_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 179,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "InputManifestError",
+      "build_accepted_only_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 206,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "InputManifestError",
+      "build_accepted_only_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "line": 228,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "InputManifestError",
+      "build_accepted_only_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 1,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 5,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 25,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "pack_hq_bar"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 51,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 89,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "pack_hq_bar",
+      "read_hq_day_bars",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 119,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 144,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 178,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 215,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 252,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 320,
+    "module": "pytdx.errors",
+    "level": 0,
+    "names": [
+      "TdxFunctionCallError"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 321,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 363,
+    "module": "pytdx.errors",
+    "level": 0,
+    "names": [
+      "TdxFunctionCallError"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 364,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "PROTOCOL_RESPONSE_MALFORMED",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 415,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 449,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 499,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 566,
+    "module": "ops.macos_research_panel_daily",
+    "level": 0,
+    "names": [
+      "ensure_exit_code"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 744,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 760,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DAY_STRUCT",
+      "DailyTarget",
+      "pack_hq_bar",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 788,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "line": 825,
+    "module": "ops.a_share_daily_sync",
+    "level": 0,
+    "names": [
+      "DailyTarget",
+      "run_sync"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py",
+    "line": 1,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py",
+    "line": 3,
+    "module": "datetime",
+    "level": 0,
+    "names": [
+      "datetime"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py",
+    "line": 4,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py",
+    "line": 5,
+    "module": "zoneinfo",
+    "level": 0,
+    "names": [
+      "ZoneInfo"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py",
+    "line": 7,
+    "module": "ops",
+    "level": 0,
+    "names": [
+      "macos_research_panel_daily"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/feature_computation.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/feature_computation.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/generation_evidence.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/generation_evidence.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/history_audit.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/history_audit.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/increment_workflow.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/increment_workflow.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/input_manifest.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/input_manifest.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/pointer_transaction.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/pointer_transaction.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/primitives_cli.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/primitives_cli.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/retention.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/retention.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/selector_contract.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/selector_contract.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/accepted_entries.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/accepted_entries.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/manifest_generation.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/manifest_generation.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/source_io.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/source_io.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/cli_runtime.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/cli_runtime.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/day_file_format.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/day_file_format.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/field_rules.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/field_rules.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/network_session.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/network_session.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/progress.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/progress.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/rebuild.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/rebuild.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/response_capture.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/response_capture.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/scope_validation.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/scope_validation.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/sync_workflow.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/sync_workflow.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/trusted_cas.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/trusted_cas.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_formula_execution.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_formula_execution.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_formula_execution.py",
+    "line": 160,
+    "module": "ops.a_formula_input_manifest",
+    "level": 0,
+    "names": [
+      "build_a_formula_input_manifest"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py",
+    "line": 16,
+    "module": "pytdx.hq",
+    "level": 0,
+    "names": [
+      "TdxHq_API"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py",
+    "line": 25,
+    "module": "pytdx.config.hosts",
+    "level": 0,
+    "names": [
+      "hq_hosts"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/bounded_execution.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/bounded_execution.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/calendar_schedule.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/calendar_schedule.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/calendar_schedule.py",
+    "line": 16,
+    "module": "contracts.trading_calendar",
+    "level": 0,
+    "names": [
+      "TradingDayState",
+      "load_market_calendar",
+      "resolve_market_states"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/cli.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/cli.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/cli.py",
+    "line": 240,
+    "module": "hk_capture_gate",
+    "level": 1,
+    "names": [
+      "run_hk_capture_gate"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/day_file_output.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/day_file_output.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/formula_pointer.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/formula_pointer.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/formula_pointer.py",
+    "line": 23,
+    "module": "infrastructure.formula_generation",
+    "level": 0,
+    "names": [
+      "read_legacy_pointer"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_capture_gate.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_capture_gate.py",
+    "line": 4,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+    "line": 8,
+    "module": "datetime",
+    "level": 0,
+    "names": [
+      "date",
+      "datetime",
+      "time",
+      "timezone"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+    "line": 9,
+    "module": "decimal",
+    "level": 0,
+    "names": [
+      "Decimal"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+    "line": 10,
+    "module": "typing",
+    "level": 0,
+    "names": [
+      "Any",
+      "Mapping"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+    "line": 11,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/scheduled_readiness.py",
+    "line": 2,
+    "module": "__future__",
+    "level": 0,
+    "names": [
+      "annotations"
+    ]
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/scheduled_readiness.py",
+    "line": 3,
+    "module": "_namespace",
+    "level": 1,
+    "names": [
+      "read_global"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/input_snapshot.py",
+    "line": 4,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/input_snapshot.py",
+    "line": 6,
+    "module": "composition",
+    "level": 1,
+    "names": [
+      "no_symlinks"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/input_snapshot.py",
+    "line": 7,
+    "module": "digests",
+    "level": 1,
+    "names": [
+      "sha256_json"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/composition.py",
+    "line": 7,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "asdict"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/composition.py",
+    "line": 8,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/composition.py",
+    "line": 9,
+    "module": "contracts",
+    "level": 1,
+    "names": [
+      "Binding",
+      "Composition",
+      "ModuleManifest",
+      "exact_keys",
+      "parse_manifest",
+      "sha"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/composition.py",
+    "line": 10,
+    "module": "digests",
+    "level": 1,
+    "names": [
+      "canonical_bytes",
+      "sha256_json"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/contracts.py",
+    "line": 1,
+    "module": "dataclasses",
+    "level": 0,
+    "names": [
+      "dataclass"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/contracts.py",
+    "line": 20,
+    "module": "datetime",
+    "level": 0,
+    "names": [
+      "datetime",
+      "timezone",
+      "timedelta"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/contracts.py",
+    "line": 21,
+    "module": "pathlib",
+    "level": 0,
+    "names": [
+      "Path"
+    ]
+  },
+  {
+    "path": "V5/src/v5_shadow/contracts.py",
+    "line": 23,
+    "module": "digests",
+    "level": 1,
+    "names": [
+      "canonical_bytes"
+    ]
+  }
+]

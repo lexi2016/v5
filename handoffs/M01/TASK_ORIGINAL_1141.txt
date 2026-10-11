@@ -1,0 +1,11 @@
+[$superpowers](app://plugins~Plugin_60aea7460bd4819199fd97a9553a5e12)  R16 实物已独立取到并核验，6143 bytes，ZIP SHA256 7e7046dc81f8b70243f2d92784a0322fab83f81e246a5761403bd432b4df1bb1。附件是原 R15、R16 和逐行审查；本轮请从 R15 完整源码做最小增量，不能再把产品缩成 helper 骨架。\
+\
+R16 的166→91行删除了 project、create_binding、锁内 require_absent 写入、最终独立读回和 current!=binding 来源比较；create_binding_from_roots 85–87 仍强制外传五项安全依赖，并且只返回 safe/source/bounded_reader，完全不创建 binding。读取入口也无内部真实默认依赖。另删 FIELDS/type/set 合同、把 schema 擅改 r16、将真实 NUL 校验改成字面反斜线字符串。这些是源码回退，与运行环境或未来行情无关。\
+\
+请先完整恢复 R15 已有 parser/core/project/create/read/verify/SafeRoot kernel_lock/不可覆盖/独立读回/本次 expected 比较，不改原 schema，不删任何既有校验；仅保留 R16 确实新增的目录 pointer 追加后的 no_symlinks。再把上一轮已明确的两公开 roots 入口真正接到这些核心：模块内部固定使用 SOURCE 中的 SafeRoot、真实 formula generation reader、no_symlinks、shadow_root 和原 pointer 常量，调用者只提供业务路径和本次身份；创建入口必须实际生成并持久化 binding，读取入口必须实际重读原来源并比对。本轮无需新 Mac 业务数据，也无需跨改共享 composition。\
+\
+在任何锁/写入前校验 roots 与 pointer 的原始类型、绝对路径词法、NUL/..、source 存在且为目录、marker、source/private 双向隔离与允许边界。受限 reader 必须实际用于创建和复用两路：source 要真实参与路径准入；目录追加原 pointer 常量后再验祖先 symlink；返回 path 也核原始类型/词法/祖先和 source containment。保留 R15 已经正确的日期、严格 parser、重复键、窄 FileNotFoundError、精确 relative 校验和真实来源 SHA 链。\
+\
+本轮直接写完整文件并用原 SOURCE fixture 调默认双入口正控及每项负例，不能只交两个日期测试；断言准确错误、无写入与来源变更拒绝。按真正 R15 前像自动生成全文件正向及独立反向 patch，实际 apply→after SHA→reverse→before SHA/ABSENT 往返。R16 两 patch 完全相同且写 /dev/null，不能沿用；SHA 清单排除自身。交完整 after、真实测试源码/命令/原日志/exit、前后 SHA、部署和回滚说明，重新打开最终 ZIP 核内容再附文件。\
+\
+若运行缺依赖，请给实际命令与原错误并交已写完整代码；不能把未实现标 NOT_RUN，也不能以时间窗口或下一轮计划结束。原 V4、算法、权限、凭据和其他模块均保持。\

@@ -1,0 +1,89 @@
+{
+  "schema": "m01-r6-independent-acceptance-review.v1",
+  "review_status": "REVIEWED_WITH_REPLAY_OUTPUT_CAVEAT",
+  "candidate_disposition": "NOT_PRODUCTION_ACCEPTED",
+  "input_identity": {
+    "fixed_commit": "30d795bca2ed28c6b182eb8778f25dfdc2b2bc0f",
+    "input_receipt_fixed_commit_matches": true,
+    "candidate_runtime_sha256": "922f1d3300ad94c5309964fb22d19b23f44b515fe3d2414cf04ad1220c527960",
+    "candidate_test_sha256": "e753bfb98ac7887d55532df2981806aeabbc87f5d1cdb243015404cf01128dc5",
+    "boundary_harness_sha256": "01953adcc6a65d9ec6a6404f452a340525ac05126805a1edc8503c12b57b24d0",
+    "original_safe_root_sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+    "original_formula_reader_sha256": "0904603912d6257cb02f41dfaf66c080e2f682e690b1c1901a86a7bafe1e74f0",
+    "hashes_match_writer_result_and_fixed_original": true
+  },
+  "harness_review": {
+    "candidate_imported_from": "acceptance/isolated_repo/V5/src/v5_shadow/a_source_daily.py",
+    "uses_original_safe_root": "fixed_original/infrastructure/owned_io.py:SafeRoot",
+    "uses_original_reader": "fixed_original/infrastructure/formula_generation.py:read_formula_generation",
+    "runner_passes_real_safe_root_and_reader_to_candidate": true,
+    "fixtures_are_synthetic_filesystem_parquet_and_json": true,
+    "fixture_root_for_independent_replay": "acceptance-review/replay-root/m01-r6-github-20261011/acceptance/fixtures",
+    "active_source_roots_or_services_touched": false,
+    "candidate_or_business_source_edited": false
+  },
+  "writer_run": {
+    "boundary_runner_exit_code": 0,
+    "boundary_case_counts": {
+      "PASS": 2,
+      "REPRODUCED": 7,
+      "unexpected_failures": 0
+    },
+    "candidate_pytest": {
+      "status": "PASS",
+      "summary": "2 passed in 0.00s",
+      "exit_code": 0,
+      "original_test_file_unchanged": true
+    },
+    "evidence": {
+      "result": "../acceptance/RESULT.json",
+      "report": "../acceptance/REPORT.md",
+      "boundary_results": "../acceptance/rawlogs/boundary_results.json",
+      "boundary_command_log": "../acceptance/rawlogs/commands.jsonl",
+      "pytest_receipt": "../acceptance/rawlogs/candidate_pytest_installed.receipt.json",
+      "pytest_stdout": "../acceptance/rawlogs/candidate_pytest_installed.stdout.txt",
+      "pytest_install_receipt": "../acceptance-integration/pytest-install-venv-receipt.json"
+    }
+  },
+  "independent_replay": {
+    "assertion_cases_completed": 9,
+    "case_counts_from_stdout": {
+      "PASS": 2,
+      "REPRODUCED": 7,
+      "unexpected_case_failures": 0
+    },
+    "matches_writer_case_counts_and_statuses": true,
+    "runner_exit_code": 1,
+    "status": "ALL_CASE_ASSERTIONS_COMPLETED_BUT_RESULT_FILE_WRITE_FAILED",
+    "runner_error": "FileNotFoundError writing replay-root/m01-r6-github-20261011/acceptance/rawlogs/boundary_results.json because the isolated scratch acceptance/rawlogs directory was not created before the standalone helper ran.",
+    "case_assertions_failed": false,
+    "structured_result_emitted_by_replay": false,
+    "retry_performed": false,
+    "stdout": "boundary-rerun.stdout.txt",
+    "stdout_sha256": "1093e86052c9afb2da06e3268a2ed55bd936d2077ebd950254b13fb0a9ce5446",
+    "stderr": "boundary-rerun.stderr.txt",
+    "stderr_sha256": "716769da16257ed1b5fa27c4914e07be9cfba925ac86de121e400370b93ed582",
+    "harness_copy_sha256": "01953adcc6a65d9ec6a6404f452a340525ac05126805a1edc8503c12b57b24d0"
+  },
+  "observed_candidate_defects": [
+    "Same generation_id with different complete source identity and pointer returns the old binding.",
+    "A corrupt existing binding is caught broadly; FileExistsError masks the binding parse error while old bytes remain unchanged.",
+    "Existing source drift is caught broadly; FileExistsError masks the original FormulaGenerationError while old bytes remain unchanged.",
+    "Binding creation succeeds without the .v5-shadow-root marker.",
+    "Binding creation succeeds when private output root exactly overlaps the formula source root.",
+    "read_and_verify_binding accepts a valid generation_path outside the designated source root because its API has no source_root argument.",
+    "Binding parser accepts JSON strict_source_verified=1 as an int equal to True."
+  ],
+  "pytest_status_accounting": {
+    "final_status": "PASS",
+    "initial_missing_pytest_attempt": "NOT_RUN",
+    "initial_network_install_attempt": "INSTALL_FAILED",
+    "later_real_pytest_install_and_original_tests": "PASS",
+    "no_pytest_shim_used_for_final_result": true
+  },
+  "limits": [
+    "The independent replay's complete runner did not exit zero; only its nine case assertions completed. The writer's full boundary runner did exit zero with structured results.",
+    "The reproduced seven candidate defects remain unresolved and block production acceptance/M01 completion.",
+    "No active-root, live-data, preview-consumer, natural-run, or production-wiring acceptance was performed."
+  ]
+}

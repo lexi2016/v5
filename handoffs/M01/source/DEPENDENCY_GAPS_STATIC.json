@@ -1,0 +1,55 @@
+{
+  "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/_namespace.py": {
+    "tree_present": false,
+    "consumers": [
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/feature_computation.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/generation_evidence.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/history_audit.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/increment_workflow.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/input_manifest.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/pointer_transaction.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/primitives_cli.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/retention.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/selector_contract.py:3"
+    ]
+  },
+  "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/_namespace.py": {
+    "tree_present": false,
+    "consumers": [
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/accepted_entries.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/manifest_generation.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/source_io.py:3"
+    ]
+  },
+  "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/_namespace.py": {
+    "tree_present": false,
+    "consumers": [
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/cli_runtime.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/day_file_format.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/field_rules.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/network_session.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/progress.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/rebuild.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/response_capture.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/scope_validation.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/sync_workflow.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/trusted_cas.py:3"
+    ]
+  },
+  "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/_namespace.py": {
+    "tree_present": false,
+    "consumers": [
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_formula_execution.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/bounded_execution.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/calendar_schedule.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/cli.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/day_file_output.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/formula_pointer.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_capture_gate.py:4",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py:11",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py:3",
+      "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/scheduled_readiness.py:3"
+    ]
+  }
+}

@@ -1,0 +1,507 @@
+[
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "37cef8f6ab20e0a4061c1a5f5f4581ac19203876",
+    "sha256": "42d2ef712abca59e2d230e8a37253a08a922001d7fd88b3baa1e0e0fb7ce4b7c",
+    "bytes": 28412,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/a_share_daily_sync.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3addc924e0f637655a21b6406d5ff4142c2368f3",
+    "sha256": "c9317156d926323570d0e73f3d537b4e42a767138bb139959998298cd73f97c0",
+    "bytes": 8300,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/a_formula_input_manifest.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8b6162ddcd9e6539d0bae5390915ee228b151e32",
+    "sha256": "7269085976cbf10f32a947aa19b7931a795647b077e2cfa1b88bea6aa92d6cad",
+    "bytes": 25159,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/a_formula_increment.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b9717c8a28a13b727658aee98cb12bc0ff5500cd",
+    "sha256": "bb4db8d0cafaf43c7080439a60b986bf0ed02d4e4cb3295bde3f7ad8a266377f",
+    "bytes": 31048,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b209a2a2ef63308772e3b922641c45e99907810e",
+    "sha256": "0904603912d6257cb02f41dfaf66c080e2f682e690b1c1901a86a7bafe1e74f0",
+    "bytes": 17448,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+    "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+    "bytes": 7514,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+    "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+    "bytes": 9354,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+    "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+    "bytes": 2251,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+    "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+    "bytes": 2597,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+    "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+    "bytes": 10239,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+    "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "bytes": 3473,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/a_formula_authority.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "be1cbd937c051dd0ac2e97a387c2c285788b03a2",
+    "sha256": "da7458ab3bebf72275254478eed909c99c5f1fcd69fa31b9f739e61b570ef4d8",
+    "bytes": 33944,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/a_formula_authority.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "045b93ffb4311c431f1f43ee8223fde1d7a30266",
+    "sha256": "d4bce5d9337f07ec8c3594367b0203f4eb8de71b5380f14734b5944cf45dcca6",
+    "bytes": 1027,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hashing.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "273dc301ff7e8fe9d91e9d3e3c7c427817dc3976",
+    "sha256": "87042083dad178442c75386e59ae4b2fd9bab0a3c92b5c3a090ddb90e6b52a16",
+    "bytes": 27895,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/constants.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "2c9beeeaf2a748ac15df6c7b6c1ef2dade37ed77",
+    "sha256": "706ea95054bcfcf3bab12a234e79a1d25bb412ba32ab0e5b5a6f3f3f6b725df8",
+    "bytes": 2604,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/constants.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9202f4dff68915569c9c25dd2bd34e1de476ff4e",
+    "sha256": "3007691db34aa721cf9549e79d9f9782bf7490ccb5d9f6ca2895f968525afdb3",
+    "bytes": 3986,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/paths.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "afa173a579a48919b4653381fd528d901f3241d6",
+    "sha256": "a5e307f15416fe422a0ad36f60d6996f6a3f74753581dc589ef93149178dd206",
+    "bytes": 3011,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/allowlist.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5c234353c4c92f19ec39d928ae37f3603f06494d",
+    "sha256": "f59dc7f70939a033fcde715aef33c5e063cb10b20c98caf17ee3a42c4884c159",
+    "bytes": 8200,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/collectors.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "619b58d6c8dc04ecdb149352d6d16e773747de39",
+    "sha256": "f5925bc479203da8b7f7f81bae26334035b254ee6c2e2b598c81d804f519f9e4",
+    "bytes": 446,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/__init__.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_authority.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9b88a3b16d77e007d355f2c0bcce3cbea8dc2e44",
+    "sha256": "e3fd8e9a9f23f708b89ca08c33cda265063244a70b7351122f970d88bdff922d",
+    "bytes": 3554,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_a_formula_authority.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "1fdafb906115622da2bd3a94832566f744e52fd7",
+    "sha256": "6dd2fae4436094249591236cec78c94a5737e21a8fa4f715d2a71bc54a120fe5",
+    "bytes": 25025,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_a_formula_increment_offline.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "94289a2668ab5b937dfccb4ce3387929df69ceec",
+    "sha256": "b358217992ea4024d1f7c468baadecd9af9cae38a2474e6f56f6a0e047bb58f0",
+    "bytes": 10160,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_a_formula_input_manifest.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "308ecbac7ae0cccb7256ba975d38003cef2b5dd9",
+    "sha256": "145406b0de8762c4400055ae1e6e95c2bbaa146ab0406015fca317e5018b1934",
+    "bytes": 29302,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_a_share_daily_sync.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5d3dc8eab42d63fe0e87412469f4c06f2ade03b6",
+    "sha256": "ec2cb82c4868bcb756f8cffbfd4aa101609a00190ffda1fda23714bffa094fa3",
+    "bytes": 4597,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_macos_research_panel_daily_ensure.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/feature_computation.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "80318113c3b5cc38eb3ab2cadc120a160563c32f",
+    "sha256": "7a811b5568f77be5c8bc641e36617b8900ccdc1cfc15b1c6e8a03673fd4ee38a",
+    "bytes": 5762,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/feature_computation.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/generation_evidence.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8dfa4f1b21e5ea95471d2a9a5a5d43a0e92b7a64",
+    "sha256": "55bcad8bdb755d931d49de2a5628f3bb9ed2441c6a93c8ccd76a34f6c7cb28ab",
+    "bytes": 7522,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/generation_evidence.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/history_audit.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "fc4e24decc9daa43225a0c8edbcd699a8eb24b73",
+    "sha256": "09e4fd1ac00f4c414a457537a07150d50701cfcf6c376ab20aa0d2addb79fa39",
+    "bytes": 12066,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/history_audit.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/increment_workflow.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "40d7c695beb743f5e69e0b728367902a3a52f3e0",
+    "sha256": "985608eeda61557a337125bd6468bbcab734e487306cac811c90d4391e5df826",
+    "bytes": 18527,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/increment_workflow.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/input_manifest.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9c5bbafd9c9942f7a595113ea09d6ecafcfae49c",
+    "sha256": "6751198a4b9f7589bd02a0ae251fdfaceb7fb4147d6487b70153207cd5cf0e52",
+    "bytes": 8127,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/input_manifest.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/pointer_transaction.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "9f9b8d94f8c614813072bc960d8e759afe343223",
+    "sha256": "6ffce57a3457255fc246db1cd646a97c29694e86911297ae04252aee838370b0",
+    "bytes": 6238,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/pointer_transaction.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/primitives_cli.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5f33e9d219c3681685b896ed61f058e24bdfff39",
+    "sha256": "cefe6d1dcbeb4953d6e37b8c46e7618fdc2e482a39d578e87520d742d6f59eac",
+    "bytes": 12776,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/primitives_cli.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/retention.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "86be6edf47b0ec53291e3089f51647598ee75841",
+    "sha256": "5727908d76cea6d20deca0357f81835844f3cf2cd7b1cf4f09c93728e158fdea",
+    "bytes": 3303,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/retention.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/selector_contract.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "1c29f6886740537df98fdef485ccd1a724db5684",
+    "sha256": "cb7bfa4ec6c9eb1a87250eebf376974b631af08089a661e2cfe9792e39ed0439",
+    "bytes": 7094,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_increment_parts/selector_contract.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/accepted_entries.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "adc77814b8a47077bcd8f43990d286a916b08455",
+    "sha256": "6b0ba2672279a635979e618c54bce6e9df6426421320a7dbb41a20a6ebf82cba",
+    "bytes": 22771,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/accepted_entries.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/manifest_generation.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "0d0efe471cde377396b2c5ca0b66c82d7a0cc074",
+    "sha256": "923c5dde974e8cba44d212f01129158756775a6350ba3a4ff76f052f536077e8",
+    "bytes": 6326,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/manifest_generation.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/source_io.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "61afbff292b81ca7bfb0ef387379ab6675a0ea18",
+    "sha256": "b7127e9c722d37a4bf8fcdd31d53604bdb1d736b49ef6390cb8560fbe554d55a",
+    "bytes": 12002,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_formula_input_manifest_parts/source_io.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/cli_runtime.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "e0cbf73925749f88d2ae7a41c8d5aa811e56a4ec",
+    "sha256": "9da0144d0750be48a17e25937de15651540c4f03133513ac7861ef56deeece4c",
+    "bytes": 9232,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/cli_runtime.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/day_file_format.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "03a5c137b096f07c204fc2f8f9cd0ea31a789e83",
+    "sha256": "a49564253c9b493c148e6bf0910dc4654dd6c13a7ca890c7690a0a2aab965545",
+    "bytes": 5277,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/day_file_format.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/field_rules.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8ef7ff8183b9fec557ca4f79b2d9a589bd1cfb0d",
+    "sha256": "6a553b1a1948ec964e9009a4dcadab9ffe7ede89784696af03489f8aa906f25d",
+    "bytes": 4946,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/field_rules.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/network_session.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b333f7f28d08f0a4f3017d9fbf112e6fd2b48e8d",
+    "sha256": "77dcb01e5ba315adf654c4ffc9b0df0193cde9c34366f9ada2c4ce23ffb89586",
+    "bytes": 8141,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/network_session.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/progress.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "323945c178a800b714ced4eb3646ce6ab5184a27",
+    "sha256": "df948bef15b7ca1bcf6f514d7bb01e2ede992c3afb721b6250adc469431e505a",
+    "bytes": 6318,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/progress.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/rebuild.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3af80cd6d395aaf3fe343807c7961de8376d127a",
+    "sha256": "a5f751c32812263ff67829d8fe0db8df6ae52782f45e49bb8ccef9d9b50a83cc",
+    "bytes": 11760,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/rebuild.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/response_capture.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "c047de68317fd321614cfadf400a97e3ef7a060a",
+    "sha256": "ba0c47c85196c4d8f46f6c8a215bd081f6e90430f242d2ee80c4ff2d4fea991e",
+    "bytes": 5470,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/response_capture.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/scope_validation.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "332fcbf204459bd7f05bdc5daca7c323616082f8",
+    "sha256": "0cc7d65cde16d953a294a948dfec41e6b83e1a1b8319bd479e241b1f7e06e9f4",
+    "bytes": 4349,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/scope_validation.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/sync_workflow.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "8fe855a83765b0f609499286307b99d8f2b41f70",
+    "sha256": "8654d5d673abcd5e2c091e89c903e276b38f02656455f6d21db0ea4e6de0e4d8",
+    "bytes": 57536,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/sync_workflow.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/trusted_cas.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "cac4d9c4a7330f28e2c231bd2562d8ae8c0b9730",
+    "sha256": "072acb3abad0b39e1ac74b34e3d753c4367d47f1123cf77ff64032eb2e36cfe8",
+    "bytes": 24266,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_a_share_daily_sync_parts/trusted_cas.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_formula_execution.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "dc8b3d50f7b41cc2470cbe519612ea1753b1101d",
+    "sha256": "33e933389f97a43272cbc4c96151501a24026191f96f9c032d767a4bdd31d38a",
+    "bytes": 18522,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_formula_execution.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b9ca6a9eee63890fb3e08c78f624f76cbea6d9e7",
+    "sha256": "cafdaf8dbd3c2cce8f94d71c8a8c7a2ea8d47aacd5da7da014959347a7c75763",
+    "bytes": 12039,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/a_market_capture.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/bounded_execution.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "dc469d2126ff8a828c749f92b18dc534184048a7",
+    "sha256": "576b81d65bc993bd93ea415ac142cbfe94a0307ba59d0ecd11f5e1b573e3fb81",
+    "bytes": 6596,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/bounded_execution.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/calendar_schedule.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "b1c47a9d6617973bd3ea628e07d805725d0c1c34",
+    "sha256": "02aa07879864b54de47813b50e6aa211e7be1bd93fe508136ed0574b7b17ee43",
+    "bytes": 3588,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/calendar_schedule.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/cli.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "1bd76c07b90440d854dba42317798ef175847a90",
+    "sha256": "f6161a61951e60de66a50e2ee28751400d316ede9dc503bb9b84967e8f4b09f2",
+    "bytes": 17434,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/cli.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/day_file_output.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "1837f5c1b4f892b5302afe0d0672772a66f28874",
+    "sha256": "b3f9741ada744988ddb656826286e61276d17194f3049e0d9fb0564454ad8fb0",
+    "bytes": 5952,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/day_file_output.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/formula_pointer.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "7f27e3f3d7bc7c3bb5b047f8a2968c9d36255a35",
+    "sha256": "beaa621f3b080b338eeb6f436c392276fc9802f36cd9299903172861e4792df9",
+    "bytes": 7154,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/formula_pointer.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_capture_gate.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "57fa7f9dcd5ee6485c70c757add8c40f11344ca4",
+    "sha256": "d3db5b9644bbf2fb1f4e245717907862ebe1cee2d0f650a8d45d732fd4a71940",
+    "bytes": 14219,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_capture_gate.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "41abd49f836ab0e118b1eec3c68001e9915c415b",
+    "sha256": "0a9651f88bc8a50d4b5e8ec4b6775a5291918f9f2556cf37c05b80a55cdfd84a",
+    "bytes": 31474,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "05c9ae8cfaa2a2cf0989000e39a464f56706f0b3",
+    "sha256": "7ab4e0d3d9529e4e59cc875e44f4b368caaa2b2ae3cad45d8c11ad01a7326a03",
+    "bytes": 6403,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py"
+  },
+  {
+    "path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/scheduled_readiness.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "d089a6e882052bbc4ebadf9f68435da1a250d96d",
+    "sha256": "9329a50b2ba88f6364b86ef6e576164c5eeff3a3ccaa56dbdfa63cd56f15d535",
+    "bytes": 17010,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/scheduled_readiness.py"
+  },
+  {
+    "path": "V5/src/v5_shadow/input_snapshot.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "3c56fe99b9d79e51cae24378db3b0afa458e4696",
+    "sha256": "271ee6441a594b04905686e87c9ec6e7eace8df30a253d0fba4e6d342d3cbabc",
+    "bytes": 1970,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/input_snapshot.py"
+  },
+  {
+    "path": "V5/src/v5_shadow/composition.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "d22723df42b71537210aa621afb05dfab6be517f",
+    "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+    "bytes": 5297,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/composition.py"
+  },
+  {
+    "path": "V5/src/v5_shadow/contracts.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+    "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+    "bytes": 7256,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/contracts.py"
+  },
+  {
+    "path": "V5/src/v5_shadow/digests.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+    "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+    "bytes": 425,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/digests.py"
+  },
+  {
+    "path": "V5/src/v5_shadow/__init__.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+    "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+    "bytes": 83,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/__init__.py"
+  },
+  {
+    "path": "V5/vendor/a_preselection_baseline/domains/_preselection_materializer_parts/_namespace.py",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+    "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+    "bytes": 527,
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/a_preselection_baseline/domains/_preselection_materializer_parts/_namespace.py",
+    "role": "READ_ONLY_GENERIC_NAMESPACE_DONOR_NOT_INSTALLED_IN_MISSING_A_PATHS"
+  }
+]
