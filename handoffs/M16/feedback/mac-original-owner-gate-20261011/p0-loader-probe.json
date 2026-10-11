@@ -1,0 +1,5 @@
+{
+  "probe": "P0 original frozen loader -> M16 original owner service",
+  "status": "BLOCKED",
+  "error": "MANAGER_SOURCE_CLOSURE:v4.manager_research.service"
+}

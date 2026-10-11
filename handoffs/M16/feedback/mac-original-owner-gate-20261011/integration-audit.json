@@ -1,0 +1,21 @@
+{
+  "p0_commit": "b8b524edc8922d87a7c8f5b426709d42ae619bb1",
+  "m16_commit": "2fec401df6e9bf125f875ea2f6fcff88b2eb64ed",
+  "router_calls_missing_from_facade": [
+    "get_announcements",
+    "get_catalyst_observations",
+    "get_workspace",
+    "refresh_announcements",
+    "refresh_catalyst_observations",
+    "refresh_workspace_plan"
+  ],
+  "p0_missing_files": [
+    "v4/manager_research/service.py",
+    "v4/manager_research/reader_source.py",
+    "apps/api/v35_api/manager_research_router.py"
+  ],
+  "factory": "No ManagerResearchJobService constructor or ManagerJobs factory in P0 V5/src; manager_plan creates SimpleNamespace workspace transport with observation_reader=None",
+  "module_http_post": "MODULE_READ_ONLY 405",
+  "status": "BLOCKED_DEFAULT_FACTORY_AND_SYSTEM_ENTRY",
+  "production_or_http_test": "NOT_RUN"
+}
