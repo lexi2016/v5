@@ -1,9 +1,4 @@
-"""Independent M12 reader.
-
-The reader never imports the producer. It reopens one committed run and checks
-receipt, manifest identity and every declared artifact digest before exposing
-video evidence.
-"""
+"""Independent M12 cold reader."""
 from __future__ import annotations
 
 import hashlib
@@ -17,6 +12,8 @@ class VideoReadError(RuntimeError):
 
 
 def _load(path: Path) -> dict[str, Any]:
+    if not path.is_file():
+        raise VideoReadError(f"missing file: {path}")
     try:
         value = json.loads(path.read_text(encoding="utf-8"))
     except Exception as exc:
@@ -26,34 +23,51 @@ def _load(path: Path) -> dict[str, Any]:
     return value
 
 
-def _sha_file(path: Path) -> str:
+def _sha_bytes(path: Path) -> str:
     if not path.is_file():
         raise VideoReadError(f"missing artifact: {path}")
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def _safe_relative(path: str) -> Path:
+    p = Path(path)
+    if p.is_absolute() or ".." in p.parts:
+        raise VideoReadError("unsafe artifact path")
+    return p
+
+
 def read_committed_video(root: Path | str, trade_date: str, run_id: str) -> dict[str, Any]:
     base = Path(root).absolute() / "video_fupan" / "runs" / str(trade_date) / run_id
-    manifest = _load(base / "manifest.json")
-    receipt = _load(base / "receipt.json")
+    manifest_path = base / "manifest.json"
+    receipt_path = base / "receipt.json"
+    manifest = _load(manifest_path)
+    receipt = _load(receipt_path)
 
-    if receipt.get("run_id") != run_id:
-        raise VideoReadError("receipt run mismatch")
-    if manifest.get("run_id") != run_id:
-        raise VideoReadError("manifest run mismatch")
+    if receipt.get("run_id") != run_id or manifest.get("owner_run_id") != run_id:
+        raise VideoReadError("run binding mismatch")
+    if receipt.get("manifest_sha256") != _sha_bytes(manifest_path):
+        raise VideoReadError("manifest bytes mismatch")
 
-    identity = manifest.get("identity")
-    if not isinstance(identity, dict):
-        raise VideoReadError("missing identity")
-    if hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest() != run_id:
-        raise VideoReadError("identity mismatch")
+    owner = manifest.get("owner_manifest")
+    if not isinstance(owner, dict):
+        raise VideoReadError("missing owner manifest")
 
-    for artifact in manifest.get("artifact_refs", []) or []:
-        if not isinstance(artifact, dict):
+    refs = owner.get("artifact_refs") or []
+    if not refs:
+        raise VideoReadError("empty artifact refs")
+
+    checked = []
+    for ref in refs:
+        if not isinstance(ref, dict):
             raise VideoReadError("invalid artifact ref")
-        path = base / str(artifact.get("path", ""))
-        expected = str(artifact.get("sha256", ""))
-        if expected and _sha_file(path) != expected:
+        rel = _safe_relative(str(ref.get("path") or ""))
+        sha = str(ref.get("sha256") or "")
+        if len(sha) != 64:
+            raise VideoReadError("invalid artifact sha")
+        artifact = Path(root).absolute() / rel
+        actual = _sha_bytes(artifact)
+        if actual != sha:
             raise VideoReadError("artifact digest mismatch")
+        checked.append(str(rel))
 
-    return {"status": "VERIFIED", "manifest": manifest, "receipt": receipt}
+    return {"status": "VERIFIED", "run_id": run_id, "artifacts": checked, "manifest": manifest}
