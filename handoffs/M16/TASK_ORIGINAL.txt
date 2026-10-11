@@ -1,0 +1,142 @@
+V5 M16｜经理候选公开资料任务
+
+这是原18模块的M16首次实现任务，立即交付可应用、可独立核验的实际代码候选。用户现要求GitHub主流程：使用本会话实际启用的GitHub插件读取提交消息中经核实的lexi2016/v5专属M16分支固定commit和可读工程树，先读START_HERE及完整任务书。不要只在prompt里写GitHub插件名字，也不要因普通网页打不开私有仓库就认定已连接插件不能读取。原ZIP仅保留审计身份，不作为默认输入。请在已选择的GPT6、极高思考与Superpowers环境中执行；实际技能调用需可核，不以文字声称替代。不要只返回设计、接口草案、空壳、假runner或“等下个交易日再写”。
+GitHub开发分支权限：用户已授权在本模块由指定发布者明确分配的独立开发分支直接交完整实现、测试、manifest与原始日志commit。先核提交消息中的准确分支和固定输入commit再写；禁止改其他模块、V4、main或合并。若本Chat实际工具不能写，报告真实限制并交可验证完整候选树和正/反补丁，由指定发布者接续，不预先把分支工作禁掉。Mac负责对最终固定commit独立实测；代码commit不等于业务/页面/自然运行通过。
+
+
+一、固定依据与此次交接
+- 源码固定基线F=f7cb731c384ee6890a87d16c19a5b5a621779477；donor repository为lexi2016/v4，只读使用。
+- 原总计划：https://github.com/lexi2016/v4/blob/24c6d60d524f43fcf4209ec8b078ec02cb34417e/V5/docs/superpowers/plans/2026-10-09-v5-master-delivery.md 。只按原18模块编号，M16是经理候选公开资料任务，M17才是尾盘发现，不改号。
+- 附件M16_SOURCE_AND_TESTS_20261010.zip，913873 bytes，SHA256=c99b8694ef479bd7b5184c5e58fd88645148f654502a497f974c1b94a402abb2。142 archive entries，其中134件仓库源件（132件F代码/测试/参考+2件固定计划）。本次逐项重算ZIP CRC、源件SHA256及Git blob均匹配；这不是产品测试通过。
+- 从经核实的模块分支固定commit读取SOURCE_MANIFEST.json、原handoff任务/源码映射/验收文档及实际源码。源件必须按manifest核SHA；具体提交链接由实际提交者提供，未验证的URL/分支/commit不得猜造。若GitHub插件读取失败，报实际工具错误，再使用已确认可读的材料，不将访问问题转成只交方案。
+- 新目标是独立私有仓库lexi2016/v5。交付候选和准确映射。仅在本次提交消息明确提供的可写模块分支范围内操作；没有该授权时交完整工程树，由指定发布者提交，不猜造远程commit或branch，不合并主分支或部署。保留V4、8910、原数据和其他模块，禁止交易、修改BUY门或扩大凭据/系统权限。
+- 包内V5/是固定donor树的路径命名空间，不代表新仓库最终root已确认。交付REPO_PATH_MAP.json，分别列donor path、after包相对路径、提议的新仓库路径和整合待核项；不得凭空剥离V5/导致补丁前像错误。
+
+二、这次必须达到的交付深度
+1. 核原ManagerResearchJobService→原provider/观察输入reader→原store、事件、缓存与PDF闭包。生产默认路径必须真实调用原owner；依赖注入可留给SIMULATED测试，但省略注入不得仅抛“请实现runner”或返回固定空结果。
+2. 提供一个可运行的V5模块入口与明确装配函数，绑定只读固定候选、已核原provider、M16私有写根；实际执行原任务→私有product/job/receipt提交→独立reader重新打开落盘字节→同run/generation/attempt/SHA核验→可接API/UI/实际触发合同。不能把内存对象回传自比当独立读回。
+3. 未掌握Mac活动配置、已有解释器、真实数据/外部来源或运行窗口，只能阻挡依赖它们的真实验收；仍须完成代码、历史/合成契约测试、生产默认装配与最小整合候选。明确HISTORICAL、SIMULATED、REAL_RECOVERY、NATURAL身份，互不冒充。M16按原用户/事件触发，不人为改成每日重新采财务。
+4. 所需共享API/UI/daily挂载不能只留TODO。先交本模块可被直接调用的具体接口、请求/响应、绑定函数及测试；再把必要共享文件的最小改动隔离成integration-candidate/和INTEGRATION_REQUEST.md，供唯一整合者核当前前像后应用。严禁混入模块补丁、整文件覆盖共享gateway/router/调度/UI/M18或另一个Chat候选。对未收到的当前共享前像，标WAITING_BASE并交精确插入点和可执行模块侧工件，不假造完整共享文件。
+5. 不通过简化算法、删验证、扩大候选参数或更改原状态词来制造绿色。相同输入只能一个有效任务，GET完全无生成/初始化/恢复写副作用；具体业务边界如下原交接要求全部保留。
+
+三、交付包硬性结构
+- 完整after/：每个新增/修改文件的完整内容及必要原owner私有冻结闭包；不能只有patch、截断片段或伪代码。
+- forward.patch与真正reverse.patch：反patch必须从候选恢复精确前像，不是正patch改文件名；新增文件反向删除，删除文件反向恢复。
+- FILE_MANIFEST.json：逐文件before/after SHA256与字节数，新增/删除用显式ABSENT，不拿空文件哈希冒ABSENT；另列donor commit/path/Git blob/SHA256/用途与写权限。
+- 在临时拷贝中真实执行forward check→apply→after SHA比对→reverse check→reverse→before SHA比对，保留命令、退出码和完整原始日志。未执行要写NOT_RUN，不能给“预计通过”。局部源件subset不能假称全仓回归。
+- 原测试及新增失败测试的完整代码、命令、解释器、退出码、原始stdout/stderr，覆盖失败→最小修复→最终固定候选再测。分别列pass/fail/skip/NOT_RUN；不能叠加旧测试数字。
+- DEFAULT_ASSEMBLY.md：生产默认入口、模块私有根、只读来源与原provider绑定、独立reader、产物和job状态、适用触发、缺件/阻断原因、单模块回滚。附INTEGRATION_REQUEST.md、隔离整合候选及REPO_PATH_MAP.json。
+- 优先交可读完整after工程树、forward/reverse.patch、manifest、原始日志和任务说明；使用经授权的专属GitHub分支时必须真实提交并返回固定commit/逐文件链接，否则给指定发布者完整候选。ZIP仅可作为可选便携副本，不以ZIP或一张README替代工程树。若本会话确实没有文件工具，明确限制并交所有必要完整文本及可在既有环境直接生成工程树的脚本，不能杜撰附件/commit/测试。
+- 代码候选、真实数据通过、API接入、页面可用、自动接续和完整验收分别列证据。现阶段无Mac/UI/自然触发证据就保持NOT_RUN；不以候选交付算完成M16。
+
+四、材料与验收边界
+本包包含原manager_research源码（含PDF vendor）、生命周期/事务/路由原测试，以及只读共享对照。V5固定树没有manager_jobs.py或manager_plan_baseline/service.py，前者需新增，后者不得伪造为既有文件。完整现役绑定、部分测试的真实EVIDENCE_ROOT和已安装依赖由既有Mac后续独验；发现实际缺件时列准确文件/import/调用点，不能索要整个V4数据或凭据。当前未额外添加真实Mac材料，未运行产品测试。
+
+以下是附包原业务任务全文，若交付方式与以上要求不同，以此次更严格的完整after、可逆补丁、真实默认装配和独立新仓库边界为准；算法与业务约束不变。
+
+# 给Chat的M16任务
+
+## 必须使用用户指定的 Superpowers 插件
+
+用户明确指定已安装的 Superpowers（plugin://superpowers@openai-curated-remote）。本会话须实际选择并使用该插件的相关技能，不能只在正文写插件名称当作已调用。先按 using-superpowers 判断应使用的流程；修复按 systematic-debugging，必要设计/计划在本模块范围内完成，再按 test-driven-development、requesting-code-review 与 verification-before-completion交代码和可核验证据。复用既有总体计划，不再发起全仓设计或仅交第二份计划。
+
+如果本会话无法访问该插件，说明实际入口/可见限制，不声称已启用；把这一问题回传嘻嘻。仍如实区分候选、静态检查、实际测试和Mac验收，禁止伪造执行。
+
+
+请把原经理候选公开资料job生命周期接入V5，交付实际可应用最小代码。以固定源码为事实，首先给原owner/完整依赖SHA→V5已有或拟新增路径→任务/产物/API/页面映射。不要把M18 workspace只读投影当job执行，也不扩成新研究平台。
+
+## 实现要求
+
+1. 复用原ManagerResearchJobService、原provider/缓存/内容合同/资格规则与store fencing。完整service依赖未在V5冻结，建立本Chat私有闭包manifest并核真实Mac活动版本；不可整文件替换M18的manager_plan/vendor。
+2. 固定候选由server-owned原观察输入读取。保留target_trade_date、stage_id、market、cutoff、input_identity、source SHA、job_id、generation和attempt。API拒绝任意股票/URL/命令/正文参数，不新增客户端自定义采集。
+3. GET/status/jobs只读已提交结果与真实任务状态，不能触发ensure、迁移发布、provider、目录创建或journal恢复。worker初始化写操作与只读server分离；缺store返回明确缺失。
+4. ensure重复点击同身份只允许一个有效job；队列容量/超时/关闭有原状态。失败、未知、PARTIAL_WITH_ROWS、有效空、READY分开。新输入新身份，不把前日缓存当今日。
+5. retry沿原force语义另attempt/generation，旧成功与失败证据保留。原进程已失去的RUNNING/QUEUED保持owner-unowned阻断，按原owner核对后恢复，不能删lock/job marker强行重跑。
+6. cancel只影响指定job/date/generation；发布前后竞态均受原store屏障。撤回页面读取/取消轮询与取消后台job分开。底层native调用不可抢占时保留真实状态，不承诺已终止外部调用。
+7. 事件更新必须保留财务facts与来源receipt，不重抓PDF；事件来源全坏保持CANNOT_CONFIRM，旧财务仍可读。事件merge基于锁内最新财务产品，晚到旧attempt不得覆盖新结果。
+8. 长任务独立worker，普通经理读可及时返回。错误只回非秘密reason code，完整诊断留已授权本机；不能将token/credential路径或SDK异常原样放进UI。
+
+## 路由和前端只交接口请求
+
+原/api/v4/manager/research提供GET、/status、POST /ensure、/retry、/events、GET /jobs/{job_id}、POST /jobs/{job_id}/cancel。原route的同源、精确date、无客户端body约束保留。V5实际挂载由集成者核，其他/workspace、/announcements等不是M16写入范围。
+
+INTEGRATION_REQUEST.md须列普通只读进入页、显式生成/重试/取消/事件更新、轮询、终态产品identity、不自动POST ensure、关闭/返回仍保留后台状态。Chat不跨写共享前端、gateway、调度或M18。
+
+## 交付
+
+固定候选commit、精确patch SHA256、逐文件before/after SHA与donor manifest；原回归/新增失败测试及命令退出码；真实Mac步骤、回滚、未解决绑定。至少给可执行代码，不仅建议。只有真实任务全生命周期和页面/恢复通过才可关闭M16；不以公告某子路径或合成provider通过代替。
+
+
+# M16来源和目标
+
+原总计划24c6d60d524f43fcf4209ec8b078ec02cb34417e / V5/docs/superpowers/plans/2026-10-09-v5-master-delivery.md：M16/P4。
+迁移d1bf034640ca2e5957423de2745a98e159b69af2 / V5/docs/superpowers/plans/2026-10-10-v5-migration-execution.md：M16（旧盘点17）。
+代码固定f7cb731c384ee6890a87d16c19a5b5a621779477，完整递归树未有V5 manager_jobs.py或manager_plan_baseline/service.py。不要把旧文档的概括当源码存在证明。
+
+## Donor → V5
+
+- canonical/v4/manager_research/service.py::ManagerResearchJobService → 拟新增V5/vendor/manager_jobs_baseline/v4/manager_research/service.py及完整原依赖；候选V5/src/v5_shadow/manager_jobs.py只封装公开资料任务职责。
+- canonical/v4/manager_research/store.py → M16私有baseline store；V5/vendor/manager_plan_baseline/v4/manager_research/store.py已有同blob c9af9a6ae87858ebee111766d4db0fd0639943b5，仅可只读对照，不能本Chat修改共享冻结闭包。
+- 原ManagerResearchStore jobs/products/receipts、commit_result → M16独占runtime根。构造ensure_directory有写副作用，读server不能随GET临时初始化写store。
+- canonical/apps/api/v35_api/manager_research_router.py → 仅M16路由接口请求；同文件M13/M18路由禁止带入模块补丁。
+- canonical/apps/web/src/views/ManagerSelectionView.vue → 共享前端明确操作/取消轮询/取消job修正请求；本Chat不写。
+
+## 已读固定文件
+
+- [handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py)
+  - Git blob SHA：8c7cc0357aa9c203fe088edb1fd88900290c9aec
+- [handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py)
+  - Git blob SHA：c9af9a6ae87858ebee111766d4db0fd0639943b5
+- [handoff/v4-running-source-20261005/canonical/apps/api/v35_api/manager_research_router.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/manager_research_router.py)
+  - Git blob SHA：1e89a2b2cdc9c6192eed188ac53d8b4027aa77be
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_research_service.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_service.py)
+  - Git blob SHA：197a973183307fc62d4fcd62869a0d77e8b42453
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_research_router_contract.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_router_contract.py)
+  - Git blob SHA：f7632fa8db60ec09b6b8c2388f9c4c781669c8e2
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_research_catalyst_service.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_catalyst_service.py)
+  - Git blob SHA：48a9250a14b18532bd9b266bb794cd72ceb0749e
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_research_decision_recovery_contract.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_decision_recovery_contract.py)
+  - Git blob SHA：252a3bd0553214f4d3c0004ae64ab9fee1191295
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_lifecycle_hardening.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_lifecycle_hardening.py)
+  - Git blob SHA：f435ac2ee102ef96c7c61b45dbf24e153cbc80a7
+- [handoff/v4-running-source-20261005/canonical/tests/test_manager_contract_hardening.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/test_manager_contract_hardening.py)
+  - Git blob SHA：95831122d073fce36067fcf9928a42791a4743a4
+- [handoff/v4-running-source-20261005/canonical/tests/optimization/test_manager_transactions.py](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/tests/optimization/test_manager_transactions.py)
+  - Git blob SHA：e915b05e9af6a02157858f5b8571997365d44504
+- [handoff/v4-running-source-20261005/canonical/apps/web/src/views/ManagerSelectionView.vue](https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ManagerSelectionView.vue)
+  - Git blob SHA：75b848172dd2a3fbc00b44dfb720759867209e42
+
+上述blob为文件身份，非活动Mac匹配。原service含大量其他模块方法不能全量暴露；实际provider/队列/version需Mac确认。本包不提供虚构补丁SHA，Chat交付时必须对新patch和before/after逐项算SHA256。
+
+
+# M16验收与回滚
+
+本清单待执行，未声称产品通过。状态统一为：代码接入、真实数据通过、页面可用、自动接续、完整验收。五项分别登记；工程测试单列证据，不替代真实数据、页面或按原触发合同的自动接续。
+
+## 原测试与新增断点
+
+在完整隔离原owner环境、已有Mac解释器保留：
+- tests/optimization/test_manager_transactions.py：GET迁移零字节变化、缓存metadata重验、并发写冲突、receipt失败不publish、cancelled generation拒绝晚到进度/commit、事件合并最新财务、product/job/receipt原子绑定、双实例不能认同attempt、错误不泄密
+- tests/test_manager_lifecycle_hardening.py：symlink拒绝、tampered cache不READY、跨实例冲突、receipt失败、发布前取消
+- tests/test_manager_contract_hardening.py：真实精确日期/cutoff、row身份、市场拼写、嵌套交易语义拒绝
+- tests/test_manager_research_router_contract.py：date必须、真实日、bodyless events、来源故障状态
+- tests/test_manager_research_catalyst_service.py：初始资料及事件更新保留facts，event outage不READY，不重收财务
+- tests/test_manager_research_service.py：原财务研究语义与单位；涉及真实EVIDENCE_ROOT的测试需核原件，不能造fixture冒当原回归
+- 相关decision recovery合同仅在确有影响时回归，不能改其cutoff/time规则。
+
+新增V5 test_manager_jobs.py：纯GET全目录/锁/任务数零改变、相同输入幂等、变更输入新identity、重复点击、队列满、timeout、重启遗留owner、取消竞态、轮询中断不误取消后台、事件并发merge、同run读回。先失败用例后最小修复；固定最终候选重跑原及新增，历史测试数量不相加。
+
+## Mac真实业务
+
+1. 核原固定候选/观察source、当前唯一provider、worker与store版本，记录非秘密config及私有根，V4/M13/M18摘要不变。
+2. 一次真实已授权候选任务提交→排队/运行→product/job/receipt提交→普通GET与job轮询同identity/SHA。无输入时明确拒绝，不生成空财务成功。
+3. 真实重试、取消、事件更新分别验证。保留前成功，新attempt不覆盖；事件更新财务收集计数不增且facts/receipt SHA保持。
+4. 取消后即使慢调用完成也不能提交旧generation。重启后无owner任务不得绿装RUNNING成功；按原恢复合同留痕。取消页面请求不应误取消后台job。
+5. 真实V5浏览器进入经理资料页、切日、刷新、后退/前进、重复生成、失败/重试、取消/结果、事件更新。普通进入与刷新不得发ensure POST；记录Network、页面截图、URL、run与代码SHA。
+6. 非每日业务按原实际用户/事件触发验收，不强设日调度。下一适用调用与跨日隔离成立；任何未验项标NOT_RUN/BLOCKED。完整当前回归由集成者统一执行。
+
+## 单模块回滚
+
+发布者保存M16旧/新worker代码、路由binding与generation；排空/停止新接收并按原owner处理在途job，避免同时两个worker认领同store。失败仅恢复M16旧绑定，保留所有attempt/receipt/成功产物；不删历史，不回写V4，不回退M13或M18。回滚后验原product/job引用一致，普通经理读持续可用。
+
+反馈同一Chat：commit/patch SHA、job/date/input/generation/attempt、各产物SHA、命令/退出码/完整非秘密错误、provider请求计数、GET写入差异、页面与回滚证据。不要凭页面关闭宣称后台已取消。

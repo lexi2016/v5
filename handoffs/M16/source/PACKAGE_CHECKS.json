@@ -1,0 +1,10 @@
+{
+  "source_files": 134,
+  "source_blob_and_byte_checks": "MATCHED",
+  "product_modules_imported": false,
+  "product_tests": "NOT_RUN",
+  "mac_data_included": false,
+  "credential_pattern_hits": [],
+  "deployment": "NOT_RUN",
+  "known_limits": "已附原ManagerResearchJobService/store/provider及原manager_research源码目录（含原PDF vendor），生命周期/事务/路由原测试和共享UI参考。V5现有manager_plan_baseline没有service.py，本包没有伪造该文件。共享UI/router/其他业务方法为只读对照，不授权本Chat跨写。"
+}
