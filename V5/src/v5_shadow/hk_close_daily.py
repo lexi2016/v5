@@ -1,7 +1,7 @@
-"""M10 HK close daily default producer/store/reader chain.
+"""M10 HK close default producer/store/reader chain.
 
-Default execution owns the canonical close producer, persists an immutable M10
-private run, then reopens the committed artifact through an independent reader.
+The default path binds the frozen M10 owner chain, preserves native publication
+identity, writes a private immutable generation and verifies it by reopening.
 """
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-SCHEMA = "v5.hk_close_daily.v3"
+SCHEMA = "v5.hk_close_daily.v4"
 
 
 def _digest(value):
@@ -22,6 +22,7 @@ class CloseReviewReceipt:
     run_id: str
     payload_sha256: str
     manifest_sha256: str
+    publication_sha256: str | None = None
 
 
 class HKCloseReviewStore:
@@ -29,7 +30,7 @@ class HKCloseReviewStore:
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
 
-    def publish(self, run_id: str, payload: dict):
+    def publish(self, run_id: str, payload: dict, *, publication: dict | None = None):
         payload_sha = _digest(payload)
         target = self.root / run_id
         if target.exists():
@@ -37,12 +38,26 @@ class HKCloseReviewStore:
             if _digest(old) != payload_sha:
                 raise ValueError("M10_RUN_ID_CONFLICT")
             return self._receipt(target)
+        if not isinstance(payload, dict):
+            raise ValueError("M10_PAYLOAD_INVALID")
         target.mkdir()
-        manifest = {"schema": SCHEMA, "run_id": run_id, "payload_sha256": payload_sha}
-        receipt = {"run_id": run_id, "payload_sha256": payload_sha, "manifest_sha256": _digest(manifest)}
+        manifest = {
+            "schema": SCHEMA,
+            "run_id": run_id,
+            "payload_sha256": payload_sha,
+            "publication_sha256": _digest(publication) if publication is not None else None,
+        }
+        receipt = {
+            "run_id": run_id,
+            "payload_sha256": payload_sha,
+            "manifest_sha256": _digest(manifest),
+            "publication_sha256": manifest["publication_sha256"],
+        }
         (target / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
         (target / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
         (target / "receipt.json").write_text(json.dumps(receipt, sort_keys=True), encoding="utf-8")
+        if publication is not None:
+            (target / "publication.json").write_text(json.dumps(publication, sort_keys=True), encoding="utf-8")
         return CloseReviewReceipt(**receipt)
 
     def _receipt(self, target):
@@ -65,18 +80,31 @@ class HKCloseReviewReader:
         return payload
 
 
-def build_default_hk_close_review(*, data_root: Path, trade_date: str, run_root: Path, stage_selection_root: Path | str | None = None):
-    """Canonical default path: collect/build -> private publish -> independent read."""
+def _load_frozen_owners():
+    # Owner modules are loaded from the M10 capsule import namespace only.
+    # The final integration environment must expose the manifest-verified
+    # capsule root before importing this module.
     from ops.collect_hkconnect_close_snapshot import collect_close_snapshot
     from ops.build_close_review import build_close_review
+    if not callable(collect_close_snapshot) or not callable(build_close_review):
+        raise ImportError("M10_OWNER_CLOSURE_INVALID")
+    return collect_close_snapshot, build_close_review
 
+
+def build_default_hk_close_review(*, data_root: Path, trade_date: str, run_root: Path, stage_selection_root: Path | str | None = None):
+    collect_close_snapshot, build_close_review = _load_frozen_owners()
     data_root = Path(data_root)
-    built = None
-    collect_close_snapshot(trade_date, data_root=data_root)
-    built = build_close_review(data_root, trade_date, stage_selection_root=stage_selection_root)
-    payload = built["review"] if isinstance(built, dict) and "review" in built else built
+    built = build_close_review(
+        data_root,
+        trade_date,
+        stage_selection_root=stage_selection_root,
+    ) if collect_close_snapshot(trade_date, data_root=data_root) else None
+    if not isinstance(built, dict) or "review" not in built:
+        raise ValueError("M10_BUILD_PUBLICATION_INVALID")
+    payload = built["review"]
+    publication = built.get("publication")
     run_id = f"{trade_date}-{_digest(payload)[:16]}"
-    HKCloseReviewStore(run_root).publish(run_id, payload)
+    HKCloseReviewStore(run_root).publish(run_id, payload, publication=publication)
     return HKCloseReviewReader(run_root).read(run_id)
 
 
