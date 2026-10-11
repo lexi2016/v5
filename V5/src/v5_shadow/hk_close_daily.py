@@ -1,8 +1,7 @@
 """M10 HK close daily default producer/store/reader chain.
 
-The default path owns the canonical HK close build. It does not accept a caller
-provided calculation callback. Calculation remains delegated to the frozen owner
-modules imported from the M10 source capsule.
+Default execution owns the canonical close producer, persists an immutable M10
+private run, then reopens the committed artifact through an independent reader.
 """
 from __future__ import annotations
 
@@ -11,14 +10,11 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-
-SCHEMA = "v5.hk_close_daily.v2"
+SCHEMA = "v5.hk_close_daily.v3"
 
 
 def _digest(value):
-    return hashlib.sha256(
-        json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
-    ).hexdigest()
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
 
 
 @dataclass(frozen=True)
@@ -34,18 +30,18 @@ class HKCloseReviewStore:
         self.root.mkdir(parents=True, exist_ok=True)
 
     def publish(self, run_id: str, payload: dict):
-        target = self.root / run_id
         payload_sha = _digest(payload)
+        target = self.root / run_id
         if target.exists():
             old = json.loads((target / "payload.json").read_text())
             if _digest(old) != payload_sha:
                 raise ValueError("M10_RUN_ID_CONFLICT")
             return self._receipt(target)
         target.mkdir()
-        (target / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
         manifest = {"schema": SCHEMA, "run_id": run_id, "payload_sha256": payload_sha}
-        (target / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
         receipt = {"run_id": run_id, "payload_sha256": payload_sha, "manifest_sha256": _digest(manifest)}
+        (target / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+        (target / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
         (target / "receipt.json").write_text(json.dumps(receipt, sort_keys=True), encoding="utf-8")
         return CloseReviewReceipt(**receipt)
 
@@ -69,16 +65,19 @@ class HKCloseReviewReader:
         return payload
 
 
-def build_default_hk_close_review(*, data_root: Path, trade_date: str, stage_selection_root: Path | str | None = None):
+def build_default_hk_close_review(*, data_root: Path, trade_date: str, run_root: Path, stage_selection_root: Path | str | None = None):
+    """Canonical default path: collect/build -> private publish -> independent read."""
     from ops.collect_hkconnect_close_snapshot import collect_close_snapshot
     from ops.build_close_review import build_close_review
 
-    collect_close_snapshot(trade_date, data_root=Path(data_root))
-    return build_close_review(
-        Path(data_root),
-        trade_date,
-        stage_selection_root=stage_selection_root,
-    )
+    data_root = Path(data_root)
+    built = None
+    collect_close_snapshot(trade_date, data_root=data_root)
+    built = build_close_review(data_root, trade_date, stage_selection_root=stage_selection_root)
+    payload = built["review"] if isinstance(built, dict) and "review" in built else built
+    run_id = f"{trade_date}-{_digest(payload)[:16]}"
+    HKCloseReviewStore(run_root).publish(run_id, payload)
+    return HKCloseReviewReader(run_root).read(run_id)
 
 
 __all__ = ["HKCloseReviewStore", "HKCloseReviewReader", "CloseReviewReceipt", "build_default_hk_close_review"]
