@@ -229,8 +229,13 @@ def run_us_mapping(request):
         result = json.loads(completed.stdout)
     _snapshot(request['us_data_root'], request['us_files'])
     _sources()
-    if result.get('implementation_identity') != identity or _identity() != identity:
+    if (canonical_bytes(result.get('implementation_identity')) != canonical_bytes(identity)
+            or canonical_bytes(_identity()) != canonical_bytes(identity)):
         raise ValueError('US_MAPPING_IMPLEMENTATION_CHANGED')
+    if result.get('source_capsule_sha256') != PIN:
+        raise ValueError('US_MAPPING_SOURCE_CAPSULE_CHANGED')
+    from v5_shadow.us_mapping_scope import describe_recovery_evaluation
+    result['recovery_evaluation'] = describe_recovery_evaluation(result, request)
     return result
 
 
