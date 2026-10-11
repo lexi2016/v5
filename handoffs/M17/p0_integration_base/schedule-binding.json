@@ -1,0 +1,32 @@
+{
+  "source_repository": "lexi2016/v4",
+  "fixed_commit": "6daed6271313b5ae5324c8948f163258ab8d1fa3",
+  "slot_source_path": "handoff/hk-close-hk-calendar-20261007/canonical/ops/run_scheduled_slot.py",
+  "slot_source_git_blob": "8740dae9779c0a0142428caddb721bbbb9a8d530",
+  "slot_source_sha256": "654efa76eebe3246759729dd60603826bdca351af83375b0155257aba1610974",
+  "catalog_sha256": "7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef",
+  "workloads": [
+    {
+      "workload_id": "a_share_close_review",
+      "owner_id": "v35_dispatcher.a_share_close_review",
+      "slots": [
+        "1605",
+        "1710"
+      ],
+      "run_policy": "A_SHARE_TRADE_DAY",
+      "target_date_role": "BUSINESS_DATE"
+    },
+    {
+      "workload_id": "hk_connect_close_review",
+      "owner_id": "v35_dispatcher.hk_connect_close_review",
+      "slots": [
+        "1610"
+      ],
+      "run_policy": "HK_SECURITIES_TRADE_DAY",
+      "target_date_role": "BUSINESS_DATE"
+    }
+  ],
+  "catalog_slots_supported": true,
+  "execution_enabled": false,
+  "reason": "Owner closures/adapters not admitted; contract mapping only. Never executes catalog.command."
+}
