@@ -1,0 +1,902 @@
+{
+  "schema": "v5.m15.scoped-github-handoff.v1",
+  "repository": "lexi2016/v5",
+  "branch": "dev/m15-github-handoff-20261011",
+  "baseline": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "r3_donor": "8c8e35d9d53431c9082dec49f4976e363c275765",
+  "original_files": [
+    {
+      "path": "handoffs/M15/source/PACKAGE_CHECKS.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/PACKAGE_CHECKS.json",
+      "category": "original_source_subset",
+      "bytes": 1722,
+      "sha256": "9d255198d3d3c468ce3dac4f09596b8a0ea2e87347b9500ded83468cee050291",
+      "git_blob": "6bbe75fbcd127ad72b141d46102b00041ed6363a"
+    },
+    {
+      "path": "handoffs/M15/source/README.md",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/README.md",
+      "category": "original_source_subset",
+      "bytes": 3530,
+      "sha256": "ed28adabe13f626dfef712c9f8d0ec575c3cc96957287ab84ba9452e7b1e598e",
+      "git_blob": "6b6401fa92ad2455327b759371ced9756bc606ce"
+    },
+    {
+      "path": "handoffs/M15/source/SOURCE_MANIFEST.csv",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/SOURCE_MANIFEST.csv",
+      "category": "original_source_subset",
+      "bytes": 36488,
+      "sha256": "41dc5cb891560c11adb2c6f6958462cbef22089f6c6c512d4fd6f82614f98fe0",
+      "git_blob": "fd776961386bd620ab9a16add6250249e53f995c"
+    },
+    {
+      "path": "handoffs/M15/source/SOURCE_MANIFEST.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/SOURCE_MANIFEST.json",
+      "category": "original_source_subset",
+      "bytes": 64895,
+      "sha256": "c763d4fb9a861c93aea343970c184165e5d3fce717655c6e4f3793f92500a8f5",
+      "git_blob": "819950348e22f83e47f2620e178c9ea9f1da59c6"
+    },
+    {
+      "path": "handoffs/M15/source/V5/contracts/daily_schedule_sources.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/contracts/daily_schedule_sources.json",
+      "category": "original_source_subset",
+      "bytes": 955,
+      "sha256": "60a460f8c0e3d97a232481214c497e10ccd12c8e2508ab11cf746acaa3c71144",
+      "git_blob": "3fc35490212813fa136f18d026ab72a5ada94caf"
+    },
+    {
+      "path": "handoffs/M15/source/V5/contracts/us_mapping_source_manifest.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/contracts/us_mapping_source_manifest.json",
+      "category": "original_source_subset",
+      "bytes": 17239,
+      "sha256": "a304682e3a48114058ddbc7fcb4c3cd2a272b354d90cce25dadcfbe2a264b3d6",
+      "git_blob": "0e803149fa083bf30c5a72a190d62dea626e15f2"
+    },
+    {
+      "path": "handoffs/M15/source/V5/pyproject.toml",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/pyproject.toml",
+      "category": "original_source_subset",
+      "bytes": 262,
+      "sha256": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584",
+      "git_blob": "94de0b747be243f6309da810fa3ce058e643b52a"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/__init__.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/__init__.py",
+      "category": "original_source_subset",
+      "bytes": 83,
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "git_blob": "152582c71d7e49884749beb490e192ff4cb8ca6c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/a_preselection.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/a_preselection.py",
+      "category": "original_source_subset",
+      "bytes": 29140,
+      "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+      "git_blob": "05dd0b28f14bd794890f514e130d8090a1b0438b"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/api_gateway.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/api_gateway.py",
+      "category": "original_source_subset",
+      "bytes": 16003,
+      "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+      "git_blob": "c5677fb59a4847a24f16a12d5412fce293168fc0"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/composition.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/composition.py",
+      "category": "original_source_subset",
+      "bytes": 5297,
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "git_blob": "d22723df42b71537210aa621afb05dfab6be517f"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/contracts.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/contracts.py",
+      "category": "original_source_subset",
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "git_blob": "5efda704a231165255c4f6ab240a25385e5cff54"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/daily_close_plan.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/daily_close_plan.py",
+      "category": "original_source_subset",
+      "bytes": 5807,
+      "sha256": "f51af9be40a32de88ea55672fffb7b7c74570c9d1ae6053b488b51a4d89bf3f6",
+      "git_blob": "b816802e512a8f22d736716168c515f5ade61ca0"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/daily_dispatch.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/daily_dispatch.py",
+      "category": "original_source_subset",
+      "bytes": 3438,
+      "sha256": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+      "git_blob": "f5d45abea6a159f01756decb23049b825cd0f906"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/daily_us_owner.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/daily_us_owner.py",
+      "category": "original_source_subset",
+      "bytes": 2474,
+      "sha256": "6523a4926f452f59f94b5649e28cf4caf6c79417a223f8c57577bace9750bc3c",
+      "git_blob": "cb6252d8403d36d86f5d06b2c3cb5ad86f7cb5f4"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/digests.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/digests.py",
+      "category": "original_source_subset",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "git_blob": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/module_api.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/module_api.py",
+      "category": "original_source_subset",
+      "bytes": 15282,
+      "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+      "git_blob": "3fdea5f256b2dc70df141a0e70dbbc1396abb859"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/module_artifacts.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/module_artifacts.py",
+      "category": "original_source_subset",
+      "bytes": 7936,
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "git_blob": "acf2195fee3711f594982269f1e6ab81da40a905"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/provider_evidence.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/provider_evidence.py",
+      "category": "original_source_subset",
+      "bytes": 6446,
+      "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+      "git_blob": "5d72d3b2d54c0449576e46e7eba7be4fbc7884d6"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/run_ledger.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/run_ledger.py",
+      "category": "original_source_subset",
+      "bytes": 6105,
+      "sha256": "2258adcf6f1f61640e9ee2bb36cae5daa06670293f4227fc431289c858077dfd",
+      "git_blob": "1187e3b7633682d61985984afdf0699508cefd59"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/us_mapping_daily.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/us_mapping_daily.py",
+      "category": "original_source_subset",
+      "bytes": 11204,
+      "sha256": "81e5b827964d91760715335bdb0e124ade240a9861d2f6846aa1f82aba39d791",
+      "git_blob": "366190eaeeaf65ed51e5bda5da6c17cd5b5d5f1e"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/us_mapping_io.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/us_mapping_io.py",
+      "category": "original_source_subset",
+      "bytes": 6707,
+      "sha256": "42e75f0671465509a580579cabb801d4e48c6c1691de785df7b10ed07cd32cba",
+      "git_blob": "3820d694747d9edd624b2b28a3f71e767b6e862c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/src/v5_shadow/us_mapping_scope.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/src/v5_shadow/us_mapping_scope.py",
+      "category": "original_source_subset",
+      "bytes": 3610,
+      "sha256": "388e542e1dcd4ea8f5c6d6be8048d140609fc4194bbde57ff5a8137f183475ae",
+      "git_blob": "cc864ef910d1f33bf3eb2ad2f168e846b2c8423d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/tests/test_daily_us_owner.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/tests/test_daily_us_owner.py",
+      "category": "original_source_subset",
+      "bytes": 2353,
+      "sha256": "3b5c1b57a407cb9ca7ceda4aa94929b9224e558562cbd10b1e8ad29cae6cfafe",
+      "git_blob": "9e5b100aaf120c2012c7f662933ac14d3932ae2a"
+    },
+    {
+      "path": "handoffs/M15/source/V5/tests/test_us_mapping_daily.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/tests/test_us_mapping_daily.py",
+      "category": "original_source_subset",
+      "bytes": 8142,
+      "sha256": "a6adf6a1da20d072f1cfe21fe7208f03c5c365f0f806ce079d3a8345b0780faa",
+      "git_blob": "bf5f74759738c542b5d4e5ed30a623c85e34140f"
+    },
+    {
+      "path": "handoffs/M15/source/V5/tests/test_us_mapping_scope.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/tests/test_us_mapping_scope.py",
+      "category": "original_source_subset",
+      "bytes": 3169,
+      "sha256": "c557cc381a1c04d281bbeb7f25cb01f965333b9cf089931e04ececaf5693ac45",
+      "git_blob": "484cc0fcd0c7458b1b74897450d404479d87ec21"
+    },
+    {
+      "path": "handoffs/M15/source/V5/uv.lock",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/uv.lock",
+      "category": "original_source_subset",
+      "bytes": 26629,
+      "sha256": "7cb690f890cc28b6a79311f07e724f61c3dc4411494d480c0041f075f0825bfd",
+      "git_blob": "f1eadf03f19d3e30798e200c3fbbfad90f3175fd"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/daily_schedule_baseline/contracts/market_calendar_2026.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/daily_schedule_baseline/contracts/market_calendar_2026.json",
+      "category": "original_source_subset",
+      "bytes": 3473,
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+      "git_blob": "c8177cfdeb55c038a88e915f206780eeba8b0d32"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/daily_schedule_baseline/contracts/runtime_workloads.json",
+      "category": "original_source_subset",
+      "bytes": 51682,
+      "sha256": "7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef",
+      "git_blob": "abdcae3adfcd56b4c33b2752e14c8fffb844f351"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/daily_schedule_baseline/contracts/trading_calendar.py",
+      "category": "original_source_subset",
+      "bytes": 9291,
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "git_blob": "dc18a1ac447242a15a0e543606aa8076ca452fbc"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/contracts/market_calendar_2026.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/contracts/market_calendar_2026.json",
+      "category": "original_source_subset",
+      "bytes": 3473,
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+      "git_blob": "c8177cfdeb55c038a88e915f206780eeba8b0d32"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/contracts/trading_calendar.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/contracts/trading_calendar.py",
+      "category": "original_source_subset",
+      "bytes": 9291,
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "git_blob": "dc18a1ac447242a15a0e543606aa8076ca452fbc"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/contracts/us_equity_calendar.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/contracts/us_equity_calendar.py",
+      "category": "original_source_subset",
+      "bytes": 3603,
+      "sha256": "73f223fb032e6c3a3a9f462f41b29fd029365ecfc98942bc5413a911faeba452",
+      "git_blob": "825a88fd532f12845b4ffb9a794bf11b07a0ca0c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/contracts/us_equity_calendar_2026.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/contracts/us_equity_calendar_2026.json",
+      "category": "original_source_subset",
+      "bytes": 603,
+      "sha256": "cd8eac440e985be8fe9700983584dd1108873b68d5cc91cae2cbe8f7283a422f",
+      "git_blob": "58ac5e41c1d3ed8c0be5616ec316c955f35afb63"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/__init__.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/__init__.py",
+      "category": "original_source_subset",
+      "bytes": 70,
+      "sha256": "29b3765f63f15078432ca53a34b28cb726c961e7dd0839022b8a87b3d8b373d8",
+      "git_blob": "fc3ee50ef882264f475f280eb35bee556b0e840d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/_namespace.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/_namespace.py",
+      "category": "original_source_subset",
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "git_blob": "55e1b3f744f80339298ac911073c67f3e549cf3c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/envelope_validation.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/envelope_validation.py",
+      "category": "original_source_subset",
+      "bytes": 15267,
+      "sha256": "9b068a58500d557d34ccda6c6e08e9520d2989ae15a189e337498e184b37347f",
+      "git_blob": "c63c65425c81bd19446bc58d6df5cb591a19679d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/market_validation.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/market_validation.py",
+      "category": "original_source_subset",
+      "bytes": 22416,
+      "sha256": "7f6b3912b11c6c0af9e7027c57b564df1652c7b3c6a60b4690887e2ff62cb01e",
+      "git_blob": "82473ea2759c3f327aba256f4785bfa62c9a2323"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/primitives.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/primitives.py",
+      "category": "original_source_subset",
+      "bytes": 1195,
+      "sha256": "e113c739623317ce562b9c24703524f094f7f7b8b370041bbc0ee3efdc567a8a",
+      "git_blob": "d8d8299ff2167fd3aefadd1425593aedf7b9ebad"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/publish_read.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/publish_read.py",
+      "category": "original_source_subset",
+      "bytes": 7889,
+      "sha256": "b51dea0a9c7b0e303f20e0fa76070e10008769592024ad062a032240fdfd3150",
+      "git_blob": "63a7be703ff1f4e19b8379ab84d3b46b5a194b84"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/session_validation.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/_research_peripheral_store_parts/session_validation.py",
+      "category": "original_source_subset",
+      "bytes": 10545,
+      "sha256": "48b6ec629083ff16ccaa9df4d0db50f1e43b2033edbcb10bed03d0b043a52145",
+      "git_blob": "48685dc90d51e3aa496348e11a08ac8a89d8af26"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/data_store.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/data_store.py",
+      "category": "original_source_subset",
+      "bytes": 10704,
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+      "git_blob": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/http_transport.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/http_transport.py",
+      "category": "original_source_subset",
+      "bytes": 9429,
+      "sha256": "b34f906be69051da0f0f5e2f4980bf9b4c310d88ad9fc1b50b3246fceffccc69",
+      "git_blob": "cbb430291831b8998d4eeebdf1760e5af2cd6bf8"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/interprocess_lock.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/interprocess_lock.py",
+      "category": "original_source_subset",
+      "bytes": 7514,
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "git_blob": "a97e733725834235fbcc9129639ae198fa8770cd"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/market_time.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/market_time.py",
+      "category": "original_source_subset",
+      "bytes": 960,
+      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+      "git_blob": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/owned_io.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/owned_io.py",
+      "category": "original_source_subset",
+      "bytes": 9354,
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "git_blob": "1b6666551980c44ebb0b05f133c189909d79c7df"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/owned_path.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/owned_path.py",
+      "category": "original_source_subset",
+      "bytes": 2251,
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "git_blob": "2d9873a41c09a05c62975210a13a59bf350a1a5a"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/research_peripheral_store.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/research_peripheral_store.py",
+      "category": "original_source_subset",
+      "bytes": 15114,
+      "sha256": "ec5ca1e32232946bacf04834d0ec0e0ed6e772ce1d3470fdb65b35522dc2faab",
+      "git_blob": "9bc740c094697370208b4e84a07e724648a80a8a"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/infrastructure/trading_safety.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/infrastructure/trading_safety.py",
+      "category": "original_source_subset",
+      "bytes": 2597,
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+      "git_blob": "5f10cfb51cb3dacd327447475964e0f6867ee89f"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/__init__.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/__init__.py",
+      "category": "original_source_subset",
+      "bytes": 70,
+      "sha256": "29b3765f63f15078432ca53a34b28cb726c961e7dd0839022b8a87b3d8b373d8",
+      "git_blob": "fc3ee50ef882264f475f280eb35bee556b0e840d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/_namespace.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/_namespace.py",
+      "category": "original_source_subset",
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "git_blob": "55e1b3f744f80339298ac911073c67f3e549cf3c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/schema_values.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_materialize_research_peripherals_parts/schema_values.py",
+      "category": "original_source_subset",
+      "bytes": 14001,
+      "sha256": "2647cfffb684d91f152358368244e49c07b33e73b36f9183ca130879f14e609c",
+      "git_blob": "98ad3c7c1efcea09932c29e5a9be3d68a0b02bd4"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/__init__.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/__init__.py",
+      "category": "original_source_subset",
+      "bytes": 70,
+      "sha256": "29b3765f63f15078432ca53a34b28cb726c961e7dd0839022b8a87b3d8b373d8",
+      "git_blob": "fc3ee50ef882264f475f280eb35bee556b0e840d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/_namespace.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/_namespace.py",
+      "category": "original_source_subset",
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "git_blob": "55e1b3f744f80339298ac911073c67f3e549cf3c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/capture_metadata.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/capture_metadata.py",
+      "category": "original_source_subset",
+      "bytes": 6199,
+      "sha256": "b6f7fb81bc6aa90cb48e1196b868dc05033b99c9054e145f295014afc81528a3",
+      "git_blob": "c5ac2d96e93a2f3a49b20f2475941dd019dcc908"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/market_snapshot.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/market_snapshot.py",
+      "category": "original_source_subset",
+      "bytes": 14768,
+      "sha256": "649d1f706f7ddbe662191b876fa46102c7b3f0f1d7f9cb2f8039a4d8b8e6287e",
+      "git_blob": "1d214eac8b1e0fab01cd7982e8c4f28e23b653cf"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/quote_parsing.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/quote_parsing.py",
+      "category": "original_source_subset",
+      "bytes": 10597,
+      "sha256": "b2acf3b603248b13b8aed1b1e1da78fb64d2d9fa19b6d7d6e243fab8f7e6eb3e",
+      "git_blob": "bb7f25ccc7ac4d3ed5965c2052a41b7a03b6b68c"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/materialize_research_peripherals.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/materialize_research_peripherals.py",
+      "category": "original_source_subset",
+      "bytes": 31490,
+      "sha256": "712fb09f36f47f1e821793b2ba94a612396d474eb688036d40061458805ca512",
+      "git_blob": "1bbf9095e59b1040945d7a9be054da96a48c7e0f"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/ops/us_market_digest.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/ops/us_market_digest.py",
+      "category": "original_source_subset",
+      "bytes": 33600,
+      "sha256": "5e814bc2ddffeec45a2ed7a593d3fa20128826c7c4951e0f10a95f3bdc0f552c",
+      "git_blob": "89eda5798fdd598c24a310aaa3588f4492c291ea"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/cache_contract.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/cache_contract.py",
+      "category": "original_source_subset",
+      "bytes": 1949,
+      "sha256": "0dabc0d2787fae9af2e3c0fb3f5bf3e49c71d28649ffd30c07c31f5e8d071b7f",
+      "git_blob": "5c4f431d28a1c9807945cbab8b87853a320ae357"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/contracts.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/contracts.py",
+      "category": "original_source_subset",
+      "bytes": 12756,
+      "sha256": "d90f0027a8383f20a299e3058d69716e62737e9e5300afc61a8ef2ed949d402f",
+      "git_blob": "643abdd5bff9a196bb993275e5f57bea79881e90"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/safety.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/safety.py",
+      "category": "original_source_subset",
+      "bytes": 3272,
+      "sha256": "c82fcdee6845e765783584f5ac46a9d4ca6b6b9fda1c3c2e919c17ab17c7f3e8",
+      "git_blob": "117439469386ffb3d58c9d047766c6c5cccbd06a"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/store.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/store.py",
+      "category": "original_source_subset",
+      "bytes": 19988,
+      "sha256": "79e077d2133f8c0bd33dde253e752bc6482423565ec11e9217d88b86f02cc07e",
+      "git_blob": "c9af9a6ae87858ebee111766d4db0fd0639943b5"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_relation_registry.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_relation_registry.json",
+      "category": "original_source_subset",
+      "bytes": 809,
+      "sha256": "ffd6ff853eb69a8329c18cf5ac77745ac08f14905279036e494c34eb0b55b3fe",
+      "git_blob": "f03ed4b429c3e6155987276a080fe9b947580834"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_research.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_research.py",
+      "category": "original_source_subset",
+      "bytes": 14052,
+      "sha256": "297dc6f5950d3614437378c22e3157b6866823fbf25fd39cb47f112ffea40da7",
+      "git_blob": "d5c1b0cd5bad6fd522ad1a060548d4520b631e58"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_reviewed_20260930.json",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_reviewed_20260930.json",
+      "category": "original_source_subset",
+      "bytes": 7890,
+      "sha256": "e6108eca9f30a44a96674941ffc7b44557d44a4f3cbe17983d96d1de23ca956a",
+      "git_blob": "5c2a632b3e812c67d24b12e3d0f1fe7524cbc944"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/us_market_bridge.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/us_market_bridge.py",
+      "category": "original_source_subset",
+      "bytes": 18974,
+      "sha256": "18d4ede4267a446d235267c71cecd1208f30ae3fdfe9ff02d9354d1b5a18de06",
+      "git_blob": "6b79f476e1251d2ac55d03e832de76ebbef1c72d"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_plan.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_plan.py",
+      "category": "original_source_subset",
+      "bytes": 97369,
+      "sha256": "ef0269a8510b9168e2d135de6c1b4d28146a22d0d691aee8dd3fe80f95a698f0",
+      "git_blob": "60e42475616d53480da470dec32d69fceb164497"
+    },
+    {
+      "path": "handoffs/M15/source/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_projection.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_projection.py",
+      "category": "original_source_subset",
+      "bytes": 30841,
+      "sha256": "027d855613e675e1f569b401b9a8344e40766b88c31e987e791d05a0b3a2f200",
+      "git_blob": "5799baef183dd4a93bdbc24c817a5df3d9e3cc33"
+    },
+    {
+      "path": "handoffs/M15/source/references/R3/handoff/manager-daily-r3-repair-20261009/after/api_current/v4/manager_research/us_mapping_research.py",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/references/R3/handoff/manager-daily-r3-repair-20261009/after/api_current/v4/manager_research/us_mapping_research.py",
+      "category": "original_source_subset",
+      "bytes": 57938,
+      "sha256": "f4a0919382d6daecaac67429a886980197fc2476f99de3ccda241fb1da8ba8b7",
+      "git_blob": "e0fc26de11bdff6b77577b067ecf15f0dc929f12"
+    },
+    {
+      "path": "handoffs/M15/source/task/MAC_ACCEPTANCE.md",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/task/MAC_ACCEPTANCE.md",
+      "category": "original_source_subset",
+      "bytes": 5449,
+      "sha256": "0a02d23a95e3f62b2b89420adff7b8a9c8e0d1d06486f3dec2f811dd7d4a1e97",
+      "git_blob": "79e76e83a460c86eee28a7b7499b9e26ce8b879b"
+    },
+    {
+      "path": "handoffs/M15/source/task/PROMPT_FOR_CHAT.md",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/task/PROMPT_FOR_CHAT.md",
+      "category": "original_source_subset",
+      "bytes": 8050,
+      "sha256": "8305d340370e85715ffe94c958e9aa2739d1b27900a3ec220f92671b2b7c9e72",
+      "git_blob": "368760481f1606c2de146cd08bfaaac161e77e13"
+    },
+    {
+      "path": "handoffs/M15/source/task/SOURCE_INDEX.md",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/task/SOURCE_INDEX.md",
+      "category": "original_source_subset",
+      "bytes": 14276,
+      "sha256": "eb6e8bf460fcee8848681f3b1b42b0bc6ba591c467cfd69cfbb01d006882ce80",
+      "git_blob": "75293a8c09472ad58bc54265bdc8d7d3ab536c8c"
+    },
+    {
+      "path": "handoffs/M15/source/task/START_HERE.md",
+      "local_source": "/workspace/shared/v5-module15-source-20261010/task/START_HERE.md",
+      "category": "original_source_subset",
+      "bytes": 4097,
+      "sha256": "1826592932c5b6353fc5d79b2eecb4592348edb071b52d1d8ea46135eb68e8c7",
+      "git_blob": "0355eeba0d027f1a2a7ea607f43e1248abfe58d7"
+    },
+    {
+      "path": "handoffs/M15/candidate_r1_rejected/SHA256_MANIFEST.txt",
+      "local_source": "/workspace/shared/review_m15_r1/candidate/V5_M15_AFTER/SHA256_MANIFEST.txt",
+      "category": "original_r1_candidate",
+      "bytes": 218,
+      "sha256": "a6d131adeecfa1c3f5f1061eccd83ba2776de100867497145ba1adf14b90b64c",
+      "git_blob": "69bdefcbaf3d8e7e42d34814a2787499eecef7fe"
+    },
+    {
+      "path": "handoffs/M15/candidate_r1_rejected/TEST_REPORT.md",
+      "local_source": "/workspace/shared/review_m15_r1/candidate/V5_M15_AFTER/TEST_REPORT.md",
+      "category": "original_r1_candidate",
+      "bytes": 344,
+      "sha256": "21f98b3d1177da2cac91dd8e3a99ca5f5e1e2de162705fa3a92f2a659c09ee9b",
+      "git_blob": "97843cd2af9c3363f15acf7acdf3a4ef95a2ff87"
+    },
+    {
+      "path": "handoffs/M15/candidate_r1_rejected/V5/src/v5_shadow/daily_us_owner.py",
+      "local_source": "/workspace/shared/review_m15_r1/candidate/V5_M15_AFTER/V5/src/v5_shadow/daily_us_owner.py",
+      "category": "original_r1_candidate",
+      "bytes": 2593,
+      "sha256": "89fa9680fd36294c941ce5a42adbdaa802ccbce03f87dd8c3da229cd98689c3c",
+      "git_blob": "4b0507cbb18766573cca16d4499087c632824a9d"
+    },
+    {
+      "path": "handoffs/M15/candidate_r1_rejected/reverse.patch",
+      "local_source": "/workspace/shared/review_m15_r1/candidate/V5_M15_AFTER/reverse.patch",
+      "category": "original_r1_candidate",
+      "bytes": 569,
+      "sha256": "17077237c3415c6891c9851c3ae237313e89374149fcd0d207688d398e6f676b",
+      "git_blob": "39cf4d6ef6f09be9567e0f99ff91c233118f0ffd"
+    },
+    {
+      "path": "handoffs/M15/candidate_r1_rejected/runtime.patch",
+      "local_source": "/workspace/shared/review_m15_r1/candidate/V5_M15_AFTER/runtime.patch",
+      "category": "original_r1_candidate",
+      "bytes": 569,
+      "sha256": "17077237c3415c6891c9851c3ae237313e89374149fcd0d207688d398e6f676b",
+      "git_blob": "39cf4d6ef6f09be9567e0f99ff91c233118f0ffd"
+    },
+    {
+      "path": "handoffs/M15/candidate_r1_rejected/test.log",
+      "local_source": "/workspace/shared/review_m15_r1/candidate/V5_M15_AFTER/test.log",
+      "category": "original_r1_candidate",
+      "bytes": 6618,
+      "sha256": "3c25bdb5842f228c723839685e87b35bb467f80e4abe33ce0181cb4aca317500",
+      "git_blob": "cae6e38e41905803bd0609b379b8e66b4fd89b26"
+    },
+    {
+      "path": "handoffs/M15/reviews/REVIEW_M15_R1.md",
+      "local_source": "/workspace/shared/REVIEW_M15_R1.md",
+      "category": "original_review",
+      "bytes": 17071,
+      "sha256": "5ecbc7da188a82b9a39cc84b46967d7323bc23e97514e4c79ce2ac401e7d129b",
+      "git_blob": "8c023d66a68e7130b5b2961c287d2066c85bd85e"
+    },
+    {
+      "path": "handoffs/M15/tasks/M15_RESUME_CODE_DELIVERY_20261011_1124.txt",
+      "local_source": "/workspace/shared/M15_RESUME_CODE_DELIVERY_20261011_1124.txt",
+      "category": "original_repair_task",
+      "bytes": 6892,
+      "sha256": "d4d3874cdcddb1324dc659cd062631538ee915d5da2491cb880b65d7ed0c47c6",
+      "git_blob": "07fe1f2d2a4f48edffb344782bb14661445ba1b0"
+    },
+    {
+      "path": "handoffs/M15/evidence/M15_existing_paths_sha_readonly.json",
+      "local_source": "/workspace/shared/m14_m15_mac_minimal_20261011_1123/M15_existing_paths_sha_readonly.json",
+      "category": "existing_mac_metadata_only",
+      "bytes": 5643,
+      "sha256": "8b5bf6b4632b8be9bbe7cbe93d6a30b0349b2461cb46ca413693a17352ff293f",
+      "git_blob": "ea39284660236715d619acb9442b3efb004132ba"
+    },
+    {
+      "path": "handoffs/M15/tasks/latest_task_documents/PROMPT_FOR_CHAT.md",
+      "local_source": "/workspace/shared/v5-chat-module15-20261010/PROMPT_FOR_CHAT.md",
+      "category": "updated_original_task",
+      "bytes": 8853,
+      "sha256": "5b083b5586e8f2d228d631665abecddae5e81ed7730b318424c9c242be2dba7f",
+      "git_blob": "77aab6a2789b3f0bf602de1f8794b5074284050e"
+    },
+    {
+      "path": "handoffs/M15/tasks/latest_task_documents/SOURCE_INDEX.md",
+      "local_source": "/workspace/shared/v5-chat-module15-20261010/SOURCE_INDEX.md",
+      "category": "updated_original_task",
+      "bytes": 14187,
+      "sha256": "d72e2ce78fcde14eb1c6af7857391a57682cb4238500e84294dab67f02599fe2",
+      "git_blob": "72ae1975e7b11e9cae4d231ded3317d02c84b61b"
+    }
+  ],
+  "excluded_source_files": [
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/issuer_us_relations.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/issuer_us_relations.py",
+      "git_blob_sha": "d5cf87f1eb80d020743c8a73cab0640152912ce4",
+      "sha256": "75fdca7a3c8bc1e8f385a023d47df640f002096921d6a0f3af8ea6cc466ee00f",
+      "bytes": 15653,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/issuer_us_relations.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/research_evidence.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/research_evidence.py",
+      "git_blob_sha": "ec5d612601508f91ede01e07d0fff9426930c275",
+      "sha256": "d2539b676d5779d9369fd8aba187c0565fcc38dbb0e89596d1248668fda4a7d5",
+      "bytes": 28636,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/research_evidence.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/research_attention.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/research_attention.py",
+      "git_blob_sha": "d604a4f4dadac305e1d618c2b9c0325a32e852f1",
+      "sha256": "ccf9246193e082f6fd09e83fae0df00533c8dc0ef27ebb5f5335dfc35d76be96",
+      "bytes": 35615,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/research_attention.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/mapping_plan_admission.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/mapping_plan_admission.py",
+      "git_blob_sha": "ae1c647eb79e9f17b1c3decfff880654fbd900d1",
+      "sha256": "4c48df3e93b599d1f9d12e7af3385c5084bf3d4fefc102085ab60211e82a31cc",
+      "bytes": 3494,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/mapping_plan_admission.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/src/v5_shadow/current_us_research.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/current_us_research.py",
+      "git_blob_sha": "1e4483e91551dc08ae5954a8cce2d18842195a19",
+      "sha256": "b6c8ce065cc2d2a2d35ba4b9e305bc9695825c9c2b30704b3acb90909749c0bb",
+      "bytes": 10269,
+      "role": "M18_INTEGRATION_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/current_us_research.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/src/v5_shadow/manager_plan.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/manager_plan.py",
+      "git_blob_sha": "5e05f82ec6d2d88f47e79d19e5caf433a0143f2c",
+      "sha256": "fa6cbee7196d40acb96dc78693925561dbc4eba7c09313157af0f7a2f6dcca7b",
+      "bytes": 39957,
+      "role": "M18_INTEGRATION_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/manager_plan.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_projection.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_projection.py",
+      "git_blob_sha": "08978f4da5e9823358e7e20f798eeeaea6dce76d",
+      "sha256": "9c5ae5eda8aa43536ddd9a5a287da2a9d27cccde308e128652d9bc4f7dffb2c4",
+      "bytes": 31337,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/workspace_projection.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/attention_decision.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/attention_decision.py",
+      "git_blob_sha": "deae8d18c88682eb8e06593603485dcab043b4be",
+      "sha256": "4b84e0469a5267771ccfe9f9f5040fc829e82f7a1b24afdeed11ebef0cb7d640",
+      "bytes": 9179,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/attention_decision.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/evidence_identity.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/evidence_identity.py",
+      "git_blob_sha": "f29fdc0361647d842de5b4b90ee2cae715361ebc",
+      "sha256": "6ff16b31c8e23f3bbceea7acc22cf866afc29db6f9f67158381cec2c23b3d053",
+      "bytes": 5276,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/evidence_identity.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/announcement_materials.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/announcement_materials.py",
+      "git_blob_sha": "fbd174f760613d5388cc2683235cf2e57048741b",
+      "sha256": "7163ca75e883d173ce7a831076402b06906951323dd54f82b2500c6b9ad60df1",
+      "bytes": 10727,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/announcement_materials.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_semantics.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_semantics.py",
+      "git_blob_sha": "438a5c0198f39000a645323a3177cf1964ca4cbb",
+      "sha256": "dc8d1d330e4fdacf2ef7169a7ac62874bfd3e2658f8b4bcff0773e06e32c4f7f",
+      "bytes": 33731,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/workspace_semantics.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/contracts.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/contracts.py",
+      "git_blob_sha": "643abdd5bff9a196bb993275e5f57bea79881e90",
+      "sha256": "d90f0027a8383f20a299e3058d69716e62737e9e5300afc61a8ef2ed949d402f",
+      "bytes": 12756,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/contracts.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/vendor/manager_plan_baseline/v4/manager_research/safety.py",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/manager_plan_baseline/v4/manager_research/safety.py",
+      "git_blob_sha": "117439469386ffb3d58c9d047766c6c5cccbd06a",
+      "sha256": "c82fcdee6845e765783584f5ac46a9d4ca6b6b9fda1c3c2e919c17ab17c7f3e8",
+      "bytes": 3272,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/vendor/manager_plan_baseline/v4/manager_research/safety.py",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    },
+    {
+      "package_path": "V5/contracts/manager_plan_source_manifest.json",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/contracts/manager_plan_source_manifest.json",
+      "git_blob_sha": "ed8abe0e2286fd3e830ff08d4b3adeb7f48a0ea8",
+      "sha256": "92c445765cdfe4a76531bc4929622ef3878b58702b4a2aa3f56dc0da8b2c3767",
+      "bytes": 29148,
+      "role": "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY",
+      "target_writable": false,
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/contracts/manager_plan_source_manifest.json",
+      "original_manifest_sha256": null,
+      "original_origin_commit": null,
+      "original_origin_path": null
+    }
+  ],
+  "source_copied_count": 74,
+  "source_original_count": 88,
+  "original_material_count": 85,
+  "candidate_status": "R1 returned for repair; not accepted",
+  "archive_identity_only": {
+    "source": {
+      "bytes": 322278,
+      "sha256": "5140895769b51fd225544e1cd4a243a13b0e7ed4944b40f951393b6751baa940"
+    },
+    "candidate_r1": {
+      "bytes": 4568,
+      "sha256": "114a17f4dd8dae9563150a85f5287d701c949bd778efe0c9036fba950c845f51"
+    }
+  },
+  "not_an_executable_closure": true
+}

@@ -1,0 +1,35 @@
+继续原 M15 美股到港股映射。你的上一条回复已经结束，仍止于 M15_R1_REPAIR_IN_PROGRESS。本次只附 M15 自身固定 SOURCE、R1 候选、精确独审及 M15 五件现有输入/产物的只读 SHA 核对记录，请实际调用文件工具完成范围内完整候选，不再只交两行 guard、方案或下一版承诺。
+
+固定输入，请先核实际字节：
+1. V5_MODULE15_SOURCE_20261010.zip，SHA256 5140895769b51fd225544e1cd4a243a13b0e7ed4944b40f951393b6751baa940。
+2. V5_M15_CANDIDATE_ledger_guard.zip，SHA256 114a17f4dd8dae9563150a85f5287d701c949bd778efe0c9036fba950c845f51。
+3. REVIEW_M15_R1.md，SHA256 5ecbc7da188a82b9a39cc84b46967d7323bc23e97514e4c79ce2ac401e7d129b。
+4. M15_existing_paths_sha_readonly.json，5643 bytes，SHA256 8b5bf6b4632b8be9bbe7cbe93d6a30b0349b2461cb46ca413693a17352ff293f。这是 Mac 原 US 三文件加 M15 mapping 两文件共五件的路径/长度/SHA 只读核对记录，不是其完整业务原件。
+
+SOURCE 的固定基线为 f7cb731c384ee6890a87d16c19a5b5a621779477。原 39 项 owner 文件长度/SHA 及 canonical PIN 97129b2c480879fbc8dc12e7ee5170928e86a9cc24a1b9c689eb3fbb830a3682 已独核一致。保留两行 ledger guard、原四键/关系语义和全部既有安全门，不能借返修破坏原闭包。审查并未认定当前调用存在 kwargs 错配。
+
+按 REVIEW_M15_R1 一次完成以下最小实际闭环：
+1. M15 自有 us_market_bridge.py 复用原 store._receipt_matches(payload_from_bytes, payload_sha, receipt_from_bytes) 窄兼容，仍核 payload、manifest、原 receipt 字节 SHA、session、phase、cutoff 和安全字段；准确更新受影响 manifest entry/PIN。原 source store 和旧 receipt 不改。测试完整新形状、恰缺两字段合法旧形状，以及只缺一项、多缺、改值、额外字段、payload/manifest/原字节篡改拒绝。
+2. 本次 daily 结果按 run_id 和 artifact SHA exact-read，校验 schema/date/run/hash/安全字段；latest 只能另列观察，不能定位本次 artifact。A 保存后 B 推进 latest，A 仍读到 A；成功 A 后失败 B 保留 A 的成功消费引用，B 保留自己的不可变产物和诊断。
+3. 将原 ledger attempt/trigger 与对应持久化 run 绑定，未知结果先查原 attempt/run，查不到仍明确未知，不自动重试。若采用 R3 donor，实际核完整所需依赖、budget/dispatch/intent 和精确 I/O 白名单，不只摘签名或放成任意 I/O；共享 dispatch/ledger/service/router 不跨写，只列精确集成请求。
+4. 实现 M15 自身稳定材料入口，绑定同一 US session/cutoff、HK 目标/参考/资格日及已验证 M02/M04 引用，复用包内原 material_us_relations → collect_attention_evidence/us_mappings/us_mapping_diagnostics → research_attention。仅固化实际必需的 M15 私有依赖闭包，逐文件记录 donor/byte identity/manifest/PIN；不复制整套经理系统或修改 M18 共享 vendor。确实需要额外文件时给精确路径和调用需要，不索取整仓。
+5. 独立输出 seed daily、material industry、material explicit ticker 三条路径的结果/拒绝/未评估状态。行业路不错误要求显式 ticker；peer 不改供应关系；种子成功不能代替材料评估，材料缺件也不能覆盖已有种子结果。
+6. 保留实际 started/generated_at 及原 source/session/cutoff；把“当前对历史输入的恢复评估结果”与“历史截止时点是否已可用/PIT”分列。不能删除历史 available 门、倒填生成时钟、扩大种子或用 READY 壳替代原算法。
+
+新 Mac 核对记录确认现有五件原文件均存在，actual_sha256 与原请求 expected_sha256 全部一致，请据此避免继续写“原 US 源全缺”：
+- US session20261009 receipt：52f13fe37d85fa167f3d727c8b060f45e1ba242e9a4707d35d58c2fcb8e2e90a。
+- US session20261009 external_finance payload：928cd4ae8089a792ea1a3cfab490c9217c4249d6c29c11aeaa9cee879f0fb4e3。
+- US manifest：cbb76e9f21895e078fb9063304988af0982532f4754cdbd4a88e4f594e17f232。
+- M15 target20261012 latest：940323dc15bcb2f2c2b285b7c956760d5186563043c42aea97e8f7762951db6a。
+- M15 run7bf4038db00f4b538d0de270734fee71：9613ade91707181a07b57e47cdef8e9338f219b07d81a1fd288bf271e7c06782，记录 generated_at=2026-10-10T01:25:07Z。
+精确原路径在该记录中。这里证明的是 Mac 当前原件存在与字节身份，不能把核对记录当完整 payload 导入，也不能据此声称当前候选已运行、自然运行或历史 PIT 通过；需真实原件执行的步骤交既有 Mac 执行者复用，别无必要重采。
+
+现有已保存请求仍 materials.files={}，因此真实材料行业/个股路径必须诚实报告缺口。本次没有附其他模块完整私有运行包。缺真实材料/REQUEST_PATH 不影响完成入口、合同、精确保存恢复及隔离工程用例；不能把三张种子卡或四键当成全部材料能力。请将 seed daily、material industry、material explicit ticker 三路分别报告已有证据、拒绝/缺件及执行状态。真实业务验收由既有 Mac 集成者按固定输入另验，原日期/来源/真实取得/PIT 身份保持，不凭新标签升级。未来目标日的正式产出不是今天完成源码的前置输入。
+
+交付完整 before/after、仓库同相对路径 a/V5/... 到 b/V5/... 的自动生成正向及真正反向 patch、逐文件 SHA/来源映射/改动范围、全部新增/修改测试源码、实际命令/cwd/解释器/依赖/exit/原日志、隔离应用回退字节校验、Mac 独立应用验收说明和 M18 稳定消费 DTO/精确接口请求。补 guard 非法输入且 owner 未被调用、旧 receipt、A/B exact-read、失败保持、未知 attempt、三路径和 PIT 用例。R1 的 runtime.patch 源路径错误且 reverse.patch 与正向相同，必须修正，不能让接入者猜路径。
+
+保留原日志“11 passed, 10 errors in 0.16s”的准确分类：10 项为缺真实 V5_US_MAPPING_REQUEST_PATH 的 setup ERROR/BLOCKED，不是 21 项通过，也不是已证实 10 项业务回归；原日志无 exit，不能补造。能执行的工程测试实际执行；缺具体依赖则记录本次命令、原错误、exit 并分列 NOT_RUN，不把合成验证当真实业务通过。
+
+只修改 M15 适配器、自有映射/消费 bridge、相应 manifest/PIN 和必要私有文件/专属测试。M03 采集、M02/M04 producer、M18 manager/gateway/UI、共享调度、V4/8910 均不跨写，不执行交易，不扩大权限或凭据访问。
+
+请先实际完成文件修改和打包，重新打开最终 ZIP 核清单与字节后再交下载附件。若文件工具确实失败，返回本次具体工具、动作、文件名与原错误，并交已经完成的实体；不要再次只回复方案或未来时。使用实际可用的 Superpowers 流程，未调用的能力不宣称已使用。

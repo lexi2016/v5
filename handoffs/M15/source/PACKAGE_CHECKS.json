@@ -1,0 +1,38 @@
+{
+  "schema": "v5.module15.package-checks.v1",
+  "package_type": "FIXED_BEFORE_IMAGE_NOT_CANDIDATE",
+  "baseline": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "source_files": 80,
+  "source_bytes": 1029947,
+  "roles": {
+    "M15_PINNED_DEPENDENCY_REFERENCE_ONLY": 37,
+    "M15_TARGET_WRITABLE": 7,
+    "SHARED_RUNTIME_REFERENCE_ONLY": 18,
+    "M15_TEST_TARGET_WRITABLE": 3,
+    "M18_MATERIAL_ALGORITHM_REFERENCE_ONLY": 12,
+    "M18_INTEGRATION_REFERENCE_ONLY": 2,
+    "R3_CONDITIONAL_DONOR_REFERENCE_ONLY": 1
+  },
+  "writable_source_or_test_files": 10,
+  "git_blob_matches": 80,
+  "sha256_readback_matches": 80,
+  "original_us_manifest_entries": 39,
+  "original_us_manifest_match": "PASS",
+  "us_descriptor_canonical_pin": "97129b2c480879fbc8dc12e7ee5170928e86a9cc24a1b9c689eb3fbb830a3682",
+  "core_m15_static_import_targets_present": "PASS",
+  "previous_review_index_crosschecks": [
+    "V5/vendor/us_mapping_baseline/ops/us_market_digest.py",
+    "V5/vendor/us_mapping_baseline/v4/manager_research/us_market_bridge.py",
+    "V5/vendor/us_mapping_baseline/v4/manager_research/us_mapping_research.py",
+    "V5/vendor/manager_plan_baseline/v4/manager_research/issuer_us_relations.py",
+    "V5/vendor/us_mapping_baseline/ops/_us_market_digest_parts/market_snapshot.py",
+    "V5/vendor/manager_plan_baseline/v4/manager_research/research_evidence.py",
+    "V5/contracts/us_mapping_source_manifest.json"
+  ],
+  "product_imports_or_execution": "NOT_RUN",
+  "product_tests": "NOT_RUN",
+  "mac_access": "NOT_RUN",
+  "real_market_or_private_business_data_included": false,
+  "new_implementation": false,
+  "reference_only_limit": "M18 and R3 references are source context, not a complete independently runnable M18/R3 runtime."
+}

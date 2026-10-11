@@ -1,0 +1,13 @@
+diff --git a/tmp/V5_before_m15/src/v5_shadow/daily_us_owner.py b/V5/src/v5_shadow/daily_us_owner.py
+index cb6252d..4b0507c 100644
+--- a/tmp/V5_before_m15/src/v5_shadow/daily_us_owner.py
++++ b/V5/src/v5_shadow/daily_us_owner.py
+@@ -22,6 +22,8 @@ def bind_us_owner(config):
+ 
+ 
+ def run_us_owner(request, ledger_run_id):
++    if not isinstance(ledger_run_id, str) or not ledger_run_id:
++        raise ValueError('US_OWNER_LEDGER_ID_INVALID')
+     result = run_us_mapping(request)
+     daily = result['persisted_daily']
+     if (result.get('readback_status') != 'MATCHED'

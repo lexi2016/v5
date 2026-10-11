@@ -1,0 +1,134 @@
+...........EEEEEEEEEE                                                    [100%]
+==================================== ERRORS ====================================
+___ ERROR at setup of UsMappingDailyTests.test_changed_source_bytes_rejected ___
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_ ERROR at setup of UsMappingDailyTests.test_execution_time_is_not_backdated_to_research_cutoff _
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+___ ERROR at setup of UsMappingDailyTests.test_missing_receipt_not_admitted ____
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_______ ERROR at setup of UsMappingDailyTests.test_naive_cutoff_rejected _______
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_ ERROR at setup of UsMappingDailyTests.test_original_build_persist_and_independent_readback _
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_ ERROR at setup of UsMappingDailyTests.test_output_without_v5_marker_rejected _
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_ ERROR at setup of UsMappingDailyTests.test_overlapping_source_and_output_rejected _
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_ ERROR at setup of UsMappingDailyTests.test_source_copy_receives_no_owner_lock_or_other_write _
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+_ ERROR at setup of UsMappingDailyTests.test_two_manual_attempts_preserve_original_runs _
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+___ ERROR at setup of UsMappingDailyTests.test_wrong_session_paths_rejected ____
+
+cls = <class 'test_us_mapping_daily.UsMappingDailyTests'>
+
+    @classmethod
+    def setUpClass(cls):
+        path = os.environ.get('V5_US_MAPPING_REQUEST_PATH')
+        if not path:
+>           raise RuntimeError('V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP')
+E           RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+
+V5/tests/test_us_mapping_daily.py:17: RuntimeError
+=========================== short test summary info ============================
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_changed_source_bytes_rejected - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_execution_time_is_not_backdated_to_research_cutoff - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_missing_receipt_not_admitted - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_naive_cutoff_rejected - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_original_build_persist_and_independent_readback - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_output_without_v5_marker_rejected - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_overlapping_source_and_output_rejected - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_source_copy_receives_no_owner_lock_or_other_write - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_two_manual_attempts_preserve_original_runs - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+ERROR V5/tests/test_us_mapping_daily.py::UsMappingDailyTests::test_wrong_session_paths_rejected - RuntimeError: V5_US_MAPPING_REQUEST_PATH_REQUIRED_NO_SKIP
+11 passed, 10 errors in 0.16s
