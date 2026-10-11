@@ -1,0 +1,48 @@
+{
+  "purpose": "M16 original assembly reference only; not an executable dependency closure",
+  "files": [
+    {
+      "path": "handoffs/M16/integration_sources/apps/api/v35_api/app.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/app.py",
+      "git_blob": "e1b58a34bd73297008a7b3d318d4ddd4ae5ea6ee",
+      "bytes": 342071,
+      "sha256": "909bdccecadf36c70f791a2c4c0d818371f4da68762e4cff40f9786e4613f80e",
+      "transformation": "none; original bytes"
+    },
+    {
+      "path": "handoffs/M16/integration_sources/stage_center/consumer.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/stage_center/consumer.py",
+      "git_blob": "491f832e98d0cf8af87bd45eaa7c15d5f16779a6",
+      "bytes": 32471,
+      "sha256": "865c2ea8183e5e6aeb9145ce2bfbb3e5b442825904b14c47fe024593a9205489",
+      "transformation": "none; original bytes"
+    },
+    {
+      "path": "handoffs/M16/integration_sources/stage_center/selection.py",
+      "source_repository": "lexi2016/v4",
+      "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "handoff/v4-running-source-20261005/canonical/stage_center/selection.py",
+      "git_blob": "e5bb693578a32f954355f53fe9b79e1d592e8422",
+      "bytes": 31705,
+      "sha256": "ccf7dddfb72fe88b5bff68ce9501e0a8ef9f41a212008a495824017943675294",
+      "transformation": "none; original bytes"
+    }
+  ],
+  "base_v5_commit": "da3c5dcdab1c2fd9f601e59fff9ffdaf376200f7",
+  "missing_dependency": {
+    "source_path": "handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/_namespace.py",
+    "fixed_source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "actual_github_read": "404 NOT_FOUND",
+    "replacement_created": false
+  },
+  "safety_review": {
+    "credential_signature_hits": 0,
+    "credential_literal_assignments": 0,
+    "runtime_configuration_files_included": false,
+    "source_not_executed": true
+  }
+}
