@@ -1,0 +1,37 @@
+{
+  "candidate_commit": "2fec401df6e9bf125f875ea2f6fcff88b2eb64ed",
+  "script_sha256": "6331147346c4351ad1865434bcf920e5b7419a5e474d0dac2299d697664b3611",
+  "redaction": "Only local absolute home/workspace prefixes replaced; stdout messages preserved. No runtime contents, source code or personal data included.",
+  "files": [
+    {
+      "file": "EXECUTION_RECEIPT.md",
+      "sha256": "bed7dcd1aa27f6f108b3f6a32cddb120abdc18bc567eaed539fd3cb9d77bbe39",
+      "bytes": 2743
+    },
+    {
+      "file": "stdout.log",
+      "sha256": "3822c311af31726dbe5bdb89c0bd0e6d7ee9afaee89bba2d543be74ae5c3030c",
+      "bytes": 1953
+    },
+    {
+      "file": "result.json",
+      "sha256": "c784a6a4d1ff9394d1769b39a123b9990c792967e17f9635db855ee6091a14c1",
+      "bytes": 1487
+    },
+    {
+      "file": "command.json",
+      "sha256": "550f3ae204396298130bd1048e622fd5f8c257156010a32a96dfaac2cb3e4df4",
+      "bytes": 572
+    },
+    {
+      "file": "verified_inputs.json",
+      "sha256": "9645789f908da563c16caf540b371f75e42b4fd8e7ac3553878b57b0ef56d6c5",
+      "bytes": 4029
+    },
+    {
+      "file": "checkout-verification.json",
+      "sha256": "2bbe502c7e159074cb4972a117476f3b456e3f43f483fb3cf86c9c74bb36ba3c",
+      "bytes": 473
+    }
+  ]
+}

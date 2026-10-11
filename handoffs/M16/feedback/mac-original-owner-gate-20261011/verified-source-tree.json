@@ -1,0 +1,741 @@
+{
+  "candidate_commit": "2fec401df6e9bf125f875ea2f6fcff88b2eb64ed",
+  "git_tree": "e0343e0abf9b94de3fca39ded9de167638a65d7d",
+  "verified_blobs": [
+    {
+      "path": "README.md",
+      "sha": "f8b50f3ba34218b3f7e9e141ae7fc40c8d6f4b19",
+      "size": 448
+    },
+    {
+      "path": "V5/src/v5_shadow/manager_jobs.py",
+      "sha": "ee154f185a7ed1d39d18f173f73c0a2428671d3e",
+      "size": 2356
+    },
+    {
+      "path": "handoffs/M16/PUBLISH_MANIFEST.json",
+      "sha": "da6f12266a50cb236ddc38f9b177f38b417092fa",
+      "size": 63251
+    },
+    {
+      "path": "handoffs/M16/START_HERE.md",
+      "sha": "f1a850a7a3cbae7716110f5a39c8b24bde7192e3",
+      "size": 2654
+    },
+    {
+      "path": "handoffs/M16/TASK_ORIGINAL.txt",
+      "sha": "60e09a9ad5cf4aac384d564a33f56c6bb0cac1ff",
+      "size": 20218
+    },
+    {
+      "path": "handoffs/M16/source/PACKAGE_CHECKS.json",
+      "sha": "e6b3922d354164c32b598753194f864eda75556c",
+      "size": 567
+    },
+    {
+      "path": "handoffs/M16/source/PACKAGE_SHA256.json",
+      "sha": "fed6d9f613b17530d9f15e9a5004da36116905fc",
+      "size": 32905
+    },
+    {
+      "path": "handoffs/M16/source/SOURCE_MANIFEST.json",
+      "sha": "fd0048fc1cc3ac3c37072461b9657937a00529a4",
+      "size": 103763
+    },
+    {
+      "path": "handoffs/M16/source/START_HERE.md",
+      "sha": "a6873ca870ba559ae9406b1bedebc423e9b93afb",
+      "size": 3381
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/contracts/manager_plan_source_manifest.json",
+      "sha": "ed8abe0e2286fd3e830ff08d4b3adeb7f48a0ea8",
+      "size": 29148
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/src/v5_shadow/contracts.py",
+      "sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "size": 7256
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/src/v5_shadow/digests.py",
+      "sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "size": 425
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/src/v5_shadow/manager_plan.py",
+      "sha": "5e05f82ec6d2d88f47e79d19e5caf433a0143f2c",
+      "size": 39957
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/src/v5_shadow/module_api.py",
+      "sha": "3fdea5f256b2dc70df141a0e70dbbc1396abb859",
+      "size": 15282
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/src/v5_shadow/module_artifacts.py",
+      "sha": "acf2195fee3711f594982269f1e6ab81da40a905",
+      "size": 7936
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/src/v5_shadow/run_ledger.py",
+      "sha": "1187e3b7633682d61985984afdf0699508cefd59",
+      "size": 6105
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/V5/vendor/manager_plan_baseline/v4/manager_research/store.py",
+      "sha": "c9af9a6ae87858ebee111766d4db0fd0639943b5",
+      "size": 19988
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/api/v35_api/manager_research_router.py",
+      "sha": "1e89a2b2cdc9c6192eed188ac53d8b4027aa77be",
+      "size": 12017
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/api/managerWorkspace.ts",
+      "sha": "307cd499916cb52eedd98671d8bec3e7d6e1c3a0",
+      "size": 92561
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ManagerSelectionView.vue",
+      "sha": "75b848172dd2a3fbc00b44dfb720759867209e42",
+      "size": 202767
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/runtime_tasks.py",
+      "sha": "4b25839e4668f726b8b45887272f26d33302e6a2",
+      "size": 3350
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "size": 10239
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "size": 10704
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "size": 7514
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "size": 9354
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "size": 2251
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "size": 2597
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/optimization/test_manager_transactions.py",
+      "sha": "e915b05e9af6a02157858f5b8571997365d44504",
+      "size": 8302
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_contract_hardening.py",
+      "sha": "95831122d073fce36067fcf9928a42791a4743a4",
+      "size": 4140
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_lifecycle_hardening.py",
+      "sha": "f435ac2ee102ef96c7c61b45dbf24e153cbc80a7",
+      "size": 11755
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_catalyst_service.py",
+      "sha": "48a9250a14b18532bd9b266bb794cd72ceb0749e",
+      "size": 11352
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_decision_recovery_contract.py",
+      "sha": "252a3bd0553214f4d3c0004ae64ab9fee1191295",
+      "size": 6624
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_event_source.py",
+      "sha": "9a255c5cc30221ebf4aeff374608ed6b503f35a1",
+      "size": 30928
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_pdf_parser.py",
+      "sha": "6e54477e3d284182bc7ed578d727217ead76771c",
+      "size": 2601
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_reader.py",
+      "sha": "2b2d35395b00e06cc3d7abbb50a978a609c6bda8",
+      "size": 21528
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_router_contract.py",
+      "sha": "f7632fa8db60ec09b6b8c2388f9c4c781669c8e2",
+      "size": 4863
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_manager_research_service.py",
+      "sha": "197a973183307fc62d4fcd62869a0d77e8b42453",
+      "size": 5208
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/__init__.py",
+      "sha": "66f16815275fc940cf0e193a1bb592d8919d9a7d",
+      "size": 1005
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/__init__.py",
+      "sha": "793d4f104b76736b4656aed98d50cd5a9dc0f948",
+      "size": 1283
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_cmap.py",
+      "sha": "fb19541f2d45060e6cd980c714df38a74f8c2d63",
+      "size": 12572
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/__init__.py",
+      "sha": "3693a5a87b8e212fe3919e9cef6700cfe71a1428",
+      "size": 1373
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/_codecs.py",
+      "sha": "93f95e5aad3aaf9c65ba15bbedb7acc88b2ba85f",
+      "size": 10555
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/adobe_glyphs.py",
+      "sha": "72d5ed3247b24e4c6887bf2e51001906ee2a3ffb",
+      "size": 447213
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/core_font_metrics.py",
+      "sha": "f086ef7a5155332de371f9e97e4982cb5a5a21f9",
+      "size": 114968
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/pdfdoc.py",
+      "sha": "306357a59c4d9a0fd846bb52e5b6774d82c6ae51",
+      "size": 4269
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/std.py",
+      "sha": "a6057ff3c7a90e9c31389d2bab1bd0f6058ad724",
+      "size": 2630
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/symbol.py",
+      "sha": "4c0d680ff242a475d3f48916ad6b7998b30ff76a",
+      "size": 3734
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_codecs/zapfding.py",
+      "sha": "9b6cdbcc0bca199f3eb8cca9e2cc7fe6001a34fb",
+      "size": 3742
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/__init__.py",
+      "sha": "215a2586062052a81ae2eed1b829d5ba50251d88",
+      "size": 3054
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_base.py",
+      "sha": "894025f3bca1ae5f9b7797fa34404bb0abd0e733",
+      "size": 1711
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_cryptography.py",
+      "sha": "b3a3d2e6dd7b328dd460a4706a399e08e0d10319",
+      "size": 4460
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_fallback.py",
+      "sha": "0412211278290605c1a9b18f82f5c131b15b018d",
+      "size": 3334
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_crypt_providers/_pycryptodome.py",
+      "sha": "3f66581e172b4dd4ea0b02f275f60ba3b26bc66f",
+      "size": 3280
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_doc_common.py",
+      "sha": "3d0e93b6c87e48795fe1f9a5a12c343dfcf06b5d",
+      "size": 54398
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_encryption.py",
+      "sha": "b57191e802f16386cd2f62a75aa45023eb97559c",
+      "size": 49546
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_font.py",
+      "sha": "236a372d88932124b92844740e25bcc83aff8a11",
+      "size": 14256
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page.py",
+      "sha": "383be98f4ded2a651091b4e0b545d1dd273fb001",
+      "size": 90193
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_page_labels.py",
+      "sha": "7a4358226053110502d71a7bb5ff72f7355984cb",
+      "size": 8626
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_protocols.py",
+      "sha": "ac24abbbe200c4ffd201d04d73196eb7a8c419bf",
+      "size": 2123
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_reader.py",
+      "sha": "ffbffebbf3de0e6625615e5e82ab32b4ce4e44d2",
+      "size": 57708
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/__init__.py",
+      "sha": "fd51c243acb8b621f2c0f2f8f4c2657278d13ade",
+      "size": 8515
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/__init__.py",
+      "sha": "d3151600e9bc1029a6d85c2bc9e53e9e36fd07df",
+      "size": 340
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_fixed_width_page.py",
+      "sha": "48f654ebb4c680494bdab5c17582e632f1e3ab54",
+      "size": 15370
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_manager.py",
+      "sha": "947cdd4165008319f82913ac0b11c531f356fe1f",
+      "size": 8221
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_layout_mode/_text_state_params.py",
+      "sha": "5203f12733f4b97dcb025e9f0366c4ae8dd54b68",
+      "size": 5481
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_text_extraction/_text_extractor.py",
+      "sha": "866f1fdbf346acd469efa3ca0e6f6124547987ea",
+      "size": 14388
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_utils.py",
+      "sha": "0396ca6f32c6ca00759e98bc2e4ffa4ca2b76378",
+      "size": 20814
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_version.py",
+      "sha": "608ddc3e604b92f258566be3bc84d8736443d501",
+      "size": 23
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/_writer.py",
+      "sha": "fc2d40af3b0f3f733bfc40853e8a79a8d874133f",
+      "size": 131834
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/__init__.py",
+      "sha": "44ed1dab5cacdfc7dbc9c07605e164e757a927b5",
+      "size": 990
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_base.py",
+      "sha": "dc065e1595f7608a9cd39f248f9573955f119184",
+      "size": 961
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_markup_annotations.py",
+      "sha": "25eb0dfc48cc776513d27ca38e0a9a5c42602281",
+      "size": 11862
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/annotations/_non_markup_annotations.py",
+      "sha": "144546094f2a8b0499073342410c3b0185db08f2",
+      "size": 3649
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/constants.py",
+      "sha": "c1069b69ab39cd21e9f8bf39d52056c382946a3f",
+      "size": 23634
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/errors.py",
+      "sha": "8fec6e13a279b9de013e41c91890d91873fbf1da",
+      "size": 1947
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/filters.py",
+      "sha": "39abc8c988ee46c0ad7133be0f448219af0d7e42",
+      "size": 30420
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/__init__.py",
+      "sha": "bde1628fb7a02f9dab04666123c1f3d8bdeeb94b",
+      "size": 3468
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_appearance_stream.py",
+      "sha": "cee5c79ec7955175cfb357c3f53801de68f7f568",
+      "size": 26834
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_base.py",
+      "sha": "bf6f66c53bd1119b9ef4138eea3f14fbc6fb0c8e",
+      "size": 32755
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_data_structures.py",
+      "sha": "dc03fabbf125ea98bc37b2f1476fcd80493124c5",
+      "size": 65869
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_files.py",
+      "sha": "f29fa770f6ccb1d6d6d4bd235f81323a7cad4423",
+      "size": 16238
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_fit.py",
+      "sha": "293066ad37cbab19401312c41c6d070fdb6a7971",
+      "size": 5515
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_inline.py",
+      "sha": "bd119704972a1f2eef39b188e853b2e291b58a2e",
+      "size": 12819
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_image_xobject.py",
+      "sha": "a29b9b271d80d55a02f1f4050d8dacb360dcaace",
+      "size": 21965
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_link.py",
+      "sha": "f92c75c7caff2e0274af6f90023972403850070e",
+      "size": 5929
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_outline.py",
+      "sha": "d5d4bb132c412567fe69d75cb71c4c3da1d4bbfe",
+      "size": 1094
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_rectangle.py",
+      "sha": "ba7865ae583bb00930d5ffe253edf46b2519a058",
+      "size": 3785
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_utils.py",
+      "sha": "1b81fd23b0f8d7f4be86e6dfb3e583275e3716c5",
+      "size": 7258
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/generic/_viewerpref.py",
+      "sha": "04f95858be78a13e18109637e60883870c4b660f",
+      "size": 6774
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/pagerange.py",
+      "sha": "2ff4613f2de87f964c22edeef4028bdeb28e50d8",
+      "size": 7108
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/papersizes.py",
+      "sha": "ed09f341f6a27e9805f0b49430bd09d4d24d70a3",
+      "size": 1413
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/types.py",
+      "sha": "a1c4e495a5710812ff122f13a4580599c380f8a3",
+      "size": 1915
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/_vendor/pypdf/xmp.py",
+      "sha": "e6c066fb5ddcdb35131454af168c96cd855a07d0",
+      "size": 30239
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/activation_canary.py",
+      "sha": "ebf50edf0f42fdaacd89b06c859b761a6f2475e0",
+      "size": 66082
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/announcement_autorun.py",
+      "sha": "8bd17bd141a962d8429e81d620306724461cfac1",
+      "size": 21749
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/announcement_materials.py",
+      "sha": "fbd174f760613d5388cc2683235cf2e57048741b",
+      "size": 10727
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/announcement_observation.py",
+      "sha": "1f585c53233cd49de8e4d104b05b3d5ed6f6a03d",
+      "size": 5435
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/announcement_source.py",
+      "sha": "d6d2c2fd556f62c81a667051534a769195c4abf8",
+      "size": 47475
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/archive_catalyst_inputs.py",
+      "sha": "91901e86fcd2bf9d09391c47c2c1963c1dbb27b3",
+      "size": 6278
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/attention_decision.py",
+      "sha": "deae8d18c88682eb8e06593603485dcab043b4be",
+      "size": 9179
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/cache_contract.py",
+      "sha": "5c4f431d28a1c9807945cbab8b87853a320ae357",
+      "size": 1949
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/catalyst_observations.py",
+      "sha": "3fdd9eac88a95a53bf9b19da5f7877ce6581f243",
+      "size": 27868
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/catalyst_projection.py",
+      "sha": "21f50142999e6dd690bb1546f200c979f9f3137f",
+      "size": 15975
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/connect_capture_adapter.py",
+      "sha": "9a05b49406e9ff7f6cc35745a6177fdf338dde19",
+      "size": 19841
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/connect_selection.py",
+      "sha": "36a0c3c8b4d52556c65fa4d1ea8a5190d0c48b88",
+      "size": 13644
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/contracts.py",
+      "sha": "643abdd5bff9a196bb993275e5f57bea79881e90",
+      "size": 12756
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/errors.py",
+      "sha": "b21b534f4c361a3c16f755025cf92399f24f3619",
+      "size": 263
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/event_source.py",
+      "sha": "95a23aecc73db041c92677d6238c35b77d6516e1",
+      "size": 92966
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/evidence_identity.py",
+      "sha": "f29fdc0361647d842de5b4b90ee2cae715361ebc",
+      "size": 5276
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/existing_materials.py",
+      "sha": "a38381749c6286be9560dd969baa6af19135c82c",
+      "size": 30987
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/financial_projection.py",
+      "sha": "2da27b9b690f537aae2f1e1f5d4ea982ff762b61",
+      "size": 37491
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
+      "sha": "8b7aa95d7ff93a6aed32a92a0f0897b3cfaee240",
+      "size": 40133
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/issuer_us_relations.py",
+      "sha": "d5cf87f1eb80d020743c8a73cab0640152912ce4",
+      "size": 15653
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/material_transport.py",
+      "sha": "891dc20d7d8a737c8aaecbb50c3615763195a616",
+      "size": 7239
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/materializer_replay.py",
+      "sha": "33857630e526de3ce23df54eaf31b75f9c4a91eb",
+      "size": 32409
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/materials.py",
+      "sha": "555d285fa5b5cd7714c68a5c582797577c3ffaea",
+      "size": 9292
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
+      "sha": "0294e489d5f8fb58b36a086ba1787c0022e01fd0",
+      "size": 41935
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/plan_owner_dispatch.py",
+      "sha": "0c6d30891bc345aa2893b1f2829dcf547a7dd10f",
+      "size": 6943
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/ports.py",
+      "sha": "b4fad4ff57694f5d4a7ea27071160ffaf7f85036",
+      "size": 1569
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/reader_source.py",
+      "sha": "016596f0945a99492f85d8085bed2eb23c1dddd9",
+      "size": 26075
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/recommendation.py",
+      "sha": "88d5184c1d61e0c662921821425c786d4e2b3b7c",
+      "size": 53414
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/replay_readiness.py",
+      "sha": "b935174a7472da491974b2d84515a495a81df8f4",
+      "size": 20124
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/research_attention.py",
+      "sha": "d604a4f4dadac305e1d618c2b9c0325a32e852f1",
+      "size": 35615
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/research_evidence.py",
+      "sha": "ec5d612601508f91ede01e07d0fff9426930c275",
+      "size": 28636
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/safety.py",
+      "sha": "117439469386ffb3d58c9d047766c6c5cccbd06a",
+      "size": 3272
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py",
+      "sha": "8c7cc0357aa9c203fe088edb1fd88900290c9aec",
+      "size": 91569
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/stage_read_timing.py",
+      "sha": "0a84b3bd9ca47610b287adf98338bc748b0a8c54",
+      "size": 4332
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py",
+      "sha": "c9af9a6ae87858ebee111766d4db0fd0639943b5",
+      "size": 19988
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/us_market_bridge.py",
+      "sha": "6b79f476e1251d2ac55d03e832de76ebbef1c72d",
+      "size": 18974
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/vibe_binding_preflight.py",
+      "sha": "b5064173eabfba4ca377ee0fc66c996c61a40a93",
+      "size": 2936
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace.py",
+      "sha": "f5646f0f5b211f637d32b3a56bf44f5e1f947efb",
+      "size": 49768
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_actions.py",
+      "sha": "631714d9ae8c156e4eeefdba84740683b761570f",
+      "size": 14843
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_announcements.py",
+      "sha": "ccc9036b78741abc18c5d087825ad00b6735646a",
+      "size": 99588
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_briefing.py",
+      "sha": "7c61130742f98fffd19a7b3c5c80d0765368d216",
+      "size": 32275
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_discovery.py",
+      "sha": "d27203bc60a41534f312907d8f6cd6d5e3628b1f",
+      "size": 23129
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_history.py",
+      "sha": "e030eca77e59e05787b77e8a74e5633e6c669219",
+      "size": 17093
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan.py",
+      "sha": "60e42475616d53480da470dec32d69fceb164497",
+      "size": 97369
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan_autorun.py",
+      "sha": "668f61984fd67f2a2a9e70cb429afe0a19466b24",
+      "size": 9439
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_projection.py",
+      "sha": "5799baef183dd4a93bdbc24c817a5df3d9e3cc33",
+      "size": 30841
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_read_control.py",
+      "sha": "2ef88175e1a232d669dc23a05f35c48e27309bcf",
+      "size": 10927
+    },
+    {
+      "path": "handoffs/M16/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_semantics.py",
+      "sha": "438a5c0198f39000a645323a3177cf1964ca4cbb",
+      "size": 33731
+    },
+    {
+      "path": "handoffs/M16/source/handoff/ACCEPTANCE.md",
+      "sha": "f5abf85ef74d25e8430c7751844f3aa9fd2cdb5c",
+      "size": 3560
+    },
+    {
+      "path": "handoffs/M16/source/handoff/PROMPT_FOR_CHAT.md",
+      "sha": "b37f2c82b85ddf62e2ea65f3d8e9cfda88d0b2c2",
+      "size": 3875
+    },
+    {
+      "path": "handoffs/M16/source/handoff/SOURCE_MAP.md",
+      "sha": "ba3004b37f499c39c92d730ba97d7388801eeddb",
+      "size": 5201
+    },
+    {
+      "path": "handoffs/M16/source/handoff/START_HERE.md",
+      "sha": "4e19e530aa54dfb941dac964e70d6eeb000d2b8d",
+      "size": 2738
+    },
+    {
+      "path": "handoffs/M16/source/reference-plans/master-24c6d60d.md",
+      "sha": "3164c9e1013eab9f84825610c7243d1ace4ab8b7",
+      "size": 16779
+    },
+    {
+      "path": "handoffs/M16/source/reference-plans/migration-d1bf0346.md",
+      "sha": "c093fe0caf5cdf1ecd34ea37ba922fdd11832b19",
+      "size": 56388
+    }
+  ]
+}

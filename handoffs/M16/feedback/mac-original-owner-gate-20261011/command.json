@@ -1,0 +1,16 @@
+{
+  "command": [
+    "<MAC_TASK_ROOT>/m13-isolated/venv/bin/python",
+    "-S",
+    "-B",
+    "<MAC_TASK_ROOT>/m16-2fec401-isolated/input/M16_2fec401_offline_owner_gate.py",
+    "--repo",
+    "<MAC_TASK_ROOT>/m16-2fec401-isolated/repo",
+    "--output-dir",
+    "<MAC_TASK_ROOT>/m16-2fec401-isolated/execution/evidence"
+  ],
+  "started_at": "2026-10-11T16:04:46.955286+00:00",
+  "finished_at": "2026-10-11T16:04:48.312756+00:00",
+  "exit_code": 0,
+  "environment": "fresh -S -B process; no V4/V35 or inherited PYTHONPATH; existing Python; network blocked in supplied gate"
+}

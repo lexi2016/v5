@@ -1,0 +1,9 @@
+{
+  "head": "2fec401df6e9bf125f875ea2f6fcff88b2eb64ed",
+  "tree": "e0343e0abf9b94de3fca39ded9de167638a65d7d",
+  "blobs_verified": 147,
+  "git_status": "",
+  "method": "Actual Git checkout from SHA-verified original commit/tree/blob objects obtained via authorized GitHub connector; shallow boundary; no reconstructed substitute commit",
+  "commit_object_timezones": "+0800 +0800",
+  "test_script_sha256": "6331147346c4351ad1865434bcf920e5b7419a5e474d0dac2299d697664b3611"
+}
