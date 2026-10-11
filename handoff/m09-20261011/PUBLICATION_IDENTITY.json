@@ -1,0 +1,23 @@
+{
+  "schema": "m09.publication_identity.v1",
+  "module_id": "M09",
+  "material_date": "2026-10-11",
+  "new_repository": "lexi2016/v5",
+  "required_visibility": "private",
+  "repository_created_verified": false,
+  "branch": null,
+  "fixed_commit": null,
+  "verified_repository_url": null,
+  "verified_task_or_commit_url": null,
+  "same_commit_offline_archive": null,
+  "same_commit_archive_sha256": null,
+  "same_commit_archive_bytes": null,
+  "status": "PENDING_REPOSITORY_CREATION_OR_PUBLICATION",
+  "source_repository": "lexi2016/v4",
+  "source_fixed_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "source_offline_archive": "v5-module09-source-20261010.zip",
+  "source_archive_sha256": "ee45e1cb627df660d15574a5a0a023be00e7fac0a29e983109b202e7e3af25fa",
+  "source_archive_bytes": 145374,
+  "no_v4_writes": true,
+  "note": "Only a verified publisher may fill actual new-repository publication fields. A local pack or uncommitted export is not a same-commit GitHub export."
+}

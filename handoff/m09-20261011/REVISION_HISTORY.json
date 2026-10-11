@@ -1,0 +1,28 @@
+{
+  "schema": "m09.packet_revision_history.v1",
+  "current_revision": "R3_FINAL_WITH_MAC_INPUTS_AND_A_PANEL",
+  "supersedes_for_delivery": "R2_WITH_MAC_INPUTS",
+  "previous_archive": "M09_HANDOFF_SOURCE_AND_TASK_20261011_R2_WITH_MAC_INPUTS.zip",
+  "previous_archive_bytes": 7405984,
+  "previous_archive_sha256": "0847f652b4d5828758af2696e8de1f2aca683e4cd5f3fa30239a2ead05cf2b29",
+  "previous_archive_preserved": true,
+  "original_source_archive_unchanged": true,
+  "original_source_archive_sha256": "ee45e1cb627df660d15574a5a0a023be00e7fac0a29e983109b202e7e3af25fa",
+  "new_runtime_archive": "M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+  "new_runtime_archive_sha256": "24eb6689e336c45e63d0bc071722ea0379c9b98a2961a60a54dd8807999f2f44",
+  "change_summary": [
+    "Added real historical T input projection and runtime binding archive",
+    "Recorded source authority/data quality/PIT limitations without synthesizing values",
+    "Recorded root mismatch, absent M09 deployment config and exact code integration requirements",
+    "Recorded observed dependency versions outside frozen pyproject ranges",
+    "Added runtime assembly and fresh Chat delivery guidance while GitHub remains pending"
+  ],
+  "history_r1": {
+    "previous_archive": "M09_HANDOFF_SOURCE_AND_TASK_20261011.zip",
+    "previous_archive_bytes": 177861,
+    "previous_archive_sha256": "fc4fc3e8f00f559674153637fd7044ee6256d765c8fefb2c9fad87c2db1e67b0",
+    "previous_archive_preserved": true
+  },
+  "final_supplement_archive": "M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip",
+  "final_supplement_archive_sha256": "482cd87266a1ea36cd9c045cffac2432229791b79b843dfc8a600baa15e730ba"
+}

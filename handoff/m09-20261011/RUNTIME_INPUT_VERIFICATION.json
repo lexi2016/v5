@@ -1,0 +1,43 @@
+{
+  "schema": "m09.runtime_input_cloud_verification.v1",
+  "verified_at_utc": "2026-10-11T09:52:08Z",
+  "archive": "M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+  "bytes": 7577304,
+  "sha256": "24eb6689e336c45e63d0bc071722ea0379c9b98a2961a60a54dd8807999f2f44",
+  "zip_member_count": 41,
+  "crc": "PASS",
+  "manifest_entries": 40,
+  "manifest_bytes_sha256": "PASS",
+  "source_copy_index_entries": 18,
+  "source_copy_bytes_sha256": "PASS",
+  "membership_line_count": 5126,
+  "membership_unique_count": 5126,
+  "panel_projection_sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47",
+  "panel_projection_bytes": 279209,
+  "parquet_cloud_redecode": "NOT_RUN_PYARROW_UNAVAILABLE",
+  "column_quality_statistics_source": "Verified Mac panel_evidence.json, not independently recomputed in cloud",
+  "receipt_json_independently_read": {
+    "status": "PARTIAL",
+    "authority_status": "REBUILD_REQUIRED",
+    "coverage_rate": 0.8858620689655172,
+    "accepted_count": 5138,
+    "target_count": 5800,
+    "row_count": 5126
+  },
+  "api_response_independently_read": {
+    "A_status": "PARTIAL_STAGE_EVIDENCE",
+    "source_role": "V3_5_STAGE_EVIDENCE_PARTIAL",
+    "trade_date": "20261009"
+  },
+  "existing_review_canonical_hash_matches_receipt": true,
+  "existing_review_run_id": "REPLAY_RESEARCH_V1_20261009_001",
+  "frozen_vs_runtime_same_bytes": [
+    "ops/build_a_share_close_review.py",
+    "infrastructure/a_share_review_store.py",
+    "contracts/runtime_workloads.json",
+    "contracts/market_calendar_2026.json"
+  ],
+  "product_import_execution_tests": "NOT_RUN",
+  "github_mutation": "NOT_PERFORMED",
+  "chat_sent": "NOT_PERFORMED_BY_PREPARER"
+}

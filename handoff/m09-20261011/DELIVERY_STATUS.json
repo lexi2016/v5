@@ -1,0 +1,28 @@
+{
+  "schema": "m09.material_delivery_status.v1",
+  "prepared_at_utc": "2026-10-11T09:52:08Z",
+  "scope": "Local handoff documents, original source archive, file integrity and static dependency inventory only",
+  "source_archive_verified": true,
+  "source_file_count": 52,
+  "producer_static_internal_imports": 12,
+  "producer_static_unresolved_internal_imports": 0,
+  "product_code_written": false,
+  "product_tests_run": false,
+  "mac_access_performed": false,
+  "github_writes_performed": false,
+  "chat_submission_performed": false,
+  "repository_publication": "PENDING_EXTERNAL_PUBLISHER",
+  "live_data": "HISTORICAL_T_20261009_INPUT_SUPPLIED_WITH_QUALITY_AUTHORITY_AND_PIT_GAPS",
+  "api_ui_binding": "MAC_SNAPSHOT_SUPPLIED_V4_CONSUMER_V35_PRODUCER_ROOT_MISMATCH_NO_M09_CONFIG",
+  "current_pack_is_after_implementation": false,
+  "important_boundaries": [
+    "T is the same-day close-review trade date, not a future preselection target date",
+    "Missing new review/store/API/UI output is not a missing input",
+    "The old ZIP remains byte-identical and only provides historical source provenance",
+    "Only the new private lexi2016/v5 repository is an authorized destination for new M09 work"
+  ],
+  "revision": "R3_FINAL_WITH_MAC_INPUTS_AND_A_PANEL",
+  "runtime_snapshot_verification": "RUNTIME_INPUT_VERIFICATION.json",
+  "repo_creation_or_fixed_commit": "PENDING_NO_V4_FALLBACK",
+  "final_scoped_supplement": "VERIFIED_A_PANEL_INPUTS_AND_EXACT_STOCK_MENTIONS_ABSENCE"
+}

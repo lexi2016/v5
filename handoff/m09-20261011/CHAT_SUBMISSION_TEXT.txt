@@ -1,0 +1,11 @@
+请开始 M09 A股收盘复盘的完整候选实现。附件是 R3 最终自包含交接包，含固定52份原源码、真实Mac历史输入和活动API/UI/调度绑定、精确装配、完整任务与交付标准。先读 START_HERE.md、FINAL_SUPPLEMENT_R3.md、RUNTIME_INPUT_ADDENDUM_R2.md、TASK_M09.md、ASSEMBLY.md 和 PROMPT_FOR_CHAT.md，再直接完成局部诊断、失败用例及代码候选；不再等待18模块大计划。
+
+新工作目的仓库仅独立私有 lexi2016/v5。GitHub网页登录与新仓库固定身份尚未完成，不冒称已提交；现在直接用附件离线源码，不改回v4，不等待私库连接才编码。原源码出处F=f7cb731c384ee6890a87d16c19a5b5a621779477保持不变。
+
+新增真实T=20261009输入为原panel的完整8列投影5126行/5126唯一，未清洗。2个bar_close_pos缺失、137空name、240空industry必须保留；源回执PARTIAL/REBUILD_REQUIRED、覆盖88.5862%，最终panel available_at未知，不能当16:05/17:10自然PIT成功。可用于真实历史诊断/回放与拒绝/缺口路径验证，不把数据未齐倒挡整个编码。原REPLAY_RESEARCH_V1存量仅为历史对照，新review/store/API结果是你要实现的输出，不许反向要求先提供输出。
+
+真实接线断点：现役8873的API读V4 root，原producer写V3.5 root；GET A仅PARTIAL_STAGE_EVIDENCE，未找到V5 M09发布配置。需要新增M09私有daily、immutable run/generation保存/读回/两槽回执，与统一集成者接普通API和原ReviewView的V5预览，只改M09；不能通过写V4或改全局共享root绕过。16:05/17:10同输入可复用但留两回执，晚到证据只进真实available_at允许的后槽，失败保旧成功，缺视频/阶段保持PARTIAL。
+
+保留原确定性算法、固定概率、PIT/研究资格/禁用LLM/WATCH_ONLY安全边界；不交易、不改BUY、不扩大权限/凭据。Mac现有pandas3.0.5与pyarrow25.0.1超固定V5声明上界，必须记录并实测兼容，不能擅自改依赖范围/环境来掩盖。
+
+用适用的Superpowers流程。交完整after源码与测试、before/SHA、正反diff及真实apply日志、实际测试命令/完整日志、原算法等价、Mac独立验收与回滚。未跑写NOT_RUN，不能只交说明或链接。AshareReviewPanel.vue、ReviewView.vue和contracts/review.ts同活动版原字节已补齐，A面板无直接内部子组件；正确transcript_stockdict/stock_mentions路径在V3.5/V4两已核根均缺失，不可捏造视频或available_at。本轮材料已齐，可直接开始核心实现；数据质量/PIT与正式发布未证仍按合同保留。

@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-10-11T09:41:46Z",
+  "module_id": "M09",
+  "archive_filename": "v5-module09-source-20261010.zip",
+  "archive_bytes": 145374,
+  "archive_sha256": "ee45e1cb627df660d15574a5a0a023be00e7fac0a29e983109b202e7e3af25fa",
+  "baseline_repository": "lexi2016/v4",
+  "baseline_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "new_work_repository": "lexi2016/v5",
+  "new_work_repository_status": "CREATION_AND_COMMIT_PENDING_PARENT_VERIFICATION",
+  "source_files": 52,
+  "source_bytes": 404637,
+  "zip_crc": "PASS",
+  "exact_manifest_bytes": "PASS",
+  "zip_source_comparison": "PASS",
+  "product_code_modified": false,
+  "product_tests": "NOT_RUN",
+  "mac_runtime": "NOT_INSPECTED_BY_THIS_WORKER",
+  "github_writes": false,
+  "chat_sent": false,
+  "git_blob_sha1_recomputed": "PASS",
+  "documented_unpack_python_syntax": "PASS"
+}

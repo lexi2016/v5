@@ -1,0 +1,140 @@
+{
+  "schema": "m09.handoff_files.v3",
+  "revision": "R3_FINAL_WITH_MAC_INPUTS_AND_A_PANEL",
+  "root": "m09_handoff_20261011",
+  "files": [
+    {
+      "path": "ASSEMBLY.md",
+      "bytes": 9462,
+      "sha256": "3c666bc5a499217328dc214166ab920f53e50243751e5b85da8cc63a6a889626"
+    },
+    {
+      "path": "BASELINE_VERIFICATION.json",
+      "bytes": 851,
+      "sha256": "3d3430210a63b96f25dc85d768f267e6718f4e2fd736fda7b0adc24333f852a8"
+    },
+    {
+      "path": "CHAT_SUBMISSION_TEXT.txt",
+      "bytes": 2624,
+      "sha256": "25f9ff7825ba0c6597b935ded2c1a8888b9b9d3772ff2c2dc2a1dab1e70c5125"
+    },
+    {
+      "path": "DELIVERY_CONTRACT.md",
+      "bytes": 6918,
+      "sha256": "61579128a49b0d027016cacd1376b30b84114613da3d6c943f503a49e0372b3f"
+    },
+    {
+      "path": "DELIVERY_STATUS.json",
+      "bytes": 1482,
+      "sha256": "22a1d520eea342432058f9ab50c5aecd996c20ff3b1ce76288c484181e7e6ac5"
+    },
+    {
+      "path": "DEPENDENCY_MANIFEST.json",
+      "bytes": 86868,
+      "sha256": "6e36670ecbd0a530654bfc45b7b85d3ca07ba62ea8363f44bf86b12d462337bc"
+    },
+    {
+      "path": "FINAL_SUPPLEMENT_FILES_MANIFEST.json",
+      "bytes": 876,
+      "sha256": "9752e260787064b10c60867e4d32d6f33a88cbf4db1fe81ab9b1115ebaa51652"
+    },
+    {
+      "path": "FINAL_SUPPLEMENT_R3.md",
+      "bytes": 2602,
+      "sha256": "87f5261369bbb073bb04e6300b78a3ffba29a5e42f63d7b1bd5cf84d69695c87"
+    },
+    {
+      "path": "FIRST_DELIVERY.md",
+      "bytes": 4361,
+      "sha256": "45b871ab14f60fe6a437b3142d4d0c507a7692ff09cc16eff80e6e0b6abc4e8d"
+    },
+    {
+      "path": "M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip",
+      "bytes": 14163,
+      "sha256": "482cd87266a1ea36cd9c045cffac2432229791b79b843dfc8a600baa15e730ba"
+    },
+    {
+      "path": "M09_A_PANEL_STOCK_MENTIONS_SUPPLEMENT_20261011.zip.sha256",
+      "bytes": 117,
+      "sha256": "fe96ba2413e550a897a79894e4196e174584bd821b91308d34f620b04968842c"
+    },
+    {
+      "path": "M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip",
+      "bytes": 7577304,
+      "sha256": "24eb6689e336c45e63d0bc071722ea0379c9b98a2961a60a54dd8807999f2f44"
+    },
+    {
+      "path": "M09_ORIGINAL_INPUTS_RUNTIME_BINDINGS_20261011.zip.sha256",
+      "bytes": 116,
+      "sha256": "111389c33c0e7b51848d28f6dd2667a2a00caf22d25c39b47dd5c91d4468475c"
+    },
+    {
+      "path": "MAC_INPUT_FILES_MANIFEST.json",
+      "bytes": 6951,
+      "sha256": "d4df3db803bc6b9c79aaca3a42145eb6f2585f7b4d9e5f5f3263bc549949e53e"
+    },
+    {
+      "path": "MAC_READONLY_TAKEOUT.md",
+      "bytes": 10397,
+      "sha256": "358e539a3bbb2f4bff48695e29f8502ff466aa75bdc4c45e4c352a0050f6a6c7"
+    },
+    {
+      "path": "ORIGINAL_SOURCE_MANIFEST.json",
+      "bytes": 39356,
+      "sha256": "0ccf865c7c4e5834676fb35fc271c71fb10e91217fc8b10f2a9162fc4e6f09e1"
+    },
+    {
+      "path": "PROMPT_FOR_CHAT.md",
+      "bytes": 5837,
+      "sha256": "cdffe7b6c2040306c73c21993a123157bf0a80bf6af78fe6679548dd5483f377"
+    },
+    {
+      "path": "PUBLICATION_IDENTITY.json",
+      "bytes": 984,
+      "sha256": "30bddbbb5570bdc92a9c4b97b6bf608f77c98c7eb7077ca349a960a6c216d6f5"
+    },
+    {
+      "path": "REVISION_HISTORY.json",
+      "bytes": 1663,
+      "sha256": "942829aab9d4ce515845c30d86d16909b3eb9342d7f2d1b3bd340a46710e681f"
+    },
+    {
+      "path": "RUNTIME_INPUT_ADDENDUM_R2.md",
+      "bytes": 8662,
+      "sha256": "38a4b9a4c4b3e458cce3d5d4dcef1062a70c458a928573063b72991069e8376d"
+    },
+    {
+      "path": "RUNTIME_INPUT_VERIFICATION.json",
+      "bytes": 1674,
+      "sha256": "2645ae1cc51f0c6abbf42369499a26e03ce55be01d3bc6e53e984914a3ec2db1"
+    },
+    {
+      "path": "SOURCE_PATHS.md",
+      "bytes": 15929,
+      "sha256": "e81e91fe0fc43c7ab03ccf65d3921b195116323705d2d04a9b4528143c228d33"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 2982,
+      "sha256": "7b0465cd75615f6478b9cbffc332d564b51ee0b8fbce20517f9b4f5bd9e81710"
+    },
+    {
+      "path": "TASK_M09.md",
+      "bytes": 9472,
+      "sha256": "48daf7a8eb42790e6bb9983d5f5220ecad524a51db6fdd05286fbc9ba099f6ab"
+    },
+    {
+      "path": "v5-module09-source-20261010.zip",
+      "bytes": 145374,
+      "sha256": "ee45e1cb627df660d15574a5a0a023be00e7fac0a29e983109b202e7e3af25fa"
+    },
+    {
+      "path": "v5-module09-source-20261010.zip.sha256",
+      "bytes": 98,
+      "sha256": "ac5197587b9fbf39250f4486513b1ede7656693198eed782f8c35a9afcb0ef73"
+    }
+  ],
+  "excludes_self": true,
+  "contains_business_candidate": false,
+  "source_baseline_unchanged": true
+}
