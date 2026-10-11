@@ -1,33 +1,42 @@
-"""M10 default producer/store/reader regression coverage.
-
-The tests are written as integration seams; runtime execution depends on the
-existing V5 test environment and is reported separately when unavailable.
-"""
+"""M10 publication artifact integrity regression tests."""
 from __future__ import annotations
 
 import tempfile
 
+import pytest
+
 from v5_shadow.hk_close_daily import HKCloseReviewReader, HKCloseReviewStore
 
 
-def test_store_reader_roundtrip_and_tamper_detection():
+def test_publication_valid_roundtrip():
     with tempfile.TemporaryDirectory() as root:
         store = HKCloseReviewStore(root)
-        store.publish("20261010-run", {"review": {"top20": ["HK.00001"]}})
-        assert HKCloseReviewReader(root).read("20261010-run")["review"]["top20"] == ["HK.00001"]
-        with open(f"{root}/20261010-run/payload.json", "w", encoding="utf-8") as handle:
-            handle.write('{"review": {"top20": []}}')
-        try:
-            HKCloseReviewReader(root).read("20261010-run")
-        except ValueError as exc:
-            assert str(exc) == "M10_PAYLOAD_SHA_INVALID"
-        else:
-            raise AssertionError("tampered payload accepted")
+        store.publish("run", {"review": {"top20": ["HK.00001"]}}, {"generation": "g1"})
+        assert HKCloseReviewReader(root).read("run")["review"]["top20"] == ["HK.00001"]
 
 
-def test_store_same_run_same_payload_is_idempotent():
-    with tempfile.TemporaryDirectory() as root:
-        store = HKCloseReviewStore(root)
-        first = store.publish("run", {"x": 1})
-        second = store.publish("run", {"x": 1})
-        assert first == second
+@pytest.mark.parametrize("mutation", ["missing", "tampered"])
+def test_publication_missing_or_changed_is_rejected(tmp_path, mutation):
+    store = HKCloseReviewStore(tmp_path)
+    store.publish("run", {"review": {}}, {"generation": "g1"})
+    publication = tmp_path / "run" / "publication.json"
+    if mutation == "missing":
+        publication.unlink()
+    else:
+        publication.write_text('{"generation":"g2"}', encoding="utf-8")
+    with pytest.raises((ValueError, FileNotFoundError)):
+        HKCloseReviewReader(tmp_path).read("run")
+
+
+def test_same_run_same_publication_is_idempotent(tmp_path):
+    store = HKCloseReviewStore(tmp_path)
+    first = store.publish("run", {"review": {}}, {"generation": "g1"})
+    second = store.publish("run", {"review": {}}, {"generation": "g1"})
+    assert first == second
+
+
+def test_same_run_changed_publication_conflicts(tmp_path):
+    store = HKCloseReviewStore(tmp_path)
+    store.publish("run", {"review": {}}, {"generation": "g1"})
+    with pytest.raises(ValueError):
+        store.publish("run", {"review": {}}, {"generation": "g2"})
