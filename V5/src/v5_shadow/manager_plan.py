@@ -530,6 +530,15 @@ def _assemble(request, diagnostic=None):
             selection_date=request['selection_date'], announcement_date=request['announcement_date'])
         readback = dict(status='READ_ONLY', plan_product=payload.get('plan_product'))
         if (payload.get('plan_product', {}).get('consumed') is True
+                and payload.get('read_context', {}).get('mode') == 'HISTORICAL_AS_OF'):
+            # The original history reader already replays the exact saved cutoff
+            # and admits this run independently of a later latest pointer.
+            saved, attempt = exact_plan_readback(payload['plan_product'], payload['input_identity'],
+                                                require_attempt=False)
+            readback.update(run_id=saved['run_id'], plan_sha256=saved['sha256'],
+                attempt=attempt, input_identity=saved['input_identity'],
+                selection_mode='HISTORICAL_AS_OF', latest_observation=latest_observation(saved))
+        if (payload.get('plan_product', {}).get('consumed') is True
                 and payload.get('read_context', {}).get('mode') != 'HISTORICAL_AS_OF'):
             saved, attempt = exact_plan_readback(payload['plan_product'], payload['input_identity'],
                                                 require_attempt=False)
