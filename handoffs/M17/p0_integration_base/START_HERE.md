@@ -5,6 +5,11 @@
 ## 先读取完整文件
 
 - V5/src/v5_shadow/run_ledger.py
+- V5/src/v5_shadow/contracts.py
+- V5/src/v5_shadow/digests.py
+- V5/src/v5_shadow/module_artifacts.py
+- V5/src/v5_shadow/api_gateway.py
+- V5/src/v5_shadow/__init__.py
 - V5/src/v5_shadow/daily_dispatch.py
 - V5/src/v5_shadow/daily_tick.py
 - V5/src/v5_shadow/composition.py
@@ -19,11 +24,13 @@
 - saved_product_readback.py
 - schedule-binding.json
 
+本轮另补齐5件真实ledger直接依赖原文件（contracts、digests、module_artifacts、api_gateway、__init__），均来自同一固定6da基线；未做源码改动、import执行或测试。这只消除这5件已确认缺件，仍不宣称完整发行物或全部依赖已验。
+
 SOURCE_MANIFEST.json 给出每件完整原路径、固定来源commit、原SHA/blob、当前SHA/blob，以及四件精确差分后像的来源。本目录中的 integration_tests、probe和schedule-binding保持它们相对于原 P0 overlay 根的路径；其完整远端原路径也在清单，不要误放进 V5/src。
 
 ## 同版本来源与边界
 
-10件核心前像都来自 lexi2016/v4@6daed6271313b5ae5324c8948f163258ab8d1fa3 的同一个 V5 源树（tree 5a568d3d8bd653cc33c1ab35750871910c3e700d）。其中 run_ledger、daily_tick、daily_owner_adapters、manager_plan 已精确应用 lexi2016/v5@e6092e769d0d69fdbc731d338885c0b399f5e265 的 integration.patch；每处hunk原文零模糊匹配，四个后像Git blob与patch index一致。其余6件核心文件及4件overlay辅助件保持原字节。
+15件核心前像都来自 lexi2016/v4@6daed6271313b5ae5324c8948f163258ab8d1fa3 的同一个 V5 源树（tree 5a568d3d8bd653cc33c1ab35750871910c3e700d）。其中 run_ledger、daily_tick、daily_owner_adapters、manager_plan 已精确应用 lexi2016/v5@e6092e769d0d69fdbc731d338885c0b399f5e265 的 integration.patch；每处hunk原文零模糊匹配，四个后像Git blob与patch index一致。其余11件核心文件及4件overlay辅助件保持原字节。
 
 原完整依赖树仍可只读定位：
 https://github.com/lexi2016/v4/tree/6daed6271313b5ae5324c8948f163258ab8d1fa3/V5
