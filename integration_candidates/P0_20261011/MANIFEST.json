@@ -1,0 +1,62 @@
+[
+  {
+    "path": "INTEGRATION_RECEIPT.md",
+    "bytes": 3869,
+    "sha256": "987bc196b0767594e71a0283831795875bcc7da4ca4352c3cafca2dc51bba02c"
+  },
+  {
+    "path": "PUBLICATION_INTEGRATION_RECEIPT.md",
+    "bytes": 3561,
+    "sha256": "0ef15b061bb0e799dc374be0e81dc1be1aa68f1c88e4fcdbadf909122000f746"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1331,
+    "sha256": "086f1401f8ae766eb9a949f4575b57821fdbecf2c3769239d4471f02f35a873f"
+  },
+  {
+    "path": "evidence/publication-targeted-final.log",
+    "bytes": 953,
+    "sha256": "a54227daf09d9ffeb300b247d00522adfb3d4a9359a29d760da17dc0f77e17fc"
+  },
+  {
+    "path": "evidence/publication-tests.log",
+    "bytes": 4351,
+    "sha256": "2721def0f7889bc41e1465efd6a15e32a0409146d01f4faddf1cb66311bb2dd1"
+  },
+  {
+    "path": "evidence/targeted.log",
+    "bytes": 1512,
+    "sha256": "70d600bed47152bda3d8e15ddc710ab19cd1dbcb26e6764375f872eb7c25af56"
+  },
+  {
+    "path": "evidence/tick-publication.log",
+    "bytes": 471,
+    "sha256": "2195ce241cffda6ca642a839b3b0ff7a48d07360c55a1c9bab2d4da3d9b50bc4"
+  },
+  {
+    "path": "integration.patch",
+    "bytes": 6219,
+    "sha256": "bf8c98368b35326a520ba92fc1504554a40e6c394f6e2d54ca519f5f14267330"
+  },
+  {
+    "path": "integration_tests/test_p0_ledger.py",
+    "bytes": 3008,
+    "sha256": "7351b2f3fa295b6589a2aba296106408e8a33736537ff5e70aa7246bb6654230"
+  },
+  {
+    "path": "integration_tests/test_plan_publication.py",
+    "bytes": 8565,
+    "sha256": "f249d4366e6cb2f68b0d55e7effb54b02fa2884d3ebff6128ff02ddeae927533"
+  },
+  {
+    "path": "saved_product_readback.py",
+    "bytes": 1260,
+    "sha256": "8e7795b72a641a4accad118494533ec4af16949205751e6a0848b9aea90a1a35"
+  },
+  {
+    "path": "schedule-binding.json",
+    "bytes": 1152,
+    "sha256": "69c859382e9652de32660c60d80b8f675565e87433f1e7943c35c23911192600"
+  }
+]

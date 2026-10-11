@@ -1,0 +1,106 @@
+diff --git a/V5/src/v5_shadow/daily_owner_adapters.py b/V5/src/v5_shadow/daily_owner_adapters.py
+index 31f08e4..f81d289 100644
+--- a/V5/src/v5_shadow/daily_owner_adapters.py
++++ b/V5/src/v5_shadow/daily_owner_adapters.py
+@@ -39,7 +39,7 @@ def rebound_receipt(request, ledger_run_id, result, artifact):
+         natural_verified=False),list(result['reason_codes'])+['REBOUND_SELECTION_CANNOT_CONFIRM'],readback=True)
+ 
+ 
+-def run_manager_daily(request, ledger_root, binding_identity):
++def run_manager_daily(request, ledger_root, binding_identity, *, publication=None):
+     """Save via original workspace and its independent same-attempt reader.
+ 
+     Caller must supply the exact post-owner request, including actual cutoff and
+@@ -68,12 +68,24 @@ def run_manager_daily(request, ledger_root, binding_identity):
+     page_product=page['payload']['plan_product']
+     if page_product.get('run_id')!=product['run_id'] or page_product.get('sha256')!=product['sha256']:
+         raise ValueError('DAILY_MANAGER_PAGE_PRODUCT_MISMATCH')
++    transport = None
++    if publication is not None:
++        from v5_shadow.manager_plan import publish_workspace_read
++        if set(publication) != {'config', 'expected_generation'}:
++            raise ValueError('DAILY_MANAGER_PUBLICATION_CONTRACT')
++        published = publish_workspace_read(dict(request, action='read', view='auto'),
++            publication['config'], expected_generation=publication['expected_generation'],
++            expected_run_id=product['run_id'], expected_plan_sha256=product['sha256'])
++        transport = published['publication']
+     reference=dict(root=request['manager_output_root'],readback=readback,
+         page_payload_sha256=sha256_json(page['payload']),page_readback='ORIGINAL_AUTO_WORKSPACE_READ_MATCHED_NOT_HTTP_DEPLOYMENT',
+         plan_status=product.get('status'),natural_verified=False)
++    if transport is not None:
++        reference['transport_publication'] = transport
+     # Saving a partial plan is useful but not three-lane business success.
+     receipt=blocked(reference,['THREE_LANE_BUSINESS_ACCEPTANCE_NOT_VERIFIED'],readback=True)
+-    return dict(state=finish_run(ledger_root,claim,receipt),result=result)
++    return dict(status=receipt['status'], state=finish_run(ledger_root,claim,receipt),result=result,
++        publication=transport)
+ 
+ 
+ def adapter_identity(config, dependencies):
+diff --git a/V5/src/v5_shadow/daily_tick.py b/V5/src/v5_shadow/daily_tick.py
+index 3a02ec2..3dde943 100644
+--- a/V5/src/v5_shadow/daily_tick.py
++++ b/V5/src/v5_shadow/daily_tick.py
+@@ -88,8 +88,22 @@ def tick(config):
+                     result['manager']=dict(status='MISSED_PLAN_WINDOW_NO_BACKFILL');return result
+                 from v5_shadow.daily_manager_assembly import assemble_manager_request
+                 manager=assemble_manager_request(template,result['lanes'],config['ledger_root'],registration)
+-            saved=run_manager_daily(manager,config['ledger_root'],registration)
+-            result['manager']=dict(status=saved.get('status','PLAN_SAVED_BUSINESS_BLOCKED'))
++            publication_config = config.get('manager_publication')
++            if publication_config is None:
++                saved=run_manager_daily(manager,config['ledger_root'],registration)
++            else:
++                # Snapshot the transport CAS token before saving. It is runtime
++                # concurrency state, not part of the stable config identity.
++                from v5_shadow.module_api import _config, _generation_head
++                checked, fd = _config(publication_config)
++                try:
++                    generation = _generation_head(fd, checked)
++                finally:
++                    os.close(fd)
++                publication = dict(config=checked, expected_generation=generation)
++                saved=run_manager_daily(manager,config['ledger_root'],registration,publication=publication)
++            result['manager']=dict(status=saved.get('status','PLAN_SAVED_BUSINESS_BLOCKED'),
++                publication=saved.get('publication'), state=saved.get('state'))
+         except Exception as error:result['manager']=dict(status='BLOCKED_OR_OUTCOME_UNKNOWN',reason=type(error).__name__)
+     return result
+ 
+diff --git a/V5/src/v5_shadow/manager_plan.py b/V5/src/v5_shadow/manager_plan.py
+index c31f6d1..bca03e1 100644
+--- a/V5/src/v5_shadow/manager_plan.py
++++ b/V5/src/v5_shadow/manager_plan.py
+@@ -663,7 +663,7 @@ def run_manager_plan(request):
+     return value
+ 
+ 
+-def publish_workspace_read(request, config, *, expected_generation, expected_run_id=None):
++def publish_workspace_read(request, config, *, expected_generation, expected_run_id=None, expected_plan_sha256=None):
+     """Explicit publication; HTTP GET only serves this committed generation.
+ 
+     Keep the exact query identity. Auto may explicitly select a committed
+@@ -684,6 +684,11 @@ def publish_workspace_read(request, config, *, expected_generation, expected_run
+                 or attempt.get('run_id') != expected_run_id
+                 or attempt.get('state') not in {'SUCCEEDED', 'SUCCEEDED_EMPTY', 'PARTIAL'}):
+             raise ValueError('SAVED_RUN_NOT_CONSUMED')
++    if expected_plan_sha256 is not None:
++        from v5_shadow.contracts import sha
++        sha(expected_plan_sha256)
++        if expected_run_id is None or result['payload'].get('plan_product', {}).get('sha256') != expected_plan_sha256:
++            raise ValueError('SAVED_PLAN_SHA_NOT_CONSUMED')
+     query = dict(date=request['target_date'], view=request['view'])
+     for key in ('selection_date', 'announcement_date'):
+         if request[key] is not None:
+diff --git a/V5/src/v5_shadow/run_ledger.py b/V5/src/v5_shadow/run_ledger.py
+index 1187e3b..a7f0954 100644
+--- a/V5/src/v5_shadow/run_ledger.py
++++ b/V5/src/v5_shadow/run_ledger.py
+@@ -11,7 +11,7 @@ from v5_shadow.digests import canonical_bytes,sha256_json
+ from v5_shadow.module_api import _open_directory,_read_at
+ from v5_shadow.module_artifacts import _directory
+ 
+-LANES={'announcement','us_mapping','rebound','manager_plan'}
++LANES={'announcement','us_mapping','rebound','manager_plan','hk_preselection','a_stage'}
+ MARKER=b'v5.daily-run-ledger.v1\n'
+ 
+ 

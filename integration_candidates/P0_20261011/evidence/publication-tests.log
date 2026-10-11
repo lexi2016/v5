@@ -1,0 +1,36 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- <MAC_TASK_ROOT>/m13-isolated/venv/bin/python
+rootdir: <MAC_TASK_ROOT>/v5-p0-integration/V5
+configfile: pyproject.toml
+collecting ... collected 28 items
+
+V5::ManagerCurrentRecoveryTests::test_auto_without_recovery_keeps_original_missing_history_gate <- tests/test_manager_current_recovery.py PASSED [  3%]
+V5::ManagerCurrentRecoveryTests::test_changed_bound_input_bytes_still_fail_sha_admission <- tests/test_manager_current_recovery.py PASSED [  7%]
+V5::ManagerCurrentRecoveryTests::test_crossday_recovery_preserves_every_existing_original_plan_byte <- tests/test_manager_current_recovery.py PASSED [ 10%]
+V5::ManagerCurrentRecoveryTests::test_crossday_refresh_and_auto_read_keep_same_run_and_sha <- tests/test_manager_current_recovery.py PASSED [ 14%]
+V5::ManagerCurrentRecoveryTests::test_explicit_history_cannot_consume_a_recovery_plan <- tests/test_manager_current_recovery.py PASSED [ 17%]
+V5::ManagerCurrentRecoveryTests::test_future_now_is_rejected_without_creating_a_store <- tests/test_manager_current_recovery.py PASSED [ 21%]
+V5::ManagerCurrentRecoveryTests::test_missing_exact_and_latest_recovery_journals_are_rejected <- tests/test_manager_current_recovery.py PASSED [ 25%]
+V5::ManagerCurrentRecoveryTests::test_missing_exact_recovery_journal_is_rejected_despite_latest_journal <- tests/test_manager_current_recovery.py PASSED [ 28%]
+V5::ManagerCurrentRecoveryTests::test_ordinary_auto_http_get_keeps_saved_recovery_run_and_sha <- tests/test_manager_current_recovery.py PASSED [ 32%]
+V5::ManagerCurrentRecoveryTests::test_recovery_attempt_tampering_cannot_claim_consumption <- tests/test_manager_current_recovery.py PASSED [ 35%]
+V5::ManagerCurrentRecoveryTests::test_recovery_directory_symlink_is_rejected_without_writing_outside <- tests/test_manager_current_recovery.py PASSED [ 39%]
+V5::ManagerCurrentRecoveryTests::test_recovery_for_another_target_does_not_select_this_target <- tests/test_manager_current_recovery.py PASSED [ 42%]
+V5::ManagerCurrentRecoveryTests::test_recovery_uses_actual_cutoff_and_actual_generated_time <- tests/test_manager_current_recovery.py PASSED [ 46%]
+V5::ManagerCurrentRecoveryTests::test_repeated_auto_read_preserves_files_run_and_sha <- tests/test_manager_current_recovery.py PASSED [ 50%]
+V5::ManagerCurrentRecoveryTests::test_same_day_manual_missing_journal_keeps_fresh_preview_without_consumption <- tests/test_manager_current_recovery.py PASSED [ 53%]
+V5::ManagerCurrentRecoveryTests::test_same_day_owner_plan_keeps_original_store_and_identity <- tests/test_manager_current_recovery.py PASSED [ 57%]
+V5::test_actual_daily_save_publish_http_reuse_and_changed_request <- ../integration_tests/test_plan_publication.py PASSED [ 60%]
+V5::test_wrong_run_sha_cas_and_bad_input_preserve_old_generation <- ../integration_tests/test_plan_publication.py PASSED [ 64%]
+V5::test_manager_generation_rollback_does_not_touch_other_module <- ../integration_tests/test_plan_publication.py PASSED [ 67%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_announcement_changed_readback_rejected PASSED [ 71%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_blocked_business_does_not_retry_same_input PASSED [ 75%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_consumed_announcement_without_decision_stays_blocked PASSED [ 78%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_disabled_tick_does_not_touch_owners_or_roots PASSED [ 82%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_launchd_contract_is_separate_disabled_and_reuses_tick PASSED [ 85%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_manager_partial_is_saved_read_back_and_not_refreshed_twice PASSED [ 89%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_manager_wrong_attempt_never_commits_success PASSED [ 92%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_reused_numeric_rebound_is_not_selection_success PASSED [ 96%]
+V5/tests/test_daily_owner_adapters.py::DailyOwnerAdapterTests::test_tick_bad_announcement_keeps_rebound_observation_and_us_running PASSED [100%]
+
+============================= 28 passed in 16.17s ==============================

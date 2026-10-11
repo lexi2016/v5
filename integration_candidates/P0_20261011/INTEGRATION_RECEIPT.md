@@ -1,0 +1,19 @@
+# P0 first integration increment
+
+Baseline: verified local V5 source snapshot from lexi2016/v4@6daed6271313b5ae5324c8948f163258ab8d1fa3, tree11818fde01e6911f1aa8e4a75fe7b6f0bc482346. Local baseline commit recorded separately. No whole-source remote migration or upload.
+
+Product delta: exactly one line in V5/src/v5_shadow/run_ledger.py, extending original four lanes with hk_preselection and a_stage. Installed file is byte-identical to independently accepted M07 R3, SHA256 d3ba8dc00de2525ccfc2756193be1338bb800c796c2302f6c97f525a76b5748e. Original module API, atomic write, locks, receipt contract, retry and business implementations unchanged.
+
+New-combination acceptance: 9 passed, exit0 (4 integration cases + existing dispatcher5 on this newly assembled version). Six lanes actually claim/finish/read/reuse in both orders, earlier states unchanged, six unique IDs; actual existing M07 installation product references survive new-process read and reuse with original run IDs and byte-verified products. Existing dispatcher failure isolation, unknown-outcome suppression, date/calendar/window and request/code identity checks remain compatible. The isolated file-integrity fixture is explicitly not market output. Existing original test suite was not rerun wholesale.
+
+Real saved-product readback: c1a32d8e98a4446aba075b46a2e9c4e3 (one attempt), 8bd82fe3170945dcaecc8057fa5c087d (two attempts). Through integrated read_run/claim_run and original daily_manager_assembly.product_reference; both REUSED_SUCCESS, SHA matches. This verifies ledger-to-reference compatibility only. Manager plan remains BLOCKED_BUSINESS_OWNER_PRODUCTS_NOT_ADMITTED; no artificial strategy products or manager success.
+
+Schedule contract: current V4 runtime ALL_SLOTS lacks1610 even though HK catalog requires1610. Retrieved exact matching fixed6daed627 handoff/hk-close-hk-calendar-20261007/canonical/ops/run_scheduled_slot.py from GitHub; original blob8740dae9779c0a0142428caddb721bbbb9a8d530 includes1610. Paired with V5 pinned catalog SHA7389cae30de08cf68c31e5b0bb6f5b17fead403366946496b7a4de148229d0ef, A1605/1710 and HK1610 are supported. schedule-binding.json records these identities. Only contract extraction by AST/JSON, execution_enabled=false. This does NOT yet bind daily_tick executable owners. No dynamic execution of catalog.command. FixedExecutorRegistry workload-handler whitelist remains the required boundary.
+
+Next precise blockers:
+- daily_tick defaults (08:00/08:45) cannot be assigned to announcement/us_mapping/rebound from the close-only catalog. Need original owner/workload mapping, exact request roots and admitted closure; ledger lane extension grants no executor registration.
+- M10 same-run publication corruption and M12 missing owner closure remain blocked. M13 new admission+invoke contract and M14/M15 business product eligibility remain separate owner/integration requirements.
+- daily_owner_adapters.run_manager_daily verifies saved plan and second auto read, but daily_tick retains only manager.status. It does not call manager_plan.publish_workspace_read(request, config, expected_generation, expected_run_id). A subsequent bounded publisher integration must preserve exact plan run/SHA and independently verify module_api transport generation; it must not mark plan save as publication.
+- V4 canonical dispatcher release identity requires V35 app/release/manifest provenance and missing split-source closure. Here V4 is a contract source only, not invoked with inherited live environment or disabled provenance.
+
+Commands/logs: evidence/command.json, targeted.log, same-run-readback.json. Invocation uses existing Python3.14.6/pytest9.1.1 with -S to exclude old editable source injection and private TMPDIR. No package installation; no service/production schedule/trade/permission operations. V4 8873/8910, V5 61796 and diagnostic61818 unchanged.

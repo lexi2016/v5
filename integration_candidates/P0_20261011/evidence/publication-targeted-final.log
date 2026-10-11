@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- <MAC_TASK_ROOT>/m13-isolated/venv/bin/python
+rootdir: <MAC_TASK_ROOT>/v5-p0-integration
+collecting ... collected 5 items
+
+integration_tests/test_plan_publication.py::test_actual_daily_save_publish_http_reuse_and_changed_request PASSED [ 20%]
+integration_tests/test_plan_publication.py::test_wrong_run_sha_cas_and_bad_input_preserve_old_generation PASSED [ 40%]
+integration_tests/test_plan_publication.py::test_manager_generation_rollback_does_not_touch_other_module PASSED [ 60%]
+integration_tests/test_plan_publication.py::test_latest_changed_rejects_prior_expected_run_before_activation PASSED [ 80%]
+integration_tests/test_plan_publication.py::test_publication_conflict_preserves_old_head_and_unknown_attempt PASSED [100%]
+
+============================== 5 passed in 9.14s ===============================

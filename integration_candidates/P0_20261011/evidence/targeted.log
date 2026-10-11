@@ -1,0 +1,18 @@
+LEDGER_MODULE <MAC_TASK_ROOT>/v5-p0-integration/V5/src/v5_shadow/run_ledger.py
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- <MAC_TASK_ROOT>/m13-isolated/venv/bin/python
+rootdir: <MAC_TASK_ROOT>/v5-p0-integration/V5
+configfile: pyproject.toml
+collecting ... collected 9 items
+
+V5::test_six_lanes_real_persistence_no_overwrite[order0] <- ../integration_tests/test_p0_ledger.py PASSED [ 11%]
+V5::test_six_lanes_real_persistence_no_overwrite[order1] <- ../integration_tests/test_p0_ledger.py PASSED [ 22%]
+V5::test_actual_saved_m07_product_preserves_same_run <- ../integration_tests/test_p0_ledger.py PASSED [ 33%]
+V5::test_new_lane_not_implicitly_registered_for_dispatch <- ../integration_tests/test_p0_ledger.py PASSED [ 44%]
+V5/tests/test_daily_dispatch.py::DailyDispatchTests::test_bad_lane_contract_does_not_block_valid_lane PASSED [ 55%]
+V5/tests/test_daily_dispatch.py::DailyDispatchTests::test_changed_binding_or_owner_cutoff_does_not_start PASSED [ 66%]
+V5/tests/test_daily_dispatch.py::DailyDispatchTests::test_missed_slot_and_missing_adapter_never_execute PASSED [ 77%]
+V5/tests/test_daily_dispatch.py::DailyDispatchTests::test_one_owner_failure_does_not_stop_other_lanes_or_retry_unknown PASSED [ 88%]
+V5/tests/test_daily_dispatch.py::DailyDispatchTests::test_weekend_calendar_and_historical_target_rejected PASSED [100%]
+
+============================== 9 passed in 0.06s ===============================
