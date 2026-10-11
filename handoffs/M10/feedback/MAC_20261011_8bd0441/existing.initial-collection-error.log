@@ -1,0 +1,34 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python
+rootdir: /Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated
+collecting ... collected 0 items / 1 error
+
+==================================== ERRORS ====================================
+___________ ERROR collecting source/V5/tests/test_hk_close_daily.py ____________
+ImportError while importing test module '/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/source/V5/tests/test_hk_close_daily.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+../m13-isolated/venv/lib/python3.14/site-packages/_pytest/python.py:508: in importtestmodule
+    mod = import_path(
+../m13-isolated/venv/lib/python3.14/site-packages/_pytest/pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+/Users/lexi/Library/Application Support/com.lexi.v4.local/runtime/python/cpython-3.14.6-macos-aarch64-none/lib/python3.14/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1406: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:938: in _load_unlocked
+    ???
+../m13-isolated/venv/lib/python3.14/site-packages/_pytest/assertion/rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+source/V5/tests/test_hk_close_daily.py:10: in <module>
+    from v5_shadow.hk_close_daily import HKCloseReviewReader, HKCloseReviewStore
+E   ModuleNotFoundError: No module named 'v5_shadow.hk_close_daily'
+=========================== short test summary info ============================
+ERROR source/V5/tests/test_hk_close_daily.py
+!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+=============================== 1 error in 0.06s ===============================

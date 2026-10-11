@@ -1,0 +1,51 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- /Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python
+rootdir: /Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated
+collecting ... collected 4 items
+
+test_independent.py::test_reader_rejects_invalid_publication[missing] FAILED [ 25%]
+test_independent.py::test_reader_rejects_invalid_publication[tampered] FAILED [ 50%]
+test_independent.py::test_reader_has_no_persistent_writes PASSED         [ 75%]
+test_independent.py::test_reader_missing_root_does_not_create_it PASSED  [100%]
+
+=================================== FAILURES ===================================
+_______________ test_reader_rejects_invalid_publication[missing] _______________
+
+tmp_path = PosixPath('/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/tmp/pytest-of-lexi/pytest-0/test_reader_rejects_invalid_pu0')
+mutation = 'missing'
+
+    @pytest.mark.parametrize('mutation', ['missing', 'tampered'])
+    def test_reader_rejects_invalid_publication(tmp_path, mutation):
+        HKCloseReviewStore(tmp_path).publish('synthetic', {'review': {}}, {'generation': 'synthetic-only'})
+        p = tmp_path / 'synthetic' / 'publication.json'
+        if mutation == 'missing':
+            p.unlink()
+        else:
+            p.write_text(json.dumps({'generation': 'tampered'}))
+>       with pytest.raises((ValueError, FileNotFoundError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, FileNotFoundError)
+
+test_independent.py:15: Failed
+______________ test_reader_rejects_invalid_publication[tampered] _______________
+
+tmp_path = PosixPath('/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/tmp/pytest-of-lexi/pytest-0/test_reader_rejects_invalid_pu1')
+mutation = 'tampered'
+
+    @pytest.mark.parametrize('mutation', ['missing', 'tampered'])
+    def test_reader_rejects_invalid_publication(tmp_path, mutation):
+        HKCloseReviewStore(tmp_path).publish('synthetic', {'review': {}}, {'generation': 'synthetic-only'})
+        p = tmp_path / 'synthetic' / 'publication.json'
+        if mutation == 'missing':
+            p.unlink()
+        else:
+            p.write_text(json.dumps({'generation': 'tampered'}))
+>       with pytest.raises((ValueError, FileNotFoundError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, FileNotFoundError)
+
+test_independent.py:15: Failed
+=========================== short test summary info ============================
+FAILED test_independent.py::test_reader_rejects_invalid_publication[missing] - Failed: DID NOT RAISE any of (ValueError, FileNotFoundError)
+FAILED test_independent.py::test_reader_rejects_invalid_publication[tampered] - Failed: DID NOT RAISE any of (ValueError, FileNotFoundError)
+========================= 2 failed, 2 passed in 0.02s ==========================

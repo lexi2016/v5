@@ -1,0 +1,32 @@
+[
+  {
+    "path": "V5/src/v5_shadow/hk_close_daily.py",
+    "git_blob_sha": "85e64fb2742de4c8b3597f14e4acc795ea87ec43",
+    "sha256": "7afcacd41f481ed65a505e287602c3c117d511b0d260dd7a14109856c0c7714e",
+    "bytes": 3907
+  },
+  {
+    "path": "V5/tests/test_hk_close_daily.py",
+    "git_blob_sha": "daf52a87645d0037b25faaecafe2bef7a337725c",
+    "sha256": "ecb61630304e5e1ace276dc6fbd8ec7fe84a9c8d6f93f54337c52dbbc3dc7a69",
+    "bytes": 1316
+  },
+  {
+    "path": "handoffs/M10/START_HERE.md",
+    "git_blob_sha": "6c8fdf1e6dc27476aab6cc619bd069df1d21890d",
+    "sha256": "9e3b080b3e88766ec4ee05c35878bf2878eed6d7e3c9cfd3029995febc4c508f",
+    "bytes": 2379
+  },
+  {
+    "path": "handoffs/M10/handoff/M10_CHAT_20261011/SOURCE_FACTS.md",
+    "git_blob_sha": "5717c0b2549953c4a1fb5ad7f22370b14a1b2ef6",
+    "sha256": "471b0ac4ac058ccabce3fe74e5c1db48ea101b97ba4d413888f0f853968e2ce6",
+    "bytes": 2857
+  },
+  {
+    "path": "handoffs/M10/handoff/M10_CHAT_20261011/PROMPT_FOR_CHAT.txt",
+    "git_blob_sha": "746a46a375f4a25d51da5beb6b335b12949e9e70",
+    "sha256": "556e13a0cbfacbe21024a38fbf40d663ed2fc2c9a943c6a825241abad7d1e177",
+    "bytes": 11453
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "env": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "PYTHONPATH": "/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/source/V5/src",
+    "TMPDIR": "/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/tmp"
+  },
+  "runs": [
+    {
+      "name": "existing",
+      "command": [
+        "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+        "-S",
+        "-c",
+        "import sys,runpy;sys.path.append(sys.argv.pop(1));runpy.run_module('pytest',run_name='__main__')",
+        "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/lib/python3.14/site-packages",
+        "-vv",
+        "-p",
+        "no:cacheprovider",
+        "/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/source/V5/tests/test_hk_close_daily.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "name": "independent",
+      "command": [
+        "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+        "-S",
+        "-c",
+        "import sys,runpy;sys.path.append(sys.argv.pop(1));runpy.run_module('pytest',run_name='__main__')",
+        "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/lib/python3.14/site-packages",
+        "-vv",
+        "-p",
+        "no:cacheprovider",
+        "/Users/lexi/Documents/Codex/2026-10-11/task/m10-isolated/test_independent.py"
+      ],
+      "exit_code": 1
+    }
+  ]
+}
