@@ -1,7 +1,7 @@
 """M16 production assembly boundary.
 
-This factory owns assembly, not research logic. Missing real owner bindings fail
-closed; simulated providers are not production defaults.
+This layer constructs the frozen owner classes. It does not accept service
+factories or simulated owner callbacks.
 """
 from __future__ import annotations
 
@@ -23,12 +23,22 @@ class M16RuntimeConfig:
     owner_closure: OwnerClosure
 
 
-def build_manager_jobs(*, config: M16RuntimeConfig):
+def build_manager_jobs(*, config: M16RuntimeConfig, observation_reader: Any):
+    if observation_reader is None:
+        raise BindingMissing('M16_OBSERVATION_READER_MISSING')
+    if not config.runtime_root.is_absolute():
+        raise BindingMissing('M16_RUNTIME_ROOT_NOT_ABSOLUTE')
+
     loaded = load_owner(config.owner_closure)
-    builder = loaded.get('factory')
-    if not callable(builder):
-        raise BindingMissing('M16_OWNER_FACTORY_NOT_BOUND')
-    service = builder(runtime_root=config.runtime_root)
-    if service is None:
-        raise BindingMissing('M16_OWNER_SERVICE_UNAVAILABLE')
+    components = loaded['components']
+
+    materials = components.material_store_class(config.runtime_root / 'materials')
+    store = components.store_class(config.runtime_root)
+    provider = components.provider_class(material_store=materials)
+    service = components.service_class(
+        store,
+        observation_reader,
+        provider,
+        material_store=materials,
+    )
     return ManagerJobs(service=service)
