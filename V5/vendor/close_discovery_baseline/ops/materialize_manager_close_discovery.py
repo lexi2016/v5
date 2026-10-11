@@ -253,14 +253,76 @@ def recapture_close_minutes(*, manager_state_root: Path, universe_root: Path, py
     try:
         with owned_interprocess_lock(lock,timeout_seconds=0,timeout_message='CLOSE_RECAPTURE_SLOT_LOCKED',timeout_error=EvidenceError):
             if artifact_path.is_file():
-                raw=artifact_path.read_bytes(); value=load(artifact_path)
-                receipt=load(receipt_path)
-                if (receipt.get('artifact_sha256')!=digest(raw) or value.get('schema_version')!=CLOSE_RECAPTURE_SCHEMA
-                        or value.get('source_trade_date')!=trade_date):
-                    raise EvidenceError('CLOSE_RECAPTURE_EXISTING_PRODUCT_CONFLICT',layer='PUBLICATION',kind='CONFLICT')
-                return _close_recapture_result(trade_date,'ALREADY_EXISTS',plan_trade_date=value.get('plan_trade_date'),artifact_ref=artifact_ref,
-                    artifact_sha256=digest(raw),candidate_count=value.get('candidate_overlay',{}).get('count'),
-                    state_root=str(state))
+                artifact_raw = artifact_path.read_bytes()
+                receipt_raw = receipt_path.read_bytes()
+
+                from apps.api.v35_api.manager_workbench_router import (
+                    ManagerWorkbenchResearchReader,
+                )
+
+                reader = ManagerWorkbenchResearchReader(state)
+                existing = reader.read_close_recapture(trade_date)
+
+                if not isinstance(existing, dict):
+                    raise EvidenceError(
+                        'CLOSE_RECAPTURE_READER_RESULT_INVALID',
+                        layer='PUBLICATION',
+                        kind='INVALID',
+                    )
+
+                if existing.get('status') not in {'READY', 'PARTIAL'}:
+                    raise EvidenceError(
+                        'CLOSE_RECAPTURE_EXISTING_PRODUCT_NOT_REUSABLE',
+                        layer='PUBLICATION',
+                        kind='INVALID',
+                    )
+
+                if (artifact_path.read_bytes() != artifact_raw
+                        or receipt_path.read_bytes() != receipt_raw):
+                    raise EvidenceError(
+                        'CLOSE_RECAPTURE_EXISTING_PRODUCT_CHANGED_DURING_READ',
+                        layer='PUBLICATION',
+                        kind='CONFLICT',
+                    )
+
+                receipt = existing.get('receipt')
+                snapshot = existing.get('snapshot')
+                overlay = existing.get('candidate_overlay')
+
+                if (not isinstance(receipt, dict)
+                        or not isinstance(snapshot, dict)
+                        or not isinstance(overlay, dict)):
+                    raise EvidenceError(
+                        'CLOSE_RECAPTURE_READER_EVIDENCE_FIELDS_MISSING',
+                        layer='PUBLICATION',
+                        kind='INVALID',
+                    )
+
+                artifact_sha256 = digest(artifact_raw)
+                receipt_sha256 = digest(receipt_raw)
+
+                if receipt.get('artifact_sha256') != artifact_sha256:
+                    raise EvidenceError(
+                        'CLOSE_RECAPTURE_READER_ARTIFACT_SHA_MISMATCH',
+                        layer='PUBLICATION',
+                        kind='CONFLICT',
+                    )
+
+                return _close_recapture_result(
+                    trade_date,
+                    'ALREADY_EXISTS',
+                    plan_trade_date=existing.get('plan_trade_date'),
+                    artifact_ref=artifact_ref,
+                    artifact_sha256=artifact_sha256,
+                    receipt_ref=f'workbench_research/{trade_date}/close_recapture.receipt.json',
+                    receipt_sha256=receipt_sha256,
+                    snapshot_ref=snapshot.get('artifact_ref'),
+                    snapshot_sha256=snapshot.get('sha256'),
+                    candidate_overlay_ref=overlay.get('artifact_ref'),
+                    candidate_overlay_sha256=overlay.get('sha256'),
+                    candidate_count=overlay.get('count'),
+                    state_root=str(state),
+                )
             store_root=_root(universe/'.runtime/data','V35_SHARED_DATA_STORE_ROOT_REQUIRED')
             pool,pool_rows=_read_close_recapture_pool(store_root,trade_date)
             python=Path(pytdx_python).expanduser()
