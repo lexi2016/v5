@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work/V5/src/v5_shadow/a_close_daily.py", line 764, in run_a_close_daily
+    admitted = _admit(source_path, request['input_manifest'], request['input_manifest_sha256'], target, request['slot'])
+  File "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work/V5/src/v5_shadow/a_close_daily.py", line 272, in _admit
+    manifest = _json(read(manifest_path, manifest_sha))
+                     ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work/V5/src/v5_shadow/a_close_daily.py", line 266, in read
+    raise ValueError('SOURCE_SHA_MISMATCH:' + relative)
+ValueError: SOURCE_SHA_MISMATCH:input.json

@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_review_findings",
+    "test_api_raw_digest",
+    "test_preimported_helper_identity",
+    "test_restored_helper_identity"
+  ],
+  "cwd": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work",
+  "python": "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+  "environment": {
+    "TMPDIR": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/fixture-tmp",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "PYTHONPATH": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/unpacked/repository/M09_DELIVERY_20261011/evidence/independent_review",
+    "M09_ORIGINAL_SOURCE_ROOT": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/unpacked/repository/M09_DELIVERY_20261011/before/handoff/v4-running-source-20261005/canonical",
+    "M09_REVIEW_SNAPSHOT": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work"
+  },
+  "timeout_seconds": 240
+}

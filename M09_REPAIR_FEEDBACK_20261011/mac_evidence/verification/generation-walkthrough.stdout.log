@@ -1,0 +1,37 @@
+{
+  "schema_version": "m09.mac_engineering_walkthrough.v1",
+  "status": "ENGINEERING_WALKTHROUGH_PASSED",
+  "environment": {
+    "python": "3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]",
+    "executable": "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0",
+    "numpy": "2.5.3",
+    "pytest": "9.1.1",
+    "dependencies_changed_by_check": false,
+    "declared_constraints": "Python>=3.14; pandas>=2.3,<3; pyarrow>=21,<25",
+    "acceptance_class": "UNCERTIFIED_RUNTIME_DIAGNOSTIC"
+  },
+  "fixture_class": "SYNTHETIC",
+  "execution_kind": "ENGINEERING",
+  "restored_identity": {
+    "trade_date": "20261009",
+    "model_run_id": "m09-5bfc6c3f32db82a4ae58d53d003f90c5-8dd3fb1765a8",
+    "canonical_review_sha256": "c7638676f97c469b6e8675f5b02445444228aee80a7cf76bf047823358d340fc",
+    "raw_review_sha256": "c7638676f97c469b6e8675f5b02445444228aee80a7cf76bf047823358d340fc",
+    "source_sha256": "7c6276e3a6138472d659b9861cab4383639b677d899c1867581ec6be60146f4d",
+    "record_sha256": "84d457e50b28a3aa9d373586b72fab363db2a7522b97b2fc9e78282cacf2ba55",
+    "generation_sha256": "b7555cc12527d50cb2bdda527b61e22a44769aa74ea7b75b48e9a51f6be231c5"
+  },
+  "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/engineering_walkthrough/private_m09",
+  "two_slots_distinct_receipts_one_calculation": true,
+  "new_configuration_new_run": true,
+  "cas_and_bad_input_preserve_success": true,
+  "rollback_preserves_all_runs": true,
+  "read_side_effects": false,
+  "HK_sentinel_unchanged": true,
+  "actual_HK_service_acceptance": "NOT_RUN",
+  "real_input_acceptance": "NOT_RUN",
+  "natural_acceptance": "NOT_RUN"
+}

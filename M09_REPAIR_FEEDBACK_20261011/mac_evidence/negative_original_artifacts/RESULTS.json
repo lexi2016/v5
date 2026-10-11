@@ -1,0 +1,68 @@
+[
+  {
+    "case": "schema",
+    "first_status": "FAILED",
+    "first_reason": "ValueError:SOURCE_SHA_MISMATCH:input.json",
+    "tampered_receipt_returned_unchanged": true,
+    "error": null,
+    "source_kind": "SYNTHETIC",
+    "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe/schema/private-output",
+    "expected": "REJECT_INVALID_PERSISTED_RECEIPT",
+    "observed": "VULNERABLE_DIRECT_REUSE"
+  },
+  {
+    "case": "date",
+    "first_status": "FAILED",
+    "first_reason": "ValueError:SOURCE_SHA_MISMATCH:input.json",
+    "tampered_receipt_returned_unchanged": true,
+    "error": null,
+    "source_kind": "SYNTHETIC",
+    "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe/date/private-output",
+    "expected": "REJECT_INVALID_PERSISTED_RECEIPT",
+    "observed": "VULNERABLE_DIRECT_REUSE"
+  },
+  {
+    "case": "trigger",
+    "first_status": "FAILED",
+    "first_reason": "ValueError:SOURCE_SHA_MISMATCH:input.json",
+    "tampered_receipt_returned_unchanged": true,
+    "error": null,
+    "source_kind": "SYNTHETIC",
+    "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe/trigger/private-output",
+    "expected": "REJECT_INVALID_PERSISTED_RECEIPT",
+    "observed": "VULNERABLE_DIRECT_REUSE"
+  },
+  {
+    "case": "safety",
+    "first_status": "FAILED",
+    "first_reason": "ValueError:SOURCE_SHA_MISMATCH:input.json",
+    "tampered_receipt_returned_unchanged": true,
+    "error": null,
+    "source_kind": "SYNTHETIC",
+    "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe/safety/private-output",
+    "expected": "REJECT_INVALID_PERSISTED_RECEIPT",
+    "observed": "VULNERABLE_DIRECT_REUSE"
+  },
+  {
+    "case": "status_success",
+    "first_status": "FAILED",
+    "first_reason": "ValueError:SOURCE_SHA_MISMATCH:input.json",
+    "tampered_receipt_returned_unchanged": true,
+    "error": null,
+    "source_kind": "SYNTHETIC",
+    "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe/status_success/private-output",
+    "expected": "REJECT_INVALID_PERSISTED_RECEIPT",
+    "observed": "VULNERABLE_DIRECT_REUSE"
+  },
+  {
+    "case": "missing_fields",
+    "first_status": "FAILED",
+    "first_reason": "ValueError:SOURCE_SHA_MISMATCH:input.json",
+    "tampered_receipt_returned_unchanged": true,
+    "error": null,
+    "source_kind": "SYNTHETIC",
+    "private_root": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe/missing_fields/private-output",
+    "expected": "REJECT_INVALID_PERSISTED_RECEIPT",
+    "observed": "VULNERABLE_DIRECT_REUSE"
+  }
+]

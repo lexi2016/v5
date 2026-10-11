@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+    "-B",
+    "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/duplicate_receipt_probe.py",
+    "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/session/duplicate_receipt_probe"
+  ],
+  "cwd": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work",
+  "environment": {
+    "PYTHONPATH": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work/V5/src:/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work/V5/tests",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1",
+    "TMPDIR": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/fixture-tmp"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "argv": [
+    "git",
+    "apply",
+    "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/unpacked/repository/M09_DELIVERY_20261011/reverse.patch"
+  ],
+  "cwd": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/patch-check",
+  "python": "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+  "environment": {
+    "TMPDIR": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/fixture-tmp",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "timeout_seconds": 240
+}

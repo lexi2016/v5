@@ -1,0 +1,11 @@
+{
+  "status": "COMPLETE_OFFLINE_EXPORT_VERIFIED",
+  "commit": "d0f9905940584777abbcae248850ebc487cade63",
+  "tree": "2e9f7ac6b9cca37a84ddbc02d0872440aa9c0a32",
+  "repository_files": 870,
+  "zip_sha256": "e39bbd8dad4a603a4412aa01b0d5ffdaeb4259271fdb284c576e9628b03964ad",
+  "zip_bytes": 17258686,
+  "crc": "PASS",
+  "all_member_hashes": "PASS",
+  "this_is_not_mac_or_production_acceptance": true
+}

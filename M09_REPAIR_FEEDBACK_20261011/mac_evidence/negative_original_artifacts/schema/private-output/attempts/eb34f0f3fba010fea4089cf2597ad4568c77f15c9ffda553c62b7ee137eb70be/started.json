@@ -1,0 +1,1 @@
+{"request_sha256":"9221637a73c40b1c72dbfd3ac58a8cc9e71384b1dcffa92651d938dac0f487d4","schema_version":"v5.m09.attempt_start.v1","started_at":"2026-10-11T11:34:48.756246+00:00","trigger":{"attempt_id":"same-attempt","execution_kind":"ENGINEERING","job_id":"a_share_close_review_1605","slot":"16:05","trade_date":"20261009","triggered_at":"2026-10-11T11:34:48.742937+00:00"}}

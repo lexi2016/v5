@@ -1,0 +1,62 @@
+[
+  {
+    "name": "forward-check",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 1.323
+  },
+  {
+    "name": "forward-apply",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.025
+  },
+  {
+    "name": "reverse-check",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.013
+  },
+  {
+    "name": "reverse-apply",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.012
+  },
+  {
+    "name": "environment",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.727
+  },
+  {
+    "name": "original-suite125",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 33.716
+  },
+  {
+    "name": "independent-six",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 3.763
+  },
+  {
+    "name": "extract-real-inputs",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 0.143
+  },
+  {
+    "name": "real-uncleaned-diagnostic",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 2.611
+  },
+  {
+    "name": "generation-walkthrough",
+    "exit": 0,
+    "timed_out": false,
+    "elapsed_seconds": 1.988
+  }
+]

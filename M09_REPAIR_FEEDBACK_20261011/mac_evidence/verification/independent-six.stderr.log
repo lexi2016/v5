@@ -1,0 +1,11 @@
+test_crash_after_head_switch_preserves_previous_success (test_review_findings.IndependentM09Review.test_crash_after_head_switch_preserves_previous_success) ... ok
+test_loaded_daily_code_does_not_claim_changed_on_disk_implementation (test_review_findings.IndependentM09Review.test_loaded_daily_code_does_not_claim_changed_on_disk_implementation) ... ok
+test_reader_rejects_mutated_calculation_or_input_snapshot (test_review_findings.IndependentM09Review.test_reader_rejects_mutated_calculation_or_input_snapshot) ... ok
+test_api_rejects_unbound_raw_review_digest (test_api_raw_digest.RawDigestLinkReview.test_api_rejects_unbound_raw_review_digest) ... ok
+test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha (test_preimported_helper_identity.PreimportedHelperIdentityReview.test_preimported_contracts_cannot_be_relabelled_with_new_disk_sha) ... ok
+test_restored_disk_does_not_hide_cached_nonbaseline_helper_code (test_restored_helper_identity.RestoredHelperIdentityReview.test_restored_disk_does_not_hide_cached_nonbaseline_helper_code) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 3.679s
+
+OK

@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+    "-B",
+    "-c",
+    "import sys,platform,json,importlib.metadata as m,pandas,pyarrow; print(json.dumps({\"python\":sys.version,\"executable\":sys.executable,\"platform\":platform.platform(),\"pandas\":pandas.__version__,\"pyarrow\":pyarrow.__version__,\"dependencies\":{d.metadata[\"Name\"]:d.version for d in m.distributions()}},indent=2))"
+  ],
+  "cwd": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/work",
+  "python": "/Users/lexi/Documents/Codex/2026-10-11/task/m13-isolated/venv/bin/python",
+  "environment": {
+    "TMPDIR": "/Users/lexi/Documents/Codex/2026-10-11/task/m09-candidate-isolated/fixture-tmp",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONNOUSERSITE": "1"
+  },
+  "timeout_seconds": 240
+}
