@@ -6,7 +6,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-SCHEMA = "v5.hk_close_daily.v4.1"
+SCHEMA = "v5.hk_close_daily.v4.2"
 
 
 def _digest(value):
@@ -18,7 +18,7 @@ class CloseReviewReceipt:
     run_id: str
     payload_sha256: str
     manifest_sha256: str
-    publication_sha256: str | None = None
+    publication_sha256: str
 
 
 class HKCloseReviewStore:
@@ -26,22 +26,22 @@ class HKCloseReviewStore:
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
 
-    def publish(self, run_id: str, payload: dict, publication: dict | None = None):
+    def publish(self, run_id: str, payload: dict, publication: dict):
         payload_sha = _digest(payload)
+        publication_sha = _digest(publication)
         target = self.root / run_id
         if target.exists():
-            old = json.loads((target / "payload.json").read_text())
-            if _digest(old) != payload_sha:
+            old_manifest = json.loads((target / "manifest.json").read_text())
+            if old_manifest.get("payload_sha256") != payload_sha or old_manifest.get("publication_sha256") != publication_sha:
                 raise ValueError("M10_RUN_ID_CONFLICT")
             return self._receipt(target)
         target.mkdir()
-        manifest = {"schema": SCHEMA, "run_id": run_id, "payload_sha256": payload_sha, "publication_sha256": _digest(publication) if publication is not None else None}
-        receipt = {"run_id": run_id, "payload_sha256": payload_sha, "manifest_sha256": _digest(manifest), "publication_sha256": manifest["publication_sha256"]}
+        manifest = {"schema": SCHEMA, "run_id": run_id, "payload_sha256": payload_sha, "publication_sha256": publication_sha}
+        receipt = {"run_id": run_id, "payload_sha256": payload_sha, "manifest_sha256": _digest(manifest), "publication_sha256": publication_sha}
         (target / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
+        (target / "publication.json").write_text(json.dumps(publication, sort_keys=True), encoding="utf-8")
         (target / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
         (target / "receipt.json").write_text(json.dumps(receipt, sort_keys=True), encoding="utf-8")
-        if publication is not None:
-            (target / "publication.json").write_text(json.dumps(publication, sort_keys=True), encoding="utf-8")
         return CloseReviewReceipt(**receipt)
 
     def _receipt(self, target):
@@ -55,12 +55,17 @@ class HKCloseReviewReader:
     def read(self, run_id: str):
         target = self.root / run_id
         payload = json.loads((target / "payload.json").read_text())
+        publication = json.loads((target / "publication.json").read_text())
         manifest = json.loads((target / "manifest.json").read_text())
         receipt = json.loads((target / "receipt.json").read_text())
         if manifest.get("payload_sha256") != _digest(payload):
             raise ValueError("M10_PAYLOAD_SHA_INVALID")
+        if manifest.get("publication_sha256") != _digest(publication):
+            raise ValueError("M10_PUBLICATION_SHA_INVALID")
         if receipt.get("manifest_sha256") != _digest(manifest):
             raise ValueError("M10_MANIFEST_SHA_INVALID")
+        if receipt.get("publication_sha256") != _digest(publication):
+            raise ValueError("M10_RECEIPT_PUBLICATION_INVALID")
         return payload
 
 
