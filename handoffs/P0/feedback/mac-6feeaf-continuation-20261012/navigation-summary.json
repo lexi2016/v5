@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "first_page_count": 31,
+  "next_offset": 31,
+  "previous_exact": true,
+  "next_again_exact": true,
+  "group_switch_reset": true,
+  "announcement_default_and_return": true,
+  "requests": [
+    {
+      "path": "/api/v4/manager/m18/v2",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/overview",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "http": 200
+    }
+  ]
+}

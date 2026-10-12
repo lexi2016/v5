@@ -1,0 +1,22 @@
+{
+  "test-p0": {
+    "started_utc": "2026-10-12T13:19:09.005464+00:00",
+    "ended_utc": "2026-10-12T13:19:09.156968+00:00",
+    "exit": 0,
+    "command": "<existing-npm> run test:p0"
+  },
+  "typecheck": {
+    "started_utc": "2026-10-12T13:19:09.157368+00:00",
+    "ended_utc": "2026-10-12T13:19:10.585102+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vue-tsc/bin/vue-tsc.js --noEmit -p tsconfig.cloud-product.json"
+  },
+  "build": {
+    "started_utc": "2026-10-12T13:19:10.585522+00:00",
+    "ended_utc": "2026-10-12T13:19:11.514805+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vite/bin/vite.js build"
+  },
+  "node_tests": 27,
+  "vue_not_rerun": true
+}
