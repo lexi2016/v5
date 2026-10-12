@@ -1,0 +1,38 @@
+{
+  "checked_utc": "2026-10-12T13:06:23.607802+00:00",
+  "backend_candidate": "509d183c731b4159fd0773d672288c232cb85ed3",
+  "frontend_candidate": "aa42f4db63a59367d7eb2740c52ffb9aa30f58c3",
+  "preview": "http://127.0.0.1:54780/",
+  "api": "http://127.0.0.1:55804",
+  "checks": [
+    {
+      "path": "/",
+      "http": 200,
+      "sha256": "b01aabb7002ff85909bbfecb73418a04e3e1aee613247833cd5ae3b5d790f0cf"
+    },
+    {
+      "path": "/manager-selection/",
+      "http": 200,
+      "sha256": "c23e6f0b2e02f9156b684dfd1f0a91ad0c2a1a98f7251c4c44496c927faa0544"
+    },
+    {
+      "path": "/assets/SavedManagerResultView-DLCBeJ84.js",
+      "http": 200,
+      "sha256": "dc2929747fd4af1d1aebe9645745b0a0cacddbcce2d9da357f456df6a74fceeb"
+    },
+    {
+      "path": "/assets/reboundPanelObservation-BUW0sreH.js",
+      "http": 200,
+      "sha256": "3f2b209543ffeaeb38bebf8d025a5ff71c960e760b9779b78ef65add85ec7d73"
+    },
+    {
+      "http": 200,
+      "projection": "rebound_references",
+      "group": "strict",
+      "total": 214,
+      "entries": 32,
+      "loaded": 31
+    }
+  ],
+  "browser_not_controlled": true
+}
