@@ -1,0 +1,157 @@
+{
+  "commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4",
+  "files": [
+    {
+      "path": "V5/vendor/close_discovery_baseline/apps/api/v35_api/manager_workbench_router.py",
+      "bytes": 57619,
+      "git_blob_sha": "793a8687601d34a042565f14b14b607bf0c46c10",
+      "sha256": "95ccda85ff50d44cffbb18fc655e417f926c14b27a60cfa4c5fad17a3cbd1b5e"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/contracts/market_calendar_2026.json",
+      "bytes": 3473,
+      "git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/contracts/trading_calendar.py",
+      "bytes": 10239,
+      "git_blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_catalyst_tracking.py",
+      "bytes": 24351,
+      "git_blob_sha": "cbc1688cc08c48bcfe7dc395d1f00a42442b95ab",
+      "sha256": "3432d0c75b82dd4b06c1204cf59e378a32bc4ccc5403a695417ba47789dc05a7"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_close_discovery.py",
+      "bytes": 16974,
+      "git_blob_sha": "4aae1db0cba7495a3b1997ecfda10146317e977c",
+      "sha256": "f983b5e2bea03d1d5309467e75c2e2da0157636813183221035fac5ef2704b6b"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_close_rebound.py",
+      "bytes": 27594,
+      "git_blob_sha": "1c39affd1bfcf181654c4e9d00e2c501c1d5bfc5",
+      "sha256": "aef0a7a3b767d5f74e3ef24fb1205897032d4a3be9d9995a028207c02a708b95"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_research_evidence.py",
+      "bytes": 30848,
+      "git_blob_sha": "9255d425083e3c3627d4940d7556eed79e3bc00f",
+      "sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/infrastructure/interprocess_lock.py",
+      "bytes": 7514,
+      "git_blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/infrastructure/manager_input_attestation.py",
+      "bytes": 10179,
+      "git_blob_sha": "d6968a2acf64d7f5cde17fa8e1f27cefb744b3dd",
+      "sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/infrastructure/owned_io.py",
+      "bytes": 9354,
+      "git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py",
+      "bytes": 61132,
+      "git_blob_sha": "27fcfedf0b0ef017f9ceb8036e32ee23db5e03e0",
+      "sha256": "998275df085d886a6c4b5a44b3737c6b31de40cbe5b791d561db93968c062bfd"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/contracts.py",
+      "bytes": 3252,
+      "git_blob_sha": "2db1935847c4f7c4639442a9980004513230fe5b",
+      "sha256": "776569b71a9db060186362fe04cce3e8b0f707d8b4a77f80288f8031a2f14fcc"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/futu_minute.py",
+      "bytes": 4507,
+      "git_blob_sha": "9518999f52a44d4b1c5c7fe8398413edb22cde9b",
+      "sha256": "af4cc0efea026eb3f6fa084389d6ee8351a286d38765e337147ced88fda150da"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq.py",
+      "bytes": 8534,
+      "git_blob_sha": "62ca1b26929b77f17b433d5faccef268d8017ca8",
+      "sha256": "19946fd9c09033a77b460fe5a68f70969623d3b1c26f058091349e702d482fdd"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq_probe.py",
+      "bytes": 5981,
+      "git_blob_sha": "b5124bfee8068e77e873dff76d5b80da0ba207db",
+      "sha256": "9ce612fb06f022601841828bb25d11d1850cd4e3ab09de775babd56f7b8d0399"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/allowlist.py",
+      "bytes": 3011,
+      "git_blob_sha": "afa173a579a48919b4653381fd528d901f3241d6",
+      "sha256": "a5e307f15416fe422a0ad36f60d6996f6a3f74753581dc589ef93149178dd206"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/collectors.py",
+      "bytes": 8200,
+      "git_blob_sha": "5c234353c4c92f19ec39d928ae37f3603f06494d",
+      "sha256": "f59dc7f70939a033fcde715aef33c5e063cb10b20c98caf17ee3a42c4884c159"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/constants.py",
+      "bytes": 2604,
+      "git_blob_sha": "2c9beeeaf2a748ac15df6c7b6c1ef2dade37ed77",
+      "sha256": "706ea95054bcfcf3bab12a234e79a1d25bb412ba32ab0e5b5a6f3f3f6b725df8"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/consumer.py",
+      "bytes": 2788,
+      "git_blob_sha": "3e9fa17abafde3ebf70aab31f7fd21e5e53678b1",
+      "sha256": "bd3b19a188907a2273d09a51ee06c448f41ea94277c30a56658350ed6f3843ba"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/hashing.py",
+      "bytes": 1027,
+      "git_blob_sha": "045b93ffb4311c431f1f43ee8223fde1d7a30266",
+      "sha256": "d4bce5d9337f07ec8c3594367b0203f4eb8de71b5380f14734b5944cf45dcca6"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/hk_0_2.py",
+      "bytes": 67647,
+      "git_blob_sha": "b2b366c2cbfd89ba9fed437620057fdb01f1e561",
+      "sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/hk_auction_0920.py",
+      "bytes": 24181,
+      "git_blob_sha": "e78eebac73deaf424c4b8dca630200915b1b3d4f",
+      "sha256": "879196347ca3691262b015c412e07ca0281a50e14bce24a45a5b52be02a5f09d"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/paths.py",
+      "bytes": 3986,
+      "git_blob_sha": "9202f4dff68915569c9c25dd2bd34e1de476ff4e",
+      "sha256": "3007691db34aa721cf9549e79d9f9782bf7490ccb5d9f6ca2895f968525afdb3"
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/store.py",
+      "bytes": 27895,
+      "git_blob_sha": "273dc301ff7e8fe9d91e9d3e3c7c427817dc3976",
+      "sha256": "87042083dad178442c75386e59ae4b2fd9bab0a3c92b5c3a090ddb90e6b52a16"
+    }
+  ],
+  "full_tree_changed_files": 1,
+  "full_tree_unchanged_files": 173,
+  "probe": {
+    "relative_path": "input/m17_late_candidate_probe_r3.py",
+    "bytes": 30506,
+    "sha256": "5df5a163c655e0f85b7b280cd158741f78528a41b65074ca7456d35640ba7543"
+  },
+  "verification": "Read-only rehash of retained 24-file source closure matched existing inventory; no tests rerun."
+}

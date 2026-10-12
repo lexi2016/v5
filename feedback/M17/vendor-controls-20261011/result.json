@@ -1,0 +1,78 @@
+{
+  "schema_version": "m17.mac_vendor_controls_historical_feedback.v1",
+  "evidence_kind": "RETROSPECTIVE_UPLOAD_OF_EXISTING_20261011_EVIDENCE",
+  "new_test_execution": false,
+  "candidate_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4",
+  "candidate_commit_role": "PRODUCT_CODE_NOT_PRIOR_MAC_FEEDBACK_COMMIT",
+  "original_result_relative_path": "execution/summary.json",
+  "original_result_sha256": "4ad325690f94f7f3e282880f8b3ab7fd97bbf2964c2b803b49e2af519b940bba",
+  "original_result_included": false,
+  "original_result_hash_meaning": "SHA-256 of the retained original private summary bytes; not the digest of this redacted summary.",
+  "started_utc": "2026-10-11T18:18:14.575623+00:00",
+  "finished_utc": "2026-10-11T18:18:15.457145+00:00",
+  "exit_code": 0,
+  "test_execution": "CANDIDATE_CONTROLS_PASS",
+  "fixture_label": "SIMULATED",
+  "source_verified_files": 24,
+  "controls": {
+    "positive": {
+      "status": "PASS",
+      "owner_status": "MATERIALIZED",
+      "collector_calls": 1,
+      "candidate_count": 100,
+      "source_trade_date": "20260928",
+      "plan_trade_date": "20260929",
+      "capture_mode": "LATE_OBSERVATION",
+      "cold_reader_status": "READY",
+      "cold_reader_zero_writes": true,
+      "external_pool_identity_verified": true
+    },
+    "intact_repeat": {
+      "status": "PASS",
+      "owner_status": "ALREADY_EXISTS",
+      "collector_calls": 0,
+      "four_refs_and_actual_sha_verified": true,
+      "product_bytes_unchanged": true
+    },
+    "corrupt_reader": {
+      "status": "PASS",
+      "reader_status": "FAILED",
+      "cannot_confirm": [
+        "CLOSE_RECAPTURE_ARTIFACT_INVALID"
+      ],
+      "zero_writes": true
+    },
+    "corrupt_owner": {
+      "status": "PASS",
+      "owner_status": "FAILED",
+      "reason": "CLOSE_RECAPTURE_EXISTING_PRODUCT_NOT_REUSABLE",
+      "collector_calls": 0,
+      "product_bytes_unchanged": true
+    }
+  },
+  "product_sha256": {
+    "artifact": "327d13ab78c7c62d3c348d6b8984f667c658b096262e6ba8632028ce03c94de7",
+    "overlay": "ccfa1a34cd41e73a5e8d87a0886ac3be8ede48a5ab413a6e7dcd8fed6b6e7408",
+    "receipt": "8913f1ebbd3e13e4c76bdb89fd2c530b8d2cbf5a79689e9c5f34c57356211439",
+    "snapshot": "36166a366fe80e8cdb54d3db96ebc72a115738dcf416e52264af554a1b6dda5b"
+  },
+  "corruption": {
+    "corrupt_overlay_sha256": "0d96b5a5bda252080f8a24ef48a39210b2cbc96773b4700e8fd5582dc908e8ad",
+    "field": "rows[0].last_price",
+    "original_overlay_sha256": "ccfa1a34cd41e73a5e8d87a0886ac3be8ede48a5ab413a6e7dcd8fed6b6e7408",
+    "receipt_and_main_artifact_unchanged": true
+  },
+  "safety": {
+    "RESEARCH_ONLY": true,
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "natural_run_verified": false,
+    "full_m17_acceptance": "NOT_RUN"
+  },
+  "scope": "Fixed original vendor owner/reader subchain only.",
+  "v5_wrapper_execution": "NOT_RUN",
+  "p0_registration_execution": "NOT_RUN",
+  "p0_audit_result": "BLOCKED_NO_M17_EXECUTION_REGISTRATION_CONTRACT",
+  "prior_github_feedback": "Not found in inspected M17 branch history/tree; original receipt states no external upload."
+}
