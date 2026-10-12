@@ -1,0 +1,167 @@
+{
+  "candidate": "084df7c61e57e7615633828a0d6a5d9078dc9b1c",
+  "started_utc": "2026-10-12T18:29:44.755783+00:00",
+  "initial_result": "24_PASS_6_TEMP_PATH_ERRORS_0_SKIP",
+  "changed_only": "TMPDIR set to existing task-owned non-symlink directory; no product edits",
+  "six_controls_exit": 0,
+  "real_saved_input": {
+    "identity": {
+      "trade_date": "20261009",
+      "model_run_id": "m09-b02843466a4db2d5702b2f6c60d226fb-40a02d511e45",
+      "canonical_review_sha256": "4fe2d2861c71ed38aadec8ee4777f0a82c35c76e68a2d707086c3f9d8685b48b",
+      "raw_review_sha256": "4fe2d2861c71ed38aadec8ee4777f0a82c35c76e68a2d707086c3f9d8685b48b",
+      "source_sha256": "8ef348707c95b3a357843b6482b6e9359143076f53ebf184cf9d2e3cc69d455d",
+      "record_sha256": "d87884ab9c5e6775d65bfd72e7ba8f2c6198a81793125b4c2da7744879fe688f",
+      "generation_sha256": "3da1e931e0528d42640e265a2d99d04a09f5f3f66a27573af28db18d5f15fce8"
+    },
+    "execution_kind": "HISTORICAL_REPLAY",
+    "business_status": "PARTIAL",
+    "scope": "OBSERVED_ROWS_ONLY",
+    "historical_research": {
+      "affected_metrics": [
+        "APPROXIMATE_ST_LIMIT_COUNTS_UNCERTAIN",
+        "INDUSTRY_COVERAGE_INCOMPLETE",
+        "INDUSTRY_AND_ROLE_RANKINGS_PARTIAL",
+        "CLOSE_POSITION_MISSING_OR_NONFINITE_UNUSED_BY_FROZEN_MODEL"
+      ],
+      "membership_qualification_verified": false,
+      "missing_text": {
+        "name": 137,
+        "tdx_industry_code": 240,
+        "tdx_industry_name": 240
+      },
+      "natural_verified": false,
+      "nonfinite_unused_close_position": 2,
+      "original_receipt": {
+        "bytes": 80017050,
+        "hash_verified": true,
+        "metadata_status": "OPAQUE_ORIGINAL_RECEIPT_HASH_ONLY_NO_READY_CLAIM",
+        "sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e"
+      },
+      "original_source": {
+        "bytes": 279209,
+        "format": "PARQUET",
+        "hash_verified": true,
+        "pointer_sha256": "e5e7ceb2a74dfdd4e26507392c2ba3b7bace235e3a55e27ec39c334a7bdbbd2d",
+        "sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47",
+        "verification": "STREAM_HASH_BEFORE_AND_AFTER_EXACT_DATE_FILTER"
+      },
+      "original_values_preserved": true,
+      "schema_version": "v5.m09.historical_research.v1",
+      "snapshot_row_count": 5126,
+      "source_available_by_requested_slot": false,
+      "source_receipt_status": "OPAQUE_ORIGINAL_RECEIPT_HASH_ONLY_NO_READY_CLAIM",
+      "source_time_verified": false,
+      "strict_1500_pit_verified": false
+    },
+    "original_close_chain_status": "PARTIAL_REVIEW",
+    "natural_verified": false,
+    "strict_1500_pit_verified": false,
+    "status": "HISTORICAL_RESEARCH_SAVED_AND_COLD_READ",
+    "cold_read_verified": true
+  },
+  "real_exit": 0,
+  "cold_exit": 0,
+  "finished_utc": "2026-10-12T18:29:47.991939+00:00",
+  "status": "PASS_AFTER_TEMP_ENVIRONMENT_CORRECTION",
+  "initial_runner_report": {
+    "schema_version": "v5.m09.historical_acceptance.v1",
+    "started_at": "2026-10-12T18:28:56.093493+00:00",
+    "python": "3.14.6",
+    "dependencies": {
+      "pandas": "2.3.3",
+      "pyarrow": "24.0.0"
+    },
+    "declared_environment_compatible": true,
+    "tests": {
+      "errors": 6,
+      "failures": 0,
+      "run": 30,
+      "skipped": []
+    },
+    "real_saved_input": "NOT_RUN",
+    "natural_run": "NOT_RUN",
+    "deployment": "NOT_RUN",
+    "original_136_rerun": "NOT_RUN",
+    "status": "FAIL",
+    "exit_code": 1,
+    "finished_at": "2026-10-12T18:29:03.146037+00:00",
+    "source_sha256": {
+      "V5/src/v5_shadow/a_close_historical.py": "1a0ad3c162424895bee73e50a5a561ff5475c41bca917d53f3fc52ad9dfe0d35",
+      "V5/src/v5_shadow/a_close_daily.py": "237d8e691ee8b870a14460e023cd0eb93f2669f12e5dd499a249f48a4a3db689",
+      "V5/src/v5_shadow/a_close_daily_sources.py": "53e73a6403f2314e3fb0ca57fa1344083e4a03ba33260a2ee87e0b36dcdf3f51",
+      "V5/src/v5_shadow/a_close_daily_worker.py": "64a6b77ccc2dfdf1817486baecc7e3f82c809b9e2290769910c6404f9d14f375",
+      "V5/src/v5_shadow/a_close_daily_api.py": "e91037541f50b622031e2698a1c490ee6245c1ce5069989bb8941d8f3a560831",
+      "V5/tests/run_m09_historical_acceptance.py": "f46cbac3a6d59ca2a457b5d7a09b34f5171ffaaea00089f0c0cbe43c3af4f002",
+      "V5/tests/test_a_close_historical.py": "c945bdd4ba43ec2987db947db7a18d5bbb10a8f9de459e3912928a3e93ab1d7b"
+    }
+  },
+  "execution": {
+    "candidate": "084df7c61e57e7615633828a0d6a5d9078dc9b1c",
+    "command": [
+      "<EXISTING_PYTHON_3.14.6>",
+      "-B",
+      "V5/tests/run_m09_historical_acceptance.py",
+      "--require-supported",
+      "--require-zero-skip",
+      "--evidence-dir",
+      "<TASK_ROOT>/m09h-084df-evidence",
+      "--source-root",
+      "<TASK_ROOT>/m09h-real-20261009/source",
+      "--pointer",
+      "DERIVED_LOCAL_PANEL_POINTER.txt",
+      "--pointer-sha256",
+      "e5e7ceb2a74dfdd4e26507392c2ba3b7bace235e3a55e27ec39c334a7bdbbd2d",
+      "--panel-sha256",
+      "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47",
+      "--trade-date",
+      "20261009",
+      "--snapshot-root",
+      "<TASK_ROOT>/m09h-real-20261009/snapshot",
+      "--run-root",
+      "<TASK_ROOT>/m09h-real-20261009/run",
+      "--receipt",
+      "panel_source_receipt.json",
+      "--receipt-sha256",
+      "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e"
+    ],
+    "started_utc": "2026-10-12T18:28:56.058437+00:00",
+    "ended_utc": "2026-10-12T18:29:03.237349+00:00",
+    "exit_code": 1,
+    "originals_unchanged": true,
+    "source_files_verified": 82,
+    "inputs": [
+      {
+        "name": "panel_20261009_required8.parquet",
+        "sha256": "7dfa12fa03ad76d5e946088f88993748a3fffd8943281a12eb364c35712f8c47",
+        "bytes": 279209
+      },
+      {
+        "name": "panel_source_receipt.json",
+        "sha256": "de652e8ddc540433bef8d0dd9f13da54eb973cf520156109d9e61794dace2a6e",
+        "bytes": 80017050
+      }
+    ],
+    "derivative_pointer_sha256": "e5e7ceb2a74dfdd4e26507392c2ba3b7bace235e3a55e27ec39c334a7bdbbd2d",
+    "derivative_pointer_is_historical_witness": false
+  },
+  "test_summary": {
+    "unique_tests": 30,
+    "initial_pass": 24,
+    "initial_temp_path_errors": 6,
+    "retried_only_failed_controls": 6,
+    "retry_pass": 6,
+    "final_skipped": 0,
+    "full_30_repeated": false,
+    "original_136_repeated": false
+  },
+  "continuation_commands": [
+    "<SYSTEM_PYTHON> finish_m09h_mac.py",
+    "<EXISTING_PYTHON_3.14.6> -I -B -c <SIX_SELECTED_ORIGINAL_TESTS> <FIXED_SOURCE/V5/src> <FIXED_SOURCE/V5/tests> <SIX_SUITE_NAMES>",
+    "<EXISTING_PYTHON_3.14.6> -I -B -c <ORIGINAL_SNAPSHOT_RUN_AND_READ_CALLS> <FIXED_SOURCE/V5/src> <PRIVATE_NEW_RESEARCH_ROOT>",
+    "<EXISTING_PYTHON_3.14.6> -I -B -c <INDEPENDENT_DAILY_READER_AND_PREVIEW_IDENTITY_CHECK> <FIXED_SOURCE/V5/src> <PRIVATE_NEW_RESEARCH_RUN_ROOT>"
+  ],
+  "continuation_harness_sha256": "3bcd9d70c5aeacda7b45185bfb7e25d607ad32496eb88b03957b63402b012ed3",
+  "no_deployment_or_active_binding_change": true,
+  "original_input_hashes_and_fixed_source_verified_after_completion": true
+}

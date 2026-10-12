@@ -1,0 +1,11 @@
+test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields) ... ok
+test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation) ... ok
+test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success) ... ok
+test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected) ... ok
+test_full_original_product_writer_and_independent_reader_keep_all_boundaries (test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries) ... ok
+test_original_reader_rejects_modified_payload (test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.213s
+
+OK

@@ -1,0 +1,129 @@
+test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha (test_a_close_historical.HistoricalParquetTests.test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha) ... <PYARROW_BUILD>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted
+<PYARROW_BUILD>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted
+<PYARROW_BUILD>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted
+<PYARROW_BUILD>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted
+ok
+test_failed_later_attempt_and_tampering_preserve_old_success (test_a_close_historical.HistoricalResearchTests.test_failed_later_attempt_and_tampering_preserve_old_success) ... ok
+test_invalid_core_numeric_duplicate_and_date_are_hard_rejected (test_a_close_historical.HistoricalResearchTests.test_invalid_core_numeric_duplicate_and_date_are_hard_rejected) ... ok
+test_large_opaque_receipt_is_hash_reference_never_ready_summary (test_a_close_historical.HistoricalResearchTests.test_large_opaque_receipt_is_hash_reference_never_ready_summary) ... ok
+test_nan_null_infinity_and_string_have_distinct_frame_identity (test_a_close_historical.HistoricalResearchTests.test_nan_null_infinity_and_string_have_distinct_frame_identity) ... ok
+test_original_model_parity_preserves_native_missing_values (test_a_close_historical.HistoricalResearchTests.test_original_model_parity_preserves_native_missing_values) ... ok
+test_replay_cannot_publish_in_existing_strict_root (test_a_close_historical.HistoricalResearchTests.test_replay_cannot_publish_in_existing_strict_root) ... ok
+test_replay_cannot_run_as_real_manual_or_natural (test_a_close_historical.HistoricalResearchTests.test_replay_cannot_run_as_real_manual_or_natural) ... ok
+test_resealed_ready_claim_is_rejected_without_publication (test_a_close_historical.HistoricalResearchTests.test_resealed_ready_claim_is_rejected_without_publication) ... ok
+test_stream_hash_is_bounded_and_preserves_file (test_a_close_historical.HistoricalResearchTests.test_stream_hash_is_bounded_and_preserves_file) ... ok
+test_strict_frame_validation_and_pit_are_unchanged (test_a_close_historical.HistoricalResearchTests.test_strict_frame_validation_and_pit_are_unchanged) ... ok
+test_two_slots_are_historical_receipts_not_cutoff_proof (test_a_close_historical.HistoricalResearchTests.test_two_slots_are_historical_receipts_not_cutoff_proof) ... ok
+test_unmodified_gaps_run_original_owner_and_cold_read (test_a_close_historical.HistoricalResearchTests.test_unmodified_gaps_run_original_owner_and_cold_read) ... ok
+test_bad_started_record_is_rejected_before_attempt_head_write (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_bad_started_record_is_rejected_before_attempt_head_write) ... ok
+test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) ... ok
+test_cold_reader_proves_real_original_store_and_preview_identity (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_cold_reader_proves_real_original_store_and_preview_identity) ... ok
+test_forged_success_cannot_borrow_existing_committed_generation (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_forged_success_cannot_borrow_existing_committed_generation) ... ok
+test_historical_engineering_retry_keeps_actual_time_and_old_cutoff (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_historical_engineering_retry_keeps_actual_time_and_old_cutoff) ... ok
+test_later_slot_reuse_can_reference_earlier_commit_trigger (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_later_slot_reuse_can_reference_earlier_commit_trigger) ... ok
+test_missing_product_rejected_on_duplicate_and_cold_read (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_missing_product_rejected_on_duplicate_and_cold_read) ... ok
+test_pre_upgrade_committing_receipt_keeps_verified_old_success (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_pre_upgrade_committing_receipt_keeps_verified_old_success) ... ok
+test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) ... ok
+test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) ... ok
+test_valid_failed_and_interrupted_unknown_are_idempotent (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_valid_failed_and_interrupted_unknown_are_idempotent) ... ok
+test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields) ... ERROR
+test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation) ... ERROR
+test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success) ... ERROR
+test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected) ... ERROR
+test_full_original_product_writer_and_independent_reader_keep_all_boundaries (test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries) ... ERROR
+test_original_reader_rejects_modified_payload (test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload) ... ERROR
+
+======================================================================
+ERROR: test_price_chain_writer_reader_preserves_native_fields (test_a_close_daily.DailyBehaviorTests.test_price_chain_writer_reader_preserves_native_fields)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily.py", line 69, in setUp
+    self.daily.initialize_a_close_root(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 118, in initialize_a_close_root
+    path = _absolute_root(root)
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 83, in _absolute_root
+    raise ValueError('M09_SYMLINK_REJECTED')
+ValueError: M09_SYMLINK_REJECTED
+
+======================================================================
+ERROR: test_cas_conflict_keeps_served_generation (test_a_close_daily.DailyBehaviorTests.test_cas_conflict_keeps_served_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily.py", line 69, in setUp
+    self.daily.initialize_a_close_root(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 118, in initialize_a_close_root
+    path = _absolute_root(root)
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 83, in _absolute_root
+    raise ValueError('M09_SYMLINK_REJECTED')
+ValueError: M09_SYMLINK_REJECTED
+
+======================================================================
+ERROR: test_later_failure_keeps_previous_success (test_a_close_daily.DailyBehaviorTests.test_later_failure_keeps_previous_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily.py", line 69, in setUp
+    self.daily.initialize_a_close_root(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 118, in initialize_a_close_root
+    path = _absolute_root(root)
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 83, in _absolute_root
+    raise ValueError('M09_SYMLINK_REJECTED')
+ValueError: M09_SYMLINK_REJECTED
+
+======================================================================
+ERROR: test_source_receipt_time_disagreement_rejected (test_a_close_daily.DailyBehaviorTests.test_source_receipt_time_disagreement_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily.py", line 69, in setUp
+    self.daily.initialize_a_close_root(self.root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 118, in initialize_a_close_root
+    path = _absolute_root(root)
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily.py", line 83, in _absolute_root
+    raise ValueError('M09_SYMLINK_REJECTED')
+ValueError: M09_SYMLINK_REJECTED
+
+======================================================================
+ERROR: test_full_original_product_writer_and_independent_reader_keep_all_boundaries (test_a_close_daily_sources.SourceTests.test_full_original_product_writer_and_independent_reader_keep_all_boundaries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily_sources.py", line 217, in test_full_original_product_writer_and_independent_reader_keep_all_boundaries
+    result = self.build(sources, root)
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily_sources.py", line 178, in build
+    return sources.build_from_admitted_panel(**arguments)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily_sources.py", line 413, in build_from_admitted_panel
+    load_frozen_module("infrastructure.owned_path").resolve_owned_path(root, "a_share_reviews/manifest.json")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/vendor/m09_a_close_daily/infrastructure/owned_path.py", line 49, in resolve_owned_path
+    _assert_no_reparse_ancestor(raw_root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/vendor/m09_a_close_daily/infrastructure/owned_path.py", line 26, in _assert_no_reparse_ancestor
+    raise ValueError("owned destination has a reparse-point ancestor")
+ValueError: owned destination has a reparse-point ancestor
+
+======================================================================
+ERROR: test_original_reader_rejects_modified_payload (test_a_close_daily_sources.SourceTests.test_original_reader_rejects_modified_payload)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily_sources.py", line 313, in test_original_reader_rejects_modified_payload
+    result = self.build(sources, root)
+  File "<TASK_ROOT>/m09h-084df-source/V5/tests/test_a_close_daily_sources.py", line 178, in build
+    return sources.build_from_admitted_panel(**arguments)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/src/v5_shadow/a_close_daily_sources.py", line 413, in build_from_admitted_panel
+    load_frozen_module("infrastructure.owned_path").resolve_owned_path(root, "a_share_reviews/manifest.json")
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/vendor/m09_a_close_daily/infrastructure/owned_path.py", line 49, in resolve_owned_path
+    _assert_no_reparse_ancestor(raw_root)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "<TASK_ROOT>/m09h-084df-source/V5/vendor/m09_a_close_daily/infrastructure/owned_path.py", line 26, in _assert_no_reparse_ancestor
+    raise ValueError("owned destination has a reparse-point ancestor")
+ValueError: owned destination has a reparse-point ancestor
+
+----------------------------------------------------------------------
+Ran 30 tests in 6.726s
+
+FAILED (errors=6)
