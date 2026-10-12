@@ -1,0 +1,13 @@
+{
+  "runtime_root": "/var/tmp/v5-runtime",
+  "composition": "/var/tmp/v5/composition.json",
+  "module_api": {
+    "host": "127.0.0.1",
+    "mode": "READ_ONLY"
+  },
+  "daily": {
+    "enabled": false,
+    "bundle_root": "/var/tmp/v5/daily",
+    "ledger_root": "/var/tmp/v5/ledger"
+  }
+}
