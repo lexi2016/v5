@@ -1,0 +1,16 @@
+{
+  "command": [
+    "<EXISTING_PYTHON>",
+    "-B",
+    "-m",
+    "unittest",
+    "test_m06_readonly_api",
+    "test_source_bundle.SourceBundleTests.test_source_publication_is_readonly_and_separate_from_manager",
+    "-v"
+  ],
+  "started_utc": "2026-10-12T17:31:46.421831+00:00",
+  "ended_utc": "2026-10-12T17:31:51.846054+00:00",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "test_actual_original_cold_projection_all100_and_readonly (test_m06_readonly_api.M06ReadOnlyAPITests.test_actual_original_cold_projection_all100_and_readonly) ... ok\ntest_binding_cannot_attach_to_manager_or_add_runtime_arguments (test_m06_readonly_api.M06ReadOnlyAPITests.test_binding_cannot_attach_to_manager_or_add_runtime_arguments) ... ok\ntest_get_query_cannot_choose_another_date_or_reference (test_m06_readonly_api.M06ReadOnlyAPITests.test_get_query_cannot_choose_another_date_or_reference) ... ok\ntest_missing_binding_explicit_not_configured (test_m06_readonly_api.M06ReadOnlyAPITests.test_missing_binding_explicit_not_configured) ... ok\ntest_post_is_readonly_no_writes (test_m06_readonly_api.M06ReadOnlyAPITests.test_post_is_readonly_no_writes) ... ok\ntest_preserve_existing_source_route_and_generation (test_m06_readonly_api.M06ReadOnlyAPITests.test_preserve_existing_source_route_and_generation) ... ok\ntest_reference_mismatch_fails_closed_without_old_payload (test_m06_readonly_api.M06ReadOnlyAPITests.test_reference_mismatch_fails_closed_without_old_payload) ... ok\ntest_saved_artifact_tamper_rejected_and_no_republication (test_m06_readonly_api.M06ReadOnlyAPITests.test_saved_artifact_tamper_rejected_and_no_republication) ... ok\ntest_source_publication_is_readonly_and_separate_from_manager (test_source_bundle.SourceBundleTests.test_source_publication_is_readonly_and_separate_from_manager) ... ok\n\n----------------------------------------------------------------------\nRan 9 tests in 5.359s\n\nOK\n"
+}

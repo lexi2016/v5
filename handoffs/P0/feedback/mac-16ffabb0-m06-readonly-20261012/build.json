@@ -1,0 +1,14 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "build",
+    "--prefix",
+    "frontend"
+  ],
+  "started_utc": "2026-10-12T17:31:59.372356+00:00",
+  "ended_utc": "2026-10-12T17:32:00.520870+00:00",
+  "exit": 0,
+  "stdout": "\n> v3-5-web@0.1.0 build\n> vite build\n\nvite v7.3.6 building client environment for production...\ntransforming...\n✓ 133 modules transformed.\nrendering chunks...\ncomputing gzip size...\ndist/daily-research-command/index.html               0.50 kB │ gzip:   0.35 kB\ndist/manager-selection/index.html                    0.56 kB │ gzip:   0.36 kB\ndist/index.html                                      0.85 kB │ gzip:   0.53 kB\ndist/assets/SavedManagerResultView-DHHZDSu1.css      5.22 kB │ gzip:   1.30 kB\ndist/assets/dailyResearchCommand-D7J2FMsY.css       12.28 kB │ gzip:   2.57 kB\ndist/assets/style-BtNCnKLk.css                      18.59 kB │ gzip:   3.89 kB\ndist/assets/App-C8ZBy9MI.css                        20.33 kB │ gzip:   4.11 kB\ndist/assets/ManagerSelectionView-DPqeaKxb.css       48.28 kB │ gzip:   7.98 kB\ndist/assets/_plugin-vue_export-helper-DlAUqK2U.js    0.09 kB │ gzip:   0.10 kB\ndist/assets/main-BBW2q8kx.js                         0.76 kB │ gzip:   0.44 kB\ndist/assets/managerSelection-fEAKFZkn.js             0.82 kB │ gzip:   0.45 kB\ndist/assets/style-DI6AXicP.js                        1.11 kB │ gzip:   0.65 kB\ndist/assets/research_lane-t0CPXntR.js                4.27 kB │ gzip:   1.73 kB\ndist/assets/dailyResearchCommand-D13tk45Q.js        26.61 kB │ gzip:   7.65 kB\ndist/assets/reboundPanelObservation-rEOT8hV3.js     30.02 kB │ gzip:  11.32 kB\ndist/assets/SavedManagerResultView-BADkwtuE.js      34.42 kB │ gzip:  11.75 kB\ndist/assets/runtime-dom.esm-bundler-Ds5LT4Of.js     69.05 kB │ gzip:  27.40 kB\ndist/assets/App-8NKFrO9R.js                        175.36 kB │ gzip:  53.69 kB\ndist/assets/ManagerSelectionView-Hp_a-sop.js       403.99 kB │ gzip: 120.59 kB\n✓ built in 907ms\n",
+  "stderr": ""
+}

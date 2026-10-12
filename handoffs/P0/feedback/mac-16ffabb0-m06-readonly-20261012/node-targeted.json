@@ -1,0 +1,13 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "frontend/tests/hkPreselectionPool.node.mjs",
+    "frontend/tests/sourceBundle.node.mjs"
+  ],
+  "started_utc": "2026-10-12T17:31:57.522005+00:00",
+  "ended_utc": "2026-10-12T17:31:57.649200+00:00",
+  "exit": 0,
+  "stdout": "✔ M06 read-only frontend client exists (0.589833ms)\n✔ GET preserves all100 original rows, fields, dates, identities and source order (11.500375ms)\n✔ 99 rows, duplicate symbols, wrong row identity and altered dates fail closed (4.791166ms)\n✔ unsafe claims are rejected at payload, reference, artifact and row boundaries (4.109833ms)\n✔ wrong committed, source and computation identities cannot be displayed (4.282583ms)\n✔ NOT_CONFIGURED is explicit and never represented as an empty successful pool (0.56525ms)\n✔ HTTP missing and corrupt results, invalid JSON, empty and oversized responses fail closed (6.5155ms)\n✔ new reads immediately clear old rows and a failed read leaves no stale result (0.616709ms)\n✔ late success cannot overwrite newer missing configuration and old request is aborted (0.51325ms)\n✔ late failure cannot clear a newer valid result (0.413666ms)\n✔ closing aborts pending read, ignores completion and prevents additional reads (0.396375ms)\n✔ standalone panel renders original row fields and embeds only within source status (0.283208ms)\n✔ source panel reads only saved route and preserves owner states and historical replay (10.039167ms)\n✔ missing or duplicate modules, wrong owner, promoted flags and malformed identity fail closed (0.736292ms)\n✔ HTTP errors, invalid JSON, absent and oversized streams stay unconfirmed (0.534917ms)\n✔ failed re-read clears previously valid source result (0.200459ms)\n✔ repeated reads do not let older completion replace new result (0.172875ms)\n✔ closing a pending read ignores later completion (0.103167ms)\nℹ tests 18\nℹ suites 0\nℹ pass 18\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 92.497542\n",
+  "stderr": ""
+}

@@ -1,0 +1,8 @@
+Error: DOM_TIMEOUT
+    at until (<TASK>/p016_dom.mjs:6:132)
+    at async <TASK>/p016_dom.mjs:7:1
+Node.js v24.19.0
+
+Diagnostic using previously captured real HTTP bytes:
+LOADING -> CANNOT_CONFIRM
+error: M06_RESEARCH_BOUNDARY

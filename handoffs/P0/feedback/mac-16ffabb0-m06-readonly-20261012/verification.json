@@ -1,0 +1,63 @@
+{
+  "candidate": "16ffabb0f1a19d94b5639ce8a0779e9285f40e24",
+  "status": "FAIL_REAL_COMPONENT_ADMISSION",
+  "fixed_code_files_verified_pre_and_post": 1079,
+  "m06_private_runtime_files_verified": 50,
+  "targeted_results": {
+    "python_m06": 9,
+    "python_api": 11,
+    "node": 18,
+    "typecheck_exit": 0,
+    "build_exit": 0
+  },
+  "real_http": {
+    "m06_get_http": 200,
+    "entire_artifact_equal_to_original_committed_artifact": true,
+    "complete_reference_exact": true,
+    "rows": 100,
+    "fixture_only": false,
+    "model_weights_reverified": false,
+    "old_four_source_result_exact": true,
+    "post_http": 405
+  },
+  "real_component": {
+    "command": [
+      "<EXISTING_NODE>",
+      "p016_dom.mjs",
+      "<SOURCE_API>"
+    ],
+    "status": "FAILED",
+    "original_error": "Error: DOM_TIMEOUT",
+    "readiness_wait_seconds": 25,
+    "parent_harness_exit": 1,
+    "diagnostic": "Unmodified HkPreselectionSession validated the already captured real HTTP bytes without rerunning producer or HTTP; transitions LOADING -> CANNOT_CONFIRM, error M06_RESEARCH_BOUNDARY.",
+    "root_cause": "boundary(row) rejects an original CSV-preserved research_only string True because it requires boolean true when the key is present. Top-level and reference research_only are boolean true; trading flags remain boolean false.",
+    "original_row_field_summary": [
+      {
+        "type": "str",
+        "value": "True",
+        "rows": 100
+      }
+    ],
+    "location": "frontend/src/api/hkPreselectionPool.ts:74",
+    "product_not_modified": true,
+    "raw_payload_not_uploaded": true
+  },
+  "not_reached": [
+    "Successful actual DOM all100 display",
+    "DOM repeat/disconnect completion",
+    "Same-run manager navigation for this candidate",
+    "Completed before/after full M06-root immutability assertion",
+    "Preview switch/deployment"
+  ],
+  "preview": {
+    "deployed": false,
+    "retained_candidate": "a50c5d022e6e4e8362d96079b4abffc988ff77cb",
+    "port": 54780
+  },
+  "new_test_source_child_cleaned_up": true,
+  "original_m06_reference_not_republished": true,
+  "models_not_executed": true,
+  "dependencies_not_installed": true,
+  "no_v4_or_other_service_changes": true
+}
