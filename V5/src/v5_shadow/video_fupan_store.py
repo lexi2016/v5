@@ -23,11 +23,6 @@ def sha_bytes(data: bytes) -> str:
 
 
 def _ensure_parent(path: Path) -> None:
-    """Create a parent directory using an explicit keyword contract.
-
-    Kept as a small boundary so callers never rely on positional pathlib
-    arguments during immutable publication.
-    """
     path.parent.mkdir(parents=True, exist_ok=True)
 
 
@@ -76,7 +71,9 @@ def publish_latest_success(root: Path | str, date: str, run_id: str) -> None:
     root = ensure_private_root(root)
     ensure_date_run(date, run_id)
     current = root / "video_fupan" / date / "latest_success.json"
-    if current.exists():
-        return
     _ensure_parent(current)
+    if current.exists():
+        existing = json.loads(current.read_text(encoding="utf-8"))
+        if not isinstance(existing, dict) or not existing.get("run_id"):
+            raise VideoStoreError("invalid latest_success pointer")
     current.write_text(json.dumps({"run_id": run_id}), encoding="utf-8")
