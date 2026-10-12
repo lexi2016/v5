@@ -1,0 +1,53 @@
+{
+  "candidate": "e951e566255e27fb82493d65af0932e37407a55d",
+  "branch": "v5/m09-handoff-20261011",
+  "result": "PASS_OFFLINE_SYNTHETIC_ORIGINAL_OWNER_AND_READBACK",
+  "runner_invocations": 1,
+  "tests": {
+    "errors": 0,
+    "failures": 0,
+    "run": 136,
+    "skipped": []
+  },
+  "environment": {
+    "python": "3.14.6",
+    "dependencies": {
+      "pandas": "2.3.3",
+      "pyarrow": "24.0.0"
+    },
+    "supported": true
+  },
+  "required_supported": true,
+  "required_zero_skip": true,
+  "runtime_and_original_source_files_verified": 104,
+  "runner_source_hashes_verified": true,
+  "historical_zip_archives_used_or_extracted": false,
+  "models_or_live_collection": false,
+  "deployed": false,
+  "services_changed": false,
+  "dependencies_installed": false,
+  "log_identities": {
+    "report.json": {
+      "original_local_sha256": "c83429e5c231386c45ca9f1a767b68b9b3723a7ceea09ebc1a391eb98ee9c1ca",
+      "sanitized_sha256": "c83429e5c231386c45ca9f1a767b68b9b3723a7ceea09ebc1a391eb98ee9c1ca"
+    },
+    "execution.json": {
+      "original_local_sha256": "d524cf12bd84fc17fcd81ce8b70f770601ce044d03722d7528e11735a4e111db",
+      "sanitized_sha256": "1cf4038a2bb1027751656e17f2062a7e07a4a68b9798276a3dbe70f6d6317845"
+    },
+    "product.stdout.log": {
+      "original_local_sha256": "0315188482392c81d5a0828cb2f589d9ee385586aae74fb6df26f235ac211e02",
+      "sanitized_sha256": "0315188482392c81d5a0828cb2f589d9ee385586aae74fb6df26f235ac211e02"
+    },
+    "product.stderr.log": {
+      "original_local_sha256": "87b1684237b176edbe6b5ba0af8b001b798c332e36ac1f3ccff5bc8c809fa98e",
+      "sanitized_sha256": "166cfb475d0a42ae73812055e1169743f09a39c57b65d42c615eaabf3217f2ee"
+    }
+  },
+  "limits": [
+    "Synthetic engineering acceptance only; not uncleaned real 5126-row historical input acceptance.",
+    "Real source quality/PIT questions remain open.",
+    "Ordinary API/UI, automatic dispatcher and natural slots NOT_RUN.",
+    "Missing video/stage evidence remains visible; no promotion to production."
+  ]
+}
