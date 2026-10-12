@@ -1,0 +1,498 @@
+--- a/V5/src/v5_shadow/m17_readonly.py
++++ /dev/null
+@@ -1,235 +0,0 @@
+-"""Exact-run M17 GET adapter. No owner, collector, claim or finish path.
+-
+-The frozen original reader validates products in a new interpreter per GET.
+-Only synthetic tests create products. This module never publishes or schedules.
+-"""
+-from __future__ import annotations
+-
+-import argparse
+-import hashlib
+-import json
+-import os
+-from pathlib import Path
+-import re
+-import subprocess
+-import sys
+-
+-if __package__ in (None, ''):
+-    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+-from v5_shadow.composition import no_symlinks
+-from v5_shadow.contracts import exact_keys, trade_date
+-from v5_shadow.digests import canonical_bytes
+-from v5_shadow.run_ledger import identity_key, read_run
+-from v5_shadow.daily_close_recapture_owner import _config, _read_file, _audit_guard
+-
+-BASE = Path(__file__).resolve().parents[2]
+-ROUTE = '/api/v5/manager/close-recapture'
+-MAX_RESPONSE_BYTES = 256 * 1024
+-MAX_CONFIG_BYTES = 32 * 1024
+-FLAGS = dict(RESEARCH_ONLY=True, production_allowed=False, buy_gate_updated=False,
+-             orders_sent=False, natural_verified=False, formal_eligibility_verified=False)
+-KEYS = ('schema_version', 'state_root', 'universe_root', 'ledger_root', 'python_executable',
+-        'identity', 'run_id', 'execution_label', 'operation')
+-
+-
+-def _refs(date):
+-    prefix = f'workbench_research/{date}/'
+-    return dict(artifact=prefix+'close_recapture.json', receipt=prefix+'close_recapture.receipt.json',
+-                snapshot=prefix+'inputs/close_recapture_pytdx.json',
+-                candidate_overlay=prefix+'close_recapture.candidates.json')
+-
+-
+-def validate_binding(config):
+-    """Explicit isolated roots and all seven original ledger identity fields."""
+-    exact_keys(config, KEYS)
+-    if (config['schema_version'] != 'v5.m17.readonly-binding.v1'
+-            or config['execution_label'] != 'MANUAL_RECOVERY'
+-            or config['operation'] != 'EXISTING_VERIFIED_PRODUCT_REUSE'):
+-        raise ValueError('M17_READONLY_BINDING')
+-    if len(canonical_bytes(config)) > MAX_CONFIG_BYTES:
+-        raise ValueError('M17_READONLY_CONFIG_LIMIT')
+-    identity_key(config['identity'])
+-    if config['identity']['lane'] != 'manager_close_recapture':
+-        raise ValueError('M17_READONLY_LANE')
+-    if not isinstance(config['run_id'], str) or not re.fullmatch('[0-9a-f]{32}', config['run_id']):
+-        raise ValueError('M17_READONLY_RUN_ID')
+-    roots = [no_symlinks(Path(config[k])) for k in ('state_root','universe_root','ledger_root')]
+-    for i, root in enumerate(roots):
+-        for other in roots[i+1:]:
+-            if root.is_relative_to(other) or other.is_relative_to(root):
+-                raise ValueError('M17_READONLY_ROOT_OVERLAP')
+-    # Reuse the existing 24-file manifest, root marker, and interpreter checks.
+-    runtime = dict(capture_mode='PYTDX_LATE_OBSERVATION',
+-        owner_root=str(BASE/'vendor/close_discovery_baseline'),
+-        python=config['python_executable'], state_root=config['state_root'],
+-        universe_root=config['universe_root'],
+-        source_manifest=str(BASE/'contracts/close_recapture_source_manifest.json'), timeout_seconds=30)
+-    _config(runtime)
+-    return runtime
+-
+-
+-def _saved(config, state):
+-    saved = state.get('latest_success') if isinstance(state, dict) else None
+-    if (not isinstance(saved, dict) or saved.get('run_id') != config['run_id']
+-            or saved.get('status') != 'SUCCEEDED' or saved.get('readback_verified') is not True
+-            or not isinstance(state.get('attempts'), list)
+-            or not any(a == saved for a in state['attempts'])):
+-        raise ValueError('M17_READONLY_SAVED_SUCCESS_REQUIRED')
+-    ref = saved.get('product_reference')
+-    if (not isinstance(ref, dict) or ref.get('ledger_run_id') != config['run_id']
+-            or ref.get('source_trade_date') != config['identity']['target_date']
+-            or ref.get('request_sha256') != config['identity']['input_sha256']
+-            or ref.get('root') != config['state_root']
+-            or ref.get('owner_status') not in {'READY','PARTIAL'}
+-            or any(ref.get(k) is not v for k,v in FLAGS.items() if k != 'formal_eligibility_verified')):
+-        raise ValueError('M17_READONLY_PRODUCT_IDENTITY')
+-    files = ref.get('files')
+-    if not isinstance(files, dict) or set(files) != set(_refs(config['identity']['target_date'])):
+-        raise ValueError('M17_READONLY_FILES')
+-    for key, path in _refs(config['identity']['target_date']).items():
+-        item = files[key]
+-        if (not isinstance(item, dict) or item.get('artifact_ref') != path
+-                or not isinstance(item.get('sha256'), str)
+-                or not re.fullmatch('[0-9a-f]{64}', item['sha256'])):
+-            raise ValueError('M17_READONLY_FILE_REFERENCE')
+-    return ref
+-
+-
+-def _redact(value, roots):
+-    if isinstance(value, str):
+-        if value.startswith(('/', 'file://', '\\\\')) or re.match(r'^[A-Za-z]:[\\/]', value):
+-            return '<redacted>'
+-        for root in roots:
+-            value = value.replace(root, '<redacted>')
+-        # Free-form original fields can embed an unrelated private path.
+-        return re.sub(r"(?<![A-Za-z0-9_./-])(?:file://[^\s\"'<>]+|/(?!/)[^\s\"'<>]+|[A-Za-z]:[\\/][^\s\"'<>]+|\\\\[^\s\"'<>]+)",
+-                      '<redacted>', value)
+-    if isinstance(value, list):
+-        return [_redact(v, roots) for v in value]
+-    if isinstance(value, dict):
+-        return {_redact(k, roots): _redact(v, roots) for k,v in value.items()}
+-    return value
+-
+-
+-def _worker(packet):
+-    config, ref = packet['config'], packet['reference']
+-    runtime = validate_binding(config)
+-    state_root = Path(config['state_root']); date = config['identity']['target_date']
+-    # Existing reader guard is reused unchanged. It is not an OS sandbox claim.
+-    _audit_guard('reader', state_root)
+-    sys.path.insert(0, runtime['owner_root'])
+-    from apps.api.v35_api.manager_workbench_router import ManagerWorkbenchResearchReader
+-    from ops.materialize_manager_close_discovery import _read_close_recapture_pool
+-    expected = _refs(date)
+-
+-    def read_hashes():
+-        return {key: dict(artifact_ref=path,
+-                    sha256=hashlib.sha256(_read_file(state_root/path)).hexdigest())
+-                for key,path in expected.items()}
+-
+-    if read_hashes() != ref['files']:
+-        raise ValueError('M17_READONLY_FILES_CHANGED')
+-    value = ManagerWorkbenchResearchReader(state_root).read_close_recapture(date)
+-    if value['status'] not in {'READY','PARTIAL'}:
+-        raise ValueError('M17_READONLY_ORIGINAL_READER_REJECTED')
+-    pool, _ = _read_close_recapture_pool(Path(config['universe_root'])/'.runtime/data', date)
+-    if pool != value['pool'] or pool != ref['pool']:
+-        raise ValueError('M17_READONLY_EXTERNAL_POOL_CHANGED')
+-    rows = value['candidate_overlay']['rows']
+-    if (not 1 <= len(rows) <= 100 or len(rows) != ref['candidate_count']
+-            or value['plan_trade_date'] != ref['plan_trade_date']
+-            or value['status'] != ref['owner_status']
+-            or value['request']['captured_at'] != ref['captured_at']
+-            or value['request']['available_at'] != ref['available_at']
+-            or value['cannot_confirm'] != ref['cannot_confirm']
+-            or value['received_not_historical_1530'] is not True
+-            or read_hashes() != ref['files']):
+-        raise ValueError('M17_READONLY_PRODUCT_CHANGED')
+-    result = dict(schema_version='v5.m17.readonly-response.v1', status=value['status'],
+-        source_trade_date=date, plan_trade_date=value['plan_trade_date'], run_id=config['run_id'],
+-        identity=config['identity'], execution_kind=ref['execution_kind'],
+-        execution_label=config['execution_label'], operation=config['operation'],
+-        captured_at=value['request']['captured_at'], available_at=value['request']['available_at'],
+-        received_not_historical_1530=True, candidate_count=len(rows), rows=rows,
+-        files=ref['files'], pool=pool, cannot_confirm=value['cannot_confirm'],
+-        bar_window=value['bar_window'], coverage=value['coverage'],
+-        source=value['source'], reader_pid=os.getpid(), **FLAGS)
+-    result = _redact(result, [config[k] for k in ('state_root','universe_root','ledger_root','python_executable')]
+-                     + [str(BASE)])
+-    if len(canonical_bytes(result)) > MAX_RESPONSE_BYTES:
+-        raise ValueError('M17_READONLY_RESPONSE_LIMIT')
+-    return result
+-
+-
+-def read_m17(config, *, source_trade_date, run_id):
+-    """Read only this explicit source date and exact successful original run."""
+-    validate_binding(config)
+-    trade_date(source_trade_date)
+-    if source_trade_date != config['identity']['target_date'] or run_id != config['run_id']:
+-        raise ValueError('M17_READONLY_EXACT_REFERENCE_REQUIRED')
+-    before = read_run(config['ledger_root'], config['identity'])
+-    reference = _saved(config, before)
+-    try:
+-        child = subprocess.run([config['python_executable'], '-I', '-B', str(Path(__file__).resolve()), '--worker'],
+-            input=canonical_bytes(dict(config=config, reference=reference)), stdout=subprocess.PIPE,
+-            stderr=subprocess.PIPE, timeout=30, cwd=str(BASE),
+-            env={'PATH':os.defpath, 'PYTHONDONTWRITEBYTECODE':'1'})
+-    except (OSError, subprocess.TimeoutExpired) as error:
+-        raise ValueError('M17_READONLY_READER_UNAVAILABLE') from error
+-    if len(child.stdout) > MAX_RESPONSE_BYTES:
+-        raise ValueError('M17_READONLY_RESPONSE_LIMIT')
+-    if child.returncode:
+-        raise ValueError('M17_READONLY_READER_REJECTED')
+-    try:
+-        result = json.loads(child.stdout)
+-        if (result['schema_version'] != 'v5.m17.readonly-response.v1'
+-                or result['source_trade_date'] != source_trade_date or result['run_id'] != run_id
+-                or result['identity'] != config['identity'] or result['files'] != reference['files']
+-                or result['status'] not in {'READY','PARTIAL'}
+-                or not 1 <= len(result['rows']) <= 100
+-                or result['candidate_count'] != len(result['rows'])
+-                or any(result.get(k) is not v for k,v in FLAGS.items())):
+-            raise ValueError('M17_READONLY_RESPONSE_MISMATCH')
+-    except (KeyError, TypeError, UnicodeError, json.JSONDecodeError) as error:
+-        raise ValueError('M17_READONLY_RESPONSE_INVALID') from error
+-    if read_run(config['ledger_root'], config['identity']) != before:
+-        raise ValueError('M17_READONLY_LEDGER_CHANGED')
+-    if len(canonical_bytes(result)) > MAX_RESPONSE_BYTES:
+-        raise ValueError('M17_READONLY_RESPONSE_LIMIT')
+-    return result
+-
+-
+-def get_response(config, query):
+-    """Host GET contract; no shared route registry is modified by this candidate."""
+-    exact_keys(query, ('source_trade_date', 'run_id'))
+-    return read_m17(config, source_trade_date=query['source_trade_date'], run_id=query['run_id'])
+-
+-
+-def main(argv=None):
+-    parser = argparse.ArgumentParser(description=__doc__)
+-    parser.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
+-    parser.add_argument('--config', type=Path)
+-    parser.add_argument('--source-trade-date')
+-    parser.add_argument('--run-id')
+-    args = parser.parse_args(argv)
+-    try:
+-        if args.worker:
+-            raw = sys.stdin.buffer.read(1024*1024+1)
+-            if len(raw) > 1024*1024: raise ValueError('M17_READONLY_PACKET_LIMIT')
+-            result = _worker(json.loads(raw))
+-        else:
+-            if args.config is None or args.source_trade_date is None or args.run_id is None:
+-                parser.error('--config, --source-trade-date and --run-id are required')
+-            raw = _read_file(args.config)
+-            if len(raw) > MAX_CONFIG_BYTES: raise ValueError('M17_READONLY_CONFIG_LIMIT')
+-            result = read_m17(json.loads(raw), source_trade_date=args.source_trade_date, run_id=args.run_id)
+-        print(canonical_bytes(result).decode())
+-        return 0
+-    except (OSError, ValueError, KeyError, TypeError):
+-        # Never publish private config paths or raw child tracebacks.
+-        print('{"status":"REJECTED","reason_code":"M17_READONLY_REFERENCE_REJECTED"}')
+-        return 2
+-
+-
+-if __name__ == '__main__':
+-    raise SystemExit(main())
+--- a/V5/tests/test_m17_readonly.py
++++ /dev/null
+@@ -1,235 +0,0 @@
+-"""Synthetic fixtures; original reader/ledger code, no market acquisition.
+-Only this new suite is executed. The old suite is imported for its fixture builder.
+-"""
+-import copy
+-import hashlib
+-import importlib.util
+-import json
+-import os
+-from pathlib import Path
+-import subprocess
+-import sys
+-import tempfile
+-import unittest
+-from unittest.mock import patch
+-
+-HERE = Path(__file__).resolve().parents[1]
+-sys.path.insert(0, str(HERE / 'src'))
+-sys.path.insert(0, str(HERE / 'tests'))
+-from test_daily_close_recapture_owner import fixture
+-from v5_shadow import daily_close_recapture_owner as original
+-from v5_shadow.digests import canonical_bytes
+-from v5_shadow.run_ledger import identity_key
+-
+-
+-def files_snapshot(*roots):
+-    return {str(p): (hashlib.sha256(p.read_bytes()).hexdigest(), p.stat().st_mtime_ns)
+-            for root in roots for p in Path(root).rglob('*') if p.is_file()}
+-
+-
+-class M17ReadonlyTests(unittest.TestCase):
+-    def setUp(self):
+-        self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m17_readonly'),
+-                             'M17_READONLY adapter is missing')
+-        from v5_shadow import m17_readonly
+-        self.api = m17_readonly
+-        self.tmp = tempfile.TemporaryDirectory()
+-        self.addCleanup(self.tmp.cleanup)
+-        request, self.ledger = fixture(Path(self.tmp.name).resolve())
+-        self.request = request
+-        # Only fixture preparation calls the original synthetic owner. GET cannot.
+-        result = original.run_close_recapture_daily(request, str(self.ledger),
+-                    original.bind_close_recapture_owner(request['config']))
+-        self.assertEqual(result['status'], 'SUCCEEDED', result)
+-        self.state = result['state']
+-        self.run_id = self.state['latest_success']['run_id']
+-        self.source_date = request['source_trade_date']
+-        self.config = dict(schema_version='v5.m17.readonly-binding.v1',
+-            state_root=request['config']['state_root'], universe_root=request['config']['universe_root'],
+-            ledger_root=str(self.ledger), python_executable=sys.executable,
+-            identity=self.state['identity'], run_id=self.run_id,
+-            execution_label='MANUAL_RECOVERY', operation='EXISTING_VERIFIED_PRODUCT_REUSE')
+-        self.roots = [self.config[k] for k in ('state_root','universe_root','ledger_root')]
+-
+-    def read(self, **kwargs):
+-        return self.api.read_m17(self.config,
+-            source_trade_date=kwargs.get('source_trade_date', self.source_date),
+-            run_id=kwargs.get('run_id', self.run_id))
+-
+-    def rewrite_ledger(self):
+-        if self.state['latest_success'] is not None:
+-            self.state['attempts'][-1] = copy.deepcopy(self.state['latest_success'])
+-        path = self.ledger / self.state['identity']['lane'] / self.source_date
+-        (path / (identity_key(self.state['identity']) + '.json')).write_bytes(canonical_bytes(self.state))
+-
+-    def test_get_returns_original_hundred_rows_with_fresh_reader_and_no_mutation(self):
+-        before = files_snapshot(*self.roots)
+-        with patch.object(original, 'claim_run', side_effect=AssertionError('claim forbidden')), \
+-             patch.object(original, 'finish_run', side_effect=AssertionError('finish forbidden')), \
+-             patch.object(original, 'run_close_recapture_owner', side_effect=AssertionError('owner forbidden')):
+-            value = self.read()
+-            again = self.read()
+-        self.assertEqual(files_snapshot(*self.roots), before)
+-        self.assertEqual(value['status'], 'READY')
+-        self.assertEqual(value['source_trade_date'], self.source_date)
+-        self.assertEqual(value['plan_trade_date'], '20260929')
+-        self.assertEqual(value['run_id'], self.run_id)
+-        self.assertEqual(value['identity'], self.state['identity'])
+-        self.assertNotEqual(value['reader_pid'], os.getpid())
+-        self.assertNotEqual(value['reader_pid'], again['reader_pid'])
+-        overlay = json.loads((Path(self.config['state_root']) /
+-            f'workbench_research/{self.source_date}/close_recapture.candidates.json').read_bytes())
+-        self.assertEqual(value['rows'], overlay['rows'])
+-        self.assertEqual(len(value['rows']), 100)
+-        self.assertEqual(value['candidate_count'], 100)
+-        self.assertEqual(value['files'], self.state['latest_success']['product_reference']['files'])
+-        self.assertEqual(value['captured_at'], self.state['latest_success']['product_reference']['captured_at'])
+-        self.assertEqual(value['pool'], self.state['latest_success']['product_reference']['pool'])
+-        self.assertEqual(value['execution_label'], 'MANUAL_RECOVERY')
+-        self.assertEqual(value['operation'], 'EXISTING_VERIFIED_PRODUCT_REUSE')
+-        for key in ('natural_verified','formal_eligibility_verified','production_allowed','buy_gate_updated','orders_sent'):
+-            self.assertIs(value[key], False)
+-        self.assertIs(value['RESEARCH_ONLY'], True)
+-        self.assertIs(value['received_not_historical_1530'], True)
+-        self.assertIn('PYTDX_TURNOVER_CURRENCY_UNIT_UNVERIFIED', value['cannot_confirm'])
+-        self.assertLessEqual(len(canonical_bytes(value)), self.api.MAX_RESPONSE_BYTES)
+-        self.assertNotIn(str(self.tmp.name), canonical_bytes(value).decode())
+-        self.assertFalse(any(k.startswith(('ops.', 'apps.api.')) for k in sys.modules))
+-
+-    def test_wrong_run_source_or_identity_is_rejected_without_mutation(self):
+-        before = files_snapshot(*self.roots)
+-        for kwargs in ({'run_id':'f'*32}, {'source_trade_date':'20260929'}):
+-            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError): self.read(**kwargs)
+-        for field in self.config['identity']:
+-            saved = self.config['identity'][field]
+-            self.config['identity'][field] = ('0'*64 if field.endswith('sha256') else
+-                '2026-09-29T00:00:09+08:00' if field == 'research_cutoff' else '20260929' if field == 'target_date' else 'rebound')
+-            with self.subTest(field=field), self.assertRaises(ValueError): self.read()
+-            self.config['identity'][field] = saved
+-        self.assertEqual(files_snapshot(*self.roots), before)
+-
+-    def test_all_four_damaged_products_fail_closed(self):
+-        for item in self.state['latest_success']['product_reference']['files'].values():
+-            path = Path(self.config['state_root']) / item['artifact_ref']; raw = path.read_bytes()
+-            path.write_bytes(b'{}')
+-            before = files_snapshot(*self.roots)
+-            with self.subTest(ref=item['artifact_ref']), self.assertRaises(ValueError): self.read()
+-            self.assertEqual(files_snapshot(*self.roots), before)
+-            path.write_bytes(raw)
+-
+-    def test_external_pool_drift_is_rejected(self):
+-        path = next(Path(self.config['universe_root']).rglob('artifact.csv'))
+-        path.write_bytes(b'changed pool')
+-        before = files_snapshot(*self.roots)
+-        with self.assertRaises(ValueError): self.read()
+-        self.assertEqual(files_snapshot(*self.roots), before)
+-
+-    def test_ledger_file_hash_or_pool_substitution_is_rejected(self):
+-        ref = self.state['latest_success']['product_reference']
+-        for mutate in (lambda: ref['files']['receipt'].update(sha256='0'*64),
+-                       lambda: ref['pool'].update(run_id='different')):
+-            saved = copy.deepcopy(ref)
+-            mutate(); self.rewrite_ledger()
+-            with self.assertRaises(ValueError): self.read()
+-            ref.clear(); ref.update(saved)
+-        self.rewrite_ledger()
+-
+-    def test_non_success_missing_readback_and_wrong_saved_run_rejected(self):
+-        for change in ({'status':'RUNNING'}, {'readback_verified':False}, {'run_id':'e'*32}):
+-            saved = copy.deepcopy(self.state['latest_success'])
+-            self.state['latest_success'].update(change); self.rewrite_ledger()
+-            with self.subTest(change=change), self.assertRaises(ValueError): self.read()
+-            self.state['latest_success'] = saved
+-        self.state['latest_success'] = None; self.rewrite_ledger()
+-        with self.assertRaises(ValueError): self.read()
+-
+-    def test_missing_ledger_never_creates_attempts(self):
+-        folder = self.ledger / self.state['identity']['lane'] / self.source_date
+-        (folder / (identity_key(self.state['identity']) + '.json')).unlink()
+-        before = files_snapshot(*self.roots)
+-        with self.assertRaises(ValueError): self.read()
+-        self.assertEqual(files_snapshot(*self.roots), before)
+-
+-    def test_root_overlap_or_wrong_marker_rejected(self):
+-        for key in ('ledger_root', 'universe_root'):
+-            saved = self.config[key]; self.config[key] = self.config['state_root']
+-            with self.subTest(key=key), self.assertRaises(ValueError): self.read()
+-            self.config[key] = saved
+-        (Path(self.config['state_root']) / '.v5-m17-close-root').write_text('not m17\n')
+-        with self.assertRaises(ValueError): self.read()
+-
+-    def test_response_byte_limit_is_enforced(self):
+-        with patch.object(self.api, 'MAX_RESPONSE_BYTES', 200):
+-            with self.assertRaisesRegex(ValueError, 'LIMIT'): self.read()
+-
+-    def test_private_paths_in_original_extra_fields_are_redacted(self):
+-        # Use a valid original product with an extra free-form field, then update
+-        # its source hashes consistently. Core reader still performs validation.
+-        root = Path(self.config['state_root']); ref = self.state['latest_success']['product_reference']
+-        paths = {k: root / v['artifact_ref'] for k,v in ref['files'].items()}
+-        overlay = json.loads(paths['candidate_overlay'].read_bytes())
+-        overlay['rows'][0]['debug_path'] = str(root / 'private.json')
+-        overlay['rows'][0]['debug_text'] = r'source=/Users/alice/private/receipt.json; error at C:\Users\alice\private.json; source:/Users/alice/private/a; path:C:\Users\alice\private.json; source:file:///Users/alice/private/a'
+-        paths['candidate_overlay'].write_bytes(canonical_bytes(overlay))
+-        digest = hashlib.sha256(paths['candidate_overlay'].read_bytes()).hexdigest()
+-        artifact = json.loads(paths['artifact'].read_bytes()); artifact['candidate_overlay']['sha256'] = digest
+-        paths['artifact'].write_bytes(canonical_bytes(artifact))
+-        receipt = json.loads(paths['receipt'].read_bytes())
+-        receipt.update(candidate_overlay_sha256=digest,artifact_sha256=hashlib.sha256(paths['artifact'].read_bytes()).hexdigest())
+-        paths['receipt'].write_bytes(canonical_bytes(receipt))
+-        for key,path in paths.items(): ref['files'][key]['sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
+-        self.rewrite_ledger()
+-        value = self.read()
+-        self.assertEqual(value['rows'][0]['debug_path'], '<redacted>')
+-        self.assertNotIn(str(root), canonical_bytes(value).decode())
+-        self.assertNotIn('/Users/alice', value['rows'][0]['debug_text'])
+-        self.assertNotIn(r'C:\Users', value['rows'][0]['debug_text'])
+-
+-    def test_fixed_get_query_contract_rejects_unbound_keys(self):
+-        query = dict(source_trade_date=self.source_date, run_id=self.run_id)
+-        value = self.api.get_response(self.config, query)
+-        self.assertEqual(value['run_id'], self.run_id)
+-        for invalid in ({}, dict(query, limit='1000'), dict(query, source_trade_date=['20260928'])):
+-            with self.subTest(query=invalid), self.assertRaises(ValueError):
+-                self.api.get_response(self.config, invalid)
+-
+-    def test_fresh_original_reader_profile_has_no_owner_ledger_write_or_collection(self):
+-        code = r"""import json,sys
+-sys.path.insert(0,sys.argv[1])
+-from v5_shadow.m17_readonly import _worker
+-packet=json.load(sys.stdin)
+-counts={'reader':0,'forbidden':0}
+-def profile(frame,event,arg):
+-    if event!='call': return
+-    name=frame.f_code.co_name
+-    if name=='read_close_recapture': counts['reader']+=1
+-    if name in {'claim_run','finish_run','recapture_close_minutes','collect_pytdx_exhq_minute','_collect_pytdx_exhq_batch','collect_payload','_connect_first_available',
+-                '_real_runtime_ready','_real_process_runner'}:
+-        counts['forbidden']+=1
+-        raise AssertionError('forbidden producer path')
+-sys.setprofile(profile)
+-value=_worker(packet)
+-sys.setprofile(None)
+-print(json.dumps({'counts':counts,'candidate_count':value['candidate_count']}))
+-"""
+-        before = files_snapshot(*self.roots)
+-        packet = dict(config=self.config, reference=self.state['latest_success']['product_reference'])
+-        done = subprocess.run([sys.executable,'-I','-B','-c',code,str(HERE/'src')],
+-            input=canonical_bytes(packet), capture_output=True)
+-        self.assertEqual(done.returncode,0,done.stderr)
+-        self.assertEqual(json.loads(done.stdout),dict(counts=dict(reader=1,forbidden=0),candidate_count=100))
+-        self.assertEqual(files_snapshot(*self.roots),before)
+-
+-    def test_cli_is_readonly_and_does_not_leak_private_config(self):
+-        path = Path(self.tmp.name) / 'binding.json'; path.write_bytes(canonical_bytes(self.config))
+-        before = files_snapshot(*self.roots)
+-        done = subprocess.run([sys.executable,'-I','-B',str(HERE/'src/v5_shadow/m17_readonly.py'),
+-            '--config',str(path),'--source-trade-date',self.source_date,'--run-id',self.run_id],capture_output=True)
+-        self.assertEqual(done.returncode,0,done.stderr)
+-        self.assertEqual(json.loads(done.stdout)['candidate_count'],100)
+-        self.assertNotIn(str(self.tmp.name).encode(),done.stdout+done.stderr)
+-        self.assertEqual(files_snapshot(*self.roots),before)
+-
+-
+-if __name__ == '__main__':
+-    unittest.main(verbosity=2)
+--- a/V5/examples/m17_readonly_binding.example.json
++++ /dev/null
+@@ -1,19 +0,0 @@
+-{
+-  "schema_version": "v5.m17.readonly-binding.v1",
+-  "state_root": "<INDEPENDENT_V5_M17_STATE_ROOT>",
+-  "universe_root": "<INDEPENDENT_V5_UNIVERSE_ROOT>",
+-  "ledger_root": "<INDEPENDENT_V5_LEDGER_ROOT>",
+-  "python_executable": "<EXISTING_PYTHON_ABSOLUTE_PATH>",
+-  "identity": {
+-    "lane": "manager_close_recapture",
+-    "target_date": "20261012",
+-    "input_sha256": "1a1638c1eb07dfb3ecd090e125301b7e0f967f116396ecb54f8976c80cc2be10",
+-    "research_cutoff": "2026-10-12T23:18:08.427624+00:00",
+-    "code_sha256": "6db6ffb77c51d2fe6d9fead18d0ac13d77c7e81a409397e3102c113ceb9a7db0",
+-    "config_sha256": "d23f28c9c73912f9d9d3e674229e6f1b685071a61ae2fa26b23bf786a027c232",
+-    "dependency_sha256": "f8d8fad70c3a90597b623ebbc485e8efeeea9d65e8a58c2492b99072488093db"
+-  },
+-  "run_id": "ca2c344b61334ad28f4b6146117643cd",
+-  "execution_label": "MANUAL_RECOVERY",
+-  "operation": "EXISTING_VERIFIED_PRODUCT_REUSE"
+-}

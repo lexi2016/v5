@@ -1,0 +1,14 @@
+test_private_paths_in_original_extra_fields_are_redacted (__main__.M17ReadonlyTests.test_private_paths_in_original_extra_fields_are_redacted) ... FAIL
+
+======================================================================
+FAIL: test_private_paths_in_original_extra_fields_are_redacted (__main__.M17ReadonlyTests.test_private_paths_in_original_extra_fields_are_redacted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CANDIDATE_ROOT>/after/V5/tests/test_m17_readonly.py", line 185, in test_private_paths_in_original_extra_fields_are_redacted
+    self.assertNotIn('/Users/alice', value['rows'][0]['debug_text'])
+AssertionError: '/Users/alice' unexpectedly found in 'source=<redacted> error at <redacted> source:/Users/alice/private/a; path:C:\\Users\\alice\\private.json; source:file:///Users/alice/private/a'
+
+----------------------------------------------------------------------
+Ran 1 test in 2.071s
+
+FAILED (failures=1)

@@ -1,0 +1,29 @@
+{
+  "schema_version": "v5.m17.readonly-verification.v1",
+  "fixture": "SYNTHETIC_ORIGINAL_READER",
+  "cloud_python": "3.12.14",
+  "fastapi": "0.141.1",
+  "tests_total": 13,
+  "tests_passed": 13,
+  "tests_failed": 0,
+  "test_command": "python -I -B integration_candidates/M17_READONLY/after/V5/tests/test_m17_readonly.py",
+  "test_exit_code": 0,
+  "new_test_suite_only": true,
+  "old_17_9_18_suites_rerun": false,
+  "dependency_blobs_verified": 35,
+  "new_files": [
+    "V5/src/v5_shadow/m17_readonly.py",
+    "V5/tests/test_m17_readonly.py",
+    "V5/examples/m17_readonly_binding.example.json"
+  ],
+  "forward_reverse_exact": true,
+  "real_mac_payload_copied": false,
+  "real_mac_acceptance": "NOT_RUN_BY_THIS_CANDIDATE",
+  "deployment": "NOT_RUN",
+  "natural_verified": false,
+  "formal_eligibility_verified": false,
+  "implementation_attribution": "Dispatch-side continuation; not original M17 Chat",
+  "source_p0_commit": "5eb5f29fb5ee9c96fbbdd8d7db3aaa905f2c5509",
+  "source_m17_real_commit": "6f1a70d9ce5cc1dd759347a3ff6fad7a0c06117f",
+  "feedback_commit": "ba8128830b1422e669f9f6d872e251a8d5a6e1cc"
+}

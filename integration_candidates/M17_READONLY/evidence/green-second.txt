@@ -1,0 +1,17 @@
+test_all_four_damaged_products_fail_closed (__main__.M17ReadonlyTests.test_all_four_damaged_products_fail_closed) ... ok
+test_cli_is_readonly_and_does_not_leak_private_config (__main__.M17ReadonlyTests.test_cli_is_readonly_and_does_not_leak_private_config) ... ok
+test_external_pool_drift_is_rejected (__main__.M17ReadonlyTests.test_external_pool_drift_is_rejected) ... ok
+test_fixed_get_query_contract_rejects_unbound_keys (__main__.M17ReadonlyTests.test_fixed_get_query_contract_rejects_unbound_keys) ... ok
+test_get_returns_original_hundred_rows_with_fresh_reader_and_no_mutation (__main__.M17ReadonlyTests.test_get_returns_original_hundred_rows_with_fresh_reader_and_no_mutation) ... ok
+test_ledger_file_hash_or_pool_substitution_is_rejected (__main__.M17ReadonlyTests.test_ledger_file_hash_or_pool_substitution_is_rejected) ... ok
+test_missing_ledger_never_creates_attempts (__main__.M17ReadonlyTests.test_missing_ledger_never_creates_attempts) ... ok
+test_non_success_missing_readback_and_wrong_saved_run_rejected (__main__.M17ReadonlyTests.test_non_success_missing_readback_and_wrong_saved_run_rejected) ... ok
+test_private_paths_in_original_extra_fields_are_redacted (__main__.M17ReadonlyTests.test_private_paths_in_original_extra_fields_are_redacted) ... ok
+test_response_byte_limit_is_enforced (__main__.M17ReadonlyTests.test_response_byte_limit_is_enforced) ... ok
+test_root_overlap_or_wrong_marker_rejected (__main__.M17ReadonlyTests.test_root_overlap_or_wrong_marker_rejected) ... ok
+test_wrong_run_source_or_identity_is_rejected_without_mutation (__main__.M17ReadonlyTests.test_wrong_run_source_or_identity_is_rejected_without_mutation) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 23.533s
+
+OK
