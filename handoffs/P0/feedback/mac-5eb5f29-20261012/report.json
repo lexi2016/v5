@@ -1,0 +1,53 @@
+{
+  "candidate_commit": "5eb5f29fb5ee9c96fbbdd8d7db3aaa905f2c5509",
+  "command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-I",
+    "-B",
+    "V5/tests/test_p0_close_recapture_registration.py"
+  ],
+  "cwd": "<FIXED_CANDIDATE_ROOT>",
+  "started_utc": "2026-10-12T23:11:06.892130+00:00",
+  "finished_utc": "2026-10-12T23:11:09.232893+00:00",
+  "exit_code": 0,
+  "python_version": "3.14.6",
+  "fastapi_version": "0.141.1",
+  "runtime_selection": "Previously verified existing runtime with FastAPI; suggested old V5 data environment lacked FastAPI. No dependencies installed.",
+  "source_files_verified": 143,
+  "materialization": "Exact needed source, contracts, 24-file original vendor closure, daily schedule closure and two test files; not full checkout.",
+  "source_unchanged_after": true,
+  "test_sha256": "905652ad8afc8f7f66d1cc5019c58e9a419917c6e17c43412ab4d99e4d85c5bb",
+  "raw_output_sha256": "fd96de12ba887e47295df90a9399bbbe33b2232dd91191da4bffa74ea45f9abd",
+  "sanitized_output_sha256": "fd96de12ba887e47295df90a9399bbbe33b2232dd91191da4bffa74ea45f9abd",
+  "frontend_tree": "9d913c4a6e55c295dce39fe2848184e15c21afe2",
+  "frontend_retested": false,
+  "old_m17_suites_rerun": false,
+  "existing_dispatch_five_rerun": false,
+  "fixture": "SYNTHETIC",
+  "not_run": [
+    "real acquisition",
+    "active binding/root setup",
+    "natural scheduling",
+    "deployment",
+    "frontend build",
+    "full suite"
+  ],
+  "tests_total": 18,
+  "tests_passed": 18,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "suite_seconds": 2.274,
+  "first_attempt": {
+    "started_utc": "2026-10-12T23:10:52.164190+00:00",
+    "finished_utc": "2026-10-12T23:10:52.620084+00:00",
+    "exit_code": 1,
+    "passed": 10,
+    "errors": 8,
+    "classification": "EXECUTOR_INCOMPLETE_SOURCE_MATERIALIZATION",
+    "reason": "Executor omitted existing fixed candidate V5/vendor/daily_schedule_baseline/contracts files; not a product defect. Added three byte-verified original files, then reran same 18-test command. No source edits.",
+    "raw_log_sha256": "39261eaffedaef22aa9a3d3c1e29319cfa14d47bbd6b00705d88d0d71a15bc85",
+    "not_reached": "Affected dispatcher/tick assertions before calendar source loading completed"
+  },
+  "active_service_changes": false,
+  "product_changes": false
+}

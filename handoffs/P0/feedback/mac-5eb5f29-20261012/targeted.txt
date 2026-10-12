@@ -1,0 +1,23 @@
+test_all_six_existing_ledger_lanes_preserved (__main__.RegistrationTests.test_all_six_existing_ledger_lanes_preserved) ... ok
+test_config_default_is_disabled_and_enabled_invalid_is_blocked (__main__.RegistrationTests.test_config_default_is_disabled_and_enabled_invalid_is_blocked) ... ok
+test_exact_mode_roots_manifest_pool_and_identity_are_bound (__main__.RegistrationTests.test_exact_mode_roots_manifest_pool_and_identity_are_bound) ... ok
+test_lost_call_stays_running_and_does_not_retry (__main__.RegistrationTests.test_lost_call_stays_running_and_does_not_retry) ... ok
+test_m17_configuration_does_not_rekey_other_owner_success (__main__.RegistrationTests.test_m17_configuration_does_not_rekey_other_owner_success) ... ok
+test_old_source_and_same_day_before_close_rejected (__main__.RegistrationTests.test_old_source_and_same_day_before_close_rejected) ... ok
+test_pool_change_rejected_before_claim (__main__.RegistrationTests.test_pool_change_rejected_before_claim) ... ok
+test_pool_reference_metadata_mismatch_blocks_before_capture (__main__.RegistrationTests.test_pool_reference_metadata_mismatch_blocks_before_capture) ... ok
+test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption (__main__.RegistrationTests.test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption) ... ok
+test_real_config_can_bind_with_existing_runtime_boundary_verified (__main__.RegistrationTests.test_real_config_can_bind_with_existing_runtime_boundary_verified) ... ok
+test_real_missing_binding_blocks_before_claim_or_worker (__main__.RegistrationTests.test_real_missing_binding_blocks_before_claim_or_worker) ... ok
+test_registry_contract_is_callable_but_not_naturally_verified (__main__.RegistrationTests.test_registry_contract_is_callable_but_not_naturally_verified) ... ok
+test_request_config_and_execution_kind_cannot_cross_bind (__main__.RegistrationTests.test_request_config_and_execution_kind_cannot_cross_bind) ... ok
+test_slot_is_explicit_no_morning_defaults_or_multiple_attempts (__main__.RegistrationTests.test_slot_is_explicit_no_morning_defaults_or_multiple_attempts) ... ok
+test_source_drift_rejected_before_calendar_admission (__main__.RegistrationTests.test_source_drift_rejected_before_calendar_admission) ... ok
+test_success_with_changed_bound_pool_keeps_unknown_claim (__main__.RegistrationTests.test_success_with_changed_bound_pool_keeps_unknown_claim) ... ok
+test_terminal_owner_failure_finishes_once_without_retry (__main__.RegistrationTests.test_terminal_owner_failure_finishes_once_without_retry) ... ok
+test_tick_entrypoint_uses_explicit_late_job_and_source_date (__main__.RegistrationTests.test_tick_entrypoint_uses_explicit_late_job_and_source_date) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 2.274s
+
+OK
