@@ -685,7 +685,12 @@ def _config(value):
         keys += ('m18_v2_binding',)
     if isinstance(value, dict) and 'm06_hk_preselection_binding' in value:
         keys += ('m06_hk_preselection_binding',)
+    if isinstance(value, dict) and 'm10_hk_close_binding' in value:
+        keys += ('m10_hk_close_binding',)
     exact_keys(value, keys)
+    if 'm10_hk_close_binding' in value:
+        from .m10_readonly import validate_binding
+        validate_binding(value)
     if 'm06_hk_preselection_binding' in value:
         from .m06_readonly import validate_binding
         validate_binding(value)
@@ -844,8 +849,11 @@ def _validate_record(config,record,path,query):
 
 
 def read_response(config,root,path,query):
-    if config['module_id']=='source_bundle' and path=='/api/v5/source-bundle/hk-preselection':
-        from .m06_readonly import read_record,not_configured
+    if config['module_id']=='source_bundle' and path in ('/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review'):
+        if path=='/api/v5/source-bundle/hk-close-review':
+            from .m10_readonly import read_record,not_configured
+        else:
+            from .m06_readonly import read_record,not_configured
         projected=read_record(config,query)
         if projected is not None:return projected
         payload=not_configured()
@@ -862,7 +870,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
     config,root=_config(value)
     if any(route in config['routes'] for route in
-           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', '/api/v5/source-bundle/hk-preselection')):
+           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review')):
         # Set at service startup, before any GET can spawn/import a reader.
         # Also covers library callers that did not start their interpreter -B.
         sys.dont_write_bytecode=True
@@ -870,6 +878,8 @@ def create_module_server(value,host='127.0.0.1',port=0):
     # One heavy read at a time; do not queue stale browser requests or allow
     # multiple full Reader allocations. Ordinary module routes stay independent.
     m18_read_slot=threading.BoundedSemaphore(1)
+    # Independent M10 reader: simultaneous source-page mounts cannot starve M06.
+    m10_read_slot=threading.BoundedSemaphore(1)
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
             super().setup();self.connection.settimeout(5)
@@ -918,8 +928,9 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-preselection')
-            if heavy and not m18_read_slot.acquire(blocking=False):
+            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in ('/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review'))
+            reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
+            if heavy and not reader_slot.acquire(blocking=False):
                 return self.error(503, 'MODULE_BUSY')
             try:
                 if parsed.path == M18_ROUTE + '/pages':
@@ -936,7 +947,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 self.error(503,'MODULE_BUSY') if str(error)=='MODULE_PUBLICATION_BUSY' else self.error(409,'MODULE_RESULT_INVALID')
             except (TypeError,KeyError,OSError,RecursionError):self.error(409,'MODULE_RESULT_INVALID')
             finally:
-                if heavy:m18_read_slot.release()
+                if heavy:reader_slot.release()
     class Server(ThreadingHTTPServer):
         daemon_threads=False
         block_on_close=True
