@@ -1,0 +1,68 @@
+{
+  "prior_module_candidate": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+  "owner_source": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4",
+  "unchanged_reused_files": [
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/contracts/close_recapture_source_manifest.json",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/contracts/close_recapture_source_manifest.json",
+      "git_blob": "4574d6ffd9f33a2a838609f21e5965d94f396003"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/__init__.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/__init__.py",
+      "git_blob": "152582c71d7e49884749beb490e192ff4cb8ca6c"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/api_gateway.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/api_gateway.py",
+      "git_blob": "ecda315f6c67c8e18e473fad9d91c77487aa9d37"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/composition.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/composition.py",
+      "git_blob": "d22723df42b71537210aa621afb05dfab6be517f"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/contracts.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/contracts.py",
+      "git_blob": "5efda704a231165255c4f6ab240a25385e5cff54"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/digests.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/digests.py",
+      "git_blob": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/module_api.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/module_api.py",
+      "git_blob": "d9d3f5f2ac06cb7802fade58829d00d6ca93c091"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/module_artifacts.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/module_artifacts.py",
+      "git_blob": "acf2195fee3711f594982269f1e6ab81da40a905"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/src/v5_shadow/run_ledger.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/src/v5_shadow/run_ledger.py",
+      "git_blob": "9f839c31aa9be37583bc09f88af3c67898aa1ec7"
+    },
+    {
+      "path": "integration_candidates/M17_REAL/after/V5/tests/test_daily_close_recapture_owner.py",
+      "source_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+      "source_path": "integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py",
+      "git_blob": "47a322db8e26d2f78b29933cb1cb195b9d62dc9c"
+    }
+  ],
+  "application": "Apply two-file forward.patch to prior candidate; no source-algorithm or ledger change",
+  "evidence_scope": "New gate tests only; old tests not rerun"
+}

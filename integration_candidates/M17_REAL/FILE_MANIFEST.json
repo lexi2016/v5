@@ -1,0 +1,25 @@
+{
+  "base_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+  "base_candidate": "integration_candidates/M17/after",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/daily_close_recapture_owner.py",
+      "before": {
+        "bytes": 16737,
+        "sha256": "f1733768668e489c345eaef032a7d382496bfe27d6dd760e5f788c5d1f24fa55"
+      },
+      "after": {
+        "bytes": 25107,
+        "sha256": "cfdb649ddf07dae4805e54e27645f71b6a5b104c1b8b1e436998357e0c7a909b"
+      }
+    },
+    {
+      "path": "V5/tests/test_daily_close_recapture_real_binding.py",
+      "before": "ABSENT",
+      "after": {
+        "bytes": 13555,
+        "sha256": "4a6800618ee59f12e6c475b80bc62854ddc4fd0f5aea44fed841f2f02e65058d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,497 @@
+--- a/V5/src/v5_shadow/daily_close_recapture_owner.py
++++ b/V5/src/v5_shadow/daily_close_recapture_owner.py
+@@ -1,12 +1,12 @@
+ """M17 independent late owner/reader and original-ledger adapter.
+ 
+-Real collection requires an explicit verified runtime/root binding. Python audit guards are
++SIMULATED only: real collection is deliberately unbound. Python audit guards are
+ not an OS sandbox. The original owner owns algorithms, windows and publication.
+ No scheduler is installed and no shared P0 file is changed by this module.
+ """
+ from __future__ import annotations
+ import argparse
+-from datetime import datetime, timezone
++from datetime import datetime
+ import hashlib
+ import json
+ import os
+@@ -19,9 +19,9 @@
+ if __package__ in (None, ''):
+     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+ from v5_shadow.composition import no_symlinks
+-from v5_shadow.contracts import aware, exact_keys, trade_date, sha
++from v5_shadow.contracts import aware, exact_keys, trade_date
+ from v5_shadow.digests import canonical_bytes, sha256_json
+-from v5_shadow.module_api import _open_directory, _read_at, _read_regular
++from v5_shadow.module_api import _open_directory, _read_at
+ from v5_shadow.run_ledger import claim_run, finish_run, read_run
+ 
+ LANE = 'manager_close_recapture'
+@@ -29,7 +29,6 @@
+ FLAGS = dict(RESEARCH_ONLY=True, production_allowed=False, buy_gate_updated=False, orders_sent=False)
+ MANIFEST_SHA256 = 'f3c6eedee74ea4d2f72641e4c0e9386b844ff0dfd40506f8c2e1ba566a94cf50'
+ MARKER = b'v5.m17.simulated-close.v1\n'
+-REAL_MARKER = b'v5.m17.close.v1\n'
+ CONFIG_KEYS = ('capture_mode', 'owner_root', 'python', 'state_root', 'universe_root', 'source_manifest', 'timeout_seconds')
+ 
+ 
+@@ -51,10 +50,10 @@
+ 
+ 
+ def _config(config):
+-    exact_keys(config, (*CONFIG_KEYS, 'real_binding') if 'real_binding' in config else CONFIG_KEYS)
++    exact_keys(config, CONFIG_KEYS)
+     if config['capture_mode'] != MODE:
+         raise ValueError('M17_CAPTURE_MODE_NOT_BOUND')
+-    if type(config['timeout_seconds']) is not int or not 1 <= config['timeout_seconds'] <= 420:
++    if type(config['timeout_seconds']) is not int or not 1 <= config['timeout_seconds'] <= 120:
+         raise ValueError('M17_TIMEOUT_CONTRACT')
+     # Existing venv interpreters may be symlinks. No installation or credential use.
+     python = Path(config['python'])
+@@ -66,8 +65,8 @@
+     for other in (owner, universe):
+         if state.is_relative_to(other) or other.is_relative_to(state):
+             raise ValueError('M17_ROOT_OVERLAP')
+-    if _read_file(state / '.v5-m17-close-root') not in (MARKER, REAL_MARKER):
+-        raise ValueError('M17_PRIVATE_ROOT_REQUIRED')
++    if _read_file(state / '.v5-m17-close-root') != MARKER:
++        raise ValueError('M17_PRIVATE_SIMULATED_ROOT_REQUIRED')
+     raw = _read_file(config['source_manifest'])
+     if _sha(raw) != MANIFEST_SHA256:
+         raise ValueError('M17_SOURCE_MANIFEST_MISMATCH')
+@@ -97,15 +96,11 @@
+ 
+ 
+ def request_identity(request, binding):
+-    if request.get('execution_kind') not in {'SIMULATED', 'OWNER_VERIFIED'}:
+-        raise ValueError('M17_EXECUTION_KIND')
+     keys = {'config', 'source_trade_date', 'research_cutoff', 'execution_kind'}
+     if request.get('execution_kind') == 'SIMULATED':
+         keys.add('simulation')
+     exact_keys(request, keys)
+     trade_date(request['source_trade_date']); aware(request['research_cutoff'])
+-    if request['execution_kind'] == 'SIMULATED' and _read_file(Path(request['config']['state_root'])/'.v5-m17-close-root') != MARKER:
+-        raise ValueError('M17_SIMULATED_ROOT_MARKER_REQUIRED')
+     current = bind_close_recapture_owner(request['config'])
+     if any(binding.get(k) != current[k] for k in ('code_sha256', 'config_sha256', 'dependency_sha256')):
+         raise ValueError('M17_BINDING_CHANGED')
+@@ -125,7 +120,7 @@
+     if (not isinstance(value, dict) or value.get('ledger_run_id') != ledger_run_id
+             or value.get('request_sha256') != sha256_json(request)
+             or value.get('source_trade_date') != request['source_trade_date']
+-            or value.get('execution_kind') != request['execution_kind']
++            or value.get('execution_kind') != 'SIMULATED'
+             or value.get('natural_verified') is not False
+             or any(value.get(k) is not v for k, v in FLAGS.items())):
+         raise ValueError('M17_WORKER_ENVELOPE_MISMATCH')
+@@ -164,10 +159,8 @@
+     request_identity(request, binding)
+     if not re.fullmatch('[a-zA-Z0-9_-]{1,128}', ledger_run_id):
+         raise ValueError('M17_LEDGER_RUN_ID')
+-    if request['execution_kind'] == 'OWNER_VERIFIED':
+-        reasons = real_binding_reasons(request)
+-        if reasons:
+-            return _receipt('BLOCKED', dict(**FLAGS, natural_verified=False), reasons)
++    if request['execution_kind'] != 'SIMULATED':
++        return _receipt('BLOCKED', dict(**FLAGS, natural_verified=False), ['REAL_COLLECTOR_NOT_BOUND'])
+     producer = _process('producer', request, ledger_run_id)
+     status = producer['owner_status']
+     if status not in {'MATERIALIZED', 'ALREADY_EXISTS', 'PARTIAL'}:
+@@ -212,13 +205,10 @@
+     return dict(status=receipt['status'], state=reopened, natural_verified=False)
+ 
+ 
+-def _audit_guard(role, state, allowed_commands=()):
++def _audit_guard(role, state):
+     """In-process guards, not a claim of OS-enforced sandbox isolation."""
+     def audit(event, args):
+-        if event == 'subprocess.Popen':
+-            if role != 'producer' or list(args[1]) not in allowed_commands:
+-                raise PermissionError('M17_CHILD_PROCESS_NOT_BOUND')
+-        if event.startswith('socket.') or event in {'os.system', 'os.fork', 'os.forkpty', 'os.posix_spawn', 'os.exec', 'os.spawn'}:
++        if event.startswith('socket.') or event in {'subprocess.Popen', 'os.system', 'os.fork', 'os.forkpty', 'os.posix_spawn', 'os.exec', 'os.spawn'}:
+             raise PermissionError('M17_NETWORK_OR_CHILD_PROCESS_DENIED')
+         if event == 'open':
+             path, mode, flags = args
+@@ -233,196 +223,41 @@
+     sys.addaudithook(audit)
+ 
+ 
+-REAL_KEYS = ('active_capture_mode', 'pytdx_python', 'pytdx_python_sha256',
+-             'pytdx_exhq_sha256', 'provider_root', 'state_root', 'universe_root')
+-
+-# A fixed read-only admission probe, never arbitrary code supplied in config.
+-_RUNTIME_PROBE = """import sys, importlib.util, pathlib, hashlib, json, os
+-sys.dont_write_bytecode = True
+-def guard(event, args):
+-    if event.startswith('socket.') or event in ('subprocess.Popen','os.system','os.exec','os.spawn','os.posix_spawn','os.fork'):
+-        raise PermissionError('M17_RUNTIME_PROBE_NETWORK_OR_PROCESS_DENIED')
+-    if event == 'open':
+-        mode, flags = args[1], args[2]
+-        if (isinstance(mode,str) and any(c in mode for c in 'wax+')) or (isinstance(flags,int) and flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)):
+-            raise PermissionError('M17_RUNTIME_PROBE_WRITE_DENIED')
+-sys.addaudithook(guard)
+-try:
+-    spec = importlib.util.find_spec('pytdx.exhq')
+-    value = dict(available=spec is not None and bool(spec.origin))
+-    if value['available']:
+-        value['module_sha256'] = hashlib.sha256(pathlib.Path(spec.origin).read_bytes()).hexdigest()
+-except (ImportError, OSError, ValueError):
+-    value = dict(available=False)
+-print(json.dumps(value,sort_keys=True))
+-"""
+-
+-
+-def real_runtime_command(binding):
+-    return [binding['pytdx_python'], '-I', '-B', '-c', _RUNTIME_PROBE]
+-
+-
+-def _probe_command(binding):
+-    return [binding['pytdx_python'], '-m', 'scripts.live_acquisition.pytdx_exhq_probe']
+-
+-
+-def _real_environment(binding=None):
+-    env = dict(PATH=os.defpath, PYTHONNOUSERSITE='1', PYTHONDONTWRITEBYTECODE='1',
+-               RESEARCH_ONLY='true', PRODUCTION_ALLOWED='false', BUY_GATE_UPDATED='false', ORDERS_SENT='false')
+-    if binding is not None:
+-        env['PYTHONPATH'] = binding['provider_root']
+-    return env
+-
+-
+-def _runtime_sha(path):
+-    # Executables can exceed the JSON artifact limit. Reuse the original regular
+-    # file/no-change reader with a separate bounded binary budget.
+-    path = no_symlinks(Path(path).resolve())
+-    parent = _open_directory(path.parent)
+-    fd = None
+-    try:
+-        fd = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+-        return _sha(_read_regular(fd, 128 * 1024 * 1024))
+-    finally:
+-        if fd is not None:
+-            os.close(fd)
+-        os.close(parent)
+-
+-
+-def real_binding_reasons(request):
+-    config = request['config']; binding = config.get('real_binding')
+-    if binding is None:
+-        return ['REAL_COLLECTOR_NOT_BOUND']
+-    try:
+-        exact_keys(binding, REAL_KEYS)
+-        if binding['active_capture_mode'] != MODE:
+-            return ['M17_REAL_ACTIVE_MODE_NOT_BOUND']
+-        if binding['state_root'] != config['state_root'] or binding['universe_root'] != config['universe_root']:
+-            return ['M17_REAL_ROOT_BINDING']
+-        for name in ('state_root', 'universe_root'):
+-            if not no_symlinks(Path(binding[name])).is_dir():
+-                return ['M17_REAL_ROOT_MISSING']
+-        if _read_file(Path(binding['state_root'])/'.v5-m17-close-root') != REAL_MARKER:
+-            return ['M17_REAL_ROOT_MARKER_REQUIRED']
+-        provider = no_symlinks(Path(binding['provider_root']))
+-        if provider != Path(config['owner_root'])/'upstreams/v3_shared_data':
+-            return ['M17_REAL_PROVIDER_BINDING']
+-        python = Path(binding['pytdx_python'])
+-        if not python.is_absolute() or not python.is_file() or not os.access(python, os.X_OK):
+-            return ['M17_REAL_INTERPRETER_MISSING']
+-        sha(binding['pytdx_python_sha256']); sha(binding['pytdx_exhq_sha256'])
+-        if _runtime_sha(python) != binding['pytdx_python_sha256']:
+-            return ['M17_REAL_INTERPRETER_SHA_MISMATCH']
+-        if aware(request['research_cutoff']) > datetime.now(timezone.utc):
+-            return ['M17_REAL_FUTURE_REQUEST_CUTOFF']
+-    except (OSError, ValueError, KeyError, TypeError):
+-        return ['M17_REAL_BINDING_INVALID']
+-    return []
+-
+-
+-def _real_runtime_ready(binding):
+-    try:
+-        result = subprocess.run(real_runtime_command(binding), capture_output=True, text=True,
+-            timeout=10, shell=False, env=_real_environment())
+-        if result.returncode or len(result.stdout) > 8192:
+-            return False
+-        value = json.loads(result.stdout)
+-        return value.get('available') is True and value.get('module_sha256') == binding['pytdx_exhq_sha256']
+-    except (OSError, subprocess.SubprocessError, ValueError, TypeError):
+-        return False
+-
+-
+-class _ProbeOutcomeUnknown(BaseException):
+-    """Escape the frozen collector's except Exception failure downgrade.
+-
+-    The worker must exit without a terminal receipt if its fixed probe may still
+-    have been in flight. The parent retains its original RUNNING claim.
+-    """
+-
+-
+-def _real_process_runner(binding, source_date):
+-    def run(command, **kwargs):
+-        # The original collector alone supplies quote-request bytes. No shell,
+-        # alternative module, extra env, or caller-defined command is admitted.
+-        if command != _probe_command(binding) or kwargs.get('shell') is not False:
+-            raise ValueError('M17_REAL_PROBE_COMMAND_NOT_BOUND')
+-        allowed = {'input','capture_output','text','encoding','errors','timeout','shell'}
+-        if set(kwargs) != allowed or not 0 < kwargs['timeout'] <= 180:
+-            raise ValueError('M17_REAL_PROBE_OPTIONS_NOT_BOUND')
+-        payload = json.loads(kwargs['input'])
+-        exact_keys(payload, ('trade_date', 'stage_id', 'codes'))
+-        if payload['trade_date'] != source_date or payload['stage_id'] != 'STAGE_1545_1555':
+-            raise ValueError('M17_REAL_PROBE_SOURCE_NOT_BOUND')
+-        try:
+-            result = subprocess.run(command, **kwargs, env=_real_environment(binding), cwd=binding['provider_root'])
+-        except (subprocess.TimeoutExpired, OSError) as error:
+-            raise _ProbeOutcomeUnknown('M17_REAL_PROBE_OUTCOME_UNKNOWN') from error
+-        if result.returncode < 0:
+-            raise _ProbeOutcomeUnknown('M17_REAL_PROBE_OUTCOME_UNKNOWN')
+-        return result
+-    return run
+-
+-
+ def _worker(role, packet):
+     request, run_id = packet['request'], packet['ledger_run_id']
++    if request['execution_kind'] != 'SIMULATED':
++        raise ValueError('REAL_COLLECTOR_NOT_BOUND')
+     config = request['config']; _config(config)
+-    execution = request['execution_kind']
+-    if execution not in {'SIMULATED', 'OWNER_VERIFIED'}:
+-        raise ValueError('M17_EXECUTION_KIND')
+-    envelope = dict(ledger_run_id=run_id, request_sha256=sha256_json(request),
+-                    source_trade_date=request['source_trade_date'], execution_kind=execution,
+-                    natural_verified=False, pid=os.getpid(), **FLAGS)
+     state = Path(config['state_root']); owner_root = Path(config['owner_root'])
+-    commands = []
+-    if execution == 'OWNER_VERIFIED':
+-        reasons = real_binding_reasons(request)
+-        if reasons:
+-            return dict(envelope, owner_status='INPUT_MISSING', reason=reasons[0])
+-        binding = config['real_binding']
+-        if role == 'producer':
+-            commands = [real_runtime_command(binding), _probe_command(binding)]
+-    elif _read_file(state/'.v5-m17-close-root') != MARKER:
+-        raise ValueError('M17_SIMULATED_ROOT_MARKER_REQUIRED')
+-    _audit_guard(role, state, commands)
+-    if execution == 'OWNER_VERIFIED' and role == 'producer' and not _real_runtime_ready(config['real_binding']):
+-        return dict(envelope, owner_status='INPUT_MISSING', reason='M17_PYTDX_RUNTIME_NOT_BOUND')
++    _audit_guard(role, state)
+     sys.path.insert(0, str(owner_root))
+     from ops import materialize_manager_close_discovery as owner
+     from apps.api.v35_api.manager_workbench_router import ManagerWorkbenchResearchReader
+     from infrastructure.owned_io import SafeRoot
+     if owner.APP_ROOT != owner_root:
+         raise ValueError('M17_OWNER_ORIGIN')
++    envelope = dict(ledger_run_id=run_id, request_sha256=sha256_json(request),
++                    source_trade_date=request['source_trade_date'], execution_kind='SIMULATED',
++                    natural_verified=False, pid=os.getpid(), **FLAGS)
+     date = request['source_trade_date']
+     if role == 'producer':
+-        if execution == 'OWNER_VERIFIED':
+-            # No clock override and no collector injection: invoke the original
+-            # default collector. Only its subprocess transport is narrowly bound.
+-            try:
+-                produced = owner.recapture_close_minutes(manager_state_root=state,
+-                    universe_root=Path(config['universe_root']),
+-                    pytdx_python=Path(binding['pytdx_python']), trade_date=date,
+-                    app_root=owner_root, provider_root=Path(binding['provider_root']),
+-                    process_runner=_real_process_runner(binding, date))
+-            except owner.EvidenceError as error:
+-                return dict(envelope, owner_status='FAILED', reason=str(error))
+-        else:
+-            simulation = request['simulation']; exact_keys(simulation, ('clocks', 'result'))
+-            clocks = iter([aware(t) for t in simulation['clocks']])
+-            if not simulation['clocks'] or simulation['clocks'][0] != request['research_cutoff']:
+-                raise ValueError('M17_SIMULATED_CLOCK_CONTRACT')
+-            result = simulation['result']
+-            exact_keys(result, ('status', 'rows', 'requested_code_count', 'completed_code_count', 'no_data_codes', 'cannot_confirm'))
+-            def collector(python, trade_date, stage_id, codes, **kwargs):
+-                if trade_date != date or stage_id != 'STAGE_1545_1555' or kwargs['market'] != 'HK_CONNECT':
+-                    raise ValueError('M17_SIMULATED_COLLECTOR_REQUEST')
+-                return SimpleNamespace(**result)
+-            try:
+-                produced = owner.recapture_close_minutes(manager_state_root=state,
+-                    universe_root=Path(config['universe_root']), pytdx_python=Path(config['python']),
+-                    trade_date=date, app_root=owner_root, provider_root=owner_root/'upstreams/v3_shared_data',
+-                    clock=lambda: next(clocks), pytdx_collector=collector)
+-            except owner.EvidenceError as error:
+-                return dict(envelope, owner_status='FAILED', reason=str(error))
++        simulation = request['simulation']; exact_keys(simulation, ('clocks', 'result'))
++        clocks = iter([aware(t) for t in simulation['clocks']])
++        if not simulation['clocks'] or simulation['clocks'][0] != request['research_cutoff']:
++            raise ValueError('M17_SIMULATED_CLOCK_CONTRACT')
++        result = simulation['result']
++        exact_keys(result, ('status', 'rows', 'requested_code_count', 'completed_code_count', 'no_data_codes', 'cannot_confirm'))
++        def collector(python, trade_date, stage_id, codes, **kwargs):
++            if trade_date != date or stage_id != 'STAGE_1545_1555' or kwargs['market'] != 'HK_CONNECT':
++                raise ValueError('M17_SIMULATED_COLLECTOR_REQUEST')
++            return SimpleNamespace(**result)
++        try:
++            produced = owner.recapture_close_minutes(manager_state_root=state,
++                universe_root=Path(config['universe_root']), pytdx_python=Path(config['python']),
++                trade_date=date, app_root=owner_root, provider_root=owner_root/'upstreams/v3_shared_data',
++                clock=lambda: next(clocks), pytdx_collector=collector)
++        except owner.EvidenceError as error:
++            return dict(envelope, owner_status='FAILED', reason=str(error))
+         envelope.update(owner_status=produced['status'], reason=produced.get('reason'), plan_trade_date=produced.get('plan_trade_date'))
+         if produced['status'] not in {'MATERIALIZED', 'ALREADY_EXISTS', 'PARTIAL'}:
+             return envelope
+--- a/V5/tests/test_daily_close_recapture_real_binding.py
++++ /dev/null
+@@ -1,159 +0,0 @@
+-"""New real-path contract tests with an isolated synthetic TdxExHq network boundary.
+-No live network, PyTDX installation, real market evidence, or ef2d test rerun.
+-"""
+-from datetime import datetime,timedelta
+-import hashlib
+-import io
+-import json
+-import os
+-from pathlib import Path
+-import subprocess
+-import sys
+-import tempfile
+-import types
+-import unittest
+-from zoneinfo import ZoneInfo
+-
+-HERE=Path(__file__).resolve().parents[1]
+-REPO=next(p for p in (HERE,*HERE.parents) if (p/'V5/vendor/close_discovery_baseline').is_dir())
+-sys.path.insert(0,str(HERE/'src'));sys.path.insert(0,str(HERE/'tests'))
+-from test_daily_close_recapture_owner import fixture, encoded,digest
+-from v5_shadow import daily_close_recapture_owner as adapter
+-
+-
+-def real_fixture(root):
+-    request,ledger=fixture(root)
+-    sys.path.insert(0,request['config']['owner_root'])
+-    from contracts.trading_calendar import load_market_calendar,previous_session
+-    calendar=load_market_calendar();today=datetime.now(ZoneInfo('Asia/Hong_Kong')).strftime('%Y%m%d')
+-    source=previous_session(calendar,today,market='hk_connect');signal=previous_session(calendar,source,market='hk_connect')
+-    folder=next(Path(request['config']['universe_root']).rglob('manifest.json')).parent
+-    old=folder.parent.parent.name
+-    relative=f'runs/{source}/HK_CONNECT_D1_TOP100_0_2/{source}-hk-connect-d1-top100-0-2-fixture'
+-    new=Path(request['config']['universe_root'])/'.runtime/data'/relative;new.mkdir(parents=True)
+-    raw=(folder/'artifact.csv').read_bytes().replace(b'20260928',source.encode()).replace(b'20260924',signal.encode());(new/'artifact.csv').write_bytes(raw)
+-    manifest=json.loads((folder/'manifest.json').read_bytes());manifest.update(trade_date=source,signal_date=signal,captured_at=f'{signal[:4]}-{signal[4:6]}-{signal[6:]}T17:30:43+08:00',artifact_relative=relative+'/artifact.csv',artifact_sha256=digest(raw))
+-    raw=encoded(manifest);(new/'manifest.json').write_bytes(raw)
+-    receipt=json.loads((folder/'receipt.json').read_bytes());receipt.update(trade_date=source,run_id=new.name,artifact_sha256=manifest['artifact_sha256'],manifest_sha256=digest(raw));(new/'receipt.json').write_bytes(encoded(receipt))
+-    # Old fixture date is outside the current exact-date role; it is never selected.
+-    config=request['config'];config['timeout_seconds']=420
+-    (Path(config['state_root'])/'.v5-m17-close-root').write_bytes(b'v5.m17.close.v1\n')
+-    config['real_binding']=dict(active_capture_mode='PYTDX_LATE_OBSERVATION',pytdx_python=config['python'],pytdx_python_sha256=digest(Path(config['python']).resolve().read_bytes()),pytdx_exhq_sha256=digest(b'SYNTHETIC_TEST_BOUNDARY'),provider_root=str(Path(config['owner_root'])/'upstreams/v3_shared_data'),state_root=config['state_root'],universe_root=config['universe_root'])
+-    request.update(source_trade_date=source,research_cutoff=datetime.now(ZoneInfo('Asia/Hong_Kong')).isoformat(),execution_kind='OWNER_VERIFIED');request.pop('simulation')
+-    return request,ledger
+-
+-
+-def harness(path):
+-    """Only this test harness replaces the network/runtime boundary, never config."""
+-    packet=json.loads(Path(path).read_text());request=packet.get('request',packet);run_id=packet.get('ledger_run_id','real-contract-run');source=request['source_trade_date'];calls=[]
+-    def no_network(event,args):
+-        if event.startswith('socket.'):raise AssertionError('LIVE_NETWORK_FORBIDDEN_IN_TEST')
+-    sys.addaudithook(no_network)
+-    class FakeAPI:
+-        def __init__(self,**kw):calls.append(['construct',kw])
+-        def connect(self,host,port,**kw):calls.append(['connect',host,port]);return True
+-        def disconnect(self):calls.append(['disconnect'])
+-        def get_instrument_bars(self,category,market,code,start,count):
+-            calls.append(['bars',category,market,code,start,count]);day=datetime.strptime(source,'%Y%m%d');prior=day-timedelta(days=1)
+-            return [dict(datetime=prior.strftime('%Y-%m-%d')+' 16:00:00',open=10,high=10,low=10,close=10,vol=1,amount=10),dict(datetime=day.strftime('%Y-%m-%d')+' 15:46:00',open=10,high=11,low=9,last=10.5,close=10.5,vol=100,amount=1050)]
+-    package=types.ModuleType('pytdx');package.__path__=[];module=types.ModuleType('pytdx.exhq');module.TdxExHq_API=FakeAPI
+-    sys.modules['pytdx']=package;sys.modules['pytdx.exhq']=module
+-    original_run=subprocess.run
+-    def boundary(command,**kwargs):
+-        if command==adapter.real_runtime_command(request['config']['real_binding']):
+-            calls.append(['runtime-admission'])
+-            return types.SimpleNamespace(returncode=0,stdout=json.dumps(dict(available=True,module_sha256=request['config']['real_binding']['pytdx_exhq_sha256'])),stderr='')
+-        expected=[request['config']['real_binding']['pytdx_python'],'-m','scripts.live_acquisition.pytdx_exhq_probe']
+-        if command!=expected:raise AssertionError('UNEXPECTED_PROCESS:'+repr(command))
+-        if packet.get('boundary_timeout') is True:raise subprocess.TimeoutExpired('fixed-probe',180)
+-        assert kwargs['shell'] is False
+-        assert kwargs['env']['PYTHONPATH']==request['config']['real_binding']['provider_root']
+-        assert 'HOME' not in kwargs['env']
+-        from scripts.live_acquisition.pytdx_exhq_probe import collect_payload,MARKER
+-        payload=json.loads(kwargs['input']);calls.append(['probe',len(payload['codes']),payload['trade_date'],payload['stage_id']])
+-        result=collect_payload(payload)
+-        return types.SimpleNamespace(returncode=0,stdout=MARKER+json.dumps(result),stderr='')
+-    subprocess.run=boundary
+-    result=adapter._worker('producer',dict(request=request,ledger_run_id=run_id))
+-    print(json.dumps(dict(envelope=result,calls=calls,evidence_kind='SYNTHETIC_NETWORK_BOUNDARY')))
+-
+-
+-class RealBindingTests(unittest.TestCase):
+-    def setUp(self):
+-        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name).resolve()
+-        self.assertTrue(hasattr(adapter,'real_runtime_command'),'Guarded real default path is missing')
+-        self.request,self.ledger=real_fixture(self.root)
+-    def tearDown(self):self.tmp.cleanup()
+-    def test_default_original_collector_probe_and_fresh_reader_contract(self):
+-        path=self.root/'request.json';path.write_text(json.dumps(self.request))
+-        child=subprocess.run([sys.executable,'-I','-B',__file__,'--harness',str(path)],capture_output=True,text=True)
+-        self.assertEqual(child.returncode,0,child.stderr);result=json.loads(child.stdout);produced=result['envelope'];self.assertEqual(produced['owner_status'],'MATERIALIZED',produced)
+-        probes=[x for x in result['calls'] if x[0]=='probe'];self.assertEqual([x[1] for x in probes],[64,36]);self.assertEqual(len([x for x in result['calls'] if x[0]=='bars']),100)
+-        self.assertEqual(produced['execution_kind'],'OWNER_VERIFIED');self.assertFalse(produced['natural_verified'])
+-        reader=adapter._process('reader',self.request,'real-contract-run');adapter._same_product(produced,reader);self.assertEqual(reader['owner_status'],'READY');self.assertEqual(reader['candidate_count'],100)
+-        self.assertFalse(list(Path(self.request['config']['state_root']).rglob('*1530*')))
+-    def test_bound_real_path_full_ledger_with_network_boundary_substitute(self):
+-        from unittest.mock import patch
+-        original_run=subprocess.run; observed=[]
+-        def worker_boundary(command,**kwargs):
+-            if command[-2:]==['--worker','producer']:
+-                packet=json.loads(kwargs['input']);path=self.root/'packet.json';path.write_text(json.dumps(packet))
+-                child=original_run([sys.executable,'-I','-B',__file__,'--harness',str(path)],capture_output=True,text=True)
+-                if child.returncode:return types.SimpleNamespace(returncode=child.returncode,stdout=child.stdout.encode(),stderr=child.stderr.encode())
+-                data=json.loads(child.stdout);observed.extend(data['calls'])
+-                return types.SimpleNamespace(returncode=0,stdout=json.dumps(data['envelope']).encode(),stderr=b'')
+-            return original_run(command,**kwargs)
+-        with patch.object(subprocess,'run',worker_boundary):
+-            result=adapter.run_close_recapture_daily(self.request,str(self.ledger),adapter.bind_close_recapture_owner(self.request['config']))
+-        self.assertEqual(result['status'],'SUCCEEDED',result)
+-        saved=result['state']['latest_success'];ref=saved['product_reference']
+-        self.assertEqual(saved['run_id'],ref['ledger_run_id']);self.assertEqual(ref['execution_kind'],'OWNER_VERIFIED');self.assertFalse(ref['natural_verified']);self.assertNotEqual(ref['producer_pid'],ref['reader_pid'])
+-        self.assertEqual([x[1] for x in observed if x[0]=='probe'],[64,36])
+-    def test_real_probe_timeout_preserves_running_ledger_without_retry(self):
+-        from unittest.mock import patch
+-        original_run=subprocess.run
+-        def worker_boundary(command,**kwargs):
+-            if command[-2:]==['--worker','producer']:
+-                packet=json.loads(kwargs['input']);packet['boundary_timeout']=True;path=self.root/'timeout-packet.json';path.write_text(json.dumps(packet))
+-                child=original_run([sys.executable,'-I','-B',__file__,'--harness',str(path)],capture_output=True,text=True)
+-                return types.SimpleNamespace(returncode=child.returncode,stdout=child.stdout.encode(),stderr=child.stderr.encode())
+-            return original_run(command,**kwargs)
+-        with patch.object(subprocess,'run',worker_boundary):
+-            result=adapter.run_close_recapture_daily(self.request,str(self.ledger),adapter.bind_close_recapture_owner(self.request['config']))
+-        self.assertEqual(result['status'],'IN_PROGRESS_OR_OUTCOME_UNKNOWN');self.assertEqual(result['state']['attempts'][0]['status'],'RUNNING');self.assertIsNone(result['state']['latest_success'])
+-        again=adapter.run_close_recapture_daily(self.request,str(self.ledger),adapter.bind_close_recapture_owner(self.request['config']))
+-        self.assertEqual(again['status'],'IN_PROGRESS_OR_OUTCOME_UNKNOWN');self.assertEqual(len(again['state']['attempts']),1)
+-    def test_probe_timeout_is_not_downgraded_to_confirmed_failure(self):
+-        from unittest.mock import patch
+-        sys.path.insert(0,self.request['config']['real_binding']['provider_root'])
+-        from scripts.live_acquisition.pytdx_exhq import collect_pytdx_exhq_minute
+-        runner=adapter._real_process_runner(self.request['config']['real_binding'],self.request['source_trade_date'])
+-        with patch.object(subprocess,'run',side_effect=subprocess.TimeoutExpired('fixed-probe',180)):
+-            with self.assertRaises(BaseException) as caught:
+-                collect_pytdx_exhq_minute(self.request['config']['python'],self.request['source_trade_date'],'STAGE_1545_1555',[f'HK.{i:05d}' for i in range(1,101)],market='HK_CONNECT',process_runner=runner,timeout_seconds=360)
+-        self.assertNotIsInstance(caught.exception,Exception)
+-        self.assertIn('M17_REAL_PROBE_OUTCOME_UNKNOWN',str(caught.exception))
+-    def test_missing_real_binding_is_blocked_before_worker(self):
+-        self.request['config'].pop('real_binding');result=adapter.run_close_recapture_daily(self.request,str(self.ledger),adapter.bind_close_recapture_owner(self.request['config']))
+-        self.assertEqual(result['status'],'BLOCKED');self.assertIn('REAL_COLLECTOR_NOT_BOUND',result['state']['attempts'][0]['reason_codes']);self.assertFalse((Path(self.request['config']['state_root'])/'workbench_research').exists())
+-    def test_wrong_interpreter_fingerprint_is_blocked(self):
+-        self.request['config']['real_binding']['pytdx_python_sha256']='0'*64
+-        receipt=adapter.run_close_recapture_owner(self.request,'bad-runtime');self.assertEqual(receipt['status'],'BLOCKED');self.assertIn('M17_REAL_INTERPRETER_SHA_MISMATCH',receipt['reason_codes'])
+-    def test_wrong_provider_binding_is_blocked(self):
+-        self.request['config']['real_binding']['provider_root']=str(self.root)
+-        receipt=adapter.run_close_recapture_owner(self.request,'bad-provider');self.assertEqual(receipt['status'],'BLOCKED');self.assertIn('M17_REAL_PROVIDER_BINDING',receipt['reason_codes'])
+-    def test_real_request_rejects_simulated_clock_data(self):
+-        self.request['simulation']={'clocks':['2000-01-01T00:00:00+00:00']}
+-        with self.assertRaises(ValueError):adapter.request_identity(self.request,adapter.bind_close_recapture_owner(self.request['config']))
+-    def test_mismatched_root_mode_is_blocked(self):
+-        (Path(self.request['config']['state_root'])/'.v5-m17-close-root').write_bytes(b'v5.m17.simulated-close.v1\n')
+-        receipt=adapter.run_close_recapture_owner(self.request,'wrong-marker');self.assertEqual(receipt['status'],'BLOCKED');self.assertIn('M17_REAL_ROOT_MARKER_REQUIRED',receipt['reason_codes'])
+-    def test_existing_runtime_without_pytdx_blocks_without_network(self):
+-        # This runner has no installed PyTDX. Never install it or try a live probe.
+-        import importlib.util
+-        if importlib.util.find_spec('pytdx') is not None:self.skipTest('Existing environment contains PyTDX; boundary test handles admission deterministically')
+-        result=adapter._process('producer',self.request,'missing-pytdx');self.assertEqual(result['owner_status'],'INPUT_MISSING');self.assertEqual(result['reason'],'M17_PYTDX_RUNTIME_NOT_BOUND');self.assertFalse((Path(self.request['config']['state_root'])/'workbench_research').exists())
+-
+-if __name__=='__main__':
+-    if len(sys.argv)>1 and sys.argv[1]=='--harness':harness(sys.argv[2])
+-    else:unittest.main(verbosity=2)

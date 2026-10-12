@@ -1,0 +1,45 @@
+test_default_original_collector_probe_and_fresh_reader_contract (__main__.RealBindingTests.test_default_original_collector_probe_and_fresh_reader_contract) ... FAIL
+test_existing_runtime_without_pytdx_blocks_without_network (__main__.RealBindingTests.test_existing_runtime_without_pytdx_blocks_without_network) ... FAIL
+test_mismatched_root_mode_is_blocked (__main__.RealBindingTests.test_mismatched_root_mode_is_blocked) ... ok
+test_missing_real_binding_is_blocked_before_worker (__main__.RealBindingTests.test_missing_real_binding_is_blocked_before_worker) ... ok
+test_real_request_rejects_simulated_clock_data (__main__.RealBindingTests.test_real_request_rejects_simulated_clock_data) ... ok
+test_wrong_interpreter_fingerprint_is_blocked (__main__.RealBindingTests.test_wrong_interpreter_fingerprint_is_blocked) ... FAIL
+test_wrong_provider_binding_is_blocked (__main__.RealBindingTests.test_wrong_provider_binding_is_blocked) ... ok
+
+======================================================================
+FAIL: test_default_original_collector_probe_and_fresh_reader_contract (__main__.RealBindingTests.test_default_original_collector_probe_and_fresh_reader_contract)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_real_binding.py", line 89, in test_default_original_collector_probe_and_fresh_reader_contract
+    self.assertEqual(child.returncode,0,child.stderr);result=json.loads(child.stdout);produced=result['envelope'];self.assertEqual(produced['owner_status'],'MATERIALIZED',produced)
+                                                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'INPUT_MISSING' != 'MATERIALIZED'
+- INPUT_MISSING
++ MATERIALIZED
+ : {'ledger_run_id': 'real-contract-run', 'request_sha256': '67d70fd2df7670902e130657540160d5cac02a4383767cbab9394ba4225104f0', 'source_trade_date': '20261012', 'execution_kind': 'OWNER_VERIFIED', 'natural_verified': False, 'pid': 8, 'RESEARCH_ONLY': True, 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False, 'owner_status': 'INPUT_MISSING', 'reason': 'M17_REAL_BINDING_INVALID'}
+
+======================================================================
+FAIL: test_existing_runtime_without_pytdx_blocks_without_network (__main__.RealBindingTests.test_existing_runtime_without_pytdx_blocks_without_network)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_real_binding.py", line 113, in test_existing_runtime_without_pytdx_blocks_without_network
+    result=adapter._process('producer',self.request,'missing-pytdx');self.assertEqual(result['owner_status'],'INPUT_MISSING');self.assertEqual(result['reason'],'M17_PYTDX_RUNTIME_NOT_BOUND');self.assertFalse((Path(self.request['config']['state_root'])/'workbench_research').exists())
+                                                                                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'M17_REAL_BINDING_INVALID' != 'M17_PYTDX_RUNTIME_NOT_BOUND'
+- M17_REAL_BINDING_INVALID
++ M17_PYTDX_RUNTIME_NOT_BOUND
+
+
+======================================================================
+FAIL: test_wrong_interpreter_fingerprint_is_blocked (__main__.RealBindingTests.test_wrong_interpreter_fingerprint_is_blocked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_real_binding.py", line 99, in test_wrong_interpreter_fingerprint_is_blocked
+    receipt=adapter.run_close_recapture_owner(self.request,'bad-runtime');self.assertEqual(receipt['status'],'BLOCKED');self.assertIn('M17_REAL_INTERPRETER_SHA_MISMATCH',receipt['reason_codes'])
+                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'M17_REAL_INTERPRETER_SHA_MISMATCH' not found in ['M17_REAL_BINDING_INVALID']
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.726s
+
+FAILED (failures=3)

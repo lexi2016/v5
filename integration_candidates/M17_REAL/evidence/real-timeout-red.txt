@@ -1,0 +1,15 @@
+test_probe_timeout_is_not_downgraded_to_confirmed_failure (__main__.RealBindingTests.test_probe_timeout_is_not_downgraded_to_confirmed_failure) ... FAIL
+
+======================================================================
+FAIL: test_probe_timeout_is_not_downgraded_to_confirmed_failure (__main__.RealBindingTests.test_probe_timeout_is_not_downgraded_to_confirmed_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17_REAL/after/V5/tests/test_daily_close_recapture_real_binding.py", line 117, in test_probe_timeout_is_not_downgraded_to_confirmed_failure
+    with self.assertRaises(BaseException) as caught:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: BaseException not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.105s
+
+FAILED (failures=1)

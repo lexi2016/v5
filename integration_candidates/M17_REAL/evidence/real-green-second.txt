@@ -1,0 +1,12 @@
+test_default_original_collector_probe_and_fresh_reader_contract (__main__.RealBindingTests.test_default_original_collector_probe_and_fresh_reader_contract) ... ok
+test_existing_runtime_without_pytdx_blocks_without_network (__main__.RealBindingTests.test_existing_runtime_without_pytdx_blocks_without_network) ... ok
+test_mismatched_root_mode_is_blocked (__main__.RealBindingTests.test_mismatched_root_mode_is_blocked) ... ok
+test_missing_real_binding_is_blocked_before_worker (__main__.RealBindingTests.test_missing_real_binding_is_blocked_before_worker) ... ok
+test_real_request_rejects_simulated_clock_data (__main__.RealBindingTests.test_real_request_rejects_simulated_clock_data) ... ok
+test_wrong_interpreter_fingerprint_is_blocked (__main__.RealBindingTests.test_wrong_interpreter_fingerprint_is_blocked) ... ok
+test_wrong_provider_binding_is_blocked (__main__.RealBindingTests.test_wrong_provider_binding_is_blocked) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.155s
+
+OK
