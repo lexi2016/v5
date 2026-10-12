@@ -1,0 +1,14 @@
+{
+  "candidate": "e951e566255e27fb82493d65af0932e37407a55d",
+  "command": [
+    "<EXISTING_PYTHON>",
+    "V5/tests/run_m09_acceptance.py",
+    "--require-supported",
+    "--require-zero-skip",
+    "--evidence-dir",
+    "<TASK_ROOT>/m09-e951-evidence"
+  ],
+  "started_utc": "2026-10-12T17:37:58.860048+00:00",
+  "ended_utc": "2026-10-12T17:38:19.265852+00:00",
+  "exit": 0
+}
