@@ -1,0 +1,76 @@
+{
+  "python": "3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]",
+  "commands": [
+    {
+      "suite": "product",
+      "argv": [
+        "<EXISTING_PYTHON>",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "import sys;sys.path[:0]=['<TASK_ROOT>/m10-1c0d-source/V5/src', '<EXISTING_PYTEST_SITE>'];import pytest;sys.exit(pytest.main([\"-q\",\"-p\",\"no:cacheprovider\",'<TASK_ROOT>/m10-1c0d-source/V5/tests']))"
+      ],
+      "start": "2026-10-12T17:16:00.752167+00:00",
+      "end": "2026-10-12T17:16:04.645547+00:00",
+      "exit_code": 0,
+      "process_environment": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      }
+    },
+    {
+      "suite": "frozen-original",
+      "argv": [
+        "<EXISTING_PYTHON>",
+        "-I",
+        "-S",
+        "-B",
+        "-c",
+        "import sys;sys.path[:0]=['<TASK_ROOT>/m10-1c0d-evidence/tmp/m10-owner-n6blnd6p', '<EXISTING_PYTEST_SITE>'];import pytest;sys.exit(pytest.main(['-q', '-p', 'no:cacheprovider', '<TASK_ROOT>/m10-1c0d-source/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_review_producer.py', '<TASK_ROOT>/m10-1c0d-source/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_review_verified_inputs.py', '<TASK_ROOT>/m10-1c0d-source/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_snapshot_idempotent_reuse.py', '-k', 'not vipdoc_normalizer and not executor_requires']))"
+      ],
+      "start": "2026-10-12T17:16:04.653873+00:00",
+      "end": "2026-10-12T17:16:04.981220+00:00",
+      "exit_code": 0,
+      "process_environment": {
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      }
+    }
+  ],
+  "source_files": {
+    "V5/src/v5_shadow/hk_close_daily.py": {
+      "sha256": "60e6c0b2561c732ea0eb7c7fc694fe9981833d5bc879760bacbfe84d22295027",
+      "bytes": 15974
+    },
+    "V5/src/v5_shadow/hk_close_owner.py": {
+      "sha256": "ea5f03c5cfd915fbff26842e432907bd15c052d89a9aceff07eac37b9e5a36bf",
+      "bytes": 10750
+    },
+    "V5/tests/test_hk_close_chain.py": {
+      "sha256": "5944230084c13611226fbc03d7066064c3415d84bff600a472caa3c4724fa84c",
+      "bytes": 12717
+    },
+    "V5/tests/m10_fixture.py": {
+      "sha256": "fde64d3b9390549b1af205e49bf7a6786ce5a27668a1888d5f297dfb755a5cd7",
+      "bytes": 2770
+    },
+    "V5/tests/run_m10_acceptance.py": {
+      "sha256": "3b8cc66856a3b3e2f60937ce8762672593fa859d74d4021edbaed231dfdc91b7",
+      "bytes": 3808
+    },
+    "V5/tests/test_hk_close_daily.py": {
+      "sha256": "53a8d2b5f76624464570842afbc756c63c4b87ab07dab6625c117a06c3691187",
+      "bytes": 1597
+    },
+    "integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE/manifest.json": {
+      "sha256": "be3c369df297d0ddd6985e0c0f0aa136849a931fe6f388f7f8355f3188574c38",
+      "bytes": 15792
+    }
+  },
+  "not_run": {
+    "test_vipdoc_normalizer_freezes_target_date_and_removes_external_paths": "Frozen import_hkconnect_close_source.py not part of supplied M10 closure.",
+    "test_close_review_executor_requires_and_passes_stage_selection_root": "Full runtime_tasks/scheduler closure not supplied; no live scheduler execution.",
+    "natural_run": "M02 membership/PIT and active half-day contracts unverified; no real collection.",
+    "api_ui_deployment": "This command is offline engine/read-projection acceptance only."
+  },
+  "result": "PASS"
+}

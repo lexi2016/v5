@@ -1,0 +1,17 @@
+{
+  "candidate": "1c0d56d0ea350f8f2178d8b0c6b7e66dfa113585",
+  "command": [
+    "<EXISTING_PYTHON>",
+    "-I",
+    "-S",
+    "-B",
+    "V5/tests/run_m10_acceptance.py",
+    "--pytest-site-packages",
+    "<EXISTING_PYTEST_SITE>",
+    "--evidence-dir",
+    "<TASK_ROOT>/m10-1c0d-evidence"
+  ],
+  "started_utc": "2026-10-12T17:16:00.712141+00:00",
+  "ended_utc": "2026-10-12T17:16:05.037342+00:00",
+  "exit": 0
+}

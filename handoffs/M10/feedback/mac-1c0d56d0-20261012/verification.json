@@ -1,0 +1,33 @@
+{
+  "candidate": "1c0d56d0ea350f8f2178d8b0c6b7e66dfa113585",
+  "branch": "dev/m10-github-handoff-20261011",
+  "result": "PASS_OFFLINE_ENGINE_AND_READ_PROJECTION_ONLY",
+  "product": {
+    "passed": 29,
+    "exit": 0
+  },
+  "frozen_original": {
+    "passed": 10,
+    "deselected_not_run": 2,
+    "exit": 0
+  },
+  "runner_invocations": 1,
+  "old_9d9e00_suite_invocations": 0,
+  "fixed_git_head_verified": true,
+  "source_files_pre_and_post_verified": 178,
+  "runner_report_hashes_verified": true,
+  "git_worktree_clean": true,
+  "not_run": {
+    "test_vipdoc_normalizer_freezes_target_date_and_removes_external_paths": "Frozen import_hkconnect_close_source.py not part of supplied M10 closure.",
+    "test_close_review_executor_requires_and_passes_stage_selection_root": "Full runtime_tasks/scheduler closure not supplied; no live scheduler execution.",
+    "natural_run": "M02 membership/PIT and active half-day contracts unverified; no real collection.",
+    "api_ui_deployment": "This command is offline engine/read-projection acceptance only."
+  },
+  "fixture_data_kind": "SIMULATED / RECORDED_INPUT_REPLAY; not live market production",
+  "membership_pit": "M02_MEMBERSHIP_PIT_UNVERIFIED",
+  "natural_admission": "UNVERIFIED",
+  "deployed": false,
+  "dependencies_installed": false,
+  "services_changed": false,
+  "minimal_integration": "Use HKCloseReviewReader/read_hk_close_projection for exact committed run/generation. Preserve original PARTIAL_WITH_ROWS and null/CANNOT_CONFIRM, complete immutable artifact, both CAS identities. GET must not invoke producer. Actual HTTP/UI route config and natural-day acceptance remain separate."
+}
