@@ -1,0 +1,369 @@
+test_adapter_does_not_change_replay_or_natural_admission (test_hk_stage_m06_adapter.M06AdapterTests.test_adapter_does_not_change_replay_or_natural_admission) ... ERROR
+test_d1_reference_projects_symbol_only_at_original_owner_boundary (test_hk_stage_m06_adapter.M06AdapterTests.test_d1_reference_projects_symbol_only_at_original_owner_boundary) ... ERROR
+test_existing_pool_is_not_overwritten (test_hk_stage_m06_adapter.M06AdapterTests.test_existing_pool_is_not_overwritten) ... ERROR
+test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) ... 
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=0) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=1) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=2) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=3) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=4) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=5) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=6) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=7) ... ERROR
+  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=8) ... ERROR
+test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) ... 
+  test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='symbol') ... ERROR
+  test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_rank') ... ERROR
+  test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_score') ... ERROR
+test_native_mapping_reaches_original_algorithm_store_and_cold_reader (test_hk_stage_m06_adapter.M06AdapterTests.test_native_mapping_reaches_original_algorithm_store_and_cold_reader) ... ERROR
+test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) ... 
+  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_LANES') ... ERROR
+  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_REQUIRED_NUMBER') ... ERROR
+  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_MEMBERSHIP_DATE') ... ERROR
+  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_UNITS') ... ERROR
+  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_SOURCE_TIME') ... ERROR
+test_original_rows_preserved_no_lane_or_numeric_raw_rewrite (test_hk_stage_m06_adapter.M06AdapterTests.test_original_rows_preserved_no_lane_or_numeric_raw_rewrite) ... ERROR
+test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) ... 
+  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='run_id') ... ERROR
+  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_sha256') ... ERROR
+  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='manifest_sha256') ... ERROR
+  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='receipt_sha256') ... ERROR
+  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_relative') ... ERROR
+  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='role') ... ERROR
+test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) ... ERROR
+test_target_13_cannot_bind_stage_12 (test_hk_stage_m06_adapter.M06AdapterTests.test_target_13_cannot_bind_stage_12) ... ERROR
+
+======================================================================
+ERROR: test_adapter_does_not_change_replay_or_natural_admission (test_hk_stage_m06_adapter.M06AdapterTests.test_adapter_does_not_change_replay_or_natural_admission)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 135, in test_adapter_does_not_change_replay_or_natural_admission
+    out=self.run_request(self.bind(r))
+                         ^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_d1_reference_projects_symbol_only_at_original_owner_boundary (test_hk_stage_m06_adapter.M06AdapterTests.test_d1_reference_projects_symbol_only_at_original_owner_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 79, in test_d1_reference_projects_symbol_only_at_original_owner_boundary
+    out=self.bind(r,result,ref);rehash(out)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_existing_pool_is_not_overwritten (test_hk_stage_m06_adapter.M06AdapterTests.test_existing_pool_is_not_overwritten)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 86, in test_existing_pool_is_not_overwritten
+    with self.assertRaisesRegex(ValueError,'M06_ALREADY_BOUND'):self.bind(request())
+                                                                ^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=0)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=4)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=5)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=6)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=7)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=8)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='symbol')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 105, in test_missing_mapped_fields_not_rebuilt_from_raw_strings
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_rank')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 105, in test_missing_mapped_fields_not_rebuilt_from_raw_strings
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_score')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 105, in test_missing_mapped_fields_not_rebuilt_from_raw_strings
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_native_mapping_reaches_original_algorithm_store_and_cold_reader (test_hk_stage_m06_adapter.M06AdapterTests.test_native_mapping_reaches_original_algorithm_store_and_cold_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 70, in test_native_mapping_reaches_original_algorithm_store_and_cold_reader
+    out=self.run_request(self.bind())
+                         ^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_LANES')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+                                      ^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_REQUIRED_NUMBER')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+                                      ^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_MEMBERSHIP_DATE')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+                                      ^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_UNITS')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+                                      ^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_SOURCE_TIME')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+                                      ^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_original_rows_preserved_no_lane_or_numeric_raw_rewrite (test_hk_stage_m06_adapter.M06AdapterTests.test_original_rows_preserved_no_lane_or_numeric_raw_rewrite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 58, in test_original_rows_preserved_no_lane_or_numeric_raw_rewrite
+    out=self.bind(r,result,ref)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='run_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='manifest_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='receipt_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_relative')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='role')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 99, in test_source_reference_and_projection_must_both_match
+    with self.assertRaisesRegex(ValueError,'SOURCE_PROJECTION'):self.bind(result=result,reference=ref)
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+======================================================================
+ERROR: test_target_13_cannot_bind_stage_12 (test_hk_stage_m06_adapter.M06AdapterTests.test_target_13_cannot_bind_stage_12)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 91, in test_target_13_cannot_bind_stage_12
+    with self.assertRaisesRegex(ValueError,'M06_DATE'):self.bind(r,result,ref)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.018s
+
+FAILED (errors=30)

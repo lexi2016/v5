@@ -1,0 +1,12 @@
+[
+  {
+    "check": "FORWARD_EXACT_AFTER_BYTES",
+    "status": "PASS",
+    "files": 12
+  },
+  {
+    "check": "REVERSE_EXACT_BASE_BYTES_AND_NEW_FILES_ABSENT",
+    "status": "PASS",
+    "files": 182
+  }
+]

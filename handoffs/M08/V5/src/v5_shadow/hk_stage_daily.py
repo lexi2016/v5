@@ -22,6 +22,7 @@ from v5_shadow.composition import no_symlinks
 from v5_shadow.contracts import aware,trade_date,sha,exact_keys
 from v5_shadow.digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
 from v5_shadow.hk_stage_sources import SOURCE_SHA,implementation_identity,load_owners,source_bytes
+from v5_shadow.hk_stage_m06 import pool_codes,validate_pool_rows,owner_d1_rows
 
 SAFETY=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
 MARKER=b'v5.hk-stage-root.v1\n'
@@ -105,12 +106,8 @@ def validate_request(request,contracts,calendar):
     if membership['status'] not in ('VERIFIED','UNKNOWN','SYNTHETIC'):raise ValueError('M08_MEMBERSHIP_STATUS')
     sha(membership['receipt_sha256']);sha(pool['rows_sha256']);sha(source['source_sha256']);sha(request['payload_sha256'])
     if not isinstance(pool['run_id'],str) or not pool['run_id']:raise ValueError('M08_M06_RUN_ID')
-    poolcodes=_codes(pool['rows'])
-    if len(poolcodes)!=100 or len(set(poolcodes))!=100 or sha256_json(pool['rows'])!=pool['rows_sha256']:raise ValueError('M08_M06_EXACT_TOP100')
-    for index,row in enumerate(pool['rows'],1):
-        if row.get('target_date')!=date or row.get('signal_date')!=signal or row.get('rank')!=index:raise ValueError('M08_M06_ROW_IDENTITY')
-        _number(row.get('score_prob_active'))
-        if not row.get('preselect_lane'):raise ValueError('M08_M06_LANE_REQUIRED')
+    poolcodes=validate_pool_rows(pool['rows'],date,signal)
+    if sha256_json(pool['rows'])!=pool['rows_sha256']:raise ValueError('M08_M06_EXACT_TOP100')
     membercodes=membership['codes']
     if not isinstance(membercodes,list) or len(membercodes)!=len(set(membercodes)) or any(not isinstance(c,str) or not re.fullmatch(r'HK\.[0-9]{5}',c) for c in membercodes):raise ValueError('M08_MEMBERSHIP_CODES')
     if not set(poolcodes)<=set(membercodes):raise ValueError('M08_POOL_MEMBERSHIP_UNKNOWN')
@@ -120,6 +117,8 @@ def validate_request(request,contracts,calendar):
     if type(source['requested_rows']) is not int or source['requested_rows']<0:raise ValueError('M08_COVERAGE')
     for field in ('missing_symbols','cannot_confirm','source_evidence'):
         if not isinstance(source[field],list) or any(not isinstance(s,str) for s in source[field]):raise ValueError('M08_SOURCE_DIAGNOSTICS')
+    if 'm06_fixture_only=true' in source['source_evidence'] and request['data_kind']!='SYNTHETIC':
+        raise ValueError('M08_M06_FIXTURE_NOT_REPLAY')
     if status in ('READY','READY_EMPTY') and (source['missing_symbols'] or source['cannot_confirm']):raise ValueError('M08_READY_CONTRADICTION')
     captured=aware(source['captured_at']);available=aware(source['available_at'])
     cutoff=_time(date,spec.cutoff);window=spec.hk_window or spec.window;start=_time(date,window.split('-')[0]+':00')
@@ -134,15 +133,15 @@ def validate_request(request,contracts,calendar):
         if captured!=_time(date,'15:55:00'):raise ValueError('M08_STAGE8_RETAINED_CAPTURE_CUTOFF')
     elif route!='FOUR_LANE':raise ValueError('M08_ORDINARY_ROUTE')
     if stage!='STAGE_1545_1555':
-        exact_keys(payload,('rows',));rows=payload['rows'];codes=_codes(rows)
+        exact_keys(payload,('rows',));rows=payload['rows']
+        codes=pool_codes(rows) if route=='D1_REFERENCE' else _codes(rows)
         if route!='FOUR_LANE' and len(codes)!=len(set(codes)):raise ValueError('M08_DUPLICATE_CODE')
         if source['requested_rows']<len(set(codes)):raise ValueError('M08_COVERAGE')
         if status=='READY_EMPTY' and rows:raise ValueError('M08_EMPTY_CONTRADICTION')
         if not rows and status=='READY':raise ValueError('M08_EMPTY_REQUIRES_VERIFIED_STATUS')
         if not set(codes)<=set(membercodes):raise ValueError('M08_ROW_MEMBERSHIP_UNKNOWN')
         seen={}
-        for row in rows:
-            code=row['code']
+        for row,code in zip(rows,codes):
             if row.get('target_date')!=date or row.get('signal_date')!=signal:raise ValueError('M08_ROW_DATE')
             if route=='D1_REFERENCE':
                 original=pool['rows'][poolcodes.index(code)]
@@ -234,7 +233,7 @@ def _select(request,generation,selection,identity_sha):
     kwargs=dict(source_status=status,requested_rows=requested,missing_symbols=missing,cannot_confirm=cannot,source_evidence=evidence)
     score_details={}
     if route=='SECOND_FILTER':artifact=selection.select_hk_0925_second_filter(rows,request['target_date'],identity_sha,**kwargs)
-    elif route=='D1_REFERENCE':artifact=selection.select_hk_0925_d1_reference(rows,request['target_date'],identity_sha,**kwargs)
+    elif route=='D1_REFERENCE':artifact=selection.select_hk_0925_d1_reference(owner_d1_rows(rows),request['target_date'],identity_sha,**kwargs)
     else:
         merged=selection.merge_hk_four_lane_candidates(rows)
         score_details={row['code']:selection.hk_four_lane_score(row,request['stage_id'],100.0) for row in merged}

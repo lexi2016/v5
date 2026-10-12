@@ -1,5 +1,11 @@
 # V5 M08｜港股阶段选股
 
+## 2026-10-12 M06 原映射接线增量
+
+在 Mac 固定反馈 `bfdb43fd3ac40f2134635e53bec22619fbaf9f97` 后补齐 M06 原冷读结果的字段适配：保留原行，直接消费 `symbol / pool_rank / pool_score`，不再错误要求 pool 的 `preselect_lane`，不生成阶段 lane。新增本地 JSON 适配命令、原 owner/store/冷读正负测试，见 [M08_M06_ADAPTER.md](V5/docs/M08_M06_ADAPTER.md) 和 [增量交付 SHA/正反补丁](delivery/M08_M06_ADAPTER_20261012/)。
+
+固定 Mac 反馈已记录上一候选 90/90 工程测试通过；本增量仅运行定向测试，未重跑该 90 项，也未执行真实入口或改动历史反馈。真实同日成员、时间、单位与行情原证据仍须独立满足；不允许用 10/13 池改日期配 10/12 阶段。以下首轮交付状态为历史记录。
+
 ## 2026-10-12 原 owner 工程候选交付
 
 默认港股输入 → 原普通/竞价/Stage8 owner → 原 SelectionStore 三件 → 独立精确 run 冷读链已实现，并提供现有只读模块 API 发布适配器。完整代码、边界、测试及 Mac 单次验收入口见 [M08_HK_STAGE_HANDOFF.md](V5/docs/M08_HK_STAGE_HANDOFF.md)；固定前像/后像、真正正反 patch 与核验见 [delivery/M08_20261012](delivery/M08_20261012/)。

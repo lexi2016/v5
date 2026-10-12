@@ -61,5 +61,5 @@ def load_owners():
 
 
 def implementation_identity():
-    names=('hk_stage_daily.py','hk_stage_reader.py','hk_stage_sources.py','contracts.py','digests.py','composition.py')
+    names=('hk_stage_daily.py','hk_stage_reader.py','hk_stage_sources.py','hk_stage_m06.py','contracts.py','digests.py','composition.py')
     return {name:hashlib.sha256(no_symlinks(Path(__file__).with_name(name)).read_bytes()).hexdigest() for name in names}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "v5.m08.m06_adapter_test_receipt.v1",
+  "baseline_commit": "7aaf58b07daa70f3efb2554b82ee8195cb7a1185",
+  "executed_at": "2026-10-12T19:34:26.011551+00:00",
+  "result": "PASS_ENGINEERING_CANDIDATE",
+  "data": "SYNTHETIC_CONTRACT_FIXTURES_ONLY",
+  "targeted_tests": 13,
+  "compatibility_tests": 3,
+  "commands": [
+    {
+      "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest discover -s V5/tests -p test_hk_stage_m06_adapter.py -v",
+      "exit_code": 0,
+      "log": "RUN.txt"
+    },
+    {
+      "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted test_hk_stage_daily.HKChainTests.test_input_rejections -v",
+      "exit_code": 0,
+      "log": "COMPATIBILITY.txt"
+    }
+  ],
+  "initial_red": {
+    "tests": 10,
+    "exit_code": 1,
+    "reason": "New adapter module absent",
+    "log": "RED.txt"
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "pyarrow": "NOT_INSTALLED",
+    "pytest": "NOT_INSTALLED"
+  },
+  "natural_verified": false,
+  "formal_admission": false,
+  "not_run": [
+    "Prior full 90-test suite (intentionally not rerun)",
+    "Mac test of this delta",
+    "Actual M06/stage payload entrypoint",
+    "Natural collection/PIT/qualification",
+    "UI deployment"
+  ]
+}

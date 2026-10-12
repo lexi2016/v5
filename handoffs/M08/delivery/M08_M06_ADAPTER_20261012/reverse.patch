@@ -1,0 +1,1002 @@
+diff --git a/START_HERE.md b/START_HERE.md
+--- a/START_HERE.md
++++ b/START_HERE.md
+@@ -1,10 +1,4 @@
+ # V5 M08｜港股阶段选股
+-
+-## 2026-10-12 M06 原映射接线增量
+-
+-在 Mac 固定反馈 `bfdb43fd3ac40f2134635e53bec22619fbaf9f97` 后补齐 M06 原冷读结果的字段适配：保留原行，直接消费 `symbol / pool_rank / pool_score`，不再错误要求 pool 的 `preselect_lane`，不生成阶段 lane。新增本地 JSON 适配命令、原 owner/store/冷读正负测试，见 [M08_M06_ADAPTER.md](V5/docs/M08_M06_ADAPTER.md) 和 [增量交付 SHA/正反补丁](delivery/M08_M06_ADAPTER_20261012/)。
+-
+-固定 Mac 反馈已记录上一候选 90/90 工程测试通过；本增量仅运行定向测试，未重跑该 90 项，也未执行真实入口或改动历史反馈。真实同日成员、时间、单位与行情原证据仍须独立满足；不允许用 10/13 池改日期配 10/12 阶段。以下首轮交付状态为历史记录。
+ 
+ ## 2026-10-12 原 owner 工程候选交付
+ 
+diff --git a/V5/docs/M08_M06_ADAPTER.md b/V5/docs/M08_M06_ADAPTER.md
+deleted file mode 100644
+--- a/V5/docs/M08_M06_ADAPTER.md
++++ /dev/null
+@@ -1,109 +0,0 @@
+-# M08 minimal M06 original-mapping adapter
+-
+-## Fixed baseline and scope
+-
+-Parent is `7aaf58b07daa70f3efb2554b82ee8195cb7a1185` on the existing
+-`dev/m08-github-handoff-20261011` branch. It preserves the Mac feedback at `bfdb43fd3ac40f2134635e53bec22619fbaf9f97`, recording the preceding
+-candidate's 90/90 isolated engineering tests, not a real-input producer run.
+-This delta preserves that feedback and all original donor bytes. It changes
+-only M08 integration code and its own tests/docs; no new dependencies.
+-
+-The actual wiring defect was a fabricated M08 prerequisite: native M06 rows
+-do not require `preselect_lane`, and their original `rank` and
+-`score_prob_active` can remain strings. The original M06 materializer already
+-provides `symbol`, integer `pool_rank`, and numeric `pool_score`.
+-
+-Sources inspected:
+-
+-- `lexi2016/v5@7006c6ab6e2b4f1f9f6a00da0b3b490dcd4d4fd8`,
+-  `handoffs/M06/source/V5/src/v5_shadow/vendor/hk_preselection_baseline/domains/_preselection_materializer_parts/hk_pool.py`
+-  (`_build_shared_hk_0_2_pool_body`) and `hk_preselection_verified.py`
+-  (`_verify_chain`, `run_verified_hk_preselection`).
+-- Same M06 source tree, `hk_preselection_publication.py`,
+-  `read_verified_hk_preselection_reference(bound_root, reference)`: exact
+-  committed reference cold read, no latest/date fallback.
+-- Original M08 donor `handoff/v4-running-source-20261005/canonical/stage_center/_runner_parts/hk_candidate_authority.py`:
+-  D1 contributes membership/metadata; LIVE evidence is separate.
+-- Original `_selection_parts/hk_auction_reference.py`: its code alias is
+-  `code/ts_code/stock_code`, while rank/score already prefer `pool_rank/pool_score`.
+-
+-## Implemented boundary
+-
+-`v5_shadow.hk_stage_m06.bind_m06_verified_result(request, result, expected_source_reference)`
+-accepts an unbound existing M08 request (no `m06` key), the original M06 strict
+-cold-reader result, and an independently pinned six-field source reference.
+-It does not import/rewrite M06's algorithm or execute an external collector.
+-
+-- Requires `ASSEMBLED / VERIFIED_SOURCE_SNAPSHOT`, original READY verification,
+-  exact source-reference projection, exact target/signal dates, eligible mapped
+-  artifact, 100 unique HK symbols, ordered native integer ranks/probabilities,
+-  original row contract, and literal false safety flags.
+-- Retains every original row field and value unchanged, including raw code and
+-  numeric strings. Never rebuilds missing mapped fields from raw strings.
+-- Binds original source hashes plus the mapped artifact and reference digests
+-  in existing source evidence; does not export source filesystem paths.
+-- Does not invent candidate lanes, timestamps, prices, cap/volume/turnover,
+-  units, M02 membership, eligibility, PIT proof, or source files.
+-- M08's existing request validation accepts native mapped rows. Existing
+-  legacy synthetic fixture rows remain supported without a fake D1 lane gate.
+-- Only `D1_REFERENCE` projects `code=symbol` in a copy passed to the unchanged
+-  original owner. Retained request/pool/payload rows are unmodified. Reference
+-  output remains `CANNOT_CONFIRM`; it cannot become `SECOND_FILTER`.
+-- Explicit `fixture_only=true` cannot be tagged as recorded replay, including
+-  after binding at the producer/independent-reader validation boundary.
+-- The new module is covered by M08 implementation identity. New generations
+-  are code-version-bound; use the old pinned checkout to cold-read old V5
+-  engineering generations. This does not migrate or rewrite any prior output.
+-
+-This is consistency checking of a supplied original-reader result, not an
+-independent replay of M06's storage verification. Calling the adapter with a
+-JSON-shaped claim does not authenticate the source. The upstream original
+-reader and exact reference must actually be checked. M08 remains
+-`natural_verified=false`, `formal_admission=false`; LIVE fails closed.
+-
+-## Local command and API
+-
+-Use absolute paths; output must not already exist. The result and reference
+-must be obtained from the original M06 reader above, not a CSV-only substitute.
+-The request file supplies actual stage/M02 evidence and omits only `m06`.
+-
+-```sh
+-cd handoffs/M08
+-PYTHONPATH=V5/src python -B -m v5_shadow.hk_stage_m06 \
+-  --request "$M08_UNBOUND_REQUEST" --m06-result "$M06_COLD_RESULT" \
+-  --expected-source "$M06_PINNED_SOURCE_REFERENCE" --output "$M08_BOUND_REQUEST"
+-```
+-
+-Then use the existing `hk_stage_daily` run command documented in
+-`M08_HK_STAGE_HANDOFF.md`, only when the remaining original evidence is complete.
+-The adapter never changes a 20261013 pool into a 20261012 pool, sets an
+-eligibility date, or populates missing payload fields to get a green result.
+-
+-Targeted verification, using installed dependencies only:
+-
+-```sh
+-cd handoffs/M08
+-PYTHONPATH=V5/src:V5/tests python -B -m unittest discover \
+-  -s V5/tests -p test_hk_stage_m06_adapter.py -v
+-```
+-
+-The existing full `run_m08_acceptance.py` now includes these 13 tests for future
+-runs (103 total if all previous counts stay unchanged). The previous 90-test
+-suite was deliberately not rerun in this delta. Cloud results are 13 new tests
+-plus 3 specifically selected existing compatibility tests, with logs and
+-runtime details in `V5/tests/logs/M08_M06_ADAPTER/`. Mac test of this delta and
+-real-data execution are NOT_RUN here.
+-
+-## Remaining evidence versus adapter work
+-
+-Same-day historical pool and saved original SelectionStore products can exist
+-independently of ordinary-stage raw runner inputs. Read saved products only
+-through their original exact-run reader; readable output is not proof of
+-reproducible source input. Saved auction reference is not SECOND_FILTER.
+-Stage8 aggregate or summaries are not its full retained snapshot and RT_DATA.
+-This delta does not copy historical results or claim their natural/PIT
+-qualification, and it does not wait for future dates to finish source code.
+-
+-See the fixed parent Mac feedback for inspected evidence and any later
+-independent historical-result adapter. Shared ledger contracts remain
+-unchanged. Complete M08 product/real-input acceptance remains open.
+diff --git a/V5/src/v5_shadow/hk_stage_daily.py b/V5/src/v5_shadow/hk_stage_daily.py
+--- a/V5/src/v5_shadow/hk_stage_daily.py
++++ b/V5/src/v5_shadow/hk_stage_daily.py
+@@ -22,7 +22,6 @@
+ from v5_shadow.contracts import aware,trade_date,sha,exact_keys
+ from v5_shadow.digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
+ from v5_shadow.hk_stage_sources import SOURCE_SHA,implementation_identity,load_owners,source_bytes
+-from v5_shadow.hk_stage_m06 import pool_codes,validate_pool_rows,owner_d1_rows
+ 
+ SAFETY=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
+ MARKER=b'v5.hk-stage-root.v1\n'
+@@ -106,8 +105,12 @@
+     if membership['status'] not in ('VERIFIED','UNKNOWN','SYNTHETIC'):raise ValueError('M08_MEMBERSHIP_STATUS')
+     sha(membership['receipt_sha256']);sha(pool['rows_sha256']);sha(source['source_sha256']);sha(request['payload_sha256'])
+     if not isinstance(pool['run_id'],str) or not pool['run_id']:raise ValueError('M08_M06_RUN_ID')
+-    poolcodes=validate_pool_rows(pool['rows'],date,signal)
+-    if sha256_json(pool['rows'])!=pool['rows_sha256']:raise ValueError('M08_M06_EXACT_TOP100')
++    poolcodes=_codes(pool['rows'])
++    if len(poolcodes)!=100 or len(set(poolcodes))!=100 or sha256_json(pool['rows'])!=pool['rows_sha256']:raise ValueError('M08_M06_EXACT_TOP100')
++    for index,row in enumerate(pool['rows'],1):
++        if row.get('target_date')!=date or row.get('signal_date')!=signal or row.get('rank')!=index:raise ValueError('M08_M06_ROW_IDENTITY')
++        _number(row.get('score_prob_active'))
++        if not row.get('preselect_lane'):raise ValueError('M08_M06_LANE_REQUIRED')
+     membercodes=membership['codes']
+     if not isinstance(membercodes,list) or len(membercodes)!=len(set(membercodes)) or any(not isinstance(c,str) or not re.fullmatch(r'HK\.[0-9]{5}',c) for c in membercodes):raise ValueError('M08_MEMBERSHIP_CODES')
+     if not set(poolcodes)<=set(membercodes):raise ValueError('M08_POOL_MEMBERSHIP_UNKNOWN')
+@@ -117,8 +120,6 @@
+     if type(source['requested_rows']) is not int or source['requested_rows']<0:raise ValueError('M08_COVERAGE')
+     for field in ('missing_symbols','cannot_confirm','source_evidence'):
+         if not isinstance(source[field],list) or any(not isinstance(s,str) for s in source[field]):raise ValueError('M08_SOURCE_DIAGNOSTICS')
+-    if 'm06_fixture_only=true' in source['source_evidence'] and request['data_kind']!='SYNTHETIC':
+-        raise ValueError('M08_M06_FIXTURE_NOT_REPLAY')
+     if status in ('READY','READY_EMPTY') and (source['missing_symbols'] or source['cannot_confirm']):raise ValueError('M08_READY_CONTRADICTION')
+     captured=aware(source['captured_at']);available=aware(source['available_at'])
+     cutoff=_time(date,spec.cutoff);window=spec.hk_window or spec.window;start=_time(date,window.split('-')[0]+':00')
+@@ -133,15 +134,15 @@
+         if captured!=_time(date,'15:55:00'):raise ValueError('M08_STAGE8_RETAINED_CAPTURE_CUTOFF')
+     elif route!='FOUR_LANE':raise ValueError('M08_ORDINARY_ROUTE')
+     if stage!='STAGE_1545_1555':
+-        exact_keys(payload,('rows',));rows=payload['rows']
+-        codes=pool_codes(rows) if route=='D1_REFERENCE' else _codes(rows)
++        exact_keys(payload,('rows',));rows=payload['rows'];codes=_codes(rows)
+         if route!='FOUR_LANE' and len(codes)!=len(set(codes)):raise ValueError('M08_DUPLICATE_CODE')
+         if source['requested_rows']<len(set(codes)):raise ValueError('M08_COVERAGE')
+         if status=='READY_EMPTY' and rows:raise ValueError('M08_EMPTY_CONTRADICTION')
+         if not rows and status=='READY':raise ValueError('M08_EMPTY_REQUIRES_VERIFIED_STATUS')
+         if not set(codes)<=set(membercodes):raise ValueError('M08_ROW_MEMBERSHIP_UNKNOWN')
+         seen={}
+-        for row,code in zip(rows,codes):
++        for row in rows:
++            code=row['code']
+             if row.get('target_date')!=date or row.get('signal_date')!=signal:raise ValueError('M08_ROW_DATE')
+             if route=='D1_REFERENCE':
+                 original=pool['rows'][poolcodes.index(code)]
+@@ -233,7 +234,7 @@
+     kwargs=dict(source_status=status,requested_rows=requested,missing_symbols=missing,cannot_confirm=cannot,source_evidence=evidence)
+     score_details={}
+     if route=='SECOND_FILTER':artifact=selection.select_hk_0925_second_filter(rows,request['target_date'],identity_sha,**kwargs)
+-    elif route=='D1_REFERENCE':artifact=selection.select_hk_0925_d1_reference(owner_d1_rows(rows),request['target_date'],identity_sha,**kwargs)
++    elif route=='D1_REFERENCE':artifact=selection.select_hk_0925_d1_reference(rows,request['target_date'],identity_sha,**kwargs)
+     else:
+         merged=selection.merge_hk_four_lane_candidates(rows)
+         score_details={row['code']:selection.hk_four_lane_score(row,request['stage_id'],100.0) for row in merged}
+diff --git a/V5/src/v5_shadow/hk_stage_m06.py b/V5/src/v5_shadow/hk_stage_m06.py
+deleted file mode 100644
+--- a/V5/src/v5_shadow/hk_stage_m06.py
++++ /dev/null
+@@ -1,130 +0,0 @@
+-"""Consume the original M06 mapped artifact without creating stage evidence.
+-
+-Call with the result of M06's original exact-reference cold reader and its
+-independently pinned source reference. This pure adapter checks consistency;
+-it does not re-read M06 storage, verify model weights, or attest qualification.
+-Original raw row fields are retained byte-semantically in the request JSON.
+-"""
+-import copy
+-import math
+-import re
+-from .contracts import exact_keys, sha
+-from .digests import canonical_bytes, sha256_json
+-
+-SOURCE_KEYS=('role','run_id','artifact_sha256','manifest_sha256','receipt_sha256','artifact_relative')
+-PROJECTION={'run_id':'source_run_id','artifact_sha256':'source_sha256',
+-    'manifest_sha256':'source_manifest_sha256','receipt_sha256':'source_receipt_sha256',
+-    'artifact_relative':'source_path'}
+-FLAGS=('production_allowed','buy_gate_updated','orders_sent')
+-
+-
+-def pool_codes(rows):
+-    """Use native symbol for mapped M06 rows; retain legacy synthetic code rows."""
+-    if not isinstance(rows,list) or any(not isinstance(row,dict) for row in rows):
+-        raise ValueError('M08_M06_ROWS')
+-    codes=[]
+-    for row in rows:
+-        mapped=any(key in row for key in ('symbol','pool_rank','pool_score','pool_id'))
+-        code=row.get('symbol') if mapped else row.get('code')
+-        if not isinstance(code,str) or not re.fullmatch(r'HK\.[0-9]{5}',code):
+-            raise ValueError('M08_M06_SYMBOL')
+-        codes.append(code)
+-    return codes
+-
+-
+-def validate_pool_rows(rows,date,signal,*,mapped_required=False):
+-    codes=pool_codes(rows)
+-    if len(codes)!=100 or len(set(codes))!=100:raise ValueError('M08_M06_EXACT_TOP100')
+-    previous=math.inf
+-    for index,row in enumerate(rows,1):
+-        mapped=any(key in row for key in ('symbol','pool_rank','pool_score','pool_id'))
+-        if mapped_required and not mapped:raise ValueError('M08_M06_MAPPED_FIELDS_REQUIRED')
+-        rank=row.get('pool_rank') if mapped else row.get('rank')
+-        score=row.get('pool_score') if mapped else row.get('score_prob_active')
+-        if row.get('target_date')!=date or row.get('signal_date')!=signal or type(rank) is not int or rank!=index:
+-            raise ValueError('M08_M06_ROW_IDENTITY')
+-        if isinstance(score,bool) or not isinstance(score,(int,float)) or not math.isfinite(score):
+-            raise ValueError('M08_M06_POOL_SCORE')
+-        if mapped:
+-            if (row.get('market')!='HK' or row.get('pool_id')!='hkconnect_d1_top100'
+-                    or row.get('selected_strategy')!='prob_active' or row.get('d1_freshness_status')!='PASS'
+-                    or row.get('recommendation_status')!='WATCH_ONLY'
+-                    or any(row.get(key) is not False for key in FLAGS)):
+-                raise ValueError('M08_M06_MAPPED_ROW_CONTRACT')
+-            if not 0<=score<=1 or score>previous:raise ValueError('M08_M06_POOL_ORDER')
+-            previous=score
+-    # D1 gives membership and metadata, not a preselect or LIVE lane.
+-    return codes
+-
+-
+-def owner_d1_rows(rows):
+-    """Project only the original symbol alias expected by the D1 reference owner."""
+-    return [dict(row,code=code) for row,code in zip(rows,pool_codes(rows))]
+-
+-
+-def bind_m06_verified_result(request,result,expected_source_reference):
+-    """Bind native M06 rows; leave all stage/M02/quote/time evidence untouched."""
+-    if 'm06' in request:raise ValueError('M08_M06_ALREADY_BOUND')
+-    expected=copy.deepcopy(expected_source_reference)
+-    exact_keys(expected,SOURCE_KEYS)
+-    if expected['role']!='HK_CONNECT_D1_TOP100_0_2':raise ValueError('M08_M06_SOURCE_ROLE')
+-    if any(not isinstance(expected[key],str) or not expected[key] for key in SOURCE_KEYS):
+-        raise ValueError('M08_M06_SOURCE_REFERENCE')
+-    for key in ('artifact_sha256','manifest_sha256','receipt_sha256'):sha(expected[key])
+-    if (not isinstance(result,dict) or result.get('status')!='ASSEMBLED'
+-            or result.get('data_kind')!='VERIFIED_SOURCE_SNAPSHOT'
+-            or result.get('model_weights_reverified') is not False
+-            or any(result.get(key) is not False for key in FLAGS)):
+-        raise ValueError('M08_M06_READER_RESULT')
+-    date=request['target_date'];signal=request['signal_date']
+-    if result.get('target_date')!=date or result.get('signal_date')!=signal:raise ValueError('M08_M06_DATE')
+-    if result.get('verified_source_reference')!=expected:raise ValueError('M08_M06_SOURCE_REFERENCE')
+-    verification=result.get('source_verification')
+-    if (not isinstance(verification,dict) or verification.get('status')!='READY'
+-            or verification.get('row_count')!=100
+-            or any(verification.get(key)!=expected[key] for key in SOURCE_KEYS if key!='role')):
+-        raise ValueError('M08_M06_SOURCE_VERIFICATION')
+-    if type(result.get('fixture_only')) is not bool:raise ValueError('M08_M06_FIXTURE_FLAG')
+-    if result['fixture_only'] and request.get('data_kind')!='SYNTHETIC':raise ValueError('M08_M06_FIXTURE_NOT_REPLAY')
+-    artifact=result.get('artifact')
+-    required=dict(schema_version='v3_5.preselection_pool.v1',market='HK',pool_id='hkconnect_d1_top100',
+-        trade_date=date,target_date=date,signal_date=signal,status='STRICT_0_2_READY',
+-        source_role='SHARED_VERIFIED_HK_0_2',producer_id='v3_shared_hk_0_2_consumer_v1')
+-    if (not isinstance(artifact,dict) or any(artifact.get(key)!=value for key,value in required.items())
+-            or artifact.get('stage_selection_eligible') is not True or artifact.get('source_row_count')!=100
+-            or any(artifact.get(key) is not False for key in FLAGS)):
+-        raise ValueError('M08_M06_ARTIFACT')
+-    if any(artifact.get(output)!=expected[key] for key,output in PROJECTION.items()):
+-        raise ValueError('M08_M06_SOURCE_PROJECTION')
+-    validate_pool_rows(artifact.get('rows'),date,signal,mapped_required=True)
+-    canonical_bytes(result)
+-    out=copy.deepcopy(request);rows=copy.deepcopy(artifact['rows'])
+-    out['m06']=dict(target_date=date,signal_date=signal,run_id=expected['run_id'],rows=rows,rows_sha256=sha256_json(rows))
+-    evidence=out['source']['source_evidence']
+-    if not isinstance(evidence,list):raise ValueError('M08_SOURCE_DIAGNOSTICS')
+-    # Retain non-path source bindings only. No raw payload or private path export.
+-    evidence.extend(['m06_adapter=ORIGINAL_MAPPED_FIELDS_ONLY','m06_adapter_attests_source=false',
+-        'm06_mapped_artifact_sha256='+sha256_json(artifact),
+-        'm06_source_reference_sha256='+sha256_json(expected),
+-        'm06_source_artifact_sha256='+expected['artifact_sha256'],
+-        'm06_source_manifest_sha256='+expected['manifest_sha256'],
+-        'm06_source_receipt_sha256='+expected['receipt_sha256'],
+-        'm06_fixture_only='+str(result['fixture_only']).lower()])
+-    canonical_bytes(out)
+-    return out
+-
+-
+-def main():
+-    """Local JSON interface; output must be a new file, never overwritten."""
+-    import argparse
+-    from pathlib import Path
+-    from .composition import no_symlinks
+-    from .hk_stage_daily import read_json
+-    parser=argparse.ArgumentParser(description=__doc__)
+-    for key in ('request','m06-result','expected-source','output'):parser.add_argument('--'+key,required=True)
+-    args=parser.parse_args()
+-    result=bind_m06_verified_result(read_json(args.request),read_json(args.m06_result),read_json(args.expected_source))
+-    with no_symlinks(Path(args.output)).open('xb') as stream:stream.write(canonical_bytes(result)+b'\n')
+-
+-
+-if __name__=='__main__':main()
+diff --git a/V5/src/v5_shadow/hk_stage_sources.py b/V5/src/v5_shadow/hk_stage_sources.py
+--- a/V5/src/v5_shadow/hk_stage_sources.py
++++ b/V5/src/v5_shadow/hk_stage_sources.py
+@@ -61,5 +61,5 @@
+ 
+ 
+ def implementation_identity():
+-    names=('hk_stage_daily.py','hk_stage_reader.py','hk_stage_sources.py','hk_stage_m06.py','contracts.py','digests.py','composition.py')
++    names=('hk_stage_daily.py','hk_stage_reader.py','hk_stage_sources.py','contracts.py','digests.py','composition.py')
+     return {name:hashlib.sha256(no_symlinks(Path(__file__).with_name(name)).read_bytes()).hexdigest() for name in names}
+diff --git a/V5/tests/logs/M08_M06_ADAPTER/COMPATIBILITY.txt b/V5/tests/logs/M08_M06_ADAPTER/COMPATIBILITY.txt
+deleted file mode 100644
+--- a/V5/tests/logs/M08_M06_ADAPTER/COMPATIBILITY.txt
++++ /dev/null
+@@ -1,8 +0,0 @@
+-test_four_lane_store_and_cold_reader (test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader) ... ok
+-test_auction_reference_never_promoted (test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted) ... ok
+-test_input_rejections (test_hk_stage_daily.HKChainTests.test_input_rejections) ... ok
+-
+-----------------------------------------------------------------------
+-Ran 3 tests in 2.153s
+-
+-OK
+diff --git a/V5/tests/logs/M08_M06_ADAPTER/RED.txt b/V5/tests/logs/M08_M06_ADAPTER/RED.txt
+deleted file mode 100644
+--- a/V5/tests/logs/M08_M06_ADAPTER/RED.txt
++++ /dev/null
+@@ -1,369 +0,0 @@
+-test_adapter_does_not_change_replay_or_natural_admission (test_hk_stage_m06_adapter.M06AdapterTests.test_adapter_does_not_change_replay_or_natural_admission) ... ERROR
+-test_d1_reference_projects_symbol_only_at_original_owner_boundary (test_hk_stage_m06_adapter.M06AdapterTests.test_d1_reference_projects_symbol_only_at_original_owner_boundary) ... ERROR
+-test_existing_pool_is_not_overwritten (test_hk_stage_m06_adapter.M06AdapterTests.test_existing_pool_is_not_overwritten) ... ERROR
+-test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) ... 
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=0) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=1) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=2) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=3) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=4) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=5) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=6) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=7) ... ERROR
+-  test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=8) ... ERROR
+-test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) ... 
+-  test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='symbol') ... ERROR
+-  test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_rank') ... ERROR
+-  test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_score') ... ERROR
+-test_native_mapping_reaches_original_algorithm_store_and_cold_reader (test_hk_stage_m06_adapter.M06AdapterTests.test_native_mapping_reaches_original_algorithm_store_and_cold_reader) ... ERROR
+-test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) ... 
+-  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_LANES') ... ERROR
+-  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_REQUIRED_NUMBER') ... ERROR
+-  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_MEMBERSHIP_DATE') ... ERROR
+-  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_UNITS') ... ERROR
+-  test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_SOURCE_TIME') ... ERROR
+-test_original_rows_preserved_no_lane_or_numeric_raw_rewrite (test_hk_stage_m06_adapter.M06AdapterTests.test_original_rows_preserved_no_lane_or_numeric_raw_rewrite) ... ERROR
+-test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) ... 
+-  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='run_id') ... ERROR
+-  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_sha256') ... ERROR
+-  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='manifest_sha256') ... ERROR
+-  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='receipt_sha256') ... ERROR
+-  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_relative') ... ERROR
+-  test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='role') ... ERROR
+-test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) ... ERROR
+-test_target_13_cannot_bind_stage_12 (test_hk_stage_m06_adapter.M06AdapterTests.test_target_13_cannot_bind_stage_12) ... ERROR
+-
+-======================================================================
+-ERROR: test_adapter_does_not_change_replay_or_natural_admission (test_hk_stage_m06_adapter.M06AdapterTests.test_adapter_does_not_change_replay_or_natural_admission)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 135, in test_adapter_does_not_change_replay_or_natural_admission
+-    out=self.run_request(self.bind(r))
+-                         ^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_d1_reference_projects_symbol_only_at_original_owner_boundary (test_hk_stage_m06_adapter.M06AdapterTests.test_d1_reference_projects_symbol_only_at_original_owner_boundary)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 79, in test_d1_reference_projects_symbol_only_at_original_owner_boundary
+-    out=self.bind(r,result,ref);rehash(out)
+-        ^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_existing_pool_is_not_overwritten (test_hk_stage_m06_adapter.M06AdapterTests.test_existing_pool_is_not_overwritten)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 86, in test_existing_pool_is_not_overwritten
+-    with self.assertRaisesRegex(ValueError,'M06_ALREADY_BOUND'):self.bind(request())
+-                                                                ^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=0)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=1)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=2)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=3)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=4)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=5)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=6)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=7)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) (case=8)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 120, in test_mapped_pool_integrity_and_safety
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='symbol')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 105, in test_missing_mapped_fields_not_rebuilt_from_raw_strings
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_rank')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 105, in test_missing_mapped_fields_not_rebuilt_from_raw_strings
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) (field='pool_score')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 105, in test_missing_mapped_fields_not_rebuilt_from_raw_strings
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_native_mapping_reaches_original_algorithm_store_and_cold_reader (test_hk_stage_m06_adapter.M06AdapterTests.test_native_mapping_reaches_original_algorithm_store_and_cold_reader)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 70, in test_native_mapping_reaches_original_algorithm_store_and_cold_reader
+-    out=self.run_request(self.bind())
+-                         ^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_LANES')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+-    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+-                                      ^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_REQUIRED_NUMBER')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+-    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+-                                      ^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_MEMBERSHIP_DATE')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+-    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+-                                      ^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_UNITS')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+-    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+-                                      ^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) (reason='M08_SOURCE_TIME')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 130, in test_no_quote_lane_membership_time_or_unit_completion
+-    r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+-                                      ^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_original_rows_preserved_no_lane_or_numeric_raw_rewrite (test_hk_stage_m06_adapter.M06AdapterTests.test_original_rows_preserved_no_lane_or_numeric_raw_rewrite)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 58, in test_original_rows_preserved_no_lane_or_numeric_raw_rewrite
+-    out=self.bind(r,result,ref)
+-        ^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='run_id')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_sha256')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='manifest_sha256')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='receipt_sha256')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='artifact_relative')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) (field='role')
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 97, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 99, in test_source_reference_and_projection_must_both_match
+-    with self.assertRaisesRegex(ValueError,'SOURCE_PROJECTION'):self.bind(result=result,reference=ref)
+-                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-======================================================================
+-ERROR: test_target_13_cannot_bind_stage_12 (test_hk_stage_m06_adapter.M06AdapterTests.test_target_13_cannot_bind_stage_12)
+-----------------------------------------------------------------------
+-Traceback (most recent call last):
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 91, in test_target_13_cannot_bind_stage_12
+-    with self.assertRaisesRegex(ValueError,'M06_DATE'):self.bind(r,result,ref)
+-                                                       ^^^^^^^^^^^^^^^^^^^^^^^
+-  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_m06_adapter.py", line 44, in bind
+-    from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-ModuleNotFoundError: No module named 'v5_shadow.hk_stage_m06'
+-
+-----------------------------------------------------------------------
+-Ran 10 tests in 0.018s
+-
+-FAILED (errors=30)
+diff --git a/V5/tests/logs/M08_M06_ADAPTER/REVIEW.md b/V5/tests/logs/M08_M06_ADAPTER/REVIEW.md
+deleted file mode 100644
+--- a/V5/tests/logs/M08_M06_ADAPTER/REVIEW.md
++++ /dev/null
+@@ -1,7 +0,0 @@
+-# Focused review
+-
+-Native mapped-row preservation, source/date/safety checks, D1 symbol-only owner boundary, implementation identity and exclusive CLI output reviewed.
+-
+-Fixed: explicit fixture-only result could be retagged after binding. Producer/cold-reader validation now rejects that contradiction; regression test passes.
+-
+-Future full acceptance includes the adapter pattern; prior 90 tests were not rerun. No remaining blocking defect identified.
+diff --git a/V5/tests/logs/M08_M06_ADAPTER/RUN.txt b/V5/tests/logs/M08_M06_ADAPTER/RUN.txt
+deleted file mode 100644
+--- a/V5/tests/logs/M08_M06_ADAPTER/RUN.txt
++++ /dev/null
+@@ -1,18 +0,0 @@
+-test_adapter_does_not_change_replay_or_natural_admission (test_hk_stage_m06_adapter.M06AdapterTests.test_adapter_does_not_change_replay_or_natural_admission) ... ok
+-test_bound_fixture_cannot_be_reclassified_at_producer_reader_boundary (test_hk_stage_m06_adapter.M06AdapterTests.test_bound_fixture_cannot_be_reclassified_at_producer_reader_boundary) ... ok
+-test_d1_reference_projects_symbol_only_at_original_owner_boundary (test_hk_stage_m06_adapter.M06AdapterTests.test_d1_reference_projects_symbol_only_at_original_owner_boundary) ... ok
+-test_existing_pool_is_not_overwritten (test_hk_stage_m06_adapter.M06AdapterTests.test_existing_pool_is_not_overwritten) ... ok
+-test_local_cli_writes_once_and_rejects_wrong_source_without_output (test_hk_stage_m06_adapter.M06AdapterTests.test_local_cli_writes_once_and_rejects_wrong_source_without_output) ... ok
+-test_mapped_pool_integrity_and_safety (test_hk_stage_m06_adapter.M06AdapterTests.test_mapped_pool_integrity_and_safety) ... ok
+-test_missing_mapped_fields_not_rebuilt_from_raw_strings (test_hk_stage_m06_adapter.M06AdapterTests.test_missing_mapped_fields_not_rebuilt_from_raw_strings) ... ok
+-test_native_mapping_reaches_original_algorithm_store_and_cold_reader (test_hk_stage_m06_adapter.M06AdapterTests.test_native_mapping_reaches_original_algorithm_store_and_cold_reader) ... ok
+-test_no_quote_lane_membership_time_or_unit_completion (test_hk_stage_m06_adapter.M06AdapterTests.test_no_quote_lane_membership_time_or_unit_completion) ... ok
+-test_original_rows_preserved_no_lane_or_numeric_raw_rewrite (test_hk_stage_m06_adapter.M06AdapterTests.test_original_rows_preserved_no_lane_or_numeric_raw_rewrite) ... ok
+-test_reader_verification_and_fixture_flag_required (test_hk_stage_m06_adapter.M06AdapterTests.test_reader_verification_and_fixture_flag_required) ... ok
+-test_source_reference_and_projection_must_both_match (test_hk_stage_m06_adapter.M06AdapterTests.test_source_reference_and_projection_must_both_match) ... ok
+-test_target_13_cannot_bind_stage_12 (test_hk_stage_m06_adapter.M06AdapterTests.test_target_13_cannot_bind_stage_12) ... ok
+-
+-----------------------------------------------------------------------
+-Ran 13 tests in 2.439s
+-
+-OK
+diff --git a/V5/tests/logs/M08_M06_ADAPTER/receipt.json b/V5/tests/logs/M08_M06_ADAPTER/receipt.json
+deleted file mode 100644
+--- a/V5/tests/logs/M08_M06_ADAPTER/receipt.json
++++ /dev/null
+@@ -1,42 +0,0 @@
+-{
+-  "schema_version": "v5.m08.m06_adapter_test_receipt.v1",
+-  "baseline_commit": "7aaf58b07daa70f3efb2554b82ee8195cb7a1185",
+-  "executed_at": "2026-10-12T19:34:26.011551+00:00",
+-  "result": "PASS_ENGINEERING_CANDIDATE",
+-  "data": "SYNTHETIC_CONTRACT_FIXTURES_ONLY",
+-  "targeted_tests": 13,
+-  "compatibility_tests": 3,
+-  "commands": [
+-    {
+-      "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest discover -s V5/tests -p test_hk_stage_m06_adapter.py -v",
+-      "exit_code": 0,
+-      "log": "RUN.txt"
+-    },
+-    {
+-      "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted test_hk_stage_daily.HKChainTests.test_input_rejections -v",
+-      "exit_code": 0,
+-      "log": "COMPATIBILITY.txt"
+-    }
+-  ],
+-  "initial_red": {
+-    "tests": 10,
+-    "exit_code": 1,
+-    "reason": "New adapter module absent",
+-    "log": "RED.txt"
+-  },
+-  "runtime": {
+-    "python": "3.12.14",
+-    "pandas": "2.2.3",
+-    "pyarrow": "NOT_INSTALLED",
+-    "pytest": "NOT_INSTALLED"
+-  },
+-  "natural_verified": false,
+-  "formal_admission": false,
+-  "not_run": [
+-    "Prior full 90-test suite (intentionally not rerun)",
+-    "Mac test of this delta",
+-    "Actual M06/stage payload entrypoint",
+-    "Natural collection/PIT/qualification",
+-    "UI deployment"
+-  ]
+-}
+diff --git a/V5/tests/run_m08_acceptance.py b/V5/tests/run_m08_acceptance.py
+--- a/V5/tests/run_m08_acceptance.py
++++ b/V5/tests/run_m08_acceptance.py
+@@ -13,7 +13,7 @@
+ import os
+ 
+ ROOT=Path(__file__).resolve().parents[1]
+-PATTERNS=('test_hk_stage_daily.py','test_hk_stage_m06_adapter.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
++PATTERNS=('test_hk_stage_daily.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
+ 
+ 
+ def main():
+diff --git a/V5/tests/test_hk_stage_m06_adapter.py b/V5/tests/test_hk_stage_m06_adapter.py
+deleted file mode 100644
+--- a/V5/tests/test_hk_stage_m06_adapter.py
++++ /dev/null
+@@ -1,180 +0,0 @@
+-"""Synthetic contract fixtures shaped like the original M06 cold-reader result.
+-
+-These are not real pool data, qualification evidence, or a natural-stage run.
+-"""
+-import copy
+-import json
+-import os
+-import subprocess
+-import sys
+-import tempfile
+-import unittest
+-from pathlib import Path
+-from v5_shadow.digests import sha256_json
+-from test_hk_stage_daily import request, rehash
+-
+-
+-def mapped_result():
+-    reference=dict(role='HK_CONNECT_D1_TOP100_0_2',run_id='SYNTHETIC_M06_NATIVE',
+-        artifact_sha256='a'*64,manifest_sha256='b'*64,receipt_sha256='c'*64,
+-        artifact_relative='SYNTHETIC_ONLY/pool.csv')
+-    safety=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
+-    rows=[dict(code=f'{i:05}',code_norm=f'{i:05}',symbol=f'HK.{i:05}',market='HK',
+-        pool_id='hkconnect_d1_top100',rank=str(i),pool_rank=i,
+-        score_prob_active=str(1-i/1000),pool_score=1-i/1000,
+-        target_date='20261008',signal_date='20261007',selected_strategy='prob_active',
+-        d1_freshness_status='PASS',recommendation_status='WATCH_ONLY',**safety)
+-        for i in range(1,101)]
+-    artifact=dict(schema_version='v3_5.preselection_pool.v1',market='HK',
+-        pool_id='hkconnect_d1_top100',trade_date='20261008',target_date='20261008',
+-        signal_date='20261007',status='STRICT_0_2_READY',source_role='SHARED_VERIFIED_HK_0_2',
+-        producer_id='v3_shared_hk_0_2_consumer_v1',stage_selection_eligible=True,
+-        source_run_id=reference['run_id'],source_sha256=reference['artifact_sha256'],
+-        source_manifest_sha256=reference['manifest_sha256'],source_receipt_sha256=reference['receipt_sha256'],
+-        source_path=reference['artifact_relative'],source_row_count=100,rows=rows,**safety)
+-    result=dict(status='ASSEMBLED',data_kind='VERIFIED_SOURCE_SNAPSHOT',
+-        model_weights_reverified=False,target_date='20261008',signal_date='20261007',
+-        eligibility_source_date='20261007',research_cutoff='2026-10-07T18:00:00+08:00',
+-        verified_source_reference=reference,artifact=artifact,fixture_only=True,
+-        source_verification=dict(status='READY',row_count=100,**{k:v for k,v in reference.items() if k!='role'}),**safety)
+-    return result,copy.deepcopy(reference)
+-
+-
+-def unbound_request(stage='STAGE_0930_0935'):
+-    r=request(stage);r.pop('m06');return r
+-
+-
+-class M06AdapterTests(unittest.TestCase):
+-    def bind(self,r=None,result=None,reference=None):
+-        from v5_shadow.hk_stage_m06 import bind_m06_verified_result
+-        default_result,default_reference=mapped_result()
+-        return bind_m06_verified_result(unbound_request() if r is None else r,
+-            default_result if result is None else result,
+-            default_reference if reference is None else reference)
+-
+-    def run_request(self,r):
+-        from v5_shadow.hk_stage_daily import init_hk_root,run_hk_stage
+-        with tempfile.TemporaryDirectory() as t:
+-            root=Path(t)/'m08';init_hk_root(root)
+-            return run_hk_stage(r,root)
+-
+-    def test_original_rows_preserved_no_lane_or_numeric_raw_rewrite(self):
+-        r=unbound_request();result,ref=mapped_result();before=copy.deepcopy((r,result,ref))
+-        out=self.bind(r,result,ref)
+-        self.assertEqual((r,result,ref),before)
+-        self.assertEqual(out['m06']['rows'],result['artifact']['rows'])
+-        self.assertEqual(out['m06']['rows'][0]['rank'],'1')
+-        self.assertEqual(out['m06']['rows'][0]['code'],'00001')
+-        self.assertEqual(out['m06']['rows_sha256'],sha256_json(result['artifact']['rows']))
+-        self.assertTrue(all('preselect_lane' not in row and 'candidate_lanes' not in row for row in out['m06']['rows']))
+-        for key in ('payload','payload_sha256','m02','data_kind'):
+-            self.assertEqual(out[key],r[key])
+-        self.assertIn('m06_adapter=ORIGINAL_MAPPED_FIELDS_ONLY',out['source']['source_evidence'])
+-
+-    def test_native_mapping_reaches_original_algorithm_store_and_cold_reader(self):
+-        out=self.run_request(self.bind())
+-        self.assertEqual(out['artifact']['selected_rows'],10)
+-        self.assertEqual([r['score'] for r in out['artifact']['rows']],[89]*10)
+-        self.assertFalse(out['natural_verified'])
+-        self.assertFalse(out['provenance']['formal_admission'])
+-
+-    def test_d1_reference_projects_symbol_only_at_original_owner_boundary(self):
+-        r=unbound_request('STAGE_0925');result,ref=mapped_result()
+-        r['route']='D1_REFERENCE';r['payload']['rows']=copy.deepcopy(result['artifact']['rows'][:12])
+-        out=self.bind(r,result,ref);rehash(out)
+-        read=self.run_request(out)
+-        self.assertEqual(read['artifact']['selection_status'],'CANNOT_CONFIRM')
+-        self.assertTrue(all(row['code'].startswith('HK.') for row in read['artifact']['rows']))
+-        self.assertTrue(all(row['source_mode']=='HK_CONNECT_D1_PRESELECT_REFERENCE' for row in read['artifact']['rows']))
+-
+-    def test_existing_pool_is_not_overwritten(self):
+-        with self.assertRaisesRegex(ValueError,'M06_ALREADY_BOUND'):self.bind(request())
+-
+-    def test_target_13_cannot_bind_stage_12(self):
+-        r=unbound_request();r['target_date']='20261012';r['signal_date']='20261009'
+-        result,ref=mapped_result();result.update(target_date='20261013',signal_date='20261012')
+-        with self.assertRaisesRegex(ValueError,'M06_DATE'):self.bind(r,result,ref)
+-
+-    def test_source_reference_and_projection_must_both_match(self):
+-        for field in ('run_id','artifact_sha256','manifest_sha256','receipt_sha256','artifact_relative','role'):
+-            with self.subTest(field=field):
+-                result,ref=mapped_result();result['verified_source_reference'][field]='different'
+-                with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-        result,ref=mapped_result();result['artifact']['source_sha256']='d'*64
+-        with self.assertRaisesRegex(ValueError,'SOURCE_PROJECTION'):self.bind(result=result,reference=ref)
+-
+-    def test_reader_verification_and_fixture_flag_required(self):
+-        for mutate in (lambda r:r.pop('source_verification'),
+-                lambda r:r['source_verification'].update(row_count=99),
+-                lambda r:r['source_verification'].update(artifact_sha256='d'*64),
+-                lambda r:r.pop('fixture_only'),lambda r:r.update(fixture_only='false')):
+-            with self.subTest(mutation=mutate):
+-                result,ref=mapped_result();mutate(result)
+-                with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-
+-    def test_local_cli_writes_once_and_rejects_wrong_source_without_output(self):
+-        with tempfile.TemporaryDirectory() as temp:
+-            root=Path(temp);result,ref=mapped_result()
+-            objects={'request':unbound_request(),'m06-result':result,'expected-source':ref}
+-            cmd=[sys.executable,'-B','-m','v5_shadow.hk_stage_m06']
+-            for key,value in objects.items():
+-                path=root/(key+'.json');path.write_text(json.dumps(value));cmd+=['--'+key,str(path)]
+-            output=root/'bound.json';cmd+=['--output',str(output)]
+-            env=dict(os.environ,PYTHONPATH=str(Path(__file__).resolve().parents[1]/'src'))
+-            proc=subprocess.run(cmd,capture_output=True,text=True,env=env)
+-            self.assertEqual(proc.returncode,0,proc.stderr)
+-            before=output.read_bytes();self.assertEqual(json.loads(before),self.bind())
+-            self.assertNotEqual(subprocess.run(cmd,capture_output=True,env=env).returncode,0)
+-            self.assertEqual(output.read_bytes(),before)
+-            ref['artifact_sha256']='d'*64;(root/'expected-source.json').write_text(json.dumps(ref))
+-            cmd[-1]=str(root/'invalid.json')
+-            self.assertNotEqual(subprocess.run(cmd,capture_output=True,env=env).returncode,0)
+-            self.assertFalse((root/'invalid.json').exists())
+-
+-    def test_missing_mapped_fields_not_rebuilt_from_raw_strings(self):
+-        for field in ('symbol','pool_rank','pool_score'):
+-            with self.subTest(field=field):
+-                result,ref=mapped_result();result['artifact']['rows'][0].pop(field)
+-                with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-
+-    def test_mapped_pool_integrity_and_safety(self):
+-        mutations=[lambda x:x['artifact']['rows'][0].update(pool_rank=True),
+-            lambda x:x['artifact']['rows'][0].update(pool_score=float('nan')),
+-            lambda x:x['artifact']['rows'][1].update(pool_score=1),
+-            lambda x:x['artifact']['rows'][0].update(symbol='A.000001'),
+-            lambda x:x['artifact']['rows'][1].update(symbol='HK.00001'),
+-            lambda x:x['artifact']['rows'].pop(),
+-            lambda x:x['artifact'].update(stage_selection_eligible=False),
+-            lambda x:x.update(production_allowed=True),
+-            lambda x:x['artifact']['rows'][0].update(orders_sent=True)]
+-        for n,mutate in enumerate(mutations):
+-            with self.subTest(case=n):
+-                result,ref=mapped_result();mutate(result)
+-                with self.assertRaises(ValueError):self.bind(result=result,reference=ref)
+-
+-    def test_no_quote_lane_membership_time_or_unit_completion(self):
+-        cases=[('M08_LANES',lambda r:r['payload']['rows'][0].pop('candidate_lanes')),
+-            ('M08_REQUIRED_NUMBER',lambda r:r['payload']['rows'][0].pop('volume_ratio')),
+-            ('M08_MEMBERSHIP_DATE',lambda r:r['m02'].update(membership_date='20261007')),
+-            ('M08_UNITS',lambda r:r['m02']['units'].update(turnover='UNKNOWN')),
+-            ('M08_SOURCE_TIME',lambda r:r['source'].update(available_at='2026-10-08T09:36:00+08:00'))]
+-        for reason,mutate in cases:
+-            with self.subTest(reason=reason):
+-                r=unbound_request();mutate(r);out=self.bind(r);rehash(out)
+-                with self.assertRaisesRegex(ValueError,reason):self.run_request(out)
+-
+-    def test_adapter_does_not_change_replay_or_natural_admission(self):
+-        r=unbound_request();r['data_kind']='RECORDED_INPUT_REPLAY'
+-        with self.assertRaisesRegex(ValueError,'FIXTURE_NOT_REPLAY'):self.bind(r)
+-        result,ref=mapped_result();result['fixture_only']=False  # Simulated reader metadata, still test-only data.
+-        out=self.run_request(self.bind(r,result,ref))
+-        self.assertIn('REPLAY_POINT_IN_TIME_QUALIFICATION_NOT_ATTESTED',out['artifact']['cannot_confirm'])
+-        r['data_kind']='LIVE'
+-        with self.assertRaisesRegex(ValueError,'NATURAL_ADMISSION_NOT_BOUND'):self.run_request(self.bind(r,result,ref))
+-
+-    def test_bound_fixture_cannot_be_reclassified_at_producer_reader_boundary(self):
+-        r=self.bind();r['data_kind']='RECORDED_INPUT_REPLAY'
+-        with self.assertRaisesRegex(ValueError,'FIXTURE_NOT_REPLAY'):self.run_request(r)
+-
+-
+-if __name__=='__main__':unittest.main()
