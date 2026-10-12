@@ -1,0 +1,63 @@
+{
+  "schema": "v5.m02.executed_tests.v1",
+  "environment": "cloud isolated POSIX; Python 3.12.14; existing standard library; no dependency installation",
+  "supported_suite": {
+    "command": "python V5/tools/run_m02_isolated.py",
+    "tests_run": 108,
+    "passed": 106,
+    "skipped": 2,
+    "errors": 0,
+    "failures": 0,
+    "exit_code": 0,
+    "seconds": 35.646
+  },
+  "full_discovery": {
+    "command": "python V5/tools/run_m02_isolated.py --all",
+    "tests_run": 110,
+    "passed": 106,
+    "skipped": 2,
+    "errors": 2,
+    "failures": 0,
+    "exit_code": 1,
+    "seconds": 30.429,
+    "errors_detail": [
+      {
+        "test": "test_manager_membership",
+        "reason": "ModuleNotFoundError: v5_shadow.manager_plan; retained original downstream integration reference"
+      },
+      {
+        "test": "test_native_identity_reader",
+        "reason": "ModuleNotFoundError: v5_shadow.manager_plan; retained original downstream integration reference"
+      }
+    ]
+  },
+  "optional_real_tests": [
+    {
+      "test": "OriginalReaderTests.test_all_three_original_readers_with_real_frozen_assets",
+      "status": "NOT_RUN",
+      "reason": "M02_REAL_ASSET_ROOT not supplied in cloud"
+    },
+    {
+      "test": "ProvidedRealFixtureTests.test_all_three_unmodified_readers_roundtrip",
+      "status": "NOT_RUN",
+      "reason": "M02_REAL_FIXTURE_REQUEST not supplied"
+    }
+  ],
+  "test_evidence": [
+    "TDD missing standalone snapshot: 5 failing tests observed, then green.",
+    "TDD complete binding persistence absent: 8 tests failed, then green; expanded concurrency/root replacement/reseal coverage.",
+    "Original membership and native reader fixtures run successfully in original child processes; panel transport mocked only in explicitly named two-reader persistence test.",
+    "Default three-reader chain invokes all owners: membership/native verified; invalid model rejected by original pinned loader, no pointer published.",
+    "Default original HK calendar, previous-session, dates, cutoff, missing structure, exact seven files, fixed model checksum and tamper negatives executed.",
+    "TDD streaming asset snapshot: real model-sized sparse file accepted by local asset FD gate while original native16MiB gate rejects it.",
+    "TDD undeclared symlink alias, root normalization, manifest/path/SHA result binding, boolean-number JSON identity, minimal budgets and original historical witness behavior observed red then green.",
+    "Budget negatives cover >64MiB asset, >128MiB total, >9files, >16MiB metadata, extra declared source files.",
+    "Forward and reverse patches passed git apply --check, actual apply, exact after-byte comparison, reverse apply and exact baseline restoration."
+  ],
+  "unchanged_source_files_verified": 72,
+  "real_natural_run": "NOT_RUN",
+  "production_or_trading": "NOT_RUN_NOT_AUTHORIZED",
+  "model_deserialization": false,
+  "source_assets_uploaded": false,
+  "qualification": false
+}
