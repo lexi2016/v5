@@ -44,7 +44,7 @@ class OfflinePagesTests(unittest.TestCase):
  def test_detail_pages_cover_all_items_in_original_order(self):
   cursor=None;items=[]
   while True:
-   page=self.reader.detail('materials',cursor=cursor);self.reader.verify_page(page)
+   page=self.reader.detail('materials',cursor=cursor);self.reader.verify_page(page,expected_section="materials",expected_selection=None,expected_cursor=cursor,expected_offset=len(items))
    items.extend(page['entries']);cursor=page['next_cursor']
    if cursor is None:break
   self.assertEqual([e['index'] for e in items],list(range(70)))
@@ -60,13 +60,13 @@ class OfflinePagesTests(unittest.TestCase):
   page=self.reader.detail('materials')
   for key,val in [('offset',32),('matched_total',0),('not_loaded_count',0),('generation_id','f'*64),('unknown',True),('identity',dict(self.identity,run_id='f'*32))]:
    bad=copy.deepcopy(page);bad[key]=val
-   with self.subTest(field=key),self.assertRaises(m.ContractError):self.reader.verify_page(bad)
+   with self.subTest(field=key),self.assertRaises(m.ContractError):self.reader.verify_page(bad,expected_section="materials",expected_selection=None,expected_cursor=None,expected_offset=0)
   bad=copy.deepcopy(page);bad['entries'][0]['sha256']='f'*64
-  with self.assertRaises(m.ContractError):self.reader.verify_page(bad)
+  with self.assertRaises(m.ContractError):self.reader.verify_page(bad,expected_section="materials",expected_selection=None,expected_cursor=None,expected_offset=0)
  def test_cross_run_and_generation_page_cursor_rejected(self):
   raw,saved,identity=fixture(run='c'*32);other=m.build(raw,saved,identity);reader=m.Reader(other,digest(other.manifest),identity)
   for foreign in [reader.detail('materials')]:
-   with self.assertRaises(m.ContractError):self.reader.verify_page(foreign)
+   with self.assertRaises(m.ContractError):self.reader.verify_page(foreign,expected_section="materials",expected_selection=None,expected_cursor=None,expected_offset=0)
    with self.assertRaises(m.ContractError):self.reader.detail('materials',cursor=foreign['next_cursor'])
  def test_wrong_identity_and_manifest_pin_rejected(self):
   for key in self.identity:
@@ -135,19 +135,19 @@ class OfflinePagesTests(unittest.TestCase):
  def test_content_reads_bound_and_verified(self):
   chunks=[]
   for index in range(self.reader.overview()['content_chunks']):
-   part=self.reader.content(index);self.assertTrue(self.reader.verify_content(part))
+   part=self.reader.content(index);self.assertTrue(self.reader.verify_content(part,expected_index=index))
    self.assertLess(len(canon(part)),16*1024*1024)
    chunks.append(base64.b64decode(part['data']))
   self.assertEqual(b''.join(chunks),self.raw)
   for field in ['generation_id','manifest_sha256','data','sha256','index']:
    bad=copy.deepcopy(part);bad[field]=0 if field=='index' else 'bad'
    if field=='index':bad[field]=True
-   with self.subTest(field=field),self.assertRaises(m.ContractError):self.reader.verify_content(bad)
+   with self.subTest(field=field),self.assertRaises(m.ContractError):self.reader.verify_content(bad,expected_index=index)
  def test_same_run_other_generation_rejected(self):
   raw,saved,identity=fixture(extra={'changed':True});bundle=m.build(raw,saved,identity);other=m.Reader(bundle,digest(bundle.manifest),identity)
   self.assertEqual(identity['run_id'],self.identity['run_id'])
-  with self.assertRaises(m.ContractError):self.reader.verify_page(other.detail('materials'))
-  with self.assertRaises(m.ContractError):self.reader.verify_content(other.content(0))
+  with self.assertRaises(m.ContractError):self.reader.verify_page(other.detail('materials'),expected_section='materials',expected_selection=None,expected_cursor=None,expected_offset=0)
+  with self.assertRaises(m.ContractError):self.reader.verify_content(other.content(0),expected_index=0)
   with self.assertRaises(m.ContractError):self.reader.detail('materials',cursor=other.detail('materials')['next_cursor'])
  def test_malformed_descriptor_types_rejected(self):
   for key,val in [('object_sha256',[]),('object_sha256',None),('index',True),('bytes',False),('sha256',{})]:
@@ -177,3 +177,30 @@ class OfflinePagesTests(unittest.TestCase):
   for offset in [True,-1,0,1,31,70,96]:
    value['offset']=offset;bad=base64.urlsafe_b64encode(canon(value)).decode()
    with self.subTest(offset=offset),self.assertRaises(m.ContractError):self.reader.detail('materials',cursor=bad)
+
+ def test_expected_request_rejects_valid_page_substitutions(self):
+  first=self.reader.detail('materials')
+  variants=[self.reader.detail('gaps'),self.reader.detail('materials',cursor=first['next_cursor']),self.reader.detail('materials',selection={'indices':[1,3]})]
+  for page in variants:
+   with self.subTest(section=page['section'],offset=page['offset'],selection=page['selection']),self.assertRaises(m.ContractError):
+    self.reader.verify_page(page,expected_section='materials',expected_selection=None,expected_cursor=None,expected_offset=0)
+ def test_expected_chunk_rejects_valid_other_chunk(self):
+  raw,saved,identity=fixture(extra={'body':'x'*m.CHUNK_BYTES});bundle=m.build(raw,saved,identity);reader=m.Reader(bundle,digest(bundle.manifest),identity)
+  with self.assertRaises(m.ContractError):reader.verify_content(reader.content(1),expected_index=0)
+  self.assertTrue(reader.verify_content(reader.content(1),expected_index=1))
+ def test_expected_request_accepts_selected_later_page(self):
+  selection={'indices':list(range(40))};first=self.reader.detail('materials',selection=selection);cursor=first['next_cursor']
+  second=self.reader.detail('materials',selection=selection,cursor=cursor)
+  self.assertTrue(self.reader.verify_page(second,expected_section='materials',expected_selection=selection,expected_cursor=cursor,expected_offset=32))
+  with self.assertRaises(m.ContractError):self.reader.verify_page(first,expected_section='materials',expected_selection=selection,expected_cursor=cursor,expected_offset=32)
+ def test_expected_request_values_are_strict(self):
+  page=self.reader.detail('materials');expected=dict(expected_section='materials',expected_selection=None,expected_cursor=None,expected_offset=0)
+  for field,value in [('expected_section','gaps'),('expected_selection',{'indices':[]}),('expected_cursor',''),('expected_offset',True),('expected_offset',-1),('expected_offset',32),('expected_offset',0.0)]:
+   with self.subTest(field=field,value=value),self.assertRaises(m.ContractError):self.reader.verify_page(page,**dict(expected,**{field:value}))
+  for index in [True,-1,0.0,None]:
+   with self.subTest(index=index),self.assertRaises(m.ContractError):self.reader.verify_content(self.reader.content(0),expected_index=index)
+ def test_expected_request_cannot_be_omitted(self):
+  page=self.reader.detail('materials');expected=dict(expected_section='materials',expected_selection=None,expected_cursor=None,expected_offset=0)
+  for field in expected:
+   with self.subTest(missing=field),self.assertRaises(TypeError):self.reader.verify_page(page,**{k:v for k,v in expected.items() if k!=field})
+  with self.assertRaises(TypeError):self.reader.verify_content(self.reader.content(0))

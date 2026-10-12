@@ -344,10 +344,17 @@ class Reader:
         parse(canonical(page), object_limit=True)
         return page
 
-    def verify_page(self, page):
+    def verify_page(self, page, *, expected_section, expected_selection, expected_cursor, expected_offset):
+        """Verify against caller-held request and this caller-pinned Reader.
+
+        Expected fields must come from the outbound request, never the response.
+        Explicit None means all indices / first page; omission is an API error.
+        """
         require(type(page) is dict, 'PAGE_SCHEMA')
         parse(canonical(page), object_limit=True)
-        expected = self.detail(page.get('section'), selection=page.get('selection'), cursor=page.get('cursor'))
+        require(integer(expected_offset, 0, MAX_ENTRIES), 'EXPECTED_OFFSET')
+        expected = self.detail(expected_section, selection=expected_selection, cursor=expected_cursor)
+        require(expected['offset'] == expected_offset, 'EXPECTED_OFFSET')
         require(canonical(page) == canonical(expected), 'PAGE_MISMATCH')
         return True
 
@@ -363,10 +370,11 @@ class Reader:
         parse(canonical(value), object_limit=True)
         return value
 
-    def verify_content(self, content):
+    def verify_content(self, content, *, expected_index):
+        """Verify the requested chunk, using a caller-held index, not its echo."""
         require(type(content) is dict, 'CONTENT_SCHEMA')
         parse(canonical(content), object_limit=True)
-        expected = self.content(content.get('index'))
+        expected = self.content(expected_index)
         require(canonical(content) == canonical(expected), 'CONTENT_MISMATCH')
         return True
 
