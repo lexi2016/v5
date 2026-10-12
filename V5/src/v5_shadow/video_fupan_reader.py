@@ -23,6 +23,8 @@ def _load(path: Path) -> dict[str, Any]:
 def _sha_file(path: Path) -> str:
     if not path.is_file():
         raise VideoReadError(f"missing artifact {path}")
+    if path.is_symlink():
+        raise VideoReadError(f"symlink artifact rejected: {path}")
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
@@ -31,6 +33,18 @@ def _relative_ref(value: str) -> Path:
     if p.is_absolute() or ".." in p.parts:
         raise VideoReadError("unsafe artifact path")
     return p
+
+
+def _ensure_no_symlink_path(root: Path, path: Path) -> None:
+    try:
+        relative = path.relative_to(root)
+    except ValueError as exc:
+        raise VideoReadError("artifact outside trusted root") from exc
+    current = root
+    for part in relative.parts:
+        current = current / part
+        if current.is_symlink():
+            raise VideoReadError(f"symlink path component rejected: {current}")
 
 
 def read_committed_video(root: Path | str, trade_date: str, run_id: str) -> dict[str, Any]:
@@ -58,7 +72,9 @@ def read_committed_video(root: Path | str, trade_date: str, run_id: str) -> dict
         if len(sha) != 64:
             raise VideoReadError("bad sha")
         rel = _relative_ref(str(item.get("path") or ""))
-        if _sha_file(root / rel) != sha:
+        artifact = root / rel
+        _ensure_no_symlink_path(root, artifact)
+        if _sha_file(artifact) != sha:
             raise VideoReadError("artifact mismatch")
         checked.append(str(rel))
     return {"status": "VERIFIED", "run_id": run_id, "artifacts": checked, "manifest": manifest}
