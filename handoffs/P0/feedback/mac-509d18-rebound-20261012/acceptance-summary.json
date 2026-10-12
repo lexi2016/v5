@@ -1,0 +1,145 @@
+{
+  "candidate": "509d183c731b4159fd0773d672288c232cb85ed3",
+  "passed": false,
+  "started_utc": "2026-10-12T13:00:26.103026+00:00",
+  "ended_utc": "2026-10-12T13:00:39.551903+00:00",
+  "api_url": "http://127.0.0.1:55464",
+  "api_pid": 53334,
+  "api_exit": -2,
+  "requests": [
+    {
+      "path": "",
+      "section": null,
+      "projection": null,
+      "http": 200,
+      "bytes": 804,
+      "seconds": 0.002,
+      "identity": "MATCHED",
+      "offset": null,
+      "entries": 0
+    },
+    {
+      "path": "/overview",
+      "section": null,
+      "projection": null,
+      "http": 200,
+      "bytes": 6638,
+      "seconds": 4.266,
+      "identity": "MATCHED",
+      "offset": null,
+      "entries": 0
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 106006,
+      "seconds": 4.369,
+      "identity": "MATCHED",
+      "offset": 0,
+      "entries": 32
+    },
+    {
+      "path": "/sections",
+      "section": "rebound_research_observation",
+      "projection": "rebound_references",
+      "http": 200,
+      "bytes": 144433,
+      "seconds": 4.623,
+      "identity": "MATCHED",
+      "offset": 0,
+      "entries": 32
+    }
+  ],
+  "data_unchanged": true,
+  "file_count": 141,
+  "worker_events": [
+    {
+      "status": "OK",
+      "error": null,
+      "pid": 53336,
+      "usage": {
+        "peak_rss_bytes": 319913984,
+        "cpu_seconds": 4.239235,
+        "wall_seconds": 4.202174374993774
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.264555999994627
+    },
+    {
+      "peak_rss_bytes": 35602432,
+      "elapsed": 4.26574333300232,
+      "error": null
+    },
+    {
+      "status": "OK",
+      "error": null,
+      "pid": 53340,
+      "usage": {
+        "peak_rss_bytes": 320323584,
+        "cpu_seconds": 4.33259,
+        "wall_seconds": 4.304867041995749
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.367113625005004
+    },
+    {
+      "peak_rss_bytes": 36192256,
+      "elapsed": 4.367555582997738,
+      "error": null
+    },
+    {
+      "status": "OK",
+      "error": null,
+      "pid": 53350,
+      "usage": {
+        "peak_rss_bytes": 319897600,
+        "cpu_seconds": 4.596245,
+        "wall_seconds": 4.557360665989108
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.620340832989314
+    },
+    {
+      "peak_rss_bytes": 36454400,
+      "elapsed": 4.620811291999416,
+      "error": null
+    }
+  ],
+  "outcome": "INCOMPLETE_HARNESS_ASSERTION_ERROR_NOT_PRODUCT_REJECTION",
+  "harness_exit": 1,
+  "harness_error": {
+    "field_paths": [
+      "research_observation.strict[0].observed_session",
+      "research_observation.strict[0].target_monday"
+    ],
+    "actual_types": [
+      "int",
+      "int"
+    ],
+    "actual_values": [
+      20261009,
+      20261012
+    ],
+    "incorrect_expected_types": [
+      "str",
+      "str"
+    ],
+    "location": "acceptance_509d18.py:31"
+  },
+  "preview_switched": false,
+  "frontend_tests_or_build_rerun": false,
+  "assets_published": false,
+  "not_reached": [
+    "complete first-page value validation and LOADED/NOT_LOADED counts",
+    "remaining group pages",
+    "announcement return",
+    "stocks/market_screen recheck",
+    "preview switch",
+    "assets commit"
+  ]
+}
