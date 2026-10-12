@@ -1,0 +1,64 @@
+{
+  "schema_version": "v5.hk_preselection_committed_reference.v1",
+  "owner": "M06",
+  "market": "HK",
+  "status": "COMMITTED",
+  "business_status": "STRICT_0_2_READY",
+  "data_kind": "VERIFIED_SOURCE_SNAPSHOT",
+  "target_date": "20261013",
+  "signal_date": "20261012",
+  "eligibility_source_date": "20261012",
+  "research_cutoff": "2026-10-12T17:11:34.690550+00:00",
+  "execution_mode": "MANUAL_RECOVERY",
+  "computation_identity": {
+    "lane": "hk_preselection",
+    "target_date": "20261013",
+    "input_sha256": "87a0d1c50d1c8300c0301241473eb320fada6494b50162c4d999e09bc77ebb1e",
+    "research_cutoff": "2026-10-12T17:11:34.690550+00:00",
+    "code_sha256": "3a07a22a36b89c6608fd643edb234058d48c3ce5854cefe34811c20fd21e7037",
+    "config_sha256": "7da15ec9ffc6f2b23b17036c36edf3c92e0dd143a4a07789f457ba275ba8b85a",
+    "dependency_sha256": "f85d90f249fa7529d78336535716465b26acb7c2f17012b59afa2f3a4ba8b8a0"
+  },
+  "producer_computation_identity": {
+    "code_sha256": "d8fae82edb8ef68fc502b6632ffe9e09c26fed3a5d20711e914251a34eb9cdb5",
+    "config_sha256": "1c99a0fb9f0c4fea3531010f3ac1d884f9feb21951cf3f974118a68bfe025c40",
+    "dependency_sha256": "1b07f33796f389ca9652f5743b8745d09fe2f0534a9a8fb93aad7efe196d5ee4",
+    "input_sha256": "d43006256c3b932934d38a93c01554fa015445476b115b52c4dcc92bc707249d",
+    "lane": "hk_preselection",
+    "research_cutoff": "2026-10-12T17:11:34.690550+00:00",
+    "target_date": "20261013"
+  },
+  "fixture_only": false,
+  "computation_sha256": "f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b",
+  "request_sha256": "93e44889ff0e086ca514780f674b317a3774362e0ef854a7ea3d255c8a47ca11",
+  "artifact_relative": "hk_preselection/20261013/objects/f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b/artifact.json",
+  "artifact_sha256": "3a56de134302f545c89c021e1184d1ecadf735f1f263c18e4c266e488b6469df",
+  "manifest_relative": "hk_preselection/20261013/objects/f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b/manifest.json",
+  "manifest_sha256": "161949ee4e850147d75be13dd5ce9758b028403801fafdae2521919d2fd0018a",
+  "receipt_relative": "hk_preselection/20261013/objects/f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b/receipt.json",
+  "receipt_sha256": "f8941ef87b8a39f7ab10f81d0401b27ca3f1df1ebdf8fdf5a368bd7bf2310dd5",
+  "producer_reference": {
+    "relative": "hk_preselection/20261013/objects/f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b/producer_receipt.json",
+    "sha256": "041c857b7f31c19e64e1e4bbed7ca29ba0d50b556445d5de82853d01c101abdc",
+    "production_method": "EXISTING_VERIFIED_POOL"
+  },
+  "reader_reference": {
+    "relative": "hk_preselection/20261013/objects/f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b/strict_reader_receipt.json",
+    "sha256": "718a5429abe88e838185b4eb44bd464c7a68dc366acdb797fd3fc4cd7661f5a4"
+  },
+  "verified_source_reference": {
+    "artifact_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/artifact.csv",
+    "artifact_sha256": "c8c78548dbeeb0cc6bdb2355de20de53ab2c73e86a84d3e0c918fd3d0d67a9d5",
+    "manifest_sha256": "85d967f08ae5cd60d35e1394ea66e7877919f24eb601dbdc0bf9a06a7c57e87c",
+    "receipt_sha256": "8e14b92f0269a145ab5baa576661dc122af623e8dee6ca4e05360ac6661d4f12",
+    "role": "HK_CONNECT_D1_TOP100_0_2",
+    "run_id": "20261013-hk-connect-d1-top100-0-2-b4a529e45fd4"
+  },
+  "model_weights_reverified": false,
+  "research_only": true,
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false,
+  "natural_verified": false,
+  "formal_eligibility_verified": false
+}
