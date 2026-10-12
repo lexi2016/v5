@@ -149,3 +149,28 @@ test('rebound variable pages reject no progress, excess rows, gaps and wrong con
  await assert.rejects(clientWith(fixture.page(59,12,'at59',null)).client.section(descriptor,fixture.overview,fixture.section,'at59',59),/M18_/);
  await assert.rejects(clientWith(fixture.pages[1]).client.section(descriptor,fixture.overview,fixture.section,'wrong',29),/M18_/);
 });
+
+function usMappingFixture() {
+ const section='us_mapping_research';const sections={...overview.sections,[section]:{kind:'object',total:1,loaded_count:0,not_loaded_count:1,state:'NOT_LOADED'}};
+ const us_mapping={source_section_sha256:'5'.repeat(64),match_count:4,source:{orders_sent:false},daily_run:{status:'COMPLETED',target_date_eligibility:'CANNOT_CONFIRM'},coverage_diagnostics:{status:'PARTIAL',full_market_coverage:false},plan_reference:{value_state:'NOT_LOADED',reason:'OWNER_CHAIN_MISSING'}};
+ const page={...detail,section,projection:'us_mapping_matches',us_mapping,matched_total:4,entries:Array.from({length:4},(_,index)=>({...entry,index})),remaining_entries:0,not_loaded_count:0,next_cursor:null};
+ return {section,overview:{...overview,sections},page};
+}
+test('US mapping requests only closed same-run daily matches and validates source, counts and plan reference',async()=>{
+ const f=usMappingFixture();const {client,requests}=clientWith(f.page);
+ const page=await client.section(descriptor,f.overview,f.section);assert.equal(page.us_mapping.match_count,4);assert.equal(page.us_mapping.source.orders_sent,false);
+ assert.match(requests[0][0],/section=us_mapping_research&projection=us_mapping_matches/);assert.doesNotMatch(requests[0][0],/group=/);
+ for(const patch of [{projection:'rebound_references'},{group:'strict'},{us_mapping:{...f.page.us_mapping,match_count:3}},{us_mapping:{...f.page.us_mapping,source_section_sha256:'wrong'}},{us_mapping:{...f.page.us_mapping,plan_reference:{value_state:'LOADED',value:{status:'CONSUMED'}}}}])await assert.rejects(clientWith({...f.page,...patch}).client.section(descriptor,f.overview,f.section),/M18_/);
+ const reference={value_state:'LOADED',source_section_sha256:'6'.repeat(64),source_span:{offset:100,bytes:200,sha256:'7'.repeat(64)},value:{status:'SOURCE_FAILED',orders_sent:false}};
+ assert.equal((await clientWith({...f.page,us_mapping:{...f.page.us_mapping,plan_reference:reference}}).client.section(descriptor,f.overview,f.section)).us_mapping.plan_reference.value.status,'SOURCE_FAILED');
+ assert.equal((await clientWith({...f.page,us_mapping:{...f.page.us_mapping,coverage_diagnostics:null}}).client.section(descriptor,f.overview,f.section)).us_mapping.coverage_diagnostics,null);
+});
+test('US mapping supports byte-bounded continuation without changing announcement default',async()=>{
+ const f=usMappingFixture();const meta={...f.page.us_mapping,match_count:33};
+ const first={...f.page,us_mapping:meta,matched_total:33,entries:Array.from({length:29},(_,index)=>({...entry,index})),remaining_entries:4,not_loaded_count:4,next_cursor:'at29'};
+ const next={...first,cursor:'at29',offset:29,entries:Array.from({length:4},(_,position)=>({...entry,index:29+position})),remaining_entries:0,not_loaded_count:29,next_cursor:null};
+ assert.equal((await clientWith(first).client.section(descriptor,f.overview,f.section)).entries.length,29);
+ assert.equal((await clientWith(next).client.section(descriptor,f.overview,f.section,'at29',29)).offset,29);
+ await assert.rejects(clientWith({...first,entries:[],remaining_entries:33,not_loaded_count:33}).client.section(descriptor,f.overview,f.section),/M18_/);
+ assert.equal(chooseSection({...f.overview.sections,announcement_reviewed_analysis:{kind:'object',total:1}}),'announcement_reviewed_analysis');
+});

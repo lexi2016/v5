@@ -1,0 +1,76 @@
+{
+  "scope": "M15 closed same-run daily matches and original frozen plan reference; existing V4 renderer reused",
+  "base_commit": "3609014279ee8444c92ef170404c95d72cbeb94c",
+  "cloud_backend": {
+    "status": "PASS",
+    "command": "PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_us_mapping_projection.py V5/tests/test_m18_v2_read_process.py V5/tests/test_m18_v2_announcement_projection.py V5/tests/test_m18_v2_rebound_projection.py -k 'not owner_scale' --tb=short -p no:cacheprovider",
+    "passed": 36,
+    "subtests_passed": 63,
+    "skipped": 1,
+    "deselected": 1,
+    "skip_reason": "existing opt-in RSS/90-second wall resource-pressure test",
+    "deselected_reason": "recently verified unchanged M14 owner_scale traversal",
+    "seconds": 44.35,
+    "exit_code": 0,
+    "new_m15_tests": 11
+  },
+  "cloud_frontend_node": {
+    "status": "PASS",
+    "command": "node --test frontend/tests/*.node.mjs",
+    "passed": 34,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "cloud_dom": {
+    "status": "PASS",
+    "environment": "existing jsdom dependency; Node24",
+    "checks": [
+      "Current four relationships create three HK cards",
+      "Card DOM equals original V4 renderUsMappingCoverage output exactly",
+      "Official source links retain safe protocol behavior",
+      "Expanded original evidence retained and new empty page removes stale cards"
+    ]
+  },
+  "regressions": [
+    "Exact original relationship absolute byte offsets and SHA; original false/null/source dates preserved",
+    "Closed request/cursor/receipt source and identity rejection",
+    "Actual HTTP to TS client/session, variable offsets0/29/59 and previous/next",
+    "More than1.3MB owner_chain with only fixed small reference captured from existing full Reader scan",
+    "Complete Reader counts/index verification unchanged; files hash/mtime unchanged",
+    "Original plan-reference status distinct from daily status and historical registry",
+    "Genuinely oversized rows/references remain explicit; per-page byte budget defers eligible rows",
+    "Announcement default and rebound regression retained"
+  ],
+  "original_v4_renderer_body_unchanged": true,
+  "limits_unchanged": {
+    "item_bytes": 16384,
+    "page_value_bytes": 131072,
+    "http_bytes": 262144,
+    "max_page_entries": 32,
+    "profile_sha256": "a8b56161f6d19de0d5222775e132d78f75d7ad707a1824b4d2b861ff285ecc6c"
+  },
+  "cloud_vue_typecheck_build": {
+    "status": "NOT_RUN",
+    "reason": "Existing cloud workspace has no Vue/Vite/vue-tsc dependencies; source tests prepared for current authorized Mac dependencies."
+  },
+  "mac_real_candidate": {
+    "status": "NOT_RUN",
+    "required": "Fresh standalone API, original4relationships/3HK and CONSUMED reference exact source spans/values, finite scope and CANNOT_CONFIRM retained, existing tabs regression, worker/data invariants, Vue/typecheck/build then preview gate."
+  },
+  "cloud_built_browser_candidate": {
+    "status": "NOT_RUN",
+    "required": "Fixed matching built assets after Mac gate; clearly synthetic fixture only."
+  },
+  "source_sha256": {
+    "V5/src/v5_shadow/module_api.py": "870cdbc7ddac5365214c5c110ec27b73e6232a8bdb83ff6e76016d4c896470da",
+    "V5/src/v5_shadow/m18_v2_read_process.py": "9642dc07ce53ce02f0852bdcab8ea088788055bab215bbd277b02e31be5ec29d",
+    "V5/tests/test_m18_v2_us_mapping_projection.py": "4e2333039e85fe966aa595ad24874192e813fb46e17ab69da30ec2ec6b444b62",
+    "frontend/src/api/m18SavedResult.ts": "dbe57db63e7b40a5c4902354082b711d938e3550b0f9b58dc7460c5ad4f42978",
+    "frontend/src/manager-selection/usMappingCoverage.ts": "ef4d7eeff7ecd54a57c71bbc7351beb4b71c06ccd21333d7be781f548e4b2350",
+    "frontend/src/views/SavedManagerResultView.vue": "a3dc1fbb611182d4415a2c4f99fa04a83c631bb51b6cbdfd9aac44722cc5b98c",
+    "frontend/src/views/SavedManagerResultView.spec.ts": "a604357787ec089b239ba2a2ad438936c41794a6afbae1995e85c65a9da901fc",
+    "frontend/tests/m18SavedResult.node.mjs": "0ebe7df808acad018730dbb5c6c6e7ce20adc1e0cfed03144203666f2b549f9a",
+    "frontend/tests/savedUsMapping.node.mjs": "c74143a7ac1cd13d7e839cb2051ef654a6496fae1ba0f17b66246df1af7cf9c9"
+  },
+  "unchanged_reader_sha256": "a537687fc3f61d1d2002020b648a77eda3e53af7308eb57e20d392d91f612f82"
+}

@@ -11,8 +11,9 @@ export interface SavedEntry { index: number; kind: string; offset: number; bytes
 export const REBOUND_GROUPS = ['strict','near','pending','excluded','screen_unresolved'] as const;
 export type ReboundGroup = typeof REBOUND_GROUPS[number];
 export interface ReboundMetadata { source_section_sha256: string; group_counts: Record<ReboundGroup,number>; source: Record<string,unknown>; observation: Record<string,unknown>; }
+export interface UsMappingMetadata { source_section_sha256: string; match_count: number; source: Record<string,unknown>; daily_run: Record<string,unknown>; coverage_diagnostics: Record<string,unknown> | null; plan_reference: Record<string,unknown>; }
 export interface AnnouncementMetadata { status: unknown; plan_cutoff: unknown; gaps: unknown; source_section_sha256: string; reference_count: number; products: Record<string,unknown>[]; }
-export interface SectionPage extends Binding { schema: string; projection?: 'announcement_references' | 'rebound_references'; announcement?: AnnouncementMetadata; rebound?: ReboundMetadata; group?: ReboundGroup; section: string; selection: null; cursor: string | null; offset: number; matched_total: number; not_loaded_count: number; remaining_entries: number; entries: SavedEntry[]; next_cursor: string | null; }
+export interface SectionPage extends Binding { schema: string; projection?: 'announcement_references' | 'rebound_references' | 'us_mapping_matches'; us_mapping?: UsMappingMetadata; announcement?: AnnouncementMetadata; rebound?: ReboundMetadata; group?: ReboundGroup; section: string; selection: null; cursor: string | null; offset: number; matched_total: number; not_loaded_count: number; remaining_entries: number; entries: SavedEntry[]; next_cursor: string | null; }
 type Fetcher = (input: string, init?: RequestInit) => Promise<Response>;
 function check(condition: unknown, code: string): asserts condition { if (!condition) throw new Error('M18_' + code); }
 function object(value: unknown): value is Record<string, any> { return value !== null && typeof value === 'object' && !Array.isArray(value); }
@@ -56,18 +57,23 @@ export class M18SavedClient {
   return value as Overview;
  }
  async section(expected: Descriptor, overview: Overview, section: string, cursor: string | null = null, offset = 0, signal?: AbortSignal, group: ReboundGroup = 'strict'): Promise<SectionPage> {
-  const projected = section === 'announcement_reviewed_analysis', rebound = section === 'rebound_research_observation';
-  check(Object.hasOwn(overview.sections,section) && section.length <= 1024 && integer(offset) && (rebound || offset % 32 === 0) && (cursor === null ? offset === 0 : cursor.length <= 8192 && offset > 0), 'SECTION_REQUEST');
+  const projected = section === 'announcement_reviewed_analysis', rebound = section === 'rebound_research_observation', usMapping = section === 'us_mapping_research';
+  check(Object.hasOwn(overview.sections,section) && section.length <= 1024 && integer(offset) && (rebound || usMapping || offset % 32 === 0) && (cursor === null ? offset === 0 : cursor.length <= 8192 && offset > 0), 'SECTION_REQUEST');
   if (rebound) check(REBOUND_GROUPS.includes(group), 'REBOUND_GROUP');
-  const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor; if (projected) query.projection='announcement_references'; if (rebound) {query.projection='rebound_references';query.group=group;}
+  const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor; if (projected) query.projection='announcement_references'; if (usMapping) query.projection='us_mapping_matches'; if (rebound) {query.projection='rebound_references';query.group=group;}
   const value = await this.get('/sections',query,signal); binding(value,expected,overview.manifest_sha256);
   if (projected) check(value.projection === 'announcement_references' && object(value.announcement) && digest(value.announcement.source_section_sha256) && integer(value.announcement.reference_count) && Array.isArray(value.announcement.products) && value.announcement.products.every(object), 'ANNOUNCEMENT_PROJECTION');
   else if (rebound) check(value.projection === 'rebound_references' && value.group === group && object(value.rebound) && digest(value.rebound.source_section_sha256) && object(value.rebound.group_counts) && Object.keys(value.rebound.group_counts).length === REBOUND_GROUPS.length && REBOUND_GROUPS.every(key=>integer(value.rebound.group_counts[key])) && object(value.rebound.source) && object(value.rebound.observation), 'REBOUND_PROJECTION');
-  else check(!Object.hasOwn(value,'projection') && !Object.hasOwn(value,'announcement') && !Object.hasOwn(value,'rebound') && !Object.hasOwn(value,'group'), 'SECTION_PROJECTION');
-  const total = projected ? value.announcement.reference_count : rebound ? value.rebound.group_counts[group] : overview.sections[section].total;
+  else if (usMapping) {
+   check(value.projection === 'us_mapping_matches' && !Object.hasOwn(value,'group') && object(value.us_mapping) && digest(value.us_mapping.source_section_sha256) && integer(value.us_mapping.match_count) && object(value.us_mapping.source) && object(value.us_mapping.daily_run) && (value.us_mapping.coverage_diagnostics === null || object(value.us_mapping.coverage_diagnostics)) && object(value.us_mapping.plan_reference), 'US_MAPPING_PROJECTION');
+   const reference=value.us_mapping.plan_reference;
+   check(reference.value_state === 'LOADED' ? digest(reference.source_section_sha256) && object(reference.source_span) && integer(reference.source_span.offset,0,64*1024*1024) && integer(reference.source_span.bytes,1,16*1024) && digest(reference.source_span.sha256) && object(reference.value) : reference.value_state === 'NOT_LOADED' && typeof reference.reason === 'string' && !Object.hasOwn(reference,'value'), 'US_MAPPING_PLAN_REFERENCE');
+  }
+  else check(!Object.hasOwn(value,'projection') && !Object.hasOwn(value,'announcement') && !Object.hasOwn(value,'rebound') && !Object.hasOwn(value,'group') && !Object.hasOwn(value,'us_mapping'), 'SECTION_PROJECTION');
+  const total = projected ? value.announcement.reference_count : rebound ? value.rebound.group_counts[group] : usMapping ? value.us_mapping.match_count : overview.sections[section].total;
   check(value.schema === 'v5.m18.offline.v2.detail' && value.section === section && value.selection === null && value.cursor === cursor && value.offset === offset && value.matched_total === total && Array.isArray(value.entries) && value.entries.length <= 32 && integer(value.remaining_entries) && integer(value.not_loaded_count) && (value.next_cursor === null || (typeof value.next_cursor === 'string' && value.next_cursor.length <= 8192)), 'SECTION_PAGE');
   for (const [position, entry] of value.entries.entries()) check(object(entry) && entry.index === offset + position && typeof entry.kind === 'string' && integer(entry.offset,0,64*1024*1024) && integer(entry.bytes,1,64*1024*1024) && digest(entry.sha256) && (entry.value_state === 'LOADED' ? Object.hasOwn(entry,'value') : entry.value_state === 'NOT_LOADED' && !Object.hasOwn(entry,'value')), 'SECTION_ENTRY');
-  const pageCountValid = rebound ? (total === 0 ? offset === 0 && value.entries.length === 0 : offset < total && value.entries.length > 0 && value.entries.length <= Math.min(32,total-offset)) : value.entries.length === Math.min(32,total-offset);
+  const pageCountValid = rebound || usMapping ? (total === 0 ? offset === 0 && value.entries.length === 0 : offset < total && value.entries.length > 0 && value.entries.length <= Math.min(32,total-offset)) : value.entries.length === Math.min(32,total-offset);
   check(pageCountValid && value.remaining_entries === value.matched_total-offset-value.entries.length && value.not_loaded_count === value.matched_total-value.entries.filter((entry: SavedEntry) => entry.value_state === 'LOADED').length && (value.remaining_entries > 0) === (value.next_cursor !== null), 'SECTION_COUNTS');
   return value as SectionPage;
  }

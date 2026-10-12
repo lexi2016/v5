@@ -60,3 +60,33 @@ export function renderUsMappingCoverage(host:HTMLElement, mapping:unknown):void 
   const reasons=Array.isArray(value.reason_codes)?value.reason_codes.filter((s):s is string=>typeof s==='string'):[];
   if(reasons.length)audit.append(el('p',`原拒绝或缺口理由：${reasons.join('；')}`));
 }
+
+
+/** Adapt only the bounded current daily matches to the established V4 cards. */
+export function renderSavedUsMappingMatches(host:HTMLElement,page:import('../api/m18SavedResult').SectionPage):void {
+  host.replaceChildren();host.hidden=false;
+  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text:string)=>{const node=document.createElement(tag);node.textContent=text;return node;};
+  const shown=(value:unknown):string=>value===undefined?'未提供':typeof value==='string'?value:JSON.stringify(value)??'未提供';
+  const meta=page.us_mapping;
+  if(!meta){host.append(el('p','CANNOT_CONFIRM · 美股驱动投影尚未加载。'));return;}
+  const loaded=page.entries.filter(entry=>entry.value_state==='LOADED');
+  const matches=loaded.map(entry=>entry.value);
+  const symbols=new Set(matches.map(value=>object(value).hk_symbol).filter((value):value is string=>typeof value==='string'&&/^HK\.\d{5}$/.test(value)));
+  host.append(el('p',`本页已读取 ${loaded.length} 条关系 · ${symbols.size} 个港股主体；本次原始关系总数 ${page.matched_total}。关系条数不是股票数，分页中的同一港股也可能出现在其他页。`),
+    el('p',`日任务状态 ${shown(meta.daily_run.status)}；目标日 ${shown(meta.daily_run.target_trade_date)}；美股交易日 ${shown(meta.daily_run.us_session_date)}。`),
+    el('p',`日研究截止 ${shown(meta.daily_run.research_cutoff)}；日结果生成时间 ${shown(meta.daily_run.generated_at)}；目标日资格 ${shown(meta.daily_run.target_date_eligibility)}。`));
+  const cards=el('div','');
+  renderUsMappingCoverage(cards,{coverage_diagnostics:meta.coverage_diagnostics,daily_run:{...meta.daily_run,matches}});
+  host.append(cards);
+  for(const entry of page.entries){
+    if(entry.value_state==='NOT_LOADED')host.append(el('p',`关系 ${entry.index+1}：NOT_LOADED · ${entry.reason??'NOT_LOADED'}；原始字节 ${entry.bytes}；SHA256 ${entry.sha256}。`));
+    else if(entry.value===null||typeof entry.value!=='object'||Array.isArray(entry.value))host.append(el('p',`关系 ${entry.index+1} 原值：${shown(entry.value)}。未生成股票卡片。`));
+  }
+  const reference=object(meta.plan_reference);
+  host.append(el('p',`本冻结响应的计划消费状态：${reference.value_state==='LOADED'?shown(object(reference.value).status):`NOT_LOADED · ${shown(reference.reason)}`}。以原状态为准，日任务完成或页面展示不推断计划已消费。`));
+  const registry=object(meta.source.registry_readback);
+  if(Object.keys(registry).length)host.append(el('p',`历史关系登记种子目标日 ${shown(registry.seed_target_date)}；范围 ${shown(registry.scope)}。历史登记卡片未并入本页日匹配。`));
+  const audit=el('details','');audit.append(el('summary','同次运行原始身份、关系字节与计划引用状态'));
+  audit.append(el('pre',JSON.stringify({source:meta.source,daily_run:meta.daily_run,plan_reference:reference,source_section_sha256:meta.source_section_sha256,entries:page.entries.map(({value,...entry})=>entry)},null,2)));
+  host.append(audit);
+}

@@ -27,11 +27,11 @@ def _validate(request):
     m.require(type(root) is str and len(root) <= 4096 and Path(root).is_absolute()
               and '..' not in Path(root).parts, 'V2_PATH')
     kind = request['kind'];query = request['query']
-    m.require(kind in ('overview', 'section', 'content', 'announcement', 'rebound'), 'V2_PAGE_ACTION')
+    m.require(kind in ('overview', 'section', 'content', 'announcement', 'rebound', 'us_mapping'), 'V2_PAGE_ACTION')
     keys = () if kind == 'overview' else ('page',) if kind == 'content' else ('section',)
-    if kind in ('announcement', 'rebound'):keys += ('projection',)
+    if kind in ('announcement', 'rebound', 'us_mapping'):keys += ('projection',)
     if kind == 'rebound':keys += ('group',)
-    if kind in ('section', 'announcement', 'rebound') and isinstance(query, dict) and 'cursor' in query: keys += ('cursor',)
+    if kind in ('section', 'announcement', 'rebound', 'us_mapping') and isinstance(query, dict) and 'cursor' in query: keys += ('cursor',)
     m.v1.exact(query, keys, 'V2_PAGE_QUERY')
     if kind == 'content':m.require(m.v1.integer(query['page'], 0, 2**63-1), 'V2_PAGE_INDEX')
     else:m.require(all(type(value) is str and len(value) <= 8192 for value in query.values()), 'V2_PAGE_QUERY')
@@ -43,6 +43,10 @@ def _validate(request):
         m.require(query['section'] == M18_REBOUND_SECTION
                   and query['projection'] == M18_REBOUND_PROJECTION
                   and query['group'] in M18_REBOUND_GROUPS, 'V2_PAGE_PROJECTION')
+    if kind == 'us_mapping':
+        from .module_api import M18_US_MAPPING_SECTION, M18_US_MAPPING_PROJECTION
+        m.require(query['section'] == M18_US_MAPPING_SECTION
+                  and query['projection'] == M18_US_MAPPING_PROJECTION, 'V2_PAGE_PROJECTION')
     m.require(len(m.v1.canonical(request)) < 65536, 'V2_REQUEST_BYTES')
 
 
@@ -82,15 +86,16 @@ def _check_payload(value, request):
                  'remaining_entries', 'entries', 'next_cursor', 'loaded_count')
         if kind == 'announcement':keys += ('projection', 'announcement')
         if kind == 'rebound':keys += ('projection', 'group', 'rebound')
+        if kind == 'us_mapping':keys += ('projection', 'us_mapping')
     m.v1.exact(value, keys, 'V2_RECEIPT_PAGE')
-    schema = 'detail' if kind in ('section', 'announcement', 'rebound') else kind
+    schema = 'detail' if kind in ('section', 'announcement', 'rebound', 'us_mapping') else kind
     m.require(value['schema'] == m.VERSION + '.' + schema, 'V2_RECEIPT_PAGE')
     if kind == 'content':
         page = query['page']
         m.require(m.v1.integer(value['index'], page, page)
                   and m.v1.integer(value['offset'], page*m.PROFILE['chunk_bytes'], page*m.PROFILE['chunk_bytes']),
                   'V2_RECEIPT_PAGE')
-    elif kind in ('section', 'announcement', 'rebound'):
+    elif kind in ('section', 'announcement', 'rebound', 'us_mapping'):
         cursor = query.get('cursor');offset = 0
         if cursor is not None:
             encoded = m.base64.b64decode(cursor, altchars=b'-_', validate=True)
@@ -130,6 +135,54 @@ def _check_payload(value, request):
             if cursor is not None:
                 m.require(cursor == _m18_rebound_cursor(value, meta['source_section_sha256'], query['group'], offset)
                           and m.v1.integer(offset, 1, value['matched_total']-1), 'V2_RECEIPT_PAGE')
+        if kind == 'us_mapping':
+            from .module_api import _m18_us_mapping_cursor, M18_VIEW_ITEM_BYTES, M18_VIEW_VALUES_BYTES
+            m.require(value['projection'] == query['projection'], 'V2_RECEIPT_PAGE')
+            meta = value['us_mapping']
+            m.v1.exact(meta, ('source_section_sha256', 'match_count', 'source', 'daily_run',
+                             'coverage_diagnostics', 'plan_reference'), 'V2_RECEIPT_PAGE')
+            m.require(type(meta['source_section_sha256']) is str
+                      and re.fullmatch('[0-9a-f]{64}', meta['source_section_sha256']) is not None
+                      and m.v1.integer(meta['match_count'], 0, m.v1.MAX_ENTRIES)
+                      and meta['match_count'] == value['matched_total']
+                      and type(meta['source']) is dict and type(meta['daily_run']) is dict
+                      and (meta['coverage_diagnostics'] is None or type(meta['coverage_diagnostics']) is dict),
+                      'V2_RECEIPT_PAGE')
+            reference = meta['plan_reference']
+            m.require(type(reference) is dict and reference.get('value_state') in ('LOADED', 'NOT_LOADED'),
+                      'V2_RECEIPT_PAGE')
+            if reference['value_state'] == 'LOADED':
+                m.v1.exact(reference, ('value_state', 'source_section_sha256', 'source_span', 'value'), 'V2_RECEIPT_PAGE')
+                span = reference['source_span']
+                m.v1.exact(span, ('offset', 'bytes', 'sha256'), 'V2_RECEIPT_PAGE')
+                m.require(type(reference['value']) is dict
+                          and m.v1.integer(span['offset'], 0, m.PROFILE['generation_bytes']-1)
+                          and m.v1.integer(span['bytes'], 1, M18_VIEW_ITEM_BYTES)
+                          and all(type(pin) is str and re.fullmatch('[0-9a-f]{64}', pin) is not None
+                                  for pin in (reference['source_section_sha256'], span['sha256'])), 'V2_RECEIPT_PAGE')
+            else:
+                m.v1.exact(reference, ('value_state', 'reason'), 'V2_RECEIPT_PAGE')
+                m.require(reference['reason'] in ('OWNER_CHAIN_MISSING',
+                          'REFERENCE_MISSING', 'REFERENCE_BYTES_LIMIT', 'REFERENCE_INVALID'), 'V2_RECEIPT_PAGE')
+            if cursor is not None:
+                m.require(cursor == _m18_us_mapping_cursor(value, meta['source_section_sha256'], offset)
+                          and m.v1.integer(offset, 1, value['matched_total']-1), 'V2_RECEIPT_PAGE')
+            entries = value['entries']
+            m.require(type(entries) is list and len(entries) <= m.v1.PAGE_SIZE
+                      and all(type(entry) is dict and entry.get('index') == offset+i for i, entry in enumerate(entries)),
+                      'V2_RECEIPT_PAGE')
+            next_offset = offset+len(entries)
+            expected_cursor = (_m18_us_mapping_cursor(value, meta['source_section_sha256'], next_offset)
+                               if next_offset < value['matched_total'] else None)
+            loaded = [entry for entry in entries if entry.get('value_state') == 'LOADED']
+            m.require((len(entries) > 0 or value['matched_total'] == 0)
+                      and next_offset <= value['matched_total'] and value['next_cursor'] == expected_cursor
+                      and value['remaining_entries'] == value['matched_total']-next_offset
+                      and value['loaded_count'] == len(loaded)
+                      and value['not_loaded_count'] == value['matched_total']-len(loaded)
+                      and all(m.v1.integer(entry.get('bytes'), 1, M18_VIEW_ITEM_BYTES) for entry in loaded)
+                      and sum(entry['bytes'] for entry in loaded) <= M18_VIEW_VALUES_BYTES,
+                      'V2_RECEIPT_PAGE')
 
 
 class PageSender(process.ReceiptSender):
@@ -151,8 +204,9 @@ def _worker(request, sender):
     result = dict(pid=os.getpid(), status='REJECTED')
     try:
         _validate(request)
-        from .module_api import _m18_disk_reader, _m18_semantic_value, _M18ReboundSpans
+        from .module_api import _m18_disk_reader, _m18_semantic_value, _M18ReboundSpans, _M18UsMappingPlanSpan
         observer = _M18ReboundSpans(request['query']) if request['kind'] == 'rebound' else None
+        if request['kind'] == 'us_mapping':observer = _M18UsMappingPlanSpan()
         reader = _m18_disk_reader(request['binding'], span_observer=observer)
         if request['kind'] == 'content':
             value = reader.content(request['query']['page'])

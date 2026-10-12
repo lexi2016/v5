@@ -178,6 +178,35 @@ M18_ANNOUNCEMENT_SECTION = 'announcement_reviewed_analysis'
 M18_ANNOUNCEMENT_PROJECTION = 'announcement_references'
 M18_REBOUND_SECTION = 'rebound_research_observation'
 M18_REBOUND_PROJECTION = 'rebound_references'
+M18_US_MAPPING_SECTION = 'us_mapping_research'
+M18_US_MAPPING_PROJECTION = 'us_mapping_matches'
+M18_US_MAPPING_SOURCE_FIELDS = (
+    'schema_version', 'status', 'target_trade_date', 'gaps', 'RESEARCH_ONLY',
+    'production_allowed', 'buy_gate_updated', 'orders_sent',
+)
+M18_US_MAPPING_DAILY_FIELDS = (
+    'schema_version', 'status', 'target_trade_date', 'run_id', 'generated_at',
+    'us_session_date', 'research_cutoff', 'coverage_scope', 'source_status',
+    'input_identity', 'relation_artifact_sha256', 'target_date_eligibility',
+    'producer_owner', 'readback_required', 'gaps', 'source_gaps', 'artifact_sha256',
+    'RESEARCH_ONLY', 'production_allowed', 'buy_gate_updated', 'orders_sent',
+)
+M18_US_MAPPING_DAILY_COVERAGE_FIELDS = (
+    'reviewed_us_symbol_count', 'matched_us_symbol_count', 'matched_hk_relation_count',
+    'configured_us_universe_count', 'available_us_universe_count', 'full_market_coverage',
+)
+M18_US_MAPPING_COVERAGE_FIELDS = (
+    'schema_version', 'status', 'scope', 'reviewed_us_symbols', 'reviewed_us_symbol_count',
+    'reviewed_relation_artifact_sha256', 'us_session_date', 'daily_run_id',
+    'daily_artifact_sha256', 'rising_individual_count', 'assessed_rising_symbol_count',
+    'unassessed_rising_symbol_count', 'configured_sample_count', 'full_market_coverage',
+    'broader_relation_result', 'reason_codes', 'formal_eligible', 'natural_verified',
+)
+M18_US_MAPPING_REGISTRY_FIELDS = ('scope', 'seed_target_date', 'formal_eligible', 'natural_verified')
+M18_US_MAPPING_PLAN_FIELDS = (
+    'status', 'target_trade_date', 'artifact_sha256', 'run_id', 'available_at',
+    'plan_cutoff', 'reason', 'RESEARCH_ONLY', 'production_allowed', 'buy_gate_updated', 'orders_sent',
+)
 M18_REBOUND_GROUPS = ('strict', 'near', 'pending', 'excluded', 'screen_unresolved')
 M18_REBOUND_SOURCE_FIELDS = (
     'status', 'eligible_screen', 'reason_codes', 'source_run_id', 'data_kind',
@@ -247,6 +276,9 @@ def _m18_semantic_response(config, root, path, query):
     elif projection == M18_REBOUND_PROJECTION:
         if query['section'] != M18_REBOUND_SECTION or query.get('group') not in M18_REBOUND_GROUPS:
             raise ValueError('M18_PROJECTION_INVALID')
+    elif projection == M18_US_MAPPING_PROJECTION:
+        if query['section'] != M18_US_MAPPING_SECTION or 'group' in query:
+            raise ValueError('M18_PROJECTION_INVALID')
     elif projection is not None or 'group' in query:
         raise ValueError('M18_PROJECTION_INVALID')
     descriptor = _m18_read_page_binding(config, root, query)
@@ -259,6 +291,7 @@ def _m18_semantic_response(config, root, path, query):
     kind = 'overview' if path == M18_ROUTE + '/overview' else 'section'
     if projection == M18_ANNOUNCEMENT_PROJECTION:kind = 'announcement'
     elif projection == M18_REBOUND_PROJECTION:kind = 'rebound'
+    elif projection == M18_US_MAPPING_PROJECTION:kind = 'us_mapping'
     selection = {key: query[key] for key in ('section', 'cursor', 'projection', 'group') if key in query}
     return _m18_read_value(binding, kind, selection)
 
@@ -453,12 +486,137 @@ def _m18_rebound_value(reader, query):
                      if next_offset<total else None))
 
 
+def _m18_us_mapping_cursor(binding, source_sha, offset):
+    value = {key: binding[key] for key in (
+        'manifest_sha256', 'generation_id', 'identity', 'profile_sha256')}
+    value.update(section=M18_US_MAPPING_SECTION, projection=M18_US_MAPPING_PROJECTION,
+        source_section_sha256=source_sha, selection_sha256=sha256_json(None), offset=offset)
+    return base64.urlsafe_b64encode(canonical_bytes(value)).decode('ascii')
+
+
+def _m18_us_mapping_fields(value, fields):
+    """Retain only named, small source fields, including explicit false/null."""
+    from . import m18_offline_v2 as m
+    if value is None:return None
+    m.require(type(value) is dict, 'V2_US_MAPPING_METADATA')
+    result = {key: value[key] for key in fields if key in value}
+    m.require(all(len(canonical_bytes(item)) <= M18_VIEW_ITEM_BYTES for item in result.values()),
+              'V2_US_MAPPING_METADATA_BYTES')
+    return result
+
+
+class _M18UsMappingPlanSpan:
+    """Observe only one closed sibling path in the Reader's existing full scan."""
+    def __init__(self):
+        self.span = None
+
+    def __call__(self, path, kind, start, end, raw):
+        if path != ('payload', 'owner_chain', 'us_mapping_daily_plan_reference'):return
+        self.span = dict(kind=kind, offset=start, bytes=end-start)
+        if end-start <= M18_VIEW_ITEM_BYTES:
+            self.span['sha256'] = hashlib.sha256(memoryview(raw)[start:end]).hexdigest()
+
+
+def _m18_us_mapping_plan_reference(reader):
+    """Read one closed sibling reference from this frozen response, never an owner."""
+    from . import m18_offline_v2 as m
+    missing = lambda reason: dict(value_state='NOT_LOADED', reason=reason)
+    if 'owner_chain' not in reader.overview()['sections']:
+        return missing('OWNER_CHAIN_MISSING')
+    page = reader.detail('owner_chain')
+    if page['matched_total'] != 1 or len(page['entries']) != 1 or page['entries'][0]['kind'] != 'object':
+        return missing('REFERENCE_INVALID')
+    source_entry = page['entries'][0]
+    capture = reader._span_observer
+    m.require(isinstance(capture, _M18UsMappingPlanSpan), 'V2_US_MAPPING_CAPTURE')
+    span = capture.span
+    if span is None:return missing('REFERENCE_MISSING')
+    if span['kind'] != 'object':return missing('REFERENCE_INVALID')
+    if span['bytes'] > M18_VIEW_ITEM_BYTES:return missing('REFERENCE_BYTES_LIMIT')
+    m.require(source_entry['offset'] <= span['offset']
+              and span['offset']+span['bytes'] <= source_entry['offset']+source_entry['bytes'],
+              'V2_US_MAPPING_REFERENCE_SPAN')
+    raw = reader._full[span['offset']:span['offset']+span['bytes']]
+    m.require(len(raw) == span['bytes'] and m.sha(raw) == span['sha256'], 'V2_US_MAPPING_REFERENCE_HASH')
+    reference, _ = m.parse(raw, 'object', reader._guard)
+    # The span/hash describes the complete original reference, while value is
+    # deliberately only its named metadata (not the duplicate matches array).
+    return dict(value_state='LOADED', source_section_sha256=source_entry['sha256'],
+        source_span=dict(offset=span['offset'],
+                         bytes=span['bytes'], sha256=span['sha256']),
+        value=_m18_us_mapping_fields(reference, M18_US_MAPPING_PLAN_FIELDS))
+
+
+def _m18_us_mapping_value(reader, query):
+    """Project only daily_run.matches from one verified, object-bounded source."""
+    from . import m18_offline_v2 as m
+    m.v1.exact(query, ('section', 'projection') + (('cursor',) if 'cursor' in query else ()),
+               'V2_PAGE_QUERY')
+    m.require(query['section'] == M18_US_MAPPING_SECTION
+              and query['projection'] == M18_US_MAPPING_PROJECTION, 'V2_PAGE_PROJECTION')
+    raw, source, scanner, source_entry = _m18_projection_source(reader, M18_US_MAPPING_SECTION)
+    daily = source.get('daily_run')
+    m.require(type(daily) is dict and type(daily.get('matches')) is list, 'V2_US_MAPPING_SOURCE')
+    # Reuse the existing grammar on the exact nested object; no arbitrary JSON
+    # path, Reader changes, full-response parsing or extra observer is exposed.
+    daily_span = scanner.sections['daily_run']['entries'][0]
+    nested = m._Scan(raw, 'object', reader._guard)
+    nested.position = daily_span['offset'];nested.value(path=('payload',))
+    m.require(nested.position == daily_span['offset']+daily_span['bytes'], 'V2_US_MAPPING_SOURCE')
+    reader._guard.scan_nodes += nested.nodes;reader._guard.scan_bytes += daily_span['bytes']
+    reader._guard.checkpoint('us_mapping_nested_source')
+    rows = nested.sections['matches']['entries'];matches = daily['matches']
+    m.require(len(rows) == len(matches), 'V2_US_MAPPING_SOURCE')
+    binding = reader._binding();cursor = query.get('cursor');offset = 0
+    if cursor is not None:
+        try:
+            declared, _ = m.v1.parse(base64.b64decode(cursor, altchars=b'-_', validate=True), object_limit=True)
+            offset = declared['offset']
+        except (ValueError, KeyError, TypeError):
+            raise ValueError('M18_CURSOR_INVALID') from None
+        m.require(m.v1.integer(offset, 1, len(rows)-1)
+                  and cursor == _m18_us_mapping_cursor(binding, source_entry['sha256'], offset),
+                  'V2_US_MAPPING_CURSOR')
+    entries = [];loaded = 0;loaded_bytes = 0
+    for row in rows[offset:offset+m.v1.PAGE_SIZE]:
+        entry = dict(row, offset=source_entry['offset']+row['offset'])
+        if entry['bytes'] > M18_VIEW_ITEM_BYTES:entry['reason'] = 'ITEM_BYTES_LIMIT'
+        elif loaded_bytes+entry['bytes'] > M18_VIEW_VALUES_BYTES:break
+        else:
+            entry.update(value=matches[row['index']], value_state='LOADED')
+            loaded += 1;loaded_bytes += entry['bytes']
+        entries.append(entry)
+    source_meta = _m18_us_mapping_fields(source, M18_US_MAPPING_SOURCE_FIELDS)
+    daily_meta = _m18_us_mapping_fields(daily, M18_US_MAPPING_DAILY_FIELDS)
+    if 'coverage' in daily:
+        daily_meta['coverage'] = _m18_us_mapping_fields(daily['coverage'], M18_US_MAPPING_DAILY_COVERAGE_FIELDS)
+    coverage = source.get('coverage_diagnostics', {})
+    if type(coverage) is dict and 'registry_readback' in coverage:
+        source_meta['registry_readback'] = _m18_us_mapping_fields(
+            coverage['registry_readback'], M18_US_MAPPING_REGISTRY_FIELDS)
+    metadata = dict(source_section_sha256=source_entry['sha256'], match_count=len(rows),
+        source=source_meta, daily_run=daily_meta,
+        coverage_diagnostics=_m18_us_mapping_fields(coverage, M18_US_MAPPING_COVERAGE_FIELDS),
+        plan_reference=_m18_us_mapping_plan_reference(reader))
+    m.require(len(canonical_bytes(metadata)) <= M18_VIEW_VALUES_BYTES, 'V2_US_MAPPING_METADATA_BYTES')
+    next_offset = offset+len(entries)
+    return dict(schema=m.VERSION+'.detail', **binding, section=M18_US_MAPPING_SECTION,
+        projection=M18_US_MAPPING_PROJECTION, us_mapping=metadata,
+        selection=None, cursor=cursor, offset=offset, matched_total=len(rows),
+        loaded_count=loaded, not_loaded_count=len(rows)-loaded,
+        remaining_entries=len(rows)-next_offset, entries=entries,
+        next_cursor=(_m18_us_mapping_cursor(binding, source_entry['sha256'], next_offset)
+                     if next_offset < len(rows) else None))
+
+
 def _m18_semantic_value(reader, kind, query):
     """Bound one verified Reader value inside the short-lived read process."""
     if kind == 'announcement':
         value = _m18_announcement_value(reader, query)
     elif kind == 'rebound':
         value = _m18_rebound_value(reader, query)
+    elif kind == 'us_mapping':
+        value = _m18_us_mapping_value(reader, query)
     elif kind == 'overview':
         value = reader.overview()
     else:
