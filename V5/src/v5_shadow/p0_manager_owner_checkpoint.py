@@ -11,7 +11,22 @@ from .manager_plan import run_manager_plan
 
 
 def _require_reference(row):
+    """Accept the canonical ledger row envelope used by assembly tests.
+
+    Existing assembly consumes state.attempts[-1].product_reference after a
+    readback_verified attempt. The earlier wrapper-only top-level reference was
+    not the original contract. Keep accepting it only as a compatibility form.
+    """
+    if not isinstance(row, dict):
+        raise ValueError("OWNER_REFERENCE_REQUIRED")
     ref = row.get("product_reference")
+    if ref is None:
+        state = row.get("state")
+        attempts = state.get("attempts") if isinstance(state, dict) else None
+        if isinstance(attempts, list) and attempts:
+            last = attempts[-1]
+            if isinstance(last, dict) and last.get("readback_verified") is True:
+                ref = last.get("product_reference")
     if not isinstance(ref, dict):
         raise ValueError("OWNER_REFERENCE_REQUIRED")
     for key in ("run_id", "artifact_sha256"):
