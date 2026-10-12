@@ -1,0 +1,94 @@
+{
+  "schema": "m03.r14.complete_candidate.v1",
+  "base_commit": "91b799d04ee42e2a5bacec035eacdafa8ef65ad7",
+  "branch": "dev/m03-github-handoff-20261011",
+  "baseline": "Explicit composite: complete R11 module + R11 test + R13 reader test. R13 reader implementation is integrated, never overlaid as a destructive full-file replacement. This before tree is an assembly baseline, not a historical runtime commit.",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/us_source_daily.py",
+      "before": {
+        "bytes": 3545,
+        "sha256": "464faaf371bd5eb6e3cea899842131173544292e0452e6c39063e121925ed4d8",
+        "git_blob": "f050aa1decd2287881835e592215495f214df559"
+      },
+      "before_source_path": "handoffs/M03/candidate_r11_historical_rejected/after/V5/src/v5_shadow/us_source_daily.py",
+      "after": {
+        "bytes": 21391,
+        "sha256": "29f7eee350b9138a1f7e49a7a94f635479564b505c673ecbbda9e7949cc5bb72",
+        "git_blob": "361a6ea9ef675582a5dce1878b7e48ca0a1c29b5"
+      }
+    },
+    {
+      "path": "V5/tests/test_us_source_daily.py",
+      "before": {
+        "bytes": 365,
+        "sha256": "955e510024565bb833f3ab276c1179b1b6ddd62ee9c27a023f0688ad71255bf8",
+        "git_blob": "1c7d7d66eab3a393d8d0fe555728cbb2a44e495b"
+      },
+      "before_source_path": "handoffs/M03/candidate_r11_historical_rejected/after/V5/tests/test_us_source_daily.py",
+      "after": {
+        "bytes": 18464,
+        "sha256": "8d5ef37d9cae71b3425b4bbf9acd3581b8742d4d4ade44f8a0ae45b1a1f3bf08",
+        "git_blob": "c6fa70abfbee70e2634b76b37bb4156234e17f68"
+      }
+    },
+    {
+      "path": "V5/tests/test_us_reader_slice.py",
+      "before": {
+        "bytes": 350,
+        "sha256": "005ed686d064531adda8d3e857afca7a1a8f773b3e965840374cec3f7beb0f99",
+        "git_blob": "7ec9f477b79ce86a43cab40091aeece616689250"
+      },
+      "before_source_path": "handoffs/M03/candidate_r13_latest_incomplete/after/V5/tests/test_us_reader_slice.py",
+      "after": {
+        "bytes": 3577,
+        "sha256": "2510f2c49ceba6e2aa513ad8122d700f030a35e5e89d85b68fcfb9333758889e",
+        "git_blob": "be5e67c3b3f86440c95ac4b62a41d3d24c87ea39"
+      }
+    },
+    {
+      "path": "V5/tests/m03_fixture.py",
+      "before": null,
+      "before_source_path": null,
+      "after": {
+        "bytes": 4020,
+        "sha256": "cbeee3173bf39ce1b3bc00b0255cd855b35541b22a96cc47df81b6cb5185a4c2",
+        "git_blob": "6e965680f6b6312d0e270c0cd32222d61450d7ba"
+      }
+    },
+    {
+      "path": "V5/tests/run_m03_offline_suite.py",
+      "before": null,
+      "before_source_path": null,
+      "after": {
+        "bytes": 992,
+        "sha256": "944fa8413687857bb49efb3efb71dbe9d430dc290977eaa1ff962f20e88b4d4f",
+        "git_blob": "b9fefa380312476fc1d402355021b78f01a99485"
+      }
+    }
+  ],
+  "reader_algorithm_source": {
+    "path": "handoffs/M03/candidate_r13_latest_incomplete/after/V5/src/v5_shadow/us_source_daily.py",
+    "sha256": "78cff69c77097aa45507596becf78b762498ca966a18438101340c15a9a14334"
+  },
+  "frozen_source": {
+    "path": "handoffs/M03/source",
+    "verified_files": 63,
+    "owner_files": 48,
+    "descriptor_sha256": "34f45318dd89132a496ac0edf98147455b41d9ea926198d83ce1bd8810c20d8b",
+    "owner_commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc"
+  },
+  "patches": {
+    "runtime.patch": {
+      "bytes": 53599,
+      "sha256": "1fed42d97b88643be1db89295d301a8a42c4c0820df584acdc961ddd2284eeb9",
+      "git_blob": "5b6fcac72437d0d63ae348fe5d90776eca5777d1"
+    },
+    "reverse.patch": {
+      "bytes": 53574,
+      "sha256": "fb3d8fee0a457dc2e44cbe384c9fcca01b55d56707b64970835610c20e3920c9",
+      "git_blob": "acbdf6792b810925e44457fbc3afd9bb5718dd9b"
+    }
+  },
+  "roundtrip": "PASS: git apply --check, apply, exact bytes; reverse --check, apply, exact bytes including new-file absence."
+}
