@@ -1,0 +1,96 @@
+{
+  "candidate": "08ed9de9ddb5fd2c62eb1762df2f6106464d823b",
+  "branch": "dev/m06-github-handoff-20261011",
+  "result": "PASS_SOURCE_FIXTURE_SUITE_ONLY",
+  "execution": {
+    "candidate": "08ed9de9ddb5fd2c62eb1762df2f6106464d823b",
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "V5/tests",
+      "-p",
+      "test_hk_preselection*.py",
+      "-v"
+    ],
+    "cwd": "<ISOLATED_M06_SOURCE>",
+    "env": {
+      "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+      "PYTHONPATH": "V5/src:V5/tests",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "<TASK_TEMP>"
+    },
+    "started_utc": "2026-10-12T16:54:58.944583+00:00",
+    "ended_utc": "2026-10-12T16:55:53.173929+00:00",
+    "exit": 0,
+    "source_blob_count": 86,
+    "file_manifest_git_entries_verified": 199,
+    "before_after_identity_entries": 17
+  },
+  "tests": {
+    "run": 85,
+    "passed": 85,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "suite_seconds": 54.095,
+    "invocations": 1
+  },
+  "environment": {
+    "python": "3.14.6",
+    "scikit-learn": "ABSENT",
+    "joblib": "ABSENT",
+    "numpy": "2.5.3",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0"
+  },
+  "identities": {
+    "source_files": 86,
+    "pre_and_post_match": true,
+    "delivery_manifest_entries_matched_remote_git": 199,
+    "delivery_files_including_manifest": 200,
+    "before_after_entries_verified": 17
+  },
+  "logs": {
+    "stdout.log": {
+      "raw_local_sha256": "9bae2d04b5f8d20f271eb4f65238b7cee18d07ed25fe55d3ffcab6e91ad8dc21",
+      "uploaded_sha256": "9bae2d04b5f8d20f271eb4f65238b7cee18d07ed25fe55d3ffcab6e91ad8dc21",
+      "redacted": false
+    },
+    "stderr.log": {
+      "raw_local_sha256": "2daf29fa054b84899037118b96b56dd2e7b3e2d174fd7ce323599b11963b3b00",
+      "uploaded_sha256": "2daf29fa054b84899037118b96b56dd2e7b3e2d174fd7ce323599b11963b3b00",
+      "redacted": false
+    }
+  },
+  "real_model_generation": {
+    "status": "NOT_RUN",
+    "reason": "Existing Python 3.14.6 differs from required 3.13.12; scikit-learn 1.9.0 and joblib 1.5.3 are absent. Original production asset closure was not admitted or loaded by this test.",
+    "required": {
+      "python": "3.13.12",
+      "scikit-learn": "1.9.0",
+      "joblib": "1.5.3"
+    }
+  },
+  "minimal_integration_scope": [
+    "Isolated cold process from this pinned source root; do not replace shared P0 helper modules.",
+    "Read exact committed_reference with read_verified_hk_preselection_reference.",
+    "Use pure project_hk_preselection_record only with an already verified runtime config and actual route/query; preserve full 100-row payload and source identities.",
+    "Any authorized later P0 publication uses existing single-writer generation CAS and preserves unrelated records/rollback. GET never produces or generates."
+  ],
+  "not_accepted": [
+    "Real model-produced Top100",
+    "Authoritative M02 eligibility/PIT/source qualification",
+    "P0 routes/page/generation deployment",
+    "M08 activation",
+    "Natural sessions or trading acceptance"
+  ],
+  "product_edits": false,
+  "dependency_install": false,
+  "clock_changed": false,
+  "services_changed": false,
+  "deployed": false
+}
