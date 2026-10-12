@@ -1,0 +1,26 @@
+test_all_five_context_fields_required_without_writes (test_m05_daily_boundary.M05DailyTests.test_all_five_context_fields_required_without_writes) ... ok
+test_bad_optional_lane_retains_diagnostic_and_healthy_sibling (test_m05_daily_boundary.M05DailyTests.test_bad_optional_lane_retains_diagnostic_and_healthy_sibling) ... ok
+test_conflict_is_aggregated_after_healthy_sibling_and_not_success (test_m05_daily_boundary.M05DailyTests.test_conflict_is_aggregated_after_healthy_sibling_and_not_success) ... ok
+test_contract_valid_empty_retains_zero_rows_and_explicit_status (test_m05_daily_boundary.M05DailyTests.test_contract_valid_empty_retains_zero_rows_and_explicit_status) ... ok
+test_daily_entrypoint_exists (test_m05_daily_boundary.M05DailyTests.test_daily_entrypoint_exists) ... ok
+test_default_chain_keeps_scores_and_final_batch_raw_identity (test_m05_daily_boundary.M05DailyTests.test_default_chain_keeps_scores_and_final_batch_raw_identity) ... ok
+test_each_bad_gate_binding_fails_before_any_write (test_m05_daily_boundary.M05DailyTests.test_each_bad_gate_binding_fails_before_any_write) ... ok
+test_expected_missing_never_occupies_pool_key (test_m05_daily_boundary.M05DailyTests.test_expected_missing_never_occupies_pool_key) ... ok
+test_fenced_gate_rejects_before_import_lock_or_pool_write (test_m05_daily_boundary.M05DailyTests.test_fenced_gate_rejects_before_import_lock_or_pool_write) ... ok
+test_host_top_level_modules_cannot_supply_frozen_store (test_m05_daily_boundary.M05DailyTests.test_host_top_level_modules_cannot_supply_frozen_store) ... ok
+test_marker_is_required_before_gate_or_assembler (test_m05_daily_boundary.M05DailyTests.test_marker_is_required_before_gate_or_assembler) ... ok
+test_missing_gate_and_bad_gate_identity_do_not_write (test_m05_daily_boundary.M05DailyTests.test_missing_gate_and_bad_gate_identity_do_not_write) ... ok
+test_non_conflict_store_error_is_not_downgraded (test_m05_daily_boundary.M05DailyTests.test_non_conflict_store_error_is_not_downgraded) ... ok
+test_nonaccepted_artifact_and_assembly_evidence_are_preserved (test_m05_daily_boundary.M05DailyTests.test_nonaccepted_artifact_and_assembly_evidence_are_preserved) ... ok
+test_output_rejects_overlap_both_directions_and_symlink (test_m05_daily_boundary.M05DailyTests.test_output_rejects_overlap_both_directions_and_symlink) ... ok
+test_request_identity_and_lane_mapping_checked_before_writer (test_m05_daily_boundary.M05DailyTests.test_request_identity_and_lane_mapping_checked_before_writer) ... ok
+test_scope_excludes_unpermitted_success_key_without_writes (test_m05_daily_boundary.M05DailyTests.test_scope_excludes_unpermitted_success_key_without_writes) ... ok
+test_all_final_readbacks_share_one_exact_live_lease_after_last_write (test_m05_frozen_factory.FrozenFactoryTests.test_all_final_readbacks_share_one_exact_live_lease_after_last_write) ... ok
+test_factory_checks_real_context_type_strictness_and_same_object (test_m05_frozen_factory.FrozenFactoryTests.test_factory_checks_real_context_type_strictness_and_same_object) ... ok
+test_narrow_conflict_classifier (test_m05_frozen_factory.FrozenFactoryTests.test_narrow_conflict_classifier) ... ok
+test_snapshot_identity_mismatch_is_not_a_publish_conflict (test_m05_frozen_factory.FrozenFactoryTests.test_snapshot_identity_mismatch_is_not_a_publish_conflict) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 18.902s
+
+OK
