@@ -6,20 +6,23 @@ saved owner references. The original manager implementation remains authoritativ
 from __future__ import annotations
 
 from copy import deepcopy
+
 from .daily_manager_assembly import assemble_manager_request
 from .manager_plan import run_manager_plan
 
 
 def _require_reference(row):
-    """Accept the canonical ledger row envelope used by assembly tests.
+    """Validate the lane-specific saved owner contract used by assembly.
 
-    Existing assembly consumes state.attempts[-1].product_reference after a
-    readback_verified attempt. The earlier wrapper-only top-level reference was
-    not the original contract. Keep accepting it only as a compatibility form.
+    Announcement, rebound and US references intentionally have different
+    contracts. Do not normalize them into a fake common artifact reference.
     """
     if not isinstance(row, dict):
         raise ValueError("OWNER_REFERENCE_REQUIRED")
+
+    lane = row.get("lane")
     ref = row.get("product_reference")
+
     if ref is None:
         state = row.get("state")
         attempts = state.get("attempts") if isinstance(state, dict) else None
@@ -27,11 +30,43 @@ def _require_reference(row):
             last = attempts[-1]
             if isinstance(last, dict) and last.get("readback_verified") is True:
                 ref = last.get("product_reference")
+
     if not isinstance(ref, dict):
         raise ValueError("OWNER_REFERENCE_REQUIRED")
-    for key in ("run_id", "artifact_sha256"):
-        if not isinstance(ref.get(key), str):
-            raise ValueError("OWNER_REFERENCE_IDENTITY")
+
+    if lane == "announcement":
+        binding = ref.get("binding")
+        if not isinstance(binding, dict):
+            raise ValueError("ANNOUNCEMENT_BINDING_REQUIRED")
+        required = ("root", "binding_sha256", "target_date", "publication_date")
+        if any(not isinstance(binding.get(key), str) for key in required):
+            raise ValueError("ANNOUNCEMENT_BINDING_IDENTITY")
+        return deepcopy(row)
+
+    if lane == "rebound":
+        reference = ref.get("reference")
+        if not isinstance(reference, dict):
+            raise ValueError("REBOUND_REFERENCE_REQUIRED")
+        required = (
+            "run_id",
+            "artifact_sha256",
+            "manifest_sha256",
+            "receipt_sha256",
+        )
+        if any(not isinstance(reference.get(key), str) for key in required):
+            raise ValueError("REBOUND_REFERENCE_IDENTITY")
+        return deepcopy(row)
+
+    if lane == "us_mapping":
+        required = ("target_date", "run_id", "artifact_sha256", "manager_output_root")
+        if any(not isinstance(ref.get(key), str) for key in required):
+            raise ValueError("US_SAVED_REFERENCE_IDENTITY")
+        return deepcopy(row)
+
+    # Compatibility path for callers without a lane is intentionally narrow.
+    # It cannot bypass the lane-specific contracts above.
+    if not isinstance(ref.get("run_id"), str) or not isinstance(ref.get("artifact_sha256"), str):
+        raise ValueError("OWNER_REFERENCE_IDENTITY")
     return deepcopy(row)
 
 
