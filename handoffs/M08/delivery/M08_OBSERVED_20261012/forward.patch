@@ -1,0 +1,1156 @@
+diff --git a/START_HERE.md b/START_HERE.md
+--- a/START_HERE.md
++++ b/START_HERE.md
+@@ -1,4 +1,10 @@
+ # V5 M08｜港股阶段选股
++
++## 2026-10-12 原已保存结果独立只读增量
++
++原 SelectionStore 已保存三件可按固定原字节 SHA/长度搬入独立 V5 私有 recorded root，再用仓库内冻结原 reader 精确 run 冷读；移走旧源不影响读，GET 只读已发布响应。入口与命令见 [M08_HK_OBSERVED.md](V5/docs/M08_HK_OBSERVED.md)，SHA 与正反补丁见 [独立增量交付](delivery/M08_OBSERVED_20261012/)。这是 OWNER_RESULT / HISTORICAL / OBSERVED_ONLY，不重新执行算法，不把历史输出当原行情输入，natural/PIT/formal 均为 false。
++
++基于 `4053d4e89101b8d47861f48813686234dc063ba9` 保留全部 Mac 反馈：前一 M06 适配 13+3 项以及 10/12 原池 100 行真实 mapping-only 均通过。本次历史观察新增 21 项隔离测试通过，原 90 项未重跑；真实三件迁移与页面部署仍待 Mac 验证。M06/producer 原有实现和身份函数不改。
+ 
+ ## 2026-10-12 M06 原映射接线增量
+ 
+diff --git a/V5/docs/M08_HK_OBSERVED.md b/V5/docs/M08_HK_OBSERVED.md
+new file mode 100644
+--- /dev/null
++++ b/V5/docs/M08_HK_OBSERVED.md
+@@ -0,0 +1,153 @@
++# M08 saved-owner observations
++
++This is an additive candidate after the M06 delivery. It copies already-saved
++HK SelectionStore results and reads them independently. It does not reconstruct
++missing ordinary-stage inputs, rerun Stage8, collect quotes, or attest natural
++execution/PIT safety. No existing producer, M06 adapter, frozen source, source
++manifest, shared API, UI, scheduler, or ledger file is changed.
++
++## Fixed inventory and evidence boundary
++
++Inventory: `lexi2016/v5@7aaf58b07daa70f3efb2554b82ee8195cb7a1185`,
++`handoffs/M08/feedback/mac-historical-materials-20261012/report.json`.
++It lists 10 saved runs across eight stages for 20261012. Each `stage_runs` entry
++contains `stage`, `run_id`, and `trio[name]` with `relative_path`, raw `sha256`,
++and `bytes`. Its PASS/status labels are descriptive, not accepted as proof.
++This independent delta is based on
++`4053d4e89101b8d47861f48813686234dc063ba9`; its existing Mac feedback is preserved.
++
++The inventory lacks the stage manifest/receipt **canonical** hashes. The
++read-only `prepare` operation first verifies the pinned raw bytes and then the
++unchanged pinned `SelectionStore._verify_run`, returning a complete reference:
++
++- `schema_version=v5.hk_stage_observed_source.v1`
++- `target_date`, `stage_id`, `market=HK_CONNECT`, `run_id`
++- Original `artifact_sha256`, `manifest_sha256`, `receipt_sha256`
++- `trio`: the three exact inventory-relative paths, raw SHA-256 values and sizes
++
++Original CSV SHA hashes raw bytes. Original manifest/receipt SHA hashes
++canonical JSON, excluding formatting and the trailing newline. Both identities
++are retained. CSV may contain only the legacy projection; the full original
++envelope is read from the manifest. Neither JSON nor CSV is reserialized during
++copying. No real historical payload or absolute source path is included in this
++code or its fixtures.
++
++## Storage and cold-read contract
++
++Initialize a distinct empty private directory. Its marker is
++`.v5-hk-stage-observed-root` with `v5.hk-stage-observed-root.v1\n`.
++Each committed import has:
++
++```
++imports/<import_sha256>/
++  import.json
++  receipt.json
++  owner/selection_runs/<date>/HK_CONNECT_SELECTION_<stage>/<run>/
++    artifact.csv
++    manifest.json
++    receipt.json
++```
++
++`import.json` binds the exact source reference, the pinned original source
++closure, this importer/reader/API implementation, and the reused public path
++redactor/shared publication helpers. The original producer identity function
++is unchanged. `receipt.json` records actual `imported_at` and COMMITTED state.
++Repeated identical imports reuse these bytes and timestamp. Changed metadata
++can produce a distinct import for the same original run, without replacing the
++old observation.
++
++The public/cold-read reference pins `import_sha256`, `import_receipt_sha256`,
++market, date, stage, and run. Cold reads verify both sidecars and all trio byte
++and canonical hashes, then call the original `_verify_run` with the exact run.
++They never consult latest pointers or the old source root. Original source
++paths inside private envelope evidence remain unchanged text and are never
++opened. Invalid safety/identity/status metadata is rejected in addition to the
++original verifier's checks. Boolean safety values must be literal false.
++
++Publication happens only after the copied trio verifies. A failed copy leaves
++an unpublished `pending-*` directory for explicit inspection; committed imports
++are not overwritten or removed. Source/destination overlap, unmarked roots,
++symlinks, non-regular inputs, wrong sizes/hashes and malformed JSON are rejected.
++No automatic cleanup or latest-success pointer is added.
++
++## Python interfaces and CLI
++
++New interfaces:
++- `prepare_hk_stage_observed_reference(source_root, inventory_entry, *, target_date)`
++- `import_hk_stage_observed(source_root, recorded_root, expected_original_reference)`
++- `read_hk_stage_observed(recorded_root, exact_import_reference)`
++- `publish_hk_stage_observed_response(config, recorded_root, exact_import_reference, *, expected_generation)`
++
++Example operator flow, substituting approved absolute local paths and the exact
++inventory run. These commands have not been executed against the Mac materials:
++
++```sh
++set -eu
++# Run from the module checkout: handoffs/M08
++export PYTHONPATH=V5/src
++python -B -m v5_shadow.hk_stage_observed init --root "$RECORDED_ROOT"
++python -B -m v5_shadow.hk_stage_observed prepare --source-root "$SOURCE_ROOT" --inventory "$INVENTORY_JSON" --run-id "$EXACT_RUN" > "$EXPECTED_REFERENCE_JSON"
++python -B -m v5_shadow.hk_stage_observed import --source-root "$SOURCE_ROOT" --root "$RECORDED_ROOT" --reference "$EXPECTED_REFERENCE_JSON" > "$IMPORTED_REFERENCE_JSON"
++python -B -m v5_shadow.hk_stage_observed read --root "$RECORDED_ROOT" --reference "$IMPORTED_REFERENCE_JSON"
++python -B -m v5_shadow.hk_stage_observed_api --config "$API_CONFIG_JSON" --root "$RECORDED_ROOT" --reference "$IMPORTED_REFERENCE_JSON" --expected-generation NONE
++```
++
++`import` prints only the reusable exact reference. `read` prints a small
++classification/status/row-count summary. Explicit `--include-artifact` prints
++the private original envelope; keep that output private and do not upload it.
++All CLI file reads use bounded regular-file/no-follow checks.
++
++API config uses the unchanged `v5.module_api.v1` contract, module `hk_stage`, an
++independent marked response root, and route `/api/v5/hk-stage-observed`.
++`NONE` is only the first publication; subsequent calls require the current
++**API generation** SHA, distinct from the import SHA. Existing
++`v5_shadow.module_api` serves the result; there is no new server.
++
++GET requires `date`, `stage`, `run_id`, and `import_sha256`. It reads immutable
++published responses and cannot call importers, readers, producers or collectors.
++Existing compare-and-swap generation activation provides response rollback.
++It does not by itself roll back code, UI, or private copied imports.
++
++## Public meaning
++
++- `data_kind=OWNER_RESULT`, `evidence_mode=HISTORICAL`, `qualification=OBSERVED_ONLY`
++- `natural_verified`, `pit_verified`, `formal_admission`, `raw_input_verified`,
++  `computation_replayed`, `market_data_authenticity_verified` are false
++- Production/BUY-gate/order flags remain false
++- `captured_at=null`; a historical capture time is never guessed
++- API `generated_at` is the recorded import time, not historical market capture
++- `source_input_sha256` identifies the observed import manifest, not unseen raw quotes
++- Original selection status, rows, formulas, coverage and diagnostics are retained
++- Public paths are redacted; the independently pinned original private bytes remain unchanged
++- Stage8 is `HK_STAGE8_SEPARATE`, outside the seven-stage M10 grouping
++
++Original source-mode labels may describe a historical natural route; they do
++not override these explicit observation limits. Saved output verification does
++not prove the full original input set or enable recomputation.
++
++## Verification
++
++Only synthetic original-owner trios in temporary cloud directories are used.
++No actual Mac data, provider access or broad suite rerun is part of this change.
++The targeted tests cover eight-stage exact copies, PARTIAL/empty/error retention,
++rehashed metadata attacks, byte/canonical hash distinction, source removal,
++latest-pointer independence, immutable retries, failed copies, CLI boundaries,
++HTTP cold reads and explicit observation-only classification.
++
++```sh
++PYTHONPATH=V5/src:V5/tests python -B -m unittest test_hk_stage_observed -v
++PYTHONPATH=V5/src:V5/tests python -B -m unittest test_hk_stage_observed.HKObservedTests.test_cli_prepare_import_read_and_publish_without_payload_stdout -v
++```
++
++Initial RED was 16 missing-module failures. Further negative regressions were
++observed failing before fixes. Final targeted counts and raw logs accompany the
++handoff. Cloud Python is 3.12.14; the declared >=3.14 Mac acceptance environment
++and the fixed real inventory remain separate validation steps.
++
++Final cloud result: **21/21 PASS**, exit 0. See
++`V5/tests/logs/M08_OBSERVED/` for the raw targeted logs, review, and runtime
++receipt. The existing aggregate acceptance command includes this new test file
++for future use; the prior 90 or combined 124 tests were not rerun in this delta.
++The CLI path is included in the 21-test run. Patch roundtrip/source SHA records
++are in `delivery/M08_OBSERVED_20261012/`. This is a complete saved-output adapter
++candidate, not complete M08 real-input/product acceptance.
+diff --git a/V5/src/v5_shadow/hk_stage_observed.py b/V5/src/v5_shadow/hk_stage_observed.py
+new file mode 100644
+--- /dev/null
++++ b/V5/src/v5_shadow/hk_stage_observed.py
+@@ -0,0 +1,363 @@
++"""Import exact saved HK owner trios; observe them without re-running selection.
++
++The original bytes remain private and unchanged. This module never collects,
++selects, follows latest, or treats a historical output as verified raw input.
++"""
++import sys
++from pathlib import Path
++if __package__ in (None, ''):
++    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++import argparse
++import fcntl
++import hashlib
++import json
++import os
++import re
++import stat
++import subprocess
++import tempfile
++from datetime import datetime, timezone
++
++from v5_shadow.composition import no_symlinks
++from v5_shadow.contracts import aware, exact_keys, sha, trade_date
++from v5_shadow.digests import canonical_bytes, sha256_json, MAX_JSON_BYTES
++from v5_shadow.hk_stage_sources import SOURCE_SHA, load_owners, source_bytes
++from v5_shadow.module_api import _open_directory, _read_regular
++
++STAGES = ('STAGE_0925', 'STAGE_0930_0935', 'STAGE_0935_0940', 'STAGE_0940_0945',
++          'STAGE_0945_1030', 'STAGE_1300_1315', 'STAGE_1445_1500', 'STAGE_1545_1555')
++FILES = ('artifact.csv', 'manifest.json', 'receipt.json')
++SAFETY = dict(production_allowed=False, buy_gate_updated=False, orders_sent=False)
++OBSERVED = dict(data_kind='OWNER_RESULT', evidence_mode='HISTORICAL', qualification='OBSERVED_ONLY',
++                natural_verified=False, pit_verified=False, formal_admission=False,
++                raw_input_verified=False, computation_replayed=False,
++                market_data_authenticity_verified=False)
++MARKER = b'v5.hk-stage-observed-root.v1\n'
++SOURCE_SCHEMA = 'v5.hk_stage_observed_source.v1'
++REF_SCHEMA = 'v5.hk_stage_observed_reference.v1'
++_SOURCE_FIELDS = ('schema_version', 'target_date', 'stage_id', 'market', 'run_id',
++                  'artifact_sha256', 'manifest_sha256', 'receipt_sha256', 'trio')
++_REF_FIELDS = ('schema_version', 'import_sha256', 'import_receipt_sha256',
++               'target_date', 'stage_id', 'market', 'run_id')
++
++
++def _identity_fields(value):
++    trade_date(value['target_date'])
++    if (value['market'] != 'HK_CONNECT' or value['stage_id'] not in STAGES
++            or not isinstance(value['run_id'], str)
++            or not re.fullmatch(r'[A-Za-z0-9](?:[A-Za-z0-9_.-]{0,254}[A-Za-z0-9])?', value['run_id'])):
++        raise ValueError('M08_OBSERVED_IDENTITY')
++
++
++def _prefix(value):
++    return f"selection_runs/{value['target_date']}/HK_CONNECT_SELECTION_{value['stage_id']}/{value['run_id']}"
++
++
++def _source_reference(value):
++    exact_keys(value, _SOURCE_FIELDS)
++    if value['schema_version'] != SOURCE_SCHEMA:
++        raise ValueError('M08_OBSERVED_SOURCE_SCHEMA')
++    _identity_fields(value)
++    for key in ('artifact_sha256', 'manifest_sha256', 'receipt_sha256'):
++        sha(value[key])
++    exact_keys(value['trio'], FILES)
++    for name, item in value['trio'].items():
++        exact_keys(item, ('relative_path', 'sha256', 'bytes'))
++        sha(item['sha256'])
++        if (item['relative_path'] != _prefix(value) + '/' + name
++                or type(item['bytes']) is not int or not 0 < item['bytes'] <= MAX_JSON_BYTES):
++            raise ValueError('M08_OBSERVED_TRIO_IDENTITY')
++    if value['artifact_sha256'] != value['trio']['artifact.csv']['sha256']:
++        raise ValueError('M08_OBSERVED_ARTIFACT_SHA')
++    return json.loads(canonical_bytes(value))
++
++
++def _reference(value):
++    exact_keys(value, _REF_FIELDS)
++    if value['schema_version'] != REF_SCHEMA:
++        raise ValueError('M08_OBSERVED_REFERENCE_SCHEMA')
++    _identity_fields(value)
++    sha(value['import_sha256']); sha(value['import_receipt_sha256'])
++    return json.loads(canonical_bytes(value))
++
++
++def _read_file(root, relative):
++    # Every directory is opened separately: O_NOFOLLOW must protect intermediate
++    # components too, not only the final filename of a slash-containing path.
++    parts=relative.split('/')
++    if any(p in ('', '.', '..') or '\\' in p for p in parts):
++        raise ValueError('M08_OBSERVED_PATH')
++    directory=_open_directory(root)
++    try:
++        for part in parts[:-1]:
++            child=os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=directory)
++            os.close(directory); directory=child
++        fd=os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=directory)
++        try:return _read_regular(fd, MAX_JSON_BYTES)
++        finally:os.close(fd)
++    finally:os.close(directory)
++
++
++def _json(raw):
++    def pairs(items):
++        result={}
++        for key, value in items:
++            if key in result:raise ValueError('M08_OBSERVED_DUPLICATE_JSON_KEY')
++            result[key]=value
++        return result
++    def constant(_):raise ValueError('M08_OBSERVED_NONFINITE_JSON')
++    if len(raw)>MAX_JSON_BYTES:raise ValueError('M08_OBSERVED_JSON_SIZE')
++    result=json.loads(raw, object_pairs_hook=pairs, parse_constant=constant)
++    canonical_bytes(result)
++    return result
++
++
++def _read_cli_json(path):
++    path=Path(path).absolute()
++    return _json(_read_file(path.parent,path.name))
++
++
++def _read_trio(root, expected):
++    raw={}
++    for name, item in expected['trio'].items():
++        data=_read_file(root, item['relative_path'])
++        if len(data)!=item['bytes'] or hashlib.sha256(data).hexdigest()!=item['sha256']:
++            raise ValueError('M08_OBSERVED_TRIO_BYTES:'+name)
++        raw[name]=data
++    for name, field in (('manifest.json', 'manifest_sha256'), ('receipt.json', 'receipt_sha256')):
++        if sha256_json(_json(raw[name]))!=expected[field]:
++            raise ValueError('M08_OBSERVED_CANONICAL_SHA:'+name)
++    return raw
++
++
++def _false_flags(value, *, required=False):
++    if isinstance(value, dict):
++        for key in SAFETY:
++            if (required or key in value) and value.get(key) is not False:
++                raise ValueError('M08_OBSERVED_SAFETY')
++        for item in value.values():_false_flags(item)
++    elif isinstance(value, list):
++        for item in value:_false_flags(item)
++
++
++def _owner_worker(root, expected):
++    expected=_source_reference(expected);before=_read_trio(root, expected)
++    selection, _, _=load_owners()
++    verified=selection.SelectionStore(root)._verify_run(expected['target_date'], expected['stage_id'],
++                                                       expected['market'], expected['run_id'])
++    for key in ('artifact_sha256', 'manifest_sha256', 'receipt_sha256'):
++        if verified[key]!=expected[key]:raise ValueError('M08_OBSERVED_OWNER_SHA')
++    artifact=verified['envelope'];manifest=_json(before['manifest.json']);receipt=_json(before['receipt.json'])
++    role='HK_CONNECT_SELECTION_'+expected['stage_id']
++    if artifact.get('source_status') not in ('READY','READY_EMPTY','PARTIAL_WITH_ROWS','CANNOT_CONFIRM'):
++        raise ValueError('M08_OBSERVED_SOURCE_STATUS')
++    for value in (artifact, manifest, receipt):
++        if any(value.get(key)!=expected[key] for key in ('market','stage_id','run_id')) or value.get('trade_date')!=expected['target_date']:
++            raise ValueError('M08_OBSERVED_OWNER_IDENTITY')
++        _false_flags(value, required=True)
++        if (value.get('algorithm_id')!=selection.SELECTION_ALGORITHM_ID
++                or value.get('selection_status')!=artifact.get('selection_status')):
++            raise ValueError('M08_OBSERVED_OWNER_METADATA')
++    for value in (manifest, receipt):
++        if value.get('role')!=role:raise ValueError('M08_OBSERVED_OWNER_ROLE')
++        if 'source_status' in value and value['source_status']!=artifact['source_status']:
++            raise ValueError('M08_OBSERVED_SOURCE_STATUS')
++    if (not isinstance(artifact.get('rows'), list) or len(artifact['rows'])>10
++            or artifact.get('selected_rows', len(artifact['rows']))!=len(artifact['rows'])):
++        raise ValueError('M08_OBSERVED_OWNER_ROWS')
++    if before!=_read_trio(root, expected):raise ValueError('M08_OBSERVED_TRIO_CHANGED')
++    source_bytes()
++    return artifact
++
++
++def _verify_owner(root, expected):
++    proc=subprocess.run([sys.executable,'-I','-B',str(Path(__file__).resolve()),'--worker'],
++                        input=canonical_bytes(dict(root=str(root),reference=expected)),
++                        stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=60)
++    value=_json(proc.stdout)
++    if proc.returncode:raise ValueError(value.get('reason','M08_OBSERVED_OWNER_FAILED'))
++    return value
++
++
++def _implementation_identity():
++    # Separate from hk_stage_sources.implementation_identity: adding this
++    # adapter must not invalidate the existing producer/M06 generations.
++    names=('hk_stage_observed.py','hk_stage_observed_api.py','hk_stage_api.py',
++           'hk_stage_sources.py','contracts.py','digests.py','composition.py',
++           'module_api.py','module_artifacts.py','api_gateway.py')
++    return {name:hashlib.sha256(no_symlinks(Path(__file__).with_name(name)).read_bytes()).hexdigest()
++            for name in names}
++
++
++def _manifest(expected):
++    return dict(schema_version='v5.hk_stage_observed_import.v1', original_reference=expected,
++                source_closure_sha256=SOURCE_SHA, reader_implementation_identity=_implementation_identity(),
++                **OBSERVED, **SAFETY)
++
++
++def init_hk_observed_root(root):
++    root=no_symlinks(Path(root))
++    if root.exists() and any(root.iterdir()):raise ValueError('M08_OBSERVED_INIT_REQUIRES_EMPTY')
++    root.mkdir(mode=0o700, parents=True, exist_ok=True)
++    _write_bytes(root/'.v5-hk-stage-observed-root', MARKER)
++    return str(root)
++
++
++def _root(root):
++    root=Path(root)
++    try:marker=_read_file(root,'.v5-hk-stage-observed-root')
++    except FileNotFoundError as error:
++        raise ValueError('M08_OBSERVED_ROOT_MARKER') from error
++    if marker!=MARKER:
++        raise ValueError('M08_OBSERVED_ROOT_MARKER')
++    return root
++
++
++def _write_bytes(path, raw):
++    path=no_symlinks(Path(path));path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
++    fd=os.open(path,os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,0o600)
++    with os.fdopen(fd,'wb') as stream:
++        stream.write(raw);stream.flush();os.fsync(stream.fileno())
++
++
++def _sync_tree(path):
++    # Directory entries must be durable before exposing the committed name.
++    for directory in sorted((p for p in path.rglob('*') if p.is_dir()),key=lambda p:len(p.parts),reverse=True):
++        fd=_open_directory(directory)
++        try:os.fsync(fd)
++        finally:os.close(fd)
++    fd=_open_directory(path)
++    try:os.fsync(fd)
++    finally:os.close(fd)
++
++
++def prepare_hk_stage_observed_reference(source_root, inventory_entry, *, target_date):
++    """Read-only augmentation of one pinned report.stage_runs entry.
++
++    Report raw hashes/sizes are mandatory. Canonical hashes are calculated from
++    those exact bytes and verified by the unchanged original reader. Inventory
++    labels such as READY or reader=PASS are never accepted as proof.
++    """
++    if not isinstance(inventory_entry,dict):raise ValueError('M08_OBSERVED_INVENTORY')
++    expected=dict(schema_version=SOURCE_SCHEMA,target_date=target_date,market='HK_CONNECT',
++                  stage_id=inventory_entry['stage'],run_id=inventory_entry['run_id'],
++                  trio=inventory_entry['trio'],artifact_sha256=inventory_entry['trio']['artifact.csv']['sha256'],
++                  manifest_sha256='0'*64,receipt_sha256='0'*64)
++    expected=_source_reference(expected)
++    for name, field in (('manifest.json','manifest_sha256'),('receipt.json','receipt_sha256')):
++        item=expected['trio'][name];raw=_read_file(source_root,item['relative_path'])
++        if len(raw)!=item['bytes'] or hashlib.sha256(raw).hexdigest()!=item['sha256']:
++            raise ValueError('M08_OBSERVED_TRIO_BYTES:'+name)
++        expected[field]=sha256_json(_json(raw))
++    _verify_owner(source_root,expected)
++    return expected
++
++
++def _make_reference(import_sha, receipt_sha, source):
++    return dict(schema_version=REF_SCHEMA,import_sha256=import_sha,import_receipt_sha256=receipt_sha,
++                **{k:source[k] for k in ('target_date','stage_id','market','run_id')})
++
++
++def read_hk_stage_observed(recorded_root, reference):
++    """Cold read only: recorded root plus exact reference, never source/latest."""
++    root=_root(recorded_root);reference=_reference(reference)
++    relative='imports/'+reference['import_sha256'];raw=_read_file(root,relative+'/import.json')
++    if hashlib.sha256(raw).hexdigest()!=reference['import_sha256']:
++        raise ValueError('M08_OBSERVED_IMPORT_SHA')
++    manifest=_json(raw);expected=_source_reference(manifest['original_reference'])
++    if canonical_bytes(manifest)!=canonical_bytes(_manifest(expected)):
++        raise ValueError('M08_OBSERVED_IMPORT_IDENTITY')
++    receipt_raw=_read_file(root,relative+'/receipt.json')
++    if hashlib.sha256(receipt_raw).hexdigest()!=reference['import_receipt_sha256']:
++        raise ValueError('M08_OBSERVED_RECEIPT_SHA')
++    receipt=_json(receipt_raw);imported_at=receipt.get('imported_at');aware(imported_at)
++    wanted=dict(schema_version='v5.hk_stage_observed_receipt.v1',status='COMMITTED',
++                import_sha256=reference['import_sha256'],imported_at=imported_at,**OBSERVED,**SAFETY)
++    if (canonical_bytes(receipt)!=canonical_bytes(wanted)
++            or reference!=_make_reference(reference['import_sha256'],reference['import_receipt_sha256'],expected)):
++        raise ValueError('M08_OBSERVED_COMMIT_IDENTITY')
++    artifact=_verify_owner(root/relative/'owner',expected)
++    return dict(artifact=artifact,reference=reference,read_status='VERIFIED',
++                provenance=dict(**OBSERVED, imported_at=imported_at,captured_at=None,
++                                original_reference=expected,source_closure_sha256=SOURCE_SHA,
++                                reader_implementation_identity=manifest['reader_implementation_identity']),
++                natural_verified=False,**SAFETY)
++
++
++def import_hk_stage_observed(source_root, recorded_root, expected_original_reference):
++    """Copy a fully pinned original trio once, verify, and atomically commit.
++
++    Failures retain an unpublished pending directory for explicit inspection.
++    Existing committed files and source files are never overwritten or removed.
++    """
++    source=no_symlinks(Path(source_root));root=_root(recorded_root)
++    if source==root or source in root.parents or root in source.parents:
++        raise ValueError('M08_OBSERVED_ROOTS_MUST_BE_SEPARATE')
++    expected=_source_reference(expected_original_reference)
++    identity=_manifest(expected);import_sha=sha256_json(identity)
++    imports=no_symlinks(root/'imports');imports.mkdir(mode=0o700,exist_ok=True)
++    lock=os.open(root/'.import.lock',os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW|os.O_NONBLOCK,0o600)
++    try:
++        if not stat.S_ISREG(os.fstat(lock).st_mode):raise ValueError('M08_OBSERVED_IMPORT_LOCK')
++        fcntl.flock(lock,fcntl.LOCK_EX)
++        committed=no_symlinks(imports/import_sha)
++        if committed.exists():
++            receipt_raw=_read_file(committed,'receipt.json')
++            reference=_make_reference(import_sha,hashlib.sha256(receipt_raw).hexdigest(),expected)
++            return dict(read_hk_stage_observed(root,reference),reused=True)
++        _verify_owner(source,expected)
++        raw=_read_trio(source,expected)
++        pending=Path(tempfile.mkdtemp(prefix='pending-',dir=imports))
++        owner=pending/'owner'
++        for name,item in expected['trio'].items():_write_bytes(owner/item['relative_path'],raw[name])
++        _verify_owner(owner,expected)
++        if identity!=_manifest(expected):raise ValueError('M08_OBSERVED_CODE_CHANGED')
++        _write_bytes(pending/'import.json',canonical_bytes(identity))
++        receipt=dict(schema_version='v5.hk_stage_observed_receipt.v1',status='COMMITTED',
++                     import_sha256=import_sha,imported_at=datetime.now(timezone.utc).isoformat(),
++                     **OBSERVED,**SAFETY)
++        receipt_raw=canonical_bytes(receipt);_write_bytes(pending/'receipt.json',receipt_raw)
++        _sync_tree(pending)
++        os.rename(pending,committed)
++        fd=_open_directory(imports)
++        try:os.fsync(fd)
++        finally:os.close(fd)
++        reference=_make_reference(import_sha,hashlib.sha256(receipt_raw).hexdigest(),expected)
++        return dict(read_hk_stage_observed(root,reference),reused=False)
++    finally:os.close(lock)
++
++
++def main(argv=None):
++    parser=argparse.ArgumentParser(description='Observe exact saved HK results; never recompute')
++    parser.add_argument('action',nargs='?',choices=('init','prepare','import','read'))
++    parser.add_argument('--worker',action='store_true')
++    parser.add_argument('--root');parser.add_argument('--source-root');parser.add_argument('--inventory')
++    parser.add_argument('--run-id');parser.add_argument('--reference');parser.add_argument('--include-artifact',action='store_true')
++    args=parser.parse_args(argv)
++    if args.worker:
++        message=_json(sys.stdin.buffer.read(MAX_JSON_BYTES+1))
++        return _owner_worker(message['root'],message['reference'])
++    if args.action=='init':return dict(root=init_hk_observed_root(Path(args.root).absolute()))
++    if args.action=='prepare':
++        report=_read_cli_json(args.inventory)
++        entries=[v for v in report['stage_runs'] if v['run_id']==args.run_id]
++        if len(entries)!=1:raise ValueError('M08_OBSERVED_EXACT_INVENTORY_RUN_REQUIRED')
++        return prepare_hk_stage_observed_reference(Path(args.source_root).absolute(),entries[0],target_date=report['date'])
++    if args.action not in ('import','read') or not args.root or not args.reference:
++        parser.error('choose an action and provide its root/reference arguments')
++    reference=_read_cli_json(args.reference)
++    value=(import_hk_stage_observed(Path(args.source_root).absolute(),Path(args.root).absolute(),reference)
++           if args.action=='import' else read_hk_stage_observed(Path(args.root).absolute(),reference))
++    if args.include_artifact:return value
++    if args.action=='import':return value['reference']
++    return dict(reference=value['reference'],read_status=value['read_status'],
++                selection_status=value['artifact']['selection_status'],rows=len(value['artifact']['rows']),
++                imported_at=value['provenance']['imported_at'],**OBSERVED,**SAFETY)
++
++
++if __name__=='__main__':
++    try:print(canonical_bytes(main()).decode())
++    except Exception as error:
++        from v5_shadow.hk_stage_api import _public_string
++        print(canonical_bytes(dict(status='FAILED',reason=_public_string(type(error).__name__+':'+str(error)))).decode())
++        raise SystemExit(1)
+diff --git a/V5/src/v5_shadow/hk_stage_observed_api.py b/V5/src/v5_shadow/hk_stage_observed_api.py
+new file mode 100644
+--- /dev/null
++++ b/V5/src/v5_shadow/hk_stage_observed_api.py
+@@ -0,0 +1,42 @@
++"""Explicit observed-result publication through the existing read-only API."""
++import argparse
++from pathlib import Path
++from .digests import canonical_bytes, sha256_json
++from .hk_stage_api import _public_value
++from .hk_stage_observed import read_hk_stage_observed, _read_cli_json, STAGES
++from .module_artifacts import publish_generation
++
++ROUTE='/api/v5/hk-stage-observed'
++
++
++def publish_hk_stage_observed_response(config, recorded_root, reference, *, expected_generation):
++    if (not isinstance(config,dict) or config.get('module_id')!='hk_stage'
++            or not isinstance(config.get('routes'),list) or ROUTE not in config['routes']):
++        raise ValueError('M08_OBSERVED_API_CONFIG')
++    read=read_hk_stage_observed(recorded_root,reference)
++    payload=_public_value(read)
++    stage8=reference['stage_id']==STAGES[-1]
++    payload.update(schema_version='v5.hk_stage_observed_response.v1',
++                   status=read['artifact']['selection_status'],
++                   stage_group='HK_STAGE8_SEPARATE' if stage8 else 'HK_SEVEN_STAGE',
++                   m10_stage_member=not stage8)
++    record=dict(schema_version='v5.module_response.v1',module_id='hk_stage',release_id=config['release_id'],
++                path=ROUTE,query=dict(date=reference['target_date'],stage=reference['stage_id'],
++                                     run_id=reference['run_id'],import_sha256=reference['import_sha256']),
++                payload=payload,payload_sha256=sha256_json(payload),
++                source_input_sha256=reference['import_sha256'],data_kind='OWNER_RESULT',
++                generated_at=read['provenance']['imported_at'],status_code=200)
++    return publish_generation(config,[record],expected_generation=expected_generation)
++
++
++def main(argv=None):
++    parser=argparse.ArgumentParser(description='Publish a verified historical observed HK result')
++    parser.add_argument('--config',required=True);parser.add_argument('--root',required=True)
++    parser.add_argument('--reference',required=True);parser.add_argument('--expected-generation',required=True)
++    args=parser.parse_args(argv)
++    return publish_hk_stage_observed_response(_read_cli_json(args.config),Path(args.root).absolute(),
++        _read_cli_json(args.reference),
++        expected_generation=None if args.expected_generation=='NONE' else args.expected_generation)
++
++
++if __name__=='__main__':print(canonical_bytes(main()).decode())
+diff --git a/V5/tests/logs/M08_OBSERVED/REVIEW.md b/V5/tests/logs/M08_OBSERVED/REVIEW.md
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_OBSERVED/REVIEW.md
+@@ -0,0 +1,7 @@
++# Independent focused review
++
++No remaining blocking defects identified. Reviewed exact raw/canonical hashes, unchanged original-reader verification, byte-preserving import, atomic/idempotent commits, source-independent cold reads, public-only path redaction and failure-safe API publication.
++
++Fixed before final tests: CLI inventory/reference/config reads used unbounded following reads; now bounded fd-based regular-file/no-follow reads reject symlinks, FIFOs and oversized inputs. Import metadata comparison now distinguishes literal false from numeric zero. Original envelope identity and literal-false flags are explicitly checked in addition to the owner reader.
++
++Unknown capture time remains null; natural/PIT/formal/raw-input/recomputation flags remain false. Actual historical inputs and Mac execution are not claimed by these synthetic tests.
+diff --git a/V5/tests/logs/M08_OBSERVED/cli.stderr.log b/V5/tests/logs/M08_OBSERVED/cli.stderr.log
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_OBSERVED/cli.stderr.log
+@@ -0,0 +1,6 @@
++test_cli_prepare_import_read_and_publish_without_payload_stdout (test_hk_stage_observed.HKObservedTests.test_cli_prepare_import_read_and_publish_without_payload_stdout) ... ok
++
++----------------------------------------------------------------------
++Ran 1 test in 1.811s
++
++OK
+diff --git a/V5/tests/logs/M08_OBSERVED/cli.stdout.log b/V5/tests/logs/M08_OBSERVED/cli.stdout.log
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/logs/M08_OBSERVED/receipt.json b/V5/tests/logs/M08_OBSERVED/receipt.json
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_OBSERVED/receipt.json
+@@ -0,0 +1,70 @@
++{
++  "schema_version": "v5.m08.observed_test_receipt.v1",
++  "baseline_commit": "4053d4e89101b8d47861f48813686234dc063ba9",
++  "fixed_real_inventory_commit": "7aaf58b07daa70f3efb2554b82ee8195cb7a1185",
++  "result": "PASS_ENGINEERING_CANDIDATE",
++  "fixture_scope": "SYNTHETIC_ORIGINAL_OWNER_TRIOS_ONLY",
++  "targeted_tests": 21,
++  "additional_cli_repeat": 1,
++  "results": [
++    {
++      "command": [
++        "python",
++        "-B",
++        "-m",
++        "unittest",
++        "test_hk_stage_observed",
++        "-v"
++      ],
++      "environment": {
++        "PYTHONPATH": "V5/src:V5/tests"
++      },
++      "cwd": "handoffs/M08",
++      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
++      "started_at": "2026-10-12T19:46:18.570991+00:00",
++      "finished_at": "2026-10-12T19:46:45.528110+00:00",
++      "exit_code": 0,
++      "stdout_path": "targeted.stdout.log",
++      "stderr_path": "targeted.stderr.log"
++    },
++    {
++      "command": [
++        "python",
++        "-B",
++        "-m",
++        "unittest",
++        "test_hk_stage_observed.HKObservedTests.test_cli_prepare_import_read_and_publish_without_payload_stdout",
++        "-v"
++      ],
++      "environment": {
++        "PYTHONPATH": "V5/src:V5/tests"
++      },
++      "cwd": "handoffs/M08",
++      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
++      "started_at": "2026-10-12T19:46:45.528774+00:00",
++      "finished_at": "2026-10-12T19:46:47.559347+00:00",
++      "exit_code": 0,
++      "stdout_path": "cli.stdout.log",
++      "stderr_path": "cli.stderr.log"
++    }
++  ],
++  "runtime": {
++    "python": "3.12.14",
++    "pandas": "2.2.3",
++    "pyarrow": "NOT_INSTALLED",
++    "pytest": "NOT_INSTALLED"
++  },
++  "natural_verified": false,
++  "pit_verified": false,
++  "formal_admission": false,
++  "raw_input_verified": false,
++  "computation_replayed": false,
++  "not_run": [
++    "Previous 90 / combined124 tests deliberately not rerun",
++    "Mac observed-adapter tests",
++    "Actual historical trio copy/read with pinned V5 closure",
++    "Existing preview route/page deployment",
++    "Reconstruction or replay of original raw stage inputs",
++    "Natural/PIT/formal module acceptance"
++  ]
++}
+diff --git a/V5/tests/logs/M08_OBSERVED/targeted.stderr.log b/V5/tests/logs/M08_OBSERVED/targeted.stderr.log
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_OBSERVED/targeted.stderr.log
+@@ -0,0 +1,26 @@
++test_all_eight_stages_copy_exact_bytes_and_survive_source_removal (test_hk_stage_observed.HKObservedTests.test_all_eight_stages_copy_exact_bytes_and_survive_source_removal) ... ok
++test_cli_prepare_import_read_and_publish_without_payload_stdout (test_hk_stage_observed.HKObservedTests.test_cli_prepare_import_read_and_publish_without_payload_stdout) ... ok
++test_cli_reference_and_config_reject_symlinks_and_nonregular_files (test_hk_stage_observed.HKObservedTests.test_cli_reference_and_config_reject_symlinks_and_nonregular_files) ... ok
++test_cold_reader_rejects_each_changed_original_file (test_hk_stage_observed.HKObservedTests.test_cold_reader_rejects_each_changed_original_file) ... ok
++test_copied_owner_must_verify_before_commit (test_hk_stage_observed.HKObservedTests.test_copied_owner_must_verify_before_commit) ... ok
++test_exact_reference_and_import_receipt_tampering_fail (test_hk_stage_observed.HKObservedTests.test_exact_reference_and_import_receipt_tampering_fail) ... ok
++test_exact_retry_is_immutable_and_reuses_import_time (test_hk_stage_observed.HKObservedTests.test_exact_retry_is_immutable_and_reuses_import_time) ... ok
++test_failed_copy_never_commits_or_corrupts_previous_import (test_hk_stage_observed.HKObservedTests.test_failed_copy_never_commits_or_corrupts_previous_import) ... ok
++test_failed_publication_keeps_existing_generation (test_hk_stage_observed.HKObservedTests.test_failed_publication_keeps_existing_generation) ... ok
++test_http_cold_reads_observations_without_any_source_or_producer (test_hk_stage_observed.HKObservedTests.test_http_cold_reads_observations_without_any_source_or_producer) ... ok
++test_latest_pointers_are_never_consulted (test_hk_stage_observed.HKObservedTests.test_latest_pointers_are_never_consulted) ... ok
++test_marked_empty_distinct_destination_required (test_hk_stage_observed.HKObservedTests.test_marked_empty_distinct_destination_required) ... ok
++test_missing_canonical_fields_cannot_be_imported (test_hk_stage_observed.HKObservedTests.test_missing_canonical_fields_cannot_be_imported) ... ok
++test_observation_metadata_requires_literal_false (test_hk_stage_observed.HKObservedTests.test_observation_metadata_requires_literal_false) ... ok
++test_original_empty_and_cannot_confirm_remain_distinct (test_hk_stage_observed.HKObservedTests.test_original_empty_and_cannot_confirm_remain_distinct) ... ok
++test_pinned_raw_bytes_do_not_replace_original_reader_verification (test_hk_stage_observed.HKObservedTests.test_pinned_raw_bytes_do_not_replace_original_reader_verification) ... ok
++test_prepare_augments_inventory_with_original_canonical_hashes (test_hk_stage_observed.HKObservedTests.test_prepare_augments_inventory_with_original_canonical_hashes) ... ok
++test_rehashed_envelope_metadata_and_numeric_false_are_rejected (test_hk_stage_observed.HKObservedTests.test_rehashed_envelope_metadata_and_numeric_false_are_rejected) ... ok
++test_same_run_different_metadata_never_overwrites_previous_import (test_hk_stage_observed.HKObservedTests.test_same_run_different_metadata_never_overwrites_previous_import) ... ok
++test_source_missing_symlink_and_whitespace_tamper_are_rejected (test_hk_stage_observed.HKObservedTests.test_source_missing_symlink_and_whitespace_tamper_are_rejected) ... ok
++test_wrong_identity_digest_size_and_layout_are_rejected (test_hk_stage_observed.HKObservedTests.test_wrong_identity_digest_size_and_layout_are_rejected) ... ok
++
++----------------------------------------------------------------------
++Ran 21 tests in 26.748s
++
++OK
+diff --git a/V5/tests/logs/M08_OBSERVED/targeted.stdout.log b/V5/tests/logs/M08_OBSERVED/targeted.stdout.log
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/run_m08_acceptance.py b/V5/tests/run_m08_acceptance.py
+--- a/V5/tests/run_m08_acceptance.py
++++ b/V5/tests/run_m08_acceptance.py
+@@ -13,7 +13,7 @@
+ import os
+ 
+ ROOT=Path(__file__).resolve().parents[1]
+-PATTERNS=('test_hk_stage_daily.py','test_hk_stage_m06_adapter.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
++PATTERNS=('test_hk_stage_daily.py','test_hk_stage_m06_adapter.py','test_hk_stage_observed.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
+ 
+ 
+ def main():
+diff --git a/V5/tests/test_hk_stage_observed.py b/V5/tests/test_hk_stage_observed.py
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/test_hk_stage_observed.py
+@@ -0,0 +1,417 @@
++"""Synthetic original-owner trios only; no Mac data or market/PIT attestation."""
++import copy
++import importlib
++import json
++import os
++from pathlib import Path
++import shutil
++import subprocess
++import sys
++import tempfile
++import threading
++import unittest
++from unittest.mock import patch
++from urllib.error import HTTPError
++from urllib.parse import urlencode
++from urllib.request import urlopen
++
++from v5_shadow.digests import canonical_bytes, sha256_json
++from v5_shadow.module_api import _config, create_module_server, read_response
++
++STAGES = ('STAGE_0925', 'STAGE_0930_0935', 'STAGE_0935_0940', 'STAGE_0940_0945',
++          'STAGE_0945_1030', 'STAGE_1300_1315', 'STAGE_1445_1500', 'STAGE_1545_1555')
++ROUTE = '/api/v5/hk-stage-observed'
++FIXTURE_SCRIPT = r'''
++import hashlib, json, sys
++from pathlib import Path
++sys.path.insert(0, sys.argv[1])
++from v5_shadow.hk_stage_sources import load_owners
++from v5_shadow.digests import sha256_json
++selection, contracts, calendar = load_owners()
++root=Path(sys.argv[2]);store=selection.SelectionStore(root)
++stages=json.loads(sys.argv[3]);result=[]
++cases=[('20261008', stage, 10, 'PARTIAL_WITH_ROWS' if stage in stages[1:7] else 'READY',
++        ['SYNTHETIC_SOURCE_GAP'] if stage in stages[1:7] else []) for stage in stages]
++cases += [('20261009', stages[0], 0, 'READY_EMPTY', []),
++          ('20261009', stages[1], 0, 'CANNOT_CONFIRM', ['SYNTHETIC_SOURCE_MISSING'])]
++for date, stage, count, status, cannot in cases:
++    rows=[dict(code=f'HK.{i:05}',rank=i,auction_score=100-i,
++          reference_price_hkd=11,strict_failure_price_hkd=10.5,ask_price=11.1,bid_price=10.9,
++          second_filter_status='WATCH_ONLY',preselect_lane='D1_MODEL_TOP100',
++          candidate_lanes=['D1_MODEL_TOP100'],open_price=10,last_price=11,high_price=11,low_price=10,
++          pct_chg=10,volume_ratio=2,turnover_hkd=100000000,circular_market_cap_hkd_yi=20)
++          for i in range(1,count+1)]
++    kwargs=dict(source_status=status,requested_rows=count,missing_symbols=[],cannot_confirm=cannot,
++                source_evidence=['fixture_only=SYNTHETIC',
++                                 'active_snapshot_path=/Users/Private Person/source snapshot.json'])
++    raw_hash=sha256_json(dict(date=date,stage=stage,rows=rows,status=status))
++    if stage=='STAGE_0925':
++        artifact=selection.select_hk_0925_second_filter(rows,date,raw_hash,**kwargs)
++    else:
++        artifact=selection.select_hk_four_lane(rows,date,stage,raw_hash,**kwargs)
++    artifact=store.publish(artifact,market='HK_CONNECT')
++    verified=store._verify_run(date,stage,'HK_CONNECT',artifact['run_id'])
++    prefix=f"selection_runs/{date}/HK_CONNECT_SELECTION_{stage}/{artifact['run_id']}"
++    trio={}
++    for name in ('artifact.csv','manifest.json','receipt.json'):
++        path=root/prefix/name;raw=path.read_bytes()
++        trio[name]=dict(relative_path=f'{prefix}/{name}',sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw))
++    result.append(dict(date=date,stage=stage,run_id=artifact['run_id'],source_status=artifact['source_status'],
++                       rows=len(artifact['rows']),reader='ORIGINAL_SelectionStore._verify_run_PASS',trio=trio,
++                       canonical={k:verified[k] for k in ('artifact_sha256','manifest_sha256','receipt_sha256')},
++                       artifact=artifact))
++print(json.dumps(result))
++'''
++
++
++class HKObservedTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        cls.fixture_temp=tempfile.TemporaryDirectory()
++        cls.addClassCleanup(cls.fixture_temp.cleanup)
++        cls.fixture_root=Path(cls.fixture_temp.name)/'original'
++        cls.fixture_root.mkdir()
++        source=Path(__file__).resolve().parents[1]/'src'
++        proc=subprocess.run([sys.executable,'-I','-B','-c',FIXTURE_SCRIPT,str(source),
++                             str(cls.fixture_root),json.dumps(STAGES)],capture_output=True,text=True,timeout=30)
++        if proc.returncode:
++            raise AssertionError(proc.stderr)
++        cls.fixtures=json.loads(proc.stdout)
++
++    def setUp(self):
++        self.api=importlib.import_module('v5_shadow.hk_stage_observed')
++        self.publisher=importlib.import_module('v5_shadow.hk_stage_observed_api')
++        self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
++        self.base=Path(self.temp.name).resolve()
++        self.source=self.base/'original';shutil.copytree(self.fixture_root,self.source)
++        self.recorded=self.base/'recorded';self.api.init_hk_observed_root(self.recorded)
++
++    def inventory(self,index=0):
++        return {k:copy.deepcopy(v) for k,v in self.fixtures[index].items() if k not in ('canonical','artifact','date')}
++
++    def expected(self,index=0):
++        return self.api.prepare_hk_stage_observed_reference(self.source,self.inventory(index),
++                                                           target_date=self.fixtures[index]['date'])
++
++    def imported(self,index=0):
++        return self.api.import_hk_stage_observed(self.source,self.recorded,self.expected(index))
++
++    def files(self,root):
++        return {str(p.relative_to(root)):p.read_bytes() for p in root.rglob('*') if p.is_file()}
++
++    def committed_dirs(self):
++        imports=self.recorded/'imports'
++        return [p for p in imports.glob('*') if len(p.name)==64 and all(c in '0123456789abcdef' for c in p.name)]
++
++    def config(self):
++        responses=self.base/'responses';responses.mkdir()
++        (responses/'.v5-module-root').write_text('v5.module-root.v1:hk_stage\n')
++        return dict(schema_version='v5.module_api.v1',module_id='hk_stage',release_id='observed-test',
++                    data_root=str(responses),routes=[ROUTE])
++
++    def test_prepare_augments_inventory_with_original_canonical_hashes(self):
++        expected=self.expected()
++        self.assertEqual(expected['trio'],self.inventory()['trio'])
++        self.assertEqual(expected['market'],'HK_CONNECT')
++        for key,value in self.fixtures[0]['canonical'].items():
++            self.assertEqual(expected[key],value)
++        self.assertNotEqual(expected['manifest_sha256'],expected['trio']['manifest.json']['sha256'])
++        self.assertNotIn(str(self.source),json.dumps(expected))
++
++    def test_all_eight_stages_copy_exact_bytes_and_survive_source_removal(self):
++        before=self.files(self.source);results=[]
++        for index in range(8):
++            result=self.imported(index);results.append(result)
++            owner=self.recorded/'imports'/result['reference']['import_sha256']/'owner'
++            for info in self.inventory(index)['trio'].values():
++                self.assertEqual((owner/info['relative_path']).read_bytes(),(self.source/info['relative_path']).read_bytes())
++            self.assertFalse((owner/'selection_latest.json').exists())
++        self.assertEqual(self.files(self.source),before)
++        self.source.rename(self.base/'offline-original')
++        for index,result in enumerate(results):
++            read=self.api.read_hk_stage_observed(self.recorded,result['reference'])
++            self.assertEqual(read['artifact'],self.fixtures[index]['artifact'])
++            self.assertEqual(read['reference'],result['reference'])
++            self.assertEqual(read['read_status'],'VERIFIED')
++            self.assertEqual(read['provenance']['data_kind'],'OWNER_RESULT')
++            self.assertEqual(read['provenance']['evidence_mode'],'HISTORICAL')
++            self.assertEqual(read['provenance']['qualification'],'OBSERVED_ONLY')
++            self.assertIsNone(read['provenance']['captured_at'])
++            for flag in ('natural_verified','pit_verified','formal_admission','raw_input_verified','computation_replayed'):
++                self.assertIs(read['provenance'][flag],False)
++            for flag in ('production_allowed','buy_gate_updated','orders_sent'):
++                self.assertIs(read[flag],False)
++
++    def test_missing_canonical_fields_cannot_be_imported(self):
++        expected=self.expected();expected.pop('receipt_sha256')
++        with self.assertRaises(ValueError):
++            self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        self.assertEqual(self.committed_dirs(),[])
++
++    def test_wrong_identity_digest_size_and_layout_are_rejected(self):
++        expected=self.expected()
++        mutations=[lambda r:r.update(market='A_SHARE'),lambda r:r.update(target_date='20261009'),
++                   lambda r:r.update(stage_id=STAGES[1]),lambda r:r.update(run_id='run-wrong'),
++                   lambda r:r.update(manifest_sha256='f'*64),
++                   lambda r:r['trio']['artifact.csv'].update(sha256='f'*64),
++                   lambda r:r['trio']['artifact.csv'].update(bytes=1),
++                   lambda r:r['trio']['artifact.csv'].update(relative_path='../artifact.csv')]
++        for mutation in mutations:
++            with self.subTest(mutation=mutation):
++                bad=copy.deepcopy(expected);mutation(bad)
++                with self.assertRaises((ValueError,OSError)):
++                    self.api.import_hk_stage_observed(self.source,self.recorded,bad)
++                self.assertEqual(self.committed_dirs(),[])
++
++    def test_source_missing_symlink_and_whitespace_tamper_are_rejected(self):
++        expected=self.expected();path=self.source/expected['trio']['manifest.json']['relative_path']
++        raw=path.read_bytes();path.write_bytes(raw+b' ')
++        with self.assertRaisesRegex(ValueError,'BYTES'):
++            self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        path.write_bytes(raw);other=self.base/'saved-manifest.json';path.rename(other);path.symlink_to(other)
++        with self.assertRaises((ValueError,OSError)):
++            self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        path.unlink()
++        with self.assertRaises((ValueError,OSError)):
++            self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        self.assertEqual(self.committed_dirs(),[])
++
++    def test_pinned_raw_bytes_do_not_replace_original_reader_verification(self):
++        entry=self.inventory();path=self.source/entry['trio']['receipt.json']['relative_path']
++        value=json.loads(path.read_bytes());value['row_count']=999
++        raw=canonical_bytes(value);path.write_bytes(raw)
++        import hashlib
++        entry['trio']['receipt.json'].update(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw))
++        with self.assertRaisesRegex(ValueError,'row_count'):
++            self.api.prepare_hk_stage_observed_reference(self.source,entry,target_date='20261008')
++
++    def test_marked_empty_distinct_destination_required(self):
++        dirty=self.base/'dirty';dirty.mkdir();(dirty/'keep').write_text('existing')
++        with self.assertRaises(ValueError):self.api.init_hk_observed_root(dirty)
++        alias=self.base/'alias';alias.symlink_to(self.recorded,target_is_directory=True)
++        with self.assertRaises((ValueError,OSError)):self.api.read_hk_stage_observed(alias,{})
++        with self.assertRaises(ValueError):
++            self.api.import_hk_stage_observed(self.source,self.source,self.expected())
++        unmarked=self.base/'unmarked';unmarked.mkdir()
++        with self.assertRaises((ValueError,OSError)):
++            self.api.import_hk_stage_observed(self.source,unmarked,self.expected())
++        self.assertEqual((dirty/'keep').read_text(),'existing')
++
++    def test_latest_pointers_are_never_consulted(self):
++        expected=self.expected(1)
++        (self.source/'selection_latest.json').write_text('not json')
++        result=self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        owner=self.recorded/'imports'/result['reference']['import_sha256']/'owner'
++        (owner/'selection_latest.json').write_text('also not json')
++        read=self.api.read_hk_stage_observed(self.recorded,result['reference'])
++        self.assertEqual(read['artifact'],self.fixtures[1]['artifact'])
++        self.assertEqual(read['artifact']['selection_status'],'PARTIAL_WITH_ROWS')
++        self.assertIn('SYNTHETIC_SOURCE_GAP',read['artifact']['cannot_confirm'])
++
++    def test_rehashed_envelope_metadata_and_numeric_false_are_rejected(self):
++        import hashlib
++        entry=self.inventory()
++        manifest_path=self.source/entry['trio']['manifest.json']['relative_path']
++        receipt_path=self.source/entry['trio']['receipt.json']['relative_path']
++        saved_manifest=manifest_path.read_bytes();saved_receipt=receipt_path.read_bytes()
++        mutations=[lambda a:a.update(market='A_SHARE'),lambda a:a.update(trade_date='20261009'),
++                   lambda a:a.update(stage_id=STAGES[1]),lambda a:a.update(production_allowed=0),
++                   lambda a:a.update(selection_status='CANNOT_CONFIRM'),lambda a:a.update(source_status='LIVE')]
++        for mutate in mutations:
++            with self.subTest(mutation=mutate):
++                manifest=json.loads(saved_manifest);receipt=json.loads(saved_receipt)
++                mutate(manifest['selection_envelope']);receipt['manifest_sha256']=sha256_json(manifest)
++                changed=copy.deepcopy(entry)
++                for name,value in (('manifest.json',manifest),('receipt.json',receipt)):
++                    raw=canonical_bytes(value)+b'\n';(self.source/entry['trio'][name]['relative_path']).write_bytes(raw)
++                    changed['trio'][name].update(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw))
++                with self.assertRaises(ValueError):
++                    self.api.prepare_hk_stage_observed_reference(self.source,changed,target_date='20261008')
++                manifest_path.write_bytes(saved_manifest);receipt_path.write_bytes(saved_receipt)
++
++    def test_exact_retry_is_immutable_and_reuses_import_time(self):
++        first=self.imported();before=self.files(self.recorded)
++        mtimes={str(p):p.stat().st_mtime_ns for p in self.recorded.rglob('*') if p.is_file()}
++        second=self.imported()
++        self.assertTrue(second['reused']);self.assertFalse(first['reused'])
++        self.assertEqual(first['reference'],second['reference'])
++        self.assertEqual(first['provenance']['imported_at'],second['provenance']['imported_at'])
++        self.assertEqual(self.files(self.recorded),before)
++        self.assertEqual(mtimes,{str(p):p.stat().st_mtime_ns for p in self.recorded.rglob('*') if p.is_file()})
++
++    def test_same_run_different_metadata_never_overwrites_previous_import(self):
++        first=self.imported();before=self.files(self.recorded)
++        entry=self.inventory();manifest_path=self.source/entry['trio']['manifest.json']['relative_path']
++        receipt_path=self.source/entry['trio']['receipt.json']['relative_path']
++        manifest=json.loads(manifest_path.read_bytes());receipt=json.loads(receipt_path.read_bytes())
++        manifest['selection_envelope']['source_evidence'].append('new_observation=separate')
++        receipt['manifest_sha256']=sha256_json(manifest)
++        import hashlib
++        for name,value in (('manifest.json',manifest),('receipt.json',receipt)):
++            raw=canonical_bytes(value)+b'\n';(self.source/entry['trio'][name]['relative_path']).write_bytes(raw)
++            entry['trio'][name].update(sha256=hashlib.sha256(raw).hexdigest(),bytes=len(raw))
++        expected=self.api.prepare_hk_stage_observed_reference(self.source,entry,target_date='20261008')
++        second=self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        self.assertNotEqual(first['reference']['import_sha256'],second['reference']['import_sha256'])
++        self.assertEqual(first['reference']['run_id'],second['reference']['run_id'])
++        for name,raw in before.items():self.assertEqual((self.recorded/name).read_bytes(),raw)
++        self.assertEqual(self.api.read_hk_stage_observed(self.recorded,first['reference'])['artifact'],self.fixtures[0]['artifact'])
++
++    def test_failed_copy_never_commits_or_corrupts_previous_import(self):
++        first=self.imported();before=self.files(self.recorded);expected=self.expected(1)
++        original=self.api._write_bytes
++        def fail_manifest(path,raw):
++            if Path(path).name=='manifest.json':raise OSError('INJECTED_COPY_FAILURE')
++            return original(path,raw)
++        with patch.object(self.api,'_write_bytes',side_effect=fail_manifest):
++            with self.assertRaisesRegex(OSError,'INJECTED_COPY_FAILURE'):
++                self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        self.assertEqual(len(self.committed_dirs()),1)
++        for name,raw in before.items():self.assertEqual((self.recorded/name).read_bytes(),raw)
++        self.assertEqual(self.api.read_hk_stage_observed(self.recorded,first['reference'])['read_status'],'VERIFIED')
++
++    def test_copied_owner_must_verify_before_commit(self):
++        expected=self.expected();original=self.api._verify_owner;calls=[]
++        def fail_copy(root,ref):
++            calls.append(str(root))
++            if Path(root)!=self.source:raise ValueError('INJECTED_COPIED_OWNER_FAILURE')
++            return original(root,ref)
++        with patch.object(self.api,'_verify_owner',side_effect=fail_copy):
++            with self.assertRaisesRegex(ValueError,'INJECTED_COPIED_OWNER_FAILURE'):
++                self.api.import_hk_stage_observed(self.source,self.recorded,expected)
++        self.assertEqual(len(calls),2);self.assertEqual(self.committed_dirs(),[])
++
++    def test_cold_reader_rejects_each_changed_original_file(self):
++        result=self.imported();ref=result['reference'];owner=self.recorded/'imports'/ref['import_sha256']/'owner'
++        for info in self.inventory()['trio'].values():
++            path=owner/info['relative_path'];raw=path.read_bytes();path.write_bytes(raw+b' ')
++            with self.assertRaisesRegex(ValueError,'BYTES'):
++                self.api.read_hk_stage_observed(self.recorded,ref)
++            path.write_bytes(raw)
++
++    def test_exact_reference_and_import_receipt_tampering_fail(self):
++        result=self.imported();ref=result['reference']
++        for key in ('import_sha256','import_receipt_sha256','run_id','target_date'):
++            bad=copy.deepcopy(ref);bad[key]='f'*64 if key.endswith('sha256') else ('run-wrong' if key=='run_id' else '20261009')
++            with self.assertRaises((ValueError,OSError)):self.api.read_hk_stage_observed(self.recorded,bad)
++        receipt=self.recorded/'imports'/ref['import_sha256']/'receipt.json';receipt.write_bytes(receipt.read_bytes()+b' ')
++        with self.assertRaises(ValueError):self.api.read_hk_stage_observed(self.recorded,ref)
++
++    def test_original_empty_and_cannot_confirm_remain_distinct(self):
++        for index in (8,9):
++            result=self.imported(index)
++            self.assertEqual(result['artifact']['selection_status'],self.fixtures[index]['artifact']['selection_status'])
++            self.assertEqual(result['artifact']['cannot_confirm'],self.fixtures[index]['artifact']['cannot_confirm'])
++
++    def test_http_cold_reads_observations_without_any_source_or_producer(self):
++        config=self.config();published=[];generation=None
++        for index in (0,1,7):
++            result=self.imported(index);ref=result['reference']
++            generation=self.publisher.publish_hk_stage_observed_response(config,self.recorded,ref,expected_generation=generation)['generation_sha256']
++            query=dict(date=ref['target_date'],stage=ref['stage_id'],run_id=ref['run_id'],import_sha256=ref['import_sha256'])
++            checked,fd=_config(config)
++            try:record,_=read_response(checked,fd,ROUTE,query)
++            finally:os.close(fd)
++            self.assertEqual(record['data_kind'],'OWNER_RESULT')
++            self.assertEqual(record['generated_at'],result['provenance']['imported_at'])
++            payload=record['payload'];self.assertNotIn('/Users/',json.dumps(payload))
++            self.assertEqual(payload['artifact']['rows'],result['artifact']['rows'])
++            self.assertEqual(payload['reference'],ref)
++            self.assertEqual(payload['m10_stage_member'],index!=7)
++            self.assertEqual(payload['provenance']['qualification'],'OBSERVED_ONLY')
++            published.append((query,payload))
++        self.source.rename(self.base/'source-offline');self.recorded.rename(self.base/'recorded-offline')
++        before=self.files(Path(config['data_root']))
++        server=create_module_server(config);thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
++        try:
++            base='http://127.0.0.1:'+str(server.server_address[1])
++            for query,payload in published+list(reversed(published)):
++                with urlopen(base+ROUTE+'?'+urlencode(query),timeout=3) as response:
++                    self.assertEqual(json.load(response),payload)
++            with self.assertRaises(HTTPError) as missing:
++                urlopen(base+ROUTE+'?date=20261008',timeout=3)
++            missing.exception.close();self.assertEqual(missing.exception.code,503)
++        finally:server.shutdown();server.server_close();thread.join(timeout=5)
++        self.assertEqual(self.files(Path(config['data_root'])),before)
++        script="""
++import json,os,sys
++from v5_shadow.module_api import _config,read_response
++v=json.loads(sys.stdin.read());c,fd=_config(v['config'])
++try: r,_=read_response(c,fd,v['route'],v['query'])
++finally:os.close(fd)
++assert 'v5_shadow.hk_stage_daily' not in sys.modules
++assert 'v5_shadow.hk_stage_observed' not in sys.modules
++print(r['data_kind'])
++"""
++        proc=subprocess.run([sys.executable,'-B','-c',script],input=json.dumps(dict(config=config,route=ROUTE,query=published[0][0])),text=True,capture_output=True,timeout=10)
++        self.assertEqual(proc.returncode,0,proc.stderr);self.assertEqual(proc.stdout.strip(),'OWNER_RESULT')
++
++    def test_cli_reference_and_config_reject_symlinks_and_nonregular_files(self):
++        result=self.imported();reference_file=self.base/'reference.json'
++        reference_file.write_bytes(canonical_bytes(result['reference']))
++        config=self.config();config_file=self.base/'config.json';config_file.write_bytes(canonical_bytes(config))
++        reference_link=self.base/'reference-link.json';reference_link.symlink_to(reference_file)
++        config_link=self.base/'config-link.json';config_link.symlink_to(config_file)
++        inventory_file=self.base/'inventory.json';inventory_file.write_bytes(canonical_bytes(dict(date='20261008',stage_runs=[self.inventory()])))
++        inventory_link=self.base/'inventory-link.json';inventory_link.symlink_to(inventory_file)
++        commands=[['v5_shadow.hk_stage_observed','prepare','--source-root',str(self.source),'--inventory',str(inventory_link),'--run-id',self.inventory()['run_id']],
++                  ['v5_shadow.hk_stage_observed','read','--root',str(self.recorded),'--reference',str(reference_link)],
++                  ['v5_shadow.hk_stage_observed_api','--config',str(config_link),'--root',str(self.recorded),
++                   '--reference',str(reference_file),'--expected-generation','NONE']]
++        fifo=self.base/'reference-fifo';os.mkfifo(fifo)
++        commands.append(['v5_shadow.hk_stage_observed','read','--root',str(self.recorded),'--reference',str(fifo)])
++        for command in commands:
++            with self.subTest(command=command):
++                proc=subprocess.run([sys.executable,'-B','-m',*command],capture_output=True,text=True,timeout=5)
++                self.assertNotEqual(proc.returncode,0,proc.stdout)
++
++    def test_observation_metadata_requires_literal_false(self):
++        result=self.imported();ref=result['reference']
++        path=self.recorded/'imports'/ref['import_sha256']/'receipt.json'
++        receipt=json.loads(path.read_bytes());receipt['natural_verified']=0
++        raw=canonical_bytes(receipt);path.write_bytes(raw)
++        import hashlib
++        changed=dict(ref,import_receipt_sha256=hashlib.sha256(raw).hexdigest())
++        with self.assertRaises(ValueError):self.api.read_hk_stage_observed(self.recorded,changed)
++
++    def test_cli_prepare_import_read_and_publish_without_payload_stdout(self):
++        root=self.base/'cli-recorded'
++        def command(module,*arguments):
++            proc=subprocess.run([sys.executable,'-B','-m',module,*map(str,arguments)],
++                                text=True,capture_output=True,timeout=15)
++            self.assertEqual(proc.returncode,0,proc.stdout+proc.stderr)
++            return json.loads(proc.stdout)
++        module='v5_shadow.hk_stage_observed'
++        command(module,'init','--root',root)
++        inventory=self.base/'inventory.json'
++        inventory.write_bytes(canonical_bytes(dict(date='20261008',stage_runs=[self.inventory(1)])))
++        expected=command(module,'prepare','--source-root',self.source,'--inventory',inventory,
++                         '--run-id',self.inventory(1)['run_id'])
++        expected_file=self.base/'expected.json';expected_file.write_bytes(canonical_bytes(expected))
++        reference=command(module,'import','--source-root',self.source,'--root',root,'--reference',expected_file)
++        reference_file=self.base/'cli-reference.json';reference_file.write_bytes(canonical_bytes(reference))
++        self.source.rename(self.base/'original-offline')
++        summary=command(module,'read','--root',root,'--reference',reference_file)
++        self.assertNotIn('artifact',summary);self.assertNotIn('/Users/',json.dumps(summary))
++        self.assertEqual(summary['reference'],reference);self.assertEqual(summary['rows'],10)
++        self.assertEqual(summary['selection_status'],'PARTIAL_WITH_ROWS')
++        self.assertEqual(summary['qualification'],'OBSERVED_ONLY')
++        config=self.config();config_file=self.base/'api.json';config_file.write_bytes(canonical_bytes(config))
++        published=command('v5_shadow.hk_stage_observed_api','--config',config_file,'--root',root,
++                          '--reference',reference_file,'--expected-generation','NONE')
++        self.assertRegex(published['generation_sha256'],r'^[0-9a-f]{64}$')
++
++    def test_failed_publication_keeps_existing_generation(self):
++        config=self.config();first=self.imported();ref=first['reference']
++        result=self.publisher.publish_hk_stage_observed_response(config,self.recorded,ref,expected_generation=None)
++        active=Path(config['data_root'])/'active.json';before=active.read_bytes()
++        with self.assertRaisesRegex(ValueError,'GENERATION_CONFLICT'):
++            self.publisher.publish_hk_stage_observed_response(config,self.recorded,ref,expected_generation=None)
++        self.assertEqual(active.read_bytes(),before)
++        receipt=self.recorded/'imports'/ref['import_sha256']/'receipt.json';receipt.write_text('{}')
++        with self.assertRaises(ValueError):
++            self.publisher.publish_hk_stage_observed_response(config,self.recorded,ref,expected_generation=result['generation_sha256'])
++        self.assertEqual(active.read_bytes(),before)
++
++
++if __name__=='__main__':unittest.main()

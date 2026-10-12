@@ -1,0 +1,70 @@
+{
+  "schema_version": "v5.m08.observed_test_receipt.v1",
+  "baseline_commit": "4053d4e89101b8d47861f48813686234dc063ba9",
+  "fixed_real_inventory_commit": "7aaf58b07daa70f3efb2554b82ee8195cb7a1185",
+  "result": "PASS_ENGINEERING_CANDIDATE",
+  "fixture_scope": "SYNTHETIC_ORIGINAL_OWNER_TRIOS_ONLY",
+  "targeted_tests": 21,
+  "additional_cli_repeat": 1,
+  "results": [
+    {
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "test_hk_stage_observed",
+        "-v"
+      ],
+      "environment": {
+        "PYTHONPATH": "V5/src:V5/tests"
+      },
+      "cwd": "handoffs/M08",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "started_at": "2026-10-12T19:46:18.570991+00:00",
+      "finished_at": "2026-10-12T19:46:45.528110+00:00",
+      "exit_code": 0,
+      "stdout_path": "targeted.stdout.log",
+      "stderr_path": "targeted.stderr.log"
+    },
+    {
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "test_hk_stage_observed.HKObservedTests.test_cli_prepare_import_read_and_publish_without_payload_stdout",
+        "-v"
+      ],
+      "environment": {
+        "PYTHONPATH": "V5/src:V5/tests"
+      },
+      "cwd": "handoffs/M08",
+      "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+      "started_at": "2026-10-12T19:46:45.528774+00:00",
+      "finished_at": "2026-10-12T19:46:47.559347+00:00",
+      "exit_code": 0,
+      "stdout_path": "cli.stdout.log",
+      "stderr_path": "cli.stderr.log"
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "pyarrow": "NOT_INSTALLED",
+    "pytest": "NOT_INSTALLED"
+  },
+  "natural_verified": false,
+  "pit_verified": false,
+  "formal_admission": false,
+  "raw_input_verified": false,
+  "computation_replayed": false,
+  "not_run": [
+    "Previous 90 / combined124 tests deliberately not rerun",
+    "Mac observed-adapter tests",
+    "Actual historical trio copy/read with pinned V5 closure",
+    "Existing preview route/page deployment",
+    "Reconstruction or replay of original raw stage inputs",
+    "Natural/PIT/formal module acceptance"
+  ]
+}

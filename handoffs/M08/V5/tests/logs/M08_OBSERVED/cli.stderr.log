@@ -1,0 +1,6 @@
+test_cli_prepare_import_read_and_publish_without_payload_stdout (test_hk_stage_observed.HKObservedTests.test_cli_prepare_import_read_and_publish_without_payload_stdout) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.811s
+
+OK

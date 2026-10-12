@@ -13,7 +13,7 @@ import sys
 import os
 
 ROOT=Path(__file__).resolve().parents[1]
-PATTERNS=('test_hk_stage_daily.py','test_hk_stage_m06_adapter.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
+PATTERNS=('test_hk_stage_daily.py','test_hk_stage_m06_adapter.py','test_hk_stage_observed.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
 
 
 def main():

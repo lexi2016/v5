@@ -1,5 +1,11 @@
 # V5 M08｜港股阶段选股
 
+## 2026-10-12 原已保存结果独立只读增量
+
+原 SelectionStore 已保存三件可按固定原字节 SHA/长度搬入独立 V5 私有 recorded root，再用仓库内冻结原 reader 精确 run 冷读；移走旧源不影响读，GET 只读已发布响应。入口与命令见 [M08_HK_OBSERVED.md](V5/docs/M08_HK_OBSERVED.md)，SHA 与正反补丁见 [独立增量交付](delivery/M08_OBSERVED_20261012/)。这是 OWNER_RESULT / HISTORICAL / OBSERVED_ONLY，不重新执行算法，不把历史输出当原行情输入，natural/PIT/formal 均为 false。
+
+基于 `4053d4e89101b8d47861f48813686234dc063ba9` 保留全部 Mac 反馈：前一 M06 适配 13+3 项以及 10/12 原池 100 行真实 mapping-only 均通过。本次历史观察新增 21 项隔离测试通过，原 90 项未重跑；真实三件迁移与页面部署仍待 Mac 验证。M06/producer 原有实现和身份函数不改。
+
 ## 2026-10-12 M06 原映射接线增量
 
 在 Mac 固定反馈 `bfdb43fd3ac40f2134635e53bec22619fbaf9f97` 后补齐 M06 原冷读结果的字段适配：保留原行，直接消费 `symbol / pool_rank / pool_score`，不再错误要求 pool 的 `preselect_lane`，不生成阶段 lane。新增本地 JSON 适配命令、原 owner/store/冷读正负测试，见 [M08_M06_ADAPTER.md](V5/docs/M08_M06_ADAPTER.md) 和 [增量交付 SHA/正反补丁](delivery/M08_M06_ADAPTER_20261012/)。
