@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import SourceBundleStatus from '../components/SourceBundleStatus.vue';
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchEffect } from 'vue';
 import { M18SavedClient, SavedRunSession, type SavedEntry, type SavedRunState, chooseSection, REBOUND_GROUPS, type ReboundGroup } from '../api/m18SavedResult';
 import { renderSavedUsMappingMatches } from '../manager-selection/usMappingCoverage';
@@ -54,6 +55,7 @@ onBeforeUnmount(()=>session.close());
    <button type="button" disabled>研报决策台 · 未接入</button>
   </nav>
   <p class="navigation-status">当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+  <SourceBundleStatus />
   <p v-if="state.phase==='LOADING'" class="task-message" role="status" aria-live="polite">正在读取同一运行的有界数据页…</p>
   <p v-if="state.phase==='CANNOT_CONFIRM'" class="task-message task-error" role="alert">CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。{{ state.error }}</p>
   <details v-if="state.descriptor" class="task-status-view saved-identity" aria-label="结果身份">

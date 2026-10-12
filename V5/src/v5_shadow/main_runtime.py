@@ -73,9 +73,13 @@ def tick(config):
     from .daily_tick import tick as daily_tick
     return daily_tick(config['daily'])
 
+def source_bundle(config):
+    from .source_bundle import run_config
+    return run_config(config.get('source_bundle', {'enabled': False}))
+
 def main(argv=None):
-    p=argparse.ArgumentParser();p.add_argument('command',choices=('validate','start','status','stop','tick'));p.add_argument('--config',required=True)
+    p=argparse.ArgumentParser();p.add_argument('command',choices=('validate','start','status','stop','tick','source-bundle'));p.add_argument('--config',required=True)
     a=p.parse_args(argv);c=load_config(a.config)
-    print(canonical_bytes({'validate':validate_config,'start':start,'status':status,'stop':stop,'tick':tick}[a.command](c)).decode())
+    print(canonical_bytes({'validate':validate_config,'start':start,'status':status,'stop':stop,'tick':tick,'source-bundle':source_bundle}[a.command](c)).decode())
 
 if __name__=='__main__': main()

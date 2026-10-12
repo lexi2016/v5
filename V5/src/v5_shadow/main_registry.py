@@ -2,6 +2,7 @@
 
 This layer only declares integration ownership. It does not execute strategies.
 Missing runtime adapters remain NOT_READY instead of being silently skipped.
+READY denotes a callable adapter, never verified current-day business inputs.
 """
 from dataclasses import dataclass
 from typing import Callable, Mapping
@@ -18,11 +19,11 @@ class ModuleRegistration:
 
 # Stable P0 registration order. Lane != module identity.
 MODULE_REGISTRY: tuple[ModuleRegistration, ...] = (
-    ModuleRegistration("M01_A_MARKET", "a_market", "daily_owner_adapters", "NOT_READY"),
-    ModuleRegistration("M02_HK_MARKET", "hk_membership", "daily_owner_adapters", "NOT_READY"),
-    ModuleRegistration("M03_US_MARKET", "us_mapping", "daily_owner_adapters", "READY"),
+    ModuleRegistration("M01_A_MARKET", "m01_a_source", "source_bundle", "READY"),
+    ModuleRegistration("M02_HK_MARKET", "m02_hk_source", "source_bundle", "READY"),
+    ModuleRegistration("M03_US_MARKET", "m03_us_source", "source_bundle", "READY"),
     ModuleRegistration("M04_RESEARCH_ARCHIVE", "research_archive", "daily_owner_adapters", "NOT_READY"),
-    ModuleRegistration("M05_A_PRESELECTION", "a_preselection", "daily_owner_adapters", "READY"),
+    ModuleRegistration("M05_A_PRESELECTION", "m05_a_preselection", "source_bundle", "READY"),
     ModuleRegistration("M06_HK_PRESELECTION", "hk_preselection", "daily_owner_adapters", "READY"),
     ModuleRegistration("M07_A_STAGE", "a_stage", "daily_owner_adapters", "READY"),
     ModuleRegistration("M08_HK_STAGE", "hk_stage", "daily_owner_adapters", "NOT_READY"),
