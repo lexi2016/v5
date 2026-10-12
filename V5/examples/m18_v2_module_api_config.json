@@ -1,0 +1,10 @@
+{
+  "schema_version": "v5.module_api.v1",
+  "module_id": "manager",
+  "release_id": "m18-v2-readonly",
+  "data_root": "/ABSOLUTE/PATH/TO/PUBLISHED/MODULE_ROOT",
+  "routes": [
+    "/api/v4/manager/m18/v2",
+    "/api/v4/manager/m18/v2/pages"
+  ]
+}
