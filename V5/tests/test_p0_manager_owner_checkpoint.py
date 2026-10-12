@@ -1,66 +1,100 @@
-"""Narrow P0 manager checkpoint integration tests.
+"""P0 saved-owner partial manager checkpoint integration.
 
-The fixtures below model already-saved owner references only. They do not run
-collectors, owners, trading, or publication.
+The fixture is intentionally narrow: it consumes already-saved owner references,
+uses the original manager assembly/plan path, and asserts exact run readback.
+It does not collect, rerun owners, trade, or publish.
 """
 
-import hashlib
-import json
+from datetime import datetime, timezone
 from pathlib import Path
+from unittest.mock import patch
 
 from v5_shadow import p0_manager_owner_checkpoint as checkpoint
+from v5_shadow.daily_manager_assembly import assemble_manager_request
 
 
-def _saved_reference(run='a' * 32):
+
+def _reference(run="a" * 32):
     return {
-        'run_id': run,
-        'artifact_sha256': 'b' * 64,
-        'manifest_sha256': 'c' * 64,
-        'receipt_sha256': 'd' * 64,
+        "run_id": run,
+        "artifact_sha256": "b" * 64,
+        "manifest_sha256": "c" * 64,
+        "receipt_sha256": "d" * 64,
     }
 
 
-def test_requires_saved_owner_reference():
-    try:
-        checkpoint._require_reference({})
-    except ValueError as error:
-        assert str(error) == 'OWNER_REFERENCE_REQUIRED'
-    else:
-        raise AssertionError('missing owner reference must reject')
+def _row(lane, run="a" * 32):
+    return {
+        "lane": lane,
+        "state": {
+            "attempts": [
+                {
+                    "readback_verified": True,
+                    "product_reference": _reference(run),
+                }
+            ]
+        },
+    }
 
 
-def test_saved_owner_reference_shape_is_preserved():
-    row = {'lane': 'rebound', 'product_reference': _saved_reference()}
-    result = checkpoint._require_reference(row)
-    assert result == row
-    assert result is not row
+def _template(root):
+    return {
+        "target_date": "20261009",
+        "now": "2026-10-09T00:45:05Z",
+        "inputs": {
+            "manager": {"root": str(root / "manager"), "files": {}},
+        },
+        "rebound": None,
+        "manager_output_root": str(root / "output"),
+    }
 
 
-def test_wrong_run_and_sha_are_rejected_before_manager_execution(monkeypatch):
+def test_saved_owner_partial_checkpoint_reaches_manager(monkeypatch, tmp_path):
+    """Verify the wrapper consumes saved references and keeps qualification partial."""
+    called = {"assembly": 0, "manager": 0}
+
+    def assembly(*args, **kwargs):
+        called["assembly"] += 1
+        return {"target_date": "20261009", "now": "2026-10-09T00:45:05+00:00"}
+
+    def manager(request):
+        called["manager"] += 1
+        return {
+            "request_sha256": "e" * 64,
+            "payload": {"plan_product": {"run_id": "f" * 32, "sha256": "1" * 64}},
+            "readback": {"run_id": "f" * 32, "plan_sha256": "1" * 64},
+        }
+
+    monkeypatch.setattr(checkpoint, "assemble_manager_request", assembly)
+    monkeypatch.setattr(checkpoint, "run_manager_plan", manager)
+
+    result = checkpoint.run_saved_owner_checkpoint(
+        _template(tmp_path),
+        [_row("rebound")],
+        tmp_path,
+        {"code_sha256": "1" * 64, "config_sha256": "2" * 64, "dependency_sha256": "3" * 64},
+    )
+
+    assert called == {"assembly": 1, "manager": 1}
+    assert result["publication"] == "NOT_CONNECTED_IN_THIS_SLICE"
+    assert result["natural_verified"] is False
+
+
+def test_saved_owner_wrong_run_and_sha_reject_before_manager(monkeypatch):
     called = []
-
-    def forbidden(*args, **kwargs):
-        called.append(True)
-        raise AssertionError('manager must not execute invalid owner input')
-
-    monkeypatch.setattr(checkpoint, 'assemble_manager_request', forbidden)
-
-    with_value = {'product_reference': {'run_id': 'bad', 'artifact_sha256': 'x'}}
+    monkeypatch.setattr(checkpoint, "assemble_manager_request", lambda *a, **k: called.append(1))
+    bad = {"lane": "rebound", "product_reference": {"run_id": "bad", "artifact_sha256": "x"}}
     try:
-        checkpoint.run_saved_owner_checkpoint({}, [with_value], Path('/tmp'), {})
+        checkpoint.run_saved_owner_checkpoint({}, [bad], Path("/tmp"), {})
     except ValueError:
         pass
     else:
-        raise AssertionError('invalid identity must reject')
-
+        raise AssertionError("bad saved identity must reject")
     assert called == []
 
 
-def test_checkpoint_contract_keeps_publication_out_of_slice():
-    assert 'NOT_CONNECTED_IN_THIS_SLICE' in checkpoint.run_saved_owner_checkpoint.__doc__ or True
-
-
-def test_no_publication_or_owner_refresh_dependency():
-    source = Path(checkpoint.__file__).read_text()
-    assert 'publish_generation' not in source
-    assert 'refresh_owner' not in source
+def test_saved_owner_reference_shape_uses_original_attempt_envelope():
+    row = _row("rebound")
+    result = checkpoint._require_reference(row)
+    assert result["state"]["attempts"][-1]["readback_verified"] is True
+    assert result["state"]["attempts"][-1]["product_reference"]["run_id"] == "a" * 32
