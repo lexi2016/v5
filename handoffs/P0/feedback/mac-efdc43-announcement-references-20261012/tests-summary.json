@@ -1,0 +1,30 @@
+{
+  "vue": {
+    "started_utc": "2026-10-12T11:55:22.913260+00:00",
+    "ended_utc": "2026-10-12T11:55:23.774019+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vitest/vitest.mjs run src/views/SavedManagerResultView.spec.ts"
+  },
+  "test-p0": {
+    "started_utc": "2026-10-12T11:55:23.774370+00:00",
+    "ended_utc": "2026-10-12T11:55:23.954353+00:00",
+    "exit": 0,
+    "command": "<existing-npm> run test:p0"
+  },
+  "typecheck": {
+    "started_utc": "2026-10-12T11:55:23.954736+00:00",
+    "ended_utc": "2026-10-12T11:55:25.382616+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vue-tsc/bin/vue-tsc.js --noEmit -p tsconfig.cloud-product.json"
+  },
+  "build": {
+    "started_utc": "2026-10-12T11:55:25.383016+00:00",
+    "ended_utc": "2026-10-12T11:55:26.393232+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vite/bin/vite.js build"
+  },
+  "counts": {
+    "vue": 2,
+    "test-p0": 17
+  }
+}

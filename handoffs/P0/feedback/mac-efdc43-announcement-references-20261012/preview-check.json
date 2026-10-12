@@ -1,0 +1,31 @@
+{
+  "checked_utc": "2026-10-12T11:57:21.539987+00:00",
+  "candidate": "efdc43a955024042dfb78707c97b94e6f7d74fed",
+  "preview": "http://127.0.0.1:54780/",
+  "backend": "http://127.0.0.1:60088",
+  "checks": [
+    {
+      "path": "/",
+      "http": 200,
+      "sha256": "842cbc6594956cb2b6136635fe26a98d8de8c1bf2a0d918ec07d5205f5fdcd33"
+    },
+    {
+      "path": "/manager-selection/",
+      "http": 200,
+      "sha256": "a4d60388fb8989f0f0339717c5a150cb981185785401ffad794fd532183b256e"
+    },
+    {
+      "path": "/assets/SavedManagerResultView-DgKaKCuR.js",
+      "http": 200,
+      "sha256": "a4c967e5b3183113e15ac17515bd84839ada29ca66e53c6441cecdd75cab8801"
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections",
+      "projection": "announcement_references",
+      "http": 200,
+      "total": 147,
+      "entries": 32
+    }
+  ],
+  "browser_not_controlled": true
+}

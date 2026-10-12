@@ -1,0 +1,216 @@
+{
+  "candidate": "efdc43a955024042dfb78707c97b94e6f7d74fed",
+  "passed": true,
+  "started_utc": "2026-10-12T11:56:03.886349+00:00",
+  "ended_utc": "2026-10-12T11:56:40.566428+00:00",
+  "api_url": "http://127.0.0.1:60088",
+  "api_pid": 41668,
+  "api_exit": null,
+  "requests": [
+    {
+      "path": "",
+      "section": null,
+      "projection": null,
+      "http": 200,
+      "bytes": 804,
+      "seconds": 0.002,
+      "identity": "MATCHED",
+      "offset": null,
+      "entries": 0
+    },
+    {
+      "path": "/overview",
+      "section": null,
+      "projection": null,
+      "http": 200,
+      "bytes": 6638,
+      "seconds": 4.391,
+      "identity": "MATCHED",
+      "offset": null,
+      "entries": 0
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 106006,
+      "seconds": 4.493,
+      "identity": "MATCHED",
+      "offset": 0,
+      "entries": 32
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 109464,
+      "seconds": 4.52,
+      "identity": "MATCHED",
+      "offset": 32,
+      "entries": 32
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 109370,
+      "seconds": 4.582,
+      "identity": "MATCHED",
+      "offset": 64,
+      "entries": 32
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 121044,
+      "seconds": 4.57,
+      "identity": "MATCHED",
+      "offset": 96,
+      "entries": 32
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 61207,
+      "seconds": 4.551,
+      "identity": "MATCHED",
+      "offset": 128,
+      "entries": 19
+    },
+    {
+      "path": "/sections",
+      "section": "stocks",
+      "projection": null,
+      "http": 200,
+      "bytes": 872,
+      "seconds": 4.788,
+      "identity": "MATCHED",
+      "offset": 0,
+      "entries": 0
+    },
+    {
+      "path": "/sections",
+      "section": "gaps",
+      "projection": null,
+      "http": 200,
+      "bytes": 10477,
+      "seconds": 4.69,
+      "identity": "MATCHED",
+      "offset": 0,
+      "entries": 32
+    }
+  ],
+  "data_unchanged": true,
+  "file_count": 141,
+  "workers": [
+    {
+      "status": "OK",
+      "pid": 41670,
+      "usage": {
+        "peak_rss_bytes": 319193088,
+        "cpu_seconds": 4.367288,
+        "wall_seconds": 4.327492833006545
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.388789666001685
+    },
+    {
+      "status": "OK",
+      "pid": 41678,
+      "usage": {
+        "peak_rss_bytes": 319209472,
+        "cpu_seconds": 4.471288,
+        "wall_seconds": 4.429225083003985
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.490874249997432
+    },
+    {
+      "status": "OK",
+      "pid": 41683,
+      "usage": {
+        "peak_rss_bytes": 322355200,
+        "cpu_seconds": 4.494335,
+        "wall_seconds": 4.454201041997294
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.518129707998014
+    },
+    {
+      "status": "OK",
+      "pid": 41695,
+      "usage": {
+        "peak_rss_bytes": 319225856,
+        "cpu_seconds": 4.559792,
+        "wall_seconds": 4.5169521659991005
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.579969166996307
+    },
+    {
+      "status": "OK",
+      "pid": 41702,
+      "usage": {
+        "peak_rss_bytes": 319275008,
+        "cpu_seconds": 4.539983,
+        "wall_seconds": 4.500574000005145
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.56739512499189
+    },
+    {
+      "status": "OK",
+      "pid": 41756,
+      "usage": {
+        "peak_rss_bytes": 319193088,
+        "cpu_seconds": 4.526113,
+        "wall_seconds": 4.480104542002664
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.549192916994798
+    },
+    {
+      "status": "OK",
+      "pid": 41767,
+      "usage": {
+        "peak_rss_bytes": 320929792,
+        "cpu_seconds": 4.752026,
+        "wall_seconds": 4.720813084000838
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.786905291999574
+    },
+    {
+      "status": "OK",
+      "pid": 41806,
+      "usage": {
+        "peak_rss_bytes": 319209472,
+        "cpu_seconds": 4.663798,
+        "wall_seconds": 4.621338458993705
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.6884358749957755
+    }
+  ],
+  "api_peak_rss_bytes": 35995648,
+  "reference_counts": {
+    "SELECTED": 103,
+    "CONDITIONAL_WATCH": 44
+  },
+  "all_reference_fields_and_raw_spans_match": true
+}
