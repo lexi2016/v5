@@ -1,0 +1,418 @@
+{
+  "candidate": "08c101d6e7f53d1d1519c3859c6b1d985c32d221",
+  "status": "PASS_DEPLOYED",
+  "acceptance": {
+    "schema_version": "v5.m08_readonly_acceptance.v1",
+    "started_utc": "2026-10-12T20:17:23.706166+00:00",
+    "mode": "REAL_SAVED_COLD_READ",
+    "steps": [
+      {
+        "name": "targeted-python",
+        "status": "PASS",
+        "exit_code": 0,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "4dc89539c838517813fcaf240d5d4132628965ce3679a09a6bc67576d5ba8931"
+      },
+      {
+        "name": "targeted-node",
+        "status": "PASS",
+        "exit_code": 0,
+        "stdout_sha256": "b1ce3c859d3e182c6cbbf0d9a4783da5a13eb78ed064c5f7344bee1dfc174b9a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "component-dom",
+        "status": "PASS",
+        "exit_code": 0,
+        "stdout_sha256": "3f6f438c672da3d79aebf8bede47edabdc53ddc9a1c37e0d088f632a642d3cad",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "typecheck",
+        "status": "PASS",
+        "exit_code": 0,
+        "stdout_sha256": "521a55b131aad9ab56d70c8f82b912329b6dbfd059cf1441f801e51f792a4270",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "build",
+        "status": "PASS",
+        "exit_code": 0,
+        "stdout_sha256": "91bccdc04254784ae05e8d8e07c13cfc11cfe4e77554e28f706901a62e6aa456",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "real_read": {
+      "status": "PASS",
+      "reference_count": 10,
+      "stage_count": 8,
+      "results": [
+        {
+          "stage": "STAGE_0925",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "READY",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "fe9c96d3599e7f4bd9a5a1c4cf10d1cebf96de95c278fd19edff06a2f37dbe2a",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_0930_0935",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "f5a5d3726f8f8a5e4b8781cad7093b3b0018c62f3bd9bdc67d73794cbc3071da",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_0935_0940",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "bd20bd40c73bea5c5f279deaa0457a267fd393be4e36ac9b2c3405f0837beaf4",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_0940_0945",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "5f035a453d7ae6d15b56b8f34c6e5fe33f19105ca242db52b61afe892d511fca",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_0945_1030",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "c77adad4c0e417262a42c68974e5081a3aa9cd5600d24cd3b15c2d9b7979e3fc",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_1300_1315",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "cccb65d069dc6328f4f1e07aa55289af7ae062ba4ac8318ddd2d3feaa5e9a776",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_1300_1315",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "cff91c43071f6580b181cd39a1c7b4020f6199f425912e965c7ee421adfc3277",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_1445_1500",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "c7634bdaeaf7900a11aabd6cdaba1b90b22f2a09eceb70760381a1ec17907707",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_1445_1500",
+          "date": "20261012",
+          "rows": 10,
+          "status": "PARTIAL_WITH_ROWS",
+          "source_status": "PARTIAL_WITH_ROWS",
+          "stage_group": "HK_SEVEN_STAGE",
+          "response_sha256": "75ed932778e8793b487d5afaa68ac2ee28d109a5da8a93cc6d1de7d7dbeaeb3d",
+          "exact_original_fields": true,
+          "captured_at": null
+        },
+        {
+          "stage": "STAGE_1545_1555",
+          "date": "20261012",
+          "rows": 10,
+          "status": "READY",
+          "source_status": "READY",
+          "stage_group": "HK_STAGE8_SEPARATE",
+          "response_sha256": "0d18bb3be36a222333cecc12b9aa78ec535637a17bac54330ec1ace89a55f4c5",
+          "exact_original_fields": true,
+          "captured_at": null
+        }
+      ],
+      "exact_rows_order_fields": true,
+      "recorded_and_api_and_protected_roots_unchanged": true,
+      "protected_root_count": 5,
+      "unknown_reference_rejected": true,
+      "existing_source_regression": [
+        {
+          "route": "/api/v5/source-bundle/status",
+          "status": "PASS",
+          "exact_existing_payload": true
+        },
+        {
+          "route": "/api/v5/source-bundle/hk-preselection",
+          "status": "PASS",
+          "exact_existing_payload": true
+        },
+        {
+          "route": "/api/v5/source-bundle/hk-close-review",
+          "status": "PASS",
+          "exact_existing_payload": true
+        },
+        {
+          "route": "/api/v5/source-bundle/a-close-replay",
+          "status": "PASS",
+          "exact_existing_payload": true
+        }
+      ]
+    },
+    "frontend": {
+      "status": "PASS"
+    },
+    "original_90_16_21_rerun": false,
+    "real_producer_invoked": false,
+    "real_imports_performed": false,
+    "synthetic_fixture_imports_only": true,
+    "synthetic_test_fixture_producer_only": true,
+    "collection": false,
+    "deployed": false,
+    "services_changed": false,
+    "commit": "08c101d6e7f53d1d1519c3859c6b1d985c32d221",
+    "runner_environment": {
+      "python": "3.14.6",
+      "supported": true
+    },
+    "worker_environment": {
+      "python": "3.14.6",
+      "supported": true
+    },
+    "ended_utc": "2026-10-12T20:18:46.282234+00:00",
+    "status": "PASS"
+  },
+  "actual_execution": {
+    "started_utc": "2026-10-12T20:17:23.651798+00:00",
+    "ended_utc": "2026-10-12T20:18:46.290088+00:00",
+    "exit": 0,
+    "command": "<EXISTING_PYTHON_3.14.6> -I -B V5/tests/run_m08_readonly_acceptance.py --expected-commit 08c101d6e7f53d1d1519c3859c6b1d985c32d221 --source-config <PRIVATE_CONFIG> --baseline-source-origin <VERIFIED_EXISTING_SOURCE_ORIGIN> --evidence-dir <PRIVATE_EVIDENCE> --protected-root <M06_V5_ROOT> --protected-root <M09_V5_ROOT> --protected-root <M10_V5_ROOT>"
+  },
+  "counts": {
+    "python": 61,
+    "node": 49,
+    "component_dom": 13,
+    "component_files": 5
+  },
+  "delivery_manifest_entries": 80,
+  "delivery_manifest_itself_git_verified": true,
+  "deployment": {
+    "status": "PASS",
+    "candidate": "08c101d6e7f53d1d1519c3859c6b1d985c32d221",
+    "started_utc": "2026-10-12T20:19:48.863791+00:00",
+    "ended_utc": "2026-10-12T20:20:30.746482+00:00",
+    "independent_shell_after_launcher_exit": true,
+    "m08_ten_deployed_response_hashes_exact": true,
+    "old_source_m06_m09_m10_responses_exact": true,
+    "dist_files": [
+      {
+        "path": "index.html",
+        "sha256": "2b360736f7648e4769fbdfd68ef23206b9471991a951638d335a909579ec34fc",
+        "bytes": 850
+      },
+      {
+        "path": "daily-research-command/index.html",
+        "sha256": "40319a50f2a603e28aba37962cc87147ce2914aec9f92b72d60950afb287241f",
+        "bytes": 504
+      },
+      {
+        "path": "manager-selection/index.html",
+        "sha256": "10e23e2e6720c6c5c2adaa7549bc0968394e96b43e6a229802cd8006d97d01d3",
+        "bytes": 558
+      },
+      {
+        "path": "assets/reboundPanelObservation-rEOT8hV3.js",
+        "sha256": "ba9136e5557d7947053de18c1e13b30b1d39ce459119cfad9c565c2b2e7ff081",
+        "bytes": 30016
+      },
+      {
+        "path": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+        "sha256": "cb85b0f263dbe24e857338301c0627076592e9f1f1a5662929f86d2c126444aa",
+        "bytes": 91
+      },
+      {
+        "path": "assets/runtime-dom.esm-bundler-Ds5LT4Of.js",
+        "sha256": "18a37e2819ece51ecd67e700d7b92f737f51fac85a1da10539aedc3649c6471f",
+        "bytes": 69045
+      },
+      {
+        "path": "assets/ManagerSelectionView-Hp_a-sop.js",
+        "sha256": "3894b76c683b996049fdfd15ba26e3825af16d088913657c29fe08021a6193ce",
+        "bytes": 403994
+      },
+      {
+        "path": "assets/ManagerSelectionView-DPqeaKxb.css",
+        "sha256": "937acb35ff2f5318182c43b1c045db2545b98d8486a17319913dde28331e83f5",
+        "bytes": 48280
+      },
+      {
+        "path": "assets/style-DI6AXicP.js",
+        "sha256": "d887044e7c17fd90344fc4f74f53cac686584daf2a458ab2136d36f1946e9ab6",
+        "bytes": 1110
+      },
+      {
+        "path": "assets/main-DrJcfZuV.js",
+        "sha256": "8da9171787150dbb117053b469fb5311527f142f0070c50042a216b7d8b13c4b",
+        "bytes": 757
+      },
+      {
+        "path": "assets/research_lane-t0CPXntR.js",
+        "sha256": "8651472ec9b303719d201e466e997fc2fadfc2f7169ec1a07c6ded932659f95b",
+        "bytes": 4268
+      },
+      {
+        "path": "assets/style-BtNCnKLk.css",
+        "sha256": "511cff3d064c51a16261deb297bd8cd2cd4b58378b4eedf3fdcd210970a12fff",
+        "bytes": 18594
+      },
+      {
+        "path": "assets/dailyResearchCommand-D13tk45Q.js",
+        "sha256": "405b50d2a49760efb992a88a600a2b7afb7897529da7dc6d2c903474a85c65a6",
+        "bytes": 26611
+      },
+      {
+        "path": "assets/App-C8ZBy9MI.css",
+        "sha256": "63b4a58d5e7c59ab32fcefd0e061bc5a859aa2c894ec1efec3e6e9e3bc56f17d",
+        "bytes": 20334
+      },
+      {
+        "path": "assets/SavedManagerResultView-DgGu62qE.css",
+        "sha256": "32b90d3a8960fedabcbd9c408b604a76997d621fd28b14f50cfea91a92ad15e9",
+        "bytes": 12758
+      },
+      {
+        "path": "assets/dailyResearchCommand-D7J2FMsY.css",
+        "sha256": "444542681a3575082c280eb30674e6550766a127bdd6da019b78e8f247125dfa",
+        "bytes": 12281
+      },
+      {
+        "path": "assets/App-8NKFrO9R.js",
+        "sha256": "c4a598d78056ae71c46084fd1c8022d74e52eb8185767423223a24ee5b61c332",
+        "bytes": 175357
+      },
+      {
+        "path": "assets/managerSelection-DVstaZ7d.js",
+        "sha256": "f6b5733a634855bbe7c04929fd35e8c8a7b49cdb0e452a043c3dd9d3550fe4dc",
+        "bytes": 822
+      },
+      {
+        "path": "assets/SavedManagerResultView-o3wxVrZg.js",
+        "sha256": "895d31cd782d01bf25192976f84f09680a77cf675bcad80f4df18bcaf1ab8f1b",
+        "bytes": 68252
+      }
+    ],
+    "deployed_dom": {
+      "m08_all_ten_exact_artifacts": true,
+      "m08_eight_stage_and_duplicate_run_selectors": true,
+      "passed": true,
+      "m09_native_review_all_fields_exact": true,
+      "m09_all_rendered_cells_original_order": true,
+      "m09_exact_date_run_generation": true,
+      "m09_historical_partial_gaps_and_false_flags": true,
+      "m09_refresh_clears_then_exact": true,
+      "via_deployed_preview": true,
+      "m10_all_original_cells_and_order": true,
+      "m10_counts": [
+        20,
+        100,
+        70,
+        20
+      ],
+      "m10_seven_partial_stages_and_null_preserved": true,
+      "m10_identity": true,
+      "m10_refresh_clears_and_reloads": true,
+      "m06_all100_rows_all_fields_original_order": true,
+      "old_four_cards": true,
+      "m06_identity_text": true,
+      "m06_repeat_and_loading_clear": true
+    },
+    "manager_navigation": {
+      "passed": true,
+      "announcement_default_total": 147,
+      "us_matches": 4,
+      "unique_hk": 3,
+      "plan_status": "CONSUMED",
+      "rebound_first_count": 31,
+      "rebound_next_offset": 31,
+      "us_return_exact": true,
+      "announcement_return_exact": true,
+      "requests": [
+        {
+          "path": "/api/v4/manager/m18/v2",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/overview",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/sections",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/sections",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/sections",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/sections",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/sections",
+          "http": 200
+        },
+        {
+          "path": "/api/v4/manager/m18/v2/sections",
+          "http": 200
+        }
+      ]
+    },
+    "protected_files_unchanged": 125,
+    "all_preserved_ports_listening": true
+  },
+  "rollback": {
+    "product": "65b3bea261a3a48d6a4ea481420e743dc84e8ec6",
+    "test_fix": "cbc13c5577ec4dfb6354c852d54fb56d5e718706",
+    "feedback": "864fd1d9f2305c8fd236da6b363909ed92274d11",
+    "old_source_service_config_and_dist_retained": true
+  },
+  "preview_port": 54780,
+  "source_port": 62906,
+  "detached_nohup": true,
+  "limits": [
+    "Historical observed saved results only; natural/PIT/formal remain false.",
+    "No old V4 runtime data-root read, real import, selector/collector production, trading, dependency install, or user screen operation.",
+    "Original M08 90/16/21 not rerun.",
+    "Full 18-module/P0-P5 acceptance remains open."
+  ]
+}
