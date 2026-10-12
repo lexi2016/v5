@@ -32,6 +32,10 @@ def _sha_text(value: Any) -> str:
     return hashlib.sha256(str(value).encode("utf-8")).hexdigest()
 
 
+def _sha_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def _bind_review_core():
     from V5.vendor.video_fupan_baseline.review_core.core import run_video
     from V5.vendor.video_fupan_baseline.review_core.config import ProducerConfig
@@ -52,7 +56,7 @@ def _cold_verify(root: Path, date: str, run_id: str) -> None:
         check=False,
     )
     if result.returncode != 0:
-        raise VideoArtifactError("cold reader rejected committed run: " + result.stderr)
+        raise VideoArtifactError("cold reader rejected committed run: " + result.stderr + result.stdout)
 
 
 def run_video_fupan(
@@ -117,7 +121,8 @@ def run_video_fupan(
         }
 
         safe_replace_json(attempt / "manifest.json", envelope)
-        safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id})
+        manifest_sha = _sha_file(attempt / "manifest.json")
+        safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
 
         committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
         committed.mkdir(parents=True, exist_ok=False)
