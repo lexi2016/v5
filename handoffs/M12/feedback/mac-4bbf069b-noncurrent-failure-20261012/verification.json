@@ -1,0 +1,39 @@
+{
+  "candidate": "4bbf069b435d8f0ba28db8e2eba1d358ea5e283c",
+  "parent": "769db376cf8ab0c2c1f69e31239aec38494ddd82",
+  "python": "3.14.6 existing interpreter",
+  "pytest": "9.0.2 existing site path",
+  "execution_count": 1,
+  "passed": 4,
+  "subtests_passed": 8,
+  "deselected": 17,
+  "failures": 0,
+  "tracked_blobs_verified_unchanged": 11,
+  "record": {
+    "command": [
+      "<existing-python>",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/m12/test_video_fupan_default_chain.py",
+      "-k",
+      "noncurrent_failed_run or owner_new_config_attempt or historical_success_is_not_repromoted"
+    ],
+    "started_utc": "2026-10-12T15:56:58.733877+00:00",
+    "ended_utc": "2026-10-12T15:56:59.626468+00:00",
+    "exit": 0,
+    "stdout": "....                                                             [100%]\n4 passed, 17 deselected, 8 subtests passed in 0.59s\n",
+    "stderr": ""
+  },
+  "coverage": [
+    "A success, B ASR failure, repeated B reuses validated immutable failure with zero additional capture/ASR and current/latest A unchanged",
+    "Tampered noncurrent failure is rejected before capture/ASR",
+    "Explicit original ProducerConfig.extra creates C identity; no wrapper automatic recovery claim; C remains ASR_REVIEW_REQUIRED",
+    "Historical success A is not repromoted after B success; latest remains B"
+  ],
+  "scope": "Only new synthetic AcquisitionTools/socket-blocked regression slice. Old 17 tests deselected, not rerun. No real video/ASR/network/trading/deployment/API/UI/natural acceptance, V4/54780/screen changes, or product edits."
+}
+
