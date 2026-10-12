@@ -107,3 +107,45 @@ test('rebound group navigation resets cursors, keeps group across pages and supp
  await session.select('rebound_research_observation','pending');assert.equal(calls.at(-1).cursor,null);assert.equal(calls.at(-1).offset,0);assert.equal(session.state.group,'pending');assert.equal(session.state.canPrevious,false);
  delay=true;const old=session.select('rebound_research_observation','near');await session.select('rebound_research_observation','excluded');finishOld({...detail,group:'near'});await old;assert.equal(session.state.group,'excluded');assert.equal(session.state.page.group,'excluded');
 });
+
+function variableReboundFixture() {
+ const section='rebound_research_observation';
+ const sections={...overview.sections,[section]:{kind:'object',total:1,loaded_count:0,not_loaded_count:1,state:'NOT_LOADED'}};
+ const rebound={source_section_sha256:'3'.repeat(64),group_counts:{strict:70,near:0,pending:0,excluded:0,screen_unresolved:0},source:{status:'CANNOT_CONFIRM',eligible_screen:null},observation:{status:'CANNOT_CONFIRM'}};
+ const page=(offset,count,cursor,next_cursor)=>({...detail,section,projection:'rebound_references',group:'strict',rebound,offset,cursor,matched_total:70,entries:Array.from({length:count},(_,position)=>({...entry,index:offset+position})),remaining_entries:70-offset-count,not_loaded_count:70-count,next_cursor});
+ return {section,overview:{...overview,sections},page,pages:[page(0,29,null,'at29'),page(29,30,'at29','at59'),page(59,11,'at59',null)]};
+}
+test('rebound accepts byte-bounded variable pages and non-multiple-of-32 continuation offsets',async()=>{
+ const fixture=variableReboundFixture();
+ for(const expected of fixture.pages) {
+  const {client}=clientWith(expected);
+  assert.deepEqual(await client.section(descriptor,fixture.overview,fixture.section,expected.cursor,expected.offset),expected);
+ }
+ const empty={...fixture.page(0,0,null,null),matched_total:0,not_loaded_count:0,remaining_entries:0,rebound:{...fixture.pages[0].rebound,group_counts:{strict:0,near:0,pending:0,excluded:0,screen_unresolved:0}}};
+ assert.equal((await clientWith(empty).client.section(descriptor,fixture.overview,fixture.section)).entries.length,0);
+ // Existing ordinary and announcement sections keep their fixed-entry cursor contract.
+ await assert.rejects(clientWith(detail).client.section(descriptor,overview,'stocks','at29',29),/M18_SECTION_REQUEST/);
+});
+test('rebound variable-page session preserves exact rows and opaque history through next and previous',async()=>{
+ const {SavedRunSession}=await import('../src/api/m18SavedResult.ts');const fixture=variableReboundFixture();const requests=[];
+ const client=new M18SavedClient(async url=>{
+  const parsed=new URL(url,'http://fixture.invalid');const cursor=parsed.searchParams.get('cursor');requests.push({path:parsed.pathname,cursor});
+  if(parsed.pathname.endsWith('/overview'))return response(fixture.overview);
+  if(parsed.pathname.endsWith('/sections'))return response(parsed.searchParams.get('section')==='stocks'?detail:fixture.pages.find(page=>page.cursor===cursor));
+  return response(descriptor);
+ });
+ const session=new SavedRunSession(client);await session.load(RUN);await session.select(fixture.section,'strict');
+ const seen=[...session.state.page.entries.map(row=>row.index)];
+ await session.next();assert.equal(session.state.phase,'LOADED');assert.equal(session.state.page.offset,29);seen.push(...session.state.page.entries.map(row=>row.index));
+ await session.next();assert.equal(session.state.page.offset,59);seen.push(...session.state.page.entries.map(row=>row.index));
+ assert.deepEqual(seen,Array.from({length:70},(_,index)=>index));assert.equal(session.state.page.next_cursor,null);
+ await session.previous();assert.equal(session.state.page.offset,29);await session.previous();assert.equal(session.state.page.offset,0);await session.next();assert.equal(session.state.page.offset,29);
+ assert.deepEqual(requests.filter(row=>row.path.endsWith('/sections')).slice(1).map(row=>row.cursor),[null,'at29','at59','at29',null,'at29']);
+});
+test('rebound variable pages reject no progress, excess rows, gaps and wrong continuation selectors',async()=>{
+ const fixture=variableReboundFixture();
+ const bad=[fixture.page(0,0,null,'at0'),fixture.page(0,33,null,'at33'),{...fixture.pages[0],entries:fixture.pages[0].entries.map((row,index)=>({...row,index:index+1}))},{...fixture.pages[0],next_cursor:null},{...fixture.pages[0],remaining_entries:42},{...fixture.pages[0],group:'near'}];
+ for(const page of bad)await assert.rejects(clientWith(page).client.section(descriptor,fixture.overview,fixture.section),/M18_/);
+ await assert.rejects(clientWith(fixture.page(59,12,'at59',null)).client.section(descriptor,fixture.overview,fixture.section,'at59',59),/M18_/);
+ await assert.rejects(clientWith(fixture.pages[1]).client.section(descriptor,fixture.overview,fixture.section,'wrong',29),/M18_/);
+});

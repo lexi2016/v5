@@ -364,8 +364,7 @@ class _M18ReboundSpans:
         if 'cursor' in query:
             value,_=m.v1.parse(base64.b64decode(query['cursor'],altchars=b'-_',validate=True),object_limit=True)
             self.offset=value['offset']
-            m.require(m.v1.integer(self.offset,m.v1.PAGE_SIZE,2**63-1)
-                      and self.offset % m.v1.PAGE_SIZE == 0,'V2_REBOUND_CURSOR')
+            m.require(m.v1.integer(self.offset,1,2**63-1),'V2_REBOUND_CURSOR')
         self.prefix=('payload',M18_REBOUND_SECTION)
         self.inner=self.prefix+('research_observation',)
         self.stop=self.offset+m.v1.PAGE_SIZE
@@ -428,7 +427,8 @@ def _m18_rebound_value(reader, query):
     for row in capture.rows:
         entry=dict(row)
         if entry['bytes']>M18_VIEW_ITEM_BYTES:entry['reason']='ITEM_BYTES_LIMIT'
-        elif loaded_bytes+entry['bytes']>M18_VIEW_VALUES_BYTES:entry['reason']='PAGE_BYTES_LIMIT'
+        # Defer this loadable row to the next page rather than skipping its value.
+        elif loaded_bytes+entry['bytes']>M18_VIEW_VALUES_BYTES:break
         else:
             entry.update(value=small_value(entry,M18_VIEW_ITEM_BYTES),value_state='LOADED')
             loaded+=1;loaded_bytes+=entry['bytes']

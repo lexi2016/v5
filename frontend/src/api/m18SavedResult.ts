@@ -56,8 +56,8 @@ export class M18SavedClient {
   return value as Overview;
  }
  async section(expected: Descriptor, overview: Overview, section: string, cursor: string | null = null, offset = 0, signal?: AbortSignal, group: ReboundGroup = 'strict'): Promise<SectionPage> {
-  check(Object.hasOwn(overview.sections,section) && section.length <= 1024 && integer(offset) && offset % 32 === 0 && (cursor === null ? offset === 0 : cursor.length <= 8192 && offset > 0), 'SECTION_REQUEST');
   const projected = section === 'announcement_reviewed_analysis', rebound = section === 'rebound_research_observation';
+  check(Object.hasOwn(overview.sections,section) && section.length <= 1024 && integer(offset) && (rebound || offset % 32 === 0) && (cursor === null ? offset === 0 : cursor.length <= 8192 && offset > 0), 'SECTION_REQUEST');
   if (rebound) check(REBOUND_GROUPS.includes(group), 'REBOUND_GROUP');
   const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor; if (projected) query.projection='announcement_references'; if (rebound) {query.projection='rebound_references';query.group=group;}
   const value = await this.get('/sections',query,signal); binding(value,expected,overview.manifest_sha256);
@@ -67,7 +67,8 @@ export class M18SavedClient {
   const total = projected ? value.announcement.reference_count : rebound ? value.rebound.group_counts[group] : overview.sections[section].total;
   check(value.schema === 'v5.m18.offline.v2.detail' && value.section === section && value.selection === null && value.cursor === cursor && value.offset === offset && value.matched_total === total && Array.isArray(value.entries) && value.entries.length <= 32 && integer(value.remaining_entries) && integer(value.not_loaded_count) && (value.next_cursor === null || (typeof value.next_cursor === 'string' && value.next_cursor.length <= 8192)), 'SECTION_PAGE');
   for (const [position, entry] of value.entries.entries()) check(object(entry) && entry.index === offset + position && typeof entry.kind === 'string' && integer(entry.offset,0,64*1024*1024) && integer(entry.bytes,1,64*1024*1024) && digest(entry.sha256) && (entry.value_state === 'LOADED' ? Object.hasOwn(entry,'value') : entry.value_state === 'NOT_LOADED' && !Object.hasOwn(entry,'value')), 'SECTION_ENTRY');
-  check(value.entries.length === Math.min(32,value.matched_total-offset) && value.remaining_entries === value.matched_total-offset-value.entries.length && value.not_loaded_count === value.matched_total-value.entries.filter((entry: SavedEntry) => entry.value_state === 'LOADED').length && (value.remaining_entries > 0) === (value.next_cursor !== null), 'SECTION_COUNTS');
+  const pageCountValid = rebound ? (total === 0 ? offset === 0 && value.entries.length === 0 : offset < total && value.entries.length > 0 && value.entries.length <= Math.min(32,total-offset)) : value.entries.length === Math.min(32,total-offset);
+  check(pageCountValid && value.remaining_entries === value.matched_total-offset-value.entries.length && value.not_loaded_count === value.matched_total-value.entries.filter((entry: SavedEntry) => entry.value_state === 'LOADED').length && (value.remaining_entries > 0) === (value.next_cursor !== null), 'SECTION_COUNTS');
   return value as SectionPage;
  }
 }

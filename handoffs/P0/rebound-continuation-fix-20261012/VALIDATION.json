@@ -1,0 +1,54 @@
+{
+  "scope": "M14 byte-bounded continuation; defer a loadable row rather than advance past it",
+  "base_commit": "b23cc0342689d4fc1ba94bf1a83a8894158e8bf2",
+  "cloud_backend": {
+    "status": "PASS",
+    "command": "PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_rebound_projection.py V5/tests/test_m18_v2_announcement_projection.py V5/tests/test_m18_v2_read_process.py",
+    "passed": 26,
+    "subtests_passed": 38,
+    "skipped": 1,
+    "skip_reason": "existing opt-in long resource pressure test",
+    "seconds": 97.09,
+    "exit_code": 0
+  },
+  "cloud_frontend_node": {
+    "status": "PASS",
+    "command": "node --test frontend/tests/*.node.mjs",
+    "passed": 27,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "regression_tests": {
+    "red": "Existing code failed new byte-boundary and variable-page client tests.",
+    "green": [
+      "128KiB exact boundary returns32; one extra byte returns31 then continues at31",
+      "693 owner-shaped synthetic rows all LOADED through HTTP, with exact original offsets and SHA, no omissions or duplicates",
+      "16KiB oversized item remains ITEM_BYTES_LIMIT and advances; false/null and empty groups preserved",
+      "HTTP to actual TS client/session:29/30/11, next/previous and group reset",
+      "client rejects non-progressing/oversized/wrong-index/wrong-cursor/wrong-group pages",
+      "announcement paging and supervised worker regressions passed"
+    ]
+  },
+  "limits_unchanged": {
+    "item_bytes": 16384,
+    "page_value_bytes": 131072,
+    "http_bytes": 262144,
+    "max_page_entries": 32,
+    "profile_sha256": "a8b56161f6d19de0d5222775e132d78f75d7ad707a1824b4d2b861ff285ecc6c"
+  },
+  "cloud_vue_typecheck_build": {
+    "status": "NOT_RUN",
+    "reason": "Existing cloud workspace lacks Vue/Vite/vue-tsc dependencies. Rebuild with existing Mac dependencies for the changed client; no template or renderer changes."
+  },
+  "mac_real_candidate": {
+    "status": "NOT_RUN",
+    "required": "Fresh API; original693 rows all LOADED using actual variable page counts; exact slices/pins/resource/reap/data checks. Build matching static client once before preview switch."
+  },
+  "source_sha256": {
+    "V5/src/v5_shadow/module_api.py": "90d3f1f9941168828bc7560a391dc9190cdf83df98436149a70afc190d7a1738",
+    "V5/src/v5_shadow/m18_v2_read_process.py": "99b936111aae6d3c4a8c403fac5586e2965a6d2d756eafbd9d72600723883b03",
+    "V5/tests/test_m18_v2_rebound_projection.py": "e4c40d703aa7da415bcd394a63cb454f5af0da366c4bfd29cdc2d9a468d1450c",
+    "frontend/src/api/m18SavedResult.ts": "786ce8ceebc856677668536b20b4eeeddacc57593c34151c99aba4185cdf8150",
+    "frontend/tests/m18SavedResult.node.mjs": "be10ccf5962b719fffc09ac308079696a9297fb474230d6212db6363656321c0"
+  }
+}

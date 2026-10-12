@@ -129,8 +129,7 @@ def _check_payload(value, request):
                       'V2_RECEIPT_PAGE')
             if cursor is not None:
                 m.require(cursor == _m18_rebound_cursor(value, meta['source_section_sha256'], query['group'], offset)
-                          and m.v1.integer(offset, m.v1.PAGE_SIZE, value['matched_total']-1)
-                          and offset % m.v1.PAGE_SIZE == 0, 'V2_RECEIPT_PAGE')
+                          and m.v1.integer(offset, 1, value['matched_total']-1), 'V2_RECEIPT_PAGE')
 
 
 class PageSender(process.ReceiptSender):
