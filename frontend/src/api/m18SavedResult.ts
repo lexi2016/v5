@@ -8,7 +8,8 @@ export interface Binding { identity: Identity; generation_id: string; profile_sh
 export interface SectionMeta { kind: string; total: number; loaded_count: number; not_loaded_count: number; state: string; }
 export interface Overview extends Binding { schema: string; content_chunks: number; sections: Record<string, SectionMeta>; }
 export interface SavedEntry { index: number; kind: string; offset: number; bytes: number; sha256: string; value_state: 'LOADED' | 'NOT_LOADED'; value?: unknown; reason?: string; }
-export interface SectionPage extends Binding { schema: string; section: string; selection: null; cursor: string | null; offset: number; matched_total: number; not_loaded_count: number; remaining_entries: number; entries: SavedEntry[]; next_cursor: string | null; }
+export interface AnnouncementMetadata { status: unknown; plan_cutoff: unknown; gaps: unknown; source_section_sha256: string; reference_count: number; products: Record<string,unknown>[]; }
+export interface SectionPage extends Binding { schema: string; projection?: 'announcement_references'; announcement?: AnnouncementMetadata; section: string; selection: null; cursor: string | null; offset: number; matched_total: number; not_loaded_count: number; remaining_entries: number; entries: SavedEntry[]; next_cursor: string | null; }
 type Fetcher = (input: string, init?: RequestInit) => Promise<Response>;
 function check(condition: unknown, code: string): asserts condition { if (!condition) throw new Error('M18_' + code); }
 function object(value: unknown): value is Record<string, any> { return value !== null && typeof value === 'object' && !Array.isArray(value); }
@@ -53,15 +54,19 @@ export class M18SavedClient {
  }
  async section(expected: Descriptor, overview: Overview, section: string, cursor: string | null = null, offset = 0, signal?: AbortSignal): Promise<SectionPage> {
   check(Object.hasOwn(overview.sections,section) && section.length <= 1024 && integer(offset) && offset % 32 === 0 && (cursor === null ? offset === 0 : cursor.length <= 8192 && offset > 0), 'SECTION_REQUEST');
-  const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor;
+  const projected = section === 'announcement_reviewed_analysis';
+  const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor; if (projected) query.projection='announcement_references';
   const value = await this.get('/sections',query,signal); binding(value,expected,overview.manifest_sha256);
-  check(value.schema === 'v5.m18.offline.v2.detail' && value.section === section && value.selection === null && value.cursor === cursor && value.offset === offset && value.matched_total === overview.sections[section].total && Array.isArray(value.entries) && value.entries.length <= 32 && integer(value.remaining_entries) && integer(value.not_loaded_count) && (value.next_cursor === null || (typeof value.next_cursor === 'string' && value.next_cursor.length <= 8192)), 'SECTION_PAGE');
+  if (projected) check(value.projection === 'announcement_references' && object(value.announcement) && digest(value.announcement.source_section_sha256) && integer(value.announcement.reference_count) && Array.isArray(value.announcement.products) && value.announcement.products.every(object), 'ANNOUNCEMENT_PROJECTION');
+  else check(!Object.hasOwn(value,'projection') && !Object.hasOwn(value,'announcement'), 'SECTION_PROJECTION');
+  const total = projected ? value.announcement.reference_count : overview.sections[section].total;
+  check(value.schema === 'v5.m18.offline.v2.detail' && value.section === section && value.selection === null && value.cursor === cursor && value.offset === offset && value.matched_total === total && Array.isArray(value.entries) && value.entries.length <= 32 && integer(value.remaining_entries) && integer(value.not_loaded_count) && (value.next_cursor === null || (typeof value.next_cursor === 'string' && value.next_cursor.length <= 8192)), 'SECTION_PAGE');
   for (const [position, entry] of value.entries.entries()) check(object(entry) && entry.index === offset + position && typeof entry.kind === 'string' && integer(entry.offset,0,64*1024*1024) && integer(entry.bytes,1,64*1024*1024) && digest(entry.sha256) && (entry.value_state === 'LOADED' ? Object.hasOwn(entry,'value') : entry.value_state === 'NOT_LOADED' && !Object.hasOwn(entry,'value')), 'SECTION_ENTRY');
   check(value.entries.length === Math.min(32,value.matched_total-offset) && value.remaining_entries === value.matched_total-offset-value.entries.length && value.not_loaded_count === value.matched_total-value.entries.filter((entry: SavedEntry) => entry.value_state === 'LOADED').length && (value.remaining_entries > 0) === (value.next_cursor !== null), 'SECTION_COUNTS');
   return value as SectionPage;
  }
 }
-export function chooseSection(sections: Record<string, SectionMeta>): string { return ['summary','stocks','cards','candidates','focus_stocks','status','gaps'].find(key => Object.hasOwn(sections,key)) ?? Object.keys(sections)[0] ?? ''; }
+export function chooseSection(sections: Record<string, SectionMeta>): string { return ['announcement_reviewed_analysis','summary','stocks','cards','candidates','focus_stocks','status','gaps'].find(key => Object.hasOwn(sections,key)) ?? Object.keys(sections)[0] ?? ''; }
 export function entryPresentation(entry: SavedEntry): {state:string; value?:unknown; reason?:string} { return entry.value_state === 'LOADED' ? {state:'LOADED',value:entry.value} : {state:'NOT_LOADED',reason:entry.reason ?? 'NOT_LOADED'}; }
 
 export interface SavedRunState { phase: 'IDLE' | 'LOADING' | 'LOADED' | 'CANNOT_CONFIRM'; descriptor: Descriptor | null; overview: Overview | null; section: string; page: SectionPage | null; error: string; canPrevious: boolean; }

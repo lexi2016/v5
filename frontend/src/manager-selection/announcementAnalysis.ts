@@ -214,3 +214,49 @@ export function renderAnnouncementAnalysis(
     host.append(element('p',`所选日期没有已校验的完整解析产物；不能解释为零公告或零解析。缺口：${gaps}。`));
   }
 }
+
+
+/** Same-run saved research references, using the established V4 reason/risk/article view.
+ * These are a bounded projection, not the full independent announcement-analysis response.
+ */
+export function renderSavedAnnouncementReferences(host:HTMLElement,page:import('../api/m18SavedResult').SectionPage):void{
+  host.replaceChildren(element('h3','公告研究股票（已保存的同一运行）'));
+  host.setAttribute('aria-label','同次运行公告研究股票');
+  const metadata=page.announcement;
+  if(page.projection!=='announcement_references'||!metadata){
+    host.append(element('p','CANNOT_CONFIRM：公告研究引用尚未读取。'));return;
+  }
+  host.append(element('p',`已消费状态：${text(metadata.status)}；研究引用共 ${metadata.reference_count} 条，按原始顺序分页。计划截止：${text(metadata.plan_cutoff)}。`));
+  const warning=element('p','研究入选与条件观察仅表示已保存的公告研究判断，不是正式推荐或交易许可。历史 PIT 与互联互通资格逐条保留；CANNOT_CONFIRM / NOT_ASSESSED 仍需核实。');
+  warning.className='task-message';host.append(warning);
+  for(const product of metadata.products){
+    host.append(element('p',`公告产品：公告日 ${text(product.publication_date)}；目标日 ${text(product.target_trade_date??product.target_date)}；产品状态 ${text(product.status)}；校验 ${text(product.validation_status)}；研究判定 ${text(product.selection_status)}。`));
+    // Counts remain the original product's counts; this page only contains its consumed references.
+    const counts=product;
+    if(['stock_count','selected_stock_count','conditional_watch_count','not_selected_stock_count','not_assessed_stock_count'].some(key=>Object.hasOwn(counts,key)))
+      host.append(element('p',`来源股票 ${text(counts.stock_count)}；入选研究 ${text(counts.selected_stock_count)}；条件观察 ${text(counts.conditional_watch_count)}；未入选 ${text(counts.not_selected_stock_count)}；未评估 ${text(counts.not_assessed_stock_count)}。`));
+  }
+  if(Array.isArray(metadata.gaps)&&metadata.gaps.length)host.append(details('公告消费缺口',metadata.gaps));
+  if(page.matched_total===0)host.append(element('p','本次保存的公告研究引用为 0 条；不推断其他模块已就绪。'));
+  for(const entry of page.entries){
+    if(entry.value_state!=='LOADED'){
+      const unavailable=element('article');unavailable.append(element('h4',`记录 ${entry.index+1} · NOT_LOADED`),element('p',`${entry.reason??'NOT_LOADED'}；${entry.bytes} bytes；SHA256 ${entry.sha256}`));host.append(unavailable);continue;
+    }
+    const reference=object(entry.value);
+    if(typeof reference.stock_code!=='string'||!reference.stock_code||!['SELECTED','CONDITIONAL_WATCH'].includes(String(reference.research_status))){
+      const unknown=element('article');unknown.append(element('h4',`记录 ${entry.index+1} · 股票字段未确认`),details('原始值（未推断股票）',entry.value));host.append(unknown);continue;
+    }
+    const card=stockView({...reference,status:reference.research_status,articles:reference.article_refs},new Map());
+    card.append(element('p',`保存研究状态 ${text(reference.research_status)}；公告日 ${text(reference.publication_date)}；目标日 ${text(reference.target_trade_date)}；复核时间 ${text(reference.reviewed_at)}；入库可用时间 ${text(reference.owner_available_at)}。`));
+    card.append(element('p',`历史 PIT：${text(reference.point_in_time_status,'CANNOT_CONFIRM')}；互联互通资格：${text(reference.connect_eligibility_status,'NOT_ASSESSED')}。`));
+    const sources=element('details');sources.append(element('summary','来源标识与读取校验'));
+    for(const article of list(reference.article_refs))sources.append(element('p',`${text(article.title)}｜公告代码 ${text(article.art_code)}｜来源 SHA256 ${text(article.source_sha256)}。原文链接未提供。`));
+    sources.append(details('本条保存来源',{
+      product_sha256:reference.product_sha256,source_manifest_sha256:reference.source_manifest_sha256,
+      evidence_run_id:reference.evidence_run_id,handoff_manifest_sha256:reference.handoff_manifest_sha256,
+      owner_import_receipt_sha256:reference.owner_import_receipt_sha256,
+      saved_entry_sha256:entry.sha256,source_section_sha256:metadata.source_section_sha256,
+    }));card.append(sources);host.append(card);
+  }
+  host.append(details('本次消费产品与计划截止（原字段）',{status:metadata.status,plan_cutoff:metadata.plan_cutoff,products:metadata.products,gaps:metadata.gaps}));
+}

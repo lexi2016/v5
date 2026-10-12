@@ -27,12 +27,16 @@ def _validate(request):
     m.require(type(root) is str and len(root) <= 4096 and Path(root).is_absolute()
               and '..' not in Path(root).parts, 'V2_PATH')
     kind = request['kind'];query = request['query']
-    m.require(kind in ('overview', 'section', 'content'), 'V2_PAGE_ACTION')
+    m.require(kind in ('overview', 'section', 'content', 'announcement'), 'V2_PAGE_ACTION')
     keys = () if kind == 'overview' else ('page',) if kind == 'content' else ('section',)
-    if kind == 'section' and isinstance(query, dict) and 'cursor' in query: keys += ('cursor',)
+    if kind == 'announcement':keys += ('projection',)
+    if kind in ('section', 'announcement') and isinstance(query, dict) and 'cursor' in query: keys += ('cursor',)
     m.v1.exact(query, keys, 'V2_PAGE_QUERY')
     if kind == 'content':m.require(m.v1.integer(query['page'], 0, 2**63-1), 'V2_PAGE_INDEX')
     else:m.require(all(type(value) is str and len(value) <= 8192 for value in query.values()), 'V2_PAGE_QUERY')
+    if kind == 'announcement':
+        m.require(query['section'] == 'announcement_reviewed_analysis'
+                  and query['projection'] == 'announcement_references', 'V2_PAGE_PROJECTION')
     m.require(len(m.v1.canonical(request)) < 65536, 'V2_REQUEST_BYTES')
 
 
@@ -70,15 +74,16 @@ def _check_payload(value, request):
     else:
         keys += ('section', 'selection', 'cursor', 'offset', 'matched_total', 'not_loaded_count',
                  'remaining_entries', 'entries', 'next_cursor', 'loaded_count')
+        if kind == 'announcement':keys += ('projection', 'announcement')
     m.v1.exact(value, keys, 'V2_RECEIPT_PAGE')
-    schema = 'detail' if kind == 'section' else kind
+    schema = 'detail' if kind in ('section', 'announcement') else kind
     m.require(value['schema'] == m.VERSION + '.' + schema, 'V2_RECEIPT_PAGE')
     if kind == 'content':
         page = query['page']
         m.require(m.v1.integer(value['index'], page, page)
                   and m.v1.integer(value['offset'], page*m.PROFILE['chunk_bytes'], page*m.PROFILE['chunk_bytes']),
                   'V2_RECEIPT_PAGE')
-    elif kind == 'section':
+    elif kind in ('section', 'announcement'):
         cursor = query.get('cursor');offset = 0
         if cursor is not None:
             encoded = m.base64.b64decode(cursor, altchars=b'-_', validate=True)
@@ -87,6 +92,20 @@ def _check_payload(value, request):
         m.require(value['section'] == query['section'] and value['selection'] is None
                   and value['cursor'] == cursor and m.v1.integer(value['offset'], offset, offset),
                   'V2_RECEIPT_PAGE')
+        if kind == 'announcement':
+            from .module_api import _m18_announcement_cursor
+            m.require(value['projection'] == query['projection'], 'V2_RECEIPT_PAGE')
+            meta = value['announcement']
+            m.v1.exact(meta, ('status', 'plan_cutoff', 'gaps', 'source_section_sha256',
+                             'reference_count', 'products'), 'V2_RECEIPT_PAGE')
+            m.require(type(meta['source_section_sha256']) is str
+                      and re.fullmatch('[0-9a-f]{64}', meta['source_section_sha256']) is not None
+                      and m.v1.integer(meta['reference_count'], 0, m.v1.MAX_ENTRIES)
+                      and meta['reference_count'] == value['matched_total'], 'V2_RECEIPT_PAGE')
+            if cursor is not None:
+                m.require(cursor == _m18_announcement_cursor(value, meta['source_section_sha256'], offset)
+                          and m.v1.integer(offset, m.v1.PAGE_SIZE, meta['reference_count']-1)
+                          and offset % m.v1.PAGE_SIZE == 0, 'V2_RECEIPT_PAGE')
 
 
 class PageSender(process.ReceiptSender):

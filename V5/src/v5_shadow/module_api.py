@@ -1,5 +1,6 @@
 """One independent, read-only API process for one module's immutable responses."""
 import argparse
+import base64
 import fcntl
 import time
 import hashlib
@@ -173,6 +174,20 @@ def _m18_page_response(config, root, query):
 M18_VIEW_BYTES = 256 * 1024
 M18_VIEW_ITEM_BYTES = 16 * 1024
 M18_VIEW_VALUES_BYTES = 128 * 1024
+M18_ANNOUNCEMENT_SECTION = 'announcement_reviewed_analysis'
+M18_ANNOUNCEMENT_PROJECTION = 'announcement_references'
+M18_ANNOUNCEMENT_PRODUCT_FIELDS = (
+    'schema_version', 'target_trade_date', 'publication_date', 'status',
+    'validation_status', 'consumed', 'product_sha256', 'source_manifest_sha256',
+    'catalog_product_sha256', 'source_run_id', 'evidence_run_id',
+    'handoff_manifest_sha256', 'agent_judgment_receipt_sha256',
+    'owner_import_receipt_sha256', 'owner_handoff_binding_status',
+    'decision_status', 'selection_status', 'stock_count', 'selected_stock_count',
+    'conditional_watch_count', 'not_selected_stock_count', 'not_assessed_stock_count',
+    'reviewed_at', 'owner_available_at', 'latest_source_or_review_at',
+    'plan_cutoff', 'cutoff_status', 'failure_stage', 'gaps', 'RESEARCH_ONLY',
+    'production_allowed', 'buy_gate_updated', 'orders_sent',
+)
 
 
 def _m18_read_value(binding, kind, query):
@@ -192,7 +207,12 @@ def _m18_semantic_response(config, root, path, query):
         keys += ('section',)
         if 'cursor' in query:
             keys += ('cursor',)
+        if 'projection' in query:
+            keys += ('projection',)
     exact_keys(query, keys)
+    if 'projection' in query and (query['projection'] != M18_ANNOUNCEMENT_PROJECTION
+            or query['section'] != M18_ANNOUNCEMENT_SECTION):
+        raise ValueError('M18_PROJECTION_INVALID')
     descriptor = _m18_read_page_binding(config, root, query)
     if query['generation_id'] != descriptor['generation_id']:
         raise ValueError('M18_GENERATION_MISMATCH')
@@ -201,13 +221,94 @@ def _m18_semantic_response(config, root, path, query):
             or binding['profile_sha256'] != descriptor['profile_sha256']):
         raise ValueError('M18_IDENTITY_MISMATCH')
     kind = 'overview' if path == M18_ROUTE + '/overview' else 'section'
-    selection = {key: query[key] for key in ('section', 'cursor') if key in query}
+    if 'projection' in query:kind = 'announcement'
+    selection = {key: query[key] for key in ('section', 'cursor', 'projection') if key in query}
     return _m18_read_value(binding, kind, selection)
+
+
+def _m18_announcement_cursor(binding, source_sha, offset):
+    value = {key: binding[key] for key in (
+        'manifest_sha256', 'generation_id', 'identity', 'profile_sha256')}
+    value.update(section=M18_ANNOUNCEMENT_SECTION, projection=M18_ANNOUNCEMENT_PROJECTION,
+                 source_section_sha256=source_sha, selection_sha256=sha256_json(None), offset=offset)
+    return base64.urlsafe_b64encode(canonical_bytes(value)).decode('ascii')
+
+
+def _m18_announcement_value(reader, query):
+    """Project exact saved reference spans; never infer stocks or rerun M13."""
+    from . import m18_offline_v2 as m
+    source_page = reader.detail(M18_ANNOUNCEMENT_SECTION)
+    m.require(source_page['matched_total'] == 1 and len(source_page['entries']) == 1,
+              'V2_ANNOUNCEMENT_SOURCE')
+    source_entry = source_page['entries'][0]
+    m.require(source_entry['kind'] == 'object'
+              and 0 < source_entry['bytes'] < m.PROFILE['object_bytes'], 'V2_OBJECT_BYTES')
+    parts = [];size = 0
+    for part in reader.item_parts(M18_ANNOUNCEMENT_SECTION, 0):
+        size += len(part)
+        m.require(size < m.PROFILE['object_bytes'], 'V2_OBJECT_BYTES')
+        parts.append(part)
+    raw = b''.join(parts);del parts
+    m.require(len(raw) == source_entry['bytes'] and m.sha(raw) == source_entry['sha256'],
+              'V2_ANNOUNCEMENT_HASH')
+    # Reuse the existing byte grammar and original object/node/depth budgets.
+    # Treat this already-verified object as payload solely to index its fields;
+    # offsets below are translated back into the original full saved response.
+    scanner = m._Scan(raw, 'object', reader._guard)
+    scanner.value(path=('payload',));scanner.space()
+    m.require(scanner.position == len(raw), 'V2_ANNOUNCEMENT_SOURCE')
+    reader._guard.scan_nodes += scanner.nodes;reader._guard.scan_bytes += len(raw)
+    source = json.loads(raw)
+    reader._guard.checkpoint('announcement_source')
+    m.require(type(source) is dict and type(source.get('research_references')) is list
+              and type(source.get('products')) is list
+              and all(type(product) is dict for product in source['products']), 'V2_ANNOUNCEMENT_SOURCE')
+    references = source['research_references']
+    rows = scanner.sections['research_references']['entries']
+    m.require(len(rows) == len(references), 'V2_ANNOUNCEMENT_SOURCE')
+    binding = reader._binding();cursor = query.get('cursor');offset = 0
+    if cursor is not None:
+        try:
+            encoded = base64.b64decode(cursor, altchars=b'-_', validate=True)
+            declared, _ = m.v1.parse(encoded, object_limit=True)
+            offset = declared['offset']
+        except (ValueError, KeyError, TypeError):
+            raise ValueError('M18_CURSOR_INVALID') from None
+        m.require(m.v1.integer(offset, m.v1.PAGE_SIZE, len(rows)-1)
+                  and offset % m.v1.PAGE_SIZE == 0, 'V2_ANNOUNCEMENT_CURSOR')
+        m.require(cursor == _m18_announcement_cursor(binding, source_entry['sha256'], offset),
+                  'V2_ANNOUNCEMENT_CURSOR')
+    entries = [];loaded = 0;loaded_bytes = 0
+    for row in rows[offset:offset+m.v1.PAGE_SIZE]:
+        entry = dict(row, offset=source_entry['offset']+row['offset'])
+        if entry['bytes'] > M18_VIEW_ITEM_BYTES:
+            entry['reason'] = 'ITEM_BYTES_LIMIT'
+        elif loaded_bytes + entry['bytes'] > M18_VIEW_VALUES_BYTES:
+            entry['reason'] = 'PAGE_BYTES_LIMIT'
+        else:
+            entry.update(value=references[row['index']], value_state='LOADED')
+            loaded += 1;loaded_bytes += entry['bytes']
+        entries.append(entry)
+    next_offset = offset + len(entries)
+    metadata = dict(status=source.get('status'), plan_cutoff=source.get('plan_cutoff'),
+        gaps=source.get('gaps'), source_section_sha256=source_entry['sha256'],
+        reference_count=len(rows), products=[
+            {key: product[key] for key in M18_ANNOUNCEMENT_PRODUCT_FIELDS if key in product}
+            for product in source['products']])
+    return dict(schema=m.VERSION+'.detail', **binding, section=M18_ANNOUNCEMENT_SECTION,
+        projection=M18_ANNOUNCEMENT_PROJECTION, announcement=metadata,
+        selection=None, cursor=cursor, offset=offset, matched_total=len(rows),
+        loaded_count=loaded, not_loaded_count=len(rows)-loaded,
+        remaining_entries=len(rows)-next_offset, entries=entries,
+        next_cursor=(_m18_announcement_cursor(binding, source_entry['sha256'], next_offset)
+                     if next_offset < len(rows) else None))
 
 
 def _m18_semantic_value(reader, kind, query):
     """Bound one verified Reader value inside the short-lived read process."""
-    if kind == 'overview':
+    if kind == 'announcement':
+        value = _m18_announcement_value(reader, query)
+    elif kind == 'overview':
         value = reader.overview()
     else:
         section = query['section']

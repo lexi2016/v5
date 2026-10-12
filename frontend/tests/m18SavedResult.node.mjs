@@ -72,3 +72,18 @@ test('section navigation replaces rows and preserves opaque cursor history; fail
  await session.previous(); assert.equal(session.state.page.offset,0); assert.deepEqual(calls.map(x=>x.offset),[0,32,0]);
  fail=true; await session.select('status'); assert.equal(session.state.phase,'CANNOT_CONFIRM'); assert.equal(session.state.page,null); assert.match(session.state.error,/409/);
 });
+
+test('same-run announcement projection is the default and pages references, not the one container object', async () => {
+ const sections={...overview.sections,announcement_reviewed_analysis:{kind:'object',total:1,loaded_count:0,not_loaded_count:1,state:'NOT_LOADED'}};
+ const announcement={status:'READY',plan_cutoff:'2026-10-12T07:42:13+08:00',gaps:[],source_section_sha256:'3'.repeat(64),reference_count:33,products:[{product_sha256:'4'.repeat(64),consumed:true}]};
+ const page={...detail,section:'announcement_reviewed_analysis',projection:'announcement_references',announcement};
+ const {client,requests}=clientWith(page);
+ assert.equal(chooseSection(sections),'announcement_reviewed_analysis');
+ const result=await client.section(descriptor,{...overview,sections},'announcement_reviewed_analysis');
+ assert.equal(result.matched_total,33);assert.equal(result.announcement.reference_count,33);
+ assert.match(requests[0][0],/projection=announcement_references/);
+ for(const patch of [{projection:'wrong'},{announcement:{...announcement,reference_count:1}},{announcement:{...announcement,source_section_sha256:'wrong'}},{announcement:undefined}]) {
+  await assert.rejects(clientWith({...page,...patch}).client.section(descriptor,{...overview,sections},'announcement_reviewed_analysis'),/M18_/);
+ }
+ await assert.rejects(clientWith({...detail,projection:'announcement_references',announcement}).client.section(descriptor,overview,'stocks'),/M18_/);
+});

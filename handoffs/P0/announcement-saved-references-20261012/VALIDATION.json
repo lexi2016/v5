@@ -1,0 +1,58 @@
+{
+  "scope": "Cloud isolated SYNTHETIC fixtures only; no real Mac candidate acceptance yet",
+  "node": {
+    "command": "node --test frontend/tests/*.node.mjs",
+    "tests": 17,
+    "passed": 17,
+    "exit_code": 0
+  },
+  "node_typescript_syntax": {
+    "files": [
+      "frontend/src/api/m18SavedResult.ts",
+      "frontend/src/manager-selection/announcementAnalysis.ts"
+    ],
+    "status": "PASS"
+  },
+  "existing_jsdom_direct_renderer": {
+    "status": "PASS",
+    "stock_cards": 1,
+    "injected_html_nodes": 0,
+    "invented_source_links": 0,
+    "vue_mount": false
+  },
+  "new_backend_projection": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_announcement_projection.py",
+    "tests": 7,
+    "subtests": 11,
+    "status": "PASS",
+    "seconds": 6.99,
+    "includes_actual_http_to_typescript_client": true
+  },
+  "vue_test": {
+    "status": "NOT_RUN",
+    "reason": "Existing Vue/Vitest dependencies unavailable in this cloud workspace; test source included for Mac"
+  },
+  "product_typecheck_build": {
+    "status": "NOT_RUN",
+    "reason": "Existing vue-tsc/Vite binaries unavailable in this cloud workspace"
+  },
+  "real_mac_api_and_preview": {
+    "status": "NOT_RUN",
+    "owner": "parent-coordinated Mac task",
+    "old_cff_memory_acceptance": "a7faff846f18d3dc37933e43f87957ab294a0064"
+  },
+  "retained": {
+    "v4_renderer_original_body_unchanged": true,
+    "existing_dependencies_unchanged": true,
+    "existing_readonly_worker_and_resource_profile": true
+  },
+  "affected_backend_regression": {
+    "command": "PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_disk_pages.py V5/tests/test_m18_v2_semantic_pages.py V5/tests/test_m18_v2_read_process.py V5/tests/test_m18_v2_announcement_projection.py",
+    "tests_passed": 28,
+    "subtests_passed": 54,
+    "skipped": 1,
+    "skip_reason": "Existing opt-in long resource pressure test; unchanged resource gates already accepted at cff144",
+    "seconds": 27.55,
+    "exit_code": 0
+  }
+}
