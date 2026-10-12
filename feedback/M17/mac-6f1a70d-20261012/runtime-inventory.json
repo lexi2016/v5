@@ -1,0 +1,69 @@
+{
+  "scope": "Read-only inventory of three previously known existing project interpreters; not an exhaustive machine search. No collector/probe call, installation or active binding.",
+  "environments": [
+    {
+      "environment": "existing-v4-runtime-python",
+      "command": "<EXISTING_PYTHON> -I -B -c <READ_ONLY_PACKAGE_METADATA_AND_FILE_HASH_PROBE>",
+      "started_utc": "2026-10-12T22:52:58.688601+00:00",
+      "finished_utc": "2026-10-12T22:52:58.731910+00:00",
+      "exit_code": 0,
+      "python_version": "3.14.6",
+      "python_binary_sha256": "839b22560e27f02d716009a2d6bcd377cb6197ff70888787e3097919120e32aa",
+      "pytdx_present": true,
+      "pytdx_version": "1.72",
+      "modules": [
+        {
+          "relative_path": "pytdx/__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "relative_path": "pytdx/exhq.py",
+          "bytes": 5598,
+          "sha256": "2f63d7efe5b33b7a059bee046e468a853639f431da26bd8b075fe81c56cb2b98"
+        }
+      ]
+    },
+    {
+      "environment": "existing-v5-data-test-python",
+      "command": "<EXISTING_PYTHON> -I -B -c <READ_ONLY_PACKAGE_METADATA_AND_FILE_HASH_PROBE>",
+      "started_utc": "2026-10-12T22:52:58.731938+00:00",
+      "finished_utc": "2026-10-12T22:52:58.765883+00:00",
+      "exit_code": 0,
+      "python_version": "3.14.6",
+      "python_binary_sha256": "839b22560e27f02d716009a2d6bcd377cb6197ff70888787e3097919120e32aa",
+      "pytdx_present": false
+    },
+    {
+      "environment": "existing-hk02-python",
+      "command": "<EXISTING_PYTHON> -I -B -c <READ_ONLY_PACKAGE_METADATA_AND_FILE_HASH_PROBE>",
+      "started_utc": "2026-10-12T22:52:58.765919+00:00",
+      "finished_utc": "2026-10-12T22:52:58.843961+00:00",
+      "exit_code": 0,
+      "python_version": "3.13.12",
+      "python_binary_sha256": "95fb891ec36d4022bdf62172f9d3c757fb3c7b1669a274cacc87fe261a535b7e",
+      "pytdx_present": true,
+      "pytdx_version": "1.72",
+      "modules": [
+        {
+          "relative_path": "pytdx/__init__.py",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "relative_path": "pytdx/exhq.py",
+          "bytes": 5598,
+          "sha256": "2f63d7efe5b33b7a059bee046e468a853639f431da26bd8b075fe81c56cb2b98"
+        }
+      ]
+    }
+  ],
+  "future_real_execution_unbound": [
+    "explicit private real state root and correct real marker",
+    "exact D1 universe pool root and provenance",
+    "active capture mode",
+    "explicit selected interpreter and PyTDX fingerprint binding",
+    "separate authorization for real collection",
+    "P0 evening scheduling/slot if global integration is requested"
+  ]
+}

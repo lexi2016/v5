@@ -1,0 +1,112 @@
+{
+  "candidate_commit": "6f1a70d9ce5cc1dd759347a3ff6fad7a0c06117f",
+  "source_files_verified": 64,
+  "original_vendor_files": 24,
+  "old_four_controls_rerun": false,
+  "commands": [
+    {
+      "label": "forward-check",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--check",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-6f1a-source/integration_candidates/M17_REAL/forward.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-6f1a-evidence/patch-check",
+      "started_utc": "2026-10-12T22:52:30.330766+00:00",
+      "finished_utc": "2026-10-12T22:52:31.301627+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "fa669ed47e8e837a489bdc043ffa06d1fe42d4c2b82f10d0a92ad35d84ea495d",
+      "sanitized_output_sha256": "fa669ed47e8e837a489bdc043ffa06d1fe42d4c2b82f10d0a92ad35d84ea495d"
+    },
+    {
+      "label": "forward-apply",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-6f1a-source/integration_candidates/M17_REAL/forward.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-6f1a-evidence/patch-check",
+      "started_utc": "2026-10-12T22:52:31.302161+00:00",
+      "finished_utc": "2026-10-12T22:52:31.309248+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sanitized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "reverse-check",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--check",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-6f1a-source/integration_candidates/M17_REAL/reverse.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-6f1a-evidence/patch-check",
+      "started_utc": "2026-10-12T22:52:31.309729+00:00",
+      "finished_utc": "2026-10-12T22:52:31.316522+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sanitized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "reverse-apply",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-6f1a-source/integration_candidates/M17_REAL/reverse.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-6f1a-evidence/patch-check",
+      "started_utc": "2026-10-12T22:52:31.316890+00:00",
+      "finished_utc": "2026-10-12T22:52:31.323501+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sanitized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "targeted",
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-I",
+        "-B",
+        "integration_candidates/M17_REAL/after/V5/tests/test_daily_close_recapture_real_binding.py"
+      ],
+      "cwd": "<TASK_ROOT>/m17-6f1a-source",
+      "started_utc": "2026-10-12T22:52:31.323902+00:00",
+      "finished_utc": "2026-10-12T22:52:32.706836+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "51c5f4e128b546b73d5f61cf3bf5d31fb02a46d3f5e409076f0cecc1512debdb",
+      "sanitized_output_sha256": "51c5f4e128b546b73d5f61cf3bf5d31fb02a46d3f5e409076f0cecc1512debdb"
+    }
+  ],
+  "patch_forward_reverse_exact": true,
+  "source_unchanged_after": true,
+  "python_version": "3.14.6",
+  "fastapi_version": "0.141.1",
+  "fixture": "SYNTHETIC_NETWORK_BOUNDARY",
+  "tests_exit_code": 0,
+  "scope": "Guarded real-default collector code path with synthetic TdxExHq_API; original collector/probe/batching/reader/ledger exercised, no real market acquisition.",
+  "not_run": [
+    "real collection",
+    "1530",
+    "continuous tracking",
+    "global P0 scheduling",
+    "deployment",
+    "natural run",
+    "page/M18 publication"
+  ],
+  "tests_total": 10,
+  "tests_passed": 9,
+  "tests_failed": 0,
+  "tests_skipped": 1,
+  "skip_reason": "Existing test environment contains PyTDX; missing-PyTDX environment case skipped by candidate suite.",
+  "suite_seconds": 1.326,
+  "old_seventeen_tests_rerun": false,
+  "guard_scope": "SYNTHETIC_NETWORK_BOUNDARY; Python guards, not OS sandbox certification",
+  "materialization": "64 exact Git blobs for new candidate, unchanged old fixture/scaffold and original 24-file vendor closure; not full checkout",
+  "network_calls": false,
+  "active_real_binding_created": false
+}
