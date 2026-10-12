@@ -1,0 +1,26 @@
+{
+  "checked_utc": "2026-10-12T11:17:17.296655+00:00",
+  "preview_url": "http://127.0.0.1:54780/",
+  "api_url": "http://127.0.0.1:51977",
+  "frontend_rebuilt": false,
+  "requests": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 850,
+      "title": "V5 \u7ecf\u7406\u5df2\u4fdd\u5b58\u7ed3\u679c"
+    },
+    {
+      "path": "/manager-selection/",
+      "status": 200,
+      "bytes": 558,
+      "title": "V5 \u7ecf\u7406\u5df2\u4fdd\u5b58\u7ed3\u679c"
+    },
+    {
+      "path": "/api/v4/manager/m18/v2?run_id=46596b03c2ab4e29b1219fd2e5eb698f",
+      "status": 200,
+      "bytes": 804,
+      "identity": "MATCHED"
+    }
+  ]
+}

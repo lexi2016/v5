@@ -1,0 +1,367 @@
+{
+  "candidate": "cff1449646c3bf0e30b3dfdf25e707cc4cda2772",
+  "passed": true,
+  "workers": [
+    {
+      "status": "OK",
+      "pid": 35968,
+      "usage": {
+        "peak_rss_bytes": 318799872,
+        "cpu_seconds": 4.239576,
+        "wall_seconds": 4.196176625002408
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.258968833994004
+    },
+    {
+      "status": "OK",
+      "pid": 35971,
+      "usage": {
+        "peak_rss_bytes": 318767104,
+        "cpu_seconds": 4.255803,
+        "wall_seconds": 4.213276458001928
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.272225709006307
+    },
+    {
+      "status": "OK",
+      "pid": 35977,
+      "usage": {
+        "peak_rss_bytes": 318881792,
+        "cpu_seconds": 4.300828,
+        "wall_seconds": 4.256999167002505
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.3182060409890255
+    },
+    {
+      "status": "OK",
+      "pid": 35988,
+      "usage": {
+        "peak_rss_bytes": 319422464,
+        "cpu_seconds": 4.298094,
+        "wall_seconds": 4.254327332993853
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.31482629099628
+    },
+    {
+      "status": "OK",
+      "pid": 35999,
+      "usage": {
+        "peak_rss_bytes": 319193088,
+        "cpu_seconds": 4.208827,
+        "wall_seconds": 4.168099167000037
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.2282048749912065
+    },
+    {
+      "status": "OK",
+      "pid": 36015,
+      "usage": {
+        "peak_rss_bytes": 318750720,
+        "cpu_seconds": 4.254771,
+        "wall_seconds": 4.211540749995038
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.271356249999371
+    },
+    {
+      "status": "OK",
+      "pid": 36041,
+      "usage": {
+        "peak_rss_bytes": 318750720,
+        "cpu_seconds": 4.300707,
+        "wall_seconds": 4.2571325409953715
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.3190990000002785
+    },
+    {
+      "status": "OK",
+      "pid": 36055,
+      "usage": {
+        "peak_rss_bytes": 318767104,
+        "cpu_seconds": 4.385254,
+        "wall_seconds": 4.343144416998257
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.403643792000366
+    },
+    {
+      "status": "OK",
+      "pid": 36070,
+      "usage": {
+        "peak_rss_bytes": 318816256,
+        "cpu_seconds": 4.21608,
+        "wall_seconds": 4.174139042006573
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.234331167011987
+    },
+    {
+      "status": "OK",
+      "pid": 36082,
+      "usage": {
+        "peak_rss_bytes": 318767104,
+        "cpu_seconds": 4.384946,
+        "wall_seconds": 4.342276833995129
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.402090792005765
+    },
+    {
+      "status": "OK",
+      "pid": 36087,
+      "usage": {
+        "peak_rss_bytes": 318799872,
+        "cpu_seconds": 4.391902,
+        "wall_seconds": 4.351928625008441
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.4120719589991495
+    },
+    {
+      "status": "OK",
+      "pid": 36091,
+      "usage": {
+        "peak_rss_bytes": 318849024,
+        "cpu_seconds": 4.451301,
+        "wall_seconds": 4.411904708002112
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.473042792000342
+    },
+    {
+      "status": "OK",
+      "pid": 36103,
+      "usage": {
+        "peak_rss_bytes": 318799872,
+        "cpu_seconds": 4.378939,
+        "wall_seconds": 4.336452249990543
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.398715916002402
+    },
+    {
+      "status": "OK",
+      "pid": 36110,
+      "usage": {
+        "peak_rss_bytes": 318816256,
+        "cpu_seconds": 4.394263,
+        "wall_seconds": 4.3514689590083435
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.411263417001464
+    }
+  ],
+  "api_peak_rss_bytes": 35700736,
+  "preserved_file_count": 141,
+  "start": "2026-10-12T11:15:38.354863+00:00",
+  "end": "2026-10-12T11:16:39.208221+00:00",
+  "url": "http://127.0.0.1:51977",
+  "child_pid": 35966,
+  "child_returncode": null,
+  "hashes_mtimes_unchanged": true,
+  "requests": [
+    {
+      "cycle": 0,
+      "request": "descriptor",
+      "http": 200,
+      "bytes": 804,
+      "seconds": 0.002,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "overview",
+      "http": 200,
+      "bytes": 6638,
+      "seconds": 4.264,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "summary",
+      "http": 200,
+      "bytes": 1321,
+      "seconds": 4.274,
+      "total": 1,
+      "entries": 1,
+      "loaded": 1,
+      "not_loaded": 0,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "gaps0",
+      "http": 200,
+      "bytes": 10477,
+      "seconds": 4.32,
+      "total": 3258,
+      "entries": 32,
+      "loaded": 32,
+      "not_loaded": 3226,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "gaps1",
+      "http": 200,
+      "bytes": 11468,
+      "seconds": 4.316,
+      "total": 3258,
+      "entries": 32,
+      "loaded": 32,
+      "not_loaded": 3226,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "materials",
+      "http": 200,
+      "bytes": 107984,
+      "seconds": 4.23,
+      "total": 3186,
+      "entries": 32,
+      "loaded": 32,
+      "not_loaded": 3154,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "market_screen",
+      "http": 200,
+      "bytes": 2220,
+      "seconds": 4.273,
+      "total": 1,
+      "entries": 1,
+      "loaded": 1,
+      "not_loaded": 0,
+      "status": "CANNOT_CONFIRM",
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "stocks",
+      "http": 200,
+      "bytes": 872,
+      "seconds": 4.32,
+      "total": 0,
+      "entries": 0,
+      "loaded": 0,
+      "not_loaded": 0,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "descriptor",
+      "http": 200,
+      "bytes": 804,
+      "seconds": 0.001,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "overview",
+      "http": 200,
+      "bytes": 6638,
+      "seconds": 4.405,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "summary",
+      "http": 200,
+      "bytes": 1321,
+      "seconds": 4.236,
+      "total": 1,
+      "entries": 1,
+      "loaded": 1,
+      "not_loaded": 0,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "gaps0",
+      "http": 200,
+      "bytes": 10477,
+      "seconds": 4.403,
+      "total": 3258,
+      "entries": 32,
+      "loaded": 32,
+      "not_loaded": 3226,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "gaps1",
+      "http": 200,
+      "bytes": 11468,
+      "seconds": 4.413,
+      "total": 3258,
+      "entries": 32,
+      "loaded": 32,
+      "not_loaded": 3226,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "materials",
+      "http": 200,
+      "bytes": 107984,
+      "seconds": 4.475,
+      "total": 3186,
+      "entries": 32,
+      "loaded": 32,
+      "not_loaded": 3154,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "market_screen",
+      "http": 200,
+      "bytes": 2220,
+      "seconds": 4.4,
+      "total": 1,
+      "entries": 1,
+      "loaded": 1,
+      "not_loaded": 0,
+      "status": "CANNOT_CONFIRM",
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 1,
+      "request": "stocks",
+      "http": 200,
+      "bytes": 872,
+      "seconds": 4.412,
+      "total": 0,
+      "entries": 0,
+      "loaded": 0,
+      "not_loaded": 0,
+      "identity": "MATCHED"
+    }
+  ],
+  "api_state": "RUNNING_RETAINED_FOR_PREVIEW",
+  "acceptance_assertions": "PASS",
+  "process_exit": "NOT_EXITED_RETAINED_FOR_PREVIEW",
+  "worker_pids_absent_after_reap": true,
+  "same_response_sha256_both_cycles": true
+}
