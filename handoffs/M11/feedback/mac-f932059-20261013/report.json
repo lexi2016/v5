@@ -1,0 +1,186 @@
+{
+  "candidate": "f932059eff5e425d0e3c381f9e4610e62e6e0cc2",
+  "started_utc": "2026-10-12T21:44:19.480524+00:00",
+  "commands": [
+    {
+      "name": "m11-pytest",
+      "command": [
+        "<EXISTING_V35_MAC_PYTHON>",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "V5/tests/m11"
+      ],
+      "cwd": "m11-f932-source",
+      "started_utc": "2026-10-12T21:44:19.505103+00:00",
+      "ended_utc": "2026-10-12T21:44:22.612917+00:00",
+      "exit": 0
+    },
+    {
+      "name": "build-manifest-check",
+      "command": [
+        "<EXISTING_V35_MAC_PYTHON>",
+        "-B",
+        "V5/tools/build_m11_source_manifest.py",
+        "--check"
+      ],
+      "cwd": "m11-f932-source",
+      "started_utc": "2026-10-12T21:44:22.612960+00:00",
+      "ended_utc": "2026-10-12T21:44:22.640076+00:00",
+      "exit": 0
+    },
+    {
+      "name": "integration-pytest",
+      "command": [
+        "/bin/bash",
+        "run_tests.sh"
+      ],
+      "cwd": "m11-f932-source/handoffs/M11/delivery/integration_candidate",
+      "started_utc": "2026-10-12T21:44:22.640106+00:00",
+      "ended_utc": "2026-10-12T21:44:23.446504+00:00",
+      "exit": 0
+    }
+  ],
+  "patches": [
+    {
+      "name": "runtime-runtime-check",
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/runtime.patch"
+      ],
+      "cwd": "m11-f932-evidence/runtime-patch",
+      "started_utc": "2026-10-12T21:44:23.447265+00:00",
+      "ended_utc": "2026-10-12T21:44:23.464603+00:00",
+      "exit": 0
+    },
+    {
+      "name": "runtime-runtime-apply",
+      "command": [
+        "git",
+        "apply",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/runtime.patch"
+      ],
+      "cwd": "m11-f932-evidence/runtime-patch",
+      "started_utc": "2026-10-12T21:44:23.464645+00:00",
+      "ended_utc": "2026-10-12T21:44:23.484381+00:00",
+      "exit": 0
+    },
+    {
+      "name": "runtime-reverse-check",
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/reverse.patch"
+      ],
+      "cwd": "m11-f932-evidence/runtime-patch",
+      "started_utc": "2026-10-12T21:44:23.486727+00:00",
+      "ended_utc": "2026-10-12T21:44:23.501093+00:00",
+      "exit": 0
+    },
+    {
+      "name": "runtime-reverse-apply",
+      "command": [
+        "git",
+        "apply",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/reverse.patch"
+      ],
+      "cwd": "m11-f932-evidence/runtime-patch",
+      "started_utc": "2026-10-12T21:44:23.501131+00:00",
+      "ended_utc": "2026-10-12T21:44:23.517669+00:00",
+      "exit": 0
+    },
+    {
+      "name": "integration-runtime-check",
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/integration_candidate/runtime.patch"
+      ],
+      "cwd": "m11-f932-evidence/integration-patch",
+      "started_utc": "2026-10-12T21:44:23.518078+00:00",
+      "ended_utc": "2026-10-12T21:44:23.528322+00:00",
+      "exit": 0
+    },
+    {
+      "name": "integration-runtime-apply",
+      "command": [
+        "git",
+        "apply",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/integration_candidate/runtime.patch"
+      ],
+      "cwd": "m11-f932-evidence/integration-patch",
+      "started_utc": "2026-10-12T21:44:23.528356+00:00",
+      "ended_utc": "2026-10-12T21:44:23.537736+00:00",
+      "exit": 0
+    },
+    {
+      "name": "integration-reverse-check",
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/integration_candidate/reverse.patch"
+      ],
+      "cwd": "m11-f932-evidence/integration-patch",
+      "started_utc": "2026-10-12T21:44:23.537836+00:00",
+      "ended_utc": "2026-10-12T21:44:23.547170+00:00",
+      "exit": 0
+    },
+    {
+      "name": "integration-reverse-apply",
+      "command": [
+        "git",
+        "apply",
+        "<TASK>/m11-f932-source/handoffs/M11/delivery/integration_candidate/reverse.patch"
+      ],
+      "cwd": "m11-f932-evidence/integration-patch",
+      "started_utc": "2026-10-12T21:44:23.547212+00:00",
+      "ended_utc": "2026-10-12T21:44:23.556531+00:00",
+      "exit": 0
+    }
+  ],
+  "candidate_blobs_verified": 319,
+  "runtime_patch_roundtrip": "PASS",
+  "integration_patch_roundtrip": "PASS",
+  "source_unchanged": true,
+  "ended_utc": "2026-10-12T21:44:23.568798+00:00",
+  "status": "PASS",
+  "uncovered_boundary": "config_path inside archive negative case is not covered by this fixed candidate; separate author hardening pending. Fixtures use config outside archive.",
+  "test_counts": {
+    "m11": 43,
+    "integration": 18,
+    "failed": 0,
+    "skipped": 0
+  },
+  "original_donor_files_verified": 73,
+  "vendor_original_files_verified": 54,
+  "new_build_manifest": {
+    "sha256": "c824e9b9bfdbda716c7f2ce25e584866f99913c224662550d0e68deb8e4bd558",
+    "historical_original_manifest": false,
+    "owner_python_count": 40,
+    "external_count": 5
+  },
+  "r4_original_supplement_files_preserved": 3,
+  "environment": {
+    "python": "3.14.6",
+    "existing_environment": "V4 runtime v3.5-mac",
+    "PYTHONPATH": "<ISOLATED_CANDIDATE>/V5/src",
+    "TMPDIR": "<TASK>/m11-f932-evidence/tmp",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "dependency_installs": 0
+  },
+  "scope_limits": [
+    "Fixture-only engineering acceptance; full original operational capture/model generation NOT_RUN.",
+    "No credential DB, real provider, collection, deployment, V4 or 54780 changes.",
+    "F assembly and iwencai_binding retained byte-for-byte. Original source validator unchanged.",
+    "Default owner call, fixture assembly, immutable publication and independent readback covered by supplied tests; this is not natural/PIT qualification.",
+    "Full M11/P0-P5 acceptance remains open."
+  ]
+}
