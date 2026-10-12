@@ -1,0 +1,76 @@
+{
+  "child_returncode": -2,
+  "requests": [
+    {
+      "request": "descriptor",
+      "http": 200,
+      "bytes": 804
+    },
+    {
+      "request": "overview",
+      "http": 200,
+      "bytes": 6638
+    },
+    {
+      "request": "summary",
+      "http": 200,
+      "bytes": 1321
+    },
+    {
+      "request": "gaps",
+      "http": 409,
+      "bytes": 90,
+      "error": [
+        "MODULE_RESULT_INVALID"
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "exception_type": "ContractError",
+      "code": "M18_V2_RESOURCE_PEAK_RSS_BYTES",
+      "frames": [
+        {
+          "file": "V5/src/v5_shadow/module_api.py",
+          "function": "_m18_semantic_response",
+          "line": 193
+        },
+        {
+          "file": "V5/src/v5_shadow/module_api.py",
+          "function": "_m18_disk_reader",
+          "line": 129
+        },
+        {
+          "file": "V5/src/v5_shadow/m18_offline_v2.py",
+          "function": "__init__",
+          "line": 257
+        },
+        {
+          "file": "V5/src/v5_shadow/m18_offline_v2.py",
+          "function": "parse",
+          "line": 132
+        },
+        {
+          "file": "V5/src/v5_shadow/m18_offline_v2.py",
+          "function": "checkpoint",
+          "line": 66
+        },
+        {
+          "file": "V5/src/v5_shadow/m18_offline_v2.py",
+          "function": "enforce_usage",
+          "line": 41
+        },
+        {
+          "file": "V5/src/v5_shadow/m18_offline_pages.py",
+          "function": "require",
+          "line": 27
+        }
+      ],
+      "peak_rss_bytes": 542490624,
+      "cpu_seconds": 2.680617999999999,
+      "wall_seconds": 2.682322959008161
+    }
+  ],
+  "hashes_mtimes_unchanged": true,
+  "utc_end": "2026-10-12T10:18:26.006998+00:00"
+}
