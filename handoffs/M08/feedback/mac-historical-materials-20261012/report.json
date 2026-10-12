@@ -1,0 +1,380 @@
+{
+  "status": "HISTORICAL_RESULTS_READABLE_INPUT_BINDING_PARTIAL",
+  "date": "20261012",
+  "signal_date": "20261009",
+  "pool": {
+    "run_id": "20261012-hk-connect-d1-top100-0-2-d6f38622b186",
+    "status": "READY",
+    "artifact_sha256": "738ffa6533bfc1e041a3cd84841d591f0ee6bda53fe8fe420cf608b9a7f3503d",
+    "manifest_sha256": "20fb5182d751e75beb80b8c97c42eba4b1d1660084b321d8a69d9ed877f9c571",
+    "receipt_sha256": "01d4b09fb76b6e2d1135822a088e963d33356a2b0cf432d9af646ac5e2073da9",
+    "input_sha256": "738ffa6533bfc1e041a3cd84841d591f0ee6bda53fe8fe420cf608b9a7f3503d",
+    "row_count": 100,
+    "manifest_relative": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/manifest.json",
+    "receipt_relative": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/receipt.json",
+    "artifact_relative": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/artifact.csv"
+  },
+  "pool_reader": "unchanged shared_data.consumer.read_verified_latest PASS",
+  "stage_reader": "unchanged SelectionStore._verify_run PASS",
+  "stage_run_count": 10,
+  "stage_count": 8,
+  "stage_runs": [
+    {
+      "stage": "STAGE_0925",
+      "run_id": "run-ad1e0d8a968a1f609d23f874",
+      "source_status": "READY",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_AUCTION_SECOND_FILTER_STAGE_0925"
+      ],
+      "cannot_confirm": [],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0925/run-ad1e0d8a968a1f609d23f874/artifact.csv",
+          "sha256": "8bb24535e394d37ba72209ba9876e1fb5647b7eb6bedc9931a3227f07b30684a",
+          "bytes": 1870
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0925/run-ad1e0d8a968a1f609d23f874/manifest.json",
+          "sha256": "7bf0d98460a9cf61f71c2662f145f175cdb61c52b47a918c106c0a3548aa51b3",
+          "bytes": 10652
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0925/run-ad1e0d8a968a1f609d23f874/receipt.json",
+          "sha256": "6df595f8587dd6b0f87b257360a0a1b8e6cfe26ad29df4bb043676c94173639a",
+          "bytes": 1115
+        }
+      }
+    },
+    {
+      "stage": "STAGE_0930_0935",
+      "run_id": "run-c38534baae0534d1ce1fa5ec",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "HK_ACTIVE_SNAPSHOT_TEMPORAL_CUTOFF_UNSAFE",
+        "TDX_CACHE_CAPTURE_AFTER_STAGE_CUTOFF"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0930_0935/run-c38534baae0534d1ce1fa5ec/artifact.csv",
+          "sha256": "46fdc737fd960eaf05e76d51d85572c846dbe72bc224060da48a7c0a389cd552",
+          "bytes": 2149
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0930_0935/run-c38534baae0534d1ce1fa5ec/manifest.json",
+          "sha256": "1793783d8fe220dfd14754721b925b958d44dcfd875c90c1e32b02706f0919fb",
+          "bytes": 17193
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0930_0935/run-c38534baae0534d1ce1fa5ec/receipt.json",
+          "sha256": "8b898fbd8efc2d41f5f072843d561ef551c75323c981dd8f4ef9e17357c10dc3",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_0935_0940",
+      "run_id": "run-2de02a0c9c77f5d926e48e08",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "PyTDX ExHQ batch coverage incomplete: completed=100/100",
+        "HK_ACTIVE_SNAPSHOT_TEMPORAL_CUTOFF_UNSAFE"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0935_0940/run-2de02a0c9c77f5d926e48e08/artifact.csv",
+          "sha256": "4d323d128164e85ad90665aff0249203d12bc1bae1903afe350ab299e99b048f",
+          "bytes": 2115
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0935_0940/run-2de02a0c9c77f5d926e48e08/manifest.json",
+          "sha256": "2935afd7c83337deb574d0160ab839c14603443b7ccffd3ff8f9058f8d8e0f2e",
+          "bytes": 31860
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0935_0940/run-2de02a0c9c77f5d926e48e08/receipt.json",
+          "sha256": "9d75c67f2764ed3a23e9ae68d89b5c9c6c3e350cbfa5dffce49324d915d897ed",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_0940_0945",
+      "run_id": "run-5e750b6ac00293b7855bb959",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "TDX_CACHE_CAPTURE_AFTER_STAGE_CUTOFF",
+        "HK_ACTIVE_SNAPSHOT_NOT_COLLECTED"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0940_0945/run-5e750b6ac00293b7855bb959/artifact.csv",
+          "sha256": "b7011229223aa85532dd7492d04c9c94b7e20a7f57c434585f2bca22fba6d84f",
+          "bytes": 2260
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0940_0945/run-5e750b6ac00293b7855bb959/manifest.json",
+          "sha256": "b3f9fcfb6ff214dd866d371f98520061b4dabcbd4f43952009a4d0c1f348f10c",
+          "bytes": 16975
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0940_0945/run-5e750b6ac00293b7855bb959/receipt.json",
+          "sha256": "773e178b134d22d3ba961debac80994cac8ca6e846832482419843a594206fb7",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_0945_1030",
+      "run_id": "run-8e42e2beca799295bbe52ab9",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "PyTDX ExHQ batch coverage incomplete: completed=100/100",
+        "HK_ACTIVE_SNAPSHOT_TEMPORAL_CUTOFF_UNSAFE"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0945_1030/run-8e42e2beca799295bbe52ab9/artifact.csv",
+          "sha256": "5b95e1426aa96f269ab3d90df67bf808e7e8ab0cff2c80878b2958acf2fb1cb0",
+          "bytes": 2245
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0945_1030/run-8e42e2beca799295bbe52ab9/manifest.json",
+          "sha256": "8371a55fb285921a3cafca5e85ed12471087c9413e19f1e635ca095cf6b85adf",
+          "bytes": 32275
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0945_1030/run-8e42e2beca799295bbe52ab9/receipt.json",
+          "sha256": "fa0d9a41ba32eef50e784265dd0c692267b2c8871bfc979df38949014385c3af",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_1300_1315",
+      "run_id": "run-b883eb9b151b3a0eaf9e8425",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "FUTU_RT_DATA_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+        "FUTU_RT_DATA_FORMAL_STAGE_ELIGIBILITY_CANNOT_CONFIRM",
+        "FUTU_RT_DATA_NATURAL_TIME_CAPTURE_CANNOT_CONFIRM",
+        "FUTU_ORDERBOOK_HISTORICAL_SNAPSHOT_UNAVAILABLE",
+        "FUTU_KLINE_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+        "FUTU_PROVIDER_SUBSCRIPTION_RELEASE_RECEIPT_CANNOT_CONFIRM"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-b883eb9b151b3a0eaf9e8425/artifact.csv",
+          "sha256": "6eefda1c5ff56e2e40d74e421297b4c01501cc53bd0998b8d933c3f699b735c1",
+          "bytes": 1975
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-b883eb9b151b3a0eaf9e8425/manifest.json",
+          "sha256": "fb5668f06b39925286f48eff1a85bd846d863416d401f478c16b8f8be65d2ba7",
+          "bytes": 21955
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-b883eb9b151b3a0eaf9e8425/receipt.json",
+          "sha256": "2c8301c7ce966146e9ea36abf31964033295159041eb3c87b38c6ee3b5d73bc9",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_1300_1315",
+      "run_id": "run-bdede6a8a80bda3266e69e68",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "FUTU_RT_DATA_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+        "FUTU_RT_DATA_FORMAL_STAGE_ELIGIBILITY_CANNOT_CONFIRM",
+        "FUTU_RT_DATA_NATURAL_TIME_CAPTURE_CANNOT_CONFIRM",
+        "FUTU_RT_DATA_OHLC_AND_ORDERBOOK_UNAVAILABLE"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-bdede6a8a80bda3266e69e68/artifact.csv",
+          "sha256": "832d4d143a29e0aaaa148f7fe555dfae239c4cd5f3ac3b37564bef3e9bd66bd4",
+          "bytes": 1844
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-bdede6a8a80bda3266e69e68/manifest.json",
+          "sha256": "83141c9db9523b4a9a60282feb4b14597114e968a7ecbcf8ef15eee2b78ac1ff",
+          "bytes": 17525
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-bdede6a8a80bda3266e69e68/receipt.json",
+          "sha256": "aeb2a922e9144e430aa54fc0fdb1c8e5d049103642dd814911caf3d0dc7579af",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_1445_1500",
+      "run_id": "run-059d5a7d3c7cd078bfac671e",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "FUTU_RT_DATA_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+        "FUTU_RT_DATA_FORMAL_STAGE_ELIGIBILITY_CANNOT_CONFIRM",
+        "FUTU_RT_DATA_NATURAL_TIME_CAPTURE_CANNOT_CONFIRM",
+        "FUTU_ORDERBOOK_HISTORICAL_SNAPSHOT_UNAVAILABLE",
+        "FUTU_KLINE_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+        "FUTU_PROVIDER_SUBSCRIPTION_RELEASE_RECEIPT_CANNOT_CONFIRM"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-059d5a7d3c7cd078bfac671e/artifact.csv",
+          "sha256": "49ac72cdc8dea2f4a224bbf60a4b064d5255ac68e7f3da5bbfe8cb1ef2f60134",
+          "bytes": 1950
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-059d5a7d3c7cd078bfac671e/manifest.json",
+          "sha256": "3ddc543c0819f54d4863d773c15f321c3b4f00fd8e3dfd1efadf9a6690da3145",
+          "bytes": 21881
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-059d5a7d3c7cd078bfac671e/receipt.json",
+          "sha256": "a6b2bcface22fd7680422174c38ed0c40214339d296be5142d7f06743e7397aa",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_1445_1500",
+      "run_id": "run-504b199463282379e17b0cb4",
+      "source_status": "PARTIAL_WITH_ROWS",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [
+        "FUTU_RT_DATA_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+        "FUTU_RT_DATA_FORMAL_STAGE_ELIGIBILITY_CANNOT_CONFIRM",
+        "FUTU_RT_DATA_NATURAL_TIME_CAPTURE_CANNOT_CONFIRM",
+        "FUTU_RT_DATA_OHLC_AND_ORDERBOOK_UNAVAILABLE"
+      ],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-504b199463282379e17b0cb4/artifact.csv",
+          "sha256": "ceba4102c0abbfe0a93e6a2e904ef9028934160cedd38d2f1a8374d9ac252830",
+          "bytes": 1819
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-504b199463282379e17b0cb4/manifest.json",
+          "sha256": "8dfee35165127f03ab074d43e32b9645d0d212c1e0ada6229582b6c2216fa60b",
+          "bytes": 17453
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-504b199463282379e17b0cb4/receipt.json",
+          "sha256": "8ddcd0162819eb6505f9dbece02aa4747058c1234c2b148916bba2252e26e17c",
+          "bytes": 1130
+        }
+      }
+    },
+    {
+      "stage": "STAGE_1545_1555",
+      "run_id": "run-a97bb6a8560dedce4e4a4679",
+      "source_status": "READY",
+      "rows": 10,
+      "source_modes": [
+        "HK_CONNECT_FOUR_LANE"
+      ],
+      "cannot_confirm": [],
+      "reader": "ORIGINAL_SelectionStore._verify_run_PASS",
+      "trio": {
+        "artifact.csv": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1545_1555/run-a97bb6a8560dedce4e4a4679/artifact.csv",
+          "sha256": "ec6c0db82b3639b49f4ea817e8cd60e632057887843d3e4e58eb7fa45083fccc",
+          "bytes": 2154
+        },
+        "manifest.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1545_1555/run-a97bb6a8560dedce4e4a4679/manifest.json",
+          "sha256": "8189e0f55dd585d025bc01e3632ad36cc258a4d9ee36aac70c2b6bf66ad85ff4",
+          "bytes": 18020
+        },
+        "receipt.json": {
+          "relative_path": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1545_1555/run-a97bb6a8560dedce4e4a4679/receipt.json",
+          "sha256": "c318c765a561f9bd2ffd084769c2bde050bf33ee00948e1d19fb809a01ac3319",
+          "bytes": 1118
+        }
+      }
+    }
+  ],
+  "second_filter": {
+    "rows": 20,
+    "status": "AUCTION_SECOND_FILTER_READY",
+    "source_csv_sha256": "8925d9d3a1a7dc2f113879f6946227cfe968e9714f10638159934ed09c7133f6",
+    "csv_hash_checked": true,
+    "d1_run_id": "20261012-hk-connect-d1-top100-0-2-d6f38622b186",
+    "selection_rows": 10,
+    "selection_run": "run-ad1e0d8a968a1f609d23f874",
+    "distinct_from_d1_reference": true
+  },
+  "stage8": {
+    "saved_selection_reader": "PASS",
+    "run_id": "run-a97bb6a8560dedce4e4a4679",
+    "rows": 10,
+    "source_status": "READY",
+    "source_evidence_route": "hk_connect_stage8_natural_rtd_data",
+    "recorded_snapshot_sha256": "05b84ffa1bb6a2fbd9629ce4571796d0bbea85c7d79f8489e331f87a80a438be",
+    "recorded_active_codes": 16,
+    "raw_provider_row_hash_refs": 16,
+    "original_snapshot_and_rtdata_bytes_located": false,
+    "existing_raw_aggregate_rows": 16,
+    "do_not_infer_natural_acceptance_from_saved_label": true
+  },
+  "input_binding": "Same-day pool and SECOND_FILTER materials exist; complete normalized original-runner input not established. Ordinary outputs are not raw selector inputs. Stage8 snapshot/provider raw bytes and enrichment remain unlocated in inspected authorized roots.",
+  "producer_invoked": false,
+  "suite_rerun": false,
+  "services_changed": false,
+  "github_upload": true,
+  "important_update_to_prior_gap_report": "Same-day 20261012 original pool and actual SECOND_FILTER product do exist; prior check only inspected current V5 M06 target13 and stage aggregate roots. Do not repeat date mismatch as a global historical-material absence.",
+  "source_categories": {
+    "pool": "original shared raw store",
+    "stage_selection": "original stage SelectionStore",
+    "second_filter": "original opening_second_filter saved outputs",
+    "stage8": "saved stage selection provenance and bar aggregate; original snapshot/RT_DATA bytes not located"
+  },
+  "source_relative_structures": {
+    "second_filter": "opening_second_filter/20261012/",
+    "stage_selection": "selection_runs/20261012/HK_CONNECT_SELECTION_<STAGE>/<RUN>/{artifact.csv,manifest.json,receipt.json}",
+    "pool": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/<RUN>/{artifact.csv,manifest.json,receipt.json}"
+  },
+  "preparation_note": "Reused previous read-only verification results. Only stat sizes for the already enumerated trio files were added; no rescan, rehash, tests or producer execution."
+}
