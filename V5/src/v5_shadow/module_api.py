@@ -17,10 +17,106 @@ from .contracts import exact_keys,aware,sha
 from .digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
 from .api_gateway import (_parse_response, _precheck_json, _bounded_json,
                           _manager_response, MANAGER_WORKSPACE_PATH)
+from .m18_offline_v2_http_bridge import ROUTE as M18_ROUTE
 
 
 def response_key(module_id,path,query):
     return sha256_json(dict(module_id=module_id,path=path,query=query))
+
+
+def _m18_page_query(query):
+    if 'page' not in query:
+        raise ValueError('M18_PAGE_REQUIRED')
+    try:
+        page = int(query['page'])
+    except (TypeError, ValueError):
+        raise ValueError('M18_PAGE_INVALID') from None
+    if page < 0:
+        raise ValueError('M18_PAGE_INVALID')
+    return page
+
+
+def _m18_identity_from_descriptor(payload):
+    if not isinstance(payload, dict):
+        raise ValueError('M18_DESCRIPTOR_NOT_READY')
+    required = (
+        'schema_version',
+        'identity',
+        'run_id',
+        'generation_id',
+        'profile_sha256',
+        'status',
+    )
+    exact_keys(payload, required)
+    if payload['schema_version'] != 'v5.m18.v2.descriptor.v1':
+        raise ValueError('M18_DESCRIPTOR_NOT_READY')
+    if payload['status'] != 'READY':
+        raise ValueError('M18_DESCRIPTOR_NOT_READY')
+    if payload['identity'].get('run_id') != payload['run_id']:
+        raise ValueError('M18_IDENTITY_MISMATCH')
+    return payload
+
+
+def _m18_read_page_binding(config, root, query):
+    """
+    Read-only resolver for already published M18 descriptor.
+
+    It intentionally does not publish, rebuild bundles, refresh manager state,
+    or execute owners.
+    """
+    descriptor_query = {'run_id': query['run_id']}
+    descriptor, _ = read_response(
+        config,
+        root,
+        M18_ROUTE,
+        descriptor_query,
+    )
+    return _m18_identity_from_descriptor(descriptor['payload'])
+
+
+def _m18_page_response(config, root, query):
+    descriptor = _m18_read_page_binding(config, root, query)
+    page = _m18_page_query(query)
+
+    from .m18_offline_v2 import Reader
+
+    binding = config.get('m18_v2_binding')
+    if not isinstance(binding, dict):
+        raise ValueError('M18_READER_NOT_READY')
+
+    exact_keys(
+        binding,
+        (
+            'manifest_sha256',
+            'identity',
+            'profile_sha256',
+            'bundle',
+        ),
+    )
+
+    if binding['identity'] != descriptor['identity']:
+        raise ValueError('M18_IDENTITY_MISMATCH')
+    if binding['profile_sha256'] != descriptor['profile_sha256']:
+        raise ValueError('M18_PROFILE_MISMATCH')
+
+    reader = Reader(
+        binding['bundle'],
+        binding['manifest_sha256'],
+        binding['identity'],
+        expected_profile=binding['profile_sha256'],
+    )
+
+    value = reader.content(page)
+
+    return {
+        'schema_version': 'v5.m18.v2.page_response.v1',
+        'identity': descriptor['identity'],
+        'run_id': descriptor['run_id'],
+        'generation_id': descriptor['generation_id'],
+        'profile_sha256': descriptor['profile_sha256'],
+        'page': page,
+        'content': value,
+    }
 
 
 def _open_directory(path):
@@ -227,7 +323,12 @@ def create_module_server(value,host='127.0.0.1',port=0):
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
             try:
-                record,digest=read_response(config,root,parsed.path,query);self.reply(record['status_code'],record['payload'],digest)
+                if parsed.path == M18_ROUTE + '/pages':
+                    payload = _m18_page_response(config,root,query)
+                    self.reply(200,payload,sha256_json(payload))
+                else:
+                    record,digest=read_response(config,root,parsed.path,query)
+                    self.reply(record['status_code'],record['payload'],digest)
             except FileNotFoundError:self.error(503,'MODULE_RESULT_NOT_AVAILABLE')
             except ValueError as error:
                 self.error(503,'MODULE_BUSY') if str(error)=='MODULE_PUBLICATION_BUSY' else self.error(409,'MODULE_RESULT_INVALID')
