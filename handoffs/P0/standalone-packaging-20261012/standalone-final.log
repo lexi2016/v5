@@ -1,0 +1,21 @@
+test_child_config_hardlink_cannot_overwrite_external_file (test_standalone_lifecycle.RuntimeBoundaryTests.test_child_config_hardlink_cannot_overwrite_external_file) ... ok
+test_child_config_symlink_cannot_overwrite_external_file (test_standalone_lifecycle.RuntimeBoundaryTests.test_child_config_symlink_cannot_overwrite_external_file) ... ok
+test_child_ignores_poisoned_caller_directory (test_standalone_lifecycle.RuntimeBoundaryTests.test_child_ignores_poisoned_caller_directory) ... ok
+test_concurrent_starts_leave_exactly_one_owned_child (test_standalone_lifecycle.RuntimeBoundaryTests.test_concurrent_starts_leave_exactly_one_owned_child) ... ok
+test_duplicate_start_preserves_existing_child_handle (test_standalone_lifecycle.RuntimeBoundaryTests.test_duplicate_start_preserves_existing_child_handle) ... ok
+test_identity_write_failure_reaps_owned_child (test_standalone_lifecycle.RuntimeBoundaryTests.test_identity_write_failure_reaps_owned_child) ... ok
+test_partial_identity_write_is_removed_and_retry_succeeds (test_standalone_lifecycle.RuntimeBoundaryTests.test_partial_identity_write_is_removed_and_retry_succeeds) ... ok
+test_silent_child_timeout_is_bounded_and_reaped (test_standalone_lifecycle.RuntimeBoundaryTests.test_silent_child_timeout_is_bounded_and_reaped) ... ok
+test_stop_and_new_start_share_admission_lock (test_standalone_lifecycle.RuntimeBoundaryTests.test_stop_and_new_start_share_admission_lock) ... ok
+test_config_rejects_external_and_symlink_paths_before_start (test_standalone_packaging.StandaloneTests.test_config_rejects_external_and_symlink_paths_before_start) ... ok
+test_init_requires_fresh_separate_root_and_does_not_invent_data (test_standalone_packaging.StandaloneTests.test_init_requires_fresh_separate_root_and_does_not_invent_data) ... ok
+test_manifest_covers_resources_and_reproducible_archive (test_standalone_packaging.StandaloneTests.test_manifest_covers_resources_and_reproducible_archive) ... ok
+test_manifest_rejects_damaged_resource_and_injected_module (test_standalone_packaging.StandaloneTests.test_manifest_rejects_damaged_resource_and_injected_module) ... ok
+test_packaged_owner_verifiers_do_not_require_external_checkout (test_standalone_packaging.StandaloneTests.test_packaged_owner_verifiers_do_not_require_external_checkout) ... ok
+test_single_entry_help (test_standalone_packaging.StandaloneTests.test_single_entry_help) ... ok
+test_archive_serves_three_saved_views_without_external_source_or_writes (test_standalone_saved_preview.ExtractedPreviewTests.test_archive_serves_three_saved_views_without_external_source_or_writes) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 15.862s
+
+OK

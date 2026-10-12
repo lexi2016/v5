@@ -5,6 +5,7 @@ from v5_shadow.composition import no_symlinks
 from v5_shadow.cloud_transport import run_original_us_cli
 BASE=Path(__file__).resolve().parents[2]
 DESCRIPTOR=BASE/'contracts/cloud_us_collector_sources.json'
+BUNDLED_OWNER=BASE/'vendor/us_collector_owner'
 PIN='34f45318dd89132a496ac0edf98147455b41d9ea926198d83ce1bd8810c20d8b'
 
 
@@ -129,7 +130,7 @@ def admit_output(path,owner_root):
 
 def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--owner-root',type=Path,required=True)
+    parser.add_argument('--owner-root',type=Path,default=BUNDLED_OWNER)
     mode=parser.add_mutually_exclusive_group(required=True)
     mode.add_argument('--check-only',action='store_true')
     mode.add_argument('--init-data-root',type=Path)

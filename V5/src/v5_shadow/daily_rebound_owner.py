@@ -1,4 +1,4 @@
-"""Call pinned separate rebound checkout; never copy its business algorithms."""
+"""Call the byte-identical bundled rebound owner in its original isolated process."""
 import sys
 from pathlib import Path
 if __package__ in (None,''):sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
@@ -9,20 +9,33 @@ from v5_shadow.digests import canonical_bytes, MAX_JSON_BYTES
 PIN='2d8e38ec61792b3e75581f96318e9c284f72b7ba'
 
 
-def verify_checkout(root):
-    root=Path(root).resolve(strict=True)
-    if not (root/'V5/src/v5_shadow/rebound_daily.py').is_file():raise ValueError('REBOUND_DAILY_CHECKOUT_MISSING')
-    def git(*args):
-        return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.PIPE)
-    if git('rev-parse','HEAD').decode().strip()!=PIN:raise ValueError('REBOUND_DAILY_CHECKOUT_PIN')
-    # Include ignored files: an injected module must not shadow a pinned module.
-    if git('status','--porcelain','--untracked-files=all','--ignored','--','V5/src','V5/vendor','V5/contracts'):
-        raise ValueError('REBOUND_DAILY_CHECKOUT_DIRTY')
+BASE=Path(__file__).resolve().parents[2]
+BUNDLED_OWNER=BASE/'vendor/rebound_daily_owner'
+DESCRIPTOR=BASE/'contracts/bundled_rebound_owner.json'
+DESCRIPTOR_SHA='f3a90c608bc78a79df2eeea0df86bb84254fa1647f0133fb3c267ca4ef6ec539'
+
+
+def verify_checkout(root=None):
+    import hashlib
+    from v5_shadow.composition import no_symlinks
+    root=no_symlinks(BUNDLED_OWNER if root is None else root)
+    if root!=BUNDLED_OWNER:raise ValueError('REBOUND_BUNDLED_OWNER_REQUIRED')
+    raw=no_symlinks(DESCRIPTOR).read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=DESCRIPTOR_SHA:raise ValueError('REBOUND_OWNER_DESCRIPTOR_SHA')
+    descriptor=json.loads(raw)
+    if descriptor['source_commit']!=PIN:raise ValueError('REBOUND_OWNER_PIN')
+    entries={row['path']:row for row in descriptor['entries']}
+    actual={str(p.relative_to(root)) for p in root.rglob('*') if p.is_file()}
+    if actual!=set(entries):raise ValueError('REBOUND_OWNER_FILE_SET')
+    for name,row in entries.items():
+        path=no_symlinks(root/name);raw=path.read_bytes()
+        if not path.is_relative_to(root) or len(raw)!=row['bytes'] or hashlib.sha256(raw).hexdigest()!=row['sha256']:
+            raise ValueError('REBOUND_OWNER_SOURCE_SHA:'+name)
     return root
 
 
 def run_rebound_owner(request,ledger_run_id):
-    root=verify_checkout(request['owner_checkout'])
+    root=verify_checkout(request.get('owner_checkout'))
     worker=Path(__file__).resolve()
     child=subprocess.run([sys.executable,'-I','-B',str(worker),'--worker'],
         input=canonical_bytes(request),stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=180,cwd=root)
@@ -35,7 +48,7 @@ def run_rebound_owner(request,ledger_run_id):
 
 
 def worker(request):
-    root=verify_checkout(request['owner_checkout'])
+    root=verify_checkout(request.get('owner_checkout'))
     # Current helper loaded v5_shadow for JSON contracts; switch the namespace
     # before importing the separate original owner and all its dependencies.
     for name in list(sys.modules):
