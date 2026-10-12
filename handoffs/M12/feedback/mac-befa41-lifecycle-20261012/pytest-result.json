@@ -1,0 +1,26 @@
+{
+  "command": [
+    "<existing-python>",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/m12/test_video_fupan_default_chain.py"
+  ],
+  "started_utc": "2026-10-12T14:18:59.957959+00:00",
+  "ended_utc": "2026-10-12T14:19:01.675258+00:00",
+  "exit": 0,
+  "stdout": ".................                                           [100%]\n17 passed, 13 subtests passed in 1.48s\n",
+  "stderr": "",
+  "candidate": "befa4124149396cf3c052ba6532cfa7897be62df",
+  "python_version": "3.14.6",
+  "pytest_version": "9.0.2",
+  "tests_passed": 17,
+  "subtests_passed": 13,
+  "skipped": 0,
+  "source_blobs_unchanged": 11,
+  "vendor_blobs_unchanged": 7,
+  "environment_changes": "No install; existing pytest site path supplied; plugin autoload/cache/bytecode disabled"
+}
