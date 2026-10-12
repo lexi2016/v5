@@ -1,0 +1,19 @@
+{
+  "command": [
+    "<existing-python>",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "V5/tests",
+    "-p",
+    "test_source_bundle.py",
+    "-v"
+  ],
+  "started_utc": "2026-10-12T16:10:14.031876+00:00",
+  "ended_utc": "2026-10-12T16:10:17.107582+00:00",
+  "exit": 0,
+  "stdout": "",
+  "stderr": "test_m01_calls_original_missing_marker_boundary (test_source_bundle.SourceBundleTests.test_m01_calls_original_missing_marker_boundary) ... ok\ntest_m01_real_default_fixture_create_and_independent_read (test_source_bundle.SourceBundleTests.test_m01_real_default_fixture_create_and_independent_read) ... ok\ntest_m02_calls_real_contract_without_promoting_identity (test_source_bundle.SourceBundleTests.test_m02_calls_real_contract_without_promoting_identity) ... ok\ntest_m03_code_root_override_is_rejected (test_source_bundle.SourceBundleTests.test_m03_code_root_override_is_rejected) ... ok\ntest_m03_missing_source_calls_original_entrypoint (test_source_bundle.SourceBundleTests.test_m03_missing_source_calls_original_entrypoint) ... ok\ntest_m03_network_request_is_rejected_before_any_side_effect (test_source_bundle.SourceBundleTests.test_m03_network_request_is_rejected_before_any_side_effect) ... ok\ntest_m03_real_original_fixture_roundtrip_and_reuse (test_source_bundle.SourceBundleTests.test_m03_real_original_fixture_roundtrip_and_reuse) ... ok\ntest_m05_missing_v192_and_permit_never_publish (test_source_bundle.SourceBundleTests.test_m05_missing_v192_and_permit_never_publish) ... ok\ntest_main_runtime_source_command_is_opt_in_and_does_not_tick (test_source_bundle.SourceBundleTests.test_main_runtime_source_command_is_opt_in_and_does_not_tick) ... ok\ntest_missing_requests_are_four_explicit_blocks (test_source_bundle.SourceBundleTests.test_missing_requests_are_four_explicit_blocks) ... ok\ntest_registry_does_not_alias_m03_to_m15 (test_source_bundle.SourceBundleTests.test_registry_does_not_alias_m03_to_m15) ... ok\ntest_source_entrypoint_exists (test_source_bundle.SourceBundleTests.test_source_entrypoint_exists) ... ok\ntest_source_publication_is_readonly_and_separate_from_manager (test_source_bundle.SourceBundleTests.test_source_publication_is_readonly_and_separate_from_manager) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 3.020s\n\nOK\n"
+}

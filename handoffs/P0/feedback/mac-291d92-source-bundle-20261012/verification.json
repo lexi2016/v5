@@ -1,0 +1,48 @@
+{
+  "candidate": "291d92f7f73f8b19fd8d25cd0d414e14738ae3c9",
+  "branch": "dev/v5-main-integration-20261012",
+  "result": "BLOCKED_TYPECHECK",
+  "source_blobs_verified_unchanged": 1019,
+  "environment": {
+    "python": "3.14.6 existing",
+    "node": "24.19.0 existing",
+    "dependencies": "existing d53e node_modules reused by local symlink; no installation"
+  },
+  "results": {
+    "source_bundle_tests": {
+      "passed": 13,
+      "skipped": 0,
+      "exit": 0
+    },
+    "module_api_compatibility": {
+      "passed": 11,
+      "exit": 0
+    },
+    "node_tests": {
+      "passed": 40,
+      "exit": 0
+    },
+    "typecheck": {
+      "exit": 2,
+      "diagnosis": "TS2307 node:fs/node:path/node:crypto/node:zlib and TS2591 process type visibility errors; no product/environment repair attempted"
+    }
+  },
+  "not_reached": [
+    "npm run build",
+    "real M03 source-bundle invocation",
+    "source snapshot/binding/publication/API readback",
+    "manager same-run API smoke",
+    "new frontend UI readback",
+    "54780 replacement",
+    "safe static dist publication"
+  ],
+  "previous_preview": {
+    "candidate": "d53e0820318462806d9e67dae1818bb684b38ade",
+    "not_operated_or_replaced": true,
+    "optional_health_recheck": "NOT_VERIFIED: sandbox GET failed PermissionError errno 1; this is not evidence of service failure"
+  },
+  "automatic_running": false,
+  "deployment_performed": false,
+  "source_inputs_modified": false,
+  "scope": "Only targeted new integration and original module API tests. No four-module full-suite rerun, real collection, real business invocation, source publication, service/screen/V4 changes, or product edits. Admitted M03 replay source remains prepared but unused by this candidate."
+}
