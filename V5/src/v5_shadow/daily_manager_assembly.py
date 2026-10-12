@@ -30,102 +30,111 @@ def _require_run(value):
     return value
 
 
-def _require_date(value, name):
-    if not isinstance(value, str) or not re.fullmatch(r"\d{8}", value):
-        raise ValueError(name)
-    return value
-
-
-def _copy_binding(value, name):
-    if value is None:
-        return None
-    if not isinstance(value, dict):
-        raise ValueError(name)
-
-    allowed = set(value)
-    if "root" not in allowed:
-        raise ValueError(name + "_ROOT")
-
-    return copy.deepcopy(value)
-
-
 def _validate_announcement_binding(binding, target):
-    if binding is None:
-        return None
+    if not isinstance(binding, dict):
+        raise ValueError("DAILY_MANAGER_ANNOUNCEMENT_BINDING")
 
     if binding.get("target_date") != target:
         raise ValueError("DAILY_MANAGER_ANNOUNCEMENT_TARGET")
 
     _require_hex64(
         binding.get("binding_sha256"),
-        "DAILY_MANAGER_ANNOUNCEMENT_BINDING",
+        "DAILY_MANAGER_ANNOUNCEMENT_BINDING_HASH",
     )
 
     if not isinstance(binding.get("publication_date"), str):
-        raise ValueError("DAILY_MANAGER_ANNOUNCEMENT_PUBLICATION")
+        raise ValueError(
+            "DAILY_MANAGER_ANNOUNCEMENT_PUBLICATION"
+        )
 
     if "revision_manifest_sha256" in binding:
         _require_hex64(
             binding["revision_manifest_sha256"],
-            "DAILY_MANAGER_ANNOUNCEMENT_REVISION",
+            "DAILY_MANAGER_ANNOUNCEMENT_REVISION_HASH",
         )
-
-    return binding
-
-
-def _validate_rebound_owner(binding):
-    if binding is None:
-        return None
-
-    if not isinstance(binding, dict):
-        raise ValueError("DAILY_MANAGER_REBOUND")
-
-    reference = binding.get("reference")
-    if not isinstance(reference, dict):
-        raise ValueError("DAILY_MANAGER_REBOUND_REFERENCE")
-
-    required = (
-        "run_id",
-        "artifact_sha256",
-        "manifest_sha256",
-        "receipt_sha256",
-    )
-
-    if set(reference) != set(required):
-        raise ValueError("DAILY_MANAGER_REBOUND_REFERENCE_KEYS")
-
-    _require_run(reference["run_id"])
-    for key in required[1:]:
-        _require_hex64(reference[key], "DAILY_MANAGER_REBOUND_" + key)
 
     return copy.deepcopy(binding)
 
 
+def _validate_rebound_owner(value):
+    if not isinstance(value, dict):
+        raise ValueError("DAILY_MANAGER_REBOUND_OWNER")
+
+    reference = value.get("reference")
+    if not isinstance(reference, dict):
+        raise ValueError(
+            "DAILY_MANAGER_REBOUND_REFERENCE"
+        )
+
+    expected = {
+        "run_id",
+        "artifact_sha256",
+        "manifest_sha256",
+        "receipt_sha256",
+    }
+
+    if set(reference) != expected:
+        raise ValueError(
+            "DAILY_MANAGER_REBOUND_REFERENCE_KEYS"
+        )
+
+    _require_run(reference["run_id"])
+
+    for key in (
+        "artifact_sha256",
+        "manifest_sha256",
+        "receipt_sha256",
+    ):
+        _require_hex64(
+            reference[key],
+            "DAILY_MANAGER_REBOUND_" + key,
+        )
+
+    return copy.deepcopy(value)
+
+
+def _validate_rebound_reference(reference):
+    owner = {
+        "root": reference["root"],
+        "reference": reference["reference"],
+    }
+    return _validate_rebound_owner(owner)
+
+
 def _merge_announcement_binding(request, lane_binding, target):
-    template_binding = request.get("announcement_offline_owner")
+    existing = request.get(
+        "announcement_offline_owner"
+    )
 
-    if template_binding is not None:
-        template_binding = _validate_announcement_binding(
-            copy.deepcopy(template_binding),
+    existing = (
+        _validate_announcement_binding(
+            existing,
             target,
         )
+        if existing is not None
+        else None
+    )
 
-    if lane_binding is not None:
-        lane_binding = _validate_announcement_binding(
-            copy.deepcopy(lane_binding),
+    lane_binding = (
+        _validate_announcement_binding(
+            lane_binding,
             target,
         )
+        if lane_binding is not None
+        else None
+    )
 
-    if template_binding is not None and lane_binding is not None:
-        if template_binding != lane_binding:
+    if existing is not None and lane_binding is not None:
+        if existing != lane_binding:
             raise ValueError(
                 "DAILY_MANAGER_ANNOUNCEMENT_BINDING_CONFLICT"
             )
 
-    if lane_binding is not None:
-        request["announcement_offline_owner"] = lane_binding
-    elif template_binding is not None:
-        request["announcement_offline_owner"] = template_binding
+    request["announcement_offline_owner"] = (
+        lane_binding
+        if lane_binding is not None
+        else existing
+    )
 
 
 def product_reference(row):
@@ -133,21 +142,30 @@ def product_reference(row):
     attempts = state.get("attempts") or []
     return (
         attempts[-1].get("product_reference")
-        if attempts and attempts[-1].get("readback_verified") is True
+        if attempts
+        and attempts[-1].get("readback_verified") is True
         else None
     )
 
 
-def assemble_manager_request(template, lanes, ledger_root, registration):
+def assemble_manager_request(
+    template,
+    lanes,
+    ledger_root,
+    registration,
+):
     from v5_shadow.manager_plan import _snapshot
 
     now = datetime.now(timezone.utc)
+
     target = now.astimezone(
         timezone(timedelta(hours=8))
     ).strftime("%Y%m%d")
 
     if template["target_date"] != target:
-        raise ValueError("DAILY_MANAGER_TEMPLATE_TARGET")
+        raise ValueError(
+            "DAILY_MANAGER_TEMPLATE_TARGET"
+        )
 
     request = copy.deepcopy(template)
 
@@ -163,36 +181,36 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
         for name, raw in _snapshot(
             request["inputs"]["manager"]
         ).items()
-        if not name.startswith("us_mapping_research/")
+        if not name.startswith(
+            "us_mapping_research/"
+        )
     }
 
-    old_rebound_observation = request.pop(
+    # Historical template observation is stale input.
+    # A verified rebound lane below is a separate contract.
+    request.pop(
         "rebound_observation",
         None,
     )
-    if old_rebound_observation is not None:
-        request.pop("rebound_observation", None)
 
-    # Do not remove an explicitly provided announcement binding.
-    explicit_announcement = request.get(
-        "announcement_offline_owner"
-    )
-    if explicit_announcement is not None:
+    if request.get("rebound_owner") is not None:
+        request["rebound_owner"] = (
+            _validate_rebound_owner(
+                request["rebound_owner"]
+            )
+        )
+
+    if request.get("announcement_offline_owner") is not None:
         request["announcement_offline_owner"] = (
             _validate_announcement_binding(
-                explicit_announcement,
+                request["announcement_offline_owner"],
                 target,
             )
         )
 
-    explicit_rebound = request.get("rebound_owner")
-    if explicit_rebound is not None:
-        request["rebound_owner"] = _validate_rebound_owner(
-            explicit_rebound
-        )
-
     for row in lanes:
         ref = product_reference(row)
+
         if not ref:
             continue
 
@@ -204,7 +222,9 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
                     "DAILY_MANAGER_US_TARGET"
                 )
 
-            run = _require_run(ref["run_id"])
+            run = _require_run(
+                ref["run_id"]
+            )
 
             root = _open_directory(
                 ref["manager_output_root"]
@@ -255,8 +275,10 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
                 )
 
                 if (
-                    digest != ref["artifact_sha256"]
-                    or sha256_json(unsigned) != digest
+                    digest
+                    != ref["artifact_sha256"]
+                    or sha256_json(unsigned)
+                    != digest
                     or daily["run_id"] != run
                 ):
                     raise ValueError(
@@ -273,7 +295,8 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
 
                 if (
                     head["run_id"] != run
-                    or head["artifact_sha256"] != digest
+                    or head["artifact_sha256"]
+                    != digest
                 ):
                     raise ValueError(
                         "DAILY_MANAGER_US_HEAD_CHANGED"
@@ -286,7 +309,10 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
                 )
 
                 files[
-                    prefix + "runs/" + run + ".json"
+                    prefix
+                    + "runs/"
+                    + run
+                    + ".json"
                 ] = raw
 
                 files[
@@ -294,35 +320,44 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
                 ] = pointer
 
             finally:
-                for fd in (runs, day, root):
+                for fd in (
+                    runs,
+                    day,
+                    root,
+                ):
                     if fd is not None:
                         os.close(fd)
 
-        elif lane == "rebound":
-            if ref.get("reference"):
-                rebound = _validate_rebound_owner(
-                    {
-                        "root": ref["root"],
-                        "reference": ref["reference"],
-                    }
-                )
-
-                request["rebound_owner"] = rebound
-
-                # Old observation is intentionally separate.
-                request.pop(
-                    "rebound_observation",
-                    None,
-                )
-
         elif lane == "announcement":
             binding = ref.get("binding")
-            if binding:
+            if binding is not None:
                 _merge_announcement_binding(
                     request,
                     binding,
                     target,
                 )
+
+        elif lane == "rebound":
+            if ref.get("reference"):
+                rebound_owner = (
+                    _validate_rebound_reference(ref)
+                )
+
+                # New explicit owner contract.
+                request["rebound_owner"] = (
+                    rebound_owner
+                )
+
+                # Compatibility view for legacy
+                # verified rebound lane consumers.
+                # This does not mean formal rebound
+                # qualification or observation.
+                request["rebound_observation"] = {
+                    "root": rebound_owner["root"],
+                    "reference": copy.deepcopy(
+                        rebound_owner["reference"]
+                    ),
+                }
 
     hashes = {
         name: hashlib.sha256(raw).hexdigest()
@@ -331,13 +366,20 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
 
     digest = sha256_json(hashes)
 
-    root = _open_directory(ledger_root)
+    root = _open_directory(
+        ledger_root
+    )
+
     staging = None
     version = None
 
     try:
         if (
-            _read_at(root, None, ".v5-daily-run-ledger")
+            _read_at(
+                root,
+                None,
+                ".v5-daily-run-ledger",
+            )
             != MARKER
         ):
             raise ValueError(
@@ -376,7 +418,11 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
                 os.close(parent)
 
     finally:
-        for fd in (version, staging, root):
+        for fd in (
+            version,
+            staging,
+            root,
+        ):
             if fd is not None:
                 os.close(fd)
 
@@ -413,7 +459,10 @@ def assemble_manager_request(template, lanes, ledger_root, registration):
 
         name = "request-" + key + ".json"
 
-        saved = _read(fd, name)
+        saved = _read(
+            fd,
+            name,
+        )
 
         if saved is not None:
             return saved
