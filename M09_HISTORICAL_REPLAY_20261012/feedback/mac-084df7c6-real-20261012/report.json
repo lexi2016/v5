@@ -1,0 +1,104 @@
+{
+  "candidate": "084df7c61e57e7615633828a0d6a5d9078dc9b1c",
+  "trade_date": "20261012",
+  "started_utc": "2026-10-12T18:46:42.694977+00:00",
+  "suites_run": false,
+  "deployment": false,
+  "real_saved_input": {
+    "status": "HISTORICAL_RESEARCH_SAVED_AND_COLD_READ",
+    "identity": {
+      "trade_date": "20261012",
+      "model_run_id": "m09-546f1ef7fb12f8560efc96ac16fbe129-10cfa3c69826",
+      "canonical_review_sha256": "1a1b7b8448f3196bf3efef0fc656d5befd660ddc36e34388f0295e4d0af25700",
+      "raw_review_sha256": "1a1b7b8448f3196bf3efef0fc656d5befd660ddc36e34388f0295e4d0af25700",
+      "source_sha256": "d6a1e3dad6944ad8bc4b1be09c0090ff448007ffbb2480b9bf4a3e9a66f4cc8b",
+      "record_sha256": "cfc57bde3e9df09afd6e781304da0f01952e8cbb36f67417ef2aec29c61f9e38",
+      "generation_sha256": "5895227e831304bfa99f6958f0536747b56e502e00c5a10f91a3b3aa50801263"
+    },
+    "cold_read_verified": true,
+    "data_kind": "RECORDED_INPUT_REPLAY",
+    "execution_kind": "HISTORICAL_REPLAY",
+    "business_status": "PARTIAL",
+    "scope": "OBSERVED_ROWS_ONLY",
+    "historical_research": {
+      "affected_metrics": [
+        "APPROXIMATE_ST_LIMIT_COUNTS_UNCERTAIN",
+        "INDUSTRY_COVERAGE_INCOMPLETE",
+        "INDUSTRY_AND_ROLE_RANKINGS_PARTIAL",
+        "CLOSE_POSITION_MISSING_OR_NONFINITE_UNUSED_BY_FROZEN_MODEL"
+      ],
+      "membership_qualification_verified": false,
+      "missing_text": {
+        "name": 137,
+        "tdx_industry_code": 242,
+        "tdx_industry_name": 242
+      },
+      "natural_verified": false,
+      "nonfinite_unused_close_position": 7,
+      "original_receipt": {
+        "bytes": 72723415,
+        "hash_verified": true,
+        "metadata_status": "OPAQUE_ORIGINAL_RECEIPT_HASH_ONLY_NO_READY_CLAIM",
+        "sha256": "4bc597fa26d574fd12e5e15200b090a7bf4161c1c6b14bb2d1fe067fe56af6aa"
+      },
+      "original_source": {
+        "bytes": 1384359739,
+        "format": "PARQUET",
+        "hash_verified": true,
+        "pointer_sha256": "119862a90c932037b530114c60e65bf1e54864c861606d0a7c54bf797e0d917e",
+        "sha256": "cbff51aecb859174b8f19710cc9a13c7e0c44a0e68b2ba28178722ecc99bcbca",
+        "verification": "STREAM_HASH_BEFORE_AND_AFTER_EXACT_DATE_FILTER"
+      },
+      "original_values_preserved": true,
+      "schema_version": "v5.m09.historical_research.v1",
+      "snapshot_row_count": 5127,
+      "source_available_by_requested_slot": false,
+      "source_receipt_status": "OPAQUE_ORIGINAL_RECEIPT_HASH_ONLY_NO_READY_CLAIM",
+      "source_time_verified": false,
+      "strict_1500_pit_verified": false
+    },
+    "original_close_chain_status": "PARTIAL_REVIEW"
+  },
+  "command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-I",
+    "-B",
+    "run_m09h_20261012.py"
+  ],
+  "harness_sha256": "2bd65e3b59528fd1fe2cf4596131887dfb3771ceb15afe481a425d644413514d",
+  "recovery_check": "Prior script/logs/output roots absent and no matching process; prior invocation not started",
+  "original_inputs_before": {
+    "pointer": {
+      "bytes": 242,
+      "sha256": "119862a90c932037b530114c60e65bf1e54864c861606d0a7c54bf797e0d917e"
+    },
+    "panel": {
+      "bytes": 1384359739,
+      "sha256": "cbff51aecb859174b8f19710cc9a13c7e0c44a0e68b2ba28178722ecc99bcbca"
+    },
+    "receipt": {
+      "bytes": 72723415,
+      "sha256": "4bc597fa26d574fd12e5e15200b090a7bf4161c1c6b14bb2d1fe067fe56af6aa"
+    }
+  },
+  "cold_exit": 0,
+  "exit_code": 0,
+  "status": "PASS",
+  "original_inputs_after": {
+    "pointer": {
+      "bytes": 242,
+      "sha256": "119862a90c932037b530114c60e65bf1e54864c861606d0a7c54bf797e0d917e"
+    },
+    "panel": {
+      "bytes": 1384359739,
+      "sha256": "cbff51aecb859174b8f19710cc9a13c7e0c44a0e68b2ba28178722ecc99bcbca"
+    },
+    "receipt": {
+      "bytes": 72723415,
+      "sha256": "4bc597fa26d574fd12e5e15200b090a7bf4161c1c6b14bb2d1fe067fe56af6aa"
+    }
+  },
+  "original_inputs_unchanged": true,
+  "source_files_unchanged": true,
+  "finished_utc": "2026-10-12T18:46:46.510745+00:00"
+}
