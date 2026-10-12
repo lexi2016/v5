@@ -1,0 +1,18 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________________ test_input_and_run_roots_cannot_overlap ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-34/test_input_and_run_roots_canno0')
+
+    def test_input_and_run_roots_cannot_overlap(tmp_path):
+        data=tmp_path/'input';data.mkdir()
+>       with pytest.raises(ValueError,match='ROOT_OVERLAP'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'ROOT_OVERLAP'
+E         Actual message: 'M10_CLOSE_INPUT_UNAVAILABLE_OR_INVALID'
+
+V5/tests/test_hk_close_chain.py:175: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/test_hk_close_chain.py::test_input_and_run_roots_cannot_overlap
+1 failed, 21 deselected in 0.19s

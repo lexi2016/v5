@@ -1,0 +1,159 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+_____________________ test_run_directory_identity_rejected _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_run_directory_identity_re0')
+
+    def test_run_directory_identity_rejected(tmp_path):
+        daily.HKCloseReviewStore(tmp_path).publish('one', {'review': {}}, {'generation': 'g1'})
+        shutil.copytree(tmp_path/'one', tmp_path/'other')
+>       with pytest.raises(ValueError, match='IDENTITY'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/test_hk_close_chain.py:13: Failed
+____________________ test_receipt_payload_identity_rejected ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_receipt_payload_identity_0')
+
+    def test_receipt_payload_identity_rejected(tmp_path):
+        daily.HKCloseReviewStore(tmp_path).publish('one', {'review': {}}, {'generation': 'g1'})
+        path=tmp_path/'one'/'receipt.json'; value=json.loads(path.read_text());value['payload_sha256']='0'*64;path.write_text(json.dumps(value))
+>       with pytest.raises(ValueError, match='RECEIPT'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/test_hk_close_chain.py:20: Failed
+____________________ test_generation_cas_preserves_success _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_generation_cas_preserves_0')
+
+    def test_generation_cas_preserves_success(tmp_path):
+        store=daily.HKCloseReviewStore(tmp_path)
+>       first=store.publish('one', {'x':1}, {'generation':'g1'}, expected_generation=None)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: HKCloseReviewStore.publish() got an unexpected keyword argument 'expected_generation'
+
+V5/tests/test_hk_close_chain.py:26: TypeError
+_____________________ test_default_owner_closure_is_frozen _____________________
+
+    def test_default_owner_closure_is_frozen():
+>       assert hasattr(daily, 'prepare_owner_capsule'), 'default chain has no fixed owner closure'
+E       AssertionError: default chain has no fixed owner closure
+E       assert False
+E        +  where False = hasattr(daily, 'prepare_owner_capsule')
+
+V5/tests/test_hk_close_chain.py:33: AssertionError
+____________________ test_unsafe_run_id_rejected[../escape] ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected___0')
+run_id = '../escape'
+
+    @pytest.mark.parametrize('run_id',['../escape','/absolute','.','a/b'])
+    def test_unsafe_run_id_rejected(tmp_path,run_id):
+>       with pytest.raises(ValueError,match='RUN_ID'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/test_hk_close_chain.py:38: Failed
+____________________ test_unsafe_run_id_rejected[/absolute] ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected__a0')
+run_id = '/absolute'
+
+    @pytest.mark.parametrize('run_id',['../escape','/absolute','.','a/b'])
+    def test_unsafe_run_id_rejected(tmp_path,run_id):
+        with pytest.raises(ValueError,match='RUN_ID'):
+>           daily.HKCloseReviewStore(tmp_path).publish(run_id,{}, {})
+
+V5/tests/test_hk_close_chain.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/hk_close_daily.py:38: in publish
+    target.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/absolute'), mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           OSError: [Errno 30] Read-only file system: '/absolute'
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1311: OSError
+________________________ test_unsafe_run_id_rejected[.] ________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected___1')
+run_id = '.'
+
+    @pytest.mark.parametrize('run_id',['../escape','/absolute','.','a/b'])
+    def test_unsafe_run_id_rejected(tmp_path,run_id):
+        with pytest.raises(ValueError,match='RUN_ID'):
+>           daily.HKCloseReviewStore(tmp_path).publish(run_id,{}, {})
+
+V5/tests/test_hk_close_chain.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/hk_close_daily.py:34: in publish
+    old_manifest = json.loads((target / "manifest.json").read_text())
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected___1/manifest.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected___1/manifest.json'
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_______________________ test_unsafe_run_id_rejected[a/b] _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected_a_0')
+run_id = 'a/b'
+
+    @pytest.mark.parametrize('run_id',['../escape','/absolute','.','a/b'])
+    def test_unsafe_run_id_rejected(tmp_path,run_id):
+        with pytest.raises(ValueError,match='RUN_ID'):
+>           daily.HKCloseReviewStore(tmp_path).publish(run_id,{}, {})
+
+V5/tests/test_hk_close_chain.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/hk_close_daily.py:38: in publish
+    target.mkdir()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected_a_0/a/b')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-agent/pytest-26/test_unsafe_run_id_rejected_a_0/a/b'
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1311: FileNotFoundError
+=========================== short test summary info ============================
+FAILED V5/tests/test_hk_close_chain.py::test_run_directory_identity_rejected
+FAILED V5/tests/test_hk_close_chain.py::test_receipt_payload_identity_rejected
+FAILED V5/tests/test_hk_close_chain.py::test_generation_cas_preserves_success
+FAILED V5/tests/test_hk_close_chain.py::test_default_owner_closure_is_frozen
+FAILED V5/tests/test_hk_close_chain.py::test_unsafe_run_id_rejected[../escape]
+FAILED V5/tests/test_hk_close_chain.py::test_unsafe_run_id_rejected[/absolute]
+FAILED V5/tests/test_hk_close_chain.py::test_unsafe_run_id_rejected[.] - File...
+FAILED V5/tests/test_hk_close_chain.py::test_unsafe_run_id_rejected[a/b] - Fi...
+8 failed in 0.10s

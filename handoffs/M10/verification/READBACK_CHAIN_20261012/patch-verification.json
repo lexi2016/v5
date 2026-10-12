@@ -1,0 +1,48 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "git",
+        "apply",
+        "--check",
+        "/workspace/shared/m10_readback_chain/handoffs/M10/verification/READBACK_CHAIN_20261012/forward.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "apply",
+        "/workspace/shared/m10_readback_chain/handoffs/M10/verification/READBACK_CHAIN_20261012/forward.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "apply",
+        "--check",
+        "/workspace/shared/m10_readback_chain/handoffs/M10/verification/READBACK_CHAIN_20261012/reverse.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "apply",
+        "/workspace/shared/m10_readback_chain/handoffs/M10/verification/READBACK_CHAIN_20261012/reverse.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "restored_every_before_sha": true,
+  "removed_only_new_patch_files": true
+}

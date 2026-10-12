@@ -1,0 +1,86 @@
+FF..                                                                     [100%]
+=================================== FAILURES ===================================
+______________ test_invalid_optional_evidence_keeps_top20[model] _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-32/test_invalid_optional_evidence0')
+part = 'model'
+
+    @pytest.mark.parametrize('part',['model','stage'])
+    def test_invalid_optional_evidence_keeps_top20(tmp_path,part):
+        from m10_fixture import create_fixture
+        data=create_fixture(tmp_path/'input')
+        path=data/('preselection_pools/20260730/manifest.json' if part=='model' else 'stages/selection_latest.json')
+        path.write_text('{invalid')
+>       result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=tmp_path/'runs',stage_selection_root=data/'stages')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+V5/tests/test_hk_close_chain.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/hk_close_daily.py:220: in build_default_hk_close_review
+    prepared = run_owner('inspect', data_root, trade_date, stage_selection_root)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+action = 'inspect'
+data_root = PosixPath('/tmp/pytest-of-agent/pytest-32/test_invalid_optional_evidence0/input')
+trade_date = '20260730'
+stage_root = PosixPath('/tmp/pytest-of-agent/pytest-32/test_invalid_optional_evidence0/input/stages')
+extra = {}
+
+    def run_owner(action,data_root,trade_date,stage_root,**extra):
+        with prepare_owner_capsule() as capsule:
+            request={'action':action,'data_root':str(Path(data_root).absolute()),'trade_date':trade_date,
+                     'stage_root':str(Path(stage_root).absolute()) if stage_root else None,'capsule':str(capsule),**extra}
+            result=subprocess.run([sys.executable,'-I','-S','-B',str(Path(__file__).resolve())],
+                                  input=json.dumps(request),text=True,capture_output=True,timeout=60)
+            if result.returncode:
+                try: reason=json.loads(result.stdout)['error']
+                except (ValueError,KeyError): reason='M10_OWNER_PROCESS_FAILED'
+>               raise ValueError(reason)
+E               ValueError: M10_OWNER_JSONDecodeError
+
+V5/src/v5_shadow/hk_close_owner.py:63: ValueError
+______________ test_invalid_optional_evidence_keeps_top20[stage] _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-32/test_invalid_optional_evidence1')
+part = 'stage'
+
+    @pytest.mark.parametrize('part',['model','stage'])
+    def test_invalid_optional_evidence_keeps_top20(tmp_path,part):
+        from m10_fixture import create_fixture
+        data=create_fixture(tmp_path/'input')
+        path=data/('preselection_pools/20260730/manifest.json' if part=='model' else 'stages/selection_latest.json')
+        path.write_text('{invalid')
+>       result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=tmp_path/'runs',stage_selection_root=data/'stages')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+V5/tests/test_hk_close_chain.py:128: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/hk_close_daily.py:220: in build_default_hk_close_review
+    prepared = run_owner('inspect', data_root, trade_date, stage_selection_root)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+action = 'inspect'
+data_root = PosixPath('/tmp/pytest-of-agent/pytest-32/test_invalid_optional_evidence1/input')
+trade_date = '20260730'
+stage_root = PosixPath('/tmp/pytest-of-agent/pytest-32/test_invalid_optional_evidence1/input/stages')
+extra = {}
+
+    def run_owner(action,data_root,trade_date,stage_root,**extra):
+        with prepare_owner_capsule() as capsule:
+            request={'action':action,'data_root':str(Path(data_root).absolute()),'trade_date':trade_date,
+                     'stage_root':str(Path(stage_root).absolute()) if stage_root else None,'capsule':str(capsule),**extra}
+            result=subprocess.run([sys.executable,'-I','-S','-B',str(Path(__file__).resolve())],
+                                  input=json.dumps(request),text=True,capture_output=True,timeout=60)
+            if result.returncode:
+                try: reason=json.loads(result.stdout)['error']
+                except (ValueError,KeyError): reason='M10_OWNER_PROCESS_FAILED'
+>               raise ValueError(reason)
+E               ValueError: M10_OWNER_JSONDecodeError
+
+V5/src/v5_shadow/hk_close_owner.py:63: ValueError
+=========================== short test summary info ============================
+FAILED V5/tests/test_hk_close_chain.py::test_invalid_optional_evidence_keeps_top20[model]
+FAILED V5/tests/test_hk_close_chain.py::test_invalid_optional_evidence_keeps_top20[stage]
+2 failed, 2 passed, 16 deselected in 1.81s

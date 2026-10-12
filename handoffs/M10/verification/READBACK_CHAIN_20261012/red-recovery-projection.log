@@ -1,0 +1,43 @@
+F.F                                                                      [100%]
+=================================== FAILURES ===================================
+_____ test_pointer_write_failure_is_not_a_committed_run_and_retry_recovers _____
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-29/test_pointer_write_failure_is_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fa99ac44b60>
+
+    def test_pointer_write_failure_is_not_a_committed_run_and_retry_recovers(tmp_path,monkeypatch):
+        store=daily.HKCloseReviewStore(tmp_path)
+        store.publish('one',{'x':1},{'generation':'g1'})
+        old=daily.HKCloseReviewReader(tmp_path).latest_identity()['generation']
+        real=daily._write
+        def fail(path,value):
+            if Path(path).name=='latest_success.json': raise OSError('synthetic disk fault')
+            return real(path,value)
+        monkeypatch.setattr(daily,'_write',fail)
+        with pytest.raises(OSError): store.publish('two',{'x':2},{'generation':'g2'},expected_generation=old)
+        assert daily.HKCloseReviewReader(tmp_path).read_latest()=={'x':1}
+>       with pytest.raises(ValueError,match='NOT_COMMITTED'): daily.HKCloseReviewReader(tmp_path).read('two')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/test_hk_close_chain.py:89: Failed
+_____________ test_partial_projection_does_not_claim_missing_hits ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-29/test_partial_projection_does_n0')
+
+    def test_partial_projection_does_not_claim_missing_hits(tmp_path):
+        from m10_fixture import create_fixture
+        data=create_fixture(tmp_path/'input',with_model=False,with_stages=False)
+        runs=tmp_path/'runs'
+        daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs)
+        projection=daily.read_hk_close_projection(runs)
+        assert len(projection['review']['close_top20'])==20
+>       assert all(r['model_0_2_hit'] is None and r['stage_union_hit'] is None and r['classification']=='CANNOT_CONFIRM' for r in projection['review']['top20_attribution'])
+E       assert False
+E        +  where False = all(<generator object test_partial_projection_does_not_claim_missing_hits.<locals>.<genexpr> at 0x7fa99ab64e10>)
+
+V5/tests/test_hk_close_chain.py:119: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/test_hk_close_chain.py::test_pointer_write_failure_is_not_a_committed_run_and_retry_recovers
+FAILED V5/tests/test_hk_close_chain.py::test_partial_projection_does_not_claim_missing_hits
+2 failed, 1 passed, 11 deselected in 2.02s

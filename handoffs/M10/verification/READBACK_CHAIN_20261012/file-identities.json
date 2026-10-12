@@ -1,0 +1,64 @@
+{
+  "base_commit": "21e9991dc81b540e46765bdb6895cf0a281ab253",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/hk_close_daily.py",
+      "before": {
+        "sha256": "b6ea712046587df0a3466bcbb7e4d81550c61eb55e3e7c499bcd67c23d84d95b",
+        "bytes": 4263
+      },
+      "after": {
+        "sha256": "60e6c0b2561c732ea0eb7c7fc694fe9981833d5bc879760bacbfe84d22295027",
+        "bytes": 15974
+      }
+    },
+    {
+      "path": "V5/src/v5_shadow/hk_close_owner.py",
+      "before": "ABSENT_IN_21e9991_TREE",
+      "after": {
+        "sha256": "2622602a9ef2066386969a1398deb6f357627a0a6803911add8c2dac94a2ed0e",
+        "bytes": 10730
+      }
+    },
+    {
+      "path": "V5/tests/test_hk_close_chain.py",
+      "before": "ABSENT_IN_21e9991_TREE",
+      "after": {
+        "sha256": "23bfe25f129854c2608c1aedcf7d5ff267c715b2b4b13ee086aad91e8e63b815",
+        "bytes": 11953
+      }
+    },
+    {
+      "path": "V5/tests/m10_fixture.py",
+      "before": "ABSENT_IN_21e9991_TREE",
+      "after": {
+        "sha256": "fde64d3b9390549b1af205e49bf7a6786ce5a27668a1888d5f297dfb755a5cd7",
+        "bytes": 2770
+      }
+    },
+    {
+      "path": "V5/tests/run_m10_acceptance.py",
+      "before": "ABSENT_IN_21e9991_TREE",
+      "after": {
+        "sha256": "3b8cc66856a3b3e2f60937ce8762672593fa859d74d4021edbaed231dfdc91b7",
+        "bytes": 3808
+      }
+    },
+    {
+      "path": "V5/docs/M10_HK_CLOSE_HANDOFF.md",
+      "before": "ABSENT_IN_21e9991_TREE",
+      "after": {
+        "sha256": "b8104d3a7a7f501b2c88278617bfc465a2008bb06edcfcab0ecbcf0ddcb08542",
+        "bytes": 6393
+      }
+    },
+    {
+      "path": "integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE/manifest.json",
+      "before": "ABSENT_IN_21e9991_TREE",
+      "after": {
+        "sha256": "be3c369df297d0ddd6985e0c0f0aa136849a931fe6f388f7f8355f3188574c38",
+        "bytes": 15792
+      }
+    }
+  ]
+}

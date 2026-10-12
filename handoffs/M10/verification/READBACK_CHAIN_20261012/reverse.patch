@@ -1,0 +1,1278 @@
+--- a/V5/src/v5_shadow/hk_close_daily.py
++++ b/V5/src/v5_shadow/hk_close_daily.py
+@@ -1,64 +1,16 @@
+-"""M10 offline default owner -> immutable publication -> cold readback.
+-
+-No network collection or service start. Native source inputs are copied into a
+-private workspace, and the frozen original collector takes its reuse path.
+-"""
++"""M10 HK close default producer/store/reader chain."""
+ from __future__ import annotations
+ 
+-import fcntl
+ import hashlib
+ import json
+-import os
+-import re
+-import subprocess
+-import sys
+-import tempfile
+-from contextlib import contextmanager
+ from dataclasses import dataclass
+ from pathlib import Path
+-from uuid import uuid4
+ 
+-SCHEMA = 'v5.hk_close_daily.v4.2'
+-DAILY_SCHEMA = 'v5.hk_close_daily.envelope.v1'
+-
+-
+-def _bytes(value):
+-    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
++SCHEMA = "v5.hk_close_daily.v4.2"
+ 
+ 
+ def _digest(value):
+-    return hashlib.sha256(_bytes(value)).hexdigest()
+-
+-
+-def _path(root, relative):
+-    root = Path(root).absolute()
+-    parts = relative.split('/')
+-    if not relative or any(p in ('', '.', '..') for p in parts) or '\\' in relative:
+-        raise ValueError('M10_PATH_INVALID')
+-    target = root.joinpath(*parts)
+-    if any(p.is_symlink() for p in (target, *target.parents)):
+-        raise ValueError('M10_SYMLINK_FORBIDDEN')
+-    return target
+-
+-
+-def _run_path(root, run_id):
+-    if not isinstance(run_id, str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,127}', run_id):
+-        raise ValueError('M10_RUN_ID_INVALID')
+-    return _path(root, run_id)
+-
+-
+-def _read(root, relative):
+-    return json.loads(_path(root, relative).read_text(encoding='utf-8'))
+-
+-
+-def _write(path, value):
+-    path = Path(path)
+-    _path(path.parent, path.name)
+-    path.parent.mkdir(parents=True, exist_ok=True)
+-    temp = path.with_name('.' + path.name + '.' + uuid4().hex)
+-    with temp.open('xb') as stream:
+-        stream.write(_bytes(value)); stream.flush(); os.fsync(stream.fileno())
+-    os.replace(temp, path)
++    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
+ 
+ 
+ @dataclass(frozen=True)
+@@ -69,248 +21,73 @@
+     publication_sha256: str
+ 
+ 
++class HKCloseReviewStore:
++    def __init__(self, root: str | Path):
++        self.root = Path(root)
++        self.root.mkdir(parents=True, exist_ok=True)
++
++    def publish(self, run_id: str, payload: dict, publication: dict):
++        payload_sha = _digest(payload)
++        publication_sha = _digest(publication)
++        target = self.root / run_id
++        if target.exists():
++            old_manifest = json.loads((target / "manifest.json").read_text())
++            if old_manifest.get("payload_sha256") != payload_sha or old_manifest.get("publication_sha256") != publication_sha:
++                raise ValueError("M10_RUN_ID_CONFLICT")
++            return self._receipt(target)
++        target.mkdir()
++        manifest = {"schema": SCHEMA, "run_id": run_id, "payload_sha256": payload_sha, "publication_sha256": publication_sha}
++        receipt = {"run_id": run_id, "payload_sha256": payload_sha, "manifest_sha256": _digest(manifest), "publication_sha256": publication_sha}
++        (target / "payload.json").write_text(json.dumps(payload, sort_keys=True), encoding="utf-8")
++        (target / "publication.json").write_text(json.dumps(publication, sort_keys=True), encoding="utf-8")
++        (target / "manifest.json").write_text(json.dumps(manifest, sort_keys=True), encoding="utf-8")
++        (target / "receipt.json").write_text(json.dumps(receipt, sort_keys=True), encoding="utf-8")
++        return CloseReviewReceipt(**receipt)
++
++    def _receipt(self, target):
++        return CloseReviewReceipt(**json.loads((target / "receipt.json").read_text()))
++
++
+ class HKCloseReviewReader:
+     def __init__(self, root: str | Path):
+         self.root = Path(root)
+ 
+     def read(self, run_id: str):
+-        return self._read_run(run_id, require_commit=True)
+-
+-    def _read_run(self, run_id, *, require_commit=False):
+-        target = _run_path(self.root, run_id)
+-        payload = _read(target, 'payload.json')
+-        publication = _read(target, 'publication.json')
+-        manifest = _read(target, 'manifest.json')
+-        receipt = _read(target, 'receipt.json')
+-        if manifest.get('schema') != SCHEMA or manifest.get('run_id') != run_id or receipt.get('run_id') != run_id:
+-            raise ValueError('M10_RUN_IDENTITY_INVALID')
+-        if manifest.get('payload_sha256') != _digest(payload):
+-            raise ValueError('M10_PAYLOAD_SHA_INVALID')
+-        if manifest.get('publication_sha256') != _digest(publication):
+-            raise ValueError('M10_PUBLICATION_SHA_INVALID')
+-        if receipt.get('manifest_sha256') != _digest(manifest):
+-            raise ValueError('M10_MANIFEST_SHA_INVALID')
+-        if receipt.get('publication_sha256') != _digest(publication):
+-            raise ValueError('M10_RECEIPT_PUBLICATION_INVALID')
+-        if receipt.get('payload_sha256') != _digest(payload):
+-            raise ValueError('M10_RECEIPT_PAYLOAD_INVALID')
+-        if payload.get('schema') == DAILY_SCHEMA:
+-            identity = payload['identity']
+-            if payload.get('run_id') != run_id or run_id != identity['trade_date'] + '-' + _digest(identity)[:24]:
+-                raise ValueError('M10_INPUT_IDENTITY_INVALID')
+-            review = payload['review']; date = identity['trade_date']
+-            relative = 'close_reviews/' + date + '.json'
+-            receipt_relative = 'receipts/close_reviews/' + date + '.json'
+-            native = payload['native_evidence']
+-            if (review.get('trade_date') != date or publication.get('payload_path') != relative
+-                    or publication.get('receipt_path') != receipt_relative
+-                    or publication.get('sha256') != _digest(review)
+-                    or publication.get('previous_sha256') != (payload.get('previous_native_sha256') or '')
+-                    or native.get('manifest', {}).get(relative) != _digest(review)
+-                    or native.get('receipt') != {'schema_version':'v3_import_receipt.v1', 'payload_path':relative,
+-                                                'source_sha256':_digest(review), 'trade_date':date}
+-                    or _digest(payload['input_evidence']) != identity.get('input_sha256')
+-                    or any(review.get(k) is not False for k in ('production_allowed','buy_gate_updated','orders_sent'))):
+-                raise ValueError('M10_NATIVE_PUBLICATION_IDENTITY_INVALID')
+-        if require_commit:
+-            pointer = _path(self.root, 'latest_success.json')
+-            latest = _read(self.root, 'latest_success.json') if pointer.exists() else {}
+-            if latest.get('committed_runs', {}).get(run_id) != _digest(receipt):
+-                raise ValueError('M10_RUN_NOT_COMMITTED')
++        target = self.root / run_id
++        payload = json.loads((target / "payload.json").read_text())
++        publication = json.loads((target / "publication.json").read_text())
++        manifest = json.loads((target / "manifest.json").read_text())
++        receipt = json.loads((target / "receipt.json").read_text())
++        if manifest.get("payload_sha256") != _digest(payload):
++            raise ValueError("M10_PAYLOAD_SHA_INVALID")
++        if manifest.get("publication_sha256") != _digest(publication):
++            raise ValueError("M10_PUBLICATION_SHA_INVALID")
++        if receipt.get("manifest_sha256") != _digest(manifest):
++            raise ValueError("M10_MANIFEST_SHA_INVALID")
++        if receipt.get("publication_sha256") != _digest(publication):
++            raise ValueError("M10_RECEIPT_PUBLICATION_INVALID")
+         return payload
+ 
+-    def latest_identity(self):
+-        path = _path(self.root, 'latest_success.json')
+-        if not path.exists():
+-            return None
+-        latest = _read(self.root, 'latest_success.json')
+-        payload = self.read(latest['run_id'])
+-        receipt = _read(_run_path(self.root, latest['run_id']), 'receipt.json')
+-        if (latest.get('run_id') != receipt['run_id'] or latest.get('generation') != _digest(receipt)
+-                or not isinstance(latest.get('committed_runs'), dict)):
+-            raise ValueError('M10_LATEST_IDENTITY_INVALID')
+-        return latest
+ 
+-    def read_latest(self):
+-        latest = self.latest_identity()
+-        if latest is None:
+-            raise FileNotFoundError('M10_NO_LATEST_SUCCESS')
+-        return self.read(latest['run_id'])
++def _load_frozen_owners():
++    from ops.collect_hkconnect_close_snapshot import collect_close_snapshot
++    from ops.build_close_review import build_close_review
++    if not callable(collect_close_snapshot) or not callable(build_close_review):
++        raise ImportError("M10_OWNER_CLOSURE_INVALID")
++    return collect_close_snapshot, build_close_review
+ 
+ 
+-class HKCloseReviewStore:
+-    def __init__(self, root: str | Path):
+-        self.root = Path(root)
+-        _path(self.root, '.publish.lock')
+-        self.root.mkdir(parents=True, exist_ok=True)
+-
+-    @contextmanager
+-    def lock(self):
+-        with _path(self.root, '.publish.lock').open('a+b') as stream:
+-            fcntl.flock(stream, fcntl.LOCK_EX)
+-            try:
+-                yield
+-            finally:
+-                fcntl.flock(stream, fcntl.LOCK_UN)
+-
+-    def publish(self, run_id: str, payload: dict, publication: dict, *, expected_generation=None):
+-        with self.lock():
+-            return self._publish(run_id, payload, publication, expected_generation)
+-
+-    def _publish(self, run_id, payload, publication, expected_generation):
+-        target = _run_path(self.root, run_id)
+-        payload_sha = _digest(payload); publication_sha = _digest(publication)
+-        reader = HKCloseReviewReader(self.root)
+-        latest = reader.latest_identity()
+-        receipt = None
+-        if target.exists():
+-            old = reader._read_run(run_id)
+-            receipt = _read(target, 'receipt.json')
+-            if _digest(old) != payload_sha or receipt['publication_sha256'] != publication_sha:
+-                raise ValueError('M10_RUN_ID_CONFLICT')
+-            if latest and latest['committed_runs'].get(run_id) == _digest(receipt):
+-                return CloseReviewReceipt(**receipt)
+-            if _read(target, 'manifest.json').get('previous_generation') != expected_generation:
+-                raise ValueError('M10_ORPHAN_PARENT_CAS_CONFLICT')
+-        if (latest['generation'] if latest else None) != expected_generation:
+-            raise ValueError('M10_GENERATION_CAS_CONFLICT')
+-        manifest = {'schema':SCHEMA,'run_id':run_id,'payload_sha256':payload_sha,'publication_sha256':publication_sha, 'previous_generation':expected_generation}
+-        receipt = {'run_id':run_id,'payload_sha256':payload_sha,'manifest_sha256':_digest(manifest),'publication_sha256':publication_sha}
+-        # Completed orphan directories remain uncommitted until this atomic pointer.
+-        if not target.exists():
+-            with tempfile.TemporaryDirectory(prefix='.pending-', dir=self.root) as staging:
+-                staged = Path(staging)/run_id; staged.mkdir()
+-                for name, value in (('payload',payload),('publication',publication),('manifest',manifest),('receipt',receipt)):
+-                    _write(staged/(name+'.json'), value)
+-                HKCloseReviewReader(staging)._read_run(run_id)
+-                os.rename(staged, target)
+-        committed = dict(latest['committed_runs']) if latest else {}
+-        committed[run_id] = _digest(receipt)
+-        _write(self.root/'latest_success.json', {'run_id':run_id,'generation':_digest(receipt), 'committed_runs':committed})
+-        return CloseReviewReceipt(**receipt)
+-
+-    def failed_attempt(self, trade_date, error):
+-        # Deliberately no host path, credential, payload or traceback in persisted evidence.
+-        _write(self.root/'attempts'/(uuid4().hex+'.json'), {'trade_date':trade_date,'status':'FAILED',
+-                'reason':str(error) if str(error).startswith('M10_') else type(error).__name__,
+-                'production_allowed':False,'buy_gate_updated':False,'orders_sent':False})
++def build_default_hk_close_review(*, data_root: Path, trade_date: str, run_root: Path, stage_selection_root: Path | str | None = None):
++    collect_close_snapshot, build_close_review = _load_frozen_owners()
++    data_root = Path(data_root)
++    collect_close_snapshot(trade_date, data_root=data_root)
++    built = build_close_review(data_root, trade_date, stage_selection_root=stage_selection_root)
++    if not isinstance(built, dict) or "review" not in built or "publication" not in built:
++        raise ValueError("M10_BUILD_PUBLICATION_INVALID")
++    payload = built["review"]
++    run_id = f"{trade_date}-{_digest(payload)[:16]}"
++    HKCloseReviewStore(run_root).publish(run_id, payload, built["publication"])
++    return HKCloseReviewReader(run_root).read(run_id)
+ 
+ 
+-@contextmanager
+-def prepare_owner_capsule():
+-    from .hk_close_owner import prepare_owner_capsule as prepare
+-    with prepare() as root:
+-        yield root
+-
+-
+-def build_default_hk_close_review(*, data_root: Path, trade_date: str, run_root: Path,
+-                                  stage_selection_root: Path | str | None = None,
+-                                  expected_generation=None, expected_native_sha256=None):
+-    """Execute frozen owners on copied, recorded inputs; never contacts a provider.
+-
+-    Both expected values must match latest success. Exact identity reuse is a
+-    read-only fast path after input inspection and never recomputes/publishes.
+-    """
+-    from .hk_close_owner import run_owner
+-    destination = Path(run_root).resolve()
+-    for input_root in (data_root, stage_selection_root):
+-        if input_root is not None:
+-            source = Path(input_root).resolve()
+-            if destination.is_relative_to(source) or source.is_relative_to(destination):
+-                raise ValueError('M10_ROOT_OVERLAP')
+-    store = HKCloseReviewStore(run_root)
+-    try:
+-        with store.lock():
+-            reader = HKCloseReviewReader(run_root)
+-            latest = reader.latest_identity()
+-            previous = reader.read_latest() if latest else None
+-            prepared = run_owner('inspect', data_root, trade_date, stage_selection_root)
+-            identity = prepared['identity']; run_id = trade_date+'-'+_digest(identity)[:24]
+-            if latest and run_id in latest['committed_runs']:
+-                return reader.read(run_id)
+-            if (latest['generation'] if latest else None) != expected_generation:
+-                raise ValueError('M10_GENERATION_CAS_CONFLICT')
+-            previous_review = previous['review'] if previous else None
+-            native_sha = _digest(previous_review) if previous_review and previous_review.get('trade_date') == trade_date else None
+-            if native_sha != expected_native_sha256:
+-                raise ValueError('M10_NATIVE_CAS_CONFLICT')
+-            if _run_path(run_root, run_id).exists():
+-                orphan = reader._read_run(run_id)
+-                publication = _read(_run_path(run_root, run_id), 'publication.json')
+-                if publication.get('previous_sha256') != (native_sha or ''):
+-                    raise ValueError('M10_NATIVE_CAS_CONFLICT')
+-                store._publish(run_id, orphan, publication, expected_generation)
+-                return reader.read(run_id)
+-            built = run_owner('build', data_root, trade_date, stage_selection_root,
+-                              previous_review=previous_review if native_sha else None,
+-                              expected_identity=identity, expected_native_sha256=native_sha)
+-            payload = {'schema':DAILY_SCHEMA,'run_id':run_id,'identity':identity,
+-                       'data_kind':'RECORDED_INPUT_REPLAY','review':built['review'],
+-                       'input_evidence':built['input_evidence'],'native_evidence':built['native_evidence'],
+-                       'cannot_confirm':built['cannot_confirm'], 'natural_admission':'UNVERIFIED',
+-                       'previous_native_sha256':native_sha}
+-            store._publish(run_id,payload,built['publication'],expected_generation)
+-            return reader.read(run_id)
+-    except Exception as error:
+-        store.failed_attempt(trade_date, error)
+-        raise
+-
+-
+-def read_hk_close_projection(run_root, run_id=None):
+-    """Read-only API/scheduler integration seam. Calling it never invokes owners."""
+-    reader=HKCloseReviewReader(run_root)
+-    payload = reader.read(run_id) if run_id else reader.read_latest()
+-    if payload.get('schema') != DAILY_SCHEMA:
+-        return payload
+-    # Preserve original native review for digest/audit; apply evidence semantics
+-    # only in this read-only UI projection.
+-    result = json.loads(json.dumps(payload))
+-    review = result['review']
+-    model_known = review['models']['0.2_prob_active']['evidence_status'] == 'READY'
+-    stage_known = True
+-    for stage, response in payload['input_evidence']['stages'].items():
+-        market = response.get('markets', {}).get('HK_CONNECT', {})
+-        status = market.get('status') or market.get('selection_status')
+-        reasons = list(dict.fromkeys([*response.get('cannot_confirm', []), *market.get('cannot_confirm', [])]))
+-        metric = review['stages'][stage]
+-        metric['source_status'] = status
+-        metric['cannot_confirm'] = reasons
+-        if status not in ('READY', 'READY_EMPTY'):
+-            stage_known = False
+-            metric['evidence_status'] = 'PARTIAL' if status == 'PARTIAL_WITH_ROWS' else 'CANNOT_CONFIRM'
+-            for key in ('hit_count', 'coverage', 'precision', 'coverage_pct', 'precision_pct'):
+-                metric[key] = None
+-    if not stage_known:
+-        review['stage_union']['evidence_status'] = 'CANNOT_CONFIRM'
+-        for key in ('hit_count','coverage','precision','coverage_pct','precision_pct'):
+-            review['stage_union'][key] = None
+-        review['kpi']['stage_union_close_top20_hits'] = None
+-    for row in review['top20_attribution']:
+-        if not model_known: row['model_0_2_hit'] = None
+-        if not stage_known: row['stage_union_hit'] = None
+-        if not model_known or not stage_known: row['classification'] = 'CANNOT_CONFIRM'
+-    review['cannot_confirm'] = sorted(set(review['cannot_confirm'] + payload['cannot_confirm']))
+-    review['source_status'] = review['status']
+-    review['status'] = 'PARTIAL' if review['cannot_confirm'] else review['status']
+-    review['evidence_mode'] = payload['data_kind']
+-    result['native_review_sha256'] = _digest(payload['review'])
+-    result['generation'] = _digest(_read(_run_path(run_root, payload['run_id']), 'receipt.json'))
+-    return result
+-
+-
+-if __name__ == '__main__':
+-    import argparse
+-    parser=argparse.ArgumentParser(description='M10 isolated recorded-input replay / cold reader')
+-    parser.add_argument('action', choices=('build','read'))
+-    parser.add_argument('--run-root', required=True, type=Path)
+-    parser.add_argument('--data-root',type=Path);parser.add_argument('--date')
+-    parser.add_argument('--stage-selection-root',type=Path)
+-    parser.add_argument('--expected-generation');parser.add_argument('--expected-native-sha256')
+-    args=parser.parse_args()
+-    if args.action=='build':
+-        if args.data_root is None or not args.date: parser.error('build requires --data-root and --date')
+-        result=build_default_hk_close_review(data_root=args.data_root,trade_date=args.date,run_root=args.run_root,
+-            stage_selection_root=args.stage_selection_root,expected_generation=args.expected_generation,
+-            expected_native_sha256=args.expected_native_sha256)
+-    else: result=read_hk_close_projection(args.run_root)
+-    print(json.dumps(result,ensure_ascii=False,sort_keys=True))
++__all__ = ["HKCloseReviewStore", "HKCloseReviewReader", "CloseReviewReceipt", "build_default_hk_close_review"]
+--- a/V5/src/v5_shadow/hk_close_owner.py
++++ /dev/null
+@@ -1,174 +0,0 @@
+-"""Fixed-source subprocess assembly; original owner and algorithm bytes unchanged."""
+-from __future__ import annotations
+-import hashlib
+-import json
+-import re
+-import subprocess
+-import sys
+-import tempfile
+-from contextlib import contextmanager
+-from datetime import datetime
+-from pathlib import Path
+-
+-CAPSULE_SHA256='be3c369df297d0ddd6985e0c0f0aa136849a931fe6f388f7f8355f3188574c38'
+-REPOSITORY=Path(__file__).resolve().parents[3]
+-MANIFEST='integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE/manifest.json'
+-FLAGS=('production_allowed','buy_gate_updated','orders_sent')
+-
+-
+-def _bytes(value):
+-    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
+-
+-
+-def _digest(value):
+-    return hashlib.sha256(_bytes(value)).hexdigest()
+-
+-
+-def _safe(root,relative):
+-    parts=relative.split('/')
+-    if any(p in ('','.','..') for p in parts) or '\\' in relative: raise ValueError('M10_INPUT_PATH_INVALID')
+-    path=Path(root).absolute().joinpath(*parts)
+-    if any(p.is_symlink() for p in (path,*path.parents)): raise ValueError('M10_INPUT_SYMLINK')
+-    return path
+-
+-
+-@contextmanager
+-def prepare_owner_capsule():
+-    source=_safe(REPOSITORY,MANIFEST); raw=source.read_bytes()
+-    if hashlib.sha256(raw).hexdigest()!=CAPSULE_SHA256: raise ValueError('M10_OWNER_MANIFEST_SHA_INVALID')
+-    mapping=json.loads(raw)
+-    with tempfile.TemporaryDirectory(prefix='m10-owner-') as directory:
+-        root=Path(directory)
+-        for entry in mapping['entries']:
+-            data=_safe(REPOSITORY,entry['source']).read_bytes()
+-            blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
+-            if (hashlib.sha256(data).hexdigest()!=entry['sha256'] or blob!=entry['git_blob_sha'] or len(data)!=entry['bytes']):
+-                raise ValueError('M10_OWNER_SOURCE_SHA_INVALID')
+-            target=_safe(root,entry['destination']);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+-        # Empty package markers are assembly metadata, never presented as donor files.
+-        for name in ('ops','contracts','domains','infrastructure','stage_center','stage_center/_selection_parts'):
+-            (root/name/'__init__.py').write_text('')
+-        yield root
+-
+-
+-def run_owner(action,data_root,trade_date,stage_root,**extra):
+-    with prepare_owner_capsule() as capsule:
+-        request={'action':action,'data_root':str(Path(data_root).absolute()),'trade_date':trade_date,
+-                 'stage_root':str(Path(stage_root).absolute()) if stage_root else None,'capsule':str(capsule),**extra}
+-        result=subprocess.run([sys.executable,'-I','-S','-B',str(Path(__file__).resolve())],
+-                              input=json.dumps(request),text=True,capture_output=True,timeout=60)
+-        if result.returncode:
+-            try: reason=json.loads(result.stdout)['error']
+-            except (ValueError,KeyError): reason='M10_OWNER_PROCESS_FAILED'
+-            raise ValueError(reason)
+-        return json.loads(result.stdout)
+-
+-
+-def _copy_inputs(request,work):
+-    date=request['trade_date']; source=Path(request['data_root']); records={}
+-    def copy(root,relative,destination,*,select=None):
+-        path=_safe(root,relative)
+-        if not path.is_file():
+-            records[destination]=None;return None
+-        data=path.read_bytes()
+-        if len(data)>64*1024*1024: raise ValueError('M10_INPUT_SIZE_LIMIT')
+-        if select is not None:
+-            try: value=json.loads(data);data=_bytes(select(value))
+-            except (ValueError,TypeError,KeyError): pass  # Preserve bad evidence for the original reader.
+-        target=_safe(work,destination);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+-        records[destination]=hashlib.sha256(data).hexdigest()
+-        return data
+-    close=f'hkconnect_close_snapshots/{date}.json'
+-    copy(source,close,'native/'+close)
+-    copy(source,f'receipts/hkconnect_close_snapshots/{date}.json',f'native/receipts/hkconnect_close_snapshots/{date}.json')
+-    copy(source,'manifest.json','native/manifest.json',select=lambda v:{close:v[close]} if isinstance(v,dict) and close in v else {})
+-    pool=f'preselection_pools/{date}/'
+-    for suffix in ('hkconnect_d1_top100.json','receipts/hkconnect_d1_top100.json'):
+-        copy(source,pool+suffix,'native/'+pool+suffix)
+-    copy(source,pool+'manifest.json','native/'+pool+'manifest.json',select=lambda v:{'hkconnect_d1_top100':v['hkconnect_d1_top100']} if isinstance(v,dict) and 'hkconnect_d1_top100' in v else {})
+-    if request['stage_root']:
+-        from domains.close_review import _REVIEW_STAGE_IDS
+-        keys={date+'/'+s+'/HK_CONNECT' for s in _REVIEW_STAGE_IDS}
+-        def selected_latest(value):
+-            if isinstance(value,dict) and isinstance(value.get('entries'),dict):
+-                return {**value,'entries':{k:v for k,v in value['entries'].items() if k in keys}}
+-            return value
+-        latest=copy(request['stage_root'],'selection_latest.json','stages/selection_latest.json',select=selected_latest)
+-        if latest:
+-            try: value=json.loads(latest)
+-            except ValueError: value={}
+-            if not isinstance(value,dict) or not isinstance(value.get('entries',{}),dict): value={}
+-            for stage in _REVIEW_STAGE_IDS:
+-                entry=value.get('entries',{}).get(date+'/'+stage+'/HK_CONNECT',{})
+-                run_id=entry.get('run_id') if isinstance(entry,dict) else None
+-                if not isinstance(run_id,str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*',run_id): continue
+-                prefix=f'selection_runs/{date}/HK_CONNECT_SELECTION_{stage}/{run_id}/'
+-                for suffix in ('artifact.csv','manifest.json','receipt.json'):
+-                    copy(request['stage_root'],prefix+suffix,'stages/'+prefix+suffix)
+-    return records
+-
+-
+-def _execute(request):
+-    date=request['trade_date']
+-    if not isinstance(date,str) or not re.fullmatch(r'\d{8}',date): raise ValueError('M10_DATE_INVALID')
+-    datetime.strptime(date,'%Y%m%d')
+-    sys.path.insert(0,request['capsule'])
+-    from ops.collect_hkconnect_close_snapshot import collect_close_snapshot
+-    from ops.build_close_review import build_close_review,_model_rows
+-    from domains.close_review import _REVIEW_STAGE_IDS
+-    from infrastructure.hkconnect_close_store import CloseSnapshotStore
+-    from infrastructure.preselection_pool_store import PreselectionPoolStore
+-    from infrastructure.review_store import ReviewStore
+-    from stage_center.consumer import StageSelectionConsumer
+-    with tempfile.TemporaryDirectory(prefix='m10-native-') as directory:
+-        work=Path(directory);files=_copy_inputs(request,work);native=work/'native';stages=work/'stages'
+-        # Preflight exact snapshot before collector call. Missing current-day input
+-        # is a hard stop too; no fallback path can reach a quote SDK.
+-        try: snapshot,snapshot_sha=CloseSnapshotStore(native).read_snapshot(date)
+-        except (OSError,ValueError) as error: raise ValueError('M10_CLOSE_INPUT_UNAVAILABLE_OR_INVALID') from error
+-        model_error=None
+-        try: model=PreselectionPoolStore(native).read_pool(date,'hkconnect_d1_top100')
+-        except (OSError,ValueError,TypeError) as error: model={};model_error=str(error)
+-        responses={s:StageSelectionConsumer(stages).get(date,s,markets=('HK_CONNECT',)) for s in _REVIEW_STAGE_IDS}
+-        reasons=['M02_MEMBERSHIP_PIT_UNVERIFIED']
+-        if not _model_rows(model,date): reasons.append('M06_STRICT_INPUT_UNAVAILABLE_OR_INVALID')
+-        for stage,response in responses.items():
+-            market=response.get('markets',{}).get('HK_CONNECT',{})
+-            for reason in [*response.get('cannot_confirm',[]),*market.get('cannot_confirm',[])]:
+-                reasons.append(stage+':'+str(reason))
+-            status=market.get('status') or market.get('selection_status')
+-            if status not in ('READY','READY_EMPTY'): reasons.append(stage+':'+str(status or 'CANNOT_CONFIRM'))
+-        evidence={'files':files,'close_snapshot_sha256':snapshot_sha,
+-                  'model':{'payload':model,'error':model_error},'stages':responses,
+-                  'close_membership_status':'CANNOT_CONFIRM','close_membership_reason':'M02_MEMBERSHIP_PIT_UNVERIFIED'}
+-        code_sha=_digest({p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in
+-                         (Path(__file__),Path(__file__).with_name('hk_close_daily.py'))})
+-        identity={'trade_date':date,'input_sha256':_digest(evidence),'owner_capsule_sha256':CAPSULE_SHA256,
+-                  'code_sha256':code_sha,'config_sha256':_digest({'network_collection':False,'data_kind':'RECORDED_INPUT_REPLAY',
+-                       'schedule':'HK_SECURITIES_TRADE_DAY/16:10','half_day':'SCHEDULE_BINDING_UNVERIFIED'}),
+-                  'calendar_sha256':hashlib.sha256((Path(request['capsule'])/'contracts/market_calendar_2026.json').read_bytes()).hexdigest()}
+-        if request['action']=='inspect': return {'identity':identity,'input_evidence':evidence}
+-        if identity!=request.get('expected_identity'): raise ValueError('M10_INPUT_CHANGED_DURING_BUILD')
+-        previous=request.get('previous_review')
+-        if previous:
+-            if _digest(previous)!=request.get('expected_native_sha256'): raise ValueError('M10_NATIVE_CAS_CONFLICT')
+-            ReviewStore(native).publish_native(previous,expected_sha256=None)
+-        elif request.get('expected_native_sha256') is not None: raise ValueError('M10_NATIVE_CAS_CONFLICT')
+-        collected=collect_close_snapshot(date,data_root=native)
+-        if collected['publication'].get('status')!='IDEMPOTENT_REUSE': raise ValueError('M10_COLLECTION_NOT_REUSE')
+-        built=build_close_review(native,date,stage_selection_root=stages)
+-        readback=ReviewStore(native).read_reference(date)
+-        if readback!=built['review']: raise ValueError('M10_NATIVE_READBACK_MISMATCH')
+-        if built['publication'].get('previous_sha256')!=(request.get('expected_native_sha256') or ''):
+-            raise ValueError('M10_NATIVE_CAS_PUBLICATION_MISMATCH')
+-        receipt=json.loads((native/f'receipts/close_reviews/{date}.json').read_text())
+-        manifest=json.loads((native/'manifest.json').read_text())
+-        return {**built,'identity':identity,'input_evidence':evidence,'cannot_confirm':sorted(set(reasons)),
+-                'native_evidence':{'manifest':manifest,'receipt':receipt,'collector_publication':collected['publication']}}
+-
+-
+-if __name__=='__main__':
+-    try: print(json.dumps(_execute(json.load(sys.stdin)),ensure_ascii=False,sort_keys=True))
+-    except Exception as error:
+-        print(json.dumps({'error':str(error) if str(error).startswith('M10_') else 'M10_OWNER_'+type(error).__name__}))
+-        sys.exit(1)
+--- a/V5/tests/test_hk_close_chain.py
++++ /dev/null
+@@ -1,216 +0,0 @@
+-"""Synthetic offline controls; original owners execute without injected callbacks."""
+-import json
+-import shutil
+-from pathlib import Path
+-
+-import pytest
+-import v5_shadow.hk_close_daily as daily
+-
+-
+-def test_run_directory_identity_rejected(tmp_path):
+-    daily.HKCloseReviewStore(tmp_path).publish('one', {'review': {}}, {'generation': 'g1'})
+-    shutil.copytree(tmp_path/'one', tmp_path/'other')
+-    with pytest.raises(ValueError, match='IDENTITY'):
+-        daily.HKCloseReviewReader(tmp_path).read('other')
+-
+-
+-def test_receipt_payload_identity_rejected(tmp_path):
+-    daily.HKCloseReviewStore(tmp_path).publish('one', {'review': {}}, {'generation': 'g1'})
+-    path=tmp_path/'one'/'receipt.json'; value=json.loads(path.read_text());value['payload_sha256']='0'*64;path.write_text(json.dumps(value))
+-    with pytest.raises(ValueError, match='RECEIPT'):
+-        daily.HKCloseReviewReader(tmp_path).read('one')
+-
+-
+-def test_generation_cas_preserves_success(tmp_path):
+-    store=daily.HKCloseReviewStore(tmp_path)
+-    first=store.publish('one', {'x':1}, {'generation':'g1'}, expected_generation=None)
+-    with pytest.raises(ValueError, match='GENERATION_CAS'):
+-        store.publish('two', {'x':2}, {'generation':'g2'}, expected_generation='stale')
+-    assert daily.HKCloseReviewReader(tmp_path).read_latest()['x']==1
+-
+-
+-def test_default_owner_closure_is_frozen():
+-    assert hasattr(daily, 'prepare_owner_capsule'), 'default chain has no fixed owner closure'
+-
+-
+-@pytest.mark.parametrize('run_id',['../escape','/absolute','.','a/b'])
+-def test_unsafe_run_id_rejected(tmp_path,run_id):
+-    with pytest.raises(ValueError,match='RUN_ID'):
+-        daily.HKCloseReviewStore(tmp_path).publish(run_id,{}, {})
+-
+-
+-def test_real_default_owners_save_and_cold_read(tmp_path):
+-    from m10_fixture import create_fixture
+-    data=create_fixture(tmp_path/'input')
+-    before={str(p.relative_to(data)):p.read_bytes() for p in data.rglob('*') if p.is_file()}
+-    result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=tmp_path/'runs',stage_selection_root=data/'stages')
+-    assert result['review']['row_counts']=={'hkconnect_universe':600,'close_top20':20,'model_0_2':100,'stage_rows':7}
+-    assert result['review']['stage_union']['hit_count']==7
+-    assert result['data_kind']=='RECORDED_INPUT_REPLAY'
+-    assert result['natural_admission']=='UNVERIFIED'
+-    assert 'M02_MEMBERSHIP_PIT_UNVERIFIED' in result['cannot_confirm']
+-    assert result==daily.HKCloseReviewReader(tmp_path/'runs').read(result['run_id'])
+-    assert before=={str(p.relative_to(data)):p.read_bytes() for p in data.rglob('*') if p.is_file()}
+-    first={str(p.relative_to(tmp_path/'runs')):p.read_bytes() for p in (tmp_path/'runs').rglob('*') if p.is_file()}
+-    again=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=tmp_path/'runs',stage_selection_root=data/'stages')
+-    assert again==result
+-    assert first=={str(p.relative_to(tmp_path/'runs')):p.read_bytes() for p in (tmp_path/'runs').rglob('*') if p.is_file()}
+-
+-
+-def test_missing_inputs_preserve_top20_as_partial(tmp_path):
+-    from m10_fixture import create_fixture
+-    data=create_fixture(tmp_path/'input',with_model=False,with_stages=False)
+-    result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=tmp_path/'runs')
+-    assert len(result['review']['close_top20'])==20
+-    assert result['review']['models']['0.2_prob_active']['hit_count'] is None
+-    assert len(result['review']['missing_stages'])==7
+-    assert result['input_evidence']['model']['payload']=={}
+-
+-
+-def test_default_missing_close_never_collects(tmp_path):
+-    with pytest.raises(ValueError,match='M10_CLOSE_INPUT'):
+-        daily.build_default_hk_close_review(data_root=tmp_path/'absent',trade_date='20260730',run_root=tmp_path/'runs')
+-    assert not (tmp_path/'absent').exists()
+-    assert not (tmp_path/'runs'/'latest_success.json').exists()
+-    assert len(list((tmp_path/'runs'/'attempts').glob('*.json')))==1
+-
+-
+-def test_pointer_write_failure_is_not_a_committed_run_and_retry_recovers(tmp_path,monkeypatch):
+-    store=daily.HKCloseReviewStore(tmp_path)
+-    store.publish('one',{'x':1},{'generation':'g1'})
+-    old=daily.HKCloseReviewReader(tmp_path).latest_identity()['generation']
+-    real=daily._write
+-    def fail(path,value):
+-        if Path(path).name=='latest_success.json': raise OSError('synthetic disk fault')
+-        return real(path,value)
+-    monkeypatch.setattr(daily,'_write',fail)
+-    with pytest.raises(OSError): store.publish('two',{'x':2},{'generation':'g2'},expected_generation=old)
+-    assert daily.HKCloseReviewReader(tmp_path).read_latest()=={'x':1}
+-    with pytest.raises(ValueError,match='NOT_COMMITTED'): daily.HKCloseReviewReader(tmp_path).read('two')
+-    monkeypatch.setattr(daily,'_write',real)
+-    store.publish('two',{'x':2},{'generation':'g2'},expected_generation=old)
+-    assert daily.HKCloseReviewReader(tmp_path).read_latest()=={'x':2}
+-
+-
+-def test_default_native_and_generation_cas_leave_latest(tmp_path):
+-    from m10_fixture import create_fixture
+-    data=create_fixture(tmp_path/'input')
+-    runs=tmp_path/'runs'
+-    first=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs,stage_selection_root=data/'stages')
+-    newer=create_fixture(tmp_path/'changed',close_offset=1)
+-    generation=daily.HKCloseReviewReader(runs).latest_identity()['generation']
+-    with pytest.raises(ValueError,match='GENERATION_CAS'):
+-        daily.build_default_hk_close_review(data_root=newer,trade_date='20260730',run_root=runs,stage_selection_root=newer/'stages')
+-    with pytest.raises(ValueError,match='NATIVE_CAS'):
+-        daily.build_default_hk_close_review(data_root=newer,trade_date='20260730',run_root=runs,stage_selection_root=newer/'stages',expected_generation=generation,expected_native_sha256='0'*64)
+-    assert daily.HKCloseReviewReader(runs).read_latest()==first
+-    second=daily.build_default_hk_close_review(data_root=newer,trade_date='20260730',run_root=runs,stage_selection_root=newer/'stages',expected_generation=generation,expected_native_sha256=daily._digest(first['review']))
+-    assert second['run_id']!=first['run_id']
+-    assert daily.HKCloseReviewReader(runs).read(first['run_id'])==first
+-
+-
+-def test_partial_projection_does_not_claim_missing_hits(tmp_path):
+-    from m10_fixture import create_fixture
+-    data=create_fixture(tmp_path/'input',with_model=False,with_stages=False)
+-    runs=tmp_path/'runs'
+-    daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs)
+-    projection=daily.read_hk_close_projection(runs)
+-    assert len(projection['review']['close_top20'])==20
+-    assert all(r['model_0_2_hit'] is None and r['stage_union_hit'] is None and r['classification']=='CANNOT_CONFIRM' for r in projection['review']['top20_attribution'])
+-
+-
+-@pytest.mark.parametrize('part',['model','stage'])
+-def test_invalid_optional_evidence_keeps_top20(tmp_path,part):
+-    from m10_fixture import create_fixture
+-    data=create_fixture(tmp_path/'input')
+-    path=data/('preselection_pools/20260730/manifest.json' if part=='model' else 'stages/selection_latest.json')
+-    path.write_text('{invalid')
+-    result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=tmp_path/'runs',stage_selection_root=data/'stages')
+-    assert len(result['review']['close_top20'])==20
+-    assert result['cannot_confirm']
+-
+-
+-@pytest.mark.parametrize('mode',['partial','empty'])
+-def test_original_stage_status_and_reason_survive(tmp_path,mode):
+-    from m10_fixture import create_fixture
+-    data=create_fixture(tmp_path/'input',stage_mode=mode)
+-    runs=tmp_path/'runs'
+-    result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs,stage_selection_root=data/'stages')
+-    view=daily.read_hk_close_projection(runs)
+-    assert len(view['review']['close_top20'])==20
+-    if mode=='partial':
+-        assert any('SYNTHETIC_SOURCE_GAP' in reason for reason in result['cannot_confirm'])
+-        assert view['review']['stage_union']['hit_count'] is None
+-        assert all(row['classification']=='CANNOT_CONFIRM' for row in view['review']['top20_attribution'])
+-    else:
+-        assert result['review']['missing_stages']==[]
+-        assert result['review']['stage_union']['selected_count']==0
+-        assert all(metric['source_status']=='READY_EMPTY' for metric in view['review']['stages'].values())
+-
+-
+-def test_read_has_no_filesystem_side_effects(tmp_path):
+-    absent=tmp_path/'absent'
+-    with pytest.raises(FileNotFoundError): daily.HKCloseReviewReader(absent).read('missing')
+-    assert not absent.exists()
+-    daily.HKCloseReviewStore(tmp_path/'runs').publish('one',{'x':1},{})
+-    before={str(p):(p.read_bytes(),p.stat().st_mtime_ns) for p in tmp_path.rglob('*') if p.is_file()}
+-    daily.HKCloseReviewReader(tmp_path/'runs').read_latest()
+-    assert before=={str(p):(p.read_bytes(),p.stat().st_mtime_ns) for p in tmp_path.rglob('*') if p.is_file()}
+-
+-
+-def test_frozen_source_tamper_rejected(tmp_path,monkeypatch):
+-    import v5_shadow.hk_close_owner as owner
+-    root=tmp_path/'repo'
+-    shutil.copytree(owner.REPOSITORY/'handoffs',root/'handoffs')
+-    shutil.copytree(owner.REPOSITORY/'integration_candidates',root/'integration_candidates')
+-    source=root/'handoffs/M10/handoff/v4-running-source-20261005/canonical/ops/build_close_review.py'
+-    source.write_text(source.read_text()+'\n# tampered synthetic test copy\n')
+-    monkeypatch.setattr(owner,'REPOSITORY',root)
+-    with pytest.raises(ValueError,match='SOURCE_SHA'):
+-        with owner.prepare_owner_capsule(): pass
+-
+-
+-def test_input_and_run_roots_cannot_overlap(tmp_path):
+-    data=tmp_path/'input';data.mkdir()
+-    with pytest.raises(ValueError,match='ROOT_OVERLAP'):
+-        daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=data/'runs')
+-    assert list(data.iterdir())==[]
+-
+-
+-def test_orphan_cannot_change_parent_after_other_success(tmp_path,monkeypatch):
+-    store=daily.HKCloseReviewStore(tmp_path)
+-    store.publish('one',{'x':1},{})
+-    old=daily.HKCloseReviewReader(tmp_path).latest_identity()['generation']
+-    real=daily._write
+-    def fail(path,value):
+-        if Path(path).name=='latest_success.json': raise OSError('synthetic pointer fault')
+-        return real(path,value)
+-    monkeypatch.setattr(daily,'_write',fail)
+-    with pytest.raises(OSError): store.publish('orphan',{'x':2},{},expected_generation=old)
+-    monkeypatch.setattr(daily,'_write',real)
+-    store.publish('three',{'x':3},{},expected_generation=old)
+-    current=daily.HKCloseReviewReader(tmp_path).latest_identity()['generation']
+-    with pytest.raises(ValueError,match='ORPHAN_PARENT_CAS'):
+-        store.publish('orphan',{'x':2},{},expected_generation=current)
+-    assert daily.HKCloseReviewReader(tmp_path).read_latest()=={'x':3}
+-
+-
+-def test_default_owner_pointer_failure_retries_without_rebuilding(tmp_path,monkeypatch):
+-    from m10_fixture import create_fixture
+-    import v5_shadow.hk_close_owner as owner
+-    data=create_fixture(tmp_path/'input');runs=tmp_path/'runs'
+-    real_write=daily._write
+-    def fail(path,value):
+-        if Path(path).name=='latest_success.json': raise OSError('synthetic pointer fault')
+-        return real_write(path,value)
+-    monkeypatch.setattr(daily,'_write',fail)
+-    with pytest.raises(OSError):
+-        daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs,stage_selection_root=data/'stages')
+-    monkeypatch.setattr(daily,'_write',real_write)
+-    original_run=owner.run_owner
+-    def inspect_only(action,*args,**kwargs):
+-        assert action=='inspect', 'orphan recovery must not recalculate'
+-        return original_run(action,*args,**kwargs)
+-    monkeypatch.setattr(owner,'run_owner',inspect_only)
+-    result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs,stage_selection_root=data/'stages')
+-    assert daily.HKCloseReviewReader(runs).read_latest()==result
+--- a/V5/tests/m10_fixture.py
++++ /dev/null
+@@ -1,39 +0,0 @@
+-"""Synthetic recipe derived from original test_store_backed_producer fixture.
+-
+-No member/PIT or natural-run attestation is fabricated.
+-"""
+-from pathlib import Path
+-import subprocess
+-import sys
+-from v5_shadow.hk_close_daily import prepare_owner_capsule
+-
+-
+-def create_fixture(root, *, with_model=True, with_stages=True, close_offset=0, stage_mode="ready"):
+-    root=Path(root)
+-    script=r'''
+-import sys
+-from pathlib import Path
+-sys.path.insert(0,sys.argv[1])
+-from infrastructure.hkconnect_close_store import CloseSnapshotStore
+-from infrastructure.preselection_pool_store import PreselectionPoolStore
+-from stage_center.selection import SelectionStore,select_hk_four_lane
+-from domains.close_review import _REVIEW_STAGE_IDS
+-root=Path(sys.argv[2]);date='20260730'
+-flags=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
+-rows=[dict(trade_date=date,code=f'HK.{i:05d}',name=f'SYNTHETIC {i}',close=100+i+int(sys.argv[5]),pre_close=100,amount=i) for i in range(1,601)]
+-snapshot=dict(schema_version='v3_5.hkconnect_close_snapshot.v1',trade_date=date,status='READY',source_mode='SYNTHETIC_OFFLINE_FIXTURE',source_input_sha256='e'*64,universe_count=600,same_date_row_count=600,coverage_ratio=1.0,rows=rows,**flags)
+-CloseSnapshotStore(root).import_snapshot(snapshot)
+-if sys.argv[3]=='True':
+-    model=[dict(market='HK',symbol=f'HK.{i:05d}',stock_name=f'SYNTHETIC {i}',pool_id='hkconnect_d1_top100',pool_rank=i,target_date=date,recommendation_status='WATCH_ONLY') for i in range(1,101)]
+-    PreselectionPoolStore(root).materialize(dict(schema_version='v3_5.preselection_pool.v1',trade_date=date,pool_id='hkconnect_d1_top100',display_name='Synthetic HK D-1 Top100',market='HK',status='STRICT_0_2_READY',producer_id='synthetic.test',source_role='SHARED_VERIFIED_HK_0_2',source_path='fixture/hk.json',source_sha256='f'*64,rows=model,cannot_confirm=[],**flags))
+-if sys.argv[4]=='True':
+-    for offset,stage in enumerate(_REVIEW_STAGE_IDS):
+-        row=dict(code=f'HK.{600-offset:05d}',name='SYNTHETIC',pct_chg=1.0,last_price=101.0,open_price=100.0,high_price=101.0,low_price=100.0,prev_close=100.0,turnover=1000.0,volume_ratio=1.0)
+-        envelope=select_hk_four_lane([] if sys.argv[6]=='empty' else [row],date,stage,f'{offset+1:064x}',source_evidence=('fixture=SYNTHETIC_OFFLINE',))
+-        if sys.argv[6]=='partial':
+-            envelope['selection_status']='PARTIAL_WITH_ROWS';envelope['cannot_confirm']=['SYNTHETIC_SOURCE_GAP']
+-        SelectionStore(root/'stages').publish(envelope,market='HK_CONNECT')
+-'''
+-    with prepare_owner_capsule() as capsule:
+-        subprocess.run([sys.executable,'-I','-S','-B','-c',script,str(capsule),str(root),str(with_model),str(with_stages),str(close_offset),stage_mode],check=True,capture_output=True,text=True)
+-    return root
+--- a/V5/tests/run_m10_acceptance.py
++++ /dev/null
+@@ -1,60 +0,0 @@
+-"""One isolated acceptance command; no network, installation or source mutation."""
+-from __future__ import annotations
+-import argparse
+-import datetime
+-import hashlib
+-import json
+-import os
+-from pathlib import Path
+-import subprocess
+-import sys
+-import tempfile
+-
+-ROOT=Path(__file__).resolve().parents[2]
+-
+-def main():
+-    parser=argparse.ArgumentParser()
+-    parser.add_argument('--pytest-site-packages',required=True,type=Path,
+-                        help='Existing directory containing pytest; loaded without .pth processing')
+-    parser.add_argument('--evidence-dir',type=Path)
+-    args=parser.parse_args()
+-    site=args.pytest_site_packages.absolute()
+-    if not (site/'pytest/__init__.py').is_file(): parser.error('pytest is absent in the specified existing directory')
+-    evidence=args.evidence_dir or Path(tempfile.mkdtemp(prefix='m10-acceptance-'))
+-    evidence.mkdir(parents=True,exist_ok=True)
+-    sys.path.insert(0,str(ROOT/'V5/src'))
+-    from v5_shadow.hk_close_daily import prepare_owner_capsule
+-    commands=[]
+-    def run(name,script):
+-        argv=[sys.executable,'-I','-S','-B','-c',script]
+-        start=datetime.datetime.now(datetime.timezone.utc).isoformat()
+-        result=subprocess.run(argv,cwd=ROOT,text=True,capture_output=True,
+-            env={**os.environ,'PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1'})
+-        end=datetime.datetime.now(datetime.timezone.utc).isoformat()
+-        (evidence/(name+'.stdout.log')).write_text(result.stdout)
+-        (evidence/(name+'.stderr.log')).write_text(result.stderr)
+-        commands.append({'suite':name,'argv':argv,'start':start,'end':end,'exit_code':result.returncode,
+-                         'process_environment':{'PYTEST_DISABLE_PLUGIN_AUTOLOAD':'1'}})
+-        print(name+':\n'+result.stdout+result.stderr,flush=True)
+-        return result.returncode
+-    prefix=f'import sys;sys.path[:0]={[str(ROOT/"V5/src"),str(site)]!r};import pytest;'
+-    product=run('product',prefix+f'sys.exit(pytest.main(["-q","-p","no:cacheprovider",{str(ROOT/"V5/tests")!r}]))')
+-    original=ROOT/'handoffs/M10/handoff/v4-running-source-20261005/canonical/tests'
+-    with prepare_owner_capsule() as capsule:
+-        paths=[str(original/name) for name in ('test_close_review_producer.py','test_close_review_verified_inputs.py','test_close_snapshot_idempotent_reuse.py')]
+-        argv=['-q','-p','no:cacheprovider',*paths,'-k','not vipdoc_normalizer and not executor_requires']
+-        canonical=run('frozen-original',f'import sys;sys.path[:0]={[str(capsule),str(site)]!r};import pytest;sys.exit(pytest.main({argv!r}))')
+-    hashes={str(p.relative_to(ROOT)):{'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size}
+-            for directory in ('V5/src/v5_shadow','V5/tests','integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE')
+-            for p in (ROOT/directory).rglob('*') if p.is_file() and '__pycache__' not in str(p)}
+-    report={'python':sys.version,'commands':commands,'source_files':hashes,
+-            'not_run':{'test_vipdoc_normalizer_freezes_target_date_and_removes_external_paths':'Frozen import_hkconnect_close_source.py not part of supplied M10 closure.',
+-                       'test_close_review_executor_requires_and_passes_stage_selection_root':'Full runtime_tasks/scheduler closure not supplied; no live scheduler execution.',
+-                       'natural_run':'M02 membership/PIT and active half-day contracts unverified; no real collection.',
+-                       'api_ui_deployment':'This command is offline engine/read-projection acceptance only.'},
+-            'result':'PASS' if product==canonical==0 else 'FAIL'}
+-    (evidence/'report.json').write_text(json.dumps(report,indent=2)+'\n')
+-    print('Evidence:',evidence)
+-    return 0 if report['result']=='PASS' else 1
+-
+-if __name__=='__main__': sys.exit(main())
+--- a/V5/docs/M10_HK_CLOSE_HANDOFF.md
++++ /dev/null
+@@ -1,82 +0,0 @@
+-# M10 默认原 owner 与冷读链交付
+-
+-## 固定前像和本次范围
+-
+-- 仓库：私有 `lexi2016/v5`。
+-- 唯一分支：`dev/m10-github-handoff-20261011`。
+-- 实施前 HEAD：`21e9991dc81b540e46765bdb6895cf0a281ab253`。
+-- 原算法 donor：`lexi2016/v4@f7cb731c384ee6890a87d16c19a5b5a621779477`。
+-- 本次只补 M10 默认原 owner、不可变发布、冷读、CAS 与离线验收。原 5 个 publication 测试先实跑通过，保留不改。
+-- `handoffs/M10/V5/`、全部原 SOURCE/历史反馈、main/P0/其他模块未修改。
+-
+-## 真实执行路径
+-
+-`build_default_hk_close_review(data_root, trade_date, run_root, stage_selection_root, expected_generation, expected_native_sha256)`：
+-
+-1. 核对隔离 capsule manifest 自身 SHA、每个原件 SHA-256、Git blob 和字节数。
+-2. 仅复制目标日收盘快照三件套、exact-date 模型三件套及原七阶段 selection 三件套到临时私有目录。输入根只读，与 run_root 不可重叠。
+-3. 子进程以 `-I -S -B` 隔离启动，避免 `.pth`、环境 PYTHONPATH 或其他 checkout 的同名 ops 注入。无安装、网络、服务或真实凭据。
+-4. 先用原 CloseSnapshotStore 验证现成快照。即便当前日缺快照也硬拒绝，不调用真实采集。合格快照由原 collector 走 IDEMPOTENT_REUSE，再执行原 builder → 原 ReviewStore.publish_native(expected_sha256) → 原 ReviewStore 冷读。
+-5. 输入文件、原 model payload、原 stage 响应和原因、source/code/config/calendar SHA 形成计算 identity。相同成功 identity 只读复用。不同输入新 run。
+-6. 原 native expected SHA 与 V5 expected generation 分别核对。原 native 数据写入仅在临时 V5 工作区；最后整套不可变 run 原子改名，再原子提交 latest_success。失败留下 attempt，旧成功可读。
+-7. pointer 写失败的 orphan 不算已提交，冷 reader 拒绝。重试必须满足创建时 parent generation 和 native SHA，才能补交指针。不会重算或覆盖旧 run。
+-
+-`HKCloseReviewReader.read(run_id)` 重读 payload/publication/manifest/receipt，核对 run、schema、全体 SHA、输入身份、原 publication 路径/date/payload SHA、原 native manifest/receipt、提交记录。`read_latest()` 同时验证 generation。
+-
+-## API 只读接入接口
+-
+-`read_hk_close_projection(run_root, run_id=None)` 仅冷读，不调用 producer；输出同一提交 run/generation。
+-
+-- 原计算产物完整保留在 store，读回 SHA 可复核。
+-- 展示层为 RECORDED_INPUT_REPLAY；不会把原 native 内层标签冒充自然运行。
+-- 原 PARTIAL_WITH_ROWS 原因保留，未能确认的 stage 指标及命中设为 null/CANNOT_CONFIRM。
+-- 缺模型/阶段仍展示 Top20；verified READY_EMPTY 与缺失不同。
+-- 该接口尚未部署到普通 HTTP 或 UI。本次没有修改共享 `/api/v3/review` 或 A 股内容。
+-- 自然调度仍未开启。冻结全天槽为 HK_SECURITIES_TRADE_DAY 16:10；半日未核时 SCHEDULE_BINDING_UNVERIFIED。禁止以 16:08/12:10 回放代替生产触发。
+-
+-## Capsule 的明确边界
+-
+-`integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE/manifest.json` 只描述隔离候选装配，不修改原 vendor/source manifest。
+-
+-原 canonical 的 `stage_center/_selection_parts/_namespace.py` 缺失；使用已交 M10 vendor 的同用途冻结文件，manifest 明确记录真实来源，绝不伪装成 canonical 原件。空 package markers 为临时装配元数据。
+-
+-## 单次 Mac 验收
+-
+-在新的隔离 checkout 固定到本次交付 commit 后执行，不覆盖活动目录，不启动/停止任何服务：
+-
+-```sh
+-# 使用 Mac 已有 Python 和 pytest 依赖目录，不安装、不读取凭据。
+-# PYTHON 为现有解释器，PYTEST_SITE 为其已有、包含 pytest/__init__.py 的 site-packages。
+-"$PYTHON" -I -S -B V5/tests/run_m10_acceptance.py \
+-  --pytest-site-packages "$PYTEST_SITE" \
+-  --evidence-dir "$ISOLATED_EVIDENCE_DIR"
+-```
+-
+-runner 一次完成 28 项 M10 产品测试与 10 项原冻结测试，并保存开始/结束、完整 argv、退出码、stdout/stderr 和被测源码 SHA/bytes。使用 Python `-S` 避免旧环境 `.pth` 指向其他 checkout 的历史问题。工具只使用临时合成 fixture，没有生产数据或 Futu 连接。
+-
+-Mac 验收必须独立核对 `git rev-parse HEAD` 等于发布者的固定 commit；本地代码字节须与 report.json 一致。不能用本说明或云端通过替代 Mac 测试结果。
+-
+-## CLI
+-
+-```sh
+-PYTHONPATH=V5/src "$PYTHON" -m v5_shadow.hk_close_daily build \
+-  --data-root "$ISOLATED_RECORDED_INPUT_ROOT" --date 20260730 \
+-  --stage-selection-root "$ISOLATED_STAGE_ROOT" --run-root "$PRIVATE_V5_RUN_ROOT"
+-PYTHONPATH=V5/src "$PYTHON" -m v5_shadow.hk_close_daily read --run-root "$PRIVATE_V5_RUN_ROOT"
+-```
+-
+-第一次 generation/native SHA 均为 None；变更输入时从上次成功的 latest_identity().generation 和原 review SHA 获得两项 CAS，分别传入 `--expected-generation` 与 `--expected-native-sha256`。同一成功 identity 重试保持纯复用，不倒退 latest。
+-
+-## 准入与未跑状态
+-
+-- 工程：离线真实原 owner/default chain 已测；fixture 始终标明合成/录制回放。
+-- 真实输入：原冻结 CloseSnapshotStore 验证不等于 M02 成员资格/PIT证明。当前没有可核的该证据，输出一直显式 `M02_MEMBERSHIP_PIT_UNVERIFIED` 与 natural_admission=UNVERIFIED，不手填 formal verified。
+-- 页面：只读投影函数已测；普通 HTTP/UI 集成与发布 NOT_RUN。
+-- 自动接续：自然调度与真实网络采集 NOT_RUN，未启用。
+-- 完整验收：Mac 独立测试、连续两个适用日自然验收 NOT_RUN。
+-- 原测试中 2 项未跑：vipdoc importer 不在给定闭包；完整 scheduler/runtime_tasks 也不在该闭包。runner 明列原因，不能宣称全仓测试通过。
+-- 云端使用现有 Python 3.12；Mac 原环境版本另验，不声称已验证全部依赖/平台版本。
+-
+-## 应用与回滚
+-
+-独立 checkout 使用固定 Git commit 或本次 forward.patch；先 apply --check。reverse.patch 是真正 after→before，并已验证可恢复全部前像字节。只回滚本次 M10 源码，不 reset --hard，不回滚其他模块/B 数据。此交付未发布 API/UI，也没有宣称完成代码/UI独立回滚验收。数据 run 不可变，旧成功保留；任何上线/指针回退由集成者另核当前 CAS。
+--- a/integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE/manifest.json
++++ /dev/null
+@@ -1,312 +0,0 @@
+-{
+-  "status": "ISOLATED_CANDIDATE_NOT_ACTIVE_INSTALL",
+-  "entries": [
+-    {
+-      "destination": "ops/build_close_review.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/ops/build_close_review.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "6be84fa7462490d17e174d5e4bf77b476afc0ba7a67d60edddd036655683cf26",
+-      "git_blob_sha": "6aa059859d27506e9cc4f39e76d7b81dc33855fe",
+-      "bytes": 6244
+-    },
+-    {
+-      "destination": "ops/collect_hkconnect_close_snapshot.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/ops/collect_hkconnect_close_snapshot.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "901905f77532fe61674d2f423b6fab1babc86b3b6f5e3aeb5a34abce91630c76",
+-      "git_blob_sha": "1b329ef71a29ff61330ba2960362aa8e5a89a4b1",
+-      "bytes": 8022
+-    },
+-    {
+-      "destination": "contracts/stages.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/contracts/stages.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "d0ac1771a1005888e53e9a322da65f959cfbcbcc665357b8783d5eb4eda9c6df",
+-      "git_blob_sha": "41bf1ba5de290c23a22695d9454b4991976c3e39",
+-      "bytes": 2036
+-    },
+-    {
+-      "destination": "contracts/trading_calendar.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+-      "git_blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+-      "bytes": 10239
+-    },
+-    {
+-      "destination": "contracts/market_calendar_2026.json",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/contracts/market_calendar_2026.json",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+-      "git_blob_sha": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+-      "bytes": 3473
+-    },
+-    {
+-      "destination": "domains/close_review.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/domains/close_review.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "24dd8ee1394844d464b06b2b46053d3551f9a088acede1031b5f18bf8ee997ab",
+-      "git_blob_sha": "f5714c41e22e50b5e48d2137548a0fe134a24bfa",
+-      "bytes": 11014
+-    },
+-    {
+-      "destination": "infrastructure/data_store.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd",
+-      "git_blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+-      "bytes": 10704
+-    },
+-    {
+-      "destination": "infrastructure/hkconnect_close_store.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/hkconnect_close_store.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "aea05a0ec8b4b42e6c140715fb1bf80ffcf49ded1f25f5bb59bc3c952bce4bf8",
+-      "git_blob_sha": "86f75687daf761f022379f56757c433fc794043a",
+-      "bytes": 4178
+-    },
+-    {
+-      "destination": "infrastructure/interprocess_lock.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+-      "git_blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+-      "bytes": 7514
+-    },
+-    {
+-      "destination": "infrastructure/market_time.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/market_time.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1",
+-      "git_blob_sha": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0",
+-      "bytes": 960
+-    },
+-    {
+-      "destination": "infrastructure/owned_io.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+-      "git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+-      "bytes": 9354
+-    },
+-    {
+-      "destination": "infrastructure/owned_path.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+-      "git_blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+-      "bytes": 2251
+-    },
+-    {
+-      "destination": "infrastructure/preselection_pool_readers.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_readers.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "949b16526e2b55ae23d121ca3909b4d33509483164d1899e65c94aef6d5781c1",
+-      "git_blob_sha": "da6a4cd1f25095a45ebeb356ac58c0e6b5ecd4da",
+-      "bytes": 5432
+-    },
+-    {
+-      "destination": "infrastructure/preselection_pool_sources.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_sources.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "cc683561201453e3f7ca975b2b7cdb6a3836b1ecbe63e001a5abd181f38813d6",
+-      "git_blob_sha": "12790ab2e2815097762d4aa21cd63f2ea5cc76a2",
+-      "bytes": 5798
+-    },
+-    {
+-      "destination": "infrastructure/preselection_pool_store.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_store.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "a6260549e63fd2a904d77bd7b2856d8c3883557efb691a2715b9595128e27aaa",
+-      "git_blob_sha": "0e9df7a85177fe031241d8b8743d6a1996d985c7",
+-      "bytes": 48603
+-    },
+-    {
+-      "destination": "infrastructure/preselection_pool_transactions.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/preselection_pool_transactions.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "22cca047d8d2da3ec9b1c4d3d18fd09026887ee48a95868757bfc598d094d58d",
+-      "git_blob_sha": "6b8ade94068811f6e46fe2d1233938eb9f4c0da5",
+-      "bytes": 15569
+-    },
+-    {
+-      "destination": "infrastructure/review_store.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/review_store.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "12278920fe02965163916ac9e1bc8143fb42d7aa4e05e8c90cf02afb9e5d399c",
+-      "git_blob_sha": "b2dc5430823bba1775139d3eae37b21381b7e080",
+-      "bytes": 7378
+-    },
+-    {
+-      "destination": "infrastructure/scope_gate.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/scope_gate.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "5620d1ee89fbae998d4c801c2a7c4cffac50f890ad0b6951f99230c591dcff68",
+-      "git_blob_sha": "33539d4b64b5374f8b1b9839ae30c494e30fb5ae",
+-      "bytes": 16258
+-    },
+-    {
+-      "destination": "infrastructure/stage_store.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/stage_store.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "00d3dca6b90f86b7a6f6707f3150f2189e2eb15fcbb7eb5198db4ffd5e0392c4",
+-      "git_blob_sha": "2cc6e6fab3c3ae83f3763349151e9c0b964dfbc6",
+-      "bytes": 24016
+-    },
+-    {
+-      "destination": "infrastructure/trading_safety.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df",
+-      "git_blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+-      "bytes": 2597
+-    },
+-    {
+-      "destination": "stage_center/calendar.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/calendar.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "31fed97066d9b804a71f15c48d4e0f8baa5d9af621e1d81dc0340fd6619e4099",
+-      "git_blob_sha": "5d819f6467328cd94d94563143fc57f461a5b973",
+-      "bytes": 4805
+-    },
+-    {
+-      "destination": "stage_center/contracts.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/contracts.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "6880f6a82c7f4fb0fde5c0661bd5a8bb12b590661a4b8552bcb3d6be969ae83d",
+-      "git_blob_sha": "3c08626f76e43f3534ba8edc2785e7da8fbc2292",
+-      "bytes": 2331
+-    },
+-    {
+-      "destination": "stage_center/consumer.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/consumer.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "865c2ea8183e5e6aeb9145ce2bfbb3e5b442825904b14c47fe024593a9205489",
+-      "git_blob_sha": "491f832e98d0cf8af87bd45eaa7c15d5f16779a6",
+-      "bytes": 32471
+-    },
+-    {
+-      "destination": "stage_center/selection.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/selection.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "ccf7dddfb72fe88b5bff68ce9501e0a8ef9f41a212008a495824017943675294",
+-      "git_blob_sha": "e5bb693578a32f954355f53fe9b79e1d592e8422",
+-      "bytes": 31705
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/schema_values.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/schema_values.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "80b0c21556c78c89132a08ca24eb80b5a211791719cb54801497dbe74472e458",
+-      "git_blob_sha": "2f5cf40e2197c6af0dddfd2e7ba65a0b6403acb0",
+-      "bytes": 3956
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/primitives_io.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/primitives_io.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "6f492e2d32fab11970993adfe694cf159cccafe2205b288685917f93560e2501",
+-      "git_blob_sha": "66cbbb36e5c7cdb02a226c7666ec0acfd1067ec4",
+-      "bytes": 11285
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/artifact_codec.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/artifact_codec.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "6c0ddaed1dfe7a066be9aeb1c726e2357f5c1814b0baca834c37bb1879aeeb9d",
+-      "git_blob_sha": "16c5484e950f4cfaade62882aaaa734acfa75984",
+-      "bytes": 2997
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/store_verification.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/store_verification.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "af061784202e35bd7c497208407ce1313876683544d89bcb05153ebca1e7af0f",
+-      "git_blob_sha": "2515e4cacbc6328455725a365dae0d52721a61a8",
+-      "bytes": 7231
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/hk_four_lanes.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_four_lanes.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "d44cd657b15b806922dd99317cfe759849a0d59884a0e39a533f0204f530ae71",
+-      "git_blob_sha": "1c462d4ac2925bb5d77f7a8199735a3567205a8b",
+-      "bytes": 8428
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/hk_formula_score.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_formula_score.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "4e42a0e6c233f649f8937dc5b5de231ce59fce8363d05025e9df77a78c4f00d7",
+-      "git_blob_sha": "0e67cd5361f597c300770ed4d49623dfa514f22a",
+-      "bytes": 6812
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/market_quality.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/market_quality.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "726cd4987a070bf78ac7416756f3cbba86633b1176f6f43535ac747263474b3f",
+-      "git_blob_sha": "6f6ddebbf4469da2a39daea02113c65441835498",
+-      "bytes": 5196
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/selection_envelope.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/selection_envelope.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "be7748ff72fd85375fc6575a6a40281fb1518c8faf0e55f352f167fbbc42bd89",
+-      "git_blob_sha": "44e32a44c24f7e2b99aeda48a5f39a71c7e55910",
+-      "bytes": 4569
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/store_publication.py",
+-      "source": "handoffs/M10/handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/store_publication.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "sha256": "e3ee42413c35aa098cddc136795fcf04a37898bc2224d815cbe9e2b854c5c968",
+-      "git_blob_sha": "e0532c71dbe469177b57c21ff37758c9e3ddbde5",
+-      "bytes": 9540
+-    },
+-    {
+-      "destination": "stage_center/_selection_parts/_namespace.py",
+-      "source": "handoffs/M10/V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py",
+-      "repository": "lexi2016/v4",
+-      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+-      "source_note": "Existing vendor shim, NOT a canonical original; explicit isolated candidate assembly only.",
+-      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+-      "git_blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+-      "bytes": 527
+-    }
+-  ]
+-}
