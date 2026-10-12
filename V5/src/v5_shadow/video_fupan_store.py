@@ -22,6 +22,15 @@ def sha_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _ensure_parent(path: Path) -> None:
+    """Create a parent directory using an explicit keyword contract.
+
+    Kept as a small boundary so callers never rely on positional pathlib
+    arguments during immutable publication.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+
+
 def ensure_private_root(root: Path | str) -> Path:
     p = Path(root).absolute()
     if "v5" not in str(p).lower():
@@ -35,9 +44,6 @@ def ensure_private_root(root: Path | str) -> Path:
 def ensure_date_run(date: str, run_id: str) -> None:
     if not re.fullmatch(r"\d{8}", str(date)):
         raise VideoStoreError("invalid date")
-    # Review Core owns run identifiers. They are not restricted to UUID/hex:
-    # examples include rcv1-20261011-none-32985ce688eb24e0. Keep the storage
-    # boundary strict while accepting the owner contract.
     if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", str(run_id)):
         raise VideoStoreError("invalid run")
     if len(str(run_id)) > 256:
@@ -46,7 +52,7 @@ def ensure_date_run(date: str, run_id: str) -> None:
 
 def safe_replace_json(path: Path, payload: Mapping[str, Any]) -> str:
     raw = json.dumps(dict(payload), ensure_ascii=False, sort_keys=True).encode("utf-8")
-    path.parent.mkdir(parents, exist_ok=True)
+    _ensure_parent(path)
     with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as f:
         f.write(raw)
         tmp = Path(f.name)
@@ -62,7 +68,7 @@ def stage_attempt(root: Path | str, date: str, attempt_id: str) -> Path:
     p = root / "video_fupan" / "attempts" / date / attempt_id
     if p.exists():
         raise VideoStoreError("attempt already exists")
-    p.mkdir(parents=True)
+    p.mkdir(parents=True, exist_ok=False)
     return p
 
 
@@ -72,5 +78,5 @@ def publish_latest_success(root: Path | str, date: str, run_id: str) -> None:
     current = root / "video_fupan" / date / "latest_success.json"
     if current.exists():
         return
-    current.parent.mkdir(parents=True, exist_ok=True)
+    _ensure_parent(current)
     current.write_text(json.dumps({"run_id": run_id}), encoding="utf-8")
