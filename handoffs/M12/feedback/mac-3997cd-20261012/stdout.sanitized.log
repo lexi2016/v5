@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- python
+rootdir: .
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract PASSED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected PASSED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_reader_rejects_empty_refs_and_bad_sha PASSED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected PASSED [100%]
+
+- generated xml file: ../m12-3997cd-evidence/junit.xml -
+============================== 4 passed in 0.14s ===============================
