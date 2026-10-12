@@ -71,28 +71,69 @@ class M09ReadOnlyAPITests(unittest.TestCase):
         self.configure();before=self.inventory()
         from v5_shadow.m09_readonly import owner_root
         worker=Path(__file__).resolve().parents[1]/'src/v5_shadow/m09_readonly_worker.py'
-        code='''import contextlib,io,json,runpy,sys
+        code='''import contextlib,io,json,os,runpy,socket,subprocess,sys
 from pathlib import Path
 owner,worker=sys.argv[1:3];sys.path.insert(0,str(Path(owner)/'V5/src'))
 from v5_shadow import a_close_daily as d,a_close_historical as h,a_close_daily_sources as f
 binding=json.load(sys.stdin)
-def forbidden(*args,**kwargs):raise AssertionError('PRODUCER_MUST_NOT_RUN')
-d._build=d.run_a_close_daily=forbidden
-h.prepare_a_close_historical_snapshot=h.run_a_close_historical=h._write_snapshot=forbidden
-f.build_from_admitted_panel=forbidden
+# pandas may import installed pyarrow for version/capability detection. Loading
+# a dependency is not a source read or producer invocation. Warm dependencies
+# before the operation guard, without preparing any market source or product.
+import pandas
+blocked=[]
+def forbidden(label):
+ def reject(*args,**kwargs):
+  blocked.append(label);raise AssertionError('READ_ONLY_GUARD:'+label)
+ return reject
+producer_entries=[(d,'_build'),(d,'run_a_close_daily'),(d,'initialize_a_close_root'),
+ (h,'prepare_a_close_historical_snapshot'),(h,'_read_target_rows'),
+ (h,'run_a_close_historical'),(h,'_write_snapshot'),(h,'initialize_a_close_historical_root'),
+ (f,'build_from_admitted_panel')]
+for module,name in producer_entries:setattr(module,name,forbidden('producer:'+name))
 load=f.load_frozen_module
 def only_reader(name):
- if name.startswith('ops.') or name=='domains.a_share_close_model':raise AssertionError('PRODUCER_MUST_NOT_IMPORT')
+ if name.startswith('ops.') or name=='domains.a_share_close_model':
+  return forbidden('producer_module:'+name)()
  return load(name)
 f.load_frozen_module=only_reader
+mutation_events={'os.mkdir','os.remove','os.rmdir','os.rename','os.link','os.symlink','os.truncate',
+ 'os.chmod','os.chown','os.utime'}
+def guard(event,args):
+ if event=='open':
+  mode,flags=args[1:3]
+  if (isinstance(mode,str) and any(c in mode for c in 'wax+')) or (isinstance(flags,int) and flags & (os.O_WRONLY|os.O_RDWR|os.O_CREAT|os.O_TRUNC|os.O_APPEND)):
+   forbidden('file_write')()
+ elif event in mutation_events:forbidden('file_mutation')()
+ elif event in ('socket.connect','socket.connect_ex','socket.getaddrinfo','socket.sendto'):forbidden('network')()
+ elif event in ('subprocess.Popen','os.system','os.posix_spawn','os.exec','os.fork','os.forkpty'):forbidden('child_process')()
+sys.addaudithook(guard)
+# Executable negative controls prove the guards trip BEFORE side effects.
+# The temporary synthetic fixture root is the only possible write target.
+controls=[]
+def must_block(label,call):
+ try:call()
+ except AssertionError as error:
+  assert str(error)=='READ_ONLY_GUARD:'+label;controls.append(label)
+ else:raise AssertionError('GUARD_DID_NOT_BLOCK:'+label)
+for module,name in producer_entries:must_block('producer:'+name,getattr(module,name))
+must_block('producer_module:ops.build_a_share_close_review',lambda:f.load_frozen_module('ops.build_a_share_close_review'))
+must_block('file_write',lambda:open(Path(binding['run_root'])/'must-not-exist','wb'))
+with socket.socket() as channel:must_block('network',lambda:channel.connect(('127.0.0.1',9)))
+must_block('child_process',lambda:subprocess.run([sys.executable,'-c','raise SystemExit(99)']))
+assert len(blocked)==len(controls)==13
+blocked.clear()
 module=runpy.run_path(worker);sys.argv=[worker,owner];sys.stdin=io.TextIOWrapper(io.BytesIO(json.dumps(binding).encode()))
 output=io.StringIO()
 with contextlib.redirect_stdout(output):module['main']()
-assert 'pyarrow' not in sys.modules
-print(output.getvalue())
+assert blocked==[],blocked
+print(json.dumps(dict(response=json.loads(output.getvalue()),guard_controls=controls,blocked_during_read=blocked,
+ optional_pyarrow_loaded='pyarrow' in sys.modules)))
 '''
         proc=subprocess.run([sys.executable,'-I','-B','-c',code,str(owner_root()),str(worker)],input=json.dumps(self.binding),capture_output=True,text=True,timeout=50)
-        self.assertEqual(proc.returncode,0,proc.stderr);self.assertEqual(json.loads(proc.stdout)['review'],self.expected['review'])
+        self.assertEqual(proc.returncode,0,proc.stderr);result=json.loads(proc.stdout)
+        self.assertEqual(result['response']['review'],self.expected['review'])
+        self.assertEqual(len(result['guard_controls']),13);self.assertEqual(result['blocked_during_read'],[])
+        self.assertIsInstance(result['optional_pyarrow_loaded'],bool)
         self.assertEqual(self.inventory(),before)
 
     def test_reference_ignores_new_product_head_and_separate_attempt(self):

@@ -1,0 +1,32 @@
+{
+  "schema_version": "v5.m09_readonly_guard_fix.v1",
+  "base_commit": "57050f34b2229f096c994377a5086a063d8a7f23",
+  "product_commit": "65b3bea261a3a48d6a4ea481420e743dc84e8ec6",
+  "changed_executable_file": "V5/tests/test_m09_readonly_api.py",
+  "before_sha256": "86962bc1746ab49572eb589c26ae5bee34c2e255b083760839c2f69afc2fe02d",
+  "after_sha256": "7bb02cf0731ea743844c63c09f0e425232813fb614f42bd9f7dc3e93030c94d3",
+  "product_code_changed": false,
+  "cloud_environment": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "pyarrow": "NOT_INSTALLED"
+  },
+  "targeted_test": {
+    "name": "test_m09_readonly_api.M09ReadOnlyAPITests.test_cold_worker_cannot_call_owner_producer_or_source_preparation",
+    "status": "PASS",
+    "run": 1,
+    "failures": 0,
+    "skips": 0,
+    "executable_negative_controls": 13
+  },
+  "audit_hook_disabled_mutant": {
+    "status": "EXPECTED_FAILURE",
+    "reason": "GUARD_DID_NOT_BLOCK:file_write",
+    "scope": "DISPOSABLE_SYNTHETIC_FIXTURE_ONLY"
+  },
+  "mac_single_test_retry": "NOT_RUN",
+  "full_suite_rerun": false,
+  "frontend_rerun": false,
+  "real_replay_rerun": false,
+  "deployed": false
+}
