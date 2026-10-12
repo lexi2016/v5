@@ -1,0 +1,54 @@
+{
+  "candidate": "2c5d1eb2c9572469bf04ad86fd61e92ee8674fe8",
+  "kind": "previously_executed_real_input_readonly_rejection",
+  "reexecuted": false,
+  "target_date": "20261012",
+  "signal_date": "20261009",
+  "row_count": 120,
+  "run_id": "20261012-a-share-v192-premarket-pool-v3-cb6287c28c83",
+  "original_reader": {
+    "path": "V5/vendor/a_preselection_baseline/upstreams/v3_shared_data/shared_data/v192_selector.py",
+    "sha256": "b0c3005965c6ee2c5ed10822fcc7c3b3ef5b3ba9847bcddcdff95644a4e90513",
+    "oracle_bundle_source_sha256": "d3ff447edc345a2aba778294bde365d4d02b636c7266f99c6d41451fc4659f72"
+  },
+  "source_identity": {
+    "artifact_sha256": "1d1d8af7c4d6a4f6b2ba5da3d67c995a73872e73dc6adddb2210d56172de5d5a",
+    "manifest_sha256": "a5aef4f54aac7943056126cc1ae2fac85923a5963b626d99981725d3392509a7",
+    "receipt_sha256": "728a66fff4015467b9fad9a82c880b6c38619d9abd705e16fd53391723def825",
+    "all_three_match_latest": true
+  },
+  "error": "StoreError v1.9.2 provenance mismatch: oracle_bundle_source_sha256",
+  "execution_note": "The prior diagnostic caught and printed the exception; outer process exit was 0, but reader result was REJECTED. Exact timestamp was not retained; no timestamp fabricated.",
+  "publisher_locating": {
+    "live_selector_sha256": "fb6fddd652a4bf377c399a546fdbb10bd7df7fe6dd9fe6bb1feffc7b3e11c64c",
+    "live_entry_sha256": "315fe0fc3c142bdd7ab4c2674f5d9d575d3dac964b36395d0ac5b5fca790104c",
+    "old_provenance": "oracle_bundle_sha256 is SHA256 of original three-file hash map; it is not the candidate local bundle source hash.",
+    "old_live_bundle_module_present": false,
+    "original_sources": [
+      {
+        "role": "feature_vector",
+        "bytes": 43215,
+        "sha256": "1685327e016ce7a12ff7982379b91463c7c2bfb311e0b892385e692926970e74",
+        "pin_match": true
+      },
+      {
+        "role": "score_v19_multihead",
+        "bytes": 50648,
+        "sha256": "2a28049399043194b2f8523c8a2da7248708bf49e01f1d7e167fed933b92e4f2",
+        "pin_match": true
+      },
+      {
+        "role": "fmla04_role",
+        "bytes": 40594,
+        "sha256": "950b14447cb61049fb44efa46a10dfa6b3d5374188e212f8aff06fee1ab326c1",
+        "pin_match": true
+      }
+    ],
+    "conclusion": "Original oracle sources and pinned candidate bundle exist. Historical execution by candidate bundle is not proven. A newly authorized correct publisher run may establish new provenance; complete input/runtime readiness and successful rebuild remain unverified. Never add fields to old manifest."
+  },
+  "adjacent_status": {
+    "M01": "Old 20260911 generation passed strict source reader; not a 20261012 chain or production qualification.",
+    "M03": "Saved 20261009 POST_CLOSE triplet passed original owner reader, but old root lacks required M03 marker; not direct-entry success."
+  },
+  "scope": "Read-only source/hash locating; no rescoring, old-run mutation, payload upload, private paths, V4/preview changes."
+}
