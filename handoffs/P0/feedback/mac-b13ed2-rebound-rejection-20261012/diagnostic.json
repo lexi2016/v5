@@ -1,0 +1,36 @@
+{
+  "started_utc": "2026-10-12T12:38:36.761673+00:00",
+  "ended_utc": "2026-10-12T12:38:41.695686+00:00",
+  "exit": 0,
+  "probe_candidate": "b13ed2806c8442440e12b32db7b1bc87df683d65",
+  "product_candidate": "aa42f4db63a59367d7eb2740c52ffb9aa30f58c3",
+  "command": "PYTHONPATH=<aa42>/V5/src <existing-python> -B <fixed-probe>/V5/tests/m18_projection_rejection_probe.py <retained-config>",
+  "stdout": {
+    "data_unchanged": true,
+    "error": "M18_V2_OBJECT_NODES",
+    "file_count": 141,
+    "module_api_sha256": "3abf88a9d345cd7990d7b73a61eea619f235b12e6956e39c84aec9f8953fd313",
+    "oracle_used": false,
+    "pid": 50291,
+    "profile_sha256": "a8b56161f6d19de0d5222775e132d78f75d7ad707a1824b4d2b861ff285ecc6c",
+    "read_process_sha256": "5a2e37ec3b65094facbfa5d3f3f074664988f6ce11ea411b9d24edf6140bd2ef",
+    "request_count": 1,
+    "status": "REJECTED",
+    "supervisor_wall_seconds": 4.83263600000646,
+    "trace_used": false,
+    "usage": {
+      "cpu_seconds": 4.808736,
+      "peak_rss_bytes": 319029248,
+      "wall_seconds": 4.772991207995801
+    },
+    "worker_exit": 0,
+    "worker_reaped": true
+  },
+  "stderr": {
+    "boundary": "_m18_semantic_value",
+    "exception_type": "ContractError",
+    "error": "M18_V2_OBJECT_NODES",
+    "terminal_function": "require",
+    "terminal_line": 27
+  }
+}
