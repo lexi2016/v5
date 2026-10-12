@@ -1,0 +1,30 @@
+{
+  "vue": {
+    "started_utc": "2026-10-12T13:48:38.078984+00:00",
+    "ended_utc": "2026-10-12T13:48:39.023492+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vitest/vitest.mjs run src/views/SavedManagerResultView.spec.ts src/manager-selection/usMappingCoverage.spec.ts"
+  },
+  "test-p0": {
+    "started_utc": "2026-10-12T13:48:39.023828+00:00",
+    "ended_utc": "2026-10-12T13:48:39.214072+00:00",
+    "exit": 0,
+    "command": "<existing-npm> run test:p0"
+  },
+  "typecheck": {
+    "started_utc": "2026-10-12T13:48:39.214461+00:00",
+    "ended_utc": "2026-10-12T13:48:40.644066+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vue-tsc/bin/vue-tsc.js --noEmit -p tsconfig.cloud-product.json"
+  },
+  "build": {
+    "started_utc": "2026-10-12T13:48:40.644446+00:00",
+    "ended_utc": "2026-10-12T13:48:41.588023+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vite/bin/vite.js build"
+  },
+  "counts": {
+    "vue": 12,
+    "node": 34
+  }
+}
