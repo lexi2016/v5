@@ -1,0 +1,141 @@
+{
+  "candidate_commit": "5eb5f29fb5ee9c96fbbdd8d7db3aaa905f2c5509",
+  "context": {
+    "execution_label": "MANUAL_RECOVERY",
+    "operation": "EXISTING_VERIFIED_PRODUCT_REUSE",
+    "scheduled_at": "2026-10-12T23:18:08.415594+00:00",
+    "deadline": "2026-10-12T23:28:08.415594+00:00",
+    "research_cutoff": "2026-10-12T23:18:08.427624+00:00",
+    "new_collection_allowed": false,
+    "natural_verified": false
+  },
+  "started_utc": "2026-10-12T23:18:08.415594+00:00",
+  "copied_files": 7,
+  "source_trade_date": "20261012",
+  "pool_trade_date": "20261012",
+  "pool_signal_date": "20261009",
+  "pool_run_id": "20261012-hk-connect-d1-top100-0-2-d6f38622b186",
+  "python_version": "3.14.6",
+  "python_binary_sha256": "839b22560e27f02d716009a2d6bcd377cb6197ff70888787e3097919120e32aa",
+  "pytdx_exhq_sha256": "2f63d7efe5b33b7a059bee046e468a853639f431da26bd8b075fe81c56cb2b98",
+  "owner_closure_verified": 24,
+  "worker_guards": [
+    {
+      "collector_calls": 0,
+      "network_attempts": 0,
+      "owner_calls": 1,
+      "owner_return_status": "ALREADY_EXISTS",
+      "probe_attempts": 0,
+      "reader_calls": 1,
+      "readonly_runtime_probes": 1,
+      "role": "producer"
+    },
+    {
+      "collector_calls": 0,
+      "network_attempts": 0,
+      "owner_calls": 0,
+      "owner_return_status": null,
+      "probe_attempts": 0,
+      "reader_calls": 1,
+      "readonly_runtime_probes": 0,
+      "role": "reader"
+    }
+  ],
+  "status": "PASS_EXISTING_VERIFIED_PRODUCT_REUSE",
+  "ledger_status": "SUCCEEDED",
+  "ledger_run_id": "ca2c344b61334ad28f4b6146117643cd",
+  "ledger_identity": {
+    "lane": "manager_close_recapture",
+    "target_date": "20261012",
+    "input_sha256": "1a1638c1eb07dfb3ecd090e125301b7e0f967f116396ecb54f8976c80cc2be10",
+    "research_cutoff": "2026-10-12T23:18:08.427624+00:00",
+    "code_sha256": "6db6ffb77c51d2fe6d9fead18d0ac13d77c7e81a409397e3102c113ceb9a7db0",
+    "config_sha256": "d23f28c9c73912f9d9d3e674229e6f1b685071a61ae2fa26b23bf786a027c232",
+    "dependency_sha256": "f8d8fad70c3a90597b623ebbc485e8efeeea9d65e8a58c2492b99072488093db"
+  },
+  "ledger_attempts": 1,
+  "producer_status": "ALREADY_EXISTS",
+  "reader_status": "READY",
+  "candidate_count": 100,
+  "plan_trade_date": "20261013",
+  "files": {
+    "artifact": {
+      "artifact_ref": "workbench_research/20261012/close_recapture.json",
+      "sha256": "0159024fb5b840cc32c2ecd8db1bc608661662a3d30df994e34d106ffad7fc90"
+    },
+    "candidate_overlay": {
+      "artifact_ref": "workbench_research/20261012/close_recapture.candidates.json",
+      "sha256": "b1b91c2622a572d39ae8259e5922d2e10d367129e38036c4bc35510ba507430c"
+    },
+    "receipt": {
+      "artifact_ref": "workbench_research/20261012/close_recapture.receipt.json",
+      "sha256": "04a452bd02ee24c7dce04036e365f87bafaacd7a5a26687d18d2c68ed338a947"
+    },
+    "snapshot": {
+      "artifact_ref": "workbench_research/20261012/inputs/close_recapture_pytdx.json",
+      "sha256": "4fd34199c3d814a3b63d13220ce50d21809f226bc18a529f2029d1c55f571427"
+    }
+  },
+  "pool_reference": {
+    "owner": "v3_shared_data",
+    "role": "HK_CONNECT_D1_TOP100_0_2",
+    "trade_date": "20261012",
+    "signal_date": "20261009",
+    "source_id": "hkconnect_0_2_frozen_prob_active",
+    "run_id": "20261012-hk-connect-d1-top100-0-2-d6f38622b186",
+    "artifact_ref": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/artifact.csv",
+    "artifact_sha256": "738ffa6533bfc1e041a3cd84841d591f0ee6bda53fe8fe420cf608b9a7f3503d",
+    "manifest_ref": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/manifest.json",
+    "manifest_sha256": "20fb5182d751e75beb80b8c97c42eba4b1d1660084b321d8a69d9ed877f9c571",
+    "receipt_ref": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/receipt.json",
+    "receipt_sha256": "01d4b09fb76b6e2d1135822a088e963d33356a2b0cf432d9af646ac5e2073da9",
+    "captured_at": "2026-10-09T17:31:42+08:00",
+    "row_count": 100
+  },
+  "cannot_confirm": [
+    "MARKET_CLOSE_NOT_CAPTURED_STAGE_WINDOW_ENDS_15_55_05",
+    "PYTDX_TURNOVER_CURRENCY_UNIT_UNVERIFIED"
+  ],
+  "original_captured_at": "2026-10-12T15:55:15.370877+08:00",
+  "original_available_at": "2026-10-12T15:55:15.373639+08:00",
+  "received_not_historical_1530": true,
+  "natural_verified": false,
+  "collector_calls": 0,
+  "network_attempts": 0,
+  "ledger_readback_equal": true,
+  "source_sha_mtime_unchanged": true,
+  "copied_payloads_unchanged": true,
+  "finished_utc": "2026-10-12T23:18:09.337454+00:00",
+  "exit_code": 0,
+  "scope": "Isolated one-time manual existing-product reuse; no global config or deployment",
+  "guard_scope": "Independent Python audit/profile guard launcher around unchanged fixed worker; not OS sandbox certification",
+  "fixed_source_blobs_unchanged": 143,
+  "distinct_producer_reader_processes": true,
+  "command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-I",
+    "-B",
+    "<TASK_HARNESS>/run_m17_real_existing_reuse.py"
+  ],
+  "harness_sha256": {
+    "run_m17_real_existing_reuse.py": "ddbb8d0eebd878fc4db30face10990060bdea3afdd709f379e29bdf69d34bc03",
+    "m17_reuse_guard_worker.py": "8d37c8e0ac1fe9f5d07d230e483a6f72baaf3c7ada0182c47aa3335e2f4db4dd"
+  },
+  "copied_minimal_files": "Four original source12 late files plus exact original D1 artifact/manifest/receipt, byte-for-byte.",
+  "markers": {
+    "real_state": "v5.m17.close.v1 newline",
+    "private_ledger": "v5.daily-run-ledger.v1 newline"
+  },
+  "legacy_source_root_marker_changed": false,
+  "no_active_global_binding": true,
+  "qualifications": {
+    "RESEARCH_ONLY": true,
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "natural_verified": false,
+    "formal_eligibility_verified": false
+  },
+  "recovery_label_location": "Separate execution context; original product, owner request and five-field receipt schemas were not extended or relabeled.",
+  "source_vs_operation_time": "Original acquisition remains 2026-10-12 15:55:15+08:00. This operation is 2026-10-13 manual migration/readback, with no new acquisition."
+}
