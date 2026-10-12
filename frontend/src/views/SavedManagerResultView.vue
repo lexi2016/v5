@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, shallowRef, watchEffect } from 'vue';
-import { M18SavedClient, SavedRunSession, type SavedEntry, type SavedRunState, chooseSection } from '../api/m18SavedResult';
+import { M18SavedClient, SavedRunSession, type SavedEntry, type SavedRunState, chooseSection, REBOUND_GROUPS, type ReboundGroup } from '../api/m18SavedResult';
 import { renderSavedAnnouncementReferences } from '../manager-selection/announcementAnalysis';
+import { renderSavedReboundReferences, reboundGroupLabels } from '../manager-selection/reboundPanelObservation';
+const reboundHost=ref<HTMLElement|null>(null);
 const announcementHost=ref<HTMLElement|null>(null);
 const query = new URLSearchParams(window.location.search);
 const requestedRun = ref(query.get('run_id') ?? '46596b03c2ab4e29b1219fd2e5eb698f');
@@ -12,9 +14,11 @@ async function reload() {
  if (/^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);url.searchParams.set('run_id',run);window.history.replaceState(null,'',url); }
  await session.load(run);
 }
+const isRebound=computed(()=>state.value.section==='rebound_research_observation');
+function selectRebound(group:ReboundGroup='strict') { void session.select('rebound_research_observation',group); }
 const isAnnouncement=computed(()=>state.value.section==='announcement_reviewed_analysis');
-function showManager() { const sections={...state.value.overview?.sections};delete sections.announcement_reviewed_analysis;const section=chooseSection(sections);if(section)void session.select(section); }
-watchEffect(()=>{const page=state.value.page,host=announcementHost.value;if(host&&page?.projection==='announcement_references')renderSavedAnnouncementReferences(host,page);},{flush:'post'});
+function showManager() { const sections={...state.value.overview?.sections};delete sections.announcement_reviewed_analysis;delete sections.rebound_research_observation;const section=chooseSection(sections);if(section)void session.select(section); }
+watchEffect(()=>{const page=state.value.page,host=announcementHost.value;if(host&&page?.projection==='announcement_references')renderSavedAnnouncementReferences(host,page);const reboundPage=state.value.page,reboundTarget=reboundHost.value;if(reboundTarget&&reboundPage?.projection==='rebound_references')renderSavedReboundReferences(reboundTarget,reboundPage);},{flush:'post'});
 function sectionChange(event: Event) { void session.select((event.target as HTMLSelectElement).value); }
 const sectionLabels: Record<string,string> = { summary:'本次研究概览', stocks:'经理候选股票', gaps:'数据与证据缺口', materials:'研究材料', lanes:'研究任务', themes:'研究主题', market_screen:'市场筛选', announcement_reviewed_analysis:'公告研究股票', announcement_observation:'公告观察', us_mapping_research:'美股与港股映射', us_market_attention:'美股关注', rebound_research_observation:'反弹研究观察', plan_product:'已消费研究计划', runtime_gaps:'运行缺口', existing_material_bindings:'材料关联', rejected_relations:'未采用关联' };
 function sectionLabel(key:string) { return sectionLabels[key] ?? key; }
@@ -39,8 +43,9 @@ onBeforeUnmount(()=>session.close());
    <span class="runtime-state">{{ state.descriptor ? `目标日 ${state.descriptor.target_date}` : '目标日尚未确认' }}</span>
   </form>
   <nav class="entry-nav" aria-label="功能入口">
-   <button type="button" :class="{active:!isAnnouncement}" :aria-current="!isAnnouncement ? 'page' : undefined" :disabled="!state.overview" @click="showManager">经理已保存结果</button>
+   <button type="button" :class="{active:!isAnnouncement&&!isRebound}" :aria-current="!isAnnouncement&&!isRebound ? 'page' : undefined" :disabled="!state.overview" @click="showManager">经理已保存结果</button>
    <button type="button" :class="{active:isAnnouncement}" :aria-current="isAnnouncement ? 'page' : undefined" :disabled="!state.overview?.sections.announcement_reviewed_analysis" @click="session.select('announcement_reviewed_analysis')">公告研究股票</button>
+   <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">超跌研究</button>
    <button type="button" disabled>阶段选股 · 未接入</button>
    <button type="button" disabled>研报决策台 · 未接入</button>
   </nav>
@@ -57,13 +62,15 @@ onBeforeUnmount(()=>session.close());
     <div><dt>manifest SHA256</dt><dd>{{ state.overview?.manifest_sha256 ?? '尚未读取' }}</dd></div>
    </dl></details>
   </details>
-  <div v-if="state.overview && !isAnnouncement" class="task-counts"><article v-for="key in ['stocks','materials','gaps']" :key="key"><span>{{ sectionLabel(key) }}</span><strong>{{ state.overview.sections[key]?.total ?? '未提供' }}</strong></article></div>
+  <div v-if="state.overview && !isAnnouncement && !isRebound" class="task-counts"><article v-for="key in ['stocks','materials','gaps']" :key="key"><span>{{ sectionLabel(key) }}</span><strong>{{ state.overview.sections[key]?.total ?? '未提供' }}</strong></article></div>
   <section v-if="state.overview" class="task-status-view saved-sections" aria-label="已保存内容">
-   <div class="control-panel"><label>内容分区<select :value="state.section" aria-label="内容分区" @change="sectionChange"><option v-for="(meta,key) in state.overview.sections" :key="key" :value="key">{{ sectionLabel(String(key)) }}{{ key==='announcement_reviewed_analysis' ? ' · 同次运行研究引用' : ` · ${meta.total} 条 · ${meta.kind}` }}</option></select></label><span>按原始分区分页读取，每页最多 32 条</span><button v-if="state.overview.sections.gaps" type="button" @click="session.select('gaps')">查看缺口 · {{ state.overview.sections.gaps.total }}</button><button v-if="state.overview.sections.materials" type="button" @click="session.select('materials')">研究材料 · {{ state.overview.sections.materials.total }}</button></div>
+   <div class="control-panel"><label>内容分区<select :value="state.section" aria-label="内容分区" @change="sectionChange"><option v-for="(meta,key) in state.overview.sections" :key="key" :value="key">{{ sectionLabel(String(key)) }}{{ ['announcement_reviewed_analysis','rebound_research_observation'].includes(String(key)) ? ' · 同次运行研究引用' : ` · ${meta.total} 条 · ${meta.kind}` }}</option></select></label><span>按原始分区分页读取，每页最多 32 条</span><button v-if="state.overview.sections.gaps" type="button" @click="session.select('gaps')">查看缺口 · {{ state.overview.sections.gaps.total }}</button><button v-if="state.overview.sections.materials" type="button" @click="session.select('materials')">研究材料 · {{ state.overview.sections.materials.total }}</button></div>
    <p v-if="!Object.keys(state.overview.sections).length" class="task-message">保存产物没有可展示的分区。未推断业务成功。</p>
+   <div v-if="isRebound" class="control-panel" role="group" aria-label="超跌观察分组"><button v-for="group in REBOUND_GROUPS" :key="group" type="button" :aria-pressed="(state.group ?? 'strict')===group" @click="selectRebound(group)">{{ reboundGroupLabels[group] }} · {{ state.page?.rebound?.group_counts[group] ?? '未读取' }}</button></div>
    <template v-if="state.page">
     <div class="saved-pagination"><button type="button" :disabled="!state.canPrevious || state.phase==='LOADING'" @click="session.previous()">上一页</button><span>当前 {{ state.page.entries.length ? state.page.offset+1 : 0 }}–{{ state.page.offset+state.page.entries.length }} / {{ state.page.matched_total }} 条</span><button type="button" :disabled="!state.page.next_cursor || state.phase==='LOADING'" @click="session.next()">下一页</button></div>
     <div v-if="isAnnouncement" ref="announcementHost" class="saved-announcements"></div>
+    <div v-else-if="isRebound" ref="reboundHost" class="saved-announcements"></div>
     <p v-else-if="state.page.matched_total===0" class="task-message">此分区原始值为空数组（0 条）。这不代表其他内容已就绪。</p>
     <div v-else class="saved-table-scroll"><table><thead><tr><th>条目</th><th>原始状态</th><th>内容与缺口</th></tr></thead><tbody>
      <tr v-for="entry in state.page.entries" :key="`${state.section}:${entry.index}`"><th scope="row">{{ title(entry) }}</th><td>{{ businessState(entry) }}</td><td>

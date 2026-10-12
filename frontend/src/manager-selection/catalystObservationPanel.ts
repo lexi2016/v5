@@ -1,6 +1,6 @@
 import { beijingTime, strategySummary } from './managerStrategySummary';
 import { renderUsMappingCoverage } from './usMappingCoverage';
-import { renderReboundPanelObservation } from './reboundPanelObservation';
+import { renderReboundPanelObservation, renderReboundScreenCard } from './reboundPanelObservation';
 import { renderAnnouncementReview } from './announcementObservation.js';
 import { renderResearchAttention } from './researchAttention.js';
 import type { ResearchAttention, SelectionDiagnostics, UsMappingResearch, UsMarketAttention } from '../api/managerWorkspace.js';
@@ -433,17 +433,7 @@ export function mountCatalystObservations(host: HTMLElement, initialDate: string
     researchFocus.append(el('p','重点研究名单及 WATCH / WAIT / NO_CHASE / INVALIDATE 条件来自已保存研究计划；不改变 Stage rank、资格、正式推荐或 BUY。'));
   }
   function screenCard(row: JsonObject, pending = false): HTMLElement {
-    const node=el('article','','manager-catalyst-card');
-    const classification=pending?'待核数据/历史':String(row.classification)==='STRICT_REBOUND'?'严格候选':'近条件候选';
-    node.dataset.screenCode=text(row.code,'UNKNOWN');
-    node.dataset.screenStatus=pending?'PARTIAL_UNKNOWN':String(row.history_status || 'KNOWN');
-    node.append(el('h4',`${text(row.name)} · ${text(row.code)} · ${classification}`),
-      el('p',`成交额 ${numberText(row.amount_hkd,0)} HKD（观察值）；60日历史 ${text(row.history_status)}（${scalarText(row.prior60_session_count,'?')}个交易日）`),
-      el('p',`超跌 ${row.oversold_flag===true?'通过':row.oversold_flag===false?'未通过':'待核'}；5日量比 ${numberText(row.volume_ratio_5d)} / 1.5；收盘较当日低点反弹 ${numberText(row.rebound_close_vs_low_pct,2)}%（观察值）`));
-    if(row.near_failed_gate)node.append(el('p',`剩余条件差项：${text(row.near_failed_gate)} = ${numberText(row.near_failed_value)}，门槛 ${numberText(row.near_gate_value)}，相对差距 ${numberText(row.near_gate_gap_ratio)}`));
-    if(pending)node.append(el('p',`待核原因：${text(row.history_unknown_reasons,'60日历史不足，不能完成严格或近条件判定。')}`));
-    node.append(el('p','仅由已核验共享HK 0.2面板重算；研究筛选结果，不是买卖、下单或Stage门禁。'),details('该股筛选数值、差项与来源',row));
-    return node;
+    return renderReboundScreenCard(row,pending);
   }
   function pendingReasonSummary(rows: JsonObject[]): string {
     const counts=new Map<string,number>();
@@ -823,3 +813,4 @@ export function mountCatalystObservations(host: HTMLElement, initialDate: string
   void load(false);
   return ()=>{disposed=true;window.removeEventListener('popstate',navigationChange);++sequence;++analysisSequence;++announcementSequence;controller?.abort();analysisController?.abort();announcementController?.abort();announcementRefreshController?.abort();clearTimeout(announcementRefreshTimer);clearTimeout(timer);planDate.removeEventListener('change',dateChange);viewSelect.removeEventListener('change',viewChange);cancelButton.removeEventListener('click',cancelClick);readButton.removeEventListener('click',readClick);refreshButton.removeEventListener('click',refreshClick);host.replaceChildren();};
 }
+

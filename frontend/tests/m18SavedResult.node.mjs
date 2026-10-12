@@ -87,3 +87,23 @@ test('same-run announcement projection is the default and pages references, not 
  }
  await assert.rejects(clientWith({...detail,projection:'announcement_references',announcement}).client.section(descriptor,overview,'stocks'),/M18_/);
 });
+
+test('rebound closed group projection preserves announcement default and rejects wrong groups or counts',async()=>{
+ const sections={...overview.sections,rebound_research_observation:{kind:'object',total:1,loaded_count:0,not_loaded_count:1,state:'NOT_LOADED'}};
+ const rebound={source_section_sha256:'3'.repeat(64),group_counts:{strict:33,near:2,pending:1,excluded:1,screen_unresolved:0},source:{status:'CANNOT_CONFIRM',eligible_screen:null},observation:{status:'CANNOT_CONFIRM',original_computation_status:'READY_WITH_GAPS'}};
+ const page={...detail,section:'rebound_research_observation',projection:'rebound_references',group:'strict',rebound};
+ const {client,requests}=clientWith(page);
+ const result=await client.section(descriptor,{...overview,sections},'rebound_research_observation',null,0,undefined,'strict');
+ assert.equal(result.matched_total,33);assert.equal(result.rebound.source.eligible_screen,null);assert.match(requests[0][0],/projection=rebound_references&group=strict/);
+ for(const patch of [{group:'near'},{rebound:{...rebound,group_counts:{...rebound.group_counts,strict:1}}},{projection:'announcement_references'}]) await assert.rejects(clientWith({...page,...patch}).client.section(descriptor,{...overview,sections},'rebound_research_observation',null,0,undefined,'strict'),/M18_/);
+ await assert.rejects(client.section(descriptor,{...overview,sections},'rebound_research_observation',null,0,undefined,'cards'),/M18_/);
+ assert.equal(chooseSection({...sections,announcement_reviewed_analysis:sections.rebound_research_observation}),'announcement_reviewed_analysis');
+});
+
+test('rebound group navigation resets cursors, keeps group across pages and suppresses a stale group result',async()=>{
+ const {SavedRunSession}=await import('../src/api/m18SavedResult.ts');const calls=[];let finishOld;let delay=false;
+ const client={descriptor:async()=>descriptor,overview:async()=>overview,section:async(_d,_o,section,cursor,offset,_signal,group)=>{calls.push({section,cursor,offset,group});if(delay&&group==='near')return new Promise(resolve=>finishOld=resolve);return {...detail,section,group,offset,cursor,entries:offset?[{...entry,index:offset}]:detail.entries,next_cursor:offset?null:'next'};}};
+ const session=new SavedRunSession(client);await session.load(RUN);await session.select('rebound_research_observation','strict');await session.next();assert.equal(calls.at(-1).group,'strict');assert.equal(calls.at(-1).offset,32);
+ await session.select('rebound_research_observation','pending');assert.equal(calls.at(-1).cursor,null);assert.equal(calls.at(-1).offset,0);assert.equal(session.state.group,'pending');assert.equal(session.state.canPrevious,false);
+ delay=true;const old=session.select('rebound_research_observation','near');await session.select('rebound_research_observation','excluded');finishOld({...detail,group:'near'});await old;assert.equal(session.state.group,'excluded');assert.equal(session.state.page.group,'excluded');
+});

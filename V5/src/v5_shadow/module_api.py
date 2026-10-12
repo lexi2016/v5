@@ -176,6 +176,34 @@ M18_VIEW_ITEM_BYTES = 16 * 1024
 M18_VIEW_VALUES_BYTES = 128 * 1024
 M18_ANNOUNCEMENT_SECTION = 'announcement_reviewed_analysis'
 M18_ANNOUNCEMENT_PROJECTION = 'announcement_references'
+M18_REBOUND_SECTION = 'rebound_research_observation'
+M18_REBOUND_PROJECTION = 'rebound_references'
+M18_REBOUND_GROUPS = ('strict', 'near', 'pending', 'excluded', 'screen_unresolved')
+M18_REBOUND_SOURCE_FIELDS = (
+    'status', 'eligible_screen', 'reason_codes', 'source_run_id', 'data_kind',
+    'execution_kind', 'scope', 'research_only', 'production_allowed',
+    'buy_gate_updated', 'orders_sent', 'natural_verified', 'formal_eligibility_verified',
+)
+M18_REBOUND_OBSERVATION_FIELDS = (
+    'schema_version', 'rule_version', 'target_trade_date', 'observed_session', 'status',
+    'original_computation_status', 'main_screen_ready', 'input_identity', 'decision_identity',
+    'gaps', 'RESEARCH_ONLY', 'research_only', 'production_allowed', 'buy_gate_updated',
+    'orders_sent', 'natural_verified', 'formal_eligibility_verified',
+)
+M18_REBOUND_BINDING_FIELDS = ('run_id', 'artifact_sha256', 'manifest_sha256', 'receipt_sha256')
+M18_REBOUND_COVERAGE_FIELDS = (
+    'input_candidate_count', 'history_complete_count', 'history_pending_count', 'strict_count',
+    'near_candidate_count', 'near_count', 'selected_count', 'panel_row_count', 'panel_code_count',
+    'excluded_count', 'screen_unresolved_count', 'row_accounted_count',
+)
+M18_REBOUND_DATE_FIELDS = (
+    'data_session', 'reader_observed_at', 'manifest_available_at', 'manifest_prepared_at',
+    'observation_status', 'provider_session_finality', 'master_captured_at',
+    'read_started_at', 'read_completed_at',
+)
+M18_REBOUND_UNIT_FIELDS = (
+    'status', 'scope', 'conversion_applied', 'legacy_declared_volume_unit', 'source_finality',
+)
 M18_ANNOUNCEMENT_PRODUCT_FIELDS = (
     'schema_version', 'target_trade_date', 'publication_date', 'status',
     'validation_status', 'consumed', 'product_sha256', 'source_manifest_sha256',
@@ -209,9 +237,17 @@ def _m18_semantic_response(config, root, path, query):
             keys += ('cursor',)
         if 'projection' in query:
             keys += ('projection',)
+        if 'group' in query:
+            keys += ('group',)
     exact_keys(query, keys)
-    if 'projection' in query and (query['projection'] != M18_ANNOUNCEMENT_PROJECTION
-            or query['section'] != M18_ANNOUNCEMENT_SECTION):
+    projection = query.get('projection')
+    if projection == M18_ANNOUNCEMENT_PROJECTION:
+        if query['section'] != M18_ANNOUNCEMENT_SECTION or 'group' in query:
+            raise ValueError('M18_PROJECTION_INVALID')
+    elif projection == M18_REBOUND_PROJECTION:
+        if query['section'] != M18_REBOUND_SECTION or query.get('group') not in M18_REBOUND_GROUPS:
+            raise ValueError('M18_PROJECTION_INVALID')
+    elif projection is not None or 'group' in query:
         raise ValueError('M18_PROJECTION_INVALID')
     descriptor = _m18_read_page_binding(config, root, query)
     if query['generation_id'] != descriptor['generation_id']:
@@ -221,8 +257,9 @@ def _m18_semantic_response(config, root, path, query):
             or binding['profile_sha256'] != descriptor['profile_sha256']):
         raise ValueError('M18_IDENTITY_MISMATCH')
     kind = 'overview' if path == M18_ROUTE + '/overview' else 'section'
-    if 'projection' in query:kind = 'announcement'
-    selection = {key: query[key] for key in ('section', 'cursor', 'projection') if key in query}
+    if projection == M18_ANNOUNCEMENT_PROJECTION:kind = 'announcement'
+    elif projection == M18_REBOUND_PROJECTION:kind = 'rebound'
+    selection = {key: query[key] for key in ('section', 'cursor', 'projection', 'group') if key in query}
     return _m18_read_value(binding, kind, selection)
 
 
@@ -234,17 +271,17 @@ def _m18_announcement_cursor(binding, source_sha, offset):
     return base64.urlsafe_b64encode(canonical_bytes(value)).decode('ascii')
 
 
-def _m18_announcement_value(reader, query):
-    """Project exact saved reference spans; never infer stocks or rerun M13."""
+def _m18_projection_source(reader, section):
+    """Read and index one verified object under the existing object budget."""
     from . import m18_offline_v2 as m
-    source_page = reader.detail(M18_ANNOUNCEMENT_SECTION)
+    source_page = reader.detail(section)
     m.require(source_page['matched_total'] == 1 and len(source_page['entries']) == 1,
               'V2_ANNOUNCEMENT_SOURCE')
     source_entry = source_page['entries'][0]
     m.require(source_entry['kind'] == 'object'
               and 0 < source_entry['bytes'] < m.PROFILE['object_bytes'], 'V2_OBJECT_BYTES')
     parts = [];size = 0
-    for part in reader.item_parts(M18_ANNOUNCEMENT_SECTION, 0):
+    for part in reader.item_parts(section, 0):
         size += len(part)
         m.require(size < m.PROFILE['object_bytes'], 'V2_OBJECT_BYTES')
         parts.append(part)
@@ -259,7 +296,14 @@ def _m18_announcement_value(reader, query):
     m.require(scanner.position == len(raw), 'V2_ANNOUNCEMENT_SOURCE')
     reader._guard.scan_nodes += scanner.nodes;reader._guard.scan_bytes += len(raw)
     source = json.loads(raw)
-    reader._guard.checkpoint('announcement_source')
+    reader._guard.checkpoint('projection_source')
+    return raw, source, scanner, source_entry
+
+
+def _m18_announcement_value(reader, query):
+    """Project exact saved reference spans; never infer stocks or rerun M13."""
+    from . import m18_offline_v2 as m
+    raw, source, scanner, source_entry = _m18_projection_source(reader, M18_ANNOUNCEMENT_SECTION)
     m.require(type(source) is dict and type(source.get('research_references')) is list
               and type(source.get('products')) is list
               and all(type(product) is dict for product in source['products']), 'V2_ANNOUNCEMENT_SOURCE')
@@ -304,10 +348,94 @@ def _m18_announcement_value(reader, query):
                      if next_offset < len(rows) else None))
 
 
+def _m18_rebound_cursor(binding, source_sha, group, offset):
+    value = {key: binding[key] for key in (
+        'manifest_sha256', 'generation_id', 'identity', 'profile_sha256')}
+    value.update(section=M18_REBOUND_SECTION, projection=M18_REBOUND_PROJECTION,
+        group=group, source_section_sha256=source_sha, selection_sha256=sha256_json(None), offset=offset)
+    return base64.urlsafe_b64encode(canonical_bytes(value)).decode('ascii')
+
+
+def _m18_rebound_value(reader, query):
+    """Page original M14 groups; cards is deliberately not a sixth group."""
+    from . import m18_offline_v2 as m
+    raw, source, outer_scan, source_entry = _m18_projection_source(reader, M18_REBOUND_SECTION)
+    m.require(type(source) is dict and type(source.get('research_observation')) is dict,
+              'V2_REBOUND_SOURCE')
+    observation = source['research_observation']
+    m.require(all(type(observation.get(group)) is list for group in M18_REBOUND_GROUPS),
+              'V2_REBOUND_GROUPS')
+    span = outer_scan.sections['research_observation']['entries'][0]
+    inner = raw[span['offset']:span['offset']+span['bytes']]
+    scanner = m._Scan(inner, 'object', reader._guard)
+    scanner.value(path=('payload',));scanner.space()
+    m.require(scanner.position == len(inner), 'V2_REBOUND_SOURCE')
+    reader._guard.scan_nodes += scanner.nodes;reader._guard.scan_bytes += len(inner)
+    reader._guard.checkpoint('rebound_groups')
+    group = query['group'];references = observation[group]
+    rows = scanner.sections[group]['entries']
+    m.require(len(rows) == len(references), 'V2_REBOUND_SOURCE')
+    binding = reader._binding();cursor = query.get('cursor');offset = 0
+    if cursor is not None:
+        try:
+            encoded = base64.b64decode(cursor, altchars=b'-_', validate=True)
+            declared, _ = m.v1.parse(encoded, object_limit=True)
+            offset = declared['offset']
+        except (ValueError, KeyError, TypeError):
+            raise ValueError('M18_CURSOR_INVALID') from None
+        m.require(m.v1.integer(offset, m.v1.PAGE_SIZE, len(rows)-1)
+                  and offset % m.v1.PAGE_SIZE == 0, 'V2_REBOUND_CURSOR')
+        m.require(cursor == _m18_rebound_cursor(binding, source_entry['sha256'], group, offset),
+                  'V2_REBOUND_CURSOR')
+    entries = [];loaded = 0;loaded_bytes = 0
+    for row in rows[offset:offset+m.v1.PAGE_SIZE]:
+        entry = dict(row, offset=source_entry['offset']+span['offset']+row['offset'])
+        if entry['bytes'] > M18_VIEW_ITEM_BYTES:
+            entry['reason'] = 'ITEM_BYTES_LIMIT'
+        elif loaded_bytes + entry['bytes'] > M18_VIEW_VALUES_BYTES:
+            entry['reason'] = 'PAGE_BYTES_LIMIT'
+        else:
+            entry.update(value=references[row['index']], value_state='LOADED')
+            loaded += 1;loaded_bytes += entry['bytes']
+        entries.append(entry)
+    source_meta = {key: source[key] for key in M18_REBOUND_SOURCE_FIELDS if key in source}
+    if 'binding_reference' in source:
+        reference = source['binding_reference']
+        m.require(type(reference) is dict, 'V2_REBOUND_SOURCE')
+        source_meta['binding_reference'] = {key: reference[key] for key in M18_REBOUND_BINDING_FIELDS if key in reference}
+    observation_meta = {key: observation[key] for key in M18_REBOUND_OBSERVATION_FIELDS if key in observation}
+    if 'coverage' in observation:
+        coverage = observation['coverage']
+        m.require(type(coverage) is dict, 'V2_REBOUND_SOURCE')
+        observation_meta['coverage'] = {key: coverage[key] for key in M18_REBOUND_COVERAGE_FIELDS if key in coverage}
+    if 'native_evidence' in observation:
+        native = observation['native_evidence']
+        m.require(type(native) is dict, 'V2_REBOUND_SOURCE')
+        evidence = {key: native[key] for key in ('volume_unit', 'price_currency', 'price_basis', 'gaps') if key in native}
+        for name, fields in (('date_evidence', M18_REBOUND_DATE_FIELDS), ('unit_evidence', M18_REBOUND_UNIT_FIELDS)):
+            if name in native:
+                m.require(type(native[name]) is dict, 'V2_REBOUND_SOURCE')
+                evidence[name] = {key: native[name][key] for key in fields if key in native[name]}
+        observation_meta['native_evidence'] = evidence
+    metadata = dict(source_section_sha256=source_entry['sha256'],
+        group_counts={key: len(observation[key]) for key in M18_REBOUND_GROUPS},
+        source=source_meta, observation=observation_meta)
+    next_offset = offset + len(entries)
+    return dict(schema=m.VERSION+'.detail', **binding, section=M18_REBOUND_SECTION,
+        projection=M18_REBOUND_PROJECTION, group=group, rebound=metadata,
+        selection=None, cursor=cursor, offset=offset, matched_total=len(rows),
+        loaded_count=loaded, not_loaded_count=len(rows)-loaded,
+        remaining_entries=len(rows)-next_offset, entries=entries,
+        next_cursor=(_m18_rebound_cursor(binding, source_entry['sha256'], group, next_offset)
+                     if next_offset < len(rows) else None))
+
+
 def _m18_semantic_value(reader, kind, query):
     """Bound one verified Reader value inside the short-lived read process."""
     if kind == 'announcement':
         value = _m18_announcement_value(reader, query)
+    elif kind == 'rebound':
+        value = _m18_rebound_value(reader, query)
     elif kind == 'overview':
         value = reader.overview()
     else:

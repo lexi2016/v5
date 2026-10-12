@@ -1,0 +1,38 @@
+{
+  "scope": "Cloud isolated SYNTHETIC fixtures only; candidate Mac/build/browser acceptance pending",
+  "node": {
+    "command": "node --test frontend/tests/*.node.mjs",
+    "passed": 24,
+    "exit_code": 0
+  },
+  "legacy_v4_jsdom_equivalence": {
+    "status": "PASS",
+    "cases": [
+      "strict",
+      "near",
+      "pending"
+    ],
+    "collapsed_and_expanded_dom_identical": true
+  },
+  "backend": {
+    "command": "PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_rebound_projection.py V5/tests/test_m18_v2_announcement_projection.py V5/tests/test_m18_v2_read_process.py V5/tests/test_m18_v2_semantic_pages.py V5/tests/test_m18_v2_disk_pages.py",
+    "passed": 34,
+    "subtests_passed": 68,
+    "skipped": 1,
+    "skip_reason": "Existing opt-in long resource stress test; unchanged resource profile",
+    "seconds": 34.7,
+    "exit_code": 0,
+    "includes_actual_http_to_typescript_session": true
+  },
+  "mac_real_candidate": "NOT_RUN",
+  "vue_tests": "NOT_RUN: existing dependencies absent in cloud",
+  "product_typecheck_and_build": "NOT_RUN: existing dependencies absent in cloud",
+  "prior_announcement_mac_acceptance": "ccc2a328d387427551d1bee0eca66c88b7485ad6",
+  "retained": [
+    "announcement default",
+    "V4 legacy renderer semantics",
+    "original resource budgets and read-only supervision",
+    "formal stocks and market_screen",
+    "dependencies and config"
+  ]
+}

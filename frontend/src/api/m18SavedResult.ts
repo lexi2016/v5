@@ -8,8 +8,11 @@ export interface Binding { identity: Identity; generation_id: string; profile_sh
 export interface SectionMeta { kind: string; total: number; loaded_count: number; not_loaded_count: number; state: string; }
 export interface Overview extends Binding { schema: string; content_chunks: number; sections: Record<string, SectionMeta>; }
 export interface SavedEntry { index: number; kind: string; offset: number; bytes: number; sha256: string; value_state: 'LOADED' | 'NOT_LOADED'; value?: unknown; reason?: string; }
+export const REBOUND_GROUPS = ['strict','near','pending','excluded','screen_unresolved'] as const;
+export type ReboundGroup = typeof REBOUND_GROUPS[number];
+export interface ReboundMetadata { source_section_sha256: string; group_counts: Record<ReboundGroup,number>; source: Record<string,unknown>; observation: Record<string,unknown>; }
 export interface AnnouncementMetadata { status: unknown; plan_cutoff: unknown; gaps: unknown; source_section_sha256: string; reference_count: number; products: Record<string,unknown>[]; }
-export interface SectionPage extends Binding { schema: string; projection?: 'announcement_references'; announcement?: AnnouncementMetadata; section: string; selection: null; cursor: string | null; offset: number; matched_total: number; not_loaded_count: number; remaining_entries: number; entries: SavedEntry[]; next_cursor: string | null; }
+export interface SectionPage extends Binding { schema: string; projection?: 'announcement_references' | 'rebound_references'; announcement?: AnnouncementMetadata; rebound?: ReboundMetadata; group?: ReboundGroup; section: string; selection: null; cursor: string | null; offset: number; matched_total: number; not_loaded_count: number; remaining_entries: number; entries: SavedEntry[]; next_cursor: string | null; }
 type Fetcher = (input: string, init?: RequestInit) => Promise<Response>;
 function check(condition: unknown, code: string): asserts condition { if (!condition) throw new Error('M18_' + code); }
 function object(value: unknown): value is Record<string, any> { return value !== null && typeof value === 'object' && !Array.isArray(value); }
@@ -52,14 +55,16 @@ export class M18SavedClient {
   for (const row of Object.values(value.sections)) check(object(row) && typeof row.kind === 'string' && integer(row.total) && row.loaded_count === 0 && row.not_loaded_count === row.total && row.state === 'NOT_LOADED', 'OVERVIEW');
   return value as Overview;
  }
- async section(expected: Descriptor, overview: Overview, section: string, cursor: string | null = null, offset = 0, signal?: AbortSignal): Promise<SectionPage> {
+ async section(expected: Descriptor, overview: Overview, section: string, cursor: string | null = null, offset = 0, signal?: AbortSignal, group: ReboundGroup = 'strict'): Promise<SectionPage> {
   check(Object.hasOwn(overview.sections,section) && section.length <= 1024 && integer(offset) && offset % 32 === 0 && (cursor === null ? offset === 0 : cursor.length <= 8192 && offset > 0), 'SECTION_REQUEST');
-  const projected = section === 'announcement_reviewed_analysis';
-  const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor; if (projected) query.projection='announcement_references';
+  const projected = section === 'announcement_reviewed_analysis', rebound = section === 'rebound_research_observation';
+  if (rebound) check(REBOUND_GROUPS.includes(group), 'REBOUND_GROUP');
+  const query: Record<string,string> = {run_id:expected.run_id, generation_id:expected.generation_id, section}; if (cursor !== null) query.cursor=cursor; if (projected) query.projection='announcement_references'; if (rebound) {query.projection='rebound_references';query.group=group;}
   const value = await this.get('/sections',query,signal); binding(value,expected,overview.manifest_sha256);
   if (projected) check(value.projection === 'announcement_references' && object(value.announcement) && digest(value.announcement.source_section_sha256) && integer(value.announcement.reference_count) && Array.isArray(value.announcement.products) && value.announcement.products.every(object), 'ANNOUNCEMENT_PROJECTION');
-  else check(!Object.hasOwn(value,'projection') && !Object.hasOwn(value,'announcement'), 'SECTION_PROJECTION');
-  const total = projected ? value.announcement.reference_count : overview.sections[section].total;
+  else if (rebound) check(value.projection === 'rebound_references' && value.group === group && object(value.rebound) && digest(value.rebound.source_section_sha256) && object(value.rebound.group_counts) && Object.keys(value.rebound.group_counts).length === REBOUND_GROUPS.length && REBOUND_GROUPS.every(key=>integer(value.rebound.group_counts[key])) && object(value.rebound.source) && object(value.rebound.observation), 'REBOUND_PROJECTION');
+  else check(!Object.hasOwn(value,'projection') && !Object.hasOwn(value,'announcement') && !Object.hasOwn(value,'rebound') && !Object.hasOwn(value,'group'), 'SECTION_PROJECTION');
+  const total = projected ? value.announcement.reference_count : rebound ? value.rebound.group_counts[group] : overview.sections[section].total;
   check(value.schema === 'v5.m18.offline.v2.detail' && value.section === section && value.selection === null && value.cursor === cursor && value.offset === offset && value.matched_total === total && Array.isArray(value.entries) && value.entries.length <= 32 && integer(value.remaining_entries) && integer(value.not_loaded_count) && (value.next_cursor === null || (typeof value.next_cursor === 'string' && value.next_cursor.length <= 8192)), 'SECTION_PAGE');
   for (const [position, entry] of value.entries.entries()) check(object(entry) && entry.index === offset + position && typeof entry.kind === 'string' && integer(entry.offset,0,64*1024*1024) && integer(entry.bytes,1,64*1024*1024) && digest(entry.sha256) && (entry.value_state === 'LOADED' ? Object.hasOwn(entry,'value') : entry.value_state === 'NOT_LOADED' && !Object.hasOwn(entry,'value')), 'SECTION_ENTRY');
   check(value.entries.length === Math.min(32,value.matched_total-offset) && value.remaining_entries === value.matched_total-offset-value.entries.length && value.not_loaded_count === value.matched_total-value.entries.filter((entry: SavedEntry) => entry.value_state === 'LOADED').length && (value.remaining_entries > 0) === (value.next_cursor !== null), 'SECTION_COUNTS');
@@ -69,7 +74,7 @@ export class M18SavedClient {
 export function chooseSection(sections: Record<string, SectionMeta>): string { return ['announcement_reviewed_analysis','summary','stocks','cards','candidates','focus_stocks','status','gaps'].find(key => Object.hasOwn(sections,key)) ?? Object.keys(sections)[0] ?? ''; }
 export function entryPresentation(entry: SavedEntry): {state:string; value?:unknown; reason?:string} { return entry.value_state === 'LOADED' ? {state:'LOADED',value:entry.value} : {state:'NOT_LOADED',reason:entry.reason ?? 'NOT_LOADED'}; }
 
-export interface SavedRunState { phase: 'IDLE' | 'LOADING' | 'LOADED' | 'CANNOT_CONFIRM'; descriptor: Descriptor | null; overview: Overview | null; section: string; page: SectionPage | null; error: string; canPrevious: boolean; }
+export interface SavedRunState { phase: 'IDLE' | 'LOADING' | 'LOADED' | 'CANNOT_CONFIRM'; descriptor: Descriptor | null; overview: Overview | null; section: string; group?: ReboundGroup; page: SectionPage | null; error: string; canPrevious: boolean; }
 /** Latest-request wins; navigation never combines runs or retains rows after a failure. */
 export class SavedRunSession {
  state: SavedRunState = {phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false};
@@ -82,7 +87,7 @@ export class SavedRunSession {
  private begin() { this.abort?.abort(); this.abort=new AbortController(); const serial=++this.serial; this.set({phase:'LOADING',page:null,error:''}); return {serial,signal:this.abort.signal}; }
  private failure(error:unknown,serial:number) { if(serial===this.serial) this.set({phase:'CANNOT_CONFIRM',page:null,error:error instanceof Error ? error.message : 'M18_UNAVAILABLE'}); }
  async load(run:string) {
-  const {serial,signal}=this.begin(); this.history=[];this.position=0;this.set({descriptor:null,overview:null,section:'',canPrevious:false});
+  const {serial,signal}=this.begin(); this.history=[];this.position=0;this.set({descriptor:null,overview:null,section:'',group:undefined,canPrevious:false});
   try {
    const descriptor=await this.client.descriptor(run,signal); if(serial!==this.serial)return;
    const overview=await this.client.overview(descriptor,signal); if(serial!==this.serial)return;
@@ -91,11 +96,11 @@ export class SavedRunSession {
    this.history=[{cursor:null,offset:0}];this.set({page,phase:'LOADED'});
   } catch(error) { this.failure(error,serial); }
  }
- async select(section:string) { this.history=[{cursor:null,offset:0}];this.position=0;await this.pageAt(section,0); }
+ async select(section:string,group:ReboundGroup='strict') { this.set({group:section==='rebound_research_observation'?group:undefined});this.history=[{cursor:null,offset:0}];this.position=0;await this.pageAt(section,0); }
  private async pageAt(section:string,position:number) {
-  const {descriptor,overview}=this.state; const request=this.history[position]; if(!descriptor||!overview||!request)return;
+  const {descriptor,overview,group}=this.state; const request=this.history[position]; if(!descriptor||!overview||!request)return;
   const {serial,signal}=this.begin();this.set({section,canPrevious:position>0});
-  try { const page=await this.client.section(descriptor,overview,section,request.cursor,request.offset,signal); if(serial!==this.serial)return;this.position=position;this.set({page,phase:'LOADED'}); }
+  try { const page=await this.client.section(descriptor,overview,section,request.cursor,request.offset,signal,group); if(serial!==this.serial)return;this.position=position;this.set({page,phase:'LOADED'}); }
   catch(error) { this.failure(error,serial); }
  }
  async next() { const page=this.state.page;if(this.state.phase==='LOADING'||!page?.next_cursor)return;this.history=this.history.slice(0,this.position+1);this.history.push({cursor:page.next_cursor,offset:page.offset+page.entries.length});await this.pageAt(this.state.section,this.position+1); }
