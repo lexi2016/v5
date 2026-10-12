@@ -1,0 +1,15 @@
+PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
+test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists) ... FAIL
+
+======================================================================
+FAIL: test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_daily.py", line 40, in test_00_default_chain_exists
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.hk_stage_daily'),'M08 default producer missing')
+AssertionError: unexpectedly None : M08 default producer missing
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

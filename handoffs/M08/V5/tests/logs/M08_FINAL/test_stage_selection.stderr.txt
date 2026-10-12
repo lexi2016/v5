@@ -1,0 +1,22 @@
+test_a_original_live_formula_and_top10 (test_stage_selection.StageSelectionTests.test_a_original_live_formula_and_top10) ... ok
+test_auction_not_silently_replaced (test_stage_selection.StageSelectionTests.test_auction_not_silently_replaced) ... ok
+test_code_whitespace_cannot_hide_duplicate (test_stage_selection.StageSelectionTests.test_code_whitespace_cannot_hide_duplicate) ... ok
+test_empty_evidence_explicit (test_stage_selection.StageSelectionTests.test_empty_evidence_explicit) ... ok
+test_future_display_source_time_rejected (test_stage_selection.StageSelectionTests.test_future_display_source_time_rejected) ... ok
+test_future_row_time_rejected (test_stage_selection.StageSelectionTests.test_future_row_time_rejected) ... ok
+test_hk_original_four_lane_top10 (test_stage_selection.StageSelectionTests.test_hk_original_four_lane_top10) ... ok
+test_hk_raw_score_override_rejected (test_stage_selection.StageSelectionTests.test_hk_raw_score_override_rejected) ... ok
+test_incomplete_a_quote_rejected (test_stage_selection.StageSelectionTests.test_incomplete_a_quote_rejected) ... ok
+test_invalid_priority_hk_alias_rejected (test_stage_selection.StageSelectionTests.test_invalid_priority_hk_alias_rejected) ... ok
+test_missing_research_not_silently_zeroed (test_stage_selection.StageSelectionTests.test_missing_research_not_silently_zeroed) ... ok
+test_negative_preferred_market_cap_rejected (test_stage_selection.StageSelectionTests.test_negative_preferred_market_cap_rejected) ... ok
+test_partial_coverage_preserved (test_stage_selection.StageSelectionTests.test_partial_coverage_preserved) ... ok
+test_stage8_requires_separate_replay_gate (test_stage_selection.StageSelectionTests.test_stage8_requires_separate_replay_gate) ... ok
+test_unknown_source_status_not_promoted (test_stage_selection.StageSelectionTests.test_unknown_source_status_not_promoted) ... ok
+test_wrong_digest_rejected (test_stage_selection.StageSelectionTests.test_wrong_digest_rejected) ... ok
+test_wrong_row_date_rejected (test_stage_selection.StageSelectionTests.test_wrong_row_date_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 5.130s
+
+OK

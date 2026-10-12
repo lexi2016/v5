@@ -1,0 +1,23 @@
+test_original_owner_store_cold_reader_and_published_api (test_hk_stage_api.HKStageAPIIntegrationTests.test_original_owner_store_cold_reader_and_published_api) ... ok
+test_adapter_contains_no_producer_import_or_call (test_hk_stage_api.HKStageAPITests.test_adapter_contains_no_producer_import_or_call) ... ok
+test_cold_reader_error_keeps_published_generation (test_hk_stage_api.HKStageAPITests.test_cold_reader_error_keeps_published_generation) ... ok
+test_date_stage_run_switches_and_refresh_are_read_only (test_hk_stage_api.HKStageAPITests.test_date_stage_run_switches_and_refresh_are_read_only) ... ok
+test_formula_label_does_not_allow_absolute_path_disclosure (test_hk_stage_api.HKStageAPITests.test_formula_label_does_not_allow_absolute_path_disclosure) ... ok
+test_fresh_process_reads_published_record_without_reader_or_producer (test_hk_stage_api.HKStageAPITests.test_fresh_process_reads_published_record_without_reader_or_producer) ... ok
+test_invalid_metadata_is_rejected_before_publication (test_hk_stage_api.HKStageAPITests.test_invalid_metadata_is_rejected_before_publication) ... ok
+test_native_formulas_are_not_mistaken_for_source_paths (test_hk_stage_api.HKStageAPITests.test_native_formulas_are_not_mistaken_for_source_paths) ... ok
+test_partial_empty_and_error_diagnostics_are_preserved (test_hk_stage_api.HKStageAPITests.test_partial_empty_and_error_diagnostics_are_preserved) ... ok
+test_public_projection_redacts_paths_without_dropping_evidence (test_hk_stage_api.HKStageAPITests.test_public_projection_redacts_paths_without_dropping_evidence) ... ok
+test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics (test_hk_stage_api.HKStageAPITests.test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics) ... ok
+test_reader_reference_substitution_is_rejected (test_hk_stage_api.HKStageAPITests.test_reader_reference_substitution_is_rejected) ... ok
+test_replay_kind_is_taken_from_reader_and_not_upgraded (test_hk_stage_api.HKStageAPITests.test_replay_kind_is_taken_from_reader_and_not_upgraded) ... ok
+test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace (test_hk_stage_api.HKStageAPITests.test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace) ... ok
+test_stage8_is_separate_from_m10_seven_stages (test_hk_stage_api.HKStageAPITests.test_stage8_is_separate_from_m10_seven_stages) ... ok
+test_unquoted_paths_and_formula_diagnostics_do_not_leak (test_hk_stage_api.HKStageAPITests.test_unquoted_paths_and_formula_diagnostics_do_not_leak) ... ok
+test_uses_exact_cold_reference_and_keeps_original_rows (test_hk_stage_api.HKStageAPITests.test_uses_exact_cold_reference_and_keeps_original_rows) ... ok
+test_wrong_module_or_route_is_rejected_without_read (test_hk_stage_api.HKStageAPITests.test_wrong_module_or_route_is_rejected_without_read) ... ok
+
+----------------------------------------------------------------------
+Ran 18 tests in 2.733s
+
+OK

@@ -1,0 +1,16 @@
+PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
+test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons) ... ERROR
+
+======================================================================
+ERROR: test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_daily.py", line 64, in test_original_score_order_and_reasons
+    detail=out['provenance']['owner_score_details']['HK.00012']
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'owner_score_details'
+
+----------------------------------------------------------------------
+Ran 1 test in 0.318s
+
+FAILED (errors=1)

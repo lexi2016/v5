@@ -1,0 +1,28 @@
+test_bad_active_index_does_not_fall_back_to_legacy (test_module_artifacts.ModuleArtifactTests.test_bad_active_index_does_not_fall_back_to_legacy) ... ok
+test_corrupt_inherited_object_blocks_new_date_publication (test_module_artifacts.ModuleArtifactTests.test_corrupt_inherited_object_blocks_new_date_publication) ... ok
+test_duplicate_response_keys_rejected (test_module_artifacts.ModuleArtifactTests.test_duplicate_response_keys_rejected) ... ok
+test_failure_before_active_swap_keeps_old_result (test_module_artifacts.ModuleArtifactTests.test_failure_before_active_swap_keeps_old_result) ... ok
+test_first_activation_interruption_requires_explicit_recovery (test_module_artifacts.ModuleArtifactTests.test_first_activation_interruption_requires_explicit_recovery) ... ok
+test_first_activation_reader_waits_for_publication (test_module_artifacts.ModuleArtifactTests.test_first_activation_reader_waits_for_publication) ... ok
+test_invalid_payload_never_replaces_success (test_module_artifacts.ModuleArtifactTests.test_invalid_payload_never_replaces_success) ... ok
+test_legacy_records_adopted_on_first_publication (test_module_artifacts.ModuleArtifactTests.test_legacy_records_adopted_on_first_publication) ... ok
+test_missing_active_pointer_never_downgrades_to_legacy (test_module_artifacts.ModuleArtifactTests.test_missing_active_pointer_never_downgrades_to_legacy) ... ok
+test_missing_manifest_is_invalid_not_missing_result (test_module_artifacts.ModuleArtifactTests.test_missing_manifest_is_invalid_not_missing_result) ... ok
+test_missing_object_does_not_fall_back (test_module_artifacts.ModuleArtifactTests.test_missing_object_does_not_fall_back) ... ok
+test_new_date_preserves_previous_date (test_module_artifacts.ModuleArtifactTests.test_new_date_preserves_previous_date) ... ok
+test_nonstring_query_is_not_published_as_unreachable_result (test_module_artifacts.ModuleArtifactTests.test_nonstring_query_is_not_published_as_unreachable_result) ... ok
+test_old_generation_and_objects_remain_immutable (test_module_artifacts.ModuleArtifactTests.test_old_generation_and_objects_remain_immutable) ... ok
+test_other_release_rejected (test_module_artifacts.ModuleArtifactTests.test_other_release_rejected) ... ok
+test_rehashed_payload_still_rejected_by_object_digest (test_module_artifacts.ModuleArtifactTests.test_rehashed_payload_still_rejected_by_object_digest) ... ok
+test_rollback_is_explicit_atomic_activation (test_module_artifacts.ModuleArtifactTests.test_rollback_is_explicit_atomic_activation) ... ok
+test_rollback_validates_unrequested_historical_object (test_module_artifacts.ModuleArtifactTests.test_rollback_validates_unrequested_historical_object) ... ok
+test_running_api_sees_atomic_new_generation (test_module_artifacts.ModuleArtifactTests.test_running_api_sees_atomic_new_generation) ... ok
+test_same_snapshot_reuses_generation (test_module_artifacts.ModuleArtifactTests.test_same_snapshot_reuses_generation) ... ok
+test_stale_compare_and_swap_rejected (test_module_artifacts.ModuleArtifactTests.test_stale_compare_and_swap_rejected) ... ok
+test_symlink_object_directory_rejected (test_module_artifacts.ModuleArtifactTests.test_symlink_object_directory_rejected) ... ok
+test_two_publishers_with_same_expected_head_only_one_wins (test_module_artifacts.ModuleArtifactTests.test_two_publishers_with_same_expected_head_only_one_wins) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 7.654s
+
+OK

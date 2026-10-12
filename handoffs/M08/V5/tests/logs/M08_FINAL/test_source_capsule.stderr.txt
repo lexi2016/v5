@@ -1,0 +1,13 @@
+test_blob_mismatch (test_source_capsule.SourceTests.test_blob_mismatch) ... ok
+test_changed (test_source_capsule.SourceTests.test_changed) ... ok
+test_duplicate_rejected (test_source_capsule.SourceTests.test_duplicate_rejected) ... ok
+test_missing (test_source_capsule.SourceTests.test_missing) ... ok
+test_parent_escape_rejected (test_source_capsule.SourceTests.test_parent_escape_rejected) ... ok
+test_symlink_rejected (test_source_capsule.SourceTests.test_symlink_rejected) ... ok
+test_unlisted (test_source_capsule.SourceTests.test_unlisted) ... ok
+test_valid_source (test_source_capsule.SourceTests.test_valid_source) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.014s
+
+OK

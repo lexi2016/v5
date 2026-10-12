@@ -1,0 +1,2320 @@
+diff --git a/START_HERE.md b/START_HERE.md
+--- a/START_HERE.md
++++ b/START_HERE.md
+@@ -1,4 +1,10 @@
+ # V5 M08｜港股阶段选股
++
++## 2026-10-12 原 owner 工程候选交付
++
++默认港股输入 → 原普通/竞价/Stage8 owner → 原 SelectionStore 三件 → 独立精确 run 冷读链已实现，并提供现有只读模块 API 发布适配器。完整代码、边界、测试及 Mac 单次验收入口见 [M08_HK_STAGE_HANDOFF.md](V5/docs/M08_HK_STAGE_HANDOFF.md)；固定前像/后像、真正正反 patch 与核验见 [delivery/M08_20261012](delivery/M08_20261012/)。
++
++这是合成/录制输入工程候选，不是 M08 完整产品验收。正式资格/PIT、Mac、活动页面和自然调度尚未验证；共享 ledger、V4 与其他模块未修改。下列原材料说明保留作历史依据，原“仅材料字节核验完成”不再描述本次新增工程实现。
+ 
+ 本分支材料属于原18模块的M08/P3。用户已授权继续编码，不再等逐模块范围确认，不新增M19。
+ 
+diff --git a/V5/docs/M08_HK_STAGE_HANDOFF.md b/V5/docs/M08_HK_STAGE_HANDOFF.md
+new file mode 100644
+--- /dev/null
++++ b/V5/docs/M08_HK_STAGE_HANDOFF.md
+@@ -0,0 +1,158 @@
++# M08 HK stage original-owner engineering candidate
++
++## Delivery and scope
++
++This candidate continues `dev/m08-github-handoff-20261011` from verified HEAD
++`5da73228d40d991e8f73ba84f7c66553e9235bc3`. No original source byte,
++shared ledger, main, P0, other module, V4 service, credential or trade path changed.
++The complete default retained-input chain is executable; it is **not complete
++M08 product acceptance**. Natural data admission, scheduler activation, Mac
++integration, existing UI mounting and two eligible natural days remain unverified.
++
++Five separate states:
++
++| Layer | Result |
++|---|---|
++| Code engineering | Default original owners → original immutable store → independent exact-run reader implemented; see exact final test receipt |
++| Real inputs | SYNTHETIC/RECORDED_INPUT_REPLAY only; no new market capture performed; M02/M06 declaration hashes are consistency evidence, not independently attested eligibility/PIT |
++| API/page | Existing immutable module API publication adapter and actual loopback HTTP tests; no Mac route or existing page deployment |
++| Automatic continuation | Natural scheduling/collection not activated; LIVE input fails closed; retained CLI may be called explicitly by existing orchestration |
++| Complete acceptance | NOT COMPLETE; neither synthetic fixtures, HTTP tests nor retained replay equal natural qualification |
++
++## Original code and compatibility
++
++Donor is `lexi2016/v4@f7cb731c384ee6890a87d16c19a5b5a621779477`.
++`integration_candidates/M08/CAPSULE_INTEGRATION_CANDIDATE.json` pins every
++selected source by path, Git blob, SHA-256 and bytes. The loader checks all bytes
++on entry and before committing success. Frozen original formulas, auction
++owners, Stage8 collector, publication and verification bodies execute unchanged.
++
++The canonical split `_namespace.py` files are absent in the supplied donor
++closure. Three in-memory compatibility aliases explicitly use the existing
++V5 vendor `read_global` helper and are labeled
++`EXPLICIT_COMPATIBILITY_ALIAS_NOT_CANONICAL`. No canonical file is invented.
++`stage_center` and `infrastructure` are virtual package scaffolds so importing
++one owner does not eagerly import unrelated runtimes. Missing imports fail closed.
++This isolated capsule remains an integration candidate, not frozen-vendor approval.
++
++## Routes and original contracts
++
++- Six ordinary stages: `merge_hk_four_lane_candidates` followed by
++  `select_hk_four_lane`. Cross-lane merges preserve first-live-value precedence;
++  duplicate same-code/same-lane input is rejected. Source fields are not zero-filled.
++- `STAGE_0925 / SECOND_FILTER`: original `select_hk_0925_second_filter`, preserves
++  original order/rank then original Top10 cap. Explicit 09:15–09:20 HK window,
++  09:20:05 input cutoff and separate shared 09:25:05 cutoff remain visible.
++- `STAGE_0925 / D1_REFERENCE`: only exact supplied M06 pool rows; original
++  `select_hk_0925_d1_reference`, always unconfirmed. It never impersonates the
++  missing second filter. Failed/partial upstream auction sources receive explicit
++  diagnostics before original envelope normalization, preventing false READY_EMPTY.
++- `STAGE_1545_1555 / STAGE8_RTDATA`: original persisted snapshot validator,
++  original active-code filter, original RT_DATA window aggregation and original
++  four-lane selector. The provider boundary is a retained JSON payload; no SDK,
++  quote connection or network fetch occurs. `natural_now` is the retained capture
++  clock used to exercise the original collector, explicitly labeled replay;
++  natural verification stays false. Snapshot capture is 15:50–15:55, RT_DATA
++  window 15:45–15:55, shared Stage8 cutoff 15:55:05. No ordinary-stage substitute.
++- `read_m10_seven`: exactly seven ordered references with the same target date;
++  missing, duplicate or appended Stage8 references are rejected.
++
++The original score details/reasons/risks are retained separately in provenance
++for four-lane routes using the original `hk_four_lane_score`; the immutable
++original envelope/rows remain unchanged. No formula or coefficient is rewritten.
++
++## Input contract
++
++`V5/tests/test_hk_stage_daily.py::request` and `stage8_request` are complete
++synthetic input examples. They are fixture-only, not actual historical quotes.
++
++Every request binds market, exact target/signal dates, stage, data kind, collector,
++source capture/availability, payload digest, Top100 run/row digest and original
++rank/lane, membership date/code set/receipt digest, field units and source status.
++The prior signal day is checked against the original HK-securities calendar;
++A-share, HK securities and HK Connect calendar states remain separate.
++
++This boundary accepts normalized retained M06/API data, not arbitrary private
++filesystem roots. It does not fetch M06 or create eligibility evidence.
++The existing M06 reader/API must supply its verified exact run before a real
++integration. A matching SHA for caller-supplied bytes alone does not prove
++provider origin, historical availability or official Connect eligibility.
++Recorded inputs explicitly carry `REPLAY_POINT_IN_TIME_QUALIFICATION_NOT_ATTESTED`;
++unknown qualification carries `M02_MEMBERSHIP_NOT_VERIFIED`. All formal/natural
++flags remain false. Half-day active window contracts are blocked, not guessed.
++Missing quote enrichment, unsafe alias, raw score override, mixed market/day,
++unknown source status, bad units/hash, future clock and duplicate records fail.
++
++## Immutable output and independent read
++
++Initialize an empty, separate V5-only root with the CLI. A marker is mandatory;
++existing non-empty directories and symlinks are rejected. The root contains:
++
++- `generations/<identity SHA>/owner/selection_runs/.../{artifact.csv,manifest.json,receipt.json}`:
++  exactly original SelectionStore publication and independent verification
++- `product.json`: full retained input, source/config/code identity, original
++  envelope and exact original trio reference; private local only
++- `attempt.json`: durable RUNNING/SUCCEEDED/FAILED state. Interrupted attempts
++  require review rather than automatic rerun
++- `latest_success.json`: convenience success index; never used by exact reader
++
++Each original SelectionStore has its own generation root because the unchanged
++owner permits one immutable input per date/stage slot. A changed input/version
++creates another generation without weakening that original conflict contract.
++Exact retry uses committed output without resampling or rewriting; FAILED/RUNNING
++attempts cannot silently restart. Failed/partial products cannot replace success;
++older or equal capture times cannot advance the success index. Final source/code
++checks precede success publication. Root producer lock serializes commits.
++
++`read_hk_stage(root, reference)` always spawns a fresh process and independently
++checks commit state, product/input/source/code bindings, requested date/stage/run,
++original trio hashes/content and safety flags. It never follows a latest pointer,
++chooses another run, or calls a selector. Keep the matching code release to read
++its historical generation; current code cannot silently reinterpret old code identity.
++
++## Commands
++
++From the checked-out module root `handoffs/M08`, using existing supported Python:
++
++```sh
++PYTHONPATH=V5/src python -B V5/tests/run_m08_acceptance.py
++PYTHONPATH=V5/src python -B -m v5_shadow.hk_stage_daily --init-root /ABSOLUTE/EMPTY/V5_M08_ROOT
++PYTHONPATH=V5/src python -B -m v5_shadow.hk_stage_daily --root /ABSOLUTE/V5_M08_ROOT --input /ABSOLUTE/INPUT.json
++PYTHONPATH=V5/src python -B -m v5_shadow.hk_stage_reader --root /ABSOLUTE/V5_M08_ROOT --reference /ABSOLUTE/EXACT_REFERENCE.json
++```
++
++Save the returned `reference` object as JSON for the read command. No path above
++is an actual deployment path. API publication uses `hk_stage_api` and the existing
++`module_artifacts.publish_generation`; see `integration_candidates/M08/API_READONLY.md`.
++GET/refresh/date/stage/run selection reads immutable published records only.
++No extra server framework, frontend, dependency, provider or recurring scheduler.
++
++## Verification and limits
++
++Cloud has Python 3.12.14 and pandas 2.2.3; these are below `pyproject.toml`'s
++production Python >=3.14/pandas >=2.3 contract. No packages were installed.
++M08's default chain itself uses standard library owners only. Exact tests, start,
++end, exit, failure counts and interpreter evidence are in the acceptance receipt.
++Pytest, pyarrow, complete donor runtime, Mac execution, SDK/live capture, UI
++build/browser and natural execution are NOT_RUN, with reasons in the receipt.
++Existing unrelated baseline suite failures are reported, not hidden or repaired.
++
++## Mac integration / independent rollback
++
++1. Pin this delivered commit; verify the delivery manifest and original hashes.
++2. Use a separate checkout/release directory and the existing supported Mac Python.
++   Do not overwrite a dirty active tree; run the one-command acceptance there.
++3. Consume the existing verified M06 input without recollecting it; keep all
++   retained market payloads and actual root paths local. Do not upload them.
++4. Apply only approved M08 API registration/mount work after reviewing the actual
++   current integrator baseline. Shared `run_ledger.py`, `daily_*`, `stage_selection.py`,
++   gateway and UI remain byte-identical here. No lane is forged into the shared ledger.
++5. Publish separate HK response generation with CAS. Keep code release, private
++   data generation, API response generation and UI mount identities separate.
++6. Roll back only the HK release binding and its expected API generation.
++   Keep A code/API bindings untouched: A1/B1 → A2/B1 → A2/B2 → A1/B2 is enforced
++   by independent bindings, not git reset or whole-tree replacement. This candidate
++   has not executed that Mac integration/rollback sequence, so no such pass is claimed.
++
++No merge, V4/8910 mutation, trade, credential read, system-security expansion,
++public deployment, new market data collection or recurring operation is included.
+diff --git a/V5/src/v5_shadow/hk_stage_api.py b/V5/src/v5_shadow/hk_stage_api.py
+new file mode 100644
+--- /dev/null
++++ b/V5/src/v5_shadow/hk_stage_api.py
+@@ -0,0 +1,165 @@
++"""Publish a cold-verified HK run through the existing immutable module API.
++
++This adapter is called explicitly after a private run has been committed. The
++shared module API serves the resulting records without importing this adapter,
++opening the private store, collecting data, or running a selector.
++"""
++import ast
++import json
++import re
++
++from .contracts import aware, exact_keys, sha, trade_date
++from .digests import canonical_bytes, sha256_json
++from .module_artifacts import publish_generation
++
++
++ROUTE = '/api/v5/hk-stage-selection'
++STAGES = (
++    'STAGE_0925', 'STAGE_0930_0935', 'STAGE_0935_0940', 'STAGE_0940_0945',
++    'STAGE_0945_1030', 'STAGE_1300_1315', 'STAGE_1445_1500', 'STAGE_1545_1555',
++)
++_FALSE_FLAGS = ('production_allowed', 'buy_gate_updated', 'orders_sent')
++_REFERENCE_KEYS = (
++    'generation_sha256', 'run_id', 'market', 'target_date', 'stage_id',
++    'artifact_sha256', 'manifest_sha256', 'receipt_sha256', 'product_sha256',
++)
++_REDACTED = '[REDACTED_PATH]'
++_PATH_KEY = re.compile(r'(?:^|_)(?:path|paths|root|roots|dir|dirs|directory|directories|relative|file|filename)$', re.I)
++_FORMULA_KEY = re.compile(r'(?:^|_)formulas?$', re.I)
++_QUOTED_LOCAL_PATH = re.compile(
++    r'''(?P<quote>["'])(?:file://|[A-Za-z]:[\\/]|\\\\|/|~/|\.\.?/).*?(?P=quote)'''
++)
++# Match local paths at token boundaries, not division operators or public URLs.
++_LOCAL_PATH = re.compile(
++    r'''(?<![\w:/\\])(?:file://|[A-Za-z]:[\\/]|\\\\|/|~/|\.\.?/)'''
++    r'''(?:[^\n\r"';,()\[\]]*[\\/])?'''
++    r'''(?:[^\n\r"';,()\[\]]*?\.[A-Za-z0-9]{1,16}(?=\s|$|[,;\]\)"'])|[^\s,;\]\)"']+)'''
++)
++
++
++def _public_formula(value):
++    # Division syntax is not a path. A literal path in a formula-labelled field
++    # remains private, however, and a label alone must not bypass redaction.
++    value = _QUOTED_LOCAL_PATH.sub(
++        lambda match: match['quote'] + _REDACTED + match['quote'], value)
++    if _LOCAL_PATH.match(value.lstrip()):
++        return _REDACTED
++    # Parsing never evaluates an expression. It distinguishes actual division
++    # syntax from prose such as "loaded from /Users/..." in a formula label.
++    try:
++        ast.parse(value, mode='eval')
++    except (SyntaxError, ValueError):
++        return _LOCAL_PATH.sub(_REDACTED, value)
++    return value
++
++
++def _public_string(value):
++    # Key/value evidence may contain relative paths and spaces. Preserve the
++    # evidence label, but never expose a path value merely because it is relative.
++    label, separator, detail = value.partition('=')
++    if separator and _PATH_KEY.search(label.strip()):
++        return label + '=' + _REDACTED
++    if separator and _FORMULA_KEY.search(label.strip()):
++        return label + '=' + _public_formula(detail)
++    value = _QUOTED_LOCAL_PATH.sub(
++        lambda match: match['quote'] + _REDACTED + match['quote'], value)
++    return _LOCAL_PATH.sub(_REDACTED, value)
++
++
++def _public_value(value, *, field=''):
++    if isinstance(value, dict):
++        result = {}
++        for key, item in value.items():
++            # Identity maps can use filenames as keys; absolute local keys need
++            # stable opaque labels to avoid either disclosure or key collisions.
++            public_key = ('redacted_path_' + sha256_json(key)
++                          if _LOCAL_PATH.search(key) else key)
++            result[public_key] = _public_value(item, field=key)
++        return result
++    if isinstance(value, list):
++        return [_public_value(item, field=field) for item in value]
++    if isinstance(value, str):
++        if _PATH_KEY.search(field) and value:
++            return _REDACTED
++        if _FORMULA_KEY.search(field):
++            return _public_formula(value)
++        return _public_string(value)
++    return value
++
++
++def _reference(value):
++    exact_keys(value, _REFERENCE_KEYS)
++    for key in _REFERENCE_KEYS:
++        if key.endswith('_sha256'):
++            sha(value[key])
++    trade_date(value['target_date'])
++    if (value['market'] != 'HK_CONNECT' or value['stage_id'] not in STAGES
++            or not isinstance(value['run_id'], str)
++            or not re.fullmatch(r'[A-Za-z0-9_.:-]{1,256}', value['run_id'])):
++        raise ValueError('HK_API_REFERENCE_INVALID')
++    return json.loads(canonical_bytes(value))
++
++
++def _validate_readback(value, reference):
++    if not isinstance(value, dict) or value.get('reference') != reference:
++        raise ValueError('HK_API_REFERENCE_MISMATCH')
++    artifact = value.get('artifact')
++    provenance = value.get('provenance')
++    if not isinstance(artifact, dict) or not isinstance(provenance, dict):
++        raise ValueError('HK_API_READBACK_INVALID')
++    if (artifact.get('market') != reference['market']
++            or artifact.get('trade_date') != reference['target_date']
++            or artifact.get('stage_id') != reference['stage_id']
++            or artifact.get('run_id') != reference['run_id']):
++        raise ValueError('HK_API_ARTIFACT_IDENTITY')
++    if (any(value.get(flag) is not False or artifact.get(flag) is not False
++            for flag in _FALSE_FLAGS)
++            or value.get('natural_verified') is not False
++            or provenance.get('natural_verified') is not False
++            or provenance.get('formal_admission') is not False):
++        raise ValueError('HK_API_SAFETY_INVALID')
++    if provenance.get('data_kind') not in ('SYNTHETIC', 'RECORDED_INPUT_REPLAY'):
++        raise ValueError('HK_API_DATA_KIND_INVALID')
++    for key in ('input_sha256', 'source_manifest_sha256'):
++        sha(provenance.get(key))
++    source = provenance.get('source_identity')
++    if not isinstance(source, dict):
++        raise ValueError('HK_API_SOURCE_IDENTITY')
++    aware(source.get('captured_at'))
++    if artifact.get('selection_status') not in ('READY', 'READY_EMPTY', 'PARTIAL_WITH_ROWS', 'CANNOT_CONFIRM'):
++        raise ValueError('HK_API_SELECTION_STATUS')
++    # Snapshot the validated object before projecting; never mutate the reader's
++    # original envelope or private evidence and never recompute owner formulas.
++    return json.loads(canonical_bytes(value))
++
++
++def publish_hk_stage_response(config, root, reference, *, expected_generation):
++    """Cold-read one exact private run, then CAS-publish its public projection.
++
++    ``root`` is the private HK store; ``config['data_root']`` is a separately
++    V5-marked ``hk_stage`` response store. ``expected_generation`` names the
++    current *module API* generation, not the private HK generation. Missing
++    data, invalid identity/safety, and CAS conflicts propagate without replacing
++    the active public generation. This function is never a GET handler.
++    """
++    if (not isinstance(config, dict) or config.get('module_id') != 'hk_stage'
++            or not isinstance(config.get('routes'), list) or ROUTE not in config['routes']):
++        raise ValueError('HK_API_CONFIG')
++    requested = _reference(reference)
++    # Import only the independent reader, and only during explicit publication.
++    from .hk_stage_reader import read_hk_stage
++    value = _validate_readback(read_hk_stage(root, json.loads(canonical_bytes(requested))), requested)
++    provenance = value['provenance']
++    payload = _public_value(value)
++    is_stage8 = requested['stage_id'] == STAGES[-1]
++    payload.update(schema_version='v5.hk_stage_public_response.v1',
++                   status=value['artifact']['selection_status'],
++                   stage_group='HK_STAGE8_SEPARATE' if is_stage8 else 'HK_SEVEN_STAGE',
++                   m10_stage_member=not is_stage8)
++    query = dict(date=requested['target_date'], stage=requested['stage_id'], run_id=requested['run_id'])
++    record = dict(schema_version='v5.module_response.v1', module_id='hk_stage',
++                  release_id=config['release_id'], path=ROUTE, query=query, payload=payload,
++                  payload_sha256=sha256_json(payload), source_input_sha256=provenance['input_sha256'],
++                  data_kind=provenance['data_kind'],
++                  generated_at=provenance['source_identity']['captured_at'], status_code=200)
++    return publish_generation(config, [record], expected_generation=expected_generation)
+diff --git a/V5/src/v5_shadow/hk_stage_daily.py b/V5/src/v5_shadow/hk_stage_daily.py
+new file mode 100644
+--- /dev/null
++++ b/V5/src/v5_shadow/hk_stage_daily.py
+@@ -0,0 +1,331 @@
++"""M08 default original-owner producer for bounded retained inputs.
++
++No provider connections, trades, publication to V4, or natural qualification.
++All eight stage contracts are preserved; Stage8 consumes its own snapshot and
++RT_DATA, never ordinary-stage rows. Selectors/store are not injectable.
++"""
++import sys
++from pathlib import Path
++if __package__ in (None,''):
++    sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import argparse
++import copy
++import fcntl
++import hashlib
++import json
++import math
++import os
++import re
++import subprocess
++from datetime import datetime,timedelta,timezone
++from v5_shadow.composition import no_symlinks
++from v5_shadow.contracts import aware,trade_date,sha,exact_keys
++from v5_shadow.digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
++from v5_shadow.hk_stage_sources import SOURCE_SHA,implementation_identity,load_owners,source_bytes
++
++SAFETY=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
++MARKER=b'v5.hk-stage-root.v1\n'
++TZ=timezone(timedelta(hours=8))
++STAGES=('STAGE_0925','STAGE_0930_0935','STAGE_0935_0940','STAGE_0940_0945','STAGE_0945_1030','STAGE_1300_1315','STAGE_1445_1500','STAGE_1545_1555')
++UNITS=dict(price='HKD',turnover='HKD',market_cap='HKD_100M',change='PERCENT',volume_ratio='RATIO')
++LANES={'D1_MODEL_TOP100','LIVE_HKCONNECT_GAINER','PREOPEN_AUCTION_CONTINUATION','LOW_FLOAT_FILTER','OLD_DEMON_MEMORY','NEW_HKCONNECT_BATCH','STRENGTH_THEME_WATCH','OPENING_INITIAL_SCREEN'}
++
++
++def init_hk_root(root):
++    root=no_symlinks(Path(root))
++    if root.exists() and any(root.iterdir()):raise ValueError('M08_INIT_REQUIRES_EMPTY_DIRECTORY')
++    root.mkdir(parents=True,exist_ok=True)
++    with (root/'.v5-hk-stage-root').open('xb') as stream:stream.write(MARKER)
++    return str(root)
++
++
++def checked_root(root):
++    root=no_symlinks(Path(root));marker=no_symlinks(root/'.v5-hk-stage-root')
++    if not marker.is_file() or marker.read_bytes()!=MARKER:raise ValueError('M08_ROOT_MARKER')
++    return root
++
++
++def read_json(path):
++    path=no_symlinks(Path(path));raw=path.read_bytes()
++    if len(raw)>MAX_JSON_BYTES:raise ValueError('M08_JSON_SIZE')
++    def pairs(items):
++        out={}
++        for key,value in items:
++            if key in out:raise ValueError('M08_DUPLICATE_JSON_KEY')
++            out[key]=value
++        return out
++    def constant(_):raise ValueError('M08_NONFINITE_JSON')
++    return json.loads(raw,object_pairs_hook=pairs,parse_constant=constant)
++
++
++def _number(value,*,positive=False):
++    if isinstance(value,bool) or not isinstance(value,(float,int)) or not math.isfinite(value) or (positive and value<=0):
++        raise ValueError('M08_REQUIRED_NUMBER')
++
++
++def _codes(rows,key='code'):
++    values=[]
++    if not isinstance(rows,list) or any(not isinstance(row,dict) for row in rows):raise ValueError('M08_ROWS')
++    for row in rows:
++        code=row.get(key)
++        if not isinstance(code,str) or not re.fullmatch(r'HK\.[0-9]{5}',code):raise ValueError('M08_CODE')
++        values.append(code)
++    return values
++
++
++def _time(date,value):return aware(date[:4]+'-'+date[4:6]+'-'+date[6:]+'T'+value+'+08:00')
++
++
++def validate_request(request,contracts,calendar):
++    exact_keys(request,('schema_version','market','target_date','signal_date','stage_id','data_kind','source','m06','m02','route','payload','payload_sha256'))
++    if request['schema_version']!='v5.hk_stage_input.v1' or request['market']!='HK_CONNECT':raise ValueError('M08_INPUT_SCHEMA')
++    if request['data_kind'] not in ('SYNTHETIC','RECORDED_INPUT_REPLAY'):raise ValueError('M08_NATURAL_ADMISSION_NOT_BOUND')
++    date=trade_date(request['target_date']);signal=trade_date(request['signal_date'])
++    if signal>=date:raise ValueError('M08_SIGNAL_DATE')
++    stage=request['stage_id'];spec=contracts.STAGE_BY_ID.get(stage)
++    if spec is None or stage not in STAGES:raise ValueError('M08_STAGE')
++    states=calendar.resolve_market_states(date)
++    if states['hk_securities'].value=='HALF_TRADING_DAY_AM':raise ValueError('M08_HALF_DAY_WINDOW_CONTRACT_UNVERIFIED')
++    if states['hk_securities'].value!='FULL_TRADING_DAY':raise ValueError('M08_HK_SECURITIES_NOT_OPEN')
++    if states['hk_connect'].value=='UNKNOWN':raise ValueError('M08_CONNECT_CALENDAR_UNKNOWN')
++    previous=datetime.strptime(date,'%Y%m%d')-timedelta(days=1)
++    for _ in range(20):
++        p=previous.strftime('%Y%m%d')
++        if calendar.resolve_market_states(p)['hk_securities'].value in ('FULL_TRADING_DAY','HALF_TRADING_DAY_AM'):break
++        previous-=timedelta(days=1)
++    if p!=signal:raise ValueError('M08_SIGNAL_NOT_PREVIOUS_HK_SESSION')
++    source=request['source'];pool=request['m06'];membership=request['m02'];payload=request['payload']
++    exact_keys(source,('collector_id','source_date','captured_at','available_at','status','requested_rows','missing_symbols','cannot_confirm','source_evidence','source_sha256'))
++    exact_keys(pool,('target_date','signal_date','run_id','rows','rows_sha256'))
++    exact_keys(membership,('membership_date','source_date','status','codes','receipt_sha256','units'))
++    if not isinstance(source['collector_id'],str) or not source['collector_id']:raise ValueError('M08_COLLECTOR_REQUIRED')
++    if source['source_date']!=date or pool['target_date']!=date or pool['signal_date']!=signal:raise ValueError('M08_SOURCE_DATE')
++    if membership['membership_date']!=date or membership['source_date']!=date:raise ValueError('M08_MEMBERSHIP_DATE')
++    if membership['units']!=UNITS:raise ValueError('M08_UNITS')
++    if membership['status'] not in ('VERIFIED','UNKNOWN','SYNTHETIC'):raise ValueError('M08_MEMBERSHIP_STATUS')
++    sha(membership['receipt_sha256']);sha(pool['rows_sha256']);sha(source['source_sha256']);sha(request['payload_sha256'])
++    if not isinstance(pool['run_id'],str) or not pool['run_id']:raise ValueError('M08_M06_RUN_ID')
++    poolcodes=_codes(pool['rows'])
++    if len(poolcodes)!=100 or len(set(poolcodes))!=100 or sha256_json(pool['rows'])!=pool['rows_sha256']:raise ValueError('M08_M06_EXACT_TOP100')
++    for index,row in enumerate(pool['rows'],1):
++        if row.get('target_date')!=date or row.get('signal_date')!=signal or row.get('rank')!=index:raise ValueError('M08_M06_ROW_IDENTITY')
++        _number(row.get('score_prob_active'))
++        if not row.get('preselect_lane'):raise ValueError('M08_M06_LANE_REQUIRED')
++    membercodes=membership['codes']
++    if not isinstance(membercodes,list) or len(membercodes)!=len(set(membercodes)) or any(not isinstance(c,str) or not re.fullmatch(r'HK\.[0-9]{5}',c) for c in membercodes):raise ValueError('M08_MEMBERSHIP_CODES')
++    if not set(poolcodes)<=set(membercodes):raise ValueError('M08_POOL_MEMBERSHIP_UNKNOWN')
++    if not isinstance(payload,dict) or sha256_json(payload)!=request['payload_sha256'] or source['source_sha256']!=request['payload_sha256']:raise ValueError('M08_PAYLOAD_SHA')
++    status=source['status']
++    if status not in ('READY','READY_EMPTY','PARTIAL_WITH_ROWS','CANNOT_CONFIRM'):raise ValueError('M08_SOURCE_STATUS')
++    if type(source['requested_rows']) is not int or source['requested_rows']<0:raise ValueError('M08_COVERAGE')
++    for field in ('missing_symbols','cannot_confirm','source_evidence'):
++        if not isinstance(source[field],list) or any(not isinstance(s,str) for s in source[field]):raise ValueError('M08_SOURCE_DIAGNOSTICS')
++    if status in ('READY','READY_EMPTY') and (source['missing_symbols'] or source['cannot_confirm']):raise ValueError('M08_READY_CONTRADICTION')
++    captured=aware(source['captured_at']);available=aware(source['available_at'])
++    cutoff=_time(date,spec.cutoff);window=spec.hk_window or spec.window;start=_time(date,window.split('-')[0]+':00')
++    if not start<=captured<=available<=cutoff or available>datetime.now(timezone.utc):raise ValueError('M08_SOURCE_TIME')
++    route=request['route']
++    if stage=='STAGE_0925':
++        if route not in ('SECOND_FILTER','D1_REFERENCE'):raise ValueError('M08_AUCTION_ROUTE')
++        if route=='SECOND_FILTER' and captured>_time(date,'09:20:05'):raise ValueError('M08_AUCTION_CAPTURE_CUTOFF')
++    elif stage=='STAGE_1545_1555':
++        if route!='STAGE8_RTDATA':raise ValueError('M08_STAGE8_SEPARATE_ROUTE_REQUIRED')
++        exact_keys(payload,('snapshot','rtdata','enrichment'))
++        if captured!=_time(date,'15:55:00'):raise ValueError('M08_STAGE8_RETAINED_CAPTURE_CUTOFF')
++    elif route!='FOUR_LANE':raise ValueError('M08_ORDINARY_ROUTE')
++    if stage!='STAGE_1545_1555':
++        exact_keys(payload,('rows',));rows=payload['rows'];codes=_codes(rows)
++        if route!='FOUR_LANE' and len(codes)!=len(set(codes)):raise ValueError('M08_DUPLICATE_CODE')
++        if source['requested_rows']<len(set(codes)):raise ValueError('M08_COVERAGE')
++        if status=='READY_EMPTY' and rows:raise ValueError('M08_EMPTY_CONTRADICTION')
++        if not rows and status=='READY':raise ValueError('M08_EMPTY_REQUIRES_VERIFIED_STATUS')
++        if not set(codes)<=set(membercodes):raise ValueError('M08_ROW_MEMBERSHIP_UNKNOWN')
++        seen={}
++        for row in rows:
++            code=row['code']
++            if row.get('target_date')!=date or row.get('signal_date')!=signal:raise ValueError('M08_ROW_DATE')
++            if route=='D1_REFERENCE':
++                original=pool['rows'][poolcodes.index(code)]
++                if row!=original:raise ValueError('M08_D1_REFERENCE_NOT_EXACT_POOL_ROW')
++                continue
++            if row.get('trade_date')!=date or row.get('stage_id')!=stage:raise ValueError('M08_ROW_STAGE_DATE')
++            if 'stage_score' in row or 'score' in row:raise ValueError('M08_RAW_SCORE_OVERRIDE')
++            when=aware(row.get('captured_at'));updated=aware(row.get('update_time'))
++            if not start<=updated<=when<=captured:raise ValueError('M08_ROW_TIME')
++            for k in ('source_last_bar_time','source_last_tick_time'):
++                if k in row and not start<=aware(row[k])<=when:raise ValueError('M08_ROW_SOURCE_TIME')
++            lanes=row.get('candidate_lanes')
++            if not isinstance(lanes,list) or not lanes or len(lanes)!=len(set(lanes)) or any(l not in LANES for l in lanes):raise ValueError('M08_LANES')
++            if code in seen and (route!='FOUR_LANE' or set(lanes)&seen[code]):raise ValueError('M08_DUPLICATE_CODE_LANE')
++            seen.setdefault(code,set()).update(lanes)
++            if 'D1_MODEL_TOP100' in lanes and code not in poolcodes:raise ValueError('M08_D1_CODE_OUTSIDE_POOL')
++            for k in ('open_price','last_price','high_price','low_price'):_number(row.get(k),positive=True)
++            for k in ('pct_chg','volume_ratio','circular_market_cap_hkd_yi','turnover_hkd'):_number(row.get(k))
++            for k in ('volume_ratio','circular_market_cap_hkd_yi','turnover_hkd','platform_circular_market_cap_hkd_yi','turnover_hkd_yi','turnover_rate','futu_turnover_rate','offer_float_market_cap_hkd_yi'):
++                if k in row:
++                    _number(row[k])
++                    if row[k]<0:raise ValueError('M08_NEGATIVE_QUOTE_ALIAS')
++            if row['low_price']>min(row['open_price'],row['last_price']) or row['high_price']<max(row['open_price'],row['last_price']):raise ValueError('M08_QUOTE_RANGE')
++            if route=='SECOND_FILTER':
++                for k in ('rank','auction_score','reference_price_hkd','strict_failure_price_hkd','ask_price','bid_price'):_number(row.get(k))
++                if not row.get('second_filter_status') or not row.get('preselect_lane'):raise ValueError('M08_AUCTION_SOURCE_REQUIRED')
++    canonical_bytes(request)
++    return dict(states={k:v.value for k,v in states.items()},window=window,cutoff=spec.cutoff,calendar=calendar.calendar_provenance())
++
++
++def _stage8_rows(request,generation):
++    from stage_center.hk_stage8 import snapshot,rtdata
++    from stage_center.acquisition import AcquisitionPlan,StageUniverseBinding
++    payload=request['payload'];snap=payload['snapshot'];codes=request['m02']['codes'];date=request['target_date'];stage=request['stage_id']
++    # This is retained source, not a newly fabricated current-day snapshot.
++    path=snapshot._snapshot_path(generation,date,stage);path.parent.mkdir(parents=True,exist_ok=True)
++    snapshot._atomic_snapshot_create(path,snap)
++    loaded=snapshot.load_hk_active_snapshot(generation,trade_date=date,stage_id=stage,codes=codes,cutoff_at='15:55:00')
++    if loaded['status']!='READY':raise ValueError('M08_STAGE8_SNAPSHOT:'+','.join(loaded['cannot_confirm']))
++    active=rtdata._stage8_active_snapshot_codes(loaded['rows']);raw=payload['rtdata']
++    if not isinstance(raw,dict) or not isinstance(raw.get('rows'),list):raise ValueError('M08_STAGE8_RTDATA')
++    seen=set()
++    for row in raw['rows']:
++        if row.get('code') not in active:raise ValueError('M08_STAGE8_RTDATA_CODE')
++        when=aware(row.get('time'));key=(row['code'],when)
++        if key in seen:raise ValueError('M08_STAGE8_DUPLICATE_TICK')
++        seen.add(key)
++        if not _time(date,'15:45:00')<=when<=_time(date,'15:55:00'):raise ValueError('M08_STAGE8_RTDATA_WINDOW')
++        for k in ('cur_price','high','low'):_number(row.get(k),positive=True)
++        for k in ('turnover','volume'):
++            _number(row.get(k))
++            if row[k]<0:raise ValueError('M08_STAGE8_RTDATA_NUMBER')
++    binding=StageUniverseBinding.ready(market='HK_CONNECT',trade_date=date,role='RETAINED_FULL_UNIVERSE',codes=tuple(codes),source_run_id=request['m06']['run_id'],sha256=request['m02']['receipt_sha256'])
++    plan=AcquisitionPlan(date,stage,('HK_CONNECT',),None,None,'hk_connect_stage8_natural_rtd_data',historical_backfill=True,universe_bindings={'HK_CONNECT':binding})
++    # The original collector owns snapshot/window/aggregation. The provider here
++    # is a fixed local payload boundary, not an injectable algorithm or store.
++    def recorded_provider(requested,*,batch_size):
++        if tuple(sorted(requested))!=tuple(sorted(active)) or batch_size!=30:raise ValueError('M08_STAGE8_CODE_SET')
++        return copy.deepcopy(raw)
++    result=rtdata._collect_hk_stage8_natural(plan,codes=codes,snapshot_root=generation,rtdata_provider=recorded_provider,natural_now=aware(request['source']['captured_at']))
++    enrichment=payload['enrichment'];ecodes=_codes(enrichment)
++    if len(ecodes)!=len(set(ecodes)) or set(ecodes)!=set(active):raise ValueError('M08_STAGE8_ENRICHMENT_CODES')
++    rows=[]
++    for original in result.rows:
++        extra=enrichment[ecodes.index(original['code'])]
++        exact_keys(extra,('code','circular_market_cap_hkd_yi'))
++        _number(extra['circular_market_cap_hkd_yi'],positive=True)
++        rows.append(dict(original,circular_market_cap_hkd_yi=extra['circular_market_cap_hkd_yi']))
++    return rows,result
++
++
++def _select(request,generation,selection,identity_sha):
++    source=request['source'];rows=request['payload'].get('rows',[]);status=source['status']
++    cannot=list(source['cannot_confirm']);missing=list(source['missing_symbols']);requested=source['requested_rows']
++    # The original auction adapter normalizes status; preserve upstream failure
++    # as original-envelope diagnostics rather than changing its ranking body.
++    if status=='CANNOT_CONFIRM' and not cannot:cannot.append('SOURCE_CANNOT_CONFIRM')
++    if status=='PARTIAL_WITH_ROWS' and not cannot:cannot.append('SOURCE_PARTIAL_WITH_ROWS')
++    evidence=list(source['source_evidence'])+['selection_contract=V3_TOP10_RECOMMENDATION', 'm08_data_kind='+request['data_kind'], 'm08_input_sha256='+sha256_json(request), 'm08_source_manifest_sha256='+SOURCE_SHA, 'natural_verified=false','formal_admission=false']
++    if request['m02']['status']=='UNKNOWN':cannot.append('M02_MEMBERSHIP_NOT_VERIFIED')
++    if request['data_kind']=='RECORDED_INPUT_REPLAY':cannot.append('REPLAY_POINT_IN_TIME_QUALIFICATION_NOT_ATTESTED')
++    route=request['route']
++    if route=='STAGE8_RTDATA':
++        rows,result=_stage8_rows(request,generation);status=result.status
++        cannot+=list(result.cannot_confirm);missing+=list(result.missing_symbols);requested=result.requested_rows
++        # Original owner labels describe the exercised implementation. Preserve
++        # them with explicit retained-input context, never claim a natural run.
++        evidence+=list(result.source_evidence)+['owner_execution=RETAINED_INPUT_ENGINEERING_REPLAY']
++    kwargs=dict(source_status=status,requested_rows=requested,missing_symbols=missing,cannot_confirm=cannot,source_evidence=evidence)
++    score_details={}
++    if route=='SECOND_FILTER':artifact=selection.select_hk_0925_second_filter(rows,request['target_date'],identity_sha,**kwargs)
++    elif route=='D1_REFERENCE':artifact=selection.select_hk_0925_d1_reference(rows,request['target_date'],identity_sha,**kwargs)
++    else:
++        merged=selection.merge_hk_four_lane_candidates(rows)
++        score_details={row['code']:selection.hk_four_lane_score(row,request['stage_id'],100.0) for row in merged}
++        artifact=selection.select_hk_four_lane(merged,request['target_date'],request['stage_id'],identity_sha,**kwargs)
++    return artifact,score_details
++
++
++def _atomic(path,value,selection):
++    path=no_symlinks(path);selection._atomic_write_json(path,value)
++
++
++def _worker(request,root):
++    root=checked_root(root);selection,contracts,calendar=load_owners()
++    metadata=validate_request(request,contracts,calendar)
++    code=implementation_identity();identity=dict(input_sha256=sha256_json(request),source_manifest_sha256=SOURCE_SHA,implementation_identity=code,config=dict(cap_limit_yi=100,mode='RETAINED_INPUT_ONLY'))
++    digest=sha256_json(identity);generations=no_symlinks(root/'generations');generations.mkdir(exist_ok=True)
++    generation=no_symlinks(generations/digest)
++    lock=os.open(no_symlinks(root/'.m08.lock'),os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
++    try:
++        fcntl.flock(lock,fcntl.LOCK_EX)
++        if generation.exists():
++            attempt=read_json(generation/'attempt.json')
++            if attempt['status']!='SUCCEEDED':raise ValueError('M08_EXISTING_ATTEMPT_REQUIRES_EXPLICIT_REVIEW:'+attempt['status'])
++            product=read_json(generation/'product.json')
++            return dict(reference=product['reference'],reused=True)
++        generation.mkdir();started=datetime.now(timezone.utc).isoformat()
++        _atomic(generation/'attempt.json',dict(status='RUNNING',identity=identity,started_at=started,**SAFETY),selection)
++        committed=False
++        try:
++            artifact,score_details=_select(request,generation,selection,digest)
++            original_root=generation/'owner';original_root.mkdir()
++            stored=selection.SelectionStore(original_root).publish(artifact,market='HK_CONNECT')
++            verified=selection.SelectionStore(original_root)._verify_run(request['target_date'],request['stage_id'],'HK_CONNECT',stored['run_id'])
++            if verified['envelope']!=stored:raise ValueError('M08_OWNER_READBACK')
++            reference={key:verified[key] for key in ('run_id','market','stage_id','artifact_sha256','manifest_sha256','receipt_sha256')}
++            reference.update(generation_sha256=digest,target_date=request['target_date'])
++            provenance=dict(data_kind=request['data_kind'],**identity,source_identity=dict(request['source'],m06_run_id=request['m06']['run_id'],m06_rows_sha256=request['m06']['rows_sha256'],membership_receipt_sha256=request['m02']['receipt_sha256']),stage_contract=metadata,owner_score_details=score_details,natural_verified=False,formal_admission=False)
++            product=dict(schema_version='v5.hk_stage_product.v1',reference=reference,artifact=stored,provenance=provenance,request=request,**SAFETY)
++            reference=dict(reference,product_sha256=sha256_json(product))
++            # Product hash is over the self-hash-free object, never circular.
++            product['reference']=reference
++            _atomic(generation/'product.json',product,selection)
++            source_bytes()
++            if implementation_identity()!=code:raise ValueError('M08_SOURCE_CHANGED_DURING_RUN')
++            _atomic(generation/'attempt.json',dict(status='SUCCEEDED',identity=identity,reference=reference,started_at=started,finished_at=datetime.now(timezone.utc).isoformat(),readback_verified=True,natural_verified=False,**SAFETY),selection)
++            committed=True
++            if stored['selection_status'] in ('READY','READY_EMPTY'):
++                latest_path=no_symlinks(root/'latest_success.json');latest=read_json(latest_path) if latest_path.exists() else {}
++                key=request['target_date']+'/'+request['stage_id'];old=latest.get(key)
++                if old is None or aware(old['captured_at'])<aware(request['source']['captured_at']):
++                    latest[key]=dict(reference=reference,captured_at=request['source']['captured_at'])
++                    _atomic(latest_path,latest,selection)
++            return dict(reference=reference,reused=False)
++        except Exception as error:
++            if committed:raise  # Index failure cannot uncommit the verified exact run.
++            _atomic(generation/'attempt.json',dict(status='FAILED',identity=identity,started_at=started,finished_at=datetime.now(timezone.utc).isoformat(),reason=type(error).__name__+':'+str(error),**SAFETY),selection)
++            raise
++    finally:os.close(lock)
++
++
++def _process(script,message):
++    result=subprocess.run([sys.executable,'-I','-B',str(script),'--worker'],input=canonical_bytes(message),stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=120)
++    if len(result.stdout)>MAX_JSON_BYTES:raise ValueError('M08_RESPONSE_SIZE')
++    try:out=json.loads(result.stdout)
++    except Exception as e:raise ValueError('M08_WORKER_OUTPUT:'+result.stderr.decode(errors='replace')[-1000:]) from e
++    if result.returncode:raise ValueError(out.get('reason','M08_WORKER_FAILURE'))
++    return out
++
++
++def run_hk_stage(request,output_root):
++    """Compute once, publish by original store, then return separate-process read."""
++    request=json.loads(canonical_bytes(request));root=checked_root(output_root)
++    result=_process(Path(__file__).resolve(),dict(request=request,root=str(root)))
++    from v5_shadow.hk_stage_reader import read_hk_stage
++    out=read_hk_stage(root,result['reference'])
++    return dict(out,reused=result['reused'])
++
++
++def main(argv=None):
++    parser=argparse.ArgumentParser(description='M08 original-owner retained-input producer; no natural/live admission')
++    parser.add_argument('--worker',action='store_true');parser.add_argument('--init-root');parser.add_argument('--input');parser.add_argument('--root')
++    args=parser.parse_args(argv)
++    if args.worker:
++        raw=sys.stdin.buffer.read(MAX_JSON_BYTES+1)
++        if len(raw)>MAX_JSON_BYTES:raise ValueError('M08_INPUT_SIZE')
++        message=json.loads(raw);return _worker(message['request'],message['root'])
++    if args.init_root:return dict(root=init_hk_root(args.init_root))
++    if not args.input or not args.root:parser.error('--input and --root are required')
++    return run_hk_stage(read_json(Path(args.input).absolute()),Path(args.root).absolute())
++
++if __name__=='__main__':
++    try:print(canonical_bytes(main()).decode())
++    except Exception as error:
++        print(canonical_bytes(dict(status='FAILED',reason=type(error).__name__+':'+str(error))).decode());raise SystemExit(1)
+diff --git a/V5/src/v5_shadow/hk_stage_reader.py b/V5/src/v5_shadow/hk_stage_reader.py
+new file mode 100644
+--- /dev/null
++++ b/V5/src/v5_shadow/hk_stage_reader.py
+@@ -0,0 +1,78 @@
++"""Independent exact-run M08 reader. Never produces or follows latest pointers."""
++import sys
++from pathlib import Path
++if __package__ in (None,''):
++    sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
++import argparse
++import copy
++import json
++from v5_shadow.contracts import exact_keys,sha,trade_date
++from v5_shadow.digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
++from v5_shadow.composition import no_symlinks
++from v5_shadow.hk_stage_sources import SOURCE_SHA,load_owners,implementation_identity,source_bytes
++from v5_shadow.hk_stage_daily import checked_root,read_json,_process,SAFETY,STAGES,validate_request
++
++
++def _read(root,reference):
++    exact_keys(reference,('generation_sha256','run_id','market','target_date','stage_id','artifact_sha256','manifest_sha256','receipt_sha256','product_sha256'))
++    for field in ('generation_sha256','artifact_sha256','manifest_sha256','receipt_sha256','product_sha256'):sha(reference[field])
++    trade_date(reference['target_date'])
++    if reference['market']!='HK_CONNECT' or reference['stage_id'] not in STAGES:raise ValueError('M08_READ_IDENTITY')
++    root=checked_root(root);generation=no_symlinks(root/'generations'/reference['generation_sha256'])
++    product=read_json(generation/'product.json');attempt=read_json(generation/'attempt.json')
++    if product.get('schema_version')!='v5.hk_stage_product.v1' or product['reference']!=reference or attempt['status']!='SUCCEEDED' or attempt['reference']!=reference:raise ValueError('M08_COMMIT_IDENTITY')
++    unhashed=copy.deepcopy(product);unhashed['reference'].pop('product_sha256')
++    if sha256_json(unhashed)!=reference['product_sha256']:raise ValueError('M08_PRODUCT_SHA')
++    identity=attempt['identity'];provenance=product['provenance'];code=implementation_identity()
++    if sha256_json(identity)!=reference['generation_sha256'] or identity['input_sha256']!=sha256_json(product['request']):raise ValueError('M08_INPUT_IDENTITY')
++    if identity['source_manifest_sha256']!=SOURCE_SHA or identity['implementation_identity']!=code:raise ValueError('M08_CODE_IDENTITY')
++    for key,value in identity.items():
++        if provenance.get(key)!=value:raise ValueError('M08_PROVENANCE_IDENTITY')
++    if provenance.get('formal_admission') is not False or provenance.get('natural_verified') is not False:raise ValueError('M08_ADMISSION_FLAGS')
++    selection,contracts,calendar=load_owners()
++    request=product['request']
++    metadata=validate_request(request,contracts,calendar)
++    expected_source=dict(request['source'],m06_run_id=request['m06']['run_id'],m06_rows_sha256=request['m06']['rows_sha256'],membership_receipt_sha256=request['m02']['receipt_sha256'])
++    if (provenance.get('data_kind')!=request['data_kind'] or provenance.get('source_identity')!=expected_source
++            or provenance.get('stage_contract')!=metadata or identity.get('config')!=dict(cap_limit_yi=100,mode='RETAINED_INPUT_ONLY')):
++        raise ValueError('M08_PROVENANCE_REQUEST_BINDING')
++    store=selection.SelectionStore(no_symlinks(generation/'owner'))
++    verified=store._verify_run(reference['target_date'],reference['stage_id'],'HK_CONNECT',reference['run_id'])
++    for key in ('artifact_sha256','manifest_sha256','receipt_sha256'):
++        if verified[key]!=reference[key]:raise ValueError('M08_OWNER_REFERENCE_SHA')
++    artifact=verified['envelope']
++    if artifact!=product['artifact'] or artifact['raw_artifact_sha256']!=reference['generation_sha256']:raise ValueError('M08_OWNER_PRODUCT_MISMATCH')
++    for value in (product,attempt,artifact):
++        if any(value.get(k) is not False for k in SAFETY):raise ValueError('M08_SAFETY_FLAGS')
++    if artifact['market']!='HK_CONNECT' or artifact['trade_date']!=reference['target_date'] or artifact['stage_id']!=reference['stage_id'] or len(artifact['rows'])>10:raise ValueError('M08_OWNER_CONTRACT')
++    source_bytes()
++    return dict(artifact=artifact,reference=reference,provenance=provenance,natural_verified=False,**SAFETY)
++
++
++def read_hk_stage(root,reference):
++    return _process(Path(__file__).resolve(),dict(root=str(checked_root(root)),reference=reference))
++
++
++def read_m10_seven(root,references,target_date):
++    """Seven ordered exact references, no Stage8, no missing-stage filling."""
++    trade_date(target_date)
++    if not isinstance(references,list) or [r.get('stage_id') for r in references]!=list(STAGES[:7]):raise ValueError('M08_M10_EXACT_SEVEN_REQUIRED')
++    if any(r.get('target_date')!=target_date for r in references):raise ValueError('M08_M10_DATE')
++    values=[read_hk_stage(root,r) for r in references]
++    return dict(target_date=target_date,stages=values,stage8_included=False,natural_verified=False,**SAFETY)
++
++
++def main():
++    parser=argparse.ArgumentParser(description='Read an exact committed M08 reference without computing')
++    parser.add_argument('--worker',action='store_true');parser.add_argument('--root');parser.add_argument('--reference');args=parser.parse_args()
++    if args.worker:
++        raw=sys.stdin.buffer.read(MAX_JSON_BYTES+1)
++        if len(raw)>MAX_JSON_BYTES:raise ValueError('M08_READ_INPUT_SIZE')
++        value=json.loads(raw);return _read(value['root'],value['reference'])
++    if not args.root or not args.reference:parser.error('--root and --reference are required')
++    return read_hk_stage(Path(args.root).absolute(),read_json(Path(args.reference).absolute()))
++
++if __name__=='__main__':
++    try:print(canonical_bytes(main()).decode())
++    except Exception as error:
++        print(canonical_bytes(dict(status='FAILED',reason=type(error).__name__+':'+str(error))).decode());raise SystemExit(1)
+diff --git a/V5/src/v5_shadow/hk_stage_sources.py b/V5/src/v5_shadow/hk_stage_sources.py
+new file mode 100644
+--- /dev/null
++++ b/V5/src/v5_shadow/hk_stage_sources.py
+@@ -0,0 +1,65 @@
++"""Pinned original M08 owners, with explicit compatibility aliases only.
++
++Canonical missing _namespace files are NOT fabricated. The existing frozen
++namespace helper is mapped in memory, identified separately in the candidate.
++No source formula, collector, store or donor byte is modified.
++"""
++import hashlib
++import importlib.abc
++import importlib.util
++import json
++import sys
++from pathlib import Path
++from .composition import no_symlinks
++from .digests import sha256_json
++
++ROOT=Path(__file__).resolve().parents[3]
++DESCRIPTOR=ROOT/'integration_candidates/M08/CAPSULE_INTEGRATION_CANDIDATE.json'
++SOURCE_SHA='451f39aabcec3206ebda1252f7cdd426bac4a19e74889ed35881a9ae9b787d8d'
++
++
++def source_bytes():
++    raw=no_symlinks(DESCRIPTOR).read_bytes()
++    if hashlib.sha256(raw).hexdigest()!=SOURCE_SHA:raise ValueError('M08_SOURCE_MANIFEST_SHA')
++    entries=json.loads(raw)['entries']; result={}
++    for entry in entries:
++        path=no_symlinks(ROOT/entry['path']); data=path.read_bytes()
++        if len(data)!=entry['bytes'] or hashlib.sha256(data).hexdigest()!=entry['sha256'] or hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()!=entry['git_blob_sha']:
++            raise ValueError('M08_SOURCE_BYTES:'+entry['module'])
++        result[entry['module']]=(entry,data,path)
++    return result
++
++
++class FrozenOwners(importlib.abc.MetaPathFinder,importlib.abc.Loader):
++    def __init__(self):
++        self.sources=source_bytes(); self.packages={'stage_center','infrastructure'}
++        for name,(entry,_,_) in self.sources.items():
++            if entry['package']:self.packages.add(name)
++            parts=name.split('.')
++            for i in range(1,len(parts)):self.packages.add('.'.join(parts[:i]))
++    def find_spec(self,fullname,path=None,target=None):
++        if fullname in self.sources or fullname in self.packages:
++            return importlib.util.spec_from_loader(fullname,self,is_package=fullname in self.packages)
++        if fullname.split('.')[0] in ('stage_center','infrastructure'):
++            raise ImportError('M08_SOURCE_CLOSURE_INCOMPLETE:'+fullname)
++        return None
++    def create_module(self,spec):return None
++    def exec_module(self,module):
++        if module.__name__ in self.packages:module.__path__=[]
++        item=self.sources.get(module.__name__)
++        if item:
++            _,data,path=item;module.__file__=str(path)
++            exec(compile(data,str(path),'exec'),module.__dict__)
++
++
++def load_owners():
++    if any(k in sys.modules for k in ('stage_center','infrastructure')):
++        raise ValueError('M08_FRESH_PROCESS_REQUIRED')
++    sys.meta_path.insert(0,FrozenOwners())
++    from stage_center import selection,contracts,calendar
++    return selection,contracts,calendar
++
++
++def implementation_identity():
++    names=('hk_stage_daily.py','hk_stage_reader.py','hk_stage_sources.py','contracts.py','digests.py','composition.py')
++    return {name:hashlib.sha256(no_symlinks(Path(__file__).with_name(name)).read_bytes()).hexdigest() for name in names}
+diff --git a/V5/tests/logs/M08_ACCEPTANCE_RUN.txt b/V5/tests/logs/M08_ACCEPTANCE_RUN.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_ACCEPTANCE_RUN.txt
+@@ -0,0 +1,69 @@
++test_hk_stage_daily.py PASS
++test_hk_stage_api.py PASS
++test_stage_selection.py PASS
++test_module_artifacts.py PASS
++test_source_capsule.py PASS
++{
++  "schema_version": "v5.m08.engineering_test_receipt.v1",
++  "scope": "SYNTHETIC_RETAINED_OWNER_CHAIN_AND_READONLY_API",
++  "results": [
++    {
++      "command": "python -B -m unittest discover -s tests -p test_hk_stage_daily.py -v",
++      "started_at": "2026-10-12T19:10:50.193559+00:00",
++      "finished_at": "2026-10-12T19:11:03.140300+00:00",
++      "exit_code": 0,
++      "stdout": "test_hk_stage_daily.stdout.txt",
++      "stderr": "test_hk_stage_daily.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_hk_stage_api.py -v",
++      "started_at": "2026-10-12T19:11:03.140768+00:00",
++      "finished_at": "2026-10-12T19:11:06.074330+00:00",
++      "exit_code": 0,
++      "stdout": "test_hk_stage_api.stdout.txt",
++      "stderr": "test_hk_stage_api.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_stage_selection.py -v",
++      "started_at": "2026-10-12T19:11:06.074714+00:00",
++      "finished_at": "2026-10-12T19:11:11.308495+00:00",
++      "exit_code": 0,
++      "stdout": "test_stage_selection.stdout.txt",
++      "stderr": "test_stage_selection.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_module_artifacts.py -v",
++      "started_at": "2026-10-12T19:11:11.309034+00:00",
++      "finished_at": "2026-10-12T19:11:19.146096+00:00",
++      "exit_code": 0,
++      "stdout": "test_module_artifacts.stdout.txt",
++      "stderr": "test_module_artifacts.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_source_capsule.py -v",
++      "started_at": "2026-10-12T19:11:19.146603+00:00",
++      "finished_at": "2026-10-12T19:11:19.381552+00:00",
++      "exit_code": 0,
++      "stdout": "test_source_capsule.stdout.txt",
++      "stderr": "test_source_capsule.stderr.txt"
++    }
++  ],
++  "runtime": {
++    "python": "3.12.14",
++    "pandas": "2.2.3",
++    "pyarrow": "NOT_INSTALLED",
++    "pytest": "NOT_INSTALLED"
++  },
++  "production_runtime_accepted": false,
++  "natural_verified": false,
++  "formal_admission": false,
++  "mac_verified": false,
++  "ui_deployed": false,
++  "not_run": [
++    "Full pytest donor runtime suite: excluded from bounded acceptance; inspect recorded pytest availability and supply full donor runtime to run separately",
++    "Live/provider SDK collection: outside retained-input scope",
++    "Mac supported-runtime acceptance and existing UI mounting: separate executor required",
++    "Natural scheduler/deadline activation and two-day evidence: not activated"
++  ],
++  "result": "PASS_ENGINEERING_CANDIDATE"
++}
+diff --git a/V5/tests/logs/M08_BASELINE_FULL_SUITE.txt b/V5/tests/logs/M08_BASELINE_FULL_SUITE.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_BASELINE_FULL_SUITE.txt
+@@ -0,0 +1,79 @@
++PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
++test_bad_lane_contract_does_not_block_valid_lane (test_daily_dispatch.DailyDispatchTests.test_bad_lane_contract_does_not_block_valid_lane) ... ok
++test_changed_binding_or_owner_cutoff_does_not_start (test_daily_dispatch.DailyDispatchTests.test_changed_binding_or_owner_cutoff_does_not_start) ... ok
++test_missed_slot_and_missing_adapter_never_execute (test_daily_dispatch.DailyDispatchTests.test_missed_slot_and_missing_adapter_never_execute) ... ok
++test_one_owner_failure_does_not_stop_other_lanes_or_retry_unknown (test_daily_dispatch.DailyDispatchTests.test_one_owner_failure_does_not_stop_other_lanes_or_retry_unknown) ... ok
++test_weekend_calendar_and_historical_target_rejected (test_daily_dispatch.DailyDispatchTests.test_weekend_calendar_and_historical_target_rejected) ... ok
++test_daily_owner_adapters (unittest.loader._FailedTest.test_daily_owner_adapters) ... ERROR
++test_bad_active_index_does_not_fall_back_to_legacy (test_module_artifacts.ModuleArtifactTests.test_bad_active_index_does_not_fall_back_to_legacy) ... ok
++test_corrupt_inherited_object_blocks_new_date_publication (test_module_artifacts.ModuleArtifactTests.test_corrupt_inherited_object_blocks_new_date_publication) ... ok
++test_duplicate_response_keys_rejected (test_module_artifacts.ModuleArtifactTests.test_duplicate_response_keys_rejected) ... ok
++test_failure_before_active_swap_keeps_old_result (test_module_artifacts.ModuleArtifactTests.test_failure_before_active_swap_keeps_old_result) ... ok
++test_first_activation_interruption_requires_explicit_recovery (test_module_artifacts.ModuleArtifactTests.test_first_activation_interruption_requires_explicit_recovery) ... ok
++test_first_activation_reader_waits_for_publication (test_module_artifacts.ModuleArtifactTests.test_first_activation_reader_waits_for_publication) ... ok
++test_invalid_payload_never_replaces_success (test_module_artifacts.ModuleArtifactTests.test_invalid_payload_never_replaces_success) ... ok
++test_legacy_records_adopted_on_first_publication (test_module_artifacts.ModuleArtifactTests.test_legacy_records_adopted_on_first_publication) ... ok
++test_missing_active_pointer_never_downgrades_to_legacy (test_module_artifacts.ModuleArtifactTests.test_missing_active_pointer_never_downgrades_to_legacy) ... ok
++test_missing_manifest_is_invalid_not_missing_result (test_module_artifacts.ModuleArtifactTests.test_missing_manifest_is_invalid_not_missing_result) ... ok
++test_missing_object_does_not_fall_back (test_module_artifacts.ModuleArtifactTests.test_missing_object_does_not_fall_back) ... ok
++test_new_date_preserves_previous_date (test_module_artifacts.ModuleArtifactTests.test_new_date_preserves_previous_date) ... ok
++test_nonstring_query_is_not_published_as_unreachable_result (test_module_artifacts.ModuleArtifactTests.test_nonstring_query_is_not_published_as_unreachable_result) ... ok
++test_old_generation_and_objects_remain_immutable (test_module_artifacts.ModuleArtifactTests.test_old_generation_and_objects_remain_immutable) ... ok
++test_other_release_rejected (test_module_artifacts.ModuleArtifactTests.test_other_release_rejected) ... ok
++test_rehashed_payload_still_rejected_by_object_digest (test_module_artifacts.ModuleArtifactTests.test_rehashed_payload_still_rejected_by_object_digest) ... ok
++test_rollback_is_explicit_atomic_activation (test_module_artifacts.ModuleArtifactTests.test_rollback_is_explicit_atomic_activation) ... ok
++test_rollback_validates_unrequested_historical_object (test_module_artifacts.ModuleArtifactTests.test_rollback_validates_unrequested_historical_object) ... ok
++test_running_api_sees_atomic_new_generation (test_module_artifacts.ModuleArtifactTests.test_running_api_sees_atomic_new_generation) ... ok
++test_same_snapshot_reuses_generation (test_module_artifacts.ModuleArtifactTests.test_same_snapshot_reuses_generation) ... ok
++test_stale_compare_and_swap_rejected (test_module_artifacts.ModuleArtifactTests.test_stale_compare_and_swap_rejected) ... ok
++test_symlink_object_directory_rejected (test_module_artifacts.ModuleArtifactTests.test_symlink_object_directory_rejected) ... ok
++test_two_publishers_with_same_expected_head_only_one_wins (test_module_artifacts.ModuleArtifactTests.test_two_publishers_with_same_expected_head_only_one_wins) ... ok
++test_blob_mismatch (test_source_capsule.SourceTests.test_blob_mismatch) ... ok
++test_changed (test_source_capsule.SourceTests.test_changed) ... ok
++test_duplicate_rejected (test_source_capsule.SourceTests.test_duplicate_rejected) ... ok
++test_missing (test_source_capsule.SourceTests.test_missing) ... ok
++test_parent_escape_rejected (test_source_capsule.SourceTests.test_parent_escape_rejected) ... ok
++test_symlink_rejected (test_source_capsule.SourceTests.test_symlink_rejected) ... ok
++test_unlisted (test_source_capsule.SourceTests.test_unlisted) ... ok
++test_valid_source (test_source_capsule.SourceTests.test_valid_source) ... ok
++test_a_original_live_formula_and_top10 (test_stage_selection.StageSelectionTests.test_a_original_live_formula_and_top10) ... ok
++test_auction_not_silently_replaced (test_stage_selection.StageSelectionTests.test_auction_not_silently_replaced) ... ok
++test_code_whitespace_cannot_hide_duplicate (test_stage_selection.StageSelectionTests.test_code_whitespace_cannot_hide_duplicate) ... ok
++test_empty_evidence_explicit (test_stage_selection.StageSelectionTests.test_empty_evidence_explicit) ... ok
++test_future_display_source_time_rejected (test_stage_selection.StageSelectionTests.test_future_display_source_time_rejected) ... ok
++test_future_row_time_rejected (test_stage_selection.StageSelectionTests.test_future_row_time_rejected) ... ok
++test_hk_original_four_lane_top10 (test_stage_selection.StageSelectionTests.test_hk_original_four_lane_top10) ... ok
++test_hk_raw_score_override_rejected (test_stage_selection.StageSelectionTests.test_hk_raw_score_override_rejected) ... ok
++test_incomplete_a_quote_rejected (test_stage_selection.StageSelectionTests.test_incomplete_a_quote_rejected) ... ok
++test_invalid_priority_hk_alias_rejected (test_stage_selection.StageSelectionTests.test_invalid_priority_hk_alias_rejected) ... ok
++test_missing_research_not_silently_zeroed (test_stage_selection.StageSelectionTests.test_missing_research_not_silently_zeroed) ... ok
++test_negative_preferred_market_cap_rejected (test_stage_selection.StageSelectionTests.test_negative_preferred_market_cap_rejected) ... ok
++test_partial_coverage_preserved (test_stage_selection.StageSelectionTests.test_partial_coverage_preserved) ... ok
++test_stage8_requires_separate_replay_gate (test_stage_selection.StageSelectionTests.test_stage8_requires_separate_replay_gate) ... ok
++test_unknown_source_status_not_promoted (test_stage_selection.StageSelectionTests.test_unknown_source_status_not_promoted) ... ok
++test_wrong_digest_rejected (test_stage_selection.StageSelectionTests.test_wrong_digest_rejected) ... ok
++test_wrong_row_date_rejected (test_stage_selection.StageSelectionTests.test_wrong_row_date_rejected) ... ok
++
++======================================================================
++ERROR: test_daily_owner_adapters (unittest.loader._FailedTest.test_daily_owner_adapters)
++----------------------------------------------------------------------
++ImportError: Failed to import test module: test_daily_owner_adapters
++Traceback (most recent call last):
++  File "[PYTHON_RUNTIME]/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
++    module = self._get_module_from_name(name)
++             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++  File "[PYTHON_RUNTIME]/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
++    __import__(name)
++  File "[M08_BASELINE]/V5/tests/test_daily_owner_adapters.py", line 7, in <module>
++    from v5_shadow.daily_tick import launchd_contract,tick,LABEL
++  File "[M08_BASELINE]/V5/src/v5_shadow/daily_tick.py", line 11, in <module>
++    from v5_shadow.daily_rebound_owner import run_rebound_owner,PIN as REBOUND_PIN
++ModuleNotFoundError: No module named 'v5_shadow.daily_rebound_owner'
++
++
++----------------------------------------------------------------------
++Ran 54 tests in 12.903s
++
++FAILED (errors=1)
++
++EXIT_CODE=1
+diff --git a/V5/tests/logs/M08_FINAL/receipt.json b/V5/tests/logs/M08_FINAL/receipt.json
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FINAL/receipt.json
+@@ -0,0 +1,64 @@
++{
++  "schema_version": "v5.m08.engineering_test_receipt.v1",
++  "scope": "SYNTHETIC_RETAINED_OWNER_CHAIN_AND_READONLY_API",
++  "results": [
++    {
++      "command": "python -B -m unittest discover -s tests -p test_hk_stage_daily.py -v",
++      "started_at": "2026-10-12T19:10:50.193559+00:00",
++      "finished_at": "2026-10-12T19:11:03.140300+00:00",
++      "exit_code": 0,
++      "stdout": "test_hk_stage_daily.stdout.txt",
++      "stderr": "test_hk_stage_daily.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_hk_stage_api.py -v",
++      "started_at": "2026-10-12T19:11:03.140768+00:00",
++      "finished_at": "2026-10-12T19:11:06.074330+00:00",
++      "exit_code": 0,
++      "stdout": "test_hk_stage_api.stdout.txt",
++      "stderr": "test_hk_stage_api.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_stage_selection.py -v",
++      "started_at": "2026-10-12T19:11:06.074714+00:00",
++      "finished_at": "2026-10-12T19:11:11.308495+00:00",
++      "exit_code": 0,
++      "stdout": "test_stage_selection.stdout.txt",
++      "stderr": "test_stage_selection.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_module_artifacts.py -v",
++      "started_at": "2026-10-12T19:11:11.309034+00:00",
++      "finished_at": "2026-10-12T19:11:19.146096+00:00",
++      "exit_code": 0,
++      "stdout": "test_module_artifacts.stdout.txt",
++      "stderr": "test_module_artifacts.stderr.txt"
++    },
++    {
++      "command": "python -B -m unittest discover -s tests -p test_source_capsule.py -v",
++      "started_at": "2026-10-12T19:11:19.146603+00:00",
++      "finished_at": "2026-10-12T19:11:19.381552+00:00",
++      "exit_code": 0,
++      "stdout": "test_source_capsule.stdout.txt",
++      "stderr": "test_source_capsule.stderr.txt"
++    }
++  ],
++  "runtime": {
++    "python": "3.12.14",
++    "pandas": "2.2.3",
++    "pyarrow": "NOT_INSTALLED",
++    "pytest": "NOT_INSTALLED"
++  },
++  "production_runtime_accepted": false,
++  "natural_verified": false,
++  "formal_admission": false,
++  "mac_verified": false,
++  "ui_deployed": false,
++  "not_run": [
++    "Full pytest donor runtime suite: excluded from bounded acceptance; inspect recorded pytest availability and supply full donor runtime to run separately",
++    "Live/provider SDK collection: outside retained-input scope",
++    "Mac supported-runtime acceptance and existing UI mounting: separate executor required",
++    "Natural scheduler/deadline activation and two-day evidence: not activated"
++  ],
++  "result": "PASS_ENGINEERING_CANDIDATE"
++}
+diff --git a/V5/tests/logs/M08_FINAL/test_hk_stage_api.stderr.txt b/V5/tests/logs/M08_FINAL/test_hk_stage_api.stderr.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FINAL/test_hk_stage_api.stderr.txt
+@@ -0,0 +1,23 @@
++test_original_owner_store_cold_reader_and_published_api (test_hk_stage_api.HKStageAPIIntegrationTests.test_original_owner_store_cold_reader_and_published_api) ... ok
++test_adapter_contains_no_producer_import_or_call (test_hk_stage_api.HKStageAPITests.test_adapter_contains_no_producer_import_or_call) ... ok
++test_cold_reader_error_keeps_published_generation (test_hk_stage_api.HKStageAPITests.test_cold_reader_error_keeps_published_generation) ... ok
++test_date_stage_run_switches_and_refresh_are_read_only (test_hk_stage_api.HKStageAPITests.test_date_stage_run_switches_and_refresh_are_read_only) ... ok
++test_formula_label_does_not_allow_absolute_path_disclosure (test_hk_stage_api.HKStageAPITests.test_formula_label_does_not_allow_absolute_path_disclosure) ... ok
++test_fresh_process_reads_published_record_without_reader_or_producer (test_hk_stage_api.HKStageAPITests.test_fresh_process_reads_published_record_without_reader_or_producer) ... ok
++test_invalid_metadata_is_rejected_before_publication (test_hk_stage_api.HKStageAPITests.test_invalid_metadata_is_rejected_before_publication) ... ok
++test_native_formulas_are_not_mistaken_for_source_paths (test_hk_stage_api.HKStageAPITests.test_native_formulas_are_not_mistaken_for_source_paths) ... ok
++test_partial_empty_and_error_diagnostics_are_preserved (test_hk_stage_api.HKStageAPITests.test_partial_empty_and_error_diagnostics_are_preserved) ... ok
++test_public_projection_redacts_paths_without_dropping_evidence (test_hk_stage_api.HKStageAPITests.test_public_projection_redacts_paths_without_dropping_evidence) ... ok
++test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics (test_hk_stage_api.HKStageAPITests.test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics) ... ok
++test_reader_reference_substitution_is_rejected (test_hk_stage_api.HKStageAPITests.test_reader_reference_substitution_is_rejected) ... ok
++test_replay_kind_is_taken_from_reader_and_not_upgraded (test_hk_stage_api.HKStageAPITests.test_replay_kind_is_taken_from_reader_and_not_upgraded) ... ok
++test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace (test_hk_stage_api.HKStageAPITests.test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace) ... ok
++test_stage8_is_separate_from_m10_seven_stages (test_hk_stage_api.HKStageAPITests.test_stage8_is_separate_from_m10_seven_stages) ... ok
++test_unquoted_paths_and_formula_diagnostics_do_not_leak (test_hk_stage_api.HKStageAPITests.test_unquoted_paths_and_formula_diagnostics_do_not_leak) ... ok
++test_uses_exact_cold_reference_and_keeps_original_rows (test_hk_stage_api.HKStageAPITests.test_uses_exact_cold_reference_and_keeps_original_rows) ... ok
++test_wrong_module_or_route_is_rejected_without_read (test_hk_stage_api.HKStageAPITests.test_wrong_module_or_route_is_rejected_without_read) ... ok
++
++----------------------------------------------------------------------
++Ran 18 tests in 2.733s
++
++OK
+diff --git a/V5/tests/logs/M08_FINAL/test_hk_stage_api.stdout.txt b/V5/tests/logs/M08_FINAL/test_hk_stage_api.stdout.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/logs/M08_FINAL/test_hk_stage_daily.stderr.txt b/V5/tests/logs/M08_FINAL/test_hk_stage_daily.stderr.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FINAL/test_hk_stage_daily.stderr.txt
+@@ -0,0 +1,29 @@
++test_auction_preserves_second_filter_order (test_hk_stage_daily.HKChainTests.test_auction_preserves_second_filter_order) ... ok
++test_auction_reference_never_promoted (test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted) ... ok
++test_changed_input_gets_new_run (test_hk_stage_daily.HKChainTests.test_changed_input_gets_new_run) ... ok
++test_empty_and_missing_are_distinct (test_hk_stage_daily.HKChainTests.test_empty_and_missing_are_distinct) ... ok
++test_exact_retry_reuses_without_rewrite (test_hk_stage_daily.HKChainTests.test_exact_retry_reuses_without_rewrite) ... ok
++test_four_lane_store_and_cold_reader (test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader) ... ok
++test_input_rejections (test_hk_stage_daily.HKChainTests.test_input_rejections) ... ok
++test_live_input_not_silently_admitted (test_hk_stage_daily.HKChainTests.test_live_input_not_silently_admitted) ... ok
++test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons) ... ok
++test_partial_preserves_rows_and_diagnostics (test_hk_stage_daily.HKChainTests.test_partial_preserves_rows_and_diagnostics) ... ok
++test_reader_ignores_latest_pointer (test_hk_stage_daily.HKChainTests.test_reader_ignores_latest_pointer) ... ok
++test_tamper_is_rejected (test_hk_stage_daily.HKChainTests.test_tamper_is_rejected) ... ok
++test_unknown_membership_is_observation_only (test_hk_stage_daily.HKChainTests.test_unknown_membership_is_observation_only) ... ok
++test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists) ... ok
++test_auction_partial_source_without_reason_not_promoted (test_hk_stage_daily.HKExtendedTests.test_auction_partial_source_without_reason_not_promoted) ... ok
++test_auction_source_failure_without_reason_never_becomes_empty (test_hk_stage_daily.HKExtendedTests.test_auction_source_failure_without_reason_never_becomes_empty) ... ok
++test_cross_lane_merge_uses_original_precedence (test_hk_stage_daily.HKExtendedTests.test_cross_lane_merge_uses_original_precedence) ... ok
++test_failure_preserves_previous_success (test_hk_stage_daily.HKExtendedTests.test_failure_preserves_previous_success) ... ok
++test_final_source_failure_never_advances_success (test_hk_stage_daily.HKExtendedTests.test_final_source_failure_never_advances_success) ... ok
++test_half_day_blocked_before_normal_windows (test_hk_stage_daily.HKExtendedTests.test_half_day_blocked_before_normal_windows) ... ok
++test_m10_exactly_seven_excludes_stage8 (test_hk_stage_daily.HKExtendedTests.test_m10_exactly_seven_excludes_stage8) ... ok
++test_reader_rejects_rebound_metadata_even_with_new_self_hash (test_hk_stage_daily.HKExtendedTests.test_reader_rejects_rebound_metadata_even_with_new_self_hash) ... ok
++test_stage8_original_snapshot_rtdata_store_reader (test_hk_stage_daily.HKExtendedTests.test_stage8_original_snapshot_rtdata_store_reader) ... ok
++test_stage8_tamper_and_missing_enrichment_fail (test_hk_stage_daily.HKExtendedTests.test_stage8_tamper_and_missing_enrichment_fail) ... ok
++
++----------------------------------------------------------------------
++Ran 24 tests in 12.838s
++
++OK
+diff --git a/V5/tests/logs/M08_FINAL/test_hk_stage_daily.stdout.txt b/V5/tests/logs/M08_FINAL/test_hk_stage_daily.stdout.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/logs/M08_FINAL/test_module_artifacts.stderr.txt b/V5/tests/logs/M08_FINAL/test_module_artifacts.stderr.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FINAL/test_module_artifacts.stderr.txt
+@@ -0,0 +1,28 @@
++test_bad_active_index_does_not_fall_back_to_legacy (test_module_artifacts.ModuleArtifactTests.test_bad_active_index_does_not_fall_back_to_legacy) ... ok
++test_corrupt_inherited_object_blocks_new_date_publication (test_module_artifacts.ModuleArtifactTests.test_corrupt_inherited_object_blocks_new_date_publication) ... ok
++test_duplicate_response_keys_rejected (test_module_artifacts.ModuleArtifactTests.test_duplicate_response_keys_rejected) ... ok
++test_failure_before_active_swap_keeps_old_result (test_module_artifacts.ModuleArtifactTests.test_failure_before_active_swap_keeps_old_result) ... ok
++test_first_activation_interruption_requires_explicit_recovery (test_module_artifacts.ModuleArtifactTests.test_first_activation_interruption_requires_explicit_recovery) ... ok
++test_first_activation_reader_waits_for_publication (test_module_artifacts.ModuleArtifactTests.test_first_activation_reader_waits_for_publication) ... ok
++test_invalid_payload_never_replaces_success (test_module_artifacts.ModuleArtifactTests.test_invalid_payload_never_replaces_success) ... ok
++test_legacy_records_adopted_on_first_publication (test_module_artifacts.ModuleArtifactTests.test_legacy_records_adopted_on_first_publication) ... ok
++test_missing_active_pointer_never_downgrades_to_legacy (test_module_artifacts.ModuleArtifactTests.test_missing_active_pointer_never_downgrades_to_legacy) ... ok
++test_missing_manifest_is_invalid_not_missing_result (test_module_artifacts.ModuleArtifactTests.test_missing_manifest_is_invalid_not_missing_result) ... ok
++test_missing_object_does_not_fall_back (test_module_artifacts.ModuleArtifactTests.test_missing_object_does_not_fall_back) ... ok
++test_new_date_preserves_previous_date (test_module_artifacts.ModuleArtifactTests.test_new_date_preserves_previous_date) ... ok
++test_nonstring_query_is_not_published_as_unreachable_result (test_module_artifacts.ModuleArtifactTests.test_nonstring_query_is_not_published_as_unreachable_result) ... ok
++test_old_generation_and_objects_remain_immutable (test_module_artifacts.ModuleArtifactTests.test_old_generation_and_objects_remain_immutable) ... ok
++test_other_release_rejected (test_module_artifacts.ModuleArtifactTests.test_other_release_rejected) ... ok
++test_rehashed_payload_still_rejected_by_object_digest (test_module_artifacts.ModuleArtifactTests.test_rehashed_payload_still_rejected_by_object_digest) ... ok
++test_rollback_is_explicit_atomic_activation (test_module_artifacts.ModuleArtifactTests.test_rollback_is_explicit_atomic_activation) ... ok
++test_rollback_validates_unrequested_historical_object (test_module_artifacts.ModuleArtifactTests.test_rollback_validates_unrequested_historical_object) ... ok
++test_running_api_sees_atomic_new_generation (test_module_artifacts.ModuleArtifactTests.test_running_api_sees_atomic_new_generation) ... ok
++test_same_snapshot_reuses_generation (test_module_artifacts.ModuleArtifactTests.test_same_snapshot_reuses_generation) ... ok
++test_stale_compare_and_swap_rejected (test_module_artifacts.ModuleArtifactTests.test_stale_compare_and_swap_rejected) ... ok
++test_symlink_object_directory_rejected (test_module_artifacts.ModuleArtifactTests.test_symlink_object_directory_rejected) ... ok
++test_two_publishers_with_same_expected_head_only_one_wins (test_module_artifacts.ModuleArtifactTests.test_two_publishers_with_same_expected_head_only_one_wins) ... ok
++
++----------------------------------------------------------------------
++Ran 23 tests in 7.654s
++
++OK
+diff --git a/V5/tests/logs/M08_FINAL/test_module_artifacts.stdout.txt b/V5/tests/logs/M08_FINAL/test_module_artifacts.stdout.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/logs/M08_FINAL/test_source_capsule.stderr.txt b/V5/tests/logs/M08_FINAL/test_source_capsule.stderr.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FINAL/test_source_capsule.stderr.txt
+@@ -0,0 +1,13 @@
++test_blob_mismatch (test_source_capsule.SourceTests.test_blob_mismatch) ... ok
++test_changed (test_source_capsule.SourceTests.test_changed) ... ok
++test_duplicate_rejected (test_source_capsule.SourceTests.test_duplicate_rejected) ... ok
++test_missing (test_source_capsule.SourceTests.test_missing) ... ok
++test_parent_escape_rejected (test_source_capsule.SourceTests.test_parent_escape_rejected) ... ok
++test_symlink_rejected (test_source_capsule.SourceTests.test_symlink_rejected) ... ok
++test_unlisted (test_source_capsule.SourceTests.test_unlisted) ... ok
++test_valid_source (test_source_capsule.SourceTests.test_valid_source) ... ok
++
++----------------------------------------------------------------------
++Ran 8 tests in 0.014s
++
++OK
+diff --git a/V5/tests/logs/M08_FINAL/test_source_capsule.stdout.txt b/V5/tests/logs/M08_FINAL/test_source_capsule.stdout.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/logs/M08_FINAL/test_stage_selection.stderr.txt b/V5/tests/logs/M08_FINAL/test_stage_selection.stderr.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FINAL/test_stage_selection.stderr.txt
+@@ -0,0 +1,22 @@
++test_a_original_live_formula_and_top10 (test_stage_selection.StageSelectionTests.test_a_original_live_formula_and_top10) ... ok
++test_auction_not_silently_replaced (test_stage_selection.StageSelectionTests.test_auction_not_silently_replaced) ... ok
++test_code_whitespace_cannot_hide_duplicate (test_stage_selection.StageSelectionTests.test_code_whitespace_cannot_hide_duplicate) ... ok
++test_empty_evidence_explicit (test_stage_selection.StageSelectionTests.test_empty_evidence_explicit) ... ok
++test_future_display_source_time_rejected (test_stage_selection.StageSelectionTests.test_future_display_source_time_rejected) ... ok
++test_future_row_time_rejected (test_stage_selection.StageSelectionTests.test_future_row_time_rejected) ... ok
++test_hk_original_four_lane_top10 (test_stage_selection.StageSelectionTests.test_hk_original_four_lane_top10) ... ok
++test_hk_raw_score_override_rejected (test_stage_selection.StageSelectionTests.test_hk_raw_score_override_rejected) ... ok
++test_incomplete_a_quote_rejected (test_stage_selection.StageSelectionTests.test_incomplete_a_quote_rejected) ... ok
++test_invalid_priority_hk_alias_rejected (test_stage_selection.StageSelectionTests.test_invalid_priority_hk_alias_rejected) ... ok
++test_missing_research_not_silently_zeroed (test_stage_selection.StageSelectionTests.test_missing_research_not_silently_zeroed) ... ok
++test_negative_preferred_market_cap_rejected (test_stage_selection.StageSelectionTests.test_negative_preferred_market_cap_rejected) ... ok
++test_partial_coverage_preserved (test_stage_selection.StageSelectionTests.test_partial_coverage_preserved) ... ok
++test_stage8_requires_separate_replay_gate (test_stage_selection.StageSelectionTests.test_stage8_requires_separate_replay_gate) ... ok
++test_unknown_source_status_not_promoted (test_stage_selection.StageSelectionTests.test_unknown_source_status_not_promoted) ... ok
++test_wrong_digest_rejected (test_stage_selection.StageSelectionTests.test_wrong_digest_rejected) ... ok
++test_wrong_row_date_rejected (test_stage_selection.StageSelectionTests.test_wrong_row_date_rejected) ... ok
++
++----------------------------------------------------------------------
++Ran 17 tests in 5.130s
++
++OK
+diff --git a/V5/tests/logs/M08_FINAL/test_stage_selection.stdout.txt b/V5/tests/logs/M08_FINAL/test_stage_selection.stdout.txt
+new file mode 100644
+index 0000000..e69de29
+diff --git a/V5/tests/logs/M08_FULL_SUITE_FINAL.txt b/V5/tests/logs/M08_FULL_SUITE_FINAL.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_FULL_SUITE_FINAL.txt
+@@ -0,0 +1,119 @@
++PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
++test_bad_lane_contract_does_not_block_valid_lane (test_daily_dispatch.DailyDispatchTests.test_bad_lane_contract_does_not_block_valid_lane) ... ok
++test_changed_binding_or_owner_cutoff_does_not_start (test_daily_dispatch.DailyDispatchTests.test_changed_binding_or_owner_cutoff_does_not_start) ... ok
++test_missed_slot_and_missing_adapter_never_execute (test_daily_dispatch.DailyDispatchTests.test_missed_slot_and_missing_adapter_never_execute) ... ok
++test_one_owner_failure_does_not_stop_other_lanes_or_retry_unknown (test_daily_dispatch.DailyDispatchTests.test_one_owner_failure_does_not_stop_other_lanes_or_retry_unknown) ... ok
++test_weekend_calendar_and_historical_target_rejected (test_daily_dispatch.DailyDispatchTests.test_weekend_calendar_and_historical_target_rejected) ... ok
++test_daily_owner_adapters (unittest.loader._FailedTest.test_daily_owner_adapters) ... ERROR
++test_original_owner_store_cold_reader_and_published_api (test_hk_stage_api.HKStageAPIIntegrationTests.test_original_owner_store_cold_reader_and_published_api) ... ok
++test_adapter_contains_no_producer_import_or_call (test_hk_stage_api.HKStageAPITests.test_adapter_contains_no_producer_import_or_call) ... ok
++test_cold_reader_error_keeps_published_generation (test_hk_stage_api.HKStageAPITests.test_cold_reader_error_keeps_published_generation) ... ok
++test_date_stage_run_switches_and_refresh_are_read_only (test_hk_stage_api.HKStageAPITests.test_date_stage_run_switches_and_refresh_are_read_only) ... ok
++test_formula_label_does_not_allow_absolute_path_disclosure (test_hk_stage_api.HKStageAPITests.test_formula_label_does_not_allow_absolute_path_disclosure) ... ok
++test_fresh_process_reads_published_record_without_reader_or_producer (test_hk_stage_api.HKStageAPITests.test_fresh_process_reads_published_record_without_reader_or_producer) ... ok
++test_invalid_metadata_is_rejected_before_publication (test_hk_stage_api.HKStageAPITests.test_invalid_metadata_is_rejected_before_publication) ... ok
++test_native_formulas_are_not_mistaken_for_source_paths (test_hk_stage_api.HKStageAPITests.test_native_formulas_are_not_mistaken_for_source_paths) ... ok
++test_partial_empty_and_error_diagnostics_are_preserved (test_hk_stage_api.HKStageAPITests.test_partial_empty_and_error_diagnostics_are_preserved) ... ok
++test_public_projection_redacts_paths_without_dropping_evidence (test_hk_stage_api.HKStageAPITests.test_public_projection_redacts_paths_without_dropping_evidence) ... ok
++test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics (test_hk_stage_api.HKStageAPITests.test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics) ... ok
++test_reader_reference_substitution_is_rejected (test_hk_stage_api.HKStageAPITests.test_reader_reference_substitution_is_rejected) ... ok
++test_replay_kind_is_taken_from_reader_and_not_upgraded (test_hk_stage_api.HKStageAPITests.test_replay_kind_is_taken_from_reader_and_not_upgraded) ... ok
++test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace (test_hk_stage_api.HKStageAPITests.test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace) ... ok
++test_stage8_is_separate_from_m10_seven_stages (test_hk_stage_api.HKStageAPITests.test_stage8_is_separate_from_m10_seven_stages) ... ok
++test_unquoted_paths_and_formula_diagnostics_do_not_leak (test_hk_stage_api.HKStageAPITests.test_unquoted_paths_and_formula_diagnostics_do_not_leak) ... ok
++test_uses_exact_cold_reference_and_keeps_original_rows (test_hk_stage_api.HKStageAPITests.test_uses_exact_cold_reference_and_keeps_original_rows) ... ok
++test_wrong_module_or_route_is_rejected_without_read (test_hk_stage_api.HKStageAPITests.test_wrong_module_or_route_is_rejected_without_read) ... ok
++test_auction_preserves_second_filter_order (test_hk_stage_daily.HKChainTests.test_auction_preserves_second_filter_order) ... ok
++test_auction_reference_never_promoted (test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted) ... ok
++test_changed_input_gets_new_run (test_hk_stage_daily.HKChainTests.test_changed_input_gets_new_run) ... ok
++test_empty_and_missing_are_distinct (test_hk_stage_daily.HKChainTests.test_empty_and_missing_are_distinct) ... ok
++test_exact_retry_reuses_without_rewrite (test_hk_stage_daily.HKChainTests.test_exact_retry_reuses_without_rewrite) ... ok
++test_four_lane_store_and_cold_reader (test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader) ... ok
++test_input_rejections (test_hk_stage_daily.HKChainTests.test_input_rejections) ... ok
++test_live_input_not_silently_admitted (test_hk_stage_daily.HKChainTests.test_live_input_not_silently_admitted) ... ok
++test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons) ... ok
++test_partial_preserves_rows_and_diagnostics (test_hk_stage_daily.HKChainTests.test_partial_preserves_rows_and_diagnostics) ... ok
++test_reader_ignores_latest_pointer (test_hk_stage_daily.HKChainTests.test_reader_ignores_latest_pointer) ... ok
++test_tamper_is_rejected (test_hk_stage_daily.HKChainTests.test_tamper_is_rejected) ... ok
++test_unknown_membership_is_observation_only (test_hk_stage_daily.HKChainTests.test_unknown_membership_is_observation_only) ... ok
++test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists) ... ok
++test_auction_partial_source_without_reason_not_promoted (test_hk_stage_daily.HKExtendedTests.test_auction_partial_source_without_reason_not_promoted) ... ok
++test_auction_source_failure_without_reason_never_becomes_empty (test_hk_stage_daily.HKExtendedTests.test_auction_source_failure_without_reason_never_becomes_empty) ... ok
++test_cross_lane_merge_uses_original_precedence (test_hk_stage_daily.HKExtendedTests.test_cross_lane_merge_uses_original_precedence) ... ok
++test_failure_preserves_previous_success (test_hk_stage_daily.HKExtendedTests.test_failure_preserves_previous_success) ... ok
++test_final_source_failure_never_advances_success (test_hk_stage_daily.HKExtendedTests.test_final_source_failure_never_advances_success) ... ok
++test_half_day_blocked_before_normal_windows (test_hk_stage_daily.HKExtendedTests.test_half_day_blocked_before_normal_windows) ... ok
++test_m10_exactly_seven_excludes_stage8 (test_hk_stage_daily.HKExtendedTests.test_m10_exactly_seven_excludes_stage8) ... ok
++test_reader_rejects_rebound_metadata_even_with_new_self_hash (test_hk_stage_daily.HKExtendedTests.test_reader_rejects_rebound_metadata_even_with_new_self_hash) ... ok
++test_stage8_original_snapshot_rtdata_store_reader (test_hk_stage_daily.HKExtendedTests.test_stage8_original_snapshot_rtdata_store_reader) ... ok
++test_stage8_tamper_and_missing_enrichment_fail (test_hk_stage_daily.HKExtendedTests.test_stage8_tamper_and_missing_enrichment_fail) ... ok
++test_bad_active_index_does_not_fall_back_to_legacy (test_module_artifacts.ModuleArtifactTests.test_bad_active_index_does_not_fall_back_to_legacy) ... ok
++test_corrupt_inherited_object_blocks_new_date_publication (test_module_artifacts.ModuleArtifactTests.test_corrupt_inherited_object_blocks_new_date_publication) ... ok
++test_duplicate_response_keys_rejected (test_module_artifacts.ModuleArtifactTests.test_duplicate_response_keys_rejected) ... ok
++test_failure_before_active_swap_keeps_old_result (test_module_artifacts.ModuleArtifactTests.test_failure_before_active_swap_keeps_old_result) ... ok
++test_first_activation_interruption_requires_explicit_recovery (test_module_artifacts.ModuleArtifactTests.test_first_activation_interruption_requires_explicit_recovery) ... ok
++test_first_activation_reader_waits_for_publication (test_module_artifacts.ModuleArtifactTests.test_first_activation_reader_waits_for_publication) ... ok
++test_invalid_payload_never_replaces_success (test_module_artifacts.ModuleArtifactTests.test_invalid_payload_never_replaces_success) ... ok
++test_legacy_records_adopted_on_first_publication (test_module_artifacts.ModuleArtifactTests.test_legacy_records_adopted_on_first_publication) ... ok
++test_missing_active_pointer_never_downgrades_to_legacy (test_module_artifacts.ModuleArtifactTests.test_missing_active_pointer_never_downgrades_to_legacy) ... ok
++test_missing_manifest_is_invalid_not_missing_result (test_module_artifacts.ModuleArtifactTests.test_missing_manifest_is_invalid_not_missing_result) ... ok
++test_missing_object_does_not_fall_back (test_module_artifacts.ModuleArtifactTests.test_missing_object_does_not_fall_back) ... ok
++test_new_date_preserves_previous_date (test_module_artifacts.ModuleArtifactTests.test_new_date_preserves_previous_date) ... ok
++test_nonstring_query_is_not_published_as_unreachable_result (test_module_artifacts.ModuleArtifactTests.test_nonstring_query_is_not_published_as_unreachable_result) ... ok
++test_old_generation_and_objects_remain_immutable (test_module_artifacts.ModuleArtifactTests.test_old_generation_and_objects_remain_immutable) ... ok
++test_other_release_rejected (test_module_artifacts.ModuleArtifactTests.test_other_release_rejected) ... ok
++test_rehashed_payload_still_rejected_by_object_digest (test_module_artifacts.ModuleArtifactTests.test_rehashed_payload_still_rejected_by_object_digest) ... ok
++test_rollback_is_explicit_atomic_activation (test_module_artifacts.ModuleArtifactTests.test_rollback_is_explicit_atomic_activation) ... ok
++test_rollback_validates_unrequested_historical_object (test_module_artifacts.ModuleArtifactTests.test_rollback_validates_unrequested_historical_object) ... ok
++test_running_api_sees_atomic_new_generation (test_module_artifacts.ModuleArtifactTests.test_running_api_sees_atomic_new_generation) ... ok
++test_same_snapshot_reuses_generation (test_module_artifacts.ModuleArtifactTests.test_same_snapshot_reuses_generation) ... ok
++test_stale_compare_and_swap_rejected (test_module_artifacts.ModuleArtifactTests.test_stale_compare_and_swap_rejected) ... ok
++test_symlink_object_directory_rejected (test_module_artifacts.ModuleArtifactTests.test_symlink_object_directory_rejected) ... ok
++test_two_publishers_with_same_expected_head_only_one_wins (test_module_artifacts.ModuleArtifactTests.test_two_publishers_with_same_expected_head_only_one_wins) ... ok
++test_blob_mismatch (test_source_capsule.SourceTests.test_blob_mismatch) ... ok
++test_changed (test_source_capsule.SourceTests.test_changed) ... ok
++test_duplicate_rejected (test_source_capsule.SourceTests.test_duplicate_rejected) ... ok
++test_missing (test_source_capsule.SourceTests.test_missing) ... ok
++test_parent_escape_rejected (test_source_capsule.SourceTests.test_parent_escape_rejected) ... ok
++test_symlink_rejected (test_source_capsule.SourceTests.test_symlink_rejected) ... ok
++test_unlisted (test_source_capsule.SourceTests.test_unlisted) ... ok
++test_valid_source (test_source_capsule.SourceTests.test_valid_source) ... ok
++test_a_original_live_formula_and_top10 (test_stage_selection.StageSelectionTests.test_a_original_live_formula_and_top10) ... ok
++test_auction_not_silently_replaced (test_stage_selection.StageSelectionTests.test_auction_not_silently_replaced) ... ok
++test_code_whitespace_cannot_hide_duplicate (test_stage_selection.StageSelectionTests.test_code_whitespace_cannot_hide_duplicate) ... ok
++test_empty_evidence_explicit (test_stage_selection.StageSelectionTests.test_empty_evidence_explicit) ... ok
++test_future_display_source_time_rejected (test_stage_selection.StageSelectionTests.test_future_display_source_time_rejected) ... ok
++test_future_row_time_rejected (test_stage_selection.StageSelectionTests.test_future_row_time_rejected) ... ok
++test_hk_original_four_lane_top10 (test_stage_selection.StageSelectionTests.test_hk_original_four_lane_top10) ... ok
++test_hk_raw_score_override_rejected (test_stage_selection.StageSelectionTests.test_hk_raw_score_override_rejected) ... ok
++test_incomplete_a_quote_rejected (test_stage_selection.StageSelectionTests.test_incomplete_a_quote_rejected) ... ok
++test_invalid_priority_hk_alias_rejected (test_stage_selection.StageSelectionTests.test_invalid_priority_hk_alias_rejected) ... ok
++test_missing_research_not_silently_zeroed (test_stage_selection.StageSelectionTests.test_missing_research_not_silently_zeroed) ... ok
++test_negative_preferred_market_cap_rejected (test_stage_selection.StageSelectionTests.test_negative_preferred_market_cap_rejected) ... ok
++test_partial_coverage_preserved (test_stage_selection.StageSelectionTests.test_partial_coverage_preserved) ... ok
++test_stage8_requires_separate_replay_gate (test_stage_selection.StageSelectionTests.test_stage8_requires_separate_replay_gate) ... ok
++test_unknown_source_status_not_promoted (test_stage_selection.StageSelectionTests.test_unknown_source_status_not_promoted) ... ok
++test_wrong_digest_rejected (test_stage_selection.StageSelectionTests.test_wrong_digest_rejected) ... ok
++test_wrong_row_date_rejected (test_stage_selection.StageSelectionTests.test_wrong_row_date_rejected) ... ok
++
++======================================================================
++ERROR: test_daily_owner_adapters (unittest.loader._FailedTest.test_daily_owner_adapters)
++----------------------------------------------------------------------
++ImportError: Failed to import test module: test_daily_owner_adapters
++Traceback (most recent call last):
++  File "[PYTHON_RUNTIME]/lib/python3.12/unittest/loader.py", line 396, in _find_test_path
++    module = self._get_module_from_name(name)
++             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
++  File "[PYTHON_RUNTIME]/lib/python3.12/unittest/loader.py", line 339, in _get_module_from_name
++    __import__(name)
++  File "[M08_CHECKOUT]/V5/tests/test_daily_owner_adapters.py", line 7, in <module>
++    from v5_shadow.daily_tick import launchd_contract,tick,LABEL
++  File "[M08_CHECKOUT]/V5/src/v5_shadow/daily_tick.py", line 11, in <module>
++    from v5_shadow.daily_rebound_owner import run_rebound_owner,PIN as REBOUND_PIN
++ModuleNotFoundError: No module named 'v5_shadow.daily_rebound_owner'
++
++
++----------------------------------------------------------------------
++Ran 96 tests in 29.657s
++
++FAILED (errors=1)
+diff --git a/V5/tests/logs/M08_RED.txt b/V5/tests/logs/M08_RED.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_RED.txt
+@@ -0,0 +1,15 @@
++PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
++test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists) ... FAIL
++
++======================================================================
++FAIL: test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_daily.py", line 40, in test_00_default_chain_exists
++    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.hk_stage_daily'),'M08 default producer missing')
++AssertionError: unexpectedly None : M08 default producer missing
++
++----------------------------------------------------------------------
++Ran 1 test in 0.001s
++
++FAILED (failures=1)
+diff --git a/V5/tests/logs/M08_RED_AUCTION_STATUS.txt b/V5/tests/logs/M08_RED_AUCTION_STATUS.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_RED_AUCTION_STATUS.txt
+@@ -0,0 +1,50 @@
++PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
++test_auction_preserves_second_filter_order (test_hk_stage_daily.HKChainTests.test_auction_preserves_second_filter_order) ... ok
++test_auction_reference_never_promoted (test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted) ... ok
++test_changed_input_gets_new_run (test_hk_stage_daily.HKChainTests.test_changed_input_gets_new_run) ... ok
++test_empty_and_missing_are_distinct (test_hk_stage_daily.HKChainTests.test_empty_and_missing_are_distinct) ... ok
++test_exact_retry_reuses_without_rewrite (test_hk_stage_daily.HKChainTests.test_exact_retry_reuses_without_rewrite) ... ok
++test_four_lane_store_and_cold_reader (test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader) ... ok
++test_input_rejections (test_hk_stage_daily.HKChainTests.test_input_rejections) ... ok
++test_live_input_not_silently_admitted (test_hk_stage_daily.HKChainTests.test_live_input_not_silently_admitted) ... ok
++test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons) ... ok
++test_partial_preserves_rows_and_diagnostics (test_hk_stage_daily.HKChainTests.test_partial_preserves_rows_and_diagnostics) ... ok
++test_reader_ignores_latest_pointer (test_hk_stage_daily.HKChainTests.test_reader_ignores_latest_pointer) ... ok
++test_tamper_is_rejected (test_hk_stage_daily.HKChainTests.test_tamper_is_rejected) ... ok
++test_unknown_membership_is_observation_only (test_hk_stage_daily.HKChainTests.test_unknown_membership_is_observation_only) ... ok
++test_00_default_chain_exists (test_hk_stage_daily.HKDailyTests.test_00_default_chain_exists) ... ok
++test_auction_partial_source_without_reason_not_promoted (test_hk_stage_daily.HKExtendedTests.test_auction_partial_source_without_reason_not_promoted) ... FAIL
++test_auction_source_failure_without_reason_never_becomes_empty (test_hk_stage_daily.HKExtendedTests.test_auction_source_failure_without_reason_never_becomes_empty) ... FAIL
++test_cross_lane_merge_uses_original_precedence (test_hk_stage_daily.HKExtendedTests.test_cross_lane_merge_uses_original_precedence) ... ok
++test_failure_preserves_previous_success (test_hk_stage_daily.HKExtendedTests.test_failure_preserves_previous_success) ... ok
++test_half_day_blocked_before_normal_windows (test_hk_stage_daily.HKExtendedTests.test_half_day_blocked_before_normal_windows) ... ok
++test_m10_exactly_seven_excludes_stage8 (test_hk_stage_daily.HKExtendedTests.test_m10_exactly_seven_excludes_stage8) ... ok
++test_stage8_original_snapshot_rtdata_store_reader (test_hk_stage_daily.HKExtendedTests.test_stage8_original_snapshot_rtdata_store_reader) ... ok
++test_stage8_tamper_and_missing_enrichment_fail (test_hk_stage_daily.HKExtendedTests.test_stage8_tamper_and_missing_enrichment_fail) ... ok
++
++======================================================================
++FAIL: test_auction_partial_source_without_reason_not_promoted (test_hk_stage_daily.HKExtendedTests.test_auction_partial_source_without_reason_not_promoted)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_daily.py", line 178, in test_auction_partial_source_without_reason_not_promoted
++    self.assertEqual(self.run_request(r)['artifact']['selection_status'],'PARTIAL_WITH_ROWS')
++AssertionError: 'READY' != 'PARTIAL_WITH_ROWS'
++- READY
+++ PARTIAL_WITH_ROWS
++
++
++======================================================================
++FAIL: test_auction_source_failure_without_reason_never_becomes_empty (test_hk_stage_daily.HKExtendedTests.test_auction_source_failure_without_reason_never_becomes_empty)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_daily.py", line 175, in test_auction_source_failure_without_reason_never_becomes_empty
++    self.assertEqual(self.run_request(r)['artifact']['selection_status'],'CANNOT_CONFIRM')
++AssertionError: 'READY_EMPTY' != 'CANNOT_CONFIRM'
++- READY_EMPTY
+++ CANNOT_CONFIRM
++
++
++----------------------------------------------------------------------
++Ran 22 tests in 12.914s
++
++FAILED (failures=2)
+diff --git a/V5/tests/logs/M08_RED_SCORE_REASONS.txt b/V5/tests/logs/M08_RED_SCORE_REASONS.txt
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/logs/M08_RED_SCORE_REASONS.txt
+@@ -0,0 +1,16 @@
++PATHS_REDACTED_FOR_PUBLICATION; substantive output unchanged.
++test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons) ... ERROR
++
++======================================================================
++ERROR: test_original_score_order_and_reasons (test_hk_stage_daily.HKChainTests.test_original_score_order_and_reasons)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "[M08_CHECKOUT]/V5/tests/test_hk_stage_daily.py", line 64, in test_original_score_order_and_reasons
++    detail=out['provenance']['owner_score_details']['HK.00012']
++           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
++KeyError: 'owner_score_details'
++
++----------------------------------------------------------------------
++Ran 1 test in 0.318s
++
++FAILED (errors=1)
+diff --git a/V5/tests/run_m08_acceptance.py b/V5/tests/run_m08_acceptance.py
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/run_m08_acceptance.py
+@@ -0,0 +1,50 @@
++"""Single existing-interpreter command for bounded M08 engineering acceptance.
++
++No install, provider access, user data, natural scheduling or deployment.
++"""
++import argparse
++from datetime import datetime,timezone
++import importlib.metadata
++import json
++from pathlib import Path
++import platform
++import subprocess
++import sys
++import os
++
++ROOT=Path(__file__).resolve().parents[1]
++PATTERNS=('test_hk_stage_daily.py','test_hk_stage_api.py','test_stage_selection.py','test_module_artifacts.py','test_source_capsule.py')
++
++
++def main():
++    p=argparse.ArgumentParser();p.add_argument('--output',type=Path,default=ROOT/'tests/logs/M08_FINAL');args=p.parse_args()
++    out=args.output.resolve();out.mkdir(parents=True,exist_ok=True)
++    env=dict(os.environ,PYTHONPATH=str(ROOT/'src'),PYTHONDONTWRITEBYTECODE='1')
++    results=[]
++    for pattern in PATTERNS:
++        cmd=[sys.executable,'-B','-m','unittest','discover','-s','tests','-p',pattern,'-v']
++        started=datetime.now(timezone.utc).isoformat()
++        proc=subprocess.run(cmd,cwd=ROOT,env=env,capture_output=True,text=True)
++        finished=datetime.now(timezone.utc).isoformat()
++        name=pattern.removesuffix('.py')
++        (out/(name+'.stdout.txt')).write_text(proc.stdout)
++        (out/(name+'.stderr.txt')).write_text(proc.stderr)
++        results.append(dict(command='python -B -m unittest discover -s tests -p '+pattern+' -v',started_at=started,finished_at=finished,exit_code=proc.returncode,stdout=name+'.stdout.txt',stderr=name+'.stderr.txt'))
++        print(pattern, 'PASS' if proc.returncode==0 else 'FAIL',flush=True)
++    def version(name):
++        try:return importlib.metadata.version(name)
++        except importlib.metadata.PackageNotFoundError:return 'NOT_INSTALLED'
++    runtime=dict(python=platform.python_version(),pandas=version('pandas'),pyarrow=version('pyarrow'),pytest=version('pytest'))
++    def parts(value):
++        try:return tuple(int(v) for v in value.split('.')[:2])
++        except ValueError:return (0,0)
++    supported=sys.version_info>=(3,14) and (2,3)<=parts(runtime['pandas'])<(3,0) and (21,0)<=parts(runtime['pyarrow'])<(25,0)
++    record=dict(schema_version='v5.m08.engineering_test_receipt.v1',scope='SYNTHETIC_RETAINED_OWNER_CHAIN_AND_READONLY_API',results=results,runtime=runtime,
++        production_runtime_accepted=supported,
++        natural_verified=False,formal_admission=False,mac_verified=False,ui_deployed=False,
++        not_run=['Full pytest donor runtime suite: excluded from bounded acceptance; inspect recorded pytest availability and supply full donor runtime to run separately','Live/provider SDK collection: outside retained-input scope','Mac supported-runtime acceptance and existing UI mounting: separate executor required','Natural scheduler/deadline activation and two-day evidence: not activated'],
++        result='PASS_ENGINEERING_CANDIDATE' if all(r['exit_code']==0 for r in results) else 'FAILED')
++    (out/'receipt.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
++    print(json.dumps(record,ensure_ascii=False,indent=2));return 0 if record['result']=='PASS_ENGINEERING_CANDIDATE' else 1
++
++if __name__=='__main__':raise SystemExit(main())
+diff --git a/V5/tests/test_hk_stage_api.py b/V5/tests/test_hk_stage_api.py
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/test_hk_stage_api.py
+@@ -0,0 +1,417 @@
++"""M08 publication adapter unit tests and synthetic engineering integration.
++
++Unit tests inject only the cold reader; the shared publisher and HTTP service
++are real. A separate three-route integration test uses no injected components.
++"""
++import ast
++import copy
++import importlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import threading
++import types
++import unittest
++from unittest.mock import Mock, patch
++from urllib.error import HTTPError
++from urllib.parse import urlencode
++from urllib.request import Request, urlopen
++
++from v5_shadow.digests import canonical_bytes, sha256_json
++from v5_shadow.module_api import _config, create_module_server, read_response
++
++
++ROUTE = '/api/v5/hk-stage-selection'
++STAGE = 'STAGE_0930_0935'
++STAGE8 = 'STAGE_1545_1555'
++
++
++class HKStageAPITests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name).resolve()
++        self.store = self.root / 'private-hk-store'
++        self.store.mkdir()
++        self.responses = self.root / 'api-responses'
++        self.responses.mkdir()
++        (self.responses / '.v5-module-root').write_text('v5.module-root.v1:hk_stage\n')
++        self.config = dict(schema_version='v5.module_api.v1', module_id='hk_stage',
++                           release_id='m08-test-r1', data_root=str(self.responses), routes=[ROUTE])
++        self.api = importlib.import_module('v5_shadow.hk_stage_api')
++        self.reader = Mock()
++        reader_module = types.ModuleType('v5_shadow.hk_stage_reader')
++        reader_module.read_hk_stage = self.reader
++        self.reader_patch = patch.dict(sys.modules, {'v5_shadow.hk_stage_reader': reader_module})
++        self.reader_patch.start()
++        self.addCleanup(self.reader_patch.stop)
++
++    def cold_result(self, date='20261008', stage=STAGE, run='selection-run-1', kind='SYNTHETIC'):
++        reference = dict(generation_sha256='1' * 64, run_id=run, market='HK_CONNECT',
++                         target_date=date, stage_id=stage, artifact_sha256='2' * 64,
++                         manifest_sha256='3' * 64, receipt_sha256='4' * 64,
++                         product_sha256='5' * 64)
++        artifact = dict(schema_version='stage_center.selection.v2', trade_date=date,
++                        stage_id=stage, market='HK_CONNECT', artifact_id='artifact-1', run_id=run,
++                        algorithm_id='original-owner', algorithm_sha256='6' * 64,
++                        raw_artifact_sha256='7' * 64, source_status='PARTIAL_WITH_ROWS',
++                        selection_status='PARTIAL_WITH_ROWS', requested_rows=3,
++                        source_rows=2, selected_rows=1, coverage_ratio=0.333333,
++                        missing_symbols=['HK.00003'], cannot_confirm=['MISSING_LANE'],
++                        rows=[dict(code='HK.00001', score=89.0, rank=1,
++                                   formula='turnover_hkd / circular_market_cap_hkd_yi',
++                                   reasons=['original-score-reason'],
++                                   candidate_lanes=['D1_MODEL_TOP100'],
++                                   quote=dict(last_price=11, turnover_hkd=100000000))],
++                        source_evidence=['raw_sha256=' + '7' * 64,
++                                         'formula=turnover_hkd/circular_market_cap_hkd_yi'],
++                        production_allowed=False, buy_gate_updated=False, orders_sent=False)
++        return dict(artifact=artifact, reference=reference,
++                    provenance=dict(data_kind=kind, input_sha256='8' * 64,
++                                    source_manifest_sha256='9' * 64,
++                                    implementation_identity={'hk_stage_daily.py': 'a' * 64},
++                                    source_identity=dict(captured_at=date[:4] + '-' + date[4:6] + '-' + date[6:] + 'T09:35:00+08:00'),
++                                    natural_verified=False, formal_admission=False),
++                    production_allowed=False, buy_gate_updated=False, orders_sent=False,
++                    natural_verified=False)
++
++    def publish(self, result=None, expected=None):
++        result = self.cold_result() if result is None else result
++        self.reader.return_value = result
++        return self.api.publish_hk_stage_response(self.config, self.store, result['reference'],
++                                                  expected_generation=expected)
++
++    def query(self, result):
++        reference = result['reference']
++        return {'date': reference['target_date'], 'stage': reference['stage_id'],
++                'run_id': reference['run_id']}
++
++    def record(self, result):
++        config, fd = _config(self.config)
++        try:
++            return read_response(config, fd, ROUTE, self.query(result))[0]
++        finally:
++            os.close(fd)
++
++    def serve(self):
++        server = create_module_server(self.config)
++        thread = threading.Thread(target=server.serve_forever, daemon=True)
++        thread.start()
++        self.addCleanup(server.server_close)
++        self.addCleanup(server.shutdown)
++        return 'http://127.0.0.1:' + str(server.server_address[1])
++
++    def http_read(self, base, query, method='GET'):
++        request = Request(base + ROUTE + '?' + urlencode(query), method=method)
++        try:
++            with urlopen(request, timeout=3) as response:
++                return response.status, json.load(response)
++        except HTTPError as error:
++            with error:
++                return error.code, json.load(error)
++
++    def test_uses_exact_cold_reference_and_keeps_original_rows(self):
++        source = self.cold_result()
++        original = copy.deepcopy(source)
++        result = self.publish(source)
++        self.reader.assert_called_once_with(self.store, original['reference'])
++        record = self.record(source)
++        self.assertEqual(record['payload']['artifact'], original['artifact'])
++        self.assertEqual(record['payload']['reference'], original['reference'])
++        self.assertEqual(record['payload']['provenance'], original['provenance'])
++        self.assertEqual(source, original)
++        self.assertEqual(record['source_input_sha256'], source['provenance']['input_sha256'])
++        self.assertEqual(record['generated_at'], source['provenance']['source_identity']['captured_at'])
++        self.assertEqual(record['data_kind'], 'SYNTHETIC')
++        self.assertEqual(record['payload_sha256'], sha256_json(record['payload']))
++        self.assertRegex(result['generation_sha256'], r'^[0-9a-f]{64}$')
++        self.assertFalse(record['payload']['natural_verified'])
++        self.assertFalse(record['payload']['provenance']['formal_admission'])
++
++    def test_replay_kind_is_taken_from_reader_and_not_upgraded(self):
++        source = self.cold_result(kind='RECORDED_INPUT_REPLAY')
++        self.publish(source)
++        self.assertEqual(self.record(source)['data_kind'], 'RECORDED_INPUT_REPLAY')
++
++    def test_stage8_is_separate_from_m10_seven_stages(self):
++        normal = self.cold_result()
++        first = self.publish(normal)['generation_sha256']
++        separate = self.cold_result(stage=STAGE8, run='stage8-run')
++        self.publish(separate, first)
++        self.assertEqual(self.record(normal)['payload']['stage_group'], 'HK_SEVEN_STAGE')
++        self.assertTrue(self.record(normal)['payload']['m10_stage_member'])
++        payload = self.record(separate)['payload']
++        self.assertEqual(payload['stage_group'], 'HK_STAGE8_SEPARATE')
++        self.assertFalse(payload['m10_stage_member'])
++        self.assertEqual(payload['artifact']['stage_id'], STAGE8)
++
++    def test_partial_empty_and_error_diagnostics_are_preserved(self):
++        generation = None
++        for status in ('READY', 'READY_EMPTY', 'PARTIAL_WITH_ROWS', 'CANNOT_CONFIRM'):
++            with self.subTest(status=status):
++                source = self.cold_result(run='run-' + status)
++                source['artifact']['selection_status'] = status
++                if status in ('READY_EMPTY', 'CANNOT_CONFIRM'):
++                    source['artifact']['rows'] = []
++                    source['artifact']['selected_rows'] = 0
++                generation = self.publish(source, generation)['generation_sha256']
++                payload = self.record(source)['payload']
++                self.assertEqual(payload['status'], status)
++                self.assertEqual(payload['artifact'], source['artifact'])
++
++    def test_public_projection_redacts_paths_without_dropping_evidence(self):
++        source = self.cold_result(stage=STAGE8)
++        source['artifact']['source_evidence'] += [
++            'active_snapshot_path=/Users/private/secret/snapshot.json',
++            'manifest_path=private/history/manifest.json',
++            'receipt_file=file:///private/receipt.json',
++            r'capture_path=C:\Users\private\snapshot.csv',
++            'input_root=/workspace/private-inputs',
++            'raw_sha256=' + 'f' * 64]
++        source['artifact']['cannot_confirm'] += ['OPEN_FAILED: /Users/private/secret/raw.csv unavailable']
++        source['provenance']['source_identity'].update(
++            input_path='/private/input.json', fixture_root='/private/replays',
++            nested={'source_path': 'private/relative/input.csv', 'units': 'HKD'})
++        original = copy.deepcopy(source)
++        self.publish(source)
++        payload = self.record(source)['payload']
++        serialized = json.dumps(payload)
++        for secret in ('/Users/private', 'private/history', 'file:///private', r'C:\\Users',
++                       '/workspace/private', '/private/input', '/private/replays', 'private/relative'):
++            self.assertNotIn(secret, serialized)
++        self.assertEqual(source, original)
++        self.assertEqual(payload['artifact']['rows'], original['artifact']['rows'])
++        self.assertEqual(len(payload['artifact']['source_evidence']), len(original['artifact']['source_evidence']))
++        self.assertIn('active_snapshot_path=[REDACTED_PATH]', payload['artifact']['source_evidence'])
++        self.assertIn('raw_sha256=' + 'f' * 64, payload['artifact']['source_evidence'])
++        self.assertIn('OPEN_FAILED:', payload['artifact']['cannot_confirm'][-1])
++        self.assertIn('unavailable', payload['artifact']['cannot_confirm'][-1])
++        self.assertEqual(payload['provenance']['source_identity']['nested']['units'], 'HKD')
++
++    def test_native_formulas_are_not_mistaken_for_source_paths(self):
++        source = self.cold_result()
++        expressions = ['(turnover_hkd)/circular_market_cap_hkd_yi',
++                       'turnover_hkd /circular_market_cap_hkd_yi',
++                       '(turnover_hkd /circular_market_cap_hkd_yi)/volume_ratio']
++        source['artifact']['rows'][0]['formula'] = expressions[0]
++        source['artifact']['rows'][0]['score_formula'] = expressions[1]
++        source['artifact']['rows'][0]['formulas'] = expressions
++        source['artifact']['source_evidence'] += ['formula=' + expression for expression in expressions]
++        self.publish(source)
++        artifact = self.record(source)['payload']['artifact']
++        self.assertEqual(artifact['rows'], source['artifact']['rows'])
++        self.assertEqual(artifact['source_evidence'], source['artifact']['source_evidence'])
++
++    def test_formula_label_does_not_allow_absolute_path_disclosure(self):
++        source = self.cold_result()
++        source['artifact']['source_evidence'].append('formula=/Users/private/expression.txt')
++        source['artifact']['rows'][0]['formula'] = '/Users/private/expression.txt'
++        self.publish(source)
++        payload = self.record(source)['payload']
++        self.assertNotIn('/Users/private', json.dumps(payload))
++        self.assertIn('formula=[REDACTED_PATH]', payload['artifact']['source_evidence'])
++
++    def test_unquoted_paths_and_formula_diagnostics_do_not_leak(self):
++        source = self.cold_result()
++        source['artifact']['cannot_confirm'] += [
++            'OPEN_FAILED: /Users/Alice Doe/secret.csv unavailable',
++            'OPEN_FAILED: /Users/Alice Doe/secret final.csv unavailable',
++        ]
++        source['artifact']['source_evidence'].append('formula=loaded from /Users/private/expression.txt')
++        self.publish(source)
++        payload = self.record(source)['payload']
++        self.assertEqual(payload['artifact']['cannot_confirm'][-2:], [
++            'OPEN_FAILED: [REDACTED_PATH] unavailable',
++            'OPEN_FAILED: [REDACTED_PATH] unavailable',
++        ])
++        self.assertEqual(payload['artifact']['source_evidence'][-1],
++                         'formula=loaded from [REDACTED_PATH]')
++
++    def test_quoted_paths_with_spaces_are_fully_redacted_from_diagnostics(self):
++        source = self.cold_result()
++        source['artifact']['cannot_confirm'] += [
++            'OPEN_FAILED: "/Users/Alice Doe/secret, draft.csv" unavailable',
++            "REPLAY_FAILED: '/private/Alice Doe/annual inputs.csv' checksum invalid",
++            'SNAPSHOT_FAILED: "C:\\Users\\Alice Doe\\snapshot.csv" unavailable',
++        ]
++        self.publish(source)
++        diagnostics = self.record(source)['payload']['artifact']['cannot_confirm']
++        self.assertEqual(diagnostics[-3:], [
++            'OPEN_FAILED: "[REDACTED_PATH]" unavailable',
++            "REPLAY_FAILED: '[REDACTED_PATH]' checksum invalid",
++            'SNAPSHOT_FAILED: "[REDACTED_PATH]" unavailable',
++        ])
++
++    def test_date_stage_run_switches_and_refresh_are_read_only(self):
++        sources = [self.cold_result(), self.cold_result(run='selection-run-2'),
++                   self.cold_result(date='20261009', run='next-date'),
++                   self.cold_result(stage=STAGE8, run='stage8-run')]
++        generation = None
++        for source in sources:
++            generation = self.publish(source, generation)['generation_sha256']
++        self.reader.reset_mock()
++        self.reader.side_effect = AssertionError('GET must never cold-read or produce')
++        before = {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
++        base = self.serve()
++        for source in sources + list(reversed(sources)):
++            status, payload = self.http_read(base, self.query(source))
++            self.assertEqual(status, 200)
++            self.assertEqual(payload['reference'], source['reference'])
++        bad_query = self.query(sources[0]); bad_query['run_id'] = 'unpublished-run'
++        self.assertEqual(self.http_read(base, bad_query)[0], 503)
++        self.assertEqual(self.http_read(base, {'date': '20261008', 'stage': STAGE})[0], 503)
++        self.assertEqual(self.http_read(base, self.query(sources[0]), 'POST')[0], 405)
++        self.reader.assert_not_called()
++        after = {p.relative_to(self.root): p.read_bytes() for p in self.root.rglob('*') if p.is_file()}
++        self.assertEqual(after, before)
++
++    def test_fresh_process_reads_published_record_without_reader_or_producer(self):
++        source = self.cold_result()
++        self.publish(source)
++        script = '''
++import json, os, sys
++from v5_shadow.module_api import _config, read_response
++value = json.loads(sys.stdin.read())
++config, fd = _config(value['config'])
++try:
++    record, digest = read_response(config, fd, value['route'], value['query'])
++finally:
++    os.close(fd)
++assert 'v5_shadow.hk_stage_daily' not in sys.modules
++assert 'v5_shadow.hk_stage_reader' not in sys.modules
++assert 'v5_shadow.hk_stage_api' not in sys.modules
++print(json.dumps(record))
++'''
++        result = subprocess.run([sys.executable, '-B', '-c', script],
++                                input=json.dumps(dict(config=self.config, route=ROUTE, query=self.query(source))),
++                                text=True, capture_output=True, timeout=10)
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertEqual(json.loads(result.stdout)['payload']['reference'], source['reference'])
++
++    def test_adapter_contains_no_producer_import_or_call(self):
++        source = Path(self.api.__file__).read_text()
++        tree = ast.parse(source)
++        for node in ast.walk(tree):
++            if isinstance(node, ast.ImportFrom):
++                self.assertNotIn('hk_stage_daily', node.module or '')
++                self.assertNotIn('stage_selection', node.module or '')
++            if isinstance(node, ast.Import):
++                for alias in node.names:
++                    self.assertNotIn('hk_stage_daily', alias.name)
++                    self.assertNotIn('stage_selection', alias.name)
++            if isinstance(node, ast.Name):
++                self.assertNotIn(node.id, ('run_hk_stage', 'run_stage_selection', 'select_hk_four_lane'))
++
++    def test_same_snapshot_reuses_generation_and_stale_cas_cannot_replace(self):
++        source = self.cold_result()
++        first = self.publish(source)['generation_sha256']
++        self.assertEqual(self.publish(source, first)['generation_sha256'], first)
++        active = (self.responses / 'active.json').read_bytes()
++        with self.assertRaisesRegex(ValueError, 'GENERATION_CONFLICT'):
++            self.publish(self.cold_result(run='late-run'), None)
++        self.assertEqual((self.responses / 'active.json').read_bytes(), active)
++
++    def test_cold_reader_error_keeps_published_generation(self):
++        first = self.publish()['generation_sha256']
++        active = (self.responses / 'active.json').read_bytes()
++        self.reader.side_effect = ValueError('HK_ARTIFACT_SHA_MISMATCH')
++        with self.assertRaisesRegex(ValueError, 'HK_ARTIFACT_SHA_MISMATCH'):
++            self.publish(expected=first)
++        self.assertEqual((self.responses / 'active.json').read_bytes(), active)
++
++    def test_invalid_metadata_is_rejected_before_publication(self):
++        cases = [
++            ('kind', lambda r: r['provenance'].update(data_kind='OWNER_RESULT')),
++            ('natural', lambda r: r.update(natural_verified=True)),
++            ('formal', lambda r: r['provenance'].update(formal_admission=True)),
++            ('production', lambda r: r['artifact'].update(production_allowed=True)),
++            ('orders', lambda r: r.update(orders_sent=True)),
++            ('missing-input', lambda r: r['provenance'].pop('input_sha256')),
++            ('bad-input', lambda r: r['provenance'].update(input_sha256='bad')),
++            ('bad-time', lambda r: r['provenance']['source_identity'].update(captured_at='2026-10-08T09:35:00')),
++            ('wrong-date', lambda r: r['artifact'].update(trade_date='20261009')),
++            ('wrong-run', lambda r: r['artifact'].update(run_id='different')),
++            ('a-market', lambda r: r['reference'].update(market='A_SHARE')),
++            ('unknown-stage', lambda r: r['reference'].update(stage_id='UNKNOWN')),
++        ]
++        for label, mutate in cases:
++            with self.subTest(case=label):
++                source = self.cold_result(); mutate(source)
++                with self.assertRaises(ValueError):
++                    self.publish(source)
++                self.assertFalse((self.responses / 'active.json').exists())
++
++    def test_reader_reference_substitution_is_rejected(self):
++        source = self.cold_result()
++        requested = copy.deepcopy(source['reference'])
++        source['reference']['generation_sha256'] = 'b' * 64
++        self.reader.return_value = source
++        with self.assertRaisesRegex(ValueError, 'HK_API_REFERENCE_MISMATCH'):
++            self.api.publish_hk_stage_response(self.config, self.store, requested, expected_generation=None)
++        self.assertFalse((self.responses / 'active.json').exists())
++
++    def test_wrong_module_or_route_is_rejected_without_read(self):
++        for config in ({**self.config, 'module_id': 'a_stage'}, {**self.config, 'routes': ['/other']}):
++            with self.subTest(config=config):
++                with self.assertRaisesRegex(ValueError, 'HK_API_CONFIG'):
++                    self.api.publish_hk_stage_response(config, self.store, self.cold_result()['reference'], expected_generation=None)
++        self.reader.assert_not_called()
++
++
++class HKStageAPIIntegrationTests(unittest.TestCase):
++    def test_original_owner_store_cold_reader_and_published_api(self):
++        # No injected readers, selectors, stores, or producers in this test.
++        from test_hk_stage_daily import request, stage8_request
++        from v5_shadow.hk_stage_daily import init_hk_root, run_hk_stage
++        from v5_shadow.hk_stage_api import publish_hk_stage_response
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary).resolve()
++            store = root / 'private-store'; init_hk_root(store)
++            responses = root / 'responses'; responses.mkdir()
++            (responses / '.v5-module-root').write_text('v5.module-root.v1:hk_stage\n')
++            config = dict(schema_version='v5.module_api.v1', module_id='hk_stage',
++                          release_id='m08-real-owner-fixture', data_root=str(responses), routes=[ROUTE])
++            generation = None
++            published = []
++            for value in (request(count=3), request('STAGE_0925', count=3), stage8_request()):
++                committed = run_hk_stage(value, store)
++                result = publish_hk_stage_response(config, store, committed['reference'],
++                                                   expected_generation=generation)
++                generation = result['generation_sha256']
++                query = dict(date=value['target_date'], stage=value['stage_id'],
++                             run_id=committed['reference']['run_id'])
++                checked_config, fd = _config(config)
++                try:
++                    record, _ = read_response(checked_config, fd, ROUTE, query)
++                finally:
++                    os.close(fd)
++                payload = record['payload']
++                self.assertEqual(payload['reference'], committed['reference'])
++                self.assertEqual(payload['artifact']['rows'], committed['artifact']['rows'])
++                self.assertEqual(payload['status'], committed['artifact']['selection_status'])
++                self.assertEqual(record['data_kind'], 'SYNTHETIC')
++                self.assertFalse(payload['natural_verified'])
++                self.assertFalse(payload['provenance']['formal_admission'])
++                self.assertNotIn(str(store), json.dumps(payload))
++                self.assertEqual(payload['m10_stage_member'], value['stage_id'] != STAGE8)
++                published.append((query, payload))
++            # Published serving remains possible after its private source moves.
++            store.rename(root / 'retained-private-store')
++            server = create_module_server(config)
++            thread = threading.Thread(target=server.serve_forever, daemon=True)
++            thread.start()
++            try:
++                base = 'http://127.0.0.1:' + str(server.server_address[1])
++                for query, payload in published:
++                    with urlopen(base + ROUTE + '?' + urlencode(query), timeout=3) as response:
++                        self.assertEqual(response.status, 200)
++                        self.assertEqual(json.load(response), payload)
++            finally:
++                server.shutdown(); server.server_close(); thread.join(timeout=5)
++
++
++if __name__ == '__main__':
++    unittest.main()
+diff --git a/V5/tests/test_hk_stage_daily.py b/V5/tests/test_hk_stage_daily.py
+new file mode 100644
+--- /dev/null
++++ b/V5/tests/test_hk_stage_daily.py
+@@ -0,0 +1,204 @@
++"""M08 engineering fixtures; dates/values are synthetic, never market evidence."""
++import copy
++import importlib.util
++import json
++import tempfile
++import unittest
++from pathlib import Path
++from v5_shadow.digests import sha256_json
++
++DATE='20261008'
++SIGNAL='20261007'
++STAGE='STAGE_0930_0935'
++
++def request(stage=STAGE, count=12):
++    times={'STAGE_0925':'09:20:00','STAGE_0930_0935':'09:35:00','STAGE_0935_0940':'09:40:00','STAGE_0940_0945':'09:45:00','STAGE_0945_1030':'10:30:00','STAGE_1300_1315':'13:15:00','STAGE_1445_1500':'15:00:00','STAGE_1545_1555':'15:55:00'}
++    captured='2026-10-08T'+times[stage]+'+08:00'
++    pool=[dict(code=f'HK.{i:05}',rank=i,score_prob_active=1-i/1000,target_date=DATE,signal_date=SIGNAL,preselect_lane='D1_MODEL_TOP100') for i in range(1,101)]
++    rows=[dict(code=f'HK.{i:05}',trade_date=DATE,target_date=DATE,signal_date=SIGNAL,stage_id=stage,captured_at=captured,update_time=captured,
++        open_price=10,last_price=11,high_price=11,low_price=10,pct_chg=10,volume_ratio=2,turnover_hkd=100000000,circular_market_cap_hkd_yi=20,
++        candidate_lanes=['D1_MODEL_TOP100'],rank=i,auction_score=100-i,reference_price_hkd=11,ask_price=11.1,bid_price=10.9,strict_failure_price_hkd=10.5,
++        second_filter_status='WATCH_ONLY',preselect_lane='D1_MODEL_TOP100') for i in range(1,count+1)]
++    payload=dict(rows=rows)
++    source=dict(collector_id='SYNTHETIC_FIXTURE',source_date=DATE,captured_at=captured,available_at=captured,
++        status='READY' if rows else 'READY_EMPTY',requested_rows=count,missing_symbols=[],cannot_confirm=[],source_evidence=['fixture_only=true'])
++    out=dict(schema_version='v5.hk_stage_input.v1',market='HK_CONNECT',target_date=DATE,signal_date=SIGNAL,stage_id=stage,data_kind='SYNTHETIC',
++        source=source,m06=dict(target_date=DATE,signal_date=SIGNAL,run_id='SYNTHETIC_M06',rows=pool,rows_sha256=sha256_json(pool)),
++        m02=dict(membership_date=DATE,source_date=DATE,status='SYNTHETIC',codes=[r['code'] for r in pool],receipt_sha256='a'*64,
++            units=dict(price='HKD',turnover='HKD',market_cap='HKD_100M',change='PERCENT',volume_ratio='RATIO')),
++        route='SECOND_FILTER' if stage=='STAGE_0925' else ('STAGE8_RTDATA' if stage=='STAGE_1545_1555' else 'FOUR_LANE'),payload=payload,payload_sha256=sha256_json(payload))
++    source['source_sha256']=out['payload_sha256']
++    return out
++
++def rehash(r):
++    r['payload_sha256']=sha256_json(r['payload']);r['source']['source_sha256']=r['payload_sha256']
++    r['m06']['rows_sha256']=sha256_json(r['m06']['rows'])
++    return r
++
++class HKDailyTests(unittest.TestCase):
++    def test_00_default_chain_exists(self):
++        self.assertIsNotNone(importlib.util.find_spec('v5_shadow.hk_stage_daily'),'M08 default producer missing')
++        self.assertIsNotNone(importlib.util.find_spec('v5_shadow.hk_stage_reader'),'M08 independent reader missing')
++
++
++class HKChainTests(unittest.TestCase):
++    def setUp(self):
++        self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)/'m08'
++    def tearDown(self):self.temp.cleanup()
++    def run_request(self,r):
++        from v5_shadow.hk_stage_daily import init_hk_root,run_hk_stage
++        if not self.root.exists():init_hk_root(self.root)
++        return run_hk_stage(r,self.root)
++    def test_four_lane_store_and_cold_reader(self):
++        from v5_shadow.hk_stage_reader import read_hk_stage
++        r=request();out=self.run_request(r);read=read_hk_stage(self.root,out['reference'])
++        self.assertEqual(out['artifact'],read['artifact']);self.assertEqual(len(read['artifact']['rows']),10)
++        self.assertEqual([v['score'] for v in read['artifact']['rows']],[89]*10)
++        self.assertFalse(read['natural_verified']);self.assertFalse(read['provenance']['formal_admission'])
++        self.assertEqual(read['artifact']['market'],'HK_CONNECT')
++    def test_original_score_order_and_reasons(self):
++        r=request();r['payload']['rows'][-1]['volume_ratio']=3
++        out=self.run_request(rehash(r));a=out['artifact']
++        self.assertEqual(a['rows'][0]['code'],'HK.00012');self.assertEqual(a['rows'][0]['score'],93)
++        self.assertIn('D1_MODEL_TOP100',a['rows'][0]['lane_evidence'])
++        detail=out['provenance']['owner_score_details']['HK.00012']
++        self.assertEqual(detail['score'],93)
++        self.assertIn('量比3.00',detail['reasons'])
++    def test_auction_preserves_second_filter_order(self):
++        r=request('STAGE_0925');r['payload']['rows'].reverse()
++        a=self.run_request(rehash(r))['artifact']
++        self.assertEqual(a['rows'][0]['code'],'HK.00012')
++        self.assertEqual(a['rows'][0]['source_mode'],'HK_CONNECT_AUCTION_SECOND_FILTER_STAGE_0925')
++    def test_auction_reference_never_promoted(self):
++        r=request('STAGE_0925');r['route']='D1_REFERENCE';r['payload']['rows']=r['m06']['rows'][:12]
++        a=self.run_request(rehash(r))['artifact']
++        self.assertEqual(a['selection_status'],'CANNOT_CONFIRM')
++        self.assertTrue(all(v['source_mode']=='HK_CONNECT_D1_PRESELECT_REFERENCE' for v in a['rows']))
++    def test_empty_and_missing_are_distinct(self):
++        r=request(count=0);a=self.run_request(r)['artifact'];self.assertEqual(a['selection_status'],'READY_EMPTY')
++        r['source'].update(status='CANNOT_CONFIRM',cannot_confirm=['SOURCE_MISSING'])
++        a=self.run_request(r)['artifact'];self.assertEqual(a['selection_status'],'CANNOT_CONFIRM')
++    def test_partial_preserves_rows_and_diagnostics(self):
++        r=request();r['source'].update(status='PARTIAL_WITH_ROWS',requested_rows=15,missing_symbols=['HK.00013'],cannot_confirm=['LANE_MISSING'])
++        a=self.run_request(r)['artifact'];self.assertEqual(a['selection_status'],'PARTIAL_WITH_ROWS')
++        self.assertEqual(a['selected_rows'],10);self.assertIn('LANE_MISSING',a['cannot_confirm'])
++    def test_exact_retry_reuses_without_rewrite(self):
++        r=request();a=self.run_request(r);before={str(p):p.stat().st_mtime_ns for p in self.root.rglob('*') if p.is_file()}
++        b=self.run_request(r);self.assertTrue(b['reused']);self.assertEqual(a['reference'],b['reference'])
++        self.assertEqual(before,{str(p):p.stat().st_mtime_ns for p in self.root.rglob('*') if p.is_file()})
++    def test_changed_input_gets_new_run(self):
++        r=request();a=self.run_request(r);r['payload']['rows'][0]['volume_ratio']=3
++        b=self.run_request(rehash(r));self.assertNotEqual(a['reference']['run_id'],b['reference']['run_id'])
++    def test_reader_ignores_latest_pointer(self):
++        from v5_shadow.hk_stage_reader import read_hk_stage
++        a=self.run_request(request());(self.root/'latest_success.json').write_text('{}')
++        self.assertEqual(read_hk_stage(self.root,a['reference'])['artifact'],a['artifact'])
++    def test_tamper_is_rejected(self):
++        from v5_shadow.hk_stage_reader import read_hk_stage
++        a=self.run_request(request());p=next(self.root.rglob('artifact.csv'));p.write_text('bad')
++        with self.assertRaises(ValueError):read_hk_stage(self.root,a['reference'])
++    def test_input_rejections(self):
++        cases=[('digest',lambda r:r.update(payload_sha256='0'*64)),
++          ('target',lambda r:r['m06'].update(target_date='20261009')),
++          ('signal',lambda r:r['m06'].update(signal_date=DATE)),
++          ('qualification_date',lambda r:r['m02'].update(membership_date='20261007')),
++          ('mixed_market',lambda r:r['payload']['rows'][0].update(code='A.000001')),
++          ('negative_cap',lambda r:r['payload']['rows'][0].update(platform_circular_market_cap_hkd_yi=-1)),
++          ('raw_score',lambda r:r['payload']['rows'][0].update(stage_score=999)),
++          ('missing_quote',lambda r:r['payload']['rows'][0].pop('volume_ratio')),
++          ('future_capture',lambda r:r['payload']['rows'][0].update(captured_at='2026-10-08T09:36:00+08:00')),
++          ('units',lambda r:r['m02']['units'].update(turnover='USD')),
++          ('lanes',lambda r:r['payload']['rows'][0].update(candidate_lanes=[])),
++          ('duplicate',lambda r:r['payload']['rows'].append(copy.deepcopy(r['payload']['rows'][0])))]
++        for name,mutate in cases:
++            with self.subTest(name=name):
++                r=request();mutate(r)
++                if name!='digest':rehash(r)
++                with self.assertRaises(ValueError):self.run_request(r)
++    def test_unknown_membership_is_observation_only(self):
++        r=request();r['m02']['status']='UNKNOWN';a=self.run_request(r)['artifact']
++        self.assertEqual(a['selection_status'],'PARTIAL_WITH_ROWS')
++        self.assertIn('M02_MEMBERSHIP_NOT_VERIFIED',a['cannot_confirm'])
++    def test_live_input_not_silently_admitted(self):
++        r=request();r['data_kind']='LIVE'
++        with self.assertRaisesRegex(ValueError,'NATURAL_ADMISSION_NOT_BOUND'):self.run_request(r)
++
++def stage8_request():
++    r=request('STAGE_1545_1555',3)
++    rows=[dict(code=f'HK.{i:05}',prev_close_price=10,last_price=11 if i<=3 else 9,turnover=50000000,volume_ratio=2,update_time='2026-10-08T15:52:00+08:00') for i in range(1,101)]
++    snap=dict(schema_version='stage_center.hk_active_snapshot.v1',trade_date=DATE,stage_id='STAGE_1545_1555',market='HK_CONNECT',source_role='FUTU_HKCONNECT_FULL_SCAN',
++        codes=r['m02']['codes'],codes_sha256=sha256_json(r['m02']['codes']),requested_rows=100,returned_rows=100,full_coverage=True,rows=rows,snapshot_sha256=sha256_json(rows),
++        captured_at='2026-10-08T15:52:00+08:00',cutoff_at='2026-10-08T15:55:00',temporal_cutoff_safe=True,production_allowed=False,buy_gate_updated=False,orders_sent=False)
++    ticks=[dict(code=f'HK.{i:05}',time='2026-10-08T'+t+'+08:00',cur_price=p,high=p,low=p,turnover=50000000,volume=1000000) for i in range(1,4) for t,p in [('15:45:00',10),('15:55:00',11)]]
++    r['payload']=dict(snapshot=snap,rtdata=dict(rows=ticks,errors=[],cleanup_warnings=[],missing_codes=[],batch_evidence=['fixture_only=true']),enrichment=[dict(code=f'HK.{i:05}',circular_market_cap_hkd_yi=20) for i in range(1,4)])
++    return rehash(r)
++
++class HKExtendedTests(unittest.TestCase):
++    setUp=HKChainTests.setUp
++    tearDown=HKChainTests.tearDown
++    run_request=HKChainTests.run_request
++    def test_stage8_original_snapshot_rtdata_store_reader(self):
++        out=self.run_request(stage8_request());a=out['artifact']
++        self.assertEqual(a['stage_id'],'STAGE_1545_1555');self.assertEqual(a['selected_rows'],3)
++        self.assertTrue(any('route=hk_connect_stage8_natural_rtd_data'==v for v in a['source_evidence']))
++        self.assertTrue(any('owner_execution=RETAINED_INPUT_ENGINEERING_REPLAY'==v for v in a['source_evidence']))
++        self.assertEqual(a['rows'][0]['score'],100)
++        self.assertFalse(out['natural_verified'])
++    def test_stage8_tamper_and_missing_enrichment_fail(self):
++        for mutate in (lambda r:r['payload']['snapshot'].update(snapshot_sha256='0'*64),lambda r:r['payload']['enrichment'].pop(),lambda r:r['payload']['rtdata']['rows'][0].update(time='2026-10-08T15:56:00+08:00')):
++            with self.subTest(mutate=mutate):
++                r=stage8_request();mutate(r)
++                with self.assertRaises(ValueError):self.run_request(rehash(r))
++    def test_failure_preserves_previous_success(self):
++        good=self.run_request(stage8_request());latest=(self.root/'latest_success.json').read_bytes()
++        r=stage8_request();r['payload']['snapshot']['snapshot_sha256']='0'*64
++        with self.assertRaises(ValueError):self.run_request(rehash(r))
++        self.assertEqual(latest,(self.root/'latest_success.json').read_bytes())
++        from v5_shadow.hk_stage_reader import read_hk_stage
++        self.assertEqual(good['artifact'],read_hk_stage(self.root,good['reference'])['artifact'])
++    def test_cross_lane_merge_uses_original_precedence(self):
++        r=request(count=1);extra=copy.deepcopy(r['payload']['rows'][0]);extra['candidate_lanes']=['OLD_DEMON_MEMORY'];extra['last_price']=10.5
++        r['payload']['rows'].append(extra)
++        a=self.run_request(rehash(r))['artifact'];self.assertEqual(a['selected_rows'],1)
++        self.assertEqual(a['rows'][0]['last_price'],11)
++        self.assertIn('OLD_DEMON_MEMORY',a['rows'][0]['candidate_lanes'])
++    def test_half_day_blocked_before_normal_windows(self):
++        r=request();r['target_date']='20261224'
++        with self.assertRaisesRegex(ValueError,'HALF_DAY_WINDOW_CONTRACT_UNVERIFIED'):self.run_request(r)
++    def test_m10_exactly_seven_excludes_stage8(self):
++        from v5_shadow.hk_stage_daily import STAGES
++        from v5_shadow.hk_stage_reader import read_m10_seven
++        refs=[self.run_request(request(s,1))['reference'] for s in STAGES[:7]]
++        out=read_m10_seven(self.root,refs,DATE);self.assertEqual(len(out['stages']),7);self.assertFalse(out['stage8_included'])
++        with self.assertRaises(ValueError):read_m10_seven(self.root,refs[1:],DATE)
++        with self.assertRaises(ValueError):read_m10_seven(self.root,refs+[self.run_request(stage8_request())['reference']],DATE)
++
++    def test_auction_source_failure_without_reason_never_becomes_empty(self):
++        r=request('STAGE_0925',0);r['source']['status']='CANNOT_CONFIRM'
++        self.assertEqual(self.run_request(r)['artifact']['selection_status'],'CANNOT_CONFIRM')
++    def test_auction_partial_source_without_reason_not_promoted(self):
++        r=request('STAGE_0925',1);r['source']['status']='PARTIAL_WITH_ROWS'
++        self.assertEqual(self.run_request(r)['artifact']['selection_status'],'PARTIAL_WITH_ROWS')
++
++
++    def test_reader_rejects_rebound_metadata_even_with_new_self_hash(self):
++        from v5_shadow.hk_stage_reader import read_hk_stage
++        out=self.run_request(request());ref=copy.deepcopy(out['reference'])
++        folder=self.root/'generations'/ref['generation_sha256']
++        product=json.loads((folder/'product.json').read_text());attempt=json.loads((folder/'attempt.json').read_text())
++        product['provenance']['source_identity']['captured_at']='2030-01-01T00:00:00+08:00'
++        product['reference'].pop('product_sha256');ref['product_sha256']=sha256_json(product)
++        product['reference']=ref;attempt['reference']=ref
++        (folder/'product.json').write_text(json.dumps(product));(folder/'attempt.json').write_text(json.dumps(attempt))
++        with self.assertRaisesRegex(ValueError,'PROVENANCE_REQUEST_BINDING'):read_hk_stage(self.root,ref)
++    def test_final_source_failure_never_advances_success(self):
++        import subprocess,sys
++        self.run_request(request());before=(self.root/'latest_success.json').read_bytes()
++        r=request();r['payload']['rows'][0]['volume_ratio']=3;rehash(r)
++        script="import sys,json;sys.path.insert(0,sys.argv[1]);from v5_shadow import hk_stage_daily as d;v=json.load(sys.stdin);d.source_bytes=lambda:(_ for _ in ()).throw(ValueError('TEST_SOURCE_CHANGED'));d._worker(v['request'],v['root'])"
++        result=subprocess.run([sys.executable,'-I','-B','-c',script,str(Path(__file__).resolve().parents[1]/'src')],input=json.dumps(dict(request=r,root=str(self.root))),text=True,capture_output=True)
++        self.assertNotEqual(result.returncode,0);self.assertIn('TEST_SOURCE_CHANGED',result.stderr)
++        self.assertEqual(before,(self.root/'latest_success.json').read_bytes())
++        self.assertTrue(any(json.loads(p.read_text())['status']=='FAILED' for p in self.root.rglob('attempt.json')))
++
++if __name__=='__main__':unittest.main()
+diff --git a/integration_candidates/M08/API_READONLY.md b/integration_candidates/M08/API_READONLY.md
+new file mode 100644
+--- /dev/null
++++ b/integration_candidates/M08/API_READONLY.md
+@@ -0,0 +1,132 @@
++# M08 immutable read-only API publication
++
++## Added module-local files
++
++- `V5/src/v5_shadow/hk_stage_api.py` (new; prior path ABSENT)
++- `V5/tests/test_hk_stage_api.py` (new; prior path ABSENT)
++- `integration_candidates/M08/API_READONLY.md` (new; prior path ABSENT)
++
++No changes to `module_api.py`, `module_artifacts.py`, gateway, ledger, scheduler,
++shared UI, V4 source, frozen vendors, or source manifests are required by this
++adapter. It adds neither a server nor a frontend framework. Activity in this
++cloud workspace does not establish a Mac mount or an active preview URL.
++
++## Explicit publication, separate from GET
++
++The producer first commits a private immutable HK run. The publisher receives
++its exact reference and calls the independently implemented cold reader:
++
++```python
++from v5_shadow.hk_stage_api import publish_hk_stage_response
++
++result = publish_hk_stage_response(
++    config, private_hk_store, exact_reference,
++    expected_generation=current_module_api_generation,
++)
++next_module_api_generation = result['generation_sha256']
++```
++
++`exact_reference` contains `generation_sha256`, `run_id`, `market`,
++`target_date`, `stage_id`, `artifact_sha256`, `manifest_sha256`,
++`receipt_sha256`, and `product_sha256`. It must identify one `HK_CONNECT` run;
++there is no `latest` lookup or fallback to a different date, stage, or run.
++
++`expected_generation` is the current **module API response generation**, or
++`None` only for the first publication. It is distinct from the private HK
++product generation inside `exact_reference`. A stale expected head fails with
++`GENERATION_CONFLICT`; a bad cold read cannot replace the public head.
++
++The existing module config contract is used unchanged:
++
++```json
++{
++  "schema_version": "v5.module_api.v1",
++  "module_id": "hk_stage",
++  "release_id": "ACTUAL_APPROVED_M08_RELEASE",
++  "data_root": "/ABSOLUTE/PRIVATE/V5/HK/RESPONSE_ROOT",
++  "routes": ["/api/v5/hk-stage-selection"]
++}
++```
++
++The response root must already have its existing-contract marker
++`.v5-module-root` containing `v5.module-root.v1:hk_stage\n`. The cold-reader
++store root and the response root are separate inputs; provisioning or mounting
++an active root is outside this adapter. The authorized integrator supplies the
++actual release, approved roots, gateway route, and available loopback port.
++Run the existing server with its existing CLI:
++
++```sh
++PYTHONPATH=V5/src python -B -m v5_shadow.module_api --config /approved/hk-api.json --port APPROVED_PORT
++```
++
++Published keys require all three exact string query parameters:
++
++`GET /api/v5/hk-stage-selection?date=20261008&stage=STAGE_0930_0935&run_id=EXACT_COMMITTED_RUN`
++
++Date/stage/run switches and refreshes read published immutable response objects.
++The server imports no HK producer, reader, or publication adapter; it never
++opens the private HK store or calls a selector. Unpublished keys return the
++existing service's unavailable result, and POST is rejected. Existing
++`activate_generation` provides compare-and-swap response-generation rollback;
++this alone is not a code, UI, or private-product rollback.
++
++## Public payload and provenance
++
++`payload.artifact` preserves the full original SelectionStore envelope,
++including ordered rows, formulas, scores, reasons, lane/quote evidence,
++coverage, missing symbols, and `cannot_confirm`. No recalculation, row sorting,
++or conversion of missing evidence into a valid empty result takes place.
++`payload.status` mirrors the original `selection_status`; a valid read returns
++HTTP 200 even when the business status is `CANNOT_CONFIRM`.
++
++The exact private reference remains in `payload.reference`, with its original
++hashes. These hashes identify the private original artifact, not its redacted
++public projection. The shared record's `payload_sha256` separately binds the
++public bytes. `source_input_sha256` comes from cold-verified provenance.
++
++Local path values are replaced with `[REDACTED_PATH]` throughout public source
++identity/evidence, including `active_snapshot_path=...`, nested path fields,
++and local paths in diagnostic text. Labels, hashes, error codes, and other
++non-path evidence remain. The private envelope is not mutated. Formula
++expressions such as `turnover_hkd / circular_market_cap_hkd_yi` are retained.
++
++`data_kind` remains `SYNTHETIC` or `RECORDED_INPUT_REPLAY`, exactly as returned
++by the cold reader. `natural_verified` and `formal_admission` remain false;
++production, BUY-gate, and order flags must be false. Record `generated_at` is
++the verified source identity's timezone-aware `captured_at`, not a fabricated
++natural-run or new capture timestamp; this makes repeat publication stable.
++
++The original eight stage IDs are accepted. The first seven carry
++`stage_group=HK_SEVEN_STAGE` and `m10_stage_member=true`. `STAGE_1545_1555`
++carries `stage_group=HK_STAGE8_SEPARATE` and `m10_stage_member=false`.
++Membership describes the downstream seven-stage grouping only; it is not
++formal market qualification or production admission.
++
++## Verification scope
++
++Executed in the cloud workspace under Python 3.12.14, below the repository's
++declared production Python >=3.14 environment:
++
++```sh
++PYTHONPATH=V5/src python -B -m unittest discover -s V5/tests -p 'test_hk_stage_api.py' -v
++PYTHONPATH=V5/src python -B -m unittest discover -s V5/tests -p 'test_module_artifacts.py' -v
++```
++
++- RED first: 13 tests, exit 1, `ModuleNotFoundError: v5_shadow.hk_stage_api`.
++- GREEN: 18/18 tests pass, exit 0 (17 boundary/unit tests and one three-route
++  original-owner integration test).
++- Review regressions for quoted/unquoted local paths and division-expression preservation
++  were observed failing first, then fixed; a formula-label path bypass is covered.
++- Existing immutable publication compatibility: 23/23 tests pass, exit 0.
++- Tests exercise the real shared publisher, cold `read_response` in a fresh
++  interpreter, the existing HTTP service, exact query switching, no-write GETs,
++  Stage8 separation, path redaction, safety/metadata rejection, unchanged
++  diagnostics, repeated publication, and compare-and-swap conflict handling.
++- Only the independent cold-reader boundary is injected in the adapter unit
++  tests. The separate integration test uses the actual producer, original
++  SelectionStore, cold reader, and existing API for four-lane, auction, and
++  Stage8 synthetic fixtures with no injections. It compares original rows,
++  statuses, and references and verifies published HTTP reads after moving the
++  private store out of reach. This establishes the synthetic engineering chain,
++  not actual Mac/API/UI deployment, natural input provenance, or complete M08
++  acceptance. Target-environment and real-input verification remain separate.
+diff --git a/integration_candidates/M08/CAPSULE_INTEGRATION_CANDIDATE.json b/integration_candidates/M08/CAPSULE_INTEGRATION_CANDIDATE.json
+new file mode 100644
+--- /dev/null
++++ b/integration_candidates/M08/CAPSULE_INTEGRATION_CANDIDATE.json
+@@ -0,0 +1 @@
++{"donor":"lexi2016/v4@f7cb731c384ee6890a87d16c19a5b5a621779477","entries":[{"bytes":31705,"git_blob_sha":"e5bb693578a32f954355f53fe9b79e1d592e8422","module":"stage_center.selection","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/selection.py","sha256":"ccf7dddfb72fe88b5bff68ce9501e0a8ef9f41a212008a495824017943675294","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/selection.py","source_repository":"lexi2016/v4"},{"bytes":2331,"git_blob_sha":"3c08626f76e43f3534ba8edc2785e7da8fbc2292","module":"stage_center.contracts","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/contracts.py","sha256":"6880f6a82c7f4fb0fde5c0661bd5a8bb12b590661a4b8552bcb3d6be969ae83d","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/contracts.py","source_repository":"lexi2016/v4"},{"bytes":4805,"git_blob_sha":"5d819f6467328cd94d94563143fc57f461a5b973","module":"stage_center.calendar","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/calendar.py","sha256":"31fed97066d9b804a71f15c48d4e0f8baa5d9af621e1d81dc0340fd6619e4099","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/calendar.py","source_repository":"lexi2016/v4"},{"bytes":13342,"git_blob_sha":"0b7dacbebbbaf1addf2e14878b426397ea81028f","module":"stage_center.acquisition","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/acquisition.py","sha256":"33e5003faed8127ec3393eb36af473c0d63ee3a79843418ef1a950ce7b697397","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/acquisition.py","source_repository":"lexi2016/v4"},{"bytes":17567,"git_blob_sha":"384a49608330385515463f4d4e9543c5a45d2097","module":"stage_center.candidate_input","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/candidate_input.py","sha256":"59c6bb0ef13a5aaa576477708385ec4ac68b7d20a69e3fc61d984da4a8284aff","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/candidate_input.py","source_repository":"lexi2016/v4"},{"bytes":33445,"git_blob_sha":"aed4b29ab53a88410fc99a920bc6ae4f5f3b95e3","module":"stage_center.raw_store","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/raw_store.py","sha256":"2dea717cb65053c48b75468fd61508b3b61b421a6b528aa8ce93395e99aef547","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/raw_store.py","source_repository":"lexi2016/v4"},{"bytes":15004,"git_blob_sha":"f7ba32406153d1d4220a15851f2b0829502eaa03","module":"stage_center.live_collectors","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/live_collectors.py","sha256":"82a08c2bbe286184e1a224d0a44e576d0f812f1ec2929ded303ab191a1d554bf","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/live_collectors.py","source_repository":"lexi2016/v4"},{"bytes":7514,"git_blob_sha":"a97e733725834235fbcc9129639ae198fa8770cd","module":"infrastructure.interprocess_lock","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py","sha256":"9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py","source_repository":"lexi2016/v4"},{"bytes":9354,"git_blob_sha":"1b6666551980c44ebb0b05f133c189909d79c7df","module":"infrastructure.owned_io","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py","sha256":"9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py","source_repository":"lexi2016/v4"},{"bytes":57,"git_blob_sha":"7319e68fca8b6ae31315a1bc94b7494dcf887ae9","module":"stage_center._selection_parts","origin":"canonical","package":true,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/__init__.py","sha256":"b56739ecc4a80eaa081f3ea124cf3199683fd470d71a770c9f91cc14de128140","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/__init__.py","source_repository":"lexi2016/v4"},{"bytes":7957,"git_blob_sha":"0dd8b201d888d4eeadbe6a3b806f44b3c3457f77","module":"stage_center._selection_parts.a_auction","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/a_auction.py","sha256":"d0a96edcb4d87f223b117917a8f0d68276bd088a88abe8f787d245c8e1c669ad","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/a_auction.py","source_repository":"lexi2016/v4"},{"bytes":7307,"git_blob_sha":"ca1f1b6d95d9d2b76591b77d372e7415fe2c5ce7","module":"stage_center._selection_parts.a_live","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/a_live.py","sha256":"b7faa3286df4f0312075c7a4563d3f4deed463d3f10ab2c4902967e8d5d7781d","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/a_live.py","source_repository":"lexi2016/v4"},{"bytes":4613,"git_blob_sha":"dc87d8230a4ea41a92509c22fb8cdb164921b0a8","module":"stage_center._selection_parts.a_stage","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/a_stage.py","sha256":"05a681a0e0d6de765fee6c84242747aaf233a6abdad3e982ae1d5f0909195cf2","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/a_stage.py","source_repository":"lexi2016/v4"},{"bytes":2997,"git_blob_sha":"16c5484e950f4cfaade62882aaaa734acfa75984","module":"stage_center._selection_parts.artifact_codec","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/artifact_codec.py","sha256":"6c0ddaed1dfe7a066be9aeb1c726e2357f5c1814b0baca834c37bb1879aeeb9d","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/artifact_codec.py","source_repository":"lexi2016/v4"},{"bytes":5104,"git_blob_sha":"12f49d16e43d3a346169734edcbc5899b748cbc9","module":"stage_center._selection_parts.hk_auction_filter","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_auction_filter.py","sha256":"2b3b3bb94dde8f35afabd4bd4072a4482a82f4cd0a9b8ee0d878046f1a5c4d4c","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_auction_filter.py","source_repository":"lexi2016/v4"},{"bytes":6917,"git_blob_sha":"89d7748dd0ab85a4d14e79dd2ebc7001ed87860c","module":"stage_center._selection_parts.hk_auction_reference","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_auction_reference.py","sha256":"d02e852313f6430a0102a029c22fe399400085ec4a317849b27987e8db64286d","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_auction_reference.py","source_repository":"lexi2016/v4"},{"bytes":6812,"git_blob_sha":"0e67cd5361f597c300770ed4d49623dfa514f22a","module":"stage_center._selection_parts.hk_formula_score","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_formula_score.py","sha256":"4e42a0e6c233f649f8937dc5b5de231ce59fce8363d05025e9df77a78c4f00d7","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_formula_score.py","source_repository":"lexi2016/v4"},{"bytes":8428,"git_blob_sha":"1c462d4ac2925bb5d77f7a8199735a3567205a8b","module":"stage_center._selection_parts.hk_four_lanes","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_four_lanes.py","sha256":"d44cd657b15b806922dd99317cfe759849a0d59884a0e39a533f0204f530ae71","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/hk_four_lanes.py","source_repository":"lexi2016/v4"},{"bytes":5196,"git_blob_sha":"6f6ddebbf4469da2a39daea02113c65441835498","module":"stage_center._selection_parts.market_quality","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/market_quality.py","sha256":"726cd4987a070bf78ac7416756f3cbba86633b1176f6f43535ac747263474b3f","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/market_quality.py","source_repository":"lexi2016/v4"},{"bytes":11285,"git_blob_sha":"66cbbb36e5c7cdb02a226c7666ec0acfd1067ec4","module":"stage_center._selection_parts.primitives_io","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/primitives_io.py","sha256":"6f492e2d32fab11970993adfe694cf159cccafe2205b288685917f93560e2501","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/primitives_io.py","source_repository":"lexi2016/v4"},{"bytes":3956,"git_blob_sha":"2f5cf40e2197c6af0dddfd2e7ba65a0b6403acb0","module":"stage_center._selection_parts.schema_values","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/schema_values.py","sha256":"80b0c21556c78c89132a08ca24eb80b5a211791719cb54801497dbe74472e458","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/schema_values.py","source_repository":"lexi2016/v4"},{"bytes":4569,"git_blob_sha":"44e32a44c24f7e2b99aeda48a5f39a71c7e55910","module":"stage_center._selection_parts.selection_envelope","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/selection_envelope.py","sha256":"be7748ff72fd85375fc6575a6a40281fb1518c8faf0e55f352f167fbbc42bd89","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/selection_envelope.py","source_repository":"lexi2016/v4"},{"bytes":3162,"git_blob_sha":"47391f5c14a3020d8c27c18ba00ed164bc6b49e9","module":"stage_center._selection_parts.shadow_capture","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/shadow_capture.py","sha256":"92875f5e1b969ec73790b31cd91378059d3f3eb07c3fcbd70c3ad16675ee66e5","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/shadow_capture.py","source_repository":"lexi2016/v4"},{"bytes":9540,"git_blob_sha":"e0532c71dbe469177b57c21ff37758c9e3ddbde5","module":"stage_center._selection_parts.store_publication","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/store_publication.py","sha256":"e3ee42413c35aa098cddc136795fcf04a37898bc2224d815cbe9e2b854c5c968","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/store_publication.py","source_repository":"lexi2016/v4"},{"bytes":7231,"git_blob_sha":"2515e4cacbc6328455725a365dae0d52721a61a8","module":"stage_center._selection_parts.store_verification","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/store_verification.py","sha256":"af061784202e35bd7c497208407ce1313876683544d89bcb05153ebca1e7af0f","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_selection_parts/store_verification.py","source_repository":"lexi2016/v4"},{"bytes":15008,"git_blob_sha":"f41cae542c1813172f0749ff2c768645657798da","module":"stage_center._live_collectors_parts.a_auction","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/a_auction.py","sha256":"0146d4921d77c9df0f791a86e6b343a36d87b06dd248bb48d597d9da47b39cad","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/a_auction.py","source_repository":"lexi2016/v4"},{"bytes":2110,"git_blob_sha":"3d30471b125766cfc391bd538e9a092e3064d113","module":"stage_center._live_collectors_parts.a_minute","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/a_minute.py","sha256":"5d56f92766b9b802c4b403d8f5af25cc82a9ef6b3f82675d1406fb4752c4362e","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/a_minute.py","source_repository":"lexi2016/v4"},{"bytes":2962,"git_blob_sha":"ad1359844d5d31020885a6c7bfc2c12d47c8bfa9","module":"stage_center._live_collectors_parts.collector_registry","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/collector_registry.py","sha256":"b8c366267f611ff76d0228093a9d826ee7c367b938aa4ab098f022a687245999","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/collector_registry.py","source_repository":"lexi2016/v4"},{"bytes":7304,"git_blob_sha":"cf21456d292d05614e2a27090c6bc21cf1849e51","module":"stage_center._live_collectors_parts.hk_active_snapshot","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_active_snapshot.py","sha256":"5079d283c25d8bc778e749e29b5c590eae25d90b3a9d5ffc785e32ce02e5f5b9","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_active_snapshot.py","source_repository":"lexi2016/v4"},{"bytes":4747,"git_blob_sha":"5201e6e5d0387306aa046286f60ad5bd73b8009d","module":"stage_center._live_collectors_parts.hk_auction","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_auction.py","sha256":"7658e15fbaffeb0846dad2eecc31c079f22968892c149385673eb6fa373e6dea","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_auction.py","source_repository":"lexi2016/v4"},{"bytes":5176,"git_blob_sha":"c33dd09141c0b5b7e6ac1d1541a5748005f96e54","module":"stage_center._live_collectors_parts.hk_minute","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_minute.py","sha256":"397818be00edff0d203e3c6763f4e5c0447a61a85142cde232c6724114298ca0","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_minute.py","source_repository":"lexi2016/v4"},{"bytes":12676,"git_blob_sha":"04a70650dea2cf670ae341de0d8074f7376d6160","module":"stage_center._live_collectors_parts.hk_replay","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_replay.py","sha256":"89456aaf429390a41604dc3d9f564c23f9ec6d7a36e2a5ec32948f9d53b9a108","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/hk_replay.py","source_repository":"lexi2016/v4"},{"bytes":44965,"git_blob_sha":"bcd53fa8be12ff04c00b50ec9566e17449978a3c","module":"stage_center._live_collectors_parts.selection_builder_registry","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/selection_builder_registry.py","sha256":"8b3552498b125ae90c56964799f3cf0e644a077243f7be4c37ea23261214379a","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/selection_builder_registry.py","source_repository":"lexi2016/v4"},{"bytes":3203,"git_blob_sha":"745089e14d886b75932de274e7b5e99ce0554dce","module":"stage_center._live_collectors_parts.shared_module_loading","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/shared_module_loading.py","sha256":"a24bb9cfbc4449796df6d0abacb60a1766b4554357a58ca95520e25f1c154fc2","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/shared_module_loading.py","source_repository":"lexi2016/v4"},{"bytes":6121,"git_blob_sha":"bdf47587b13506604208ec140cd6ac542679ab28","module":"stage_center._live_collectors_parts.temporal_validation","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/temporal_validation.py","sha256":"61c8fec0021fb66356cf31791a5bc3af576681fa1e576bbf142463b581dc2961","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_live_collectors_parts/temporal_validation.py","source_repository":"lexi2016/v4"},{"bytes":4154,"git_blob_sha":"4c678d04db2b29d06373c2584779954b2a57adb9","module":"stage_center._raw_store_parts.codec","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/codec.py","sha256":"504b97a64f483db17026dbeed6d5084fbc18ee972be60ad9e069ebd038708572","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/codec.py","source_repository":"lexi2016/v4"},{"bytes":3455,"git_blob_sha":"67f59e1b049b88c8c9e0cd24a6f25989b4a83e89","module":"stage_center._raw_store_parts.filesystem_io","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/filesystem_io.py","sha256":"f904f4086d4debfc32f5ad33ec2717cda522a59f2e15a3518c7aa83b91eef2b1","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/filesystem_io.py","source_repository":"lexi2016/v4"},{"bytes":2467,"git_blob_sha":"48fd739a205b63e1771a99aba95b6b8087e0619e","module":"stage_center._raw_store_parts.receipt_identity","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/receipt_identity.py","sha256":"b33c496a6052b450959a9b886c79ad8d5686230e320dbc99bfd98a3e8265a8f0","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/receipt_identity.py","source_repository":"lexi2016/v4"},{"bytes":13685,"git_blob_sha":"83e9cc77a7c4e9b48a8d3d5ddb2fc9c78844a947","module":"stage_center._raw_store_parts.transaction_publish","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/transaction_publish.py","sha256":"756068d347246c7e2c9fac9f65b3af580180cface934a4d51ee3fe5ce8985b61","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/transaction_publish.py","source_repository":"lexi2016/v4"},{"bytes":13082,"git_blob_sha":"5044ac9c43c53e4b96da752e42337d3f1da3eadc","module":"stage_center._raw_store_parts.transaction_read","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/transaction_read.py","sha256":"a7196066092ddc1bc2db9a7f4f559f54540766fedae9ee4dcd518409fc8b5fde","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/_raw_store_parts/transaction_read.py","source_repository":"lexi2016/v4"},{"bytes":1088,"git_blob_sha":"8544c2d159cbfccf65508617263676c9df97fc6b","module":"stage_center.hk_stage8","origin":"canonical","package":true,"path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/__init__.py","sha256":"d33f9f7ba2135f35073c92fdae1cd8b877f1fa9271f4c1c22217c1e969455f0b","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/__init__.py","source_repository":"lexi2016/v4"},{"bytes":1360,"git_blob_sha":"2adb7bf59d55aa00267f55d8dafeac260cb3edf5","module":"stage_center.hk_stage8.builders","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/builders.py","sha256":"231b8c0acc1092663b3236ad0415242280c4951b17a0aa094b632f7be0fe5a7c","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/builders.py","source_repository":"lexi2016/v4"},{"bytes":3774,"git_blob_sha":"52bf5b1a5dd696f7d447c9ca94171786f9aadd94","module":"stage_center.hk_stage8.precapture","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/precapture.py","sha256":"09e2140a6a3dd5516556193dec4a4e67b7d5db425be2282f187ea8c819d1f002","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/precapture.py","source_repository":"lexi2016/v4"},{"bytes":20873,"git_blob_sha":"5d33beffd7b3f5de963b393acf2151c77dfcf460","module":"stage_center.hk_stage8.rtdata","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/rtdata.py","sha256":"a85317c29df499162c7c805be19e89e198f77ad1d51811912da0c29d27bb8547","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/rtdata.py","source_repository":"lexi2016/v4"},{"bytes":19508,"git_blob_sha":"be5dd4ea8dc587e46bbda034e43fca1c1a1671f8","module":"stage_center.hk_stage8.snapshot","origin":"canonical","package":false,"path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/snapshot.py","sha256":"d1658e72a03a6842c2e6b1b3ae63f6889aa00f28c69ad0a7aa5c7400bf6f5267","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"handoff/v4-running-source-20261005/canonical/stage_center/hk_stage8/snapshot.py","source_repository":"lexi2016/v4"},{"bytes":527,"git_blob_sha":"55e1b3f744f80339298ac911073c67f3e549cf3c","module":"stage_center._selection_parts._namespace","origin":"EXPLICIT_COMPATIBILITY_ALIAS_NOT_CANONICAL","package":false,"path":"V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py","sha256":"45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py","source_repository":"lexi2016/v4"},{"bytes":527,"git_blob_sha":"55e1b3f744f80339298ac911073c67f3e549cf3c","module":"stage_center._live_collectors_parts._namespace","origin":"EXPLICIT_COMPATIBILITY_ALIAS_NOT_CANONICAL","package":false,"path":"V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py","sha256":"45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py","source_repository":"lexi2016/v4"},{"bytes":527,"git_blob_sha":"55e1b3f744f80339298ac911073c67f3e549cf3c","module":"stage_center._raw_store_parts._namespace","origin":"EXPLICIT_COMPATIBILITY_ALIAS_NOT_CANONICAL","package":false,"path":"V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py","sha256":"45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1","source_commit":"f7cb731c384ee6890a87d16c19a5b5a621779477","source_path":"V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py","source_repository":"lexi2016/v4"}],"material_commit":"5da73228d40d991e8f73ba84f7c66553e9235bc3","schema_version":"v5.m08.source_closure.v1","status":"ISOLATED_CAPSULE_INTEGRATION_CANDIDATE","virtual_packages":["stage_center","infrastructure"]}
+\ No newline at end of file
+diff --git a/integration_candidates/M08/REVIEW_AND_LIMITS.md b/integration_candidates/M08/REVIEW_AND_LIMITS.md
+new file mode 100644
+--- /dev/null
++++ b/integration_candidates/M08/REVIEW_AND_LIMITS.md
+@@ -0,0 +1,47 @@
++# Independent review and verification limits
++
++Two main-chain medium findings were reproduced and fixed before final acceptance:
++
++1. Final pinned-source verification followed success-index publication. It now
++   precedes SUCCEEDED/latest publication. Regression proves a final source failure
++   preserves previous latest-success bytes. An index-write failure after a verified
++   commit cannot retroactively mark that committed product FAILED.
++2. Reader checked a supplied product hash but did not bind display provenance back
++   to the retained request. It now rechecks the allowed data kind, exact source
++   identity, stage/calendar metadata and fixed configuration. A rehashed invented
++   future capture is rejected with M08_PROVENANCE_REQUEST_BINDING.
++
++Original auction normalization also exposed two wrapper-level failures: an empty
++failed source became READY_EMPTY and a partial source became READY. Both were
++observed in failing tests. Explicit upstream diagnostics now keep the unchanged
++original owner envelope fail-closed; original order, scores and Top10 remain.
++
++The API adapter's separate review reproduced quoted/unquoted paths with spaces
++and formula-like diagnostics. Final tests preserve real arithmetic formulas while
++redacting private paths. Actual no-injection producer/store/reader/API/HTTP tests
++exercise ordinary, auction and independent Stage8 routes; source private root
++can be moved after publication and GET continues reading only committed records.
++
++Final bounded acceptance is recorded under `V5/tests/logs/M08_FINAL/` with exact
++commands, UTC start/end, exits and runtime versions. Successful logs are raw.
++Older failure traces are path-redacted for publication only; substantive output
++is unchanged and the original capture was retained in the engineering workspace.
++
++The complete supplied V5 unittest discovery was also executed. It has one
++collection error: `test_daily_owner_adapters` imports `v5_shadow.daily_rebound_owner`,
++which is absent from this original M08 material branch. A fresh exact baseline
++reconstruction from 5da7322 reproduces the same error (54 tests, one error).
++It is not hidden, and unrelated module code is not copied or repaired to obtain
++an artificial all-green result. Final full-suite output accompanies delivery.
++
++Production package requirements are not satisfied by this cloud interpreter
++(Python 3.12.14, pandas 2.2.3, no pyarrow, no pytest). The bounded original-owner
++chain uses stdlib and its tests run here. Full donor pytest tests, supported Mac
++runtime, live inputs, page deployment, automatic/natural scheduling and two-day
++acceptance are NOT_RUN. No claim of full M08 completion is made.
++
++Shared code integration remains unchanged: no shared ledger allowlist was altered,
++no existing lane was impersonated, and no main/P0/UI file was overwritten.
++The public API adapter is a callable implementation using the existing immutable
++module publisher/server. A real active mount requires the integrator's verified
++Mac baseline and separate acceptance; it is not represented by a guessed URL.

@@ -1,0 +1,36 @@
+[
+  {
+    "command": "git apply --check forward.patch",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "git apply forward.patch",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "check": "APPLIED_AFTER_SHA256_ALL_MATCH",
+    "files": 29,
+    "status": "PASS"
+  },
+  {
+    "command": "git apply --check reverse.patch",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": "git apply reverse.patch",
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "check": "REVERSED_BASE_SHA256_ALL_MATCH_AND_NEW_PATHS_ABSENT",
+    "files": 145,
+    "status": "PASS"
+  }
+]

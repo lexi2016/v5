@@ -1,0 +1,64 @@
+{
+  "schema_version": "v5.m08.engineering_test_receipt.v1",
+  "scope": "SYNTHETIC_RETAINED_OWNER_CHAIN_AND_READONLY_API",
+  "results": [
+    {
+      "command": "python -B -m unittest discover -s tests -p test_hk_stage_daily.py -v",
+      "started_at": "2026-10-12T19:10:50.193559+00:00",
+      "finished_at": "2026-10-12T19:11:03.140300+00:00",
+      "exit_code": 0,
+      "stdout": "test_hk_stage_daily.stdout.txt",
+      "stderr": "test_hk_stage_daily.stderr.txt"
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -p test_hk_stage_api.py -v",
+      "started_at": "2026-10-12T19:11:03.140768+00:00",
+      "finished_at": "2026-10-12T19:11:06.074330+00:00",
+      "exit_code": 0,
+      "stdout": "test_hk_stage_api.stdout.txt",
+      "stderr": "test_hk_stage_api.stderr.txt"
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -p test_stage_selection.py -v",
+      "started_at": "2026-10-12T19:11:06.074714+00:00",
+      "finished_at": "2026-10-12T19:11:11.308495+00:00",
+      "exit_code": 0,
+      "stdout": "test_stage_selection.stdout.txt",
+      "stderr": "test_stage_selection.stderr.txt"
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -p test_module_artifacts.py -v",
+      "started_at": "2026-10-12T19:11:11.309034+00:00",
+      "finished_at": "2026-10-12T19:11:19.146096+00:00",
+      "exit_code": 0,
+      "stdout": "test_module_artifacts.stdout.txt",
+      "stderr": "test_module_artifacts.stderr.txt"
+    },
+    {
+      "command": "python -B -m unittest discover -s tests -p test_source_capsule.py -v",
+      "started_at": "2026-10-12T19:11:19.146603+00:00",
+      "finished_at": "2026-10-12T19:11:19.381552+00:00",
+      "exit_code": 0,
+      "stdout": "test_source_capsule.stdout.txt",
+      "stderr": "test_source_capsule.stderr.txt"
+    }
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "pyarrow": "NOT_INSTALLED",
+    "pytest": "NOT_INSTALLED"
+  },
+  "production_runtime_accepted": false,
+  "natural_verified": false,
+  "formal_admission": false,
+  "mac_verified": false,
+  "ui_deployed": false,
+  "not_run": [
+    "Full pytest donor runtime suite: excluded from bounded acceptance; inspect recorded pytest availability and supply full donor runtime to run separately",
+    "Live/provider SDK collection: outside retained-input scope",
+    "Mac supported-runtime acceptance and existing UI mounting: separate executor required",
+    "Natural scheduler/deadline activation and two-day evidence: not activated"
+  ],
+  "result": "PASS_ENGINEERING_CANDIDATE"
+}
