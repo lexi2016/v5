@@ -1,0 +1,40 @@
+{
+  "base_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/daily_close_recapture_owner.py",
+      "before": "ABSENT",
+      "after": {
+        "bytes": 16737,
+        "sha256": "f1733768668e489c345eaef032a7d382496bfe27d6dd760e5f788c5d1f24fa55"
+      }
+    },
+    {
+      "path": "V5/contracts/close_recapture_source_manifest.json",
+      "before": "ABSENT",
+      "after": {
+        "bytes": 7499,
+        "sha256": "f3c6eedee74ea4d2f72641e4c0e9386b844ff0dfd40506f8c2e1ba566a94cf50"
+      }
+    },
+    {
+      "path": "V5/tests/test_daily_close_recapture_owner.py",
+      "before": "ABSENT",
+      "after": {
+        "bytes": 12167,
+        "sha256": "b72d20c680b6505c99cfb0e9ca7698595c0887aac88236abd54eebe96e8dbbe1"
+      }
+    },
+    {
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "before": {
+        "bytes": 6133,
+        "sha256": "d3ba8dc00de2525ccfc2756193be1338bb800c796c2302f6c97f525a76b5748e"
+      },
+      "after": {
+        "bytes": 6159,
+        "sha256": "75eb32e06d412efc4e439efc2f876403a0c4804e57b22a1d3849756bd7a368e3"
+      }
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "commands": [
+    {
+      "step": "forward-check",
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/forward.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "step": "forward-apply",
+      "command": [
+        "git",
+        "apply",
+        "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/forward.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "step": "reverse-check",
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/reverse.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "step": "reverse-apply",
+      "command": [
+        "git",
+        "apply",
+        "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/reverse.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "after_bytes_match": true,
+  "before_bytes_restored": true
+}

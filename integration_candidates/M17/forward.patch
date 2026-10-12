@@ -1,0 +1,639 @@
+--- /dev/null
++++ b/V5/src/v5_shadow/daily_close_recapture_owner.py
+@@ -0,0 +1,311 @@
++"""M17 independent late owner/reader and original-ledger adapter.
++
++SIMULATED only: real collection is deliberately unbound. Python audit guards are
++not an OS sandbox. The original owner owns algorithms, windows and publication.
++No scheduler is installed and no shared P0 file is changed by this module.
++"""
++from __future__ import annotations
++import argparse
++from datetime import datetime
++import hashlib
++import json
++import os
++from pathlib import Path
++import re
++import subprocess
++import sys
++from types import SimpleNamespace
++
++if __package__ in (None, ''):
++    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++from v5_shadow.composition import no_symlinks
++from v5_shadow.contracts import aware, exact_keys, trade_date
++from v5_shadow.digests import canonical_bytes, sha256_json
++from v5_shadow.module_api import _open_directory, _read_at
++from v5_shadow.run_ledger import claim_run, finish_run, read_run
++
++LANE = 'manager_close_recapture'
++MODE = 'PYTDX_LATE_OBSERVATION'
++FLAGS = dict(RESEARCH_ONLY=True, production_allowed=False, buy_gate_updated=False, orders_sent=False)
++MANIFEST_SHA256 = 'f3c6eedee74ea4d2f72641e4c0e9386b844ff0dfd40506f8c2e1ba566a94cf50'
++MARKER = b'v5.m17.simulated-close.v1\n'
++CONFIG_KEYS = ('capture_mode', 'owner_root', 'python', 'state_root', 'universe_root', 'source_manifest', 'timeout_seconds')
++
++
++class OutcomeUnknown(RuntimeError):
++    """The original producer may have written: retain RUNNING, never retry."""
++
++
++def _sha(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def _read_file(path):
++    path = no_symlinks(Path(path))
++    fd = _open_directory(path.parent)
++    try:
++        return _read_at(fd, None, path.name)
++    finally:
++        os.close(fd)
++
++
++def _config(config):
++    exact_keys(config, CONFIG_KEYS)
++    if config['capture_mode'] != MODE:
++        raise ValueError('M17_CAPTURE_MODE_NOT_BOUND')
++    if type(config['timeout_seconds']) is not int or not 1 <= config['timeout_seconds'] <= 120:
++        raise ValueError('M17_TIMEOUT_CONTRACT')
++    # Existing venv interpreters may be symlinks. No installation or credential use.
++    python = Path(config['python'])
++    if not python.is_absolute() or not python.is_file() or not os.access(python, os.X_OK):
++        raise ValueError('M17_EXISTING_PYTHON_REQUIRED')
++    owner = no_symlinks(Path(config['owner_root']))
++    state = no_symlinks(Path(config['state_root']))
++    universe = no_symlinks(Path(config['universe_root']))
++    for other in (owner, universe):
++        if state.is_relative_to(other) or other.is_relative_to(state):
++            raise ValueError('M17_ROOT_OVERLAP')
++    if _read_file(state / '.v5-m17-close-root') != MARKER:
++        raise ValueError('M17_PRIVATE_SIMULATED_ROOT_REQUIRED')
++    raw = _read_file(config['source_manifest'])
++    if _sha(raw) != MANIFEST_SHA256:
++        raise ValueError('M17_SOURCE_MANIFEST_MISMATCH')
++    manifest = json.loads(raw)
++    if manifest['schema'] != 'v5.m17.close-recapture-source.v1' or len(manifest['files']) != 24:
++        raise ValueError('M17_SOURCE_MANIFEST_CONTRACT')
++    actual = {}
++    for entry in manifest['files']:
++        path = entry['path']
++        if Path(path).is_absolute() or '..' in Path(path).parts or path in actual:
++            raise ValueError('M17_SOURCE_PATH')
++        content = _read_file(owner / path)
++        if len(content) != entry['bytes'] or _sha(content) != entry['sha256']:
++            raise ValueError('M17_SOURCE_BYTES_MISMATCH')
++        actual[path] = _sha(content)
++    return sha256_json(actual)
++
++
++def bind_close_recapture_owner(config):
++    dependency = _config(config)
++    # Include the real ledger/import closure in the adapter's code identity.
++    names = ('daily_close_recapture_owner.py', 'run_ledger.py', 'contracts.py', 'digests.py',
++             'module_api.py', 'module_artifacts.py', 'api_gateway.py', 'composition.py', '__init__.py')
++    return dict(invoke=run_close_recapture_owner,
++                code_sha256=sha256_json({n: _sha(_read_file(Path(__file__).with_name(n))) for n in names}),
++                config_sha256=sha256_json(config), dependency_sha256=dependency)
++
++
++def request_identity(request, binding):
++    keys = {'config', 'source_trade_date', 'research_cutoff', 'execution_kind'}
++    if request.get('execution_kind') == 'SIMULATED':
++        keys.add('simulation')
++    exact_keys(request, keys)
++    trade_date(request['source_trade_date']); aware(request['research_cutoff'])
++    current = bind_close_recapture_owner(request['config'])
++    if any(binding.get(k) != current[k] for k in ('code_sha256', 'config_sha256', 'dependency_sha256')):
++        raise ValueError('M17_BINDING_CHANGED')
++    if binding.get('invoke') is not run_close_recapture_owner:
++        raise ValueError('M17_INVOKE_NOT_BOUND')
++    return dict(lane=LANE, target_date=request['source_trade_date'], input_sha256=sha256_json(request),
++                research_cutoff=request['research_cutoff'], **{k: current[k] for k in
++                ('code_sha256', 'config_sha256', 'dependency_sha256')})
++
++
++def _receipt(status, reference, reasons, verified=False):
++    return dict(status=status, product_reference=reference, readback_verified=verified,
++                retry_safe_without_external_effect=False, reason_codes=reasons)
++
++
++def verify_envelope(value, request, ledger_run_id):
++    if (not isinstance(value, dict) or value.get('ledger_run_id') != ledger_run_id
++            or value.get('request_sha256') != sha256_json(request)
++            or value.get('source_trade_date') != request['source_trade_date']
++            or value.get('execution_kind') != 'SIMULATED'
++            or value.get('natural_verified') is not False
++            or any(value.get(k) is not v for k, v in FLAGS.items())):
++        raise ValueError('M17_WORKER_ENVELOPE_MISMATCH')
++    return value
++
++
++def _process(role, request, ledger_run_id):
++    config = request['config']
++    _config(config)
++    packet = canonical_bytes(dict(request=request, ledger_run_id=ledger_run_id))
++    try:
++        child = subprocess.run([config['python'], '-I', '-B', str(Path(__file__).resolve()),
++                                '--worker', role], input=packet, stdout=subprocess.PIPE,
++                               stderr=subprocess.PIPE, timeout=config['timeout_seconds'],
++                               cwd=config['owner_root'], env={'PATH': os.defpath, 'PYTHONDONTWRITEBYTECODE': '1'})
++    except (subprocess.TimeoutExpired, OSError) as error:
++        raise OutcomeUnknown('M17_WORKER_OUTCOME_UNKNOWN') from error
++    if child.returncode or len(child.stdout) > 1024 * 1024:
++        raise OutcomeUnknown('M17_WORKER_EXIT_OR_OUTPUT_UNKNOWN')
++    try:
++        value = json.loads(child.stdout)
++        return verify_envelope(value, request, ledger_run_id)
++    except (ValueError, TypeError) as error:
++        raise OutcomeUnknown('M17_WORKER_ENVELOPE_UNKNOWN') from error
++
++
++def _same_product(producer, reader):
++    for key in ('ledger_run_id', 'request_sha256', 'source_trade_date', 'plan_trade_date', 'files'):
++        if producer.get(key) != reader.get(key):
++            raise OutcomeUnknown('M17_PRODUCER_READER_MISMATCH')
++
++
++def run_close_recapture_owner(request, ledger_run_id):
++    """Dispatcher-compatible five-field receipt; no hidden generic callbacks."""
++    binding = bind_close_recapture_owner(request['config'])
++    request_identity(request, binding)
++    if not re.fullmatch('[a-zA-Z0-9_-]{1,128}', ledger_run_id):
++        raise ValueError('M17_LEDGER_RUN_ID')
++    if request['execution_kind'] != 'SIMULATED':
++        return _receipt('BLOCKED', dict(**FLAGS, natural_verified=False), ['REAL_COLLECTOR_NOT_BOUND'])
++    producer = _process('producer', request, ledger_run_id)
++    status = producer['owner_status']
++    if status not in {'MATERIALIZED', 'ALREADY_EXISTS', 'PARTIAL'}:
++        terminal = 'BLOCKED' if status in {'NOT_APPLICABLE', 'INPUT_MISSING', 'PENDING_SLOT'} else 'FAILED'
++        return _receipt(terminal, producer, [producer.get('reason') or 'M17_ORIGINAL_OWNER_NOT_READY'])
++    reader = _process('reader', request, ledger_run_id)
++    if reader['owner_status'] not in {'READY', 'PARTIAL'}:
++        return _receipt('FAILED', reader, ['M17_INDEPENDENT_READER_REJECTED'])
++    _same_product(producer, reader)
++    reference = dict(reader, producer_pid=producer['pid'], reader_pid=reader['pid'],
++                     producer_status=status, root=request['config']['state_root'])
++    return _receipt('SUCCEEDED', reference, reader['cannot_confirm'], verified=True)
++
++
++def run_close_recapture_daily(request, ledger_root, binding):
++    identity = request_identity(request, binding)
++    claim = claim_run(ledger_root, identity, max_attempts=1)
++    if claim['status'] == 'REUSED_SUCCESS':
++        saved = claim['state']['latest_success']
++        try:
++            reader = _process('reader', request, saved['run_id'])
++            if reader['owner_status'] not in {'READY', 'PARTIAL'}:
++                raise ValueError('M17_SAVED_READER_REJECTED')
++            _same_product(saved['product_reference'], reader)
++            if saved['product_reference']['pool'] != reader['pool']:
++                raise ValueError('M17_SAVED_POOL_CHANGED')
++        except (ValueError, OutcomeUnknown):
++            return dict(status='BLOCKED_SAVED_PRODUCT_INVALID', state=claim['state'], natural_verified=False)
++        return dict(claim, readback_verified=True, natural_verified=False)
++    if claim['status'] != 'CLAIMED':
++        return dict(claim, natural_verified=False)
++    try:
++        receipt = binding['invoke'](request, claim['run_id'])
++    except OutcomeUnknown:
++        return dict(status='IN_PROGRESS_OR_OUTCOME_UNKNOWN', state=read_run(ledger_root, identity), natural_verified=False)
++    state = finish_run(ledger_root, claim, receipt)
++    reopened = read_run(ledger_root, identity)
++    if reopened != state or reopened['attempts'][-1]['run_id'] != claim['run_id']:
++        raise OutcomeUnknown('M17_LEDGER_READBACK_MISMATCH')
++    if receipt['status'] == 'SUCCEEDED' and reopened['latest_success']['product_reference']['ledger_run_id'] != claim['run_id']:
++        raise OutcomeUnknown('M17_LEDGER_PRODUCT_RUN_MISMATCH')
++    return dict(status=receipt['status'], state=reopened, natural_verified=False)
++
++
++def _audit_guard(role, state):
++    """In-process guards, not a claim of OS-enforced sandbox isolation."""
++    def audit(event, args):
++        if event.startswith('socket.') or event in {'subprocess.Popen', 'os.system', 'os.fork', 'os.forkpty', 'os.posix_spawn', 'os.exec', 'os.spawn'}:
++            raise PermissionError('M17_NETWORK_OR_CHILD_PROCESS_DENIED')
++        if event == 'open':
++            path, mode, flags = args
++            writing = (isinstance(mode, str) and any(c in mode for c in 'wax+')) or (isinstance(flags, int) and flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
++            if writing and role == 'reader':
++                raise PermissionError('M17_READER_WRITE_DENIED')
++            if writing and isinstance(path, (str, bytes)) and os.path.isabs(path):
++                if not Path(os.fsdecode(path)).is_relative_to(state):
++                    raise PermissionError('M17_WRITE_ROOT_DENIED')
++        if role == 'reader' and event in {'os.mkdir', 'os.remove', 'os.rename', 'os.rmdir', 'os.link', 'os.symlink', 'os.chmod', 'os.truncate'}:
++            raise PermissionError('M17_READER_WRITE_DENIED')
++    sys.addaudithook(audit)
++
++
++def _worker(role, packet):
++    request, run_id = packet['request'], packet['ledger_run_id']
++    if request['execution_kind'] != 'SIMULATED':
++        raise ValueError('REAL_COLLECTOR_NOT_BOUND')
++    config = request['config']; _config(config)
++    state = Path(config['state_root']); owner_root = Path(config['owner_root'])
++    _audit_guard(role, state)
++    sys.path.insert(0, str(owner_root))
++    from ops import materialize_manager_close_discovery as owner
++    from apps.api.v35_api.manager_workbench_router import ManagerWorkbenchResearchReader
++    from infrastructure.owned_io import SafeRoot
++    if owner.APP_ROOT != owner_root:
++        raise ValueError('M17_OWNER_ORIGIN')
++    envelope = dict(ledger_run_id=run_id, request_sha256=sha256_json(request),
++                    source_trade_date=request['source_trade_date'], execution_kind='SIMULATED',
++                    natural_verified=False, pid=os.getpid(), **FLAGS)
++    date = request['source_trade_date']
++    if role == 'producer':
++        simulation = request['simulation']; exact_keys(simulation, ('clocks', 'result'))
++        clocks = iter([aware(t) for t in simulation['clocks']])
++        if not simulation['clocks'] or simulation['clocks'][0] != request['research_cutoff']:
++            raise ValueError('M17_SIMULATED_CLOCK_CONTRACT')
++        result = simulation['result']
++        exact_keys(result, ('status', 'rows', 'requested_code_count', 'completed_code_count', 'no_data_codes', 'cannot_confirm'))
++        def collector(python, trade_date, stage_id, codes, **kwargs):
++            if trade_date != date or stage_id != 'STAGE_1545_1555' or kwargs['market'] != 'HK_CONNECT':
++                raise ValueError('M17_SIMULATED_COLLECTOR_REQUEST')
++            return SimpleNamespace(**result)
++        try:
++            produced = owner.recapture_close_minutes(manager_state_root=state,
++                universe_root=Path(config['universe_root']), pytdx_python=Path(config['python']),
++                trade_date=date, app_root=owner_root, provider_root=owner_root/'upstreams/v3_shared_data',
++                clock=lambda: next(clocks), pytdx_collector=collector)
++        except owner.EvidenceError as error:
++            return dict(envelope, owner_status='FAILED', reason=str(error))
++        envelope.update(owner_status=produced['status'], reason=produced.get('reason'), plan_trade_date=produced.get('plan_trade_date'))
++        if produced['status'] not in {'MATERIALIZED', 'ALREADY_EXISTS', 'PARTIAL'}:
++            return envelope
++    else:
++        readback = ManagerWorkbenchResearchReader(state).read_close_recapture(date)
++        envelope.update(owner_status=readback['status'], plan_trade_date=readback.get('plan_trade_date'))
++        if readback['status'] not in {'READY', 'PARTIAL'}:
++            return envelope
++        pool, _ = owner._read_close_recapture_pool(Path(config['universe_root'])/'.runtime/data', date)
++        if pool != readback['pool']:
++            raise ValueError('M17_EXTERNAL_POOL_CHANGED')
++        envelope.update(pool=pool, pool_run_id=pool['run_id'], cannot_confirm=readback['cannot_confirm'],
++                        captured_at=readback['request']['captured_at'], available_at=readback['request']['available_at'],
++                        candidate_count=readback['candidate_overlay']['count'], received_not_historical_1530=readback['received_not_historical_1530'])
++    # SafeRoot reopens each original file; receipt hash is its bytes, never artifact_sha256.
++    safe = SafeRoot(state)
++    prefix = f'workbench_research/{date}/'
++    refs = dict(artifact=prefix+'close_recapture.json', receipt=prefix+'close_recapture.receipt.json',
++                snapshot=prefix+'inputs/close_recapture_pytdx.json', candidate_overlay=prefix+'close_recapture.candidates.json')
++    files = {key: dict(artifact_ref=ref, sha256=_sha(safe.read_bytes(ref))) for key, ref in refs.items()}
++    if role == 'producer':
++        if any(produced.get(key+'_ref') != item['artifact_ref'] or produced.get(key+'_sha256') != item['sha256'] for key, item in files.items()):
++            raise ValueError('M17_PRODUCER_FILES_MISMATCH')
++    else:
++        expected = dict(artifact=readback['receipt']['artifact_sha256'],
++                        snapshot=readback['snapshot']['sha256'], candidate_overlay=readback['candidate_overlay']['sha256'])
++        if any(files[key]['sha256'] != sha for key, sha in expected.items()):
++            raise ValueError('M17_READER_FILES_CHANGED')
++    return dict(envelope, files=files)
++
++
++def main(argv=None):
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--worker', choices=('producer', 'reader'), help=argparse.SUPPRESS)
++    parser.add_argument('--request', type=Path)
++    parser.add_argument('--ledger-root', type=Path)
++    args = parser.parse_args(argv)
++    if args.worker:
++        packet = json.loads(sys.stdin.buffer.read(1024 * 1024 + 1))
++        value = _worker(args.worker, packet)
++    else:
++        if args.request is None or args.ledger_root is None:
++            parser.error('--request and --ledger-root are required')
++        request = json.loads(_read_file(args.request))
++        value = run_close_recapture_daily(request, str(args.ledger_root), bind_close_recapture_owner(request['config']))
++    print(canonical_bytes(value).decode())
++    return 0 if args.worker or value['status'] in {'SUCCEEDED', 'REUSED_SUCCESS'} else 2
++
++
++if __name__ == '__main__':
++    raise SystemExit(main())
+--- /dev/null
++++ b/V5/contracts/close_recapture_source_manifest.json
+@@ -0,0 +1,173 @@
++{
++  "schema": "v5.m17.close-recapture-source.v1",
++  "files": [
++    {
++      "path": "apps/api/v35_api/manager_workbench_router.py",
++      "bytes": 57619,
++      "sha256": "95ccda85ff50d44cffbb18fc655e417f926c14b27a60cfa4c5fad17a3cbd1b5e",
++      "git_blob": "793a8687601d34a042565f14b14b607bf0c46c10",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "contracts/market_calendar_2026.json",
++      "bytes": 3473,
++      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
++      "git_blob": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "contracts/trading_calendar.py",
++      "bytes": 10239,
++      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
++      "git_blob": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "domains/manager_catalyst_tracking.py",
++      "bytes": 24351,
++      "sha256": "3432d0c75b82dd4b06c1204cf59e378a32bc4ccc5403a695417ba47789dc05a7",
++      "git_blob": "cbc1688cc08c48bcfe7dc395d1f00a42442b95ab",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "domains/manager_close_discovery.py",
++      "bytes": 16974,
++      "sha256": "f983b5e2bea03d1d5309467e75c2e2da0157636813183221035fac5ef2704b6b",
++      "git_blob": "4aae1db0cba7495a3b1997ecfda10146317e977c",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "domains/manager_close_rebound.py",
++      "bytes": 27594,
++      "sha256": "aef0a7a3b767d5f74e3ef24fb1205897032d4a3be9d9995a028207c02a708b95",
++      "git_blob": "1c39affd1bfcf181654c4e9d00e2c501c1d5bfc5",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "domains/manager_research_evidence.py",
++      "bytes": 30848,
++      "sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d",
++      "git_blob": "9255d425083e3c3627d4940d7556eed79e3bc00f",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "infrastructure/interprocess_lock.py",
++      "bytes": 7514,
++      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
++      "git_blob": "a97e733725834235fbcc9129639ae198fa8770cd",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "infrastructure/manager_input_attestation.py",
++      "bytes": 10179,
++      "sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc",
++      "git_blob": "d6968a2acf64d7f5cde17fa8e1f27cefb744b3dd",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "infrastructure/owned_io.py",
++      "bytes": 9354,
++      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
++      "git_blob": "1b6666551980c44ebb0b05f133c189909d79c7df",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "ops/materialize_manager_close_discovery.py",
++      "bytes": 61132,
++      "sha256": "998275df085d886a6c4b5a44b3737c6b31de40cbe5b791d561db93968c062bfd",
++      "git_blob": "27fcfedf0b0ef017f9ceb8036e32ee23db5e03e0",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/scripts/live_acquisition/contracts.py",
++      "bytes": 3252,
++      "sha256": "776569b71a9db060186362fe04cce3e8b0f707d8b4a77f80288f8031a2f14fcc",
++      "git_blob": "2db1935847c4f7c4639442a9980004513230fe5b",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/scripts/live_acquisition/futu_minute.py",
++      "bytes": 4507,
++      "sha256": "af4cc0efea026eb3f6fa084389d6ee8351a286d38765e337147ced88fda150da",
++      "git_blob": "9518999f52a44d4b1c5c7fe8398413edb22cde9b",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq.py",
++      "bytes": 8534,
++      "sha256": "19946fd9c09033a77b460fe5a68f70969623d3b1c26f058091349e702d482fdd",
++      "git_blob": "62ca1b26929b77f17b433d5faccef268d8017ca8",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq_probe.py",
++      "bytes": 5981,
++      "sha256": "9ce612fb06f022601841828bb25d11d1850cd4e3ab09de775babd56f7b8d0399",
++      "git_blob": "b5124bfee8068e77e873dff76d5b80da0ba207db",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/allowlist.py",
++      "bytes": 3011,
++      "sha256": "a5e307f15416fe422a0ad36f60d6996f6a3f74753581dc589ef93149178dd206",
++      "git_blob": "afa173a579a48919b4653381fd528d901f3241d6",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/collectors.py",
++      "bytes": 8200,
++      "sha256": "f59dc7f70939a033fcde715aef33c5e063cb10b20c98caf17ee3a42c4884c159",
++      "git_blob": "5c234353c4c92f19ec39d928ae37f3603f06494d",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/constants.py",
++      "bytes": 2604,
++      "sha256": "706ea95054bcfcf3bab12a234e79a1d25bb412ba32ab0e5b5a6f3f3f6b725df8",
++      "git_blob": "2c9beeeaf2a748ac15df6c7b6c1ef2dade37ed77",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/consumer.py",
++      "bytes": 2788,
++      "sha256": "bd3b19a188907a2273d09a51ee06c448f41ea94277c30a56658350ed6f3843ba",
++      "git_blob": "3e9fa17abafde3ebf70aab31f7fd21e5e53678b1",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/hashing.py",
++      "bytes": 1027,
++      "sha256": "d4bce5d9337f07ec8c3594367b0203f4eb8de71b5380f14734b5944cf45dcca6",
++      "git_blob": "045b93ffb4311c431f1f43ee8223fde1d7a30266",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/hk_0_2.py",
++      "bytes": 67647,
++      "sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89",
++      "git_blob": "b2b366c2cbfd89ba9fed437620057fdb01f1e561",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/hk_auction_0920.py",
++      "bytes": 24181,
++      "sha256": "879196347ca3691262b015c412e07ca0281a50e14bce24a45a5b52be02a5f09d",
++      "git_blob": "e78eebac73deaf424c4b8dca630200915b1b3d4f",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/paths.py",
++      "bytes": 3986,
++      "sha256": "3007691db34aa721cf9549e79d9f9782bf7490ccb5d9f6ca2895f968525afdb3",
++      "git_blob": "9202f4dff68915569c9c25dd2bd34e1de476ff4e",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    },
++    {
++      "path": "upstreams/v3_shared_data/shared_data/store.py",
++      "bytes": 27895,
++      "sha256": "87042083dad178442c75386e59ae4b2fd9bab0a3c92b5c3a090ddb90e6b52a16",
++      "git_blob": "273dc301ff7e8fe9d91e9d3e3c7c427817dc3976",
++      "source_commit": "fe0a1890ebe59b476af6c8a0e1878fca059c24f4"
++    }
++  ]
++}
+--- /dev/null
++++ b/V5/tests/test_daily_close_recapture_owner.py
+@@ -0,0 +1,135 @@
++"""SIMULATED process/ledger integration; not natural-market acceptance.
++Pool/quote fixture provenance: fixed F test_manager_close_executor_rework.py L35-84,
++Git blob 38fa6bbf4200fbbb53599fdb01132b3472970ad5. Never import its scheduler.
++Run from repository root: python -B integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py
++"""
++import csv
++import hashlib
++import importlib.util
++import io
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++
++HERE=Path(__file__).resolve().parents[1]
++REPO=next(p for p in (HERE,*HERE.parents) if (p/'V5/vendor/close_discovery_baseline').is_dir())
++sys.path.insert(0,str(HERE/'src'))
++
++def encoded(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
++def digest(v):return hashlib.sha256(v).hexdigest()
++
++def fixture(root):
++    state=root/'state';state.mkdir();(state/'.v5-m17-close-root').write_text('v5.m17.simulated-close.v1\n')
++    ledger=root/'ledger';ledger.mkdir();(ledger/'.v5-daily-run-ledger').write_text('v5.daily-run-ledger.v1\n')
++    universe=root/'universe'; source='20260928';run='20260928-hk-connect-d1-top100-0-2-fixture'
++    relative=f'runs/{source}/HK_CONNECT_D1_TOP100_0_2/{run}'
++    folder=universe/'.runtime/data'/relative;folder.mkdir(parents=True)
++    rows=[dict(trade_date=source,bar_time='17:30',rank=i,code=f'HK.{i:05d}',name=f'stock-{i}',signal_date='20260924',target_date=source,recommendation_status='WATCH_ONLY_BACKTEST_GATED',production_allowed='False',score_prob_active='0.5') for i in range(1,101)]
++    buffer=io.StringIO(newline='');writer=csv.DictWriter(buffer,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
++    artifact=buffer.getvalue().encode();(folder/'artifact.csv').write_bytes(artifact)
++    manifest=dict(schema_version='v3_shared_data.manifest.v1',market='HK_CONNECT',stage_id='D1_PREMARKET',trade_date=source,row_count=100,source_id='hkconnect_0_2_frozen_prob_active',signal_date='20260924',captured_at='2026-09-24T17:30:43+08:00',artifact_relative=relative+'/artifact.csv',artifact_sha256=digest(artifact),provenance=dict(source_contract='tdx_vipdoc_71_day_prob_active'))
++    raw=encoded(manifest);(folder/'manifest.json').write_bytes(raw)
++    receipt=dict(schema_version='v3_shared_data.receipt.v1',status='READY',owner='v3_shared_data',role='HK_CONNECT_D1_TOP100_0_2',trade_date=source,run_id=run,artifact_sha256=digest(artifact),manifest_sha256=digest(raw),production_allowed=False,buy_gate_updated=False,orders_sent=False)
++    (folder/'receipt.json').write_bytes(encoded(receipt))
++    quotes=[dict(code=r['code'],update_time='2026-09-28 15:46:00',open_price=10.0,high_price=10.5,low_price=9.9,last_price=10.2,prev_close_price=10.0,turnover=1000.0,volume=100,window_start='2026-09-28 15:46:00',window_end='2026-09-28 15:46:00',bar_count=1,temporal_cutoff_safe=True) for r in rows]
++    simulation=dict(clocks=['2026-09-29T00:00:05+08:00','2026-09-29T00:00:10+08:00','2026-09-29T00:00:10.500000+08:00','2026-09-29T00:00:11+08:00'],result=dict(status='READ_OK',rows=quotes,requested_code_count=100,completed_code_count=100,no_data_codes=[],cannot_confirm=[]))
++    config=dict(capture_mode='PYTDX_LATE_OBSERVATION',owner_root=str(REPO/'V5/vendor/close_discovery_baseline'),python=str(Path(sys.executable).absolute()),state_root=str(state),universe_root=str(universe),source_manifest=str(HERE/'contracts/close_recapture_source_manifest.json'),timeout_seconds=30)
++    request=dict(config=config,source_trade_date=source,research_cutoff=simulation['clocks'][0],execution_kind='SIMULATED',simulation=simulation)
++    return request,ledger
++
++class LateRegistrationTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp=tempfile.TemporaryDirectory();self.root=Path(self.tmp.name).resolve()
++        spec=importlib.util.find_spec('v5_shadow.daily_close_recapture_owner')
++        self.assertIsNotNone(spec,'M17 standalone adapter is missing')
++        from v5_shadow import daily_close_recapture_owner as owner
++        self.owner=owner;self.request,self.ledger=fixture(self.root)
++    def tearDown(self):self.tmp.cleanup()
++    def run_daily(self):
++        return self.owner.run_close_recapture_daily(self.request,str(self.ledger),self.owner.bind_close_recapture_owner(self.request['config']))
++    def test_real_process_chain_and_reuse_cold_reader(self):
++        result=self.run_daily();self.assertEqual(result['status'],'SUCCEEDED',result)
++        ref=result['state']['latest_success']['product_reference'];self.assertEqual(ref['source_trade_date'],'20260928');self.assertEqual(ref['plan_trade_date'],'20260929')
++        self.assertNotEqual(ref['ledger_run_id'],ref['pool_run_id']);self.assertNotEqual(ref['producer_pid'],ref['reader_pid']);self.assertNotEqual(os.getpid(),ref['reader_pid'])
++        self.assertEqual(ref['execution_kind'],'SIMULATED');self.assertFalse(ref['natural_verified']);self.assertEqual(len(ref['files']),4)
++        before={p: p.read_bytes() for p in Path(self.request['config']['state_root']).rglob('*') if p.is_file()}
++        reused=self.run_daily();self.assertEqual(reused['status'],'REUSED_SUCCESS');self.assertEqual(len(reused['state']['attempts']),1)
++        self.assertEqual(before,{p:p.read_bytes() for p in before});self.assertFalse(list(Path(self.request['config']['state_root']).rglob('*1530*')))
++        self.assertFalse(any(k.startswith(('ops.','domains.','apps.api.')) for k in sys.modules))
++    def test_reused_success_corruption_is_not_ready_or_retried(self):
++        self.assertEqual(self.run_daily()['status'],'SUCCEEDED')
++        p=Path(self.request['config']['state_root'])/'workbench_research/20260928/close_recapture.candidates.json';p.write_bytes(b'{}')
++        result=self.run_daily();self.assertEqual(result['status'],'BLOCKED_SAVED_PRODUCT_INVALID');self.assertEqual(len(result['state']['attempts']),1);self.assertEqual(p.read_bytes(),b'{}')
++    def test_running_is_unknown_and_never_retried(self):
++        from v5_shadow.run_ledger import claim_run
++        binding=self.owner.bind_close_recapture_owner(self.request['config']);identity=self.owner.request_identity(self.request,binding)
++        claim=claim_run(str(self.ledger),identity,max_attempts=1)
++        result=self.run_daily();self.assertEqual(result['status'],'IN_PROGRESS_OR_OUTCOME_UNKNOWN');self.assertEqual(result['state']['attempts'][0]['run_id'],claim['run_id'])
++        self.assertFalse((Path(self.request['config']['state_root'])/'workbench_research').exists())
++    def test_unbound_real_execution_is_blocked_without_workers(self):
++        self.request['execution_kind']='OWNER_VERIFIED';self.request.pop('simulation')
++        result=self.run_daily();self.assertEqual(result['status'],'BLOCKED');self.assertIn('REAL_COLLECTOR_NOT_BOUND',result['state']['attempts'][0]['reason_codes']);self.assertFalse((Path(self.request['config']['state_root'])/'workbench_research').exists())
++    def test_unknown_mode_rejected(self):
++        self.request['config']['capture_mode']='UNKNOWN'
++        with self.assertRaisesRegex(ValueError,'CAPTURE_MODE'):self.run_daily()
++    def test_missing_pool_fails_closed(self):
++        self.request['config']['universe_root']=str(self.root/'missing')
++        result=self.run_daily();self.assertIn(result['status'],('BLOCKED','FAILED'));self.assertIsNone(result['state']['latest_success'])
++    def test_window_before_155505_is_rejected(self):
++        self.request['simulation']['clocks'][0]='2026-09-28T15:55:04+08:00';self.request['research_cutoff']=self.request['simulation']['clocks'][0]
++        result=self.run_daily();self.assertEqual(result['status'],'FAILED');self.assertIsNone(result['state']['latest_success'])
++    def test_input_envelope_substitution_rejected(self):
++        binding=self.owner.bind_close_recapture_owner(self.request['config'])
++        with self.assertRaisesRegex(ValueError,'ENVELOPE'):
++            self.owner.verify_envelope({'ledger_run_id':'wrong'},self.request,'right')
++    def test_source_manifest_drift_rejected_before_claim(self):
++        manifest=json.loads(Path(self.request['config']['source_manifest']).read_text());manifest['files'][0]['sha256']='0'*64
++        p=self.root/'source.json';p.write_text(json.dumps(manifest));self.request['config']['source_manifest']=str(p)
++        with self.assertRaisesRegex(ValueError,'SOURCE'):self.run_daily()
++        self.assertFalse((self.ledger/'manager_close_recapture').exists())
++    def test_other_six_lanes_remain_registered(self):
++        from v5_shadow.run_ledger import LANES
++        self.assertEqual(LANES,{'announcement','us_mapping','rebound','manager_plan','hk_preselection','a_stage','manager_close_recapture'})
++    def test_new_identity_keeps_previous_run_separate(self):
++        first=self.run_daily();self.assertEqual(first['status'],'SUCCEEDED')
++        self.request['simulation']['clocks'][0]='2026-09-29T00:00:06+08:00';self.request['research_cutoff']=self.request['simulation']['clocks'][0]
++        second=self.run_daily();self.assertEqual(second['status'],'SUCCEEDED')
++        self.assertNotEqual(first['state']['latest_success']['run_id'],second['state']['latest_success']['run_id'])
++        self.assertEqual(second['state']['latest_success']['product_reference']['producer_status'],'ALREADY_EXISTS')
++    def test_partial_coverage_is_not_upgraded(self):
++        sim=self.request['simulation']['result'];sim['rows']=sim['rows'][:2];sim['completed_code_count']=2
++        result=self.run_daily();self.assertEqual(result['status'],'SUCCEEDED')
++        ref=result['state']['latest_success']['product_reference'];self.assertEqual(ref['owner_status'],'PARTIAL');self.assertEqual(ref['candidate_count'],2);self.assertIn('PYTDX_EXHQ_COVERAGE_INCOMPLETE',ref['cannot_confirm'])
++    def test_current_or_previous_session_limit_preserved(self):
++        self.request['simulation']['clocks'][0]='2026-09-30T16:00:00+08:00';self.request['research_cutoff']=self.request['simulation']['clocks'][0]
++        result=self.run_daily();self.assertEqual(result['status'],'FAILED');self.assertIn('LATE_RECAPTURE_SOURCE_NOT_CURRENT_OR_PREVIOUS_SESSION',result['state']['attempts'][0]['reason_codes'])
++    def test_external_pool_drift_blocks_saved_reuse(self):
++        self.assertEqual(self.run_daily()['status'],'SUCCEEDED')
++        p=next(Path(self.request['config']['universe_root']).rglob('artifact.csv'));p.write_bytes(b'changed')
++        result=self.run_daily();self.assertEqual(result['status'],'BLOCKED_SAVED_PRODUCT_INVALID');self.assertEqual(len(result['state']['attempts']),1)
++    def test_receipt_corruption_blocks_saved_reuse(self):
++        self.assertEqual(self.run_daily()['status'],'SUCCEEDED')
++        p=Path(self.request['config']['state_root'])/'workbench_research/20260928/close_recapture.receipt.json';p.write_bytes(b'{}')
++        result=self.run_daily();self.assertEqual(result['status'],'BLOCKED_SAVED_PRODUCT_INVALID');self.assertEqual(p.read_bytes(),b'{}')
++    def test_python_guards_deny_network_subprocess_and_reader_write(self):
++        code="""import sys, pathlib, socket, subprocess
++sys.path.insert(0,sys.argv[1])
++from v5_shadow.daily_close_recapture_owner import _audit_guard
++_audit_guard('reader',pathlib.Path(sys.argv[2]))
++for action in (lambda:socket.socket(),lambda:subprocess.run([sys.executable,'-c','pass']),lambda:open(pathlib.Path(sys.argv[2])/'forbidden','w')):
++    try:action()
++    except PermissionError:pass
++    else:raise AssertionError('guard failed')
++"""
++        done=subprocess.run([sys.executable,'-I','-B','-c',code,str(HERE/'src'),str(self.root)],capture_output=True,text=True)
++        self.assertEqual(done.returncode,0,done.stderr);self.assertFalse((self.root/'forbidden').exists())
++    def test_standalone_cli_full_chain(self):
++        p=self.root/'request.json';p.write_text(json.dumps(self.request));script=HERE/'src/v5_shadow/daily_close_recapture_owner.py'
++        done=subprocess.run([sys.executable,'-I','-B',str(script),'--request',str(p),'--ledger-root',str(self.ledger)],capture_output=True,text=True)
++        self.assertEqual(done.returncode,0,done.stderr+done.stdout);self.assertEqual(json.loads(done.stdout)['status'],'SUCCEEDED')
++
++if __name__=='__main__':unittest.main(verbosity=2)
+--- a/V5/src/v5_shadow/run_ledger.py
++++ b/V5/src/v5_shadow/run_ledger.py
+@@ -11,7 +11,7 @@
+ from v5_shadow.module_api import _open_directory,_read_at
+ from v5_shadow.module_artifacts import _directory
+ 
+-LANES={'announcement','us_mapping','rebound','manager_plan','hk_preselection','a_stage'}
++LANES={'announcement','us_mapping','rebound','manager_plan','hk_preselection','a_stage','manager_close_recapture'}
+ MARKER=b'v5.daily-run-ledger.v1\n'
+ 
+ 

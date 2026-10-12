@@ -1,0 +1,72 @@
+{
+  "owner_root": "V5/vendor/close_discovery_baseline",
+  "owner_source_manifest": "after/V5/contracts/close_recapture_source_manifest.json",
+  "candidate_root": "integration_candidates/M17/after",
+  "application_prefix": "V5",
+  "narrow_p0_dependencies": [
+    {
+      "path": "after/V5/src/v5_shadow/composition.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/composition.py",
+      "source_git_blob": "d22723df42b71537210aa621afb05dfab6be517f",
+      "source_sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/digests.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/digests.py",
+      "source_git_blob": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "source_sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/__init__.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/__init__.py",
+      "source_git_blob": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+      "source_sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/module_api.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/module_api.py",
+      "source_git_blob": "d9d3f5f2ac06cb7802fade58829d00d6ca93c091",
+      "source_sha256": "9a0fc23a18b7499961fa14d57fb097dc293f64f27c6f87b5bc0354921784e510",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/contracts.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/contracts.py",
+      "source_git_blob": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "source_sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/module_artifacts.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/module_artifacts.py",
+      "source_git_blob": "acf2195fee3711f594982269f1e6ab81da40a905",
+      "source_sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/api_gateway.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/api_gateway.py",
+      "source_git_blob": "ecda315f6c67c8e18e473fad9d91c77487aa9d37",
+      "source_sha256": "21f90aed9fb73d18874d3ec41a153c1a6dcab3189e5ee3a8c2afa4f3f8baa5ee",
+      "role": "unchanged isolated test scaffold; do not overlay deployed P0"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/run_ledger.py",
+      "source_commit": "5a2cbd69e8a3eb99fc2167f0d2a41638b5af2c03",
+      "source_path": "handoffs/M17/p0_integration_base/V5/src/v5_shadow/run_ledger.py",
+      "source_git_blob": "a7f0954f776e357635e1cca449e54c88c1c110e8",
+      "source_sha256": "d3ba8dc00de2525ccfc2756193be1338bb800c796c2302f6c97f525a76b5748e",
+      "role": "single lane admission candidate"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+test_input_envelope_substitution_rejected (__main__.LateRegistrationTests.test_input_envelope_substitution_rejected) ... FAIL
+test_missing_pool_fails_closed (__main__.LateRegistrationTests.test_missing_pool_fails_closed) ... FAIL
+test_other_six_lanes_remain_registered (__main__.LateRegistrationTests.test_other_six_lanes_remain_registered) ... FAIL
+test_real_process_chain_and_reuse_cold_reader (__main__.LateRegistrationTests.test_real_process_chain_and_reuse_cold_reader) ... FAIL
+test_reused_success_corruption_is_not_ready_or_retried (__main__.LateRegistrationTests.test_reused_success_corruption_is_not_ready_or_retried) ... FAIL
+test_running_is_unknown_and_never_retried (__main__.LateRegistrationTests.test_running_is_unknown_and_never_retried) ... FAIL
+test_source_manifest_drift_rejected_before_claim (__main__.LateRegistrationTests.test_source_manifest_drift_rejected_before_claim) ... FAIL
+test_standalone_cli_full_chain (__main__.LateRegistrationTests.test_standalone_cli_full_chain) ... FAIL
+test_unbound_real_execution_is_blocked_without_workers (__main__.LateRegistrationTests.test_unbound_real_execution_is_blocked_without_workers) ... FAIL
+test_unknown_mode_rejected (__main__.LateRegistrationTests.test_unknown_mode_rejected) ... FAIL
+test_window_before_155505_is_rejected (__main__.LateRegistrationTests.test_window_before_155505_is_rejected) ... FAIL
+
+======================================================================
+FAIL: test_input_envelope_substitution_rejected (__main__.LateRegistrationTests.test_input_envelope_substitution_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_missing_pool_fails_closed (__main__.LateRegistrationTests.test_missing_pool_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_other_six_lanes_remain_registered (__main__.LateRegistrationTests.test_other_six_lanes_remain_registered)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_real_process_chain_and_reuse_cold_reader (__main__.LateRegistrationTests.test_real_process_chain_and_reuse_cold_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_reused_success_corruption_is_not_ready_or_retried (__main__.LateRegistrationTests.test_reused_success_corruption_is_not_ready_or_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_running_is_unknown_and_never_retried (__main__.LateRegistrationTests.test_running_is_unknown_and_never_retried)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_source_manifest_drift_rejected_before_claim (__main__.LateRegistrationTests.test_source_manifest_drift_rejected_before_claim)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_standalone_cli_full_chain (__main__.LateRegistrationTests.test_standalone_cli_full_chain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_unbound_real_execution_is_blocked_without_workers (__main__.LateRegistrationTests.test_unbound_real_execution_is_blocked_without_workers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_unknown_mode_rejected (__main__.LateRegistrationTests.test_unknown_mode_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+======================================================================
+FAIL: test_window_before_155505_is_rejected (__main__.LateRegistrationTests.test_window_before_155505_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "[ISOLATED_WORKSPACE]/work/integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py", line 48, in setUp
+    self.assertIsNotNone(spec,'M17 standalone adapter is missing')
+AssertionError: unexpectedly None : M17 standalone adapter is missing
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.002s
+
+FAILED (failures=11)

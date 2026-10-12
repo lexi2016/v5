@@ -1,0 +1,16 @@
+test_input_envelope_substitution_rejected (__main__.LateRegistrationTests.test_input_envelope_substitution_rejected) ... ok
+test_missing_pool_fails_closed (__main__.LateRegistrationTests.test_missing_pool_fails_closed) ... ok
+test_other_six_lanes_remain_registered (__main__.LateRegistrationTests.test_other_six_lanes_remain_registered) ... ok
+test_real_process_chain_and_reuse_cold_reader (__main__.LateRegistrationTests.test_real_process_chain_and_reuse_cold_reader) ... ok
+test_reused_success_corruption_is_not_ready_or_retried (__main__.LateRegistrationTests.test_reused_success_corruption_is_not_ready_or_retried) ... ok
+test_running_is_unknown_and_never_retried (__main__.LateRegistrationTests.test_running_is_unknown_and_never_retried) ... ok
+test_source_manifest_drift_rejected_before_claim (__main__.LateRegistrationTests.test_source_manifest_drift_rejected_before_claim) ... ok
+test_standalone_cli_full_chain (__main__.LateRegistrationTests.test_standalone_cli_full_chain) ... ok
+test_unbound_real_execution_is_blocked_without_workers (__main__.LateRegistrationTests.test_unbound_real_execution_is_blocked_without_workers) ... ok
+test_unknown_mode_rejected (__main__.LateRegistrationTests.test_unknown_mode_rejected) ... ok
+test_window_before_155505_is_rejected (__main__.LateRegistrationTests.test_window_before_155505_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 12.212s
+
+OK
