@@ -1,0 +1,54 @@
+{
+  "candidate": "cbc13c5577ec4dfb6354c852d54fb56d5e718706",
+  "product_candidate": "65b3bea261a3a48d6a4ea481420e743dc84e8ec6",
+  "guard_retry": {
+    "status": "PASS",
+    "tests": 1,
+    "skipped": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 0.957
+  },
+  "verified_source_files": 1132,
+  "only_executable_change": "V5/tests/test_m09_readonly_api.py",
+  "runtime_and_frontend_identical_to_product_candidate": true,
+  "existing_dist_identical_files": 19,
+  "prior_pass_evidence_commit": "57050f34b2229f096c994377a5086a063d8a7f23",
+  "prior_passes_reused": [
+    "real_GET_original_projection",
+    "26_other_Python",
+    "41_Node",
+    "component_DOM",
+    "typecheck",
+    "build"
+  ],
+  "status": "BLOCKED_DEPLOYMENT_PRECHECK",
+  "deployment": false,
+  "first_error": {
+    "operation": "lsof -t -iTCP:54780 -sTCP:LISTEN",
+    "exit_code": 1,
+    "reason": "NO_LISTENER"
+  },
+  "observed_ports": {
+    "8873": true,
+    "8910": true,
+    "54777": true,
+    "54778": true,
+    "54779": true,
+    "54780": false,
+    "62870": false,
+    "63668": false
+  },
+  "no_previous_process_stopped": true,
+  "new_candidate_source_identity_verified_and_stopped": true,
+  "candidate_source_real_read_pass": [
+    "M09_exact_20261012_run",
+    "M06_exact100",
+    "M10_exact_saved_projection",
+    "original_four_source_status"
+  ],
+  "live_preview_navigation_not_reached": true,
+  "rollback_files_and_config_retained": true,
+  "rollback_candidate": "e5d39d958d908be1708fb608110131b8ff5e1ce2",
+  "rollback_services_not_listening": true,
+  "reported_utc": "2026-10-12T19:03:54.889178+00:00"
+}
