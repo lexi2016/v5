@@ -1,0 +1,51 @@
+{
+  "candidate": "4c8606044b6004025998cff3cb0ebe5f3a5c4ed0",
+  "start": "2026-10-12T10:39:31.307030+00:00",
+  "end": "2026-10-12T10:39:42.583403+00:00",
+  "url": "http://127.0.0.1:63872",
+  "child_pid": 31990,
+  "child_returncode": -2,
+  "child_peak_rss_bytes": 542277632,
+  "child_cpu_seconds": 11.220187000000001,
+  "hashes_mtimes_unchanged": true,
+  "requests": [
+    {
+      "cycle": 0,
+      "request": "descriptor",
+      "http": 200,
+      "bytes": 804,
+      "seconds": 0.002,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "overview",
+      "http": 200,
+      "bytes": 6638,
+      "seconds": 4.233,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "summary",
+      "http": 200,
+      "bytes": 1321,
+      "seconds": 4.311,
+      "total": 1,
+      "entries": 1,
+      "loaded": 1,
+      "not_loaded": 0,
+      "identity": "MATCHED"
+    },
+    {
+      "cycle": 0,
+      "request": "gaps0",
+      "http": 409,
+      "bytes": 90,
+      "seconds": 2.62,
+      "error_codes": [
+        "MODULE_RESULT_INVALID"
+      ]
+    }
+  ]
+}
