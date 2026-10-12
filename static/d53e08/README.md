@@ -1,0 +1,3 @@
+# d53e08 static browser build
+
+Fixed source/backend d53e0820318462806d9e67dae1818bb684b38ade. Mac Vue12,Node34,typecheck/build passed.19 HTML/CSS/JS files835248bytes; SHA256/Git blob hashes in manifest.json. Real4 M15 matches/3HK and originalCONSUMED plan reference accepted; same-run announcement/rebound/M15 client switching passed. Only four reviewed US keys in configured sample, not whole-market capability. Announcement remains default. Use synthetic fixtures for cloud browser validation; no real payload, config, source maps or private paths included. Actual Mac evidence is appended independently on development branch.
