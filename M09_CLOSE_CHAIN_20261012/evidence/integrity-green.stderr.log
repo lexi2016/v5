@@ -1,0 +1,15 @@
+test_bad_started_record_is_rejected_before_attempt_head_write (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_bad_started_record_is_rejected_before_attempt_head_write) ... ok
+test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) ... ok
+test_cold_reader_proves_real_original_store_and_preview_identity (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_cold_reader_proves_real_original_store_and_preview_identity) ... ok
+test_forged_success_cannot_borrow_existing_committed_generation (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_forged_success_cannot_borrow_existing_committed_generation) ... ok
+test_historical_engineering_retry_keeps_actual_time_and_old_cutoff (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_historical_engineering_retry_keeps_actual_time_and_old_cutoff) ... ok
+test_later_slot_reuse_can_reference_earlier_commit_trigger (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_later_slot_reuse_can_reference_earlier_commit_trigger) ... ok
+test_missing_product_rejected_on_duplicate_and_cold_read (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_missing_product_rejected_on_duplicate_and_cold_read) ... ok
+test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) ... ok
+test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) ... ok
+test_valid_failed_and_interrupted_unknown_are_idempotent (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_valid_failed_and_interrupted_unknown_are_idempotent) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 4.633s
+
+OK

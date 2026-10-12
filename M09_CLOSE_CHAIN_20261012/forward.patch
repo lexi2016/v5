@@ -1,0 +1,428 @@
+--- a/V5/src/v5_shadow/a_close_daily.py
++++ b/V5/src/v5_shadow/a_close_daily.py
+@@ -590,26 +590,123 @@
+     return generation
+ 
+ 
+-def _attempt_receipt(handle, target, trigger_sha):
++def _attempt_start(handle, target, trigger_sha):
++    start = _read_optional(handle, 'attempts/' + trigger_sha + '/started.json')
++    if (not isinstance(start, dict) or set(start) != {'schema_version', 'trigger', 'request_sha256', 'started_at'}
++            or start['schema_version'] != 'v5.m09.attempt_start.v1'):
++        raise ValueError('M09_ATTEMPT_START_IDENTITY')
++    trigger = start['trigger']
++    keys = {'trade_date', 'slot', 'job_id', 'attempt_id', 'execution_kind', 'triggered_at'}
++    if (not isinstance(trigger, dict) or set(trigger) != keys or trigger['trade_date'] != target
++            or sha256_json(trigger) != sha(trigger_sha)
++            or trigger['execution_kind'] not in ('ENGINEERING', 'RECORDED_INPUT_REPLAY', 'MANUAL_RECOVERY', 'NATURAL')):
++        raise ValueError('M09_ATTEMPT_START_IDENTITY')
++    cutoff = _date_slot(target, trigger['slot'])
++    for key in ('job_id', 'attempt_id'):
++        if not isinstance(trigger[key], str) or re.fullmatch(r'[A-Za-z0-9_.-]{1,128}', trigger[key]) is None:
++            raise ValueError('M09_ATTEMPT_TRIGGER_IDENTIFIER')
++    sha(start['request_sha256'])
++    triggered, started = aware(trigger['triggered_at']), aware(start['started_at'])
++    # Source availability belongs to the historical cutoff. Actual attempts may
++    # run later: never compare an engineering/replay start with that cutoff.
++    if not triggered <= started <= _now():
++        raise ValueError('M09_ATTEMPT_TIME_ORDER')
++    if trigger['execution_kind'] == 'NATURAL':
++        end = cutoff.replace(hour=17, minute=10) if trigger['slot'] == '16:05' else cutoff.replace(hour=23, minute=59, second=59)
++        if not cutoff <= triggered <= started <= end:
++            raise ValueError('M09_NATURAL_ATTEMPT_TIME')
++    request = _read_optional(handle, 'attempts/' + trigger_sha + '/request.json')
++    if request is not None and (not isinstance(request, dict) or sha256_json(request) != start['request_sha256']
++            or any(request.get(key) != value for key, value in trigger.items())):
++        raise ValueError('M09_ATTEMPT_REQUEST_IDENTITY')
++    return start, cutoff, request
++
++
++def _verify_calculation_request(handle, receipt, request, record):
++    calculation = _read_optional(handle, 'runs/' + receipt['run_id'] + '/calculation.json')
++    for key in ('trade_date', 'input_manifest_sha256', 'input_manifest_path', 'configuration_revision', 'source_root_at_admission'):
++        request_key = {'input_manifest_path': 'input_manifest', 'source_root_at_admission': 'source_root'}.get(key, key)
++        if calculation.get(key) != request.get(request_key):
++            raise ValueError('M09_ATTEMPT_CALCULATION_REQUEST:' + key)
++    expected_class = ('ENGINEERING' if request['execution_kind'] == 'ENGINEERING' else
++                      'HISTORICAL_REPLAY' if request['execution_kind'] == 'RECORDED_INPUT_REPLAY' else 'DAILY_RESEARCH')
++    if record['execution_kind'] != expected_class:
++        raise ValueError('M09_ATTEMPT_EXECUTION_CLASS')
++
++
++def _verify_committed_success(handle, target, receipt):
++    generation = _generation(handle, target, receipt['generation_sha256'])
++    if any(generation.get(key) != receipt[key] for key in ('run_id', 'record_sha256')):
++        raise ValueError('M09_ATTEMPT_GENERATION_IDENTITY')
++    # SafeRoot carries the real private root. Never pass None to the cold store.
++    _, record = _read_run(handle.root, handle, receipt['run_id'], receipt['record_sha256'])
++    for key in ('calculation_sha256', 'business_status', 'data_kind', 'evidence_status'):
++        if record.get(key) != receipt[key]:
++            raise ValueError('M09_ATTEMPT_RECORD_IDENTITY:' + key)
++    request = _read_optional(handle, 'attempts/' + receipt['trigger_sha256'] + '/request.json')
++    if request is None:
++        # Pre-upgrade committing receipts have no archived request. Their exact
++        # generation still binds the trigger/request and verified original run.
++        # Unbound legacy reuse stays UNKNOWN; it cannot borrow another commit.
++        if (generation['commit_trigger_sha256'] != receipt['trigger_sha256']
++                or generation['commit_request_sha256'] != receipt['request_sha256']):
++            raise ValueError('M09_ATTEMPT_REQUEST_UNVERIFIED')
++    else:
++        _verify_calculation_request(handle, receipt, request, record)
++    witness = _attempt_receipt(handle, target, generation['commit_trigger_sha256'], verify_success=False)
++    if (witness['status'] != 'SUCCEEDED' or witness['request_sha256'] != generation['commit_request_sha256']
++            or any(witness.get(key) != receipt[key] for key in ('run_id', 'record_sha256', 'generation_sha256', 'calculation_sha256'))):
++        raise ValueError('M09_ATTEMPT_COMMIT_WITNESS')
++    if (generation['commit_trigger_sha256'] != receipt['trigger_sha256'] and not receipt['reused']):
++        raise ValueError('M09_ATTEMPT_REUSE_IDENTITY')
++    if not aware(record['computed_at']) <= aware(generation['published_at']) <= aware(witness['finished_at']) <= aware(receipt['finished_at']):
++        raise ValueError('M09_ATTEMPT_PUBLICATION_TIME_ORDER')
++
++
++def _attempt_receipt(handle, target, trigger_sha, *, verify_success=True):
+     sha(trigger_sha)
+-    prefix = 'attempts/' + trigger_sha
+-    start = _read_optional(handle, prefix + '/started.json')
+-    if (not isinstance(start, dict) or start.get('schema_version') != 'v5.m09.attempt_start.v1'
+-            or start.get('trigger', {}).get('trade_date') != target
+-            or sha256_json(start['trigger']) != trigger_sha):
+-        raise ValueError('M09_ATTEMPT_START_IDENTITY')
+-    sha(start['request_sha256'])
+-    receipt = _read_optional(handle, prefix + '/receipt.json')
++    start, cutoff, _ = _attempt_start(handle, target, trigger_sha)
++    receipt = _read_optional(handle, 'attempts/' + trigger_sha + '/receipt.json')
++    common = dict(schema_version='v5.m09.trigger_receipt.v1', trade_date=target,
++                  slot=start['trigger']['slot'], cutoff=cutoff.isoformat(), trigger=start['trigger'],
++                  trigger_sha256=trigger_sha, request_sha256=start['request_sha256'],
++                  started_at=start['started_at'], natural_verified=False, safety=dict(SAFETY))
+     if receipt is None:
+-        return dict(schema_version='v5.m09.trigger_receipt.v1', trade_date=target, status='UNKNOWN',
+-                    reason='ATTEMPT_STARTED_WITHOUT_TERMINAL_RECEIPT', trigger=start['trigger'],
+-                    trigger_sha256=trigger_sha, request_sha256=start['request_sha256'],
+-                    started_at=start['started_at'], natural_verified=False, safety=dict(SAFETY))
+-    if (receipt.get('schema_version') != 'v5.m09.trigger_receipt.v1' or receipt.get('trade_date') != target
+-            or receipt.get('status') not in ('SUCCEEDED', 'FAILED', 'UNKNOWN')
+-            or receipt.get('trigger_sha256') != trigger_sha or receipt.get('trigger') != start['trigger']
+-            or receipt.get('request_sha256') != start['request_sha256'] or receipt.get('safety') != SAFETY):
++        return dict(common, status='UNKNOWN', reason='ATTEMPT_STARTED_WITHOUT_TERMINAL_RECEIPT')
++    if (not isinstance(receipt, dict) or any(receipt.get(key) != value for key, value in common.items())
++            or receipt.get('natural_verified') is not False
++            or not isinstance(receipt.get('safety'), dict) or set(receipt['safety']) != set(SAFETY)
++            or any(receipt['safety'][key] is not value for key, value in SAFETY.items())):
+         raise ValueError('M09_ATTEMPT_RECEIPT_IDENTITY')
++    if not aware(start['started_at']) <= aware(receipt.get('finished_at')) <= _now():
++        raise ValueError('M09_ATTEMPT_TIME_ORDER')
++    status = receipt.get('status')
++    terminal = set(common) | {'status', 'finished_at'}
++    if status == 'SUCCEEDED':
++        required = {'reused', 'run_id', 'calculation_sha256', 'record_sha256', 'generation_sha256',
++                    'business_status', 'data_kind', 'evidence_status'}
++        if set(receipt) != terminal | required or type(receipt['reused']) is not bool:
++            raise ValueError('M09_ATTEMPT_SUCCESS_FIELDS')
++        for key in ('calculation_sha256', 'record_sha256', 'generation_sha256'):
++            sha(receipt[key])
++        if verify_success:
++            _verify_committed_success(handle, target, receipt)
++    elif status == 'FAILED':
++        required = {'reason', 'run_id', 'previous_success_generation_sha256', 'publication_recovery_status', 'issues'}
++        if (set(receipt) != terminal | required or not isinstance(receipt['reason'], str) or not receipt['reason']
++                or not isinstance(receipt['issues'], list) or any(not isinstance(x, dict) for x in receipt['issues'])
++                or not isinstance(receipt['publication_recovery_status'], str)):
++            raise ValueError('M09_ATTEMPT_FAILURE_FIELDS')
++        if receipt['run_id'] is not None and (not isinstance(receipt['run_id'], str)
++                or re.fullmatch(r'm09-[0-9a-f]{32}-[0-9a-f]{12}', receipt['run_id']) is None):
++            raise ValueError('M09_ATTEMPT_RUN_ID')
++        if receipt['previous_success_generation_sha256'] is not None:
++            sha(receipt['previous_success_generation_sha256'])
++    elif status == 'UNKNOWN':
++        if set(receipt) != terminal | {'reason'} or receipt['reason'] != 'INTERRUPTED_ATTEMPT_REQUIRES_NEW_ATTEMPT_ID':
++            raise ValueError('M09_ATTEMPT_UNKNOWN_FIELDS')
++    else:
++        raise ValueError('M09_ATTEMPT_STATUS')
+     return receipt
+ 
+ 
+@@ -734,13 +831,26 @@
+     attempt = 'attempts/' + trigger_sha
+     request_sha = sha256_json(request)
+     with handle.kernel_lock('locks/' + target + '.lock', timeout=30):
+-        _reconcile_interrupted_head(path, handle, target)
+         existing = _read_optional(handle, attempt + '/receipt.json')
+         if existing is not None:
+-            if existing.get('request_sha256') != request_sha:
++            existing = _attempt_receipt(handle, target, trigger_sha)
++            if existing['request_sha256'] != request_sha:
+                 raise ValueError('M09_ATTEMPT_IDENTITY_CONFLICT')
++            if existing['status'] == 'SUCCEEDED':
++                _, record = _read_run(path, handle, existing['run_id'], existing['record_sha256'])
++                _verify_calculation_request(handle, existing, request, record)
+             return existing
+         previous_start = _read_optional(handle, attempt + '/started.json')
++        if previous_start is not None:
++            previous_start, _, _ = _attempt_start(handle, target, trigger_sha)
++            if previous_start['request_sha256'] != request_sha:
++                raise ValueError('M09_ATTEMPT_IDENTITY_CONFLICT')
++        saved_request = _read_optional(handle, attempt + '/request.json')
++        if saved_request is not None and saved_request != request:
++            raise ValueError('M09_ATTEMPT_REQUEST_IDENTITY')
++        _reconcile_interrupted_head(path, handle, target)
++        if saved_request is None:
++            handle.write_bytes(attempt + '/request.json', canonical_bytes(request), require_absent=True)
+         start = {'schema_version': 'v5.m09.attempt_start.v1', 'trigger': trigger, 'request_sha256': request_sha, 'started_at': _now().isoformat()}
+         if previous_start is None:
+             handle.write_bytes(attempt + '/started.json', canonical_bytes(start), require_absent=True)
+--- /dev/null
++++ b/V5/tests/test_a_close_receipt_integrity.py
+@@ -0,0 +1,178 @@
++"""Real original-owner fixtures: durable attempts, cold reads and PIT boundaries."""
++import copy
++import json
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from datetime import datetime, timedelta, timezone
++from unittest.mock import patch
++
++from test_a_close_daily import make_input, file_sha, tree_bytes
++from v5_shadow import a_close_daily as daily
++from v5_shadow.digests import canonical_bytes, sha256_json
++
++
++class ReceiptIntegrityTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory(prefix='m09-receipts-')
++        self.addCleanup(self.tmp.cleanup)
++        self.base = Path(self.tmp.name).resolve()
++        self.root, self.source = self.base/'output', self.base/'source'
++        make_input(self.source)
++        daily.initialize_a_close_root(self.root)
++
++    def request(self, attempt='first', slot='16:05'):
++        return dict(schema_version='v5.m09.daily_request.v1', trade_date='20261009', slot=slot,
++                    job_id='a_share_close_review_'+slot.replace(':',''), attempt_id=attempt,
++                    execution_kind='ENGINEERING', triggered_at=datetime.now(timezone.utc).isoformat(),
++                    source_root=str(self.source), input_manifest='input.json',
++                    input_manifest_sha256=file_sha(self.source/'input.json'), configuration_revision='integrity-v1')
++
++    def run_request(self, request):
++        return daily.run_a_close_daily(self.root, request)
++
++    def receipt_path(self, receipt):
++        return self.root/'attempts'/receipt['trigger_sha256']/'receipt.json'
++
++    def assert_rejected_unchanged(self, request):
++        before = tree_bytes(self.root)
++        with patch.object(daily, '_build', side_effect=AssertionError('must not produce')):
++            with self.assertRaises((ValueError, OSError)):
++                self.run_request(request)
++        self.assertEqual(tree_bytes(self.root), before)
++
++    def test_six_reported_failed_receipt_tampers_are_rejected(self):
++        mutations = {
++            'schema': lambda r:r.update(schema_version='forged'),
++            'date': lambda r:r.update(trade_date='20261008'),
++            'trigger': lambda r:r['trigger'].update(attempt_id='other'),
++            'safety': lambda r:r['safety'].update(orders_sent=True),
++            'success': lambda r:r.update(status='SUCCEEDED', run_id='m09-'+'a'*32+'-'+'b'*12,
++                                          generation_sha256='0'*64),
++            'missing': lambda r:r.pop('started_at'),
++        }
++        for name, mutate in mutations.items():
++            with self.subTest(name=name):
++                request=self.request(name);request['input_manifest_sha256']='1'*64
++                receipt=self.run_request(request);self.assertEqual(receipt['status'],'FAILED')
++                mutate(receipt);self.receipt_path(receipt).write_bytes(canonical_bytes(receipt))
++                self.assert_rejected_unchanged(request)
++
++    def test_boolean_lookalikes_and_bad_attempt_times_are_rejected(self):
++        mutations = {
++            'bool': lambda r:r['safety'].update(orders_sent=0),
++            'natural': lambda r:r.update(natural_verified=0),
++            'slot': lambda r:r.update(slot='17:10'),
++            'cutoff': lambda r:r.update(cutoff='2026-10-09T17:10:00+08:00'),
++            'start': lambda r:r.update(started_at='2026-10-08T01:00:00+00:00'),
++            'end': lambda r:r.update(finished_at='2026-10-08T01:00:00+00:00'),
++            'status': lambda r:r.update(status='READY'),
++        }
++        for name, mutate in mutations.items():
++            with self.subTest(name=name):
++                request=self.request(name);request['input_manifest_sha256']='1'*64
++                receipt=self.run_request(request);mutate(receipt)
++                self.receipt_path(receipt).write_bytes(canonical_bytes(receipt))
++                self.assert_rejected_unchanged(request)
++
++    def test_bad_started_record_is_rejected_before_attempt_head_write(self):
++        request=self.request();request['input_manifest_sha256']='1'*64
++        receipt=self.run_request(request);path=self.receipt_path(receipt).with_name('started.json')
++        start=json.loads(path.read_bytes());start['started_at']='not-a-time';path.write_bytes(canonical_bytes(start))
++        self.assert_rejected_unchanged(request)
++
++    def test_historical_engineering_retry_keeps_actual_time_and_old_cutoff(self):
++        request=self.request();first=self.run_request(request)
++        self.assertEqual(first['status'],'SUCCEEDED',first)
++        self.assertGreater(daily.aware(first['started_at']), daily.aware(first['cutoff']))
++        self.assertEqual(self.run_request(request),first)
++        source_times=json.loads((self.source/'input.json').read_bytes())['provenance']
++        self.assertEqual(source_times['available_at'],'2026-10-09T15:41:00+08:00')
++
++    def test_later_slot_reuse_can_reference_earlier_commit_trigger(self):
++        first=self.run_request(self.request())
++        request=self.request('later','17:10');later=self.run_request(request)
++        self.assertEqual(later['status'],'SUCCEEDED',later)
++        self.assertTrue(later['reused']);self.assertEqual(first['generation_sha256'],later['generation_sha256'])
++        self.assertNotEqual(first['trigger_sha256'],later['trigger_sha256'])
++        self.assertEqual(self.run_request(request),later)
++        self.assertEqual(daily.read_a_close_latest_attempt(self.root,'20261009'),later)
++
++    def test_missing_product_rejected_on_duplicate_and_cold_read(self):
++        request=self.request();receipt=self.run_request(request)
++        self.assertEqual(receipt['status'],'SUCCEEDED',receipt)
++        (self.root/'runs'/receipt['run_id']/'product/a_share_reviews/20261009.json').rename(self.base/'retained-product.json')
++        self.assert_rejected_unchanged(request)
++        with self.assertRaises((ValueError,OSError)):daily.read_a_close_daily(self.root,'20261009')
++
++    def test_forged_success_cannot_borrow_existing_committed_generation(self):
++        first=self.run_request(self.request())
++        request=self.request('failed','17:10');request['input_manifest_sha256']='1'*64
++        failed=self.run_request(request);self.assertEqual(failed['status'],'FAILED')
++        forged=copy.deepcopy(first)
++        for key in ('trigger','trigger_sha256','request_sha256','started_at','finished_at','slot','cutoff'):
++            forged[key]=failed[key]
++        forged['reused']=True
++        self.receipt_path(failed).write_bytes(canonical_bytes(forged))
++        self.assert_rejected_unchanged(request)
++        served=daily.read_a_close_daily(self.root,'20261009')
++        self.assertEqual(served['identity']['generation_sha256'],first['generation_sha256'])
++        self.assertEqual(served['latest_attempt']['status'],'UNKNOWN')
++
++    def test_record_calculation_and_generation_mismatch_rejected(self):
++        for field in ('run_id','record_sha256','calculation_sha256','generation_sha256'):
++            with self.subTest(field=field):
++                request=self.request(field);receipt=self.run_request(request)
++                self.assertEqual(receipt['status'],'SUCCEEDED',receipt)
++                original=self.receipt_path(receipt).read_bytes()
++                receipt[field]='m09-'+'a'*32+'-'+'b'*12 if field=='run_id' else '0'*64
++                self.receipt_path(receipt).write_bytes(canonical_bytes(receipt))
++                self.assert_rejected_unchanged(request)
++                self.receipt_path(receipt).write_bytes(original)
++
++    def test_cold_reader_proves_real_original_store_and_preview_identity(self):
++        request=self.request();receipt=self.run_request(request)
++        self.assertEqual(receipt['status'],'SUCCEEDED',receipt)
++        source=Path(daily.__file__).resolve().parents[1]
++        code='''import json,sys
++from pathlib import Path
++sys.path.insert(0,sys.argv[1])
++from v5_shadow.a_close_daily import read_a_close_daily
++from v5_shadow.a_close_daily_api import read_a_close_preview
++root=Path(sys.argv[2]);read=read_a_close_daily(root,'20261009');preview=read_a_close_preview(root,'20261009')
++assert read['review']['model_review']['run_id']==preview['model_review']['run_id']
++assert read['identity']['generation_sha256']==preview['m09_publication']['generation_sha256']
++print(json.dumps(read['identity'],sort_keys=True))
++'''
++        before=tree_bytes(self.root)
++        process=subprocess.run([sys.executable,'-I','-B','-c',code,str(source),str(self.root)],capture_output=True,text=True)
++        self.assertEqual(process.returncode,0,process.stderr)
++        self.assertEqual(json.loads(process.stdout)['model_run_id'],receipt['run_id'])
++        self.assertEqual(before,tree_bytes(self.root))
++
++    def test_pre_upgrade_committing_receipt_keeps_verified_old_success(self):
++        request=self.request();receipt=self.run_request(request)
++        self.assertEqual(receipt['status'],'SUCCEEDED',receipt)
++        archive=self.receipt_path(receipt).with_name('request.json')
++        archive.rename(self.base/'retained-request.json')
++        before=tree_bytes(self.root)
++        served=daily.read_a_close_daily(self.root,'20261009')
++        self.assertEqual(served['identity']['generation_sha256'],receipt['generation_sha256'])
++        self.assertEqual(self.run_request(request),receipt)
++        self.assertEqual(tree_bytes(self.root),before)
++
++    def test_valid_failed_and_interrupted_unknown_are_idempotent(self):
++        failed_request=self.request('failed');failed_request['input_manifest_sha256']='1'*64
++        failed=self.run_request(failed_request);self.assertEqual(failed['status'],'FAILED')
++        self.assertEqual(self.run_request(failed_request),failed)
++        request=self.request('interrupted');trigger={k:request[k] for k in ('trade_date','slot','job_id','attempt_id','execution_kind','triggered_at')}
++        handle=daily.frozen.safe_root(self.root);prefix='attempts/'+sha256_json(trigger)
++        handle.write_bytes(prefix+'/started.json',canonical_bytes(dict(schema_version='v5.m09.attempt_start.v1',
++            trigger=trigger,request_sha256=sha256_json(request),started_at=datetime.now(timezone.utc).isoformat())),require_absent=True)
++        unknown=self.run_request(request);self.assertEqual(unknown['status'],'UNKNOWN')
++        self.assertEqual(self.run_request(request),unknown)
++
++
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/V5/tests/run_m09_acceptance.py
+@@ -0,0 +1,72 @@
++"""One offline M09 acceptance command, using only the selected existing Python."""
++from __future__ import annotations
++import argparse
++from datetime import datetime, timezone
++import hashlib
++import importlib.metadata
++import importlib.util
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++
++ROOT=Path(__file__).resolve().parents[2]
++
++
++def main():
++    parser=argparse.ArgumentParser()
++    parser.add_argument('--evidence-dir',type=Path)
++    parser.add_argument('--require-supported',action='store_true')
++    parser.add_argument('--require-zero-skip',action='store_true')
++    args=parser.parse_args()
++    evidence=(args.evidence_dir or Path(tempfile.mkdtemp(prefix='m09-acceptance-'))).resolve()
++    evidence.mkdir(parents=True,exist_ok=True)
++    versions={}
++    for name in ('pandas','pyarrow'):
++        try:versions[name]=importlib.metadata.version(name)
++        except importlib.metadata.PackageNotFoundError:versions[name]=None
++    def pair(value):
++        try:return tuple(map(int,value.split('.')[:2]))
++        except (AttributeError,ValueError):return (0,0)
++    supported=sys.version_info >= (3,14) and (2,3)<=pair(versions['pandas'])<(3,0) and (21,0)<=pair(versions['pyarrow'])<(25,0)
++    report={'schema_version':'v5.m09.acceptance.v1','started_at':datetime.now(timezone.utc).isoformat(),
++            'python':sys.version.split()[0], 'dependencies':versions,'declared_environment_compatible':supported,
++            'scope':'OFFLINE_SYNTHETIC_ORIGINAL_OWNER_AND_READBACK',
++            'live_data':'NOT_RUN','mac':'NOT_RUN' if sys.platform!='darwin' else 'OFFLINE_TEST_ONLY',
++            'api_ui_deployment':'NOT_RUN','natural_slots':'NOT_RUN','tests':None}
++    if importlib.util.find_spec('pandas') is None or (args.require_supported and not supported):
++        report.update(status='NOT_RUN',reason='EXISTING_INTERPRETER_DEPENDENCIES_UNAVAILABLE_OR_OUTSIDE_DECLARED_RANGE',exit_code=2)
++    else:
++        donor=ROOT/'handoff/v4-running-source-20261005/canonical'
++        script='''import json,sys,unittest
++sys.path[:0]=sys.argv[1:3]
++suite=unittest.defaultTestLoader.discover(sys.argv[2])
++result=unittest.TextTestRunner(verbosity=2).run(suite)
++print('M09_TEST_RESULT='+json.dumps({'run':result.testsRun,'failures':len(result.failures),'errors':len(result.errors),'skipped':[(str(t),reason) for t,reason in result.skipped]},sort_keys=True))
++sys.exit(0 if result.wasSuccessful() else 1)
++'''
++        env=dict(os.environ,M09_ORIGINAL_SOURCE_ROOT=str(donor),PYTHONDONTWRITEBYTECODE='1',
++                 PYTHONPATH=os.pathsep.join((str(ROOT/'V5/src'),str(ROOT/'V5/tests'))))
++        result=subprocess.run([sys.executable,'-I','-B','-c',script,str(ROOT/'V5/src'),str(ROOT/'V5/tests')],
++                              cwd=ROOT,env=env,text=True,capture_output=True)
++        (evidence/'product.stdout.log').write_text(result.stdout)
++        (evidence/'product.stderr.log').write_text(result.stderr)
++        print(result.stdout+result.stderr,end='')
++        marker=next((line for line in result.stdout.splitlines() if line.startswith('M09_TEST_RESULT=')),None)
++        stats=json.loads(marker.split('=',1)[1]) if marker else None
++        report.update(tests=stats,exit_code=result.returncode,status='FAIL')
++        if result.returncode==0 and stats is not None:
++            report['status']='PASS_WITH_NOT_RUN' if stats['skipped'] else 'PASS'
++            if args.require_zero_skip and stats['skipped']:report.update(status='NOT_RUN',exit_code=2)
++    report['finished_at']=datetime.now(timezone.utc).isoformat()
++    report['source_sha256']={str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()
++        for directory in ('V5/src/v5_shadow','V5/tests','V5/vendor/m09_a_close_daily','V5/contracts')
++        for p in (ROOT/directory).rglob('*') if p.is_file() and '__pycache__' not in p.parts}
++    (evidence/'report.json').write_text(json.dumps(report,indent=2,ensure_ascii=False)+'\n')
++    print('M09 acceptance:',report['status'])
++    return report['exit_code']
++
++
++if __name__=='__main__':sys.exit(main())

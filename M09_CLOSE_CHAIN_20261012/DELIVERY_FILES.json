@@ -1,0 +1,74 @@
+{
+  "V5/src/v5_shadow/a_close_daily.py": {
+    "sha256": "838db029c974b8e27c54809b57e095cbb872d786b0b7d14d29be03092a468278",
+    "bytes": 63182
+  },
+  "V5/tests/test_a_close_receipt_integrity.py": {
+    "sha256": "29424ca339a19decce978ab0974e018536b6412647c251716c2ff810fca08f8d",
+    "bytes": 10297
+  },
+  "V5/tests/run_m09_acceptance.py": {
+    "sha256": "5d5cd985b51c4fd7e9bd4d382fc4637c55646308d12437b6b13968249f049fbb",
+    "bytes": 4050
+  },
+  "M09_CLOSE_CHAIN_20261012/forward.patch": {
+    "sha256": "ebf61ab2d5b6b0960be20a080759d2afb3defd4bab8075051c95791ed9b7fa96",
+    "bytes": 26355
+  },
+  "M09_CLOSE_CHAIN_20261012/START_HERE.md": {
+    "sha256": "f85642fac4b024de37e10ae50f2ee20af69ce78ae32c13b126e154c8b16787c4",
+    "bytes": 5946
+  },
+  "M09_CLOSE_CHAIN_20261012/PATCH_ROUNDTRIP.json": {
+    "sha256": "a45f43030fbb751c059c39df861bab575128a8a9cc6c42f4e6a4f15b871361ea",
+    "bytes": 559
+  },
+  "M09_CLOSE_CHAIN_20261012/FILES_SHA256.json": {
+    "sha256": "a0bd22ff378f7c186fcd7cf1bbf15f6912d118d39ed2fc8ecf8445a47f251250",
+    "bytes": 1102
+  },
+  "M09_CLOSE_CHAIN_20261012/reverse.patch": {
+    "sha256": "ab35209d49244769a2bd0c8b23eaf9a8112bf6f4274f3018fe0d0c43af154069",
+    "bytes": 26287
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/baseline.stderr.log": {
+    "sha256": "c3aad3b50f06eb506483ee2319670f3b1b6f29ca9323f8301de7d0c9b0f77066",
+    "bytes": 19869
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/product.stderr.log": {
+    "sha256": "440e581686171eab3fbf0cec03ccfc86c1e3ce1611aebad2aa8c67651b4ab8aa",
+    "bytes": 21812
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/runner-first-attempt.stderr.log": {
+    "sha256": "ee2a263ea9340b7c2577f93266397295a581a83ed31b4131d75b969c1eb50430",
+    "bytes": 22498
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/integrity-green.stderr.log": {
+    "sha256": "39bc28c5dd2a4110d67f3a07c19df1cc2d2b4d76bfdd9955343e71ca7362624c",
+    "bytes": 1921
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/report.json": {
+    "sha256": "7cdfcb9d5cf9a44348efe470086d962e10f16bd6b846162d9aaccb7e4f257b6a",
+    "bytes": 6746
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/integrity-final.stderr.log": {
+    "sha256": "21efa8811826e8a968ca97ab3e9f9e09b33577174164f05e001d8e21f8e2a155",
+    "bytes": 2109
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/product.stdout.log": {
+    "sha256": "34c04f9cab9c4681e52c5528b780e938a66f70f50969b2209be3ce0466692edc",
+    "bytes": 1062
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/legacy-red.stderr.log": {
+    "sha256": "8ab7891af65fc7f0032331c7cc586b0959f74f65a85e3b423c15e05c558db73f",
+    "bytes": 2015
+  },
+  "M09_CLOSE_CHAIN_20261012/evidence/integrity-red.stderr.log": {
+    "sha256": "a1bc368a18c50bc2a6165917a0b225f11f64902e9cdd76f5bc6264ef17b001d4",
+    "bytes": 19803
+  },
+  "M09_CLOSE_CHAIN_20261012/before/V5/src/v5_shadow/a_close_daily.py": {
+    "sha256": "23b4200ffb29e83041b761927c6f285ff84d6b92a3cf8b2fc3e527a9d8ae1d9c",
+    "bytes": 55584
+  }
+}

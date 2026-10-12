@@ -590,26 +590,123 @@ def _generation(handle, target, digest):
     return generation
 
 
-def _attempt_receipt(handle, target, trigger_sha):
-    sha(trigger_sha)
-    prefix = 'attempts/' + trigger_sha
-    start = _read_optional(handle, prefix + '/started.json')
-    if (not isinstance(start, dict) or start.get('schema_version') != 'v5.m09.attempt_start.v1'
-            or start.get('trigger', {}).get('trade_date') != target
-            or sha256_json(start['trigger']) != trigger_sha):
+def _attempt_start(handle, target, trigger_sha):
+    start = _read_optional(handle, 'attempts/' + trigger_sha + '/started.json')
+    if (not isinstance(start, dict) or set(start) != {'schema_version', 'trigger', 'request_sha256', 'started_at'}
+            or start['schema_version'] != 'v5.m09.attempt_start.v1'):
         raise ValueError('M09_ATTEMPT_START_IDENTITY')
+    trigger = start['trigger']
+    keys = {'trade_date', 'slot', 'job_id', 'attempt_id', 'execution_kind', 'triggered_at'}
+    if (not isinstance(trigger, dict) or set(trigger) != keys or trigger['trade_date'] != target
+            or sha256_json(trigger) != sha(trigger_sha)
+            or trigger['execution_kind'] not in ('ENGINEERING', 'RECORDED_INPUT_REPLAY', 'MANUAL_RECOVERY', 'NATURAL')):
+        raise ValueError('M09_ATTEMPT_START_IDENTITY')
+    cutoff = _date_slot(target, trigger['slot'])
+    for key in ('job_id', 'attempt_id'):
+        if not isinstance(trigger[key], str) or re.fullmatch(r'[A-Za-z0-9_.-]{1,128}', trigger[key]) is None:
+            raise ValueError('M09_ATTEMPT_TRIGGER_IDENTIFIER')
     sha(start['request_sha256'])
-    receipt = _read_optional(handle, prefix + '/receipt.json')
+    triggered, started = aware(trigger['triggered_at']), aware(start['started_at'])
+    # Source availability belongs to the historical cutoff. Actual attempts may
+    # run later: never compare an engineering/replay start with that cutoff.
+    if not triggered <= started <= _now():
+        raise ValueError('M09_ATTEMPT_TIME_ORDER')
+    if trigger['execution_kind'] == 'NATURAL':
+        end = cutoff.replace(hour=17, minute=10) if trigger['slot'] == '16:05' else cutoff.replace(hour=23, minute=59, second=59)
+        if not cutoff <= triggered <= started <= end:
+            raise ValueError('M09_NATURAL_ATTEMPT_TIME')
+    request = _read_optional(handle, 'attempts/' + trigger_sha + '/request.json')
+    if request is not None and (not isinstance(request, dict) or sha256_json(request) != start['request_sha256']
+            or any(request.get(key) != value for key, value in trigger.items())):
+        raise ValueError('M09_ATTEMPT_REQUEST_IDENTITY')
+    return start, cutoff, request
+
+
+def _verify_calculation_request(handle, receipt, request, record):
+    calculation = _read_optional(handle, 'runs/' + receipt['run_id'] + '/calculation.json')
+    for key in ('trade_date', 'input_manifest_sha256', 'input_manifest_path', 'configuration_revision', 'source_root_at_admission'):
+        request_key = {'input_manifest_path': 'input_manifest', 'source_root_at_admission': 'source_root'}.get(key, key)
+        if calculation.get(key) != request.get(request_key):
+            raise ValueError('M09_ATTEMPT_CALCULATION_REQUEST:' + key)
+    expected_class = ('ENGINEERING' if request['execution_kind'] == 'ENGINEERING' else
+                      'HISTORICAL_REPLAY' if request['execution_kind'] == 'RECORDED_INPUT_REPLAY' else 'DAILY_RESEARCH')
+    if record['execution_kind'] != expected_class:
+        raise ValueError('M09_ATTEMPT_EXECUTION_CLASS')
+
+
+def _verify_committed_success(handle, target, receipt):
+    generation = _generation(handle, target, receipt['generation_sha256'])
+    if any(generation.get(key) != receipt[key] for key in ('run_id', 'record_sha256')):
+        raise ValueError('M09_ATTEMPT_GENERATION_IDENTITY')
+    # SafeRoot carries the real private root. Never pass None to the cold store.
+    _, record = _read_run(handle.root, handle, receipt['run_id'], receipt['record_sha256'])
+    for key in ('calculation_sha256', 'business_status', 'data_kind', 'evidence_status'):
+        if record.get(key) != receipt[key]:
+            raise ValueError('M09_ATTEMPT_RECORD_IDENTITY:' + key)
+    request = _read_optional(handle, 'attempts/' + receipt['trigger_sha256'] + '/request.json')
+    if request is None:
+        # Pre-upgrade committing receipts have no archived request. Their exact
+        # generation still binds the trigger/request and verified original run.
+        # Unbound legacy reuse stays UNKNOWN; it cannot borrow another commit.
+        if (generation['commit_trigger_sha256'] != receipt['trigger_sha256']
+                or generation['commit_request_sha256'] != receipt['request_sha256']):
+            raise ValueError('M09_ATTEMPT_REQUEST_UNVERIFIED')
+    else:
+        _verify_calculation_request(handle, receipt, request, record)
+    witness = _attempt_receipt(handle, target, generation['commit_trigger_sha256'], verify_success=False)
+    if (witness['status'] != 'SUCCEEDED' or witness['request_sha256'] != generation['commit_request_sha256']
+            or any(witness.get(key) != receipt[key] for key in ('run_id', 'record_sha256', 'generation_sha256', 'calculation_sha256'))):
+        raise ValueError('M09_ATTEMPT_COMMIT_WITNESS')
+    if (generation['commit_trigger_sha256'] != receipt['trigger_sha256'] and not receipt['reused']):
+        raise ValueError('M09_ATTEMPT_REUSE_IDENTITY')
+    if not aware(record['computed_at']) <= aware(generation['published_at']) <= aware(witness['finished_at']) <= aware(receipt['finished_at']):
+        raise ValueError('M09_ATTEMPT_PUBLICATION_TIME_ORDER')
+
+
+def _attempt_receipt(handle, target, trigger_sha, *, verify_success=True):
+    sha(trigger_sha)
+    start, cutoff, _ = _attempt_start(handle, target, trigger_sha)
+    receipt = _read_optional(handle, 'attempts/' + trigger_sha + '/receipt.json')
+    common = dict(schema_version='v5.m09.trigger_receipt.v1', trade_date=target,
+                  slot=start['trigger']['slot'], cutoff=cutoff.isoformat(), trigger=start['trigger'],
+                  trigger_sha256=trigger_sha, request_sha256=start['request_sha256'],
+                  started_at=start['started_at'], natural_verified=False, safety=dict(SAFETY))
     if receipt is None:
-        return dict(schema_version='v5.m09.trigger_receipt.v1', trade_date=target, status='UNKNOWN',
-                    reason='ATTEMPT_STARTED_WITHOUT_TERMINAL_RECEIPT', trigger=start['trigger'],
-                    trigger_sha256=trigger_sha, request_sha256=start['request_sha256'],
-                    started_at=start['started_at'], natural_verified=False, safety=dict(SAFETY))
-    if (receipt.get('schema_version') != 'v5.m09.trigger_receipt.v1' or receipt.get('trade_date') != target
-            or receipt.get('status') not in ('SUCCEEDED', 'FAILED', 'UNKNOWN')
-            or receipt.get('trigger_sha256') != trigger_sha or receipt.get('trigger') != start['trigger']
-            or receipt.get('request_sha256') != start['request_sha256'] or receipt.get('safety') != SAFETY):
+        return dict(common, status='UNKNOWN', reason='ATTEMPT_STARTED_WITHOUT_TERMINAL_RECEIPT')
+    if (not isinstance(receipt, dict) or any(receipt.get(key) != value for key, value in common.items())
+            or receipt.get('natural_verified') is not False
+            or not isinstance(receipt.get('safety'), dict) or set(receipt['safety']) != set(SAFETY)
+            or any(receipt['safety'][key] is not value for key, value in SAFETY.items())):
         raise ValueError('M09_ATTEMPT_RECEIPT_IDENTITY')
+    if not aware(start['started_at']) <= aware(receipt.get('finished_at')) <= _now():
+        raise ValueError('M09_ATTEMPT_TIME_ORDER')
+    status = receipt.get('status')
+    terminal = set(common) | {'status', 'finished_at'}
+    if status == 'SUCCEEDED':
+        required = {'reused', 'run_id', 'calculation_sha256', 'record_sha256', 'generation_sha256',
+                    'business_status', 'data_kind', 'evidence_status'}
+        if set(receipt) != terminal | required or type(receipt['reused']) is not bool:
+            raise ValueError('M09_ATTEMPT_SUCCESS_FIELDS')
+        for key in ('calculation_sha256', 'record_sha256', 'generation_sha256'):
+            sha(receipt[key])
+        if verify_success:
+            _verify_committed_success(handle, target, receipt)
+    elif status == 'FAILED':
+        required = {'reason', 'run_id', 'previous_success_generation_sha256', 'publication_recovery_status', 'issues'}
+        if (set(receipt) != terminal | required or not isinstance(receipt['reason'], str) or not receipt['reason']
+                or not isinstance(receipt['issues'], list) or any(not isinstance(x, dict) for x in receipt['issues'])
+                or not isinstance(receipt['publication_recovery_status'], str)):
+            raise ValueError('M09_ATTEMPT_FAILURE_FIELDS')
+        if receipt['run_id'] is not None and (not isinstance(receipt['run_id'], str)
+                or re.fullmatch(r'm09-[0-9a-f]{32}-[0-9a-f]{12}', receipt['run_id']) is None):
+            raise ValueError('M09_ATTEMPT_RUN_ID')
+        if receipt['previous_success_generation_sha256'] is not None:
+            sha(receipt['previous_success_generation_sha256'])
+    elif status == 'UNKNOWN':
+        if set(receipt) != terminal | {'reason'} or receipt['reason'] != 'INTERRUPTED_ATTEMPT_REQUIRES_NEW_ATTEMPT_ID':
+            raise ValueError('M09_ATTEMPT_UNKNOWN_FIELDS')
+    else:
+        raise ValueError('M09_ATTEMPT_STATUS')
     return receipt
 
 
@@ -734,13 +831,26 @@ def run_a_close_daily(root, request):
     attempt = 'attempts/' + trigger_sha
     request_sha = sha256_json(request)
     with handle.kernel_lock('locks/' + target + '.lock', timeout=30):
-        _reconcile_interrupted_head(path, handle, target)
         existing = _read_optional(handle, attempt + '/receipt.json')
         if existing is not None:
-            if existing.get('request_sha256') != request_sha:
+            existing = _attempt_receipt(handle, target, trigger_sha)
+            if existing['request_sha256'] != request_sha:
                 raise ValueError('M09_ATTEMPT_IDENTITY_CONFLICT')
+            if existing['status'] == 'SUCCEEDED':
+                _, record = _read_run(path, handle, existing['run_id'], existing['record_sha256'])
+                _verify_calculation_request(handle, existing, request, record)
             return existing
         previous_start = _read_optional(handle, attempt + '/started.json')
+        if previous_start is not None:
+            previous_start, _, _ = _attempt_start(handle, target, trigger_sha)
+            if previous_start['request_sha256'] != request_sha:
+                raise ValueError('M09_ATTEMPT_IDENTITY_CONFLICT')
+        saved_request = _read_optional(handle, attempt + '/request.json')
+        if saved_request is not None and saved_request != request:
+            raise ValueError('M09_ATTEMPT_REQUEST_IDENTITY')
+        _reconcile_interrupted_head(path, handle, target)
+        if saved_request is None:
+            handle.write_bytes(attempt + '/request.json', canonical_bytes(request), require_absent=True)
         start = {'schema_version': 'v5.m09.attempt_start.v1', 'trigger': trigger, 'request_sha256': request_sha, 'started_at': _now().isoformat()}
         if previous_start is None:
             handle.write_bytes(attempt + '/started.json', canonical_bytes(start), require_absent=True)

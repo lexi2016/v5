@@ -1,0 +1,33 @@
+{
+  "base_commit": "a3f5c557f715f6964f600b041979d5939da9c403",
+  "files": {
+    "V5/src/v5_shadow/a_close_daily.py": {
+      "before": {
+        "bytes": 55584,
+        "sha256": "23b4200ffb29e83041b761927c6f285ff84d6b92a3cf8b2fc3e527a9d8ae1d9c",
+        "git_blob_sha1": "aef5ae603f6aff0a8d8dd3acd2804739dd5a7344"
+      },
+      "after": {
+        "bytes": 63182,
+        "sha256": "838db029c974b8e27c54809b57e095cbb872d786b0b7d14d29be03092a468278",
+        "git_blob_sha1": "fd823ca13e763059958e003bd91bbe8d1463849d"
+      }
+    },
+    "V5/tests/test_a_close_receipt_integrity.py": {
+      "before": "ABSENT",
+      "after": {
+        "bytes": 10297,
+        "sha256": "29424ca339a19decce978ab0974e018536b6412647c251716c2ff810fca08f8d",
+        "git_blob_sha1": "c3208c257159a5a344adf0e10670bb656583ccea"
+      }
+    },
+    "V5/tests/run_m09_acceptance.py": {
+      "before": "ABSENT",
+      "after": {
+        "bytes": 4050,
+        "sha256": "5d5cd985b51c4fd7e9bd4d382fc4637c55646308d12437b6b13968249f049fbb",
+        "git_blob_sha1": "6827d7de269ac507e70b844dd7b0918cb1ed46c2"
+      }
+    }
+  }
+}

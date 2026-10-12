@@ -1,0 +1,28 @@
+test_pre_upgrade_committing_receipt_keeps_verified_old_success (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_pre_upgrade_committing_receipt_keeps_verified_old_success) ... ERROR
+
+======================================================================
+ERROR: test_pre_upgrade_committing_receipt_keeps_verified_old_success (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_pre_upgrade_committing_receipt_keeps_verified_old_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 161, in test_pre_upgrade_committing_receipt_keeps_verified_old_success
+    served=daily.read_a_close_daily(self.root,'20261009')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$CHECKOUT/V5/src/v5_shadow/a_close_daily.py", line 761, in read_a_close_daily
+    committed, skipped = _select_committed(path, handle, target, digest, explicit=generation_sha256 is not None)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$CHECKOUT/V5/src/v5_shadow/a_close_daily.py", line 733, in _select_committed
+    if _is_committed(handle, target, cursor, generation):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$CHECKOUT/V5/src/v5_shadow/a_close_daily.py", line 704, in _is_committed
+    receipt = _attempt_receipt(handle, target, generation['commit_trigger_sha256'])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "$CHECKOUT/V5/src/v5_shadow/a_close_daily.py", line 683, in _attempt_receipt
+    _verify_committed_success(handle, target, receipt)
+  File "$CHECKOUT/V5/src/v5_shadow/a_close_daily.py", line 636, in _verify_committed_success
+    raise ValueError('M09_ATTEMPT_REQUEST_UNVERIFIED')
+ValueError: M09_ATTEMPT_REQUEST_UNVERIFIED
+
+----------------------------------------------------------------------
+Ran 1 test in 0.626s
+
+FAILED (errors=1)

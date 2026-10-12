@@ -1,0 +1,229 @@
+test_bad_started_record_is_rejected_before_attempt_head_write (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_bad_started_record_is_rejected_before_attempt_head_write) ... FAIL
+test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) ... 
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='bool') ... FAIL
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='natural') ... FAIL
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='slot') ... FAIL
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='cutoff') ... FAIL
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='start') ... FAIL
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='end') ... FAIL
+  test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='status') ... FAIL
+test_cold_reader_proves_real_original_store_and_preview_identity (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_cold_reader_proves_real_original_store_and_preview_identity) ... ok
+test_forged_success_cannot_borrow_existing_committed_generation (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_forged_success_cannot_borrow_existing_committed_generation) ... FAIL
+test_historical_engineering_retry_keeps_actual_time_and_old_cutoff (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_historical_engineering_retry_keeps_actual_time_and_old_cutoff) ... ok
+test_later_slot_reuse_can_reference_earlier_commit_trigger (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_later_slot_reuse_can_reference_earlier_commit_trigger) ... ok
+test_missing_product_rejected_on_duplicate_and_cold_read (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_missing_product_rejected_on_duplicate_and_cold_read) ... ok
+test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) ... 
+  test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) (field='record_sha256') ... FAIL
+  test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) (field='calculation_sha256') ... FAIL
+  test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) (field='generation_sha256') ... FAIL
+test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) ... 
+  test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='schema') ... FAIL
+  test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='date') ... FAIL
+  test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='trigger') ... FAIL
+  test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='safety') ... FAIL
+  test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='success') ... FAIL
+  test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='missing') ... FAIL
+test_valid_failed_and_interrupted_unknown_are_idempotent (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_valid_failed_and_interrupted_unknown_are_idempotent) ... ok
+
+======================================================================
+FAIL: test_bad_started_record_is_rejected_before_attempt_head_write (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_bad_started_record_is_rejected_before_attempt_head_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 84, in test_bad_started_record_is_rejected_before_attempt_head_write
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='bool')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='natural')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='slot')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='cutoff')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='start')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='end')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_boolean_lookalikes_and_bad_attempt_times_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_boolean_lookalikes_and_bad_attempt_times_are_rejected) (name='status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 78, in test_boolean_lookalikes_and_bad_attempt_times_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_forged_success_cannot_borrow_existing_committed_generation (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_forged_success_cannot_borrow_existing_committed_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 119, in test_forged_success_cannot_borrow_existing_committed_generation
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) (field='record_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 132, in test_record_calculation_and_generation_mismatch_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) (field='calculation_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 132, in test_record_calculation_and_generation_mismatch_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_record_calculation_and_generation_mismatch_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_record_calculation_and_generation_mismatch_rejected) (field='generation_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 132, in test_record_calculation_and_generation_mismatch_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='schema')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 61, in test_six_reported_failed_receipt_tampers_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='date')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 61, in test_six_reported_failed_receipt_tampers_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='trigger')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 61, in test_six_reported_failed_receipt_tampers_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='safety')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 61, in test_six_reported_failed_receipt_tampers_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='success')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 61, in test_six_reported_failed_receipt_tampers_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+======================================================================
+FAIL: test_six_reported_failed_receipt_tampers_are_rejected (test_a_close_receipt_integrity.ReceiptIntegrityTests.test_six_reported_failed_receipt_tampers_are_rejected) (name='missing')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 61, in test_six_reported_failed_receipt_tampers_are_rejected
+    self.assert_rejected_unchanged(request)
+  File "$CHECKOUT/V5/tests/test_a_close_receipt_integrity.py", line 42, in assert_rejected_unchanged
+    with self.assertRaises((ValueError, OSError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: (<class 'ValueError'>, <class 'OSError'>) not raised
+
+----------------------------------------------------------------------
+Ran 10 tests in 4.658s
+
+FAILED (failures=18)
