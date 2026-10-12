@@ -1,0 +1,74 @@
+{
+  "schema_version": "v5.m08_readonly_acceptance.v1",
+  "started_utc": "2026-10-12T20:10:19.949770+00:00",
+  "mode": "SYNTHETIC_ONLY",
+  "steps": [
+    {
+      "name": "targeted-python",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f7ea990b7bb6718c517ff89d18f9f8399918793ff9c0bf5422e112c706a1be18"
+    },
+    {
+      "name": "targeted-node",
+      "status": "PASS",
+      "exit_code": 0,
+      "stdout_sha256": "a928974bc8bd8c5d4ab663e2fcfb11ee6d78f39f0bc9303b752f5cfa01defb2f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "real_read": {
+    "status": "NOT_RUN",
+    "reason": "Real reference list and observed root exist only on authorized Mac; no payload read from cloud."
+  },
+  "frontend": {
+    "status": "NOT_RUN",
+    "reason": "Existing vitest, vue-tsc and vite executables are absent; no dependency installation attempted."
+  },
+  "original_90_16_21_rerun": false,
+  "real_producer_invoked": false,
+  "real_imports_performed": false,
+  "synthetic_fixture_imports_only": true,
+  "synthetic_test_fixture_producer_only": true,
+  "collection": false,
+  "deployed": false,
+  "services_changed": false,
+  "runner_environment": {
+    "python": "3.12.14",
+    "supported": false
+  },
+  "ended_utc": "2026-10-12T20:12:04.433196+00:00",
+  "status": "PARTIAL_VERIFICATION",
+  "python_test_count": 61,
+  "node_test_count": 49,
+  "new_m08_python_api_tests": 11,
+  "new_m08_acceptance_tests": 3,
+  "new_m08_node_tests": 8,
+  "original_suites_rerun": false,
+  "owner_source_commit": "0a9e49a088358954ce36093f6c068e694fde961f",
+  "base_head": "864fd1d9f2305c8fd236da6b363909ed92274d11",
+  "unique_frozen_owner_files": 58,
+  "manifest_entry_count": 60,
+  "red_evidence": [
+    {
+      "check": "M08 API missing module",
+      "status": "EXPECTED_RED",
+      "reason": "ModuleNotFoundError: v5_shadow.m08_readonly"
+    },
+    {
+      "check": "M08 client absent",
+      "status": "EXPECTED_RED",
+      "reason": "assert.ok(existsSync(apiUrl))"
+    },
+    {
+      "check": "D1 fixture identity",
+      "status": "EXPECTED_RED_THEN_FIXED",
+      "reason": "Synthetic fixture mistakenly called SECOND_FILTER for the D1 variant; changed only synthetic fixture to original select_hk_0925_d1_reference; real code unchanged"
+    }
+  ],
+  "deployment": {
+    "status": "NOT_RUN",
+    "owner": "Existing authorized Mac executor after fixed-commit acceptance"
+  }
+}
