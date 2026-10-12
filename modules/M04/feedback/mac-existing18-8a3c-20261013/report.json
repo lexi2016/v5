@@ -1,0 +1,61 @@
+{
+  "candidate_commit": "8a3c1d2013e34b7e070fd924e1ee754f7dfd8de7",
+  "scope": "Historical V1 archive compatibility cold read only; no builder/import/acquisition",
+  "started_utc": "2026-10-12T23:35:50.389057+00:00",
+  "existing_evidence_dedup": "Prior 69-file binding excludes both source12 target files; this exact sample/candidate/private-root combination was not covered.",
+  "source_files_verified": 487,
+  "binding_file_sha256": {
+    "manifest.json": "b3018c40ba6ffb88f1eec00a48448b5f3414fd55f067fb39a7518febb012fb52",
+    "research/archives/20261012.json": "3fdf8ce89eefc4e6c39b03201e56dd3a4aaaefca125c5b3ae787228fa7bb21af",
+    "receipts/research/archives/20261012.json": "8b62a83a0dcc85879734af21a309a7e464ff0cbabbad6e68271b4d11a9766ecd"
+  },
+  "reader_invocations": [
+    {
+      "command": [
+        "<EXISTING_PYTHON_3.14.6>",
+        "-I",
+        "-B",
+        "-X",
+        "pycache_prefix=<TASK_ROOT>/m04-existing18-8a3c-20261013/archive-cache",
+        "<TASK_ROOT>/m04-8a3c-source/modules/M04/source/V5/src/v5_shadow/archive_reader.py"
+      ],
+      "started_utc": "2026-10-12T23:35:50.431922+00:00",
+      "finished_utc": "2026-10-12T23:35:50.689569+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "037714beb13568d47b7a3bb6172dc2c63931f44424ee308cef8535cc22681aef",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "builder_calls": 0,
+  "import_calls": 0,
+  "provider_calls": 0,
+  "old_tests_rerun": false,
+  "natural_verified": false,
+  "historical_pit_claimed": false,
+  "production_allowed": false,
+  "status": "PASS_HISTORICAL_ARCHIVE_COMPATIBILITY_READ",
+  "archive_date": "20261012",
+  "source_slot": "2100",
+  "source_run_id": "hip-49cb26f7f3a0661bde1d1440",
+  "article_count": 18,
+  "payload_equals_original": true,
+  "missing_retrieved_at": 18,
+  "missing_available_at": 18,
+  "pit": "UNKNOWN",
+  "batch_fetched_at": "2026-10-12T21:00:00+08:00",
+  "batch_collected_at": [
+    "2026-10-12T21:00:00+08:00"
+  ],
+  "source_publication_available_at": "2026-10-12T21:00:01.768546+08:00",
+  "publication_time_is_not_article_availability": true,
+  "reader_source_capsule_sha256": "33a4b671c4b2b6b89db2c3e8bed7efdc8d1ee8fc983ff005d2ade2692d47b2a4",
+  "article_v2_source_sha256": "5c3f8dea7b25d12be209a809fbff49dfb85063be5a653b3ea4053397f12c0e5c",
+  "reader_request_sha256": "a7eebf7089e5d60891714a248c912e5096c364f5bb4c84e26e9bf51406ba3233",
+  "out_of_sample_record_errors": 53,
+  "out_of_sample_note": "Unmodified full manifest references other uncopied dates/products; those records are not part of this three-file sample and are not claimed verified.",
+  "source_sha_size_mtime_unchanged": true,
+  "copied_bytes_unchanged": true,
+  "fixed_code_unchanged": true,
+  "finished_utc": "2026-10-12T23:35:50.702128+00:00",
+  "exit_code": 0
+}
