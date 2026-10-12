@@ -13,16 +13,10 @@ from V5.src.v5_shadow.video_fupan_reader import read_committed_video, VideoReadE
 DATE = "20261011"
 
 
-def _artifact(root: Path, name: str, data: bytes) -> tuple[str, str]:
-    path = root / name
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_bytes(data)
-    return name, hashlib.sha256(data).hexdigest()
-
-
 class SimulatedOwner:
-    def __init__(self, root: Path):
-        self.root = root
+    """Narrow AcquisitionTools fixture; not a producer replacement."""
+
+    def __init__(self):
         self.capture_count = 0
         self.asr_count = 0
 
@@ -30,21 +24,48 @@ class SimulatedOwner:
         from V5.vendor.video_fupan_baseline.review_core.producer import AcquisitionTools
 
         def discover(_date, _config):
-            return [{"bv_id": "BV_SIMULATED", "title": "SIMULATED"}]
+            # Must satisfy review_core.select_target_video title/date oracle.
+            return [
+                {
+                    "bv_id": "BV_SIMULATED",
+                    "title": "10.11 A股复盘 主线行情思路 SIMULATED",
+                    "upload_date": DATE,
+                    "uploader": "比巴卜作手",
+                    "target_trade_date": DATE,
+                }
+            ]
 
         def capture(_selection, work_dir, _config):
             self.capture_count += 1
-            return _artifact(work_dir, "media/simulated.bin", b"SIMULATED_MEDIA")
+            media = work_dir / "media" / "simulated.mp4"
+            media.parent.mkdir(parents=True, exist_ok=True)
+            media.write_bytes(b"SIMULATED_MEDIA_BYTES")
+            return {
+                "status": "CAPTURED",
+                "media_path": str(media),
+                "downloaded": True,
+                "access_status": "SIMULATED",
+            }
 
         def asr(_media, work_dir, _config):
             self.asr_count += 1
-            return _artifact(work_dir, "asr/transcript.txt", "SIMULATED_ASR_NON_EMPTY".encode())
+            out = work_dir / "asr"
+            out.mkdir(parents=True, exist_ok=True)
+            raw = out / "transcript.funasr_raw.txt"
+            segments = out / "transcript.funasr_segments.csv"
+            raw.write_text("SIMULATED_ASR_NON_EMPTY", encoding="utf-8")
+            segments.write_text("start,end,text\n0,1,SIMULATED", encoding="utf-8")
+            return {
+                "status": "ASR_REVIEW_REQUIRED",
+                "raw_path": str(raw),
+                "segments_path": str(segments),
+            }
 
         return AcquisitionTools(discover=discover, capture=capture, asr=asr)
 
 
 def test_simulated_owner_default_chain_contract(tmp_path: Path):
-    owner = SimulatedOwner(tmp_path)
+    owner = SimulatedOwner()
     result = run_video_fupan(
         DATE,
         private_root=tmp_path / "v5_private",
@@ -61,7 +82,7 @@ def test_simulated_owner_default_chain_contract(tmp_path: Path):
 
 
 def test_receipt_manifest_artifact_mutation_rejected(tmp_path: Path):
-    owner = SimulatedOwner(tmp_path)
+    owner = SimulatedOwner()
     result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
     run = tmp_path / "v5_private" / "video_fupan" / "runs" / DATE / result["run_id"]
     (run / "receipt.json").write_text('{"owner_run_id":"bad"}', encoding="utf-8")
@@ -81,7 +102,7 @@ def test_reader_rejects_empty_refs_and_bad_sha(tmp_path: Path):
 
 
 def test_simulated_identity_and_path_escape_rejected(tmp_path: Path):
-    owner = SimulatedOwner(tmp_path)
+    owner = SimulatedOwner()
     result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
     run = tmp_path / "v5_private" / "video_fupan" / "runs" / DATE / result["run_id"]
     payload = json.loads((run / "manifest.json").read_text())
