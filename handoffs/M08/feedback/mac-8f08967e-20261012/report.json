@@ -1,0 +1,146 @@
+{
+  "candidate": "8f08967ee01c2679dacd0d78d0a2a028867f1967",
+  "started_utc": "2026-10-12T19:17:08.105888+00:00",
+  "ended_utc": "2026-10-12T19:17:24.781870+00:00",
+  "exit_code": 0,
+  "actual_command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-B",
+    "V5/tests/run_m08_acceptance.py",
+    "--output",
+    "<PRIVATE_EVIDENCE>/targeted"
+  ],
+  "source_files_verified_before_after": 177,
+  "patch_roundtrip": "PASS",
+  "test_counts": {
+    "test_hk_stage_api.stderr": 18,
+    "test_hk_stage_daily.stderr": 24,
+    "test_source_capsule.stderr": 8,
+    "test_module_artifacts.stderr": 23,
+    "test_stage_selection.stderr": 17
+  },
+  "total_tests": 90,
+  "receipt": {
+    "schema_version": "v5.m08.engineering_test_receipt.v1",
+    "scope": "SYNTHETIC_RETAINED_OWNER_CHAIN_AND_READONLY_API",
+    "results": [
+      {
+        "command": "python -B -m unittest discover -s tests -p test_hk_stage_daily.py -v",
+        "started_at": "2026-10-12T19:17:08.132844+00:00",
+        "finished_at": "2026-10-12T19:17:13.248371+00:00",
+        "exit_code": 0,
+        "stdout": "test_hk_stage_daily.stdout.txt",
+        "stderr": "test_hk_stage_daily.stderr.txt"
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_hk_stage_api.py -v",
+        "started_at": "2026-10-12T19:17:13.248670+00:00",
+        "finished_at": "2026-10-12T19:17:15.031092+00:00",
+        "exit_code": 0,
+        "stdout": "test_hk_stage_api.stdout.txt",
+        "stderr": "test_hk_stage_api.stderr.txt"
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_stage_selection.py -v",
+        "started_at": "2026-10-12T19:17:15.031342+00:00",
+        "finished_at": "2026-10-12T19:17:16.904698+00:00",
+        "exit_code": 0,
+        "stdout": "test_stage_selection.stdout.txt",
+        "stderr": "test_stage_selection.stderr.txt"
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_module_artifacts.py -v",
+        "started_at": "2026-10-12T19:17:16.905025+00:00",
+        "finished_at": "2026-10-12T19:17:24.668567+00:00",
+        "exit_code": 0,
+        "stdout": "test_module_artifacts.stdout.txt",
+        "stderr": "test_module_artifacts.stderr.txt"
+      },
+      {
+        "command": "python -B -m unittest discover -s tests -p test_source_capsule.py -v",
+        "started_at": "2026-10-12T19:17:24.668833+00:00",
+        "finished_at": "2026-10-12T19:17:24.712299+00:00",
+        "exit_code": 0,
+        "stdout": "test_source_capsule.stdout.txt",
+        "stderr": "test_source_capsule.stderr.txt"
+      }
+    ],
+    "runtime": {
+      "python": "3.14.6",
+      "pandas": "2.3.3",
+      "pyarrow": "24.0.0",
+      "pytest": "NOT_INSTALLED"
+    },
+    "production_runtime_accepted": true,
+    "natural_verified": false,
+    "formal_admission": false,
+    "mac_verified": false,
+    "ui_deployed": false,
+    "not_run": [
+      "Full pytest donor runtime suite: excluded from bounded acceptance; inspect recorded pytest availability and supply full donor runtime to run separately",
+      "Live/provider SDK collection: outside retained-input scope",
+      "Mac supported-runtime acceptance and existing UI mounting: separate executor required",
+      "Natural scheduler/deadline activation and two-day evidence: not activated"
+    ],
+    "result": "PASS_ENGINEERING_CANDIDATE"
+  },
+  "mac_engineering_execution_confirmed": true,
+  "runner_static_mac_verified_false_note": "Runner emits a static mac_verified=false and generic Mac NOT_RUN text; this wrapper records actual Mac execution separately without editing product runner.",
+  "bounded_readonly_input_assessment": "real-input-assessment.json",
+  "known_baseline_full96_not_repeated": true,
+  "no_live_or_recorded_real_stage_production": true,
+  "deployed": false,
+  "patch_roundtrip_details": {
+    "status": "PASS",
+    "entries": 29,
+    "originals": 145,
+    "events": [
+      {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "reverse.patch"
+        ],
+        "started_utc": "2026-10-12T19:17:08.061308+00:00",
+        "ended_utc": "2026-10-12T19:17:08.070956+00:00",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "reverse.patch"
+        ],
+        "started_utc": "2026-10-12T19:17:08.070979+00:00",
+        "ended_utc": "2026-10-12T19:17:08.081505+00:00",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "forward.patch"
+        ],
+        "started_utc": "2026-10-12T19:17:08.087691+00:00",
+        "ended_utc": "2026-10-12T19:17:08.095755+00:00",
+        "exit_code": 0,
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "forward.patch"
+        ],
+        "started_utc": "2026-10-12T19:17:08.095776+00:00",
+        "ended_utc": "2026-10-12T19:17:08.104903+00:00",
+        "exit_code": 0,
+        "stderr": ""
+      }
+    ]
+  }
+}

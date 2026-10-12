@@ -1,0 +1,192 @@
+{
+  "status": "NOT_ADMITTED_READONLY_GAP_ASSESSMENT",
+  "request_validation_invoked": false,
+  "real_producer_invoked": false,
+  "m06": {
+    "target_date": "20261013",
+    "signal_date": "20261012",
+    "eligibility_source_date": "20261012",
+    "rows": 100,
+    "source_run_id": "20261013-hk-connect-d1-top100-0-2-b4a529e45fd4",
+    "artifact_sha256": "3a56de134302f545c89c021e1184d1ecadf735f1f263c18e4c266e488b6469df",
+    "artifact_hash_verified": true,
+    "preselect_lane_present_rows": 0,
+    "rank_types": [
+      "str"
+    ]
+  },
+  "existing_saved_stages": [
+    {
+      "stage_id": "STAGE_0930_0935",
+      "role": "HK_CONNECT_1MIN_STAGE_0930_0935",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 100,
+      "raw_sha256": "61bf5144100e18f28cc193f9425cbf0be640e6c982a88625ea40b59e036556c2",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_0935_0940",
+      "role": "HK_CONNECT_1MIN_STAGE_0935_0940",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 98,
+      "raw_sha256": "4b2fdfddcb1a25e0dab3b973acbeb5be095edabbb5277683c19a8f4e91c6520b",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_0940_0945",
+      "role": "HK_CONNECT_1MIN_STAGE_0940_0945",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 100,
+      "raw_sha256": "ac91032befbd3f2bced7447683df658ac5628cabbce38854f9eab6d8151128f5",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_0945_1030",
+      "role": "HK_CONNECT_1MIN_STAGE_0945_1030",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 99,
+      "raw_sha256": "7ca6916c92b89e1748303e072e42fb86bf25a300fe39c2a136d34de3c0aed043",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_1300_1315",
+      "role": "HK_CONNECT_1MIN_STAGE_1300_1315",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 100,
+      "raw_sha256": "dfac1af8dbb4fd390c3df445604d13c09d0765058b6be355a8b2325f038f93b6",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_1445_1500",
+      "role": "HK_CONNECT_1MIN_STAGE_1445_1500",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 100,
+      "raw_sha256": "c8aaa31e84a6d46fc96f4aa0cbc70436da82c26b63ad1361d4bc5df547d471db",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_1545_1555",
+      "role": "HK_CONNECT_1MIN_STAGE_1545_1555",
+      "date": "20261012",
+      "status": "READY",
+      "rows": 16,
+      "raw_sha256": "8eaeb406e3c635957a099f814915915aa318a518a67352e4137e23e00a405f84",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    },
+    {
+      "stage_id": "STAGE_0925",
+      "role": "HK_CONNECT_AUCTION_REFERENCE_STAGE_0925",
+      "date": "20261012",
+      "status": "PARTIAL_WITH_ROWS",
+      "rows": 20,
+      "raw_sha256": "1a89f7c0df82e4797dd78b1ff79972438457df619fed261401127eac07b884f2",
+      "missing_direct_request_fields": [
+        "candidate_lanes",
+        "captured_at",
+        "circular_market_cap_hkd_yi",
+        "pct_chg",
+        "signal_date",
+        "target_date",
+        "turnover_hkd",
+        "volume_ratio"
+      ],
+      "manifest_has_captured_at": false,
+      "manifest_has_available_at": false
+    }
+  ],
+  "target_20261013_raw_and_selection_directories_present": false,
+  "gaps": [
+    "Current exact verified M06 target=20261013/signal=20261012 cannot be combined with saved 20261012 stage data; no target-day 20261013 raw/selection directory was located.",
+    "M08 requires normalized retained M06 rows with original integer rank and preselect_lane. Current original M06 API rows retain string rank and have no preselect_lane; no adapter or fabricated mapping was applied.",
+    "Same-target declared membership codes/receipt plus exact units and capture/availability binding are not supplied by the current M06 response alone. UNKNOWN membership must remain unverified, not invented.",
+    "Ordinary saved raw CSVs lack request-bound dates, capture and lane metadata plus volume-ratio/market-cap enrichment; turnover is an original differently named field. Do not zero-fill or silently alias.",
+    "Located auction artifact is AUCTION_REFERENCE, not evidence of original SECOND_FILTER ranked output. Exact matching-day M06 D1_REFERENCE is separate and cannot stand in for SECOND_FILTER.",
+    "Located Stage8 16-row bar aggregate does not provide the required separately persisted full-coverage active snapshot + retained RT_DATA window payload + enrichment. No such original matched-date source package was located in inspected roots; aggregate READY cannot prove that contract."
+  ],
+  "qualification": "REPLAY_POINT_IN_TIME_QUALIFICATION_NOT_ATTESTED / M02_MEMBERSHIP_NOT_VERIFIED remain unresolved",
+  "scope": "Only authorized current M06 root and saved V4 stage/V35 state filenames and targeted stage records inspected; no machine-wide absence claim",
+  "checked_utc": "2026-10-12T19:18:33.436444+00:00"
+}
