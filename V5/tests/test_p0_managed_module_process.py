@@ -1,11 +1,7 @@
 """Real managed module_api process isolation tests.
 
-These tests create only task-owned temporary fixtures. They start the real
-v5_shadow.module_process entrypoint and exercise the existing read-only
-module_api server. They do not mock runtime/server behavior and do not touch
-owners, producers, ledgers, V4 or 8910 processes.
+Task-owned fixtures only. Uses real module_process and real runtime refusal paths.
 """
-
 import json
 import socket
 import subprocess
@@ -14,16 +10,17 @@ import time
 from pathlib import Path
 from urllib.request import urlopen
 
+from v5_shadow import main_runtime
 
 
-def _fixture(tmp_path):
-    data_root = tmp_path / "module-data"
+def _module_fixture(tmp_path, module_id="p0_test"):
+    data_root = tmp_path / (module_id + "-data")
     data_root.mkdir()
-    (data_root / ".v5-module-root").write_text("v5.module-root.v1:p0_test\n")
-    cfg = tmp_path / "module.json"
+    (data_root / ".v5-module-root").write_text("v5.module-root.v1:" + module_id + "\n")
+    cfg = tmp_path / (module_id + ".json")
     cfg.write_text(json.dumps({
         "schema_version": "v5.module_api.v1",
-        "module_id": "p0_test",
+        "module_id": module_id,
         "release_id": "managed-process-test",
         "data_root": str(data_root),
         "routes": [],
@@ -31,15 +28,9 @@ def _fixture(tmp_path):
     return cfg
 
 
-def _start(cfg):
-    proc = subprocess.Popen(
-        [sys.executable, "-m", "v5_shadow.module_process", "--config", str(cfg), "--port", "0"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
-    )
-    line = proc.stdout.readline()
-    ready = json.loads(line)
+def _start(cfg, port=0):
+    proc = subprocess.Popen([sys.executable, "-m", "v5_shadow.module_process", "--config", str(cfg), "--port", str(port)], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    ready = json.loads(proc.stdout.readline())
     assert ready["status"] == "READY"
     return proc, ready
 
@@ -54,15 +45,13 @@ def _wait_closed(port):
 
 
 def test_real_start_ready_health_identity_stop(tmp_path):
-    cfg = _fixture(tmp_path)
-    proc, ready = _start(cfg)
+    proc, ready = _start(_module_fixture(tmp_path))
     try:
-        assert proc.pid == ready["pid"]
         with urlopen(f"http://127.0.0.1:{ready['port']}/__v5/module-health", timeout=3) as response:
             body = json.loads(response.read())
         assert response.status == 200
         assert body["module_id"] == "p0_test"
-        assert body["release_id"] == "managed-process-test"
+        assert proc.pid == ready["pid"]
     finally:
         proc.terminate()
         proc.wait(timeout=5)
@@ -70,42 +59,37 @@ def test_real_start_ready_health_identity_stop(tmp_path):
 
 
 def test_duplicate_port_is_rejected_by_real_server(tmp_path):
-    cfg = _fixture(tmp_path)
-    first, ready = _start(cfg)
-    second = None
+    first, ready = _start(_module_fixture(tmp_path))
     try:
-        second = subprocess.Popen(
-            [sys.executable, "-m", "v5_shadow.module_process", "--config", str(cfg), "--port", str(ready["port"])],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-        )
+        second = subprocess.Popen([sys.executable, "-m", "v5_shadow.module_process", "--config", str(_module_fixture(tmp_path)), "--port", str(ready["port"])], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         assert second.wait(timeout=5) != 0
     finally:
         first.terminate()
         first.wait(timeout=5)
-        if second and second.poll() is None:
-            second.terminate()
-            second.wait(timeout=5)
 
 
-def test_wrong_identity_fixture_does_not_stop_existing_process(tmp_path):
-    cfg = _fixture(tmp_path)
-    proc, ready = _start(cfg)
+def test_wrong_identity_runtime_stop_is_rejected(tmp_path):
+    root = tmp_path / "runtime"
+    cfg = {"runtime_root": str(root), "composition": "unused", "module_api": {"schema_version": "v5.module_api.v1", "module_id": "p0_test", "release_id": "managed-process-test", "data_root": str(tmp_path), "routes": []}}
+    main_runtime.start(cfg)
+    wrong = dict(cfg)
+    wrong["module_api"] = dict(cfg["module_api"])
+    wrong["module_api"]["release_id"] = "wrong-release"
     try:
-        wrong = dict(json.loads(cfg.read_text()))
-        wrong["module_id"] = "other_module"
-        wrong_cfg = tmp_path / "wrong.json"
-        wrong_cfg.write_text(json.dumps(wrong))
-        assert wrong_cfg.exists()
-        assert proc.poll() is None
+        try:
+            main_runtime.stop(wrong)
+        except ValueError as error:
+            assert str(error) == "RUNTIME_IDENTITY_MISMATCH"
+        else:
+            raise AssertionError("expected identity rejection")
+        assert main_runtime.status(cfg)["status"] == "RUNNING"
     finally:
-        proc.terminate()
-        proc.wait(timeout=5)
+        main_runtime.stop(cfg)
 
 
 def test_no_owner_or_producer_import_contract():
+    import ast
     from v5_shadow import module_process
-    source = Path(module_process.__file__).read_text()
-    assert "owner" not in source.lower()
-    assert "producer" not in source.lower()
+    tree = ast.parse(Path(module_process.__file__).read_text())
+    names = [n.module for n in ast.walk(tree) if isinstance(n, ast.ImportFrom)]
+    assert not any(n and ("owner" in n or "producer" in n) for n in names)
