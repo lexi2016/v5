@@ -1,0 +1,149 @@
+{
+  "schema_version": "v5.m09_readonly_acceptance.v1",
+  "started_utc": "2026-10-12T18:50:17.121724+00:00",
+  "mode": "SYNTHETIC_ONLY",
+  "environment": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "supported": false,
+    "pyarrow_required_for_cold_read": false
+  },
+  "steps": [
+    {
+      "name": "targeted-python",
+      "started_utc": "2026-10-12T18:50:17.134907+00:00",
+      "ended_utc": "2026-10-12T18:51:08.720881+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "8c1ed55f1982703cb8a94ab24a62b850ff5a5fcc9d70831e72f3ba5d3fb21e3d",
+      "status": "PASS"
+    },
+    {
+      "name": "targeted-node",
+      "started_utc": "2026-10-12T18:51:08.720927+00:00",
+      "ended_utc": "2026-10-12T18:51:11.673188+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "1fe7e8826d3d74c7ca7c0f616feae124ecf6632a175ec3418af00026298d92ad",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "PASS"
+    }
+  ],
+  "real_read": {
+    "status": "NOT_RUN"
+  },
+  "frontend": {
+    "status": "NOT_RUN"
+  },
+  "network_collection": false,
+  "real_producer_invoked": false,
+  "synthetic_test_fixture_producer_only": true,
+  "services_changed": false,
+  "deployed": false,
+  "original_136_rerun": false,
+  "original_30_rerun": false,
+  "commit": null,
+  "source_files": [
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "sha256": "d5d829617d211a10266c8a6d924b045de228bc4af0158c83d2f851ebf0ca975c",
+      "bytes": 52667
+    },
+    {
+      "path": "V5/src/v5_shadow/source_bundle.py",
+      "sha256": "d22f24721c8d08109d7b762a25d3eb3b6efd81b5edddea760c314fe52bd63da0",
+      "bytes": 7933
+    },
+    {
+      "path": "V5/src/v5_shadow/m09_readonly.py",
+      "sha256": "2502a71fbf4340570a08d04d8183d45131055376723876370c5e41f665d36edb",
+      "bytes": 5801
+    },
+    {
+      "path": "V5/src/v5_shadow/m09_readonly_worker.py",
+      "sha256": "e0b1cac97988b2005c3de8c76318959aee6b8814d051bb8664807cf2e04dbd67",
+      "bytes": 4755
+    },
+    {
+      "path": "V5/contracts/m09_readonly_runtime.json",
+      "sha256": "d07a7a671ab7bd42b4b1778918c75e15c647ed954d30358125dac15327c056a0",
+      "bytes": 9164
+    },
+    {
+      "path": "V5/tests/run_m09_readonly_acceptance.py",
+      "sha256": "b9b54aceb0d36e23fe6cc99284eb1a66a2fceb96617ce5d68c23c3efe529c942",
+      "bytes": 13520
+    },
+    {
+      "path": "V5/tests/test_m09_readonly_api.py",
+      "sha256": "86962bc1746ab49572eb589c26ae5bee34c2e255b083760839c2f69afc2fe02d",
+      "bytes": 14921
+    },
+    {
+      "path": "V5/tests/test_m09_acceptance_runner.py",
+      "sha256": "f2febdeae89633617ba1b2f9e6ff329668278f1ea7f466bfa92d932650effa41",
+      "bytes": 2949
+    },
+    {
+      "path": "V5/tests/fixtures/a_close_replay_factory.py",
+      "sha256": "09978843dda47d036a5a007df8056f377465318f69e783cf92493472fb64c472",
+      "bytes": 2371
+    },
+    {
+      "path": "V5/tests/export_m09_readonly_fixture.py",
+      "sha256": "b414166ec9e0fd310f70fae9c8a3aadbd39a9bd25419253c7edb35c3e365c599",
+      "bytes": 717
+    },
+    {
+      "path": "frontend/src/api/aCloseReplay.ts",
+      "sha256": "60b12f6a540d3883dee7627f0dbddfdfcff3d8924e8e329613237985b6d3baed",
+      "bytes": 9827
+    },
+    {
+      "path": "frontend/src/components/ACloseReplay.vue",
+      "sha256": "6d8fd66c87d4c220d2796fc73be09d9f6d008f5ee954fd52c33f5af53e351ad2",
+      "bytes": 8687
+    },
+    {
+      "path": "frontend/src/components/ACloseReplay.spec.ts",
+      "sha256": "6ba82f73b41778e35d1c2f4cfdad3a1475c31c5560cb99c2c643227eb6e0bff6",
+      "bytes": 4377
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.vue",
+      "sha256": "657494c1bdee0eb64d5bffc2fcdb9582c7be00a386538f72302f8b31b218c684",
+      "bytes": 3005
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.m09.spec.ts",
+      "sha256": "b5b7e3d66379ea02fd86d1aac71ba03d4038cae704c7c1979f4ed1fdc94854f0",
+      "bytes": 2453
+    },
+    {
+      "path": "frontend/tests/aCloseReplay.node.mjs",
+      "sha256": "0be7023acfe531e616c3f3e79fa4f32ed3775ee2a31bfc0d2c65701b642ccd04",
+      "bytes": 6508
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "sha256": "23115f64db29520ae2803ec191ba6f8dabc70a07d8da85b7fa4d973c9b688b21",
+      "bytes": 1930
+    }
+  ],
+  "ended_utc": "2026-10-12T18:51:11.673316+00:00",
+  "status": "PARTIAL_VERIFICATION",
+  "verified_base_commit": "c64adfca99041951b45bc4fda600b99e68d07d5e",
+  "owner_commit": "084df7c61e57e7615633828a0d6a5d9078dc9b1c",
+  "python_tests": {
+    "run": 27,
+    "passed": 27,
+    "failed": 0,
+    "skipped": 0
+  },
+  "node_tests": {
+    "run": 41,
+    "passed": 41,
+    "failed": 0,
+    "skipped": 0
+  },
+  "verification_note": "Exact cloud source-byte snapshot; supported Mac real GET/DOM/typecheck/build/deployment remain NOT_RUN. No original owner 136/30 suite rerun."
+}

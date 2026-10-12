@@ -26,6 +26,7 @@ if (sourceTarget) {
  proxy['/api/v5/source-bundle/status'] = readonlyProxy(sourceTarget);
  proxy['/api/v5/source-bundle/hk-preselection'] = readonlyProxy(sourceTarget);
  proxy['/api/v5/source-bundle/hk-close-review'] = readonlyProxy(sourceTarget);
+ proxy['/api/v5/source-bundle/a-close-replay'] = readonlyProxy(sourceTarget);
 }
 export default defineConfig({
   plugins: [vue()],
