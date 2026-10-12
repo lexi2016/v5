@@ -1,0 +1,231 @@
+{
+  "candidate": "e951e566255e27fb82493d65af0932e37407a55d",
+  "trade_date": "20261012",
+  "started_at": "2026-10-12T17:57:03.810002+00:00",
+  "checks": {
+    "original_store_read": {
+      "status": "PASS",
+      "result": {
+        "trade_date": "20261012",
+        "source_sha256": "221c2d856e20e89fd4f3a13748adbd35104ffe1e97b956473f5142adc47dac59",
+        "cannot_confirm": [
+          "CANNOT_CONFIRM_TARGET_VIDEO_NOT_CONSUMED",
+          "CANNOT_CONFIRM_STRICT_D0_1500_PANEL",
+          "FORMAL_GENERALIZATION_PENDING"
+        ],
+        "production_allowed": false,
+        "orders_sent": false,
+        "buy_gate_updated": false,
+        "close_chain_status": "PARTIAL_REVIEW",
+        "source_evidence": [
+          {
+            "date_role": "business_date_close",
+            "raw_sha256": "cbff51aecb859174b8f19710cc9a13c7e0c44a0e68b2ba28178722ecc99bcbca",
+            "row_count": 5127,
+            "source_id": "selector_ready_panel",
+            "trade_date": "20261012"
+          }
+        ]
+      }
+    },
+    "original_source_receipt_size_admission": {
+      "status": "REJECTED",
+      "error_type": "OwnedIOError",
+      "error": "OWNED_FILE_TOO_LARGE"
+    },
+    "source_time_16:05": {
+      "status": "REJECTED",
+      "issues": [
+        {
+          "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        }
+      ]
+    },
+    "source_time_17:10": {
+      "status": "REJECTED",
+      "issues": [
+        {
+          "code": "SOURCE_TIME_INVALID_OR_UNKNOWN",
+          "detail": "CONTRACT_TIME_INVALID"
+        }
+      ]
+    },
+    "original_admitted_frame_validation": {
+      "status": "REJECTED",
+      "error_type": "ValueError",
+      "error": "M09_ADMITTED_FRAME_TEXT"
+    }
+  },
+  "identities": [
+    {
+      "role": "a_share_reviews/20261012.json",
+      "bytes": 39944,
+      "sha256": "bdad7538792fae48e890d309eeb98dc958c3655b1a7aed49f94e285ba4de4a21"
+    },
+    {
+      "role": "a_share_reviews/receipts/20261012.json",
+      "bytes": 279,
+      "sha256": "2da3dbb9c1a6bb1cf1657a67dbd782f5d81dd9487f33e3b3f113e19604ff74b6"
+    },
+    {
+      "role": "a_share_reviews/manifest.json",
+      "bytes": 3367,
+      "sha256": "2668c319fcfa38496edb56cc5c5a2357aa6b61ea6b75123ac40b3860e610985c"
+    },
+    {
+      "role": "preselection_pools/20261012/a_d1_premarket_pool.json",
+      "bytes": 252803,
+      "sha256": "61cc3ddb16e082b8566a8168efa9d60fafabe7f99eebc38765b2cf8f2eba2d6b"
+    },
+    {
+      "role": "preselection_pools/20261012/receipts/a_d1_premarket_pool.json",
+      "bytes": 480,
+      "sha256": "cecb5af97e6d84e50ac12e7022f6a4fdfd20fa045abd8fd7092a3896da074aa4"
+    },
+    {
+      "role": "original_A_source_receipt",
+      "bytes": 72723415,
+      "sha256": "4bc597fa26d574fd12e5e15200b090a7bf4161c1c6b14bb2d1fe067fe56af6aa"
+    },
+    {
+      "role": "current_selector_pointer",
+      "bytes": 242,
+      "sha256": "119862a90c932037b530114c60e65bf1e54864c861606d0a7c54bf797e0d917e"
+    },
+    {
+      "role": "dispatch_1605_receipt",
+      "bytes": 1435,
+      "sha256": "cc3d569965dfe67acc05c9ea13bd032a37cf8879800572ec420523d5276d5001"
+    },
+    {
+      "role": "dispatch_1605_receipt",
+      "bytes": 2801,
+      "sha256": "ef556fd4caba1b86ffe5109eddbc4c5a35c2623cbc9a227472976dcbd3e3e65c"
+    },
+    {
+      "role": "dispatch_1710_receipt",
+      "bytes": 2726,
+      "sha256": "d1ce62a372e3da6ff295f77e1e91f135b1f4c96294064227934e089543870e22"
+    }
+  ],
+  "source": {
+    "status": "PARTIAL",
+    "authority_status": "REBUILD_REQUIRED",
+    "coverage_rate": 0.8860344827586207,
+    "row_count": 5139,
+    "target_count": 5800,
+    "captured_at": null,
+    "available_at": null,
+    "selector_sha256": "cbff51aecb859174b8f19710cc9a13c7e0c44a0e68b2ba28178722ecc99bcbca"
+  },
+  "panel": {
+    "rows": 5127,
+    "unique_codes": 5127,
+    "full_file_bytes": 1384359739,
+    "full_file_sha256": "NOT_REHASHED_DECLARED_SHA_ONLY",
+    "unmodified_columns": [
+      "trade_date",
+      "ts_code",
+      "name",
+      "pct_chg",
+      "amount",
+      "bar_close_pos",
+      "tdx_industry_code",
+      "tdx_industry_name"
+    ],
+    "missing_or_empty_text": {
+      "name": 137,
+      "tdx_industry_code": 242,
+      "tdx_industry_name": 242
+    },
+    "nonfinite_numeric": {
+      "pct_chg": 0,
+      "amount": 0,
+      "bar_close_pos": 7
+    }
+  },
+  "slots": [
+    {
+      "slot": "1605",
+      "attempt": 1,
+      "finished_at": "2026-10-12T08:07:15.566180Z",
+      "status": "FAILED",
+      "failure_class": "CONTRACT",
+      "workloads": [
+        {
+          "exit_code": 1,
+          "status": "FAILED",
+          "stderr": "selector panel unresolved: no selector panel with max date >= 20261012 under <V35_STATE>/workspace/数据",
+          "close_chain_status": null
+        }
+      ]
+    },
+    {
+      "slot": "1605",
+      "attempt": 2,
+      "finished_at": "2026-10-12T14:06:34.562916Z",
+      "status": "SUCCEEDED",
+      "failure_class": "",
+      "workloads": [
+        {
+          "exit_code": 0,
+          "status": "SUCCEEDED",
+          "stderr": "",
+          "close_chain_status": "PARTIAL_REVIEW"
+        }
+      ]
+    },
+    {
+      "slot": "1710",
+      "attempt": 1,
+      "finished_at": "2026-10-12T09:10:17.459481Z",
+      "status": "SUCCEEDED",
+      "failure_class": "",
+      "workloads": [
+        {
+          "exit_code": 0,
+          "status": "SUCCEEDED",
+          "stderr": "",
+          "close_chain_status": "PARTIAL_REVIEW"
+        }
+      ]
+    }
+  ],
+  "input_unchanged": true,
+  "outcome": "BLOCKED_STRICT_REAL_ADMISSION",
+  "not_run": [
+    "run_a_close_daily",
+    "original_builder",
+    "new_original_store_publication",
+    "exact_new_run_generation_cold_read",
+    "136_acceptance_rerun",
+    "deployment"
+  ],
+  "missing_contract_materials": [
+    "existing v5.m09.input.v1 manifest binding raw panel + independently declared complete membership + original provenance receipt",
+    "verifiable captured_at/available_at before each historical cutoff"
+  ],
+  "finished_at": "2026-10-12T17:57:04.089667+00:00",
+  "exit_code": 0,
+  "method": "Read-only original store reader and original receipt-size/time/frame validation components; full diagnose_a_close_input was not called because no existing compliant input manifest was located. No synthetic wrapper, time backfill or membership reconstruction.",
+  "command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-I",
+    "-B",
+    "<TASK_ROOT>/m09_real_readonly.py"
+  ],
+  "python_dependencies": {
+    "python": "3.14.6",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0"
+  },
+  "stderr_note": "PyArrow emitted four CPU sysctl permission warnings; filtered parquet decode completed. No permission changes.",
+  "preselection": {
+    "pool_id": "a_d1_premarket_pool",
+    "source_role": "SHARED_VERIFIED_V192",
+    "source_row_count": 120,
+    "role": "Located saved premarket pool; not substituted for close-panel declared universe."
+  },
+  "interpretation": "Saved original dispatcher records do not prove V5 M09 natural acceptance. 1605 attempt 2 completed at 22:06:34 +08:00; it cannot repair the historical 16:05 cutoff."
+}
