@@ -64,14 +64,17 @@ function relative(value: unknown): value is string {
  return typeof value === 'string' && !!value && !value.includes('\\') && !value.includes(':')
   && value.split('/').every(part => part !== '' && part !== '.' && part !== '..');
 }
-function boundary(value: JsonObject, research = false) {
+function boundary(value: JsonObject, research = false, originalCsvRow = false) {
  check((research ? RESEARCH_FLAGS : TRADING_FLAGS).every(key => value[key] === false), 'RESEARCH_BOUNDARY');
  check(!research || (value.research_only === true && value.model_weights_reverified === false), 'RESEARCH_BOUNDARY');
  // Original artifact/row extensions must not silently promote the research claim.
  for (const key of ['natural_verified', 'formal_eligibility_verified', 'model_weights_reverified']) {
   check(!(key in value) || value[key] === false, 'RESEARCH_BOUNDARY');
  }
- check(!('research_only' in value) || value.research_only === true, 'RESEARCH_BOUNDARY');
+ // The original projector preserves CSV research_only as the exact text 'True'.
+ // Admit that representation only on rows; never coerce or rewrite the source field.
+ check(!('research_only' in value) || value.research_only === true
+  || (originalCsvRow && value.research_only === 'True'), 'RESEARCH_BOUNDARY');
 }
 function validate(value: unknown): HkPreselectionResult | HkNotConfigured {
  check(object(value), 'CONTRACT');
@@ -124,7 +127,7 @@ function validate(value: unknown): HkPreselectionResult | HkNotConfigured {
  const symbols = new Set<string>();
  artifact.rows.forEach((row: unknown, index: number) => {
   check(object(row), 'ROW_CONTRACT');
-  boundary(row);
+  boundary(row, false, true);
   check(typeof row.symbol === 'string' && /^HK\.\d{5}$/.test(row.symbol) && !symbols.has(row.symbol)
    && row.market === 'HK' && row.pool_id === POOL_ID && row.pool_rank === index + 1
    && (!('rank' in row) || Number(row.rank) === index + 1), 'ROW_IDENTITY');

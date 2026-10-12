@@ -37,6 +37,32 @@ if (api) {
   assert.deepEqual(seen,{url:'/api/v5/source-bundle/hk-preselection',init:{method:'GET',cache:'no-store',credentials:'omit',signal:controller.signal}});
   assert.equal(HK_PRESELECTION_ROUTE,seen.url);
  });
+ test('original CSV research_only True remains an unchanged string in all100 rows',async()=>{
+  const expected=sample();for(const row of expected.artifact.rows)row.research_only='True';
+  const result=await readHkPreselectionPool(async()=>response(expected));
+  assert.deepEqual(result,expected);assert.equal(result.artifact.rows.length,100);
+  assert.ok(result.artifact.rows.every(row=>row.research_only==='True'));
+  const states=[];await new HkPreselectionSession(state=>states.push(state),async()=>response(expected)).load();
+  assert.equal(states.at(-1).phase,'LOADED');assert.deepEqual(states.at(-1).result,expected);
+ });
+ test('CSV research_only compatibility is row-only and never widens top-level safety',async()=>{
+  for(const target of ['payload','reference','artifact']){
+   const value=sample();for(const row of value.artifact.rows)row.research_only='True';
+   (target==='payload'?value:target==='reference'?value.committed_reference:value.artifact).research_only='True';
+   await assert.rejects(()=>readHkPreselectionPool(async()=>response(value)),/M06_RESEARCH_BOUNDARY/);
+  }
+  for(const invalid of [false,'False','true','TRUE',1,'1','',null]){
+   const value=sample();value.artifact.rows[0].research_only=invalid;
+   await assert.rejects(()=>readHkPreselectionPool(async()=>response(value)),/M06_RESEARCH_BOUNDARY/);
+  }
+ });
+ test('original row trading flags stay required boolean false after CSV compatibility',async()=>{
+  for(const key of ['production_allowed','buy_gate_updated','orders_sent'])for(const invalid of [undefined,true,'False','false',0,null]){
+   const value=sample();value.artifact.rows[0].research_only='True';
+   if(invalid===undefined)delete value.artifact.rows[0][key];else value.artifact.rows[0][key]=invalid;
+   await assert.rejects(()=>readHkPreselectionPool(async()=>response(value)),/M06_RESEARCH_BOUNDARY/);
+  }
+ });
  test('99 rows, duplicate symbols, wrong row identity and altered dates fail closed',async()=>{
   for(const mutate of [x=>x.artifact.rows.pop(),x=>x.artifact.rows[1].symbol=x.artifact.rows[0].symbol,x=>x.artifact.rows[0].market='A',x=>x.artifact.rows[0].pool_id='other',x=>x.artifact.rows[0].pool_rank=2,x=>x.artifact.rows[0].signal_date='20261009',x=>x.artifact.rows[0].target_date='20261014',x=>x.artifact.rows[0].code_norm='HK.00999',x=>x.artifact.rows[0].score_prob_active='NaN',x=>x.artifact.rows[0].pool_score=2,x=>x.artifact.rows[0].recommendation_status='BUY']){
    const value=sample();mutate(value);await assert.rejects(()=>readHkPreselectionPool(async()=>response(value)),/M06_/);
