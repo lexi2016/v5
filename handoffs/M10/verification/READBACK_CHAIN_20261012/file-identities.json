@@ -16,16 +16,16 @@
       "path": "V5/src/v5_shadow/hk_close_owner.py",
       "before": "ABSENT_IN_21e9991_TREE",
       "after": {
-        "sha256": "2622602a9ef2066386969a1398deb6f357627a0a6803911add8c2dac94a2ed0e",
-        "bytes": 10730
+        "sha256": "ea5f03c5cfd915fbff26842e432907bd15c052d89a9aceff07eac37b9e5a36bf",
+        "bytes": 10750
       }
     },
     {
       "path": "V5/tests/test_hk_close_chain.py",
       "before": "ABSENT_IN_21e9991_TREE",
       "after": {
-        "sha256": "23bfe25f129854c2608c1aedcf7d5ff267c715b2b4b13ee086aad91e8e63b815",
-        "bytes": 11953
+        "sha256": "5944230084c13611226fbc03d7066064c3415d84bff600a472caa3c4724fa84c",
+        "bytes": 12717
       }
     },
     {
@@ -48,8 +48,8 @@
       "path": "V5/docs/M10_HK_CLOSE_HANDOFF.md",
       "before": "ABSENT_IN_21e9991_TREE",
       "after": {
-        "sha256": "b8104d3a7a7f501b2c88278617bfc465a2008bb06edcfcab0ecbcf0ddcb08542",
-        "bytes": 6393
+        "sha256": "a3de0945ba58a7756af95968892ef23bad669768f3244dd45a3a3f22518be34e",
+        "bytes": 6541
       }
     },
     {

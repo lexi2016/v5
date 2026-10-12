@@ -214,3 +214,17 @@ def test_default_owner_pointer_failure_retries_without_rebuilding(tmp_path,monke
     monkeypatch.setattr(owner,'run_owner',inspect_only)
     result=daily.build_default_hk_close_review(data_root=data,trade_date='20260730',run_root=runs,stage_selection_root=data/'stages')
     assert daily.HKCloseReviewReader(runs).read_latest()==result
+
+
+def test_internal_temp_symlink_alias_is_canonicalized(tmp_path,monkeypatch):
+    # macOS /tmp and /var may be OS-provided symlink aliases. Resolve only
+    # internally created temporary roots; user input symlinks remain rejected.
+    import v5_shadow.hk_close_owner as owner
+    original=owner.tempfile.TemporaryDirectory
+    real=tmp_path/'real-temp';real.mkdir();alias=tmp_path/'temp-alias';alias.symlink_to(real,target_is_directory=True)
+    def aliased_temp(*args,**kwargs):
+        return original(*args,dir=alias,**kwargs)
+    monkeypatch.setattr(owner.tempfile,'TemporaryDirectory',aliased_temp)
+    with owner.prepare_owner_capsule() as capsule:
+        assert capsule.is_relative_to(real)
+        assert (capsule/'ops/build_close_review.py').is_file()

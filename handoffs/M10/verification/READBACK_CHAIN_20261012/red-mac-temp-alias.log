@@ -1,0 +1,44 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+______________ test_internal_temp_symlink_alias_is_canonicalized _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-45/test_internal_temp_symlink_ali0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7ff9a7695a90>
+
+    def test_internal_temp_symlink_alias_is_canonicalized(tmp_path,monkeypatch):
+        # macOS /tmp and /var may be OS-provided symlink aliases. Resolve only
+        # internally created temporary roots; user input symlinks remain rejected.
+        import v5_shadow.hk_close_owner as owner
+        original=owner.tempfile.TemporaryDirectory
+        real=tmp_path/'real-temp';real.mkdir();alias=tmp_path/'temp-alias';alias.symlink_to(real,target_is_directory=True)
+        def aliased_temp(*args,**kwargs):
+            return original(*args,dir=alias,**kwargs)
+        monkeypatch.setattr(owner.tempfile,'TemporaryDirectory',aliased_temp)
+>       with owner.prepare_owner_capsule() as capsule:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+V5/tests/test_hk_close_chain.py:228: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py:137: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+V5/src/v5_shadow/hk_close_owner.py:47: in prepare_owner_capsule
+    target=_safe(root,entry['destination']);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('/tmp/pytest-of-agent/pytest-45/test_internal_temp_symlink_ali0/temp-alias/m10-owner-3vs5jt5f')
+relative = 'ops/build_close_review.py'
+
+    def _safe(root,relative):
+        parts=relative.split('/')
+        if any(p in ('','.','..') for p in parts) or '\\' in relative: raise ValueError('M10_INPUT_PATH_INVALID')
+        path=Path(root).absolute().joinpath(*parts)
+>       if any(p.is_symlink() for p in (path,*path.parents)): raise ValueError('M10_INPUT_SYMLINK')
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       ValueError: M10_INPUT_SYMLINK
+
+V5/src/v5_shadow/hk_close_owner.py:31: ValueError
+=========================== short test summary info ============================
+FAILED V5/tests/test_hk_close_chain.py::test_internal_temp_symlink_alias_is_canonicalized
+1 failed, 23 deselected in 0.07s

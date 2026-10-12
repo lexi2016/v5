@@ -38,7 +38,7 @@ def prepare_owner_capsule():
     if hashlib.sha256(raw).hexdigest()!=CAPSULE_SHA256: raise ValueError('M10_OWNER_MANIFEST_SHA_INVALID')
     mapping=json.loads(raw)
     with tempfile.TemporaryDirectory(prefix='m10-owner-') as directory:
-        root=Path(directory)
+        root=Path(directory).resolve()
         for entry in mapping['entries']:
             data=_safe(REPOSITORY,entry['source']).read_bytes()
             blob=hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()
@@ -121,7 +121,7 @@ def _execute(request):
     from infrastructure.review_store import ReviewStore
     from stage_center.consumer import StageSelectionConsumer
     with tempfile.TemporaryDirectory(prefix='m10-native-') as directory:
-        work=Path(directory);files=_copy_inputs(request,work);native=work/'native';stages=work/'stages'
+        work=Path(directory).resolve();files=_copy_inputs(request,work);native=work/'native';stages=work/'stages'
         # Preflight exact snapshot before collector call. Missing current-day input
         # is a hard stop too; no fallback path can reach a quote SDK.
         try: snapshot,snapshot_sha=CloseSnapshotStore(native).read_snapshot(date)

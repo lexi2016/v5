@@ -11,8 +11,8 @@
         "-c",
         "import sys;sys.path[:0]=['/workspace/shared/m10_readback_chain/V5/src', '/workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages'];import pytest;sys.exit(pytest.main([\"-q\",\"-p\",\"no:cacheprovider\",'/workspace/shared/m10_readback_chain/V5/tests']))"
       ],
-      "start": "2026-10-12T17:09:13.131960+00:00",
-      "end": "2026-10-12T17:09:21.090700+00:00",
+      "start": "2026-10-12T17:12:45.043367+00:00",
+      "end": "2026-10-12T17:12:51.675119+00:00",
       "exit_code": 0,
       "process_environment": {
         "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
@@ -26,10 +26,10 @@
         "-S",
         "-B",
         "-c",
-        "import sys;sys.path[:0]=['/tmp/m10-owner-huv34ztm', '/workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages'];import pytest;sys.exit(pytest.main(['-q', '-p', 'no:cacheprovider', '/workspace/shared/m10_readback_chain/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_review_producer.py', '/workspace/shared/m10_readback_chain/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_review_verified_inputs.py', '/workspace/shared/m10_readback_chain/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_snapshot_idempotent_reuse.py', '-k', 'not vipdoc_normalizer and not executor_requires']))"
+        "import sys;sys.path[:0]=['/tmp/m10-owner-8owm25kd', '/workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages'];import pytest;sys.exit(pytest.main(['-q', '-p', 'no:cacheprovider', '/workspace/shared/m10_readback_chain/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_review_producer.py', '/workspace/shared/m10_readback_chain/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_review_verified_inputs.py', '/workspace/shared/m10_readback_chain/handoffs/M10/handoff/v4-running-source-20261005/canonical/tests/test_close_snapshot_idempotent_reuse.py', '-k', 'not vipdoc_normalizer and not executor_requires']))"
       ],
-      "start": "2026-10-12T17:09:21.100919+00:00",
-      "end": "2026-10-12T17:09:21.589702+00:00",
+      "start": "2026-10-12T17:12:51.688042+00:00",
+      "end": "2026-10-12T17:12:52.182611+00:00",
       "exit_code": 0,
       "process_environment": {
         "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
@@ -38,8 +38,8 @@
   ],
   "source_files": {
     "V5/src/v5_shadow/hk_close_owner.py": {
-      "sha256": "2622602a9ef2066386969a1398deb6f357627a0a6803911add8c2dac94a2ed0e",
-      "bytes": 10730
+      "sha256": "ea5f03c5cfd915fbff26842e432907bd15c052d89a9aceff07eac37b9e5a36bf",
+      "bytes": 10750
     },
     "V5/src/v5_shadow/hk_close_daily.py": {
       "sha256": "60e6c0b2561c732ea0eb7c7fc694fe9981833d5bc879760bacbfe84d22295027",
@@ -58,8 +58,8 @@
       "bytes": 3808
     },
     "V5/tests/test_hk_close_chain.py": {
-      "sha256": "23bfe25f129854c2608c1aedcf7d5ff267c715b2b4b13ee086aad91e8e63b815",
-      "bytes": 11953
+      "sha256": "5944230084c13611226fbc03d7066064c3415d84bff600a472caa3c4724fa84c",
+      "bytes": 12717
     },
     "integration_candidates/M10/CAPSULE_INTEGRATION_CANDIDATE/manifest.json": {
       "sha256": "be3c369df297d0ddd6985e0c0f0aa136849a931fe6f388f7f8355f3188574c38",

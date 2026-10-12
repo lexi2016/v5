@@ -40,6 +40,8 @@
 
 原 canonical 的 `stage_center/_selection_parts/_namespace.py` 缺失；使用已交 M10 vendor 的同用途冻结文件，manifest 明确记录真实来源，绝不伪装成 canonical 原件。空 package markers 为临时装配元数据。
 
+内部 tempfile 根会规范化为真实路径，兼容 macOS 的 /tmp 与 /var 系统别名；调用方输入根仍执行禁止软链接检查。
+
 ## 单次 Mac 验收
 
 在新的隔离 checkout 固定到本次交付 commit 后执行，不覆盖活动目录，不启动/停止任何服务：
@@ -52,7 +54,7 @@
   --evidence-dir "$ISOLATED_EVIDENCE_DIR"
 ```
 
-runner 一次完成 28 项 M10 产品测试与 10 项原冻结测试，并保存开始/结束、完整 argv、退出码、stdout/stderr 和被测源码 SHA/bytes。使用 Python `-S` 避免旧环境 `.pth` 指向其他 checkout 的历史问题。工具只使用临时合成 fixture，没有生产数据或 Futu 连接。
+runner 一次完成 29 项 M10 产品测试与 10 项原冻结测试，并保存开始/结束、完整 argv、退出码、stdout/stderr 和被测源码 SHA/bytes。使用 Python `-S` 避免旧环境 `.pth` 指向其他 checkout 的历史问题。工具只使用临时合成 fixture，没有生产数据或 Futu 连接。
 
 Mac 验收必须独立核对 `git rev-parse HEAD` 等于发布者的固定 commit；本地代码字节须与 report.json 一致。不能用本说明或云端通过替代 Mac 测试结果。
 
