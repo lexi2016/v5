@@ -17,7 +17,9 @@ def validate_config(config):
     if 'module_api' not in config: raise ValueError('MODULE_API_CONFIG_REQUIRED')
     for key in ('runtime_root','composition'):
         if key not in config: raise ValueError('RUNTIME_CONFIG_REQUIRED')
-    return {'status':'CONFIGURATION_VALID','registry':registration_snapshot(),'config_sha256':sha256_json(config),'natural_verified':False}
+    from .p0_close_recapture import validate_registration
+    close_recapture=validate_registration(config.get('daily',{}).get('close_recapture'))
+    return {'close_recapture':close_recapture,'status':'CONFIGURATION_VALID','registry':registration_snapshot(),'config_sha256':sha256_json(config),'natural_verified':False}
 
 def _runtime_path(c): return Path(c['runtime_root'])/'runtime.json'
 

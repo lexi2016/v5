@@ -11,7 +11,7 @@ from v5_shadow.digests import canonical_bytes,sha256_json
 from v5_shadow.module_api import _open_directory,_read_at
 from v5_shadow.module_artifacts import _directory
 
-LANES={'announcement','us_mapping','rebound','manager_plan','hk_preselection','a_stage'}
+LANES={'announcement','us_mapping','rebound','manager_plan','hk_preselection','a_stage','manager_close_recapture'}
 MARKER=b'v5.daily-run-ledger.v1\n'
 
 

@@ -8,6 +8,9 @@
   "daily": {
     "enabled": false,
     "bundle_root": "/var/tmp/v5/daily",
-    "ledger_root": "/var/tmp/v5/ledger"
+    "ledger_root": "/var/tmp/v5/ledger",
+    "close_recapture": {
+      "enabled": false
+    }
   }
 }

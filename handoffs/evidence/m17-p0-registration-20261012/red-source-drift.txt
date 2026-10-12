@@ -1,0 +1,19 @@
+test_source_drift_rejected_before_calendar_admission (__main__.RegistrationTests.test_source_drift_rejected_before_calendar_admission) ... FAIL
+
+======================================================================
+FAIL: test_source_drift_rejected_before_calendar_admission (__main__.RegistrationTests.test_source_drift_rejected_before_calendar_admission)
+----------------------------------------------------------------------
+ValueError: BLOCKED_M17_REGISTRATION
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 193, in test_source_drift_rejected_before_calendar_admission
+    with self.assertRaisesRegex(ValueError,'M17_SOURCE_BYTES_MISMATCH'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "M17_SOURCE_BYTES_MISMATCH" does not match "BLOCKED_M17_REGISTRATION"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.046s
+
+FAILED (failures=1)

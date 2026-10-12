@@ -1,0 +1,153 @@
+test_all_six_existing_ledger_lanes_preserved (__main__.RegistrationTests.test_all_six_existing_ledger_lanes_preserved) ... FAIL
+test_config_default_is_disabled_and_enabled_invalid_is_blocked (__main__.RegistrationTests.test_config_default_is_disabled_and_enabled_invalid_is_blocked) ... FAIL
+test_exact_mode_roots_manifest_pool_and_identity_are_bound (__main__.RegistrationTests.test_exact_mode_roots_manifest_pool_and_identity_are_bound) ... FAIL
+test_lost_call_stays_running_and_does_not_retry (__main__.RegistrationTests.test_lost_call_stays_running_and_does_not_retry) ... FAIL
+test_old_source_and_same_day_before_close_rejected (__main__.RegistrationTests.test_old_source_and_same_day_before_close_rejected) ... FAIL
+test_pool_change_rejected_before_claim (__main__.RegistrationTests.test_pool_change_rejected_before_claim) ... FAIL
+test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption (__main__.RegistrationTests.test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption) ... FAIL
+test_real_missing_binding_blocks_before_claim_or_worker (__main__.RegistrationTests.test_real_missing_binding_blocks_before_claim_or_worker) ... FAIL
+test_registry_contract_is_callable_but_not_naturally_verified (__main__.RegistrationTests.test_registry_contract_is_callable_but_not_naturally_verified) ... FAIL
+test_request_config_and_execution_kind_cannot_cross_bind (__main__.RegistrationTests.test_request_config_and_execution_kind_cannot_cross_bind) ... FAIL
+test_slot_is_explicit_no_morning_defaults_or_multiple_attempts (__main__.RegistrationTests.test_slot_is_explicit_no_morning_defaults_or_multiple_attempts) ... FAIL
+
+======================================================================
+FAIL: test_all_six_existing_ledger_lanes_preserved (__main__.RegistrationTests.test_all_six_existing_ledger_lanes_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 133, in test_all_six_existing_ledger_lanes_preserved
+    job,_=self.prepared()
+          ^^^^^^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 43, in prepared
+    return self.api().prepare_job(self.job,self.registration,'20260929')
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_config_default_is_disabled_and_enabled_invalid_is_blocked (__main__.RegistrationTests.test_config_default_is_disabled_and_enabled_invalid_is_blocked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 58, in test_config_default_is_disabled_and_enabled_invalid_is_blocked
+    self.assertIn('close_recapture',main_runtime.validate_config(c),'P0 config registration missing')
+AssertionError: 'close_recapture' not found in {'status': 'CONFIGURATION_VALID', 'registry': [{'module_id': 'M01_A_MARKET', 'owner_entry': 'm01_a_source', 'runtime': 'source_bundle', 'status': 'READY', 'dependencies': []}, {'module_id': 'M02_HK_MARKET', 'owner_entry': 'm02_hk_source', 'runtime': 'source_bundle', 'status': 'READY', 'dependencies': []}, {'module_id': 'M03_US_MARKET', 'owner_entry': 'm03_us_source', 'runtime': 'source_bundle', 'status': 'READY', 'dependencies': []}, {'module_id': 'M04_RESEARCH_ARCHIVE', 'owner_entry': 'research_archive', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M05_A_PRESELECTION', 'owner_entry': 'm05_a_preselection', 'runtime': 'source_bundle', 'status': 'READY', 'dependencies': []}, {'module_id': 'M06_HK_PRESELECTION', 'owner_entry': 'hk_preselection', 'runtime': 'daily_owner_adapters', 'status': 'READY', 'dependencies': []}, {'module_id': 'M07_A_STAGE', 'owner_entry': 'a_stage', 'runtime': 'daily_owner_adapters', 'status': 'READY', 'dependencies': []}, {'module_id': 'M08_HK_STAGE', 'owner_entry': 'hk_stage', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M09_A_CLOSE_REVIEW', 'owner_entry': 'a_close_review', 'runtime': 'daily_owner_adapters', 'status': 'READY', 'dependencies': []}, {'module_id': 'M10_HK_CLOSE_REVIEW', 'owner_entry': 'hk_close_review', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M11_INTRADAY_RESEARCH', 'owner_entry': 'intraday_research', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M12_VIDEO_FUPAN', 'owner_entry': 'video_fupan', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M13_ANNOUNCEMENT', 'owner_entry': 'announcement_analysis', 'runtime': 'daily_owner_adapters', 'status': 'READY', 'dependencies': []}, {'module_id': 'M14_REBOUND', 'owner_entry': 'rebound_shadow', 'runtime': 'daily_owner_adapters', 'status': 'READY', 'dependencies': []}, {'module_id': 'M15_US_MAPPING', 'owner_entry': 'us_mapping', 'runtime': 'daily_owner_adapters', 'status': 'READY', 'dependencies': []}, {'module_id': 'M16_PUBLIC_RESEARCH', 'owner_entry': 'manager_public_research', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M17_CLOSE_RECAPTURE', 'owner_entry': 'daily_close_recapture', 'runtime': 'daily_owner_adapters', 'status': 'NOT_READY', 'dependencies': []}, {'module_id': 'M18_MANAGER', 'owner_entry': 'manager_plan', 'runtime': 'm18_offline_v2', 'status': 'READY', 'dependencies': ['M13_ANNOUNCEMENT', 'M14_REBOUND', 'M15_US_MAPPING']}], 'config_sha256': '0264bcf8d25606aeabe9a94ada40282e7efbd4bc314f69e740a557004c781c38', 'natural_verified': False} : P0 config registration missing
+
+======================================================================
+FAIL: test_exact_mode_roots_manifest_pool_and_identity_are_bound (__main__.RegistrationTests.test_exact_mode_roots_manifest_pool_and_identity_are_bound)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 65, in test_exact_mode_roots_manifest_pool_and_identity_are_bound
+    job,binding=self.prepared()
+                ^^^^^^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 43, in prepared
+    return self.api().prepare_job(self.job,self.registration,'20260929')
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_lost_call_stays_running_and_does_not_retry (__main__.RegistrationTests.test_lost_call_stays_running_and_does_not_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 111, in test_lost_call_stays_running_and_does_not_retry
+    job,binding=self.prepared()
+                ^^^^^^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 43, in prepared
+    return self.api().prepare_job(self.job,self.registration,'20260929')
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_old_source_and_same_day_before_close_rejected (__main__.RegistrationTests.test_old_source_and_same_day_before_close_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 127, in test_old_source_and_same_day_before_close_rejected
+    job,binding=self.prepared();self.now=datetime.fromisoformat('2026-09-30T00:00:06+08:00')
+                ^^^^^^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 43, in prepared
+    return self.api().prepare_job(self.job,self.registration,'20260929')
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_pool_change_rejected_before_claim (__main__.RegistrationTests.test_pool_change_rejected_before_claim)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 120, in test_pool_change_rejected_before_claim
+    job,binding=self.prepared()
+                ^^^^^^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 43, in prepared
+    return self.api().prepare_job(self.job,self.registration,'20260929')
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption (__main__.RegistrationTests.test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 97, in test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption
+    job,binding=self.prepared();result=self.dispatch(job,binding)
+                ^^^^^^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 43, in prepared
+    return self.api().prepare_job(self.job,self.registration,'20260929')
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_real_missing_binding_blocks_before_claim_or_worker (__main__.RegistrationTests.test_real_missing_binding_blocks_before_claim_or_worker)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 86, in test_real_missing_binding_blocks_before_claim_or_worker
+    result=self.api().validate_registration(self.registration)
+           ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_registry_contract_is_callable_but_not_naturally_verified (__main__.RegistrationTests.test_registry_contract_is_callable_but_not_naturally_verified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 52, in test_registry_contract_is_callable_but_not_naturally_verified
+    self.assertEqual(row.status,'READY')
+AssertionError: 'NOT_READY' != 'READY'
+- NOT_READY
+? ----
++ READY
+
+
+======================================================================
+FAIL: test_request_config_and_execution_kind_cannot_cross_bind (__main__.RegistrationTests.test_request_config_and_execution_kind_cannot_cross_bind)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 94, in test_request_config_and_execution_kind_cannot_cross_bind
+    with self.assertRaises(ValueError):self.api().prepare_job(dict(self.job,owner_request=req),self.registration,'20260929')
+                                       ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+======================================================================
+FAIL: test_slot_is_explicit_no_morning_defaults_or_multiple_attempts (__main__.RegistrationTests.test_slot_is_explicit_no_morning_defaults_or_multiple_attempts)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 79, in test_slot_is_explicit_no_morning_defaults_or_multiple_attempts
+    with self.assertRaises(ValueError):self.api().prepare_job(bad,self.registration,'20260929')
+                                       ^^^^^^^^^^
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 38, in api
+    self.assertIsNotNone(importlib.util.find_spec("v5_shadow.p0_close_recapture"), "P0 M17 execution registration missing")
+AssertionError: unexpectedly None : P0 M17 execution registration missing
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.019s
+
+FAILED (failures=11)

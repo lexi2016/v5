@@ -1,0 +1,49 @@
+{
+  "baseline_commit": "bae6184b99d289f394b0cc3c3d5370e9f3155715",
+  "frontend_tree": "9d913c4a6e55c295dce39fe2848184e15c21afe2",
+  "unchanged_blob_sha": {
+    "V5/src/v5_shadow/module_api.py": "b0fbdfea972880489cf69a1ed3671ffe61b9ad44",
+    "V5/src/v5_shadow/api_gateway.py": "ecda315f6c67c8e18e473fad9d91c77487aa9d37",
+    "V5/src/v5_shadow/m06_readonly.py": "46b565b54a5c29f46d3332171f0d5fe3f613e399",
+    "V5/src/v5_shadow/m08_readonly.py": "632cf1d78b5c138226378d9e1b0cc813b53551c8",
+    "V5/src/v5_shadow/m09_readonly.py": "7a20121f1dbad308c7f6b2ea39eebbc77e77501b",
+    "V5/src/v5_shadow/m10_readonly.py": "fb96f32a761f9186e276051fb15e82beab71c3fa",
+    "V5/src/v5_shadow/announcement_bridge.py": "2cabda8ee3da84e4af96ebc200357ed003668e19",
+    "V5/src/v5_shadow/rebound_owner.py": "b94965909f2d9c0e3b67057fc35b11146cee8dad",
+    "V5/src/v5_shadow/us_mapping_daily.py": "366190eaeeaf65ed51e5bda5da6c17cd5b5d5f1e",
+    "V5/src/v5_shadow/m18_offline_v2.py": "87ffdcf8d8234f50bb1f4eb54f813f409085a772"
+  },
+  "reused_objects": [
+    {
+      "path": "V5/vendor/close_discovery_baseline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3b892f56c67939f04f3f61352fe59284872732c8"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_close_recapture_owner.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3976ce1b9900f298e21a6bd9f5d92d70e3a80108"
+    },
+    {
+      "path": "V5/contracts/close_recapture_source_manifest.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4574d6ffd9f33a2a838609f21e5965d94f396003"
+    },
+    {
+      "path": "V5/tests/test_daily_close_recapture_owner.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47a322db8e26d2f78b29933cb1cb195b9d62dc9c"
+    }
+  ],
+  "new_p0_tests": 18,
+  "existing_dispatch_tests": 5,
+  "old_m17_tests": "NOT_RERUN",
+  "natural_verified": false,
+  "real_collection": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "proof_kind": "SOURCE_TREE_IDENTITY_NOT_BROWSER_ACCEPTANCE"
+}

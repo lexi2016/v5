@@ -38,15 +38,25 @@ def tick(config):
     if bundle['target_date']!=today:raise ValueError('DAILY_BUNDLE_TARGET')
     from v5_shadow.announcement_offline_reader import PIN as ANNOUNCEMENT_PIN,REVISION_PIN
     from v5_shadow.manager_plan import PIN as MANAGER_PIN, _identity as manager_identity
-    registration=adapter_identity(config,dict(announcement=ANNOUNCEMENT_PIN,revision=REVISION_PIN,rebound=REBOUND_PIN,
+    # M17's exact-date pool/runtime binding must not rekey unrelated owners.
+    ordinary_config={k:v for k,v in config.items() if k!='close_recapture'}
+    registration=adapter_identity(ordinary_config,dict(announcement=ANNOUNCEMENT_PIN,revision=REVISION_PIN,rebound=REBOUND_PIN,
         manager=MANAGER_PIN,manager_implementation=manager_identity()))
-    bindings=dict(us_mapping=bind_us_owner(config),
+    bindings=dict(us_mapping=bind_us_owner(ordinary_config),
         announcement=dict(registration,invoke=read_announcement_owner),
         rebound=dict(registration,invoke=run_rebound_owner))
     jobs=[];rejected=[]
     defaults=default_slots(today)
     for job in bundle['jobs']:
         try:
+            if job.get('lane')=='manager_close_recapture':
+                from v5_shadow.p0_close_recapture import prepare_job,validate_registration
+                registration_m17=config.get('close_recapture')
+                gate=validate_registration(registration_m17)
+                if gate['status']!='BOUND_NOT_NATURALLY_VERIFIED':
+                    rejected.append(dict(lane=job['lane'],**gate));continue
+                prepared,binding=prepare_job(job,registration_m17,today)
+                bindings[job['lane']]=binding;jobs.append(prepared);continue
             job=dict({key:defaults[key] for key in ('scheduled_at','deadline','research_cutoff','half_day_bound','max_attempts')},**job)
             lane=job['lane'];request=job['owner_request']
             if lane=='announcement':

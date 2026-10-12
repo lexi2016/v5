@@ -1,0 +1,17 @@
+test_m17_configuration_does_not_rekey_other_owner_success (__main__.RegistrationTests.test_m17_configuration_does_not_rekey_other_owner_success) ... FAIL
+
+======================================================================
+FAIL: test_m17_configuration_does_not_rekey_other_owner_success (__main__.RegistrationTests.test_m17_configuration_does_not_rekey_other_owner_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 215, in test_m17_configuration_does_not_rekey_other_owner_success
+    self.assertEqual(second['status'],'REUSED_SUCCESS')
+AssertionError: 'SUCCEEDED' != 'REUSED_SUCCESS'
+- SUCCEEDED
++ REUSED_SUCCESS
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.075s
+
+FAILED (failures=1)

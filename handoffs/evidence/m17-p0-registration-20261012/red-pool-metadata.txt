@@ -1,0 +1,17 @@
+test_pool_reference_metadata_mismatch_blocks_before_capture (__main__.RegistrationTests.test_pool_reference_metadata_mismatch_blocks_before_capture) ... FAIL
+
+======================================================================
+FAIL: test_pool_reference_metadata_mismatch_blocks_before_capture (__main__.RegistrationTests.test_pool_reference_metadata_mismatch_blocks_before_capture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_CHECKOUT>/V5/tests/test_p0_close_recapture_registration.py", line 198, in test_pool_reference_metadata_mismatch_blocks_before_capture
+    self.assertEqual(self.api().validate_registration(self.registration)['status'],'BLOCKED_M17_REGISTRATION')
+AssertionError: 'BOUND_NOT_NATURALLY_VERIFIED' != 'BLOCKED_M17_REGISTRATION'
+- BOUND_NOT_NATURALLY_VERIFIED
++ BLOCKED_M17_REGISTRATION
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.018s
+
+FAILED (failures=1)
