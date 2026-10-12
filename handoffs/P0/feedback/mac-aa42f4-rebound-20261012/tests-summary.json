@@ -1,0 +1,31 @@
+{
+  "vue": {
+    "started_utc": "2026-10-12T12:27:14.495066+00:00",
+    "ended_utc": "2026-10-12T12:27:15.399112+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vitest/vitest.mjs run src/views/SavedManagerResultView.spec.ts src/manager-selection/reboundPanelObservation.spec.ts"
+  },
+  "test-p0": {
+    "started_utc": "2026-10-12T12:27:15.399629+00:00",
+    "ended_utc": "2026-10-12T12:27:15.551458+00:00",
+    "exit": 0,
+    "command": "<existing-npm> run test:p0"
+  },
+  "typecheck": {
+    "started_utc": "2026-10-12T12:27:15.551874+00:00",
+    "ended_utc": "2026-10-12T12:27:17.004585+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vue-tsc/bin/vue-tsc.js --noEmit -p tsconfig.cloud-product.json"
+  },
+  "build": {
+    "started_utc": "2026-10-12T12:27:17.004980+00:00",
+    "ended_utc": "2026-10-12T12:27:17.953950+00:00",
+    "exit": 0,
+    "command": "<existing-node> node_modules/vite/bin/vite.js build"
+  },
+  "counts": {
+    "view": 2,
+    "reboundPanelObservation": 4,
+    "test-p0": 24
+  }
+}

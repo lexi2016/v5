@@ -1,0 +1,120 @@
+{
+  "candidate": "aa42f4db63a59367d7eb2740c52ffb9aa30f58c3",
+  "passed": false,
+  "started_utc": "2026-10-12T12:28:06.550574+00:00",
+  "ended_utc": "2026-10-12T12:28:20.522740+00:00",
+  "api_url": "http://127.0.0.1:50383",
+  "api_pid": 48606,
+  "api_exit": -2,
+  "requests": [
+    {
+      "path": "",
+      "section": null,
+      "projection": null,
+      "http": 200,
+      "bytes": 804,
+      "seconds": 0.002,
+      "identity": "MATCHED",
+      "offset": null,
+      "entries": 0
+    },
+    {
+      "path": "/overview",
+      "section": null,
+      "projection": null,
+      "http": 200,
+      "bytes": 6638,
+      "seconds": 4.361,
+      "identity": "MATCHED",
+      "offset": null,
+      "entries": 0
+    },
+    {
+      "path": "/sections",
+      "section": "announcement_reviewed_analysis",
+      "projection": "announcement_references",
+      "http": 200,
+      "bytes": 106006,
+      "seconds": 4.691,
+      "identity": "MATCHED",
+      "offset": 0,
+      "entries": 32
+    }
+  ],
+  "data_unchanged": true,
+  "file_count": 141,
+  "failed_request": {
+    "http": 409,
+    "path": "/api/v4/manager/m18/v2/sections",
+    "section": "rebound_research_observation",
+    "projection": "rebound_references",
+    "group": "strict",
+    "cursor": null
+  },
+  "harness_exit": 1,
+  "events": [
+    {
+      "status": "OK",
+      "pid": 48608,
+      "usage": {
+        "peak_rss_bytes": 319815680,
+        "cpu_seconds": 4.330114,
+        "wall_seconds": 4.2927012919972185
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.356880249993992
+    },
+    {
+      "peak_rss_bytes": 35405824,
+      "elapsed": 4.36052912499872,
+      "error": null
+    },
+    {
+      "status": "OK",
+      "pid": 48611,
+      "usage": {
+        "peak_rss_bytes": 319733760,
+        "cpu_seconds": 4.667859,
+        "wall_seconds": 4.627922666986706
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.689282624996849
+    },
+    {
+      "peak_rss_bytes": 35995648,
+      "elapsed": 4.689722333001555,
+      "error": null
+    },
+    {
+      "status": "REJECTED",
+      "pid": 48612,
+      "usage": {
+        "peak_rss_bytes": 319799296,
+        "cpu_seconds": 4.732468,
+        "wall_seconds": 4.694134000004851
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 4.755609083993477
+    },
+    {
+      "peak_rss_bytes": 36028416,
+      "elapsed": 4.756080749997636,
+      "error": "M18_READER_REJECTED"
+    }
+  ],
+  "not_reached": [
+    "strict pages success",
+    "near",
+    "pending",
+    "excluded",
+    "screen_unresolved",
+    "announcement return",
+    "stocks/market_screen recheck",
+    "preview switch",
+    "static asset publication"
+  ],
+  "preview_preserved_candidate": "efdc43a955024042dfb78707c97b94e6f7d74fed"
+}
