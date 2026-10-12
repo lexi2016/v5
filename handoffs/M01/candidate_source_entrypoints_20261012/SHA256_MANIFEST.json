@@ -1,0 +1,125 @@
+{
+  "excludes_self": true,
+  "files": [
+    {
+      "path": "before/V5/src/v5_shadow/a_source_daily.py",
+      "bytes": 6480,
+      "sha256": "b234e625179fddd9debe03fd71de55dd85ebe109d74cb2feb3ca3c569616570c",
+      "git_blob": "ac8e8582106b7614c034a7a7c2c7f40d7442604f"
+    },
+    {
+      "path": "before/V5/tests/test_a_source_daily.py",
+      "bytes": 252,
+      "sha256": "b84136434422d7e3812a3a20e26f37288fc7bb540a1bafd109e90b4d9fe23b55",
+      "git_blob": "bde0123c78a4b17306ab0f165013351fcadd5d00"
+    },
+    {
+      "path": "after/V5/src/v5_shadow/a_source_daily.py",
+      "bytes": 7184,
+      "sha256": "4140ae04b254f9d8e682b3a04b773825bae13b3f16f13233e866185b60515045",
+      "git_blob": "e31147c383bb75e2f9ca55024cfc3b80d8f32364"
+    },
+    {
+      "path": "after/V5/tests/test_a_source_daily.py",
+      "bytes": 24415,
+      "sha256": "6d3aa3789ad8bc6bc3bb58ae489a19607943dbd473e1e84829e3cbf18a59b70e",
+      "git_blob": "768858d7ec3054ad98a5a1d462925375ee1022b7"
+    },
+    {
+      "path": "evidence/COMMANDS_AND_RESULTS.json",
+      "bytes": 1491,
+      "sha256": "06963d1f92d851158021ad8ab1ddbd3402cf61843078731c884ab3430941c353",
+      "git_blob": "c536b7de920e15f8d1b0a36b673a3aa6d42ac274"
+    },
+    {
+      "path": "evidence/GREEN_FINAL.log",
+      "bytes": 7167,
+      "sha256": "719ed0be888c0d6acd3c530b213811d67e91a8c347eecaea54c256745fac8f58",
+      "git_blob": "0a23614a68cdc711c3efc11ccfb0630c4e5699ce"
+    },
+    {
+      "path": "evidence/INDEPENDENT_REVIEW.md",
+      "bytes": 792,
+      "sha256": "956c9e63fa8005dd492b3700bec6cca269f7bf2b2b39443c7451423834f95f61",
+      "git_blob": "65904d5d5b50558e707f252e0eaf3816b9b8c476"
+    },
+    {
+      "path": "evidence/PATCH_ROUNDTRIP.json",
+      "bytes": 1843,
+      "sha256": "1a8f12c5e493a6086dd7d69a05c757305b2c7a731443aa5efb104368a32f32aa",
+      "git_blob": "c9ffe2f3e92febd0b46dd20450b88e3f749fac6a"
+    },
+    {
+      "path": "evidence/PYTEST_AVAILABILITY.log",
+      "bytes": 109,
+      "sha256": "bd46f4865a7c4903d57b1dd38cb80c42da3c0a6c5f9a74b654ec6782eea5fe12",
+      "git_blob": "20c33b578d32b226af2183e722d967d05488bdea"
+    },
+    {
+      "path": "evidence/RED_R15.log",
+      "bytes": 77317,
+      "sha256": "e8dbb3296a24f0017c3ea339e99d78804f16234a501d137bcda329621cd70d3e",
+      "git_blob": "3ee7ddf45b287425d21d21cd24565908f386f44f"
+    },
+    {
+      "path": "evidence/REQUIRE_PARQUET.log",
+      "bytes": 214,
+      "sha256": "e2f93e7b279424d93304875e05f2591897f21fd55614c2b93c531e5b98ce31d7",
+      "git_blob": "a6ba6b0d3f015d457ca3378604831322c3889f09"
+    },
+    {
+      "path": "evidence/SOURCE_IDENTITY_CHECK.json",
+      "bytes": 14553,
+      "sha256": "bcb51b01807d2045eb05961e343cacb2655770ee9eafe651c0c5a284e2914c3a",
+      "git_blob": "a81001c24e3a9addace2d39e1a1cf9a22b482b7b"
+    },
+    {
+      "path": "run_tests.py",
+      "bytes": 1020,
+      "sha256": "656d9d8d00e22a1643e4914eaf1267b68b4630c683914b9cec5cdd97fbe71c0d",
+      "git_blob": "7534a5451dd7fee063d17f4e5af0663ec9656e7f"
+    },
+    {
+      "path": "runtime.patch",
+      "bytes": 29331,
+      "sha256": "9e8c8fd94b3f0e0b37048fa6eb55726f259a726fe171abf6c76dbcb15cf46d53",
+      "git_blob": "efbc03353fa31ccbb47b67d95b7cec473addd3b8"
+    },
+    {
+      "path": "reverse.patch",
+      "bytes": 29325,
+      "sha256": "c1a4b6edee9473267559310b51adb188f8a9d138d586a4bfc8ed250f1dc34b41",
+      "git_blob": "28d0fe5eca677c02cbe5e5c1feb9eab684e95984"
+    },
+    {
+      "path": "BEFORE_AFTER_SHA256.json",
+      "bytes": 870,
+      "sha256": "73ca345fa199c6f90333f3368370d74b1506e1f349b56407ee97cb01ef4d3a9b",
+      "git_blob": "14d3e60fc507aeb1f3731060fcb9d33a20d7a879"
+    },
+    {
+      "path": "REPO_PATH_MAP.json",
+      "bytes": 1755,
+      "sha256": "851f2ea093bc0dceafefe6842337156aabf6c43c51843f7775243a8d4c106cb6",
+      "git_blob": "776a00c05dc0e2e9299045f1b338c0d88f9391c5"
+    },
+    {
+      "path": "REPORT.md",
+      "bytes": 4417,
+      "sha256": "a5b0651e57779c0dd8c764b8240c440fcbb806c328f5012f5eac2d4d56419a4c",
+      "git_blob": "d4ed600d766a064d947f85b51ecdd2f0dd89709d"
+    },
+    {
+      "path": "MAC_APPLY_AND_ACCEPTANCE.md",
+      "bytes": 2812,
+      "sha256": "a2bd3ce407ad133c2f41357559115c6505f7ccc8edb2238d397d5e0041f88c4d",
+      "git_blob": "d722f62835ce3851594e5c25c0f389266db57f3d"
+    },
+    {
+      "path": "INTEGRATION_REQUEST.md",
+      "bytes": 799,
+      "sha256": "39356699f3912ef49e41fe727e4bb7435af9498cbe88b51714b5d4efad6cebad",
+      "git_blob": "438ed93b1a826d3ffbe3db46c42db96cd2855861"
+    }
+  ]
+}

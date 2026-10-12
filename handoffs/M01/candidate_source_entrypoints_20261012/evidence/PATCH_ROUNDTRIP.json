@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "git",
+      "apply",
+      "--check",
+      "/workspace/shared/m01_source_completion_20261012/runtime.patch"
+    ],
+    "cwd": "/workspace/shared/m01_source_completion_20261012/patch_roundtrip",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "apply",
+      "/workspace/shared/m01_source_completion_20261012/runtime.patch"
+    ],
+    "cwd": "/workspace/shared/m01_source_completion_20261012/patch_roundtrip",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "forward",
+    "path": "V5/src/v5_shadow/a_source_daily.py",
+    "sha256": "4140ae04b254f9d8e682b3a04b773825bae13b3f16f13233e866185b60515045",
+    "matches": "after"
+  },
+  {
+    "phase": "forward",
+    "path": "V5/tests/test_a_source_daily.py",
+    "sha256": "6d3aa3789ad8bc6bc3bb58ae489a19607943dbd473e1e84829e3cbf18a59b70e",
+    "matches": "after"
+  },
+  {
+    "command": [
+      "git",
+      "apply",
+      "--check",
+      "/workspace/shared/m01_source_completion_20261012/reverse.patch"
+    ],
+    "cwd": "/workspace/shared/m01_source_completion_20261012/patch_roundtrip",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "git",
+      "apply",
+      "/workspace/shared/m01_source_completion_20261012/reverse.patch"
+    ],
+    "cwd": "/workspace/shared/m01_source_completion_20261012/patch_roundtrip",
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "phase": "reverse",
+    "path": "V5/src/v5_shadow/a_source_daily.py",
+    "sha256": "b234e625179fddd9debe03fd71de55dd85ebe109d74cb2feb3ca3c569616570c",
+    "matches": "reference_r15"
+  },
+  {
+    "phase": "reverse",
+    "path": "V5/tests/test_a_source_daily.py",
+    "sha256": "b84136434422d7e3812a3a20e26f37288fc7bb540a1bafd109e90b4d9fe23b55",
+    "matches": "reference_r15"
+  }
+]

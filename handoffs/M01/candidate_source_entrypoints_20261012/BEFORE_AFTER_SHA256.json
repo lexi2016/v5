@@ -1,0 +1,28 @@
+[
+  {
+    "path": "V5/src/v5_shadow/a_source_daily.py",
+    "before": {
+      "bytes": 6480,
+      "sha256": "b234e625179fddd9debe03fd71de55dd85ebe109d74cb2feb3ca3c569616570c",
+      "git_blob": "ac8e8582106b7614c034a7a7c2c7f40d7442604f"
+    },
+    "after": {
+      "bytes": 7184,
+      "sha256": "4140ae04b254f9d8e682b3a04b773825bae13b3f16f13233e866185b60515045",
+      "git_blob": "e31147c383bb75e2f9ca55024cfc3b80d8f32364"
+    }
+  },
+  {
+    "path": "V5/tests/test_a_source_daily.py",
+    "before": {
+      "bytes": 252,
+      "sha256": "b84136434422d7e3812a3a20e26f37288fc7bb540a1bafd109e90b4d9fe23b55",
+      "git_blob": "bde0123c78a4b17306ab0f165013351fcadd5d00"
+    },
+    "after": {
+      "bytes": 24415,
+      "sha256": "6d3aa3789ad8bc6bc3bb58ae489a19607943dbd473e1e84829e3cbf18a59b70e",
+      "git_blob": "768858d7ec3054ad98a5a1d462925375ee1022b7"
+    }
+  }
+]

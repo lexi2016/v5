@@ -1,0 +1,569 @@
+--- a/V5/src/v5_shadow/a_source_daily.py
++++ b/V5/src/v5_shadow/a_source_daily.py
+@@ -4,6 +4,13 @@
+ from pathlib import Path
+ from datetime import datetime
+ import hashlib, json, re
++
++from infrastructure.owned_io import SafeRoot
++from infrastructure.formula_generation import (
++    FORMULA_GENERATION_POINTER_NAME,
++    read_formula_generation,
++)
++from .composition import no_symlinks, shadow_root
+ 
+ class M01BindingError(Exception):
+     pass
+@@ -111,42 +118,64 @@
+         raise M01BindingError("drift")
+     return b
+ 
+-def _make_context(private_root,source_root,SafeRoot,no_symlinks,shadow_root):
+-    source=no_symlinks(Path(source_root))
+-    output=shadow_root(Path(private_root))
++def _business_path(value):
++    # Inspect the original value before Path can coerce or normalise it.
++    if type(value) is str:
++        text=value
++    elif isinstance(value,Path):
++        text=str(value)
++    else:
++        raise M01BindingError("path_type")
++    return Path(validate_path(text))
++
++
++def _make_context(private_root,source_root):
++    source_path=_business_path(source_root)
++    output_path=_business_path(private_root)
++    source=no_symlinks(source_path)
++    if not source.is_dir():
++        raise M01BindingError("source_directory")
++    output=no_symlinks(output_path)
+     if source==output or source in output.parents or output in source.parents:
+         raise M01BindingError("root_overlap")
++    output=shadow_root(output)
+     safe=SafeRoot(output)
+     if safe.read_bytes(".v5-shadow-root",max_bytes=64)!=b"v5.shadow-root.v1\n":
+         raise M01BindingError("marker")
+     return safe,source
+ 
++
+ def bounded_reader(source_root,reader,no_symlinks,FORMULA_GENERATION_POINTER_NAME):
+     def call(pointer,**kwargs):
+-        p=Path(pointer)
+-        p=no_symlinks(p)
++        p=no_symlinks(_business_path(pointer))
++        if not p.is_relative_to(source_root):
++            raise M01BindingError("source_root")
+         if p.is_dir():
+             p=p/FORMULA_GENERATION_POINTER_NAME
++        # The appended pointer itself may be a symlink; inspect it too.
++        p=no_symlinks(_business_path(p))
+         if not p.is_relative_to(source_root):
+             raise M01BindingError("source_root")
+         result=reader(p,**kwargs)
+-        q=Path(result["path"])
++        q=no_symlinks(_business_path(result["path"]))
+         if not q.is_relative_to(source_root):
+             raise M01BindingError("reader_path")
+         return result
+     return call
+ 
+-def create_binding_from_roots(*,private_root,source_root,generation_pointer,target_date,
+-                              SafeRoot,reader,no_symlinks,shadow_root,FORMULA_GENERATION_POINTER_NAME):
+-    safe,source=_make_context(private_root,source_root,SafeRoot,no_symlinks,shadow_root)
+-    return create_binding(safe,generation_pointer,target_date,
+-                          bounded_reader(source,reader,no_symlinks,FORMULA_GENERATION_POINTER_NAME))
+ 
+-def read_binding_from_roots(*,private_root,source_root,relative,
+-                            SafeRoot,reader,no_symlinks,shadow_root,FORMULA_GENERATION_POINTER_NAME):
+-    safe,source=_make_context(private_root,source_root,SafeRoot,no_symlinks,shadow_root)
++def create_binding_from_roots(*,private_root,source_root,generation_pointer,target_date):
++    validate_date(target_date)
++    pointer=_business_path(generation_pointer)
++    safe,source=_make_context(private_root,source_root)
++    return create_binding(safe,pointer,target_date,
++        bounded_reader(source,read_formula_generation,no_symlinks,FORMULA_GENERATION_POINTER_NAME))
++
++
++def read_binding_from_roots(*,private_root,source_root,relative):
++    safe,source=_make_context(private_root,source_root)
+     return read_and_verify_binding(safe,relative,
+-        bounded_reader(source,reader,no_symlinks,FORMULA_GENERATION_POINTER_NAME))
++        bounded_reader(source,read_formula_generation,no_symlinks,FORMULA_GENERATION_POINTER_NAME))
+ 
+ def read_and_verify_binding(safe_root,relative,reader):
+     return verify_binding_bytes(safe_root.read_bytes(relative,max_bytes=65536),relative,reader)
+--- a/V5/tests/test_a_source_daily.py
++++ b/V5/tests/test_a_source_daily.py
+@@ -1,10 +1,460 @@
+-
+-import pytest
+-from v5_shadow.a_source_daily import validate_date, M01BindingError
+-
+-def test_date_ok():
+-    assert validate_date('20261011') == '20261011'
+-
+-def test_bad_date():
+-    with pytest.raises(M01BindingError):
+-        validate_date('20260230')
++"""Offline M01 tests. Fixtures are synthetic, never production source evidence."""
++from contextlib import contextmanager
++from dataclasses import asdict, replace
++import copy
++import hashlib
++import importlib.util
++import inspect
++import json
++from pathlib import Path
++import tempfile
++import unittest
++from unittest.mock import patch
++
++from infrastructure.owned_io import SafeRoot, OwnedIOError
++from infrastructure.formula_generation import (
++    FORMULA_GENERATION_POINTER_NAME, FORMULA_GENERATION_SCHEMA,
++    FormulaGenerationError, read_formula_generation,
++)
++from v5_shadow.composition import no_symlinks, shadow_root
++from v5_shadow import a_source_daily as m
++
++HAS_PARQUET = importlib.util.find_spec('pyarrow') is not None
++DATE = '20261009'
++SCHEMA = 'v5.m01.a_source_binding.r15'
++
++
++def digest(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def canonical(obj):
++    return json.dumps(obj, sort_keys=True, separators=(',', ':')).encode()
++
++
++def snapshot(root):
++    return {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file() and not p.is_symlink()}
++
++
++def projected(pointer):
++    return {'status': 'READY', 'strict_source_verified': True, 'target_date': DATE,
++            'generation_id': 'a' * 64, 'path': pointer, 'sha256': 'b' * 64,
++            'input_manifest': {'manifest_sha256': 'c' * 64},
++            'input_manifest_evidence': {'sha256': 'd' * 64},
++            'source': {'sync_receipt_sha256': 'e' * 64}}
++
++
++def write_generation(source):
++    """Original formula reader contract, real Parquet, synthetic local bytes."""
++    import pyarrow as pa
++    import pyarrow.parquet as pq
++    def detail(path):
++        raw = path.read_bytes()
++        return {'path': path.name, 'bytes': len(raw), 'sha256': digest(raw)}
++    artifacts = {}
++    for role in ('selector', 'backtest', 'selector_source', 'selector_sidecar'):
++        path = source / (role + '.parquet')
++        pq.write_table(pa.table({'trade_date': [int(DATE)], 'fixture_role': [role]}), path)
++        artifacts[role] = detail(path)
++    receipt = source / 'sync-receipt.json'
++    receipt.write_bytes(canonical({'status': 'READY', 'target_date': DATE,
++        'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}))
++    manifest = {'target_date': DATE, 'source_sha256': artifacts['selector_source']['sha256']}
++    manifest['manifest_sha256'] = digest(canonical(manifest))
++    manifest_path = source / 'input-manifest.json'
++    manifest_path.write_bytes(canonical(manifest))
++    payload = {'schema': FORMULA_GENERATION_SCHEMA, 'status': 'READY',
++        'target_date': DATE, 'run_id': 'm01-synthetic-offline', **artifacts,
++        'source': {'name': 'synthetic-local-test-only', 'sha256': manifest['source_sha256'],
++                   'sync_receipt_path': str(receipt), 'sync_receipt_sha256': digest(receipt.read_bytes())},
++        'input_manifest': {**detail(manifest_path), 'manifest_sha256': manifest['manifest_sha256']}}
++    payload['generation_id'] = digest(canonical({k: payload[k] for k in ('selector', 'backtest')}))
++    pointer = source / FORMULA_GENERATION_POINTER_NAME
++    pointer.write_bytes(canonical(payload))
++    return pointer, payload
++
++
++class TempCase(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.tmp.cleanup)
++        # /var is a symlink on macOS: use resolved test-only temporary roots.
++        self.base = Path(self.tmp.name).resolve()
++        self.source = self.base / 'source'
++        self.private = self.base / 'private'
++        self.source.mkdir()
++        self.private.mkdir()
++        (self.private / '.v5-shadow-root').write_bytes(b'v5.shadow-root.v1\n')
++        self.pointer = self.source / FORMULA_GENERATION_POINTER_NAME
++        self.pointer.write_bytes(b'{}')
++        self.result = projected(self.pointer)
++        self.binding = m.project(self.result)
++        self.relative = m.binding_relative(self.binding)
++        self.raw = json.dumps(asdict(self.binding), sort_keys=True).encode()
++
++    def create(self, **overrides):
++        args = dict(private_root=self.private, source_root=self.source,
++                    generation_pointer=self.pointer, target_date=DATE)
++        args.update(overrides)
++        return m.create_binding_from_roots(**args)
++
++    def read(self, **overrides):
++        args = dict(private_root=self.private, source_root=self.source, relative=self.relative)
++        args.update(overrides)
++        return m.read_binding_from_roots(**args)
++
++    def assert_prewrite_error(self, code, call, error=m.M01BindingError):
++        before = snapshot(self.private)
++        with self.assertRaisesRegex(error, '^' + code + '$'):
++            call()
++        self.assertEqual(snapshot(self.private), before)
++        self.assertFalse((self.private / 'm01').exists())
++
++
++class DefaultEntrypointTests(TempCase):
++    def test_public_signatures_need_business_arguments_only(self):
++        self.assertEqual(set(inspect.signature(m.create_binding_from_roots).parameters),
++            {'private_root', 'source_root', 'generation_pointer', 'target_date'})
++        self.assertEqual(set(inspect.signature(m.read_binding_from_roots).parameters),
++            {'private_root', 'source_root', 'relative'})
++
++    def test_internal_defaults_are_original_source_dependencies(self):
++        self.assertIs(getattr(m, 'SafeRoot', None), SafeRoot)
++        self.assertIs(getattr(m, 'read_formula_generation', None), read_formula_generation)
++        self.assertIs(getattr(m, 'no_symlinks', None), no_symlinks)
++        self.assertIs(getattr(m, 'shadow_root', None), shadow_root)
++        self.assertEqual(getattr(m, 'FORMULA_GENERATION_POINTER_NAME', None), FORMULA_GENERATION_POINTER_NAME)
++
++    def test_invalid_date_is_checked_before_roots(self):
++        self.assert_prewrite_error('invalid_date', lambda: self.create(target_date='20260230', source_root=object()))
++
++    def test_roots_reject_raw_types(self):
++        for key in ('private_root', 'source_root'):
++            for value in (None, 123, b'/tmp', object()):
++                with self.subTest(key=key, value=repr(value)):
++                    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
++
++    def test_roots_reject_raw_lexical_paths(self):
++        for key in ('private_root', 'source_root'):
++            for value in ('relative', '/tmp/../escape', '/tmp/evil\x00', '/tmp\\evil'):
++                with self.subTest(key=key, value=value):
++                    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
++
++    def test_source_must_be_existing_directory(self):
++        for path in (self.base / 'missing', self.pointer):
++            with self.subTest(path=path):
++                self.assert_prewrite_error('source_directory', lambda: self.create(source_root=path))
++
++    def test_roots_must_not_overlap_either_direction(self):
++        child = self.private / 'input'
++        child.mkdir()
++        for source, private in ((self.source, self.source), (self.source, self.source / 'output'), (child, self.private)):
++            with self.subTest(source=source, private=private):
++                self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
++
++    def test_bad_marker_rejected_on_both_entries(self):
++        (self.private / '.v5-shadow-root').write_bytes(b'wrong\n')
++        for call in (self.create, self.read):
++            with self.subTest(entry=call.__name__):
++                self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', call, ValueError)
++
++    def test_missing_marker_rejected(self):
++        (self.private / '.v5-shadow-root').unlink()
++        self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', self.create, ValueError)
++
++    def test_marker_symlink_rejected(self):
++        marker = self.private / '.v5-shadow-root'
++        marker.rename(self.base / 'marker')
++        marker.symlink_to(self.base / 'marker')
++        self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', self.create, ValueError)
++
++    def test_source_and_private_symlink_ancestors_rejected(self):
++        link = self.base / 'linked'
++        link.symlink_to(self.base, target_is_directory=True)
++        for key, value in (('source_root', link / 'source'), ('private_root', link / 'private')):
++            with self.subTest(key=key):
++                self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(**{key:value}), ValueError)
++
++    def test_pointer_raw_type_and_lexical_rejection(self):
++        for value, code in ((42,'path_type'), (b'/tmp','path_type'), ('relative','path'),
++                            (str(self.source)+'/../evil','path'), ('/tmp/evil\x00','path'), ('/tmp\\evil','path')):
++            with self.subTest(value=repr(value)):
++                self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
++
++    def test_pointer_outside_source_rejected_before_original_reader(self):
++        outside = self.base / 'outside.json'
++        outside.write_bytes(b'{}')
++        self.assert_prewrite_error('source_root', lambda: self.create(generation_pointer=outside))
++
++    def test_directory_pointer_append_is_rechecked_for_symlink(self):
++        outside = self.base / 'outside.json'
++        outside.write_bytes(b'{}')
++        self.pointer.unlink()
++        self.pointer.symlink_to(outside)
++        self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(generation_pointer=self.source), ValueError)
++
++    def test_default_reader_rejects_bad_generation_without_writes(self):
++        self.assert_prewrite_error('formula generation schema/status is invalid', self.create, FormulaGenerationError)
++
++    def test_read_entry_applies_same_root_boundary(self):
++        self.assert_prewrite_error('source_directory', lambda: self.read(source_root=self.base/'missing'))
++        self.assert_prewrite_error('root_overlap', lambda: self.read(source_root=self.private))
++        self.assert_prewrite_error('path_type', lambda: self.read(private_root=12))
++
++    def test_default_read_applies_source_bound_to_saved_generation(self):
++        raw = asdict(self.binding)
++        raw['generation_path'] = str(self.base/'outside.json')
++        binding = m.ASourceBinding(**raw)
++        relative = m.binding_relative(binding)
++        SafeRoot(self.private).write_bytes(relative, canonical(raw), require_absent=True)
++        before = snapshot(self.private)
++        with self.assertRaisesRegex(m.M01BindingError, '^source_root$'):
++            self.read(relative=relative)
++        self.assertEqual(snapshot(self.private), before)
++
++
++class BoundedReaderTests(TempCase):
++    def bounded(self, reader):
++        return m.bounded_reader(self.source, reader, no_symlinks, FORMULA_GENERATION_POINTER_NAME)
++
++    def test_directory_uses_original_pointer_name(self):
++        calls = []
++        def reader(pointer, **kwargs):
++            calls.append((pointer,kwargs))
++            return self.result
++        self.assertEqual(self.bounded(reader)(self.source, require_source=True),self.result)
++        self.assertEqual(calls,[(self.pointer,{'require_source':True})])
++
++    def test_guard_rejection_prevents_reader_call(self):
++        def reader(*args,**kwargs):
++            self.fail('unsafe path reached original reader')
++        for pointer, code in ((32,'path_type'),('relative','path'),(str(self.source)+'/../outside','path'),(self.base/'outside','source_root')):
++            with self.subTest(pointer=pointer):
++                with self.assertRaisesRegex(m.M01BindingError, '^'+code+'$'):
++                    self.bounded(reader)(pointer)
++
++    def test_returned_path_rejects_raw_types_lexical_paths_and_escape(self):
++        for path, code in ((32,'path_type'),(object(),'path_type'),('relative','path'),
++                (str(self.source)+'/../outside','path'),('/tmp/a\x00','path'),('/tmp\\a','path'),(self.base/'outside','reader_path')):
++            with self.subTest(path=repr(path)):
++                result = dict(self.result,path=path)
++                with self.assertRaisesRegex(m.M01BindingError,'^'+code+'$'):
++                    self.bounded(lambda *a,**k: result)(self.pointer)
++
++    def test_returned_path_rejects_symlink_ancestor(self):
++        outside = self.base/'outside'
++        outside.mkdir()
++        link = self.source/'alias'
++        link.symlink_to(outside, target_is_directory=True)
++        with self.assertRaisesRegex(ValueError, '^SYMLINK_REJECTED$'):
++            self.bounded(lambda *a,**k: dict(self.result,path=link/'generation.json'))(self.pointer)
++
++
++class ParserAndCoreTests(TempCase):
++    def test_dates_strict_and_real_calendar(self):
++        self.assertEqual(m.validate_date('20240229'),'20240229')
++        for value in (20261009,None,True,'2026-10-09','２０２６１００９','20260229','20261301',' 20261009'):
++            with self.subTest(value=value), self.assertRaisesRegex(m.M01BindingError,'^invalid_date$'):
++                m.validate_date(value)
++
++    def test_parser_preserves_r15_exact_schema_and_fields(self):
++        self.assertEqual(m.parse_binding(self.raw),self.binding)
++        for key,value,error in [('schema','v5.m01.a_source_binding.r17','schema'),('status','READY','schema'),
++                               ('strict_source_verified',1,'strict'),('cutoff_status','VERIFIED','cutoff'),
++                               ('target_date',DATE+'0','invalid_date'),('generation_id',42,'generation_id'),
++                               ('generation_id','A'*64,'generation_id'),('generation_path',42,'path_type')]:
++            obj=asdict(self.binding);obj[key]=value
++            with self.subTest(key=key,value=value),self.assertRaisesRegex(m.M01BindingError,'^'+error+'$'):
++                m.parse_binding(canonical(obj))
++        for obj in ({},[],{**asdict(self.binding),'extra':1}):
++            with self.subTest(obj=obj),self.assertRaisesRegex(m.M01BindingError,'^fields$'):
++                m.parse_binding(canonical(obj))
++
++    def test_parser_rejects_duplicate_keys_and_invalid_json(self):
++        for raw,error in ((b'{"schema":1,"schema":2}','duplicate_key'),(b'\xff','json'),(b'{','json')):
++            with self.subTest(raw=raw),self.assertRaisesRegex(m.M01BindingError,'^'+error+'$'):
++                m.parse_binding(raw)
++
++    def test_parser_rejects_every_digest(self):
++        for key in ('generation_sha256','manifest_sha256','manifest_evidence_sha256','sync_receipt_sha256'):
++            for value in (42,'a'*63,'A'*64):
++                obj=asdict(self.binding);obj[key]=value
++                with self.subTest(key=key,value=value),self.assertRaisesRegex(m.M01BindingError,'^sha$'):
++                    m.parse_binding(canonical(obj))
++
++    def test_project_preserves_generation_id_and_path_validation(self):
++        for key,value,error in (('generation_id',42,'generation_id'),('generation_id','z'*64,'generation_id'),
++                ('path',object(),'path_type'),('path','/tmp/../evil','path'),('strict_source_verified',1,'strict'),('status','FAILED','status')):
++            with self.subTest(key=key),self.assertRaisesRegex(m.M01BindingError,'^'+error+'$'):
++                m.project(dict(self.result,**{key:value}))
++
++    def test_exact_relative_checked_before_reader(self):
++        def reader(*a,**k): self.fail('mismatched binding relative reached reader')
++        for relative in ('../binding.json','/'+self.relative,self.relative.replace('/a_source/','//a_source/'),Path(self.relative)):
++            with self.subTest(relative=relative),self.assertRaisesRegex(m.M01BindingError,'^relative$'):
++                m.verify_binding_bytes(self.raw,relative,reader)
++
++    def test_full_projection_and_expected_comparison(self):
++        for key in ('generation_id','sha256'):
++            with self.subTest(key=key),self.assertRaisesRegex(m.M01BindingError,'^drift$'):
++                m.verify_binding_bytes(self.raw,self.relative,lambda *a,**k:dict(self.result,**{key:'f'*64}))
++        with self.assertRaisesRegex(m.M01BindingError,'^drift$'):
++            m.verify_binding_bytes(self.raw,self.relative,lambda *a,**k:self.result,replace(self.binding,manifest_sha256='f'*64))
++
++    def test_core_persists_reuses_and_independently_rereads(self):
++        calls=[]
++        def reader(pointer,**kwargs):
++            calls.append((pointer,kwargs));return self.result
++        safe=SafeRoot(self.private)
++        created=m.create_binding(safe,self.pointer,DATE,reader)
++        self.assertEqual(created,self.binding)
++        self.assertEqual(len(calls),2)
++        self.assertEqual(calls[1],(str(self.pointer),{'expected_target_date':DATE,'require_source':True}))
++        before=snapshot(self.private)
++        self.assertEqual(m.create_binding(safe,self.pointer,DATE,reader),created)
++        self.assertEqual(len(calls),4)
++        self.assertEqual(m.read_and_verify_binding(safe,self.relative,reader),created)
++        self.assertEqual(snapshot(self.private),before)
++
++    def test_write_is_locked_and_require_absent(self):
++        outer=self
++        class ObservedRoot(SafeRoot):
++            locked=False
++            @contextmanager
++            def kernel_lock(self,*args,**kwargs):
++                with super().kernel_lock(*args,**kwargs):
++                    self.locked=True
++                    try:yield
++                    finally:self.locked=False
++            def write_bytes(self,relative,raw,*,require_absent=False):
++                outer.assertTrue(self.locked);outer.assertTrue(require_absent)
++                super().write_bytes(relative,raw,require_absent=require_absent)
++        m.create_binding(ObservedRoot(self.private),self.pointer,DATE,lambda *a,**k:self.result)
++        self.assertEqual(m.parse_binding((self.private/self.relative).read_bytes()),self.binding)
++
++    def test_conflicting_existing_binding_not_overwritten(self):
++        safe=SafeRoot(self.private)
++        bad=b'{"status":"broken"}'
++        safe.write_bytes(self.relative,bad,require_absent=True)
++        with self.assertRaisesRegex(m.M01BindingError,'^fields$'):
++            m.create_binding(safe,self.pointer,DATE,lambda *a,**k:self.result)
++        self.assertEqual((self.private/self.relative).read_bytes(),bad)
++
++    def test_atomic_absent_publication_preserves_racing_file(self):
++        class RacingRoot(SafeRoot):
++            def write_bytes(self,relative,raw,*,require_absent=False):
++                super().write_bytes(relative,b'racing-owner',require_absent=True)
++                super().write_bytes(relative,raw,require_absent=require_absent)
++        with self.assertRaises(FileExistsError):
++            m.create_binding(RacingRoot(self.private),self.pointer,DATE,lambda *a,**k:self.result)
++        self.assertEqual((self.private/self.relative).read_bytes(),b'racing-owner')
++
++    def test_non_missing_read_error_is_not_treated_as_absent(self):
++        class DeniedRoot(SafeRoot):
++            def read_bytes(self,*args,**kwargs):raise PermissionError('denied-test')
++        with self.assertRaisesRegex(PermissionError,'^denied-test$'):
++            m.create_binding(DeniedRoot(self.private),self.pointer,DATE,lambda *a,**k:self.result)
++        self.assertFalse((self.private/self.relative).exists())
++
++    def test_postwrite_source_drift_refused(self):
++        calls=[]
++        def reader(*args,**kwargs):
++            calls.append(1)
++            return self.result if len(calls)==1 else dict(self.result,sha256='f'*64)
++        with self.assertRaisesRegex(m.M01BindingError,'^drift$'):
++            m.create_binding(SafeRoot(self.private),self.pointer,DATE,reader)
++        self.assertEqual(len(calls),2)
++        self.assertEqual(m.parse_binding((self.private/self.relative).read_bytes()),self.binding)
++
++    def test_formula_failure_preserves_previous_success(self):
++        safe=SafeRoot(self.private)
++        m.create_binding(safe,self.pointer,DATE,lambda *a,**k:self.result)
++        before=snapshot(self.private)
++        def failing(*args,**kwargs):raise FormulaGenerationError('fixture-formula-failure')
++        with self.assertRaisesRegex(FormulaGenerationError,'^fixture-formula-failure$'):
++            m.create_binding(safe,self.pointer,DATE,failing)
++        self.assertEqual(snapshot(self.private),before)
++
++    def test_binding_symlink_never_overwritten(self):
++        target=self.private/self.relative
++        target.parent.mkdir(parents=True)
++        outside=self.base/'old-success';outside.write_bytes(b'preserve')
++        target.symlink_to(outside)
++        with self.assertRaises(OSError):
++            m.create_binding(SafeRoot(self.private),self.pointer,DATE,lambda *a,**k:self.result)
++        self.assertEqual(outside.read_bytes(),b'preserve')
++        self.assertTrue(target.is_symlink())
++
++
++@unittest.skipUnless(HAS_PARQUET, 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed')
++class RealDefaultReaderTests(TempCase):
++    def setUp(self):
++        super().setUp()
++        self.pointer,self.payload=write_generation(self.source)
++
++    def test_default_create_read_reuse_real_parquet_and_source_sha_chain(self):
++        source_before=snapshot(self.source)
++        created=self.create(generation_pointer=self.source)
++        self.assertEqual(created.schema,SCHEMA)
++        self.assertEqual(created.generation_sha256,digest(self.pointer.read_bytes()))
++        self.assertEqual(created.generation_id,self.payload['generation_id'])
++        self.assertEqual(created.manifest_sha256,self.payload['input_manifest']['manifest_sha256'])
++        self.assertEqual(created.manifest_evidence_sha256,self.payload['input_manifest']['sha256'])
++        self.assertEqual(created.sync_receipt_sha256,self.payload['source']['sync_receipt_sha256'])
++        relative=m.binding_relative(created)
++        self.assertEqual(self.read(relative=relative),created)
++        before=snapshot(self.private)
++        self.assertEqual(self.create(),created)
++        self.assertEqual(snapshot(self.private),before)
++        self.assertEqual(snapshot(self.source),source_before)
++
++    def test_default_wrong_day_rejected_before_output_write(self):
++        self.assert_prewrite_error('formula generation target_date mismatch: '+DATE+' != 20261008',
++            lambda:self.create(target_date='20261008'),FormulaGenerationError)
++
++    def test_default_generation_identity_conflict_rejected(self):
++        self.payload['generation_id']='f'*64
++        self.pointer.write_bytes(canonical(self.payload))
++        self.assert_prewrite_error('formula generation identity mismatch',self.create,FormulaGenerationError)
++
++    def test_default_artifact_tamper_preserves_old_binding(self):
++        created=self.create();relative=m.binding_relative(created)
++        before=snapshot(self.private)
++        selector=self.source/'selector.parquet'
++        raw=selector.read_bytes();selector.write_bytes(bytes([raw[0]^1])+raw[1:])
++        with self.assertRaisesRegex(FormulaGenerationError,'^generation selector SHA mismatch$'):
++            self.read(relative=relative)
++        self.assertEqual(snapshot(self.private),before)
++
++    def test_default_manifest_tamper_rejected(self):
++        target=self.source/'input-manifest.json';raw=target.read_bytes()
++        target.write_bytes(b'!'+raw[1:])
++        self.assert_prewrite_error('generation input_manifest SHA mismatch',self.create,FormulaGenerationError)
++
++    def test_default_receipt_tamper_rejected(self):
++        target=self.source/'sync-receipt.json';raw=target.read_bytes()
++        target.write_bytes(b'!'+raw[1:])
++        self.assert_prewrite_error('formula generation sync receipt SHA mismatch',self.create,FormulaGenerationError)
++
++    def test_default_changed_pointer_rejects_old_binding(self):
++        created=self.create();relative=m.binding_relative(created)
++        before=snapshot(self.private)
++        self.payload['run_id']='m01-changed-synthetic-run'
++        self.pointer.write_bytes(canonical(self.payload))
++        with self.assertRaisesRegex(m.M01BindingError,'^drift$'):
++            self.read(relative=relative)
++        self.assertEqual(snapshot(self.private),before)
++
++    def test_default_changed_valid_source_gets_new_identity_without_overwrite(self):
++        created=self.create();relative=m.binding_relative(created)
++        old=(self.private/relative).read_bytes()
++        self.payload['run_id']='m01-changed-synthetic-run'
++        self.pointer.write_bytes(canonical(self.payload))
++        newer=self.create()
++        self.assertNotEqual(m.binding_relative(newer),relative)
++        self.assertEqual((self.private/relative).read_bytes(),old)
++        self.assertEqual(self.read(relative=m.binding_relative(newer)),newer)
++
++
++if __name__=='__main__':
++    unittest.main(verbosity=2)

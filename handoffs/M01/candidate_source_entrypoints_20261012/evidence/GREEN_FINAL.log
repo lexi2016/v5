@@ -1,0 +1,50 @@
+test_directory_uses_original_pointer_name (test_a_source_daily.BoundedReaderTests.test_directory_uses_original_pointer_name) ... ok
+test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) ... ok
+test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) ... ok
+test_returned_path_rejects_symlink_ancestor (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_symlink_ancestor) ... ok
+test_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) ... ok
+test_default_read_applies_source_bound_to_saved_generation (test_a_source_daily.DefaultEntrypointTests.test_default_read_applies_source_bound_to_saved_generation) ... ok
+test_default_reader_rejects_bad_generation_without_writes (test_a_source_daily.DefaultEntrypointTests.test_default_reader_rejects_bad_generation_without_writes) ... ok
+test_directory_pointer_append_is_rechecked_for_symlink (test_a_source_daily.DefaultEntrypointTests.test_directory_pointer_append_is_rechecked_for_symlink) ... ok
+test_internal_defaults_are_original_source_dependencies (test_a_source_daily.DefaultEntrypointTests.test_internal_defaults_are_original_source_dependencies) ... ok
+test_invalid_date_is_checked_before_roots (test_a_source_daily.DefaultEntrypointTests.test_invalid_date_is_checked_before_roots) ... ok
+test_marker_symlink_rejected (test_a_source_daily.DefaultEntrypointTests.test_marker_symlink_rejected) ... ok
+test_missing_marker_rejected (test_a_source_daily.DefaultEntrypointTests.test_missing_marker_rejected) ... ok
+test_pointer_outside_source_rejected_before_original_reader (test_a_source_daily.DefaultEntrypointTests.test_pointer_outside_source_rejected_before_original_reader) ... ok
+test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) ... ok
+test_public_signatures_need_business_arguments_only (test_a_source_daily.DefaultEntrypointTests.test_public_signatures_need_business_arguments_only) ... ok
+test_read_entry_applies_same_root_boundary (test_a_source_daily.DefaultEntrypointTests.test_read_entry_applies_same_root_boundary) ... ok
+test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) ... ok
+test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) ... ok
+test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) ... ok
+test_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) ... ok
+test_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) ... ok
+test_atomic_absent_publication_preserves_racing_file (test_a_source_daily.ParserAndCoreTests.test_atomic_absent_publication_preserves_racing_file) ... ok
+test_binding_symlink_never_overwritten (test_a_source_daily.ParserAndCoreTests.test_binding_symlink_never_overwritten) ... ok
+test_conflicting_existing_binding_not_overwritten (test_a_source_daily.ParserAndCoreTests.test_conflicting_existing_binding_not_overwritten) ... ok
+test_core_persists_reuses_and_independently_rereads (test_a_source_daily.ParserAndCoreTests.test_core_persists_reuses_and_independently_rereads) ... ok
+test_dates_strict_and_real_calendar (test_a_source_daily.ParserAndCoreTests.test_dates_strict_and_real_calendar) ... ok
+test_exact_relative_checked_before_reader (test_a_source_daily.ParserAndCoreTests.test_exact_relative_checked_before_reader) ... ok
+test_formula_failure_preserves_previous_success (test_a_source_daily.ParserAndCoreTests.test_formula_failure_preserves_previous_success) ... ok
+test_full_projection_and_expected_comparison (test_a_source_daily.ParserAndCoreTests.test_full_projection_and_expected_comparison) ... ok
+test_non_missing_read_error_is_not_treated_as_absent (test_a_source_daily.ParserAndCoreTests.test_non_missing_read_error_is_not_treated_as_absent) ... ok
+test_parser_preserves_r15_exact_schema_and_fields (test_a_source_daily.ParserAndCoreTests.test_parser_preserves_r15_exact_schema_and_fields) ... ok
+test_parser_rejects_duplicate_keys_and_invalid_json (test_a_source_daily.ParserAndCoreTests.test_parser_rejects_duplicate_keys_and_invalid_json) ... ok
+test_parser_rejects_every_digest (test_a_source_daily.ParserAndCoreTests.test_parser_rejects_every_digest) ... ok
+test_postwrite_source_drift_refused (test_a_source_daily.ParserAndCoreTests.test_postwrite_source_drift_refused) ... ok
+test_project_preserves_generation_id_and_path_validation (test_a_source_daily.ParserAndCoreTests.test_project_preserves_generation_id_and_path_validation) ... ok
+test_write_is_locked_and_require_absent (test_a_source_daily.ParserAndCoreTests.test_write_is_locked_and_require_absent) ... ok
+test_default_artifact_tamper_preserves_old_binding (test_a_source_daily.RealDefaultReaderTests.test_default_artifact_tamper_preserves_old_binding) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_changed_pointer_rejects_old_binding (test_a_source_daily.RealDefaultReaderTests.test_default_changed_pointer_rejects_old_binding) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_changed_valid_source_gets_new_identity_without_overwrite (test_a_source_daily.RealDefaultReaderTests.test_default_changed_valid_source_gets_new_identity_without_overwrite) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_create_read_reuse_real_parquet_and_source_sha_chain (test_a_source_daily.RealDefaultReaderTests.test_default_create_read_reuse_real_parquet_and_source_sha_chain) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_generation_identity_conflict_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_generation_identity_conflict_rejected) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_manifest_tamper_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_manifest_tamper_rejected) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_receipt_tamper_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_receipt_tamper_rejected) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_wrong_day_rejected_before_output_write (test_a_source_daily.RealDefaultReaderTests.test_default_wrong_day_rejected_before_output_write) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.067s
+
+OK (skipped=8)
+EXIT_CODE=0

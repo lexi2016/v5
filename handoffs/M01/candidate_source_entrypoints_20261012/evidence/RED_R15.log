@@ -1,0 +1,843 @@
+test_directory_uses_original_pointer_name (test_a_source_daily.BoundedReaderTests.test_directory_uses_original_pointer_name) ... ok
+test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) ... 
+  test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) (pointer=32) ... ERROR
+  test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) (pointer='relative') ... ERROR
+  test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) (pointer='/tmp/tmpzdbx3a5d/source/../outside') ... ERROR
+test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) ... 
+  test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path='32') ... ERROR
+  test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path='<object object at 0x7f2f888a0c30>') ... ERROR
+  test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'relative'") ... FAIL
+  test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'/tmp/tmpl0zez0e9/source/../outside'") ... FAIL
+  test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'/tmp/a\\x00'") ... FAIL
+  test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'/tmp\\\\a'") ... FAIL
+test_returned_path_rejects_symlink_ancestor (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_symlink_ancestor) ... FAIL
+test_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) ... 
+  test_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) (entry='create') ... ERROR
+  test_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) (entry='read') ... ERROR
+test_default_read_applies_source_bound_to_saved_generation (test_a_source_daily.DefaultEntrypointTests.test_default_read_applies_source_bound_to_saved_generation) ... ERROR
+test_default_reader_rejects_bad_generation_without_writes (test_a_source_daily.DefaultEntrypointTests.test_default_reader_rejects_bad_generation_without_writes) ... ERROR
+test_directory_pointer_append_is_rechecked_for_symlink (test_a_source_daily.DefaultEntrypointTests.test_directory_pointer_append_is_rechecked_for_symlink) ... ERROR
+test_internal_defaults_are_original_source_dependencies (test_a_source_daily.DefaultEntrypointTests.test_internal_defaults_are_original_source_dependencies) ... FAIL
+test_invalid_date_is_checked_before_roots (test_a_source_daily.DefaultEntrypointTests.test_invalid_date_is_checked_before_roots) ... ERROR
+test_marker_symlink_rejected (test_a_source_daily.DefaultEntrypointTests.test_marker_symlink_rejected) ... ERROR
+test_missing_marker_rejected (test_a_source_daily.DefaultEntrypointTests.test_missing_marker_rejected) ... ERROR
+test_pointer_outside_source_rejected_before_original_reader (test_a_source_daily.DefaultEntrypointTests.test_pointer_outside_source_rejected_before_original_reader) ... ERROR
+test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) ... 
+  test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value='42') ... ERROR
+  test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="b'/tmp'") ... ERROR
+  test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'relative'") ... ERROR
+  test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'/tmp/tmp3bzv10tk/source/../evil'") ... ERROR
+  test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'/tmp/evil\\x00'") ... ERROR
+  test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'/tmp\\\\evil'") ... ERROR
+test_public_signatures_need_business_arguments_only (test_a_source_daily.DefaultEntrypointTests.test_public_signatures_need_business_arguments_only) ... FAIL
+test_read_entry_applies_same_root_boundary (test_a_source_daily.DefaultEntrypointTests.test_read_entry_applies_same_root_boundary) ... ERROR
+test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) ... 
+  test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) (source=PosixPath('/tmp/tmp_21rxavn/source'), private=PosixPath('/tmp/tmp_21rxavn/source')) ... ERROR
+  test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) (source=PosixPath('/tmp/tmp_21rxavn/source'), private=PosixPath('/tmp/tmp_21rxavn/source/output')) ... ERROR
+  test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) (source=PosixPath('/tmp/tmp_21rxavn/private/input'), private=PosixPath('/tmp/tmp_21rxavn/private')) ... ERROR
+test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) ... 
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='relative') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='/tmp/../escape') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='/tmp/evil\x00') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='/tmp\\evil') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='relative') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='/tmp/../escape') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='/tmp/evil\x00') ... ERROR
+  test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='/tmp\\evil') ... ERROR
+test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) ... 
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value='None') ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value='123') ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value="b'/tmp'") ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value='<object object at 0x7f2f888a1000>') ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value='None') ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value='123') ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value="b'/tmp'") ... ERROR
+  test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value='<object object at 0x7f2f888a1050>') ... ERROR
+test_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) ... 
+  test_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) (key='source_root') ... ERROR
+  test_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) (key='private_root') ... ERROR
+test_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) ... 
+  test_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) (path=PosixPath('/tmp/tmpxtk7096o/missing')) ... ERROR
+  test_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) (path=PosixPath('/tmp/tmpxtk7096o/source/CURRENT_FORMULA_GENERATION.json')) ... ERROR
+test_atomic_absent_publication_preserves_racing_file (test_a_source_daily.ParserAndCoreTests.test_atomic_absent_publication_preserves_racing_file) ... ok
+test_binding_symlink_never_overwritten (test_a_source_daily.ParserAndCoreTests.test_binding_symlink_never_overwritten) ... ok
+test_conflicting_existing_binding_not_overwritten (test_a_source_daily.ParserAndCoreTests.test_conflicting_existing_binding_not_overwritten) ... ok
+test_core_persists_reuses_and_independently_rereads (test_a_source_daily.ParserAndCoreTests.test_core_persists_reuses_and_independently_rereads) ... ok
+test_dates_strict_and_real_calendar (test_a_source_daily.ParserAndCoreTests.test_dates_strict_and_real_calendar) ... ok
+test_exact_relative_checked_before_reader (test_a_source_daily.ParserAndCoreTests.test_exact_relative_checked_before_reader) ... ok
+test_formula_failure_preserves_previous_success (test_a_source_daily.ParserAndCoreTests.test_formula_failure_preserves_previous_success) ... ok
+test_full_projection_and_expected_comparison (test_a_source_daily.ParserAndCoreTests.test_full_projection_and_expected_comparison) ... ok
+test_non_missing_read_error_is_not_treated_as_absent (test_a_source_daily.ParserAndCoreTests.test_non_missing_read_error_is_not_treated_as_absent) ... ok
+test_parser_preserves_r15_exact_schema_and_fields (test_a_source_daily.ParserAndCoreTests.test_parser_preserves_r15_exact_schema_and_fields) ... ok
+test_parser_rejects_duplicate_keys_and_invalid_json (test_a_source_daily.ParserAndCoreTests.test_parser_rejects_duplicate_keys_and_invalid_json) ... ok
+test_parser_rejects_every_digest (test_a_source_daily.ParserAndCoreTests.test_parser_rejects_every_digest) ... ok
+test_postwrite_source_drift_refused (test_a_source_daily.ParserAndCoreTests.test_postwrite_source_drift_refused) ... ok
+test_project_preserves_generation_id_and_path_validation (test_a_source_daily.ParserAndCoreTests.test_project_preserves_generation_id_and_path_validation) ... ok
+test_write_is_locked_and_require_absent (test_a_source_daily.ParserAndCoreTests.test_write_is_locked_and_require_absent) ... ok
+test_default_artifact_tamper_preserves_old_binding (test_a_source_daily.RealDefaultReaderTests.test_default_artifact_tamper_preserves_old_binding) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_changed_pointer_rejects_old_binding (test_a_source_daily.RealDefaultReaderTests.test_default_changed_pointer_rejects_old_binding) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_changed_valid_source_gets_new_identity_without_overwrite (test_a_source_daily.RealDefaultReaderTests.test_default_changed_valid_source_gets_new_identity_without_overwrite) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_create_read_reuse_real_parquet_and_source_sha_chain (test_a_source_daily.RealDefaultReaderTests.test_default_create_read_reuse_real_parquet_and_source_sha_chain) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_generation_identity_conflict_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_generation_identity_conflict_rejected) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_manifest_tamper_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_manifest_tamper_rejected) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_receipt_tamper_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_receipt_tamper_rejected) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+test_default_wrong_day_rejected_before_output_write (test_a_source_daily.RealDefaultReaderTests.test_default_wrong_day_rejected_before_output_write) ... skipped 'NOT_RUN: original reader requires existing pyarrow; no substitute reader installed'
+
+======================================================================
+ERROR: test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) (pointer=32)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 234, in test_guard_rejection_prevents_reader_call
+    self.bounded(reader)(pointer)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/src/v5_shadow/a_source_daily.py", line 126, in call
+    p=Path(pointer)
+      ^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1162, in __init__
+    super().__init__(*args)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 373, in __init__
+    raise TypeError(
+TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'int'
+
+======================================================================
+ERROR: test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) (pointer='relative')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 234, in test_guard_rejection_prevents_reader_call
+    self.bounded(reader)(pointer)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/src/v5_shadow/a_source_daily.py", line 127, in call
+    p=no_symlinks(p)
+      ^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/source/V5/src/v5_shadow/composition.py", line 25, in no_symlinks
+    raise ValueError('PATH_INVALID')
+ValueError: PATH_INVALID
+
+======================================================================
+ERROR: test_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) (pointer='/tmp/tmpzdbx3a5d/source/../outside')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 234, in test_guard_rejection_prevents_reader_call
+    self.bounded(reader)(pointer)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/src/v5_shadow/a_source_daily.py", line 127, in call
+    p=no_symlinks(p)
+      ^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/source/V5/src/v5_shadow/composition.py", line 25, in no_symlinks
+    raise ValueError('PATH_INVALID')
+ValueError: PATH_INVALID
+
+======================================================================
+ERROR: test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path='32')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 242, in test_returned_path_rejects_raw_types_lexical_paths_and_escape
+    self.bounded(lambda *a,**k: result)(self.pointer)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/src/v5_shadow/a_source_daily.py", line 133, in call
+    q=Path(result["path"])
+      ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1162, in __init__
+    super().__init__(*args)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 373, in __init__
+    raise TypeError(
+TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'int'
+
+======================================================================
+ERROR: test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path='<object object at 0x7f2f888a0c30>')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 242, in test_returned_path_rejects_raw_types_lexical_paths_and_escape
+    self.bounded(lambda *a,**k: result)(self.pointer)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/src/v5_shadow/a_source_daily.py", line 133, in call
+    q=Path(result["path"])
+      ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1162, in __init__
+    super().__init__(*args)
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 373, in __init__
+    raise TypeError(
+TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'object'
+
+======================================================================
+ERROR: test_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) (entry='create')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 159, in test_bad_marker_rejected_on_both_entries
+    self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', call, ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) (entry='read')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 159, in test_bad_marker_rejected_on_both_entries
+    self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', call, ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 104, in read
+    return m.read_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_default_read_applies_source_bound_to_saved_generation (test_a_source_daily.DefaultEntrypointTests.test_default_read_applies_source_bound_to_saved_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 212, in test_default_read_applies_source_bound_to_saved_generation
+    self.read(relative=relative)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 104, in read
+    return m.read_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_default_reader_rejects_bad_generation_without_writes (test_a_source_daily.DefaultEntrypointTests.test_default_reader_rejects_bad_generation_without_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 197, in test_default_reader_rejects_bad_generation_without_writes
+    self.assert_prewrite_error('formula generation schema/status is invalid', self.create, FormulaGenerationError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_directory_pointer_append_is_rechecked_for_symlink (test_a_source_daily.DefaultEntrypointTests.test_directory_pointer_append_is_rechecked_for_symlink)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 194, in test_directory_pointer_append_is_rechecked_for_symlink
+    self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(generation_pointer=self.source), ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 194, in <lambda>
+    self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(generation_pointer=self.source), ValueError)
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_invalid_date_is_checked_before_roots (test_a_source_daily.DefaultEntrypointTests.test_invalid_date_is_checked_before_roots)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 129, in test_invalid_date_is_checked_before_roots
+    self.assert_prewrite_error('invalid_date', lambda: self.create(target_date='20260230', source_root=object()))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 129, in <lambda>
+    self.assert_prewrite_error('invalid_date', lambda: self.create(target_date='20260230', source_root=object()))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_marker_symlink_rejected (test_a_source_daily.DefaultEntrypointTests.test_marker_symlink_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 169, in test_marker_symlink_rejected
+    self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', self.create, ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_missing_marker_rejected (test_a_source_daily.DefaultEntrypointTests.test_missing_marker_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 163, in test_missing_marker_rejected
+    self.assert_prewrite_error('SHADOW_ROOT_NOT_INITIALIZED', self.create, ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_outside_source_rejected_before_original_reader (test_a_source_daily.DefaultEntrypointTests.test_pointer_outside_source_rejected_before_original_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 187, in test_pointer_outside_source_rejected_before_original_reader
+    self.assert_prewrite_error('source_root', lambda: self.create(generation_pointer=outside))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 187, in <lambda>
+    self.assert_prewrite_error('source_root', lambda: self.create(generation_pointer=outside))
+                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value='42')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in test_pointer_raw_type_and_lexical_rejection
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in <lambda>
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="b'/tmp'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in test_pointer_raw_type_and_lexical_rejection
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in <lambda>
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'relative'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in test_pointer_raw_type_and_lexical_rejection
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in <lambda>
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'/tmp/tmp3bzv10tk/source/../evil'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in test_pointer_raw_type_and_lexical_rejection
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in <lambda>
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'/tmp/evil\\x00'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in test_pointer_raw_type_and_lexical_rejection
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in <lambda>
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) (value="'/tmp\\\\evil'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in test_pointer_raw_type_and_lexical_rejection
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 182, in <lambda>
+    self.assert_prewrite_error(code, lambda: self.create(generation_pointer=value))
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_read_entry_applies_same_root_boundary (test_a_source_daily.DefaultEntrypointTests.test_read_entry_applies_same_root_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 200, in test_read_entry_applies_same_root_boundary
+    self.assert_prewrite_error('source_directory', lambda: self.read(source_root=self.base/'missing'))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 200, in <lambda>
+    self.assert_prewrite_error('source_directory', lambda: self.read(source_root=self.base/'missing'))
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 104, in read
+    return m.read_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) (source=PosixPath('/tmp/tmp_21rxavn/source'), private=PosixPath('/tmp/tmp_21rxavn/source'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 153, in test_roots_must_not_overlap_either_direction
+    self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 153, in <lambda>
+    self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) (source=PosixPath('/tmp/tmp_21rxavn/source'), private=PosixPath('/tmp/tmp_21rxavn/source/output'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 153, in test_roots_must_not_overlap_either_direction
+    self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 153, in <lambda>
+    self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) (source=PosixPath('/tmp/tmp_21rxavn/private/input'), private=PosixPath('/tmp/tmp_21rxavn/private'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 153, in test_roots_must_not_overlap_either_direction
+    self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 153, in <lambda>
+    self.assert_prewrite_error('root_overlap', lambda: self.create(source_root=source, private_root=private))
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='relative')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='/tmp/../escape')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='/tmp/evil\x00')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='private_root', value='/tmp\\evil')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='relative')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='/tmp/../escape')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='/tmp/evil\x00')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) (key='source_root', value='/tmp\\evil')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in test_roots_reject_raw_lexical_paths
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 141, in <lambda>
+    self.assert_prewrite_error('path', lambda: self.create(**{key: value}))
+                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value='None')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value='123')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value="b'/tmp'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='private_root', value='<object object at 0x7f2f888a1000>')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value='None')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value='123')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value="b'/tmp'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) (key='source_root', value='<object object at 0x7f2f888a1050>')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in test_roots_reject_raw_types
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 135, in <lambda>
+    self.assert_prewrite_error('path_type', lambda: self.create(**{key: value}))
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) (key='source_root')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 176, in test_source_and_private_symlink_ancestors_rejected
+    self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(**{key:value}), ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 176, in <lambda>
+    self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(**{key:value}), ValueError)
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) (key='private_root')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 176, in test_source_and_private_symlink_ancestors_rejected
+    self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(**{key:value}), ValueError)
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 176, in <lambda>
+    self.assert_prewrite_error('SYMLINK_REJECTED', lambda: self.create(**{key:value}), ValueError)
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) (path=PosixPath('/tmp/tmpxtk7096o/missing'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 146, in test_source_must_be_existing_directory
+    self.assert_prewrite_error('source_directory', lambda: self.create(source_root=path))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 146, in <lambda>
+    self.assert_prewrite_error('source_directory', lambda: self.create(source_root=path))
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+ERROR: test_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) (path=PosixPath('/tmp/tmpxtk7096o/source/CURRENT_FORMULA_GENERATION.json'))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 146, in test_source_must_be_existing_directory
+    self.assert_prewrite_error('source_directory', lambda: self.create(source_root=path))
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 109, in assert_prewrite_error
+    call()
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 146, in <lambda>
+    self.assert_prewrite_error('source_directory', lambda: self.create(source_root=path))
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 99, in create
+    return m.create_binding_from_roots(**args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: create_binding_from_roots() missing 5 required keyword-only arguments: 'SafeRoot', 'reader', 'no_symlinks', 'shadow_root', and 'FORMULA_GENERATION_POINTER_NAME'
+
+======================================================================
+FAIL: test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'relative'")
+----------------------------------------------------------------------
+v5_shadow.a_source_daily.M01BindingError: reader_path
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 241, in test_returned_path_rejects_raw_types_lexical_paths_and_escape
+    with self.assertRaisesRegex(m.M01BindingError,'^'+code+'$'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "^path$" does not match "reader_path"
+
+======================================================================
+FAIL: test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'/tmp/tmpl0zez0e9/source/../outside'")
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 241, in test_returned_path_rejects_raw_types_lexical_paths_and_escape
+    with self.assertRaisesRegex(m.M01BindingError,'^'+code+'$'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: M01BindingError not raised
+
+======================================================================
+FAIL: test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'/tmp/a\\x00'")
+----------------------------------------------------------------------
+v5_shadow.a_source_daily.M01BindingError: reader_path
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 241, in test_returned_path_rejects_raw_types_lexical_paths_and_escape
+    with self.assertRaisesRegex(m.M01BindingError,'^'+code+'$'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "^path$" does not match "reader_path"
+
+======================================================================
+FAIL: test_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) (path="'/tmp\\\\a'")
+----------------------------------------------------------------------
+v5_shadow.a_source_daily.M01BindingError: reader_path
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 241, in test_returned_path_rejects_raw_types_lexical_paths_and_escape
+    with self.assertRaisesRegex(m.M01BindingError,'^'+code+'$'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "^path$" does not match "reader_path"
+
+======================================================================
+FAIL: test_returned_path_rejects_symlink_ancestor (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_symlink_ancestor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 249, in test_returned_path_rejects_symlink_ancestor
+    with self.assertRaisesRegex(ValueError, '^SYMLINK_REJECTED$'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_internal_defaults_are_original_source_dependencies (test_a_source_daily.DefaultEntrypointTests.test_internal_defaults_are_original_source_dependencies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 122, in test_internal_defaults_are_original_source_dependencies
+    self.assertIs(getattr(m, 'SafeRoot', None), SafeRoot)
+AssertionError: None is not <class 'infrastructure.owned_io.SafeRoot'>
+
+======================================================================
+FAIL: test_public_signatures_need_business_arguments_only (test_a_source_daily.DefaultEntrypointTests.test_public_signatures_need_business_arguments_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m01_source_completion_20261012/after/V5/tests/test_a_source_daily.py", line 116, in test_public_signatures_need_business_arguments_only
+    self.assertEqual(set(inspect.signature(m.create_binding_from_roots).parameters),
+AssertionError: Items in the first set but not the second:
+'shadow_root'
+'SafeRoot'
+'no_symlinks'
+'reader'
+'FORMULA_GENERATION_POINTER_NAME'
+
+----------------------------------------------------------------------
+Ran 44 tests in 0.052s
+
+FAILED (failures=7, errors=44, skipped=8)
+EXIT_CODE=1

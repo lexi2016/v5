@@ -1,3 +1,9 @@
+# M01 当前候选：默认双 roots 入口已实现
+
+2026-10-12：本轮在 R15 完整核心上修复真实默认创建/读取入口，保留 r15 schema 和原 owner。新候选在 [candidate_source_entrypoints_20261012/REPORT.md](candidate_source_entrypoints_20261012/REPORT.md)，完整 [after](candidate_source_entrypoints_20261012/after/)、[前后 SHA](candidate_source_entrypoints_20261012/BEFORE_AFTER_SHA256.json)、[正向 patch](candidate_source_entrypoints_20261012/runtime.patch)、[反向 patch](candidate_source_entrypoints_20261012/reverse.patch) 和 [Mac 验收步骤](candidate_source_entrypoints_20261012/MAC_APPLY_AND_ACCEPTANCE.md) 均已交付。
+
+本轮云测试：36 PASS、8 项真实 Parquet fixture 因缺现有 pyarrow 而明确 NOT_RUN/SKIP；不算 Mac、真实业务或生产通过。两份 patch 已实际往返，原 SOURCE 71 件字节核合。原 source/reference/review/历史材料完整保留。下面为上一轮交接记录，状态仅对应其注明候选。
+
 # M01 A行情与公式面板来源：GitHub工程与返修入口
 
 当前独立私有仓库为 lexi2016/v5，本模块开发分支为 dev/m01-github-handoff-20261011。本次只是现有工程材料交接，不是实现、测试或部署通过。
