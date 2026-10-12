@@ -17,7 +17,7 @@ from .contracts import exact_keys,aware,sha
 from .digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
 from .api_gateway import (_parse_response, _precheck_json, _bounded_json,
                           _manager_response, MANAGER_WORKSPACE_PATH)
-from .m18_v2_http_bridge import ROUTE as M18_ROUTE
+M18_ROUTE = "/api/v4/manager/m18/v2"
 
 
 def response_key(module_id,path,query):
