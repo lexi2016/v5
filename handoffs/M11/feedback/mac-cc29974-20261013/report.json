@@ -1,0 +1,34 @@
+{
+  "candidate": "cc29974b15f2199aef3f19100c91a9195f217074",
+  "base_candidate": "f932059eff5e425d0e3c381f9e4610e62e6e0cc2",
+  "base_mac_feedback": "aa476d6227ba3aff7e9816d7a9380b5a169c495a",
+  "command": [
+    "<EXISTING_V35_MAC_PYTHON_3.14.6>",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "V5/tests/m11/test_binding_config_boundary.py"
+  ],
+  "environment": {
+    "PYTHONPATH": "V5/src",
+    "TMPDIR": "<TASK>/m11-cc299-evidence/tmp",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+  },
+  "started_utc": "2026-10-12T21:47:22.068073+00:00",
+  "ended_utc": "2026-10-12T21:47:22.190872+00:00",
+  "exit": 0,
+  "git_blobs_verified": 327,
+  "changed_blobs_verified": 18,
+  "source_unchanged": true,
+  "vendor_originals_and_new_manifest_identical_to_f932": true,
+  "status": "PASS",
+  "scope": "Only supplied configuration-boundary test file; original 43+18 tests not rerun.",
+  "limits": [
+    "Fixture-only; no deployment, credentials, real provider, production, or acquisition.",
+    "Negative cases deliberately place isolated fixture config at/equal/below fixture archive; real configs and services untouched.",
+    "Historical source/PIT/natural/full module acceptance unchanged."
+  ]
+}
