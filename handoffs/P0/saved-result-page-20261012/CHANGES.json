@@ -1,0 +1,84 @@
+{
+  "frontend_base": "d94cfc86111dc33a76e651e15fb6668dcefa849c",
+  "backend_checked_head": "ed2f0e93982022d94ccdf4252e49fa319b09d971",
+  "files": [
+    {
+      "path": "frontend/src/api/m18SavedResult.ts",
+      "bytes": 11484,
+      "git_blob_sha": "67842859046566eff938b54838e8733c42b1fb68",
+      "sha256": "463db40c88743617d2264cde097cc7a32c12afb7a69b65ed6c22fdf4ab269c0f"
+    },
+    {
+      "path": "frontend/src/views/SavedManagerResultView.vue",
+      "bytes": 9871,
+      "git_blob_sha": "b65e7008ebb186bdd898fe38dbda466dbb913b59",
+      "sha256": "b5fe344726abaab35232d644a49baf9bfc64b8eae7427c52df9ad8b072888403"
+    },
+    {
+      "path": "frontend/src/views/SavedManagerResultView.spec.ts",
+      "bytes": 899,
+      "git_blob_sha": "b306de6c13e4406f8548c97dfa640efe2aefc08e",
+      "sha256": "8fee821bd0961b8c05a21d59e850ab953c0b7d3afcd07b33ef2ad64793aec958"
+    },
+    {
+      "path": "frontend/tests/m18SavedResult.node.mjs",
+      "bytes": 7954,
+      "git_blob_sha": "17c6ec9a19639305558cad479aef6d5b498300c0",
+      "sha256": "6e3d0e29ad66b084a33092fac00d59c7d1de4bd00ee9a917fa0cced115f53bb4"
+    },
+    {
+      "path": "frontend/src/main.ts",
+      "bytes": 456,
+      "git_blob_sha": "b8c69650563a93367a4651513209be3f5e51f2f9",
+      "sha256": "4e401b936164f505a1d68e8abe0886b7a7ce41849b8931f09a2684f444ccbbf2"
+    },
+    {
+      "path": "frontend/src/manager-selection/main.ts",
+      "bytes": 337,
+      "git_blob_sha": "c4555767cd55a747a71c51bc3a306fa76cb00e4e",
+      "sha256": "acbd0ec5f91b2c2f0a6b57073fca7a09ce42e935297688efa3ccbc4269824564"
+    },
+    {
+      "path": "frontend/index.html",
+      "bytes": 582,
+      "git_blob_sha": "85e8cbbeb5132d0f875102f4e913d75671e1ed08",
+      "sha256": "7d4864ccaf161ad34fa2c44709bf76e160dbd905083fc1d3ec305c3bffd5ade7"
+    },
+    {
+      "path": "frontend/manager-selection/index.html",
+      "bytes": 299,
+      "git_blob_sha": "9a62a427f0483bc856be562ef9a0d9c836c372c7",
+      "sha256": "bb6aece954171d013a56e9f57bf0931cfe63e3fb0daf529f5e4557780c4d429d"
+    },
+    {
+      "path": "frontend/package.json",
+      "bytes": 568,
+      "git_blob_sha": "0deb8a4d915dbdc38b10558dfbe2fc779c60dabf",
+      "sha256": "081bad6e16ff464a2e25f8eb35e55184d9cc27af4fa59a9fc1d8409cf9614b39"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "bytes": 1352,
+      "git_blob_sha": "14414fb25c02e702df506e592ed92e65577c9286",
+      "sha256": "2b4b5ff3aef17296cea4352a476147c0afb7a118738372246046b1cc6cbe4874"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "bytes": 24424,
+      "git_blob_sha": "991ca145fa73f73833c1f7462fb28c8aa83ac644",
+      "sha256": "d3ff03123d77c86ed8a755ab6c6ae100779569cb73b103b26e13dede0f652501"
+    },
+    {
+      "path": "V5/tests/test_m18_v2_semantic_pages.py",
+      "bytes": 8085,
+      "git_blob_sha": "e804f0ba9312aebed1cc659e00ea60f3969ff3c8",
+      "sha256": "3a8af4bdc2499037774e1f4a6befb1f7a51dcf1192ca3e321f6526b0fb4bb675"
+    },
+    {
+      "path": "V5/examples/m18_v2_saved_view_config.json",
+      "bytes": 828,
+      "git_blob_sha": "5f87cc16a59e536500af5f3af29d700d79cc4574",
+      "sha256": "be50b0d22bf15e5a7113dd82a201f0daba0641cb49c218abc81e48ad44e93ced"
+    }
+  ]
+}

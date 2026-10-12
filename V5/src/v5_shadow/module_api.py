@@ -169,6 +169,63 @@ def _m18_page_response(config, root, query):
     }
 
 
+# Per-view limits are narrower than existing global/offline budgets.
+M18_VIEW_BYTES = 256 * 1024
+M18_VIEW_ITEM_BYTES = 16 * 1024
+M18_VIEW_VALUES_BYTES = 128 * 1024
+
+
+def _m18_semantic_response(config, root, path, query):
+    """Read one saved semantic page. Never reconstruct a full response for HTTP."""
+    keys = ('run_id', 'generation_id')
+    if path == M18_ROUTE + '/sections':
+        keys += ('section',)
+        if 'cursor' in query:
+            keys += ('cursor',)
+    exact_keys(query, keys)
+    descriptor = _m18_read_page_binding(config, root, query)
+    if query['generation_id'] != descriptor['generation_id']:
+        raise ValueError('M18_GENERATION_MISMATCH')
+    binding = config['m18_v2_binding']
+    if (binding['identity'] != descriptor['identity']
+            or binding['profile_sha256'] != descriptor['profile_sha256']):
+        raise ValueError('M18_IDENTITY_MISMATCH')
+    reader = _m18_disk_reader(binding)
+    if path == M18_ROUTE + '/overview':
+        value = reader.overview()
+    else:
+        section = query['section']
+        value = reader.detail(section, cursor=query.get('cursor'))
+        loaded_bytes = 0
+        loaded_count = 0
+        for entry in value['entries']:
+            if entry['bytes'] > M18_VIEW_ITEM_BYTES:
+                entry['reason'] = 'ITEM_BYTES_LIMIT'
+                continue
+            if loaded_bytes + entry['bytes'] > M18_VIEW_VALUES_BYTES:
+                entry['reason'] = 'PAGE_BYTES_LIMIT'
+                continue
+            pieces = []
+            size = 0
+            for piece in reader.item_parts(section, entry['index']):
+                size += len(piece)
+                if size > M18_VIEW_ITEM_BYTES:
+                    raise ValueError('M18_VIEW_ITEM_SIZE')
+                pieces.append(piece)
+            raw = b''.join(pieces)
+            if len(raw) != entry['bytes'] or hashlib.sha256(raw).hexdigest() != entry['sha256']:
+                raise ValueError('M18_VIEW_ITEM_HASH')
+            entry['value'] = json.loads(raw)
+            entry['value_state'] = 'LOADED'
+            loaded_bytes += size
+            loaded_count += 1
+        value['loaded_count'] = loaded_count
+        value['not_loaded_count'] = value['matched_total'] - loaded_count
+    if len(canonical_bytes(value)) > M18_VIEW_BYTES:
+        raise ValueError('M18_VIEW_RESPONSE_LIMIT')
+    return value
+
+
 def _open_directory(path):
     path=Path(path)
     if not path.is_absolute() or '..' in path.parts:raise ValueError('MODULE_ROOT_PATH')
@@ -202,7 +259,7 @@ def _config(value):
         keys += ('m18_v2_binding',)
     exact_keys(value, keys)
     if value['module_id'] == 'manager' and any(
-        route == '/api/v4/manager/m18/v2/pages'
+        route in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections')
         for route in value['routes']
     ):
         binding = value['m18_v2_binding']
@@ -414,6 +471,9 @@ def create_module_server(value,host='127.0.0.1',port=0):
             try:
                 if parsed.path == M18_ROUTE + '/pages':
                     payload = _m18_page_response(config,root,query)
+                    self.reply(200,payload,sha256_json(payload))
+                elif parsed.path in (M18_ROUTE + '/overview', M18_ROUTE + '/sections'):
+                    payload = _m18_semantic_response(config,root,parsed.path,query)
                     self.reply(200,payload,sha256_json(payload))
                 else:
                     record,digest=read_response(config,root,parsed.path,query)
