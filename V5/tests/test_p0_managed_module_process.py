@@ -15,8 +15,9 @@ from v5_shadow import main_runtime
 
 def _module_fixture(tmp_path, module_id="p0_test"):
     data_root = tmp_path / (module_id + "-data")
-    data_root.mkdir()
-    (data_root / ".v5-module-root").write_text("v5.module-root.v1:" + module_id + "\n")
+    data_root.mkdir(exist_ok=True)
+    marker = data_root / ".v5-module-root"
+    marker.write_text("v5.module-root.v1:" + module_id + "\n")
     cfg = tmp_path / (module_id + ".json")
     cfg.write_text(json.dumps({
         "schema_version": "v5.module_api.v1",
@@ -51,6 +52,7 @@ def test_real_start_ready_health_identity_stop(tmp_path):
             body = json.loads(response.read())
         assert response.status == 200
         assert body["module_id"] == "p0_test"
+        assert body["release_id"] == "managed-process-test"
         assert proc.pid == ready["pid"]
     finally:
         proc.terminate()
@@ -59,18 +61,26 @@ def test_real_start_ready_health_identity_stop(tmp_path):
 
 
 def test_duplicate_port_is_rejected_by_real_server(tmp_path):
-    first, ready = _start(_module_fixture(tmp_path))
+    cfg = _module_fixture(tmp_path)
+    first, ready = _start(cfg)
+    second = None
     try:
-        second = subprocess.Popen([sys.executable, "-m", "v5_shadow.module_process", "--config", str(_module_fixture(tmp_path)), "--port", str(ready["port"])], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        second = subprocess.Popen([sys.executable, "-m", "v5_shadow.module_process", "--config", str(cfg), "--port", str(ready["port"])], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         assert second.wait(timeout=5) != 0
     finally:
         first.terminate()
         first.wait(timeout=5)
+        if second and second.poll() is None:
+            second.terminate()
+            second.wait(timeout=5)
 
 
 def test_wrong_identity_runtime_stop_is_rejected(tmp_path):
     root = tmp_path / "runtime"
-    cfg = {"runtime_root": str(root), "composition": "unused", "module_api": {"schema_version": "v5.module_api.v1", "module_id": "p0_test", "release_id": "managed-process-test", "data_root": str(tmp_path), "routes": []}}
+    data_root = tmp_path / "runtime-data"
+    data_root.mkdir()
+    (data_root / ".v5-module-root").write_text("v5.module-root.v1:p0_test\n")
+    cfg = {"runtime_root": str(root), "composition": "unused", "module_api": {"schema_version": "v5.module_api.v1", "module_id": "p0_test", "release_id": "managed-process-test", "data_root": str(data_root), "routes": []}}
     main_runtime.start(cfg)
     wrong = dict(cfg)
     wrong["module_api"] = dict(cfg["module_api"])
