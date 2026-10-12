@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- <EXISTING_M12_PYTHON>
+rootdir: <TASK>/m12-a50077-source
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_same_input_reuses_committed_run_without_new_capture_asr PASSED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_failed_publish_keeps_old_success_and_old_run_readable PASSED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_existing_valid_run_symlink_artifact_is_rejected FAILED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_path_escape_is_rejected_with_valid_receipt PASSED [100%]
+
+=================================== FAILURES ===================================
+_____________ test_existing_valid_run_symlink_artifact_is_rejected _____________
+
+tmp_path = PosixPath('<TASK>/m12-a50077-evidence/tmp/pytest/test_existing_valid_run_symlin0')
+
+    def test_existing_valid_run_symlink_artifact_is_rejected(tmp_path: Path):
+        _, result = _run(tmp_path)
+        root = tmp_path / "v5_private"
+        run = root / "video_fupan" / "runs" / DATE / result["run_id"]
+        payload = json.loads((run / "manifest.json").read_text())
+        ref = payload["owner_manifest"]["artifact_refs"][0]
+        artifact = root / ref["path"]
+        outside = tmp_path / "outside.bin"
+        outside.write_bytes(artifact.read_bytes())
+        artifact.unlink()
+        try:
+            artifact.symlink_to(outside)
+        except OSError:
+            pytest.skip("symlink unavailable")
+>       with pytest.raises(VideoReadError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE VideoReadError
+
+tests/m12/test_video_fupan_default_chain.py:86: Failed
+- generated xml file: <TASK>/m12-a50077-evidence/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/m12/test_video_fupan_default_chain.py::test_existing_valid_run_symlink_artifact_is_rejected - Failed: DID NOT RAISE VideoReadError
+========================= 1 failed, 3 passed in 0.22s ==========================
