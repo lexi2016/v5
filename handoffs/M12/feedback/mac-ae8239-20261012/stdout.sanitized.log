@@ -1,0 +1,12 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- <EXISTING_M12_PYTHON>
+rootdir: <TASK>/m12-ae8239-source
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_same_input_reuses_committed_run_without_new_capture_asr PASSED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_failed_publish_keeps_old_success_and_old_run_readable PASSED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_existing_valid_run_symlink_artifact_is_rejected PASSED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_path_escape_is_rejected_with_valid_receipt PASSED [100%]
+
+- generated xml file: <TASK>/m12-ae8239-evidence/junit.xml -
+============================== 4 passed in 0.22s ===============================
