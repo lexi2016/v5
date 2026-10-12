@@ -1,0 +1,53 @@
+{
+  "schema_version": "v5.frontend.missing-source.v1",
+  "source_identity": "exact existing frontend working-copy bytes; no source Git commit claimed",
+  "base_commit": "2489ea1e04a26a9e2f318f498ac3f5f8c970fe48",
+  "scope": "seven explicitly authorized missing runtime/build source files only",
+  "files": [
+    {
+      "path": "frontend/daily-research-command/index.html",
+      "bytes": 305,
+      "git_blob_sha1": "946aa0eed9e8eaddff5d4f8f64d683451c67c592",
+      "sha256": "a61dbe49ce906335a5ab1df778fdb2f4f1d2426faad1474092fdeb4cb4978762"
+    },
+    {
+      "path": "frontend/manager-selection/index.html",
+      "bytes": 301,
+      "git_blob_sha1": "a71815215fbffed870bf40f125b2a6217771c5ae",
+      "sha256": "061760454c1455a5c0d5b863de55567d9d336e1be0cd93b3d6f34156ae6cb472"
+    },
+    {
+      "path": "frontend/tsconfig.cloud-product.json",
+      "bytes": 128,
+      "git_blob_sha1": "d475671277f399b338356ac75185c8cfb8c14b29",
+      "sha256": "49732d8a3523a18055ebdb726eb1407e1345e71a1b3eeb995eb65b1956384e97"
+    },
+    {
+      "path": "frontend/src/manager-selection/dailyResearchRun.ts",
+      "bytes": 19519,
+      "git_blob_sha1": "6a58eb272c1523c839a2f8895990c16a9da54b7a",
+      "sha256": "5e12c62c954b1689fb8540621d7db650ebe88aa0ef763363ff42fef40a52107d"
+    },
+    {
+      "path": "frontend/src/manager-selection/announcementAnalysis.ts",
+      "bytes": 17541,
+      "git_blob_sha1": "989ebf937bb4b92113ce04435cbde21f13957d3c",
+      "sha256": "7365a33cd65c024131844ea7a451bc3d89220f6391a17863f31a3781e0b6e327"
+    },
+    {
+      "path": "frontend/src/api/managerAnnouncementAnalysis.ts",
+      "bytes": 19705,
+      "git_blob_sha1": "c69bacde41c0af509be6816d2835eea5111dd021",
+      "sha256": "f30ec19c2c5b21f79ecfe3a3a23b1cf9d59bc5f5f48d117c7db4bcce39f3e5b5"
+    },
+    {
+      "path": "frontend/src/manager-selection/researchAttention.ts",
+      "bytes": 23801,
+      "git_blob_sha1": "89473e23fc68904ee9515cb17898b2c466d5947d",
+      "sha256": "a7aeb4e0a84aaa340260e7a09d522b5e96cf579fcca18f6aa747154716a32a1c"
+    }
+  ],
+  "tests": "NOT_RUN",
+  "build": "NOT_RUN",
+  "privacy": "No personal absolute-path patterns found in the seven selected files; withheld tests not included."
+}
