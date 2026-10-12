@@ -1,0 +1,3 @@
+#6feeaf static build
+
+Source/backend6feeafdec3e14ddac82e1a843dd91998818293fe. Mac Node27/typecheck/build passed; no unchanged Vue/template suite rerun.19 HTML/CSS/JS files831571bytes, SHA256/Git blob hashes in manifest.json. Real Mac693/693 rebound rows LOADED,0NOT_LOADED,26group pages; exact original fields/spans and non32 previous/next/group-switch client checks passed. Original512MiB/16KiB-row/128KiB-page/256KiB-HTTP budgets retained. Use synthetic fixtures for cloud UI tests; no real data/config/source maps included. Local preview remains54780; see development-branch fixed Mac feedback for actual evidence.
