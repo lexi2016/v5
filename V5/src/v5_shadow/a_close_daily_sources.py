@@ -21,6 +21,7 @@ import os
 from pathlib import Path, PurePosixPath
 import re
 import stat
+import struct
 import sys
 import threading
 from types import ModuleType
@@ -183,14 +184,43 @@ class _Field:
         return _Filter(self.column, value)
 
 
+def encode_rows(rows):
+    """Unambiguous scalar wire form; preserves null, NaN bits and signed zero."""
+    def scalar(value):
+        if value is None: return ['null']
+        if type(value) is str: return ['str', value]
+        if type(value) is bool: return ['bool', value]
+        if type(value) is int: return ['int', str(value)]
+        if type(value) is float: return ['f64', struct.pack('>d', value).hex()]
+        raise ValueError('M09_FRAME_SCALAR_TYPE')
+    return [{key: scalar(value) for key, value in row.items()} for row in rows]
+
+
+def decode_rows(rows):
+    def scalar(value):
+        if value == ['null']: return None
+        if not isinstance(value, list) or len(value) != 2: raise ValueError('M09_FRAME_SCALAR_WIRE')
+        tag, item = value
+        if tag == 'str' and isinstance(item, str): return item
+        if tag == 'bool' and type(item) is bool: return item
+        if tag == 'int' and isinstance(item, str) and re.fullmatch(r'-?(0|[1-9][0-9]{0,127})', item): return int(item)
+        if tag == 'f64' and isinstance(item, str) and re.fullmatch('[0-9a-f]{16}', item): return struct.unpack('>d', bytes.fromhex(item))[0]
+        raise ValueError('M09_FRAME_SCALAR_WIRE')
+    if not isinstance(rows, list) or len(rows) > 20_000: raise ValueError('M09_FRAME_ROWS_WIRE')
+    if any(not isinstance(row, dict) or any(not isinstance(k, str) for k in row) for row in rows):
+        raise ValueError('M09_FRAME_ROWS_WIRE')
+    return [{key: scalar(value) for key, value in row.items()} for row in rows]
+
+
 def _frame_digest(frame) -> str:
     return hashlib.sha256(_json_bytes({
-        "columns": list(frame.columns), "dtypes": [str(kind) for kind in frame.dtypes],
-        "rows": frame.to_dict("records"),
+        'schema_version': 'v5.m09.typed_frame_identity.v1',
+        'columns': list(frame.columns), 'dtypes': [str(kind) for kind in frame.dtypes],
+        'rows': encode_rows(frame.to_dict('records')),
     })).hexdigest()
 
 
-def _validate_frame(frame, trade_date: str) -> None:
+def _validate_frame(frame, trade_date: str, *, historical_replay: bool = False) -> None:
     import pandas as pd
 
     if not isinstance(frame, pd.DataFrame) or tuple(frame.columns) != COLUMNS or not 1 <= len(frame) <= 20_000:
@@ -204,12 +234,21 @@ def _validate_frame(frame, trade_date: str) -> None:
             raise ValueError("M09_ADMITTED_FRAME_CODE")
         seen.add(code)
         for key in ("name", "tdx_industry_code", "tdx_industry_name"):
-            if not isinstance(row[key], str) or not row[key].strip():
+            if historical_replay:
+                if row[key] is not None and (not isinstance(row[key], str) or len(row[key]) > 2048):
+                    raise ValueError("M09_ADMITTED_FRAME_TEXT")
+            elif not isinstance(row[key], str) or not row[key].strip():
                 raise ValueError("M09_ADMITTED_FRAME_TEXT")
-        for key in ("pct_chg", "amount", "bar_close_pos"):
+        for key in ("pct_chg", "amount") + (() if historical_replay else ("bar_close_pos",)):
             if isinstance(row[key], bool) or not isinstance(row[key], Real) or not math.isfinite(row[key]):
                 raise ValueError("M09_ADMITTED_FRAME_NUMBER")
-        if row["amount"] < 0 or not 0 <= row["bar_close_pos"] <= 1:
+        position = row["bar_close_pos"]
+        if historical_replay:
+            if position is not None and (isinstance(position, bool) or not isinstance(position, Real)):
+                raise ValueError("M09_ADMITTED_FRAME_NUMBER")
+            if position is not None and math.isfinite(position) and not 0 <= position <= 1:
+                raise ValueError("M09_ADMITTED_FRAME_NUMBER")
+        if row["amount"] < 0 or (not historical_replay and not 0 <= position <= 1):
             raise ValueError("M09_ADMITTED_FRAME_NUMBER")
 
 
@@ -359,6 +398,7 @@ def read_original_review(run_root: Path, trade_date: str) -> dict[str, Any] | No
 def build_from_admitted_panel(
     run_root: Path, trade_date: str, panel_pointer: Path, admitted_frame,
     expected_panel_sha256: str, run_id: str, context: Mapping[str, Any],
+    *, historical_replay: bool = False,
 ) -> dict[str, Any]:
     """Invoke exact original producer with a checked, immutable frame binding.
 
@@ -371,7 +411,7 @@ def build_from_admitted_panel(
     load_frozen_module("infrastructure.data_store")._date(trade_date)
     root, pointer = _absolute(run_root), _absolute(panel_pointer)
     load_frozen_module("infrastructure.owned_path").resolve_owned_path(root, "a_share_reviews/manifest.json")
-    _validate_frame(admitted_frame, trade_date)
+    _validate_frame(admitted_frame, trade_date, historical_replay=historical_replay)
     if not isinstance(run_id, str) or not run_id.strip():
         raise ValueError("M09_RUN_ID_REQUIRED")
     if not isinstance(context, Mapping) or set(context) - CONTEXT_KEYS:

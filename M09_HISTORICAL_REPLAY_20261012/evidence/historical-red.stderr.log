@@ -1,0 +1,87 @@
+test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha (test_a_close_historical.HistoricalParquetTests.test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha) ... skipped 'NOT_RUN: existing pyarrow absent; no installation'
+test_failed_later_attempt_and_tampering_preserve_old_success (test_a_close_historical.HistoricalResearchTests.test_failed_later_attempt_and_tampering_preserve_old_success) ... FAIL
+test_invalid_core_numeric_duplicate_and_date_are_hard_rejected (test_a_close_historical.HistoricalResearchTests.test_invalid_core_numeric_duplicate_and_date_are_hard_rejected) ... FAIL
+test_nan_null_infinity_and_string_have_distinct_frame_identity (test_a_close_historical.HistoricalResearchTests.test_nan_null_infinity_and_string_have_distinct_frame_identity) ... FAIL
+test_replay_cannot_publish_in_existing_strict_root (test_a_close_historical.HistoricalResearchTests.test_replay_cannot_publish_in_existing_strict_root) ... FAIL
+test_replay_cannot_run_as_real_manual_or_natural (test_a_close_historical.HistoricalResearchTests.test_replay_cannot_run_as_real_manual_or_natural) ... FAIL
+test_stream_hash_is_bounded_and_preserves_file (test_a_close_historical.HistoricalResearchTests.test_stream_hash_is_bounded_and_preserves_file) ... FAIL
+test_strict_frame_validation_and_pit_are_unchanged (test_a_close_historical.HistoricalResearchTests.test_strict_frame_validation_and_pit_are_unchanged) ... FAIL
+test_two_slots_are_historical_receipts_not_cutoff_proof (test_a_close_historical.HistoricalResearchTests.test_two_slots_are_historical_receipts_not_cutoff_proof) ... FAIL
+test_unmodified_gaps_run_original_owner_and_cold_read (test_a_close_historical.HistoricalResearchTests.test_unmodified_gaps_run_original_owner_and_cold_read) ... FAIL
+
+======================================================================
+FAIL: test_failed_later_attempt_and_tampering_preserve_old_success (test_a_close_historical.HistoricalResearchTests.test_failed_later_attempt_and_tampering_preserve_old_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_invalid_core_numeric_duplicate_and_date_are_hard_rejected (test_a_close_historical.HistoricalResearchTests.test_invalid_core_numeric_duplicate_and_date_are_hard_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_nan_null_infinity_and_string_have_distinct_frame_identity (test_a_close_historical.HistoricalResearchTests.test_nan_null_infinity_and_string_have_distinct_frame_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_replay_cannot_publish_in_existing_strict_root (test_a_close_historical.HistoricalResearchTests.test_replay_cannot_publish_in_existing_strict_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_replay_cannot_run_as_real_manual_or_natural (test_a_close_historical.HistoricalResearchTests.test_replay_cannot_run_as_real_manual_or_natural)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_stream_hash_is_bounded_and_preserves_file (test_a_close_historical.HistoricalResearchTests.test_stream_hash_is_bounded_and_preserves_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_strict_frame_validation_and_pit_are_unchanged (test_a_close_historical.HistoricalResearchTests.test_strict_frame_validation_and_pit_are_unchanged)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_two_slots_are_historical_receipts_not_cutoff_proof (test_a_close_historical.HistoricalResearchTests.test_two_slots_are_historical_receipts_not_cutoff_proof)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+======================================================================
+FAIL: test_unmodified_gaps_run_original_owner_and_cold_read (test_a_close_historical.HistoricalResearchTests.test_unmodified_gaps_run_original_owner_and_cold_read)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "$CHECKOUT/V5/tests/test_a_close_historical.py", line 23, in setUp
+    self.assertIsNotNone(historical,'Explicit historical research entry is missing')
+AssertionError: unexpectedly None : Explicit historical research entry is missing
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.001s
+
+FAILED (failures=9, skipped=1)

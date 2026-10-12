@@ -1,0 +1,37 @@
+{
+  "schema_version": "v5.m09.historical_acceptance.v1",
+  "started_at": "2026-10-12T18:20:04.657540+00:00",
+  "python": "3.12.14",
+  "dependencies": {
+    "pandas": "2.2.3",
+    "pyarrow": null
+  },
+  "declared_environment_compatible": false,
+  "tests": {
+    "errors": 0,
+    "failures": 0,
+    "run": 30,
+    "skipped": [
+      [
+        "test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha (test_a_close_historical.HistoricalParquetTests.test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha)",
+        "NOT_RUN: existing pyarrow absent; no installation"
+      ]
+    ]
+  },
+  "real_saved_input": "NOT_RUN",
+  "natural_run": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "original_136_rerun": "NOT_RUN",
+  "status": "PASS_WITH_NOT_RUN",
+  "exit_code": 0,
+  "finished_at": "2026-10-12T18:20:20.034767+00:00",
+  "source_sha256": {
+    "V5/src/v5_shadow/a_close_historical.py": "1a0ad3c162424895bee73e50a5a561ff5475c41bca917d53f3fc52ad9dfe0d35",
+    "V5/src/v5_shadow/a_close_daily.py": "237d8e691ee8b870a14460e023cd0eb93f2669f12e5dd499a249f48a4a3db689",
+    "V5/src/v5_shadow/a_close_daily_sources.py": "53e73a6403f2314e3fb0ca57fa1344083e4a03ba33260a2ee87e0b36dcdf3f51",
+    "V5/src/v5_shadow/a_close_daily_worker.py": "64a6b77ccc2dfdf1817486baecc7e3f82c809b9e2290769910c6404f9d14f375",
+    "V5/src/v5_shadow/a_close_daily_api.py": "e91037541f50b622031e2698a1c490ee6245c1ce5069989bb8941d8f3a560831",
+    "V5/tests/run_m09_historical_acceptance.py": "f46cbac3a6d59ca2a457b5d7a09b34f5171ffaaea00089f0c0cbe43c3af4f002",
+    "V5/tests/test_a_close_historical.py": "c945bdd4ba43ec2987db947db7a18d5bbb10a8f9de459e3912928a3e93ab1d7b"
+  }
+}

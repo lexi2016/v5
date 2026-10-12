@@ -150,7 +150,14 @@ def _validate_committed(committed: Mapping[str, Any], target: str) -> None:
     _mapping(record.get("provenance"))
     _mapping(record.get("evidence_status"))
     _mapping(record.get("membership"))
-    if (record.get("scope") != "DECLARED_UNIVERSE_ONLY"
+    allowed_scope = "OBSERVED_ROWS_ONLY" if record.get("historical_research") is not None else "DECLARED_UNIVERSE_ONLY"
+    if record.get("historical_research") is not None:
+        historical = _mapping(record["historical_research"])
+        if (record.get("data_kind") != "RECORDED_INPUT_REPLAY" or record.get("execution_kind") != "HISTORICAL_REPLAY"
+                or any(historical.get(key) is not False for key in ("source_time_verified", "source_available_by_requested_slot",
+                       "membership_qualification_verified", "strict_1500_pit_verified", "natural_verified"))):
+            raise ValueError("M09_HISTORICAL_PROMOTION_REJECTED")
+    if (record.get("scope") != allowed_scope
             or record.get("natural_verified") is not False
             or record.get("source_provenance_independently_verified") is not False
             or not isinstance(record.get("cannot_confirm"), list)
@@ -228,6 +235,8 @@ def project_committed_review(committed: Mapping[str, Any] | None, requested_date
         "publication_recovery": deepcopy(committed.get("publication_recovery")),
         "reason_codes": [], "safety": deepcopy(record["safety"]),
     }
+    if record.get("historical_research") is not None:
+        evidence["historical_research"] = deepcopy(record["historical_research"])
     # The frozen product has no overall status. Its native model status is
     # preserved; model success does not replace the recorded chain gap state.
     review.setdefault("status", record["business_status"])

@@ -1,0 +1,1 @@
+M09_RESULT={"errors": 0, "failures": 0, "run": 30, "skipped": [["test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha (test_a_close_historical.HistoricalParquetTests.test_multiday_parquet_stream_filter_keeps_exact_date_and_source_sha)", "NOT_RUN: existing pyarrow absent; no installation"]]}

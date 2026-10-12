@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "commands": [
+    {
+      "command": "git apply --check forward.patch",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git apply forward.patch",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git apply --check reverse.patch",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": "git apply reverse.patch",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "restored_exactly": true
+}

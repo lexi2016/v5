@@ -37,7 +37,7 @@ MAX_PANEL_BYTES = 128 * 1024 * 1024
 MAX_JSON_BYTES = 16 * 1024 * 1024
 MAX_ROWS = 20000
 _WORKER_TIMEOUT = 120
-_IMPLEMENTATION_PATHS = ('a_close_daily.py', 'a_close_daily_sources.py', 'a_close_daily_worker.py', 'contracts.py', 'digests.py')
+_IMPLEMENTATION_PATHS = ('a_close_daily.py', 'a_close_daily_sources.py', 'a_close_daily_worker.py', 'a_close_historical.py', 'contracts.py', 'digests.py')
 # A long-lived dispatcher must restart when any loaded implementation changes.
 # Hashing only at run time would attest bytes which this process never loaded.
 _IMPORTED_IMPLEMENTATION = {
@@ -254,7 +254,7 @@ def _panel_rows(raw, panel_format, data_kind):
     return parquet.read(columns=list(COLUMNS)).to_pylist(), str(schema)
 
 
-def _admit(source_root, manifest_path, manifest_sha, target, slot):
+def _admit(source_root, manifest_path, manifest_sha, target, slot, *, execution_kind=None):
     cutoff = _date_slot(target, slot)
     root, source = _source_io(source_root)
     files, issues = {}, []
@@ -270,6 +270,9 @@ def _admit(source_root, manifest_path, manifest_sha, target, slot):
         return raw
 
     manifest = _json(read(manifest_path, manifest_sha))
+    if isinstance(manifest, dict) and manifest.get('schema_version') == 'v5.m09.historical_input.v1':
+        from .a_close_historical import admit_historical
+        return admit_historical(source_root, manifest_path, manifest_sha, target, slot, execution_kind)
     required = {'schema_version', 'trade_date', 'data_kind', 'panel', 'membership', 'provenance', 'evidence'}
     if not isinstance(manifest, dict) or set(manifest) != required or manifest['schema_version'] != 'v5.m09.input.v1':
         raise ValueError('INPUT_MANIFEST_FIELDS')
@@ -453,9 +456,12 @@ def _implementation_identity():
     return {'capsule': frozen.sources_identity(), 'modules': current, 'environment': _environment()}
 
 
-def _build(run_root, target, pointer, rows, panel_sha, run_id, context):
+def _build(run_root, target, pointer, rows, panel_sha, run_id, context, *, historical_replay=False):
     request = dict(run_root=str(run_root), trade_date=target, panel_pointer=str(pointer), rows=rows,
                    panel_sha256=panel_sha, run_id=run_id, context=context, expected_implementation_identity=_implementation_identity())
+    if historical_replay:
+        request['rows'] = frozen.encode_rows(rows)
+        request['historical_replay'] = True
     try:
         process = subprocess.run([sys.executable, '-I', '-B', str(Path(__file__).with_name('a_close_daily_worker.py'))],
                                  input=canonical_bytes(request), stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -567,6 +573,15 @@ def _read_run(root, handle, run_id, record_sha):
         raw = handle.read_bytes(prefix + '/product/' + path, max_bytes=MAX_JSON_BYTES)
         if _raw_sha(raw) != expected['sha256'] or len(raw) != expected['bytes']:
             raise ValueError('M09_STORE_RAW_DIGEST:' + path)
+    if manifest.get('schema_version') == 'v5.m09.historical_input.v1':
+        from .a_close_historical import admit_historical
+        checked = admit_historical(root / prefix / 'inputs/source', manifest_path,
+                                   calculation['input_manifest_sha256'], target, '16:05', 'RECORDED_INPUT_REPLAY')
+        if (record.get('data_kind') != 'RECORDED_INPUT_REPLAY' or record.get('execution_kind') != 'HISTORICAL_REPLAY'
+                or record.get('scope') != 'OBSERVED_ROWS_ONLY'
+                or record.get('historical_research') != checked['diagnostic']['historical_research']
+                or record.get('natural_verified') is not False or record.get('strict_1500_pit_verified') is not False):
+            raise ValueError('M09_HISTORICAL_RECORD_IDENTITY')
     # A newly constructed original Store reads payload/receipt/manifest together.
     review = frozen.read_original_review(root / prefix / 'product', target)
     if (not isinstance(review, dict) or sha256_json(review) != record['review_sha256']
@@ -822,6 +837,13 @@ def run_a_close_daily(root, request):
     """Execute one explicit trigger. The caller owns scheduler/auth configuration."""
     request, cutoff = _request(request)
     path, handle = _private_io(root)
+    from .a_close_historical import MARKER, MARKER_BYTES
+    try:
+        marker = handle.read_bytes(MARKER, max_bytes=100)
+    except FileNotFoundError:
+        marker = None
+    if marker is not None and (marker != MARKER_BYTES or request['execution_kind'] != 'RECORDED_INPUT_REPLAY'):
+        raise ValueError('M09_HISTORICAL_ROOT_REPLAY_ONLY')
     source_path = _absolute_root(request['source_root'])
     if source_path.is_relative_to(path) or path.is_relative_to(source_path):
         raise ValueError('M09_SOURCE_OUTPUT_OVERLAP')
@@ -871,7 +893,11 @@ def run_a_close_daily(root, request):
         try:
             if 'expected_generation_sha256' in request and request['expected_generation_sha256'] != serving:
                 raise ValueError('M09_GENERATION_CAS_CONFLICT')
-            admitted = _admit(source_path, request['input_manifest'], request['input_manifest_sha256'], target, request['slot'])
+            admitted = _admit(source_path, request['input_manifest'], request['input_manifest_sha256'], target, request['slot'],
+                              execution_kind=request['execution_kind'])
+            historical_replay = admitted['manifest']['schema_version'] == 'v5.m09.historical_input.v1'
+            if historical_replay and marker != MARKER_BYTES:
+                raise ValueError('M09_HISTORICAL_ROOT_REQUIRED')
             handle.write_bytes(attempt + '/admission.json', canonical_bytes(admitted['diagnostic']), require_absent=True)
             if not admitted['diagnostic']['admitted']:
                 raise _InputError(admitted['diagnostic']['issues'])
@@ -888,7 +914,7 @@ def run_a_close_daily(root, request):
                            'panel_format': admitted['manifest']['panel']['format'], 'source_root_at_admission': str(source_path),
                            'source_files': {key: {k: v for k, v in value.items() if k != 'raw'} for key, value in admitted['files'].items()},
                            'evidence_status': admitted['diagnostic']['evidence_status'], 'implementation': implementation,
-                           'configuration_revision': request['configuration_revision'], 'scope': 'DECLARED_UNIVERSE_ONLY'}
+                           'configuration_revision': request['configuration_revision'], 'scope': admitted['diagnostic']['scope']}
             calculation_sha = sha256_json(computation)
             cached = _read_optional(handle, 'calculations/' + calculation_sha + '.json')
             reused = cached is not None
@@ -916,7 +942,8 @@ def run_a_close_daily(root, request):
                 handle.write_bytes(prefix + '/inputs/producer_pointer.txt', pointer_raw, require_absent=True)
                 input_files['inputs/producer_pointer.txt'] = {'sha256': _raw_sha(pointer_raw), 'bytes': len(pointer_raw)}
                 handle.write_bytes(prefix + '/calculation.json', canonical_bytes(computation), require_absent=True)
-                output = _build(path / prefix / 'product', target, pointer_path, admitted['rows'], admitted['manifest']['panel']['sha256'], run_id, admitted['context'])
+                build_options = {'historical_replay': True} if historical_replay else {}
+                output = _build(path / prefix / 'product', target, pointer_path, admitted['rows'], admitted['manifest']['panel']['sha256'], run_id, admitted['context'], **build_options)
                 review = frozen.read_original_review(path / prefix / 'product', target)
                 if review != output['review'] or sha256_json(review) != output['publication']['sha256']:
                     raise ValueError('M09_INDEPENDENT_READBACK_MISMATCH')
@@ -933,13 +960,18 @@ def run_a_close_daily(root, request):
                           'review_sha256': sha256_json(review), 'source_sha256': review['source_sha256'], 'store_files': store_files,
                           'input_files': input_files, 'run_root_at_creation': str(path / prefix),
                           'computed_at': _now().isoformat(), 'data_kind': kind, 'execution_kind': classification,
-                          'business_status': 'PARTIAL', 'scope': 'DECLARED_UNIVERSE_ONLY', 'natural_verified': False,
+                          'business_status': 'PARTIAL', 'scope': admitted['diagnostic']['scope'], 'natural_verified': False,
                           'strict_1500_pit_verified': False, 'source_provenance_independently_verified': False,
                           'scenario_probabilities_status': 'FROZEN_LEGACY_CONSTANTS_NOT_CALIBRATED',
                           'legacy_as_of': model['as_of'], 'provenance': deepcopy(admitted['manifest']['provenance']),
                           'membership': deepcopy(admitted['manifest']['membership']), 'evidence_status': deepcopy(admitted['diagnostic']['evidence_status']),
                           'cannot_confirm': ['FULL_MARKET_MEMBERSHIP_NOT_VERIFIED', 'STRICT_1500_PIT_NOT_VERIFIED', 'NATURAL_TRIGGER_NOT_INDEPENDENTLY_VERIFIED'],
                           'implementation_identity': implementation, 'safety': dict(SAFETY)}
+                if historical_replay:
+                    record['historical_research'] = deepcopy(admitted['diagnostic']['historical_research'])
+                    record['cannot_confirm'].extend(['HISTORICAL_RESEARCH_ONLY', 'SOURCE_TIME_UNKNOWN',
+                        'SOURCE_AVAILABILITY_AT_SLOT_UNVERIFIED', 'OBSERVED_ROWS_ARE_NOT_QUALIFIED_MEMBERSHIP',
+                        *record['historical_research']['affected_metrics']])
                 record_sha = sha256_json(record)
                 handle.write_bytes(prefix + '/record.json', canonical_bytes(record), require_absent=True)
                 _read_run(path, handle, run_id, record_sha)
