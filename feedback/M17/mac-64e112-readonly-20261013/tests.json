@@ -1,0 +1,61 @@
+{
+  "candidate": "64e112573eb5cbac47ff2db1dd0887f459f38213",
+  "dependency_files_verified": 35,
+  "delivery_blob_files_verified": 51,
+  "file_manifest_verified": true,
+  "patch_commands": [
+    {
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--check",
+        "<TASK_ROOT>/m17-64e112-source/integration_candidates/M17_READONLY/forward.patch"
+      ],
+      "started_utc": "2026-10-12T23:54:31.749560+00:00",
+      "finished_utc": "2026-10-12T23:54:31.757223+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "<TASK_ROOT>/m17-64e112-source/integration_candidates/M17_READONLY/forward.patch"
+      ],
+      "started_utc": "2026-10-12T23:54:31.757242+00:00",
+      "finished_utc": "2026-10-12T23:54:31.764550+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--check",
+        "<TASK_ROOT>/m17-64e112-source/integration_candidates/M17_READONLY/reverse.patch"
+      ],
+      "started_utc": "2026-10-12T23:54:31.765111+00:00",
+      "finished_utc": "2026-10-12T23:54:31.771557+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "<TASK_ROOT>/m17-64e112-source/integration_candidates/M17_READONLY/reverse.patch"
+      ],
+      "started_utc": "2026-10-12T23:54:31.771580+00:00",
+      "finished_utc": "2026-10-12T23:54:31.778417+00:00",
+      "exit_code": 0
+    }
+  ],
+  "patch_forward_reverse_exact": true,
+  "test_command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-I",
+    "-B",
+    "integration_candidates/M17_READONLY/after/V5/tests/test_m17_readonly.py"
+  ],
+  "started_utc": "2026-10-12T23:54:31.778503+00:00",
+  "finished_utc": "2026-10-12T23:54:40.038684+00:00",
+  "exit_code": 0,
+  "test_output_sha256": "16daadb891b1a9231f022348166db55c9a7f67a92294e147aac1fafd5458c5c3"
+}

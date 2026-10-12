@@ -1,0 +1,117 @@
+{
+  "candidate": "64e112573eb5cbac47ff2db1dd0887f459f38213",
+  "command": [
+    "<EXISTING_PYTHON_3.14.6>",
+    "-I",
+    "-B",
+    "<TASK_HARNESS>/run_m17_readonly_real.py"
+  ],
+  "entrypoint": "get_response(binding,query)",
+  "started_utc": "2026-10-12T23:57:10.279429+00:00",
+  "finished_utc": "2026-10-12T23:57:10.578764+00:00",
+  "exit_code": 0,
+  "checks": {
+    "snapshot_unchanged": true,
+    "fresh_worker_once": true,
+    "original_reader_once": true,
+    "forbidden_child_counts_zero": true,
+    "parent_ledger_reads_two": true,
+    "parent_forbidden_zero": true,
+    "original_rows_exact": true,
+    "hundred_rows": true,
+    "identity_exact": true,
+    "source_plan_dates": true,
+    "captured_at_original": true,
+    "safe_flags": true,
+    "bounded_response": true,
+    "no_private_absolute_paths": true
+  },
+  "profile_parent": {
+    "read_run": 2,
+    "owner": 0,
+    "claim": 0,
+    "finish": 0,
+    "collector": 0,
+    "probe": 0
+  },
+  "profile_child": {
+    "reader_calls": 1,
+    "pool_reader_calls": 1,
+    "owner_calls": 0,
+    "claim_calls": 0,
+    "finish_calls": 0,
+    "collector_calls": 0,
+    "probe_calls": 0,
+    "network_attempts": 0,
+    "child_process_attempts": 0
+  },
+  "instrumentation": "Task-only subprocess launcher runs unchanged fixed adapter worker with Python profile/audit hooks; parent get_response unchanged; no OS sandbox claim.",
+  "snapshot_files": 12,
+  "response_bytes": 62131,
+  "response_sha256": "70475799bf92deda51b34ba2eaea03f01db78cd60b17b29caf196a443a02a4b0",
+  "status": "READY",
+  "candidate_count": 100,
+  "run_id": "ca2c344b61334ad28f4b6146117643cd",
+  "identity": {
+    "code_sha256": "6db6ffb77c51d2fe6d9fead18d0ac13d77c7e81a409397e3102c113ceb9a7db0",
+    "config_sha256": "d23f28c9c73912f9d9d3e674229e6f1b685071a61ae2fa26b23bf786a027c232",
+    "dependency_sha256": "f8d8fad70c3a90597b623ebbc485e8efeeea9d65e8a58c2492b99072488093db",
+    "input_sha256": "1a1638c1eb07dfb3ecd090e125301b7e0f967f116396ecb54f8976c80cc2be10",
+    "lane": "manager_close_recapture",
+    "research_cutoff": "2026-10-12T23:18:08.427624+00:00",
+    "target_date": "20261012"
+  },
+  "files": {
+    "artifact": {
+      "artifact_ref": "workbench_research/20261012/close_recapture.json",
+      "sha256": "0159024fb5b840cc32c2ecd8db1bc608661662a3d30df994e34d106ffad7fc90"
+    },
+    "candidate_overlay": {
+      "artifact_ref": "workbench_research/20261012/close_recapture.candidates.json",
+      "sha256": "b1b91c2622a572d39ae8259e5922d2e10d367129e38036c4bc35510ba507430c"
+    },
+    "receipt": {
+      "artifact_ref": "workbench_research/20261012/close_recapture.receipt.json",
+      "sha256": "04a452bd02ee24c7dce04036e365f87bafaacd7a5a26687d18d2c68ed338a947"
+    },
+    "snapshot": {
+      "artifact_ref": "workbench_research/20261012/inputs/close_recapture_pytdx.json",
+      "sha256": "4fd34199c3d814a3b63d13220ce50d21809f226bc18a529f2029d1c55f571427"
+    }
+  },
+  "pool": {
+    "artifact_ref": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/artifact.csv",
+    "artifact_sha256": "738ffa6533bfc1e041a3cd84841d591f0ee6bda53fe8fe420cf608b9a7f3503d",
+    "captured_at": "2026-10-09T17:31:42+08:00",
+    "manifest_ref": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/manifest.json",
+    "manifest_sha256": "20fb5182d751e75beb80b8c97c42eba4b1d1660084b321d8a69d9ed877f9c571",
+    "owner": "v3_shared_data",
+    "receipt_ref": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/receipt.json",
+    "receipt_sha256": "01d4b09fb76b6e2d1135822a088e963d33356a2b0cf432d9af646ac5e2073da9",
+    "role": "HK_CONNECT_D1_TOP100_0_2",
+    "row_count": 100,
+    "run_id": "20261012-hk-connect-d1-top100-0-2-d6f38622b186",
+    "signal_date": "20261009",
+    "source_id": "hkconnect_0_2_frozen_prob_active",
+    "trade_date": "20261012"
+  },
+  "source_trade_date": "20261012",
+  "plan_trade_date": "20261013",
+  "captured_at": "2026-10-12T15:55:15.370877+08:00",
+  "available_at": "2026-10-12T15:55:15.373639+08:00",
+  "cannot_confirm": [
+    "MARKET_CLOSE_NOT_CAPTURED_STAGE_WINDOW_ENDS_15_55_05",
+    "PYTDX_TURNOVER_CURRENCY_UNIT_UNVERIFIED"
+  ],
+  "flags": {
+    "RESEARCH_ONLY": true,
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "natural_verified": false,
+    "formal_eligibility_verified": false
+  },
+  "fixed_source_files_unchanged": 51,
+  "ledger_snapshot_sha256": "2099a5464d4472f4d7a62ec50053d26c1d28cd689d4a3811558e0e31b1b2e8e4",
+  "scope": "Fixed adapter acceptance only; no shared route, frontend, deployment, scheduler, acquisition or trading. Entire P0-P5 and 18-module acceptance remain incomplete."
+}
