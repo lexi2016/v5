@@ -1,0 +1,32 @@
+[
+  {
+    "relative": "latest_success.json",
+    "bytes": 248,
+    "sha256": "be7fd0e1386de302933d18b0d325fca9000b6b7dbf696e2be8f473fe0a16477d"
+  },
+  {
+    "relative": ".publish.lock",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "relative": "20261012-2a08a3fadb260ecd3f8dc17f/manifest.json",
+    "bytes": 279,
+    "sha256": "5cec9cc39e803754796798a41e298ecbba116b65ca3e158bae62e69f4e19a325"
+  },
+  {
+    "relative": "20261012-2a08a3fadb260ecd3f8dc17f/payload.json",
+    "bytes": 407197,
+    "sha256": "21bb3055dcbf5305aa195aab0a47ec18c0b6880c0e623ad44f8636310964256b"
+  },
+  {
+    "relative": "20261012-2a08a3fadb260ecd3f8dc17f/publication.json",
+    "bytes": 197,
+    "sha256": "d45c004beba860c0b5506b3cbef52be9a98b5db47cb6119b7c957398f4f95d81"
+  },
+  {
+    "relative": "20261012-2a08a3fadb260ecd3f8dc17f/receipt.json",
+    "bytes": 303,
+    "sha256": "4fc105e27355b4a9dfc6dde25331dea05e48ab513deaf7c4bcf31b6bc2e479a1"
+  }
+]

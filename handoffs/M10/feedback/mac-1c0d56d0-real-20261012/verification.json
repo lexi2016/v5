@@ -1,0 +1,135 @@
+{
+  "candidate": "1c0d56d0ea350f8f2178d8b0c6b7e66dfa113585",
+  "started_utc": "2026-10-12T17:24:51.480636+00:00",
+  "build_invocations": 1,
+  "expected_generation": null,
+  "expected_native_sha256": null,
+  "status": "PASS_RECORDED_REAL_INPUT",
+  "run_id": "20261012-2a08a3fadb260ecd3f8dc17f",
+  "latest_identity": {
+    "committed_runs": {
+      "20261012-2a08a3fadb260ecd3f8dc17f": "4fc105e27355b4a9dfc6dde25331dea05e48ab513deaf7c4bcf31b6bc2e479a1"
+    },
+    "generation": "4fc105e27355b4a9dfc6dde25331dea05e48ab513deaf7c4bcf31b6bc2e479a1",
+    "run_id": "20261012-2a08a3fadb260ecd3f8dc17f"
+  },
+  "data_kind": "RECORDED_INPUT_REPLAY",
+  "natural_admission": "UNVERIFIED",
+  "source_snapshot_rows": 698,
+  "counts": {
+    "close_top20": 20,
+    "model_rows": 100,
+    "stage_rows": 70,
+    "top20_attribution": 20
+  },
+  "native_status": "MODEL_REVIEW_READY",
+  "source_stage_statuses": {
+    "STAGE_0925": "PARTIAL_WITH_ROWS",
+    "STAGE_0930_0935": "PARTIAL_WITH_ROWS",
+    "STAGE_0935_0940": "PARTIAL_WITH_ROWS",
+    "STAGE_0940_0945": "PARTIAL_WITH_ROWS",
+    "STAGE_0945_1030": "PARTIAL_WITH_ROWS",
+    "STAGE_1300_1315": "PARTIAL_WITH_ROWS",
+    "STAGE_1445_1500": "PARTIAL_WITH_ROWS"
+  },
+  "cannot_confirm": [
+    "M02_MEMBERSHIP_PIT_UNVERIFIED",
+    "STAGE_0925:PARTIAL_WITH_ROWS",
+    "STAGE_0930_0935:HK_ACTIVE_SNAPSHOT_TEMPORAL_CUTOFF_UNSAFE",
+    "STAGE_0930_0935:PARTIAL_WITH_ROWS",
+    "STAGE_0930_0935:TDX_CACHE_CAPTURE_AFTER_STAGE_CUTOFF",
+    "STAGE_0935_0940:HK_ACTIVE_SNAPSHOT_TEMPORAL_CUTOFF_UNSAFE",
+    "STAGE_0935_0940:PARTIAL_WITH_ROWS",
+    "STAGE_0935_0940:PyTDX ExHQ batch coverage incomplete: completed=100/100",
+    "STAGE_0940_0945:HK_ACTIVE_SNAPSHOT_NOT_COLLECTED",
+    "STAGE_0940_0945:PARTIAL_WITH_ROWS",
+    "STAGE_0940_0945:TDX_CACHE_CAPTURE_AFTER_STAGE_CUTOFF",
+    "STAGE_0945_1030:HK_ACTIVE_SNAPSHOT_TEMPORAL_CUTOFF_UNSAFE",
+    "STAGE_0945_1030:PARTIAL_WITH_ROWS",
+    "STAGE_0945_1030:PyTDX ExHQ batch coverage incomplete: completed=100/100",
+    "STAGE_1300_1315:FUTU_KLINE_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+    "STAGE_1300_1315:FUTU_ORDERBOOK_HISTORICAL_SNAPSHOT_UNAVAILABLE",
+    "STAGE_1300_1315:FUTU_PROVIDER_SUBSCRIPTION_RELEASE_RECEIPT_CANNOT_CONFIRM",
+    "STAGE_1300_1315:FUTU_RT_DATA_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+    "STAGE_1300_1315:FUTU_RT_DATA_FORMAL_STAGE_ELIGIBILITY_CANNOT_CONFIRM",
+    "STAGE_1300_1315:FUTU_RT_DATA_NATURAL_TIME_CAPTURE_CANNOT_CONFIRM",
+    "STAGE_1300_1315:PARTIAL_WITH_ROWS",
+    "STAGE_1445_1500:FUTU_KLINE_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+    "STAGE_1445_1500:FUTU_ORDERBOOK_HISTORICAL_SNAPSHOT_UNAVAILABLE",
+    "STAGE_1445_1500:FUTU_PROVIDER_SUBSCRIPTION_RELEASE_RECEIPT_CANNOT_CONFIRM",
+    "STAGE_1445_1500:FUTU_RT_DATA_CAPTURE_AFTER_TARGET_CUTOFF_NOT_PIT",
+    "STAGE_1445_1500:FUTU_RT_DATA_FORMAL_STAGE_ELIGIBILITY_CANNOT_CONFIRM",
+    "STAGE_1445_1500:FUTU_RT_DATA_NATURAL_TIME_CAPTURE_CANNOT_CONFIRM",
+    "STAGE_1445_1500:PARTIAL_WITH_ROWS"
+  ],
+  "input_identity": {
+    "calendar_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "code_sha256": "f44a885fee223b3a47e02c5fa4bf8da5c028a12bd67070bb0f678bd953b72590",
+    "config_sha256": "2ea6e3cc83c2154e200fa9a0a1ba76a951a3f3b4c26498fe53e06c7cff015bbb",
+    "input_sha256": "f2a70c019883a4f415f86e6b6934a2653355dbad26d8ef2cf74133922989b170",
+    "owner_capsule_sha256": "be3c369df297d0ddd6985e0c0f0aa136849a931fe6f388f7f8355f3188574c38",
+    "trade_date": "20261012"
+  },
+  "native_review_sha256": "f3db1d5e4ed53e9a67b6b24ab472e65e3f939e643bc839d9ae5cad217bbb0228",
+  "original_saved_review_exact_equal": false,
+  "original_saved_counts": {
+    "close_top20": 20,
+    "model_rows": 100,
+    "stage_rows": 70,
+    "top20_attribution": 20
+  },
+  "collector_publication": {
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "payload_path": "hkconnect_close_snapshots/20261012.json",
+    "production_allowed": false,
+    "reused_existing_snapshot": true,
+    "sha256": "a19ac9af949c309b98231df1699d94b16e314567ac06915edf9120660b6ef302",
+    "status": "IDEMPOTENT_REUSE",
+    "trade_date": "20261012",
+    "write_performed": false
+  },
+  "cold_read": {
+    "exact_run_equal": true,
+    "latest_equal": true,
+    "projection_generation": "4fc105e27355b4a9dfc6dde25331dea05e48ab513deaf7c4bcf31b6bc2e479a1",
+    "projection_status": "PARTIAL",
+    "native_review_sha256": "f3db1d5e4ed53e9a67b6b24ab472e65e3f939e643bc839d9ae5cad217bbb0228"
+  },
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false,
+  "exit": 0,
+  "ended_utc": "2026-10-12T17:24:51.826696+00:00",
+  "original_and_copied_input_files_unchanged": 28,
+  "source_files_unchanged": 178,
+  "projection_all_seven_partial_metrics_null": true,
+  "projection_top20_stage_hits_null_and_classification_cannot_confirm": true,
+  "original_saved_array_equality": {
+    "close_top20": true,
+    "model_rows": true,
+    "stage_rows": false,
+    "top20_attribution": false
+  },
+  "original_saved_review_status": "MODEL_REVIEW_PARTIAL_STAGE_EVIDENCE",
+  "native_status_note": "Frozen native builder returns MODEL_REVIEW_READY; unchanged native output is retained for audit. Read-only projection preserves source PARTIAL_WITH_ROWS and returns PARTIAL with null metrics, not natural/full evidence readiness.",
+  "network_collection": false,
+  "source_snapshot_write_performed": false,
+  "new_v5_immutable_artifact_written": true,
+  "services_changed": false,
+  "deployed": false,
+  "payload_uploaded": false,
+  "private_paths_uploaded": false,
+  "execution": {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-I",
+      "-S",
+      "-B",
+      "<TASK>/m10_real_run.py"
+    ],
+    "started_utc": "2026-10-12T17:24:51.434439+00:00",
+    "ended_utc": "2026-10-12T17:24:51.868938+00:00",
+    "exit": 0
+  }
+}

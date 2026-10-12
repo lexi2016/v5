@@ -1,0 +1,170 @@
+[
+  {
+    "kind": "data",
+    "relative": "hkconnect_close_snapshots/20261012.json",
+    "bytes": 134189,
+    "sha256": "a19ac9af949c309b98231df1699d94b16e314567ac06915edf9120660b6ef302"
+  },
+  {
+    "kind": "data",
+    "relative": "receipts/hkconnect_close_snapshots/20261012.json",
+    "bytes": 205,
+    "sha256": "cafae91e18a8a5e46d37e855efa385bfb608e731fba111e1ad8e3dfa947f7449"
+  },
+  {
+    "kind": "data",
+    "relative": "manifest.json",
+    "bytes": 130563,
+    "sha256": "b3018c40ba6ffb88f1eec00a48448b5f3414fd55f067fb39a7518febb012fb52"
+  },
+  {
+    "kind": "data",
+    "relative": "preselection_pools/20261012/hkconnect_d1_top100.json",
+    "bytes": 213335,
+    "sha256": "220fd29bc907a1c4e431c75fb8eccb3204c5857130eb639f1e9b6a62b60cfe3d"
+  },
+  {
+    "kind": "data",
+    "relative": "preselection_pools/20261012/receipts/hkconnect_d1_top100.json",
+    "bytes": 476,
+    "sha256": "f864601096eb45ba07f20092449786d73929f393c7cb737ca1cc2906f9af9d4c"
+  },
+  {
+    "kind": "data",
+    "relative": "preselection_pools/20261012/manifest.json",
+    "bytes": 681,
+    "sha256": "a0eb3e6a348ea1dc651b6808e7f5f1c98ad06608464076dfa302e1847df2d66c"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_latest.json",
+    "bytes": 123377,
+    "sha256": "a1308e48590d8e02ac0db2aa8bd231d35ce529bdfb21c4469195d3b06f88a8ae"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0925/run-ad1e0d8a968a1f609d23f874/artifact.csv",
+    "bytes": 1870,
+    "sha256": "8bb24535e394d37ba72209ba9876e1fb5647b7eb6bedc9931a3227f07b30684a"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0925/run-ad1e0d8a968a1f609d23f874/manifest.json",
+    "bytes": 10652,
+    "sha256": "7bf0d98460a9cf61f71c2662f145f175cdb61c52b47a918c106c0a3548aa51b3"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0925/run-ad1e0d8a968a1f609d23f874/receipt.json",
+    "bytes": 1115,
+    "sha256": "6df595f8587dd6b0f87b257360a0a1b8e6cfe26ad29df4bb043676c94173639a"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0930_0935/run-c38534baae0534d1ce1fa5ec/artifact.csv",
+    "bytes": 2149,
+    "sha256": "46fdc737fd960eaf05e76d51d85572c846dbe72bc224060da48a7c0a389cd552"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0930_0935/run-c38534baae0534d1ce1fa5ec/manifest.json",
+    "bytes": 17193,
+    "sha256": "1793783d8fe220dfd14754721b925b958d44dcfd875c90c1e32b02706f0919fb"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0930_0935/run-c38534baae0534d1ce1fa5ec/receipt.json",
+    "bytes": 1130,
+    "sha256": "8b898fbd8efc2d41f5f072843d561ef551c75323c981dd8f4ef9e17357c10dc3"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0935_0940/run-2de02a0c9c77f5d926e48e08/artifact.csv",
+    "bytes": 2115,
+    "sha256": "4d323d128164e85ad90665aff0249203d12bc1bae1903afe350ab299e99b048f"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0935_0940/run-2de02a0c9c77f5d926e48e08/manifest.json",
+    "bytes": 31860,
+    "sha256": "2935afd7c83337deb574d0160ab839c14603443b7ccffd3ff8f9058f8d8e0f2e"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0935_0940/run-2de02a0c9c77f5d926e48e08/receipt.json",
+    "bytes": 1130,
+    "sha256": "9d75c67f2764ed3a23e9ae68d89b5c9c6c3e350cbfa5dffce49324d915d897ed"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0940_0945/run-5e750b6ac00293b7855bb959/artifact.csv",
+    "bytes": 2260,
+    "sha256": "b7011229223aa85532dd7492d04c9c94b7e20a7f57c434585f2bca22fba6d84f"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0940_0945/run-5e750b6ac00293b7855bb959/manifest.json",
+    "bytes": 16975,
+    "sha256": "b3f9fcfb6ff214dd866d371f98520061b4dabcbd4f43952009a4d0c1f348f10c"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0940_0945/run-5e750b6ac00293b7855bb959/receipt.json",
+    "bytes": 1130,
+    "sha256": "773e178b134d22d3ba961debac80994cac8ca6e846832482419843a594206fb7"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0945_1030/run-8e42e2beca799295bbe52ab9/artifact.csv",
+    "bytes": 2245,
+    "sha256": "5b95e1426aa96f269ab3d90df67bf808e7e8ab0cff2c80878b2958acf2fb1cb0"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0945_1030/run-8e42e2beca799295bbe52ab9/manifest.json",
+    "bytes": 32275,
+    "sha256": "8371a55fb285921a3cafca5e85ed12471087c9413e19f1e635ca095cf6b85adf"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_0945_1030/run-8e42e2beca799295bbe52ab9/receipt.json",
+    "bytes": 1130,
+    "sha256": "fa0d9a41ba32eef50e784265dd0c692267b2c8871bfc979df38949014385c3af"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-b883eb9b151b3a0eaf9e8425/artifact.csv",
+    "bytes": 1975,
+    "sha256": "6eefda1c5ff56e2e40d74e421297b4c01501cc53bd0998b8d933c3f699b735c1"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-b883eb9b151b3a0eaf9e8425/manifest.json",
+    "bytes": 21955,
+    "sha256": "fb5668f06b39925286f48eff1a85bd846d863416d401f478c16b8f8be65d2ba7"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1300_1315/run-b883eb9b151b3a0eaf9e8425/receipt.json",
+    "bytes": 1130,
+    "sha256": "2c8301c7ce966146e9ea36abf31964033295159041eb3c87b38c6ee3b5d73bc9"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-059d5a7d3c7cd078bfac671e/artifact.csv",
+    "bytes": 1950,
+    "sha256": "49ac72cdc8dea2f4a224bbf60a4b064d5255ac68e7f3da5bbfe8cb1ef2f60134"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-059d5a7d3c7cd078bfac671e/manifest.json",
+    "bytes": 21881,
+    "sha256": "3ddc543c0819f54d4863d773c15f321c3b4f00fd8e3dfd1efadf9a6690da3145"
+  },
+  {
+    "kind": "stages",
+    "relative": "selection_runs/20261012/HK_CONNECT_SELECTION_STAGE_1445_1500/run-059d5a7d3c7cd078bfac671e/receipt.json",
+    "bytes": 1130,
+    "sha256": "a6b2bcface22fd7680422174c38ed0c40214339d296be5142d7f06743e7397aa"
+  }
+]
