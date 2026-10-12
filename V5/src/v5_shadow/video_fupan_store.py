@@ -35,13 +35,18 @@ def ensure_private_root(root: Path | str) -> Path:
 def ensure_date_run(date: str, run_id: str) -> None:
     if not re.fullmatch(r"\d{8}", str(date)):
         raise VideoStoreError("invalid date")
-    if not re.fullmatch(r"[0-9a-fA-F_-]+", str(run_id)):
+    # Review Core owns run identifiers. They are not restricted to UUID/hex:
+    # examples include rcv1-20261011-none-32985ce688eb24e0. Keep the storage
+    # boundary strict while accepting the owner contract.
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]*", str(run_id)):
         raise VideoStoreError("invalid run")
+    if len(str(run_id)) > 256:
+        raise VideoStoreError("run too long")
 
 
 def safe_replace_json(path: Path, payload: Mapping[str, Any]) -> str:
     raw = json.dumps(dict(payload), ensure_ascii=False, sort_keys=True).encode("utf-8")
-    path.parent.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(parents, exist_ok=True)
     with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as f:
         f.write(raw)
         tmp = Path(f.name)
