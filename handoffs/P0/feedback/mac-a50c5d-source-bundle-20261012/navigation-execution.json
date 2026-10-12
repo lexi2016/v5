@@ -1,0 +1,12 @@
+{
+  "command": [
+    "<EXISTING_NODE>",
+    "navigation_a50.mjs",
+    "<MANAGER_API>"
+  ],
+  "started_utc": "2026-10-12T16:27:55.360720+00:00",
+  "ended_utc": "2026-10-12T16:28:26.653237+00:00",
+  "exit": 0,
+  "stdout": "{\"passed\":true,\"announcement_default_total\":147,\"us_matches\":4,\"unique_hk\":3,\"plan_status\":\"CONSUMED\",\"rebound_first_count\":31,\"rebound_next_offset\":31,\"us_return_exact\":true,\"announcement_return_exact\":true,\"requests\":[{\"path\":\"/api/v4/manager/m18/v2\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/overview\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/sections\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/sections\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/sections\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/sections\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/sections\",\"http\":200},{\"path\":\"/api/v4/manager/m18/v2/sections\",\"http\":200}]}\n",
+  "stderr": ""
+}

@@ -1,0 +1,10 @@
+{
+  "command": [
+    "<EXISTING_NODE>",
+    "a50_dom.mjs",
+    "<SOURCE_API>"
+  ],
+  "exit": 0,
+  "stdout": "READY_DISCONNECT {\"statuses\":[\"BLOCKED_REQUEST_MISSING\",\"BLOCKED_REQUEST_MISSING\",\"VALIDATED_SOURCE_BINDING\",\"BLOCKED_REQUEST_MISSING\"],\"repeat_exact\":true,\"loading_clears\":true}\n{\"passed\":true,\"actual_vue_component_mounted\":true,\"screen_or_browser_used\":false,\"recorded_identity_visible\":true,\"statuses\":[\"BLOCKED_REQUEST_MISSING\",\"BLOCKED_REQUEST_MISSING\",\"VALIDATED_SOURCE_BINDING\",\"BLOCKED_REQUEST_MISSING\"],\"repeat_exact\":true,\"loading_clears\":true,\"real_disconnect_clears\":true}\n",
+  "stderr": ""
+}

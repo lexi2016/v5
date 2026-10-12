@@ -1,0 +1,85 @@
+{
+  "candidate": "a50c5d022e6e4e8362d96079b4abffc988ff77cb",
+  "parent": "07d0561faac2cf4a3d90e78bd87653fe94642a15",
+  "verified_source_blobs": 1019,
+  "result": "PASS_EXPLICIT_SOURCE_REPLAY_API_UI_PREVIEW_ONLY",
+  "prior_passes_not_repeated": {
+    "source_bundle": 13,
+    "module_api": 11,
+    "node": 40
+  },
+  "source_invocation": {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "v5_shadow.main_runtime",
+      "source-bundle",
+      "--config",
+      "<PRIVATE>/source-runtime.json"
+    ],
+    "started_utc": "2026-10-12T16:26:36.568110+00:00",
+    "ended_utc": "2026-10-12T16:26:37.593338+00:00",
+    "exit": 0,
+    "publication": {
+      "changed": true,
+      "generation_sha256": "5afd3802652bc36e8ff67b56124f8fd0782c2e5cc82851494fc24e4a5e665945",
+      "module_id": "source_bundle",
+      "previous_generation": null,
+      "release_id": "p0-a50c5d-source-replay",
+      "schema_version": "v5.module_active.v1"
+    },
+    "data_kind": "RECORDED_INPUT_REPLAY",
+    "modules": [
+      {
+        "module_id": "M01_A_MARKET",
+        "status": "BLOCKED_REQUEST_MISSING"
+      },
+      {
+        "module_id": "M02_HK_MARKET",
+        "status": "BLOCKED_REQUEST_MISSING"
+      },
+      {
+        "module_id": "M03_US_MARKET",
+        "status": "VALIDATED_SOURCE_BINDING"
+      },
+      {
+        "module_id": "M05_A_PRESELECTION",
+        "status": "BLOCKED_REQUEST_MISSING"
+      }
+    ],
+    "source_status": "READY",
+    "identity": {
+      "capture_id": "492b5679fb596b7b7c13908a",
+      "capture_origin": "ORIGINAL_TIME_CAPTURE",
+      "capture_phase": "POST_CLOSE",
+      "captured_at": "2026-10-09T20:15:04Z",
+      "us_session_date": "20261009",
+      "run_id": "us-rss:20261009:POST_CLOSE:492b5679fb596b7b7c13908a"
+    },
+    "original_input_hash_size_mtime_unchanged": true,
+    "network_capture_requested": false
+  },
+  "limits": [
+    "RECORDED_INPUT_REPLAY is not new natural capture.",
+    "M01/M02/M05 absent requests remain BLOCKED_REQUEST_MISSING; no real source success claimed for them.",
+    "M05 known oracle-provenance rejection and missing strict gate are not repaired by this run.",
+    "M07 remains outside this acceptance.",
+    "Full 18 modules/P0-P5 not accepted.",
+    "UI component mounted through existing jsdom/Vue; no screen/browser interaction performed."
+  ],
+  "natural_verified": false,
+  "formal_eligibility_verified": false,
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false,
+  "dependencies_installed": false,
+  "product_modified_locally": false,
+  "rollback": {
+    "candidate": "d53e0820318462806d9e67dae1818bb684b38ade",
+    "dist_retained": true,
+    "manager_origin": "http://127.0.0.1:63668",
+    "previous_processes_found_absent": true
+  },
+  "command_path_policy": "Actual executions retained locally; private absolute paths replaced with explicit placeholders in uploaded evidence."
+}

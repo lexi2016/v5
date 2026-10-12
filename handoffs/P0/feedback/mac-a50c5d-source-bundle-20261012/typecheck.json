@@ -1,0 +1,14 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "typecheck",
+    "--prefix",
+    "frontend"
+  ],
+  "started_utc": "2026-10-12T16:25:58.535253+00:00",
+  "ended_utc": "2026-10-12T16:26:00.382194+00:00",
+  "exit": 0,
+  "stdout": "\n> v3-5-web@0.1.0 typecheck\n> vue-tsc --noEmit\n\n",
+  "stderr": ""
+}

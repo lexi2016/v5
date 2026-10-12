@@ -1,0 +1,101 @@
+{
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 850,
+      "sha256": "2b5e205af9d56e7d5a01573bf23710231844649096b2b75ce882abe8370cc105"
+    },
+    {
+      "path": "daily-research-command/index.html",
+      "bytes": 504,
+      "sha256": "40319a50f2a603e28aba37962cc87147ce2914aec9f92b72d60950afb287241f"
+    },
+    {
+      "path": "manager-selection/index.html",
+      "bytes": 558,
+      "sha256": "734f52abe7e61d517e00efeddafa2279271dfc6d3eb0e4cf58d96751b53c15e5"
+    },
+    {
+      "path": "assets/reboundPanelObservation-rEOT8hV3.js",
+      "bytes": 30016,
+      "sha256": "ba9136e5557d7947053de18c1e13b30b1d39ce459119cfad9c565c2b2e7ff081"
+    },
+    {
+      "path": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+      "bytes": 91,
+      "sha256": "cb85b0f263dbe24e857338301c0627076592e9f1f1a5662929f86d2c126444aa"
+    },
+    {
+      "path": "assets/runtime-dom.esm-bundler-Ds5LT4Of.js",
+      "bytes": 69045,
+      "sha256": "18a37e2819ece51ecd67e700d7b92f737f51fac85a1da10539aedc3649c6471f"
+    },
+    {
+      "path": "assets/ManagerSelectionView-Hp_a-sop.js",
+      "bytes": 403994,
+      "sha256": "3894b76c683b996049fdfd15ba26e3825af16d088913657c29fe08021a6193ce"
+    },
+    {
+      "path": "assets/ManagerSelectionView-DPqeaKxb.css",
+      "bytes": 48280,
+      "sha256": "937acb35ff2f5318182c43b1c045db2545b98d8486a17319913dde28331e83f5"
+    },
+    {
+      "path": "assets/style-DI6AXicP.js",
+      "bytes": 1110,
+      "sha256": "d887044e7c17fd90344fc4f74f53cac686584daf2a458ab2136d36f1946e9ab6"
+    },
+    {
+      "path": "assets/research_lane-t0CPXntR.js",
+      "bytes": 4268,
+      "sha256": "8651472ec9b303719d201e466e997fc2fadfc2f7169ec1a07c6ded932659f95b"
+    },
+    {
+      "path": "assets/style-BtNCnKLk.css",
+      "bytes": 18594,
+      "sha256": "511cff3d064c51a16261deb297bd8cd2cd4b58378b4eedf3fdcd210970a12fff"
+    },
+    {
+      "path": "assets/dailyResearchCommand-D13tk45Q.js",
+      "bytes": 26611,
+      "sha256": "405b50d2a49760efb992a88a600a2b7afb7897529da7dc6d2c903474a85c65a6"
+    },
+    {
+      "path": "assets/managerSelection-DozGhZAt.js",
+      "bytes": 822,
+      "sha256": "ffec2b8c9eb433f58dba027aad859ce9b8f5328801659acdd848f21bc3f9ce1c"
+    },
+    {
+      "path": "assets/App-C8ZBy9MI.css",
+      "bytes": 20334,
+      "sha256": "63b4a58d5e7c59ab32fcefd0e061bc5a859aa2c894ec1efec3e6e9e3bc56f17d"
+    },
+    {
+      "path": "assets/SavedManagerResultView-BreC_mhZ.css",
+      "bytes": 3561,
+      "sha256": "dd239313b98107c4530fba9a9eeff0f499fe21995f77a1f411eaed20fa3029a5"
+    },
+    {
+      "path": "assets/SavedManagerResultView-Cw81e_uS.js",
+      "bytes": 23422,
+      "sha256": "75f6e31ead0a627b85e0cb3ed419c7f2d5b5a4ce8d20e6c8afb673b79bd8d4ee"
+    },
+    {
+      "path": "assets/dailyResearchCommand-D7J2FMsY.css",
+      "bytes": 12281,
+      "sha256": "444542681a3575082c280eb30674e6550766a127bdd6da019b78e8f247125dfa"
+    },
+    {
+      "path": "assets/main-ChGznpZV.js",
+      "bytes": 757,
+      "sha256": "81b51557a6be88139a4f55662f23afe360a88b2a6adc2dfd8becb45c25d04cc2"
+    },
+    {
+      "path": "assets/App-8NKFrO9R.js",
+      "bytes": 175357,
+      "sha256": "c4a598d78056ae71c46084fd1c8022d74e52eb8185767423223a24ee5b61c332"
+    }
+  ],
+  "scan": "PASS",
+  "note": "The existing saved-view default run identifier is part of pinned product source; no response data or replay payload is bundled."
+}
