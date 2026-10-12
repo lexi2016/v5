@@ -1,0 +1,17 @@
+test_original_projector_owned_fields_preserve_exact_legacy_semantics (test_hk_preselection_verified.VerifiedContractTests.test_original_projector_owned_fields_preserve_exact_legacy_semantics) ... FAIL
+
+======================================================================
+FAIL: test_original_projector_owned_fields_preserve_exact_legacy_semantics (test_hk_preselection_verified.VerifiedContractTests.test_original_projector_owned_fields_preserve_exact_legacy_semantics)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_verified.py", line 124, in test_original_projector_owned_fields_preserve_exact_legacy_semantics
+    self.assertEqual(actual['status'],'ASSEMBLED')
+AssertionError: 'CANNOT_CONFIRM' != 'ASSEMBLED'
+- CANNOT_CONFIRM
++ ASSEMBLED
+
+
+----------------------------------------------------------------------
+Ran 1 test in 1.559s
+
+FAILED (failures=1)

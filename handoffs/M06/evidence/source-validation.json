@@ -1,0 +1,11 @@
+{
+  "original_files": 60,
+  "original_mismatches": [],
+  "parsed_python_files": 54,
+  "new_core_sha256": {
+    "hk_preselection.py": "00ccdaa1890675335836351d33c4fea5f9458a8dd287e3724efb9f0cb0fb1b21",
+    "hk_preselection_daily.py": "1b55e91cf091eb3f75846c2a0c0e13873018fa18605ce84067cb8fa1383e96ac",
+    "hk_preselection_publication.py": "58c1b435dd8a5341d7dae1ee8e687877346576327fcc2e94621cd5bebf1dc880",
+    "hk_preselection_verified.py": "7349a400c45a9e112a98b1ad913482f910367d8f185335d7785428d623005704"
+  }
+}

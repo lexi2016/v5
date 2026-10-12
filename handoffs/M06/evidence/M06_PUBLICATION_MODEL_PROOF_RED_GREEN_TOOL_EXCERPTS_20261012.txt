@@ -1,0 +1,14 @@
+Transcribed excerpts from execution-tool output; NOT redirected raw process logs.
+
+PRELIMINARY EXPECTED RED
+Observed exit_code: 1.
+FAIL: test_arbitrary_model_proof_cannot_claim_weights_verified (test_hk_preselection_publication.HKPublicationTests.test_arbitrary_model_proof_cannot_claim_weights_verified)
+AssertionError: ValueError not raised
+Ran 1 test in 4.799s
+FAILED (failures=1)
+
+GREEN AFTER HARDENING
+Observed exit_code: 0.
+test_arbitrary_model_proof_cannot_claim_weights_verified (test_hk_preselection_publication.HKPublicationTests.test_arbitrary_model_proof_cannot_claim_weights_verified) ... ok
+Ran 1 test in 0.080s
+OK

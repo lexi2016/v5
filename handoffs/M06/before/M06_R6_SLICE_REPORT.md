@@ -1,0 +1,1 @@
+SOURCE_SNAPSHOT vertical slice. Real producer/runtime/strict production execution NOT_RUN.

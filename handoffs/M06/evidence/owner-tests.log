@@ -1,0 +1,60 @@
+COMMAND: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=V5/src python3 -B -m unittest discover -s V5/tests -p test_hk_preselection_owner.py -v
+setUpClass (test_hk_preselection_owner.HKOriginalOwnerTests) ... ERROR
+
+======================================================================
+ERROR: setUpClass (test_hk_preselection_owner.HKOriginalOwnerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_owner.py", line 183, in setUpClass
+    raise AssertionError(f"Cold original-owner worker failed: {process.stderr}\n{process.stdout}")
+AssertionError: Cold original-owner worker failed: Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_owner.py", line 252, in <module>
+    print(json.dumps(_owner_worker(), sort_keys=True))
+                     ^^^^^^^^^^^^^^^
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_owner.py", line 157, in _owner_worker
+    late_result = consumer.run_verified_hk_preselection(request) if captured > cutoff else None
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'v5_shadow.hk_preselection' has no attribute 'run_verified_hk_preselection'
+
+
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.250s
+
+FAILED (errors=1)
+
+EXIT_CODE=5
+
+FINAL RUN COMMAND: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=V5/src python3 -B -m unittest discover -s V5/tests -p test_hk_preselection_owner.py -v
+ORIGINAL_OWNER_EVIDENCE {"captured_at": "2026-10-13T01:18:27+09:00", "closure_bytes": 132000, "closure_files": ["upstreams/v3_shared_data/shared_data/__init__.py", "upstreams/v3_shared_data/shared_data/allowlist.py", "upstreams/v3_shared_data/shared_data/collectors.py", "upstreams/v3_shared_data/shared_data/constants.py", "upstreams/v3_shared_data/shared_data/consumer.py", "upstreams/v3_shared_data/shared_data/hashing.py", "upstreams/v3_shared_data/shared_data/hk_0_2.py", "upstreams/v3_shared_data/shared_data/hk_security_master.py", "upstreams/v3_shared_data/shared_data/paths.py", "upstreams/v3_shared_data/shared_data/store.py"], "evidence_scope": "SYNTHETIC_PUBLISH_STORE_READ_ONLY", "master_sources": ["SYNTHETIC_FIXTURE"], "model_scoring_executed": false, "model_weights_reverified": false, "original_owner_sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89", "panel_read": false, "publication": {"already_exists": false, "artifact_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/artifact.csv", "artifact_sha256": "fa7093212e6f741cdb2256e727f079b4e00572a3ccf0fa66b6eee469c2354232", "attempt": 1, "input_sha256": "fa7093212e6f741cdb2256e727f079b4e00572a3ccf0fa66b6eee469c2354232", "manifest_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/manifest.json", "manifest_sha256": "389ae40ca9bb31fe2a7c0a8dc83a24c0f210504d8375f84e3217295f8e8ab2a3", "ok": true, "receipt_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/receipt.json", "receipt_sha256": "6a886258766506a34aacb612e8cdf421d378134e7e908feaeeea803fbb19119d", "row_count": 100, "run_id": "20261008-hk-connect-d1-top100-0-2-3180705d45ad", "status": "READY"}, "runtime": {"actual": {"joblib": "1.5.3", "python": "3.12.14", "sklearn": "1.8.0"}, "error": "HK 0.2 requires Python 3.13.12", "error_type": "StoreError", "expected_error": "HK 0.2 requires Python 3.13.12", "model_still_absent": true, "pins": {"joblib": "1.5.3", "python": "3.13.12", "sklearn": "1.9.0"}}}
+test_actual_late_publication_is_not_historical_pit_evidence (test_hk_preselection_owner.HKOriginalOwnerTests.test_actual_late_publication_is_not_historical_pit_evidence) ... ok
+test_original_model_loader_rejects_actual_nonpinned_runtime (test_hk_preselection_owner.HKOriginalOwnerTests.test_original_model_loader_rejects_actual_nonpinned_runtime) ... ok
+test_real_materializer_failure_preserves_existing_success (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_materializer_failure_preserves_existing_success) ... ok
+test_real_materializer_missing_assets_creates_no_output (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_materializer_missing_assets_creates_no_output) ... ok
+test_real_owner_publishes_and_reads_all_100_synthetic_rows (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_owner_publishes_and_reads_all_100_synthetic_rows) ... ok
+test_real_owner_same_input_is_idempotent (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_owner_same_input_is_idempotent) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.994s
+
+OK
+
+EXIT_CODE=0
+
+CURRENT_DATE_SYNTHETIC_PROVENANCE_GREEN COMMAND: PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=V5/src python3 -B -m unittest discover -s V5/tests -p test_hk_preselection_owner.py -v
+ORIGINAL_OWNER_EVIDENCE {"captured_at": "2026-10-13T01:31:38+09:00", "closure_bytes": 132000, "closure_files": ["upstreams/v3_shared_data/shared_data/__init__.py", "upstreams/v3_shared_data/shared_data/allowlist.py", "upstreams/v3_shared_data/shared_data/collectors.py", "upstreams/v3_shared_data/shared_data/constants.py", "upstreams/v3_shared_data/shared_data/consumer.py", "upstreams/v3_shared_data/shared_data/hashing.py", "upstreams/v3_shared_data/shared_data/hk_0_2.py", "upstreams/v3_shared_data/shared_data/hk_security_master.py", "upstreams/v3_shared_data/shared_data/paths.py", "upstreams/v3_shared_data/shared_data/store.py"], "evidence_scope": "SYNTHETIC_PUBLISH_STORE_READ_ONLY", "master_sources": ["SYNTHETIC_FIXTURE"], "model_scoring_executed": false, "model_weights_reverified": false, "original_owner_sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89", "panel_read": false, "publication": {"already_exists": false, "artifact_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/artifact.csv", "artifact_sha256": "fa7093212e6f741cdb2256e727f079b4e00572a3ccf0fa66b6eee469c2354232", "attempt": 1, "input_sha256": "fa7093212e6f741cdb2256e727f079b4e00572a3ccf0fa66b6eee469c2354232", "manifest_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/manifest.json", "manifest_sha256": "eee4723193b4e15d2fc9ed565c7a9b5e24bd87dcb26a9d324527dfcd88ff55f6", "ok": true, "receipt_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/receipt.json", "receipt_sha256": "2a94c6d6baf5349a2dcc4bcf1143e465d02f285abb3dd198418958a8383789b3", "row_count": 100, "run_id": "20261008-hk-connect-d1-top100-0-2-3180705d45ad", "status": "READY"}, "runtime": {"actual": {"joblib": "1.5.3", "python": "3.12.14", "sklearn": "1.8.0"}, "error": "HK 0.2 requires Python 3.13.12", "error_type": "StoreError", "expected_error": "HK 0.2 requires Python 3.13.12", "model_still_absent": true, "pins": {"joblib": "1.5.3", "python": "3.13.12", "sklearn": "1.9.0"}}}
+CURRENT_DATE_ORIGINAL_OWNER_EVIDENCE {"captured_at": "2026-10-13T01:31:38+09:00", "complete_artifacts_equal": true, "eligibility_source_date": "20261012", "expected_source": {"artifact_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/artifact.csv", "artifact_sha256": "b6a888962e4daf38e2e8c89716a86e1b8966f0f9fc1a4ea5755d59c8e48f5607", "manifest_sha256": "28f3ea2a9e32a2bcea6fda0da543e8a5a231286189aa46e233e1ab9b22408db0", "receipt_sha256": "44e5b73cbea6aad946ca7f7bf854d5db60b767e8385e71f2030b645e085c765b", "role": "HK_CONNECT_D1_TOP100_0_2", "run_id": "20261013-hk-connect-d1-top100-0-2-e8958a424dcf"}, "finished_at": "2026-10-13T01:31:38+09:00", "legacy_status": "ASSEMBLED", "market_state": "FULL_TRADING_DAY", "master_captured_at": "2026-10-12T16:30:00+08:00", "master_fixture_only": true, "master_sources": ["SYNTHETIC_FIXTURE"], "owner": "v3_shared_data", "pool_fixture_only": null, "publication": {"already_exists": false, "artifact_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/artifact.csv", "artifact_sha256": "b6a888962e4daf38e2e8c89716a86e1b8966f0f9fc1a4ea5755d59c8e48f5607", "attempt": 1, "input_sha256": "b6a888962e4daf38e2e8c89716a86e1b8966f0f9fc1a4ea5755d59c8e48f5607", "manifest_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/manifest.json", "manifest_sha256": "28f3ea2a9e32a2bcea6fda0da543e8a5a231286189aa46e233e1ab9b22408db0", "ok": true, "receipt_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/receipt.json", "receipt_sha256": "44e5b73cbea6aad946ca7f7bf854d5db60b767e8385e71f2030b645e085c765b", "row_count": 100, "run_id": "20261013-hk-connect-d1-top100-0-2-e8958a424dcf", "status": "READY"}, "research_cutoff": "2026-10-13T23:59:59+08:00", "signal_date": "20261012", "skip_reason": "", "target_date": "20261013", "verified_fixture_only": true, "verified_status": "ASSEMBLED"}
+test_actual_late_publication_is_not_historical_pit_evidence (test_hk_preselection_owner.HKOriginalOwnerTests.test_actual_late_publication_is_not_historical_pit_evidence) ... ok
+test_current_real_owner_matches_legacy_and_retains_synthetic_master_provenance (test_hk_preselection_owner.HKOriginalOwnerTests.test_current_real_owner_matches_legacy_and_retains_synthetic_master_provenance) ... ok
+test_original_model_loader_rejects_actual_nonpinned_runtime (test_hk_preselection_owner.HKOriginalOwnerTests.test_original_model_loader_rejects_actual_nonpinned_runtime) ... ok
+test_real_materializer_failure_preserves_existing_success (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_materializer_failure_preserves_existing_success) ... ok
+test_real_materializer_missing_assets_creates_no_output (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_materializer_missing_assets_creates_no_output) ... ok
+test_real_owner_publishes_and_reads_all_100_synthetic_rows (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_owner_publishes_and_reads_all_100_synthetic_rows) ... ok
+test_real_owner_same_input_is_idempotent (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_owner_same_input_is_idempotent) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.046s
+
+OK
+
+EXIT_CODE=0

@@ -1,0 +1,6 @@
+test_daily_identity_binds_observed_runtime_dependencies (test_hk_preselection_daily.DailyTests.test_daily_identity_binds_observed_runtime_dependencies) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 6.652s
+
+OK

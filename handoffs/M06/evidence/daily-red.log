@@ -1,0 +1,14 @@
+test_module_implemented (test_hk_preselection_daily.DailyTests.test_module_implemented) ... FAIL
+
+======================================================================
+FAIL: test_module_implemented (test_hk_preselection_daily.DailyTests.test_module_implemented)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_daily.py", line 21, in test_module_implemented
+    self.assertTrue((Path(__file__).parents[1]/'src/v5_shadow/hk_preselection_daily.py').is_file(),'daily entrypoint must exist')
+AssertionError: False is not true : daily entrypoint must exist
+
+----------------------------------------------------------------------
+Ran 1 test in 0.004s
+
+FAILED (failures=1)

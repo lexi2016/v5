@@ -1,0 +1,2 @@
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python: No module named pytest
+pytest_availability_exit=1

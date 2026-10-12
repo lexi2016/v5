@@ -1,0 +1,15 @@
+test_reused_success_rechecks_live_inputs_after_exact_readback (test_hk_preselection_daily.DailyTests.test_reused_success_rechecks_live_inputs_after_exact_readback) ... FAIL
+
+======================================================================
+FAIL: test_reused_success_rechecks_live_inputs_after_exact_readback (test_hk_preselection_daily.DailyTests.test_reused_success_rechecks_live_inputs_after_exact_readback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_daily.py", line 84, in test_reused_success_rechecks_live_inputs_after_exact_readback
+    with self.assertRaisesRegex(ValueError,'M06_INPUT_CHANGED'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 9.186s
+
+FAILED (failures=1)

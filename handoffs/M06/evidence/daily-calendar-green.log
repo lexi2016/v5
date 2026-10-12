@@ -1,0 +1,6 @@
+test_bad_calendar_precedes_missing_pool_runtime_gate (test_hk_preselection_daily.DailyTests.test_bad_calendar_precedes_missing_pool_runtime_gate) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.809s
+
+OK

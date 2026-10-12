@@ -1,0 +1,16 @@
+Transcribed excerpts from execution-tool output; NOT redirected raw process logs.
+
+PRELIMINARY EXPECTED RED
+Observed exit_code: 1.
+FAIL: test_nonregular_metadata_is_rejected_without_waiting_for_fifo_writer (test_hk_preselection_publication.HKPublicationTests.test_nonregular_metadata_is_rejected_without_waiting_for_fifo_writer)
+AssertionError: False is not true : a FIFO must fail closed without blocking
+Ran 1 test in 0.358s
+FAILED (failures=1)
+
+GREEN AFTER O_NONBLOCK, WITH EXACT ROUTE PROJECTION REGRESSION
+Observed exit_code: 0.
+Both targeted tests passed:
+- test_nonregular_metadata_is_rejected_without_waiting_for_fifo_writer
+- test_route_record_uses_exact_committed_reference_without_writes
+Ran 2 tests in 6.869s
+OK

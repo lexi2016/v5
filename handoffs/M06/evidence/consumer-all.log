@@ -1,0 +1,56 @@
+test_99_rows_and_wrong_model_hash_rejected (test_hk_preselection.HKPreselectionTests.test_99_rows_and_wrong_model_hash_rejected) ... ok
+test_a_previous_day_not_used_as_hk_price_day (test_hk_preselection.HKPreselectionTests.test_a_previous_day_not_used_as_hk_price_day) ... ok
+test_all100_ranks_and_symbols_preserved (test_hk_preselection.HKPreselectionTests.test_all100_ranks_and_symbols_preserved) ... ok
+test_cannot_confirm_with100_rows_not_upgraded_to_ready (test_hk_preselection.HKPreselectionTests.test_cannot_confirm_with100_rows_not_upgraded_to_ready) ... ok
+test_hk_open_connect_closed_is_independently_reported (test_hk_preselection.HKPreselectionTests.test_hk_open_connect_closed_is_independently_reported) ... ok
+test_invalid_probabilities_fail_closed (test_hk_preselection.HKPreselectionTests.test_invalid_probabilities_fail_closed) ... ok
+test_late_receipt_and_bad_input_hash_rejected (test_hk_preselection.HKPreselectionTests.test_late_receipt_and_bad_input_hash_rejected) ... ok
+test_no_model_or_panel_files_are_read (test_hk_preselection.HKPreselectionTests.test_no_model_or_panel_files_are_read) ... ok
+test_nondefault_unsupported_arguments_are_not_silently_dropped (test_hk_preselection.HKPreselectionTests.test_nondefault_unsupported_arguments_are_not_silently_dropped) ... ok
+test_pool_capture_after_cutoff_or_finish_rejected (test_hk_preselection.HKPreselectionTests.test_pool_capture_after_cutoff_or_finish_rejected) ... ok
+test_pool_member_absent_from_master_rejected (test_hk_preselection.HKPreselectionTests.test_pool_member_absent_from_master_rejected) ... ok
+test_ready_but_temporal_false_rejected (test_hk_preselection.HKPreselectionTests.test_ready_but_temporal_false_rejected) ... ok
+test_real_reader_projects_all_top100_and_preserves_three_dates (test_hk_preselection.HKPreselectionTests.test_real_reader_projects_all_top100_and_preserves_three_dates) ... ok
+test_same_signal_and_eligibility_dates_supported (test_hk_preselection.HKPreselectionTests.test_same_signal_and_eligibility_dates_supported) ... ok
+test_target_day_master_before_pool_capture_allowed (test_hk_preselection.HKPreselectionTests.test_target_day_master_before_pool_capture_allowed) ... ok
+test_101_nan_clock_and_unready_cannot_confirm (test_hk_preselection_verified.VerifiedContractTests.test_101_nan_clock_and_unready_cannot_confirm) ... ok
+test_duplicate_rows_rejected_with_self_consistent_hashes (test_hk_preselection_verified.VerifiedContractTests.test_duplicate_rows_rejected_with_self_consistent_hashes) ... ok
+test_each_identity_absent_none_empty_and_wrong_sha_rejected (test_hk_preselection_verified.VerifiedContractTests.test_each_identity_absent_none_empty_and_wrong_sha_rejected) ... ok
+test_each_of_eight_files_required (test_hk_preselection_verified.VerifiedContractTests.test_each_of_eight_files_required) ... ok
+test_kind_extra_fields_and_bad_dates_rejected (test_hk_preselection_verified.VerifiedContractTests.test_kind_extra_fields_and_bad_dates_rejected) ... ok
+test_real_cold_chain_exact_original_artifact_and_identity (test_hk_preselection_verified.VerifiedContractTests.test_real_cold_chain_exact_original_artifact_and_identity) ... ok
+test_relative_path_and_ancestor_symlink_rejected (test_hk_preselection_verified.VerifiedContractTests.test_relative_path_and_ancestor_symlink_rejected) ... ok
+test_wrong_run_path_role_and_tamper_rejected (test_hk_preselection_verified.VerifiedContractTests.test_wrong_run_path_role_and_tamper_rejected) ... ok
+test_99_rows_and_wrong_model_hash_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_99_rows_and_wrong_model_hash_rejected) ... ok
+test_a_previous_day_not_used_as_hk_price_day (test_hk_preselection_verified.VerifiedOriginalRegressions.test_a_previous_day_not_used_as_hk_price_day) ... ok
+test_all100_ranks_and_symbols_preserved (test_hk_preselection_verified.VerifiedOriginalRegressions.test_all100_ranks_and_symbols_preserved) ... ok
+test_cannot_confirm_with100_rows_not_upgraded_to_ready (test_hk_preselection_verified.VerifiedOriginalRegressions.test_cannot_confirm_with100_rows_not_upgraded_to_ready) ... ok
+test_hk_open_connect_closed_is_independently_reported (test_hk_preselection_verified.VerifiedOriginalRegressions.test_hk_open_connect_closed_is_independently_reported) ... ok
+test_invalid_probabilities_fail_closed (test_hk_preselection_verified.VerifiedOriginalRegressions.test_invalid_probabilities_fail_closed) ... ok
+test_late_receipt_and_bad_input_hash_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_late_receipt_and_bad_input_hash_rejected) ... ok
+test_no_model_or_panel_files_are_read (test_hk_preselection_verified.VerifiedOriginalRegressions.test_no_model_or_panel_files_are_read) ... ok
+test_nondefault_unsupported_arguments_are_not_silently_dropped (test_hk_preselection_verified.VerifiedOriginalRegressions.test_nondefault_unsupported_arguments_are_not_silently_dropped) ... FAIL
+test_pool_capture_after_cutoff_or_finish_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_pool_capture_after_cutoff_or_finish_rejected) ... ok
+test_pool_member_absent_from_master_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_pool_member_absent_from_master_rejected) ... ok
+test_ready_but_temporal_false_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_ready_but_temporal_false_rejected) ... ok
+test_real_reader_projects_all_top100_and_preserves_three_dates (test_hk_preselection_verified.VerifiedOriginalRegressions.test_real_reader_projects_all_top100_and_preserves_three_dates) ... ok
+test_same_signal_and_eligibility_dates_supported (test_hk_preselection_verified.VerifiedOriginalRegressions.test_same_signal_and_eligibility_dates_supported) ... ok
+test_target_day_master_before_pool_capture_allowed (test_hk_preselection_verified.VerifiedOriginalRegressions.test_target_day_master_before_pool_capture_allowed) ... ok
+
+======================================================================
+FAIL: test_nondefault_unsupported_arguments_are_not_silently_dropped (test_hk_preselection_verified.VerifiedOriginalRegressions.test_nondefault_unsupported_arguments_are_not_silently_dropped)
+----------------------------------------------------------------------
+ValueError: M06_REQUEST_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection.py", line 52, in test_nondefault_unsupported_arguments_are_not_silently_dropped
+    with self.assertRaisesRegex(ValueError,'UNSUPPORTED_LEGACY_READER_ARGUMENT'):self.run_request(request)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "UNSUPPORTED_LEGACY_READER_ARGUMENT" does not match "M06_REQUEST_FIELDS_INVALID"
+
+----------------------------------------------------------------------
+Ran 38 tests in 26.337s
+
+FAILED (failures=1)

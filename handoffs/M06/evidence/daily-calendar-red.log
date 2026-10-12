@@ -1,0 +1,19 @@
+test_bad_calendar_precedes_missing_pool_runtime_gate (test_hk_preselection_daily.DailyTests.test_bad_calendar_precedes_missing_pool_runtime_gate) ... FAIL
+
+======================================================================
+FAIL: test_bad_calendar_precedes_missing_pool_runtime_gate (test_hk_preselection_daily.DailyTests.test_bad_calendar_precedes_missing_pool_runtime_gate)
+----------------------------------------------------------------------
+ValueError: M06_PRODUCER_RUNTIME_MISMATCH:{"actual": {"joblib": "1.5.3", "python": "3.12.14", "scikit-learn": "1.8.0"}, "expected": {"joblib": "1.5.3", "python": "3.13.12", "scikit-learn": "1.9.0"}}
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_daily.py", line 50, in test_bad_calendar_precedes_missing_pool_runtime_gate
+    with self.assertRaisesRegex(ValueError,'HK_SIGNAL_NOT_PREVIOUS_SECURITIES_SESSION'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "HK_SIGNAL_NOT_PREVIOUS_SECURITIES_SESSION" does not match "M06_PRODUCER_RUNTIME_MISMATCH:{"actual": {"joblib": "1.5.3", "python": "3.12.14", "scikit-learn": "1.8.0"}, "expected": {"joblib": "1.5.3", "python": "3.13.12", "scikit-learn": "1.9.0"}}"
+
+----------------------------------------------------------------------
+Ran 1 test in 0.140s
+
+FAILED (failures=1)

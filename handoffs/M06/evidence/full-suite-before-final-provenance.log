@@ -1,0 +1,91 @@
+test_99_rows_and_wrong_model_hash_rejected (test_hk_preselection.HKPreselectionTests.test_99_rows_and_wrong_model_hash_rejected) ... ok
+test_a_previous_day_not_used_as_hk_price_day (test_hk_preselection.HKPreselectionTests.test_a_previous_day_not_used_as_hk_price_day) ... ok
+test_all100_ranks_and_symbols_preserved (test_hk_preselection.HKPreselectionTests.test_all100_ranks_and_symbols_preserved) ... ok
+test_cannot_confirm_with100_rows_not_upgraded_to_ready (test_hk_preselection.HKPreselectionTests.test_cannot_confirm_with100_rows_not_upgraded_to_ready) ... ok
+test_hk_open_connect_closed_is_independently_reported (test_hk_preselection.HKPreselectionTests.test_hk_open_connect_closed_is_independently_reported) ... ok
+test_invalid_probabilities_fail_closed (test_hk_preselection.HKPreselectionTests.test_invalid_probabilities_fail_closed) ... ok
+test_late_receipt_and_bad_input_hash_rejected (test_hk_preselection.HKPreselectionTests.test_late_receipt_and_bad_input_hash_rejected) ... ok
+test_no_model_or_panel_files_are_read (test_hk_preselection.HKPreselectionTests.test_no_model_or_panel_files_are_read) ... ok
+test_nondefault_unsupported_arguments_are_not_silently_dropped (test_hk_preselection.HKPreselectionTests.test_nondefault_unsupported_arguments_are_not_silently_dropped) ... ok
+test_pool_capture_after_cutoff_or_finish_rejected (test_hk_preselection.HKPreselectionTests.test_pool_capture_after_cutoff_or_finish_rejected) ... ok
+test_pool_member_absent_from_master_rejected (test_hk_preselection.HKPreselectionTests.test_pool_member_absent_from_master_rejected) ... ok
+test_ready_but_temporal_false_rejected (test_hk_preselection.HKPreselectionTests.test_ready_but_temporal_false_rejected) ... ok
+test_real_reader_projects_all_top100_and_preserves_three_dates (test_hk_preselection.HKPreselectionTests.test_real_reader_projects_all_top100_and_preserves_three_dates) ... ok
+test_same_signal_and_eligibility_dates_supported (test_hk_preselection.HKPreselectionTests.test_same_signal_and_eligibility_dates_supported) ... ok
+test_target_day_master_before_pool_capture_allowed (test_hk_preselection.HKPreselectionTests.test_target_day_master_before_pool_capture_allowed) ... ok
+test_actual_after_cutoff_source_rejected (test_hk_preselection_daily.DailyTests.test_actual_after_cutoff_source_rejected) ... ok
+test_asset_file_sha_cannot_be_none (test_hk_preselection_daily.DailyTests.test_asset_file_sha_cannot_be_none) ... ok
+test_bad_calendar_precedes_missing_pool_runtime_gate (test_hk_preselection_daily.DailyTests.test_bad_calendar_precedes_missing_pool_runtime_gate) ... ok
+test_bad_existing_pool_no_generation_fallback_or_old_overwrite (test_hk_preselection_daily.DailyTests.test_bad_existing_pool_no_generation_fallback_or_old_overwrite) ... ok
+test_daily_identity_binds_observed_runtime_dependencies (test_hk_preselection_daily.DailyTests.test_daily_identity_binds_observed_runtime_dependencies) ... ok
+test_date_calendar_rejection_before_publication (test_hk_preselection_daily.DailyTests.test_date_calendar_rejection_before_publication) ... ok
+test_exact_existing_pool_committed_and_reused (test_hk_preselection_daily.DailyTests.test_exact_existing_pool_committed_and_reused) ... ok
+test_marker_overlap_and_bad_kind_rejected (test_hk_preselection_daily.DailyTests.test_marker_overlap_and_bad_kind_rejected) ... ok
+test_missing_pool_reports_actual_runtime_or_asset_blocker (test_hk_preselection_daily.DailyTests.test_missing_pool_reports_actual_runtime_or_asset_blocker) ... ok
+test_module_implemented (test_hk_preselection_daily.DailyTests.test_module_implemented) ... ok
+test_only_explicit_recorded_replay_allows_missing_assets (test_hk_preselection_daily.DailyTests.test_only_explicit_recorded_replay_allows_missing_assets) ... ok
+ORIGINAL_OWNER_EVIDENCE {"captured_at": "2026-10-13T01:38:07+09:00", "closure_bytes": 132000, "closure_files": ["upstreams/v3_shared_data/shared_data/__init__.py", "upstreams/v3_shared_data/shared_data/allowlist.py", "upstreams/v3_shared_data/shared_data/collectors.py", "upstreams/v3_shared_data/shared_data/constants.py", "upstreams/v3_shared_data/shared_data/consumer.py", "upstreams/v3_shared_data/shared_data/hashing.py", "upstreams/v3_shared_data/shared_data/hk_0_2.py", "upstreams/v3_shared_data/shared_data/hk_security_master.py", "upstreams/v3_shared_data/shared_data/paths.py", "upstreams/v3_shared_data/shared_data/store.py"], "evidence_scope": "SYNTHETIC_PUBLISH_STORE_READ_ONLY", "master_sources": ["SYNTHETIC_FIXTURE"], "model_scoring_executed": false, "model_weights_reverified": false, "original_owner_sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89", "panel_read": false, "publication": {"already_exists": false, "artifact_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/artifact.csv", "artifact_sha256": "fa7093212e6f741cdb2256e727f079b4e00572a3ccf0fa66b6eee469c2354232", "attempt": 1, "input_sha256": "fa7093212e6f741cdb2256e727f079b4e00572a3ccf0fa66b6eee469c2354232", "manifest_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/manifest.json", "manifest_sha256": "4bfa39973a0152aae74e27d32a2847ef12e5738e151b315481b69fcc1e76a8a8", "ok": true, "receipt_relative": "runs/20261008/HK_CONNECT_D1_TOP100_0_2/20261008-hk-connect-d1-top100-0-2-3180705d45ad/receipt.json", "receipt_sha256": "0b9d5b6ca4ac11de0feca06733869a1e4e0b2da4d0076b17bf2d1b92696c9cba", "row_count": 100, "run_id": "20261008-hk-connect-d1-top100-0-2-3180705d45ad", "status": "READY"}, "runtime": {"actual": {"joblib": "1.5.3", "python": "3.12.14", "sklearn": "1.8.0"}, "error": "HK 0.2 requires Python 3.13.12", "error_type": "StoreError", "expected_error": "HK 0.2 requires Python 3.13.12", "model_still_absent": true, "pins": {"joblib": "1.5.3", "python": "3.13.12", "sklearn": "1.9.0"}}}
+CURRENT_DATE_ORIGINAL_OWNER_EVIDENCE {"captured_at": "2026-10-13T01:38:08+09:00", "complete_artifacts_equal": true, "eligibility_source_date": "20261012", "expected_source": {"artifact_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/artifact.csv", "artifact_sha256": "b6a888962e4daf38e2e8c89716a86e1b8966f0f9fc1a4ea5755d59c8e48f5607", "manifest_sha256": "97a2400a921c776de36a4e62e3084deaf36176b9e890f2d9da2843df5765a3be", "receipt_sha256": "7e1345ab021c8b8c2a54bcd69aab8f15513f3f52d3d0f860971513dd9e594023", "role": "HK_CONNECT_D1_TOP100_0_2", "run_id": "20261013-hk-connect-d1-top100-0-2-e8958a424dcf"}, "finished_at": "2026-10-13T01:38:08+09:00", "legacy_status": "ASSEMBLED", "market_state": "FULL_TRADING_DAY", "master_captured_at": "2026-10-12T16:30:00+08:00", "master_fixture_only": true, "master_sources": ["SYNTHETIC_FIXTURE"], "owner": "v3_shared_data", "pool_fixture_only": null, "publication": {"already_exists": false, "artifact_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/artifact.csv", "artifact_sha256": "b6a888962e4daf38e2e8c89716a86e1b8966f0f9fc1a4ea5755d59c8e48f5607", "attempt": 1, "input_sha256": "b6a888962e4daf38e2e8c89716a86e1b8966f0f9fc1a4ea5755d59c8e48f5607", "manifest_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/manifest.json", "manifest_sha256": "97a2400a921c776de36a4e62e3084deaf36176b9e890f2d9da2843df5765a3be", "ok": true, "receipt_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-e8958a424dcf/receipt.json", "receipt_sha256": "7e1345ab021c8b8c2a54bcd69aab8f15513f3f52d3d0f860971513dd9e594023", "row_count": 100, "run_id": "20261013-hk-connect-d1-top100-0-2-e8958a424dcf", "status": "READY"}, "research_cutoff": "2026-10-13T23:59:59+08:00", "signal_date": "20261012", "skip_reason": "", "target_date": "20261013", "verified_fixture_only": true, "verified_status": "ASSEMBLED"}
+test_actual_late_publication_is_not_historical_pit_evidence (test_hk_preselection_owner.HKOriginalOwnerTests.test_actual_late_publication_is_not_historical_pit_evidence) ... ok
+test_current_real_owner_matches_legacy_and_retains_synthetic_master_provenance (test_hk_preselection_owner.HKOriginalOwnerTests.test_current_real_owner_matches_legacy_and_retains_synthetic_master_provenance) ... ok
+test_original_model_loader_rejects_actual_nonpinned_runtime (test_hk_preselection_owner.HKOriginalOwnerTests.test_original_model_loader_rejects_actual_nonpinned_runtime) ... ok
+test_real_materializer_failure_preserves_existing_success (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_materializer_failure_preserves_existing_success) ... ok
+test_real_materializer_missing_assets_creates_no_output (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_materializer_missing_assets_creates_no_output) ... ok
+test_real_owner_publishes_and_reads_all_100_synthetic_rows (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_owner_publishes_and_reads_all_100_synthetic_rows) ... ok
+test_real_owner_same_input_is_idempotent (test_hk_preselection_owner.HKOriginalOwnerTests.test_real_owner_same_input_is_idempotent) ... ok
+test_actual_eight_file_snapshot_and_full100_cold_readback (test_hk_preselection_publication.HKPublicationTests.test_actual_eight_file_snapshot_and_full100_cold_readback) ... ok
+test_arbitrary_model_proof_cannot_claim_weights_verified (test_hk_preselection_publication.HKPublicationTests.test_arbitrary_model_proof_cannot_claim_weights_verified) ... ok
+test_bad_source_never_commits (test_hk_preselection_publication.HKPublicationTests.test_bad_source_never_commits) ... ok
+test_concurrent_publish_has_one_immutable_success (test_hk_preselection_publication.HKPublicationTests.test_concurrent_publish_has_one_immutable_success) ... ok
+test_crash_before_commit_leaves_unknown_not_auto_republished (test_hk_preselection_publication.HKPublicationTests.test_crash_before_commit_leaves_unknown_not_auto_republished) ... ok
+test_different_same_slot_input_cannot_replace_prior_success (test_hk_preselection_publication.HKPublicationTests.test_different_same_slot_input_cannot_replace_prior_success) ... ok
+test_exact_declared_runtime_and_code_do_not_replace_actual_asset_bytes (test_hk_preselection_publication.HKPublicationTests.test_exact_declared_runtime_and_code_do_not_replace_actual_asset_bytes) ... ok
+test_execution_mode_cannot_set_natural_verified (test_hk_preselection_publication.HKPublicationTests.test_execution_mode_cannot_set_natural_verified) ... ok
+test_existing_empty_final_is_conflict_not_replaceable (test_hk_preselection_publication.HKPublicationTests.test_existing_empty_final_is_conflict_not_replaceable) ... ok
+test_frozen_receipt_requires_complete_runtime_inventory (test_hk_preselection_publication.HKPublicationTests.test_frozen_receipt_requires_complete_runtime_inventory) ... ok
+test_marker_missing_or_invalid_never_auto_binds (test_hk_preselection_publication.HKPublicationTests.test_marker_missing_or_invalid_never_auto_binds) ... ok
+test_metadata_mutation_during_cold_read_is_detected (test_hk_preselection_publication.HKPublicationTests.test_metadata_mutation_during_cold_read_is_detected) ... ok
+test_nonregular_metadata_is_rejected_without_waiting_for_fifo_writer (test_hk_preselection_publication.HKPublicationTests.test_nonregular_metadata_is_rejected_without_waiting_for_fifo_writer) ... ok
+test_output_inside_input_and_input_inside_output_rejected (test_hk_preselection_publication.HKPublicationTests.test_output_inside_input_and_input_inside_output_rejected) ... ok
+test_producer_identity_or_original_result_mismatch_rejected (test_hk_preselection_publication.HKPublicationTests.test_producer_identity_or_original_result_mismatch_rejected) ... ok
+test_producer_ledger_identity_and_fixture_disclosure_remain_separate (test_hk_preselection_publication.HKPublicationTests.test_producer_ledger_identity_and_fixture_disclosure_remain_separate) ... ok
+test_publication_api_exists (test_hk_preselection_publication.HKPublicationTests.test_publication_api_exists) ... ok
+test_receipt_raw_bytes_cannot_change_even_when_json_is_equal (test_hk_preselection_publication.HKPublicationTests.test_receipt_raw_bytes_cannot_change_even_when_json_is_equal) ... ok
+test_recorded_asset_bytes_persist_without_claiming_model_proof (test_hk_preselection_publication.HKPublicationTests.test_recorded_asset_bytes_persist_without_claiming_model_proof) ... ok
+test_recorded_replay_allows_explicit_absent_asset_snapshot (test_hk_preselection_publication.HKPublicationTests.test_recorded_replay_allows_explicit_absent_asset_snapshot) ... ok
+test_root_ancestor_leaf_and_input_symlinks_rejected (test_hk_preselection_publication.HKPublicationTests.test_root_ancestor_leaf_and_input_symlinks_rejected) ... ok
+test_route_record_uses_exact_committed_reference_without_writes (test_hk_preselection_publication.HKPublicationTests.test_route_record_uses_exact_committed_reference_without_writes) ... ok
+test_same_input_reuses_exact_reference_and_checks_current_bytes (test_hk_preselection_publication.HKPublicationTests.test_same_input_reuses_exact_reference_and_checks_current_bytes) ... ok
+test_tampered_committed_source_and_artifact_rejected (test_hk_preselection_publication.HKPublicationTests.test_tampered_committed_source_and_artifact_rejected) ... ok
+test_wrong_reference_does_not_fall_back_to_latest (test_hk_preselection_publication.HKPublicationTests.test_wrong_reference_does_not_fall_back_to_latest) ... ok
+test_101_nan_clock_and_unready_cannot_confirm (test_hk_preselection_verified.VerifiedContractTests.test_101_nan_clock_and_unready_cannot_confirm) ... ok
+test_duplicate_rows_rejected_with_self_consistent_hashes (test_hk_preselection_verified.VerifiedContractTests.test_duplicate_rows_rejected_with_self_consistent_hashes) ... ok
+test_each_identity_absent_none_empty_and_wrong_sha_rejected (test_hk_preselection_verified.VerifiedContractTests.test_each_identity_absent_none_empty_and_wrong_sha_rejected) ... ok
+test_each_of_eight_files_required (test_hk_preselection_verified.VerifiedContractTests.test_each_of_eight_files_required) ... ok
+test_kind_extra_fields_and_bad_dates_rejected (test_hk_preselection_verified.VerifiedContractTests.test_kind_extra_fields_and_bad_dates_rejected) ... ok
+test_original_projector_owned_fields_preserve_exact_legacy_semantics (test_hk_preselection_verified.VerifiedContractTests.test_original_projector_owned_fields_preserve_exact_legacy_semantics) ... ok
+test_real_cold_chain_exact_original_artifact_and_identity (test_hk_preselection_verified.VerifiedContractTests.test_real_cold_chain_exact_original_artifact_and_identity) ... ok
+test_relative_path_and_ancestor_symlink_rejected (test_hk_preselection_verified.VerifiedContractTests.test_relative_path_and_ancestor_symlink_rejected) ... ok
+test_wrong_run_path_role_and_tamper_rejected (test_hk_preselection_verified.VerifiedContractTests.test_wrong_run_path_role_and_tamper_rejected) ... ok
+test_99_rows_and_wrong_model_hash_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_99_rows_and_wrong_model_hash_rejected) ... ok
+test_a_previous_day_not_used_as_hk_price_day (test_hk_preselection_verified.VerifiedOriginalRegressions.test_a_previous_day_not_used_as_hk_price_day) ... ok
+test_all100_ranks_and_symbols_preserved (test_hk_preselection_verified.VerifiedOriginalRegressions.test_all100_ranks_and_symbols_preserved) ... ok
+test_cannot_confirm_with100_rows_not_upgraded_to_ready (test_hk_preselection_verified.VerifiedOriginalRegressions.test_cannot_confirm_with100_rows_not_upgraded_to_ready) ... ok
+test_hk_open_connect_closed_is_independently_reported (test_hk_preselection_verified.VerifiedOriginalRegressions.test_hk_open_connect_closed_is_independently_reported) ... ok
+test_invalid_probabilities_fail_closed (test_hk_preselection_verified.VerifiedOriginalRegressions.test_invalid_probabilities_fail_closed) ... ok
+test_late_receipt_and_bad_input_hash_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_late_receipt_and_bad_input_hash_rejected) ... ok
+test_no_model_or_panel_files_are_read (test_hk_preselection_verified.VerifiedOriginalRegressions.test_no_model_or_panel_files_are_read) ... ok
+test_nondefault_unsupported_arguments_are_not_silently_dropped (test_hk_preselection_verified.VerifiedOriginalRegressions.test_nondefault_unsupported_arguments_are_not_silently_dropped) ... ok
+test_pool_capture_after_cutoff_or_finish_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_pool_capture_after_cutoff_or_finish_rejected) ... ok
+test_pool_member_absent_from_master_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_pool_member_absent_from_master_rejected) ... ok
+test_ready_but_temporal_false_rejected (test_hk_preselection_verified.VerifiedOriginalRegressions.test_ready_but_temporal_false_rejected) ... ok
+test_real_reader_projects_all_top100_and_preserves_three_dates (test_hk_preselection_verified.VerifiedOriginalRegressions.test_real_reader_projects_all_top100_and_preserves_three_dates) ... ok
+test_same_signal_and_eligibility_dates_supported (test_hk_preselection_verified.VerifiedOriginalRegressions.test_same_signal_and_eligibility_dates_supported) ... ok
+test_target_day_master_before_pool_capture_allowed (test_hk_preselection_verified.VerifiedOriginalRegressions.test_target_day_master_before_pool_capture_allowed) ... ok
+
+----------------------------------------------------------------------
+Ran 82 tests in 133.217s
+
+OK
+
+EXIT_CODE=0

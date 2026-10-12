@@ -1,0 +1,18 @@
+ .../hk_preselection_production_sources.json        |   7 +-
+ V5/docs/M06_CONTRACT.md                            |  63 ++
+ V5/docs/M06_INTEGRATION_REQUEST.md                 |  27 +
+ V5/docs/M06_MAC_APPLY_AND_ROLLBACK.md              |  42 ++
+ V5/docs/M06_VALIDATION_STATUS.md                   |  27 +
+ V5/src/v5_shadow/api_gateway.py                    | 284 +++++++++
+ V5/src/v5_shadow/hk_preselection_daily.py          | 392 +++++++++---
+ V5/src/v5_shadow/hk_preselection_publication.py    | 691 ++++++++++++++++++++-
+ V5/src/v5_shadow/hk_preselection_verified.py       | 294 +++++++--
+ V5/src/v5_shadow/module_api.py                     | 273 ++++++++
+ V5/src/v5_shadow/module_artifacts.py               | 203 ++++++
+ V5/src/v5_shadow/run_ledger.py                     | 111 ++++
+ .../fixtures/hk_preselection_verified_factory.py   |  26 +-
+ V5/tests/test_hk_preselection_daily.py             | 100 ++-
+ V5/tests/test_hk_preselection_owner.py             | 377 +++++++++++
+ V5/tests/test_hk_preselection_publication.py       | 374 +++++++++++
+ V5/tests/test_hk_preselection_verified.py          | 159 ++++-
+ 17 files changed, 3285 insertions(+), 165 deletions(-)

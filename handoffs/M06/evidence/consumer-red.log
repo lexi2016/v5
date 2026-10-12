@@ -1,0 +1,20 @@
+test_real_cold_chain_exact_original_artifact_and_identity (test_hk_preselection_verified.VerifiedContractTests.test_real_cold_chain_exact_original_artifact_and_identity) ... ERROR
+
+======================================================================
+ERROR: test_real_cold_chain_exact_original_artifact_and_identity (test_hk_preselection_verified.VerifiedContractTests.test_real_cold_chain_exact_original_artifact_and_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_verified.py", line 43, in test_real_cold_chain_exact_original_artifact_and_identity
+    result=run_verified_hk_preselection(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m06_complete/work/V5/src/v5_shadow/hk_preselection_verified.py", line 49, in run_verified_hk_preselection
+    result=_assemble_verified(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m06_complete/work/V5/src/v5_shadow/hk_preselection_verified.py", line 44, in _assemble_verified
+    from . import hk_preselection_runtime_capsule as capsule
+ImportError: cannot import name 'hk_preselection_runtime_capsule' from 'v5_shadow' (/workspace/shared/m06_complete/work/V5/src/v5_shadow/__init__.py)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.622s
+
+FAILED (errors=1)

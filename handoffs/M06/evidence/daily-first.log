@@ -1,0 +1,13 @@
+test_actual_after_cutoff_source_rejected (test_hk_preselection_daily.DailyTests.test_actual_after_cutoff_source_rejected) ... ok
+test_asset_file_sha_cannot_be_none (test_hk_preselection_daily.DailyTests.test_asset_file_sha_cannot_be_none) ... ok
+test_bad_existing_pool_no_generation_fallback_or_old_overwrite (test_hk_preselection_daily.DailyTests.test_bad_existing_pool_no_generation_fallback_or_old_overwrite) ... ok
+test_date_calendar_rejection_before_publication (test_hk_preselection_daily.DailyTests.test_date_calendar_rejection_before_publication) ... ok
+test_exact_existing_pool_committed_and_reused (test_hk_preselection_daily.DailyTests.test_exact_existing_pool_committed_and_reused) ... ok
+test_marker_overlap_and_bad_kind_rejected (test_hk_preselection_daily.DailyTests.test_marker_overlap_and_bad_kind_rejected) ... ok
+test_missing_pool_reports_actual_runtime_or_asset_blocker (test_hk_preselection_daily.DailyTests.test_missing_pool_reports_actual_runtime_or_asset_blocker) ... ok
+test_module_implemented (test_hk_preselection_daily.DailyTests.test_module_implemented) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 13.081s
+
+OK

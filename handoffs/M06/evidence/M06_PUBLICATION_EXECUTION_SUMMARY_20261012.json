@@ -1,0 +1,85 @@
+{
+  "schema_version": "m06.publication_test_execution_summary.v1",
+  "evidence_type": "SUMMARY_OF_OBSERVED_EXECUTION_TOOL_RESULTS_NOT_RAW_PROCESS_LOG",
+  "raw_log_saved": false,
+  "limitation": "Commands were not redirected to log files. This summary and explicitly labeled excerpts record observed output, not a recovered full raw stdout/stderr log. Use the saved full-suite log for aggregate evidence.",
+  "files": {
+    "src/v5_shadow/hk_preselection_publication.py": {
+      "bytes": 39059,
+      "sha256": "58c1b435dd8a5341d7dae1ee8e687877346576327fcc2e94621cd5bebf1dc880",
+      "equals_tested_final_bytes": true
+    },
+    "tests/test_hk_preselection_publication.py": {
+      "bytes": 22548,
+      "sha256": "a8ff15eacbabe03d52674aca4f7552f2fab9354eb83593a1e3f72dc1d9de244e",
+      "equals_tested_final_bytes": true
+    }
+  },
+  "final_publication_run": {
+    "command": "PYTHONPATH=/workspace/shared/m06_complete/work/V5/src:/workspace/shared/m06_complete/work/V5/tests python -B -m unittest test_hk_preselection_publication -v",
+    "exit_code": 0,
+    "tests": 25,
+    "elapsed_seconds": 69.273,
+    "result": "OK",
+    "source_state": "These hashes identify final publication and test source bytes. Subsequent consumer/daily changes require separate full-suite validation."
+  },
+  "observed_preliminary_runs": [
+    {
+      "description": "Initial missing-publication-module test",
+      "exit_code": 1,
+      "tests": 1,
+      "result": "FAILED (failures=1)",
+      "expected_red": true
+    },
+    {
+      "description": "Arbitrary model proof negative test before hardening",
+      "exit_code": 1,
+      "tests": 1,
+      "result": "FAILED (failures=1)",
+      "expected_red": true
+    },
+    {
+      "description": "Arbitrary model proof negative test after hardening",
+      "exit_code": 0,
+      "tests": 1,
+      "elapsed_seconds": 0.08,
+      "result": "OK"
+    },
+    {
+      "description": "Real FIFO nonblocking regression before O_NONBLOCK",
+      "exit_code": 1,
+      "tests": 1,
+      "elapsed_seconds": 0.358,
+      "result": "FAILED (failures=1)",
+      "expected_red": true
+    },
+    {
+      "description": "FIFO regression plus exact route projection after O_NONBLOCK",
+      "exit_code": 0,
+      "tests": 2,
+      "elapsed_seconds": 6.869,
+      "result": "OK"
+    },
+    {
+      "description": "Preliminary full discovery during daily calendar fix",
+      "exit_code": 1,
+      "tests": 72,
+      "elapsed_seconds": 112.355,
+      "result": "FAILED (failures=1)",
+      "failure": "test_bad_calendar_precedes_missing_pool_runtime_gate: expected HK_SIGNAL_NOT_PREVIOUS_SECURITIES_SESSION, received M06_PRODUCER_RUNTIME_MISMATCH"
+    },
+    {
+      "description": "Preliminary publication run while dependent source files changed",
+      "exit_code": 1,
+      "tests": 24,
+      "elapsed_seconds": 72.076,
+      "result": "FAILED (errors=1)",
+      "failure": "test_route_record_uses_exact_committed_reference_without_writes: M06_IMPLEMENTATION_CHANGED"
+    }
+  ],
+  "boundaries": [
+    "No full frozen-model-scoring success was claimed or run.",
+    "Tests use the genuine original reader and explicitly marked source fixtures.",
+    "No source/test edits or product reruns were made to produce this summary."
+  ]
+}

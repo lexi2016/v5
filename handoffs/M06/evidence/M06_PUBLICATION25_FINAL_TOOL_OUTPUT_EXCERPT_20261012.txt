@@ -1,0 +1,10 @@
+Transcribed completion excerpt from execution-tool output; NOT a redirected raw process log.
+Observed exit_code: 0
+
+ok
+test_wrong_reference_does_not_fall_back_to_latest (test_hk_preselection_publication.HKPublicationTests.test_wrong_reference_does_not_fall_back_to_latest) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 69.273s
+
+OK

@@ -1,0 +1,17 @@
+test_daily_identity_binds_observed_runtime_dependencies (test_hk_preselection_daily.DailyTests.test_daily_identity_binds_observed_runtime_dependencies) ... FAIL
+
+======================================================================
+FAIL: test_daily_identity_binds_observed_runtime_dependencies (test_hk_preselection_daily.DailyTests.test_daily_identity_binds_observed_runtime_dependencies)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m06_complete/work/V5/tests/test_hk_preselection_daily.py", line 69, in test_daily_identity_binds_observed_runtime_dependencies
+    self.assertEqual(result['computation_identity']['dependency_sha256'],sha256_json(actual))
+AssertionError: 'a444e1f3a17c91033ab8838a3798f038a11bd5adca28a7628158c35077f0b264' != 'c8123c793e2de6a070060f0982f9d76bf754ec33cf7ccff916eedab1ec003d74'
+- a444e1f3a17c91033ab8838a3798f038a11bd5adca28a7628158c35077f0b264
++ c8123c793e2de6a070060f0982f9d76bf754ec33cf7ccff916eedab1ec003d74
+
+
+----------------------------------------------------------------------
+Ran 1 test in 6.222s
+
+FAILED (failures=1)

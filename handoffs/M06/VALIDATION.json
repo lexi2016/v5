@@ -1,0 +1,82 @@
+{
+  "schema_version": "v5.m06.delivery_validation.v1",
+  "created_at_utc": "2026-10-12T16:46:20.307789+00:00",
+  "repository": "lexi2016/v5",
+  "branch": "dev/m06-github-handoff-20261011",
+  "base_commit": "d3ebf33c40d1b5f06e3729b11d5ece0506f34c91",
+  "base_tree": "b904d5cb57ed934740bc6a4283c780de7d9baf55",
+  "namespace": "handoffs/M06",
+  "test_command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest discover -s V5/tests -p 'test_hk_preselection*.py' -v",
+  "test_working_directory": "source",
+  "test_result": {
+    "total": 85,
+    "passed": 85,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "duration_seconds": 140.15,
+    "exit_code": 0,
+    "raw_log": "evidence/full-suite.log"
+  },
+  "source_validation": {
+    "original_files": 60,
+    "original_mismatches": [],
+    "parsed_python_files": 54,
+    "new_core_sha256": {
+      "hk_preselection.py": "00ccdaa1890675335836351d33c4fea5f9458a8dd287e3724efb9f0cb0fb1b21",
+      "hk_preselection_daily.py": "1b55e91cf091eb3f75846c2a0c0e13873018fa18605ce84067cb8fa1383e96ac",
+      "hk_preselection_publication.py": "58c1b435dd8a5341d7dae1ee8e687877346576327fcc2e94621cd5bebf1dc880",
+      "hk_preselection_verified.py": "7349a400c45a9e112a98b1ad913482f910367d8f185335d7785428d623005704"
+    }
+  },
+  "patch_validation": {
+    "forward_apply_check": "PASS",
+    "forward_exact_after": "PASS",
+    "reverse_apply_check": "PASS",
+    "reverse_exact_before": "PASS",
+    "changed_files": 17,
+    "deleted_files": []
+  },
+  "independent_review": "evidence/independent-review.json",
+  "owner_fixture": {
+    "publisher": "ORIGINAL_PUBLISH_HK_0_2_ROWS",
+    "store": "ORIGINAL_SAFE_ROOT_STORE",
+    "reader": "ORIGINAL_READ_VERIFIED_HK_0_2_POOL",
+    "data_kind": "SYNTHETIC_FIXTURE",
+    "target_date": "20261013",
+    "signal_date": "20261012",
+    "eligibility_source_date": "20261012",
+    "clock": "REAL_NOT_PATCHED",
+    "all_100_original_artifact_equality": true,
+    "fixture_only": true
+  },
+  "model_generation": {
+    "status": "BLOCKED_NOT_RUN",
+    "required": {
+      "python": "3.13.12",
+      "scikit_learn": "1.9.0",
+      "joblib": "1.5.3"
+    },
+    "observed": {
+      "python": "3.12.14",
+      "scikit_learn": "1.8.0",
+      "joblib": "1.5.3"
+    },
+    "missing": [
+      "Original frozen model and panel assets",
+      "pyarrow",
+      "fastparquet"
+    ],
+    "original_missing_asset_call": "REAL_REJECTION_OLD_SUCCESS_PRESERVED",
+    "original_runtime_gate": "REAL_REJECTION"
+  },
+  "pytest": {
+    "status": "UNAVAILABLE_NOT_PASSED",
+    "log": "evidence/pytest-availability.log"
+  },
+  "mac": "NOT_RUN",
+  "active_p0_api_page_m08": "NOT_RUN",
+  "natural_sessions": "NOT_RUN",
+  "formal_eligibility_pit": "NOT_VERIFIED",
+  "trading_enabled": false
+}

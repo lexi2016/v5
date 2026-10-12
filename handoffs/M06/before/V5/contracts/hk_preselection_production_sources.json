@@ -1,0 +1,6 @@
+{
+  "schema_version": "v5.hk_preselection_sources.v1",
+  "consumer": "hk_preselection_verified",
+  "data_kind": "SOURCE_SNAPSHOT",
+  "frozen": true
+}

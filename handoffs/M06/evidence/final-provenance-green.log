@@ -1,0 +1,10 @@
+test_actual_low_level_verification_is_preserved (test_hk_preselection_verified.VerifiedContractTests.test_actual_low_level_verification_is_preserved) ... ok
+test_reused_success_rechecks_live_inputs_after_exact_readback (test_hk_preselection_daily.DailyTests.test_reused_success_rechecks_live_inputs_after_exact_readback) ... ok
+test_existing_receipt_preserves_actual_low_level_verification (test_hk_preselection_daily.DailyTests.test_existing_receipt_preserves_actual_low_level_verification) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 16.793s
+
+OK
+
+EXIT_CODE=0
