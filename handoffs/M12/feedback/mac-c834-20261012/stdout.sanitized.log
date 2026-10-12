@@ -1,0 +1,165 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- python
+rootdir: .
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract FAILED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected FAILED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_reader_rejects_empty_refs_and_bad_sha PASSED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ test_simulated_owner_default_chain_contract __________________
+
+tmp_path = PosixPath('../m12-c834-evidence/tmp/pytest/test_simulated_owner_default_c0')
+
+    def test_simulated_owner_default_chain_contract(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(
+            DATE,
+            private_root=tmp_path / "v5_private",
+            tools=owner.tools(),
+            source_identity="SIMULATED_SOURCE",
+            tool_identity="SIMULATED_TOOL",
+            config_identity="SIMULATED_CONFIG",
+            allow_network=True,
+        )
+
+tests/m12/test_video_fupan_default_chain.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_daily.py:127: in run_video_fupan
+    _cold_verify(root, trade_date, owner_run_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('../m12-c834-evidence/tmp/pytest/test_simulated_owner_default_c0/v5_private')
+date = '20261011', run_id = 'rcv1-20261011-none-4fa5b50a04fd9b52'
+
+    def _cold_verify(root: Path, date: str, run_id: str) -> None:
+        code = (
+            "from pathlib import Path; "
+            "from V5.src.v5_shadow.video_fupan_reader import read_committed_video; "
+            "read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", code, str(root), date, run_id],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+>           raise VideoArtifactError("cold reader rejected committed run: " + result.stderr)
+E           V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: cold reader rejected committed run: Traceback (most recent call last):
+E             File "<string>", line 1, in <module>
+E               from pathlib import Path; from V5.src.v5_shadow.video_fupan_reader import read_committed_video; read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])
+E                                                                                                               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "V5/src/v5_shadow/video_fupan_reader.py", line 46, in read_committed_video
+E               raise VideoReadError("manifest bytes mismatch")
+E           V5.src.v5_shadow.video_fupan_reader.VideoReadError: manifest bytes mismatch
+
+V5/src/v5_shadow/video_fupan_daily.py:55: VideoArtifactError
+_______________ test_receipt_manifest_artifact_mutation_rejected _______________
+
+tmp_path = PosixPath('../m12-c834-evidence/tmp/pytest/test_receipt_manifest_artifact0')
+
+    def test_receipt_manifest_artifact_mutation_rejected(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/m12/test_video_fupan_default_chain.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_daily.py:127: in run_video_fupan
+    _cold_verify(root, trade_date, owner_run_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('../m12-c834-evidence/tmp/pytest/test_receipt_manifest_artifact0/v5_private')
+date = '20261011', run_id = 'rcv1-20261011-none-c4e8cf59c2f2de0f'
+
+    def _cold_verify(root: Path, date: str, run_id: str) -> None:
+        code = (
+            "from pathlib import Path; "
+            "from V5.src.v5_shadow.video_fupan_reader import read_committed_video; "
+            "read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", code, str(root), date, run_id],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+>           raise VideoArtifactError("cold reader rejected committed run: " + result.stderr)
+E           V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: cold reader rejected committed run: Traceback (most recent call last):
+E             File "<string>", line 1, in <module>
+E               from pathlib import Path; from V5.src.v5_shadow.video_fupan_reader import read_committed_video; read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])
+E                                                                                                               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "V5/src/v5_shadow/video_fupan_reader.py", line 46, in read_committed_video
+E               raise VideoReadError("manifest bytes mismatch")
+E           V5.src.v5_shadow.video_fupan_reader.VideoReadError: manifest bytes mismatch
+
+V5/src/v5_shadow/video_fupan_daily.py:55: VideoArtifactError
+_______________ test_simulated_identity_and_path_escape_rejected _______________
+
+tmp_path = PosixPath('../m12-c834-evidence/tmp/pytest/test_simulated_identity_and_pa0')
+
+    def test_simulated_identity_and_path_escape_rejected(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/m12/test_video_fupan_default_chain.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_daily.py:127: in run_video_fupan
+    _cold_verify(root, trade_date, owner_run_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+root = PosixPath('../m12-c834-evidence/tmp/pytest/test_simulated_identity_and_pa0/v5_private')
+date = '20261011', run_id = 'rcv1-20261011-none-1fc01532f3d2f1d7'
+
+    def _cold_verify(root: Path, date: str, run_id: str) -> None:
+        code = (
+            "from pathlib import Path; "
+            "from V5.src.v5_shadow.video_fupan_reader import read_committed_video; "
+            "read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])"
+        )
+        result = subprocess.run(
+            [sys.executable, "-c", code, str(root), date, run_id],
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        if result.returncode != 0:
+>           raise VideoArtifactError("cold reader rejected committed run: " + result.stderr)
+E           V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: cold reader rejected committed run: Traceback (most recent call last):
+E             File "<string>", line 1, in <module>
+E               from pathlib import Path; from V5.src.v5_shadow.video_fupan_reader import read_committed_video; read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])
+E                                                                                                               ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E             File "V5/src/v5_shadow/video_fupan_reader.py", line 46, in read_committed_video
+E               raise VideoReadError("manifest bytes mismatch")
+E           V5.src.v5_shadow.video_fupan_reader.VideoReadError: manifest bytes mismatch
+
+V5/src/v5_shadow/video_fupan_daily.py:55: VideoArtifactError
+- generated xml file: ../m12-c834-evidence/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract - V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: cold reader rejected committed run: Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from pathlib import Path; from V5.src.v5_shadow.video_fupan_reader import read_committed_video; read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])
+                                                                                                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "V5/src/v5_shadow/video_fupan_reader.py", line 46, in read_committed_video
+    raise VideoReadError("manifest bytes mismatch")
+V5.src.v5_shadow.video_fupan_reader.VideoReadError: manifest bytes mismatch
+FAILED tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected - V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: cold reader rejected committed run: Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from pathlib import Path; from V5.src.v5_shadow.video_fupan_reader import read_committed_video; read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])
+                                                                                                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "V5/src/v5_shadow/video_fupan_reader.py", line 46, in read_committed_video
+    raise VideoReadError("manifest bytes mismatch")
+V5.src.v5_shadow.video_fupan_reader.VideoReadError: manifest bytes mismatch
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected - V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: cold reader rejected committed run: Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    from pathlib import Path; from V5.src.v5_shadow.video_fupan_reader import read_committed_video; read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])
+                                                                                                    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "V5/src/v5_shadow/video_fupan_reader.py", line 46, in read_committed_video
+    raise VideoReadError("manifest bytes mismatch")
+V5.src.v5_shadow.video_fupan_reader.VideoReadError: manifest bytes mismatch
+========================= 3 failed, 1 passed in 0.17s ==========================
