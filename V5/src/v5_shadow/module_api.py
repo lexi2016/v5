@@ -37,23 +37,35 @@ def _m18_page_query(query):
 
 
 def _m18_identity_from_descriptor(payload):
+    from .m18_offline_v2 import generation, profile_check, v1
+
     if not isinstance(payload, dict):
         raise ValueError('M18_DESCRIPTOR_NOT_READY')
     required = (
         'schema_version',
         'identity',
         'run_id',
+        'target_date',
         'generation_id',
         'profile_sha256',
+        'pages_route',
         'status',
+        'generated_at',
     )
     exact_keys(payload, required)
     if payload['schema_version'] != 'v5.m18.v2.descriptor.v1':
         raise ValueError('M18_DESCRIPTOR_NOT_READY')
     if payload['status'] != 'READY':
         raise ValueError('M18_DESCRIPTOR_NOT_READY')
-    if payload['identity'].get('run_id') != payload['run_id']:
+    v1.identity_check(payload['identity'])
+    profile_check(payload['profile_sha256'])
+    aware(payload['generated_at'])
+    if (payload['identity']['run_id'] != payload['run_id']
+            or payload['identity']['target_date'] != payload['target_date']
+            or generation(payload['identity']) != payload['generation_id']):
         raise ValueError('M18_IDENTITY_MISMATCH')
+    if payload['pages_route'] != M18_ROUTE + '/pages':
+        raise ValueError('M18_DESCRIPTOR_NOT_READY')
     return payload
 
 
@@ -71,14 +83,58 @@ def _m18_read_page_binding(config, root, query):
         M18_ROUTE,
         descriptor_query,
     )
+    if descriptor['status_code'] != 200:
+        raise ValueError('M18_DESCRIPTOR_NOT_READY')
     return _m18_identity_from_descriptor(descriptor['payload'])
 
 
+def _m18_disk_reader(binding):
+    """Load the immutable offline layout without invoking its writing worker."""
+    from .m18_offline_v2 import Bundle, Reader, PROFILE, ResourceGuard
+
+    guard = ResourceGuard()
+    root = _open_directory(binding['bundle_root'])
+    def read(directory, name):
+        fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
+                     dir_fd=directory)
+        try:
+            return _read_regular(fd, PROFILE['object_bytes'] - 1)
+        finally:
+            os.close(fd)
+    try:
+        manifest = read(root, 'manifest.json')
+        if hashlib.sha256(manifest).hexdigest() != binding['manifest_sha256']:
+            raise ValueError('M18_MANIFEST_HASH')
+        objects_fd = os.open('objects', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                             dir_fd=root)
+        try:
+            objects = {}
+            total = len(manifest)
+            with os.scandir(objects_fd) as entries:
+                for entry in entries:
+                    if len(objects) + 2 > PROFILE['records']:
+                        raise ValueError('M18_RECORDS')
+                    if not re.fullmatch('[0-9a-f]{64}', entry.name):
+                        raise ValueError('M18_OBJECT_NAME')
+                    raw = read(objects_fd, entry.name)
+                    total += len(raw)
+                    if total >= PROFILE['generation_bytes']:
+                        raise ValueError('M18_STORED_BYTES')
+                    objects[entry.name] = raw
+                    guard.checkpoint()
+        finally:
+            os.close(objects_fd)
+    finally:
+        os.close(root)
+    return Reader(Bundle(manifest, objects), binding['manifest_sha256'],
+                  binding['identity'], expected_profile=binding['profile_sha256'],
+                  guard=guard)
+
+
 def _m18_page_response(config, root, query):
+    exact_keys(query, ('run_id', 'page'))
     descriptor = _m18_read_page_binding(config, root, query)
     page = _m18_page_query(query)
-
-    from .m18_offline_v2 import Reader
 
     binding = config.get('m18_v2_binding')
     if not isinstance(binding, dict):
@@ -90,7 +146,7 @@ def _m18_page_response(config, root, query):
             'manifest_sha256',
             'identity',
             'profile_sha256',
-            'bundle',
+            'bundle_root',
         ),
     )
 
@@ -99,13 +155,7 @@ def _m18_page_response(config, root, query):
     if binding['profile_sha256'] != descriptor['profile_sha256']:
         raise ValueError('M18_PROFILE_MISMATCH')
 
-    reader = Reader(
-        binding['bundle'],
-        binding['manifest_sha256'],
-        binding['identity'],
-        expected_profile=binding['profile_sha256'],
-    )
-
+    reader = _m18_disk_reader(binding)
     value = reader.content(page)
 
     return {
@@ -145,17 +195,12 @@ def _read_regular(fd,limit):
 
 
 def _config(value):
-    exact_keys(
-        value,
-        (
-            'schema_version',
-            'module_id',
-            'release_id',
-            'data_root',
-            'm18_v2_binding',
-            'routes',
-        ),
-    )
+    keys = ('schema_version', 'module_id', 'release_id', 'data_root', 'routes')
+    # Ordinary module APIs retain their original exact schema. Only an M18
+    # pages route requires the extra immutable disk binding.
+    if isinstance(value, dict) and 'm18_v2_binding' in value:
+        keys += ('m18_v2_binding',)
+    exact_keys(value, keys)
     if value['module_id'] == 'manager' and any(
         route == '/api/v4/manager/m18/v2/pages'
         for route in value['routes']

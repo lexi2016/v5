@@ -10,7 +10,7 @@ from pathlib import Path
 from v5_shadow.module_api import _config
 
 
-CONFIG_PATH = Path("V5/examples/m18_v2_module_api_config.json")
+CONFIG_PATH = Path(__file__).resolve().parents[1] / "examples/m18_v2_module_api_config.json"
 
 
 def _load_config():
@@ -36,8 +36,10 @@ def test_m18_binding_keeps_v2_identity_separate_from_publication():
     binding = config["m18_v2_binding"]
 
     assert binding["identity"]["run_id"] == "46596b03c2ab4e29b1219fd2e5eb698f"
-    assert len(binding["manifest_sha256"]) == 64
-    assert len(binding["profile_sha256"]) == 64
+    # This example is an unbound template, not invented READY input. Executable
+    # pins and paths are covered by the real persisted fixture in disk_pages.
+    assert binding["manifest_sha256"] == "<EXISTING_V2_MANIFEST_SHA256>"
+    assert binding["profile_sha256"] == "<EXISTING_V2_PROFILE_SHA256>"
 
 
 def test_m18_config_rejects_missing_v2_binding():
