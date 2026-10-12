@@ -1,0 +1,70 @@
+{
+  "scope": "M11_BACKEND_CANDIDATE_NOT_DEPLOYED",
+  "runtime_engineering": {
+    "status": "PASS",
+    "passed": 37,
+    "evidence": "evidence/m11-runtime-suite.json",
+    "scope": "Pre-build-pin full M11 runtime suite; unchanged tests not rerun after source-pin update"
+  },
+  "selected_original_regression": {
+    "status": "PASS",
+    "passed": 14,
+    "deselected": 5,
+    "evidence": "evidence/original-selected.json"
+  },
+  "default_capture": {
+    "status": "IMPLEMENTED",
+    "verification": "Original call and refusal, pure algorithm and publication units verified; genuine full acquisition NOT_RUN"
+  },
+  "default_daily_generation": {
+    "status": "IMPLEMENTED",
+    "verification": "Real original assemble_runtime positive verified; full real model generation NOT_RUN"
+  },
+  "real_acquisition": {
+    "status": "NOT_RUN",
+    "reason": "Operational approved config/input/cache not supplied; cloud acquisition dependencies incomplete"
+  },
+  "real_model_generation": {
+    "status": "NOT_RUN",
+    "reason": "Real operational model dependencies/config/input not supplied; credentials not accessed"
+  },
+  "full_original_tests": {
+    "status": "NOT_RUN",
+    "reason": "Trusted manifest, historical golden input, complete router/scheduler tree and Mac-specific saved artifacts absent"
+  },
+  "five_statuses": {
+    "code_integration": "CANDIDATE_ONLY",
+    "real_data_pass": "NOT_RUN",
+    "page_usable": "NOT_RUN",
+    "automatic_continuation": "NOT_RUN",
+    "full_acceptance": "NOT_PASSED"
+  },
+  "mac_independent": {
+    "status": "NOT_RUN",
+    "reason": "Awaiting fixed candidate; parent reported Mac reconnected after earlier offline period"
+  },
+  "formal_independent_review": "NOT_RUN_THIS_TURN_PER_PARENT_INSTRUCTION",
+  "production_allowed": false,
+  "orders_sent": false,
+  "buy_gate_updated": false,
+  "api_scheduler_candidate": {
+    "status": "PASS",
+    "passed": 18,
+    "scope": "Offline orchestration contracts; owner test doubles explicitly labelled",
+    "deployed": false
+  },
+  "source_pin_affected_tests": {
+    "status": "PASS",
+    "passed": 17,
+    "evidence": "evidence/source-pin-affected-tests.json",
+    "scope": "default entry, CLI, publication and six new real build-validator/assembly tests"
+  },
+  "new_build_manifest": {
+    "status": "HASH_BOUND",
+    "sha256": "c824e9b9bfdbda716c7f2ce25e584866f99913c224662550d0e68deb8e4bd558",
+    "original_validator_changed": false,
+    "historical_original": false,
+    "owner_python_count": 40,
+    "external_file_count": 5
+  }
+}

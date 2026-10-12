@@ -1,0 +1,18 @@
+...............F..                                                       [100%]
+=================================== FAILURES ===================================
+________ test_job_root_renaming_is_detected_without_writing_replacement ________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-69/test_job_root_renaming_is_dete0')
+
+    def test_job_root_renaming_is_detected_without_writing_replacement(tmp_path):
+        m=load_service();s=m.Service([plan(m,tmp_path)],tmp_path/'jobs')
+        (tmp_path/'jobs').rename(tmp_path/'old-jobs');(tmp_path/'jobs').mkdir()
+        try:
+>           with pytest.raises(m.Refused,match='ROOT_REPLACED'):s.get_day('20261012')
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE Refused
+
+tests/test_integration.py:190: Failed
+=========================== short test summary info ============================
+FAILED tests/test_integration.py::test_job_root_renaming_is_detected_without_writing_replacement
+1 failed, 17 passed in 0.73s

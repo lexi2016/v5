@@ -1,0 +1,22 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_______________ test_cli_explicit_read_is_real_owner_zero_write ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-61/test_cli_explicit_read_is_real0')
+
+    def test_cli_explicit_read_is_real_owner_zero_write(tmp_path):
+        b=binding(tmp_path)
+        data={k:str(v) for k,v in dataclasses.asdict(b).items()}
+        raw=json.dumps(data).encode();path=tmp_path/'binding.json';path.write_bytes(raw)
+        before={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}
+        result=subprocess.run([sys.executable,'-B','-m','v5_shadow.m11','--binding-file',str(path),'--binding-sha256',hashlib.sha256(raw).hexdigest(),'read','--date','2026-10-12'],capture_output=True,text=True)
+>       assert result.returncode==0,result.stderr
+E       AssertionError: /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python: No module named v5_shadow.m11.__main__; 'v5_shadow.m11' is a package and cannot be directly executed
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python', '-B', '-m', 'v5_sha...on/bin/python: No module named v5_shadow.m11.__main__; 'v5_shadow.m11' is a package and cannot be directly executed\n").returncode
+
+V5/tests/m11/test_cli.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_cli.py::test_cli_explicit_read_is_real_owner_zero_write
+1 failed in 0.10s

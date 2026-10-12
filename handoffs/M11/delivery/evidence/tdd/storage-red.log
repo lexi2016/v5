@@ -1,0 +1,122 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+___________________ test_child_symlink_cannot_write_outside ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-48/test_child_symlink_cannot_writ0')
+
+    def test_child_symlink_cannot_write_outside(tmp_path):
+        root = tmp_path / 'private'; root.mkdir()
+        outside = tmp_path / 'outside'; outside.mkdir()
+        (root / '2026-10-12').symlink_to(outside, target_is_directory=True)
+>       with pytest.raises((ValueError, OSError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OSError)
+
+../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py:20: Failed
+______________________ test_read_rejects_payload_symlink _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-48/test_read_rejects_payload_syml0')
+
+    def test_read_rejects_payload_symlink(tmp_path):
+        store = IntradayCapsuleStore(tmp_path / 'private')
+        store.write_success(slot(), {'v': 1}, 'source')
+        # Every committed byte must be read with no-follow, including the final file.
+        target = store._artifact_dir(slot())
+        final = target / 'commit.json'
+>       assert final.exists(), 'a single atomic commit envelope is required'
+E       AssertionError: a single atomic commit envelope is required
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/tmp/pytest-of-agent/pytest-48/test_read_rejects_payload_syml0/private/2026-10-12/0925/d8371df149547d2da11f98d1dc9d9e708727a60bc2e8d3467cbd3db7a5c232ca/commit.json').exists
+
+../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py:31: AssertionError
+____________________ test_uncommitted_payload_is_never_read ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-48/test_uncommitted_payload_is_ne0')
+
+    def test_uncommitted_payload_is_never_read(tmp_path):
+        store = IntradayCapsuleStore(tmp_path)
+        target = store._artifact_dir(slot()); target.mkdir(parents=True)
+        (target / 'payload.json').write_text('{"v": 1}')
+        (target / 'manifest.json').write_text(json.dumps({'identity':slot().identity(), 'payload_sha':__import__('hashlib').sha256(json.dumps({'v':1},sort_keys=True).encode()).hexdigest()}))
+>       with pytest.raises((ValueError, OSError)):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OSError)
+
+../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py:43: Failed
+_______________ test_independent_worker_read_and_receipt_tamper ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-48/test_independent_worker_read_a0')
+
+    def test_independent_worker_read_and_receipt_tamper(tmp_path):
+        store = IntradayCapsuleStore(tmp_path)
+        store.write_success(slot(), {'v':1}, 'source')
+        code = 'import json,sys; from v5_shadow.m11.intraday_capsule import *; print(json.dumps(IntradayCapsuleStore(sys.argv[1]).read_verified(M11Slot(**json.loads(sys.argv[2])))))'
+        result = subprocess.run([sys.executable,'-B','-c',code,str(tmp_path),json.dumps(slot().__dict__)],capture_output=True,text=True,check=True)
+        assert json.loads(result.stdout) == {'v':1}
+        final = store._artifact_dir(slot()) / 'commit.json'
+>       envelope = json.loads(final.read_text()); envelope['receipt']['manifest_sha256'] = '0' * 64
+                              ^^^^^^^^^^^^^^^^^
+
+../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/tmp/pytest-of-agent/pytest-48/test_independent_worker_read_a0/2026-10-12/0925/d8371df149547d2da11f98d1dc9d9e708727a60bc2e8d3467cbd3db7a5c232ca/commit.json')
+mode = 'r', buffering = -1, encoding = 'locale', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pytest-of-agent/pytest-48/test_independent_worker_read_a0/2026-10-12/0925/d8371df149547d2da11f98d1dc9d9e708727a60bc2e8d3467cbd3db7a5c232ca/commit.json'
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_______________________ test_attempt_history_is_retained _______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-48/test_attempt_history_is_retain0')
+
+    def test_attempt_history_is_retained(tmp_path):
+        store = IntradayCapsuleStore(tmp_path)
+        store.write_attempt(slot(), 'REQUEST_IN_FLIGHT')
+        store.write_attempt(slot(), 'ATTEMPT_UNKNOWN')
+>       assert len(list((tmp_path/'2026-10-12'/'attempts'/'0925'/'events').glob('*.json'))) == 2
+E       AssertionError: assert 0 == 2
+E        +  where 0 = len([])
+E        +    where [] = list(<generator object Path.glob at 0x7f4856dd3ef0>)
+E        +      where <generator object Path.glob at 0x7f4856dd3ef0> = glob('*.json')
+E        +        where glob = ((((PosixPath('/tmp/pytest-of-agent/pytest-48/test_attempt_history_is_retain0') / '2026-10-12') / 'attempts') / '0925') / 'events').glob
+
+../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py:66: AssertionError
+=============================== warnings summary ===============================
+shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_child_symlink_cannot_write_outside
+shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_read_rejects_payload_symlink
+shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_independent_worker_read_and_receipt_tamper
+  /workspace/shared/m11_complete/work/V5/src/v5_shadow/m11/intraday_capsule.py:82: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "created_at": datetime.utcnow().isoformat() + "Z",
+
+../../shared/manager_bi02_fix/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:469
+  /workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:469: PytestCacheWarning: could not create cache path /workspace/.pytest_cache/v/cache/nodeids: [Errno 30] Read-only file system: '/workspace/pytest-cache-files-5t7e3wzu'
+    config.cache.set("cache/nodeids", sorted(self.cached_nodeids))
+
+../../shared/manager_bi02_fix/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:423
+  /workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages/_pytest/cacheprovider.py:423: PytestCacheWarning: could not create cache path /workspace/.pytest_cache/v/cache/lastfailed: [Errno 30] Read-only file system: '/workspace/pytest-cache-files-xf4yk_ch'
+    config.cache.set("cache/lastfailed", self.lastfailed)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_child_symlink_cannot_write_outside
+FAILED ../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_read_rejects_payload_symlink
+FAILED ../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_uncommitted_payload_is_never_read
+FAILED ../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_independent_worker_read_and_receipt_tamper
+FAILED ../../shared/m11_complete/work/V5/tests/m11/test_capsule_boundaries.py::test_attempt_history_is_retained
+5 failed, 5 warnings in 0.18s

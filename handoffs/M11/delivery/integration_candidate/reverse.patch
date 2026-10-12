@@ -1,0 +1,477 @@
+--- a/V5/src/v5_shadow/m11/service.py
++++ /dev/null
+@@ -1,474 +0,0 @@
+-"""NOT_DEPLOYED: M11-only asynchronous loopback service and six-slot dispatcher.
+-
+-Startup bindings are trusted local inputs. HTTP accepts a date and opaque intent
+-ID only. GET reads receipts and verified immutable capsules, never owner capture.
+-A process lease plus durable admission prevents duplicate jobs across restarts.
+-"""
+-from __future__ import annotations
+-
+-import argparse
+-from concurrent.futures import ThreadPoolExecutor
+-from dataclasses import dataclass
+-from contextlib import contextmanager
+-from datetime import date, datetime, timezone
+-import fcntl
+-import hashlib
+-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+-import json
+-import os
+-from pathlib import Path
+-import re
+-import stat
+-import threading
+-from urllib.parse import parse_qs, urlsplit
+-from uuid import uuid4
+-from zoneinfo import ZoneInfo
+-
+-SLOTS = ('09:25', '09:35', '10:00', '11:30', '14:00', '15:00')
+-SHANGHAI = ZoneInfo('Asia/Shanghai')
+-SAFETY = {'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False}
+-LIMIT = 2 * 1024 * 1024
+-
+-
+-class Refused(ValueError):
+-    pass
+-
+-
+-def encoded(value):
+-    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+-
+-
+-def digest(value):
+-    return hashlib.sha256(encoded(value)).hexdigest()
+-
+-
+-def exact_date(value):
+-    if not isinstance(value, str) or not re.fullmatch(r'\d{8}|\d{4}-\d{2}-\d{2}', value):
+-        raise Refused('DATE_INVALID')
+-    try:
+-        return date.fromisoformat(value).isoformat()
+-    except ValueError as error:
+-        raise Refused('DATE_INVALID') from error
+-
+-
+-def stamp(value):
+-    try:
+-        value = datetime.fromisoformat(value)
+-        if value.tzinfo is None:
+-            raise ValueError('unbound')
+-        return value
+-    except (TypeError, ValueError) as error:
+-        raise Refused('TIME_UNBOUND') from error
+-
+-
+-def opaque(value):
+-    if not isinstance(value, str) or not re.fullmatch('[0-9a-f]{32}', value):
+-        raise Refused('OPAQUE_ID_INVALID')
+-    return value
+-
+-
+-def safe_path(value):
+-    path = Path(value)
+-    if not path.is_absolute() or '..' in path.parts or any(p.is_symlink() for p in [path, *path.parents]):
+-        raise Refused('PATH_BOUNDARY_INVALID')
+-    return path
+-
+-
+-@contextmanager
+-def directory(path, create=False):
+-    path = safe_path(path)
+-    fd = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+-    try:
+-        for part in path.parts[1:]:
+-            if create:
+-                try: os.mkdir(part, mode=0o700, dir_fd=fd)
+-                except FileExistsError: pass
+-            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+-            os.close(fd); fd = child
+-        yield fd
+-    finally: os.close(fd)
+-
+-
+-def read_at(parent, name):
+-    fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+-    try:
+-        if not stat.S_ISREG(os.fstat(fd).st_mode): raise Refused('FILE_TYPE_INVALID')
+-        with os.fdopen(fd, 'rb', closefd=False) as handle: raw = handle.read(LIMIT+1)
+-        if len(raw)>LIMIT: raise Refused('FILE_SIZE_LIMIT')
+-        return raw
+-    finally: os.close(fd)
+-
+-
+-def read_bytes(path):
+-    path = safe_path(path)
+-    with directory(path.parent) as parent: return read_at(parent, path.name)
+-
+-
+-def public_tree(value):
+-    """Drop owner-local path/provider metadata from browser projections."""
+-    if isinstance(value, dict):
+-        return {k: public_tree(v) for k, v in value.items()
+-                if not any(token in k.lower() for token in ('path', 'root', 'provider', 'credential', 'token', 'secret'))}
+-    if isinstance(value, list):
+-        return [public_tree(v) for v in value]
+-    return value
+-
+-
+-@dataclass(frozen=True)
+-class BoundPlan:
+-    binding: object
+-    target_date: str
+-    cutoff: str
+-    sources: list
+-    slot: str | None = None
+-
+-    @property
+-    def operation(self):
+-        return 'capture' if self.slot else 'generate'
+-
+-    def key(self):
+-        return digest({'date': self.target_date, 'slot': self.slot, 'cutoff': self.cutoff,
+-                       'sources': self.sources, 'binding': {k: str(v) for k, v in vars(self.binding).items()}})
+-
+-    def validate(self):
+-        if exact_date(self.target_date) != self.target_date:
+-            raise Refused('PLAN_DATE_MUST_BE_ISO')
+-        cutoff = stamp(self.cutoff)
+-        if cutoff.astimezone(SHANGHAI).date().isoformat() != self.target_date:
+-            raise Refused('CUTOFF_DATE_MISMATCH')
+-        if self.slot is not None and self.slot not in SLOTS:
+-            raise Refused('SLOT_INVALID')
+-        if not isinstance(self.sources, list) or not self.sources:
+-            raise Refused('SOURCE_AVAILABILITY_UNKNOWN')
+-        for source in self.sources:
+-            if not isinstance(source, dict) or not re.fullmatch('[0-9a-f]{64}', str(source.get('sha256', ''))):
+-                raise Refused('SOURCE_SHA_REQUIRED')
+-            available = stamp(source.get('available_at'))
+-            if available > cutoff:
+-                raise Refused('SOURCE_LATE')
+-            for field in ('event_time', 'published_at', 'observed_at'):
+-                if stamp(source.get(field)) > available:
+-                    raise Refused('SOURCE_TIME_ORDER')
+-        self.binding.validate()
+-        encoded(self.sources)
+-
+-
+-def default_owner(operation, binding, **kwargs):
+-    from v5_shadow.m11.daily import capture, generate
+-    return (capture if operation == 'capture' else generate)(binding, **kwargs)
+-
+-
+-def default_readback(binding, operation, identity):
+-    from v5_shadow.m11.intraday_capsule import IntradayCapsuleStore, M11Slot
+-    root = binding.archive_root / ('intraday' if operation == 'capture' else 'daily')
+-    return IntradayCapsuleStore(root).read_verified(M11Slot(**identity))
+-
+-
+-def slot_due(day, slot, now):
+-    if not isinstance(now, datetime) or now.tzinfo is None:
+-        raise Refused('CLOCK_UNBOUND')
+-    local = now.astimezone(SHANGHAI)
+-    if slot not in SLOTS or local.date().isoformat() != exact_date(day):
+-        return False
+-    # Exact owner semantics: integer minute drift, inclusive 0..8. +08:59 passes.
+-    drift = local.hour * 60 + local.minute - int(slot[:2]) * 60 - int(slot[3:])
+-    return 0 <= drift <= 8
+-
+-
+-class Service:
+-    def __init__(self, plans, job_root, *, owner=None, readback=None):
+-        self.root = safe_path(job_root)
+-        self.plans = {}
+-        for original in plans:
+-            p = BoundPlan(original.binding, original.target_date, original.cutoff,
+-                          json.loads(encoded(original.sources)), original.slot)
+-            p.validate()
+-            key = (p.operation, p.target_date, p.slot)
+-            if key in self.plans:
+-                raise Refused('DUPLICATE_PLAN')
+-            self.plans[key] = p
+-            for bound in (p.binding.state_root, p.binding.archive_root, p.binding.config_path):
+-                bound = safe_path(bound)
+-                if self.root == bound or self.root in bound.parents or bound in self.root.parents:
+-                    raise Refused('JOB_ROOT_OVERLAP')
+-        self.owner = owner or default_owner
+-        self.readback = readback or default_readback
+-        with directory(self.root, create=True) as fd:
+-            meta=os.fstat(fd); self._root_identity=(meta.st_dev,meta.st_ino)
+-            self._lease = os.open('.service.lock', os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600, dir_fd=fd)
+-        try:
+-            fcntl.flock(self._lease, fcntl.LOCK_EX | fcntl.LOCK_NB)
+-        except OSError as error:
+-            os.close(self._lease)
+-            raise Refused('SERVICE_ALREADY_RUNNING') from error
+-        self._lock = threading.RLock()
+-        self._active = set()
+-        self._closed = False
+-        try:
+-            self._records()
+-        except Exception:
+-            os.close(self._lease)
+-            raise
+-        self._pool = ThreadPoolExecutor(max_workers=2, thread_name_prefix='m11-owner')
+-
+-    def close(self):
+-        if not self._closed:
+-            self._closed = True
+-            self._pool.shutdown(wait=True)
+-            os.close(self._lease)
+-
+-    @contextmanager
+-    def _directory(self):
+-        with directory(self.root) as fd:
+-            meta=os.fstat(fd)
+-            if (meta.st_dev,meta.st_ino)!=self._root_identity: raise Refused("ROOT_REPLACED")
+-            yield fd
+-
+-    def _read(self, job_id):
+-        try:
+-            with self._directory() as fd:
+-                raw = json.loads(read_at(fd,opaque(job_id)+'.json'))
+-            if (raw.get('schema') != 'v5.m11.job.v1' or raw.get('job_id') != job_id
+-                or raw.get('operation') not in {'capture', 'generate'}
+-                or raw.get('status') not in {'QUEUED', 'RUNNING', 'COMMITTED', 'BLOCKED', 'CANNOT_CONFIRM', 'ATTEMPT_UNKNOWN'}
+-                or exact_date(raw.get('target_date')) != raw.get('target_date')
+-                or not re.fullmatch('[0-9a-f]{64}', str(raw.get('plan_key','')))
+-                or not re.fullmatch('[0-9a-f]{64}', str(raw.get('intent_key','')))):
+-                raise ValueError('invalid record')
+-            return raw
+-        except FileNotFoundError as error:
+-            raise Refused('JOB_NOT_FOUND') from error
+-        except (ValueError, OSError, TypeError, AttributeError) as error:
+-            raise Refused('JOB_STORE_UNTRUSTED') from error
+-
+-    def _records(self):
+-        with self._directory() as fd:
+-            names=sorted(name for name in os.listdir(fd) if name.endswith('.json'))
+-        return [self._read(name[:-5]) for name in names]
+-
+-    def _write(self, record, *, initial=False):
+-        raw = encoded(record)
+-        if len(raw) > LIMIT:
+-            raise Refused('JOB_SIZE_LIMIT')
+-        target = opaque(record['job_id'])+'.json'
+-        with self._directory() as parent:
+-            temp = '.tmp-'+uuid4().hex
+-            fd = os.open(temp, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600, dir_fd=parent)
+-            try:
+-                with os.fdopen(fd, 'wb', closefd=False) as handle:
+-                    handle.write(raw); handle.flush(); os.fsync(fd)
+-                if initial:
+-                    os.link(temp, target, src_dir_fd=parent, dst_dir_fd=parent, follow_symlinks=False)
+-                else:
+-                    meta=os.stat(target,dir_fd=parent,follow_symlinks=False)
+-                    if not stat.S_ISREG(meta.st_mode): raise Refused('JOB_FILE_TYPE_INVALID')
+-                    os.replace(temp, target, src_dir_fd=parent, dst_dir_fd=parent)
+-                os.fsync(parent)
+-            finally:
+-                os.close(fd)
+-                try: os.unlink(temp,dir_fd=parent)
+-                except FileNotFoundError: pass
+-
+-    def _public(self, record):
+-        result = {k: record[k] for k in ('job_id','operation','target_date','slot','cutoff','status','submitted_at')}
+-        if result['status'] in {'QUEUED', 'RUNNING'} and record['job_id'] not in self._active:
+-            result['status'] = 'ATTEMPT_UNKNOWN'
+-        result.update({'run_id': record['job_id'], 'sources': record['sources'],
+-                       'pit_status': 'CANNOT_CONFIRM', **SAFETY})
+-        result['owner'] = public_tree(record.get('owner', {}))
+-        return result
+-
+-    def get_job(self, job_id):
+-        with self._lock:
+-            return self._public(self._read(job_id))
+-
+-    def submit(self, day, intent_id):
+-        return self._submit(exact_date(day), opaque(intent_id), 'generate', None)
+-
+-    def _submit(self, day, intent_id, operation, slot):
+-        with self._lock:
+-            if self._closed: raise Refused('SERVICE_CLOSED')
+-            plan = self.plans.get((operation, day, slot))
+-            if plan is None: raise Refused('DATE_NOT_CONFIGURED')
+-            records = self._records()
+-            intent_key = digest({'intent_id': intent_id, 'operation': operation, 'date': day, 'slot': slot})
+-            for old in records:
+-                if old['intent_key'] == intent_key:
+-                    if old['plan_key'] != plan.key(): raise Refused('INTENT_BINDING_CHANGED')
+-                    return self._public(old)
+-            for old in records:
+-                if (old['target_date'],old['operation'],old['slot']) != (day,operation,slot): continue
+-                public = self._public(old)
+-                if public['status'] in {'QUEUED','RUNNING','ATTEMPT_UNKNOWN'}:
+-                    raise Refused('ATTEMPT_REQUIRES_REVIEW')
+-                if public['status'] != 'COMMITTED':
+-                    owner = old.get('owner', {})
+-                    if owner.get('attempt_state') != 'FAILED_NO_REQUEST' and owner.get('owner_called') is not False:
+-                        raise Refused('ATTEMPT_REQUIRES_REVIEW')
+-            # Binding is checked before durable admission. Never replace an old intent.
+-            plan.validate()
+-            job_id = uuid4().hex
+-            record = {'schema':'v5.m11.job.v1','job_id':job_id,'operation':operation,
+-                      'target_date':day,'slot':slot,'cutoff':plan.cutoff,'plan_key':plan.key(),
+-                      'intent_key':intent_key,'status':'QUEUED','sources':public_tree(plan.sources),
+-                      'submitted_at':datetime.now(timezone.utc).isoformat()}
+-            self._write(record, initial=True)
+-            self._active.add(job_id)
+-            self._pool.submit(self._run, job_id, plan)
+-            return self._public(record)
+-
+-    def _run(self, job_id, plan):
+-        try:
+-            with self._lock:
+-                record = self._read(job_id); record['status']='RUNNING'; self._write(record)
+-            kwargs = {'target_date':plan.target_date,'cutoff':plan.cutoff,'run_id':job_id,
+-                      'sources':json.loads(encoded(plan.sources))}
+-            if plan.slot: kwargs['slot']=plan.slot
+-            owner = self.owner(plan.operation, plan.binding, **kwargs)
+-            if not isinstance(owner,dict): raise Refused('OWNER_PROTOCOL_INVALID')
+-            if owner.get('status') == 'COMMITTED':
+-                identity = owner.get('identity', {})
+-                if identity.get('run_id') != job_id or identity.get('target_date') != plan.target_date:
+-                    raise Refused('OWNER_IDENTITY_MISMATCH')
+-                self.readback(plan.binding, plan.operation, identity)
+-                status = 'COMMITTED'
+-            elif owner.get('attempt_state') in {'REQUEST_IN_FLIGHT','REQUEST_ATTEMPTED','ATTEMPT_UNKNOWN'}:
+-                status = 'ATTEMPT_UNKNOWN'
+-            else:
+-                status = 'BLOCKED' if owner.get('status') == 'BLOCKED' else 'CANNOT_CONFIRM'
+-            with self._lock:
+-                record = self._read(job_id); record.update(status=status, owner=owner); self._write(record)
+-        except Exception as error:
+-            with self._lock:
+-                try:
+-                    record = self._read(job_id)
+-                    record.update(status='ATTEMPT_UNKNOWN',owner={'status':'BLOCKED','error_code':'OWNER_OUTCOME_UNKNOWN',
+-                        'attempt_state':'ATTEMPT_UNKNOWN','exception_type':type(error).__name__,**SAFETY})
+-                    self._write(record)
+-                except Exception:
+-                    pass  # Durable QUEUED/RUNNING marker remains unknown. Never erase it.
+-        finally:
+-            with self._lock: self._active.discard(job_id)
+-
+-    def get_day(self, day):
+-        day = exact_date(day)
+-        with self._lock:
+-            records = sorted([r for r in self._records() if r['target_date']==day], key=lambda r:(r['submitted_at'],r['job_id']))
+-            jobs = [self._public(r) for r in records]
+-        committed = []
+-        for record in records:
+-            if record['status'] != 'COMMITTED': continue
+-            item = self._public(record)
+-            plan = self.plans.get((record['operation'],day,record['slot']))
+-            try:
+-                if plan is None or plan.key()!=record['plan_key']: raise Refused('BINDING_CHANGED')
+-                identity = record['owner']['identity']
+-                payload = self.readback(plan.binding, plan.operation, identity)
+-                owner = payload.get('owner', {})
+-                item['payload'] = public_tree({k:owner[k] for k in ('research_review','intraday_research') if k in owner})
+-                item['business_status'] = payload.get('status','CANNOT_CONFIRM')
+-                item['readback_status'] = 'VERIFIED_PERSISTENCE_ONLY'
+-            except Exception:
+-                item['status']='CANNOT_CONFIRM'; item['readback_status']='COMMITTED_READBACK_REFUSED'; item['payload']={}
+-            committed.append(item)
+-        return {'schema_version':'v5.m11.panel.v1','target_date':day,'status':'READ_ONLY',
+-                'pit_status':'CANNOT_CONFIRM','jobs':jobs,'committed':committed,
+-                'generation_configured':('generate',day,None) in self.plans,
+-                'cannot_confirm': ['GLOBAL_PIT_NOT_PROVEN'], **SAFETY} if records else {
+-                'schema_version':'v5.m11.panel.v1','target_date':day,'status':'CANNOT_CONFIRM',
+-                'pit_status':'CANNOT_CONFIRM','jobs':[],'committed':[],
+-                'generation_configured':('generate',day,None) in self.plans,
+-                'cannot_confirm':['NO_COMMITTED_M11_RUN','GLOBAL_PIT_NOT_PROVEN'], **SAFETY}
+-
+-    def dispatch_due(self, now=None, *, trading_dates):
+-        now = now or datetime.now(timezone.utc)
+-        approved = {exact_date(d) for d in trading_dates}
+-        result = []
+-        for plan in self.plans.values():
+-            if plan.operation != 'capture' or plan.target_date not in approved: continue
+-            if not slot_due(plan.target_date,plan.slot,now) or stamp(plan.cutoff)>now: continue
+-            intent = digest({'scheduled_plan':plan.key()})[:32]
+-            try: result.append(self._submit(plan.target_date,intent,'capture',plan.slot))
+-            except Refused as error: result.append({'status':'BLOCKED','target_date':plan.target_date,'slot':plan.slot,'error_code':str(error)})
+-        return result
+-
+-
+-def load_settings(path, expected_sha256):
+-    raw = read_bytes(safe_path(path))
+-    if hashlib.sha256(raw).hexdigest()!=expected_sha256: raise Refused('SETTINGS_SHA_MISMATCH')
+-    value=json.loads(raw)
+-    if set(value)!={'schema','job_root','plans','trading_dates'} or value['schema']!='v5.m11.service.v1':
+-        raise Refused('SETTINGS_INVALID')
+-    from v5_shadow.m11.daily import M11Binding
+-    plans=[]
+-    for item in value['plans']:
+-        if set(item)!={'binding','target_date','cutoff','sources','slot'}: raise Refused('PLAN_FIELDS_INVALID')
+-        fields=dict(item['binding'])
+-        if set(fields)!={'state_root','archive_root','config_path','config_sha256','owner_manifest_sha256'}:
+-            raise Refused('BINDING_FIELDS_INVALID')
+-        for key in ('state_root','archive_root','config_path'): fields[key]=safe_path(fields[key])
+-        plans.append(BoundPlan(M11Binding(**fields),item['target_date'],item['cutoff'],item['sources'],item['slot']))
+-    dates=tuple(exact_date(day) for day in value['trading_dates'])
+-    return Service(plans,value['job_root']),dates
+-
+-
+-def create_server(service, *, host='127.0.0.1', port=0):
+-    if host!='127.0.0.1': raise Refused('LOOPBACK_ONLY')
+-    class Handler(BaseHTTPRequestHandler):
+-        def log_message(self,*args): pass
+-        def setup(self):
+-            super().setup(); self.connection.settimeout(5)
+-        def respond(self,status,body):
+-            data=encoded(body)
+-            self.send_response(status); self.send_header('Content-Type','application/json; charset=utf-8')
+-            self.send_header('Content-Length',str(len(data)));self.send_header('Cache-Control','no-store')
+-            self.send_header('X-Content-Type-Options','nosniff');self.end_headers();self.wfile.write(data)
+-        def do_GET(self): self.dispatch()
+-        def do_POST(self): self.dispatch()
+-        def dispatch(self):
+-            try:
+-                hosts={f'127.0.0.1:{self.server.server_port}',f'localhost:{self.server.server_port}'}
+-                if self.headers.get('Host') not in hosts: raise Refused('HOST_REJECTED')
+-                if self.headers.get('Origin') and self.headers['Origin'] not in {'http://'+h for h in hosts}:
+-                    raise Refused('ORIGIN_REJECTED')
+-                if self.headers.get('Transfer-Encoding') or len(self.path)>1024: raise Refused('REQUEST_INVALID')
+-                parsed=urlsplit(self.path)
+-                if parsed.scheme or parsed.netloc or parsed.fragment: raise Refused('REQUEST_INVALID')
+-                query=parse_qs(parsed.query,strict_parsing=True,max_num_fields=2)
+-                length=int(self.headers.get('Content-Length','0'))
+-                if length<0 or length>4096: raise Refused('BODY_SIZE_INVALID')
+-                if self.command=='GET':
+-                    if length: raise Refused('GET_BODY_REJECTED')
+-                    if parsed.path=='/api/v5/m11/day' and set(query)=={'date'} and len(query['date'])==1:
+-                        return self.respond(200,service.get_day(query['date'][0]))
+-                    if parsed.path=='/api/v5/m11/job' and set(query)=={'job_id'} and len(query['job_id'])==1:
+-                        return self.respond(200,service.get_job(query['job_id'][0]))
+-                    raise Refused('ROUTE_NOT_FOUND')
+-                if parsed.path!='/api/v5/m11/generate' or query: raise Refused('ROUTE_NOT_FOUND')
+-                if self.headers.get('Content-Type','').split(';')[0]!='application/json': raise Refused('BODY_TYPE_INVALID')
+-                raw=self.rfile.read(length)
+-                if len(raw)!=length: raise Refused('BODY_INCOMPLETE')
+-                body=json.loads(raw)
+-                if not isinstance(body,dict) or set(body)!={'date','intent_id'}: raise Refused('BODY_FIELDS_INVALID')
+-                return self.respond(202,service.submit(body['date'],body['intent_id']))
+-            except Refused as error:
+-                code=str(error); status=409 if code in {'ATTEMPT_REQUIRES_REVIEW','INTENT_BINDING_CHANGED'} else 400
+-                if code in {'ROUTE_NOT_FOUND','JOB_NOT_FOUND'}: status=404
+-                self.respond(status,{'status':'CANNOT_CONFIRM','error_code':code,**SAFETY})
+-            except (ValueError,TypeError,OSError):
+-                self.respond(400,{'status':'CANNOT_CONFIRM','error_code':'REQUEST_INVALID',**SAFETY})
+-    return ThreadingHTTPServer((host,port),Handler)
+-
+-
+-def main(argv=None):
+-    parser=argparse.ArgumentParser(description='M11 private loopback candidate; no automatic daily generation')
+-    parser.add_argument('--settings',required=True);parser.add_argument('--settings-sha256',required=True)
+-    parser.add_argument('--port',type=int,required=True)
+-    args=parser.parse_args(argv)
+-    service,_=load_settings(args.settings,args.settings_sha256)
+-    server=create_server(service,port=args.port)
+-    try: server.serve_forever()
+-    finally: server.server_close();service.close()
+-
+-
+-if __name__=='__main__':main()

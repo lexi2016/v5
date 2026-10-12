@@ -1,0 +1,10 @@
+[
+  {
+    "target_path": "V5/src/v5_shadow/m11/service.py",
+    "status": "ADDED",
+    "before_sha256": null,
+    "before_bytes": 0,
+    "after_sha256": "14a351a730d857ef002ed3359bab3c8729dc1afc1f1f69cb9412253ef9d9aa78",
+    "after_bytes": 22755
+  }
+]

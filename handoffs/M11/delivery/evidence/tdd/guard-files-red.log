@@ -1,0 +1,30 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____________________ test_root_ancestor_symlink_rejected ______________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-58/test_root_ancestor_symlink_rej0')
+
+    def test_root_ancestor_symlink_rejected(tmp_path):
+        real=tmp_path/'real';real.mkdir()
+        link=tmp_path/'link';link.symlink_to(real,target_is_directory=True)
+>       with pytest.raises((ValueError,OSError)):assert_safe_root(link/'child')
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OSError)
+
+V5/tests/m11/test_storage_guard_races.py:9: Failed
+__________________ test_atomic_publish_uses_no_follow_source ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-58/test_atomic_publish_uses_no_fo0')
+
+    def test_atomic_publish_uses_no_follow_source(tmp_path):
+        other=tmp_path/'other';other.write_text('outside')
+        root=tmp_path/'root';root.mkdir();temp=root/'temp';temp.symlink_to(other)
+>       with pytest.raises((ValueError,OSError)):atomic_absent_publish(temp,root/'final',root)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE any of (ValueError, OSError)
+
+V5/tests/m11/test_storage_guard_races.py:15: Failed
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_storage_guard_races.py::test_root_ancestor_symlink_rejected
+FAILED V5/tests/m11/test_storage_guard_races.py::test_atomic_publish_uses_no_follow_source
+2 failed in 0.03s

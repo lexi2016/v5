@@ -1,0 +1,42 @@
+FFFF                                                                     [100%]
+=================================== FAILURES ===================================
+_______ test_default_capture_invokes_original_and_keeps_manifest_refusal _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-50/test_default_capture_invokes_o0')
+
+    def test_default_capture_invokes_original_and_keeps_manifest_refusal(tmp_path):
+>       from v5_shadow.m11.daily import capture
+E       ModuleNotFoundError: No module named 'v5_shadow.m11.daily'
+
+V5/tests/m11/test_default_owner_chain.py:21: ModuleNotFoundError
+____________________ test_get_original_reader_is_zero_write ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-50/test_get_original_reader_is_ze0')
+
+    def test_get_original_reader_is_zero_write(tmp_path):
+>       from v5_shadow.m11.daily import read_owner_day
+E       ModuleNotFoundError: No module named 'v5_shadow.m11.daily'
+
+V5/tests/m11/test_default_owner_chain.py:33: ModuleNotFoundError
+_______________ test_default_config_digest_and_overlap_rejected ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-50/test_default_config_digest_and0')
+
+    def test_default_config_digest_and_overlap_rejected(tmp_path):
+>       from v5_shadow.m11.daily import capture, M11Binding
+E       ModuleNotFoundError: No module named 'v5_shadow.m11.daily'
+
+V5/tests/m11/test_default_owner_chain.py:44: ModuleNotFoundError
+___________________ test_unknown_availability_never_admitted ___________________
+
+    def test_unknown_availability_never_admitted():
+>       from v5_shadow.m11.daily import validate_availability
+E       ModuleNotFoundError: No module named 'v5_shadow.m11.daily'
+
+V5/tests/m11/test_default_owner_chain.py:53: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_default_owner_chain.py::test_default_capture_invokes_original_and_keeps_manifest_refusal
+FAILED V5/tests/m11/test_default_owner_chain.py::test_get_original_reader_is_zero_write
+FAILED V5/tests/m11/test_default_owner_chain.py::test_default_config_digest_and_overlap_rejected
+FAILED V5/tests/m11/test_default_owner_chain.py::test_unknown_availability_never_admitted
+4 failed in 0.04s

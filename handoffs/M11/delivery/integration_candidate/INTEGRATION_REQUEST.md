@@ -1,0 +1,1 @@
+NOT_DEPLOYED. Apply the M11 backend additions only, per README application order. No shared source diff is required: existing gateway config supports the three exact routes, and the module-private dispatch_due callable accepts approved scheduling input. Verify active config/release/port and owner source pins; preserve M04/M09/M10 and defer all P0/UI wiring.

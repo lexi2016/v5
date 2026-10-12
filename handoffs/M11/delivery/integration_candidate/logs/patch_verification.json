@@ -1,0 +1,48 @@
+{
+  "commands": [
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "/workspace/shared/m11_complete/work/handoffs/M11/delivery/integration_candidate/runtime.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "/workspace/shared/m11_complete/work/handoffs/M11/delivery/integration_candidate/runtime.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "/workspace/shared/m11_complete/work/handoffs/M11/delivery/integration_candidate/reverse.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "/workspace/shared/m11_complete/work/handoffs/M11/delivery/integration_candidate/reverse.patch"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "forward_bytes_match": true,
+  "reverse_restored_absence": true
+}

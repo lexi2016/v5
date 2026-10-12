@@ -1,0 +1,32 @@
+{
+  "base_commit": "2c408de0888d1e3ab0c3f000d6fc2fa2217bced8",
+  "recovered_file_count": 106,
+  "before_blob_mismatches": 0,
+  "original_manifest_entries_checked": 73,
+  "original_sha_size_mismatches": 0,
+  "missing_original_queries": [
+    {
+      "repository": "lexi2016/v4",
+      "ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/OWNED_SOURCE_MANIFEST.json",
+      "result": "GitHub API 404 NOT_FOUND"
+    },
+    {
+      "repository": "lexi2016/v4",
+      "ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "V5/vendor/archive_reader_baseline/domains/research_review_generation/OWNED_SOURCE_MANIFEST.json",
+      "result": "GitHub API 404 NOT_FOUND"
+    }
+  ],
+  "adjacent_owned_runtime_read": "SUCCESS; blob 194d05812d92c78dced27ccbe622aa7498f87862",
+  "shared_zip_inventories_checked": 65,
+  "matching_original_manifests": 0,
+  "later_mac_supplement_commit": "8fc903527554044bf7d6beb11b96abbe7e8cabad",
+  "later_manifest_sha256": "104ac49a1dc3e2bb970878da096a9b7d6dc86db9b63f0d6ac561109fb5829914",
+  "compatible_with_F": false,
+  "F_difference": [
+    "assembly.py differs: 6830B F vs 5780B r4",
+    "F includes iwencai_binding.py absent from r4 manifest"
+  ],
+  "authorized_new_V5_build_manifest_sha256": "c824e9b9bfdbda716c7f2ce25e584866f99913c224662550d0e68deb8e4bd558"
+}

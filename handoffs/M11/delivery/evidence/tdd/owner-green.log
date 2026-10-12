@@ -1,0 +1,36 @@
+FF..                                                                     [100%]
+=================================== FAILURES ===================================
+_______ test_default_capture_invokes_original_and_keeps_manifest_refusal _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-51/test_default_capture_invokes_o0')
+
+    def test_default_capture_invokes_original_and_keeps_manifest_refusal(tmp_path):
+        from v5_shadow.m11.daily import capture
+        b=binding(tmp_path)
+        result=capture(b,target_date='2026-10-12',slot='09:25',cutoff='2026-10-12T09:33:00+08:00',run_id='r1')
+        assert result['status']=='BLOCKED'
+>       assert result['error_code']=='M11_ORIGINAL_SOURCE_MANIFEST_MISSING'
+E       AssertionError: assert 'M11_OWNER_DEPENDENCY_MISSING' == 'M11_ORIGINAL...IFEST_MISSING'
+E         
+E         - M11_ORIGINAL_SOURCE_MANIFEST_MISSING
+E         + M11_OWNER_DEPENDENCY_MISSING
+
+V5/tests/m11/test_default_owner_chain.py:25: AssertionError
+____________________ test_get_original_reader_is_zero_write ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-51/test_get_original_reader_is_ze0')
+
+    def test_get_original_reader_is_zero_write(tmp_path):
+        from v5_shadow.m11.daily import read_owner_day
+        b=binding(tmp_path)
+        before={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}
+        result=read_owner_day(b,'2026-10-12')
+>       assert result['intraday_research']['status']=='CANNOT_CONFIRM'
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'intraday_research'
+
+V5/tests/m11/test_default_owner_chain.py:37: KeyError
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_default_owner_chain.py::test_default_capture_invokes_original_and_keeps_manifest_refusal
+FAILED V5/tests/m11/test_default_owner_chain.py::test_get_original_reader_is_zero_write
+2 failed, 2 passed in 0.51s

@@ -1,0 +1,74 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+_________________ test_new_v5_manifest_real_original_validator _________________
+
+    def test_new_v5_manifest_real_original_validator():
+        path=OWNER_ROOT/'domains/research_review_generation/OWNED_SOURCE_MANIFEST.json'
+>       assert path.exists(), 'explicit V5 build manifest must be packaged'
+E       AssertionError: explicit V5 build manifest must be packaged
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/workspace/shared/m11_complete/work/V5/vendor/research_review_baseline/domains/research_review_generation/OWNED_SOURCE_MANIFEST.json').exists
+
+V5/tests/m11/test_build_manifest.py:14: AssertionError
+________ test_original_validator_rejects_modified_build_closure[tamper] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-72/test_original_validator_reject0')
+damage = 'tamper'
+
+    @pytest.mark.parametrize('damage',['tamper','missing','extra','wrong_pin'])
+    def test_original_validator_rejects_modified_build_closure(tmp_path,damage):
+>       from v5_shadow.m11.owner_sources import BUILD_MANIFEST_SHA
+E       ImportError: cannot import name 'BUILD_MANIFEST_SHA' from 'v5_shadow.m11.owner_sources' (/workspace/shared/m11_complete/work/V5/src/v5_shadow/m11/owner_sources.py)
+
+V5/tests/m11/test_build_manifest.py:29: ImportError
+_______ test_original_validator_rejects_modified_build_closure[missing] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-72/test_original_validator_reject1')
+damage = 'missing'
+
+    @pytest.mark.parametrize('damage',['tamper','missing','extra','wrong_pin'])
+    def test_original_validator_rejects_modified_build_closure(tmp_path,damage):
+>       from v5_shadow.m11.owner_sources import BUILD_MANIFEST_SHA
+E       ImportError: cannot import name 'BUILD_MANIFEST_SHA' from 'v5_shadow.m11.owner_sources' (/workspace/shared/m11_complete/work/V5/src/v5_shadow/m11/owner_sources.py)
+
+V5/tests/m11/test_build_manifest.py:29: ImportError
+________ test_original_validator_rejects_modified_build_closure[extra] _________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-72/test_original_validator_reject2')
+damage = 'extra'
+
+    @pytest.mark.parametrize('damage',['tamper','missing','extra','wrong_pin'])
+    def test_original_validator_rejects_modified_build_closure(tmp_path,damage):
+>       from v5_shadow.m11.owner_sources import BUILD_MANIFEST_SHA
+E       ImportError: cannot import name 'BUILD_MANIFEST_SHA' from 'v5_shadow.m11.owner_sources' (/workspace/shared/m11_complete/work/V5/src/v5_shadow/m11/owner_sources.py)
+
+V5/tests/m11/test_build_manifest.py:29: ImportError
+______ test_original_validator_rejects_modified_build_closure[wrong_pin] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-72/test_original_validator_reject3')
+damage = 'wrong_pin'
+
+    @pytest.mark.parametrize('damage',['tamper','missing','extra','wrong_pin'])
+    def test_original_validator_rejects_modified_build_closure(tmp_path,damage):
+>       from v5_shadow.m11.owner_sources import BUILD_MANIFEST_SHA
+E       ImportError: cannot import name 'BUILD_MANIFEST_SHA' from 'v5_shadow.m11.owner_sources' (/workspace/shared/m11_complete/work/V5/src/v5_shadow/m11/owner_sources.py)
+
+V5/tests/m11/test_build_manifest.py:29: ImportError
+_ test_original_default_assembly_accepts_build_pin_without_opening_credentials _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-72/test_original_default_assembly0')
+
+    def test_original_default_assembly_accepts_build_pin_without_opening_credentials(tmp_path):
+>       from v5_shadow.m11.owner_sources import BUILD_MANIFEST_SHA
+E       ImportError: cannot import name 'BUILD_MANIFEST_SHA' from 'v5_shadow.m11.owner_sources' (/workspace/shared/m11_complete/work/V5/src/v5_shadow/m11/owner_sources.py)
+
+V5/tests/m11/test_build_manifest.py:42: ImportError
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_build_manifest.py::test_new_v5_manifest_real_original_validator
+FAILED V5/tests/m11/test_build_manifest.py::test_original_validator_rejects_modified_build_closure[tamper]
+FAILED V5/tests/m11/test_build_manifest.py::test_original_validator_rejects_modified_build_closure[missing]
+FAILED V5/tests/m11/test_build_manifest.py::test_original_validator_rejects_modified_build_closure[extra]
+FAILED V5/tests/m11/test_build_manifest.py::test_original_validator_rejects_modified_build_closure[wrong_pin]
+FAILED V5/tests/m11/test_build_manifest.py::test_original_default_assembly_accepts_build_pin_without_opening_credentials
+6 failed in 0.07s

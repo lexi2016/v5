@@ -1,0 +1,112 @@
+[
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "V5/src/v5_shadow/api_gateway.py",
+    "package_path": "fixed-f7cb731c/V5/src/v5_shadow/api_gateway.py",
+    "blob_sha": "c5677fb59a4847a24f16a12d5412fce293168fc0",
+    "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+    "bytes": 16003,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/api_gateway.py"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "V5/src/v5_shadow/daily_dispatch.py",
+    "package_path": "fixed-f7cb731c/V5/src/v5_shadow/daily_dispatch.py",
+    "blob_sha": "f5d45abea6a159f01756decb23049b825cd0f906",
+    "sha256": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+    "bytes": 3438,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/V5/src/v5_shadow/daily_dispatch.py"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.vue",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.vue",
+    "blob_sha": "30fd187165747a5556d4589f0aeca3ef2787a44e",
+    "sha256": "e1562043e5d98561e3bb19f808215269005c575e49b291efa9f12d93b7a37d78",
+    "bytes": 3479,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.vue"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.spec.ts",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.spec.ts",
+    "blob_sha": "14588c0a6b89be34d9aa5ac17a6e80d7ee3b6037",
+    "sha256": "4234697d41a01b47218d382f97aafb0737f929fe37d057a7afdcd642926a8cc7",
+    "bytes": 21731,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/views/ReviewView.spec.ts"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/api/review.ts",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/api/review.ts",
+    "blob_sha": "892eeef9ff696c7ddce1fb4948f80fd1f34ea413",
+    "sha256": "fc2c7551fe386a9b01375d6d82d7f633990bba169f48e9b918386e31baa6dd7d",
+    "bytes": 1436,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/api/review.ts"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/contracts/review.ts",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/contracts/review.ts",
+    "blob_sha": "9821e25ad0b5fc8adcfef0f39afa5ecf88eceafd",
+    "sha256": "2fcc5edbe4320f7aba66fe4695dd02578c098904104891a0f015355dfa14cb2d",
+    "bytes": 12071,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/contracts/review.ts"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/catalog.py",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/catalog.py",
+    "blob_sha": "bf5df12e05ed5d68c8e0a123b4be67d961a8d67c",
+    "sha256": "96c1b7ec2a3c9a94b7f6ac094a5d0ad12ab3c92287201cc7143b42386846a417",
+    "bytes": 11044,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/catalog.py"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/DailyResearchReviewPanel.vue",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/DailyResearchReviewPanel.vue",
+    "blob_sha": "14b1a100189a4cda4d97315ca6d701cfddee7818",
+    "sha256": "8dda9bc4ef247493ed5ee4f10e174a31bc2ed3bb6107f15aa23e54311ba0b797",
+    "bytes": 27062,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/DailyResearchReviewPanel.vue"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/DailyResearchReviewPanel.spec.ts",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/DailyResearchReviewPanel.spec.ts",
+    "blob_sha": "a9d92bd69b67fe7def7f26b1b3aa2f41327cb064",
+    "sha256": "26eff9f13222ebe6967acc64c32fef87afa5210e1a9140b141705c0d5e6997cb",
+    "bytes": 3697,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/components/review/DailyResearchReviewPanel.spec.ts"
+  },
+  {
+    "repository": "lexi2016/v4",
+    "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "path": "handoff/v4-running-source-20261005/canonical/apps/web/src/components/daily-research-command/types.ts",
+    "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/apps/web/src/components/daily-research-command/types.ts",
+    "blob_sha": "1f72503c2aea2c4436ecb6aabf85c63701fffe84",
+    "sha256": "7b06a9da0e790083636a13b5994808676713d2ff91eea5e1de11ef8933bf5607",
+    "bytes": 2146,
+    "role": "READ_ONLY_SHARED_INTEGRATION_REFERENCE",
+    "url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/apps/web/src/components/daily-research-command/types.ts"
+  }
+]

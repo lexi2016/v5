@@ -1,0 +1,17 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_capture_cutoff_cannot_borrow_next_day __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-67/test_capture_cutoff_cannot_bor0')
+
+    def test_capture_cutoff_cannot_borrow_next_day(tmp_path):
+        from v5_shadow.m11.daily import capture
+        b=binding(tmp_path)
+>       with pytest.raises(ValueError,match='CUTOFF'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/m11/test_default_owner_chain.py:101: Failed
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_default_owner_chain.py::test_capture_cutoff_cannot_borrow_next_day
+1 failed in 0.86s

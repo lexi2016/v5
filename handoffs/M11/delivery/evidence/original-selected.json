@@ -1,0 +1,22 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "handoffs/M11/original_source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_research_review_generation.py",
+    "handoffs/M11/original_source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/tests/test_daily_research_review.py",
+    "-k",
+    "not external_source_audit and not real_v4 and not public_review_envelope and not review_router"
+  ],
+  "cwd": "/workspace/shared/m11_complete/work",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "started_at": "2026-10-12T20:59:36.490467+00:00",
+  "finished_at": "2026-10-12T20:59:37.127895+00:00",
+  "exit_code": 0,
+  "PYTHONPATH": "/workspace/shared/m11_complete/work/V5/src:/workspace/shared/m11_complete/work/V5/vendor/research_review_baseline:/workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages",
+  "scope": "OFFLINE_ENGINEERING_ONLY"
+}
