@@ -1,0 +1,243 @@
+{
+  "candidate": "16f360cf6506cc38665e7d95a6e4754a574e4d83",
+  "branch": "dev/v5-standalone-packaging-20261012",
+  "python": "3.14.6 existing environment",
+  "source_blobs_verified": 856,
+  "source_unchanged_after_tests": true,
+  "tests": {
+    "passed": 16,
+    "failed": 0,
+    "skipped": 0
+  },
+  "archive": {
+    "sha256": "c6f16533ce4b486639a6526cb8c4f10b408d7eaf047ee943027cb3868ac84d56",
+    "bytes": 11438080,
+    "files": 679,
+    "two_builds_equal": true,
+    "matches_cloud": true
+  },
+  "records": [
+    {
+      "label": "verify",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "V5/run_standalone.py",
+        "verify"
+      ],
+      "started_utc": "2026-10-12T15:03:03.782914+00:00",
+      "ended_utc": "2026-10-12T15:03:03.874823+00:00",
+      "exit": 0,
+      "stdout": "{\"status\": \"PACKAGE_VERIFIED\", \"files\": 678, \"frontend_source_commit\": \"e8c753b6109a8c26e8cf8c7cb843c789479260a0\", \"business_verified\": false, \"daily_enabled\": false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "targeted-tests",
+      "command": [
+        "<existing-python>",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "V5/tests",
+        "-p",
+        "test_standalone*py",
+        "-v"
+      ],
+      "started_utc": "2026-10-12T15:03:03.875205+00:00",
+      "ended_utc": "2026-10-12T15:03:15.837588+00:00",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "test_child_config_hardlink_cannot_overwrite_external_file (test_standalone_lifecycle.RuntimeBoundaryTests.test_child_config_hardlink_cannot_overwrite_external_file) ... ok\ntest_child_config_symlink_cannot_overwrite_external_file (test_standalone_lifecycle.RuntimeBoundaryTests.test_child_config_symlink_cannot_overwrite_external_file) ... ok\ntest_child_ignores_poisoned_caller_directory (test_standalone_lifecycle.RuntimeBoundaryTests.test_child_ignores_poisoned_caller_directory) ... ok\ntest_concurrent_starts_leave_exactly_one_owned_child (test_standalone_lifecycle.RuntimeBoundaryTests.test_concurrent_starts_leave_exactly_one_owned_child) ... ok\ntest_duplicate_start_preserves_existing_child_handle (test_standalone_lifecycle.RuntimeBoundaryTests.test_duplicate_start_preserves_existing_child_handle) ... ok\ntest_identity_write_failure_reaps_owned_child (test_standalone_lifecycle.RuntimeBoundaryTests.test_identity_write_failure_reaps_owned_child) ... ok\ntest_partial_identity_write_is_removed_and_retry_succeeds (test_standalone_lifecycle.RuntimeBoundaryTests.test_partial_identity_write_is_removed_and_retry_succeeds) ... ok\ntest_silent_child_timeout_is_bounded_and_reaped (test_standalone_lifecycle.RuntimeBoundaryTests.test_silent_child_timeout_is_bounded_and_reaped) ... ok\ntest_stop_and_new_start_share_admission_lock (test_standalone_lifecycle.RuntimeBoundaryTests.test_stop_and_new_start_share_admission_lock) ... ok\ntest_config_rejects_external_and_symlink_paths_before_start (test_standalone_packaging.StandaloneTests.test_config_rejects_external_and_symlink_paths_before_start) ... ok\ntest_init_requires_fresh_separate_root_and_does_not_invent_data (test_standalone_packaging.StandaloneTests.test_init_requires_fresh_separate_root_and_does_not_invent_data) ... ok\ntest_manifest_covers_resources_and_reproducible_archive (test_standalone_packaging.StandaloneTests.test_manifest_covers_resources_and_reproducible_archive) ... ok\ntest_manifest_rejects_damaged_resource_and_injected_module (test_standalone_packaging.StandaloneTests.test_manifest_rejects_damaged_resource_and_injected_module) ... ok\ntest_packaged_owner_verifiers_do_not_require_external_checkout (test_standalone_packaging.StandaloneTests.test_packaged_owner_verifiers_do_not_require_external_checkout) ... ok\ntest_single_entry_help (test_standalone_packaging.StandaloneTests.test_single_entry_help) ... ok\ntest_archive_serves_three_saved_views_without_external_source_or_writes (test_standalone_saved_preview.ExtractedPreviewTests.test_archive_serves_three_saved_views_without_external_source_or_writes) ... ok\n\n----------------------------------------------------------------------\nRan 16 tests in 11.858s\n\nOK\n"
+    },
+    {
+      "label": "build-one",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "V5/tools/build_standalone.py",
+        "--output",
+        "<task-root>/standalone-16f360-evidence/build-one.tar"
+      ],
+      "started_utc": "2026-10-12T15:03:15.838098+00:00",
+      "ended_utc": "2026-10-12T15:03:15.978042+00:00",
+      "exit": 0,
+      "stdout": "{\"status\": \"BUILT_SOURCE_LAYOUT\", \"output\": \"<task-root>/standalone-16f360-evidence/build-one.tar\", \"files\": 679, \"sha256\": \"c6f16533ce4b486639a6526cb8c4f10b408d7eaf047ee943027cb3868ac84d56\", \"python_embedded\": false, \"business_verified\": false, \"daily_enabled\": false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "build-two",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "V5/tools/build_standalone.py",
+        "--output",
+        "<task-root>/standalone-16f360-evidence/build-two.tar"
+      ],
+      "started_utc": "2026-10-12T15:03:15.978418+00:00",
+      "ended_utc": "2026-10-12T15:03:16.105706+00:00",
+      "exit": 0,
+      "stdout": "{\"status\": \"BUILT_SOURCE_LAYOUT\", \"output\": \"<task-root>/standalone-16f360-evidence/build-two.tar\", \"files\": 679, \"sha256\": \"c6f16533ce4b486639a6526cb8c4f10b408d7eaf047ee943027cb3868ac84d56\", \"python_embedded\": false, \"business_verified\": false, \"daily_enabled\": false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "unpacked-verify",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "<task-root>/standalone-16f360-evidence/unpacked/V5/run_standalone.py",
+        "verify"
+      ],
+      "started_utc": "2026-10-12T15:04:21.919575+00:00",
+      "ended_utc": "2026-10-12T15:04:22.009185+00:00",
+      "exit": 0,
+      "stdout": "{\"status\": \"PACKAGE_VERIFIED\", \"files\": 678, \"frontend_source_commit\": \"e8c753b6109a8c26e8cf8c7cb843c789479260a0\", \"business_verified\": false, \"daily_enabled\": false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "unpacked-init",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "<task-root>/standalone-16f360-evidence/unpacked/V5/run_standalone.py",
+        "init",
+        "--root",
+        "<task-root>/standalone-16f360-evidence/isolated-data"
+      ],
+      "started_utc": "2026-10-12T15:04:22.009492+00:00",
+      "ended_utc": "2026-10-12T15:04:22.041202+00:00",
+      "exit": 0,
+      "stdout": "{\"status\": \"ROOT_INITIALIZED_NO_DATA\", \"root\": \"<task-root>/standalone-16f360-evidence/isolated-data\", \"daily_enabled\": false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "unpacked-validate",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "<task-root>/standalone-16f360-evidence/unpacked/V5/run_standalone.py",
+        "validate",
+        "--root",
+        "<task-root>/standalone-16f360-evidence/isolated-data"
+      ],
+      "started_utc": "2026-10-12T15:04:22.096093+00:00",
+      "ended_utc": "2026-10-12T15:04:22.202111+00:00",
+      "exit": 0,
+      "stdout": "{\"status\": \"CONFIGURATION_VALID_READ_ONLY\", \"files\": 678, \"frontend_source_commit\": \"e8c753b6109a8c26e8cf8c7cb843c789479260a0\", \"business_verified\": false, \"daily_enabled\": false}\n",
+      "stderr": ""
+    },
+    {
+      "label": "independent-smoke",
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "<task-root>/standalone-16f360-evidence/unpacked/V5/run_standalone.py",
+        "serve",
+        "--root",
+        "<task-root>/standalone-16f360-evidence/isolated-data"
+      ],
+      "started_utc": "2026-10-12T15:04:22.202385+00:00",
+      "launcher_pid": 75702,
+      "synthetic_only": true,
+      "external_source": "nonexistent PYTHONPATH with -I",
+      "external_service_simulation": "HTTP(S)_PROXY points to unavailable loopback port 1; NO_PROXY only loopback",
+      "reads": [
+        {
+          "section": "announcement_reviewed_analysis",
+          "http_status": 200,
+          "bytes": 1887,
+          "sha256": "951aac08284363cdd2c4244f6c8d5e69df9836bbc955bdc9fe32e3dd27558e85",
+          "values_exact": true
+        },
+        {
+          "section": "rebound_research_observation",
+          "http_status": 200,
+          "bytes": 2694,
+          "sha256": "617a85c3bb4b177d1b282f68d311f64309c08aace32d8c2d69c9161a3921aba8",
+          "values_exact": true
+        },
+        {
+          "section": "us_mapping_research",
+          "http_status": 200,
+          "bytes": 4134,
+          "sha256": "3e25b8c144ed9752253dc1b5b90d16b6c56d69082f33dd6cde0b9b415485021b",
+          "values_exact": true
+        }
+      ],
+      "ready": {
+        "status": "READY_READ_ONLY",
+        "pid": 75702,
+        "port": 50050,
+        "module_pid": 75703,
+        "url": "http://127.0.0.1:50050/manager-selection/",
+        "daily_enabled": false,
+        "business_verified": false
+      },
+      "identity": {
+        "code": "main_runtime.v3",
+        "config_sha256": "87d613344029dded864a76e79248a5a6c60d83dfa063742e187e5121ce24283a",
+        "marker": "v5-main-runtime.v3",
+        "module_pid": 75703,
+        "pid": 75702,
+        "port": 50049,
+        "started_at": 1791817462.345771
+      },
+      "health": {
+        "config_sha256": "32a1d2ca8f8b936fe1c0d2635abaf6a326aaa51a143c3af83294864bbfc9401c",
+        "implementation_sha256": "870cdbc7ddac5365214c5c110ec27b73e6232a8bdb83ff6e76016d4c896470da",
+        "module_id": "manager",
+        "pid": 75703,
+        "release_id": "standalone-synthetic",
+        "source_provenance_verified": false,
+        "status": "READ_ONLY_RESPONSE_SERVICE"
+      },
+      "get_data_and_install_hash_mtime_unchanged": true,
+      "result": "PASS",
+      "launcher_exit": 0,
+      "stderr": "",
+      "ended_utc": "2026-10-12T15:04:22.678148+00:00",
+      "runtime_identity_removed": true,
+      "child_reaped": true
+    },
+    {
+      "label": "owned-child-identity",
+      "command": [
+        "/bin/ps",
+        "-p",
+        "75703",
+        "-o",
+        "pid=,ppid=,command="
+      ],
+      "started_utc": "2026-10-12T15:04:22.349703+00:00",
+      "ended_utc": "2026-10-12T15:04:22.352260+00:00",
+      "exit": 0,
+      "stdout": "75703 75702 <existing-python> -I -B -c import sys;sys.path.insert(0,sys.argv.pop(1));from v5_shadow.module_process import main;main() <task-root>/standalone-16f360-evidence/unpacked/V5/src --config <task-root>/standalone-16f360-evidence/isolated-data/runtime/module_api_child.json --port 0\n",
+      "stderr": ""
+    },
+    {
+      "label": "owned-child-after",
+      "command": [
+        "/bin/ps",
+        "-p",
+        "75703",
+        "-o",
+        "pid=,command="
+      ],
+      "started_utc": "2026-10-12T15:04:22.678237+00:00",
+      "ended_utc": "2026-10-12T15:04:22.680987+00:00",
+      "exit": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "scope": "Independent readonly source-layout package with synthetic saved fixtures; not 18 modules, real production data, or natural daily acceptance",
+  "external_simulation_limit": "Missing external PYTHONPATH and process-local unavailable HTTP(S) proxy; this is dependency simulation, not OS-level denial of all V4 filesystem/network access. Real V4 services untouched."
+}
