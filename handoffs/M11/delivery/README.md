@@ -43,3 +43,7 @@ Explicit capture adds `capture --date ... --slot 09:25 --cutoff <aware ISO> --ru
 Explicit daily uses `generate` with the same arguments except slot. Source-time records require event_time, published_at, observed_at and available_at, all explicitly time-zoned. No source-time record grants permission to fetch or to access a credential.
 
 A new explicit daily generation uses a separately bound private owner state/config and a new run ID, retaining the previous state and archive. The wrapper never passes --replace and never mutates old successful output. A changed config cannot reuse an old owner slot under different facts; the original owner refuses that and the integrator must bind a distinct private generation state.
+
+## Post-f932 configuration/input boundary fix
+
+A focused negative test found that an operator-bound config file could be placed inside archive output. Binding now rejects equality and every archive descendant before any config or marker reads, using M11_CONFIG_OUTPUT_OVERLAP. Three negative cases plus a separate-config zero-write positive case progressed RED 3 failed/1 passed to GREEN 4 passed. No original algorithm or V4/shared path changed, and no unrelated test suite was rerun. Evidence: config-boundary-red/green. This is a source-safety fix, not new data/PIT/production evidence.

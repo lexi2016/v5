@@ -1,0 +1,19 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "V5/tests/m11/test_binding_config_boundary.py"
+  ],
+  "cwd": "/workspace/shared/m11_complete/work",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "started_at": "2026-10-12T21:42:39.102388+00:00",
+  "finished_at": "2026-10-12T21:42:39.791308+00:00",
+  "exit_code": 1,
+  "PYTHONPATH": "/workspace/shared/m11_complete/work/V5/src:/workspace/shared/m11_complete/work/V5/vendor/research_review_baseline:/workspace/shared/manager_bi02_fix/.venv/lib/python3.12/site-packages",
+  "scope": "OFFLINE_ENGINEERING_ONLY"
+}

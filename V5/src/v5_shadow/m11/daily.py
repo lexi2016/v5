@@ -52,6 +52,8 @@ class M11Binding:
 
     def validate(self):
         state=_root(self.state_root); archive=_root(self.archive_root); config=_root(self.config_path)
+        if config==archive or archive in config.parents:
+            raise ValueError('M11_CONFIG_OUTPUT_OVERLAP')
         for a,b in ((state,archive),(state,V5),(archive,V5)):
             if a==b or a in b.parents or b in a.parents:raise ValueError('M11_ROOT_OVERLAP')
         for root in (state,archive):

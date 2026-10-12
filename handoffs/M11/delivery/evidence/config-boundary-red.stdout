@@ -1,0 +1,66 @@
+FFF.                                                                     [100%]
+=================================== FAILURES ===================================
+___________ test_configuration_cannot_overlap_archive_output[equal] ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-75/test_configuration_cannot_over0')
+placement = 'equal'
+
+    @pytest.mark.parametrize('placement',['equal','direct_child','nested_child'])
+    def test_configuration_cannot_overlap_archive_output(tmp_path,placement):
+        b=binding(tmp_path)
+        path=b.archive_root if placement=='equal' else b.archive_root/('config.json' if placement=='direct_child' else 'executions/config.json')
+        if placement!='equal':
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_bytes(b.config_path.read_bytes())
+        invalid=M11Binding(b.state_root,b.archive_root,path,b.config_sha256,b.owner_manifest_sha256)
+        before={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}
+>       with pytest.raises(ValueError,match='M11_CONFIG_OUTPUT_OVERLAP'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'M11_CONFIG_OUTPUT_OVERLAP'
+E         Actual message: 'OWNED_FILE_NOT_REGULAR'
+
+V5/tests/m11/test_binding_config_boundary.py:17: AssertionError
+________ test_configuration_cannot_overlap_archive_output[direct_child] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-75/test_configuration_cannot_over1')
+placement = 'direct_child'
+
+    @pytest.mark.parametrize('placement',['equal','direct_child','nested_child'])
+    def test_configuration_cannot_overlap_archive_output(tmp_path,placement):
+        b=binding(tmp_path)
+        path=b.archive_root if placement=='equal' else b.archive_root/('config.json' if placement=='direct_child' else 'executions/config.json')
+        if placement!='equal':
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_bytes(b.config_path.read_bytes())
+        invalid=M11Binding(b.state_root,b.archive_root,path,b.config_sha256,b.owner_manifest_sha256)
+        before={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}
+>       with pytest.raises(ValueError,match='M11_CONFIG_OUTPUT_OVERLAP'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/m11/test_binding_config_boundary.py:17: Failed
+________ test_configuration_cannot_overlap_archive_output[nested_child] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-75/test_configuration_cannot_over2')
+placement = 'nested_child'
+
+    @pytest.mark.parametrize('placement',['equal','direct_child','nested_child'])
+    def test_configuration_cannot_overlap_archive_output(tmp_path,placement):
+        b=binding(tmp_path)
+        path=b.archive_root if placement=='equal' else b.archive_root/('config.json' if placement=='direct_child' else 'executions/config.json')
+        if placement!='equal':
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_bytes(b.config_path.read_bytes())
+        invalid=M11Binding(b.state_root,b.archive_root,path,b.config_sha256,b.owner_manifest_sha256)
+        before={str(p):p.read_bytes() for p in tmp_path.rglob('*') if p.is_file()}
+>       with pytest.raises(ValueError,match='M11_CONFIG_OUTPUT_OVERLAP'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/m11/test_binding_config_boundary.py:17: Failed
+=========================== short test summary info ============================
+FAILED V5/tests/m11/test_binding_config_boundary.py::test_configuration_cannot_overlap_archive_output[equal]
+FAILED V5/tests/m11/test_binding_config_boundary.py::test_configuration_cannot_overlap_archive_output[direct_child]
+FAILED V5/tests/m11/test_binding_config_boundary.py::test_configuration_cannot_overlap_archive_output[nested_child]
+3 failed, 1 passed in 0.16s

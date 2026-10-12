@@ -11,3 +11,9 @@ Use the exact published candidate commit and an existing authorized Python envir
 6. For real explicit daily generation: original assemble_runtime → run_generation(replace=False) → exact original daily artifact SHA in new process → independent capsule read. Preserve declared-only provenance and natural CANNOT_CONFIRM. A new explicit generation requires distinct approved private state/config, not replacing old output.
 7. Page use, real source input, natural trading-day evidence, automatic resumption and full-module acceptance each need separate receipts. The current candidate does not supply them.
 8. Roll back M11 adapter registration only; keep V4 and existing successes. See ROLLBACK.
+
+## Focused diff acceptance after f932
+
+For the later config-boundary fix only, use the new fixed commit and run:
+`PYTHONPATH=V5/src python -B -m pytest -q -p no:cacheprovider V5/tests/m11/test_binding_config_boundary.py`
+Expected four passing cases. Do not repeat unrelated successful f932 suites merely for this two-line boundary guard.

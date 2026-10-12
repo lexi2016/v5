@@ -66,5 +66,13 @@
     "historical_original": false,
     "owner_python_count": 40,
     "external_file_count": 5
+  },
+  "post_f932_config_boundary": {
+    "status": "PASS",
+    "passed": 4,
+    "red": "3 failed, 1 passed",
+    "evidence": "evidence/config-boundary-green.json",
+    "scope": "archive equality/direct/nested config rejection plus separate config zero-write acceptance",
+    "unrelated_tests_rerun": false
   }
 }
