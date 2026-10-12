@@ -61,9 +61,13 @@ def stage_attempt(root: Path | str, date: str, attempt_id: str) -> Path:
     root = ensure_private_root(root)
     ensure_date_run(date, attempt_id)
     p = root / "video_fupan" / "attempts" / date / attempt_id
-    if p.exists():
-        raise VideoStoreError("attempt already exists")
-    p.mkdir(parents=True, exist_ok=False)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        p.mkdir(exist_ok=False)
+    except FileExistsError:
+        # Keep incomplete attempts as failure evidence; retries get a new
+        # staging directory instead of overwriting or deleting the old one.
+        p = Path(tempfile.mkdtemp(prefix=f"{attempt_id}.", dir=p.parent))
     return p
 
 
@@ -76,4 +80,19 @@ def publish_latest_success(root: Path | str, date: str, run_id: str) -> None:
         existing = json.loads(current.read_text(encoding="utf-8"))
         if not isinstance(existing, dict) or not existing.get("run_id"):
             raise VideoStoreError("invalid latest_success pointer")
-    current.write_text(json.dumps({"run_id": run_id}), encoding="utf-8")
+        if existing["run_id"] == run_id:
+            return
+    # Only the pointer is mutable. A failed write/replace must leave the prior
+    # bytes intact, while immutable run and attempt records remain untouched.
+    fd, name = tempfile.mkstemp(prefix=".latest_success.", suffix=".tmp", dir=current.parent)
+    temporary = Path(name)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(json.dumps({"run_id": run_id}))
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, current)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+

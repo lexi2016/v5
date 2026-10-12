@@ -14,6 +14,7 @@ import sys
 from pathlib import Path
 from typing import Any, Mapping
 
+from .video_fupan_reader import VideoReadError, _read_owner_evidence
 from .video_fupan_store import (
     VideoStoreError,
     ensure_date_run,
@@ -43,13 +44,27 @@ def _bind_review_core():
     return run_video, ProducerConfig, AcquisitionTools
 
 
-def _cold_verify(root: Path, date: str, run_id: str) -> None:
-    code = ("from pathlib import Path; "
+def _cold_verify(root: Path, date: str, run_id: str) -> dict[str, Any]:
+    code = ("import json; from pathlib import Path; "
             "from V5.src.v5_shadow.video_fupan_reader import read_committed_video; "
-            "read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])")
+            "print(json.dumps(read_committed_video(Path(__import__('sys').argv[1]), __import__('sys').argv[2], __import__('sys').argv[3])))")
     result = subprocess.run([sys.executable, "-c", code, str(root), date, run_id], capture_output=True, text=True, check=False)
     if result.returncode != 0:
         raise VideoArtifactError("cold reader rejected committed run: " + result.stderr + result.stdout)
+    return json.loads(result.stdout)
+
+
+def _promote_verified(root: Path, date: str, run_id: str, checked: Mapping[str, Any]) -> bool:
+    owner = checked["manifest"]["owner_manifest"]
+    # Discovery status and current_advanced are not acquisition success. The
+    # first failed owner run can have TARGET_BV_LOCKED/current_advanced=True.
+    eligible = (checked["owner_receipt"].get("status") == "ACQUIRED"
+                and owner.get("discovery_status") == "TARGET_BV_LOCKED"
+                and owner.get("capture_status") in {"CAPTURED", "REUSED_CONTENT"}
+                and owner.get("asr_status") == "ASR_REVIEW_REQUIRED")
+    if eligible:
+        publish_latest_success(root, date, run_id)
+    return eligible
 
 
 def _existing_run(root: Path, date: str, run_id: str) -> bool:
@@ -74,24 +89,31 @@ def run_video_fupan(trade_date: str, *, private_root: Path | str, tools: Any,
         owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
         if not owner_run_id:
             raise VideoArtifactError("missing owner run")
+        ensure_date_run(trade_date, owner_run_id)
+        _, owner_receipt_sha = _read_owner_evidence(root, trade_date, owner_run_id, owner_manifest)
 
         if _existing_run(root, trade_date, owner_run_id):
-            _cold_verify(root, trade_date, owner_run_id)
-            publish_latest_success(root, trade_date, owner_run_id)
-            return {"run_id": owner_run_id, "manifest": json.loads((root / "video_fupan" / "runs" / trade_date / owner_run_id / "manifest.json").read_text()), "reused": True}
+            checked = _cold_verify(root, trade_date, owner_run_id)
+            promoted = _promote_verified(root, trade_date, owner_run_id, checked)
+            return {"run_id": owner_run_id, "manifest": checked["manifest"], "reused": True, "promoted": promoted}
 
         attempt_id = hashlib.sha256(json.dumps({"date": trade_date, "owner_run_id": owner_run_id, "source": source_identity, "tool": tool_identity, "config": config_identity}, sort_keys=True).encode("utf-8")).hexdigest()
         attempt = stage_attempt(root, trade_date, attempt_id)
-        envelope = {"owner_run_id": owner_run_id, "owner_status": result.get("status"), "owner_manifest": owner_manifest, "attempt_id": attempt_id, "m12_identity": {"trade_date": trade_date, "source_sha256": _sha_text(source_identity), "tool_sha256": _sha_text(tool_identity), "config_sha256": _sha_text(config_identity)}}
+        attempt_id = attempt.name
+        envelope = {"owner_run_id": owner_run_id, "owner_status": result.get("status"), "owner_manifest": owner_manifest, "owner_receipt_sha256": owner_receipt_sha, "attempt_id": attempt_id, "m12_identity": {"trade_date": trade_date, "source_sha256": _sha_text(source_identity), "tool_sha256": _sha_text(tool_identity), "config_sha256": _sha_text(config_identity)}}
         safe_replace_json(attempt / "manifest.json", envelope)
         manifest_sha = _sha_file(attempt / "manifest.json")
         safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
         committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
-        committed.mkdir(parents=True, exist_ok=False)
-        os.replace(attempt / "manifest.json", committed / "manifest.json")
-        os.replace(attempt / "receipt.json", committed / "receipt.json")
-        _cold_verify(root, trade_date, owner_run_id)
-        publish_latest_success(root, trade_date, owner_run_id)
-        return {"run_id": owner_run_id, "manifest": envelope, "attempt_id": attempt_id}
-    except VideoStoreError as exc:
+        committed.parent.mkdir(parents=True, exist_ok=True)
+        if committed.exists():
+            raise VideoArtifactError("immutable committed run already exists")
+        # The reader layout is unchanged; expose both files together, never a
+        # half-committed run that blocks the next same-input retry.
+        os.replace(attempt, committed)
+        checked = _cold_verify(root, trade_date, owner_run_id)
+        promoted = _promote_verified(root, trade_date, owner_run_id, checked)
+        return {"run_id": owner_run_id, "manifest": envelope, "attempt_id": attempt_id, "promoted": promoted}
+    except (VideoStoreError, VideoReadError) as exc:
         raise VideoArtifactError(str(exc)) from exc
+
