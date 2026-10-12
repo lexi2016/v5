@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "restoration": {
+    "restoration_completed": true,
+    "product_candidate": "65b3bea261a3a48d6a4ea481420e743dc84e8ec6",
+    "test_fix_candidate": "cbc13c5577ec4dfb6354c852d54fb56d5e718706",
+    "events": [
+      {
+        "name": "manager-restored",
+        "pid": 17107,
+        "port": 63668,
+        "started_utc": "2026-10-12T19:06:38.519987+00:00",
+        "ready_utc": "2026-10-12T19:06:38.633633+00:00",
+        "identity_verified": true,
+        "candidate": "candidate-d53e08",
+        "detached_session": true
+      },
+      {
+        "name": "e5d39d-rollback-source",
+        "pid": 17109,
+        "port": 62870,
+        "started_utc": "2026-10-12T19:06:38.633693+00:00",
+        "ready_utc": "2026-10-12T19:06:38.749469+00:00",
+        "identity_verified": true,
+        "candidate": "candidate-e5d39d",
+        "detached_session": true
+      },
+      {
+        "name": "m09-source",
+        "pid": 17111,
+        "port": 55753,
+        "started_utc": "2026-10-12T19:06:38.749526+00:00",
+        "ready_utc": "2026-10-12T19:06:38.863177+00:00",
+        "identity_verified": true,
+        "candidate": "candidate-cbc13c",
+        "detached_session": true
+      },
+      {
+        "name": "preview",
+        "pid": 17113,
+        "port": 54780,
+        "started_utc": "2026-10-12T19:06:38.863298+00:00",
+        "ready_utc": "2026-10-12T19:06:38.978202+00:00",
+        "detached_session": true,
+        "static_index_identity_verified": true
+      }
+    ],
+    "source_api": "http://127.0.0.1:55753",
+    "manager_api": "http://127.0.0.1:63668",
+    "rollback_source_api": "http://127.0.0.1:62870",
+    "protected_ports_before": {
+      "8873": true,
+      "8910": true,
+      "54777": true,
+      "54778": true,
+      "54779": true
+    },
+    "no_old_process_stopped": true,
+    "prior_exit_cause": "UNKNOWN",
+    "prior_evidence": "Previous scripts used child Popen under long-running exec sessions without detached sessions. Old preview/source logs contain no exit reason; old session lookup reports disconnected exec transport. Causality is not established.",
+    "method": "existing module_process and vite entrypoints, nohup + new session, stdin DEVNULL, stdout/stderr private files; no system services or settings changed",
+    "completed_utc": "2026-10-12T19:06:38.978217+00:00"
+  },
+  "deployment_verified": true,
+  "started_utc": "2026-10-12T19:07:06.474960+00:00",
+  "ended_utc": "2026-10-12T19:07:41.101276+00:00",
+  "independent_shell_after_launcher_exit": true,
+  "all_four_daemons_same_pid_alive": true,
+  "exact_real_m09_m06_m10_and_four_source_responses": true,
+  "static_files_verified": 19,
+  "deployed_dom": {
+    "passed": true,
+    "m09_native_review_all_fields_exact": true,
+    "m09_all_rendered_cells_original_order": true,
+    "m09_exact_date_run_generation": true,
+    "m09_historical_partial_gaps_and_false_flags": true,
+    "m09_refresh_clears_then_exact": true,
+    "via_deployed_preview": true,
+    "m10_all_original_cells_and_order": true,
+    "m10_counts": [
+      20,
+      100,
+      70,
+      20
+    ],
+    "m10_seven_partial_stages_and_null_preserved": true,
+    "m10_identity": true,
+    "m10_refresh_clears_and_reloads": true,
+    "m06_all100_rows_all_fields_original_order": true,
+    "old_four_cards": true,
+    "m06_identity_text": true,
+    "m06_repeat_and_loading_clear": true
+  },
+  "navigation": {
+    "passed": true,
+    "announcement_default_total": 147,
+    "us_matches": 4,
+    "unique_hk": 3,
+    "plan_status": "CONSUMED",
+    "rebound_first_count": 31,
+    "rebound_next_offset": 31,
+    "us_return_exact": true,
+    "announcement_return_exact": true,
+    "requests": [
+      {
+        "path": "/api/v4/manager/m18/v2",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/overview",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      }
+    ]
+  },
+  "protected_all_six_roots_sha_and_mtime_unchanged": true,
+  "protected_file_count": 214,
+  "no_tests_or_producers_rerun": true,
+  "rollback_candidate": "e5d39d958d908be1708fb608110131b8ff5e1ce2",
+  "rollback_files_config_and_source_service_retained": true,
+  "subsequent_independent_shell_check": {
+    "utc": "2026-10-12T19:09:24.668047+00:00",
+    "four_same_pids_alive": true,
+    "preview_exact_m09_get": true
+  },
+  "browser_validation_method": "jsdom mounted original Vue SFCs fetching real deployed proxy; no user-screen operation",
+  "guard_fix_evidence_commit": "3d27098686ea0459c7b6fc264d51704ab01920e0",
+  "original_product_acceptance_evidence_commit": "57050f34b2229f096c994377a5086a063d8a7f23",
+  "manager_saved_run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+  "m09_bound_run_id": "m09-546f1ef7fb12f8560efc96ac16fbe129-10cfa3c69826",
+  "m09_bound_generation": "5895227e831304bfa99f6958f0536747b56e502e00c5a10f91a3b3aa50801263",
+  "m09_date": "20261012",
+  "m09_classification": [
+    "RECORDED_INPUT_REPLAY",
+    "HISTORICAL_REPLAY",
+    "PARTIAL",
+    "OBSERVED_ROWS_ONLY"
+  ]
+}
