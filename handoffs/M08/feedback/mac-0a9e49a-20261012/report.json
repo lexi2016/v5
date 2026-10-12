@@ -1,0 +1,354 @@
+{
+  "candidate": "0a9e49a088358954ce36093f6c068e694fde961f",
+  "engineering": {
+    "candidate": "0a9e49a088358954ce36093f6c068e694fde961f",
+    "started_utc": "2026-10-12T19:52:53.392334+00:00",
+    "commands": [
+      {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "<TASK>/m08-0a9e-source/handoffs/M08/delivery/M08_OBSERVED_20261012/reverse.patch"
+        ],
+        "started_utc": "2026-10-12T19:52:53.435368+00:00",
+        "ended_utc": "2026-10-12T19:52:53.446824+00:00",
+        "exit": 0
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "<TASK>/m08-0a9e-source/handoffs/M08/delivery/M08_OBSERVED_20261012/reverse.patch"
+        ],
+        "started_utc": "2026-10-12T19:52:53.446866+00:00",
+        "ended_utc": "2026-10-12T19:52:53.457741+00:00",
+        "exit": 0
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "<TASK>/m08-0a9e-source/handoffs/M08/delivery/M08_OBSERVED_20261012/forward.patch"
+        ],
+        "started_utc": "2026-10-12T19:52:53.464024+00:00",
+        "ended_utc": "2026-10-12T19:52:53.476302+00:00",
+        "exit": 0
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "<TASK>/m08-0a9e-source/handoffs/M08/delivery/M08_OBSERVED_20261012/forward.patch"
+        ],
+        "started_utc": "2026-10-12T19:52:53.476359+00:00",
+        "ended_utc": "2026-10-12T19:52:53.487946+00:00",
+        "exit": 0
+      },
+      {
+        "command": [
+          "<EXISTING_PYTHON_3.14.6>",
+          "-B",
+          "-m",
+          "unittest",
+          "test_hk_stage_observed",
+          "-v"
+        ],
+        "started_utc": "2026-10-12T19:52:53.488372+00:00",
+        "ended_utc": "2026-10-12T19:53:03.842692+00:00",
+        "exit": 0
+      }
+    ],
+    "git_blobs_verified": 203,
+    "patch_roundtrip": "PASS",
+    "baseline_files_verified": 197,
+    "test_exit": 0,
+    "status": "PASS",
+    "ended_utc": "2026-10-12T19:53:03.842979+00:00"
+  },
+  "real": {
+    "candidate": "0a9e49a088358954ce36093f6c068e694fde961f",
+    "started_utc": "2026-10-12T19:53:25.842821+00:00",
+    "prepare": [
+      {
+        "stage": "STAGE_0925",
+        "run_id": "run-ad1e0d8a968a1f609d23f874",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_0930_0935",
+        "run_id": "run-c38534baae0534d1ce1fa5ec",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_0935_0940",
+        "run_id": "run-2de02a0c9c77f5d926e48e08",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_0940_0945",
+        "run_id": "run-5e750b6ac00293b7855bb959",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_0945_1030",
+        "run_id": "run-8e42e2beca799295bbe52ab9",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_1300_1315",
+        "run_id": "run-b883eb9b151b3a0eaf9e8425",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_1300_1315",
+        "run_id": "run-bdede6a8a80bda3266e69e68",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_1445_1500",
+        "run_id": "run-059d5a7d3c7cd078bfac671e",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_1445_1500",
+        "run_id": "run-504b199463282379e17b0cb4",
+        "status": "PASS"
+      },
+      {
+        "stage": "STAGE_1545_1555",
+        "run_id": "run-a97bb6a8560dedce4e4a4679",
+        "status": "PASS"
+      }
+    ],
+    "imports": [
+      {
+        "stage": "STAGE_0925",
+        "run_id": "run-ad1e0d8a968a1f609d23f874",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_0930_0935",
+        "run_id": "run-c38534baae0534d1ce1fa5ec",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_0935_0940",
+        "run_id": "run-2de02a0c9c77f5d926e48e08",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_0940_0945",
+        "run_id": "run-5e750b6ac00293b7855bb959",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_0945_1030",
+        "run_id": "run-8e42e2beca799295bbe52ab9",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_1300_1315",
+        "run_id": "run-b883eb9b151b3a0eaf9e8425",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_1300_1315",
+        "run_id": "run-bdede6a8a80bda3266e69e68",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_1445_1500",
+        "run_id": "run-059d5a7d3c7cd078bfac671e",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_1445_1500",
+        "run_id": "run-504b199463282379e17b0cb4",
+        "status": "COMMITTED",
+        "reused": false
+      },
+      {
+        "stage": "STAGE_1545_1555",
+        "run_id": "run-a97bb6a8560dedce4e4a4679",
+        "status": "COMMITTED",
+        "reused": false
+      }
+    ],
+    "cold_reads": [
+      {
+        "stage": "STAGE_0925",
+        "run_id": "run-ad1e0d8a968a1f609d23f874",
+        "row_count": 10,
+        "source_status": "READY",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_0930_0935",
+        "run_id": "run-c38534baae0534d1ce1fa5ec",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_0935_0940",
+        "run_id": "run-2de02a0c9c77f5d926e48e08",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_0940_0945",
+        "run_id": "run-5e750b6ac00293b7855bb959",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_0945_1030",
+        "run_id": "run-8e42e2beca799295bbe52ab9",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_1300_1315",
+        "run_id": "run-b883eb9b151b3a0eaf9e8425",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_1300_1315",
+        "run_id": "run-bdede6a8a80bda3266e69e68",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_1445_1500",
+        "run_id": "run-059d5a7d3c7cd078bfac671e",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_1445_1500",
+        "run_id": "run-504b199463282379e17b0cb4",
+        "row_count": 10,
+        "source_status": "PARTIAL_WITH_ROWS",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      },
+      {
+        "stage": "STAGE_1545_1555",
+        "run_id": "run-a97bb6a8560dedce4e4a4679",
+        "row_count": 10,
+        "source_status": "READY",
+        "captured_at": null,
+        "qualification": "OBSERVED_ONLY",
+        "natural_verified": false,
+        "pit_verified": false,
+        "formal_admission": false
+      }
+    ],
+    "status": "PASS",
+    "production_invoked": false,
+    "old_source_open_attempts": 0,
+    "source_unchanged": true,
+    "exit": 0,
+    "source_trio_files": 30,
+    "root_independence": "Fresh read process configured with new root/exact refs only; parent audit denies source opens, original subprocess receives only copied owner root. Old source never moved or deleted.",
+    "ended_utc": "2026-10-12T19:53:29.384334+00:00"
+  },
+  "final_all_git_blobs_verified": 211,
+  "copied_original_files_verified": 30,
+  "real_command": "TMPDIR=<TASK>/m08-0a9e-evidence/tmp <EXISTING_PYTHON_3.14.6> -B run_m08_obs_real.py",
+  "test_counts": {
+    "passed": 21,
+    "failed": 0,
+    "skipped": 0
+  },
+  "prior_suites": "90/16 NOT_RERUN",
+  "initial_harness_outcome": {
+    "candidate": "0a9e49a088358954ce36093f6c068e694fde961f",
+    "started_utc": "2026-10-12T19:52:28.754548+00:00",
+    "commands": [
+      {
+        "command": [
+          "git",
+          "apply",
+          "--check",
+          "<TASK>/m08-0a9e-source/handoffs/M08/delivery/M08_OBSERVED_20261012/reverse.patch"
+        ],
+        "started_utc": "2026-10-12T19:52:28.793473+00:00",
+        "ended_utc": "2026-10-12T19:52:28.806070+00:00",
+        "exit": 0
+      },
+      {
+        "command": [
+          "git",
+          "apply",
+          "<TASK>/m08-0a9e-source/handoffs/M08/delivery/M08_OBSERVED_20261012/reverse.patch"
+        ],
+        "started_utc": "2026-10-12T19:52:28.806126+00:00",
+        "ended_utc": "2026-10-12T19:52:28.816848+00:00",
+        "exit": 0
+      }
+    ],
+    "git_blobs_verified": 203,
+    "status": "HARNESS_BLOCKED",
+    "error": "[Errno 2] No such file or directory: '<TASK>/m08-0a9e-evidence/patch-copy/feedback/mac-8f08967e-20261012/real-input-assessment.json'",
+    "ended_utc": "2026-10-12T19:52:28.819496+00:00"
+  },
+  "limits": [
+    "No original selector/collector production, provider access, deployment or port changes.",
+    "Real API publication/UI integration NOT_RUN.",
+    "OBSERVED_ONLY does not establish natural/PIT/formal or full M08/P0-P5 acceptance.",
+    "Exact references, recorded root and original payloads retained privately for next read-only integration."
+  ]
+}
