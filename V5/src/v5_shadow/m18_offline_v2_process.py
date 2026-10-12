@@ -8,6 +8,11 @@ worker exit and all measured resource gates pass. No automatic retries.
 import hashlib
 import json
 import multiprocessing
+import select
+import struct
+import resource
+import math
+import re
 import os
 from pathlib import Path
 import stat
@@ -101,7 +106,8 @@ def _worker(request, connection):
             result.update(counts=reader.counts,detail_pages=pages,content_chunks=overview['content_chunks'],
                           response_bytes=bytes_written,response_sha256=h.hexdigest(),
                           gaps=overview['sections'].get('gaps',{}).get('total'),
-                          not_loaded=overview['sections'])
+                          not_loaded_sections=len(overview['sections']),
+                          not_loaded_items=sum(row['not_loaded_count'] for row in overview['sections'].values()))
         guard.checkpoint('worker_complete');result['status']='OK'
     except m.ContractError as error:result['error']=str(error)
     except Exception:result['error']='M18_V2_WORKER_FAILED'
@@ -112,40 +118,158 @@ def _worker(request, connection):
         connection.send(result);connection.close()
 
 
+# Internal local IPC contract: bounded JSON summary plus a fixed 24-byte footer.
+# No pickle on the return path. Footer is sampled AFTER body encode/write.
+RECEIPT_BYTES=16*1024
+FOOTER=struct.Struct('!Qdd')
+COMMON={'pid','status','scan_nodes','scan_bytes','stage_count'}
+BUILD={'manifest_sha256','objects','generation_bytes'}
+READ={'counts','detail_pages','content_chunks','response_bytes','response_sha256','gaps','not_loaded_sections','not_loaded_items'}
+COUNTS={'input_nodes','metadata_nodes','logical_nodes','stored_bytes','records','response_nodes','saved_nodes'}
+
+
+def check_summary(value):
+    m.require(type(value) is dict and COMMON<=set(value),'V2_RECEIPT_SCHEMA')
+    if value['status']=='REJECTED':
+        m.v1.exact(value,COMMON|{'error'},'V2_RECEIPT_SCHEMA')
+        error=value['error']
+        m.require(type(error) is str and re.fullmatch(r'M18_[A-Z0-9_]{1,128}',error) is not None,'V2_RECEIPT_ERROR')
+    else:
+        m.require(value['status']=='OK' and (set(value)==COMMON|BUILD or set(value)==COMMON|READ),'V2_RECEIPT_SCHEMA')
+    for key,item in value.items():
+        if key in ('status','error'):continue
+        if key in ('manifest_sha256','response_sha256'):
+            m.require(type(item) is str and re.fullmatch('[0-9a-f]{64}',item) is not None,'V2_RECEIPT_HASH')
+        elif key=='counts':
+            m.v1.exact(item,COUNTS,'V2_RECEIPT_COUNTS')
+            m.require(all(m.v1.integer(n,0,2**63-1) for n in item.values()),'V2_RECEIPT_COUNTER')
+        elif key=='gaps' and item is None:pass
+        else:m.require(m.v1.integer(item,1 if key=='pid' else 0,2**63-1),'V2_RECEIPT_COUNTER')
+
+
+def compact_receipt(result):
+    m.require(type(result) is dict and set(result)<=COMMON|BUILD|READ|{'error','usage','stages'},'V2_RECEIPT_SCHEMA')
+    usage=result.get('usage',{});stages=result.get('stages',[])
+    m.require(type(usage) is dict and type(stages) is list,'V2_RECEIPT_SCHEMA')
+    value={k:v for k,v in result.items() if k not in ('usage','stages')}
+    if result.get('status')=='REJECTED':
+        value={k:v for k,v in value.items() if k in ('pid','status','error')}
+    value.update(scan_nodes=usage.get('scan_nodes',0),scan_bytes=usage.get('scan_bytes',0),stage_count=len(stages))
+    check_summary(value);return value
+
+
+def encode_receipt(value):
+    check_summary(value)
+    raw=json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode('ascii')
+    m.require(0<len(raw)<=RECEIPT_BYTES,'V2_RECEIPT_LENGTH')
+    return raw
+
+
+class ReceiptSender:
+    def __init__(self,connection):self.connection=connection;self.started=time.monotonic();self.sent=False
+    def fileno(self):return self.connection.fileno()
+    def close(self):self.connection.close()
+    def _write(self,raw):
+        view=memoryview(raw)
+        while view:
+            count=os.write(self.fileno(),view)
+            if count<=0:raise OSError('receipt write closed')
+            view=view[count:]
+    def send(self,result):
+        m.require(not self.sent,'V2_RECEIPT_DUPLICATE');self.sent=True
+        body=encode_receipt(compact_receipt(result))
+        self._write(struct.pack('!I',len(body)));self._write(body)
+        # Includes summary compaction, JSON encoding and the entire body send.
+        # CPU is process lifetime CPU (including spawn imports), stronger than
+        # the business Guard's operation CPU. Final fixed footer/teardown is
+        # outside this sample; the parent still supervises wall time to exit.
+        usage=resource.getrusage(resource.RUSAGE_SELF)
+        peak=usage.ru_maxrss if sys.platform=='darwin' else usage.ru_maxrss*1024
+        self._write(FOOTER.pack(peak,time.process_time(),time.monotonic()-self.started))
+
+
+def receive_receipt(fd,deadline):
+    data=bytearray();total=None
+    try:
+        os.set_blocking(fd,False)
+        while True:
+            remaining=deadline-time.monotonic()
+            m.require(remaining>0,'V2_RESOURCE_WALL_SECONDS')
+            ready,_,_=select.select([fd],[],[],min(.05,remaining))
+            if not ready:continue
+            try:block=os.read(fd,min(4096,RECEIPT_BYTES+4+FOOTER.size+1-len(data)))
+            except (BlockingIOError,InterruptedError):continue
+            m.require(time.monotonic()<=deadline,'V2_RESOURCE_WALL_SECONDS')
+            if not block:
+                m.require(bool(data),'V2_RECEIPT_EOF')
+                m.require(total is not None and len(data)==total,'V2_RECEIPT_TRUNCATED')
+                break
+            data.extend(block)
+            if len(data)>=4 and total is None:
+                length=struct.unpack('!I',data[:4])[0]
+                m.require(0<length<=RECEIPT_BYTES,'V2_RECEIPT_LENGTH');total=4+length+FOOTER.size
+            if total is not None:m.require(len(data)<=total,'V2_RECEIPT_TRAILING')
+        value,_=m.v1.parse(bytes(data[4:-FOOTER.size]),object_limit=True)
+        check_summary(value)
+        peak,cpu,wall=FOOTER.unpack(data[-FOOTER.size:])
+        m.require(all(math.isfinite(x) and x>=0 for x in (cpu,wall)),'V2_RECEIPT_USAGE')
+        value['usage']=dict(peak_rss_bytes=peak,cpu_seconds=cpu,wall_seconds=wall,
+                            scan_nodes=value['scan_nodes'],scan_bytes=value['scan_bytes'])
+        m.require(time.monotonic()<=deadline,'V2_RESOURCE_WALL_SECONDS')
+        return value
+    except (OSError,ValueError) as error:
+        if isinstance(error,m.ContractError):raise
+        raise m.ContractError('M18_V2_RECEIPT_IO') from None
+
+
+def _entry(worker,request,connection):
+    sender=ReceiptSender(connection)
+    try:worker(request,sender)
+    except (OSError,m.ContractError):pass  # EOF/truncation is rejected by parent.
+    finally:sender.close()
+
+
+def _reap(process):
+    if process.pid is None:return True
+    if process.is_alive():process.terminate();process.join(1)
+    if process.is_alive():process.kill();process.join(2)
+    else:process.join(0)
+    return not process.is_alive()
+
+
 def run(request):
-    """Trusted local API: fixed actions only, never shell commands from input."""
+    """Fixed local actions with bounded, deadline-aware return framing."""
     try:_validate(request)
     except (m.ContractError,ValueError,TypeError) as error:
         return dict(status='REJECTED',error=str(error) if isinstance(error,m.ContractError) else 'M18_V2_REQUEST')
     context=multiprocessing.get_context('spawn');parent,child=context.Pipe(duplex=False)
-    process=context.Process(target=_worker,args=(request,child));start=time.monotonic()
-    result=None
+    process=context.Process(target=_entry,args=(_worker,request,child));start=time.monotonic()
+    deadline=start+m.PROFILE['wall_seconds'];result=None;accepted_owned=False
     try:
         process.start();child.close()
-        while time.monotonic()-start<=m.PROFILE['wall_seconds']:
-            if parent.poll(.05):
-                try:result=parent.recv()
-                except EOFError:pass
-                break
-            if not process.is_alive():break
-        remaining=max(0,m.PROFILE['wall_seconds']-(time.monotonic()-start))
-        process.join(remaining if result is not None else 0)
-        if process.is_alive():
-            process.terminate();process.join(1)
-            if process.is_alive():process.kill();process.join()
-            return dict(status='REJECTED',error='M18_V2_RESOURCE_WALL_SECONDS',supervisor_wall_seconds=time.monotonic()-start)
-        if result is None or process.exitcode!=0:
-            return dict(status='REJECTED',error='M18_V2_WORKER_EXIT',worker_exit=process.exitcode)
-        result['supervisor_wall_seconds']=time.monotonic()-start
-        result['worker_exit']=process.exitcode
-        try:
-            m.enforce_usage(dict(result['usage'],wall_seconds=result['supervisor_wall_seconds']))
-        except m.ContractError as error:result.update(status='REJECTED',error=str(error))
+        result=receive_receipt(parent.fileno(),deadline)
+        process.join(max(0,deadline-time.monotonic()))
+        m.require(time.monotonic()<=deadline and not process.is_alive(),'V2_RESOURCE_WALL_SECONDS')
+        m.require(process.exitcode==0,'V2_WORKER_EXIT')
+        m.require(result['pid']==process.pid,'V2_RECEIPT_PID')
         if result['status']=='OK':
-            # No CAS/pointer publication: a local acceptance marker in this
-            # operation's new directory only, after successful child exit.
+            m.require(set(result)-{'usage'}==COMMON|(BUILD if request['action']=='build' else READ),'V2_RECEIPT_ACTION')
+            if request['action']=='read':m.require(result['response_sha256']==request['identity']['response_sha256'],'V2_RECEIPT_IDENTITY')
+        m.enforce_usage(dict(result['usage'],wall_seconds=time.monotonic()-start))
+        if result['status']=='OK':
+            # This small parent-owned local marker is outside worker CPU/RSS.
+            m.require(time.monotonic()<=deadline,'V2_RESOURCE_WALL_SECONDS')
             with (Path(request['output_root'])/'ACCEPTED.json').open('x') as f:
+                accepted_owned=True
                 json.dump(dict(profile_sha256=m.PROFILE_SHA256,identity=request['identity'],usage=result['usage']),f)
-        return result
+        m.require(time.monotonic()<=deadline,'V2_RESOURCE_WALL_SECONDS')
+        return dict(result,supervisor_wall_seconds=time.monotonic()-start,worker_exit=process.exitcode,worker_reaped=True)
+    except (m.ContractError,OSError,EOFError) as error:
+        reaped=_reap(process)
+        if accepted_owned:(Path(request['output_root'])/'ACCEPTED.json').unlink(missing_ok=True)
+        diagnostic={'usage':result['usage']} if result is not None else {}
+        return dict(**diagnostic,status='REJECTED',error=str(error) if isinstance(error,m.ContractError) else 'M18_V2_RECEIPT_IO',
+                    supervisor_wall_seconds=time.monotonic()-start,worker_exit=process.exitcode,worker_reaped=reaped)
     finally:
+        if process.pid is not None:_reap(process)
         parent.close();child.close()
