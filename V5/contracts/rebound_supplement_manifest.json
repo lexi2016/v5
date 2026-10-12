@@ -1,0 +1,21 @@
+{
+  "schema_version": "v5.rebound_stored_supplement_sources.v1",
+  "base_commit": "408b32eaa50e0980c1097750ed5fdd4a4f553a46",
+  "consumer_derivation": "F consumer plus stored reader and missing OHLC / same-source six-trade integration; no historical executing identity claimed",
+  "reference_commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+  "entries": [
+    {
+      "relative_path": "v4/manager_research/workspace_plan.py",
+      "path": "vendor/rebound_supplement/workspace_plan.py",
+      "sha256": "29c47c3836f0b26a9106626a990f03cae47c2ac22f2b4ca10be68c916c75f897"
+    },
+    {
+      "relative_path": "v3_shared_data/shared_data/hk_daily_supplement.py",
+      "path": "vendor/rebound_repair_baseline/hk_daily_supplement.py",
+      "sha256": "fa7dcbce4ee026b0a02c47220820d0407af183553d3304afcc5db425dce33cbd",
+      "repository": "lexi2016/v4",
+      "commit": "164c010c7eaa1659db9bfed0ff5f123c7a39eefc",
+      "git_blob_sha": "4f215a304c55987ccd2e8ef3755232b4aa9fc477"
+    }
+  ]
+}
