@@ -1,0 +1,99 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- python
+rootdir: .
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract FAILED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected FAILED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_reader_rejects_empty_refs_and_bad_sha PASSED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ test_simulated_owner_default_chain_contract __________________
+
+tmp_path = PosixPath('../m12-e231-evidence/tmp/pytest/test_simulated_owner_default_c0')
+
+    def test_simulated_owner_default_chain_contract(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(
+            DATE,
+            private_root=tmp_path / "v5_private",
+            tools=owner.tools(),
+            source_identity="SIMULATED_SOURCE",
+            tool_identity="SIMULATED_TOOL",
+            config_identity="SIMULATED_CONFIG",
+            allow_network=True,
+        )
+
+tests/m12/test_video_fupan_default_chain.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_daily.py:123: in run_video_fupan
+    safe_replace_json(attempt / "manifest.json", envelope)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('../m12-e231-evidence/tmp/pytest/test_simulated_owner_default_c0/v5_private/video_fupan/attempts/20261011/3b3c72b601e229535d708ee0c4b0427a404b3cb50ad4174f7833f93cda5f57d0/manifest.json')
+payload = {'owner_run_id': 'rcv1-20261011-none-0144a4de568fe956', 'owner_status': 'DISCOVERY_CANDIDATES_READY', 'owner_manifest'...4de568fe956', 'bv_id': '', ...}, 'attempt_id': '3b3c72b601e229535d708ee0c4b0427a404b3cb50ad4174f7833f93cda5f57d0', ...}
+
+    def safe_replace_json(path: Path, payload: Mapping[str, Any]) -> str:
+        raw = json.dumps(dict(payload), ensure_ascii=False, sort_keys=True).encode("utf-8")
+>       path.parent.mkdir(parents, exist_ok=True)
+                          ^^^^^^^
+E       NameError: name 'parents' is not defined
+
+V5/src/v5_shadow/video_fupan_store.py:49: NameError
+_______________ test_receipt_manifest_artifact_mutation_rejected _______________
+
+tmp_path = PosixPath('../m12-e231-evidence/tmp/pytest/test_receipt_manifest_artifact0')
+
+    def test_receipt_manifest_artifact_mutation_rejected(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/m12/test_video_fupan_default_chain.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_daily.py:123: in run_video_fupan
+    safe_replace_json(attempt / "manifest.json", envelope)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('../m12-e231-evidence/tmp/pytest/test_receipt_manifest_artifact0/v5_private/video_fupan/attempts/20261011/0a60e5f9591002b7f057c46f4bd61547d85c13bc35ee7e3f3fcfd4b5bfb70944/manifest.json')
+payload = {'owner_run_id': 'rcv1-20261011-none-dc3aec6f65d78d08', 'owner_status': 'DISCOVERY_CANDIDATES_READY', 'owner_manifest'...c6f65d78d08', 'bv_id': '', ...}, 'attempt_id': '0a60e5f9591002b7f057c46f4bd61547d85c13bc35ee7e3f3fcfd4b5bfb70944', ...}
+
+    def safe_replace_json(path: Path, payload: Mapping[str, Any]) -> str:
+        raw = json.dumps(dict(payload), ensure_ascii=False, sort_keys=True).encode("utf-8")
+>       path.parent.mkdir(parents, exist_ok=True)
+                          ^^^^^^^
+E       NameError: name 'parents' is not defined
+
+V5/src/v5_shadow/video_fupan_store.py:49: NameError
+_______________ test_simulated_identity_and_path_escape_rejected _______________
+
+tmp_path = PosixPath('../m12-e231-evidence/tmp/pytest/test_simulated_identity_and_pa0')
+
+    def test_simulated_identity_and_path_escape_rejected(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/m12/test_video_fupan_default_chain.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_daily.py:123: in run_video_fupan
+    safe_replace_json(attempt / "manifest.json", envelope)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+path = PosixPath('../m12-e231-evidence/tmp/pytest/test_simulated_identity_and_pa0/v5_private/video_fupan/attempts/20261011/c37936d6f94e596f4aaefef43801076cb424117f68794806bdc2884784eee827/manifest.json')
+payload = {'owner_run_id': 'rcv1-20261011-none-17662f5ab0533c2d', 'owner_status': 'DISCOVERY_CANDIDATES_READY', 'owner_manifest'...f5ab0533c2d', 'bv_id': '', ...}, 'attempt_id': 'c37936d6f94e596f4aaefef43801076cb424117f68794806bdc2884784eee827', ...}
+
+    def safe_replace_json(path: Path, payload: Mapping[str, Any]) -> str:
+        raw = json.dumps(dict(payload), ensure_ascii=False, sort_keys=True).encode("utf-8")
+>       path.parent.mkdir(parents, exist_ok=True)
+                          ^^^^^^^
+E       NameError: name 'parents' is not defined
+
+V5/src/v5_shadow/video_fupan_store.py:49: NameError
+- generated xml file: ../m12-e231-evidence/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract - NameError: name 'parents' is not defined
+FAILED tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected - NameError: name 'parents' is not defined
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected - NameError: name 'parents' is not defined
+========================= 3 failed, 1 passed in 0.07s ==========================
