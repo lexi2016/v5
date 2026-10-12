@@ -1,0 +1,17 @@
+{
+  "candidate": "084df7c61e57e7615633828a0d6a5d9078dc9b1c",
+  "trade_date": "20261012",
+  "status": "BLOCKED_EXECUTOR_TRANSPORT",
+  "source_stream_hash": "NOT_CONFIRMED",
+  "producer_store_execution": "NOT_CONFIRMED",
+  "cold_reader": "NOT_CONFIRMED",
+  "run_id": null,
+  "generation": null,
+  "first_observed_error": "Failed to create unified exec process: exec-server transport disconnected; failed to resume exec-server session: recovery timed out after 25s",
+  "notes": [
+    "The prepared execution request returned no local tool result before transport loss; it must not be reported as executed or passed.",
+    "Pending orchestration cells were terminated. A read-only local state check is required before any retry to rule out an already-started run.",
+    "No suite rerun, source modification, install, network collection, deployment or screen operation was requested.",
+    "This is an infrastructure blocker, not a rejection by the historical source-binding contract."
+  ]
+}
