@@ -152,8 +152,9 @@ def _worker(request, sender):
     result = dict(pid=os.getpid(), status='REJECTED')
     try:
         _validate(request)
-        from .module_api import _m18_disk_reader, _m18_semantic_value
-        reader = _m18_disk_reader(request['binding'])
+        from .module_api import _m18_disk_reader, _m18_semantic_value, _M18ReboundSpans
+        observer = _M18ReboundSpans(request['query']) if request['kind'] == 'rebound' else None
+        reader = _m18_disk_reader(request['binding'], span_observer=observer)
         if request['kind'] == 'content':
             value = reader.content(request['query']['page'])
         else:

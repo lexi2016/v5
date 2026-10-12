@@ -112,10 +112,23 @@ class _Scan(v1._Scan):
         return left,right
 
 
-def scan(raw, scope, guard=None):
+class _ObservedScan(_Scan):
+    """Optional span observation; default scanners keep their original path."""
+    def __init__(self, raw, scope, guard, observer):
+        super().__init__(raw,scope,guard)
+        self._observer=observer
+
+    def value(self, depth=0, path=()):
+        result=super().value(depth,path)
+        self._observer(path,*result,self.raw)
+        return result
+
+
+def scan(raw, scope, guard=None, *, span_observer=None):
     guard = guard or ResourceGuard()
     guard.checkpoint()
-    scanner = _Scan(raw,scope,guard)
+    scanner = (_Scan(raw,scope,guard) if span_observer is None
+               else _ObservedScan(raw,scope,guard,span_observer))
     scanner.run()
     guard.scan_nodes += scanner.nodes
     guard.scan_bytes += len(raw)
@@ -123,9 +136,9 @@ def scan(raw, scope, guard=None):
     return scanner
 
 
-def parse(raw, scope, guard=None, *, canonical_required=True):
+def parse(raw, scope, guard=None, *, canonical_required=True, span_observer=None):
     guard = guard or ResourceGuard()
-    scanner = scan(raw,scope,guard)
+    scanner = scan(raw,scope,guard,span_observer=span_observer)
     def invalid(_):raise ContractError('M18_V2_JSON_INVALID')
     try:value = json.loads(raw,parse_constant=invalid)
     except (ValueError,UnicodeError,RecursionError):raise ContractError('M18_V2_JSON_INVALID') from None
@@ -209,7 +222,7 @@ class Reader(v1.Reader):
     a later validation failure can also leave them consumed. The default keeps
     caller-owned Bundles reusable. Files and index verification are unchanged.
     """
-    def __init__(self,bundle,expected_manifest_sha256,expected_identity,*,expected_profile,guard=None,consume_content=False):
+    def __init__(self,bundle,expected_manifest_sha256,expected_identity,*,expected_profile,guard=None,consume_content=False,span_observer=None):
         profile_check(expected_profile);v1.identity_check(expected_identity)
         self._guard=guard or ResourceGuard();ledger=Ledger()
         require(isinstance(bundle,Bundle) and type(bundle.objects) is dict,'V2_BUNDLE')
@@ -267,7 +280,7 @@ class Reader(v1.Reader):
             del value,block
         full=bytes(data);del data
         require(sha(full)==expected_identity['response_sha256'],'V2_FULL_HASH')
-        response,scanner=parse(full,'response',self._guard);v1.response_check(response,expected_identity)
+        response,scanner=parse(full,'response',self._guard,span_observer=span_observer);v1.response_check(response,expected_identity)
         require(scanner.nodes==manifest['response_nodes'],'V2_RESPONSE_NODES')
         sections=scanner.sections;del response,scanner
         expected_sections={k:dict(kind=v['kind'],total=v['total']) for k,v in sections.items()}
@@ -286,6 +299,9 @@ class Reader(v1.Reader):
         self._generation=manifest['generation_id'];self._pin=expected_manifest_sha256
         self.counts=dict(ledger.counts,response_nodes=manifest['response_nodes'],saved_nodes=manifest['saved_nodes'])
         self._guard.checkpoint('reader_complete')
+        # Captured spans are usable only after all manifest/content/index gates.
+        # The observer must retain only bounded metadata, never the raw buffer.
+        self._span_observer=span_observer
 
     def _binding(self):
         return dict(super()._binding(),profile_sha256=PROFILE_SHA256)

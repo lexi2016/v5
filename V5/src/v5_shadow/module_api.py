@@ -90,7 +90,7 @@ def _m18_read_page_binding(config, root, query):
     return _m18_identity_from_descriptor(descriptor['payload'])
 
 
-def _m18_disk_reader(binding):
+def _m18_disk_reader(binding, *, span_observer=None):
     """Load the immutable offline layout without invoking its writing worker."""
     from .m18_offline_v2 import Bundle, Reader, PROFILE, ResourceGuard
 
@@ -130,7 +130,7 @@ def _m18_disk_reader(binding):
         os.close(root)
     return Reader(Bundle(manifest, objects), binding['manifest_sha256'],
                   binding['identity'], expected_profile=binding['profile_sha256'],
-                  guard=guard, consume_content=True)
+                  guard=guard, consume_content=True, span_observer=span_observer)
 
 
 def _m18_page_response(config, root, query):
@@ -356,78 +356,101 @@ def _m18_rebound_cursor(binding, source_sha, group, offset):
     return base64.urlsafe_b64encode(canonical_bytes(value)).decode('ascii')
 
 
+class _M18ReboundSpans:
+    """Bounded private observation of the Reader's one existing complete scan."""
+    def __init__(self, query):
+        from . import m18_offline_v2 as m
+        self.group=query['group'];self.offset=0
+        if 'cursor' in query:
+            value,_=m.v1.parse(base64.b64decode(query['cursor'],altchars=b'-_',validate=True),object_limit=True)
+            self.offset=value['offset']
+            m.require(m.v1.integer(self.offset,m.v1.PAGE_SIZE,2**63-1)
+                      and self.offset % m.v1.PAGE_SIZE == 0,'V2_REBOUND_CURSOR')
+        self.prefix=('payload',M18_REBOUND_SECTION)
+        self.inner=self.prefix+('research_observation',)
+        self.stop=self.offset+m.v1.PAGE_SIZE
+        self.counts={group:0 for group in M18_REBOUND_GROUPS}
+        self.rows=[];self.metadata={};self.kinds={}
+        self.paths={};self.containers={self.prefix:None,self.prefix+('research_observation',):None}
+        def fields(path, target, names):
+            self.containers[path]=target
+            for name in names:self.paths[path+(name,)]=target+(name,)
+        fields(self.prefix,('source',),M18_REBOUND_SOURCE_FIELDS)
+        fields(self.prefix+('binding_reference',),('source','binding_reference'),M18_REBOUND_BINDING_FIELDS)
+        inner=self.prefix+('research_observation',)
+        fields(inner,('observation',),M18_REBOUND_OBSERVATION_FIELDS)
+        fields(inner+('coverage',),('observation','coverage'),M18_REBOUND_COVERAGE_FIELDS)
+        native=inner+('native_evidence',)
+        fields(native,('observation','native_evidence'),('volume_unit','price_currency','price_basis','gaps'))
+        fields(native+('date_evidence',),('observation','native_evidence','date_evidence'),M18_REBOUND_DATE_FIELDS)
+        fields(native+('unit_evidence',),('observation','native_evidence','unit_evidence'),M18_REBOUND_UNIT_FIELDS)
+
+    def __call__(self, path, kind, start, end, raw):
+        if len(path)<2 or path[0]!='payload' or path[1]!=M18_REBOUND_SECTION:return
+        if path in self.containers:self.kinds[path]=kind
+        inner=self.inner
+        if len(path)==4 and path[:3]==inner and path[3] in self.counts:
+            self.kinds[path]=kind
+        if len(path)==5 and path[:3]==inner and path[3] in self.counts and type(path[4]) is int:
+            self.counts[path[3]]=path[4]+1
+            if path[3]==self.group and self.offset<=path[4]<self.stop:
+                self.rows.append(dict(index=path[4],kind=kind,offset=start,bytes=end-start,
+                    sha256=hashlib.sha256(memoryview(raw)[start:end]).hexdigest(),value_state='NOT_LOADED'))
+        if path in self.paths:
+            self.metadata[path]=dict(offset=start,bytes=end-start,
+                sha256=hashlib.sha256(memoryview(raw)[start:end]).hexdigest())
+
+
 def _m18_rebound_value(reader, query):
-    """Page original M14 groups; cards is deliberately not a sixth group."""
+    """Parse only captured small values after complete Reader verification."""
     from . import m18_offline_v2 as m
-    raw, source, outer_scan, source_entry = _m18_projection_source(reader, M18_REBOUND_SECTION)
-    m.require(type(source) is dict and type(source.get('research_observation')) is dict,
-              'V2_REBOUND_SOURCE')
-    observation = source['research_observation']
-    m.require(all(type(observation.get(group)) is list for group in M18_REBOUND_GROUPS),
-              'V2_REBOUND_GROUPS')
-    span = outer_scan.sections['research_observation']['entries'][0]
-    inner = raw[span['offset']:span['offset']+span['bytes']]
-    scanner = m._Scan(inner, 'object', reader._guard)
-    scanner.value(path=('payload',));scanner.space()
-    m.require(scanner.position == len(inner), 'V2_REBOUND_SOURCE')
-    reader._guard.scan_nodes += scanner.nodes;reader._guard.scan_bytes += len(inner)
-    reader._guard.checkpoint('rebound_groups')
-    group = query['group'];references = observation[group]
-    rows = scanner.sections[group]['entries']
-    m.require(len(rows) == len(references), 'V2_REBOUND_SOURCE')
-    binding = reader._binding();cursor = query.get('cursor');offset = 0
+    source_page=reader.detail(M18_REBOUND_SECTION)
+    m.require(source_page['matched_total']==1 and len(source_page['entries'])==1,'V2_REBOUND_SOURCE')
+    source_entry=source_page['entries'][0]
+    m.require(source_entry['kind']=='object' and 0<source_entry['bytes']<m.PROFILE['object_bytes'],'V2_OBJECT_BYTES')
+    capture=reader._span_observer
+    m.require(isinstance(capture,_M18ReboundSpans) and capture.group==query['group'],'V2_REBOUND_CAPTURE')
+    inner=capture.prefix+('research_observation',)
+    m.require(all(capture.kinds.get(path)=='object' for path in (capture.prefix,inner))
+              and all(kind=='object' for path,kind in capture.kinds.items() if path in capture.containers)
+              and all(capture.kinds.get(inner+(group,))=='array' for group in M18_REBOUND_GROUPS)
+              and sum(capture.counts.values())<=m.v1.MAX_ENTRIES,'V2_REBOUND_SOURCE')
+    binding=reader._binding();cursor=query.get('cursor');offset=capture.offset;total=capture.counts[capture.group]
     if cursor is not None:
-        try:
-            encoded = base64.b64decode(cursor, altchars=b'-_', validate=True)
-            declared, _ = m.v1.parse(encoded, object_limit=True)
-            offset = declared['offset']
-        except (ValueError, KeyError, TypeError):
-            raise ValueError('M18_CURSOR_INVALID') from None
-        m.require(m.v1.integer(offset, m.v1.PAGE_SIZE, len(rows)-1)
-                  and offset % m.v1.PAGE_SIZE == 0, 'V2_REBOUND_CURSOR')
-        m.require(cursor == _m18_rebound_cursor(binding, source_entry['sha256'], group, offset),
+        m.require(offset<total and cursor==_m18_rebound_cursor(binding,source_entry['sha256'],capture.group,offset),
                   'V2_REBOUND_CURSOR')
-    entries = [];loaded = 0;loaded_bytes = 0
-    for row in rows[offset:offset+m.v1.PAGE_SIZE]:
-        entry = dict(row, offset=source_entry['offset']+span['offset']+row['offset'])
-        if entry['bytes'] > M18_VIEW_ITEM_BYTES:
-            entry['reason'] = 'ITEM_BYTES_LIMIT'
-        elif loaded_bytes + entry['bytes'] > M18_VIEW_VALUES_BYTES:
-            entry['reason'] = 'PAGE_BYTES_LIMIT'
+    def small_value(span, limit):
+        m.require(0<span['bytes']<=limit,'V2_OBJECT_BYTES')
+        raw=reader._full[span['offset']:span['offset']+span['bytes']]
+        m.require(len(raw)==span['bytes'] and m.sha(raw)==span['sha256'],'V2_REBOUND_HASH')
+        return m.parse(raw,'object',reader._guard)[0]
+    entries=[];loaded=0;loaded_bytes=0
+    for row in capture.rows:
+        entry=dict(row)
+        if entry['bytes']>M18_VIEW_ITEM_BYTES:entry['reason']='ITEM_BYTES_LIMIT'
+        elif loaded_bytes+entry['bytes']>M18_VIEW_VALUES_BYTES:entry['reason']='PAGE_BYTES_LIMIT'
         else:
-            entry.update(value=references[row['index']], value_state='LOADED')
-            loaded += 1;loaded_bytes += entry['bytes']
+            entry.update(value=small_value(entry,M18_VIEW_ITEM_BYTES),value_state='LOADED')
+            loaded+=1;loaded_bytes+=entry['bytes']
         entries.append(entry)
-    source_meta = {key: source[key] for key in M18_REBOUND_SOURCE_FIELDS if key in source}
-    if 'binding_reference' in source:
-        reference = source['binding_reference']
-        m.require(type(reference) is dict, 'V2_REBOUND_SOURCE')
-        source_meta['binding_reference'] = {key: reference[key] for key in M18_REBOUND_BINDING_FIELDS if key in reference}
-    observation_meta = {key: observation[key] for key in M18_REBOUND_OBSERVATION_FIELDS if key in observation}
-    if 'coverage' in observation:
-        coverage = observation['coverage']
-        m.require(type(coverage) is dict, 'V2_REBOUND_SOURCE')
-        observation_meta['coverage'] = {key: coverage[key] for key in M18_REBOUND_COVERAGE_FIELDS if key in coverage}
-    if 'native_evidence' in observation:
-        native = observation['native_evidence']
-        m.require(type(native) is dict, 'V2_REBOUND_SOURCE')
-        evidence = {key: native[key] for key in ('volume_unit', 'price_currency', 'price_basis', 'gaps') if key in native}
-        for name, fields in (('date_evidence', M18_REBOUND_DATE_FIELDS), ('unit_evidence', M18_REBOUND_UNIT_FIELDS)):
-            if name in native:
-                m.require(type(native[name]) is dict, 'V2_REBOUND_SOURCE')
-                evidence[name] = {key: native[name][key] for key in fields if key in native[name]}
-        observation_meta['native_evidence'] = evidence
-    metadata = dict(source_section_sha256=source_entry['sha256'],
-        group_counts={key: len(observation[key]) for key in M18_REBOUND_GROUPS},
-        source=source_meta, observation=observation_meta)
-    next_offset = offset + len(entries)
-    return dict(schema=m.VERSION+'.detail', **binding, section=M18_REBOUND_SECTION,
-        projection=M18_REBOUND_PROJECTION, group=group, rebound=metadata,
-        selection=None, cursor=cursor, offset=offset, matched_total=len(rows),
-        loaded_count=loaded, not_loaded_count=len(rows)-loaded,
-        remaining_entries=len(rows)-next_offset, entries=entries,
-        next_cursor=(_m18_rebound_cursor(binding, source_entry['sha256'], group, next_offset)
-                     if next_offset < len(rows) else None))
+    meta=dict(source={},observation={})
+    for path,target in capture.containers.items():
+        if path in capture.kinds and target:
+            node=meta
+            for key in target:node=node.setdefault(key,{})
+    m.require(sum(span['bytes'] for span in capture.metadata.values())<=M18_VIEW_BYTES,'V2_REBOUND_METADATA_BYTES')
+    for path,span in capture.metadata.items():
+        target=capture.paths[path];node=meta
+        for key in target[:-1]:node=node.setdefault(key,{})
+        node[target[-1]]=small_value(span,M18_VIEW_BYTES)
+    metadata=dict(source_section_sha256=source_entry['sha256'],group_counts=dict(capture.counts),**meta)
+    next_offset=offset+len(entries)
+    return dict(schema=m.VERSION+'.detail',**binding,section=M18_REBOUND_SECTION,
+        projection=M18_REBOUND_PROJECTION,group=capture.group,rebound=metadata,
+        selection=None,cursor=cursor,offset=offset,matched_total=total,
+        loaded_count=loaded,not_loaded_count=total-loaded,remaining_entries=total-next_offset,entries=entries,
+        next_cursor=(_m18_rebound_cursor(binding,source_entry['sha256'],capture.group,next_offset)
+                     if next_offset<total else None))
 
 
 def _m18_semantic_value(reader, kind, query):

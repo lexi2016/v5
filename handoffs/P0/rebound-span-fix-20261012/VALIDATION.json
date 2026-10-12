@@ -1,0 +1,52 @@
+{
+  "scope": "Backend-only correction for confirmed real M18_V2_OBJECT_NODES; no frontend changes",
+  "confirmed_mac_diagnosis": "f71081168eec44fcad769ecb68642a36dd7ab1be",
+  "profile_sha256_unchanged": "a8b56161f6d19de0d5222775e132d78f75d7ad707a1824b4d2b861ff285ecc6c",
+  "regression": {
+    "passed": 128,
+    "subtests_passed": 171,
+    "skipped": 1,
+    "skip_reason": "Existing opt-in long resource-pressure test",
+    "seconds": 132.0,
+    "exit_code": 0,
+    "command": "PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_rebound_projection.py V5/tests/test_m18_v2_announcement_projection.py V5/tests/test_m18_v2_read_process.py V5/tests/test_m18_v2_semantic_pages.py V5/tests/test_m18_v2_disk_pages.py V5/tests/test_m18_offline_v2.py V5/tests/test_m18_offline_pages.py V5/tests/test_m18_v2_reader_lifetime.py V5/tests/test_m18_v2_http_bridge.py V5/tests/test_m18_v2_publication_bridge.py V5/tests/test_m18_v2_module_api_binding.py V5/tests/test_module_api.py V5/tests/test_module_artifacts.py"
+  },
+  "final_scale_recheck": {
+    "command": "PYTHONPATH=V5/src:V5/tests /workspace/shared/manager_bi02_fix/.venv/bin/python -B -m pytest -q V5/tests/test_m18_v2_rebound_projection.py -k owner_scale",
+    "passed": 1,
+    "deselected": 7,
+    "seconds": 18.94,
+    "exit_code": 0
+  },
+  "scale": {
+    "synthetic": true,
+    "section_bytes": 5220624,
+    "section_nodes": 206033,
+    "original_object_node_limit": 200000,
+    "original_object_parse_still_rejected": true,
+    "strict_first_and_next_http": 200,
+    "absolute_slices_and_hashes_verified": true,
+    "page_byte_not_loaded_preserved": true,
+    "data_hashes_and_mtimes_unchanged": true
+  },
+  "reader_invariants": [
+    "default observer is off; original scanner class unchanged",
+    "original counts and sections equal with and without capture",
+    "tampered persisted index still rejected",
+    "current page maximum32 row spans; no captured raw buffer or response DOM",
+    "whole Reader proof completes before page values exposed"
+  ],
+  "frontend": {
+    "source": "UNCHANGED from aa42f4db63a59367d7eb2740c52ffb9aa30f58c3",
+    "prior_mac_node_vue_typecheck_build": "PASS at c44acaaa885ff4637fddb9b84c38a23b693d5a63",
+    "rerun_for_backend_fix": "NOT_RUN; unchanged frontend"
+  },
+  "candidate_mac_real_api_and_preview": "NOT_RUN; parent-coordinated acceptance pending",
+  "changed_runtime_and_test_files": [
+    "V5/src/v5_shadow/module_api.py",
+    "V5/src/v5_shadow/m18_offline_v2.py",
+    "V5/src/v5_shadow/m18_v2_read_process.py",
+    "V5/tests/test_m18_v2_rebound_projection.py",
+    "V5/tests/rebound_scale_fixture.py"
+  ]
+}

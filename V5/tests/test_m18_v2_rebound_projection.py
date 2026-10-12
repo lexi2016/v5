@@ -77,6 +77,11 @@ class ReboundProjectionTests(unittest.TestCase):
         query.update(changes)
         return ROUTE+'/sections?'+urlencode({k:v for k,v in query.items() if v is not None})
 
+    def captured_reader(self,query):
+        from v5_shadow.module_api import _M18ReboundSpans
+        return m.Reader(self.bundle,m.sha(self.bundle.manifest),self.identity,
+            expected_profile=m.PROFILE_SHA256,span_observer=_M18ReboundSpans(query))
+
     def test_three_pages_exact_offsets_hashes_and_group_counts_without_cards(self):
         url=self.start();before=self.snapshot();cursor=None;seen=[]
         for offset,count in ((0,32),(32,32),(64,6)):
@@ -146,7 +151,7 @@ class ReboundProjectionTests(unittest.TestCase):
         from v5_shadow.module_api import _m18_semantic_value
         query=dict(section=SECTION,projection=PROJECTION,group='strict')
         request=dict(binding=self.config['m18_v2_binding'],kind='rebound',query=query)
-        process._validate(request);page=_m18_semantic_value(self.reader,'rebound',query)
+        process._validate(request);page=_m18_semantic_value(self.captured_reader(query),'rebound',query)
         process._check_payload(page,request)
         for changes in (dict(group='cards'),dict(projection='announcement_references'),dict(section='stocks')):
             with self.subTest(changes=changes),self.assertRaises(m.ContractError):
@@ -158,14 +163,72 @@ class ReboundProjectionTests(unittest.TestCase):
     def test_source_limit_precedes_read_and_full_response_is_never_called(self):
         from v5_shadow.module_api import _m18_semantic_value
         query=dict(section=SECTION,projection=PROJECTION,group='strict')
-        with patch.object(self.reader,'full_response',side_effect=AssertionError('no full response')):
-            self.assertEqual(_m18_semantic_value(self.reader,'rebound',query)['matched_total'],70)
-        oversized=copy.deepcopy(self.reader.detail(SECTION))
+        reader=self.captured_reader(query)
+        with patch.object(reader,'full_response',side_effect=AssertionError('no full response')):
+            self.assertEqual(_m18_semantic_value(reader,'rebound',query)['matched_total'],70)
+        oversized=copy.deepcopy(reader.detail(SECTION))
         oversized['entries'][0]['bytes']=m.PROFILE['object_bytes']
-        with patch.object(self.reader,'detail',return_value=oversized), \
-                patch.object(self.reader,'item_parts',side_effect=AssertionError('must reject before read')), \
+        with patch.object(reader,'detail',return_value=oversized), \
+                patch.object(reader,'item_parts',side_effect=AssertionError('must reject before read')), \
                 self.assertRaisesRegex(m.ContractError,'V2_OBJECT_BYTES'):
-            _m18_semantic_value(self.reader,'rebound',query)
+            _m18_semantic_value(reader,'rebound',query)
+
+    def test_capture_keeps_original_nodes_sections_and_index_validation(self):
+        from v5_shadow.module_api import _M18ReboundSpans
+        query=dict(section=SECTION,projection=PROJECTION,group='strict')
+        reader=self.captured_reader(query)
+        self.assertEqual(reader.counts,self.reader.counts)
+        self.assertEqual(reader._sections,self.reader._sections)
+        self.assertIsNone(self.reader._span_observer)
+        self.assertEqual(len(reader._span_observer.rows),32)
+        self.assertEqual(reader._span_observer.counts,{k:len(v) for k,v in self.groups.items()})
+        self.assertFalse(hasattr(reader._span_observer,'raw'))
+        self.assertFalse(hasattr(reader._span_observer,'response'))
+        manifest=json.loads(self.bundle.manifest);objects=dict(self.bundle.objects)
+        descriptor=manifest['index_pages'][0];old_key=descriptor['object_sha256']
+        value=json.loads(objects.pop(old_key));value['entries'][0]['entry']['sha256']='f'*64
+        encoded=canonical_bytes(value);descriptor['object_sha256']=m.sha(encoded)
+        objects[m.sha(encoded)]=encoded;manifest_raw=canonical_bytes(manifest)
+        with self.assertRaisesRegex(m.ContractError,'V2_INDEX_CONTENT'):
+            m.Reader(m.Bundle(manifest_raw,objects),m.sha(manifest_raw),self.identity,
+                expected_profile=m.PROFILE_SHA256,span_observer=_M18ReboundSpans(query))
+
+    def test_owner_scale_section_over_object_nodes_remains_pageable(self):
+        from rebound_scale_fixture import fixture as scale_fixture
+        raw,identity,bundle=scale_fixture()
+        section=canonical_bytes(json.loads(raw)['payload'][SECTION])
+        scan=m.scan(section,'response')
+        self.assertEqual(scan.nodes,206033)
+        self.assertLess(len(section),m.PROFILE['object_bytes'])
+        # This remains a real object limit. Projection must not widen it.
+        with self.assertRaisesRegex(m.ContractError,'M18_V2_OBJECT_NODES'):
+            m.parse(section,'object')
+        with patch.object(base,'fixture',return_value=(raw,identity,bundle)):
+            base.DiskPagesTests.setUp(self)
+        url=self.start();before=self.snapshot()
+        # Client wait covers the existing 90s worker gate; no product limit changes.
+        def get_scale(path):
+            from urllib.request import urlopen
+            from urllib.error import HTTPError
+            try:reply=urlopen(url+path,timeout=m.PROFILE['wall_seconds']+10)
+            except HTTPError as error:reply=error
+            with reply:
+                data=reply.read()
+                return reply.status,json.loads(data),reply.headers,len(data)
+        status,page,_,size=get_scale(self.path())
+        self.assertEqual(status,200)
+        self.assertLessEqual(size,256*1024)
+        self.assertEqual(page['matched_total'],214)
+        self.assertEqual(page['rebound']['group_counts'],dict(zip(GROUPS,(214,286,34,159,0))))
+        self.assertEqual(len(page['entries']),32)
+        self.assertTrue(any(e['value_state']=='NOT_LOADED' for e in page['entries']))
+        for entry in page['entries']:
+            item=raw[entry['offset']:entry['offset']+entry['bytes']]
+            self.assertEqual(entry['sha256'],m.sha(item))
+            if entry['value_state']=='LOADED':self.assertEqual(entry['value'],json.loads(item))
+        status,next_page,_,_=get_scale(self.path(cursor=page['next_cursor']))
+        self.assertEqual(status,200);self.assertEqual(next_page['offset'],32)
+        self.assertEqual(before,self.snapshot())
 
     def test_real_http_frontend_preserves_announcement_default_and_group_history(self):
         import shutil
