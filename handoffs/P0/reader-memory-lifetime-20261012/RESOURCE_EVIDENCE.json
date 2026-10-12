@@ -1,0 +1,234 @@
+{
+  "baseline_b2a": {
+    "requests": 10,
+    "peak_rss_bytes": 208236544,
+    "per_request": [
+      {
+        "peak_rss_bytes": 205914112,
+        "elapsed": 9.685443174999818,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 9.48117508499945,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 9.569641312000385,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 13.118929253000715,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 9.816978293999455,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 9.4052450220006,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 10.378190407000147,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 21.119271221999952,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 9.365251533999981,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 208236544,
+        "elapsed": 9.559264995000376,
+        "error": null
+      }
+    ]
+  },
+  "rejected_per_chunk_release": {
+    "requests": 10,
+    "peak_rss_bytes": 276320256,
+    "per_request": [
+      {
+        "peak_rss_bytes": 166535168,
+        "elapsed": 10.042675810999754,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 234045440,
+        "elapsed": 11.179933093000727,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276152320,
+        "elapsed": 11.784276567000234,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276213760,
+        "elapsed": 15.440264145999208,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276320256,
+        "elapsed": 9.867650666999907,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276320256,
+        "elapsed": 9.569182817000183,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276320256,
+        "elapsed": 9.89880062499924,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276320256,
+        "elapsed": 9.98786803999974,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276320256,
+        "elapsed": 10.282968574000733,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 276320256,
+        "elapsed": 9.433669201000157,
+        "error": null
+      }
+    ]
+  },
+  "rejected_single_worker_probe": {
+    "requests": 10,
+    "peak_rss_bytes": 232955904,
+    "per_request": [
+      {
+        "peak_rss_bytes": 166780928,
+        "elapsed": 9.72037697900032,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232800256,
+        "elapsed": 9.874334228000407,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232886272,
+        "elapsed": 10.19479594600034,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232927232,
+        "elapsed": 10.186078036999788,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232951808,
+        "elapsed": 10.162127364999833,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232951808,
+        "elapsed": 10.500275462999525,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232955904,
+        "elapsed": 9.582254590000048,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232955904,
+        "elapsed": 10.553367188000266,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232955904,
+        "elapsed": 12.642371871999785,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 232955904,
+        "elapsed": 11.886950277999858,
+        "error": null
+      }
+    ]
+  },
+  "candidate_batch_release": {
+    "requests": 10,
+    "peak_rss_bytes": 175996928,
+    "per_request": [
+      {
+        "peak_rss_bytes": 167264256,
+        "elapsed": 10.93408078199991,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175894528,
+        "elapsed": 14.678692555999987,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175894528,
+        "elapsed": 10.459779431999777,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175992832,
+        "elapsed": 9.459206688999984,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175992832,
+        "elapsed": 11.739910540999517,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175992832,
+        "elapsed": 12.061227279999912,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175992832,
+        "elapsed": 16.9148097340003,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175992832,
+        "elapsed": 10.211270820000209,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175992832,
+        "elapsed": 9.914158595000117,
+        "error": null
+      },
+      {
+        "peak_rss_bytes": 175996928,
+        "elapsed": 10.35748638899986,
+        "error": null
+      }
+    ]
+  },
+  "fixture": {
+    "response_bytes": 28647597,
+    "saved_bytes": 37913404,
+    "response_nodes": 1103793,
+    "generation_bytes": 38940915,
+    "data_kind": "SYNTHETIC"
+  },
+  "profile_rss_bytes": 536870912
+}

@@ -128,7 +128,7 @@ def _m18_disk_reader(binding):
         os.close(root)
     return Reader(Bundle(manifest, objects), binding['manifest_sha256'],
                   binding['identity'], expected_profile=binding['profile_sha256'],
-                  guard=guard)
+                  guard=guard, consume_content=True)
 
 
 def _m18_page_response(config, root, query):

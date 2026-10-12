@@ -202,8 +202,14 @@ def build(response_bytes, saved_plan_bytes, expected_identity, *, expected_profi
 
 
 class Reader(v1.Reader):
-    """Reuses v1 expected-request verification; each response pins v2 profile."""
-    def __init__(self,bundle,expected_manifest_sha256,expected_identity,*,expected_profile,guard=None):
+    """Reuses v1 expected-request verification; each response pins v2 profile.
+
+    consume_content=True transfers exclusive ownership of temporary Bundle
+    content buffers. They are destructively released after validated assembly;
+    a later validation failure can also leave them consumed. The default keeps
+    caller-owned Bundles reusable. Files and index verification are unchanged.
+    """
+    def __init__(self,bundle,expected_manifest_sha256,expected_identity,*,expected_profile,guard=None,consume_content=False):
         profile_check(expected_profile);v1.identity_check(expected_identity)
         self._guard=guard or ResourceGuard();ledger=Ledger()
         require(isinstance(bundle,Bundle) and type(bundle.objects) is dict,'V2_BUNDLE')
@@ -252,6 +258,13 @@ class Reader(v1.Reader):
             require(len(block)==size and sha(block)==desc['sha256'],'V2_CONTENT_HASH')
             require(v1.canonical({k:value[k] for k in ('index','offset','bytes','sha256')})==v1.canonical({k:desc[k] for k in ('index','offset','bytes','sha256')}),'V2_CONTENT_DESCRIPTOR')
             data[offset:offset+size]=block;offset+=size
+        if consume_content:
+            # This caller owns the temporary Bundle exclusively. Release all
+            # verified encoded content together after assembly, before the
+            # full JSON DOM; shared callers keep the non-consuming default.
+            for desc in chunks:
+                del bundle.objects[desc['object_sha256']]
+            del value,block
         full=bytes(data);del data
         require(sha(full)==expected_identity['response_sha256'],'V2_FULL_HASH')
         response,scanner=parse(full,'response',self._guard);v1.response_check(response,expected_identity)
