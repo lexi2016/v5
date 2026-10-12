@@ -1,0 +1,13 @@
+{
+  "command": [
+    "node",
+    "--test",
+    "frontend/tests/hkPreselectionPool.node.mjs",
+    "frontend/tests/sourceBundle.node.mjs"
+  ],
+  "started_utc": "2026-10-12T17:45:06.185907+00:00",
+  "ended_utc": "2026-10-12T17:45:06.308344+00:00",
+  "exit": 0,
+  "stdout": "✔ M06 read-only frontend client exists (0.608916ms)\n✔ GET preserves all100 original rows, fields, dates, identities and source order (11.371209ms)\n✔ original CSV research_only True remains an unchanged string in all100 rows (1.592958ms)\n✔ CSV research_only compatibility is row-only and never widens top-level safety (4.412583ms)\n✔ original row trading flags stay required boolean false after CSV compatibility (5.372625ms)\n✔ 99 rows, duplicate symbols, wrong row identity and altered dates fail closed (3.449083ms)\n✔ unsafe claims are rejected at payload, reference, artifact and row boundaries (3.498708ms)\n✔ wrong committed, source and computation identities cannot be displayed (4.289583ms)\n✔ NOT_CONFIGURED is explicit and never represented as an empty successful pool (0.534667ms)\n✔ HTTP missing and corrupt results, invalid JSON, empty and oversized responses fail closed (7.929041ms)\n✔ new reads immediately clear old rows and a failed read leaves no stale result (0.505666ms)\n✔ late success cannot overwrite newer missing configuration and old request is aborted (0.400458ms)\n✔ late failure cannot clear a newer valid result (0.3555ms)\n✔ closing aborts pending read, ignores completion and prevents additional reads (0.362292ms)\n✔ standalone panel renders original row fields and embeds only within source status (0.289709ms)\n✔ source panel reads only saved route and preserves owner states and historical replay (9.918625ms)\n✔ missing or duplicate modules, wrong owner, promoted flags and malformed identity fail closed (0.705917ms)\n✔ HTTP errors, invalid JSON, absent and oversized streams stay unconfirmed (0.289209ms)\n✔ failed re-read clears previously valid source result (0.515459ms)\n✔ repeated reads do not let older completion replace new result (0.201583ms)\n✔ closing a pending read ignores later completion (0.102875ms)\nℹ tests 21\nℹ suites 0\nℹ pass 21\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 97.263625\n",
+  "stderr": ""
+}

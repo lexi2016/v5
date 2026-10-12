@@ -1,0 +1,17 @@
+{
+  "command": [
+    "npm",
+    "run",
+    "typecheck",
+    "--prefix",
+    "frontend",
+    "--",
+    "--project",
+    "tsconfig.cloud-product.json"
+  ],
+  "started_utc": "2026-10-12T17:45:06.308702+00:00",
+  "ended_utc": "2026-10-12T17:45:07.965331+00:00",
+  "exit": 0,
+  "stdout": "\n> v3-5-web@0.1.0 typecheck\n> vue-tsc --noEmit --project tsconfig.cloud-product.json\n\n",
+  "stderr": ""
+}

@@ -1,0 +1,123 @@
+{
+  "candidate": "1991622e5a2df5464a00387a737c44dd4dc7574f",
+  "passed": true,
+  "events": [
+    {
+      "name": "source-first",
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-B",
+        "-m",
+        "v5_shadow.module_process",
+        "--config",
+        "<PRIVATE_CONFIG>",
+        "--port",
+        "0"
+      ],
+      "started_utc": "2026-10-12T17:45:18.676976+00:00",
+      "ready_utc": "2026-10-12T17:45:18.781016+00:00",
+      "pid": 6792,
+      "port": 59646,
+      "identity_verified": true,
+      "health_verified": true,
+      "url": "http://127.0.0.1:59646"
+    },
+    {
+      "name": "owned-source-disconnect",
+      "exit": -15,
+      "ended_utc": "2026-10-12T17:45:21.334511+00:00",
+      "identity_verified": true
+    },
+    {
+      "name": "source-retained",
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-B",
+        "-m",
+        "v5_shadow.module_process",
+        "--config",
+        "<PRIVATE_CONFIG>",
+        "--port",
+        "0"
+      ],
+      "started_utc": "2026-10-12T17:45:52.513413+00:00",
+      "ready_utc": "2026-10-12T17:45:52.614538+00:00",
+      "pid": 6886,
+      "port": 59767,
+      "identity_verified": true,
+      "health_verified": true,
+      "url": "http://127.0.0.1:59767"
+    }
+  ],
+  "m06_all100_artifact_exact": true,
+  "complete_reference_exact": true,
+  "fixture_only": false,
+  "model_weights_reverified": false,
+  "old_source_status_exact": true,
+  "post_status": 405,
+  "m06_and_source_root_files_unchanged": true,
+  "protected_root_file_count": 41,
+  "manager_files_unchanged": true,
+  "manager_file_count": 141,
+  "source_api": "http://127.0.0.1:59767",
+  "manager_api": "http://127.0.0.1:63668",
+  "local_config_sha256": "a62c6bd355c01c6c6509f562433ad46d940b9aa90c883333a78f330746c678db",
+  "dom": {
+    "passed": true,
+    "actual_parent_and_child_vue_components": true,
+    "screen_used": false,
+    "all_100_rows_all_fields_order_text_exact": true,
+    "field_count": 64,
+    "three_dates_run_hashes_visible": true,
+    "old_four_source_cards_exact": true,
+    "repeated_read_exact": true,
+    "loading_clears_rows": true,
+    "real_disconnect_clears_rows": true
+  },
+  "navigation": {
+    "passed": true,
+    "announcement_default_total": 147,
+    "us_matches": 4,
+    "unique_hk": 3,
+    "plan_status": "CONSUMED",
+    "rebound_first_count": 31,
+    "rebound_next_offset": 31,
+    "us_return_exact": true,
+    "announcement_return_exact": true,
+    "requests": [
+      {
+        "path": "/api/v4/manager/m18/v2",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/overview",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      }
+    ]
+  },
+  "completed_utc": "2026-10-12T17:45:52.614646+00:00"
+}

@@ -1,0 +1,43 @@
+{
+  "candidate": "1991622e5a2df5464a00387a737c44dd4dc7574f",
+  "passed": true,
+  "started_utc": "2026-10-12T17:46:51.674067+00:00",
+  "ended_utc": "2026-10-12T17:46:54.744751+00:00",
+  "preview_port": 54780,
+  "old_pid": 91842,
+  "old_identity_verified": true,
+  "preview_pid": 7040,
+  "static_files_verified": 19,
+  "source_status_and_m06_proxy_exact": true,
+  "manager_proxy_same_run": true,
+  "deployed_dom": {
+    "passed": true,
+    "via_deployed_preview": true,
+    "all100_rows_all_fields_original_order": true,
+    "old_four_cards": true,
+    "identity_text": true,
+    "repeat_and_loading_clear": true
+  },
+  "m06_and_source_roots_unchanged": true,
+  "protected_ports_unchanged_listening": {
+    "8873": true,
+    "8910": true,
+    "54777": true,
+    "54778": true,
+    "54779": true
+  },
+  "rollback_candidate": "a50c5d022e6e4e8362d96079b4abffc988ff77cb",
+  "rollback_source_api": "http://127.0.0.1:65234",
+  "rollback_manager_api": "http://127.0.0.1:63668",
+  "rollback_dist_retained": true,
+  "command": [
+    "<EXISTING_NODE>",
+    "node_modules/vite/bin/vite.js",
+    "preview",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "54780",
+    "--strictPort"
+  ]
+}

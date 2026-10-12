@@ -1,0 +1,43 @@
+{
+  "candidate": "1991622e5a2df5464a00387a737c44dd4dc7574f",
+  "status": "PASS_REAL_M06_READONLY_COMPONENT_AND_DEPLOYMENT",
+  "node_passed": 21,
+  "typecheck_exit": 0,
+  "build_exit": 0,
+  "prior_python_9_and_11_not_repeated": true,
+  "m06_85_and_m09_136_not_repeated": true,
+  "fixed_source_blobs_pre_and_post_verified": 1079,
+  "reused_original_captured_response_file_sha256": "68b5861211136f48f7870bda1f0bf7e72c41104f2bde9aa2bcd9f44329a7f197",
+  "parser_state": "LOADED",
+  "rows": 100,
+  "all_original_fields_per_row": 64,
+  "original_csv_research_only_string_preserved": true,
+  "complete_artifact_and_reference_exact": true,
+  "three_dates": [
+    "20261013",
+    "20261012",
+    "20261012"
+  ],
+  "source_run_id": "20261013-hk-connect-d1-top100-0-2-b4a529e45fd4",
+  "original_artifact_sha256": "3a56de134302f545c89c021e1184d1ecadf735f1f263c18e4c266e488b6469df",
+  "fixture_only": false,
+  "model_weights_reverified": false,
+  "formal_eligibility_verified": false,
+  "natural_verified": false,
+  "production_allowed": false,
+  "orders_sent": false,
+  "buy_gate_updated": false,
+  "deployed_port": 54780,
+  "rollback_candidate": "a50c5d022e6e4e8362d96079b4abffc988ff77cb",
+  "original_m06_and_source_data_not_republished": true,
+  "m06_source_files_unchanged": 41,
+  "manager_files_unchanged": 141,
+  "models_not_executed": true,
+  "dependencies_not_installed": true,
+  "screen_not_used": true,
+  "limits": [
+    "Original M06 executable remains existing HK02 environment, not final standalone V5 packaging.",
+    "All-module/P0-P5 natural/business acceptance remains incomplete.",
+    "Safe dist contains application code only; original response and private binding stay local."
+  ]
+}
