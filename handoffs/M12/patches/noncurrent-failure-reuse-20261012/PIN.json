@@ -1,0 +1,44 @@
+{
+  "repository": "lexi2016/v5",
+  "branch": "dev/m12-github-handoff-20261011",
+  "baseline_commit": "769db376cf8ab0c2c1f69e31239aec38494ddd82",
+  "baseline_candidate": "befa4124149396cf3c052ba6532cfa7897be62df",
+  "donor_repository": "lexi2016/v4",
+  "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+  "donor_copy_root": "handoffs/M12/original_source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/review_core",
+  "policy": "Original source and prior feedback untouched. Explicit V5 vendor-only patch, paired before/after hashes and reversible diffs. No owner safety gate changes.",
+  "files": [
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/core.py",
+      "status": "modified",
+      "before_sha256": "edc10ea4bc837b6f307d897a6bbfde5d555fc289b537cf7f8831edf56428854b",
+      "after_sha256": "0af6ed5fb08520d9fc0547756dc0d26996c8f85fd84192d61bd5b52ec17ca51a",
+      "before_git_blob": "edfa250bab397033338745905fb41e0e16e01ad1",
+      "after_git_blob": "3bc3e9568d26853b70be4e327a1858adb24b9fda",
+      "before_bytes": 59792,
+      "after_bytes": 61380
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/producer.py",
+      "status": "modified",
+      "before_sha256": "b98b7905302bdad5f3e601b09f566672bfbf1508794085bac10ef6668e7c92c7",
+      "after_sha256": "0d33b5d2ff728ffb1c58db2fc7c0ca89a2e62df357675f241c88648d21485012",
+      "before_git_blob": "18cabb94c5ceb176341b159de388f8ab6f283118",
+      "after_git_blob": "84081b65b2f7b6037ea89a9c7c0dec44a6cf790a",
+      "before_bytes": 87088,
+      "after_bytes": 88342
+    },
+    {
+      "path": "tests/m12/test_video_fupan_default_chain.py",
+      "status": "modified",
+      "before_sha256": "fa6957578d368c98b2769aa8ed73d0513a094b9c90f0c27a5dfc21a3febcf0be",
+      "after_sha256": "f4ec4f93de396570601139a7443d265ebeb0a98ac74ce2b8049a737fbc9dbefd",
+      "before_git_blob": "8ca74df9e95fe24b69ea7b67f10510baf4b46691",
+      "after_git_blob": "2c950b901efd07b027bb748d0843626d9d96613e",
+      "before_bytes": 22231,
+      "after_bytes": 28800
+    }
+  ],
+  "runtime_patch_sha256": "687b18193a1dcc326aa542949aafaa7bee31800502369a14baca9dc53b1e85c6",
+  "reverse_patch_sha256": "582cd6436351096d31f39f80068b3caa74f98239b7d131dc2060a237ec0b91fb"
+}

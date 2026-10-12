@@ -226,6 +226,115 @@ class VideoFupanDefaultChainTests(unittest.TestCase):
         owner_receipt = self.root / "review" / DATE / "runs" / failed["run_id"] / "receipt.json"
         assert json.loads(owner_receipt.read_text())["current_advanced"] is False
 
+    def test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr(self):
+        for status in ("FAILED", "ASR_FAILED"):
+            with self.subTest(status=status):
+                parent = self.tmp_path / status
+                root = parent / "v5_private"
+                _, first = _run(parent, SimulatedOwner("BV_SUCCESS_A"))
+                owner = SimulatedOwner("BV_FAILURE_B", status)
+                _, failed = _run(parent, owner)
+                current = root / "review" / DATE / "current.json"
+                latest = root / "video_fupan" / DATE / "latest_success.json"
+                owner_run = root / "review" / DATE / "runs" / failed["run_id"]
+                receipt = (owner_run / "receipt.json").read_bytes()
+                assert json.loads(receipt)["status"] == "ACQUIRE_FAILED"
+                assert json.loads(receipt)["current_advanced"] is False
+                before = _snapshot(root)
+                pointer_times = (current.stat().st_mtime_ns, latest.stat().st_mtime_ns)
+                # A repaired dependency alone does not authorize a new attempt
+                # under the same deterministic input/config/tool identity.
+                owner.asr_status = "ASR_REVIEW_REQUIRED"
+                _, repeated = _run(parent, owner)
+                assert repeated["run_id"] == failed["run_id"]
+                assert repeated["reused"] is True
+                assert repeated["promoted"] is False
+                assert owner.capture_count == owner.asr_count == 1
+                assert _snapshot(root) == before
+                assert (owner_run / "receipt.json").read_bytes() == receipt
+                assert json.loads(current.read_text())["run_id"] == first["run_id"]
+                assert json.loads(latest.read_text())["run_id"] == first["run_id"]
+                assert (current.stat().st_mtime_ns, latest.stat().st_mtime_ns) == pointer_times
+                assert _cold_read(root, failed["run_id"])["owner_receipt"]["status"] == "ACQUIRE_FAILED"
+
+    def test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run(self):
+        from V5.vendor.video_fupan_baseline.review_core.config import ProducerConfig
+        from V5.vendor.video_fupan_baseline.review_core.core import run_video, inspect_bundle
+
+        _, first = _run(self.tmp_path, SimulatedOwner("BV_SUCCESS_A"))
+        owner = SimulatedOwner("BV_FAILURE_B", "ASR_FAILED")
+        _, failed = _run(self.tmp_path, owner)
+        failed_dir = self.root / "review" / DATE / "runs" / failed["run_id"]
+        old_evidence = _snapshot(failed_dir)
+        old_success = self.latest.read_bytes()
+        old_media = _snapshot(self.root / "media")
+        owner.asr_status = "ASR_REVIEW_REQUIRED"
+        config = ProducerConfig(data_root=self.root, network_allowed=True,
+                                extra={"recovery_attempt": "explicit-attempt-C"})
+        recovered = run_video(DATE, mode="acquire", data_root=self.root,
+                              config=config, tools=owner.tools(), allow_network=True)
+        assert recovered["run_id"] not in {first["run_id"], failed["run_id"]}
+        assert recovered["acquisition_count"] == 0
+        assert recovered["asr_execution_count"] == 1
+        assert owner.capture_count == 1 and owner.asr_count == 2
+        assert _snapshot(failed_dir) == old_evidence
+        assert _snapshot(self.root / "media") == old_media
+        assert self.latest.read_bytes() == old_success  # raw owner does not publish V5
+        assert inspect_bundle(DATE, self.root)["run_id"] == recovered["run_id"]
+        receipt = json.loads((Path(recovered["run_dir"]) / "receipt.json").read_text())
+        assert receipt["status"] == "ACQUIRED"
+        assert recovered["manifest"]["asr_status"] == "ASR_REVIEW_REQUIRED"
+        before = _snapshot(self.root)
+        repeated = run_video(DATE, mode="acquire", data_root=self.root,
+                             config=config, tools=owner.tools(), allow_network=True)
+        assert repeated["idempotent"] is True
+        assert repeated["run_id"] == recovered["run_id"]
+        assert owner.capture_count == 1 and owner.asr_count == 2
+        assert _snapshot(self.root) == before
+
+    def test_historical_success_is_not_repromoted_by_failure_reuse_path(self):
+        from V5.vendor.video_fupan_baseline.review_core.core import ImmutableRunError
+
+        owner, first = _run(self.tmp_path, SimulatedOwner("BV_SUCCESS_A"))
+        _, second = _run(self.tmp_path, SimulatedOwner("BV_SUCCESS_B"))
+        before = _snapshot(self.root)
+        with self.assertRaises(ImmutableRunError):
+            _run(self.tmp_path, owner)
+        assert owner.capture_count == owner.asr_count == 1
+        assert _snapshot(self.root) == before
+        assert json.loads(self.latest.read_text())["run_id"] == second["run_id"]
+        assert _cold_read(self.root, first["run_id"])["status"] == "VERIFIED"
+
+    def test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr(self):
+        from V5.vendor.video_fupan_baseline.review_core.core import EvidenceValidationError
+
+        _, first = _run(self.tmp_path, SimulatedOwner("BV_SUCCESS_A"))
+        owner = SimulatedOwner("BV_FAILURE_B", "ASR_FAILED")
+        _, failed = _run(self.tmp_path, owner)
+        run = self.root / "review" / DATE / "runs" / failed["run_id"]
+        receipt_path = run / "receipt.json"
+        receipt = json.loads(receipt_path.read_text())
+        mutations = [(run / "video_session.json", b"CORRUPTED_ARTIFACT")]
+        for field, value in (("input_digest", "0" * 64), ("run_id", "wrong"),
+                             ("trade_date", "20261010"), ("manifest_sha256", "0" * 64),
+                             ("safety_flags", {"production_allowed": True})):
+            mutated = dict(receipt)
+            mutated[field] = value
+            mutations.append((receipt_path, json.dumps(mutated).encode()))
+        for artifact, value in mutations:
+            with self.subTest(path=artifact.name, value=value):
+                original = artifact.read_bytes()
+                artifact.write_bytes(value)
+                before = _snapshot(self.root)
+                try:
+                    with self.assertRaises(EvidenceValidationError):
+                        _run(self.tmp_path, owner)
+                    assert owner.capture_count == owner.asr_count == 1
+                    assert _snapshot(self.root) == before
+                    assert json.loads(self.latest.read_text())["run_id"] == first["run_id"]
+                finally:
+                    artifact.write_bytes(original)
+
     def test_real_publication_write_or_replace_failure_preserves_old_success(self):
         from V5.src.v5_shadow import video_fupan_store as store
         for failure in ("write", "replace"):

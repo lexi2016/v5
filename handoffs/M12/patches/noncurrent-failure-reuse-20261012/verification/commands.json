@@ -1,0 +1,99 @@
+{
+  "records": [
+    {
+      "label": "baseline-red",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_historical_success_is_not_repromoted_by_failure_reuse_path"
+      ],
+      "cwd": "isolated original production + candidate tests",
+      "python_version": "3.12.14",
+      "started_utc": "2026-10-12T15:51:49.178169+00:00",
+      "ended_utc": "2026-10-12T15:51:50.156443+00:00",
+      "exit": 1,
+      "stdout_file": "baseline-red.stdout.log",
+      "stderr_file": "baseline-red.stderr.log"
+    },
+    {
+      "label": "focused-green",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr",
+        "test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_historical_success_is_not_repromoted_by_failure_reuse_path"
+      ],
+      "cwd": "candidate checkout root",
+      "python_version": "3.12.14",
+      "started_utc": "2026-10-12T15:51:50.157381+00:00",
+      "ended_utc": "2026-10-12T15:51:51.262435+00:00",
+      "exit": 0,
+      "stdout_file": "focused-green.stdout.log",
+      "stderr_file": "focused-green.stderr.log"
+    },
+    {
+      "label": "module-suite-green",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/m12",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "cwd": "candidate checkout root",
+      "python_version": "3.12.14",
+      "started_utc": "2026-10-12T15:51:51.262781+00:00",
+      "ended_utc": "2026-10-12T15:51:55.074785+00:00",
+      "exit": 0,
+      "stdout_file": "module-suite-green.stdout.log",
+      "stderr_file": "module-suite-green.stderr.log"
+    },
+    {
+      "label": "pytest-unavailable",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/m12/test_video_fupan_default_chain.py"
+      ],
+      "cwd": "candidate checkout root",
+      "python_version": "3.12.14",
+      "started_utc": "2026-10-12T15:51:55.075767+00:00",
+      "ended_utc": "2026-10-12T15:51:55.093774+00:00",
+      "exit": 1,
+      "stdout_file": "pytest-unavailable.stdout.log",
+      "stderr_file": "pytest-unavailable.stderr.log"
+    }
+  ],
+  "focused_test_count": 4,
+  "focused_subtests": 8,
+  "module_test_count": 21,
+  "module_subtests": 21,
+  "network": "socket connections blocked in tests; synthetic AcquisitionTools only",
+  "limitations": [
+    "pytest unavailable in cloud; no install attempted",
+    "historical donor tests require full original closure and were not run",
+    "Mac new candidate verification pending",
+    "no real discovery/capture/ASR/UI/deployment"
+  ]
+}

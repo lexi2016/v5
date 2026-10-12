@@ -1,0 +1,9 @@
+test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr) ... ok
+test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run) ... ok
+test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) ... ok
+test_historical_success_is_not_repromoted_by_failure_reuse_path (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_historical_success_is_not_repromoted_by_failure_reuse_path) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.944s
+
+OK

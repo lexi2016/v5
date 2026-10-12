@@ -1743,6 +1743,29 @@ def acquire_video(
         else:
             current_manifest = None
 
+        # A failed refresh is committed without replacing a prior successful
+        # current pointer. Reuse that exact run before touching media/ASR caches;
+        # a genuinely new attempt must have a new input/config/tool identity.
+        run_dir = runtime / "review" / target / "runs" / run_id
+        if run_dir.exists():
+            inspected = core._inspect_run(target, runtime, run_id, input_digest)
+            receipt = core._read_json(run_dir / "receipt.json")
+            if receipt.get("status") != "ACQUIRE_FAILED":
+                # Do not turn failure reuse into re-publication of a historical
+                # success. Preserve the existing immutable-run rejection.
+                raise core.ImmutableRunError(f"immutable run already exists without idempotent current: {run_dir}")
+            return {
+                "status": inspected["discovery_status"],
+                "idempotent": True,
+                "run_id": run_id,
+                "run_dir": str(run_dir),
+                "current_path": str(runtime / "review" / target / "current.json"),
+                "current_advanced": False,
+                "manifest": inspected,
+                "acquisition_count": 0,
+                "asr_execution_count": 0,
+            }
+
         capture_result: dict[str, Any] = {"status": "NOT_RUN"}
         media_ref: dict[str, Any] | None = None
         acquisition_count = 0

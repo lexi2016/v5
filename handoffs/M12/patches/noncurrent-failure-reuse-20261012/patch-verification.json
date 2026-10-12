@@ -1,0 +1,49 @@
+{
+  "checks": [
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "/workspace/scratch/a0bba65e475b/v5-m12-failure-reuse/handoffs/M12/patches/noncurrent-failure-reuse-20261012/runtime.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "/workspace/scratch/a0bba65e475b/v5-m12-failure-reuse/handoffs/M12/patches/noncurrent-failure-reuse-20261012/runtime.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "--check",
+        "/workspace/scratch/a0bba65e475b/v5-m12-failure-reuse/handoffs/M12/patches/noncurrent-failure-reuse-20261012/reverse.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "apply",
+        "/workspace/scratch/a0bba65e475b/v5-m12-failure-reuse/handoffs/M12/patches/noncurrent-failure-reuse-20261012/reverse.patch"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "after_sha_match": true,
+  "reverse_restored_before_sha": true,
+  "authoritative_validation_body_unchanged": true
+}

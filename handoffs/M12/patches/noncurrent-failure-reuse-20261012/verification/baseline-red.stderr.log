@@ -1,0 +1,117 @@
+test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr) ... 
+  test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr) (status='FAILED') ... ERROR
+  test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr) (status='ASR_FAILED') ... ERROR
+test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_owner_new_config_attempt_recovers_failed_asr_into_new_immutable_run) ... ok
+test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) ... 
+  test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='video_session.json', value=b'CORRUPTED_ARTIFACT') ... FAIL
+  test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "0000000000000000000000000000000000000000000000000000000000000000", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}') ... FAIL
+  test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "wrong", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}') ... FAIL
+  test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261010", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}') ... FAIL
+  test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}') ... FAIL
+  test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": true}}') ... FAIL
+test_historical_success_is_not_repromoted_by_failure_reuse_path (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_historical_success_is_not_repromoted_by_failure_reuse_path) ... ok
+
+======================================================================
+ERROR: test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr) (status='FAILED')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 248, in test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr
+    _, repeated = _run(parent, owner)
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 61, in _run
+    return owner, run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/src/v5_shadow/video_fupan_daily.py", line 85, in run_video_fupan
+    result = run_video(trade_date, mode="acquire", data_root=root, config=config, tools=tools, allow_network=allow_network)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/vendor/video_fupan_baseline/review_core/core.py", line 1252, in run_video
+    return acquire_video(
+           ^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/vendor/video_fupan_baseline/review_core/producer.py", line 1867, in acquire_video
+    return _write_acquired_run(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/vendor/video_fupan_baseline/review_core/producer.py", line 1312, in _write_acquired_run
+    raise core.ImmutableRunError(f"immutable run already exists without idempotent current: {run_dir}")
+V5.vendor.video_fupan_baseline.review_core.core.ImmutableRunError: immutable run already exists without idempotent current: /tmp/m12-v5-test-2awehbqa/FAILED/v5_private/review/20261011/runs/rcv1-20261011-BV_FAILURE_B-710c762c4cdbe20a
+
+======================================================================
+ERROR: test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr) (status='ASR_FAILED')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 248, in test_noncurrent_failed_run_reuses_exact_evidence_without_capture_or_asr
+    _, repeated = _run(parent, owner)
+                  ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 61, in _run
+    return owner, run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/src/v5_shadow/video_fupan_daily.py", line 85, in run_video_fupan
+    result = run_video(trade_date, mode="acquire", data_root=root, config=config, tools=tools, allow_network=allow_network)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/vendor/video_fupan_baseline/review_core/core.py", line 1252, in run_video
+    return acquire_video(
+           ^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/vendor/video_fupan_baseline/review_core/producer.py", line 1867, in acquire_video
+    return _write_acquired_run(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/m12-baseline-red-y3g3x924/V5/vendor/video_fupan_baseline/review_core/producer.py", line 1312, in _write_acquired_run
+    raise core.ImmutableRunError(f"immutable run already exists without idempotent current: {run_dir}")
+V5.vendor.video_fupan_baseline.review_core.core.ImmutableRunError: immutable run already exists without idempotent current: /tmp/m12-v5-test-2awehbqa/ASR_FAILED/v5_private/review/20261011/runs/rcv1-20261011-BV_FAILURE_B-52473e974960966c
+
+======================================================================
+FAIL: test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='video_session.json', value=b'CORRUPTED_ARTIFACT')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 332, in test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr
+    assert owner.capture_count == owner.asr_count == 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+======================================================================
+FAIL: test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "0000000000000000000000000000000000000000000000000000000000000000", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 332, in test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr
+    assert owner.capture_count == owner.asr_count == 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+======================================================================
+FAIL: test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "wrong", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 332, in test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr
+    assert owner.capture_count == owner.asr_count == 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+======================================================================
+FAIL: test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261010", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 332, in test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr
+    assert owner.capture_count == owner.asr_count == 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+======================================================================
+FAIL: test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000", "safety_flags": {"production_allowed": false, "buy_gate_updated": false, "orders_sent": false}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 332, in test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr
+    assert owner.capture_count == owner.asr_count == 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+======================================================================
+FAIL: test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr (test_video_fupan_default_chain.VideoFupanDefaultChainTests.test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr) (path='receipt.json', value=b'{"schema_version": "ReviewCoreReceiptV1", "trade_date": "20261011", "run_id": "rcv1-20261011-BV_FAILURE_B-f0cbecb861a460f4", "status": "ACQUIRE_FAILED", "input_digest": "f0cbecb861a460f4802747add9c78cdd40fa03a44d6737adf1f488c13948a688", "acquisition_count": 1, "asr_execution_count": 1, "network_used": true, "discovery_attempt": {"status": "DISCOVERY_CANDIDATES_READY", "routes": [], "errors": [], "network_attempted": true}, "current_advanced": false, "manifest_sha256": "19e31bd1b5a917387805adda433b967b800c5c6ac4f1763ca2de77ca1e67aa6b", "safety_flags": {"production_allowed": true}}')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/m12-baseline-red-y3g3x924/tests/m12/test_video_fupan_default_chain.py", line 332, in test_noncurrent_failed_run_tampering_is_rejected_before_capture_or_asr
+    assert owner.capture_count == owner.asr_count == 1
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.804s
+
+FAILED (failures=6, errors=2)

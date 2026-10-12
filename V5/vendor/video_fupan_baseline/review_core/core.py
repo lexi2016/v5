@@ -1396,6 +1396,39 @@ def inspect_bundle(trade_date: str, data_root: Path | str | None = None) -> dict
     if not current_path.is_file():
         raise EvidenceValidationError(f"exact-date current pointer missing: {target}")
     current = _read_json(current_path)
+    return _inspect_bundle_pointer(target, runtime_root, current)
+
+
+def _inspect_run(trade_date: str, data_root: Path, run_id: str, input_digest: str) -> dict[str, Any]:
+    """Validate a detached immutable run through the same authoritative reader.
+
+    The receipt supplies the stored manifest digest. This in-memory descriptor
+    is never written to current.json and cannot promote an old or failed run.
+    """
+    target = normalize_trade_date(trade_date)
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,255}", run_id):
+        raise EvidenceValidationError("invalid immutable run identity")
+    runtime_root = Path(data_root).absolute()
+    run_rel = f"review/{target}/runs/{run_id}"
+    receipt_path = runtime_root / run_rel / "receipt.json"
+    receipt = _read_json(receipt_path)
+    if receipt.get("input_digest") != input_digest:
+        raise EvidenceValidationError("receipt input digest does not match requested run")
+    return _inspect_bundle_pointer(target, runtime_root, {
+        "schema_version": CURRENT_SCHEMA_VERSION,
+        "trade_date": target,
+        "run_id": run_id,
+        "input_digest": input_digest,
+        "run_path": run_rel,
+        "manifest_path": f"{run_rel}/manifest.json",
+        "manifest_sha256": receipt.get("manifest_sha256"),
+        "receipt_sha256": sha256_file(receipt_path),
+        "safety_flags": receipt.get("safety_flags", {}),
+    })
+
+
+def _inspect_bundle_pointer(target: str, runtime_root: Path, current: dict[str, Any]) -> dict[str, Any]:
+    """Shared validation for current and explicitly identified immutable runs."""
     if current.get("schema_version") != CURRENT_SCHEMA_VERSION:
         raise EvidenceValidationError("current pointer schema mismatch")
     if current.get("trade_date") != target:
