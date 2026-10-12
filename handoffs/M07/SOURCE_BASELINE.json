@@ -1,0 +1,341 @@
+{
+  "schema_version": "v5.m07_source_baseline.v1",
+  "module_id": "M07",
+  "repository": "lexi2016/v5",
+  "branch": "dev/m07-github-handoff-20261011",
+  "branch_created_utc": "2026-10-12",
+  "parent": "d3ebf33c40d1b5f06e3729b11d5ece0506f34c91",
+  "baseline_status": "ORIGINAL_SOURCE_PLUS_REJECTED_R4_NOT_COMPLETE_CHAIN",
+  "files": [
+    {
+      "path": "TASK_DOCUMENTS/ACCEPTANCE.md",
+      "sha256": "59e34c0fcb6e987e228c206fe92fd93c538571ff6c2410e6dc1c3dc2b6a3c5fa",
+      "bytes": 4813,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "TASK_DOCUMENTS/PROMPT_FOR_CHAT.md",
+      "sha256": "dbd95b86127117793e74402becbb038b36daa26f514c69b9c721a277ef493dfe",
+      "bytes": 4493,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "TASK_DOCUMENTS/SOURCE_MAP.md",
+      "sha256": "4f1cd1194c1dfbe7a3457365c3950dc27880e1b518d49646ee170ad8ecd45f27",
+      "bytes": 6063,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "TASK_DOCUMENTS/START_HERE.md",
+      "sha256": "510f47c81c25942dc2406110172db0e41fad8a166908a3f5f4aba643f77e297b",
+      "bytes": 5097,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "V5/README.md",
+      "sha256": "7abaade6654d84cd93c378a609f4db3e9b9dec45db338ac7407f782ec34eee57",
+      "bytes": 2487,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/README.md",
+      "git_blob_sha": "4e44173cee5f43e034f9aef3710ba9a15873b225"
+    },
+    {
+      "path": "V5/contracts/stage_selection_source_manifest.json",
+      "sha256": "1cc54a2b9efcd1756501007469206503a49b98acaa7495860f567999ab4d0a37",
+      "bytes": 6358,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/contracts/stage_selection_source_manifest.json",
+      "git_blob_sha": "ef6645352e3afa8743bad9e6bbbac78e2324a7a8"
+    },
+    {
+      "path": "V5/pyproject.toml",
+      "sha256": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584",
+      "bytes": 262,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/pyproject.toml",
+      "git_blob_sha": "94de0b747be243f6309da810fa3ce058e643b52a"
+    },
+    {
+      "path": "V5/src/v5_shadow/__init__.py",
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "bytes": 83,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/__init__.py",
+      "git_blob_sha": "152582c71d7e49884749beb490e192ff4cb8ca6c"
+    },
+    {
+      "path": "V5/src/v5_shadow/a_preselection.py",
+      "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+      "bytes": 29140,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/a_preselection.py",
+      "git_blob_sha": "05dd0b28f14bd794890f514e130d8090a1b0438b"
+    },
+    {
+      "path": "V5/src/v5_shadow/a_stage_daily.py",
+      "sha256": "2a1bd62175a335e06ffd03066c6047ca744eaf396aa558ccf23ea74fc20d10e6",
+      "bytes": 4253,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "V5/src/v5_shadow/api_gateway.py",
+      "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+      "bytes": 16003,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/api_gateway.py",
+      "git_blob_sha": "c5677fb59a4847a24f16a12d5412fce293168fc0"
+    },
+    {
+      "path": "V5/src/v5_shadow/composition.py",
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "bytes": 5297,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/composition.py",
+      "git_blob_sha": "d22723df42b71537210aa621afb05dfab6be517f"
+    },
+    {
+      "path": "V5/src/v5_shadow/contracts.py",
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "bytes": 7256,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/contracts.py",
+      "git_blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_dispatch.py",
+      "sha256": "a7d0a9bfe672fd670ee3c7504a0b25c1a0365498c0520b71d16e38bc93cae240",
+      "bytes": 3438,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/daily_dispatch.py",
+      "git_blob_sha": "f5d45abea6a159f01756decb23049b825cd0f906"
+    },
+    {
+      "path": "V5/src/v5_shadow/digests.py",
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "bytes": 425,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/digests.py",
+      "git_blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+      "bytes": 15282,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/module_api.py",
+      "git_blob_sha": "3fdea5f256b2dc70df141a0e70dbbc1396abb859"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_artifacts.py",
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "bytes": 7936,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/module_artifacts.py",
+      "git_blob_sha": "acf2195fee3711f594982269f1e6ab81da40a905"
+    },
+    {
+      "path": "V5/src/v5_shadow/provider_evidence.py",
+      "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+      "bytes": 6446,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/provider_evidence.py",
+      "git_blob_sha": "5d72d3b2d54c0449576e46e7eba7be4fbc7884d6"
+    },
+    {
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "sha256": "d3ba8dc00de2525ccfc2756193be1338bb800c796c2302f6c97f525a76b5748e",
+      "bytes": 6133,
+      "repository": "lexi2016/v5",
+      "commit": "7006c6ab6e2b4f1f9f6a00da0b3b490dcd4d4fd8",
+      "source_path": "handoffs/M06/source/V5/src/v5_shadow/run_ledger.py",
+      "git_blob_sha": "a7f0954f776e357635e1cca449e54c88c1c110e8"
+    },
+    {
+      "path": "V5/src/v5_shadow/stage_selection.py",
+      "sha256": "7c65602ac642a92cfda17dde9f1d2eb38e7a2db92f55974f37645178c4c60a8c",
+      "bytes": 12330,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/src/v5_shadow/stage_selection.py",
+      "git_blob_sha": "4f371cce798b512f17c36b70bcc3bce413a3ae06"
+    },
+    {
+      "path": "V5/tests/test_a_stage_daily.py",
+      "sha256": "388b322695d5e6e4f66f67ae6c7bf93209c9289c6e3b2c91a89c33c2d1f4b2cb",
+      "bytes": 1049,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "V5/tests/test_run_ledger.py",
+      "sha256": "2bfd83f03f4b74b5b8db75daef4af5f8456737f0329a458ed0f4bb2727be5b6b",
+      "bytes": 5533,
+      "origin": "original M07 task / rejected R4 candidate / unchanged shared ledger regression; not accepted production"
+    },
+    {
+      "path": "V5/tests/test_stage_selection.py",
+      "sha256": "6cb3b183451d96cd5c8f4e9bed54ddaf7ff4e3722d6a65be0d94a3b37b0507df",
+      "bytes": 6543,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/tests/test_stage_selection.py",
+      "git_blob_sha": "8368fae537b76dec4fba0f83206f11bb94386bcd"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/infrastructure/__init__.py",
+      "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b",
+      "bytes": 68,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/infrastructure/__init__.py",
+      "git_blob_sha": "647f68415f88ab9dfb514686554c9f9abf4c1cd6"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/infrastructure/interprocess_lock.py",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "bytes": 7514,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/infrastructure/interprocess_lock.py",
+      "git_blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/infrastructure/owned_io.py",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "bytes": 9354,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/infrastructure/owned_io.py",
+      "git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/__init__.py",
+      "sha256": "b56739ecc4a80eaa081f3ea124cf3199683fd470d71a770c9f91cc14de128140",
+      "bytes": 57,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/__init__.py",
+      "git_blob_sha": "7319e68fca8b6ae31315a1bc94b7494dcf887ae9"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py",
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "bytes": 527,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/_namespace.py",
+      "git_blob_sha": "55e1b3f744f80339298ac911073c67f3e549cf3c"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/a_live.py",
+      "sha256": "b7faa3286df4f0312075c7a4563d3f4deed463d3f10ab2c4902967e8d5d7781d",
+      "bytes": 7307,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/a_live.py",
+      "git_blob_sha": "ca1f1b6d95d9d2b76591b77d372e7415fe2c5ce7"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/hk_formula_score.py",
+      "sha256": "4e42a0e6c233f649f8937dc5b5de231ce59fce8363d05025e9df77a78c4f00d7",
+      "bytes": 6812,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/hk_formula_score.py",
+      "git_blob_sha": "0e67cd5361f597c300770ed4d49623dfa514f22a"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/hk_four_lanes.py",
+      "sha256": "d44cd657b15b806922dd99317cfe759849a0d59884a0e39a533f0204f530ae71",
+      "bytes": 8428,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/hk_four_lanes.py",
+      "git_blob_sha": "1c462d4ac2925bb5d77f7a8199735a3567205a8b"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/market_quality.py",
+      "sha256": "726cd4987a070bf78ac7416756f3cbba86633b1176f6f43535ac747263474b3f",
+      "bytes": 5196,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/market_quality.py",
+      "git_blob_sha": "6f6ddebbf4469da2a39daea02113c65441835498"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/primitives_io.py",
+      "sha256": "6f492e2d32fab11970993adfe694cf159cccafe2205b288685917f93560e2501",
+      "bytes": 11285,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/primitives_io.py",
+      "git_blob_sha": "66cbbb36e5c7cdb02a226c7666ec0acfd1067ec4"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/schema_values.py",
+      "sha256": "80b0c21556c78c89132a08ca24eb80b5a211791719cb54801497dbe74472e458",
+      "bytes": 3956,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/schema_values.py",
+      "git_blob_sha": "2f5cf40e2197c6af0dddfd2e7ba65a0b6403acb0"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/selection_envelope.py",
+      "sha256": "be7748ff72fd85375fc6575a6a40281fb1518c8faf0e55f352f167fbbc42bd89",
+      "bytes": 4569,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/selection_envelope.py",
+      "git_blob_sha": "44e32a44c24f7e2b99aeda48a5f39a71c7e55910"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/shadow_capture.py",
+      "sha256": "92875f5e1b969ec73790b31cd91378059d3f3eb07c3fcbd70c3ad16675ee66e5",
+      "bytes": 3162,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/_selection_parts/shadow_capture.py",
+      "git_blob_sha": "47391f5c14a3020d8c27c18ba00ed164bc6b49e9"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/calendar.py",
+      "sha256": "31fed97066d9b804a71f15c48d4e0f8baa5d9af621e1d81dc0340fd6619e4099",
+      "bytes": 4805,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/calendar.py",
+      "git_blob_sha": "5d819f6467328cd94d94563143fc57f461a5b973"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/contracts.py",
+      "sha256": "6880f6a82c7f4fb0fde5c0661bd5a8bb12b590661a4b8552bcb3d6be969ae83d",
+      "bytes": 2331,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/contracts.py",
+      "git_blob_sha": "3c08626f76e43f3534ba8edc2785e7da8fbc2292"
+    },
+    {
+      "path": "V5/vendor/stage_selection_baseline/stage_center/selection.py",
+      "sha256": "ccf7dddfb72fe88b5bff68ce9501e0a8ef9f41a212008a495824017943675294",
+      "bytes": 31705,
+      "repository": "lexi2016/v4",
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_path": "V5/vendor/stage_selection_baseline/stage_center/selection.py",
+      "git_blob_sha": "e5bb693578a32f954355f53fe9b79e1d592e8422"
+    }
+  ]
+}
