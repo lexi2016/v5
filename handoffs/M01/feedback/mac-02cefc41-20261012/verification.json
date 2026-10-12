@@ -1,0 +1,43 @@
+{
+  "candidate": "02cefc41aadb4358cb8485b71858ae5d6b903a56",
+  "tests": 44,
+  "passed": 44,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "execution_count": 1,
+  "tracked_blobs_verified_unchanged": 84,
+  "before_after_sha256_verified": true,
+  "records": [
+    {
+      "command": [
+        "<existing-python>",
+        "-I",
+        "-B",
+        "-c",
+        "import sys,pandas,pyarrow;print(sys.executable);print(sys.version);print(\"pandas\",pandas.__version__);print(\"pyarrow\",pyarrow.__version__)"
+      ],
+      "started_utc": "2026-10-12T15:30:34.945576+00:00",
+      "ended_utc": "2026-10-12T15:30:35.668429+00:00",
+      "exit": 0,
+      "stdout": "<existing-python>\n3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]\npandas 2.3.3\npyarrow 24.0.0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "<existing-python>",
+        "handoffs/M01/candidate_source_entrypoints_20261012/run_tests.py",
+        "--source",
+        "handoffs/M01/source",
+        "--require-parquet"
+      ],
+      "started_utc": "2026-10-12T15:30:35.668737+00:00",
+      "ended_utc": "2026-10-12T15:30:36.027719+00:00",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "test_directory_uses_original_pointer_name (test_a_source_daily.BoundedReaderTests.test_directory_uses_original_pointer_name) ... ok\ntest_guard_rejection_prevents_reader_call (test_a_source_daily.BoundedReaderTests.test_guard_rejection_prevents_reader_call) ... ok\ntest_returned_path_rejects_raw_types_lexical_paths_and_escape (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_raw_types_lexical_paths_and_escape) ... ok\ntest_returned_path_rejects_symlink_ancestor (test_a_source_daily.BoundedReaderTests.test_returned_path_rejects_symlink_ancestor) ... ok\ntest_bad_marker_rejected_on_both_entries (test_a_source_daily.DefaultEntrypointTests.test_bad_marker_rejected_on_both_entries) ... ok\ntest_default_read_applies_source_bound_to_saved_generation (test_a_source_daily.DefaultEntrypointTests.test_default_read_applies_source_bound_to_saved_generation) ... ok\ntest_default_reader_rejects_bad_generation_without_writes (test_a_source_daily.DefaultEntrypointTests.test_default_reader_rejects_bad_generation_without_writes) ... ok\ntest_directory_pointer_append_is_rechecked_for_symlink (test_a_source_daily.DefaultEntrypointTests.test_directory_pointer_append_is_rechecked_for_symlink) ... ok\ntest_internal_defaults_are_original_source_dependencies (test_a_source_daily.DefaultEntrypointTests.test_internal_defaults_are_original_source_dependencies) ... ok\ntest_invalid_date_is_checked_before_roots (test_a_source_daily.DefaultEntrypointTests.test_invalid_date_is_checked_before_roots) ... ok\ntest_marker_symlink_rejected (test_a_source_daily.DefaultEntrypointTests.test_marker_symlink_rejected) ... ok\ntest_missing_marker_rejected (test_a_source_daily.DefaultEntrypointTests.test_missing_marker_rejected) ... ok\ntest_pointer_outside_source_rejected_before_original_reader (test_a_source_daily.DefaultEntrypointTests.test_pointer_outside_source_rejected_before_original_reader) ... ok\ntest_pointer_raw_type_and_lexical_rejection (test_a_source_daily.DefaultEntrypointTests.test_pointer_raw_type_and_lexical_rejection) ... ok\ntest_public_signatures_need_business_arguments_only (test_a_source_daily.DefaultEntrypointTests.test_public_signatures_need_business_arguments_only) ... ok\ntest_read_entry_applies_same_root_boundary (test_a_source_daily.DefaultEntrypointTests.test_read_entry_applies_same_root_boundary) ... ok\ntest_roots_must_not_overlap_either_direction (test_a_source_daily.DefaultEntrypointTests.test_roots_must_not_overlap_either_direction) ... ok\ntest_roots_reject_raw_lexical_paths (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_lexical_paths) ... ok\ntest_roots_reject_raw_types (test_a_source_daily.DefaultEntrypointTests.test_roots_reject_raw_types) ... ok\ntest_source_and_private_symlink_ancestors_rejected (test_a_source_daily.DefaultEntrypointTests.test_source_and_private_symlink_ancestors_rejected) ... ok\ntest_source_must_be_existing_directory (test_a_source_daily.DefaultEntrypointTests.test_source_must_be_existing_directory) ... ok\ntest_atomic_absent_publication_preserves_racing_file (test_a_source_daily.ParserAndCoreTests.test_atomic_absent_publication_preserves_racing_file) ... ok\ntest_binding_symlink_never_overwritten (test_a_source_daily.ParserAndCoreTests.test_binding_symlink_never_overwritten) ... ok\ntest_conflicting_existing_binding_not_overwritten (test_a_source_daily.ParserAndCoreTests.test_conflicting_existing_binding_not_overwritten) ... ok\ntest_core_persists_reuses_and_independently_rereads (test_a_source_daily.ParserAndCoreTests.test_core_persists_reuses_and_independently_rereads) ... ok\ntest_dates_strict_and_real_calendar (test_a_source_daily.ParserAndCoreTests.test_dates_strict_and_real_calendar) ... ok\ntest_exact_relative_checked_before_reader (test_a_source_daily.ParserAndCoreTests.test_exact_relative_checked_before_reader) ... ok\ntest_formula_failure_preserves_previous_success (test_a_source_daily.ParserAndCoreTests.test_formula_failure_preserves_previous_success) ... ok\ntest_full_projection_and_expected_comparison (test_a_source_daily.ParserAndCoreTests.test_full_projection_and_expected_comparison) ... ok\ntest_non_missing_read_error_is_not_treated_as_absent (test_a_source_daily.ParserAndCoreTests.test_non_missing_read_error_is_not_treated_as_absent) ... ok\ntest_parser_preserves_r15_exact_schema_and_fields (test_a_source_daily.ParserAndCoreTests.test_parser_preserves_r15_exact_schema_and_fields) ... ok\ntest_parser_rejects_duplicate_keys_and_invalid_json (test_a_source_daily.ParserAndCoreTests.test_parser_rejects_duplicate_keys_and_invalid_json) ... ok\ntest_parser_rejects_every_digest (test_a_source_daily.ParserAndCoreTests.test_parser_rejects_every_digest) ... ok\ntest_postwrite_source_drift_refused (test_a_source_daily.ParserAndCoreTests.test_postwrite_source_drift_refused) ... ok\ntest_project_preserves_generation_id_and_path_validation (test_a_source_daily.ParserAndCoreTests.test_project_preserves_generation_id_and_path_validation) ... ok\ntest_write_is_locked_and_require_absent (test_a_source_daily.ParserAndCoreTests.test_write_is_locked_and_require_absent) ... ok\ntest_default_artifact_tamper_preserves_old_binding (test_a_source_daily.RealDefaultReaderTests.test_default_artifact_tamper_preserves_old_binding) ... <pyarrow-build>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l1dcachesize'. Detail: [errno 1] Operation not permitted\n<pyarrow-build>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l2cachesize'. Detail: [errno 1] Operation not permitted\n<pyarrow-build>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.l3cachesize'. Detail: [errno 1] Operation not permitted\n<pyarrow-build>/arrow/cpp/src/arrow/util/cpu_info.cc:242: IOError: sysctlbyname failed for 'hw.optional.neon'. Detail: [errno 1] Operation not permitted\nok\ntest_default_changed_pointer_rejects_old_binding (test_a_source_daily.RealDefaultReaderTests.test_default_changed_pointer_rejects_old_binding) ... ok\ntest_default_changed_valid_source_gets_new_identity_without_overwrite (test_a_source_daily.RealDefaultReaderTests.test_default_changed_valid_source_gets_new_identity_without_overwrite) ... ok\ntest_default_create_read_reuse_real_parquet_and_source_sha_chain (test_a_source_daily.RealDefaultReaderTests.test_default_create_read_reuse_real_parquet_and_source_sha_chain) ... ok\ntest_default_generation_identity_conflict_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_generation_identity_conflict_rejected) ... ok\ntest_default_manifest_tamper_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_manifest_tamper_rejected) ... ok\ntest_default_receipt_tamper_rejected (test_a_source_daily.RealDefaultReaderTests.test_default_receipt_tamper_rejected) ... ok\ntest_default_wrong_day_rejected_before_output_write (test_a_source_daily.RealDefaultReaderTests.test_default_wrong_day_rejected_before_output_write) ... ok\n\n----------------------------------------------------------------------\nRan 44 tests in 0.197s\n\nOK\n"
+    }
+  ],
+  "scope": "Offline synthetic fixture engineering acceptance, including 8 real Parquet I/O cases. No real market data, historical PIT, production qualification, deployment, M05/M09 consumption, API/UI, or natural daily acceptance. cutoff_status remains UNVERIFIED.",
+  "warning": "PyArrow emitted four sandbox sysctl CPU/cache-probe warnings; all 44 tests passed. No permission changes or rerun."
+}
