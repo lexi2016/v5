@@ -2,7 +2,7 @@
   "schema_version": "v5.frontend.missing-source.v1",
   "source_identity": "exact existing frontend working-copy bytes; no source Git commit claimed",
   "base_commit": "2489ea1e04a26a9e2f318f498ac3f5f8c970fe48",
-  "scope": "seven explicitly authorized missing runtime/build source files only",
+  "scope": "nine explicitly authorized runtime/build source files: seven initial missing files plus two current app_shell files",
   "files": [
     {
       "path": "frontend/daily-research-command/index.html",
@@ -45,9 +45,36 @@
       "bytes": 23801,
       "git_blob_sha1": "89473e23fc68904ee9515cb17898b2c466d5947d",
       "sha256": "a7aeb4e0a84aaa340260e7a09d522b5e96cf579fcca18f6aa747154716a32a1c"
+    },
+    {
+      "path": "frontend/src/app_shell/types.ts",
+      "bytes": 6658,
+      "git_blob_sha1": "fe7d77d9ec407a58de3d414b53bbcdb720e98ce9",
+      "sha256": "ceb03c5b53e6ff3c75815b944c692f75e45da65a1a65f2b31bc6fd3320abab44"
+    },
+    {
+      "path": "frontend/src/app_shell/useAppShell.ts",
+      "bytes": 41331,
+      "git_blob_sha1": "4093d9264b03d6536a71ac2bbd18712322bef211",
+      "sha256": "4a21ee3176df7550def6a6b3c89d4ec7a83b19249430ae0f74939a9b5eabaf94"
     }
   ],
   "tests": "NOT_RUN",
   "build": "NOT_RUN",
-  "privacy": "No personal absolute-path patterns found in the seven selected files; withheld tests not included."
+  "privacy": "No personal absolute paths, private-key headers, recognized credential tokens/assignments, URLs or email literals found in the two added app_shell files; withheld tests not included.",
+  "app_shell_dependency_check": {
+    "scope": "direct imports only against existing frontend working root",
+    "missing_relative_imports": [],
+    "package_imports": [
+      "vue"
+    ],
+    "resolved_relative_paths": [
+      "frontend/src/components/review/StageSummaryPanel.vue",
+      "frontend/src/api/review.ts",
+      "frontend/src/contracts/review.ts",
+      "frontend/src/app_shell/types.ts",
+      "frontend/src/app_shell/formatters.ts",
+      "frontend/src/app_shell/timeline.ts"
+    ]
+  }
 }
