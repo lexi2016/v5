@@ -145,7 +145,51 @@ def _read_regular(fd,limit):
 
 
 def _config(value):
-    exact_keys(value,('schema_version','module_id','release_id','data_root','routes'))
+    exact_keys(
+        value,
+        (
+            'schema_version',
+            'module_id',
+            'release_id',
+            'data_root',
+            'm18_v2_binding',
+            'routes',
+        ),
+    )
+    if value['module_id'] == 'manager' and any(
+        route == '/api/v4/manager/m18/v2/pages'
+        for route in value['routes']
+    ):
+        binding = value['m18_v2_binding']
+
+        exact_keys(
+            binding,
+            (
+                'manifest_sha256',
+                'identity',
+                'profile_sha256',
+                'bundle_root',
+            ),
+        )
+
+        exact_keys(
+            binding['identity'],
+            (
+                'run_id',
+                'target_date',
+                'plan_sha256',
+                'raw_sha256',
+                'response_sha256',
+                'input_identity',
+            ),
+        )
+
+        sha(binding['manifest_sha256'])
+        sha(binding['profile_sha256'])
+
+        if binding['identity']['run_id'] != \
+                '46596b03c2ab4e29b1219fd2e5eb698f':
+            raise ValueError('M18_BINDING_RUN_ID')
     if value['schema_version']!='v5.module_api.v1' or not isinstance(value['module_id'],str) or not re.fullmatch('[a-z][a-z0-9_]{0,63}',value['module_id']):raise ValueError('MODULE_CONFIG_INVALID')
     if not isinstance(value['release_id'],str) or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]{0,127}',value['release_id']):raise ValueError('MODULE_RELEASE_REQUIRED')
     if not isinstance(value['routes'],list) or len(value['routes'])>100 or any(not isinstance(v,str) for v in value['routes']) or len(set(value['routes']))!=len(value['routes']):raise ValueError('MODULE_ROUTES_INVALID')
