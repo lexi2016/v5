@@ -1,0 +1,32 @@
+{
+  "source_sha256": {
+    "V5/src/v5_shadow/module_api.py": "f67c05d9ab947faa0f75cf1092c1cfce39994bf9ce67d31fcad1f7a20e5cbfee",
+    "V5/src/v5_shadow/m18_offline_v2_process.py": "6d26332d3b9e97905e7a7ffbcea5fb47a002702a4ee6285e65a52d1af70b3f73",
+    "V5/src/v5_shadow/m18_v2_read_process.py": "b4becba61103317ef9e2bb6c862441b6d2d379c5596d56be33e086edd3880b24",
+    "V5/tests/test_m18_v2_read_process.py": "cd77077d79ea82eaaadcd89e91ffb8830626389b260aedf61e5b1ebafe87ee22",
+    "V5/tests/m18_semantic_memory_probe.py": "8bd47bf33a6bfcd70b01273fefa316e20ca5c30e4409c6a61f4874130b89b723"
+  },
+  "full_regression": {
+    "tests": 93,
+    "subtests": 90,
+    "seconds": 278.92,
+    "passed": true,
+    "includes_original_rss_gate": true,
+    "includes_original_90_second_deadline": true
+  },
+  "final_regression": {
+    "tests": 42,
+    "subtests": 65,
+    "skipped": 1,
+    "seconds": 64.84,
+    "passed": true,
+    "skip_reason": "Already executed original 90s/RSS stress in full run; final changes cover only parent selector/final elapsed/bytecode startup"
+  },
+  "ast_checks": 5,
+  "final_synthetic_requests": 10,
+  "frontend_changed": false,
+  "reader_changed": false,
+  "profile_changed": false,
+  "mac_acceptance": "NOT_RUN",
+  "github_actions": "NOT_RUN"
+}

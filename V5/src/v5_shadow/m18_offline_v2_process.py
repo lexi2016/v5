@@ -175,9 +175,11 @@ class ReceiptSender:
             count=os.write(self.fileno(),view)
             if count<=0:raise OSError('receipt write closed')
             view=view[count:]
+    def encode(self,result):
+        return encode_receipt(compact_receipt(result))
     def send(self,result):
         m.require(not self.sent,'V2_RECEIPT_DUPLICATE');self.sent=True
-        body=encode_receipt(compact_receipt(result))
+        body=self.encode(result)
         self._write(struct.pack('!I',len(body)));self._write(body)
         # Includes summary compaction, JSON encoding and the entire body send.
         # CPU is process lifetime CPU (including spawn imports), stronger than
@@ -188,7 +190,7 @@ class ReceiptSender:
         self._write(FOOTER.pack(peak,time.process_time(),time.monotonic()-self.started))
 
 
-def receive_receipt(fd,deadline):
+def receive_receipt(fd,deadline,*,receipt_bytes=RECEIPT_BYTES,check=check_summary):
     data=bytearray();total=None
     try:
         os.set_blocking(fd,False)
@@ -197,7 +199,7 @@ def receive_receipt(fd,deadline):
             m.require(remaining>0,'V2_RESOURCE_WALL_SECONDS')
             ready,_,_=select.select([fd],[],[],min(.05,remaining))
             if not ready:continue
-            try:block=os.read(fd,min(4096,RECEIPT_BYTES+4+FOOTER.size+1-len(data)))
+            try:block=os.read(fd,min(4096,receipt_bytes+4+FOOTER.size+1-len(data)))
             except (BlockingIOError,InterruptedError):continue
             m.require(time.monotonic()<=deadline,'V2_RESOURCE_WALL_SECONDS')
             if not block:
@@ -207,14 +209,15 @@ def receive_receipt(fd,deadline):
             data.extend(block)
             if len(data)>=4 and total is None:
                 length=struct.unpack('!I',data[:4])[0]
-                m.require(0<length<=RECEIPT_BYTES,'V2_RECEIPT_LENGTH');total=4+length+FOOTER.size
+                m.require(0<length<=receipt_bytes,'V2_RECEIPT_LENGTH');total=4+length+FOOTER.size
             if total is not None:m.require(len(data)<=total,'V2_RECEIPT_TRAILING')
         value,_=m.v1.parse(bytes(data[4:-FOOTER.size]),object_limit=True)
-        check_summary(value)
+        check(value)
         peak,cpu,wall=FOOTER.unpack(data[-FOOTER.size:])
         m.require(all(math.isfinite(x) and x>=0 for x in (cpu,wall)),'V2_RECEIPT_USAGE')
-        value['usage']=dict(peak_rss_bytes=peak,cpu_seconds=cpu,wall_seconds=wall,
-                            scan_nodes=value['scan_nodes'],scan_bytes=value['scan_bytes'])
+        value['usage']=dict(peak_rss_bytes=peak,cpu_seconds=cpu,wall_seconds=wall)
+        if 'scan_nodes' in value:
+            value['usage'].update(scan_nodes=value['scan_nodes'],scan_bytes=value['scan_bytes'])
         m.require(time.monotonic()<=deadline,'V2_RESOURCE_WALL_SECONDS')
         return value
     except (OSError,ValueError) as error:

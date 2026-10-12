@@ -8,6 +8,7 @@ import os
 import re
 import socket
 import stat
+import sys
 import threading
 from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
@@ -155,8 +156,7 @@ def _m18_page_response(config, root, query):
     if binding['profile_sha256'] != descriptor['profile_sha256']:
         raise ValueError('M18_PROFILE_MISMATCH')
 
-    reader = _m18_disk_reader(binding)
-    value = reader.content(page)
+    value = _m18_read_value(binding, 'content', {'page': page})
 
     return {
         'schema_version': 'v5.m18.v2.page_response.v1',
@@ -175,6 +175,16 @@ M18_VIEW_ITEM_BYTES = 16 * 1024
 M18_VIEW_VALUES_BYTES = 128 * 1024
 
 
+def _m18_read_value(binding, kind, query):
+    from .m18_v2_read_process import run
+    result = run(dict(binding=binding, kind=kind, query=query))
+    if result['status'] != 'OK':
+        if result.get('error') == 'MODULE_RESULT_NOT_AVAILABLE':
+            raise FileNotFoundError('M18_READER_NOT_READY')
+        raise ValueError('M18_READER_REJECTED')
+    return result['payload']
+
+
 def _m18_semantic_response(config, root, path, query):
     """Read one saved semantic page. Never reconstruct a full response for HTTP."""
     keys = ('run_id', 'generation_id')
@@ -190,8 +200,14 @@ def _m18_semantic_response(config, root, path, query):
     if (binding['identity'] != descriptor['identity']
             or binding['profile_sha256'] != descriptor['profile_sha256']):
         raise ValueError('M18_IDENTITY_MISMATCH')
-    reader = _m18_disk_reader(binding)
-    if path == M18_ROUTE + '/overview':
+    kind = 'overview' if path == M18_ROUTE + '/overview' else 'section'
+    selection = {key: query[key] for key in ('section', 'cursor') if key in query}
+    return _m18_read_value(binding, kind, selection)
+
+
+def _m18_semantic_value(reader, kind, query):
+    """Bound one verified Reader value inside the short-lived read process."""
+    if kind == 'overview':
         value = reader.overview()
     else:
         section = query['section']
@@ -420,6 +436,15 @@ def read_response(config,root,path,query):
 def create_module_server(value,host='127.0.0.1',port=0):
     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
     config,root=_config(value)
+    if any(route in config['routes'] for route in
+           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections')):
+        # Set at service startup, before any GET can spawn/import a reader.
+        # Also covers library callers that did not start their interpreter -B.
+        sys.dont_write_bytecode=True
+        os.environ['PYTHONDONTWRITEBYTECODE']='1'
+    # One heavy read at a time; do not queue stale browser requests or allow
+    # multiple full Reader allocations. Ordinary module routes stay independent.
+    m18_read_slot=threading.BoundedSemaphore(1)
     class Handler(BaseHTTPRequestHandler):
         def setup(self):
             super().setup();self.connection.settimeout(5)
@@ -468,6 +493,9 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections')
+            if heavy and not m18_read_slot.acquire(blocking=False):
+                return self.error(503, 'MODULE_BUSY')
             try:
                 if parsed.path == M18_ROUTE + '/pages':
                     payload = _m18_page_response(config,root,query)
@@ -482,6 +510,8 @@ def create_module_server(value,host='127.0.0.1',port=0):
             except ValueError as error:
                 self.error(503,'MODULE_BUSY') if str(error)=='MODULE_PUBLICATION_BUSY' else self.error(409,'MODULE_RESULT_INVALID')
             except (TypeError,KeyError,OSError,RecursionError):self.error(409,'MODULE_RESULT_INVALID')
+            finally:
+                if heavy:m18_read_slot.release()
     class Server(ThreadingHTTPServer):
         daemon_threads=False
         block_on_close=True

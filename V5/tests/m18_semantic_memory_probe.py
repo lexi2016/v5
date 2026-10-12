@@ -25,6 +25,15 @@ def prepare(root):
 
 def serve(config):
     from v5_shadow import module_api as api
+    from v5_shadow import m18_v2_read_process as read_process
+    original_run=read_process.run
+    def observed_run(request):
+        result=original_run(request)
+        print(json.dumps({key:result.get(key) for key in
+              ('status','pid','usage','worker_exit','worker_reaped','supervisor_wall_seconds')}),
+              file=sys.stderr,flush=True)
+        return result
+    read_process.run=observed_run
     original=api._m18_semantic_response
     def observed(*args):
         start=time.monotonic();code=None

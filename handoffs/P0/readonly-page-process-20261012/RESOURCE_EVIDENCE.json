@@ -1,0 +1,203 @@
+{
+  "data_kind": "SYNTHETIC",
+  "fixture": {
+    "response_bytes": 28647597,
+    "saved_bytes": 37913404,
+    "response_nodes": 1103793,
+    "generation_bytes": 38940915
+  },
+  "requests": [
+    {
+      "section": "overview",
+      "status": 200,
+      "bytes": 2161,
+      "elapsed": 12.59756738499982
+    },
+    {
+      "section": "summary",
+      "status": 200,
+      "bytes": 1057,
+      "elapsed": 11.299989220000498
+    },
+    {
+      "section": "gaps",
+      "status": 200,
+      "bytes": 8537,
+      "elapsed": 10.516628544000014
+    },
+    {
+      "section": "gaps-next",
+      "status": 200,
+      "bytes": 9484,
+      "elapsed": 10.498100909999266
+    },
+    {
+      "section": "materials",
+      "status": 200,
+      "bytes": 8608,
+      "elapsed": 11.711361687000135
+    },
+    {
+      "section": "empty",
+      "status": 200,
+      "bytes": 871,
+      "elapsed": 10.884684385000583
+    },
+    {
+      "section": "summary",
+      "status": 200,
+      "bytes": 1057,
+      "elapsed": 9.645061140999132
+    },
+    {
+      "section": "gaps",
+      "status": 200,
+      "bytes": 8537,
+      "elapsed": 10.50083924699993
+    },
+    {
+      "section": "materials",
+      "status": 200,
+      "bytes": 8608,
+      "elapsed": 10.251361061999887
+    },
+    {
+      "section": "overview",
+      "status": 200,
+      "bytes": 2161,
+      "elapsed": 10.605100425999808
+    }
+  ],
+  "files_unchanged": true,
+  "workers": [
+    {
+      "status": "OK",
+      "pid": 10,
+      "usage": {
+        "peak_rss_bytes": 165920768,
+        "cpu_seconds": 12.495766464,
+        "wall_seconds": 12.41253481900003
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 12.580021684999338
+    },
+    {
+      "status": "OK",
+      "pid": 13,
+      "usage": {
+        "peak_rss_bytes": 165928960,
+        "cpu_seconds": 11.259666672,
+        "wall_seconds": 11.119482229999448
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 11.29451720399993
+    },
+    {
+      "status": "OK",
+      "pid": 16,
+      "usage": {
+        "peak_rss_bytes": 165920768,
+        "cpu_seconds": 10.475716344,
+        "wall_seconds": 10.364915307999581
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 10.51345983400006
+    },
+    {
+      "status": "OK",
+      "pid": 19,
+      "usage": {
+        "peak_rss_bytes": 165834752,
+        "cpu_seconds": 10.456262094,
+        "wall_seconds": 10.350554893000663
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 10.4939442040004
+    },
+    {
+      "status": "OK",
+      "pid": 22,
+      "usage": {
+        "peak_rss_bytes": 165916672,
+        "cpu_seconds": 11.678603829,
+        "wall_seconds": 11.558069175999663
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 11.707020293999449
+    },
+    {
+      "status": "OK",
+      "pid": 25,
+      "usage": {
+        "peak_rss_bytes": 165920768,
+        "cpu_seconds": 10.842128513,
+        "wall_seconds": 10.744612829000289
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 10.881386164000105
+    },
+    {
+      "status": "OK",
+      "pid": 28,
+      "usage": {
+        "peak_rss_bytes": 165916672,
+        "cpu_seconds": 9.609313565,
+        "wall_seconds": 9.514273953999691
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 9.641420574000222
+    },
+    {
+      "status": "OK",
+      "pid": 31,
+      "usage": {
+        "peak_rss_bytes": 165920768,
+        "cpu_seconds": 10.453681768,
+        "wall_seconds": 10.342794133999632
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 10.493932073999531
+    },
+    {
+      "status": "OK",
+      "pid": 34,
+      "usage": {
+        "peak_rss_bytes": 165875712,
+        "cpu_seconds": 10.189359761,
+        "wall_seconds": 10.104083941000681
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 10.248515754000437
+    },
+    {
+      "status": "OK",
+      "pid": 37,
+      "usage": {
+        "peak_rss_bytes": 165928960,
+        "cpu_seconds": 10.559356912,
+        "wall_seconds": 10.460348001000057
+      },
+      "worker_exit": 0,
+      "worker_reaped": true,
+      "supervisor_wall_seconds": 10.601996943000813
+    }
+  ],
+  "api_peak_rss_bytes": 20373504,
+  "worker_peak_min": 165834752,
+  "worker_peak_max": 165928960,
+  "original_profile": {
+    "rss_bytes": 536870912,
+    "cpu_seconds": 60,
+    "wall_seconds": 90
+  },
+  "real_mac_acceptance": "NOT_RUN"
+}
