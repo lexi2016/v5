@@ -1,0 +1,8 @@
+test_four_lane_store_and_cold_reader (test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader) ... ok
+test_auction_reference_never_promoted (test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted) ... ok
+test_input_rejections (test_hk_stage_daily.HKChainTests.test_input_rejections) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.960s
+
+OK

@@ -1,0 +1,92 @@
+{
+  "candidate": "c2ae2825a12d71e3e66c633f7cef5405717f9c6b",
+  "commands": [
+    {
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "V5/tests",
+        "-p",
+        "test_hk_stage_m06_adapter.py",
+        "-v"
+      ],
+      "started_utc": "2026-10-12T19:39:13.402381+00:00",
+      "ended_utc": "2026-10-12T19:39:14.380210+00:00",
+      "exit": 0
+    },
+    {
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-B",
+        "-m",
+        "unittest",
+        "test_hk_stage_daily.HKChainTests.test_four_lane_store_and_cold_reader",
+        "test_hk_stage_daily.HKChainTests.test_auction_reference_never_promoted",
+        "test_hk_stage_daily.HKChainTests.test_input_rejections",
+        "-v"
+      ],
+      "started_utc": "2026-10-12T19:39:14.380443+00:00",
+      "ended_utc": "2026-10-12T19:39:15.373201+00:00",
+      "exit": 0
+    }
+  ],
+  "source_unchanged": true,
+  "file_count": 189,
+  "status": "PASS_TARGETED_ENGINEERING_AND_READ_ONLY_MAPPING",
+  "test_counts": {
+    "new": 13,
+    "compatibility": 3,
+    "failures": 0,
+    "skips": 0
+  },
+  "source_git_blobs_verified": 189,
+  "python": "3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]",
+  "platform": "Darwin",
+  "test_cwd": "handoffs/M08",
+  "test_environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<TASK>/m08-c2ae-evidence/tmp"
+  },
+  "real_mapping": {
+    "started_utc": "2026-10-12T19:39:46.346687+00:00",
+    "scope": "READ_ONLY_ORIGINAL_M06_READER_AND_M08_MAPPING_ONLY",
+    "production_invoked": false,
+    "natural_verified": false,
+    "formal_admission": false,
+    "reader_status": "ASSEMBLED",
+    "reason": "",
+    "source_reference": {
+      "role": "HK_CONNECT_D1_TOP100_0_2",
+      "run_id": "20261012-hk-connect-d1-top100-0-2-d6f38622b186",
+      "artifact_sha256": "738ffa6533bfc1e041a3cd84841d591f0ee6bda53fe8fe420cf608b9a7f3503d",
+      "manifest_sha256": "20fb5182d751e75beb80b8c97c42eba4b1d1660084b321d8a69d9ed877f9c571",
+      "receipt_sha256": "01d4b09fb76b6e2d1135822a088e963d33356a2b0cf432d9af646ac5e2073da9",
+      "artifact_relative": "runs/20261012/HK_CONNECT_D1_TOP100_0_2/20261012-hk-connect-d1-top100-0-2-d6f38622b186/artifact.csv"
+    },
+    "verification_cutoff": "2026-10-12T23:59:59+08:00",
+    "cutoff_qualification": "Historical read verification boundary only; not an attestation of PIT availability.",
+    "status": "PASS_MAPPING_ONLY",
+    "row_count": 100,
+    "all_original_fields_preserved": true,
+    "date_mismatch_rejected": "M08_M06_DATE",
+    "source_files_unchanged": true,
+    "source_file_count": 8,
+    "fixture_only": false,
+    "stage_producer": "NOT_RUN: complete actual stage/M02/quote input request not assembled or fabricated",
+    "exit": 0,
+    "ended_utc": "2026-10-12T19:39:46.628690+00:00"
+  },
+  "real_mapping_command": "TMPDIR=<TASK>/m08-c2ae-evidence/tmp <EXISTING_HK02_PYTHON_3.13.12> -B m08_c2_real_mapping.py",
+  "scope_limits": [
+    "Previous 90 tests not rerun.",
+    "No product edits, deployment, provider collection, trading, or service operations.",
+    "Mapping-only API context supplies dates and empty source evidence, not an executable M08 stage/M02 request.",
+    "Raw payloads and private paths excluded.",
+    "Full M08 and P0-P5 acceptance remain open."
+  ],
+  "harness_note": "Initial post-run Git-blob inventory included unmaterialized prior feedback and exited 1; restricted correctly to candidate source/delivery excluding feedback, then all verified. Product tests were unaffected."
+}
