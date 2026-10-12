@@ -1,0 +1,15 @@
+test_success_checkpoint_cannot_escalate_safety_claims (test_research_ingest_daily.ResearchIngestTests.test_success_checkpoint_cannot_escalate_safety_claims) ... FAIL
+
+======================================================================
+FAIL: test_success_checkpoint_cannot_escalate_safety_claims (test_research_ingest_daily.ResearchIngestTests.test_success_checkpoint_cannot_escalate_safety_claims)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 135, in test_success_checkpoint_cannot_escalate_safety_claims
+    with self.assertRaisesRegex(ValueError,'SUCCESS_SAFETY'): self.module.run(self.request)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 2.411s
+
+FAILED (failures=1)

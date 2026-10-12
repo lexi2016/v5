@@ -1,0 +1,6 @@
+test_control_real_collector_full_builder_and_independent_reader_are_accepted (test_archive_builder_identity.BoundArchiveBuilderIdentityTests.test_control_real_collector_full_builder_and_independent_reader_are_accepted) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.901s
+
+OK

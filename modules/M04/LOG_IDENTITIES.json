@@ -1,0 +1,62 @@
+[
+  {
+    "name": "baseline-one.log",
+    "raw_sha256": "62a33a2148afd2ef9de67b11cc046f5f7e0df9444d25ce456240c24106f22424",
+    "published_sha256": "62a33a2148afd2ef9de67b11cc046f5f7e0df9444d25ce456240c24106f22424",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "red.log",
+    "raw_sha256": "9183c1feb7909bce77709cef8be15ea589183b8f7e8cc63358232423af761615",
+    "published_sha256": "d796b88c4c0e2934e36bf71fbf6548b726663003bea78ab5ed133d6f020d03e7",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "green.log",
+    "raw_sha256": "9fbd9946549adf44e30e7af552af7adcf11e0aaff6e11fdd31840deffbcf11bc",
+    "published_sha256": "1f45cb67fcf5cc435d9ddc7b75e7eb71a7077d08e696f18cc2a96d39fc64da0a",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "green-final.log",
+    "raw_sha256": "f06c9d40b30a51eee0a98072ceca353ad860eace428d3b23e16365c63646a8f5",
+    "published_sha256": "f06c9d40b30a51eee0a98072ceca353ad860eace428d3b23e16365c63646a8f5",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "targeted-final.log",
+    "raw_sha256": "0eb3de6920c46433b2b2008a09e2f97583f1f96dd89a4cc4bccc1028c5c51859",
+    "published_sha256": "0eb3de6920c46433b2b2008a09e2f97583f1f96dd89a4cc4bccc1028c5c51859",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "safety-red.log",
+    "raw_sha256": "506df7c055897b48f37f685dabc07df6dc8bee614be9fceef93cb5cdea5ab9cc",
+    "published_sha256": "d81ced24f67317dda4b2ddff2190e9698a2daae7452bf614d6deda35bccda144",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "targeted-final14.log",
+    "raw_sha256": "e331b03eb2fb29f6cbd94ac93f9676897b1754c10c55d59016fb56b58356f060",
+    "published_sha256": "e331b03eb2fb29f6cbd94ac93f9676897b1754c10c55d59016fb56b58356f060",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "full-suite.log",
+    "raw_sha256": "5c02d77975e6b3ec06d696d5472238374c3cedacbd213e67d07795dcbb10919d",
+    "published_sha256": "5c02d77975e6b3ec06d696d5472238374c3cedacbd213e67d07795dcbb10919d",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "original-regression.log",
+    "raw_sha256": "51f5550d86043279227c92b72199d4ee1f66d30623405f70c98442058ffe76c7",
+    "published_sha256": "51f5550d86043279227c92b72199d4ee1f66d30623405f70c98442058ffe76c7",
+    "published_form": "workspace paths substituted only"
+  },
+  {
+    "name": "packaged-final.log",
+    "raw_sha256": "4d48d78bedc6caee1732eb374eb6d6f3445dff661c6d6194700f78a5b2e3fdb0",
+    "published_sha256": "4d48d78bedc6caee1732eb374eb6d6f3445dff661c6d6194700f78a5b2e3fdb0",
+    "published_form": "workspace paths substituted only"
+  }
+]

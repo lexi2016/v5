@@ -1,0 +1,32 @@
+test_archive_tamper_rejected_by_cold_reader (test_research_ingest_daily.ResearchIngestTests.test_archive_tamper_rejected_by_cold_reader) ... ok
+test_capture_tamper_rejected_before_reusing_success (test_research_ingest_daily.ResearchIngestTests.test_capture_tamper_rejected_before_reusing_success) ... ok
+test_changed_input_failure_preserves_previous_success (test_research_ingest_daily.ResearchIngestTests.test_changed_input_failure_preserves_previous_success) ... ok
+test_default_chain_and_cold_cli_exact_reference (test_research_ingest_daily.ResearchIngestTests.test_default_chain_and_cold_cli_exact_reference) ... ok
+test_import_failure_retains_builder_then_retry_uses_new_root (test_research_ingest_daily.ResearchIngestTests.test_import_failure_retains_builder_then_retry_uses_new_root) ... ok
+test_locked_run_is_rejected (test_research_ingest_daily.ResearchIngestTests.test_locked_run_is_rejected) ... ok
+test_overlap_rejected_before_owner (test_research_ingest_daily.ResearchIngestTests.test_overlap_rejected_before_owner) ... ok
+test_same_request_reuses_success_without_writes (test_research_ingest_daily.ResearchIngestTests.test_same_request_reuses_success_without_writes) ... ok
+test_unmarked_state_rejected (test_research_ingest_daily.ResearchIngestTests.test_unmarked_state_rejected) ... ERROR
+
+======================================================================
+ERROR: test_unmarked_state_rejected (test_research_ingest_daily.ResearchIngestTests.test_unmarked_state_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 93, in test_unmarked_state_rejected
+    with self.assertRaisesRegex(ValueError,'STATE_MARKER'): self.module.run(self.request)
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "MODULE_SOURCE/V5/src/v5_shadow/research_ingest_daily.py", line 86, in run
+    if _raw_file(state, '.v5-research-ingest') != b'v5.research-ingest.v1\n':
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "MODULE_SOURCE/V5/src/v5_shadow/current_us_research.py", line 55, in _raw_file
+    try:return _read_at(fd,None,path.name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "MODULE_SOURCE/V5/src/v5_shadow/module_api.py", line 71, in _read_at
+    try:fd=os.open(name,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK,dir_fd=parent)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '.v5-research-ingest'
+
+----------------------------------------------------------------------
+Ran 9 tests in 15.224s
+
+FAILED (errors=1)

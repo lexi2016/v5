@@ -1,0 +1,22 @@
+15 dependency SHAs MATCHED; offline structural mapping, not Mac source acceptance
+Python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ] Platform: Linux-6.18.44-x86_64-with-glibc2.41
+Isolated dependency root: /tmp/m04-owner-layout.zgmLQL
+test_archive_tamper_rejected_by_cold_reader (test_research_ingest_daily.ResearchIngestTests.test_archive_tamper_rejected_by_cold_reader) ... ok
+test_capture_tamper_rejected_before_reusing_success (test_research_ingest_daily.ResearchIngestTests.test_capture_tamper_rejected_before_reusing_success) ... ok
+test_changed_input_failure_preserves_previous_success (test_research_ingest_daily.ResearchIngestTests.test_changed_input_failure_preserves_previous_success) ... ok
+test_default_chain_and_cold_cli_exact_reference (test_research_ingest_daily.ResearchIngestTests.test_default_chain_and_cold_cli_exact_reference) ... ok
+test_explicit_run_cli_executes_same_original_chain (test_research_ingest_daily.ResearchIngestTests.test_explicit_run_cli_executes_same_original_chain) ... ok
+test_import_failure_retains_builder_then_retry_uses_new_root (test_research_ingest_daily.ResearchIngestTests.test_import_failure_retains_builder_then_retry_uses_new_root) ... ok
+test_locked_run_is_rejected (test_research_ingest_daily.ResearchIngestTests.test_locked_run_is_rejected) ... ok
+test_overlap_rejected_before_owner (test_research_ingest_daily.ResearchIngestTests.test_overlap_rejected_before_owner) ... ok
+test_partial_builder_is_not_reexecuted_or_overwritten (test_research_ingest_daily.ResearchIngestTests.test_partial_builder_is_not_reexecuted_or_overwritten) ... ok
+test_same_request_reuses_success_without_writes (test_research_ingest_daily.ResearchIngestTests.test_same_request_reuses_success_without_writes) ... ok
+test_success_checkpoint_cannot_escalate_safety_claims (test_research_ingest_daily.ResearchIngestTests.test_success_checkpoint_cannot_escalate_safety_claims) ... ok
+test_symlink_state_is_rejected (test_research_ingest_daily.ResearchIngestTests.test_symlink_state_is_rejected) ... ok
+test_unknown_fields_cannot_enable_acquisition (test_research_ingest_daily.ResearchIngestTests.test_unknown_fields_cannot_enable_acquisition) ... ok
+test_unmarked_state_rejected (test_research_ingest_daily.ResearchIngestTests.test_unmarked_state_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 19.820s
+
+OK

@@ -1,0 +1,86 @@
+test_archive_tamper_rejected_by_cold_reader (test_research_ingest_daily.ResearchIngestTests.test_archive_tamper_rejected_by_cold_reader) ... FAIL
+test_capture_tamper_rejected_before_reusing_success (test_research_ingest_daily.ResearchIngestTests.test_capture_tamper_rejected_before_reusing_success) ... FAIL
+test_changed_input_failure_preserves_previous_success (test_research_ingest_daily.ResearchIngestTests.test_changed_input_failure_preserves_previous_success) ... FAIL
+test_default_chain_and_cold_cli_exact_reference (test_research_ingest_daily.ResearchIngestTests.test_default_chain_and_cold_cli_exact_reference) ... FAIL
+test_import_failure_retains_builder_then_retry_uses_new_root (test_research_ingest_daily.ResearchIngestTests.test_import_failure_retains_builder_then_retry_uses_new_root) ... FAIL
+test_locked_run_is_rejected (test_research_ingest_daily.ResearchIngestTests.test_locked_run_is_rejected) ... FAIL
+test_overlap_rejected_before_owner (test_research_ingest_daily.ResearchIngestTests.test_overlap_rejected_before_owner) ... FAIL
+test_same_request_reuses_success_without_writes (test_research_ingest_daily.ResearchIngestTests.test_same_request_reuses_success_without_writes) ... FAIL
+test_unmarked_state_rejected (test_research_ingest_daily.ResearchIngestTests.test_unmarked_state_rejected) ... FAIL
+
+======================================================================
+FAIL: test_archive_tamper_rejected_by_cold_reader (test_research_ingest_daily.ResearchIngestTests.test_archive_tamper_rejected_by_cold_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_capture_tamper_rejected_before_reusing_success (test_research_ingest_daily.ResearchIngestTests.test_capture_tamper_rejected_before_reusing_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_changed_input_failure_preserves_previous_success (test_research_ingest_daily.ResearchIngestTests.test_changed_input_failure_preserves_previous_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_default_chain_and_cold_cli_exact_reference (test_research_ingest_daily.ResearchIngestTests.test_default_chain_and_cold_cli_exact_reference)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_import_failure_retains_builder_then_retry_uses_new_root (test_research_ingest_daily.ResearchIngestTests.test_import_failure_retains_builder_then_retry_uses_new_root)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_locked_run_is_rejected (test_research_ingest_daily.ResearchIngestTests.test_locked_run_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_overlap_rejected_before_owner (test_research_ingest_daily.ResearchIngestTests.test_overlap_rejected_before_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_same_request_reuses_success_without_writes (test_research_ingest_daily.ResearchIngestTests.test_same_request_reuses_success_without_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+======================================================================
+FAIL: test_unmarked_state_rejected (test_research_ingest_daily.ResearchIngestTests.test_unmarked_state_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "MODULE_SOURCE/V5/tests/test_research_ingest_daily.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.research_ingest_daily'),
+AssertionError: unexpectedly None : M04 default owner orchestration entrypoint is missing
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.018s
+
+FAILED (failures=9)
