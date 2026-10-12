@@ -683,7 +683,12 @@ def _config(value):
     # pages route requires the extra immutable disk binding.
     if isinstance(value, dict) and 'm18_v2_binding' in value:
         keys += ('m18_v2_binding',)
+    if isinstance(value, dict) and 'm06_hk_preselection_binding' in value:
+        keys += ('m06_hk_preselection_binding',)
     exact_keys(value, keys)
+    if 'm06_hk_preselection_binding' in value:
+        from .m06_readonly import validate_binding
+        validate_binding(value)
     if value['module_id'] == 'manager' and any(
         route in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections')
         for route in value['routes']
@@ -839,6 +844,16 @@ def _validate_record(config,record,path,query):
 
 
 def read_response(config,root,path,query):
+    if config['module_id']=='source_bundle' and path=='/api/v5/source-bundle/hk-preselection':
+        from .m06_readonly import read_record,not_configured
+        projected=read_record(config,query)
+        if projected is not None:return projected
+        payload=not_configured()
+        record=dict(schema_version='v5.module_response.v1',module_id=config['module_id'],
+            release_id=config['release_id'],path=path,query={},payload=payload,
+            payload_sha256=sha256_json(payload),source_input_sha256=sha256_json(payload),
+            data_kind='OWNER_RESULT',generated_at=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),status_code=200)
+        return _validate_record(config,record,path,query),sha256_json(record)
     record,digest=_read_record(root,response_key(config['module_id'],path,query),config)
     return _validate_record(config,record,path,query),digest
 
@@ -847,7 +862,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
     config,root=_config(value)
     if any(route in config['routes'] for route in
-           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections')):
+           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', '/api/v5/source-bundle/hk-preselection')):
         # Set at service startup, before any GET can spawn/import a reader.
         # Also covers library callers that did not start their interpreter -B.
         sys.dont_write_bytecode=True
@@ -903,7 +918,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections')
+            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-preselection')
             if heavy and not m18_read_slot.acquire(blocking=False):
                 return self.error(503, 'MODULE_BUSY')
             try:

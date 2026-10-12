@@ -115,7 +115,9 @@ def run_source_bundle(bundle):
 
 
 def publish_source_result(result,config,*,expected_generation):
-    if config.get('module_id')!='source_bundle' or config.get('routes')!=[STATUS_ROUTE]:
+    routes=config.get('routes')
+    if (config.get('module_id')!='source_bundle' or not isinstance(routes,list)
+        or STATUS_ROUTE not in routes or set(routes)-{STATUS_ROUTE,'/api/v5/source-bundle/hk-preselection'}):
         raise ValueError('SOURCE_MODULE_ID_REQUIRED')
     from .module_artifacts import publish_generation
     record=dict(schema_version='v5.module_response.v1',module_id='source_bundle',

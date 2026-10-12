@@ -1,0 +1,14 @@
+test_actual_original_cold_projection_all100_and_readonly (test_m06_readonly_api.M06ReadOnlyAPITests.test_actual_original_cold_projection_all100_and_readonly) ... ok
+test_binding_cannot_attach_to_manager_or_add_runtime_arguments (test_m06_readonly_api.M06ReadOnlyAPITests.test_binding_cannot_attach_to_manager_or_add_runtime_arguments) ... ok
+test_get_query_cannot_choose_another_date_or_reference (test_m06_readonly_api.M06ReadOnlyAPITests.test_get_query_cannot_choose_another_date_or_reference) ... ok
+test_missing_binding_explicit_not_configured (test_m06_readonly_api.M06ReadOnlyAPITests.test_missing_binding_explicit_not_configured) ... ok
+test_post_is_readonly_no_writes (test_m06_readonly_api.M06ReadOnlyAPITests.test_post_is_readonly_no_writes) ... ok
+test_preserve_existing_source_route_and_generation (test_m06_readonly_api.M06ReadOnlyAPITests.test_preserve_existing_source_route_and_generation) ... ok
+test_reference_mismatch_fails_closed_without_old_payload (test_m06_readonly_api.M06ReadOnlyAPITests.test_reference_mismatch_fails_closed_without_old_payload) ... ok
+test_saved_artifact_tamper_rejected_and_no_republication (test_m06_readonly_api.M06ReadOnlyAPITests.test_saved_artifact_tamper_rejected_and_no_republication) ... ok
+test_source_publication_is_readonly_and_separate_from_manager (test_source_bundle.SourceBundleTests.test_source_publication_is_readonly_and_separate_from_manager) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 8.483s
+
+OK

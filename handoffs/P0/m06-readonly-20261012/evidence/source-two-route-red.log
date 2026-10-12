@@ -1,0 +1,17 @@
+test_preserve_existing_source_route_and_generation (test_m06_readonly_api.M06ReadOnlyAPITests.test_preserve_existing_source_route_and_generation) ... ERROR
+
+======================================================================
+ERROR: test_preserve_existing_source_route_and_generation (test_m06_readonly_api.M06ReadOnlyAPITests.test_preserve_existing_source_route_and_generation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CHECKOUT>/V5/tests/test_m06_readonly_api.py", line 102, in test_preserve_existing_source_route_and_generation
+    publication=publish_source_result(result,config,expected_generation=None)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<CHECKOUT>/V5/src/v5_shadow/source_bundle.py", line 119, in publish_source_result
+    raise ValueError('SOURCE_MODULE_ID_REQUIRED')
+ValueError: SOURCE_MODULE_ID_REQUIRED
+
+----------------------------------------------------------------------
+Ran 1 test in 3.354s
+
+FAILED (errors=1)

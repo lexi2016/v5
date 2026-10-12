@@ -1,0 +1,4 @@
+Original project_hk_preselection_record payload created from original verified synthetic fixture.
+{"eligibility_source_date": "20261012", "fixture_only": true, "model_weights_reverified": false, "row_count": 100, "signal_date": "20261012", "source_run_id": "SYNTHETIC_HK02_RUN", "target_date": "20261013"}
+PASS: frontend accepts exact original publisher payload; complete deep equality, all100 row order/values and three dates preserved.
+{"first_symbol":"HK.00001","last_symbol":"HK.00100","first_score":"0.999","fields":["buy_gate_updated","code_norm","d1_freshness_status","market","name","orders_sent","pool_id","pool_rank","pool_score","production_allowed","rank","recommendation_status","score_prob_active","selected_strategy","signal_date","stock_name","symbol","target_date","trade_date"]}

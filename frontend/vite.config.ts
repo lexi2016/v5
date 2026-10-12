@@ -22,7 +22,10 @@ function readonlyProxy(target: string): ProxyOptions {
 }
 const proxy: Record<string, ProxyOptions> = {};
 if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);
-if (sourceTarget) proxy['/api/v5/source-bundle/status'] = readonlyProxy(sourceTarget);
+if (sourceTarget) {
+ proxy['/api/v5/source-bundle/status'] = readonlyProxy(sourceTarget);
+ proxy['/api/v5/source-bundle/hk-preselection'] = readonlyProxy(sourceTarget);
+}
 export default defineConfig({
   plugins: [vue()],
   test: { environment: 'jsdom' },

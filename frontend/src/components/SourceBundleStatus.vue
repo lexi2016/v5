@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, shallowRef } from 'vue';
 import { SourceBundleSession, type SourceState } from '../api/sourceBundle';
+import HkPreselectionPool from './HkPreselectionPool.vue';
 const state=shallowRef<SourceState>({phase:'IDLE',result:null,error:''});
 const session=new SourceBundleSession(next=>{state.value=next;});
 const names:Record<string,string>={M01_A_MARKET:'M01 A 股基础数据',M02_HK_MARKET:'M02 港股基础数据',M03_US_MARKET:'M03 美股基础数据',M05_A_PRESELECTION:'M05 A 股预选池'};
@@ -22,6 +23,7 @@ function json(value:unknown){return JSON.stringify(value,null,2);}
     <details v-if="row.owner_result"><summary>模块原始结果、日期与缺口</summary><pre>{{ json(row.owner_result) }}</pre></details>
    </article></div>
   </template>
+  <HkPreselectionPool />
  </section>
 </template>
 <style scoped>

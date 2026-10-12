@@ -1,0 +1,26 @@
+✔ M06 read-only frontend client exists (3.392506ms)
+✔ GET preserves all100 original rows, fields, dates, identities and source order (17.469468ms)
+✔ 99 rows, duplicate symbols, wrong row identity and altered dates fail closed (25.273352ms)
+✔ unsafe claims are rejected at payload, reference, artifact and row boundaries (22.446683ms)
+✔ wrong committed, source and computation identities cannot be displayed (23.611032ms)
+✔ NOT_CONFIGURED is explicit and never represented as an empty successful pool (3.817191ms)
+✔ HTTP missing and corrupt results, invalid JSON, empty and oversized responses fail closed (97.9937ms)
+✔ new reads immediately clear old rows and a failed read leaves no stale result (3.273154ms)
+✔ late success cannot overwrite newer missing configuration and old request is aborted (6.77729ms)
+✔ late failure cannot clear a newer valid result (2.777288ms)
+✔ closing aborts pending read, ignores completion and prevents additional reads (2.459279ms)
+✔ standalone panel renders original row fields and embeds only within source status (0.899665ms)
+✔ source panel reads only saved route and preserves owner states and historical replay (7.268754ms)
+✔ missing or duplicate modules, wrong owner, promoted flags and malformed identity fail closed (4.694004ms)
+✔ HTTP errors, invalid JSON, absent and oversized streams stay unconfirmed (1.474762ms)
+✔ failed re-read clears previously valid source result (2.138692ms)
+✔ repeated reads do not let older completion replace new result (0.747067ms)
+✔ closing a pending read ignores later completion (0.716113ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 438.390131

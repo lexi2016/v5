@@ -1,0 +1,15 @@
+test_missing_binding_explicit_not_configured (test_m06_readonly_api.M06ReadOnlyAPITests.test_missing_binding_explicit_not_configured) ... FAIL
+
+======================================================================
+FAIL: test_missing_binding_explicit_not_configured (test_m06_readonly_api.M06ReadOnlyAPITests.test_missing_binding_explicit_not_configured)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CHECKOUT>/V5/tests/test_m06_readonly_api.py", line 63, in test_missing_binding_explicit_not_configured
+    self.assertEqual(status,200);self.assertEqual(value['status'],'NOT_CONFIGURED')
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 503 != 200
+
+----------------------------------------------------------------------
+Ran 1 test in 4.183s
+
+FAILED (failures=1)
