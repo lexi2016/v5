@@ -1,0 +1,303 @@
+{
+  "source": "Existing manifest metadata and previously extracted status inventory; no Reader rerun",
+  "identity": {
+    "input_identity": "c99d03b5dfe289f93382d14e1aa4c083283283270c27287e1e752b71f2d465de",
+    "plan_sha256": "fed238e033181b159f419918c8c54dcb4743791b18f93d31e2a1e2006f5924ce",
+    "raw_sha256": "7de6ea9fc6b10462fcc75af1c02c9d9d5111288a9d993b7f154ca988fea4e4db",
+    "response_sha256": "ae840ac69d9fdc8f25bd675c41e8e3f6d028ef17147987b36220a35a6d786d22",
+    "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+    "target_date": "20261012"
+  },
+  "sections": {
+    "RESEARCH_ONLY": {
+      "kind": "boolean",
+      "total": 1
+    },
+    "announcement_observation": {
+      "kind": "object",
+      "total": 1
+    },
+    "announcement_review": {
+      "kind": "object",
+      "total": 1
+    },
+    "announcement_reviewed_analysis": {
+      "kind": "object",
+      "total": 1
+    },
+    "briefing": {
+      "kind": "object",
+      "total": 1
+    },
+    "browser_consumption": {
+      "kind": "string",
+      "total": 1
+    },
+    "buy_gate_updated": {
+      "kind": "boolean",
+      "total": 1
+    },
+    "close_recapture_evidence": {
+      "kind": "object",
+      "total": 1
+    },
+    "company_events": {
+      "kind": "array",
+      "total": 0
+    },
+    "connect_selection_rejections": {
+      "kind": "array",
+      "total": 0
+    },
+    "continuity_gap": {
+      "kind": "string",
+      "total": 1
+    },
+    "daily_channels": {
+      "kind": "object",
+      "total": 1
+    },
+    "date_bindings": {
+      "kind": "object",
+      "total": 1
+    },
+    "decision_projection_version": {
+      "kind": "string",
+      "total": 1
+    },
+    "discovery_evidence": {
+      "kind": "object",
+      "total": 1
+    },
+    "existing_material_bindings": {
+      "kind": "array",
+      "total": 53
+    },
+    "existing_material_coverage": {
+      "kind": "object",
+      "total": 1
+    },
+    "focus_symbols": {
+      "kind": "array",
+      "total": 0
+    },
+    "gaps": {
+      "kind": "array",
+      "total": 3258
+    },
+    "input_identity": {
+      "kind": "string",
+      "total": 1
+    },
+    "lanes": {
+      "kind": "array",
+      "total": 3
+    },
+    "market_screen": {
+      "kind": "object",
+      "total": 1
+    },
+    "market_screen_evidence": {
+      "kind": "object",
+      "total": 1
+    },
+    "material_discovery_evidence": {
+      "kind": "object",
+      "total": 1
+    },
+    "materials": {
+      "kind": "array",
+      "total": 3186
+    },
+    "observation_mode": {
+      "kind": "string",
+      "total": 1
+    },
+    "orders_sent": {
+      "kind": "boolean",
+      "total": 1
+    },
+    "owner_chain": {
+      "kind": "object",
+      "total": 1
+    },
+    "plan_context": {
+      "kind": "object",
+      "total": 1
+    },
+    "plan_product": {
+      "kind": "object",
+      "total": 1
+    },
+    "planning_close_recapture_evidence": {
+      "kind": "object",
+      "total": 1
+    },
+    "previous_calendar_sha256": {
+      "kind": "null",
+      "total": 1
+    },
+    "previous_observation_identity": {
+      "kind": "null",
+      "total": 1
+    },
+    "production_allowed": {
+      "kind": "boolean",
+      "total": 1
+    },
+    "quote_evidence": {
+      "kind": "object",
+      "total": 1
+    },
+    "read_context": {
+      "kind": "object",
+      "total": 1
+    },
+    "rebound_research_observation": {
+      "kind": "object",
+      "total": 1
+    },
+    "rejected_relations": {
+      "kind": "array",
+      "total": 1503
+    },
+    "repair_contract": {
+      "kind": "string",
+      "total": 1
+    },
+    "replacement_context": {
+      "kind": "string",
+      "total": 1
+    },
+    "research_attention": {
+      "kind": "object",
+      "total": 1
+    },
+    "run_accounting": {
+      "kind": "object",
+      "total": 1
+    },
+    "runtime_gaps": {
+      "kind": "array",
+      "total": 2
+    },
+    "runtime_status_read_at": {
+      "kind": "string",
+      "total": 1
+    },
+    "schema_version": {
+      "kind": "string",
+      "total": 1
+    },
+    "selection_diagnostics": {
+      "kind": "object",
+      "total": 1
+    },
+    "semantic_version": {
+      "kind": "string",
+      "total": 1
+    },
+    "stage_read_timing": {
+      "kind": "object",
+      "total": 1
+    },
+    "stocks": {
+      "kind": "array",
+      "total": 0
+    },
+    "summary": {
+      "kind": "object",
+      "total": 1
+    },
+    "target_trade_date": {
+      "kind": "string",
+      "total": 1
+    },
+    "themes": {
+      "kind": "array",
+      "total": 4
+    },
+    "us_mapping_research": {
+      "kind": "object",
+      "total": 1
+    },
+    "us_market_attention": {
+      "kind": "object",
+      "total": 1
+    },
+    "workspace_plan_attempt": {
+      "kind": "object",
+      "total": 1
+    }
+  },
+  "status_paths": {
+    "plan_product.status": "CURRENT",
+    "announcement_reviewed_analysis.status": "READY",
+    "announcement_observation.status": "NOT_RUN",
+    "us_mapping_research.coverage_diagnostics.status": "PARTIAL",
+    "us_mapping_research.daily_run.status": "COMPLETED",
+    "us_market_attention.status": "READY",
+    "rebound_research_observation.status": "CANNOT_CONFIRM",
+    "rebound_research_observation.research_observation.original_computation_status": "READY_WITH_GAPS",
+    "market_screen.status": "CANNOT_CONFIRM",
+    "market_screen.main_screen_ready": false
+  },
+  "gap_paths": [
+    "gaps",
+    "announcement_reviewed_analysis.gaps",
+    "announcement_observation.gaps",
+    "us_mapping_research.coverage_diagnostics.reason_codes",
+    "rebound_research_observation.reason_codes",
+    "rebound_research_observation.research_observation.gaps",
+    "market_screen.gaps"
+  ],
+  "status_inventory": {
+    "plan": "CURRENT",
+    "plan_consumed": true,
+    "announcement_reviewed": "READY",
+    "announcement_products": 1,
+    "announcement_references": 147,
+    "announcement_observation": "NOT_RUN",
+    "announcement_gap": [
+      "ANNOUNCEMENT_OWNER_NOT_RUN"
+    ],
+    "us_daily": "COMPLETED",
+    "us_attention": "READY",
+    "us_mapping": "PARTIAL",
+    "us_reasons": [
+      "BROADER_US_HK_RELATIONS_NOT_ASSESSED",
+      "TARGET_DATE_ELIGIBILITY_CANNOT_CONFIRM"
+    ],
+    "us_reviewed": 4,
+    "us_unassessed": 19,
+    "rebound": "CANNOT_CONFIRM",
+    "rebound_original": "READY_WITH_GAPS",
+    "rebound_reason_counts": {
+      "REBOUND_AMOUNT_UNIT_NOT_PROVEN": 1,
+      "REBOUND_HISTORY_PRICE_CURRENCY_NOT_PROVEN": 1,
+      "REBOUND_HISTORY_VOLUME_UNIT_NOT_PROVEN": 1,
+      "REBOUND_NATURAL_RUN_NOT_VERIFIED": 1,
+      "REBOUND_PROVIDER_FINALITY_NOT_ATTESTED": 1,
+      "REBOUND_TARGET_MEMBERSHIP_NOT_BOUND": 1,
+      "SCREEN_HISTORY_OR_VOLUME_INCOMPLETE": 34
+    },
+    "formal_screen": "CANNOT_CONFIRM",
+    "formal_screen_gaps": [
+      "SCREEN_AUTHORITY_ROOT_NOT_BOUND"
+    ],
+    "main_screen_ready": false,
+    "gap_count": 3258,
+    "gap_reason_counts": {
+      "ANNOUNCEMENT_SELECTION_NO_VERIFIED_CAPTURE_IN_WINDOW": 1,
+      "ARCHIVE_ARTICLE_ACQUISITION_TIME_MISSING": 3075,
+      "ARCHIVE_ARTICLE_STRUCTURED_THEME_MISSING": 175,
+      "CURRENT_MARKET_BREADTH_AMOUNT_INDEX_OWNER_INPUT_MISSING": 1,
+      "DISCOVERY_NATIVE_HK_UNIVERSE_ROOT_NOT_BOUND": 1,
+      "HK_CONNECT_TARGET_AUTHORITY_ROOT_NOT_BOUND": 1,
+      "PLAN_NATIVE_CLOSE_DATA_ROOT_NOT_BOUND": 1,
+      "SCREEN_AUTHORITY_ROOT_NOT_BOUND": 1,
+      "TARGET_DATE_HK_CONNECT_ELIGIBILITY_NOT_CHECKED": 1,
+      "VIBE_OWNER_INPUT_BINDING_NOT_CONFIGURED": 1
+    }
+  }
+}
