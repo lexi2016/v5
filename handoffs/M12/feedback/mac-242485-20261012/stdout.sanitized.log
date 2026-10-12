@@ -1,0 +1,38 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- python
+rootdir: .
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract FAILED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected PASSED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_reader_rejects_empty_refs_and_bad_sha PASSED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected PASSED [100%]
+
+=================================== FAILURES ===================================
+_________________ test_simulated_owner_default_chain_contract __________________
+
+tmp_path = PosixPath('../m12-242485-evidence/tmp/pytest/test_simulated_owner_default_c0')
+
+    def test_simulated_owner_default_chain_contract(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+        result = run_video_fupan(
+            DATE,
+            private_root=tmp_path / "v5_private",
+            tools=owner.tools(),
+            source_identity="SIMULATED_SOURCE",
+            tool_identity="SIMULATED_TOOL",
+            config_identity="SIMULATED_CONFIG",
+            allow_network=True,
+        )
+        checked = read_committed_video(tmp_path / "v5_private", DATE, result["run_id"])
+        assert checked["status"] == "VERIFIED"
+>       assert owner.capture_count == 1
+E       assert 0 == 1
+E        +  where 0 = <test_video_fupan_default_chain.SimulatedOwner object at 0x109a257f0>.capture_count
+
+tests/m12/test_video_fupan_default_chain.py:59: AssertionError
+- generated xml file: ../m12-242485-evidence/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract - assert 0 == 1
+ +  where 0 = <test_video_fupan_default_chain.SimulatedOwner object at 0x109a257f0>.capture_count
+========================= 1 failed, 3 passed in 0.15s ==========================
