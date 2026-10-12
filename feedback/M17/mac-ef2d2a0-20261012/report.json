@@ -1,0 +1,112 @@
+{
+  "candidate_commit": "ef2d2a0d4a87fc96e90a1d91f106267ca24c2b97",
+  "source_files_verified": 48,
+  "original_vendor_files": 24,
+  "old_four_controls_rerun": false,
+  "commands": [
+    {
+      "label": "forward-check",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--check",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-ef2d-source/integration_candidates/M17/forward.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-ef2d-evidence/patch-check",
+      "started_utc": "2026-10-12T22:40:37.213509+00:00",
+      "finished_utc": "2026-10-12T22:40:38.879479+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "35133920d4b41871573fd48864a4de112dccff2e22e4cab7d3c2218eb0cff1f3",
+      "sanitized_output_sha256": "35133920d4b41871573fd48864a4de112dccff2e22e4cab7d3c2218eb0cff1f3"
+    },
+    {
+      "label": "forward-apply",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-ef2d-source/integration_candidates/M17/forward.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-ef2d-evidence/patch-check",
+      "started_utc": "2026-10-12T22:40:38.879934+00:00",
+      "finished_utc": "2026-10-12T22:40:38.887087+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sanitized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "reverse-check",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--check",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-ef2d-source/integration_candidates/M17/reverse.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-ef2d-evidence/patch-check",
+      "started_utc": "2026-10-12T22:40:38.887644+00:00",
+      "finished_utc": "2026-10-12T22:40:38.894503+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sanitized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "reverse-apply",
+      "command": [
+        "/usr/bin/git",
+        "apply",
+        "--unsafe-paths",
+        "<TASK_ROOT>/m17-ef2d-source/integration_candidates/M17/reverse.patch"
+      ],
+      "cwd": "<TASK_ROOT>/m17-ef2d-evidence/patch-check",
+      "started_utc": "2026-10-12T22:40:38.894818+00:00",
+      "finished_utc": "2026-10-12T22:40:38.901645+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sanitized_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "targeted",
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-I",
+        "-B",
+        "integration_candidates/M17/after/V5/tests/test_daily_close_recapture_owner.py"
+      ],
+      "cwd": "<TASK_ROOT>/m17-ef2d-source",
+      "started_utc": "2026-10-12T22:40:38.902042+00:00",
+      "finished_utc": "2026-10-12T22:40:43.659618+00:00",
+      "exit_code": 0,
+      "raw_output_sha256": "d35a1fc9562ad5275df5167800493536767cd1ad90921f111d044f3d78f58739",
+      "sanitized_output_sha256": "d35a1fc9562ad5275df5167800493536767cd1ad90921f111d044f3d78f58739"
+    }
+  ],
+  "patch_forward_reverse_exact": true,
+  "source_unchanged_after": true,
+  "python_version": "3.14.6",
+  "fastapi_version": "0.141.1",
+  "fixture": "SIMULATED",
+  "tests_exit_code": 0,
+  "scope": "Standalone late CLI/adapter and isolated ledger only",
+  "not_run": [
+    "real collection",
+    "1530",
+    "continuous tracking",
+    "global P0 scheduling",
+    "deployment",
+    "natural run",
+    "page/M18 publication"
+  ],
+  "tests_passed": 17,
+  "tests_failed": 0,
+  "tests_skipped": 0,
+  "test_runner": "unittest",
+  "suite_seconds": 4.725,
+  "old_feedback_commit": "73e31bf030cbdf070ed8a03fed21649a20751fd2",
+  "old_feedback_controls": 4,
+  "new_test_controls": 17,
+  "materialization": "48 exact Git blobs needed for candidate/scaffold/patches and 24-file vendor closure; not a full checkout",
+  "patch_warning": "First git invocation emitted macOS developer-tool cache/FSEvents warnings; all four patch commands exited 0 and postimages/preimages matched manifest.",
+  "guard_scope": "Python audit guards tested; not an independent OS sandbox certification"
+}
