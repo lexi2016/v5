@@ -1,0 +1,25 @@
+# P0 公告完整合成链：最小源码补件
+
+独立分支dev/p0-announcement-fixture-source-20261012，继承干净2489ea1e04a26a9e2f318f498ac3f5f8c970fe48。固定上游lexi2016/v4@1a699a040c0b2cd467726bca5ccc7847182cb975。
+
+## 入口和范围
+
+Bundle根为[V5/handoff/announcement-budget-red-20261009/](V5/handoff/announcement-budget-red-20261009/)。将V5_ANNOUNCEMENT_OFFLINE_TEST_BUNDLE指向此bundle根，可供原V5/tests/test_manager_offline_announcement.py查找tests/test_offline_analysis_chain.py。这里提供32件最小源码：原测试4件、原assembler1件、原清单3件、assembler覆盖后选中的owner源24件。没有复制其它历史说明、运行日志、真实正文或本机目录值。
+
+原fixture依赖：offline_analysis_chain → failed_partial_pages → offline_evidence_recovery → v5_private_owner → tools/assemble_owner_app.py。后者按SOURCE_MANIFEST、OWNER_DEPENDENCIES、CANDIDATE_MANIFEST装配隔离owner。
+
+## 明确的隐私派生
+
+31件保持原字节；SOURCE_MANIFEST.json仅删除11个非执行original_source_root字段，candidate_path/sha256及其余字段不变。它已不是原manifest字节：原SHA e1945dd3fc63a2a379fa77b481f2c9733c66922c01547d632d8740a105014a9f，派生SHA d714b66ecf12131a18956336ce9fdda7313e18d4f743539a239aaa7c5a3e2529。完整映射见[SOURCE_IDENTITY_MANIFEST.json](SOURCE_IDENTITY_MANIFEST.json)。原对象保留不改。
+
+上游60项SHA256SUMS包含原manifest摘要，不能用于声称本派生材料通过原版全包校验。本bundle的SHA256SUMS是清楚缩小到32件并更新该manifest摘要的新校验清单。原assembler在此入口只消费entries的candidate_path/sha256，不绑定原manifest原字节；24件产品源码未改。
+
+## 日期与执行边界
+
+原factory target=20261009、publication=2026-10-08；历史assembly正例另需显式声明2026-10-09T00:45:05Z的测试时钟，不能以真实今日时钟解释历史target失败。
+
+fixture准备会调用原PrivateOwner capture，但只用临时合成transport和deny-network hook，然后走原recovery/prepare/register/verify/import/readback。不得将fixture准备统计成零owner计算；经理消费阶段的零上游调用计数应单独验证。没有真实采集授权被此说明扩展。
+
+失败保留页60/108仍为BODY_CAPTURE_FAILED、NOT_ASSESSED、TEXT_INSUFFICIENT_UNASSESSED；不得截缺项、伪造binding或提升formal。派生manager_binding.v1.json的root/binding_sha256/target_date/publication_date由原链生成。
+
+**NOT_RUN**：publisher仅核来源/路径/原字节并整理材料，未运行任何owner、测试、采集、服务或产品。后续P0 Chat接续源码，Mac按父任务执行隔离验证；本提交不是测试通过或功能完成。
