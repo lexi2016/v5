@@ -1,0 +1,35 @@
+{
+  "candidate": "8a3c1d2013e34b7e070fd924e1ee754f7dfd8de7",
+  "expected_tree": "988a221142464ec9082150e20a4a2328a99f62ca",
+  "command": [
+    "sh",
+    "modules/M04/scripts/test_offline.sh"
+  ],
+  "environment": {
+    "PYTHON_BIN": "<EXISTING_V35_MAC_PYTHON_3.14.6>",
+    "TMPDIR": "<TASK>/m04-8a3c-evidence/tmp",
+    "M04_TEST_SCOPE": "targeted"
+  },
+  "started_utc": "2026-10-12T22:24:06.423525+00:00",
+  "ended_utc": "2026-10-12T22:24:14.676153+00:00",
+  "exit": 0,
+  "git_blobs_verified": 487,
+  "source_unchanged": true,
+  "status": "PASS",
+  "limits": [
+    "Only supplied 14 targeted fixture/original-owner tests; old 97 and canonical pytest suite NOT_RUN.",
+    "No dependency install, credentials, real acquisition or deployment.",
+    "Original producer legacy default paths retained as source bytes; explicit isolated owner layout used.",
+    "Fixture engineering result is not real-data/PIT/natural/full M04 acceptance."
+  ],
+  "test_counts": {
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0
+  },
+  "isolated_dependency_sha_matches": 15,
+  "commit_tree_and_parent_verified": true,
+  "base_commit": "d3ebf33c40d1b5f06e3729b11d5ece0506f34c91",
+  "delivery_files": 485,
+  "inherited_baseline_files": 2
+}
