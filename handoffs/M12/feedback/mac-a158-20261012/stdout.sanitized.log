@@ -1,0 +1,606 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.14.6, pytest-9.1.1, pluggy-1.6.0 -- python
+rootdir: .
+collecting ... collected 4 items
+
+tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract FAILED [ 25%]
+tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected FAILED [ 50%]
+tests/m12/test_video_fupan_default_chain.py::test_reader_rejects_empty_refs_and_bad_sha PASSED [ 75%]
+tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected FAILED [100%]
+
+=================================== FAILURES ===================================
+_________________ test_simulated_owner_default_chain_contract __________________
+
+trade_date = '20261011'
+private_root = PosixPath('../m12-a158-evidence/tmp/pytest/test_simulated_owner_default_c0/v5_private')
+tools = AcquisitionTools(discover=<function SimulatedOwner.tools.<locals>.discover at 0x1077f6820>, capture=<function SimulatedOwner.tools.<locals>.capture at 0x1077f6cf0>, asr=<function SimulatedOwner.tools.<locals>.asr at 0x1077f6e50>)
+source_identity = 'SIMULATED_SOURCE', tool_identity = 'SIMULATED_TOOL'
+config_identity = 'SIMULATED_CONFIG', allow_network = True
+
+    def run_video_fupan(
+        trade_date: str,
+        *,
+        private_root: Path | str,
+        tools: Any,
+        source_identity: str,
+        tool_identity: str,
+        config_identity: str,
+        allow_network: bool = False,
+    ) -> dict[str, Any]:
+        try:
+            root = ensure_private_root(private_root)
+            run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
+            config = ProducerConfig(data_root=root, network_allowed=allow_network)
+            ensure_date_run(trade_date, "a")
+            if config.data_root != root or not isinstance(tools, AcquisitionTools):
+                raise VideoArtifactError("invalid owner binding")
+    
+            result = run_video(
+                trade_date,
+                mode="acquire",
+                data_root=root,
+                config=config,
+                tools=tools,
+                allow_network=allow_network,
+            )
+            if not isinstance(result, Mapping):
+                raise VideoArtifactError("owner result invalid")
+    
+            owner_manifest = dict(result.get("manifest") or {})
+            owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
+            if not owner_run_id:
+                raise VideoArtifactError("missing owner run")
+    
+            attempt_id = hashlib.sha256(
+                json.dumps(
+                    {
+                        "date": trade_date,
+                        "owner_run_id": owner_run_id,
+                        "source": source_identity,
+                        "tool": tool_identity,
+                        "config": config_identity,
+                    },
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+    
+            attempt = stage_attempt(root, trade_date, attempt_id)
+            envelope = {
+                "owner_run_id": owner_run_id,
+                "owner_status": result.get("status"),
+                "owner_manifest": owner_manifest,
+                "attempt_id": attempt_id,
+                "m12_identity": {
+                    "trade_date": trade_date,
+                    "source_sha256": _sha_text(source_identity),
+                    "tool_sha256": _sha_text(tool_identity),
+                    "config_sha256": _sha_text(config_identity),
+                },
+            }
+    
+            safe_replace_json(attempt / "manifest.json", envelope)
+            manifest_sha = _sha_file(attempt / "manifest.json")
+            safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
+    
+            committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
+            committed.mkdir(parents=True, exist_ok=False)
+            os.replace(attempt / "manifest.json", committed / "manifest.json")
+            os.replace(attempt / "receipt.json", committed / "receipt.json")
+    
+            _cold_verify(root, trade_date, owner_run_id)
+>           publish_latest_success(root, trade_date, owner_run_id)
+
+V5/src/v5_shadow/video_fupan_daily.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_store.py:66: in publish_latest_success
+    ensure_date_run(date, run_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+date = '20261011', run_id = 'rcv1-20261011-none-32985ce688eb24e0'
+
+    def ensure_date_run(date: str, run_id: str) -> None:
+        if not re.fullmatch(r"\d{8}", str(date)):
+            raise VideoStoreError("invalid date")
+        if not re.fullmatch(r"[0-9a-fA-F_-]+", str(run_id)):
+>           raise VideoStoreError("invalid run")
+E           V5.src.v5_shadow.video_fupan_store.VideoStoreError: invalid run
+
+V5/src/v5_shadow/video_fupan_store.py:39: VideoStoreError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('../m12-a158-evidence/tmp/pytest/test_simulated_owner_default_c0')
+
+    def test_simulated_owner_default_chain_contract(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(
+            DATE,
+            private_root=tmp_path / "v5_private",
+            tools=owner.tools(),
+            source_identity="SIMULATED_SOURCE",
+            tool_identity="SIMULATED_TOOL",
+            config_identity="SIMULATED_CONFIG",
+            allow_network=True,
+        )
+
+tests/m12/test_video_fupan_default_chain.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+trade_date = '20261011'
+private_root = PosixPath('../m12-a158-evidence/tmp/pytest/test_simulated_owner_default_c0/v5_private')
+tools = AcquisitionTools(discover=<function SimulatedOwner.tools.<locals>.discover at 0x1077f6820>, capture=<function SimulatedOwner.tools.<locals>.capture at 0x1077f6cf0>, asr=<function SimulatedOwner.tools.<locals>.asr at 0x1077f6e50>)
+source_identity = 'SIMULATED_SOURCE', tool_identity = 'SIMULATED_TOOL'
+config_identity = 'SIMULATED_CONFIG', allow_network = True
+
+    def run_video_fupan(
+        trade_date: str,
+        *,
+        private_root: Path | str,
+        tools: Any,
+        source_identity: str,
+        tool_identity: str,
+        config_identity: str,
+        allow_network: bool = False,
+    ) -> dict[str, Any]:
+        try:
+            root = ensure_private_root(private_root)
+            run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
+            config = ProducerConfig(data_root=root, network_allowed=allow_network)
+            ensure_date_run(trade_date, "a")
+            if config.data_root != root or not isinstance(tools, AcquisitionTools):
+                raise VideoArtifactError("invalid owner binding")
+    
+            result = run_video(
+                trade_date,
+                mode="acquire",
+                data_root=root,
+                config=config,
+                tools=tools,
+                allow_network=allow_network,
+            )
+            if not isinstance(result, Mapping):
+                raise VideoArtifactError("owner result invalid")
+    
+            owner_manifest = dict(result.get("manifest") or {})
+            owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
+            if not owner_run_id:
+                raise VideoArtifactError("missing owner run")
+    
+            attempt_id = hashlib.sha256(
+                json.dumps(
+                    {
+                        "date": trade_date,
+                        "owner_run_id": owner_run_id,
+                        "source": source_identity,
+                        "tool": tool_identity,
+                        "config": config_identity,
+                    },
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+    
+            attempt = stage_attempt(root, trade_date, attempt_id)
+            envelope = {
+                "owner_run_id": owner_run_id,
+                "owner_status": result.get("status"),
+                "owner_manifest": owner_manifest,
+                "attempt_id": attempt_id,
+                "m12_identity": {
+                    "trade_date": trade_date,
+                    "source_sha256": _sha_text(source_identity),
+                    "tool_sha256": _sha_text(tool_identity),
+                    "config_sha256": _sha_text(config_identity),
+                },
+            }
+    
+            safe_replace_json(attempt / "manifest.json", envelope)
+            manifest_sha = _sha_file(attempt / "manifest.json")
+            safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
+    
+            committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
+            committed.mkdir(parents=True, exist_ok=False)
+            os.replace(attempt / "manifest.json", committed / "manifest.json")
+            os.replace(attempt / "receipt.json", committed / "receipt.json")
+    
+            _cold_verify(root, trade_date, owner_run_id)
+            publish_latest_success(root, trade_date, owner_run_id)
+            return {"run_id": owner_run_id, "manifest": envelope, "attempt_id": attempt_id}
+        except VideoStoreError as exc:
+>           raise VideoArtifactError(str(exc)) from exc
+E           V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: invalid run
+
+V5/src/v5_shadow/video_fupan_daily.py:136: VideoArtifactError
+_______________ test_receipt_manifest_artifact_mutation_rejected _______________
+
+trade_date = '20261011'
+private_root = PosixPath('../m12-a158-evidence/tmp/pytest/test_receipt_manifest_artifact0/v5_private')
+tools = AcquisitionTools(discover=<function SimulatedOwner.tools.<locals>.discover at 0x107a403b0>, capture=<function SimulatedOwner.tools.<locals>.capture at 0x107a405c0>, asr=<function SimulatedOwner.tools.<locals>.asr at 0x107a40670>)
+source_identity = 's', tool_identity = 't', config_identity = 'c'
+allow_network = True
+
+    def run_video_fupan(
+        trade_date: str,
+        *,
+        private_root: Path | str,
+        tools: Any,
+        source_identity: str,
+        tool_identity: str,
+        config_identity: str,
+        allow_network: bool = False,
+    ) -> dict[str, Any]:
+        try:
+            root = ensure_private_root(private_root)
+            run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
+            config = ProducerConfig(data_root=root, network_allowed=allow_network)
+            ensure_date_run(trade_date, "a")
+            if config.data_root != root or not isinstance(tools, AcquisitionTools):
+                raise VideoArtifactError("invalid owner binding")
+    
+            result = run_video(
+                trade_date,
+                mode="acquire",
+                data_root=root,
+                config=config,
+                tools=tools,
+                allow_network=allow_network,
+            )
+            if not isinstance(result, Mapping):
+                raise VideoArtifactError("owner result invalid")
+    
+            owner_manifest = dict(result.get("manifest") or {})
+            owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
+            if not owner_run_id:
+                raise VideoArtifactError("missing owner run")
+    
+            attempt_id = hashlib.sha256(
+                json.dumps(
+                    {
+                        "date": trade_date,
+                        "owner_run_id": owner_run_id,
+                        "source": source_identity,
+                        "tool": tool_identity,
+                        "config": config_identity,
+                    },
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+    
+            attempt = stage_attempt(root, trade_date, attempt_id)
+            envelope = {
+                "owner_run_id": owner_run_id,
+                "owner_status": result.get("status"),
+                "owner_manifest": owner_manifest,
+                "attempt_id": attempt_id,
+                "m12_identity": {
+                    "trade_date": trade_date,
+                    "source_sha256": _sha_text(source_identity),
+                    "tool_sha256": _sha_text(tool_identity),
+                    "config_sha256": _sha_text(config_identity),
+                },
+            }
+    
+            safe_replace_json(attempt / "manifest.json", envelope)
+            manifest_sha = _sha_file(attempt / "manifest.json")
+            safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
+    
+            committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
+            committed.mkdir(parents=True, exist_ok=False)
+            os.replace(attempt / "manifest.json", committed / "manifest.json")
+            os.replace(attempt / "receipt.json", committed / "receipt.json")
+    
+            _cold_verify(root, trade_date, owner_run_id)
+>           publish_latest_success(root, trade_date, owner_run_id)
+
+V5/src/v5_shadow/video_fupan_daily.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_store.py:66: in publish_latest_success
+    ensure_date_run(date, run_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+date = '20261011', run_id = 'rcv1-20261011-none-018cc28a4ad02e2f'
+
+    def ensure_date_run(date: str, run_id: str) -> None:
+        if not re.fullmatch(r"\d{8}", str(date)):
+            raise VideoStoreError("invalid date")
+        if not re.fullmatch(r"[0-9a-fA-F_-]+", str(run_id)):
+>           raise VideoStoreError("invalid run")
+E           V5.src.v5_shadow.video_fupan_store.VideoStoreError: invalid run
+
+V5/src/v5_shadow/video_fupan_store.py:39: VideoStoreError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('../m12-a158-evidence/tmp/pytest/test_receipt_manifest_artifact0')
+
+    def test_receipt_manifest_artifact_mutation_rejected(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/m12/test_video_fupan_default_chain.py:65: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+trade_date = '20261011'
+private_root = PosixPath('../m12-a158-evidence/tmp/pytest/test_receipt_manifest_artifact0/v5_private')
+tools = AcquisitionTools(discover=<function SimulatedOwner.tools.<locals>.discover at 0x107a403b0>, capture=<function SimulatedOwner.tools.<locals>.capture at 0x107a405c0>, asr=<function SimulatedOwner.tools.<locals>.asr at 0x107a40670>)
+source_identity = 's', tool_identity = 't', config_identity = 'c'
+allow_network = True
+
+    def run_video_fupan(
+        trade_date: str,
+        *,
+        private_root: Path | str,
+        tools: Any,
+        source_identity: str,
+        tool_identity: str,
+        config_identity: str,
+        allow_network: bool = False,
+    ) -> dict[str, Any]:
+        try:
+            root = ensure_private_root(private_root)
+            run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
+            config = ProducerConfig(data_root=root, network_allowed=allow_network)
+            ensure_date_run(trade_date, "a")
+            if config.data_root != root or not isinstance(tools, AcquisitionTools):
+                raise VideoArtifactError("invalid owner binding")
+    
+            result = run_video(
+                trade_date,
+                mode="acquire",
+                data_root=root,
+                config=config,
+                tools=tools,
+                allow_network=allow_network,
+            )
+            if not isinstance(result, Mapping):
+                raise VideoArtifactError("owner result invalid")
+    
+            owner_manifest = dict(result.get("manifest") or {})
+            owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
+            if not owner_run_id:
+                raise VideoArtifactError("missing owner run")
+    
+            attempt_id = hashlib.sha256(
+                json.dumps(
+                    {
+                        "date": trade_date,
+                        "owner_run_id": owner_run_id,
+                        "source": source_identity,
+                        "tool": tool_identity,
+                        "config": config_identity,
+                    },
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+    
+            attempt = stage_attempt(root, trade_date, attempt_id)
+            envelope = {
+                "owner_run_id": owner_run_id,
+                "owner_status": result.get("status"),
+                "owner_manifest": owner_manifest,
+                "attempt_id": attempt_id,
+                "m12_identity": {
+                    "trade_date": trade_date,
+                    "source_sha256": _sha_text(source_identity),
+                    "tool_sha256": _sha_text(tool_identity),
+                    "config_sha256": _sha_text(config_identity),
+                },
+            }
+    
+            safe_replace_json(attempt / "manifest.json", envelope)
+            manifest_sha = _sha_file(attempt / "manifest.json")
+            safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
+    
+            committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
+            committed.mkdir(parents=True, exist_ok=False)
+            os.replace(attempt / "manifest.json", committed / "manifest.json")
+            os.replace(attempt / "receipt.json", committed / "receipt.json")
+    
+            _cold_verify(root, trade_date, owner_run_id)
+            publish_latest_success(root, trade_date, owner_run_id)
+            return {"run_id": owner_run_id, "manifest": envelope, "attempt_id": attempt_id}
+        except VideoStoreError as exc:
+>           raise VideoArtifactError(str(exc)) from exc
+E           V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: invalid run
+
+V5/src/v5_shadow/video_fupan_daily.py:136: VideoArtifactError
+_______________ test_simulated_identity_and_path_escape_rejected _______________
+
+trade_date = '20261011'
+private_root = PosixPath('../m12-a158-evidence/tmp/pytest/test_simulated_identity_and_pa0/v5_private')
+tools = AcquisitionTools(discover=<function SimulatedOwner.tools.<locals>.discover at 0x107a407d0>, capture=<function SimulatedOwner.tools.<locals>.capture at 0x107a40930>, asr=<function SimulatedOwner.tools.<locals>.asr at 0x107a40a90>)
+source_identity = 's', tool_identity = 't', config_identity = 'c'
+allow_network = True
+
+    def run_video_fupan(
+        trade_date: str,
+        *,
+        private_root: Path | str,
+        tools: Any,
+        source_identity: str,
+        tool_identity: str,
+        config_identity: str,
+        allow_network: bool = False,
+    ) -> dict[str, Any]:
+        try:
+            root = ensure_private_root(private_root)
+            run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
+            config = ProducerConfig(data_root=root, network_allowed=allow_network)
+            ensure_date_run(trade_date, "a")
+            if config.data_root != root or not isinstance(tools, AcquisitionTools):
+                raise VideoArtifactError("invalid owner binding")
+    
+            result = run_video(
+                trade_date,
+                mode="acquire",
+                data_root=root,
+                config=config,
+                tools=tools,
+                allow_network=allow_network,
+            )
+            if not isinstance(result, Mapping):
+                raise VideoArtifactError("owner result invalid")
+    
+            owner_manifest = dict(result.get("manifest") or {})
+            owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
+            if not owner_run_id:
+                raise VideoArtifactError("missing owner run")
+    
+            attempt_id = hashlib.sha256(
+                json.dumps(
+                    {
+                        "date": trade_date,
+                        "owner_run_id": owner_run_id,
+                        "source": source_identity,
+                        "tool": tool_identity,
+                        "config": config_identity,
+                    },
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+    
+            attempt = stage_attempt(root, trade_date, attempt_id)
+            envelope = {
+                "owner_run_id": owner_run_id,
+                "owner_status": result.get("status"),
+                "owner_manifest": owner_manifest,
+                "attempt_id": attempt_id,
+                "m12_identity": {
+                    "trade_date": trade_date,
+                    "source_sha256": _sha_text(source_identity),
+                    "tool_sha256": _sha_text(tool_identity),
+                    "config_sha256": _sha_text(config_identity),
+                },
+            }
+    
+            safe_replace_json(attempt / "manifest.json", envelope)
+            manifest_sha = _sha_file(attempt / "manifest.json")
+            safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
+    
+            committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
+            committed.mkdir(parents=True, exist_ok=False)
+            os.replace(attempt / "manifest.json", committed / "manifest.json")
+            os.replace(attempt / "receipt.json", committed / "receipt.json")
+    
+            _cold_verify(root, trade_date, owner_run_id)
+>           publish_latest_success(root, trade_date, owner_run_id)
+
+V5/src/v5_shadow/video_fupan_daily.py:133: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+V5/src/v5_shadow/video_fupan_store.py:66: in publish_latest_success
+    ensure_date_run(date, run_id)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+date = '20261011', run_id = 'rcv1-20261011-none-3ceca66a43be9c06'
+
+    def ensure_date_run(date: str, run_id: str) -> None:
+        if not re.fullmatch(r"\d{8}", str(date)):
+            raise VideoStoreError("invalid date")
+        if not re.fullmatch(r"[0-9a-fA-F_-]+", str(run_id)):
+>           raise VideoStoreError("invalid run")
+E           V5.src.v5_shadow.video_fupan_store.VideoStoreError: invalid run
+
+V5/src/v5_shadow/video_fupan_store.py:39: VideoStoreError
+
+The above exception was the direct cause of the following exception:
+
+tmp_path = PosixPath('../m12-a158-evidence/tmp/pytest/test_simulated_identity_and_pa0')
+
+    def test_simulated_identity_and_path_escape_rejected(tmp_path: Path):
+        owner = SimulatedOwner(tmp_path)
+>       result = run_video_fupan(DATE, private_root=tmp_path / "v5_private", tools=owner.tools(), source_identity="s", tool_identity="t", config_identity="c", allow_network=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/m12/test_video_fupan_default_chain.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+trade_date = '20261011'
+private_root = PosixPath('../m12-a158-evidence/tmp/pytest/test_simulated_identity_and_pa0/v5_private')
+tools = AcquisitionTools(discover=<function SimulatedOwner.tools.<locals>.discover at 0x107a407d0>, capture=<function SimulatedOwner.tools.<locals>.capture at 0x107a40930>, asr=<function SimulatedOwner.tools.<locals>.asr at 0x107a40a90>)
+source_identity = 's', tool_identity = 't', config_identity = 'c'
+allow_network = True
+
+    def run_video_fupan(
+        trade_date: str,
+        *,
+        private_root: Path | str,
+        tools: Any,
+        source_identity: str,
+        tool_identity: str,
+        config_identity: str,
+        allow_network: bool = False,
+    ) -> dict[str, Any]:
+        try:
+            root = ensure_private_root(private_root)
+            run_video, ProducerConfig, AcquisitionTools = _bind_review_core()
+            config = ProducerConfig(data_root=root, network_allowed=allow_network)
+            ensure_date_run(trade_date, "a")
+            if config.data_root != root or not isinstance(tools, AcquisitionTools):
+                raise VideoArtifactError("invalid owner binding")
+    
+            result = run_video(
+                trade_date,
+                mode="acquire",
+                data_root=root,
+                config=config,
+                tools=tools,
+                allow_network=allow_network,
+            )
+            if not isinstance(result, Mapping):
+                raise VideoArtifactError("owner result invalid")
+    
+            owner_manifest = dict(result.get("manifest") or {})
+            owner_run_id = str(result.get("run_id") or owner_manifest.get("run_id") or "")
+            if not owner_run_id:
+                raise VideoArtifactError("missing owner run")
+    
+            attempt_id = hashlib.sha256(
+                json.dumps(
+                    {
+                        "date": trade_date,
+                        "owner_run_id": owner_run_id,
+                        "source": source_identity,
+                        "tool": tool_identity,
+                        "config": config_identity,
+                    },
+                    sort_keys=True,
+                ).encode("utf-8")
+            ).hexdigest()
+    
+            attempt = stage_attempt(root, trade_date, attempt_id)
+            envelope = {
+                "owner_run_id": owner_run_id,
+                "owner_status": result.get("status"),
+                "owner_manifest": owner_manifest,
+                "attempt_id": attempt_id,
+                "m12_identity": {
+                    "trade_date": trade_date,
+                    "source_sha256": _sha_text(source_identity),
+                    "tool_sha256": _sha_text(tool_identity),
+                    "config_sha256": _sha_text(config_identity),
+                },
+            }
+    
+            safe_replace_json(attempt / "manifest.json", envelope)
+            manifest_sha = _sha_file(attempt / "manifest.json")
+            safe_replace_json(attempt / "receipt.json", {"owner_run_id": owner_run_id, "attempt_id": attempt_id, "manifest_sha256": manifest_sha})
+    
+            committed = root / "video_fupan" / "runs" / trade_date / owner_run_id
+            committed.mkdir(parents=True, exist_ok=False)
+            os.replace(attempt / "manifest.json", committed / "manifest.json")
+            os.replace(attempt / "receipt.json", committed / "receipt.json")
+    
+            _cold_verify(root, trade_date, owner_run_id)
+            publish_latest_success(root, trade_date, owner_run_id)
+            return {"run_id": owner_run_id, "manifest": envelope, "attempt_id": attempt_id}
+        except VideoStoreError as exc:
+>           raise VideoArtifactError(str(exc)) from exc
+E           V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: invalid run
+
+V5/src/v5_shadow/video_fupan_daily.py:136: VideoArtifactError
+- generated xml file: ../m12-a158-evidence/junit.xml -
+=========================== short test summary info ============================
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_owner_default_chain_contract - V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: invalid run
+FAILED tests/m12/test_video_fupan_default_chain.py::test_receipt_manifest_artifact_mutation_rejected - V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: invalid run
+FAILED tests/m12/test_video_fupan_default_chain.py::test_simulated_identity_and_path_escape_rejected - V5.src.v5_shadow.video_fupan_daily.VideoArtifactError: invalid run
+========================= 3 failed, 1 passed in 0.15s ==========================
