@@ -1,0 +1,264 @@
+{
+  "four_required": [
+    {
+      "module_path": "domains/manager_condition_evidence.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_condition_evidence.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/domains/manager_condition_evidence.py",
+      "git_blob_sha": "008b32f0bb832db4d64d97b937e9686f74625df3",
+      "sha256": "9e1c7a9fb04c7a3f00d11ba1c4c3c4922c86b6536190df7caa9d2205804ee3f6",
+      "bytes": 30940,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "infrastructure/manager_close_attempt.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/manager_close_attempt.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/manager_close_attempt.py",
+      "git_blob_sha": "296418d926c73c18343ef6321809228ced4e3d0b",
+      "sha256": "ecbe2ab89bcb4837f00ff4a9c04219393cf37225a9bbafc145e0904de7ffb006",
+      "bytes": 4720,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "v4/manager_research/workspace_plan.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_plan.py",
+      "git_blob_sha": "60e42475616d53480da470dec32d69fceb164497",
+      "sha256": "ef0269a8510b9168e2d135de6c1b4d28146a22d0d691aee8dd3fe80f95a698f0",
+      "bytes": 97369,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "v4/manager_research/workspace_projection.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_projection.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_projection.py",
+      "git_blob_sha": "5799baef183dd4a93bdbc24c817a5df3d9e3cc33",
+      "sha256": "027d855613e675e1f569b401b9a8344e40766b88c31e987e791d05a0b3a2f200",
+      "bytes": 30841,
+      "private_absolute_path_lines": []
+    }
+  ],
+  "verified_same_donor_direct_dependencies": [
+    {
+      "module_path": "contracts/trading_calendar.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "git_blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+      "bytes": 10239,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "domains/manager_research_evidence.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/domains/manager_research_evidence.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/domains/manager_research_evidence.py",
+      "git_blob_sha": "9255d425083e3c3627d4940d7556eed79e3bc00f",
+      "sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d",
+      "bytes": 30848,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "infrastructure/manager_input_attestation.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/manager_input_attestation.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/manager_input_attestation.py",
+      "git_blob_sha": "d6968a2acf64d7f5cde17fa8e1f27cefb744b3dd",
+      "sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc",
+      "bytes": 10179,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "infrastructure/owned_io.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "git_blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "bytes": 9354,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "infrastructure/owned_path.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "git_blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "bytes": 2251,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "upstreams/v3_shared_data/shared_data/hk_security_master.py",
+      "v5_path": "handoffs/M17/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_security_master.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_security_master.py",
+      "git_blob_sha": "36262bcd4fb9a8a52be8c6791180ee450c2d63b8",
+      "sha256": "ac2c16669236d24d6d03cac183238ca8dccd8fd23895ae14ad34cef40c049008",
+      "bytes": 14396,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "upstreams/v3_shared_data/shared_data/hk_daily_supplement.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_daily_supplement.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/hk_daily_supplement.py",
+      "git_blob_sha": "4f215a304c55987ccd2e8ef3755232b4aa9fc477",
+      "sha256": "fa7dcbce4ee026b0a02c47220820d0407af183553d3304afcc5db425dce33cbd",
+      "bytes": 32662,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "upstreams/v3_shared_data/shared_data/store.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/upstreams/v3_shared_data/shared_data/store.py",
+      "git_blob_sha": "273dc301ff7e8fe9d91e9d3e3c7c427817dc3976",
+      "sha256": "87042083dad178442c75386e59ae4b2fd9bab0a3c92b5c3a090ddb90e6b52a16",
+      "bytes": 27895,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "v4/manager_research/__init__.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/__init__.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/__init__.py",
+      "git_blob_sha": "66f16815275fc940cf0e193a1bb592d8919d9a7d",
+      "sha256": "7902d6b467cacfa763ca6adef297b823c924c573cdb79df2c2e04ec758c38cc4",
+      "bytes": 1005,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "v4/manager_research/store.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py",
+      "git_blob_sha": "c9af9a6ae87858ebee111766d4db0fd0639943b5",
+      "sha256": "79e077d2133f8c0bd33dde253e752bc6482423565ec11e9217d88b86f02cc07e",
+      "bytes": 19988,
+      "private_absolute_path_lines": []
+    },
+    {
+      "module_path": "v4/manager_research/workspace_read_control.py",
+      "v5_path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_read_control.py",
+      "v5_commit": "f350602512ee14f825bb53a976fbaada93a0b921",
+      "donor_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "donor_repository_path": "handoff/v4-running-source-20261005/canonical/v4/manager_research/workspace_read_control.py",
+      "git_blob_sha": "2ef88175e1a232d669dc23a05f35c48e27309bcf",
+      "sha256": "491e3569e8f00586ca6f4e9982e182584d2f2a0437f83da66767b7ffdbf1fb25",
+      "bytes": 10927,
+      "private_absolute_path_lines": []
+    }
+  ],
+  "other_direct_lazy_import_references": [
+    {
+      "v5_path": "V5/vendor/manager_plan_baseline/v4/manager_research/announcement_materials.py",
+      "v5_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+      "git_blob_sha": "fbd174f760613d5388cc2683235cf2e57048741b",
+      "sha256": "7163ca75e883d173ce7a831076402b06906951323dd54f82b2500c6b9ad60df1",
+      "bytes": 10727,
+      "private_absolute_path_lines": [],
+      "scope": "lazy imports in temporal_role/stock_plan/read_plan_quotes/build_workspace; outside minimal 1530 history/arithmetic path; existing reference only, not automatically part of selected frozen donor"
+    },
+    {
+      "v5_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_actions.py",
+      "v5_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+      "git_blob_sha": "631714d9ae8c156e4eeefdba84740683b761570f",
+      "sha256": "9ae8f53fd261e5a28f97029e76ee0b296d7befb02a32a0f6689229b5000b2ecf",
+      "bytes": 14843,
+      "private_absolute_path_lines": [],
+      "scope": "lazy imports in temporal_role/stock_plan/read_plan_quotes/build_workspace; outside minimal 1530 history/arithmetic path; existing reference only, not automatically part of selected frozen donor"
+    },
+    {
+      "v5_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_semantics.py",
+      "v5_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+      "git_blob_sha": "438a5c0198f39000a645323a3177cf1964ca4cbb",
+      "sha256": "dc8d1d330e4fdacf2ef7169a7ac62874bfd3e2658f8b4bcff0773e06e32c4f7f",
+      "bytes": 33731,
+      "private_absolute_path_lines": [],
+      "scope": "lazy imports in temporal_role/stock_plan/read_plan_quotes/build_workspace; outside minimal 1530 history/arithmetic path; existing reference only, not automatically part of selected frozen donor"
+    },
+    {
+      "v5_path": "V5/vendor/manager_plan_baseline/v4/manager_research/workspace_briefing.py",
+      "v5_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+      "git_blob_sha": "7c61130742f98fffd19a7b3c5c80d0765368d216",
+      "sha256": "60a7942e6c2c6a8ed32099ec807c79c35fa393342ed59996798f21da12466ff6",
+      "bytes": 32275,
+      "private_absolute_path_lines": [],
+      "scope": "lazy imports in temporal_role/stock_plan/read_plan_quotes/build_workspace; outside minimal 1530 history/arithmetic path; existing reference only, not automatically part of selected frozen donor"
+    },
+    {
+      "v5_path": "V5/vendor/hk_close_baseline/infrastructure/hkconnect_close_store.py",
+      "v5_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+      "git_blob_sha": "86f75687daf761f022379f56757c433fc794043a",
+      "sha256": "aea05a0ec8b4b42e6c140715fb1bf80ffcf49ded1f25f5bb59bc3c952bce4bf8",
+      "bytes": 4178,
+      "private_absolute_path_lines": [],
+      "scope": "lazy imports in temporal_role/stock_plan/read_plan_quotes/build_workspace; outside minimal 1530 history/arithmetic path; existing reference only, not automatically part of selected frozen donor"
+    }
+  ],
+  "manifest_tree_entries": 132,
+  "manifest_git_blob_tree_matches": 132,
+  "source_uploaded": 0,
+  "tests": "NOT_RUN",
+  "imports_executed": "NOT_RUN",
+  "real_inputs_read": "NOT_RUN",
+  "services_changed": false,
+  "current_v4_runtime_parity": "NOT_VERIFIED; frozen donor evidence only",
+  "eager_package_dependency_references": [
+    {
+      "path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/contracts.py",
+      "git_blob_sha": "643abdd5bff9a196bb993275e5f57bea79881e90",
+      "sha256": "d90f0027a8383f20a299e3058d69716e62737e9e5300afc61a8ef2ed949d402f",
+      "verification": "existing manifest identity matches fixed Git tree; not reexecuted"
+    },
+    {
+      "path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
+      "git_blob_sha": "8b7aa95d7ff93a6aed32a92a0f0897b3cfaee240",
+      "sha256": "7bc565f9c7a210bc4966622cfde60875ec9f002f7b38a5d9063c467a9499d56d",
+      "verification": "existing manifest identity matches fixed Git tree; not reexecuted"
+    },
+    {
+      "path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/material_transport.py",
+      "git_blob_sha": "891dc20d7d8a737c8aaecbb50c3615763195a616",
+      "sha256": "497c52c915e5485f34de27cb1fb2caca3971c77f531385a0d1f80d4587fc6ab5",
+      "verification": "existing manifest identity matches fixed Git tree; not reexecuted"
+    },
+    {
+      "path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/materials.py",
+      "git_blob_sha": "555d285fa5b5cd7714c68a5c582797577c3ffaea",
+      "sha256": "0d3c6c3fa0404c7006e5a8127b6123b99f7fff7c4d99af04b524fc04cb0e1ac2",
+      "verification": "existing manifest identity matches fixed Git tree; not reexecuted"
+    },
+    {
+      "path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/service.py",
+      "git_blob_sha": "8c7cc0357aa9c203fe088edb1fd88900290c9aec",
+      "sha256": "1d1ffc81991c32aeb66b3b4704db8421a9131896bc76597f3596d4510bfbccdd",
+      "verification": "existing manifest identity matches fixed Git tree; not reexecuted"
+    },
+    {
+      "path": "handoffs/M17/supplement/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/store.py",
+      "git_blob_sha": "c9af9a6ae87858ebee111766d4db0fd0639943b5",
+      "sha256": "79e077d2133f8c0bd33dde253e752bc6482423565ec11e9217d88b86f02cc07e",
+      "verification": "existing manifest identity matches fixed Git tree; not reexecuted"
+    }
+  ]
+}
