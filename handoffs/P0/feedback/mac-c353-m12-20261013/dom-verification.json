@@ -1,0 +1,184 @@
+{
+  "method": "Entire deployed built main bundle mounted in jsdom, real local HTTP; not browser visual validation",
+  "finished_utc": "2026-10-13T04:37:29.001Z",
+  "behavior": {
+    "initial_sources_closed": true,
+    "result_before_sources": true,
+    "heading": "\u516c\u544a\u7814\u7a76\u80a1\u7968\u76ee\u6807\u65e5 20261012\u5df2\u8bfb\u53d6\u8fd0\u884c 46596b03c2ab4e29b1219fd2e5eb698f",
+    "m12": {
+      "first_click_opens_and_focuses": true,
+      "source_stays_collapsed": true,
+      "waiting_without_binding": true,
+      "no_saved_content": true,
+      "reopen_does_not_fetch": true,
+      "real_video_verified": false
+    },
+    "loading_in_result_before_sources": true,
+    "m04": {
+      "real_articles_exact": 18,
+      "first_click_opens_both_and_focuses": true,
+      "reopen_repeat_does_not_fetch": true,
+      "explicit_refresh_clears_rows_and_reads_once": true,
+      "outside_errors": 53,
+      "pit": "UNKNOWN"
+    },
+    "source_expand_and_focus": true,
+    "error_in_result_before_sources": true,
+    "error_clears_old_result": true,
+    "restored_same_run": true
+  },
+  "manager_card_and_table_counts": [
+    [
+      32,
+      0
+    ],
+    [
+      31,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      1
+    ]
+  ],
+  "requests": [
+    {
+      "path": "/assets/_plugin-vue_export-helper-DlAUqK2U.js",
+      "status": 200,
+      "elapsed_ms": 7
+    },
+    {
+      "path": "/assets/style-DI6AXicP.js",
+      "status": 200,
+      "elapsed_ms": 13
+    },
+    {
+      "path": "/assets/reboundPanelObservation-rEOT8hV3.js",
+      "status": 200,
+      "elapsed_ms": 8
+    },
+    {
+      "path": "/assets/runtime-dom.esm-bundler-Ds5LT4Of.js",
+      "status": 200,
+      "elapsed_ms": 14
+    },
+    {
+      "path": "/assets/SavedManagerResultView-BZ-8fQ-F.js",
+      "status": 200,
+      "elapsed_ms": 9
+    },
+    {
+      "path": "/api/v4/manager/m18/v2?run_id=46596b03c2ab4e29b1219fd2e5eb698f",
+      "status": 200,
+      "elapsed_ms": 4
+    },
+    {
+      "path": "/api/v5/source-bundle/status",
+      "status": 200,
+      "elapsed_ms": 7
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-stage-observed",
+      "status": 200,
+      "elapsed_ms": 50
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-close-review",
+      "status": 200,
+      "elapsed_ms": 58
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-stage-observed?date=20261012&stage=STAGE_0925&run_id=run-ad1e0d8a968a1f609d23f874&import_sha256=574539e4fe64225e65c57c7693f36b21919c3c67acb2a01daa03aaaf4cfd2606",
+      "status": 200,
+      "elapsed_ms": 165
+    },
+    {
+      "path": "/api/v5/manager/close-recapture?source_trade_date=20261012&run_id=ca2c344b61334ad28f4b6146117643cd",
+      "status": 200,
+      "elapsed_ms": 274
+    },
+    {
+      "path": "/api/v5/source-bundle/a-close-replay",
+      "status": 200,
+      "elapsed_ms": 506
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-preselection",
+      "status": 200,
+      "elapsed_ms": 842
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/overview?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a",
+      "status": 200,
+      "elapsed_ms": 4562
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+      "status": 200,
+      "elapsed_ms": 4752
+    },
+    {
+      "path": "/api/v5/source-bundle/video-fupan",
+      "status": 200,
+      "elapsed_ms": 3
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+      "status": 200,
+      "elapsed_ms": 4864
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=rebound_research_observation&projection=rebound_references&group=strict",
+      "status": 200,
+      "elapsed_ms": 4671
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=us_mapping_research&projection=us_mapping_matches",
+      "status": 200,
+      "elapsed_ms": 4627
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=summary",
+      "status": 200,
+      "elapsed_ms": 4520
+    },
+    {
+      "path": "/api/v5/source-bundle/research-intelligence",
+      "status": 200,
+      "elapsed_ms": 167
+    },
+    {
+      "path": "/api/v5/source-bundle/research-intelligence",
+      "status": 200,
+      "elapsed_ms": 177
+    },
+    {
+      "path": "/api/v4/manager/m18/v2?run_id=46596b03c2ab4e29b1219fd2e5eb698f",
+      "status": 200,
+      "elapsed_ms": 3
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/overview?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a",
+      "status": 200,
+      "elapsed_ms": 4719
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+      "status": 200,
+      "elapsed_ms": 4981
+    }
+  ],
+  "runtime_errors": [],
+  "exit_code": 0,
+  "visual_verification": false,
+  "original_runtime_blobs_unchanged": 10,
+  "original_lifecycle_test_blob_unchanged": true,
+  "source_27_entries_unchanged_after_checks": true,
+  "protected_files_unchanged": true,
+  "protected_files_count": 220,
+  "overall_checks_started_utc": "2026-10-13T04:35:21.360222+00:00"
+}

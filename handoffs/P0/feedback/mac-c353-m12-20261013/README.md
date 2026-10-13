@@ -1,0 +1,13 @@
+# Mac M12 fixed candidate: targeted PASS, deployed WAITING
+
+Product c353334d70972033ae86f7175504ca675bafbb68; verification-doc reference 51f9503593fdb6415a95a2c219f995f730821fc7. Only the 27-file SOURCE_CLOSURE overlay was applied to the active M04 composition. The ten original M12 runtime blobs and original lifecycle test blob match 4bbf069b435d8f0ba28db8e2eba1d358ea5e283c. No whole-HEAD deployment.
+
+Four shared preimages matched. main_registry.py had the known undeployed M06 daily registration in the cloud base; only the M12 line was applied, preserving the active M06 hk_preselection/daily_owner_adapters registration. No M06 daily backend, daily_tick or daily_dispatch was deployed. overlay.json records both product and applied identities.
+
+Existing Mac Python and Node dependencies only, no installation. Exact commands/times/exit codes in checks.json: Python 59 passed plus 21 subtests; Node 12 passed; DOM 16 passed; typecheck/build exit 0. The fixtures use isolated synthetic owner children with sockets blocked. A pre-existing testing-library fireEvent.change advisory remains; no test failure. No real provider, download, ASR, collection, model generation, credential access or scheduler activation occurred.
+
+New source API on loopback 59177; frontend 54780 uses the new built dist. Only the verified task-owned prior preview PID was stopped. Old M04 source 62116, old dist/config and rollback script are retained. Manager source 63668 and original run are unchanged. M12 adds only its route; no M12 binding is configured. API and main-page entry explicitly show WAITING / M12_SAVED_REFERENCE_NOT_CONFIGURED. No synthetic content is deployed as real and no real saved-video page or human review is claimed complete.
+
+Entire deployed built bundle mounted in existing jsdom with real HTTP passed: M12 first click opens/focuses its content, source disclosure stays collapsed, WAITING has no saved-content rows, reopen makes no duplicate read. M04 still opens/focuses and reads exact original 18 articles; manager cards retain 32/31/3 and summary one row; M06 original 100 rows and committed reference exact, M17 semantic response exact. All 19 dist files match actual HTTP bytes. 220 protected files retain SHA/size/mtime; protected ports remain unchanged. IAB not retried; visual confirmation remains cloud-side NOT_VERIFIED.
+
+Broad cloud suite remains FAILED_NOT_RELEASE_ACCEPTANCE (1071 tests,35 failures,143 errors,17 skipped); it was not rerun or relabeled as passed. Original M06 85 tests were not rerun. This is minimum integration and WAITING boundary acceptance only; real video, natural daily execution and research review remain NOT_RUN/NOT_VERIFIED.

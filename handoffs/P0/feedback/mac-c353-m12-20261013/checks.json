@@ -1,0 +1,76 @@
+[
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "V5/tests/test_m12_integration.py",
+      "tests/m12/test_video_fupan_default_chain.py",
+      "V5/tests/test_p0_main_registry.py",
+      "V5/tests/test_module_api.py",
+      "V5/tests/test_m04_readonly_api.py"
+    ],
+    "cwd": "candidate-m12-c353",
+    "started_utc": "2026-10-13T04:35:21.360222+00:00",
+    "finished_utc": "2026-10-13T04:35:45.808552+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/node",
+      "--experimental-strip-types",
+      "--test",
+      "tests/m12SavedVideo.node.mjs",
+      "tests/m04SavedResearch.node.mjs",
+      "tests/savedManagerNavigation.node.mjs"
+    ],
+    "cwd": "candidate-m12-c353/frontend",
+    "started_utc": "2026-10-13T04:35:45.809191+00:00",
+    "finished_utc": "2026-10-13T04:35:45.899422+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "test",
+      "--",
+      "src/components/M12SavedVideo.spec.ts",
+      "src/views/SavedManagerResultView.m12.spec.ts",
+      "src/components/M04SavedResearch.spec.ts",
+      "src/views/SavedManagerResultView.navigation.spec.ts",
+      "src/components/SourceBundleStatus.m08.spec.ts",
+      "src/components/SourceBundleStatus.m09.spec.ts",
+      "src/components/SourceBundleStatus.m17.spec.ts"
+    ],
+    "cwd": "candidate-m12-c353/frontend",
+    "started_utc": "2026-10-13T04:35:45.900055+00:00",
+    "finished_utc": "2026-10-13T04:35:48.121252+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "candidate-m12-c353/frontend",
+    "started_utc": "2026-10-13T04:35:48.121773+00:00",
+    "finished_utc": "2026-10-13T04:35:50.201790+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "build"
+    ],
+    "cwd": "candidate-m12-c353/frontend",
+    "started_utc": "2026-10-13T04:35:50.202299+00:00",
+    "finished_utc": "2026-10-13T04:35:51.428242+00:00",
+    "exit_code": 0
+  }
+]

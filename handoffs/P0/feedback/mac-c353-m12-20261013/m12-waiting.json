@@ -1,0 +1,14 @@
+{
+  "buy_gate_updated": false,
+  "module_id": "M12_VIDEO_FUPAN",
+  "natural_verified": false,
+  "orders_sent": false,
+  "production_allowed": false,
+  "reason_codes": [
+    "M12_SAVED_REFERENCE_NOT_CONFIGURED"
+  ],
+  "research_only": true,
+  "review_completed": false,
+  "schema_version": "v5.m12_saved_video.v1",
+  "status": "WAITING"
+}

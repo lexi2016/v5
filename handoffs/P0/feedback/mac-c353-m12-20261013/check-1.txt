@@ -1,0 +1,20 @@
+✔ fixed GET reads all 18 synthetic articles and preserves unknown clocks (29.083042ms)
+✔ not configured remains missing and incomplete, false PIT or unsafe rows are rejected (1.57625ms)
+✔ retry clears old results and stale or closed requests cannot replace current state (0.49325ms)
+✔ source module and main navigation expose a lazy fixed-sample research disclosure (0.3015ms)
+✔ M04 route uses the existing read-only source proxy (0.068041ms)
+✔ saved original ASR is explicit-date GET and remains unreviewed synthetic evidence (28.917208ms)
+✔ WAITING is preserved and successful-looking malformed or unsafe data is rejected (0.922125ms)
+✔ new requests clear old evidence and stale responses cannot overwrite current selected date (0.634875ms)
+✔ default saved-results navigation exposes the real lazy component (0.442ms)
+✔ saved result content precedes a closed source disclosure and preserves the source component (0.4215ms)
+✔ result navigation has a visible heading, focus and scroll instead of only starting a request (0.110834ms)
+✔ the selected result exposes its verified date and run without enabling missing routes (0.107333ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 64.9365
