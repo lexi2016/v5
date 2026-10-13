@@ -276,12 +276,14 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6acb9ad6-5dc8-83ec-b3bd-bd3a447de94a)；`dev/m16-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
 - **已有代码与证据：** [loader](https://github.com/lexi2016/v5/commit/5bb1d635abe03cec61d0e52bf1150f2c70b5fe6a)；[只读接线](https://github.com/lexi2016/v5/commit/257ca6425c4d489e09430605ee82bf22a4e02da8)；[Mac](https://github.com/lexi2016/v5/commit/711d1cf68d26609a62241862f4f12291279e2f40)。 [完整生命周期候选ac1d14](https://github.com/lexi2016/v5/commit/ac1d1404ee76ca18a55dc65451b34868de6db552)；[Mac隔离原回执](../../../../handoffs/P0/feedback/mac-m16-ac1d14-isolated-20261013/result.json)。
 - **已验证层级：** 原loader Mac32、真实10行PARTIAL_WITH_ROWS冷读/页历史保留。新固定ac1d14已155 blob/154 manifest核验，Mac31/31合成隔离PASS、exit0；首轮1 PASS/30 setup ERROR因TMPDIR经过/var symlink，改真实非symlink TMPDIR后通过，未改产品/候选字节。旧32未重跑，完整模块0。
-- **未完成缺口：** 新生命周期候选已有隔离成功证据，不再将ensure/events/retry/cancel/reader一律标为未交代码。完整锁环境、真实PDF/provider网络、部署/原生页面及自然NOT_RUN；Python3.14.6不同于README云端3.12.14，未安装依赖，不以合成PDF解析成功替代真实源资格。
+- **未完成缺口：** 新生命周期候选已有隔离成功证据，不再将ensure/events/retry/cancel/reader一律标为未交代码。完整锁环境、原生可视、自然及生命周期剩余场景仍待验；限定真实PDF/provider与现有页面部署已由本节末条单次生产补证，但部分资料未形成事实、历史PIT/正式资格仍false。Python3.14.6不同于README云端3.12.14，未安装依赖。
 - **依赖：** 原固定候选、公开资料provider、事件与job状态机；不依赖所有经理计划先完成才核独立job工程。
-- **下一条完整交付：** 复用ac1d14的31项合成隔离证据与原32历史，按实际授权补完整锁环境、限定真实provider/PDF与运行绑定、保存reader/API及部署/生命周期剩余验收。保持GET无创建副作用、失败/取消/重试合同，不自动新外采。
+- **下一条完整交付：** 复用ac1d14的31项合成隔离证据与原32历史，复用下述已完成的单次真实provider/PDF、保存reader/API及部署证据，按实际授权补完整锁环境、资料缺口与生命周期剩余验收。保持GET无创建副作用、失败/取消/重试合同，不自动新外采。
 - **验收标准：** 限定既有候选真实任务的提交/运行/结果、失败重试、取消/事件更新可追踪；GET无副作用，长任务不阻塞经理读取，状态/原PDF未核边界保留、单job回退过。
 - **责任与交接：** M16唯一实现者保留固定生命周期候选；P0仅接请求/状态读取与长任务隔离，Mac后续按获准候选/调用范围验未覆盖部分。此次31 PASS不提升真实来源、部署、自然或全模块状态。
 - **新增真实输入接线（北京时间2026-10-14 01:11）：** 固定2e49a397d99de8b0315628c97c01a4fd1a3a823a，新增12/12定向通过，旧31未重跑；M08 date12/STAGE_0935_0940原10行完整导出，新输入身份与原字段保持。只读50024/PID22335三次GET200无写，NOT_MATERIALIZED、product/job=null，仅返回输入身份/数量；producer关闭、未ensure/PDF网络/主页面部署，PIT=false，不计研究产品或业务完成。[真实接线原回执](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/m16-service.json)。
+
+- **新增单次真实生产及部署（2026-10-13 19:26 UTC终态）：** 固定2e49a397d99de8b0315628c97c01a4fd1a3a823a，从job/product空执行一次ensure/attempt1，19:21:04–19:23:07 exit0，PARTIAL_WITH_ROWS 10条（6 READY/4 CANNOT_CONFIRM）、144结构化事实；1成员官方活跃主体未确认，3成员PDF未形成结构化事实。原事件9=1 eligible/8 unconfirmed，新闻156份覆盖9/10。历史20261012/cutoff09:40+08不改、PIT/historical_system_available=false、10条formal全false。新进程原reader及50024 API同product，54780 HTTP/DOM通过；source60473/PID26856、preview PID26954，旧58799回退。首次DOM资源加载检查失败自动回退，仅修验证脚本后通过，无改产品/重采集；候选/准备输入/M08及V4/M14/经理保持。新增真实生产与部署一次，页面仍14/18、完整仍0/18。[派生增量反馈](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/m16-production-summary.json)。
 
 ### M17 尾盘量价发现与持续跟踪｜P4
 

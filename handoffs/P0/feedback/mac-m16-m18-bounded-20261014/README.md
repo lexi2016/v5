@@ -23,3 +23,15 @@
 - m18-prior-preparation.json：26d6404a7035b81e1bfffc12b5797e5675062c9a64d353c1c82cd326cd253730
 - m18-prior-diagnostic.json：78b05dfd1fda92acadfde0ecf0f63a129b64e5ec0574cbfb67dadc800852d207
 - m18-recheck.json：a7802a0da490c3d81b614a56e80b2550f8ec14a838237b6f21f17188c7e0b7c4
+
+## M16 单次真实生产与现有页发布增量（19:26 UTC终态）
+
+本节及 m16-production-summary.json 为 **DERIVED_SUMMARY**，转存Mac普通消息 `msg_0b47eb1b0178a3a6016ace861d071087d18be7579582d0eee5`；未取得原文件字节，不声称与原JSON的SHA相同，文档写入者未执行测试。以上五份原JSON保持不变，初次NOT_MATERIALIZED是执行前历史。
+
+固定2e49a397d99de8b0315628c97c01a4fd1a3a823a执行前job/product为空；一次ensure、attempt1，UTC2026-10-13 19:21:04–19:23:07 exit0，无retry/独立events refresh，12项测试未重跑。实际保存PARTIAL_WITH_ROWS：10条中6 READY、4 CANNOT_CONFIRM，144条结构化事实。HK.02915为ISSUER_NOT_IN_OFFICIAL_ACTIVE_LIST；HK.02583/01081/00376为PDF_NO_STRUCTURED_FACTS（文件取回解析但未建立事实）。原事件9个＝1 eligible＋8 unconfirmed；公共新闻156份覆盖9/10，部分覆盖保留。
+
+历史日期20261012、cutoff2026-10-12T09:40:00+08:00，PIT=false、historical_system_available=false，10条formal_eligible全false；不是当日实时结果。新进程原reader、50024 API与原保存reader核验同product，54780 HTTP/DOM通过。新source60473/PID26856，预览54780/PID26954；旧58799与绑定保留回退。首次DOM资源加载验证失败自动回退，仅修验证脚本后复验，未改产品或重采集。
+
+候选、准备输入、M08原资料不变，V4/其他预览/M14/经理保留。此次新增实际生产及发布一次，已有M16页面不重复增加14/18页面计数；自然及完整模块0/18不变。原生视觉没有新增通过证据。
+
+身份与来源报告指纹见[m16-production-summary.json](m16-production-summary.json)。来源result.safe.json SHA256为`71141c89e0f9c64d3ebbb9c0d72b699758f1a32970f2c87b6a38127ae250e7bf`，原字节仍在Mac，不上传原事实/新闻/股票行或私有路径。
