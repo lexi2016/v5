@@ -1,0 +1,63 @@
+{
+  "source_bundle_preimage_git_blob": "28f63d069c522c213a464a41a0beee9ed61a5455",
+  "source_bundle_worker_preimage_git_blob": "24986aa93eacbdf0c6a4b49660b91c07a1c09ae7",
+  "files": [
+    {
+      "path": "V5/contracts/source_owner_runtime.json",
+      "before": {
+        "bytes": 49220,
+        "sha256": "4742067f641a56df84d590c5036c4fd27e1cd7fa974519995589e8ecf7f54465",
+        "git_blob": "8b3651ecd61459a1115479d4b97e92bc48d76698"
+      },
+      "after": {
+        "bytes": 49592,
+        "sha256": "ca6785467be503cf36add56209f160da4f13383ce816903a3b7e4dea091f4053",
+        "git_blob": "1ee499af55a9ae0d3604680d22c7caf4213ac2ac"
+      }
+    },
+    {
+      "path": "V5/source_owners/m03/V5/src/v5_shadow/us_source_saved.py",
+      "before": "ABSENT",
+      "after": {
+        "bytes": 15279,
+        "sha256": "7e2ce3f43b660a5d20b4bc52adf10c8da6770f148adb390b666cc47c132ad864",
+        "git_blob": "1512a9436b1f45b076c9bbd5710e9629107065fe"
+      }
+    },
+    {
+      "path": "V5/src/v5_shadow/source_bundle.py",
+      "before": {
+        "bytes": 8161,
+        "sha256": "8a1730e25b45cc042abf20ab15f62e33af8f819cad2c9ec1bfc20fb4d4bc2f0e",
+        "git_blob": "28f63d069c522c213a464a41a0beee9ed61a5455"
+      },
+      "after": {
+        "bytes": 13752,
+        "sha256": "16db7a5d3f74f92c90c8ca9f7800a4f63f35f6c0873dc48ecfdb6f243cc0f4dd",
+        "git_blob": "920243955a84d9f4dba275b9b9fc562d8a9e3be1"
+      }
+    },
+    {
+      "path": "V5/src/v5_shadow/source_bundle_worker.py",
+      "before": {
+        "bytes": 4550,
+        "sha256": "782c523c96ce9494c616aac04cb02276e59ced55ff1814309c192e067ec171d7",
+        "git_blob": "24986aa93eacbdf0c6a4b49660b91c07a1c09ae7"
+      },
+      "after": {
+        "bytes": 4910,
+        "sha256": "01cc782e3bbae80cf09bd3da4c510e158ead36e2ef1c8a7a0f0ba394a00bacda",
+        "git_blob": "642157519976b0a57463a7faee8e3e2d8df04940"
+      }
+    },
+    {
+      "path": "V5/tests/test_source_bundle_m03_saved.py",
+      "before": "ABSENT",
+      "after": {
+        "bytes": 7587,
+        "sha256": "02a298b7585fa46ea820c660813608befe7ad2307ed1bd12b474589a557e3259",
+        "git_blob": "0a531b43abdf400db27b337efc934ab8395478dd"
+      }
+    }
+  ]
+}

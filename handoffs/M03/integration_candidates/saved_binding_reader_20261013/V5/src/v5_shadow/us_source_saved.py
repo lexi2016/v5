@@ -215,7 +215,6 @@ def _read_owned(envelope):
         raise ValueError('M03_SAVED_REQUEST_SHA_MISMATCH')
     _verify_runtime(values['v5_src'])
     _install_runtime_loader(values['v5_src'])
-    sys.path.insert(0, values['v5_src'])
     from v5_shadow import us_source_daily as original
     from v5_shadow.cloud_us_collector import load_owner, verify, audit_modules, admit_output
     req = original._request_from_dict(values)
@@ -225,6 +224,10 @@ def _read_owned(envelope):
     # Only prepend the byte-pinned import boundary. The original reader body,
     # request, owner loader and semantic validation are unmodified.
     reader_body = original._reader_child_code()
+    path_line = '    sys.path.insert(0, sys.argv[1])\n'
+    if reader_body.count(path_line) != 1:
+        raise ValueError('M03_SAVED_READER_BOOTSTRAP_CONTRACT')
+    reader_body = reader_body.replace(path_line, '')
     loader_prefix = ("import runpy, sys\n" +
         "runpy.run_path(" + repr(str(Path(__file__).absolute())) +
         ")['_install_runtime_loader'](sys.argv[1])\n")

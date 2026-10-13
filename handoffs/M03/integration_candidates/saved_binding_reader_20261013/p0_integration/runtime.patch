@@ -1,0 +1,698 @@
+--- a/V5/contracts/source_owner_runtime.json
++++ b/V5/contracts/source_owner_runtime.json
+@@ -8,6 +8,13 @@
+       "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c"
+     },
+     {
++      "bytes": 7184,
++      "git_blob": "e31147c383bb75e2f9ca55024cfc3b80d8f32364",
++      "origin": "handoffs/M01/candidate_source_entrypoints_20261012/after/V5/src/v5_shadow/a_source_daily.py",
++      "path": "source_owners/m01/V5/src/v5_shadow/a_source_daily.py",
++      "sha256": "4140ae04b254f9d8e682b3a04b773825bae13b3f16f13233e866185b60515045"
++    },
++    {
+       "bytes": 5297,
+       "git_blob": "d22723df42b71537210aa621afb05dfab6be517f",
+       "origin": "handoffs/M01/source/V5/src/v5_shadow/composition.py",
+@@ -148,6 +155,13 @@
+       "sha256": "00ccdaa1890675335836351d33c4fea5f9458a8dd287e3724efb9f0cb0fb1b21"
+     },
+     {
++      "bytes": 24748,
++      "git_blob": "73383409b70bc8341b6287146136f90025ee54dd",
++      "origin": "V5/src/v5_shadow/hk_source_daily.py",
++      "path": "source_owners/m02/V5/src/v5_shadow/hk_source_daily.py",
++      "sha256": "265701fe19fc00fc23e886ebc542fc1c8e8278313c4373e5aa0f6206e09e559d"
++    },
++    {
+       "bytes": 1970,
+       "git_blob": "3c56fe99b9d79e51cae24378db3b0afa458e4696",
+       "origin": "handoffs/M02/source/V5/src/v5_shadow/input_snapshot.py",
+@@ -155,6 +169,13 @@
+       "sha256": "271ee6441a594b04905686e87c9ec6e7eace8df30a253d0fba4e6d342d3cbabc"
+     },
+     {
++      "bytes": 1600,
++      "git_blob": "354f729b3076a78cf823f2f06ca7a1ebc7d2c092",
++      "origin": "V5/src/v5_shadow/m02_input_snapshot.py",
++      "path": "source_owners/m02/V5/src/v5_shadow/m02_input_snapshot.py",
++      "sha256": "4344425ed3999935ad82b81f281d0cf76adf43ab745216417fa7a181f2734a33"
++    },
++    {
+       "bytes": 5702,
+       "git_blob": "bb6c9421a50d034e99476f41dfe690c8f5625e92",
+       "origin": "handoffs/M02/source/V5/src/v5_shadow/membership_reader.py",
+@@ -169,6 +190,13 @@
+       "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca"
+     },
+     {
++      "bytes": 4139,
++      "git_blob": "550d2d8f997ee2f4a31a8fdd5aefbfcb50635b94",
++      "origin": "V5/src/v5_shadow/native_identity_reader.py",
++      "path": "source_owners/m02/V5/src/v5_shadow/native_identity_reader.py",
++      "sha256": "c47017a5ecc698026715f368e1e6930d2be3fa501133015d0fe99adf1cdc0798"
++    },
++    {
+       "bytes": 6446,
+       "git_blob": "5d72d3b2d54c0449576e46e7eba7be4fbc7884d6",
+       "origin": "handoffs/M02/source/V5/src/v5_shadow/provider_evidence.py",
+@@ -547,6 +575,20 @@
+       "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+     },
+     {
++      "bytes": 21391,
++      "git_blob": "361a6ea9ef675582a5dce1878b7e48ca0a1c29b5",
++      "origin": "handoffs/M03/candidate_r14_complete/after/V5/src/v5_shadow/us_source_daily.py",
++      "path": "source_owners/m03/V5/src/v5_shadow/us_source_daily.py",
++      "sha256": "29f7eee350b9138a1f7e49a7a94f635479564b505c673ecbbda9e7949cc5bb72"
++    },
++    {
++      "bytes": 15279,
++      "git_blob": "1512a9436b1f45b076c9bbd5710e9629107065fe",
++      "origin": "handoffs/M03/integration_candidates/saved_binding_reader_20261013/V5/src/v5_shadow/us_source_saved.py",
++      "path": "source_owners/m03/V5/src/v5_shadow/us_source_saved.py",
++      "sha256": "7e2ce3f43b660a5d20b4bc52adf10c8da6770f148adb390b666cc47c132ad864"
++    },
++    {
+       "bytes": 55,
+       "git_blob": "bdeb74d7a882d62b6f3eb78a06b8127f2121ff40",
+       "origin": "handoffs/M03/source/collector_owner/contracts/__init__.py",
+@@ -881,41 +923,6 @@
+       "origin": "handoffs/M03/source/collector_owner/ops/us_market_digest.py",
+       "path": "source_owners/m03/collector_owner/ops/us_market_digest.py",
+       "sha256": "5e814bc2ddffeec45a2ed7a593d3fa20128826c7c4951e0f10a95f3bdc0f552c"
+-    },
+-    {
+-      "bytes": 7184,
+-      "git_blob": "e31147c383bb75e2f9ca55024cfc3b80d8f32364",
+-      "origin": "handoffs/M01/candidate_source_entrypoints_20261012/after/V5/src/v5_shadow/a_source_daily.py",
+-      "path": "source_owners/m01/V5/src/v5_shadow/a_source_daily.py",
+-      "sha256": "4140ae04b254f9d8e682b3a04b773825bae13b3f16f13233e866185b60515045"
+-    },
+-    {
+-      "bytes": 24748,
+-      "git_blob": "73383409b70bc8341b6287146136f90025ee54dd",
+-      "origin": "V5/src/v5_shadow/hk_source_daily.py",
+-      "path": "source_owners/m02/V5/src/v5_shadow/hk_source_daily.py",
+-      "sha256": "265701fe19fc00fc23e886ebc542fc1c8e8278313c4373e5aa0f6206e09e559d"
+-    },
+-    {
+-      "bytes": 4139,
+-      "git_blob": "550d2d8f997ee2f4a31a8fdd5aefbfcb50635b94",
+-      "origin": "V5/src/v5_shadow/native_identity_reader.py",
+-      "path": "source_owners/m02/V5/src/v5_shadow/native_identity_reader.py",
+-      "sha256": "c47017a5ecc698026715f368e1e6930d2be3fa501133015d0fe99adf1cdc0798"
+-    },
+-    {
+-      "bytes": 1600,
+-      "git_blob": "354f729b3076a78cf823f2f06ca7a1ebc7d2c092",
+-      "origin": "V5/src/v5_shadow/m02_input_snapshot.py",
+-      "path": "source_owners/m02/V5/src/v5_shadow/m02_input_snapshot.py",
+-      "sha256": "4344425ed3999935ad82b81f281d0cf76adf43ab745216417fa7a181f2734a33"
+-    },
+-    {
+-      "bytes": 21391,
+-      "git_blob": "361a6ea9ef675582a5dce1878b7e48ca0a1c29b5",
+-      "origin": "handoffs/M03/candidate_r14_complete/after/V5/src/v5_shadow/us_source_daily.py",
+-      "path": "source_owners/m03/V5/src/v5_shadow/us_source_daily.py",
+-      "sha256": "29f7eee350b9138a1f7e49a7a94f635479564b505c673ecbbda9e7949cc5bb72"
+     }
+   ],
+   "schema_version": "v5.source_owner_runtime.v1"
+--- /dev/null
++++ b/V5/source_owners/m03/V5/src/v5_shadow/us_source_saved.py
+@@ -0,0 +1,321 @@
++"""Read an exact existing M03 binding, without a source/collector/write fallback.
++
++This adapter can live in P0's older owner bundle. It starts a fresh child and
++loads only the byte-pinned efea market runtime named by the ORIGINAL request.
++It does not rewrite owner_root, v5_src, capture permission, dates, or cutoff.
++"""
++import argparse
++import hashlib
++import importlib.abc
++import importlib.util
++import json
++import os
++from pathlib import Path
++import re
++import stat
++import subprocess
++import sys
++
++RUNTIME_COMMIT = 'efeaeb8fc04474b1f38ebda98b35953b580049df'
++RUNTIME_SHA256 = {
++    'src/v5_shadow/__init__.py': 'c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c',
++    'src/v5_shadow/us_source_daily.py': '55c4291c191d56639559ca2d96fdbfb1d274116bd21a821b24a922627efce8fa',
++    'src/v5_shadow/cloud_us_collector.py': '8a98fba4022d775852685d12343e753f0d31ffe7f46a3bd8e9243f11eb4cdd06',
++    'src/v5_shadow/cloud_transport.py': 'b3430662338cac674ca4f0f8d241a84f6d5ff6891b89a1bd0c519c4d7affed89',
++    'src/v5_shadow/composition.py': '258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0',
++    'src/v5_shadow/contracts.py': 'eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a',
++    'src/v5_shadow/digests.py': '134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5',
++    'contracts/cloud_us_collector_sources.json': '34f45318dd89132a496ac0edf98147455b41d9ea926198d83ce1bd8810c20d8b',
++}
++FIELDS = frozenset(('request_file', 'expected_request_sha256',
++                    'expected_binding_sha256', 'expected_source_sha256'))
++MAX_BYTES = 16 * 1024 * 1024
++
++
++def _sha(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def _sha_value(value):
++    if not isinstance(value, str) or re.fullmatch(r'[0-9a-f]{64}', value) is None:
++        raise ValueError('M03_SAVED_SHA_REQUIRED')
++    return value
++
++
++def _canonical(value):
++    # This is the original R14 request/binding convention, not a new identity.
++    return json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
++
++
++def _pairs(pairs):
++    value = {}
++    for key, item in pairs:
++        if key in value:
++            raise ValueError('M03_SAVED_DUPLICATE_JSON_KEY')
++        value[key] = item
++    return value
++
++
++def _decode(raw):
++    value = json.loads(raw, object_pairs_hook=_pairs,
++                       parse_constant=lambda value: (_ for _ in ()).throw(ValueError('M03_SAVED_NONFINITE')))
++    if not isinstance(value, dict):
++        raise ValueError('M03_SAVED_JSON_OBJECT_REQUIRED')
++    return value
++
++
++def _read_file(value):
++    """Bounded, stable read using no-follow descriptors for every component."""
++    if not isinstance(value, (str, Path)):
++        raise ValueError('M03_SAVED_ABSOLUTE_PATH_REQUIRED')
++    path = Path(value)
++    if not path.is_absolute() or '..' in path.parts or '\x00' in str(path):
++        raise ValueError('M03_SAVED_ABSOLUTE_PATH_REQUIRED')
++    if os.name != 'posix' or not hasattr(os, 'O_NOFOLLOW'):
++        raise ValueError('M03_SAVED_PLATFORM_UNSUPPORTED')
++    parent = os.open('/', os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
++    fd = None
++    try:
++        for part in path.parts[1:-1]:
++            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
++            os.close(parent)
++            parent = child
++        fd = os.open(path.name, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW, dir_fd=parent)
++        before = os.fstat(fd)
++        if not stat.S_ISREG(before.st_mode) or before.st_size > MAX_BYTES:
++            raise ValueError('M03_SAVED_FILE_CONTRACT')
++        chunks = []
++        remaining = MAX_BYTES + 1
++        while remaining:
++            raw = os.read(fd, min(remaining, 1024 * 1024))
++            if not raw:
++                break
++            chunks.append(raw)
++            remaining -= len(raw)
++        raw = b''.join(chunks)
++        after = os.fstat(fd)
++        visible = os.stat(path.name, dir_fd=parent, follow_symlinks=False)
++        identity = lambda info: (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
++        if len(raw) > MAX_BYTES or identity(before) != identity(after) or identity(after) != identity(visible):
++            raise ValueError('M03_SAVED_FILE_CHANGED')
++        return raw
++    finally:
++        if fd is not None:
++            os.close(fd)
++        os.close(parent)
++
++
++def _check_envelope(value):
++    if not isinstance(value, dict) or set(value) != FIELDS:
++        raise ValueError('M03_SAVED_READ_FIELDS')
++    _sha_value(value['expected_request_sha256'])
++    _sha_value(value['expected_binding_sha256'])
++    sources = value['expected_source_sha256']
++    if not isinstance(sources, dict) or set(sources) != {'payload', 'receipt', 'manifest'}:
++        raise ValueError('M03_SAVED_SOURCE_SHA_FIELDS')
++    for digest in sources.values():
++        _sha_value(digest)
++    if not isinstance(value['request_file'], str) or not value['request_file']:
++        raise ValueError('M03_SAVED_REQUEST_FILE_REQUIRED')
++
++
++def _verify_runtime(v5_src):
++    root = Path(v5_src).parent
++    for relative, expected in RUNTIME_SHA256.items():
++        if _sha(_read_file(root / relative)) != expected:
++            raise ValueError('M03_SAVED_RUNTIME_SHA_MISMATCH:' + relative)
++
++
++
++def _install_runtime_loader(v5_src):
++    """Compile the pinned bytes, never a valid/poisoned pyc or path fallback."""
++    if any(name == 'v5_shadow' or name.startswith('v5_shadow.') for name in sys.modules):
++        raise ValueError('M03_SAVED_FRESH_PROCESS_REQUIRED')
++    root = Path(v5_src).parent
++    modules = {}
++    for relative, expected in RUNTIME_SHA256.items():
++        if not relative.endswith('.py'):
++            continue
++        path = root / relative
++        raw = _read_file(path)
++        if _sha(raw) != expected:
++            raise ValueError('M03_SAVED_RUNTIME_SHA_MISMATCH:' + relative)
++        package = path.name == '__init__.py'
++        parts = Path(relative).parts[1:]
++        name = '.'.join(parts[:-1] if package else (*parts[:-1], path.stem))
++        modules[name] = (path, raw, package)
++    class Loader(importlib.abc.Loader):
++        def create_module(self, spec):
++            return None
++        def exec_module(self, module):
++            path, raw, _ = modules[module.__name__]
++            exec(compile(raw, str(path), 'exec', dont_inherit=True), module.__dict__)
++    class Finder(importlib.abc.MetaPathFinder):
++        def find_spec(self, fullname, path=None, target=None):
++            if fullname != 'v5_shadow' and not fullname.startswith('v5_shadow.'):
++                return None
++            if fullname not in modules:
++                raise ModuleNotFoundError('M03_SAVED_UNPINNED_RUNTIME_MODULE:' + fullname)
++            source, _, package = modules[fullname]
++            return importlib.util.spec_from_file_location(fullname, source, loader=Loader(),
++                submodule_search_locations=[str(source.parent)] if package else None)
++    sys.meta_path.insert(0, Finder())
++
++
++def _install_readonly_audit(allowed_reader):
++    """Do not permit this child to produce, repair, create locks, or network."""
++    mutations = {'os.mkdir', 'os.remove', 'os.rmdir', 'os.rename', 'os.link',
++                 'os.symlink', 'os.chmod', 'os.chown', 'os.truncate', 'os.utime'}
++    write_flags = os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND
++    def audit(event, args):
++        if event.startswith('socket.') or event in mutations:
++            raise ValueError('M03_SAVED_READ_ONLY_VIOLATION:' + event)
++        if event == 'open':
++            mode, flags = args[1], args[2]
++            if (isinstance(mode, str) and any(c in mode for c in 'wax+')) or flags & write_flags:
++                raise ValueError('M03_SAVED_READ_ONLY_VIOLATION:open')
++        if event == 'subprocess.Popen' and list(args[1]) != allowed_reader:
++            raise ValueError('M03_SAVED_PRODUCER_PROCESS_FORBIDDEN')
++    sys.addaudithook(audit)
++
++
++def _projection(binding, request_sha, binding_sha):
++    snapshot = binding['market_snapshot']
++    identity = binding['identity']
++    request = binding['request']
++    return dict(
++        schema_version='v5.m03.saved_binding_public_view.v1',
++        status=binding['status'], source_status=binding['source_status'],
++        readback_verified=True, request_sha256=request_sha, binding_sha256=binding_sha,
++        source_sha256=binding['source_sha256'],
++        request={key: request[key] for key in ('trade_date', 'session', 'capture_phase', 'cutoff')},
++        identity={key: identity[key] for key in ('us_session_date', 'capture_phase', 'captured_at',
++            'capture_id', 'run_id', 'capture_origin', 'original_time_capture',
++            'rss_status', 'quote_capture_status') if key in identity},
++        market_snapshot=dict(
++            **{key: snapshot[key] for key in ('schema_version', 'status', 'capture_session_date',
++                'capture_phase', 'captured_at', 'source_response_sha256') if key in snapshot},
++            quote_count=len(snapshot.get('quotes', [])), theme_count=len(snapshot.get('rows', []))),
++        runtime_commit=RUNTIME_COMMIT, orchestrator_sha256=binding['orchestrator_sha256'],
++        owner_descriptor_sha256=binding['owner_descriptor_sha256'],
++        production_allowed=False, orders_sent=False, buy_gate_updated=False,
++        natural_verified=False, formal_eligibility_verified=False)
++
++
++def _read_owned(envelope):
++    _check_envelope(envelope)
++    original_raw = _read_file(envelope['request_file'])
++    values = _decode(original_raw)
++    required = {'trade_date', 'capture_phase', 'session', 'cutoff', 'source_root',
++        'snapshot_root', 'binding_root', 'owner_root', 'v5_src', 'allow_network_capture',
++        'capture_root', 'allow_late_post_close', 'development_dates_file', 'market_snapshot_only'}
++    if set(values) != required:
++        raise ValueError('M03_SAVED_REQUEST_FIELDS')
++    if _sha(original_raw) != envelope['expected_request_sha256']:
++        raise ValueError('M03_SAVED_REQUEST_SHA_MISMATCH')
++    _verify_runtime(values['v5_src'])
++    _install_runtime_loader(values['v5_src'])
++    from v5_shadow import us_source_daily as original
++    from v5_shadow.cloud_us_collector import load_owner, verify, audit_modules, admit_output
++    req = original._request_from_dict(values)
++    if original._request_dict(req) != values:
++        raise ValueError('M03_SAVED_REQUEST_ROUNDTRIP_MISMATCH')
++    original._validate_request(req)
++    # Only prepend the byte-pinned import boundary. The original reader body,
++    # request, owner loader and semantic validation are unmodified.
++    reader_body = original._reader_child_code()
++    path_line = '    sys.path.insert(0, sys.argv[1])\n'
++    if reader_body.count(path_line) != 1:
++        raise ValueError('M03_SAVED_READER_BOOTSTRAP_CONTRACT')
++    reader_body = reader_body.replace(path_line, '')
++    loader_prefix = ("import runpy, sys\n" +
++        "runpy.run_path(" + repr(str(Path(__file__).absolute())) +
++        ")['_install_runtime_loader'](sys.argv[1])\n")
++    original._reader_child_code = lambda: loader_prefix + reader_body
++    allowed_reader = [sys.executable, '-I', '-B', '-c', original._reader_child_code(),
++                      str(req.v5_src), str(req.owner_root), str(req.snapshot_root),
++                      req.trade_date, req.capture_phase]
++    _install_readonly_audit(allowed_reader)
++    load_owner(req.owner_root)
++    try:
++        admit_output(req.binding_root, req.owner_root)
++        admit_output(req.snapshot_root, req.owner_root)
++        name = original._binding_name(req)
++        if name != _sha(_canonical(values)) + '.json':
++            raise ValueError('M03_SAVED_BINDING_NAME_MISMATCH')
++        io = original._safe_root(req.binding_root)
++        try:
++            raw = io.read_bytes(name)
++        except FileNotFoundError as error:
++            raise ValueError('M03_SAVED_BINDING_MISSING') from error
++        if _sha(raw) != envelope['expected_binding_sha256']:
++            raise ValueError('M03_SAVED_BINDING_SHA_MISMATCH')
++        binding = _decode(raw)
++        if binding.get('source_sha256') != envelope['expected_source_sha256']:
++            raise ValueError('M03_SAVED_SOURCE_SHA_MISMATCH')
++        # Original reconstruction checks every binding field, exact original
++        # request, stable snapshot bytes, and fresh-child original store reader.
++        original._verify_binding(binding, req)
++        if io.read_bytes(name) != raw or _read_file(envelope['request_file']) != original_raw:
++            raise ValueError('M03_SAVED_INPUT_CHANGED')
++        result = _projection(binding, envelope['expected_request_sha256'], _sha(raw))
++        result['request_identity_sha256'] = name[:-5]
++    finally:
++        verify(req.owner_root)
++        audit_modules()
++        original._verify_orchestrator()
++        _verify_runtime(req.v5_src)
++    return result
++
++
++def read_saved_binding(*, request_file, expected_request_sha256,
++                       expected_binding_sha256, expected_source_sha256):
++    """Read existing bytes only. Capture=True in the original request is identity."""
++    envelope = dict(request_file=str(request_file), expected_request_sha256=expected_request_sha256,
++                    expected_binding_sha256=expected_binding_sha256,
++                    expected_source_sha256=expected_source_sha256)
++    _check_envelope(envelope)
++    try:
++        proc = subprocess.run([sys.executable, '-I', '-B', str(Path(__file__).absolute()), '--child'],
++            input=_canonical(envelope), stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=300)
++    except subprocess.TimeoutExpired as error:
++        raise ValueError('M03_SAVED_READ_TIMEOUT') from error
++    if len(proc.stdout) > MAX_BYTES:
++        raise ValueError('M03_SAVED_RESPONSE_LIMIT')
++    try:
++        value = _decode(proc.stdout)
++    except ValueError as error:
++        raise ValueError('M03_SAVED_BAD_RESPONSE:' + proc.stderr.decode(errors='replace')[-1000:]) from error
++    if proc.returncode:
++        raise ValueError(value.get('error', 'M03_SAVED_READ_FAILED'))
++    if set(value) != {'result'} or not isinstance(value['result'], dict):
++        raise ValueError('M03_SAVED_RESPONSE_CONTRACT')
++    return value['result']
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    mode = parser.add_mutually_exclusive_group(required=True)
++    mode.add_argument('--request', type=Path, help='local saved-read envelope JSON; contains no producer options')
++    mode.add_argument('--child', action='store_true', help=argparse.SUPPRESS)
++    args = parser.parse_args()
++    try:
++        if args.child:
++            raw = sys.stdin.buffer.read(MAX_BYTES + 1)
++            if len(raw) > MAX_BYTES:
++                raise ValueError('M03_SAVED_REQUEST_LIMIT')
++            result = _read_owned(_decode(raw))
++            print(json.dumps({'result': result}, sort_keys=True, allow_nan=False))
++        else:
++            envelope = _decode(_read_file(args.request))
++            _check_envelope(envelope)
++            print(json.dumps(read_saved_binding(**envelope), sort_keys=True, allow_nan=False))
++        return 0
++    except Exception as error:
++        failure = dict(status='SOURCE_REJECTED', error_type=type(error).__name__, error=str(error))
++        print(json.dumps(failure, sort_keys=True), file=sys.stdout if args.child else sys.stderr)
++        return 2
++
++
++if __name__ == '__main__':
++    raise SystemExit(main())
+--- a/V5/src/v5_shadow/source_bundle.py
++++ b/V5/src/v5_shadow/source_bundle.py
+@@ -15,7 +15,7 @@
+ 
+ BASE=Path(__file__).resolve().parents[2]
+ OWNER_MANIFEST=BASE/'contracts/source_owner_runtime.json'
+-OWNER_MANIFEST_SHA256='4742067f641a56df84d590c5036c4fd27e1cd7fa974519995589e8ecf7f54465'
++OWNER_MANIFEST_SHA256='ca6785467be503cf36add56209f160da4f13383ce816903a3b7e4dea091f4053'
+ STATUS_ROUTE='/api/v5/source-bundle/status'
+ MODULES=(('M01_A_MARKET','m01'),('M02_HK_MARKET','m02'),('M03_US_MARKET','m03'),('M05_A_PRESELECTION','m05'))
+ FLAGS=dict(natural_verified=False,formal_eligibility_verified=False,production_allowed=False,buy_gate_updated=False,orders_sent=False)
+@@ -131,6 +131,93 @@
+     return publish_generation(config,[record],expected_generation=expected_generation)
+ 
+ 
++
++def _m03_saved_public_view(result):
++    """Accept only the pinned saved-reader projection; no private roots."""
++    from .contracts import sha,aware
++    fields={'schema_version','status','source_status','readback_verified',
++        'request_sha256','request_identity_sha256','binding_sha256','source_sha256',
++        'request','identity','market_snapshot','runtime_commit','orchestrator_sha256',
++        'owner_descriptor_sha256',*FLAGS}
++    if (not isinstance(result,dict) or set(result)!=fields
++        or result.get('schema_version')!='v5.m03.saved_binding_public_view.v1'
++        or result.get('status')!='VALIDATED_SOURCE_BINDING'
++        or result.get('source_status') not in {'READY','READY_EMPTY'}
++        or result.get('readback_verified') is not True
++        or any(result.get(key) is not False for key in FLAGS)
++        or result.get('runtime_commit')!='efeaeb8fc04474b1f38ebda98b35953b580049df'):
++        raise ValueError('M03_SAVED_RESULT_CONTRACT')
++    for key in ('request_sha256','request_identity_sha256','binding_sha256',
++                'orchestrator_sha256','owner_descriptor_sha256'):sha(result[key])
++    if set(result['source_sha256'])!={'payload','receipt','manifest'}:
++        raise ValueError('M03_SAVED_RESULT_CONTRACT')
++    for value in result['source_sha256'].values():sha(value)
++    if set(result['request'])!={'trade_date','session','capture_phase','cutoff'}:
++        raise ValueError('M03_SAVED_RESULT_CONTRACT')
++    aware(result['request']['cutoff'])
++    snapshot=result['market_snapshot']
++    if (snapshot.get('status')!='READY'
++        or type(snapshot.get('quote_count')) is not int or snapshot['quote_count']<0
++        or type(snapshot.get('theme_count')) is not int or snapshot['theme_count']<0):
++        raise ValueError('M03_SAVED_RESULT_CONTRACT')
++    return json.loads(canonical_bytes(result))
++
++
++def publish_m03_saved_binding(request,config,*,expected_generation,data_kind='RECORDED_INPUT_REPLAY'):
++    """Read only M03, replace only its status row, and use the original route CAS."""
++    from .contracts import exact_keys,sha,aware
++    from .module_api import (_config,_generation_head,_load_generation,_read_object,
++        _validate_record,response_key)
++    import os
++    request=json.loads(canonical_bytes(request))
++    exact_keys(request,('action','request_file','expected_request_sha256','expected_binding_sha256','expected_source_sha256'))
++    if request['action']!='read':raise ValueError('M03_SAVED_READ_REQUIRED')
++    if data_kind not in {'SYNTHETIC','RECORDED_INPUT_REPLAY'}:raise ValueError('M03_SAVED_DATA_KIND')
++    sha(expected_generation)
++    checked,root=_config(config)
++    try:
++        if _generation_head(root,checked)!=expected_generation:raise ValueError('GENERATION_CONFLICT')
++        # Pin the object to this exact generation; read_response would select
++        # the then-current head and could admit a different A->B->A predecessor.
++        refs=_load_generation(root,checked,expected_generation)['records']
++        digest=refs[response_key('source_bundle',STATUS_ROUTE,{})]
++        record,_=_read_object(root,digest,checked)
++        _validate_record(checked,record,STATUS_ROUTE,{})
++    finally:os.close(root)
++    previous=record['payload'];rows=previous.get('modules')
++    owners=('m01_a_source','m02_hk_source','m03_us_source','m05_a_preselection')
++    if (checked['module_id']!='source_bundle' or previous.get('schema_version')!='v5.source_bundle.result.v1'
++        or previous.get('status')!='SOURCE_BUNDLE_ATTEMPTED'
++        or any(previous.get(key) is not False for key in FLAGS)
++        or not isinstance(rows,list) or len(rows)!=len(MODULES)
++        or any(not isinstance(row,dict) or row.get('module_id')!=MODULES[i][0]
++            or row.get('owner_entry')!=owners[i] or not isinstance(row.get('status'),str) or not row['status']
++            or any(row.get(key) is not False for key in FLAGS) for i,row in enumerate(rows))):
++        raise ValueError('M03_SAVED_PREDECESSOR_CONTRACT')
++    if previous.get('data_kind')!=data_kind or record['data_kind']!=data_kind:
++        raise ValueError('M03_SAVED_DATA_KIND_MISMATCH')
++    sha(previous['request_sha256']);aware(previous['observed_at'])
++    # The pinned original reader owns all receipt, source, and safety checks.
++    # Failure propagates before publication; there is no fallback to a build.
++    view=_m03_saved_public_view(_call('m03',request))
++    if (view['request_sha256']!=request['expected_request_sha256']
++        or view['binding_sha256']!=request['expected_binding_sha256']
++        or view['source_sha256']!=request['expected_source_sha256']):
++        raise ValueError('M03_SAVED_RESULT_ANCHOR_MISMATCH')
++    result=json.loads(canonical_bytes(previous))
++    result['modules'][2]=dict(module_id='M03_US_MARKET',owner_entry='m03_us_source',
++        status=view['status'],owner_result=view,**FLAGS)
++    result['observed_at']=datetime.now(timezone.utc).isoformat()
++    result['request_sha256']=sha256_json(dict(operation='M03_ONLY_SAVED_READ',
++        request=request,previous_generation=expected_generation,previous_record_sha256=digest))
++    result['m03_saved_publication']=dict(operation='M03_ONLY_SAVED_READ',
++        previous_generation=expected_generation,previous_record_sha256=digest,
++        previous_payload_sha256=record['payload_sha256'],previous_observed_at=previous['observed_at'],
++        previous_request_sha256=previous['request_sha256'],retained_modules=[MODULES[i][0] for i in (0,1,3)])
++    publication=publish_source_result(result,checked,expected_generation=expected_generation)
++    return dict(result=result,publication=publication)
++
++
+ def run_config(config):
+     if config.get('enabled') is not True:return dict(status='SOURCE_BUNDLE_DISABLED',**FLAGS)
+     from .module_api import _open_directory,_read_at
+--- a/V5/src/v5_shadow/source_bundle_worker.py
++++ b/V5/src/v5_shadow/source_bundle_worker.py
+@@ -43,8 +43,15 @@
+ 
+ 
+ def m03(request,root):
++    values=dict(request)
++    action=values.pop('action','build')
++    if action=='read':
++        # run_path compiles this .py; an ambient pyc must not replace the reader.
++        import runpy
++        reader=runpy.run_path(str(root/'V5/src/v5_shadow/us_source_saved.py'))
++        return reader['read_saved_binding'](**values)
++    if action!='build':raise ValueError('M03_SOURCE_ACTION')
+     from v5_shadow.us_source_daily import _request_from_dict,run_us_source
+-    values=dict(request)
+     if values.get('allow_network_capture',False) is not False:
+         raise ValueError('SOURCE_CAPTURE_DISABLED')
+     if any(name in values for name in ('owner_root','v5_src','capture_root','development_dates_file','allow_late_post_close')):
+--- /dev/null
++++ b/V5/tests/test_source_bundle_m03_saved.py
+@@ -0,0 +1,126 @@
++"""Exact M03 saved-read dispatch and one-row publication; all market data synthetic."""
++import copy
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++
++from v5_shadow import source_bundle
++from v5_shadow.module_api import _config, read_response
++from v5_shadow.source_bundle import STATUS_ROUTE, publish_source_result
++import test_source_bundle_publication_routes as route_fixture
++
++MARKET_RUNTIME = Path(os.environ['M03_SAVED_TEST_RUNTIME'])
++FIXTURE = r'''
++import hashlib,json,sys
++from pathlib import Path
++base=Path(sys.argv[1]);root=Path(sys.argv[2])
++sys.path[:0]=[str(base/'V5/src'),str(base/'V5/tests')]
++from v5_shadow import us_source_daily as d
++from test_us_market_capture import offline_chain_runner
++req=d.USSourceRequest(trade_date='20261009',session='20261009',capture_phase='POST_CLOSE',
++    cutoff='2026-10-09T20:20:00Z',source_root=root/'source',snapshot_root=root/'snapshot',
++    binding_root=root/'binding',owner_root=base/'collector_owner',v5_src=base/'V5/src',
++    capture_root=root/'capture',allow_network_capture=True,market_snapshot_only=True)
++binding=d.run_us_source(req,runner=offline_chain_runner(root/'synthetic-provider-calls.jsonl'))
++assert binding['status']=='VALIDATED_SOURCE_BINDING'
++request=root/'original-request.json';request.write_bytes(d._json_bytes(d._request_dict(req)))
++raw=(req.binding_root/d._binding_name(req)).read_bytes()
++print(json.dumps(dict(action='read',request_file=str(request),
++    expected_request_sha256=d._binding_name(req)[:-5],expected_binding_sha256=hashlib.sha256(raw).hexdigest(),
++    expected_source_sha256=binding['source_sha256'])))
++'''
++
++
++class M03SavedPublicationTests(unittest.TestCase):
++    def setUp(self):
++        self.fixture=route_fixture.SourceBundlePublicationRouteTests()
++        self.fixture.setUp(); self.addCleanup(self.fixture.doCleanups)
++        self.root=self.fixture.root; self.config=self.fixture.config
++        generation,self.siblings=self.fixture.seed_siblings()
++        self.previous=copy.deepcopy(self.fixture.result)
++        for i in (0,1,3):
++            self.previous['modules'][i].update(status='RETAINED_SYNTHETIC_STATUS',owner_result={'sequence':i})
++        self.generation=publish_source_result(self.previous,self.config,expected_generation=generation)['generation_sha256']
++        tmp=tempfile.TemporaryDirectory(prefix='m03-saved-p0-synthetic-');self.addCleanup(tmp.cleanup)
++        self.data=Path(tmp.name)
++        run=subprocess.run([sys.executable,'-I','-B','-c',FIXTURE,str(MARKET_RUNTIME),str(self.data)],capture_output=True,text=True,timeout=120)
++        self.assertEqual(run.returncode,0,run.stderr)
++        self.request=json.loads(run.stdout)
++
++    def publish(self,**kwargs):
++        entry=getattr(source_bundle,'publish_m03_saved_binding',None)
++        self.assertTrue(callable(entry),'M03_SAVED_PUBLICATION_ENTRY_MISSING')
++        return entry(self.request,self.config,expected_generation=kwargs.get('expected_generation',self.generation),data_kind=kwargs.get('data_kind','SYNTHETIC'))
++
++    def data_bytes(self):
++        return {str(p.relative_to(self.data)):p.read_bytes() for p in self.data.rglob('*') if p.is_file()}
++
++    def test_real_saved_reader_updates_only_m03_and_retains_all_other_cards_routes(self):
++        before=self.data_bytes();old=self.fixture.tree()
++        out=self.publish();result=out['result']
++        self.assertEqual(self.data_bytes(),before)
++        for i in (0,1,3):self.assertEqual(result['modules'][i],self.previous['modules'][i])
++        row=result['modules'][2];self.assertEqual(row['status'],'VALIDATED_SOURCE_BINDING')
++        view=row['owner_result'];self.assertTrue(view['readback_verified'])
++        self.assertEqual(view['market_snapshot']['quote_count'],33)
++        self.assertEqual(view['market_snapshot']['theme_count'],24)
++        self.assertEqual(view['request_sha256'],self.request['expected_request_sha256'])
++        self.assertNotIn(str(self.data),json.dumps(result))
++        self.assertNotIn(str(MARKET_RUNTIME),json.dumps(result))
++        current=json.loads((self.root/'active.json').read_bytes())['generation_sha256']
++        refs=json.loads((self.root/'generations'/(current+'.json')).read_bytes())['records']
++        for key,digest in self.siblings.items():self.assertEqual(refs[key],digest)
++        for path,raw in old.items():
++            if path!='active.json':self.assertEqual((self.root/path).read_bytes(),raw)
++        checked,fd=_config(self.config)
++        try:record,_=read_response(checked,fd,STATUS_ROUTE,{})
++        finally:os.close(fd)
++        self.assertEqual(record['payload'],result)
++
++    def test_dispatch_read_preserves_original_true_capture_identity(self):
++        before=self.data_bytes();result=source_bundle._call('m03',self.request)
++        self.assertEqual(result['status'],'VALIDATED_SOURCE_BINDING')
++        self.assertEqual(result['request_sha256'],self.request['expected_request_sha256'])
++        self.assertEqual(self.data_bytes(),before)
++        self.assertTrue(json.loads(Path(self.request['request_file']).read_bytes())['allow_network_capture'])
++
++    def test_bad_binding_cas_and_data_kind_never_publish(self):
++        before=self.fixture.tree(); self.request['expected_binding_sha256']='0'*64
++        with self.assertRaisesRegex(ValueError,'M03_SAVED_BINDING_SHA_MISMATCH'):self.publish()
++        self.assertEqual(self.fixture.tree(),before)
++        with patch.object(source_bundle,'_call',side_effect=AssertionError('reader must not run')):
++            with self.assertRaisesRegex(ValueError,'GENERATION_CONFLICT'):self.publish(expected_generation='0'*64)
++            with self.assertRaisesRegex(ValueError,'M03_SAVED_DATA_KIND_MISMATCH'):self.publish(data_kind='RECORDED_INPUT_REPLAY')
++        self.assertEqual(self.fixture.tree(),before)
++
++    def test_unknown_action_and_extra_capture_fields_do_not_fall_back(self):
++        for changes in ({'action':'read-or-capture'},{'allow_network_capture':True}):
++            with self.subTest(changes=changes):
++                with self.assertRaises(ValueError):source_bundle._call('m03',dict(self.request,**changes))
++        before=self.fixture.tree();self.request['action']='create'
++        with self.assertRaisesRegex(ValueError,'M03_SAVED_READ_REQUIRED'):self.publish()
++        self.assertEqual(self.fixture.tree(),before)
++
++    def test_racing_m02_update_is_preserved_by_cas_rejection(self):
++        original=source_bundle._call;race={}
++        def intervening(owner,request):
++            changed=copy.deepcopy(self.previous);changed['modules'][1]['owner_result']['sequence']='newer'
++            race['generation']=publish_source_result(changed,self.config,expected_generation=self.generation)['generation_sha256']
++            race['tree']=self.fixture.tree()
++            return original(owner,request)
++        with patch.object(source_bundle,'_call',side_effect=intervening):
++            with self.assertRaisesRegex(ValueError,'GENERATION_CONFLICT'):self.publish()
++        self.assertEqual(self.fixture.tree(),race['tree'])
++
++    def test_resealed_unknown_status_or_unsafe_flag_cannot_publish(self):
++        before=self.fixture.tree();valid=source_bundle._call('m03',self.request)
++        for change in ({'status':'READY'},{'production_allowed':True},{'readback_verified':False}):
++            with self.subTest(change=change):
++                with patch.object(source_bundle,'_call',return_value=dict(valid,**change)):
++                    with self.assertRaisesRegex(ValueError,'M03_SAVED_RESULT_CONTRACT'):self.publish()
++        self.assertEqual(self.fixture.tree(),before)

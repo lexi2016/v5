@@ -153,3 +153,10 @@ class SavedBindingTests(SourceCase):
             finally:
                 if existed:cache.write_bytes(saved)
                 else:cache.unlink()
+
+    def test_unlisted_top_level_dependency_cannot_shadow_stdlib(self):
+        shadow=BASE/'src/dataclasses.py'
+        self.assertFalse(shadow.exists())
+        shadow.write_text("raise RuntimeError('UNLISTED_STDLIB_SHADOW')\n")
+        try:self.assertEqual(self.invoke()['status'],'VALIDATED_SOURCE_BINDING')
+        finally:shadow.unlink()
