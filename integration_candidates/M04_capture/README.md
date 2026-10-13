@@ -12,7 +12,7 @@ All packaged files are hashed in `RELEASE.json`, excluding the manifest itself. 
 
 ## Existing dependencies and checks
 
-Use the already approved interpreter/dependencies. Original declaration remains Python >=3.14, pandas >=2.3,<3 and pyarrow >=21,<25, unchanged. No installation is performed. The original analyzer retains its stock lookup errors/health in the captured summary; lack of pyarrow or an inadequate selector is not converted into verified security identity or strategy eligibility.
+Use the already approved interpreter/dependencies. The original whole-V5 declaration remains Python >=3.14, pandas >=2.3,<3 and pyarrow >=21,<25, unchanged. This independent launcher has the narrowly scoped tested profile below; it does not install the original whole package. No installation is performed. The original analyzer retains its stock lookup errors/health in the captured summary; lack of pyarrow or an inadequate selector is not converted into verified security identity or strategy eligibility.
 
     PYTHON_BIN=/absolute/existing/python sh /absolute/package/test_offline.sh
 
@@ -78,4 +78,16 @@ Current verification: see `TEST_REPORT.md`. Locked dependency acceptance, real a
 
 The targeted suite now includes a 1001-valid-security synthetic Parquet fixture through the original default analyzer, synthetic local CLI, durable owner, persisted archive, and separate-process cold reader. Its intentionally historical synthetic selector date is 20200102 and must not become the capture date. When pyarrow is absent this test is explicitly SKIPPED/NOT_RUN, not a compatibility pass. Run the same test_offline.sh with the existing Mac 3.13.12 / pandas 2.3.3 / pyarrow 23.0.1 environment; no install is requested. The supplied 20261009 real selector snapshot is a separate read-only check, not fabricated by these tests.
 
-Mac previously reported 22/22 PASS on fixed 8266c6ed9606b0912328670c7411743a85af5727 with that environment (2026-10-13 16:20:08–16:20:27 UTC; 5569-byte receipt SHA256 3b41c44e504de77cd7f0c4a43166046066aeb4c6040718facdcd8a110f6d35cb). This does not yet establish the newly added healthy-Parquet case. M04-specific environment metadata follows that verification; original full-package locked-environment acceptance remains NOT_RUN. Official installed CLI 0.4.9 output/body contract remains unverified; no genuine acquisition was performed.
+Mac previously reported 22/22 PASS on fixed 8266c6ed9606b0912328670c7411743a85af5727 with that environment (2026-10-13 16:20:08–16:20:27 UTC; 5569-byte receipt SHA256 3b41c44e504de77cd7f0c4a43166046066aeb4c6040718facdcd8a110f6d35cb). This does not yet establish the newly added healthy-Parquet case. This was the pre-Mac status for that increment; the subsequently verified independent profile is recorded below. Original full-package locked-environment acceptance remains NOT_RUN. Official installed CLI 0.4.9 output/body contract remains unverified; no genuine acquisition was performed.
+
+## Tested independent M04 launch profile
+
+Use existing CPython **3.13.12**, pandas **2.3.3**, pyarrow **23.0.1** for capture. Exact versions are pinned in environment.profile.json, not in the original V5 metadata. Mac fixed a6ccecbadb19a036082c3e2790ba0a259f26ba4f passed **27/27, zero skips**, including healthy synthetic Parquet, original analyzer/owner, saved body/clocks and separate-process cold reader, at 2026-10-13 16:29:27–16:29:47 UTC. Receipt: 7418 bytes, SHA256 ebe4943f9449e88587f9af8f42ee5e18c4bedc5d06c6417266ea96949ff1d84c. This is compatibility evidence, not genuine capture evidence.
+
+    /absolute/existing/python3.13 -I -B /absolute/package/launch.py environment
+
+This command checks RELEASE first, then exact interpreter/dependency versions and actual pandas/pyarrow.dataset/parquet imports, without stdin, CLI, network, credentials or writes. capture runs this same check before reading the request or starting acquisition. No bypass flag is provided. A mismatch exits 1 and leaves capture unstarted.
+
+read, lane, resume, validate and init use the dependency-free read/administration profile: existing CPython 3.12.14, 3.13.12 or 3.14.6 only. They do not import pandas or pyarrow. Resume remains usable without the CLI or acquisition dependencies. Tests use direct original runtime calls to test data behavior and separately verify the launch guard; this profile covers the delivered launch entry point, not arbitrary direct imports of unrelated packaged modules.
+
+For any eventual explicitly authorized bounded new capture, first run environment, then use the documented explicit --execute-acquisition command with independently pinned inputs and current Shanghai date/elapsed slot. All previous source/hash/date/PIT/safety requirements remain. Installed official CLI 0.4.9 fulltext output remains UNVERIFIED. Original full-V5 lock acceptance remains NOT_RUN. No source acquisition, credential access or deployment is implied.

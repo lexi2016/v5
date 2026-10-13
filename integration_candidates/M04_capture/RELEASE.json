@@ -1,14 +1,17 @@
 {
   "files": {
     "PROVENANCE.json": "99e26cf488bd4f9c27cb08accc518936f3dab3e585648ec4e0986472227730e3",
-    "README.md": "b2583633774e95dee5d515dbb7728786dea6f09903cb92719af4b3be830506cc",
-    "TEST_REPORT.md": "a5be655079c2b5ac00982bed1c02105f43448fde76725560dbfe3ad353095c56",
+    "README.md": "cf11cf95b490b355bea1f68de6a4b21b9707bd8bf16bc55db9a55989b64d2118",
+    "TEST_REPORT.md": "594239687f1869cd78daa9b05f26197bb5eb77bceb4dd2edd8735c3834a80474",
     "capture_runtime.py": "00a20538b20458b2f17e6e9c8f2e9c1e7a79054283a76594b29d92edf92be6c2",
     "config.example.json": "eefea0772ba1af0e2c2724e69cd3cbc0b01512254364d1bc3761101487e0f066",
+    "environment.profile.json": "2f35dbd39b0c040fc8ebb1cc4bcbf67f3e3b547c96d25cdf06ec17f43a44edf3",
+    "environment_profile.py": "4d9ec64913500de383b63c1c6471cfec5ff8b43b1e10b210f6e2891455116ba0",
+    "evidence/environment-profile-tests.txt": "083e730f1f6277339596146fcf18acfa669923bbe26d47b4a47603e4a19e968f",
     "evidence/launcher-spaces-tests.txt": "ec030e672dfa255a2e6f6b9fd1c88202452a618249d7216035f77abdd627676c",
     "evidence/offline-tests.txt": "41f7dbf17c1ae9c24751030e1cda8dff8bf4312e3fdd87f4854ab17ca1221938",
     "evidence/source-contract-tests.txt": "c61511d84658cac15100f4ccd96803f53e9bd48f55ee91734af32bb762a6062c",
-    "launch.py": "bc4337cef08ea5faa0cefe4cfbdc781c26148351e4067089dbe88bbd00ab931c",
+    "launch.py": "0b8f34516e605c655ed41cd18e9e5312f15c69c49d064b1e384593d10a998c7a",
     "research_lane.py": "ec268472daba737d7c5b9880c356a856bb10c17c2f42874521dfb420e3891466",
     "source/V5/README.md": "7abaade6654d84cd93c378a609f4db3e9b9dec45db338ac7407f782ec34eee57",
     "source/V5/contracts/a_close_source_manifest.json": "1b433f3b88f97e21b6ff33d084b9fcdccde5b90a43a220eefbf7a6b8c5a55f27",
@@ -481,6 +484,7 @@
     "source/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_projection.py": "027d855613e675e1f569b401b9a8344e40766b88c31e987e791d05a0b3a2f200",
     "test_offline.sh": "e382c35af1ecdcc26dae704ee3e9d87dd72c3397efa17f59c1b6a5c49392b3f1",
     "tests/test_capture.py": "9e4ca1f3441009e18835711767bce52b3e1e0c9f4a37af2d1c47a1329edc524d",
+    "tests/test_environment_profile.py": "12fde4171992cd45581ac9d7464bc70cd9860ae9f1a12690fa59aa591d9f7e92",
     "tests/test_research_lane.py": "0ae92e03b3d6a7be6f67ef5af5a261d176decd5ab275fdda26046a69fff2227a",
     "tests/test_source_contract.py": "34d99009a6da667de6c287bc0d71a19a75b0309b9de9f23755d6539214a41f39"
   },

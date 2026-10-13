@@ -1,0 +1,18 @@
+{
+  "schema_version": "v5.m04_environment_profile.v1",
+  "scope": "Only integration_candidates/M04_capture launch.py commands; does not override source/V5/pyproject.toml or permit other V5 modules",
+  "profiles": {
+    "capture": {"implementation": "CPython", "python_exact": ["3.13.12"], "dependencies_exact": {"pandas": "2.3.3", "pyarrow": "23.0.1"}},
+    "readonly": {"implementation": "CPython", "python_exact": ["3.12.14", "3.13.12", "3.14.6"], "dependencies_exact": {}}
+  },
+  "capture_evidence": {
+    "commit": "a6ccecbadb19a036082c3e2790ba0a259f26ba4f",
+    "test_result": "27 PASS, 0 SKIP, including real synthetic 1001-row Parquet through original analyzer/owner/cold reader",
+    "mac_utc_interval": ["2026-10-13T16:29:27Z", "2026-10-13T16:29:47Z"],
+    "receipt_bytes": 7418,
+    "receipt_sha256": "ebe4943f9449e88587f9af8f42ee5e18c4bedc5d06c6417266ea96949ff1d84c",
+    "evidence_source": "Mac executor receipt reported by coordinating task; not a live CLI acquisition"
+  },
+  "readonly_evidence": "Cloud CPython 3.12.14 original reader/CLI tests; Mac fixed 8266 CPython 3.14.6 22 PASS and CPython 3.13.12 22 PASS; a6cce CPython 3.13.12 27 PASS. No pandas/pyarrow imports are needed for read/lane/resume.",
+  "limitations": ["Exact tested versions only; no installation", "Full original V5 lock acceptance NOT_RUN", "Official CLI 0.4.9 actual full-text response UNVERIFIED", "No genuine capture run", "Matching environment does not grant source, PIT, SHA, date, scope or production acceptance"]
+}

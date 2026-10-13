@@ -8,13 +8,18 @@ import capture_runtime as runtime
 
 def main():
  parser=argparse.ArgumentParser(description=__doc__)
- parser.add_argument('command',choices=['validate','init','capture','resume','read','lane'])
+ parser.add_argument('command',choices=['validate','init','capture','resume','read','lane','environment'])
  parser.add_argument('--date');parser.add_argument('--slot');parser.add_argument('--run-id')
  parser.add_argument('--research-date')
  parser.add_argument('--execute-acquisition',action='store_true')
  args=parser.parse_args()
  try:
   runtime.verify_sources()
+  from environment_profile import check_environment
+  if args.command=='capture' and not args.execute_acquisition:raise ValueError('EXPLICIT_ACQUISITION_REQUIRED')
+  environment=check_environment('capture' if args.command in ('capture','environment') else 'readonly')
+  if args.command=='environment':
+   print(runtime.canonical_bytes({**environment,**runtime.SAFETY}).decode());return 0
   raw=sys.stdin.buffer.read(runtime.MAX_JSON_BYTES+1)
   if len(raw)>runtime.MAX_JSON_BYTES:raise ValueError('REQUEST_SIZE')
   data=json.loads(raw)
