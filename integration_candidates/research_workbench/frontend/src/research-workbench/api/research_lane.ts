@@ -343,7 +343,7 @@ async function requestJson(
     );
   }
   if (!response.ok) {
-    if (legacyLane) throw new Error("research lane request failed");
+    if (legacyLane) throw new ResearchLaneRequestError("HTTP_NON_2XX", "research lane request failed", response.status);
     throw new ResearchLaneRequestError(
       "HTTP_NON_2XX",
       `${resource} request failed (HTTP ${response.status})`,

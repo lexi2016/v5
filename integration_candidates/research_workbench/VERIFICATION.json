@@ -102,5 +102,23 @@
       "VERIFICATION.json",
       "RELEASE.json"
     ]
+  },
+  "date_queue_fix": {
+    "status": "CANDIDATE_NOT_DEPLOYED",
+    "research_tests_passed": 51,
+    "typecheck_exit_code": 0,
+    "evidence": "tests/date-queue-focused.txt",
+    "maximum_inflight_lane_reads": 1,
+    "maximum_attempts_per_current_selection": 3,
+    "retry_http_statuses": [
+      503
+    ],
+    "retry_delays_ms": [
+      250,
+      750
+    ],
+    "patch_manifest": "DATE_QUEUE_PATCH.json",
+    "vite_build_exit_code": 0,
+    "exact_patch_smoke": "PASS all five after SHA and repeated application rejected"
   }
 }

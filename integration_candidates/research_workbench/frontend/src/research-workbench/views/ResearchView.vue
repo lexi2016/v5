@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from "vue";
 
 import { loadResearchLane, loadResearchLaneLatest, type ResearchLane } from "../api/research_lane";
+import { latestReadQueue } from "../composables/latestReadQueue";
 import { useResearchState } from "../composables/useResearchLane";
 import ResearchStatusStrip from "../components/research/ResearchStatusStrip.vue";
 import ResearchImpactList from "../components/research/ResearchImpactList.vue";
@@ -16,7 +17,7 @@ const props = defineProps<{ archiveDate: string; initialFeedFilter?: "latest" | 
 const payload = ref<ResearchLane | null>(null);
 const loading = ref(false);
 const error = ref("");
-let requestVersion = 0;
+
 const feedFilter = ref<string>(props.initialFeedFilter === "wechat" ? "wechat" : "latest");
 const requestedMode = ref<"EXACT" | "LATEST">("EXACT");
 const updateDiagnostic = computed(() => payload.value?.update_diagnostic as { state?: string; message?: string } | undefined);
@@ -48,33 +49,36 @@ function validateResearchDate(result: ResearchLane, expectedDate?: string) {
   }
 }
 
-async function run(loader: () => Promise<ResearchLane>, expectedDate?: string) {
-  const version = ++requestVersion;
-  loading.value = true;
-  error.value = "";
-  payload.value = null;
-  try {
+const reads = latestReadQueue<ResearchLane>({
+  start() { loading.value = true; error.value = ""; payload.value = null; },
+  success(result) { payload.value = result; loading.value = false; },
+  failure(reason) {
+    const busy = (reason as { status?: number } | null)?.status === 503;
+    error.value = busy
+      ? "研报只读服务仍繁忙（HTTP 503）；已完成 3 次有限尝试，请稍后按所选日期重读。未用其他日期替代。"
+      : reason instanceof Error ? reason.message : "研报决策台读取失败；未用其他日期替代。";
+    loading.value = false;
+  },
+});
+onBeforeUnmount(() => reads.dispose());
+function run(loader: () => Promise<ResearchLane>, expectedDate?: string) {
+  reads.submit(expectedDate ? `EXACT:${expectedDate}` : "LATEST", async () => {
     const result = await loader();
     validateResearchDate(result, expectedDate);
-    if (version === requestVersion) payload.value = result;
-  } catch (reason) {
-    if (version === requestVersion) {
-      error.value = reason instanceof Error ? reason.message : "研报决策台读取失败；未用其他日期替代。";
-    }
-  } finally {
-    if (version === requestVersion) loading.value = false;
-  }
+    return result;
+  });
 }
 
 function loadExact() {
   if (!props.archiveDate) return;
   requestedMode.value = "EXACT";
-  void run(() => loadResearchLane(props.archiveDate), props.archiveDate);
+  const date = props.archiveDate;
+  run(() => loadResearchLane(date), date);
 }
 
 function loadLatest() {
   requestedMode.value = "LATEST";
-  void run(loadResearchLaneLatest);
+  run(loadResearchLaneLatest);
 }
 
 function locateWechatPane() {

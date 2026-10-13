@@ -1,0 +1,221 @@
+--- a/frontend/src/research-workbench/views/ResearchView.vue
++++ b/frontend/src/research-workbench/views/ResearchView.vue
+@@ -1,7 +1,8 @@
+ <script setup lang="ts">
+-import { computed, nextTick, onMounted, ref, watch } from "vue";
++import { computed, nextTick, onMounted, onBeforeUnmount, ref, watch } from "vue";
+ 
+ import { loadResearchLane, loadResearchLaneLatest, type ResearchLane } from "../api/research_lane";
++import { latestReadQueue } from "../composables/latestReadQueue";
+ import { useResearchState } from "../composables/useResearchLane";
+ import ResearchStatusStrip from "../components/research/ResearchStatusStrip.vue";
+ import ResearchImpactList from "../components/research/ResearchImpactList.vue";
+@@ -16,7 +17,7 @@
+ const payload = ref<ResearchLane | null>(null);
+ const loading = ref(false);
+ const error = ref("");
+-let requestVersion = 0;
++
+ const feedFilter = ref<string>(props.initialFeedFilter === "wechat" ? "wechat" : "latest");
+ const requestedMode = ref<"EXACT" | "LATEST">("EXACT");
+ const updateDiagnostic = computed(() => payload.value?.update_diagnostic as { state?: string; message?: string } | undefined);
+@@ -48,33 +49,36 @@
+   }
+ }
+ 
+-async function run(loader: () => Promise<ResearchLane>, expectedDate?: string) {
+-  const version = ++requestVersion;
+-  loading.value = true;
+-  error.value = "";
+-  payload.value = null;
+-  try {
++const reads = latestReadQueue<ResearchLane>({
++  start() { loading.value = true; error.value = ""; payload.value = null; },
++  success(result) { payload.value = result; loading.value = false; },
++  failure(reason) {
++    const busy = (reason as { status?: number } | null)?.status === 503;
++    error.value = busy
++      ? "研报只读服务仍繁忙（HTTP 503）；已完成 3 次有限尝试，请稍后按所选日期重读。未用其他日期替代。"
++      : reason instanceof Error ? reason.message : "研报决策台读取失败；未用其他日期替代。";
++    loading.value = false;
++  },
++});
++onBeforeUnmount(() => reads.dispose());
++function run(loader: () => Promise<ResearchLane>, expectedDate?: string) {
++  reads.submit(expectedDate ? `EXACT:${expectedDate}` : "LATEST", async () => {
+     const result = await loader();
+     validateResearchDate(result, expectedDate);
+-    if (version === requestVersion) payload.value = result;
+-  } catch (reason) {
+-    if (version === requestVersion) {
+-      error.value = reason instanceof Error ? reason.message : "研报决策台读取失败；未用其他日期替代。";
+-    }
+-  } finally {
+-    if (version === requestVersion) loading.value = false;
+-  }
++    return result;
++  });
+ }
+ 
+ function loadExact() {
+   if (!props.archiveDate) return;
+   requestedMode.value = "EXACT";
+-  void run(() => loadResearchLane(props.archiveDate), props.archiveDate);
++  const date = props.archiveDate;
++  run(() => loadResearchLane(date), date);
+ }
+ 
+ function loadLatest() {
+   requestedMode.value = "LATEST";
+-  void run(loadResearchLaneLatest);
++  run(loadResearchLaneLatest);
+ }
+ 
+ function locateWechatPane() {
+--- a/frontend/src/research-workbench/views/ResearchView.spec.ts
++++ b/frontend/src/research-workbench/views/ResearchView.spec.ts
+@@ -722,7 +722,7 @@
+     expect(screen.queryByRole("region", { name: "研报决策台三栏" })).toBeNull();
+   });
+ 
+-  it("ignores a stale exact-date response after a newer request completes", async () => {
++  it("serializes rapid date switches and automatically reads only the final selection", async () => {
+     let resolveFirst: ((value: ReturnType<typeof response>) => void) | undefined;
+     let resolveSecond: ((value: ReturnType<typeof response>) => void) | undefined;
+     let laneRequest = 0;
+@@ -738,8 +738,12 @@
+ 
+     const { rerender } = render(ResearchView, { props: { archiveDate: "20260804" } });
+     await waitFor(() => expect(laneRequest).toBe(1));
++    await rerender({ archiveDate: "20260806" });
+     await rerender({ archiveDate: "20260805" });
++    expect(laneRequest).toBe(1);
++    resolveFirst?.(response({ ...lane("20260804"), research_quality_summary: { new_item_count: 1 } }));
+     await waitFor(() => expect(laneRequest).toBe(2));
++    expect(fetchMock.mock.calls.filter(([url]) => url.includes("/research/lane")).map(([url]) => url)).toEqual(["/api/v5/research/lane?research_date=20260804", "/api/v5/research/lane?research_date=20260805"]);
+ 
+     resolveSecond?.(response({ ...lane("20260805"), research_quality_summary: { new_item_count: 2 } }));
+     const statusStrip = await screen.findByRole("region", { name: "研报状态条" });
+@@ -749,5 +753,16 @@
+     await waitFor(() => expect(screen.getByTestId("research-date-identity").textContent).toContain("20260805"));
+     expect(statusCellValue(screen.getByRole("region", { name: "研报状态条" }), "本小时新增")).toBe("2");
+   });
+-});
+-
++  it("shows final busy failure after bounded retries and restores the read button", async () => {
++    let calls = 0;
++    vi.stubGlobal("fetch", vi.fn(async () => { calls++; return {ok:false,status:503}; }));
++    render(ResearchView, {props:{archiveDate:"20260805"}});
++    const alert = await screen.findByRole("alert", {}, {timeout:2500});
++    expect(alert.textContent).toContain("3 次有限尝试");
++    expect(calls).toBe(3);
++    expect((screen.getByRole("button",{name:"按所选日期"}) as HTMLButtonElement).disabled).toBe(false);
++    expect(screen.queryByRole("region",{name:"研报决策台三栏"})).toBeNull();
++  });
++
++});
++
+--- a/frontend/src/research-workbench/api/research_lane.ts
++++ b/frontend/src/research-workbench/api/research_lane.ts
+@@ -343,7 +343,7 @@
+     );
+   }
+   if (!response.ok) {
+-    if (legacyLane) throw new Error("research lane request failed");
++    if (legacyLane) throw new ResearchLaneRequestError("HTTP_NON_2XX", "research lane request failed", response.status);
+     throw new ResearchLaneRequestError(
+       "HTTP_NON_2XX",
+       `${resource} request failed (HTTP ${response.status})`,
+--- a/frontend/src/research-workbench/composables/latestReadQueue.ts
++++ b/frontend/src/research-workbench/composables/latestReadQueue.ts
+@@ -0,0 +1,60 @@
++/** One in-flight read. Superseded selections are discarded, never aborted into
++ * another worker; only the newest pending selection runs after settlement.
++ * HTTP 503 gets at most two delayed retries. Disposal cancels pending work and
++ * timers, and ignores the active read without pretending the server stopped. */
++export function latestReadQueue<T>(events: {
++  start: () => void; success: (value: T) => void; failure: (error: unknown) => void;
++}) {
++  type Request = { key: string; read: () => Promise<T>; generation: number };
++  let pending: Request | undefined;
++  let running = false;
++  let disposed = false;
++  let generation = 0;
++  let currentKey: string | undefined;
++  let wake: (() => void) | undefined;
++  const delays = [250, 750];
++  async function pump() {
++    if (running || disposed) return;
++    running = true;
++    try {
++      while (pending && !disposed) {
++        const request = pending;
++        pending = undefined;
++        for (let attempt = 0; ; attempt++) {
++          try {
++            const value = await request.read();
++            if (!disposed && request.generation === generation) {
++              currentKey = undefined;
++              events.success(value);
++            }
++            break;
++          } catch (error) {
++            if (disposed || request.generation !== generation) break;
++            if ((error as { status?: number } | null)?.status !== 503 || attempt >= delays.length) {
++              currentKey = undefined;
++              events.failure(error);
++              break;
++            }
++            await new Promise<void>((resolve) => {
++              const timer = setTimeout(done, delays[attempt]);
++              function done() { clearTimeout(timer); wake = undefined; resolve(); }
++              wake = done;
++            });
++            if (disposed || request.generation !== generation) break;
++          }
++        }
++      }
++    } finally { running = false; }
++  }
++  return {
++    submit(key: string, read: () => Promise<T>) {
++      if (disposed || currentKey === key) return;
++      currentKey = key;
++      pending = { key, read, generation: ++generation };
++      events.start();
++      wake?.();
++      void pump();
++    },
++    dispose() { disposed = true; generation++; pending = undefined; wake?.(); },
++  };
++}
+--- a/frontend/src/research-workbench/composables/latestReadQueue.spec.ts
++++ b/frontend/src/research-workbench/composables/latestReadQueue.spec.ts
+@@ -0,0 +1,27 @@
++import { afterEach, expect, it, vi } from 'vitest';
++import { latestReadQueue } from './latestReadQueue';
++afterEach(() => vi.useRealTimers());
++const flush = async () => { await Promise.resolve(); await Promise.resolve(); };
++it('retries 503 finitely then succeeds without overlapping reads', async () => {
++ vi.useFakeTimers(); const success=vi.fn(),failure=vi.fn();
++ const read=vi.fn().mockRejectedValueOnce({status:503}).mockRejectedValueOnce({status:503}).mockResolvedValue('final');
++ const q=latestReadQueue({start:vi.fn(),success,failure}); q.submit('final',read);
++ await vi.runAllTimersAsync(); expect(read).toHaveBeenCalledTimes(3);expect(success).toHaveBeenCalledWith('final');expect(failure).not.toHaveBeenCalled();
++});
++it('permanent 503 exits after three attempts and permits explicit retry', async () => {
++ vi.useFakeTimers();const failure=vi.fn(),read=vi.fn().mockRejectedValue({status:503});
++ const q=latestReadQueue({start:vi.fn(),success:vi.fn(),failure});q.submit('last',read);
++ await vi.runAllTimersAsync();expect(read).toHaveBeenCalledTimes(3);expect(failure).toHaveBeenCalledTimes(1);expect(vi.getTimerCount()).toBe(0);
++ q.submit('last',read);await vi.runAllTimersAsync();expect(read).toHaveBeenCalledTimes(6);
++});
++it('deduplicates selection and cancels superseded backoff and unmounted pending work', async () => {
++ vi.useFakeTimers();const success=vi.fn(),read=vi.fn().mockRejectedValue({status:503});
++ const q=latestReadQueue({start:vi.fn(),success,failure:vi.fn()});q.submit('old',read);q.submit('old',read);await flush();
++ const final=vi.fn().mockResolvedValue('final');q.submit('final',final);await flush();await vi.runAllTimersAsync();
++ expect(read).toHaveBeenCalledTimes(1);expect(final).toHaveBeenCalledTimes(1);expect(success).toHaveBeenCalledWith('final');
++ q.submit('busy',read);await flush();q.dispose();await vi.runAllTimersAsync();expect(read).toHaveBeenCalledTimes(2);expect(vi.getTimerCount()).toBe(0);
++});
++it('unmount ignores active results and never starts the pending selection', async () => {
++ let finish!:(v:string)=>void;const success=vi.fn(),next=vi.fn();
++ const q=latestReadQueue<string>({start:vi.fn(),success,failure:vi.fn()});q.submit('first',()=>new Promise(resolve=>{finish=resolve}));q.submit('last',next);q.dispose();finish('stale');await flush();expect(next).not.toHaveBeenCalled();expect(success).not.toHaveBeenCalled();
++});

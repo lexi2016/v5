@@ -5,9 +5,9 @@
   "files": {
     "INDEPENDENT_REVIEW.json": "2d6c58dc9a3e4d36ed5bdcd37418558118e68c240fc857071fa0863107547742",
     "PREIMAGE_MANIFEST.json": "676096bfac54e90027058646a0c4f018b0fa287fa6b9bdead6b004b3af531990",
-    "README.md": "54d5a89417af36dce5c21c71f621650cff9d4f00cffe55179f9b350498a9947d",
+    "README.md": "dfe36dd4cdbfff1f0745b9796a8f950bfab87ac4d555ca100774ee92efa9a86b",
     "UPSTREAM_MANIFEST.json": "cce698ab1f9ea356e415d8448eeac77c737c8f6926662640dc3d46675a7fe5ab",
-    "VERIFICATION.json": "ab6a35867e0e6ef596ad928a8a5c9d772b636474bc1e489731074e1408d17875",
+    "VERIFICATION.json": "9735be395d07a2da94551ecce0412a40f28fd066337c7d5ca50124d397862de0",
     "after/V5/src/v5_shadow/module_api.py": "278b8c412129caabc8dbfec6be98e3eddec57fa127325a2d6fec11a0b8a93bfb",
     "after/frontend/src/main.ts": "80080a667a856479f75393452916abb6369ae401d8efe6bdcd79539942ac0494",
     "after/frontend/src/views/SavedManagerResultView.navigation.spec.ts": "ba55ded15078c19ce475a26701e374dc3dccf80626f6ce8e20bce75a1e7f4576",
@@ -29,7 +29,7 @@
     "frontend/src/research-workbench/Root.spec.ts": "5807148ed38b67a3ec56085bb1193b1e8646c8c24224c2968c07b9f605baafa2",
     "frontend/src/research-workbench/Root.vue": "6f901cc707e88d7bc88d3f30bc55b9c73c5238e328194579619bd53c7c81b63e",
     "frontend/src/research-workbench/api/research_lane.spec.ts": "6a07194d5e9134dec16da090b29a9f25182739c82ef0b433755c6d4ca161d631",
-    "frontend/src/research-workbench/api/research_lane.ts": "2add8ec3577e60cd01ac97427756b3cd20e030338033d540c8e1bc7bbd4fb11c",
+    "frontend/src/research-workbench/api/research_lane.ts": "77b2c2707f520dbcee7dae264a95066c8c1cbbbf3eecf422389f221042cf3e53",
     "frontend/src/research-workbench/api/wechat_research.ts": "1c686afbf92c26b70baa3bf854dcf51e8ae1950b82ea8c2022408ca5051557ad",
     "frontend/src/research-workbench/components/research/ResearchAppendix.vue": "af25a474325ba0457752fb81d63f0474fe893d81ec0044b041f13c3f8923374f",
     "frontend/src/research-workbench/components/research/ResearchContextPane.vue": "4989b5209ff2e00174cea659b08264afa80757e37c2c70e1c7d9395d3c0341f6",
@@ -42,8 +42,8 @@
     "frontend/src/research-workbench/composables/useResearchLane.spec.ts": "09c5b0dbfd13799d05e99da9ae03db89af2ef64fa99ed2e779c85506813ebeda",
     "frontend/src/research-workbench/composables/useResearchLane.ts": "ac34f90a1e39c9777f292b7b6965bcf16f2e168205ef623a6142fe7fa387fec3",
     "frontend/src/research-workbench/styles/v3-research-lane.css": "7c2fcd9656f3a633e4a16fabcf31e00235a4fe4f035d665fc1546b2d0cb02a08",
-    "frontend/src/research-workbench/views/ResearchView.spec.ts": "6ab78ba71eadfebda8101f53d91b9e802a91aad2c556f3ef2da118fb1b515d50",
-    "frontend/src/research-workbench/views/ResearchView.vue": "b367f06bf51aba4b1fb7684c956bee8bd3b1e8b66a7203143c6435e8319891a4",
+    "frontend/src/research-workbench/views/ResearchView.spec.ts": "f4d97837ca0a3fb859fbe1392a85bb06f133876805dd4176e333483ff5274f36",
+    "frontend/src/research-workbench/views/ResearchView.vue": "865afe7d49f4e82a24aa71e3016d99bc37fecdb4bdec84e60effb74eb88b783f",
     "frontend/src/research-workbench/views/archive.spec.ts": "51a901f0fbbf42a6489ac940772dc374fc62b4b053a7b9237a743879dc90420a",
     "frontend/tsconfig.json": "b19201e63bbf4385cf139d4c4296ceb15238b8de050b16674f92abcef5f37623",
     "frontend/vite.config.ts": "fc96401908b58bc60579a7c71be464da5cee7b509033f5155a0b3c89397df569",
@@ -63,6 +63,12 @@
     "tests/test_http.py": "290ada713d90e7dff1c5ca467ecbbbdb0ad8382a8c198f0d683be4c1d9edff7b",
     "MAC_OBSERVED_PREIMAGE.json": "3ef84920dd85240ca06f05b3de5c1091cb3cda54ef81d11aa9656d14da5a428d",
     "tests/test_apply.py": "5c88aca95008f39a16c7378f8f226829bb7ece07a3c91c7e8cc9ac6b30c40578",
-    "tests/apply-final.txt": "33060fd73862c5e1af97335504d5b45211fce6d229657f556d8deceeadc52ce4"
+    "tests/apply-final.txt": "33060fd73862c5e1af97335504d5b45211fce6d229657f556d8deceeadc52ce4",
+    "DATE_QUEUE_PATCH.json": "80f0227487f60afde750c8a780074b40b264f38f7dc2cfa5ef33e70b14e239c9",
+    "date_queue_fix.patch": "16b0037932f13a69259ed105c5e7c35cab8bcd2799e498f6b6440994c56af3b4",
+    "apply_date_queue_fix.py": "7992917844a6740e1d546f70e18dd310ae87472ec69c8da70322611e4e1c707c",
+    "tests/date-queue-focused.txt": "8b160c4173ae4b2789f983d2d6944992ba370d01b244036b94c3f705f89c26f0",
+    "frontend/src/research-workbench/composables/latestReadQueue.ts": "e697be58c7ea78ceadcd6c070ee8e1d17dfd8fa3cc3676c96131aed39d6e3cc6",
+    "frontend/src/research-workbench/composables/latestReadQueue.spec.ts": "a9ace1ebfec42be131371145b760023e227dd1a3fb81d29466e7c0ff1cc90e9b"
   }
 }

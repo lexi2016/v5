@@ -1,0 +1,25 @@
+{
+  "previous_research_commit": "d3c52b4f08cbe6af9f69326461109004ac36c95c",
+  "files": {
+    "frontend/src/research-workbench/views/ResearchView.vue": {
+      "before_sha256": "b367f06bf51aba4b1fb7684c956bee8bd3b1e8b66a7203143c6435e8319891a4",
+      "after_sha256": "865afe7d49f4e82a24aa71e3016d99bc37fecdb4bdec84e60effb74eb88b783f"
+    },
+    "frontend/src/research-workbench/views/ResearchView.spec.ts": {
+      "before_sha256": "6ab78ba71eadfebda8101f53d91b9e802a91aad2c556f3ef2da118fb1b515d50",
+      "after_sha256": "f4d97837ca0a3fb859fbe1392a85bb06f133876805dd4176e333483ff5274f36"
+    },
+    "frontend/src/research-workbench/api/research_lane.ts": {
+      "before_sha256": "2add8ec3577e60cd01ac97427756b3cd20e030338033d540c8e1bc7bbd4fb11c",
+      "after_sha256": "77b2c2707f520dbcee7dae264a95066c8c1cbbbf3eecf422389f221042cf3e53"
+    },
+    "frontend/src/research-workbench/composables/latestReadQueue.ts": {
+      "before_sha256": null,
+      "after_sha256": "e697be58c7ea78ceadcd6c070ee8e1d17dfd8fa3cc3676c96131aed39d6e3cc6"
+    },
+    "frontend/src/research-workbench/composables/latestReadQueue.spec.ts": {
+      "before_sha256": null,
+      "after_sha256": "a9ace1ebfec42be131371145b760023e227dd1a3fb81d29466e7c0ff1cc90e9b"
+    }
+  }
+}

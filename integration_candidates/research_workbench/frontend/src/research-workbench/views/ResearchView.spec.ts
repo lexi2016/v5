@@ -722,7 +722,7 @@ describe("reactive status and peripheral display contracts", () => {
     expect(screen.queryByRole("region", { name: "研报决策台三栏" })).toBeNull();
   });
 
-  it("ignores a stale exact-date response after a newer request completes", async () => {
+  it("serializes rapid date switches and automatically reads only the final selection", async () => {
     let resolveFirst: ((value: ReturnType<typeof response>) => void) | undefined;
     let resolveSecond: ((value: ReturnType<typeof response>) => void) | undefined;
     let laneRequest = 0;
@@ -738,8 +738,12 @@ describe("reactive status and peripheral display contracts", () => {
 
     const { rerender } = render(ResearchView, { props: { archiveDate: "20260804" } });
     await waitFor(() => expect(laneRequest).toBe(1));
+    await rerender({ archiveDate: "20260806" });
     await rerender({ archiveDate: "20260805" });
+    expect(laneRequest).toBe(1);
+    resolveFirst?.(response({ ...lane("20260804"), research_quality_summary: { new_item_count: 1 } }));
     await waitFor(() => expect(laneRequest).toBe(2));
+    expect(fetchMock.mock.calls.filter(([url]) => url.includes("/research/lane")).map(([url]) => url)).toEqual(["/api/v5/research/lane?research_date=20260804", "/api/v5/research/lane?research_date=20260805"]);
 
     resolveSecond?.(response({ ...lane("20260805"), research_quality_summary: { new_item_count: 2 } }));
     const statusStrip = await screen.findByRole("region", { name: "研报状态条" });
@@ -749,5 +753,16 @@ describe("reactive status and peripheral display contracts", () => {
     await waitFor(() => expect(screen.getByTestId("research-date-identity").textContent).toContain("20260805"));
     expect(statusCellValue(screen.getByRole("region", { name: "研报状态条" }), "本小时新增")).toBe("2");
   });
+  it("shows final busy failure after bounded retries and restores the read button", async () => {
+    let calls = 0;
+    vi.stubGlobal("fetch", vi.fn(async () => { calls++; return {ok:false,status:503}; }));
+    render(ResearchView, {props:{archiveDate:"20260805"}});
+    const alert = await screen.findByRole("alert", {}, {timeout:2500});
+    expect(alert.textContent).toContain("3 次有限尝试");
+    expect(calls).toBe(3);
+    expect((screen.getByRole("button",{name:"按所选日期"}) as HTMLButtonElement).disabled).toBe(false);
+    expect(screen.queryByRole("region",{name:"研报决策台三栏"})).toBeNull();
+  });
+
 });
 
