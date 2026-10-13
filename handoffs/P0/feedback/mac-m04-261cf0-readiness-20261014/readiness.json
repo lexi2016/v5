@@ -1,0 +1,117 @@
+{
+  "candidate": "261cf0123dd7175bfcc6031a5dc201604a98a609",
+  "release_sha256": "e15e41ae28fefb0e9e89a0b7392856dc3a875de4f618e74c46a005ab8d1d117a",
+  "integrity": {
+    "git_blob_files": 488,
+    "manifest_entries": 487,
+    "all_488_source_hashes_unchanged": true,
+    "before_and_after_inventory_sha256": "9b4c5315429bb396dfe53abc5ee6b991dcca61e44d741acd833e3d9321f40cd3"
+  },
+  "environment": {
+    "actual": {
+      "dependencies": {
+        "pandas": "2.3.3",
+        "pyarrow": "23.0.1"
+      },
+      "implementation": "CPython",
+      "python": "3.13.12"
+    },
+    "buy_gate_updated": false,
+    "full_v5_locked_environment": "NOT_RUN",
+    "historical_pit_claimed": false,
+    "natural_verified": false,
+    "official_cli_fulltext": "UNVERIFIED",
+    "orders_sent": false,
+    "production_allowed": false,
+    "profile": "capture",
+    "real_capture": "NOT_RUN",
+    "status": "M04_ENVIRONMENT_MATCHED"
+  },
+  "test_run": {
+    "started_at": "2026-10-13T16:37:10.816694+00:00",
+    "ended_at": "2026-10-13T16:37:32.755309+00:00",
+    "elapsed_seconds": 21.94718404201558,
+    "exit_code": 0,
+    "summary": {
+      "PASS": 33,
+      "FAIL": 0,
+      "ERROR": 0,
+      "SKIP": 0
+    },
+    "unittest_seconds": 21.629
+  },
+  "passed_tests": [
+    "test_bad_cli_pin_rejected_before_any_capture",
+    "test_capture_real_owner_default_analyzer_import_and_cold_reference",
+    "test_cli_capture_requires_explicit_execution_flag",
+    "test_concurrent_capture_rejected_without_owner",
+    "test_config_unknown_field_and_overlap_rejected",
+    "test_failed_capture_is_not_blindly_refetched",
+    "test_ingest_saved_response_lost_resumes_original_success",
+    "test_initialize_recovers_only_marked_partial_layout",
+    "test_interrupted_checkpoint_never_publishes_partial_final_file",
+    "test_material_tamper_and_unsafe_run_id_rejected",
+    "test_old_acquisition_never_runs",
+    "test_repeated_capture_and_resume_never_refetch",
+    "test_reused_capture_id_requires_same_date_slot_and_claim_id",
+    "test_spaced_interpreter_path_runs_original_capture_and_recovery",
+    "test_status_saved_response_lost_recovers_without_cli",
+    "test_unknown_legacy_time_is_not_backfilled",
+    "test_dependency_drift_rejected",
+    "test_dependency_import_failure_rejected",
+    "test_exact_capture_profile_imports_actual_dependency_modules",
+    "test_launcher_rejects_environment_before_stdin_or_capture",
+    "test_readonly_does_not_require_or_import_dependencies",
+    "test_untested_python_rejected_before_dependency_import",
+    "test_bad_selected_archive_rejected_and_read_has_no_writes",
+    "test_empty_latest_has_no_invented_date",
+    "test_exact_missing_never_falls_back",
+    "test_latest_and_exact_only_archive_lane_preserve_original",
+    "test_original_v1_unknown_clocks_and_53_outside_errors_preserved",
+    "test_unknown_query_and_invalid_dates_rejected",
+    "test_healthy_parquet_original_analyzer_owner_and_cold_reader",
+    "test_known_empty_envelopes_remain_empty",
+    "test_known_nonempty_envelopes_preserve_body",
+    "test_unknown_and_malformed_envelopes_fail_closed",
+    "test_unknown_cli_cannot_commit_success_or_archive"
+  ],
+  "validate": "VALID_CONFIG_EXIT0",
+  "init": "INITIALIZED_EXIT0",
+  "runtime": "m04-261cf0-final/runtime",
+  "capture_directories": 0,
+  "configuration": "m04-261cf0-final/capture-0830.private.json",
+  "interpreter_reference": "m04-261cf0-final/interpreter.private.json",
+  "entry": "m04-261cf0-final/candidate/launch.py",
+  "planned_capture_arguments": [
+    "capture",
+    "--date",
+    "20261014",
+    "--slot",
+    "0830",
+    "--run-id",
+    "<fresh_unique_id>",
+    "--execute-acquisition"
+  ],
+  "earliest_beijing": "2026-10-14 08:30",
+  "earliest_utc": "2026-10-14T00:30:00Z",
+  "groups": [
+    "15555851111822",
+    "51111814525844"
+  ],
+  "readiness": "M04_PROFILE_CONFIG_AND_EMPTY_RUNTIME_READY_NO_CAPTURE_PERFORMED",
+  "remaining_limits": [
+    "Official CLI actual JSON/full-body contract and login availability remain UNVERIFIED; CLI never executed.",
+    "Pinned official native CLI remains outside independent V5 task directory; self-contained CLI distribution not prepared.",
+    "Independent selector snapshot dated20261009 has4989 valid A-share identities; freshness/eligibility not claimed.",
+    "Full original V5 locked-environment acceptance remains NOT_RUN; standalone M04 profile only."
+  ],
+  "warnings": [
+    "pyarrow CPU feature sysctl queries returned sandbox EPERM; actual healthy Parquet test passed."
+  ],
+  "capture_executed": false,
+  "official_cli_executed": false,
+  "model_executed": false,
+  "deployment_changed": false,
+  "old_roots_preserved": true,
+  "detailed_result_sha256": "d8cc0f078d341ca82037055e95b4bcb07b4fc106daa9485533aaff9ae025d789"
+}
