@@ -1,0 +1,97 @@
+{
+  "candidate": "0a7d03c9e5d292ccffe2e09f1ca8be88feea50e1",
+  "started_at": "2026-10-13T16:16:06.210034+00:00",
+  "source_origin": "http://127.0.0.1:51363",
+  "source_pid": 11000,
+  "native_visual": "NOT_RUN_BROWSER_TOOL_TIMEOUT",
+  "rollback": {
+    "frontend": "research-d3c52b-combined/checkout/frontend",
+    "source_origin": "http://127.0.0.1:51363",
+    "manager_origin": "http://127.0.0.1:63668",
+    "preview_port": 54780
+  },
+  "protected_ports": {
+    "51363": [
+      11000
+    ],
+    "56563": [
+      3337
+    ],
+    "63668": [
+      17107
+    ],
+    "8873": [
+      54701
+    ],
+    "8910": [
+      1093
+    ],
+    "54777": [
+      69093
+    ],
+    "54778": [
+      69094
+    ],
+    "54779": [
+      69095
+    ]
+  },
+  "old_preview_pid": 11869,
+  "protected_file_count": 2688,
+  "preview_pid": 14238,
+  "status": "DEPLOYED_HTTP_DOM_PASS",
+  "finished_at": "2026-10-13T16:16:18.175665+00:00",
+  "existing_routes_equal": 2,
+  "manager_descriptor_equal": true,
+  "protected_files_unchanged": true,
+  "protected_ports_unchanged": true,
+  "rollback_executed": false,
+  "preview_port": 54780,
+  "real_archive_articles": 18,
+  "out_of_scope_errors": 53,
+  "rapid_date_switch": "FINAL_DATE_AUTO_READ_SINGLE_INFLIGHT_PASS",
+  "backend_restarted": false,
+  "page_url": "http://127.0.0.1:54780/?view=research&date=20261012",
+  "release_sha256": "7e997784015db638ddbe4b04cd1bde2b043c578df9a411fb48bed80192724799",
+  "candidate_files_verified": 68,
+  "patch_files": 5,
+  "preimage_guard": "ALL_PASS_BEFORE_WRITES",
+  "focused_tests": {
+    "files": 2,
+    "PASS": 35,
+    "exit": 0
+  },
+  "typecheck": "PASS",
+  "build": "PASS",
+  "max_lane_inflight": 1,
+  "permanent_503_test": {
+    "injected_in_probe_only": true,
+    "attempts": 3,
+    "finite_exit_and_error": "PASS",
+    "manual_retry_recovery": "PASS"
+  },
+  "main_vite_manager_backend_source_unchanged": true,
+  "manager_legacy_built_chunks_unchanged": true,
+  "m04_dependency": "8266c6ed9606b0912328670c7411743a85af5727",
+  "source_config": "research-d3c52b-combined/evidence-retry/source-api.private.json",
+  "frontend": "research-0a7d03-date-queue/checkout/frontend",
+  "body_and_unknown_clock_gaps_unchanged": true,
+  "source_capture": "NOT_RUN",
+  "model_or_owner_computation": "NOT_RUN",
+  "visual_this_turn": "NOT_RUN_PREVIOUS_BROWSER_TOOL_TIMEOUT_NOT_RETRIED",
+  "full_module_acceptance": false,
+  "dom_evidence": {
+    "isolated": {
+      "sha256": "e9ba2e6447d7d60697c310925623f3473ef0b9e928abcca566b2df2cd5d94089",
+      "bytes": 10969,
+      "status": "PASS",
+      "private_dom_retained_locally": true
+    },
+    "published": {
+      "sha256": "307b4f9d114b221e46ee36deaf7e39ff53067822c993b1f1ea0e760a2b2553ba",
+      "bytes": 10969,
+      "status": "PASS",
+      "private_dom_retained_locally": true
+    }
+  }
+}

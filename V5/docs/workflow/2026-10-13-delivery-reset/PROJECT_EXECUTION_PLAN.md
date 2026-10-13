@@ -140,7 +140,7 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **责任与交接：** M04原Chat/唯一实现者待排负责来源及原编排；P0负责合法材料引用/来源页；Mac按lane验固定候选，成功前置节点不重做，真实材料不随源码自动上传。
 - **最新候选验收（与旧已过编排分开）：** 原9736bf2e807b2aa22e2541a4375b182e1ddceb24的8 PASS / 2 FAIL / 11 ERROR原回执保留；含空格解释器测试shebang窄修后，固定8266c6ed9606b0912328670c7411743a85af5727于Mac22/22 PASS、0 FAIL/ERROR/SKIP，exit0，482 blob/481 manifest核验。只变测试夹具/report/log/RELEASE，业务与原owner字节不变；旧18篇/原scope suite未重跑，真实provider/network、部署/原生页面/自然未验，锁依赖NOT_RUN（pandas3.0.5/pyarrow25.0.1超声明上限）。[新旧原回执](../../../../handoffs/P0/feedback/mac-m04-8266c6-retest-20261013/README.md)。
 - **研报普通页新发布（北京时间2026-10-14 00:01）：** 固定P0 d3c52b4f08cbe6af9f69326461109004ac36c95c绑定M04 8266c6，HTTP/jsdom DOM发布PASS；54780/PID11869与source51363/PID11000，旧56563/63668/V4保留，12路由/经理descriptor及2,688文件不变。实际仅20261012旧归档18条，均无正文、取得时点UNKNOWN、source_run_id=null；53范围外错误保留，小时未生成/公众号未配置。未新采集/补算，native visual工具超时NOT_RUN。[原回执及已知503问题](../../../../handoffs/P0/feedback/mac-research-d3c52b-deployed-20261014/README.md)。
-- **当前页面问题：** 快速切日BUSY503仍存在，旧响应不串日，手动重读可恢复；最终日期自动接续窄修正在进行，未宣称已修复，后续固定代码/复验另记。
+- **快速切日问题限定修复（北京时间2026-10-14 00:16）：** 固定0a7d03c9e5d292ccffe2e09f1ca8be88feea50e1已前端发布PASS，Mac35/35定向与typecheck/build通过；实际最终日期自动读回、lane最大在途1，probe持续503三次退出并可手动恢复。仅54780/PID14238更新，后端51363/PID11000与2,688保护文件不变。原BUSY503失败历史保留，此限定页面问题已闭环，不宣称系统无503；18旧归档的无正文/UNKNOWN及native visual NOT_RUN、非自然/全模块边界不变。[修复发布原回执](../../../../handoffs/P0/feedback/mac-research-0a7d03-date-fix-20261014/README.md)。
 
 ### M05 A预选池｜P2
 
