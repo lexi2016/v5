@@ -1,0 +1,10 @@
+{
+  "python_executable": "<EXISTING_HK02_VENV>/bin/python",
+  "python_sha256": "95fb891ec36d4022bdf62172f9d3c757fb3c7b1669a274cacc87fe261a535b7e",
+  "python_venv": {
+    "root": "<EXISTING_HK02_VENV>",
+    "realpath": "<EXISTING_PYTHON_BINARY>",
+    "pyvenv_cfg_sha256": "e0be6009c776d3f9c351e6d5c7da5dadd5594aaf464288dfac8c47d7e0f32437",
+    "symlink_sha256": "07df37f69e93b179f25a3e7fc5555636ce68d25af1cab1c43b58e4b6986cbe57"
+  }
+}

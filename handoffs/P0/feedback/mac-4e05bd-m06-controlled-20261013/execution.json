@@ -1,0 +1,20 @@
+{
+  "candidate": "4e05bd422d1f6bdedb7bff8b2faf5218fac9e58a",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-m",
+    "unittest",
+    "test_m06_python_launch"
+  ],
+  "env": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "<TASK_TMP>"
+  },
+  "started_utc": "2026-10-13T01:35:23.590557+00:00",
+  "finished_utc": "2026-10-13T01:35:29.556457+00:00",
+  "exit_code": 0,
+  "closure_entries_verified": 147,
+  "closure_sha256": "dae57f54bedc7632b4beafa9cd29fb2158db83162ac3d7bacdace2bf9fe1a1e4"
+}

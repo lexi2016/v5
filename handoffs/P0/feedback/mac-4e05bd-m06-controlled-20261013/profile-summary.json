@@ -1,0 +1,23 @@
+{
+  "processes_observed": 34,
+  "child_launches": 33,
+  "coverage": "Recursive observer wraps Python script launches through runpy; preserves interpreter, flags, script argv, stdin and product source. Profiles return via stderr, preserving original write restrictions.",
+  "calls": {
+    "v5_shadow.main_runtime:tick": 1,
+    "v5_shadow.daily_tick:tick": 1,
+    "v5_shadow.daily_dispatch:dispatch_due": 1,
+    "__main__:main": 4,
+    "v5_shadow.hk_preselection_daily:produce_hk02_daily": 1,
+    "v5_shadow.hk_preselection_publication:read_verified_hk_preselection_reference": 4
+  },
+  "model_generation_calls": 0,
+  "provider_network_attempts": 0,
+  "original_generation_worker_launches": 0,
+  "child_modes": {
+    "m06_daily_worker.py <ORIGINAL_M06_ROOT>": 4,
+    "hk_preselection_verified.py --worker": 15,
+    "hk_preselection_daily.py --assets": 13,
+    "hk_preselection_daily.py --calendar": 1
+  },
+  "child_failures": 0
+}

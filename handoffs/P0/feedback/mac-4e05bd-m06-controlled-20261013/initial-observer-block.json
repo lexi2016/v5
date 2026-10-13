@@ -1,0 +1,28 @@
+{
+  "candidate": "4e05bd422d1f6bdedb7bff8b2faf5218fac9e58a",
+  "started_utc": "2026-10-13T01:37:45.989813+00:00",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "run_m06p_4e05_real.py"
+  ],
+  "entrypoint": "v5_shadow.main_runtime.tick(config)",
+  "real_tick_calls": 1,
+  "old_cutoff_reused": false,
+  "admission_cutoff": "2026-10-13T01:37:45.989496+00:00",
+  "completion_cutoff": "2026-10-13T01:52:45.989496+00:00",
+  "slot": {
+    "scheduled_at": "2026-10-13T01:37:44.989496+00:00",
+    "deadline": "2026-10-13T01:57:45.989496+00:00",
+    "max_attempts": 1,
+    "half_day_bound": true
+  },
+  "tick_status": "DISPATCH_ATTEMPT_ONLY",
+  "status": "CONTROLLED_EXECUTION_BLOCKED",
+  "error_type": "AssertionError",
+  "error": "EXACT_TWO_LEDGER_RECORDS_REQUIRED",
+  "exit_code": 1,
+  "finished_utc": "2026-10-13T01:37:46.779804+00:00",
+  "protected_files_count": 73,
+  "protected_files_unchanged": true
+}
