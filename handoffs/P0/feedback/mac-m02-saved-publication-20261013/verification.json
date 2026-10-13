@@ -1,0 +1,113 @@
+{
+  "record_type": "controller_mac_receipt_transcription",
+  "recorder_retested": false,
+  "date": "2026-10-13",
+  "timezone": "Asia/Shanghai",
+  "original_m02": {
+    "code_prefix_as_received": "ce6cddce...",
+    "build_coldread_window": [
+      "18:26:14.297",
+      "18:26:15.229"
+    ],
+    "exit_code": 0,
+    "target": "20261013",
+    "signal": "20261012",
+    "native_E": "20261013",
+    "membership_files": 7,
+    "membership_rows": 698,
+    "native_count": 4,
+    "hk02_assets": 9,
+    "run": "37139d842d68ad1bfb6bb0144262d65411f4ad131bb1ea6a2155b53144a47297",
+    "identity": "SOURCE_IDENTITY_ONLY",
+    "temporal": "CANNOT_CONFIRM",
+    "three_source_pit": false,
+    "formal_historical_eligibility": false
+  },
+  "original_sdk": {
+    "manual_boards": 2,
+    "rows_per_board": 698,
+    "return_code": 0,
+    "raw_status": "RAW_CAPTURED",
+    "raw_sha256": "b4fdab446aa1083f44b4af909add39432fdbda6db766846671a5d121281a908c",
+    "overall_collector": "FAILED",
+    "failure": "stock_owner NaN"
+  },
+  "original_recovery": {
+    "window": [
+      "18:22:38.544",
+      "18:22:38.788"
+    ],
+    "status": "PRIVATE_MEMBERSHIP_PUBLISHED",
+    "files": 7,
+    "coldread_window": [
+      "18:22:38.789",
+      "18:22:38.869"
+    ],
+    "coldread_success": true,
+    "early_asof_rejected": true,
+    "manual": false,
+    "natural": false
+  },
+  "publication": {
+    "candidate": "a451275c5eee5ec63139b7e8f886624ebdd4c7d5",
+    "cloud_focused_passed": 18,
+    "cloud_skipped": 0,
+    "cloud_tests_are_mac_retest": false,
+    "mac_window": [
+      "18:58:54",
+      "19:00:00"
+    ],
+    "mac_exit_code": 0,
+    "cas_published_at": "18:59:24",
+    "previous_generation": "5afd3802652bc36e8ff67b56124f8fd0782c2e5cc82851494fc24e4a5e665945",
+    "generation": "ef028788c825681136ef76318ba389c384b8f3eb38191e01c1e9f8befdcbbe21",
+    "isolated_bridge_files_with_matching_preimages": 2,
+    "original_saved_binding_coldreader_used": true,
+    "build_collection_model_rerun": false,
+    "canonical_rows_preserved": [
+      "M01",
+      "M03",
+      "M05"
+    ],
+    "other_routes_semantically_unchanged": 10,
+    "data_kind": "RECORDED_INPUT_REPLAY",
+    "private_absolute_paths_in_m02": false
+  },
+  "deployment_checks": {
+    "frontend_dom_http200": 15,
+    "frontend_dom_errors": 0,
+    "native_browser_screenshot_acceptance": false,
+    "m06_target": "20261014",
+    "m06_rows": 100,
+    "api": {
+      "port": 61236,
+      "pid": 18570,
+      "restarted": false
+    },
+    "frontend": {
+      "port": 54780,
+      "pid": 88722,
+      "restarted": false
+    },
+    "manager": {
+      "port": 63668,
+      "pid": 17107,
+      "restarted": false
+    },
+    "v4_other_protected_sources_config_inputs_unchanged": true,
+    "temporary": {
+      "port": 58301,
+      "pid": 27947,
+      "identity_checked_then_stopped": true
+    }
+  },
+  "boundaries": {
+    "controller_total_as_received": "18/14/14/0/0",
+    "m02_full_admission": false,
+    "limited_m06_natural_count": 1
+  },
+  "source": {
+    "mac_thread": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+    "turn": "01a134e7-6b61-750a-afbf-599f1aed5479"
+  }
+}
