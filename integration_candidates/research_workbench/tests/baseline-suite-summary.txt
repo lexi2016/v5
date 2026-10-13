@@ -1,0 +1,28 @@
+ FAIL  src/components/CloseRecapture.spec.ts [ src/components/CloseRecapture.spec.ts ]
+⎯⎯⎯⎯⎯⎯ Failed Tests 24 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > renders actual date, exact identity, original rows and honest gaps
+ FAIL  src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > clears all old identity and rows on loading and disconnection
+ FAIL  src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > rejects promoted source-time evidence without retaining old report
+ FAIL  src/components/HkCloseReview.spec.ts > M10 exact saved read-only review panel > renders every original saved row, same run/generation and partial null metrics
+ FAIL  src/components/HkCloseReview.spec.ts > M10 exact saved read-only review panel > clears every previous table while refreshing and on rejection
+ FAIL  src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > renders all ten saved runs, every original row/field, stage labels and observation boundaries
+ FAIL  src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > refresh/loading and disconnection remove old identity and all rows
+ FAIL  src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > stale selection cannot overwrite a newer selected run
+ FAIL  src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > missing binding and rejected safety never show fabricated rows
+ FAIL  src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > accepts the exact generated owner run and SHA without historical promotion
+ FAIL  src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > rejects broken context, provenance, date and same-run identities
+ FAIL  src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > admits ordinary auto but rejects historical and dynamic relabeling
+ FAIL  src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts the saved real recovery payload without changing its plan SHA
+ FAIL  src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > rejects incomplete or falsely historical recovery identities
+ FAIL  src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts ordinary auto and refuses explicit historical or dynamic relabeling
+ FAIL  src/manager-selection/cloudActualReadback.spec.ts > renders the saved cloud auto response with the same run and honest missing-source state
+ FAIL  src/views/SavedManagerResultView.spec.ts > shows an ordinary V5 page and keeps missing API results visibly unconfirmed
+ FAIL  src/manager-selection/__tests__/actualResearchSelectionProjection.spec.ts > actual Oct 2 owner projection through the Manager DTO and renderer > validates and renders the complete owner-derived 689-row selection
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > uses the target date in the research selection heading and accessible label
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > keeps unavailable screen coverage unknown rather than rendering an observed zero
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > does not attach a fixed date when the selection ledger is absent
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > validates and renders the complete ledger beyond the old 30-card cap
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > rejects duplicate stock decisions and broken row accounting
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > binds a strict research selection to the existing attention card priority
+ Test Files  10 failed | 43 passed | 1 skipped (54)
+      Tests  24 failed | 385 passed | 3 skipped (412)

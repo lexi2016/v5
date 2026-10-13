@@ -1,0 +1,53 @@
+{
+  "baseline_failure_names": [
+    "src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > accepts the exact generated owner run and SHA without historical promotion",
+    "src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > admits ordinary auto but rejects historical and dynamic relabeling",
+    "src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > rejects broken context, provenance, date and same-run identities",
+    "src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts ordinary auto and refuses explicit historical or dynamic relabeling",
+    "src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts the saved real recovery payload without changing its plan SHA",
+    "src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > rejects incomplete or falsely historical recovery identities",
+    "src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > clears all old identity and rows on loading and disconnection",
+    "src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > rejects promoted source-time evidence without retaining old report",
+    "src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > renders actual date, exact identity, original rows and honest gaps",
+    "src/components/CloseRecapture.spec.ts [ src/components/CloseRecapture.spec.ts ]",
+    "src/components/HkCloseReview.spec.ts > M10 exact saved read-only review panel > clears every previous table while refreshing and on rejection",
+    "src/components/HkCloseReview.spec.ts > M10 exact saved read-only review panel > renders every original saved row, same run/generation and partial null metrics",
+    "src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > missing binding and rejected safety never show fabricated rows",
+    "src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > refresh/loading and disconnection remove old identity and all rows",
+    "src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > renders all ten saved runs, every original row/field, stage labels and observation boundaries",
+    "src/components/HkStageObserved.spec.ts > M08 exact historical stage/run selector > stale selection cannot overwrite a newer selected run",
+    "src/manager-selection/__tests__/actualResearchSelectionProjection.spec.ts > actual Oct 2 owner projection through the Manager DTO and renderer > validates and renders the complete owner-derived 689-row selection",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > binds a strict research selection to the existing attention card priority",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > does not attach a fixed date when the selection ledger is absent",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > keeps unavailable screen coverage unknown rather than rendering an observed zero",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > rejects duplicate stock decisions and broken row accounting",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > uses the target date in the research selection heading and accessible label",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > validates and renders the complete ledger beyond the old 30-card cap",
+    "src/manager-selection/cloudActualReadback.spec.ts > renders the saved cloud auto response with the same run and honest missing-source state",
+    "src/views/SavedManagerResultView.spec.ts > shows an ordinary V5 page and keeps missing API results visibly unconfirmed"
+  ],
+  "final_failure_names": [
+    "src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > accepts the exact generated owner run and SHA without historical promotion",
+    "src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > admits ordinary auto but rejects historical and dynamic relabeling",
+    "src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > rejects broken context, provenance, date and same-run identities",
+    "src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts ordinary auto and refuses explicit historical or dynamic relabeling",
+    "src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts the saved real recovery payload without changing its plan SHA",
+    "src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > rejects incomplete or falsely historical recovery identities",
+    "src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > clears all old identity and rows on loading and disconnection",
+    "src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > rejects promoted source-time evidence without retaining old report",
+    "src/manager-selection/__tests__/actualResearchSelectionProjection.spec.ts > actual Oct 2 owner projection through the Manager DTO and renderer > validates and renders the complete owner-derived 689-row selection",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > binds a strict research selection to the existing attention card priority",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > does not attach a fixed date when the selection ledger is absent",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > keeps unavailable screen coverage unknown rather than rendering an observed zero",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > rejects duplicate stock decisions and broken row accounting",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > uses the target date in the research selection heading and accessible label",
+    "src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > validates and renders the complete ledger beyond the old 30-card cap",
+    "src/manager-selection/cloudActualReadback.spec.ts > renders the saved cloud auto response with the same run and honest missing-source state",
+    "src/views/SavedManagerResultView.navigation.spec.ts > moves all four result entries to their actual heading and retains the requested run"
+  ],
+  "new_failure_names": [
+    "src/views/SavedManagerResultView.navigation.spec.ts > moves all four result entries to their actual heading and retains the requested run"
+  ],
+  "baseline_summary": "10 failed suites, 43 passed, 1 skipped; 24 failed tests, 385 passed, 3 skipped",
+  "final_summary": "See integrated-suite-final.txt summary"
+}

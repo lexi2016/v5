@@ -1,0 +1,12 @@
+{
+  "source": "Parent relayed actual Mac readback 2026-10-13T15:40Z",
+  "files": {
+    "frontend/src/main.ts": "4e401b936164f505a1d68e8abe0886b7a7ce41849b8931f09a2684f444ccbbf2",
+    "frontend/vite.config.ts": "76df9236b995cb1276b1b144af35374b0fd05b2afed92d149662760396d1dbf9",
+    "frontend/src/views/SavedManagerResultView.vue": "d87126cc20523213247248f50bd2f253cb308041fbaec247e9760dc3d8cd0b15",
+    "V5/src/v5_shadow/module_api.py": "f4722594c27f6f614a3831de015e268ae48a400a5b3cf8a79706e38eb3bdd12c"
+  },
+  "main_matches_fixed_preimage": true,
+  "other_three_files_are_composed_runtime_not_standalone_fac_source": true,
+  "integration": "Run transformations against new isolated copy of these exact observed files; do not copy static afterimages."
+}

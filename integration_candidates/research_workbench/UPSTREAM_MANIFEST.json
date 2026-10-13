@@ -1,0 +1,23 @@
+{
+  "repository": "lexi2016/v4",
+  "commit": "6e0134ef0daaf6525f12176e12b3fe8ceca606e0",
+  "deployment_status": "NOT_DEPLOYED_8873_USER_CONFIRMED",
+  "files": {
+    "api/research_lane.ts": "2189894a99585148164822d637bdd64e4af3f1a46dbde0a65233396992c8007f",
+    "api/wechat_research.ts": "9c65b609bce8e94755a8734ab0c7e9a65ae24aea1d3a239abc9aa1892348bbb4",
+    "api/research_lane.spec.ts": "a74422ae8c2c89ea98834fc7b1a357d9919f45f83977a067ae46a9335dc114e4",
+    "views/ResearchView.vue": "5e30b5cb4673b9026396e02cd28fc2ff02d5d0bfbc2f7fb40a298a6db7ed0e77",
+    "views/ResearchView.spec.ts": "7e7c6ccb87498036bab940168bbcfec216013fd43e2234fdd8c2fb0f84ca29ea",
+    "styles/v3-research-lane.css": "7c2fcd9656f3a633e4a16fabcf31e00235a4fe4f035d665fc1546b2d0cb02a08",
+    "composables/useResearchLane.spec.ts": "09c5b0dbfd13799d05e99da9ae03db89af2ef64fa99ed2e779c85506813ebeda",
+    "composables/useResearchLane.ts": "72369545a01e0193262a7a4bd82db5cf750ffd93f098718fc2b83eb439a06f93",
+    "components/research/ResearchContextPane.vue": "00120424e7d0d2383edf4092275683167a13c2bbb93ba02f362f8d2743dfb7c9",
+    "components/research/ResearchFeedCard.vue": "5bf78572f08610c23d2c028e6a2df623fb261ea1adc947d241612830419efbdd",
+    "components/research/ResearchStatusStrip.vue": "491b950d7e077bfc4ab67e3dd23f9906435b951b9a2907feac436e2495b8782c",
+    "components/research/ResearchFeedPane.vue": "467ae08217d921f3b3e550c6ccdc5e3e1629c928c77c3056767246eaa5b84add",
+    "components/research/ResearchSourceColumns.vue": "ba7f04a8454d066aec4bd36b37507bfd3945c3bfc7be5341bca85298dd779e58",
+    "components/research/ResearchImpactList.vue": "aa73aee84335138d5ee3471725d1cc90b72de2d96e14201daa2301cc1b321531",
+    "components/research/WechatResearchPanel.vue": "896917e3dea939d45514ba836c08d2a836791958864be1697f287151c872885f",
+    "components/research/ResearchAppendix.vue": "af25a474325ba0457752fb81d63f0474fe893d81ec0044b041f13c3f8923374f"
+  }
+}

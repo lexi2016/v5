@@ -1,0 +1,89 @@
+{
+  "scope": "Independent V5 research view, source_bundle GET bridge and isolated M04 original cold-reader integration",
+  "status": "CODE_CANDIDATE_TESTED_NOT_DEPLOYED",
+  "upstream_v4_commit": "6e0134ef0daaf6525f12176e12b3fe8ceca606e0",
+  "upstream_v4_new_fix_deployed": false,
+  "m04_dependency_commit": "9736bf2e807b2aa22e2541a4375b182e1ddceb24",
+  "m04_release_sha256": "a269bfe3a17e5dd182e4a0f281f6df3d8fbf4a64e327bf4a70499b2388cd1013",
+  "frontend_focused": {
+    "files": 9,
+    "passed": 61,
+    "failed": 0,
+    "evidence": "tests/final-focused-r3.txt"
+  },
+  "bridge_unit": {
+    "passed": 6,
+    "failed": 0,
+    "includes": [
+      "exact query rejection",
+      "unsafe payload refusal",
+      "manifest byte mismatch before launch",
+      "unbound bytecode refused",
+      "explicit unconfigured source"
+    ]
+  },
+  "entry_checks": {
+    "passed": 3,
+    "failed": 0
+  },
+  "actual_module_http": {
+    "passed": 2,
+    "failed": 0,
+    "data": "SYNTHETIC_ORIGINAL_OWNER_ARCHIVE",
+    "checks": [
+      "GET source_bundle to pinned M04 CLI to original cold reader",
+      "EXACT and LATEST",
+      "missing date no fallback",
+      "source bytes unchanged",
+      "POST 405",
+      "duplicate parameter 400",
+      "invalid date 409",
+      "WeChat NOT_CONFIGURED"
+    ]
+  },
+  "typecheck": {
+    "exit_code": 0,
+    "evidence": "tests/final-typecheck-r3.txt"
+  },
+  "vite_build": {
+    "exit_code": 0,
+    "evidence": "tests/final-build-r3.txt"
+  },
+  "full_suite": {
+    "status": "NOT_ALL_GREEN",
+    "baseline_failed_tests": 24,
+    "baseline_passed_tests": 385,
+    "candidate_failed_tests": 17,
+    "candidate_passed_tests": 446,
+    "skipped_tests": 3,
+    "shared_baseline_failures": 16,
+    "extra": "One unchanged multi-step SavedManagerResultView navigation test exceeded 5000ms under concurrent full-suite/build load; same test passed focused final run. Two obsolete assertions expecting no research link were updated and passed.",
+    "evidence": [
+      "tests/baseline-suite-summary.txt",
+      "tests/integrated-suite-summary.txt",
+      "tests/known-suite-failures.json"
+    ],
+    "not_a_current_mac_full_release_verdict": true
+  },
+  "mac_runtime_and_visual": "NOT_RUN",
+  "real_saved_archive_binding": "MAC_ONLY_PENDING",
+  "provider_model_owner_computation": "NOT_RUN",
+  "natural_execution": "NOT_RUN",
+  "safety": {
+    "research_only": true,
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "v4_runtime_dependency": false
+  },
+  "observed_mac_preimages": "MAC_OBSERVED_PREIMAGE.json",
+  "composed_mac_integration": "Transforms to be applied against observed current isolated copy; static afterimages are standalone fac reference only",
+  "mac_preimage_guard": {
+    "passed": 3,
+    "checks": [
+      "exact observed four-file SHA required; unknown rejected before write",
+      "CRLF and unrelated bytes preserved",
+      "nonunique anchor refused"
+    ]
+  }
+}

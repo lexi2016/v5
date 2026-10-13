@@ -1,0 +1,104 @@
+--- a/frontend/src/main.ts
++++ b/frontend/src/main.ts
+@@ -3,5 +3,6 @@
+ // Preserve the established stage UI as an explicit reference entry; saved-run
+ // mode never starts its live/workspace requests or downloads its large bundle.
+ const view = new URLSearchParams(window.location.search).get('view');
+-const app = view === 'legacy' ? import('./App.vue') : import('./views/SavedManagerResultView.vue');
++const app = view === 'research' ? import('./research-workbench/Root.vue')
++  : view === 'legacy' ? import('./App.vue') : import('./views/SavedManagerResultView.vue');
+ app.then(({default: component}) => createApp(component).mount('#app'));
+--- a/frontend/vite.config.ts
++++ b/frontend/vite.config.ts
+@@ -23,6 +23,8 @@
+ const proxy: Record<string, ProxyOptions> = {};
+ if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);
+ if (sourceTarget) {
++ proxy['/api/v5/research/lane'] = readonlyProxy(sourceTarget);
++ proxy['/api/v5/research/wechat/materials'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/rebound-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/a-stage-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/manager-public-research'] = readonlyProxy(sourceTarget);
+--- a/frontend/src/views/SavedManagerResultView.vue
++++ b/frontend/src/views/SavedManagerResultView.vue
+@@ -125,7 +125,7 @@
+    <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
+    <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
+    <button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果</button>
+-   <button type="button" disabled>研报决策台 · 未接入</button>
++   <a class="entry-nav-link" href="?view=research">研报决策台</a>
+   </nav>
+   <p class="navigation-status">当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+   <section id="saved-result-content" aria-labelledby="saved-result-title">
+--- a/V5/src/v5_shadow/module_api.py
++++ b/V5/src/v5_shadow/module_api.py
+@@ -719,7 +719,12 @@
+         keys += ('m11_saved_research_binding',)
+     if isinstance(value, dict) and 'm16_saved_public_research_binding' in value:
+         keys += ('m16_saved_public_research_binding',)
++    if isinstance(value, dict) and 'm04_research_lane_binding' in value:
++        keys += ('m04_research_lane_binding',)
+     exact_keys(value, keys)
++    if 'm04_research_lane_binding' in value:
++        from .research_workbench_readonly import validate_binding
++        validate_binding(value)
+     if 'm18_v2_daily_publication' in value:
+         if (type(value['m18_v2_daily_publication']) is not bool
+                 or value['module_id'] != 'manager' or M18_ROUTE not in value['routes']):
+@@ -1051,6 +1056,8 @@
+             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+             heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M14_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
+             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
++            research_path = config['module_id']=='source_bundle' and parsed.path in ('/api/v5/research/lane','/api/v5/research/wechat/materials')
++            heavy = heavy or research_path
+             reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
+             if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/a-close-replay':
+                 reader_slot=m09_read_slot
+@@ -1070,10 +1077,16 @@
+                 reader_slot=m14_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M12_ROUTE:
+                 reader_slot=m12_read_slot
++            if research_path:
++                reader_slot=m04_read_slot
+             if heavy and not reader_slot.acquire(blocking=False):
+                 return self.error(503, 'MODULE_BUSY')
+             try:
+-                if parsed.path == M18_ROUTE + '/pages':
++                if research_path:
++                    from .research_workbench_readonly import response
++                    status,payload=response(config,parsed.path,query)
++                    self.reply(status,payload,sha256_json(payload))
++                elif parsed.path == M18_ROUTE + '/pages':
+                     payload = _m18_page_response(config,root,query)
+                     self.reply(200,payload,sha256_json(payload))
+                 elif parsed.path in (M18_ROUTE + '/overview', M18_ROUTE + '/sections'):
+@@ -1082,6 +1095,7 @@
+                 else:
+                     record,digest=read_response(config,root,parsed.path,query)
+                     self.reply(record['status_code'],record['payload'],digest)
++            except TimeoutError:self.error(503,'RESEARCH_READER_TIMEOUT')
+             except FileNotFoundError:self.error(503,'MODULE_RESULT_NOT_AVAILABLE')
+             except ValueError as error:
+                 self.error(503,'MODULE_BUSY') if str(error)=='MODULE_PUBLICATION_BUSY' else self.error(409,'MODULE_RESULT_INVALID')
+--- a/frontend/src/views/SavedManagerResultView.navigation.spec.ts
++++ b/frontend/src/views/SavedManagerResultView.navigation.spec.ts
+@@ -74,7 +74,7 @@
+   const m07Stage = container.querySelector<HTMLDetailsElement>('#m07-saved-stage');
+   await waitFor(() => expect(m07Stage?.open).toBe(true));
+   expect(m07Stage).toBeTruthy();
+-  expect(screen.getByText('研报决策台 · 未接入')).toHaveProperty('disabled', true);
++  expect(screen.getByRole('link',{name:'研报决策台'}).getAttribute('href')).toBe('?view=research');
+ });
+ 
+ it('opens and focuses the complete source disclosure without remounting its requests', async () => {
+--- a/frontend/src/views/SavedManagerResultView.spec.ts
++++ b/frontend/src/views/SavedManagerResultView.spec.ts
+@@ -49,7 +49,7 @@
+  expect(managerRequests).toHaveLength(3);
+  expect(managerRequests[2]).toContain('section=announcement_reviewed_analysis&projection=announcement_references');
+  expect(screen.queryByRole('table')).toBeNull();
+- expect(screen.queryByRole('link')).toBeNull();
++ expect(screen.getByRole('link',{name:'研报决策台'}).getAttribute('href')).toBe('?view=research');
+  await fireEvent.click(screen.getByRole('button',{name:'经理同次运行超跌引用'}));
+  expect(await screen.findByRole('heading',{name:'合成超跌公司 · 04321 · 严格条件研究观察'})).toBeTruthy();
+  expect(screen.queryByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeNull();

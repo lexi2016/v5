@@ -1,0 +1,26 @@
+{
+  "frontend/src/main.ts": {
+    "before_sha256": "4e401b936164f505a1d68e8abe0886b7a7ce41849b8931f09a2684f444ccbbf2",
+    "after_sha256": "80080a667a856479f75393452916abb6369ae401d8efe6bdcd79539942ac0494"
+  },
+  "frontend/vite.config.ts": {
+    "before_sha256": "f36372ce2f451faf5ae65dc7c92b9ef913361c16624be38105ec4f6059b477a3",
+    "after_sha256": "cd5625de88af45f5a923ba36fa6f4309500f943d89223360b25221573a7eaa5c"
+  },
+  "frontend/src/views/SavedManagerResultView.vue": {
+    "before_sha256": "ece25bf7ccf0ef405d275a0c3f497cdaa52a089e780e091b46e4057b35524dc0",
+    "after_sha256": "ed3dedc536997a7f6f9643a7e863b7c80e078976693ac67c08ea157c9434ec71"
+  },
+  "V5/src/v5_shadow/module_api.py": {
+    "before_sha256": "62a3f0680abd64d0c8fe5f2027f72630beb91786b9c62409d74efc93b149ecfb",
+    "after_sha256": "278b8c412129caabc8dbfec6be98e3eddec57fa127325a2d6fec11a0b8a93bfb"
+  },
+  "frontend/src/views/SavedManagerResultView.navigation.spec.ts": {
+    "before_sha256": "50e50f182b3bab6a134f9d54ac443539d2351d65810ada9b32c701a8d44f3348",
+    "after_sha256": "ba55ded15078c19ce475a26701e374dc3dccf80626f6ce8e20bce75a1e7f4576"
+  },
+  "frontend/src/views/SavedManagerResultView.spec.ts": {
+    "before_sha256": "9807e710699a862ea7636d61a0c9af704e119a1b0a34316bada3b80030ce821a",
+    "after_sha256": "a37ace2da1ce59161fc24b10a6538dd32ab0ad08166baf215c343515538782e6"
+  }
+}

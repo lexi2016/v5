@@ -1,0 +1,18 @@
+{
+  "frontend/src/main.ts": {
+    "before": "4e401b936164f505a1d68e8abe0886b7a7ce41849b8931f09a2684f444ccbbf2",
+    "after": "80080a667a856479f75393452916abb6369ae401d8efe6bdcd79539942ac0494"
+  },
+  "frontend/vite.config.ts": {
+    "before": "f36372ce2f451faf5ae65dc7c92b9ef913361c16624be38105ec4f6059b477a3",
+    "after": "cd5625de88af45f5a923ba36fa6f4309500f943d89223360b25221573a7eaa5c"
+  },
+  "frontend/src/views/SavedManagerResultView.vue": {
+    "before": "ece25bf7ccf0ef405d275a0c3f497cdaa52a089e780e091b46e4057b35524dc0",
+    "after": "ed3dedc536997a7f6f9643a7e863b7c80e078976693ac67c08ea157c9434ec71"
+  },
+  "V5/src/v5_shadow/module_api.py": {
+    "before": "62a3f0680abd64d0c8fe5f2027f72630beb91786b9c62409d74efc93b149ecfb",
+    "after": "278b8c412129caabc8dbfec6be98e3eddec57fa127325a2d6fec11a0b8a93bfb"
+  }
+}

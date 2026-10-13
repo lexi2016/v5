@@ -1,0 +1,24 @@
+import {render,screen,fireEvent} from '@testing-library/vue';
+import {afterEach,it,expect,vi} from 'vitest';
+import ResearchView from './ResearchView.vue';
+afterEach(()=>vi.unstubAllGlobals());
+it('reads an archive as original material without inventing source lane or clocks',async()=>{
+ const lane={schema_version:'v3_5.research_lane.v1',research_date:'20261012',endpoint_mode:'EXACT',status:'LIVE_PERIPHERAL_ONLY',write_policy:'read_only',recommendation_status:'RESEARCH_ONLY',production_allowed:false,buy_gate_updated:false,orders_sent:false,cannot_confirm:['HOURLY_NOT_CONFIGURED'],archive_materials:{status:'READY',article_count:1,articles:[{title:'原材料标题',article_id:'a1',body:'完整原文第二段，不截断',retrieved_at:'2026-10-12T22:00:00+08:00',available_at:'UNKNOWN'}]}};
+ vi.stubGlobal('fetch',vi.fn(async()=>({ok:true,json:async()=>lane})));
+ const {container}=render(ResearchView,{props:{archiveDate:'20261012'}});
+ await screen.findByText('原材料标题');
+ expect(container.textContent).toContain('归档原文');
+ expect(container.textContent).toContain('完整原文第二段，不截断');
+ expect(container.textContent).toContain('HOURLY_NOT_CONFIGURED');
+ expect(container.querySelector('.hourly-priority-pane')?.textContent).toContain('未生成');
+ expect(container.querySelector('.hourly-context-pane')?.textContent).toContain('未评估');
+ expect(container.querySelectorAll('.hourly-source-column .hourly-pill')[0]?.textContent).toBe('未评估');
+ expect(container.textContent).toContain('小时情报未生成');
+ expect(container.querySelector('.hourly-time-label')?.textContent).toContain('2026-10-12 22:00:00+08:00');
+ expect(container.querySelectorAll('.hourly-feed-card.archive')).toHaveLength(1);
+ expect(container.querySelectorAll('.hourly-feed-card.morning')).toHaveLength(0);
+ expect(container.querySelectorAll('.hourly-feed-card.zsxq')).toHaveLength(0);
+ await fireEvent.click(screen.getByRole('button',{name:'星球'}));
+ expect(container.querySelectorAll('.hourly-feed-list .hourly-feed-card')).toHaveLength(0);
+ expect(container.textContent).toContain('未接入');
+});

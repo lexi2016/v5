@@ -1,0 +1,23 @@
+⎯⎯⎯⎯⎯⎯ Failed Tests 17 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > accepts the exact generated owner run and SHA without historical promotion
+ FAIL  src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > rejects broken context, provenance, date and same-run identities
+ FAIL  src/api/cloudRecoveryContract.spec.ts > cloud CURRENT_RECOVERY synthetic owner response > admits ordinary auto but rejects historical and dynamic relabeling
+ FAIL  src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts the saved real recovery payload without changing its plan SHA
+ FAIL  src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > rejects incomplete or falsely historical recovery identities
+ FAIL  src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts ordinary auto and refuses explicit historical or dynamic relabeling
+ FAIL  src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > clears all old identity and rows on loading and disconnection
+Error: Test timed out in 5000ms.
+ FAIL  src/components/ACloseReplay.spec.ts > M09 exact saved historical replay panel > rejects promoted source-time evidence without retaining old report
+Error: Test timed out in 5000ms.
+ FAIL  src/views/SavedManagerResultView.navigation.spec.ts > moves all four result entries to their actual heading and retains the requested run
+Error: Test timed out in 5000ms.
+ FAIL  src/manager-selection/cloudActualReadback.spec.ts > renders the saved cloud auto response with the same run and honest missing-source state
+ FAIL  src/manager-selection/__tests__/actualResearchSelectionProjection.spec.ts > actual Oct 2 owner projection through the Manager DTO and renderer > validates and renders the complete owner-derived 689-row selection
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > uses the target date in the research selection heading and accessible label
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > keeps unavailable screen coverage unknown rather than rendering an observed zero
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > does not attach a fixed date when the selection ledger is absent
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > validates and renders the complete ledger beyond the old 30-card cap
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > rejects duplicate stock decisions and broken row accounting
+ FAIL  src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > binds a strict research selection to the existing attention card priority
+ Test Files  7 failed | 52 passed | 1 skipped (60)
+      Tests  17 failed | 446 passed | 3 skipped (466)
