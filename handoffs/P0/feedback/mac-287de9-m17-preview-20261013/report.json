@@ -1,0 +1,420 @@
+{
+  "candidate": "287de959ac160f6ae2792ca1f9684b4c86750012",
+  "branch": "dev/v5-main-integration-20261012",
+  "new_http_tests": {
+    "pass": 9,
+    "fail": 0,
+    "initial_sandbox_bind_errors": 8,
+    "retried_failed_only": true
+  },
+  "node_tests_pass": 17,
+  "component_dom_tests_pass": 10,
+  "typecheck": "PASS",
+  "build": "PASS",
+  "existing_package_and_lock_match": true,
+  "old_adapter_13_not_rerun": true,
+  "execution": [
+    {
+      "name": "http9",
+      "command": [
+        "<EXISTING_PYTHON_3.14.6>",
+        "-B",
+        "-m",
+        "unittest",
+        "test_m17_readonly_api",
+        "-v"
+      ],
+      "cwd": "candidate-287de9/V5",
+      "started_utc": "2026-10-13T00:04:23.659633+00:00",
+      "finished_utc": "2026-10-13T00:04:27.004127+00:00",
+      "exit_code": 1,
+      "output_sha256": "5e39de0067a93f79c153371aa018f9629a9cb8754e3c750e4791dea139336a19"
+    },
+    {
+      "name": "node",
+      "command": [
+        "node",
+        "--test",
+        "tests/closeRecapture.node.mjs",
+        "tests/sourceBundle.node.mjs"
+      ],
+      "cwd": "candidate-287de9/frontend",
+      "started_utc": "2026-10-13T00:04:27.004717+00:00",
+      "finished_utc": "2026-10-13T00:04:28.335698+00:00",
+      "exit_code": 0,
+      "output_sha256": "36b41b16ff53eea8b2bfa3e5a7bb48815aaea1e145cb7e728661d23ecea4b582"
+    },
+    {
+      "name": "dom",
+      "command": [
+        "npm",
+        "test",
+        "--",
+        "src/components/CloseRecapture.spec.ts",
+        "src/components/SourceBundleStatus.m17.spec.ts",
+        "src/components/SourceBundleStatus.m08.spec.ts",
+        "src/components/SourceBundleStatus.m09.spec.ts",
+        "src/views/SavedManagerResultView.spec.ts"
+      ],
+      "cwd": "candidate-287de9/frontend",
+      "started_utc": "2026-10-13T00:04:28.336249+00:00",
+      "finished_utc": "2026-10-13T00:04:30.763661+00:00",
+      "exit_code": 0,
+      "output_sha256": "34058698a62a4bc35eeab806d0e01b102cc348c1318236528cd5fa410a044fa1"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "cwd": "candidate-287de9/frontend",
+      "started_utc": "2026-10-13T00:04:30.764072+00:00",
+      "finished_utc": "2026-10-13T00:04:32.622336+00:00",
+      "exit_code": 0,
+      "output_sha256": "16b4018cae57fe1052ea85fd680aa74ae29b25bcd0cded804c7a52cb0c66ec91"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "cwd": "candidate-287de9/frontend",
+      "started_utc": "2026-10-13T00:04:32.623045+00:00",
+      "finished_utc": "2026-10-13T00:04:33.722907+00:00",
+      "exit_code": 0,
+      "output_sha256": "0791418cf8216ed7ffe9f51170c6426ea5961c556089521caf40d1faac0d8d05"
+    }
+  ],
+  "http_failed_only_retry": {
+    "command": [
+      "<EXISTING_PYTHON_3.14.6>",
+      "-B",
+      "-m",
+      "unittest",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_damage_after_success_fails_closed_without_stale_rows",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_exact_get_cold_reads_original_rows_and_never_writes",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_exact_query_required_no_date_run_or_1530_fallback",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_m17_busy_is_bounded_and_does_not_starve_m06",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_methods_and_other_source_routes_preserved",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_missing_binding_cannot_fall_back_to_forged_saved_success",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_oversize_response_rejected_at_http_boundary",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_partial_original_result_stays_partial_with_real_gap",
+      "-v"
+    ],
+    "started_utc": "2026-10-13T00:04:51.470264+00:00",
+    "finished_utc": "2026-10-13T00:04:58.884926+00:00",
+    "exit_code": 0,
+    "reason": "Retry only eight sandbox EPERM loopback-bind errors with authorized Mac execution; original one passing test not rerun."
+  },
+  "isolated": {
+    "candidate": "287de959ac160f6ae2792ca1f9684b4c86750012",
+    "started_utc": "2026-10-13T00:05:53.181387+00:00",
+    "finished_utc": "2026-10-13T00:05:55.434840+00:00",
+    "exit_code": 0,
+    "real_http": [
+      {
+        "status": 200,
+        "bytes": 62131,
+        "semantic_exact": true
+      },
+      {
+        "status": 200,
+        "bytes": 62131,
+        "semantic_exact": true
+      }
+    ],
+    "source_date": "20261012",
+    "plan_date": "20261013",
+    "run_id": "ca2c344b61334ad28f4b6146117643cd",
+    "captured_at": "2026-10-12T15:55:15.370877+08:00",
+    "candidate_count": 100,
+    "original_semantics_exact_except_fresh_reader_pid": true,
+    "parent_forbidden_counts": {
+      "owner": 0,
+      "claim": 0,
+      "finish": 0,
+      "collector": 0,
+      "probe": 0
+    },
+    "worker_profiles": [
+      {
+        "reader_calls": 1,
+        "pool_reader_calls": 1,
+        "owner_calls": 0,
+        "claim_calls": 0,
+        "finish_calls": 0,
+        "collector_calls": 0,
+        "probe_calls": 0,
+        "network_attempts": 0,
+        "child_process_attempts": 0
+      },
+      {
+        "reader_calls": 1,
+        "pool_reader_calls": 1,
+        "owner_calls": 0,
+        "claim_calls": 0,
+        "finish_calls": 0,
+        "collector_calls": 0,
+        "probe_calls": 0,
+        "network_attempts": 0,
+        "child_process_attempts": 0
+      }
+    ],
+    "wrong_date_run_extra_query_rejected": true,
+    "old_source_routes_exact": [
+      "/api/v5/source-bundle/status",
+      "/api/v5/source-bundle/hk-preselection",
+      "/api/v5/source-bundle/hk-close-review",
+      "/api/v5/source-bundle/a-close-replay",
+      "/api/v5/source-bundle/hk-stage-observed"
+    ],
+    "m18_original_run_preserved": true,
+    "protected_files_unchanged": 137,
+    "guard": "Task-only profiling/worker launcher; unchanged fixed product; only reader children instrumented.",
+    "local_config_extends_old_bindings": true
+  },
+  "deployment": {
+    "candidate": "287de959ac160f6ae2792ca1f9684b4c86750012",
+    "status": "DEPLOYED_HTTP_VERIFIED",
+    "started_utc": "2026-10-13T00:07:33.983051+00:00",
+    "finished_utc": "2026-10-13T00:07:36.296674+00:00",
+    "source_pid": 40157,
+    "source_origin": "http://127.0.0.1:64303",
+    "preview_pid": 40161,
+    "preview_port": 54780,
+    "manager_origin": "http://127.0.0.1:63668",
+    "stopped_owned_preview_pid": 25441,
+    "old_preview_identity_verified": true,
+    "old_source_retained": true,
+    "old_source_origin": "http://127.0.0.1:62906",
+    "rollback_candidate": "08c101d6e7f53d1d1519c3859c6b1d985c32d221",
+    "old_config_dist_retained": true,
+    "protected_listener_pids_unchanged": true,
+    "m17_semantics_exact": true,
+    "old_five_source_routes_exact": true,
+    "m18_same_descriptor": true,
+    "static_files": [
+      {
+        "path": "index.html",
+        "sha256": "0f130213fe98f759daed45241ff6424371d779e902626e67c477d7256e00319e"
+      },
+      {
+        "path": "daily-research-command/index.html",
+        "sha256": "40319a50f2a603e28aba37962cc87147ce2914aec9f92b72d60950afb287241f"
+      },
+      {
+        "path": "manager-selection/index.html",
+        "sha256": "00aa7a076811be08478afdee3172ea447a4d5ac9eb58743c1360a124980d71e6"
+      },
+      {
+        "path": "assets/SavedManagerResultView-zQbtr-TE.css",
+        "sha256": "82465fde9e4104c6c6c0b674b310717f698ac8af761d499bec474aa2628cea54"
+      },
+      {
+        "path": "assets/SavedManagerResultView-DXk8ByWo.js",
+        "sha256": "33011365753b5f69ce9a2479a60a2000afae271a541f7a84a233fb914c65fd92"
+      },
+      {
+        "path": "assets/reboundPanelObservation-rEOT8hV3.js",
+        "sha256": "ba9136e5557d7947053de18c1e13b30b1d39ce459119cfad9c565c2b2e7ff081"
+      },
+      {
+        "path": "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+        "sha256": "cb85b0f263dbe24e857338301c0627076592e9f1f1a5662929f86d2c126444aa"
+      },
+      {
+        "path": "assets/runtime-dom.esm-bundler-Ds5LT4Of.js",
+        "sha256": "18a37e2819ece51ecd67e700d7b92f737f51fac85a1da10539aedc3649c6471f"
+      },
+      {
+        "path": "assets/ManagerSelectionView-Hp_a-sop.js",
+        "sha256": "3894b76c683b996049fdfd15ba26e3825af16d088913657c29fe08021a6193ce"
+      },
+      {
+        "path": "assets/ManagerSelectionView-DPqeaKxb.css",
+        "sha256": "937acb35ff2f5318182c43b1c045db2545b98d8486a17319913dde28331e83f5"
+      },
+      {
+        "path": "assets/style-DI6AXicP.js",
+        "sha256": "d887044e7c17fd90344fc4f74f53cac686584daf2a458ab2136d36f1946e9ab6"
+      },
+      {
+        "path": "assets/research_lane-t0CPXntR.js",
+        "sha256": "8651472ec9b303719d201e466e997fc2fadfc2f7169ec1a07c6ded932659f95b"
+      },
+      {
+        "path": "assets/style-BtNCnKLk.css",
+        "sha256": "511cff3d064c51a16261deb297bd8cd2cd4b58378b4eedf3fdcd210970a12fff"
+      },
+      {
+        "path": "assets/dailyResearchCommand-D13tk45Q.js",
+        "sha256": "405b50d2a49760efb992a88a600a2b7afb7897529da7dc6d2c903474a85c65a6"
+      },
+      {
+        "path": "assets/App-C8ZBy9MI.css",
+        "sha256": "63b4a58d5e7c59ab32fcefd0e061bc5a859aa2c894ec1efec3e6e9e3bc56f17d"
+      },
+      {
+        "path": "assets/main-knFzPsqF.js",
+        "sha256": "2dbb08a79c53fe0c0032c0901a8be7d7cb8ff39f935dcd2dc7e20f35311352c7"
+      },
+      {
+        "path": "assets/dailyResearchCommand-D7J2FMsY.css",
+        "sha256": "444542681a3575082c280eb30674e6550766a127bdd6da019b78e8f247125dfa"
+      },
+      {
+        "path": "assets/App-8NKFrO9R.js",
+        "sha256": "c4a598d78056ae71c46084fd1c8022d74e52eb8185767423223a24ee5b61c332"
+      },
+      {
+        "path": "assets/managerSelection-Bhx-p-XH.js",
+        "sha256": "43c7d0c21dc0bc9a265e9ff876020e7082cbb2b9327d5de1f62d8dfd6b2112db"
+      }
+    ],
+    "health": {
+      "config_sha256": "1d542e5c2e1d4b5a1086e6bdfbe0cba0919c12b8a2fdbce17e41470e690be8e5",
+      "implementation_sha256": "a522ec21a8c18b6cd4c03b29a43f27773569d05f416dfb865d58bded8717ba6b",
+      "module_id": "source_bundle",
+      "pid": 40157,
+      "release_id": "p0-a50c5d-source-replay",
+      "source_provenance_verified": false,
+      "status": "READ_ONLY_RESPONSE_SERVICE"
+    },
+    "exit_code": 0,
+    "preview_command": [
+      "<EXISTING_NODE>",
+      "node_modules/vite/bin/vite.js",
+      "preview",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "54780",
+      "--strictPort"
+    ],
+    "source_command": [
+      "<EXISTING_PYTHON>",
+      "-I",
+      "-B",
+      "-c",
+      "<FIXED_MODULE_API_ENTRYPOINT>",
+      "<FIXED_V5_SRC>",
+      "--config",
+      "<TASK_PRIVATE_CONFIG>",
+      "--port",
+      "0"
+    ]
+  },
+  "deployed_component_dom": {
+    "m17_actual_http_dom_100_original_rows": true,
+    "m17_original_identity_and_flags": true,
+    "m17_reload_clears_and_exact": true,
+    "m17_wrong_date_clears_identity_and_rows": true,
+    "m17_recovery_exact": true,
+    "m08_all_ten_exact_artifacts": true,
+    "m08_eight_stage_and_duplicate_run_selectors": true,
+    "passed": true,
+    "m09_native_review_all_fields_exact": true,
+    "m09_all_rendered_cells_original_order": true,
+    "m09_exact_date_run_generation": true,
+    "m09_historical_partial_gaps_and_false_flags": true,
+    "m09_refresh_clears_then_exact": true,
+    "via_deployed_preview": true,
+    "m10_all_original_cells_and_order": true,
+    "m10_counts": [
+      20,
+      100,
+      70,
+      20
+    ],
+    "m10_seven_partial_stages_and_null_preserved": true,
+    "m10_identity": true,
+    "m10_refresh_clears_and_reloads": true,
+    "m06_all100_rows_all_fields_original_order": true,
+    "old_four_cards": true,
+    "m06_identity_text": true,
+    "m06_repeat_and_loading_clear": true
+  },
+  "m18_navigation": {
+    "passed": true,
+    "announcement_default_total": 147,
+    "us_matches": 4,
+    "unique_hk": 3,
+    "plan_status": "CONSUMED",
+    "rebound_first_count": 31,
+    "rebound_next_offset": 31,
+    "us_return_exact": true,
+    "announcement_return_exact": true,
+    "requests": [
+      {
+        "path": "/api/v4/manager/m18/v2",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/overview",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      },
+      {
+        "path": "/api/v4/manager/m18/v2/sections",
+        "http": 200
+      }
+    ]
+  },
+  "dom_execution": [
+    {
+      "command": [
+        "<EXISTING_NODE>",
+        "m17p_deployed_dom.mjs",
+        "http://127.0.0.1:54780"
+      ],
+      "started_utc": "2026-10-13T00:08:16.606981+00:00",
+      "finished_utc": "2026-10-13T00:08:26.325210+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "<EXISTING_NODE>",
+        "navigation_m17p.mjs",
+        "http://127.0.0.1:54780"
+      ],
+      "started_utc": "2026-10-13T00:08:26.325592+00:00",
+      "finished_utc": "2026-10-13T00:08:57.105999+00:00",
+      "exit_code": 0
+    }
+  ],
+  "verification": {
+    "checked_utc": "2026-10-13T00:09:06.500079+00:00",
+    "source_blob_files_unchanged": 1253,
+    "protected_product_pool_ledger_files_sha_mtime_unchanged": 137,
+    "browser_control": "BLOCKED: Chrome connection/session initialization and exact-tab acquisition timed out; no browser screenshot obtained; no additional deployment attempted.",
+    "dom_method": "Actual fixed Vue components mounted in existing jsdom; real HTTP through deployed 54780, not mocked responses.",
+    "not_run": [
+      "Chrome visual/screenshot acceptance"
+    ],
+    "scope": "M17 preview wiring only. No acquisition, natural scheduling, trading, original excluded source restoration, or full 18-module/P0-P5 acceptance."
+  },
+  "rollback": "Prior 08c101 dist/config and source API retained. Task-local identity-checking rollback script prepared, not executed."
+}
