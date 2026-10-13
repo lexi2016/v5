@@ -5,7 +5,7 @@
 ## 固定来源
 
 - 用户指定 V4 `codex/research-workbench-buttons-20261013-r1` / `6e0134ef0daaf6525f12176e12b3fe8ceca606e0`。该提交的五文件增量已上传但未合主分支、未部署8873；本候选复用其三栏研究UI/筛选改进并在 V5 独立构建测试，不能称 V4 新版已上线。
-- M04 完整只读原owner依赖：`lexi2016/v5@9736bf2e807b2aa22e2541a4375b182e1ddceb24` 的 `integration_candidates/M04_capture`。`RELEASE.json` 原字节 SHA256 `a269bfe3a17e5dd182e4a0f281f6df3d8fbf4a64e327bf4a70499b2388cd1013`。
+- M04 完整只读原owner依赖：`lexi2016/v5@8266c6ed9606b0912328670c7411743a85af5727` 的 `integration_candidates/M04_capture`。`RELEASE.json` 原字节 SHA256 `156d7f1ab030a8c7427a7c079eef62ed6615071d37e8c9fd41efa1d61ffdcbec`。
 - 共享前像：M14 `fac269ade842eb1d9b54c604b77091b0cd58bd44` 的 `integration_candidates/M14_saved_page/files`；main.ts 为 P0 `2a124b87bf64793f8c0226a049ae2ac9700c9b86` 已读原文件。静态GitHub前后 SHA 在 PREIMAGE_MANIFEST.json。最新Mac实读四文件在 MAC_OBSERVED_PREIMAGE.json；main一致，其余三文件是c7b+fac的组合，与单独fac源码不同。因此静态after绝不可覆盖现役；apply_candidate读取新隔离副本实际内容，仅移植唯一锚点增量。Mac实读SHA已由主控核过，不把分支名当运行身份。
 
 ## 代码与用途
@@ -40,3 +40,6 @@ GET `/api/v5/research/wechat/materials` 当前显式 `NOT_CONFIGURED`。不伪�
 ## 验证边界
 
 定向研究/入口/桥/HTTP/原冷reader及整合typecheck/build结果见 VERIFICATION.json。所有业务输入为合成离线fixture；没有真实provider/model/原owner生产、没有Mac部署或自然触发。整库UI有已复现缺fixture等失败及一次并行负载下5000ms导航超时，必须单列，不能声称全库绿。当前能够交付已有合法V5保存资料的完整阅读链；完整M04来源采集、M11盘中研究、公众号索引及自然日生产各自仍按原模块验收。
+
+### M04 dependency pin update (2026-10-13)
+The new M04 package changes only the synthetic test launcher for interpreter paths containing spaces/quotes plus its report, log and RELEASE (482 files / 481 manifest entries; owner reports 22/22 cloud tests). Business runtime, launch.py, research_lane.py and original owner bytes are unchanged. The research tests above were run against the previous 9736bf2 dependency; they are historical evidence, not a claim of new Mac verification. Only dependency/configuration pins and this package manifest changed. Mac isolated verification remains the deployment gate.

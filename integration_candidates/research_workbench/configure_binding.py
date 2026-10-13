@@ -1,7 +1,7 @@
 """Create a new config file, preserving every existing route and binding."""
 import argparse,json
 from pathlib import Path
-PIN='a269bfe3a17e5dd182e4a0f281f6df3d8fbf4a64e327bf4a70499b2388cd1013'
+PIN='156d7f1ab030a8c7427a7c079eef62ed6615071d37e8c9fd41efa1d61ffdcbec'
 def configure(config,package,python,binding):
  if config.get('module_id')!='source_bundle':raise ValueError('SOURCE_BUNDLE_REQUIRED')
  result=dict(config);result['routes']=list(config['routes'])
