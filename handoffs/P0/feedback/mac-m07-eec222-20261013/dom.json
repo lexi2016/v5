@@ -1,0 +1,55 @@
+{
+  "behavior": {
+    "initial_sources_closed": true,
+    "result_before_sources": true,
+    "m11": {
+      "opens_and_focuses": true,
+      "slots_waiting": 6,
+      "no_saved_content": true,
+      "reopen_does_not_fetch": true,
+      "real_owner_receipt": false
+    },
+    "m12": {
+      "real_original_transcript_and_segments_exact": true,
+      "identity_exact": true,
+      "asr_review_required": true,
+      "stockdict_not_available": true,
+      "reimported": false
+    },
+    "m16": {
+      "real_rows": 10,
+      "reference_product_job_receipt_exact": true,
+      "business_status": "PARTIAL_WITH_ROWS",
+      "source_pdf_unverified": true,
+      "other_date_waiting_clears_old_rows": true,
+      "same_date_recovery": true,
+      "receipt_attempt_generation_not_invented": true
+    },
+    "loading_in_result_before_sources": true,
+    "m04": {
+      "real_articles_exact": 18,
+      "first_click_opens_both_and_focuses": true,
+      "reopen_repeat_does_not_fetch": true,
+      "explicit_refresh_clears_rows_and_reads_once": true,
+      "outside_errors": 53,
+      "pit": "UNKNOWN"
+    },
+    "m07": {
+      "waiting": true,
+      "specific_missing_inputs": 4,
+      "no_stock_rows": true,
+      "opens_and_focuses": true,
+      "refresh_get_only": true,
+      "no_real_binding": true
+    },
+    "source_expand_and_focus": true,
+    "error_in_result_before_sources": true,
+    "error_clears_old_result": true,
+    "restored_same_run": true
+  },
+  "exit_code": 0,
+  "finished_utc": "2026-10-13T06:36:36.587Z",
+  "method": "Entire deployed built main bundle mounted in jsdom, real local HTTP; not browser visual validation",
+  "visual_verification": false,
+  "logs": []
+}

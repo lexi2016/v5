@@ -1,0 +1,23 @@
+{
+  "buy_gate_updated": false,
+  "data_kind": null,
+  "formal_eligibility_verified": false,
+  "missing_inputs": [
+    "M05_SIX_PHYSICAL_POOLS",
+    "M01_RAW_TRIO_AND_RECORDING_CLOCKS",
+    "M04_HOURLY_SOURCE_WITNESS_AND_MORNING",
+    "M07_VERIFIED_SAVED_REFERENCE"
+  ],
+  "module_id": "M07_A_STAGE",
+  "natural_verified": false,
+  "orders_sent": false,
+  "owner_commit": "e99b5d0d8d0dfc7c2e76d68057c735b4e5dc7c31",
+  "production_allowed": false,
+  "reason_codes": [
+    "M07_SAVED_REFERENCE_NOT_CONFIGURED"
+  ],
+  "reference": null,
+  "schema_version": "v5.m07_saved_stage.v1",
+  "selection": null,
+  "status": "WAITING"
+}

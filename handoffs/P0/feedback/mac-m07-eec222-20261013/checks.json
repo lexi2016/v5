@@ -1,0 +1,65 @@
+[
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "V5/tests/test_m07_p0_integration.py",
+      "V5/tests/test_module_api.py",
+      "V5/tests/test_p0_main_registry.py"
+    ],
+    "cwd": "candidate-m07-eec",
+    "started_utc": "2026-10-13T06:34:22.363325+00:00",
+    "finished_utc": "2026-10-13T06:34:29.749924+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "test:p0"
+    ],
+    "cwd": "candidate-m07-eec/frontend",
+    "started_utc": "2026-10-13T06:34:29.750533+00:00",
+    "finished_utc": "2026-10-13T06:34:34.262649+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "test",
+      "--",
+      "tests/m07SavedStage.test.ts"
+    ],
+    "cwd": "candidate-m07-eec/frontend",
+    "started_utc": "2026-10-13T06:34:34.263153+00:00",
+    "finished_utc": "2026-10-13T06:34:34.986597+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "candidate-m07-eec/frontend",
+    "started_utc": "2026-10-13T06:34:34.987043+00:00",
+    "finished_utc": "2026-10-13T06:34:36.935444+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "build"
+    ],
+    "cwd": "candidate-m07-eec/frontend",
+    "started_utc": "2026-10-13T06:34:36.935971+00:00",
+    "finished_utc": "2026-10-13T06:34:38.102220+00:00",
+    "exit_code": 0
+  }
+]

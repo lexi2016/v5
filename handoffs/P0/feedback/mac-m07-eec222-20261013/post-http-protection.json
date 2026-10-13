@@ -1,0 +1,17 @@
+{
+  "requests": [
+    {
+      "route": "/api/v5/source-bundle/a-stage-saved",
+      "method": "POST",
+      "status": 405
+    },
+    {
+      "route": "/api/v5/source-bundle/a-stage-saved",
+      "method": "POST",
+      "status": 405
+    }
+  ],
+  "protected_files_unchanged": 307,
+  "finished_utc": "2026-10-13T06:36:59.859276+00:00",
+  "exit_code": 0
+}
