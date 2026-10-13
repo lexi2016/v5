@@ -410,6 +410,43 @@ def _expected(error,kind=None):
     return type(error) is ValueError and str(error).startswith(EXPECTED_PREFIXES)
 
 
+def _adapt_verified_v192_empty(artifact,pool,target,signal):
+    """Versioned projection of an independently reread, verified empty owner result.
+
+    The original artifact is not rewritten at its source. Its canonical JSON
+    identity and complete value survive in an already allowed evidence field;
+    source verification digests retain their original names and meaning.
+    """
+    verification=pool.run.verification
+    expected=dict(schema_version='v3_5.preselection_pool.v1',trade_date=target,
+        target_date=target,signal_date=signal,pool_id='a_d1_premarket_pool',
+        market='A',status='V192_CANDIDATE_READY_EMPTY',
+        producer_id='v3_shared_v192_consumer_v1',source_role='SHARED_VERIFIED_V192',
+        source_path=verification['artifact_relative'],
+        source_sha256=verification['artifact_sha256'],
+        source_artifact_sha256=verification['artifact_sha256'],
+        source_run_id=verification['run_id'],artifact_role='A_SHARE_V192_PREMARKET_POOL_V3',
+        artifact_version='V3',source_merge_role='MAIN_STAGE_INPUT')
+    if (not isinstance(artifact,dict) or any(artifact.get(k)!=v for k,v in expected.items())
+            or type(artifact.get('rows')) is not list or artifact['rows']!=[]
+            or list(pool.rows)!=[]
+            or type(artifact.get('source_row_count')) is not int or artifact['source_row_count']!=0
+            or type(verification.get('row_count')) is not int or verification['row_count']!=0
+            or verification.get('status')!='READY_EMPTY'
+            or pool.run.receipt.get('status')!='READY_EMPTY'
+            or artifact.get('stage_selection_eligible') is not True
+            or 'coverage_evidence' in artifact
+            or any(artifact.get(k) is not False or pool.run.receipt.get(k) is not False
+                   for k in ('production_allowed','buy_gate_updated','orders_sent'))):
+        raise ValueError('shared v1.9.2 verified-empty identity mismatch')
+    original=json.loads(canonical_bytes(artifact))
+    evidence=dict(schema_version='v5.m05.v192_empty_adapter.v1',
+        original_status=original['status'],original_artifact=original,
+        original_artifact_sha256=sha256_json(original),
+        source_verification=json.loads(canonical_bytes(verification)))
+    return dict(original,status='VALID_EMPTY',coverage_evidence=evidence)
+
+
 def _build(module,lane,target,signal):
     root=no_symlinks(lane['input_root']);paths={k:_relative(root,v) for k,v in lane['paths'].items()}
     if lane['kind']=='research':
@@ -427,7 +464,11 @@ def _build(module,lane,target,signal):
                 display_name='A股研报推荐股票池',market='A',reason=reason)
     if lane['kind']=='v192':
         reader=importlib.import_module('upstreams.v3_shared_data.shared_data.v192_selector').read_verified_v192_pool
-        return module.build_shared_v192_premarket_pool(root,trade_date=target,signal_date=signal,reader=reader)
+        artifact=module.build_shared_v192_premarket_pool(root,trade_date=target,signal_date=signal,reader=reader)
+        if artifact.get('status')=='V192_CANDIDATE_READY_EMPTY' and artifact.get('rows')==[]:
+            pool=reader(root,target_date=target,expected_signal_date=signal)
+            return _adapt_verified_v192_empty(artifact,pool,target,signal)
+        return artifact
     if lane['kind']=='fupan':return module.build_fupan_watchlist_pool(paths['pool'],paths['manifest'],trade_date=target,signal_date=signal)
     if lane['kind']=='stage7':return module.build_stage7_review_pool(paths['pool'],paths['manifest'],trade_date=target,signal_date=signal)
     if lane['kind']=='wechat':return module.build_wechat_pool(paths['manifest'],paths['rows'],target)

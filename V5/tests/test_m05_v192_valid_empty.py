@@ -81,6 +81,7 @@ owner.materialize_frozen_v192_selector(shared, panel_path=panel,
 verified = owner.read_verified_v192_pool(shared, target_date=target,
     expected_signal_date=signal)
 assert list(verified.rows) == [] and verified.run.verification['row_count'] == 0
+assert verified.run.verification['status'] == 'READY_EMPTY'
 assert verified.run.manifest['provenance']['panel_sha256'] == before
 assert hashlib.sha256(panel.read_bytes()).hexdigest() == before
 artifact = materializer.build_shared_v192_premarket_pool(shared,
@@ -183,6 +184,11 @@ class V192ValidEmptyTests(unittest.TestCase):
                          self.original['original_artifact_sha256'])
         self.assertEqual(sha256_json(evidence['original_artifact']),
                          evidence['original_artifact_sha256'])
+        verification = evidence['source_verification']
+        self.assertEqual(verification['row_count'], 0)
+        self.assertEqual(verification['status'], 'READY_EMPTY')
+        self.assertEqual(verification['run_id'], artifact['source_run_id'])
+        self.assertEqual(verification['artifact_sha256'], artifact['source_artifact_sha256'])
         # The adapter may change only status and add its declared evidence.
         expected = dict(self.original['original_artifact'], status='VALID_EMPTY',
                         coverage_evidence=evidence)
@@ -218,6 +224,55 @@ class V192ValidEmptyTests(unittest.TestCase):
         repeated = self.daily()
         self.assertEqual(repeated['batch_identity'], result['batch_identity'])
         self.assertEqual(repeated['receipts'], result['receipts'])
+
+    def assert_rejected_without_write(self):
+        before = tuple(self.tree(root) for root in (self.source, self.control, self.out, self.v4))
+        result = self.daily()
+        self.assertEqual(result['status'], 'REJECTED')
+        self.assertIsNone(result['row_count'])
+        self.assertEqual(result['receipts'], [])
+        self.assertFalse(result['outcomes'][0]['accepted'])
+        self.assertFalse(result['outcomes'][0]['artifact_written'])
+        self.assertEqual(before, tuple(self.tree(root) for root in
+                         (self.source, self.control, self.out, self.v4)))
+        return result
+
+    def test_missing_source_manifest_is_not_valid_empty(self):
+        manifest = (self.shared / self.original['original_artifact']['source_path']).with_name('manifest.json')
+        relative = str(manifest.relative_to(self.shared))
+        manifest.unlink()  # Only a disposable SYNTHETIC fixture file.
+        self.lane['files'][relative] = None
+        self.assert_rejected_without_write()
+
+    def test_changed_artifact_sha_is_not_valid_empty(self):
+        artifact = self.shared / self.original['original_artifact']['source_path']
+        artifact.write_bytes(artifact.read_bytes() + b'\n')
+        # Bind actual bytes so rejection must still occur at the original
+        # owner's receipt/manifest integrity boundary, not just the outer map.
+        self.lane['files'].update(self.file_hashes(self.shared))
+        self.assert_rejected_without_write()
+
+    def test_other_valid_session_does_not_relabel_empty_source(self):
+        self.request.update(target_date='20261009', signal_date='20261008')
+        self.assert_rejected_without_write()
+
+    def test_unsafe_source_receipt_is_not_valid_empty(self):
+        receipt = (self.shared / self.original['original_artifact']['source_path']).with_name('receipt.json')
+        value = json.loads(receipt.read_bytes())
+        value['orders_sent'] = True
+        receipt.write_bytes(canonical_bytes(value))
+        self.lane['files'].update(self.file_hashes(self.shared))
+        self.assert_rejected_without_write()
+
+    def test_cannot_confirm_zero_source_is_not_valid_empty(self):
+        receipt = (self.shared / self.original['original_artifact']['source_path']).with_name('receipt.json')
+        value = json.loads(receipt.read_bytes())
+        value['status'] = 'CANNOT_CONFIRM'
+        receipt.write_bytes(canonical_bytes(value))
+        self.lane['files'].update(self.file_hashes(self.shared))
+        result = self.assert_rejected_without_write()
+        self.assertIn('shared v1.9.2 verified-empty identity mismatch',
+                      result['outcomes'][0]['reason'])
 
 
 if __name__ == '__main__':
