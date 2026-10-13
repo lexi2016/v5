@@ -1,0 +1,20 @@
+{
+  "schema_version": "v5.m14.window_visibility_candidate.v1",
+  "files": {
+    "PREIMAGE.json": "09d1487614a72ed67c0fb50544cc31584fabd6b9e78112c6d721c6150a41cb23",
+    "README.md": "e5915de370b67419da8c5ae773ec9fff2064e76473f720d44647fc130fce05d9",
+    "VERIFICATION.json": "fe65a443d59d719dbe026c1d6f516b535d286b759bb7337317f4b8601f8c91dc",
+    "apply_candidate.py": "ac8562cfb50ca81f81524313db27b0be4a85231feb6258dd2b056954975110ae",
+    "before/V5/src/v5_shadow/m14_readonly.py": "15d25e8a589602b12a35e45fec3e93ee443403979533abdde78daa48104ee224",
+    "before/frontend/src/components/M14SavedRebound.vue": "8d7c313837d97fe6e5130cc2f4ecdcb8d4f9f8fe4de2432add7a1e24a272d010",
+    "candidate.patch": "fcf5e0a5a705256d1bc273adafb1c982ca6ccc686a2cd9f659fec5ea13113419",
+    "files/V5/src/v5_shadow/m14_readonly.py": "0f9c38018f41143272e1f0aa0f21684f984037ba8e14dc89a0ce6449b4eb3787",
+    "files/frontend/src/components/M14SavedRebound.vue": "1f55d7881ea40a24559ce89c6f241205233e91b487c9c7c926c0492c7de28143",
+    "tests/M14WindowVisibility.spec.ts": "423fd3525b9589683669272de9a9b2e2732b5cf53cbd666526cd48ad064665ef",
+    "tests/apply-results.txt": "ba2a0589f8b75af2bd15716480c46503eb444378ec41fee18750d9dff2f6543e",
+    "tests/build-results.txt": "db69870d66dd6f668f19769374a73e1c0a24a8c01657a937e0a59c6a7e364ff4",
+    "tests/projection-results.txt": "feabb4add9e2ca3374e538560634d1ec97dc4f4ce89aab12f3d726e36ea9b2f6",
+    "tests/test_projection.py": "fb72ad0ab9ccfabfdef99ac4e47b0b52b229701171c3f1d79a7e6e8d7987a96a",
+    "tests/vue-results.txt": "35b0da08771f00be19bfda5b3dd29d9d1fb661e6a971598cf25d626e4c256737"
+  }
+}

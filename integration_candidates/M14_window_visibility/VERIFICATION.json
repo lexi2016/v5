@@ -1,0 +1,21 @@
+{
+  "status": "ISOLATED_CANDIDATE_NOT_DEPLOYED",
+  "backend_projection_tests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "vue_tests": {
+    "passed": 5,
+    "failed": 0
+  },
+  "typecheck_exit_code": 0,
+  "vite_build_exit_code": 0,
+  "exact_apply_smoke": "PASS",
+  "real_mac_acceptance": "PENDING",
+  "source_algorithm_changed": false,
+  "collection_or_recompute": false,
+  "target_files": [
+    "V5/src/v5_shadow/m14_readonly.py",
+    "frontend/src/components/M14SavedRebound.vue"
+  ]
+}

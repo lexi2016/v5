@@ -1,0 +1,1 @@
+PASS exact two-file patch, both after hashes, unknown/reapplied preimages rejected
