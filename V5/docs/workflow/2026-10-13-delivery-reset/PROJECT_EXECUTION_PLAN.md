@@ -71,7 +71,7 @@
 |A2 M03来源|固定efeaeb8完整候选已核75 blob/74 manifest，Mac release exit 0、新定向23/23 PASS、0 skip；原48项未重跑|真实provider/network、HTTP/DOM、发布及自然NOT_RUN；需适用US session与合法输入，新闻不能替代行情|复用离线CLI/持久化恢复证据，后续按授权验真实三件、P0/M15消费及服务页面；不把合成transport当真实采集|
 |A3 M14真实页|fac269隔离15 Vue/typecheck/build及真实690行22页HTTP/DOM已过，独立reader/页面候选已交|现役组合c7b→fac切换DOM初始等待超时、已自动回退；完整日志待回，根因未定|Mac只读定位后针对受影响发布/回退复验；资格/历史不足保留，不重owner，不称已部署|
 |A4 M13公告|完整目录/正文/capture/审阅决策输入/导入/保存reader代码，先消费已有合法产品|新revision缺真实review决定时不能代填；缺决策不阻止离线合同与页面代码|原输入→已审核产品→消费引用同SHA；详情/分页失败状态和cutoff可定位|
-|A5 M15映射|最终f7dd8e63完整候选531/531回读，云端new20 Python/原40/Node7通过；Mac独立隔离验收待回|新候选真实源/页面/部署/自然NOT_RUN；snapshot/正文span/时点与HK身份分别核|固定最终版与RELEASE，按Mac实际结果收口，再按授权验真实两路径和P0消费，不沿用0d53冷读缺口|
+|A5 M15映射|f7dd8e63已核531 blob/530 manifest，Mac新20 Python/7 Node/typecheck/build PASS；原40复用云证未重跑|现有pandas3.0.5/pyarrow25.0.1超声明上限，锁依赖NOT_RUN；真实provider/资格/DOM/部署/自然未执行|保留原依赖上限，另证锁环境，再按授权核真实两路径与P0消费，不将隔离合成检查称全验收|
 |A6 P0/M18|沿已过c7b+52e71补合法request/template准备、标准引用导入与未完集成；仅必要差异测试|完整当日三策略引用、target/cutoff和原运行窗口；准备request不等于执行manager|不重做已过产品；普通API/页同run与显式历史保持，CAS双descriptor拒绝旧generation|
 |A7 M04支撑|在已过完整编排上补首批13/15真正需要的来源/取得时间/正文引用缺口|缺历史取得时间不回填；未授权外传不做|原材料reader提供真实正文/来源/时点或明确UNKNOWN，供三策略同SHA消费|
 
@@ -252,13 +252,13 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 ### M15 美股到港股映射｜P1
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca4b1c-7bac-83ec-878c-d1fb0bd37b38)；`dev/m15-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
-- **已有代码与证据：** [1dede80b](https://github.com/lexi2016/v5/commit/1dede80b4ff18781849e87e85ca693890ed57979)；[页面证据](https://github.com/lexi2016/v5/commit/d53e0820318462806d9e67dae1818bb684b38ade)。 [最终完整候选f7dd8e63](https://github.com/lexi2016/v5/commit/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af)；[候选README](https://github.com/lexi2016/v5/blob/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af/integration_candidates/M15_mapping/README.md)。
-- **已验证层级：** 原四关系/三HK保存读回与页面历史保留；新最终候选f7dd8e63已531/531远端字节/SHA/blob回读，云端新增20 Python、原40与Node 7通过；RELEASE SHA-256为8cb4cd4db7b9e8dccba527ec844dde9f7787d54ac1dd88cae0ded97e6db23507。中间0d53原reader冷读未齐已在最终版修复。Mac已进入同一线程独立隔离验收、回执待回；新候选真实源/页面/部署/自然均NOT_RUN，完整0。
-- **未完成缺口：** 新完整两路径候选已固定，不再作为未交代码处理；Mac隔离结果待回，真实行情snapshot、材料正文/span/取得时点与HK身份仍需各自核验，PIT/资格未闭环。12/13新闻三件不能替代market_snapshot，云端通过不等于真实源或部署通过。
+- **已有代码与证据：** [1dede80b](https://github.com/lexi2016/v5/commit/1dede80b4ff18781849e87e85ca693890ed57979)；[页面证据](https://github.com/lexi2016/v5/commit/d53e0820318462806d9e67dae1818bb684b38ade)。 [最终完整候选f7dd8e63](https://github.com/lexi2016/v5/commit/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af)；[候选README](https://github.com/lexi2016/v5/blob/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af/integration_candidates/M15_mapping/README.md)。 [Mac原回执](../../../../handoffs/P0/feedback/mac-m15-f7dd-isolated-20261013/result.json)。
+- **已验证层级：** 原四关系/三HK保存读回与页面历史保留；最终f7dd8e63已531 blob/530 manifest核验，RELEASE SHA-256为8cb4cd4db7b9e8dccba527ec844dde9f7787d54ac1dd88cae0ded97e6db23507。Mac新增20 Python与7 Node、typecheck/build通过，候选字节未变；原40项复用此前云端证据，未在Mac重跑。两条原cold reader在合成fixture上MATCHED；新候选真实provider/源资格/真实DOM/部署/自然均未执行，完整0。
+- **未完成缺口：** Mac隔离合成检查已通过，但Python 3.14.6环境使用pandas 3.0.5、pyarrow 25.0.1，超过README声明上限；locked dependency validation为NOT_RUN，不得为通过而改依赖上限。真实snapshot/正文span/取得时点与HK身份、PIT/资格、真实DOM及发布仍待验，新闻三件不能替代行情snapshot。
 - **依赖：** M03同session行情、原种子/registry；M04原主体/正文/命题/真实可用时点及M02 native/目标资格；供M18。种子daily和材料（行业/主题、个股）路径分别验。
-- **下一条完整交付：** 以最终f7dd8e63及固定RELEASE完成Mac独立隔离验收，按实际失败回唯一作者；通过后在获准真实范围核两路径输入→原reader保存冷读→P0/M18及普通页消费。复用未受影响证据，不回退中间0d53或重写旧映射算法。
+- **下一条完整交付：** 复用f7dd8e63的20 Python/7 Node/typecheck/build隔离证据；在声明依赖范围内另证锁环境，不安装或放宽依赖来伪装本次已通过。按实际授权推进真实两路径输入→原reader保存冷读→P0/M18及普通页消费；不回退中间0d53或重写已过算法。
 - **验收标准：** 两路径各有真实结果或按原合同准确拒绝，保存/普通页同身份；原范围外未知、目标资格和自然身份不变，M18同session合法消费，下一适用session/回滚过。
-- **责任与交接：** M15唯一实现者已交最终完整候选；Mac独立隔离验收回执待回。P0负责必要M03/M04/M02标准引用与M18展示接线；真实源/页面发布另记，不把新闻当行情、不在V4来源根写锁。
+- **责任与交接：** M15唯一实现者保留最终固定候选与依赖声明；Mac隔离检查回执已到，锁依赖/真实源/真实DOM/部署另行验收。P0负责必要标准引用与M18展示接线，不把合成或云端历史结果计为真实生产。
 
 ### M16 经理候选公开资料任务｜P4
 
@@ -332,7 +332,7 @@ P0原Chat：[主框架原会话](https://chatgpt.com/c/6acc9a79-4364-83ee-8b6d-e
 |已交完整owner是否独立可启动（M04/08/09/10/11/12/16等）|固定commit的一次文件/入口/依赖/启动命令及阶段覆盖表|入口/测试足证则复用，不重写；缺失接口立即列入模块下一完整交付，不能无界扫描|
 |原计划未核训练入口/8910范围|只登记其是否属于现18职责及已授权迁移范围、来源证据|未核不静默删、不计入18或自创新模块；需要范围变化先明确影响|
 
-这些核查与其他独立代码流并行，不设“全项目审完才能编码”的门。M02限定真实采集到页面链已验，保留PIT/资格、自然与原生视觉的剩余边界；M03新候选已过Mac离线验收，推进未过真实/接线范围；M14独立页候选隔离已过、组合部署回退待日志定位，M15最终候选待Mac结果，不再做一轮总审。
+这些核查与其他独立代码流并行，不设“全项目审完才能编码”的门。M02限定真实采集到页面链已验，保留PIT/资格、自然与原生视觉的剩余边界；M03新候选已过Mac离线验收，推进未过真实/接线范围；M14独立页候选隔离已过、组合部署回退待日志定位，M15隔离检查已过、锁依赖和真实/部署仍待验，不再做一轮总审。
 
 ### 3. 数据、权限、时窗分别处理
 

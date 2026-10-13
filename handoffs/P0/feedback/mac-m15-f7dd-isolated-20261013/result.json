@@ -1,0 +1,148 @@
+{
+  "candidate": "f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af",
+  "branch": "dev/m15-github-handoff-20261011",
+  "status": "ISOLATED_SYNTHETIC_CHECKS_PASS",
+  "release_sha256": "8cb4cd4db7b9e8dccba527ec844dde9f7787d54ac1dd88cae0ded97e6db23507",
+  "package_files": 531,
+  "manifest_files": 530,
+  "all_git_blobs_and_sha256_verified": true,
+  "candidate_bytes_unchanged_after_tests": true,
+  "environment": {
+    "python": "3.14.6",
+    "node": "24.19.0",
+    "pandas": "3.0.5",
+    "pyarrow": "25.0.1",
+    "locked_dependency_validation": "NOT_RUN_EXISTING_PANDAS_AND_PYARROW_ABOVE_DECLARED_UPPER_BOUNDS",
+    "dependencies_installed": false
+  },
+  "stages": [
+    {
+      "stage": "verify_release",
+      "command": [
+        "$PY",
+        "-I",
+        "-B",
+        "./m15-f7dd8e-isolated/candidate/verify_release.py"
+      ],
+      "started_at": "2026-10-13T14:39:20.836673+00:00",
+      "finished_at": "2026-10-13T14:39:20.924615+00:00",
+      "exit_code": 0
+    },
+    {
+      "stage": "python_new",
+      "command": [
+        "$PY",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "started_at": "2026-10-13T14:39:20.925289+00:00",
+      "finished_at": "2026-10-13T14:39:29.459915+00:00",
+      "exit_code": 0
+    },
+    {
+      "stage": "node",
+      "command": [
+        "$NODE",
+        "--test",
+        "frontend/tests/m15Mapping.node.mjs"
+      ],
+      "started_at": "2026-10-13T14:39:29.460197+00:00",
+      "finished_at": "2026-10-13T14:39:29.563656+00:00",
+      "exit_code": 0
+    },
+    {
+      "stage": "typecheck",
+      "command": [
+        "$NODE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "started_at": "2026-10-13T14:39:34.762595+00:00",
+      "finished_at": "2026-10-13T14:39:37.093995+00:00",
+      "exit_code": 0
+    },
+    {
+      "stage": "build",
+      "command": [
+        "$NODE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "started_at": "2026-10-13T14:39:37.094020+00:00",
+      "finished_at": "2026-10-13T14:39:39.390602+00:00",
+      "exit_code": 0
+    }
+  ],
+  "python_new": {
+    "passed": 20,
+    "seconds": 8.45
+  },
+  "python_old": {
+    "count": 40,
+    "status": "NOT_RERUN_REUSED_PRIOR_CLOUD_RESULT_AS_AUTHORIZED"
+  },
+  "node": {
+    "passed": 7,
+    "failed": 0
+  },
+  "run_offline_tests_selection": "Read original runner; executed its new Python and Node commands; original 40 command intentionally omitted",
+  "original_cold_readers": [
+    {
+      "artifact_sha256": "db6296035e8f223eb621cb811ad8f325705be4e5fa334fe9bcc5d2ca52fff9c9",
+      "buy_gate_updated": false,
+      "kind": "seed",
+      "orders_sent": false,
+      "owner_source_pin": "6eab8e6d44b64e1668b795352dbf88a5176fdc826e532be07701be435abf01bb",
+      "process_id": 82722,
+      "production_allowed": false,
+      "read_only": true,
+      "reader": "us_mapping_research._read_saved",
+      "run_id": "36f37c3887ec48cfa209c35d4fad106c",
+      "status": "MATCHED",
+      "target_date": "20261012"
+    },
+    {
+      "artifact_sha256": "5bba49b4487477e62b3e587187e6f814118349c563d781b66745a7d701f5eb0a",
+      "buy_gate_updated": false,
+      "kind": "material",
+      "orders_sent": false,
+      "owner_source_pin": "7a460e6f33b40630763d912affcedfe2c687d2b69e2924b55d8b8607298c69e5",
+      "process_id": 82723,
+      "production_allowed": false,
+      "read_only": true,
+      "reader": "workspace._read_plan + verified_plan_attempt",
+      "run_id": "5a566b3ad8c649e88a3e31eb5429b77f",
+      "status": "MATCHED",
+      "target_date": "20261012"
+    }
+  ],
+  "frontend": {
+    "assembly": "Separate frontend-check copy, both P0 preimages hash-verified; exact candidate view/config/API/component copied only inside this isolated directory",
+    "typecheck": "PASS",
+    "build": "PASS",
+    "native_dom": "NOT_RUN",
+    "visual": "NOT_RUN"
+  },
+  "scope": {
+    "inputs": "CANDIDATE_EXPLICIT_SYNTHETIC_FIXTURES",
+    "real_provider_collection": false,
+    "credentials_access": false,
+    "trades": false,
+    "real_daily_owner_run": false,
+    "shared_http_ports_started": false,
+    "temporary_loopback_api": "Candidate OrdinaryApiTests uses port 0, shuts down and joins in finally; test PASS",
+    "P0_active_wiring": false,
+    "deployment": false,
+    "M14_product_or_test_changed": false
+  },
+  "limits": [
+    "Existing dependencies differ from declared release range; this is not locked-environment certification",
+    "No real source eligibility, natural daily scheduling, formal qualification, or full 18-module acceptance",
+    "No product edits or test-gate relaxation"
+  ]
+}
