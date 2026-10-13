@@ -1,0 +1,34 @@
+{
+  "schema_version": "v5.m07_test_report.v1",
+  "scope": "handoffs/M07/V5 complete included test suite",
+  "data_kind": "SYNTHETIC",
+  "command": "PYTHONPATH=src /workspace/shared/manager_bi02_fix/.venv/bin/python -m pytest -q",
+  "working_directory": "handoffs/M07/V5",
+  "started_at": "2026-10-13T05:43:41.142792+00:00",
+  "finished_at": "2026-10-13T05:44:14.982115+00:00",
+  "exit_code": 0,
+  "runtime": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "pytest": "9.1.1"
+  },
+  "result_summary": "63 passed, 31 subtests passed in 33.52s",
+  "log_sha256": "9b5d90f673d8ef227cdc2f4a139062ef36c3086732552597f5597212db26a1f6",
+  "assertion_scope": [
+    "real original pool/raw/research/morning reader/selector/store chain",
+    "normal and auction full artifact parity",
+    "input preservation and original acquisition rank",
+    "SHA/receipt/date/window/coverage/field/temporal admission negatives",
+    "same identity concurrency/reuse, read-only readback, corruption, CAS and rollback",
+    "original stage wrapper and original run ledger regression"
+  ],
+  "acceptance": {
+    "code_candidate": "PASS",
+    "mac_python_3_14": "NOT_RUN",
+    "real_market_input": "NOT_RUN",
+    "formal_eligibility": "BLOCKED",
+    "api_ui": "NOT_RUN",
+    "natural_two_trading_days": "NOT_RUN",
+    "module_complete": "NOT_COMPLETE"
+  },
+  "qualification": "PASS refers only to test assertions, including required BLOCKED/PARTIAL_WITH_ROWS outcomes; it does not confer product readiness. Cloud Python differs from declared >=3.14."
+}

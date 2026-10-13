@@ -1,0 +1,41 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_______ M07ChainTests.test_concrete_entrypoint_has_no_callback_contract ________
+
+self = <test_a_stage_daily.M07ChainTests testMethod=test_concrete_entrypoint_has_no_callback_contract>
+
+    def test_concrete_entrypoint_has_no_callback_contract(self):
+        import inspect
+        names=inspect.signature(daily.run_a_stage_daily).parameters
+>       self.assertIn('request',names)
+E       AssertionError: 'request' not found in mappingproxy(OrderedDict({'target_date': <Parameter "target_date">, 'stage_id': <Parameter "stage_id">, 'cutoff': <Parameter "cutoff">, 'pool_input': <Parameter "pool_input">, 'live_input': <Parameter "live_input">, 'research_input': <Parameter "research_input">, 'selector': <Parameter "selector">, 'publish_verified': <Parameter "publish_verified">}))
+
+tests/test_a_stage_daily.py:16: AssertionError
+__ M07ChainTests.test_original_raw_interface_requires_compatible_strict_body ___
+
+self = <test_a_stage_daily.M07ChainTests testMethod=test_original_raw_interface_requires_compatible_strict_body>
+
+        def test_original_raw_interface_requires_compatible_strict_body(self):
+            owner=Path(__file__).resolve().parents[2]/'owner'
+            code="""from stage_center.raw_store import validate_rows,RawStoreError
+    print(validate_rows([],trade_date='20261008',stage_id='STAGE_0930_0935',market='A_SHARE'))
+    for flag in (True, 0, 1, None):
+     try: validate_rows([],trade_date='20261008',stage_id='STAGE_0930_0935',market='A_SHARE',allow_temporal_false_observation=flag)
+     except RawStoreError: pass
+     else: raise AssertionError('override accepted')
+    """
+            import os
+            proc=subprocess.run([sys.executable,'-B','-c',code],env={**os.environ,'PYTHONPATH':str(owner)},capture_output=True,text=True)
+>           self.assertEqual(proc.returncode,0,proc.stderr)
+E           AssertionError: 1 != 0 : Traceback (most recent call last):
+E             File "<string>", line 2, in <module>
+E             File "<TASK_WORKSPACE>/candidate/handoffs/M07/owner/stage_center/raw_store.py", line 642, in validate_rows
+E               return _v4_impl(
+E                      ^^^^^^^^^
+E           TypeError: _validate_rows_body() got an unexpected keyword argument 'allow_temporal_false_observation'
+
+tests/test_a_stage_daily.py:31: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_a_stage_daily.py::M07ChainTests::test_concrete_entrypoint_has_no_callback_contract
+FAILED tests/test_a_stage_daily.py::M07ChainTests::test_original_raw_interface_requires_compatible_strict_body
+2 failed in 0.12s

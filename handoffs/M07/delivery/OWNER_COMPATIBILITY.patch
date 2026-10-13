@@ -1,0 +1,15 @@
+--- upstream@d1bf034/stage_center/_raw_store_parts/receipt_identity.py
++++ handoffs/M07/owner/stage_center/_raw_store_parts/receipt_identity.py
+@@ -3,8 +3,11 @@
+ from ._namespace import read_global as _v4_global
+ 
+ 
+-def _validate_rows_body(_v4_scope, /, rows, *, trade_date, stage_id, market):
++def _validate_rows_body(_v4_scope, /, rows, *, trade_date, stage_id, market, allow_temporal_false_observation=False):
+     """Validate the frozen 19-field raw shape without dropping evidence."""
++    # M07 private compatibility patch: keep every temporal-false path closed.
++    if allow_temporal_false_observation is not False:
++        raise _v4_global(_v4_scope, 'RawStoreError')("M07_TEMPORAL_FALSE_OVERRIDE_FORBIDDEN")
+     _v4_global(_v4_scope, '_validate_date')(trade_date)
+     expected_market = _v4_global(_v4_scope, '_MARKET_CODE').get(market)
+     if expected_market is None:

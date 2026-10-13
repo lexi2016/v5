@@ -1,0 +1,1032 @@
+--- a/handoffs/M07/V5/src/v5_shadow/a_stage_daily.py
++++ b/handoffs/M07/V5/src/v5_shadow/a_stage_daily.py
+@@ -1,98 +1,627 @@
+-"""M07 A stage private adapter.
+-
+-No authority is created here. Formal admission requires immutable upstream
+-artifacts supplied by approved owner adapters.
++"""M07 concrete, replay-only A-stage owner chain.
++
++Inputs are explicit SHA-pinned V5 private copies. Original owners run in fresh
++processes. No provider, scheduling, formal-authority grant, or trading path.
+ """
+ from __future__ import annotations
++import sys
++from pathlib import Path
++if __package__ in (None, ''):
++    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
++import csv
+ from copy import deepcopy
+-from hashlib import sha256
+-import json, math, re
+-
+-_SHA = re.compile(r"^[0-9a-f]{64}$")
+-
+-def _canonical_digest(value):
+-    def bad(x):
+-        if isinstance(x,float) and (math.isnan(x) or math.isinf(x)):
+-            raise ValueError("NAN_NOT_ALLOWED")
+-    json.loads(json.dumps(value, default=bad))
+-    raw=json.dumps(value, ensure_ascii=False, allow_nan=False,
+-                   sort_keys=True, separators=(",", ":")).encode("utf-8")
+-    return sha256(raw).hexdigest()
+-
+-def _require_receipt(name, value, target_date):
+-    if not isinstance(value, dict) or value.get("status")!="VERIFIED":
+-        raise ValueError(f"{name}_NOT_VERIFIED")
+-    for k in ("sha256","owner","artifact_ref","manifest_sha256","receipt_sha256"):
+-        if not value.get(k): raise ValueError(f"{name}_{k.upper()}_MISSING")
+-    for k in ("sha256","manifest_sha256","receipt_sha256"):
+-        if not _SHA.fullmatch(value[k]): raise ValueError(f"{name}_{k}_INVALID")
+-    if value.get("target_date")!=target_date:
+-        raise ValueError(f"{name}_DATE_MISMATCH")
+-
+-def _merge_rows(pool, live, research):
+-    pool_rows={_code(r["code"]):deepcopy(r) for r in pool.get("rows",[])}
+-    if len(pool_rows)!=len(pool.get("rows",[])):
+-        raise ValueError("M05_DUPLICATE_CODE")
+-    research_rows={_code(r["code"]):r for r in research.get("rows",[])}
+-    out=[]
+-    for r in live.get("rows",[]):
+-        c=_code(r["code"])
+-        if c not in pool_rows: continue
+-        x=deepcopy(pool_rows[c])
+-        # market data may fill observation fields only
+-        for k in ("open","high","low","close","volume","amount","bid","ask",
+-                  "captured_at","acquired_at"):
+-            if k in r: x[k]=deepcopy(r[k])
+-        if c in research_rows:
+-            for k in ("news_quality_score","research_quality_score",
+-                      "slot","delta","reason","health"):
+-                if k in research_rows[c]: x[k]=deepcopy(research_rows[c][k])
+-        out.append(x)
+-    return out
+-
+-def _code(v):
+-    if not isinstance(v,str): raise ValueError("CODE_INVALID")
+-    c=v.strip()
+-    if not re.fullmatch(r"[0-9A-Za-z.]{4,10}",c):
+-        raise ValueError("CODE_INVALID")
+-    return c.upper()
+-
+-def run_a_stage_daily(*, target_date, stage_id, cutoff, pool_input,
+-                      live_input, research_input, selector, publish_verified):
+-    if stage_id in ("STAGE_0925","STAGE_1545_1555"):
+-        raise ValueError("A_SPECIAL_WINDOW_REQUIRES_ORIGINAL_ROUTE")
+-    if live_input.get("market")!="A_SHARE":
+-        raise ValueError("A_STAGE_MARKET_INVALID")
+-    _require_receipt("M05",pool_input,target_date)
+-    _require_receipt("M01",live_input,target_date)
+-    _require_receipt("M04",research_input,target_date)
+-
+-    rows=_merge_rows(pool_input,live_input,research_input)
+-    requested=live_input.get("requested_rows")
+-    missing=live_input.get("missing_symbols",[])
+-    cannot=live_input.get("cannot_confirm",[])
+-    request={
+-      "market":"A_SHARE","target_date":target_date,"stage_id":stage_id,
+-      "data_kind":live_input["data_kind"],"rows":rows,
+-      "rows_sha256":_canonical_digest(rows),
+-      "source_status":live_input["source_status"],
+-      "requested_rows":requested if requested is not None else len(rows),
+-      "missing_symbols":missing,"cannot_confirm":cannot,
+-    }
+-    before=_canonical_digest(rows)
+-    result=selector(request)
+-    if _canonical_digest(rows)!=before:
+-        raise ValueError("SELECTOR_MUTATED_INPUT")
+-    if not isinstance(result,dict) or "artifact" not in result:
+-        raise ValueError("SELECTOR_ARTIFACT_MISSING")
+-    payload={
+-      "identity_sha256":_canonical_digest({
+-        "target_date":target_date,"stage_id":stage_id,"cutoff":cutoff,
+-        "request_sha256":_canonical_digest(request),
+-        "M05":pool_input["sha256"],"M01":live_input["sha256"],
+-        "M04":research_input["sha256"]}),
+-      "selection":result,"natural":False,
+-      "safety_flags":{"production_allowed":False}}
+-    if publish_verified is None:
+-        raise ValueError("PUBLISHER_NOT_BOUND")
+-    return publish_verified(payload)
++from datetime import datetime, timezone, timedelta
++import fcntl
++import hashlib
++import importlib
++import importlib.abc
++import importlib.util
++import io
++import json
++import math
++import os
++import re
++import stat
++import subprocess
++import tempfile
++import traceback
++from uuid import uuid4
++from v5_shadow.contracts import aware, trade_date, exact_keys, sha
++from v5_shadow.digests import canonical_bytes, sha256_json, MAX_JSON_BYTES
++from v5_shadow.composition import no_symlinks
++from v5_shadow.run_ledger import claim_run, finish_run
++
++BASE = Path(__file__).resolve().parents[2]
++HANDOFF = BASE.parent
++OWNER = HANDOFF / 'owner'
++MANIFEST = HANDOFF / 'OWNER_CLOSURE.json'
++MANIFEST_SHA256 = 'dc63874f8d9e8307ee30a50d398d3c31d3fbac0d124702786b240d7059c6c301'
++INPUT_MARKER = b'v5.m07-input-copy.v1\n'
++OUTPUT_MARKER = b'v5.m07-private-output.v1\n'
++FLAGS = dict(production_allowed=False, buy_gate_updated=False, orders_sent=False,
++             natural_verified=False, formal_eligibility_verified=False)
++TZ = timezone(timedelta(hours=8))
++SOURCES = ('pool', 'live', 'research', 'morning')
++SIDE_EFFECTS_STARTED = False
++
++
++def _bytes(path):
++    path = no_symlinks(Path(path))
++    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
++    try:
++        if not stat.S_ISREG(os.fstat(fd).st_mode):
++            raise ValueError('M07_REGULAR_FILE_REQUIRED')
++        with os.fdopen(fd, 'rb', closefd=False) as stream:
++            data = stream.read(MAX_JSON_BYTES + 1)
++        if len(data) > MAX_JSON_BYTES:
++            raise ValueError('M07_FILE_TOO_LARGE')
++        return data
++    finally:
++        os.close(fd)
++
++
++def _path(root, relative):
++    if (not isinstance(relative, str) or not relative or '\\' in relative
++            or Path(relative).is_absolute() or Path(relative).as_posix() != relative
++            or any(p in ('', '.', '..') for p in relative.split('/'))):
++        raise ValueError('M07_RELATIVE_PATH')
++    return no_symlinks(Path(root) / relative)
++
++
++def _private(root, marker_name, marker):
++    root = Path(root)
++    if not root.is_absolute() or '..' in root.parts:
++        raise ValueError('M07_ABSOLUTE_PRIVATE_ROOT_REQUIRED')
++    root = no_symlinks(root)
++    if any(p.casefold() in ('v4', 'v3', 'v3.5', 'v35', 'v3_system') for p in root.parts):
++        raise ValueError('M07_LEGACY_RUNTIME_ROOT_FORBIDDEN')
++    if not root.is_dir() or _bytes(root / marker_name) != marker:
++        raise ValueError('M07_PRIVATE_ROOT_MARKER')
++    return root
++
++
++def _owner_sources():
++    raw = _bytes(MANIFEST)
++    if hashlib.sha256(raw).hexdigest() != MANIFEST_SHA256:
++        raise ValueError('M07_OWNER_MANIFEST_CHANGED')
++    manifest = json.loads(raw)
++    sources = {}
++    for entry in manifest['entries']:
++        raw = _bytes(_path(OWNER, entry['path']))
++        if len(raw) != entry['bytes'] or hashlib.sha256(raw).hexdigest() != entry['sha256']:
++            raise ValueError('M07_OWNER_BYTES_CHANGED:' + entry['path'])
++        sources[entry['path']] = raw
++    return sources
++
++
++class _OwnerLoader(importlib.abc.MetaPathFinder, importlib.abc.Loader):
++    def __init__(self, sources):
++        self.sources = {p[:-3].replace('/', '.'): (p, data)
++                        for p, data in sources.items() if p.endswith('.py')}
++        self.packages = set()
++        for name in self.sources:
++            parts = name.split('.')
++            self.packages.update('.'.join(parts[:i]) for i in range(1, len(parts)))
++    def find_spec(self, fullname, path=None, target=None):
++        if fullname in self.sources or fullname in self.packages:
++            return importlib.util.spec_from_loader(fullname, self, is_package=fullname in self.packages)
++        if fullname.split('.')[0] in ('stage_center', 'infrastructure', 'domains', 'contracts', 'upstreams'):
++            raise ImportError('M07_FROZEN_CLOSURE_MISSING:' + fullname)
++        return None
++    def create_module(self, spec):
++        return None
++    def exec_module(self, module):
++        if module.__name__ in self.packages:
++            module.__path__ = []
++        if module.__name__ in self.sources:
++            relative, raw = self.sources[module.__name__]
++            module.__file__ = str(OWNER / relative)
++            exec(compile(raw, module.__file__, 'exec'), module.__dict__)
++
++
++def _load_owner():
++    if any(n in sys.modules for n in ('stage_center', 'infrastructure', 'domains', 'contracts')):
++        raise ValueError('M07_FRESH_OWNER_PROCESS_REQUIRED')
++    sys.meta_path.insert(0, _OwnerLoader(_owner_sources()))
++    return importlib.import_module('stage_center.selection')
++
++
++def _guard(writable):
++    """Defense in depth, not an OS-sandbox certification. Supports owned dir_fds."""
++    writable = tuple(Path(p).resolve() for p in writable)
++    descriptors = {}
++    opening = False
++    def resolved(path, directory=None):
++        if isinstance(path, int):
++            if path not in descriptors:
++                raise PermissionError('M07_UNTRACKED_DESCRIPTOR')
++            return descriptors[path]
++        p = Path(os.fsdecode(path))
++        if not p.is_absolute():
++            if directory is not None:
++                if directory not in descriptors:
++                    raise PermissionError('M07_UNTRACKED_DIRECTORY_DESCRIPTOR')
++                p = descriptors[directory] / p
++            else:
++                p = Path.cwd() / p
++        if '..' in p.parts:
++            raise PermissionError('M07_PARENT_TRAVERSAL')
++        return p
++    def check(path, directory=None):
++        p = resolved(path, directory)
++        if not any(p == root or root in p.parents for root in writable):
++            raise PermissionError('M07_WRITE_OUTSIDE_PRIVATE_ROOT:' + str(p))
++    original_open, original_close = os.open, os.close
++    def opened(path, flags, mode=0o777, *, dir_fd=None):
++        nonlocal opening
++        p = resolved(path, dir_fd)
++        if flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC):
++            check(p)
++        opening = True
++        try:
++            fd = original_open(path, flags, mode, dir_fd=dir_fd)
++        finally:
++            opening = False
++        descriptors[fd] = p
++        return fd
++    def closed(fd):
++        descriptors.pop(fd, None)
++        return original_close(fd)
++    original_mkdir = os.mkdir
++    def mkdir(path, mode=0o777, *, dir_fd=None):
++        p = resolved(path, dir_fd)
++        if any(p in root.parents for root in writable):
++            # SafeRoot probes every existing ancestor with mkdir. No syscall or
++            # permission expansion is needed for this guaranteed EEXIST case.
++            if not p.is_symlink() and p.is_dir():
++                raise FileExistsError(str(p))
++            raise PermissionError('M07_ANCESTOR_NOT_EXISTING_DIRECTORY')
++        check(p)
++        return original_mkdir(path, mode, dir_fd=dir_fd)
++    os.open, os.close, os.mkdir = opened, closed, mkdir
++    def audit(event, args):
++        if event.startswith(('socket.', 'subprocess.')) or event in ('os.system', 'os.exec', 'os.spawn'):
++            raise PermissionError('M07_NETWORK_OR_PROCESS_FORBIDDEN')
++        if event == 'open' and not opening:
++            path, mode, flags = args
++            write = (isinstance(mode, str) and any(c in mode for c in 'wax+')) or (
++                isinstance(flags, int) and flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC))
++            if write:
++                check(path)
++        if event in ('os.remove', 'os.rmdir'):
++            check(args[0], None if args[1] == -1 else args[1])
++        if event == 'os.mkdir':
++            check(args[0], None if args[2] == -1 else args[2])
++        if event == 'os.rename':
++            check(args[0], None if args[2] == -1 else args[2])
++            check(args[1], None if args[3] == -1 else args[3])
++        if event == 'os.link':
++            check(args[0], None if args[2] == -1 else args[2])
++            check(args[1], None if args[3] == -1 else args[3])
++        if event == 'os.symlink':
++            raise PermissionError('M07_SYMLINK_CREATION_FORBIDDEN')
++    sys.addaudithook(audit)
++
++
++def _request(value):
++    exact_keys(value, ('schema_version', 'target_date', 'stage_id', 'cutoff', 'data_kind',
++        'trigger', 'natural', 'pool_source_dates', 'inputs', 'recording', 'expected_generation'))
++    if value['schema_version'] != 'v5.m07_daily_request.v1':
++        raise ValueError('M07_REQUEST_SCHEMA')
++    trade_date(value['target_date']); aware(value['cutoff'])
++    if value['natural'] is not False or value['trigger'] not in ('RECORDED_INPUT_REPLAY', 'MANUAL_RECOVERY'):
++        raise ValueError('M07_NATURAL_EXECUTION_NOT_BOUND')
++    if value['data_kind'] not in ('SYNTHETIC', 'RECORDED_INPUT_REPLAY'):
++        raise ValueError('M07_DATA_KIND')
++    if value['expected_generation'] is not None:
++        sha(value['expected_generation'])
++    exact_keys(value['inputs'], SOURCES)
++    for key, binding in value['inputs'].items():
++        exact_keys(binding, ('root', 'files'))
++        if not isinstance(binding['files'], dict) or not binding['files']:
++            raise ValueError('M07_INPUT_FILES_REQUIRED:' + key)
++        for relative, digest in binding['files'].items():
++            _path(Path(binding['root']), relative); sha(digest)
++    exact_keys(value['recording'], ('run_id', 'artifact_sha256', 'manifest_sha256',
++                                   'receipt_sha256', 'captured_at', 'acquired_at'))
++    for field in ('artifact_sha256', 'manifest_sha256', 'receipt_sha256'):
++        sha(value['recording'][field])
++    if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.-]*', value['recording']['run_id']):
++        raise ValueError('M07_RAW_RUN_ID')
++    canonical_bytes(value)
++    return deepcopy(value)
++
++
++def _snapshots(request, directory):
++    result = {}
++    originals = {}
++    for key in SOURCES:
++        binding = request['inputs'][key]
++        root = _private(binding['root'], '.v5-m07-input', INPUT_MARKER)
++        target = directory / key; target.mkdir()
++        before = {}
++        for relative, digest in binding['files'].items():
++            source = _path(root, relative); raw = _bytes(source)
++            if hashlib.sha256(raw).hexdigest() != digest:
++                raise ValueError('M07_INPUT_BYTES_MISMATCH:' + key + ':' + relative)
++            before[relative] = raw
++            dest = _path(target, relative); dest.parent.mkdir(parents=True, exist_ok=True)
++            dest.write_bytes(raw)
++        # Catch a source change during copy; readers only lock or recover copies.
++        if any(_bytes(_path(root, name)) != raw for name, raw in before.items()):
++            raise ValueError('M07_INPUT_CHANGED_DURING_COPY')
++        originals[key] = before; result[key] = target
++    return result, originals
++
++
++def _number(value, *, positive=False):
++    if isinstance(value, bool):
++        raise ValueError('M07_REQUIRED_NUMBER')
++    try:
++        result = float(value)
++    except (TypeError, ValueError):
++        raise ValueError('M07_REQUIRED_NUMBER') from None
++    if not math.isfinite(result) or (result <= 0 if positive else result < 0):
++        raise ValueError('M07_REQUIRED_NUMBER')
++    return result
++
++
++def _admit(request, roots):
++    from stage_center.contracts import STAGE_BY_ID
++    from stage_center.calendar import resolve_market_states
++    from stage_center.raw_store import RawStore, RAW_FIELDS
++    from infrastructure.stage_acquisition_universe_contracts import read_strict_a_preselection_snapshot
++    from stage_center.input_contracts import KNOWN_A_STAGE_POOL_IDS
++    spec = STAGE_BY_ID.get(request['stage_id'])
++    date = request['target_date']; iso = f'{date[:4]}-{date[4:6]}-{date[6:]}'
++    if spec is None or 'A_SHARE' not in spec.markets:
++        raise ValueError('M07_A_STAGE_NOT_SUPPORTED')
++    if resolve_market_states(date)['a_share'].value != 'FULL_TRADING_DAY':
++        raise ValueError('M07_MARKET_NOT_OPEN')
++    cutoff = aware(iso + 'T' + spec.cutoff + '+08:00')
++    if aware(request['cutoff']) != cutoff:
++        raise ValueError('M07_ORIGINAL_CUTOFF_MISMATCH')
++    start = aware(iso + 'T' + spec.window.split('-')[0] + ':00+08:00')
++    captured = aware(request['recording']['captured_at'])
++    acquired = aware(request['recording']['acquired_at'])
++    if not start <= captured <= acquired <= cutoff or acquired > datetime.now(timezone.utc):
++        raise ValueError('M07_RECORDING_OUTSIDE_WINDOW_OR_FUTURE')
++    exact_keys(request['pool_source_dates'], KNOWN_A_STAGE_POOL_IDS)
++    for value in request['pool_source_dates'].values():
++        trade_date(value)
++    snapshot = read_strict_a_preselection_snapshot(roots['pool'], date)
++    if not snapshot.ready:
++        raise ValueError('M07_M05_NO_VALID_ROWS:' + ';'.join(snapshot.diagnostic_reasons))
++    # Every physically present lane must verify, even when another valid lane exists.
++    for reasons in snapshot.pool_diagnostics.values():
++        if any('SOURCE_REJECTED:' in r or ('SOURCE_UNAVAILABLE:' in r and 'FileNotFoundError' not in r) for r in reasons):
++            raise ValueError('M07_M05_REJECTED_PHYSICAL_LANE')
++    for pool in snapshot.pools:
++        payload = pool.artifact
++        if (payload.get('target_date') != date or
++                payload.get('signal_date') != request['pool_source_dates'][pool.pool_id]):
++            raise ValueError('M07_M05_SOURCE_DATE_MISMATCH')
++        for row in payload['rows']:
++            for field in ('symbol', 'code', 'stock_code', 'normalized_code', 'ts_code'):
++                if field in row and (not isinstance(row[field], str) or row[field] != row[field].strip()):
++                    raise ValueError('M07_POOL_CODE_WHITESPACE')
++            if row.get('formal_eligible') is True or row.get('formal_authority') is True:
++                raise ValueError('M07_DECLARED_FORMAL_AUTHORITY')
++    raw = RawStore(roots['live']).verify_run(date, request['stage_id'], 'A_SHARE', request['recording']['run_id'])
++    for field in ('artifact_sha256', 'manifest_sha256', 'receipt_sha256'):
++        if raw[field] != request['recording'][field]:
++            raise ValueError('M07_RAW_RECEIPT_BINDING')
++    if raw['cutoff_at'] != spec.cutoff or raw['window'] != spec.window:
++        raise ValueError('M07_RAW_WINDOW_BINDING')
++    with _path(roots['live'], raw['artifact_relative']).open(newline='', encoding='utf-8-sig') as stream:
++        csv_rows = list(csv.DictReader(stream))
++    rows = []; seen = set()
++    for source in csv_rows:
++        code = source['code']
++        if not re.fullmatch(r'A\.\d{6}', code) or code in seen:
++            raise ValueError('M07_RAW_CODE_INVALID_OR_DUPLICATE')
++        seen.add(code)
++        if code not in snapshot.codes:
++            raise ValueError('M07_RAW_CODE_NOT_IN_M05')
++        if source['temporal_cutoff_safe'] != 'True' or datetime.strptime(source['window_end'], '%Y-%m-%d %H:%M:%S').replace(tzinfo=TZ) > captured:
++            raise ValueError('M07_RAW_UNSAFE_OR_AFTER_CAPTURE')
++        row = {k: source[k] for k in RAW_FIELDS}
++        for field in ('last_price', 'open_price', 'high_price', 'low_price', 'prev_close_price'):
++            row[field] = _number(source[field], positive=True)
++        for field in ('turnover', 'volume', 'bid_price', 'ask_price', 'bid_vol', 'ask_vol'):
++            row[field] = _number(source[field])
++        if row['low_price'] > min(row['open_price'], row['last_price']) or row['high_price'] < max(row['open_price'], row['last_price']):
++            raise ValueError('M07_QUOTE_INCONSISTENT')
++        rows.append(row)
++    missing = set(snapshot.codes) - seen
++    declared = raw['missing_symbols']
++    if (len(declared) != len(set(declared)) or any(not re.fullmatch(r'A\.\d{6}', c) for c in declared)
++            or set(declared) != missing or raw['requested_rows'] != len(snapshot.codes)):
++        raise ValueError('M07_RAW_COVERAGE_NOT_EXACT')
++    if raw['status'] in ('READY', 'READY_EMPTY') and (missing or raw['cannot_confirm']):
++        raise ValueError('M07_RAW_READY_CONTRADICTION')
++    if raw['status'] == 'CANNOT_CONFIRM' or not rows:
++        raise ValueError('M07_RAW_UNKNOWN_OR_WINDOW_MISSED')
++    return spec, snapshot, raw, rows
++
++
++def _select(request, roots, spec, pool, raw, observations, owner):
++    gaps = list(raw['cannot_confirm'])
++    gaps.append('FORMAL_OVERLAY_CANNOT_CONFIRM')
++    evidence = list(raw['source_evidence']) + ['selection_contract=V3_TOP10_RECOMMENDATION',
++        'formal_overlay=CANNOT_CONFIRM', 'm07_raw_status=' + raw['status'],
++        'm07_input_sha256=' + sha256_json(request['inputs']),
++        'm07_pool_codes_sha256=' + sha256_json(list(pool.codes)),
++        'm07_trigger=' + request['trigger'], 'm07_natural=false']
++    rows = []
++    research = None
++    if request['stage_id'] != 'STAGE_0925':
++        from stage_center.research_context import load_research_context
++        research = load_research_context(roots['research'], trade_date=request['target_date'],
++            stage_cutoff=spec.cutoff, morning_root=roots['morning'])
++        gaps.extend(research.cannot_confirm); evidence.extend(research.source_evidence)
++    for index, obs in enumerate(observations, 1):
++        code = obs['code']
++        if request['stage_id'] == 'STAGE_0925':
++            rows.append(dict(code=code, name=obs['name'], trade_date=request['target_date'],
++                time=obs['update_time'], update_time=obs['update_time'], amount=obs['turnover'],
++                price=obs['last_price'], prev_close_price=obs['prev_close_price'],
++                open_price=obs['open_price'], last_price=obs['last_price'], high_price=obs['high_price'],
++                low_price=obs['low_price'], bid_vol=obs['bid_vol'], ask_vol=obs['ask_vol'],
++                pool_score=None, next_validation_time=raw['cutoff_at']))
++            continue
++        score = research.by_code.get(obs['code'])
++        if score is None or score.news_quality_score is None or score.research_quality_score is None:
++            # Do not invoke a selector whose numeric default turns absence into zero.
++            raise ValueError('M07_RESEARCH_REQUIRED_FIELDS_MISSING:' + code)
++        rows.append(dict(code=code, name=obs['name'], stock_name=obs['name'],
++            trade_date=request['target_date'], stage_id=request['stage_id'],
++            formal_eligible=False, formal_rank='', candidate={'score': None},
++            qmt=dict(open=obs['open_price'], lastPrice=obs['last_price'], lastClose=obs['prev_close_price'],
++                high=obs['high_price'], low=obs['low_price'], amount=obs['turnover'],
++                bidVol=[obs['bid_vol']], askVol=[obs['ask_vol']]),
++            open_price=obs['open_price'], last_price=obs['last_price'], high_price=obs['high_price'], low_price=obs['low_price'],
++            update_time=obs['update_time'],
++            next_validation_time=raw['cutoff_at'], acquisition_rank=int(_number(obs['batch_index'], positive=True)),
++            lane_evidence=['STAGE_ACQUISITION_UNIVERSE','PYTDX_EXACT_STAGE_ADAPTER'],
++            news_quality_score=score.news_quality_score, research_quality_score=score.research_quality_score,
++            latest_research_slot=score.latest_research_slot, research_delta_hits=score.research_delta_hits,
++            news_research_reason='；'.join(score.news_research_reason), source_health=score.source_health))
++    before = canonical_bytes(rows)
++    kwargs = dict(source_status='CANNOT_CONFIRM', requested_rows=raw['requested_rows'],
++        missing_symbols=raw['missing_symbols'], cannot_confirm=list(dict.fromkeys(gaps)),
++        source_evidence=list(dict.fromkeys(evidence)))
++    if request['stage_id'] == 'STAGE_0925':
++        artifact = owner.select_a_0925_auction(rows, request['target_date'], raw['artifact_sha256'], **kwargs)
++        algorithm = 'select_a_0925_auction'
++    else:
++        artifact = owner.select_a_live_stage(rows, request['target_date'], request['stage_id'], raw['artifact_sha256'], **kwargs)
++        algorithm = 'select_a_live_stage'
++    if canonical_bytes(rows) != before:
++        raise ValueError('M07_SELECTOR_MUTATED_INPUT')
++    if (artifact['algorithm_sha256'] != owner.A_SHARE_LIVE_ALGORITHM_SHA256 or len(artifact['rows']) > 10
++            or any(artifact.get(k) is not False for k in ('production_allowed','buy_gate_updated','orders_sent'))
++            or any(r.get('formal_eligible') is not False for r in artifact['rows'])):
++        raise ValueError('M07_SELECTION_OUTPUT_CONTRACT')
++    return artifact, dict(algorithm=algorithm, rows=rows, kwargs=kwargs, input_mutated=False)
++
++
++def _build(message, owner):
++    global SIDE_EFFECTS_STARTED
++    request = _request(message['request'])
++    with tempfile.TemporaryDirectory(prefix='m07-input-copy-') as temporary:
++        directory = Path(temporary).resolve()
++        roots, originals = _snapshots(request, directory)
++        output = no_symlinks(Path(message['generation_root']))
++        output.parent.mkdir(exist_ok=True)
++        _guard((directory, output))
++        spec, pool, raw, observations = _admit(request, roots)
++        artifact, selector_input = _select(request, roots, spec, pool, raw, observations, owner)
++        for key in SOURCES:
++            for relative, original in originals[key].items():
++                if _bytes(_path(roots[key], relative)) != original:
++                    raise ValueError('M07_OWNER_CHANGED_INPUT_BYTES')
++        _owner_sources()
++        SIDE_EFFECTS_STARTED = True
++        output.mkdir(parents=True, exist_ok=False)
++        published = owner.SelectionStore(output).publish(artifact, market='A_SHARE')
++        verified = owner.SelectionStore(output)._verify_run(request['target_date'], request['stage_id'], 'A_SHARE', published['run_id'])
++        if verified['envelope'] != artifact:
++            raise ValueError('M07_PUBLISH_READBACK_MISMATCH')
++        return dict(status='BUILT', selection=artifact, selector_input=selector_input,
++            artifact_sha256=verified['artifact_sha256'], manifest_sha256=verified['manifest_sha256'],
++            receipt_sha256=verified['receipt_sha256'], artifact_relative=verified['artifact_relative'],
++            pool_codes_sha256=sha256_json(list(pool.codes)), pool_diagnostics={k:list(v) for k,v in pool.pool_diagnostics.items()},
++            request_sha256=sha256_json(request), isolation_status='PYTHON_GUARDS_ONLY_OS_UNVERIFIED', **FLAGS)
++
++
++def _worker(message):
++    owner = _load_owner()
++    if message['operation'] == 'build':
++        return _build(message, owner)
++    if message['operation'] == 'read':
++        root = no_symlinks(Path(message['generation_root']))
++        _guard(())
++        store = owner.SelectionStore(root)
++        envelope = store.read_verified(message['target_date'], message['stage_id'], 'A_SHARE')
++        result = store._verify_run(message['target_date'], message['stage_id'], 'A_SHARE', envelope['run_id'])
++        _owner_sources()
++        return result
++    raise ValueError('M07_WORKER_OPERATION')
++
++
++def _invoke(message):
++    proc = subprocess.run([sys.executable, '-I', '-B', str(Path(__file__).resolve()), '--worker'],
++        input=canonical_bytes(message), stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=120,
++        env={k:v for k,v in os.environ.items() if not k.startswith(('V4_', 'V35_', 'PYTHONPATH'))})
++    if len(proc.stdout) > MAX_JSON_BYTES:
++        raise ValueError('M07_WORKER_OUTPUT_TOO_LARGE')
++    try:
++        value = json.loads(proc.stdout)
++    except (ValueError, UnicodeError) as error:
++        raise ValueError('M07_WORKER_RESPONSE:' + proc.stderr.decode(errors='replace')[-1000:]) from error
++    return value
++
++
++def _current(root):
++    try:
++        value = json.loads(_bytes(root / 'current.json'))
++    except FileNotFoundError:
++        return {'schema_version':'v5.m07_current.v1','entries':{}}
++    exact_keys(value, ('schema_version','entries'))
++    if value['schema_version'] != 'v5.m07_current.v1' or not isinstance(value['entries'], dict):
++        raise ValueError('M07_CURRENT_SCHEMA')
++    return value
++
++
++def _atomic(path, payload):
++    temporary = path.parent / ('.' + uuid4().hex + '.tmp')
++    fd = os.open(temporary, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o600)
++    with os.fdopen(fd,'wb') as stream:
++        stream.write(canonical_bytes(payload)); stream.flush(); os.fsync(stream.fileno())
++    os.replace(temporary, path)
++    fd = os.open(path.parent, os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
++    try: os.fsync(fd)
++    finally: os.close(fd)
++
++
++def _slot(date, stage):
++    trade_date(date)
++    if not re.fullmatch(r'STAGE_[0-9_]+', stage):
++        raise ValueError('M07_STAGE_ID')
++    return date + '/' + stage
++
++
++def _read_reference(root, reference):
++    sha(reference['generation'])
++    verified = _invoke(dict(operation='read', generation_root=str(root/'generations'/reference['generation']),
++                           target_date=reference['target_date'], stage_id=reference['stage_id']))
++    if verified.get('status') == 'ERROR':
++        raise ValueError('M07_ORIGINAL_READBACK_REJECTED:' + verified['reason'])
++    for field in ('artifact_sha256','manifest_sha256','receipt_sha256','run_id'):
++        if verified.get(field) != reference[field]:
++            raise ValueError('M07_PRODUCT_REFERENCE_MISMATCH:' + field)
++    return dict(generation=reference['generation'], selection=verified['envelope'],
++                artifact_sha256=verified['artifact_sha256'], manifest_sha256=verified['manifest_sha256'],
++                receipt_sha256=verified['receipt_sha256'], **FLAGS)
++
++
++def read_a_stage_daily(output_root, target_date, stage_id):
++    """Read committed data only; no claim, creation, capture, retry or repair."""
++    root = _private(output_root, '.v5-m07-output', OUTPUT_MARKER)
++    reference = _current(root)['entries'].get(_slot(target_date, stage_id))
++    if reference is None:
++        raise ValueError('M07_NO_COMMITTED_SELECTION')
++    if reference['target_date'] != target_date or reference['stage_id'] != stage_id:
++        raise ValueError('M07_CURRENT_IDENTITY')
++    return _read_reference(root, reference)
++
++
++def activate_a_stage_generation(output_root, reference, *, expected_generation):
++    """Activate or roll back one verified private A slot with an exact CAS lease."""
++    root = _private(output_root, '.v5-m07-output', OUTPUT_MARKER)
++    exact_keys(reference, ('generation','target_date','stage_id','run_id',
++                           'artifact_sha256','manifest_sha256','receipt_sha256'))
++    if expected_generation is not None:
++        sha(expected_generation)
++    slot = _slot(reference['target_date'], reference['stage_id'])
++    verified = _read_reference(root, reference)
++    fd = os.open(root/'.publication.lock', os.O_RDWR|os.O_CREAT|os.O_NOFOLLOW,0o600)
++    try:
++        if not stat.S_ISREG(os.fstat(fd).st_mode):
++            raise ValueError('M07_PUBLICATION_LOCK')
++        fcntl.flock(fd,fcntl.LOCK_EX)
++        current = _current(root); existing = current['entries'].get(slot)
++        if (existing['generation'] if existing else None) != expected_generation:
++            raise ValueError('M07_EXPECTED_GENERATION_MISMATCH')
++        current['entries'][slot] = deepcopy(reference)
++        _atomic(root/'current.json',current)
++    finally:
++        os.close(fd)
++    return verified
++
++
++def run_a_stage_daily(request, *, output_root):
++    """Replay pinned bytes using actual owners; SUCCEEDED means saved readback only."""
++    try:
++        request = _request(request)
++        root = _private(output_root, '.v5-m07-output', OUTPUT_MARKER)
++        _owner_sources()
++        slot = _slot(request['target_date'], request['stage_id'])
++        identity = dict(lane='a_stage', target_date=request['target_date'],
++            input_sha256=sha256_json(request), research_cutoff=request['cutoff'],
++            code_sha256=hashlib.sha256(_bytes(Path(__file__))).hexdigest(),
++            config_sha256=sha256_json(dict(stage_id=request['stage_id'],pool_source_dates=request['pool_source_dates'],root=str(root))),
++            dependency_sha256=MANIFEST_SHA256)
++        claim = claim_run(root/'ledger', identity, max_attempts=1)
++    except (ValueError, OSError, TypeError, KeyError) as error:
++        return dict(status='BLOCKED',reason_codes=[type(error).__name__+':'+str(error)],**FLAGS)
++    if claim['status'] == 'REUSED_SUCCESS':
++        try:
++            reference = claim['state']['latest_success']['product_reference']
++            return dict(status='REUSED_SUCCESS', **_read_reference(root,reference))
++        except (ValueError, OSError, KeyError) as error:
++            return dict(status='READBACK_FAILED',reason_codes=[str(error)],**FLAGS)
++    if claim['status'] != 'CLAIMED':
++        return dict(status=claim['status'],state=claim['state'],**FLAGS)
++    generation = claim['identity_sha256']
++    def blocked(reason, safe=True, failure_trace=None):
++        state = finish_run(root/'ledger',claim,dict(status='BLOCKED',product_reference=None,
++            readback_verified=False,retry_safe_without_external_effect=safe,reason_codes=[reason]))
++        return dict(status='BLOCKED',reason_codes=[reason],state=state,failure_trace=failure_trace,**FLAGS)
++    try:
++        prior = _current(root)['entries'].get(slot)
++    except (ValueError, OSError) as error:
++        return blocked(type(error).__name__+':'+str(error))
++    if (prior['generation'] if prior else None) != request['expected_generation']:
++        return blocked('M07_EXPECTED_GENERATION_MISMATCH')
++    try:
++        built = _invoke(dict(operation='build',request=request,generation_root=str(root/'generations'/generation)))
++        if built.get('status') == 'ERROR':
++            if built.get('side_effects_started') is False:
++                return blocked(built['reason'],failure_trace=built.get('trace'))
++            return dict(status='OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY',reason_codes=[built['reason']],run_id=claim['run_id'],**FLAGS)
++        if built.get('status') != 'BUILT' or built.get('request_sha256') != sha256_json(request):
++            raise ValueError('M07_BUILD_IDENTITY_MISMATCH')
++        reference = dict(generation=generation,target_date=request['target_date'],stage_id=request['stage_id'],
++            run_id=built['selection']['run_id'],artifact_sha256=built['artifact_sha256'],
++            manifest_sha256=built['manifest_sha256'],receipt_sha256=built['receipt_sha256'])
++        verified = _read_reference(root,reference)
++        if verified['selection'] != built['selection']:
++            raise ValueError('M07_INDEPENDENT_READBACK_MISMATCH')
++        try:
++            activate_a_stage_generation(root, reference, expected_generation=request['expected_generation'])
++        except ValueError as error:
++            if str(error) == 'M07_EXPECTED_GENERATION_MISMATCH':
++                return blocked(str(error),False)
++            raise
++        state = finish_run(root/'ledger',claim,dict(status='SUCCEEDED',product_reference=reference,
++            readback_verified=True,retry_safe_without_external_effect=False,reason_codes=['REPLAY_ONLY','FORMAL_AUTHORITY_NOT_CONNECTED']))
++        return dict(status='SUCCEEDED',state=state,selector_input=built['selector_input'],
++            pool_diagnostics=built['pool_diagnostics'],**verified)
++    except Exception as error:
++        # Publication may already exist. Never turn uncertainty into a retry.
++        return dict(status='OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY',run_id=claim['run_id'],
++                    reason_codes=[type(error).__name__+':'+str(error)],**FLAGS)
++
++
++if __name__ == '__main__':
++    try:
++        raw=sys.stdin.buffer.read(MAX_JSON_BYTES+1)
++        if len(raw)>MAX_JSON_BYTES:raise ValueError('M07_REQUEST_TOO_LARGE')
++        message=json.loads(raw)
++        if sys.argv[1:] == ['--worker']:
++            answer=_worker(message)
++        elif sys.argv[1:] == ['--run']:
++            answer=run_a_stage_daily(message['request'],output_root=message['output_root'])
++        elif sys.argv[1:] == ['--activate']:
++            answer=activate_a_stage_generation(message['output_root'],message['reference'],expected_generation=message['expected_generation'])
++        elif sys.argv[1:] == ['--read']:
++            answer=read_a_stage_daily(message['output_root'],message['target_date'],message['stage_id'])
++        else:
++            raise ValueError('M07_USAGE: --run, --read, --activate or internal --worker')
++        print(canonical_bytes(answer).decode())
++    except Exception as error:
++        print(canonical_bytes(dict(status='ERROR',reason=type(error).__name__+':'+str(error),
++            side_effects_started=SIDE_EFFECTS_STARTED,trace=traceback.format_exc())).decode())
++        raise SystemExit(1)
+--- a/handoffs/M07/V5/tests/test_a_stage_daily.py
++++ b/handoffs/M07/V5/tests/test_a_stage_daily.py
+@@ -1,24 +1,280 @@
+-import pytest
+-from v5_shadow.a_stage_daily import run_a_stage_daily
+-
+-def receipt():
+-    return {"status":"VERIFIED","sha256":"a"*64}
+-
+-def live():
+-    return {"status":"VERIFIED","sha256":"b"*64,"market":"A_SHARE",
+-            "data_kind":"RECORDED_INPUT_REPLAY","rows":[],"rows_sha256":"c"*64,
+-            "source_status":"READY_EMPTY","requested_rows":0,
+-            "missing_symbols":[],"cannot_confirm":[]}
+-
+-def test_declared_authority_is_rejected():
+-    with pytest.raises(ValueError, match="DECLARED"):
+-        run_a_stage_daily(target_date="20261010",stage_id="STAGE_0930",
+-            cutoff="09:35:00",pool_input={"status":"VERIFIED","sha256":"a"*64,
+-            "formal_authority":True},live_input=live(),
+-            research_input=receipt(),selector=lambda x:x)
+-
+-def test_special_route_blocked():
+-    with pytest.raises(ValueError):
+-        run_a_stage_daily(target_date="20261010",stage_id="STAGE_1545_1555",
+-            cutoff="15:50:00",pool_input=receipt(),live_input=live(),
+-            research_input=receipt(),selector=lambda x:x)
++"""M07 original-owner chain. All created input records are SYNTHETIC."""
++import copy
++import hashlib
++import json
++import subprocess
++import sys
++import tempfile
++import unittest
++from pathlib import Path
++from v5_shadow import a_stage_daily as daily
++
++class M07ChainTests(unittest.TestCase):
++    def test_concrete_entrypoint_has_no_callback_contract(self):
++        import inspect
++        names=inspect.signature(daily.run_a_stage_daily).parameters
++        self.assertIn('request',names)
++        self.assertNotIn('selector',names)
++        self.assertNotIn('publish_verified',names)
++
++    def test_original_raw_interface_requires_compatible_strict_body(self):
++        owner=Path(__file__).resolve().parents[2]/'owner'
++        code="""from stage_center.raw_store import validate_rows,RawStoreError
++print(validate_rows([],trade_date='20261008',stage_id='STAGE_0930_0935',market='A_SHARE'))
++for flag in (True, 0, 1, None):
++ try: validate_rows([],trade_date='20261008',stage_id='STAGE_0930_0935',market='A_SHARE',allow_temporal_false_observation=flag)
++ except RawStoreError: pass
++ else: raise AssertionError('override accepted')
++"""
++        import os
++        proc=subprocess.run([sys.executable,'-B','-c',code],env={**os.environ,'PYTHONPATH':str(owner)},capture_output=True,text=True)
++        self.assertEqual(proc.returncode,0,proc.stderr)
++
++class _M07Fixture(object):
++    def setUp(self):
++            from m07_fixture import make_case
++            self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++            self.root=Path(self.tmp.name);inputs=self.root/'inputs';inputs.mkdir()
++            self.request=make_case(inputs)
++            self.output=self.root/'private-output';self.output.mkdir()
++            (self.output/'.v5-m07-output').write_bytes(b'v5.m07-private-output.v1\n')
++            (self.output/'ledger').mkdir()
++            (self.output/'ledger/.v5-daily-run-ledger').write_bytes(b'v5.daily-run-ledger.v1\n')
++
++    def run_case(self):return daily.run_a_stage_daily(self.request,output_root=self.output)
++
++    def assert_blocked(self):
++            result=self.run_case();self.assertEqual(result['status'],'BLOCKED',result)
++            self.assertFalse((self.output/'current.json').exists())
++            return result
++
++class M07ConcreteOwnerTests(_M07Fixture, unittest.TestCase):
++    def test_real_owner_chain_publishes_and_independently_reads_same_run(self):
++            from m07_fixture import binding
++            before={k:binding(Path(v['root'])) for k,v in self.request['inputs'].items()}
++            result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++            record=daily.read_a_stage_daily(self.output,self.request['target_date'],self.request['stage_id'])
++            self.assertEqual(record['generation'],result['generation'])
++            self.assertEqual(record['artifact_sha256'],result['artifact_sha256'])
++            self.assertEqual(record['selection']['run_id'],result['selection']['run_id'])
++            self.assertEqual(len(record['selection']['rows']),10)
++            self.assertEqual(record['selection']['selection_status'],'PARTIAL_WITH_ROWS')
++            self.assertEqual(record['selection']['source_status'],'CANNOT_CONFIRM')
++            self.assertIn('FORMAL_OVERLAY_CANNOT_CONFIRM',record['selection']['cannot_confirm'])
++            self.assertTrue(all(r['formal_eligible'] is False for r in record['selection']['rows']))
++            self.assertTrue(all(r['research_quality_score']==72.5 for r in record['selection']['rows']))
++            self.assertEqual(before,{k:binding(Path(v['root'])) for k,v in self.request['inputs'].items()})
++            self.assertIs(result['natural_verified'],False)
++
++    def test_original_selector_parity(self):
++            result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++            from stage_center.selection import select_a_live_stage
++            admitted=result['selector_input'];rows=copy.deepcopy(admitted['rows']);before=copy.deepcopy(rows)
++            expected=select_a_live_stage(rows,self.request['target_date'],self.request['stage_id'],self.request['recording']['artifact_sha256'],**admitted['kwargs'])
++            self.assertEqual(expected,result['selection'])
++            self.assertEqual(rows,before)
++            self.assertEqual(admitted['algorithm'],'select_a_live_stage')
++            self.assertEqual(admitted['input_mutated'],False)
++
++    def test_success_is_reused_without_recomputation(self):
++            result=self.run_case();again=self.run_case()
++            self.assertEqual(again['status'],'REUSED_SUCCESS',again)
++            self.assertEqual(again['generation'],result['generation'])
++            self.assertEqual(len(list((self.output/'generations').iterdir())),1)
++
++    def test_current_reader_does_not_create_any_files(self):
++            self.run_case()
++            def inventory():return {str(p.relative_to(self.output)):hashlib.sha256(p.read_bytes()).hexdigest() for p in self.output.rglob('*') if p.is_file()}
++            before=inventory();daily.read_a_stage_daily(self.output,'20261012','STAGE_0930_0935');self.assertEqual(inventory(),before)
++
++    def test_unknown_hk_stage_is_blocked(self):
++            self.request['stage_id']='STAGE_1545_1555';self.assert_blocked()
++
++    def test_input_digest_is_checked(self):
++            self.request['inputs']['pool']['files'][next(iter(self.request['inputs']['pool']['files']))]='0'*64
++            self.assert_blocked()
++
++    def test_claimed_natural_mode_is_rejected(self):
++            self.request['natural']=True;self.assert_blocked()
++
++    def test_future_recording_is_rejected(self):
++            self.request['recording']['captured_at']='2099-10-12T09:35:00+08:00';self.assert_blocked()
++
++    def test_recording_outside_original_window_is_rejected(self):
++            self.request['recording']['captured_at']='2026-10-12T10:00:00+08:00';self.assert_blocked()
++
++    def test_pool_source_date_drift_is_rejected(self):
++            self.request['pool_source_dates']['a_d1_premarket_pool']='20261008';self.assert_blocked()
++
++    def test_claimed_receipt_identity_is_rejected(self):
++            self.request['recording']['receipt_sha256']='0'*64;self.assert_blocked()
++
++    def test_missing_recording_is_not_valid_empty(self):
++            self.request['recording']['run_id']='absent';self.assert_blocked()
++
++    def test_readback_corruption_is_not_reused_success(self):
++            result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++            artifact=next((self.output/'generations').rglob('artifact.csv'));artifact.write_bytes(b'bad')
++            with self.assertRaises(ValueError):daily.read_a_stage_daily(self.output,'20261012','STAGE_0930_0935')
++            again=self.run_case();self.assertNotEqual(again['status'],'REUSED_SUCCESS',again)
++
++    def test_current_compare_and_swap_failure_preserves_prior(self):
++            first=self.run_case();self.assertEqual(first['status'],'SUCCEEDED',first)
++            self.request['trigger']='MANUAL_RECOVERY';self.request['expected_generation']='f'*64
++            before=(self.output/'current.json').read_bytes()
++            result=self.run_case();self.assertEqual(result['status'],'BLOCKED',result)
++            self.assertEqual((self.output/'current.json').read_bytes(),before)
++
++def _rewrite_raw(case, transform, *, source_status='READY', missing=(), requested=None):
++    """A new fully valid synthetic raw trio, not a mocked verifier."""
++    from m07_fixture import binding
++    from stage_center.raw_store import RawStore,RAW_FIELDS
++    import csv
++    binding_now=case.request['inputs']['live'];root=Path(binding_now['root']);old=RawStore(root).verify_run(case.request['target_date'],case.request['stage_id'],'A_SHARE',case.request['recording']['run_id'])
++    with (root/old['artifact_relative']).open(encoding='utf-8-sig',newline='') as stream:
++        rows=[{k:(r[k]=='True' if k=='temporal_cutoff_safe' else r[k]) for k in RAW_FIELDS} for r in csv.DictReader(stream)]
++    rows=transform(rows)
++    newroot=root.parent/('live-'+str(len(list(root.parent.glob('live-*')))));newroot.mkdir();(newroot/'.v5-m07-input').write_bytes(b'v5.m07-input-copy.v1\n')
++    result=RawStore(newroot).publish(trade_date=case.request['target_date'],stage_id=case.request['stage_id'],market='A_SHARE',source_id='SYNTHETIC_A_QUOTES',source_status=source_status,rows=rows,cannot_confirm=[],source_evidence=['SYNTHETIC_ONLY'],requested_rows=old['requested_rows'] if requested is None else requested,missing_symbols=missing,window=old['window'],cutoff_at=old['cutoff_at'])
++    case.request['inputs']['live']=binding(newroot)
++    for key in ('run_id','artifact_sha256','manifest_sha256','receipt_sha256'):case.request['recording'][key]=result[key]
++
++def _replace_research(case, source):
++    from m07_fixture import binding,write
++    from infrastructure.data_store import _canonical_bytes
++    from domains.research import build_research_archive
++    from infrastructure.research_store import HourlyResearchStore
++    root=case.root/('research-'+str(len(list(case.root.glob('research-*')))));root.mkdir()
++    (root/'.v5-m07-input').write_bytes(b'v5.m07-input-copy.v1\n')
++    raw=_canonical_bytes(source);digest=hashlib.sha256(raw).hexdigest();path=root/'research/hourly/source'/f'{digest}.json';path.parent.mkdir(parents=True);path.write_bytes(raw)
++    archive=build_research_archive(source,source_input_sha256=digest)
++    HourlyResearchStore(root).publish(archive,slot=source['source_manifest']['hourly_slot'],mode='LIVE')
++    case.request['inputs']['research']=binding(root)
++
++class M07ExtendedTests(_M07Fixture, unittest.TestCase):
++    def test_auction_original_route(self):
++        from m07_fixture import make_case
++        from stage_center.selection import select_a_0925_auction
++        inputs=self.root/'auction';inputs.mkdir();self.request=make_case(inputs,stage='STAGE_0925')
++        result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++        admitted=result['selector_input'];self.assertEqual(admitted['algorithm'],'select_a_0925_auction')
++        expected=select_a_0925_auction(copy.deepcopy(admitted['rows']),self.request['target_date'],self.request['recording']['artifact_sha256'],**admitted['kwargs'])
++        self.assertEqual(expected,result['selection']);self.assertNotEqual(expected['rows'][0]['score'],expected['rows'][0]['qmt_amount'])
++
++    def test_tail_uses_original_a_window(self):
++        from m07_fixture import make_case
++        inputs=self.root/'tail';inputs.mkdir();self.request=make_case(inputs,stage='STAGE_1445_1500')
++        result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++        self.assertEqual(result['selector_input']['algorithm'],'select_a_live_stage')
++        self.assertEqual(result['selection']['stage_id'],'STAGE_1445_1500')
++
++    def test_quote_fields_rejected(self):
++        original=copy.deepcopy(self.request)
++        for field in ('open_price','last_price','prev_close_price','high_price','low_price','volume','turnover','bid_vol','ask_vol'):
++            with self.subTest(field=field):
++                self.request=copy.deepcopy(original)
++                _rewrite_raw(self,lambda rows: [{**r,field:''} for r in rows])
++                self.assertIn('M07_REQUIRED_NUMBER',str(self.assert_blocked()))
++
++    def test_duplicate_raw_rejected(self):
++        _rewrite_raw(self,lambda rows: [rows[0]]+rows);self.assert_blocked()
++
++    def test_partial_coverage_is_not_promoted(self):
++        _rewrite_raw(self,lambda rows: rows[:-1],source_status='PARTIAL_WITH_ROWS',missing=['A.000012'])
++        result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++        self.assertEqual(result['selection']['missing_symbols'],['A.000012'])
++        self.assertEqual(result['selection']['selection_status'],'PARTIAL_WITH_ROWS')
++        self.assertEqual(result['selection']['source_rows'],11)
++
++    def test_ready_missing_contradiction_rejected(self):
++        _rewrite_raw(self,lambda rows: rows[:-1],missing=['A.000012']);self.assert_blocked()
++
++    def test_empty_unknown_are_not_ready_empty(self):
++        _rewrite_raw(self,lambda rows: [],requested=12,missing=['A.'+f'{i+1:06}' for i in range(12)])
++        self.assert_blocked()
++
++    def test_research_unknown_is_not_numeric_zero(self):
++        from m07_fixture import binding,write
++        root=Path(self.request['inputs']['research']['root'])
++        # A wholly absent exact-date archive is never substituted by current data.
++        self.request['inputs']['research']['files']={'manifest.json':self.request['inputs']['research']['files']['manifest.json']}
++        result=self.assert_blocked();self.assertIn('research',str(result).lower())
++
++    def test_symlink_source_rejected(self):
++        binding=self.request['inputs']['pool'];name=next(iter(binding['files']));path=Path(binding['root'])/name
++        target=path.with_suffix('.saved');path.rename(target);path.symlink_to(target)
++        self.assert_blocked()
++
++    def test_sources_rehashed_after_claim_before_copy(self):
++        name=next(iter(self.request['inputs']['morning']['files']));path=Path(self.request['inputs']['morning']['root'])/name
++        path.write_bytes(path.read_bytes()+b' ');self.assert_blocked()
++
++    def test_changed_input_new_generation_leaves_old_readable(self):
++        first=self.run_case();self.assertEqual(first['status'],'SUCCEEDED',first)
++        self.request['trigger']='MANUAL_RECOVERY';self.request['expected_generation']=first['generation']
++        second=self.run_case();self.assertEqual(second['status'],'SUCCEEDED',second)
++        self.assertNotEqual(first['generation'],second['generation'])
++        self.assertEqual(len(list((self.output/'generations').iterdir())),2)
++        self.assertEqual(daily.read_a_stage_daily(self.output,'20261012','STAGE_0930_0935')['generation'],second['generation'])
++
++    def test_concurrent_same_identity(self):
++        from concurrent.futures import ThreadPoolExecutor
++        with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda _:self.run_case(),range(2)))
++        self.assertEqual(sum(r['status']=='SUCCEEDED' for r in results),1,results)
++        self.assertTrue(all(r['status'] in ('SUCCEEDED','IN_PROGRESS_OR_OUTCOME_UNKNOWN','REUSED_SUCCESS') for r in results),results)
++
++    def test_original_acquisition_rank_and_code_are_preserved(self):
++        _rewrite_raw(self,lambda rows:[{**r,'batch_index':str(12-i),'turnover':'100000000'} for i,r in enumerate(rows)])
++        result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
++        self.assertEqual(result['selection']['rows'][0]['code'],'A.000012')
++        self.assertEqual(result['selector_input']['rows'][0]['acquisition_rank'],12)
++
++    def test_rollback_is_verified_and_compare_and_swap_only(self):
++        first=self.run_case();self.assertEqual(first['status'],'SUCCEEDED',first)
++        self.request['trigger']='MANUAL_RECOVERY';self.request['expected_generation']=first['generation']
++        second=self.run_case();self.assertEqual(second['status'],'SUCCEEDED',second)
++        reference=first['state']['latest_success']['product_reference']
++        restored=daily.activate_a_stage_generation(self.output,reference,expected_generation=second['generation'])
++        self.assertEqual(restored['generation'],first['generation'])
++        with self.assertRaisesRegex(ValueError,'EXPECTED_GENERATION'):
++            daily.activate_a_stage_generation(self.output,reference,expected_generation=second['generation'])
++
++    def test_verified_research_none_is_preserved_and_blocks(self):
++        from m07_fixture import _source
++        from stage_center.research_context import load_research_context
++        _replace_research(self,_source('20261012',slot='0900',with_stage_evidence=False))
++        context=load_research_context(self.request['inputs']['research']['root'],trade_date='20261012',stage_cutoff='09:35:05',morning_root=self.request['inputs']['morning']['root'])
++        self.assertIsNone(context.by_code['A.000001'].research_quality_score)
++        result=self.assert_blocked();self.assertIn('M07_RESEARCH_REQUIRED_FIELDS_MISSING',str(result))
++
++    def test_future_research_archive_is_not_used(self):
++        from m07_fixture import _source
++        _replace_research(self,_source('20261012',slot='1000',with_stage_evidence=True))
++        result=self.assert_blocked();self.assertIn('before cutoff',str(result))
++
++    def test_raw_temporal_false_rejected_for_default_and_false(self):
++        from stage_center.raw_store import RAW_FIELDS,validate_rows,RawStoreError
++        row=dict.fromkeys(RAW_FIELDS,'1');row.update(code='A.000001',update_time='2026-10-12 09:35:00',window_start='2026-10-12 09:30:00',window_end='2026-10-12 09:35:00',temporal_cutoff_safe=False)
++        for extra in ({},{'allow_temporal_false_observation':False}):
++            accepted,issues=validate_rows([row],trade_date='20261012',stage_id='STAGE_0930_0935',market='A_SHARE',**extra)
++            self.assertEqual(accepted,[]);self.assertTrue(any('temporal_cutoff_safe' in x for x in issues))
++        with self.assertRaisesRegex(RawStoreError,'M07_TEMPORAL_FALSE_OVERRIDE'):
++            validate_rows([row],trade_date='20261012',stage_id='STAGE_0930_0935',market='A_SHARE',allow_temporal_false_observation=True)
++
++    def test_closed_and_unknown_calendar(self):
++        for date in ('20261011','20270104'):
++            with self.subTest(date=date):
++                self.request['target_date']=date
++                result=self.assert_blocked();self.assertIn('M07_MARKET_NOT_OPEN',str(result))
++
++    def test_other_market_bytes_unchanged_during_publish_and_rollback(self):
++        other=self.root/'hk-output';other.mkdir();(other/'current.json').write_bytes(b'UNCHANGED_HK_SENTINEL')
++        before=(other/'current.json').read_bytes()
++        self.test_rollback_is_verified_and_compare_and_swap_only()
++        self.assertEqual((other/'current.json').read_bytes(),before)
++
++    def test_generation_symlink_cannot_redirect_publication(self):
++        outside=self.root/'unrelated';outside.mkdir()
++        (self.output/'generations').symlink_to(outside,target_is_directory=True)
++        result=self.run_case();self.assertEqual(result['status'],'BLOCKED',result)
++        self.assertEqual(list(outside.iterdir()),[])

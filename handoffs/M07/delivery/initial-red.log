@@ -1,0 +1,27 @@
+FF                                                                       [100%]
+=================================== FAILURES ===================================
+_____________________ test_declared_authority_is_rejected ______________________
+
+    def test_declared_authority_is_rejected():
+        with pytest.raises(ValueError, match="DECLARED"):
+>           run_a_stage_daily(target_date="20261010",stage_id="STAGE_0930",
+                cutoff="09:35:00",pool_input={"status":"VERIFIED","sha256":"a"*64,
+                "formal_authority":True},live_input=live(),
+                research_input=receipt(),selector=lambda x:x)
+E           TypeError: run_a_stage_daily() missing 1 required keyword-only argument: 'publish_verified'
+
+tests/test_a_stage_daily.py:15: TypeError
+__________________________ test_special_route_blocked __________________________
+
+    def test_special_route_blocked():
+        with pytest.raises(ValueError):
+>           run_a_stage_daily(target_date="20261010",stage_id="STAGE_1545_1555",
+                cutoff="15:50:00",pool_input=receipt(),live_input=live(),
+                research_input=receipt(),selector=lambda x:x)
+E           TypeError: run_a_stage_daily() missing 1 required keyword-only argument: 'publish_verified'
+
+tests/test_a_stage_daily.py:22: TypeError
+=========================== short test summary info ============================
+FAILED tests/test_a_stage_daily.py::test_declared_authority_is_rejected - Typ...
+FAILED tests/test_a_stage_daily.py::test_special_route_blocked - TypeError: r...
+2 failed in 0.03s

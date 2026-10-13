@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____ M07ExtendedTests.test_original_acquisition_rank_and_code_are_preserved ____
+
+self = <test_a_stage_daily.M07ExtendedTests testMethod=test_original_acquisition_rank_and_code_are_preserved>
+
+    def _test_original_acquisition_rank_and_code_are_preserved(self):
+        _rewrite_raw(self,lambda rows:[{**r,'batch_index':str(12-i),'turnover':'100000000'} for i,r in enumerate(rows)])
+        result=self.run_case();self.assertEqual(result['status'],'SUCCEEDED',result)
+>       self.assertEqual(result['selection']['rows'][0]['code'],'A.000012')
+E       AssertionError: '000001' != 'A.000012'
+E       - 000001
+E       ? ^
+E       + A.000012
+E       ? ^^     +
+
+tests/test_a_stage_daily.py:235: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_a_stage_daily.py::M07ExtendedTests::test_original_acquisition_rank_and_code_are_preserved
+1 failed, 28 deselected in 0.89s

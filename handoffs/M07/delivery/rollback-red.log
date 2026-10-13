@@ -1,0 +1,19 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ M07ExtendedTests.test_rollback_is_verified_and_compare_and_swap_only _____
+
+self = <test_a_stage_daily.M07ExtendedTests testMethod=test_rollback_is_verified_and_compare_and_swap_only>
+
+    def _test_rollback_is_verified_and_compare_and_swap_only(self):
+        first=self.run_case();self.assertEqual(first['status'],'SUCCEEDED',first)
+        self.request['trigger']='MANUAL_RECOVERY';self.request['expected_generation']=first['generation']
+        second=self.run_case();self.assertEqual(second['status'],'SUCCEEDED',second)
+        reference=first['state']['latest_success']['product_reference']
+>       restored=daily.activate_a_stage_generation(self.output,reference,expected_generation=second['generation'])
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'v5_shadow.a_stage_daily' has no attribute 'activate_a_stage_generation'
+
+tests/test_a_stage_daily.py:248: AttributeError
+=========================== short test summary info ============================
+FAILED tests/test_a_stage_daily.py::M07ExtendedTests::test_rollback_is_verified_and_compare_and_swap_only
+1 failed, 29 deselected in 1.40s

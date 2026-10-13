@@ -1,0 +1,77 @@
+{
+  "schema_version": "v5.m07_evidence_sources.v1",
+  "logs": [
+    {
+      "path": "handoffs/M07/delivery/initial-red.log",
+      "original_sha256": "e50d42aedfb1775f529696c403c5b07aa99bc722e89a2693f0ce613feb87b4af",
+      "stored_sha256": "e50d42aedfb1775f529696c403c5b07aa99bc722e89a2693f0ce613feb87b4af",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/concrete-red.log",
+      "original_sha256": "c691196b6bf9b3bc54c055176888d255bb9fd4a08d25e3b4e5fb14153014d4ac",
+      "stored_sha256": "3a837b38a12e3bd69d38c470fe8bec027b3c63e18e9103f3086be6908122a2f5",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/rank-red.log",
+      "original_sha256": "dcd14814bea86f32759f55a98cd302d9ebc858298dc469e6ab5226c211cf591e",
+      "stored_sha256": "dcd14814bea86f32759f55a98cd302d9ebc858298dc469e6ab5226c211cf591e",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/rank-green.log",
+      "original_sha256": "8ad00faadbb382a84fcb3158e95c9f55ab9241ea2253c8a886602ba6c62d2fbf",
+      "stored_sha256": "8ad00faadbb382a84fcb3158e95c9f55ab9241ea2253c8a886602ba6c62d2fbf",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/rollback-red.log",
+      "original_sha256": "0752119c1a617cb044315187f2fced1f30d36160e4af59f4f883edac4c2b401a",
+      "stored_sha256": "0752119c1a617cb044315187f2fced1f30d36160e4af59f4f883edac4c2b401a",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/rollback-green.log",
+      "original_sha256": "068122053ecc23847234cc72e99ddcdb655171a8f32815fc9c21cfa811a8cd81",
+      "stored_sha256": "068122053ecc23847234cc72e99ddcdb655171a8f32815fc9c21cfa811a8cd81",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/symlink-red.log",
+      "original_sha256": "51cf9bf5e3f89d51d040b0a6d5f9634c3efb309ca44c96f335e270f95484ac50",
+      "stored_sha256": "51cf9bf5e3f89d51d040b0a6d5f9634c3efb309ca44c96f335e270f95484ac50",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    },
+    {
+      "path": "handoffs/M07/delivery/symlink-green.log",
+      "original_sha256": "88600b07c30151aaf00972959b3fbceea23840cdf9e403abdd8f6b1f7dd17a4f",
+      "stored_sha256": "88600b07c30151aaf00972959b3fbceea23840cdf9e403abdd8f6b1f7dd17a4f",
+      "normalization": "task workspace absolute prefix -> <TASK_WORKSPACE>"
+    }
+  ],
+  "fixture_sources": [
+    {
+      "path": "handoffs/M07/V5/tests/daily_ledger_fixture.py",
+      "kind": "UNCHANGED",
+      "source_repository": "lexi2016/v5",
+      "source_commit": "acf8d23f9c191e4cb2da5737ca715002e83648c2",
+      "source_path": "V5/tests/daily_ledger_fixture.py",
+      "source_blob": "94cebf77d66faaebd3abe27c52abbc9a61390d17"
+    },
+    {
+      "path": "handoffs/M07/V5/tests/m07_fixture.py",
+      "kind": "NEW_SYNTHETIC_WITH_ORIGINAL_HELPER_REUSE",
+      "reused_helpers": [
+        "_source",
+        "_write_morning"
+      ],
+      "source_repository": "lexi2016/v4",
+      "source_commit": "d1bf034640ca2e5957423de2745a98e159b69af2",
+      "source_path": "handoff/v4-running-source-20261005/canonical/tests/test_stage_research_context_v4.py",
+      "source_blob": "6acf988c8f15e89d21ac0fb28e6e4b2e71d67bff"
+    }
+  ],
+  "baseline_failures": "Original R4 tests failed due to missing publish_verified argument. Original run_ledger tests could not collect because daily_ledger_fixture was absent; only missing fixture was restored unchanged.",
+  "expectation_correction": "Original owner maps CANNOT_CONFIRM plus rows to PARTIAL_WITH_ROWS. Test expectation corrected, owner untouched."
+}

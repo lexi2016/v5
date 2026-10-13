@@ -1,0 +1,20 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ M07ExtendedTests.test_generation_symlink_cannot_redirect_publication _____
+
+self = <test_a_stage_daily.M07ExtendedTests testMethod=test_generation_symlink_cannot_redirect_publication>
+
+    def _test_generation_symlink_cannot_redirect_publication(self):
+        outside=self.root/'unrelated';outside.mkdir()
+        (self.output/'generations').symlink_to(outside,target_is_directory=True)
+>       result=self.run_case();self.assertEqual(result['status'],'BLOCKED',result)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: 'OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY' != 'BLOCKED'
+E       - OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY
+E       + BLOCKED
+E        : {'status': 'OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY', 'reason_codes': ['PermissionError:M07_WRITE_OUTSIDE_PRIVATE_ROOT:/tmp/tmpgsx30yt7/private-output/generations/37d9ec4273105863e630e7bc3f07ce0302dc6f9112271131254e515e25a3462e'], 'run_id': '453e084a63ba4e86a99514baa3e4c518', 'production_allowed': False, 'buy_gate_updated': False, 'orders_sent': False, 'natural_verified': False, 'formal_eligibility_verified': False}
+
+tests/test_a_stage_daily.py:314: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_a_stage_daily.py::M07ExtendedTests::test_generation_symlink_cannot_redirect_publication
+1 failed, 35 deselected in 0.54s
