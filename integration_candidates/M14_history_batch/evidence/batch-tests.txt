@@ -1,0 +1,33 @@
+test_capture_reuses_missing_canary_without_retry_and_whole_rows (test_rebound_history_batch.BatchTests.test_capture_reuses_missing_canary_without_retry_and_whole_rows) ... ok
+test_changed_task_cannot_resume_even_with_valid_context (test_rebound_history_batch.BatchTests.test_changed_task_cannot_resume_even_with_valid_context) ... ok
+test_connection_failure_makes_no_code_attempt (test_rebound_history_batch.BatchTests.test_connection_failure_makes_no_code_attempt) ... ok
+test_context_semantic_pool_rejected_even_with_consistent_sha (test_rebound_history_batch.BatchTests.test_context_semantic_pool_rejected_even_with_consistent_sha) ... ok
+test_cross_run_reuse_identity_and_response_hash_rejected (test_rebound_history_batch.BatchTests.test_cross_run_reuse_identity_and_response_hash_rejected) ... ok
+test_duplicate_member_code_and_nonmember_key_rejected (test_rebound_history_batch.BatchTests.test_duplicate_member_code_and_nonmember_key_rejected) ... ok
+test_existing_receipt_count_is_distinct_from_new_attempts (test_rebound_history_batch.BatchTests.test_existing_receipt_count_is_distinct_from_new_attempts) ... ok
+test_failure_and_missing_are_final_no_auto_retry (test_rebound_history_batch.BatchTests.test_failure_and_missing_are_final_no_auto_retry) ... ok
+test_hard_deadline_interrupts_real_wait (test_rebound_history_batch.BatchTests.test_hard_deadline_interrupts_real_wait) ... ok
+test_initial_three_canary_sources_cannot_be_omitted (test_rebound_history_batch.BatchTests.test_initial_three_canary_sources_cannot_be_omitted) ... ok
+test_interrupted_started_attempt_is_unknown_not_retried (test_rebound_history_batch.BatchTests.test_interrupted_started_attempt_is_unknown_not_retried) ... ok
+test_invalid_response_preserved_and_not_retried (test_rebound_history_batch.BatchTests.test_invalid_response_preserved_and_not_retried) ... ok
+test_limits_are_validated_before_connection (test_rebound_history_batch.BatchTests.test_limits_are_validated_before_connection) ... ok
+test_maxcalls_then_resume_never_reissues_receipts (test_rebound_history_batch.BatchTests.test_maxcalls_then_resume_never_reissues_receipts) ... ok
+test_orphan_file_fails_closed_without_retry (test_rebound_history_batch.BatchTests.test_orphan_file_fails_closed_without_retry) ... ok
+test_per_query_context_change_stops_without_second_query (test_rebound_history_batch.BatchTests.test_per_query_context_change_stops_without_second_query) ... ok
+test_plan_offline_exact_members_keys_and_three_receipts (test_rebound_history_batch.BatchTests.test_plan_offline_exact_members_keys_and_three_receipts) ... ok
+test_preparation_output_matches_batch_contract (test_rebound_history_batch.BatchTests.test_preparation_output_matches_batch_contract) ... ok
+test_rate_limit_survives_immediate_resume (test_rebound_history_batch.BatchTests.test_rate_limit_survives_immediate_resume) ... ok
+test_receipt_file_hash_and_helper_source_pin_rejected (test_rebound_history_batch.BatchTests.test_receipt_file_hash_and_helper_source_pin_rejected) ... ok
+test_resume_is_offline_and_validates_journal (test_rebound_history_batch.BatchTests.test_resume_is_offline_and_validates_journal) ... ok
+test_second_writer_cannot_connect (test_rebound_history_batch.BatchTests.test_second_writer_cannot_connect) ... ok
+test_stale_current_context_file_blocks_before_connect (test_rebound_history_batch.BatchTests.test_stale_current_context_file_blocks_before_connect) ... ok
+test_stale_task_time_rejected (test_rebound_history_batch.BatchTests.test_stale_task_time_rejected) ... ok
+test_symlink_helper_and_evidence_rejected (test_rebound_history_batch.BatchTests.test_symlink_helper_and_evidence_rejected) ... ok
+test_tampered_receipt_blocks_before_connect (test_rebound_history_batch.BatchTests.test_tampered_receipt_blocks_before_connect) ... ok
+test_time_budget_stops_before_second_call (test_rebound_history_batch.BatchTests.test_time_budget_stops_before_second_call) ... ok
+test_wrong_endpoint_never_queries_or_switches_host (test_rebound_history_batch.BatchTests.test_wrong_endpoint_never_queries_or_switches_host) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 5.372s
+
+OK

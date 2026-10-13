@@ -1,0 +1,67 @@
+{
+  "schema_version": "v5.m14_history_batch_candidate.v1",
+  "base_commit": "c52aca63e7aac5a1f450bd5d1e11ae805fe0cb31",
+  "branch": "dev/m14-github-handoff-20261011",
+  "scope": "ADD_ONLY_CANDIDATE_NO_RUNTIME_APPLY",
+  "reused_capture_helper": {
+    "commit": "c52aca63e7aac5a1f450bd5d1e11ae805fe0cb31",
+    "path": "integration_candidates/M14_history_recovery/capture/v5_shadow/rebound_history_capture.py",
+    "sha256": "e1a5fc5dba23dd10c727f002848b38e6d688b98316c99480bbef95fd97c66312"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "before_sha256": null,
+      "sha256": "1f90ae0c13b89f36e1de14d83e46164c0b011f69c9efb4b25a67f1ecf1528e1b",
+      "bytes": 10201
+    },
+    {
+      "path": "batch/README.md",
+      "before_sha256": null,
+      "sha256": "a41ae1fd06e09981a52e6b338b86e5b68eeea18d5d688cfc2eb9bdbfa5e283e2",
+      "bytes": 11126
+    },
+    {
+      "path": "batch/rebound_history_batch.py",
+      "before_sha256": null,
+      "sha256": "4d51d842839d38abd906e4294ff801a9e4d38824dd0b899e62c1f12f58e804dd",
+      "bytes": 37194
+    },
+    {
+      "path": "batch/tests/test_rebound_history_batch.py",
+      "before_sha256": null,
+      "sha256": "425b9bad412e188208c041f4936482e21d17a7a681aea9503c59628a4f5d116e",
+      "bytes": 18919
+    },
+    {
+      "path": "evidence/batch-tests.txt",
+      "before_sha256": null,
+      "sha256": "384ec8a7374eccf97c99954a8486294e015388f1de86a46a7314a4f9e7f95c84",
+      "bytes": 4169
+    },
+    {
+      "path": "evidence/preparation-tests.txt",
+      "before_sha256": null,
+      "sha256": "e1ee53ad79026afda74c8db1e512d84160de4bd4501e4e21d3bea97220302700",
+      "bytes": 1278
+    },
+    {
+      "path": "evidence/validation.json",
+      "before_sha256": null,
+      "sha256": "44b3d937e0dcb7db61853d8d8e68eddc6b949eed66022b16c56d31a815183cc0",
+      "bytes": 766
+    },
+    {
+      "path": "preparation/prepare_history_batch.py",
+      "before_sha256": null,
+      "sha256": "91bb7d4ba191cd3ed7c4c32dcccfef90868fd0c651739437c1faf35e7fae245d",
+      "bytes": 11691
+    },
+    {
+      "path": "preparation/tests/test_prepare_history_batch.py",
+      "before_sha256": null,
+      "sha256": "ad144285515b8ae4cee2ff3278cad1042d1bf145a1a496fe1733fdf4af6f7d3c",
+      "bytes": 3494
+    }
+  ]
+}

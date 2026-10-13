@@ -1,0 +1,13 @@
+test_calendar_requires_sixty_exact_dates (test_prepare_history_batch.PreparationTests.test_calendar_requires_sixty_exact_dates) ... ok
+test_duplicate_history_is_not_missing (test_prepare_history_batch.PreparationTests.test_duplicate_history_is_not_missing) ... ok
+test_missing_exact_calendar_keys_not_last_available (test_prepare_history_batch.PreparationTests.test_missing_exact_calendar_keys_not_last_available) ... ok
+test_naive_preparation_clock_rejected (test_prepare_history_batch.PreparationTests.test_naive_preparation_clock_rejected) ... ok
+test_output_must_be_separate_from_original_inputs (test_prepare_history_batch.PreparationTests.test_output_must_be_separate_from_original_inputs) ... ok
+test_pool_five_groups_exact_and_duplicates_rejected (test_prepare_history_batch.PreparationTests.test_pool_five_groups_exact_and_duplicates_rejected) ... ok
+test_target_omission_duplicate_and_extra_are_rejected (test_prepare_history_batch.PreparationTests.test_target_omission_duplicate_and_extra_are_rejected) ... ok
+test_task_context_two_hour_expiry_and_canonical_keys (test_prepare_history_batch.PreparationTests.test_task_context_two_hour_expiry_and_canonical_keys) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK

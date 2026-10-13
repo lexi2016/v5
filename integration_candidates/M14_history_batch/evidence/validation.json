@@ -1,0 +1,29 @@
+{
+  "schema_version": "v5.m14_history_batch_delivery_validation.v1",
+  "batch_tests": {
+    "passed": 28,
+    "network": "FAKE_CONNECTOR_ONLY"
+  },
+  "preparation_tests": {
+    "passed": 8,
+    "real_parquet": "NOT_RUN"
+  },
+  "original_calendar": {
+    "status": "PASS",
+    "signal_date": "20261013",
+    "prior60_count": 60,
+    "previous5": [
+      "20261006",
+      "20261007",
+      "20261008",
+      "20261009",
+      "20261012"
+    ],
+    "calendar_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+  },
+  "real_batch_capture": "NOT_RUN",
+  "repair": "NOT_RUN_NOT_AUTHORIZED_FOR_MIXED_SOURCE_PANEL",
+  "real_owner_calculation": "NOT_RUN",
+  "single_source_window_adapter": "SEPARATE_NOT_INCLUDED",
+  "source_data_uploaded": false
+}
