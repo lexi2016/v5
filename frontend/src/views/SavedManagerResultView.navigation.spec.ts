@@ -65,9 +65,16 @@ it('puts saved results before collapsed, still-mounted source modules with verif
   expect(screen.getByRole('heading', { name: '公告研究股票', level: 2 })).toBeTruthy();
   expect(screen.getByText('已读取运行 ' + run)).toBeTruthy();
   expect(results.textContent).toContain('目标日 20261012');
-  expect(screen.getByText('阶段选股 · 未接入')).toHaveProperty('disabled', true);
-  expect(screen.getByText('研报决策台 · 未接入')).toHaveProperty('disabled', true);
+  const m07Button = screen.getByRole('button', { name: 'A 股阶段选股 · M07 已保存结果' });
+  expect(m07Button).toBeTruthy();
+  expect(m07Button).not.toHaveProperty('disabled', true);
   expect(scroll).not.toHaveBeenCalled();
+  await fireEvent.click(m07Button);
+
+  const m07Stage = container.querySelector<HTMLDetailsElement>('#m07-saved-stage');
+  await waitFor(() => expect(m07Stage?.open).toBe(true));
+  expect(m07Stage).toBeTruthy();
+  expect(screen.getByText('研报决策台 · 未接入')).toHaveProperty('disabled', true);
 });
 
 it('opens and focuses the complete source disclosure without remounting its requests', async () => {
