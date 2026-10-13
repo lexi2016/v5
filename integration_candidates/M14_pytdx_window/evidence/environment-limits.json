@@ -1,0 +1,17 @@
+{
+  "python": "3.12.14",
+  "new_tests_pandas": "2.2.3",
+  "new_tests_passed": 33,
+  "old_owner_passed": 28,
+  "old_owner_skip": 1,
+  "old_stored_supplement": {
+    "attempted": 7,
+    "fixture_setup_failures": 7,
+    "reason": "ModuleNotFoundError: pandas in minimal venv",
+    "product_execution": "NOT_RUN"
+  },
+  "real_pyarrow_io": "NOT_RUN",
+  "real_python314_owner": "NOT_RUN",
+  "real_690_result": "NOT_RUN",
+  "preview_binding": "NOT_RUN"
+}

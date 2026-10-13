@@ -1,0 +1,8 @@
+test_pinned_batch_journal_to_manifest_request_with_parquet_seam (test_prepare_window.PrepareJournalIntegrationTests.test_pinned_batch_journal_to_manifest_request_with_parquet_seam) ... ok
+test_offline_cli_exists_with_journal_context_and_plan_sha_inputs (test_prepare_window.PrepareWindowTests.test_offline_cli_exists_with_journal_context_and_plan_sha_inputs) ... ok
+test_preparation_does_not_call_owner_or_connector_or_rewrite_input (test_prepare_window.PrepareWindowTests.test_preparation_does_not_call_owner_or_connector_or_rewrite_input) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.404s
+
+OK

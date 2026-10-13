@@ -1,0 +1,18 @@
+{
+  "base_commit": "02193d90221b24f59b0678fc3035eaa128791259",
+  "original_owner_source": "c7b/386d verified bytes, matching Mac local 884548 source SHA",
+  "files": [
+    {
+      "path": "src/v5_shadow/rebound_owner.py",
+      "before_sha256": "dc1b68715ba38a97a1df029a1934dab58b84b7f7486cb60b2a75a4d71491aa15",
+      "after_sha256": "ab4cea7668300c8eecb5678710c1e862d73bdfc7f45d1b9aa03339bac0c4b6ab",
+      "bytes": 39906
+    },
+    {
+      "path": "src/v5_shadow/rebound_pytdx_window.py",
+      "before_sha256": null,
+      "after_sha256": "d50b6c643b17c36bfe9677d8a3344b9e83c31dd4a50c1b2019a1c47207760d7c",
+      "bytes": 28502
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schema_version": "v5.m14_pytdx_window_candidate.v1",
+  "base_commit": "02193d90221b24f59b0678fc3035eaa128791259",
+  "branch": "dev/m14-github-handoff-20261011",
+  "scope": "CANDIDATE_ONLY_EXPLICIT_NEW_SOURCE_RESEARCH_ROUTE",
+  "runtime_images": [
+    {
+      "path": "src/v5_shadow/rebound_owner.py",
+      "before_sha256": "dc1b68715ba38a97a1df029a1934dab58b84b7f7486cb60b2a75a4d71491aa15",
+      "after_sha256": "ab4cea7668300c8eecb5678710c1e862d73bdfc7f45d1b9aa03339bac0c4b6ab",
+      "bytes": 39906
+    },
+    {
+      "path": "src/v5_shadow/rebound_pytdx_window.py",
+      "before_sha256": null,
+      "after_sha256": "d50b6c643b17c36bfe9677d8a3344b9e83c31dd4a50c1b2019a1c47207760d7c",
+      "bytes": 28502
+    }
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c5c70c39e0ba7bcc2fd70790f2f74fd670be248b1103bb5d18aca1117b523366",
+      "bytes": 12416
+    },
+    {
+      "path": "apply_candidate.py",
+      "sha256": "b944daf1c15db0ba66621a8a5b36f1d409408a896e2a42e7ef840bb8aead36da",
+      "bytes": 2893
+    },
+    {
+      "path": "candidate.patch",
+      "sha256": "433a071ec6da959d1b6f1d3139c919a9aa9f1f4fb64e417ed02f05b590d38a8d",
+      "bytes": 37706
+    },
+    {
+      "path": "evidence/apply-tests.txt",
+      "sha256": "8600abe3d693b5e28fdf7c50b5ff47fdace36dfe8a06df24afdbec76591e1f7c",
+      "bytes": 314
+    },
+    {
+      "path": "evidence/environment-limits.json",
+      "sha256": "a59fbed20177f188a4672fb2b8f16e9582c983b28d73cf43bbf195f77db2f27b",
+      "bytes": 448
+    },
+    {
+      "path": "evidence/original-owner-tests.txt",
+      "sha256": "85d5fa872c2b98b332ef5aa3799e7f2919439f4f24ae12dceedb2c5589f95a39",
+      "bytes": 5276
+    },
+    {
+      "path": "evidence/prepare-integration.txt",
+      "sha256": "723187af906d6448fd232d80744c0e7f351c3e5f8babcbfd30a7537a98b36902",
+      "bytes": 646
+    },
+    {
+      "path": "evidence/window-tests.txt",
+      "sha256": "2798fa5fca22fac142c9fcd836028b830aa170e360538a15f9ea20788f205f88",
+      "bytes": 5354
+    },
+    {
+      "path": "files/src/v5_shadow/rebound_owner.py",
+      "sha256": "ab4cea7668300c8eecb5678710c1e862d73bdfc7f45d1b9aa03339bac0c4b6ab",
+      "bytes": 39906
+    },
+    {
+      "path": "files/src/v5_shadow/rebound_pytdx_window.py",
+      "sha256": "d50b6c643b17c36bfe9677d8a3344b9e83c31dd4a50c1b2019a1c47207760d7c",
+      "bytes": 28502
+    },
+    {
+      "path": "preparation/prepare_pytdx_window.py",
+      "sha256": "00145e9214f94b926651e243d1843a0fa0e9da818dcc60c59913af1314c55f87",
+      "bytes": 14283
+    },
+    {
+      "path": "source_contract.json",
+      "sha256": "7f53e64cf28df17721d0c4f85fee62bddbab4fabfafd74c9f84bf466923eccbe",
+      "bytes": 1099
+    },
+    {
+      "path": "tests/prepare_journal_probe.py",
+      "sha256": "56c7aabb2a17acd7952154d6629b11ea74286367ca2803dde6fdedcca3767ccf",
+      "bytes": 7393
+    },
+    {
+      "path": "tests/test_guard_window.py",
+      "sha256": "7687a0d3d61d250ddaa93cb0e595b1072e35e100e783d2a110e979db9f821005",
+      "bytes": 1891
+    },
+    {
+      "path": "tests/test_original_calculator_window.py",
+      "sha256": "8a83532e94f971a224560ef5e562c53119cf948cc310673430223ed92b71059a",
+      "bytes": 4652
+    },
+    {
+      "path": "tests/test_prepare_window.py",
+      "sha256": "4146e37d6258c123d5084ac8250e7029a40786a4e78be4aa86d99e1d98738c10",
+      "bytes": 2744
+    },
+    {
+      "path": "tests/test_private_window_binding.py",
+      "sha256": "2444705cbdb95d89a75e19efceccc4adbb6c137636bdb05119221c910f798b14",
+      "bytes": 8690
+    },
+    {
+      "path": "tests/test_rebound_pytdx_window.py",
+      "sha256": "b75483c1862b67c45d3e6e9db1e3954814c252e553af3197e7c0c6195078158d",
+      "bytes": 7994
+    },
+    {
+      "path": "tests/test_window_owner_contract.py",
+      "sha256": "798f1741a469e120e9089e205fe23f7e0be4ce70d55e306b4c4743e5840b4963",
+      "bytes": 4133
+    },
+    {
+      "path": "verification.json",
+      "sha256": "73602aa0173a190669f3d1bd89308eef874cdb30dd38cf60b910eaee0b243ab0",
+      "bytes": 644
+    }
+  ]
+}
