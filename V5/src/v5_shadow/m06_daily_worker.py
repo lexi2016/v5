@@ -141,7 +141,9 @@ def main():
             payload=read_product(request,registration,snapshot,envelope['reference'],envelope['m06_ledger_run_id'])
         else:raise ValueError('M06_DAILY_ACTION')
         if inspect_request(request,registration)!=snapshot:raise ValueError('M06_BINDING_CHANGED')
-    sys.stdout.buffer.write(canonical_bytes(dict(payload=payload,pid=os.getpid(),request_sha256=sha256_json(envelope))))
+    sys.stdout.buffer.write(canonical_bytes(dict(payload=payload,pid=os.getpid(),request_sha256=sha256_json(envelope),
+        python_launch=dict(executable=sys.executable,realpath=str(Path(sys.executable).resolve()),
+            prefix=sys.prefix,base_prefix=sys.base_prefix))))
 
 
 if __name__=='__main__':

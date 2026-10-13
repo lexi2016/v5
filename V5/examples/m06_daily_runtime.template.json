@@ -11,12 +11,18 @@
     "ledger_root": "${INDEPENDENT_P0_LEDGER_ROOT}",
     "hk_preselection": {
       "enabled": false,
-      "python_executable": "${EXISTING_HK02_PYTHON_REALPATH}",
+      "python_executable": "${EXISTING_HK02_VENV_LAUNCH_PATH}",
       "python_sha256": "${EXISTING_PYTHON_RAW_SHA256}",
       "timeout_seconds": 1200,
       "store_root": "${INDEPENDENT_SOURCE_SNAPSHOT_ROOT}",
       "asset_root": "${FROZEN_ASSET_ROOT}",
-      "private_root": "${NEW_MARKED_M06_OUTPUT_ROOT}"
+      "private_root": "${NEW_MARKED_M06_OUTPUT_ROOT}",
+      "python_venv": {
+        "root": "${EXISTING_VENV_CANONICAL_ROOT}",
+        "realpath": "${PINNED_REAL_BINARY_PATH}",
+        "pyvenv_cfg_sha256": "${PYVENV_CFG_RAW_SHA256}",
+        "symlink_sha256": "${LAUNCH_READLINK_TEXT_SHA256}"
+      }
     }
   }
 }

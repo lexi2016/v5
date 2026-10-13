@@ -1,0 +1,42 @@
+{
+  "status": "INTERPRETER_FIX_FOCUSED_TESTS_PASS_MAC_REAL_REGISTRATION_PENDING",
+  "parent": "1ad98175e582ccc39e350341f97f5c9f9a97fa4e",
+  "root_cause": "SYMLINK_REJECTED for existing HK02 venv launch; resolving leaf loses venv dependencies",
+  "changed_production_files": [
+    "V5/src/v5_shadow/p0_hk_preselection.py",
+    "V5/src/v5_shadow/m06_daily_worker.py"
+  ],
+  "test_command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_m06_python_launch",
+  "new_focused_tests": 14,
+  "exit_code": 0,
+  "seconds": 19.084,
+  "source_closure_entries": 147,
+  "source_closure_sha256": "dae57f54bedc7632b4beafa9cd29fb2158db83162ac3d7bacdace2bf9fe1a1e4",
+  "tdd_red": {
+    "tests": 10,
+    "failures": 5,
+    "reason": "explicit venv registration/identity missing; strict symlink blocker reproduced"
+  },
+  "verification": "Actual synthetic venv subprocess retained sentinel package; fixed original M06 inspect/owner/independent reader ran on synthetic pool; replacement, wrong prefix and all pins/root guards tested",
+  "historical_mac_result": {
+    "candidate": "211fe3e38946bc07285c1a027f63f25b23c9eb1f",
+    "new_tests": 21,
+    "regressions": 9,
+    "rerun_here": false
+  },
+  "synthetic_venv": "Temporary pyvenv.cfg, executable symlink and synthetic sentinel metadata only; no pip, dependency install or existing environment rebuild",
+  "original_m06_changed": false,
+  "real_model_invoked": false,
+  "real_provider_invoked": false,
+  "natural_verified": false,
+  "installed_dependencies": false,
+  "not_run": [
+    "old21 suite",
+    "old85 suite",
+    "M17 suite",
+    "Mac real registration",
+    "real model/provider",
+    "deployment",
+    "scheduler"
+  ]
+}
