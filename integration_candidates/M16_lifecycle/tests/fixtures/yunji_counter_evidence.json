@@ -1,0 +1,12 @@
+{
+  "evidence_kind": "MANUALLY_VERIFIED_PUBLIC_DOCUMENT_FACTS",
+  "verified_on": "2026-10-13",
+  "remote_document_bytes_sha256": null,
+  "identity": {"company": "Beijing Yunji Technology Co., Ltd.", "issuer_document_code": "HK.02670", "temporary_counter_code": "HK.02915"},
+  "sources": [
+    {"url": "https://www.hkex.com.hk/eng/market/sec_tradinfo/tradarng/tradarng_news/premonth/e2915e_260921.htm", "locator": "Share Subdivision notice and counter table", "effective_date": "2026-09-23", "subdivision_ratio": "1:10", "temporary_counter": "02915", "temporary_name": "YUNJI", "temporary_board_lot": 500},
+    {"url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0901/2026090103473.pdf", "locator": "Physical pages 1-2, Revised timetable; Hong Kong local time", "announcement_date": "2026-09-01", "original_open": "2026-09-04T09:00:00+08:00", "revised_open": "2026-09-23T09:00:00+08:00", "revised_parallel_from": "2026-10-08T09:00:00+08:00", "revised_scheduled_close": "2026-10-29T16:10:00+08:00", "close_status": "ANNOUNCED_SCHEDULE_ONLY"},
+    {"url": "https://www.hkex.com.hk/eng/market/sec_tradinfo/tradarng/tradarng_news/currentmonth/e2915g_261006.htm", "locator": "Parallel Trading notice and counter table", "parallel_date": "2026-10-08", "permanent_counter": "02670", "permanent_name": "YUNJI-NEW", "permanent_board_lot": 100, "temporary_counter": "02915", "temporary_name": "YUNJI-OLD", "temporary_board_lot": 500, "settlement": "COUNTER_SPECIFIC"}
+  ],
+  "scope": "Issuer-public-document association only. Not a price, lot, security-selection, eligibility or historical-system-availability conversion."
+}

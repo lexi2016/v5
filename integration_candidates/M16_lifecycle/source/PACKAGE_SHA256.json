@@ -8,7 +8,7 @@
     {
       "path": "SOURCE_MANIFEST.json",
       "bytes": 104540,
-      "sha256": "136ccbcedccca4dd75b98d4acb8f47e3e18980b351c28f84b7e88228962a1dac"
+      "sha256": "5515c0ec467b3ea39ac79359022297c73bf0c989bd66b910815162fa69dc61c6"
     },
     {
       "path": "START_HERE.md",
@@ -527,8 +527,8 @@
     },
     {
       "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
-      "bytes": 40133,
-      "sha256": "1eca2c0be054e2e687a0370378cb469d0354f7eb9861ab039c1ecea14ece6057"
+      "bytes": 45045,
+      "sha256": "e15337967bf538b5031281acc1dad41471a82931e02608e36c0ce3988ca01b6e"
     },
     {
       "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/issuer_us_relations.py",

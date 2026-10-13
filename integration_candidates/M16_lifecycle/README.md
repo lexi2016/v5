@@ -440,3 +440,38 @@ prior commit authoritative. The read-only page binding must subsequently point
 to the newly committed recovery job/generation and new commit hashes; the product
 hash stays unchanged. This binding update is a separate integration operation,
 not performed by the recovery function.
+
+## Date-bound 02915 issuer-document resolution
+
+A narrowly scoped relationship in the original HKEX provider now associates the
+observed temporary counter **HK.02915** with Beijing Yunji's document issuer
+**HK.02670**. It applies only from 2026-09-23 09:00 (Hong Kong time) up to the
+announced scheduled close, 2026-10-29 16:10 exclusive. The close is explicitly
+recorded as a schedule, not a claim that later execution or amendments were
+verified. Counter labels are YUNJI before the 2026-10-08 parallel opening and
+YUNJI-OLD thereafter.
+
+The three official sources are listed in
+`tests/fixtures/yunji_counter_evidence.json`. This file records manually verified
+public-document facts, not downloaded document bytes; it does not invent a PDF
+hash. The PDF's revised timetable was checked on physical pages 1–2, separately
+from its superseded original timetable. The in-receipt record digest hashes the
+local audited relationship record only and labels that limitation explicitly.
+
+`_resolve_document_issuer` requires the existing HKEX active issuer mapping for
+02670 to identify YUNJI. A conflicting direct 02915 mapping or unknown issuer
+fails closed. Only the existing title-directory stockId and issuer-code match
+use 02670. The source receipt retains `issuer_code=HK.02915`, adds
+`observed_counter_code`, `issuer_document_code`, and `issuer_relationship` with
+its exact lookup cutoff, effective window and official URLs. Failure receipts
+also preserve established relationship evidence.
+
+The original observation code, input identity/source digest, cutoff, price,
+volume, stage rank and eligibility are untouched. Lot sizes and the subdivision
+ratio are evidence of counter identity only, never conversion instructions.
+There is no global alias table, no relationship to 00928, no additional request
+host, credential, event-lane change or live collection in this delivery.
+Existing stored 9/1 products remain unchanged; a new independently verified
+collection would still need real directory/PDF evidence before READY could be
+published for 02915. The prior saved-PDF repair command intentionally does not
+accept an unmatched 02915 row as if it already had a verified PDF.

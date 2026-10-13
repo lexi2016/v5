@@ -1226,12 +1226,12 @@
   {
     "commit": null,
     "repository_path": "integration_candidates/M16_lifecycle/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
-    "blob_sha": "fd61abe363bde2f9a9ea4a9586ba46262b96570b",
-    "expected_bytes": 40133,
+    "blob_sha": "6fc46cee5132474c8c11c2c294d05ef16b8630b6",
+    "expected_bytes": 45045,
     "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
     "role": "M16_CANDIDATE_PATCHED_SOURCE",
-    "bytes": 40133,
-    "sha256": "1eca2c0be054e2e687a0370378cb469d0354f7eb9861ab039c1ecea14ece6057",
+    "bytes": 45045,
+    "sha256": "e15337967bf538b5031281acc1dad41471a82931e02608e36c0ce3988ca01b6e",
     "blob_verified": false,
     "url": null,
     "upstream_source": {

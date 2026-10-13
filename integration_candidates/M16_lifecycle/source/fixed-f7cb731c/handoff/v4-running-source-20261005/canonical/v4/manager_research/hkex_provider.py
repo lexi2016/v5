@@ -318,6 +318,66 @@ def parse_title_rows(body: bytes, *, base_url: str = TITLE_SEARCH_URL) -> list[d
     return rows
 
 
+# A single audited corporate-action relationship, not a security/price alias.
+# The close is the announced schedule, not evidence of subsequent execution.
+_YUNJI_COUNTER_RELATION = {
+    "relationship_id": "HKEX-YUNJI-20260923-TEMPORARY-COUNTER",
+    "observed_counter_code": "HK.02915",
+    "issuer_document_code": "HK.02670",
+    "issuer_legal_name": "Beijing Yunji Technology Co., Ltd.",
+    "effective_from": "2026-09-23T09:00:00+08:00",
+    "parallel_from": "2026-10-08T09:00:00+08:00",
+    "scheduled_end_exclusive": "2026-10-29T16:10:00+08:00",
+    "end_evidence_status": "ANNOUNCED_SCHEDULE_ONLY",
+    "scope": "ISSUER_PUBLIC_DOCUMENT_LOOKUP_ONLY",
+    "does_not_establish": ["PRICE_ADJUSTMENT", "LOT_CONVERSION", "SELECTION_ELIGIBILITY", "HISTORICAL_SYSTEM_AVAILABILITY"],
+    "sources": [
+        {"url": "https://www.hkex.com.hk/eng/market/sec_tradinfo/tradarng/tradarng_news/premonth/e2915e_260921.htm",
+         "locator": "Trading Arrangement Notices: Share Subdivision; counter table",
+         "evidence": "02670 issuer establishes temporary counter 02915 from 2026-09-23; subdivision 1 into 10."},
+        {"url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0901/2026090103473.pdf",
+         "locator": "PDF pages 1-2, Revised timetable (Hong Kong time)",
+         "announcement_date": "2026-09-01",
+         "evidence": "Opening 2026-09-23 09:00; parallel trading 2026-10-08 09:00; scheduled close 2026-10-29 16:10."},
+        {"url": "https://www.hkex.com.hk/eng/market/sec_tradinfo/tradarng/tradarng_news/currentmonth/e2915g_261006.htm",
+         "locator": "Trading Arrangement Notices: Parallel Trading; counter table",
+         "evidence": "From 2026-10-08: 02670 YUNJI-NEW, lot 100; 02915 YUNJI-OLD, lot 500. Settlement remains counter-specific."},
+    ],
+}
+_YUNJI_NAMES = frozenset(name.casefold() for name in (
+    "YUNJI", "YUNJI-NEW", "YUNJI-OLD", "Beijing Yunji Technology Co., Ltd.", "北京雲迹科技股份有限公司",
+))
+
+
+def _resolve_document_issuer(code_number: str, mapping: Mapping[str, Mapping[str, Any]], *, cutoff_at: str) -> dict[str, Any] | None:
+    """Resolve only issuer-document lookup; never alter an observation/security."""
+    if code_number != "02915":
+        item = mapping.get(code_number)
+        return dict(item) if item is not None else None
+    relation = _YUNJI_COUNTER_RELATION
+    cutoff = datetime.fromisoformat(cutoff_at)
+    if cutoff.tzinfo is None or not (datetime.fromisoformat(relation["effective_from"]) <= cutoff
+                                   < datetime.fromisoformat(relation["scheduled_end_exclusive"])):
+        raise ProviderError("TEMPORARY_COUNTER_OUTSIDE_EVIDENCED_WINDOW")
+    issuer = mapping.get("02670")
+    if (not isinstance(issuer, Mapping) or issuer.get("mapping_code") != "02670"
+            or _normal_text(str(issuer.get("issuer", ""))).casefold() not in _YUNJI_NAMES):
+        raise ProviderError("TEMPORARY_COUNTER_ISSUER_NOT_CONFIRMED")
+    direct = mapping.get("02915")
+    if direct is not None and (direct.get("stock_id") != issuer.get("stock_id")
+            or _normal_text(str(direct.get("issuer", ""))).casefold() not in _YUNJI_NAMES):
+        raise ProviderError("TEMPORARY_COUNTER_MAPPING_CONFLICT")
+    result = dict(issuer)
+    # A fresh independent record prevents callers from mutating the pinned rule.
+    evidence = json.loads(json.dumps(relation))
+    evidence["counter_name_at_cutoff"] = "YUNJI-OLD" if cutoff >= datetime.fromisoformat(relation["parallel_from"]) else "YUNJI"
+    evidence["lookup_cutoff_at"] = cutoff_at
+    evidence["record_sha256"] = _digest(json.dumps(relation, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8"))
+    evidence["record_digest_kind"] = "AUDITED_RELATIONSHIP_RECORD_NOT_REMOTE_DOCUMENT_BYTES"
+    result.update(document_code="02670", counter_relationship=evidence)
+    return result
+
+
 def _candidate_score(row: Mapping[str, Any]) -> tuple[int, str]:
     text = f"{row.get('headline', '')} {row.get('document_title', '')}".lower()
     # Result documents are ranked by document type before publication time.
@@ -523,10 +583,14 @@ class HkexOfficialProvider:
             mapping, mapping_sha, mapping_retrieved_at = self._load_active_stocks()
         except ProviderError as exc:
             return self._failure(code, target, "ISSUER_MAPPING_UNAVAILABLE", str(exc))
-        issuer_info = mapping.get(code_number)
+        try:
+            issuer_info = _resolve_document_issuer(code_number, mapping, cutoff_at=cutoff_at)
+        except ProviderError as exc:
+            return self._failure(code, target, "ISSUER_RELATIONSHIP_UNCONFIRMED", str(exc))
         if issuer_info is None:
             return self._failure(code, target, "ISSUER_NOT_IN_OFFICIAL_ACTIVE_LIST", "code not present in HKEX active stock list")
 
+        document_code = str(issuer_info.get("document_code", code_number))
         target_day = datetime.strptime(target, "%Y%m%d").date()
         from_day = target_day - timedelta(days=370)
         query = urlencode(
@@ -569,7 +633,7 @@ class HkexOfficialProvider:
         eligible = [
             row
             for row in rows
-            if row.get("stock_code") == code_number
+            if row.get("stock_code") == document_code
             and datetime.fromisoformat(str(row["published_at"])) <= cutoff_dt
             and str(row["published_at"])[:10].replace("-", "") <= target
         ]
@@ -683,7 +747,7 @@ class HkexOfficialProvider:
             "issuer_mapping_url": ACTIVE_STOCK_LIST_URL,
             "issuer_mapping_sha256": mapping_sha,
             "issuer_mapping_retrieved_at": mapping_retrieved_at,
-            "matching_basis": f"HKEX active stock list c={code_number}, i={issuer_info['stock_id']}; title directory stock code={selected.get('stock_code')}",
+            "matching_basis": f"HKEX active stock list c={document_code}, i={issuer_info['stock_id']}; title directory stock code={selected.get('stock_code')}" + (f"; observed counter={code_number}" if issuer_info.get('counter_relationship') else ""),
             "publication_time_evidence": "HKEX official title directory release-time row",
             "document_title": selected.get("document_title", ""),
             "headline": selected.get("headline", ""),
@@ -694,6 +758,9 @@ class HkexOfficialProvider:
             "parse_status": "STRUCTURED_FACTS" if facts else "NO_STRUCTURED_FACTS",
             "report_selection": "LATEST_EFFECTIVE_REPORT" if report_candidates else "BOUNDED_EVENT_FALLBACK",
         }
+        if issuer_info.get("counter_relationship"):
+            source.update(observed_counter_code=code, issuer_document_code=f"HK.{document_code}",
+                          issuer_relationship=issuer_info["counter_relationship"])
         if not facts:
             return {
                 "status": "CANNOT_CONFIRM",
@@ -827,6 +894,10 @@ class HkexOfficialProvider:
                 "matching_basis": f"HKEX active stock list code={code}",
                 "publication_time_evidence": "HKEX official title directory was queried; no qualifying document was confirmed",
             }
+        if source is not None and issuer_info and issuer_info.get("counter_relationship"):
+            source.update(observed_counter_code=code, issuer_document_code=f"HK.{issuer_info['document_code']}",
+                          issuer_relationship=issuer_info["counter_relationship"],
+                          matching_basis=f"HKEX active issuer c={issuer_info['document_code']}; observed counter={code}; dated temporary-counter relationship")
         if response is not None and source is not None:
             source["directory_retrieved_at"] = response.retrieved_at
             source["directory_sha256"] = _digest(response.body)

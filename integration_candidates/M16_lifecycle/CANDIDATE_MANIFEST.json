@@ -1,5 +1,5 @@
 {
-  "base_commit": "68e4ec21895ba534a043f035e259bcd29e8edc30",
+  "base_commit": "1666211d8f6471b992c6d501adc926c1fa4fd5e3",
   "scope": "integration_candidates/M16_lifecycle",
   "files": [
     {
@@ -10,9 +10,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 25728,
-      "sha256": "c2cc5faa947df2b380db5116b5ec9ed2eea26ea1f5cdbc2dfdc0c9878782a111",
-      "git_blob_sha": "de1fc38bff60a0c6b05bc218ea591bdc88e2e94a"
+      "bytes": 27908,
+      "sha256": "bcd2093c20b4a495e28270be4595f619daeeb8961428e89a035d24500f925d90",
+      "git_blob_sha": "2b2267eccbf784f4c80bfd2f9c1e4009a4caccdb"
     },
     {
       "path": "source/PACKAGE_CHECKS.json",
@@ -23,14 +23,14 @@
     {
       "path": "source/PACKAGE_SHA256.json",
       "bytes": 32905,
-      "sha256": "23a5dd947152bc510e917929cb5ccc29bdb0acda5b2a78f666ceb3595cd07dfe",
-      "git_blob_sha": "9b92d41412fa2bc6c46568129813023f6125c2dd"
+      "sha256": "fb65231f3480f128dd6f4afa2bc1f424dd5efc9d075ef98fdc866d2953aded3c",
+      "git_blob_sha": "cea2b9838b8834156c03b0af59da680f611d287a"
     },
     {
       "path": "source/SOURCE_MANIFEST.json",
       "bytes": 104540,
-      "sha256": "136ccbcedccca4dd75b98d4acb8f47e3e18980b351c28f84b7e88228962a1dac",
-      "git_blob_sha": "c62f9b4f2e77c8cc9c2b2d4069590fc038726e83"
+      "sha256": "5515c0ec467b3ea39ac79359022297c73bf0c989bd66b910815162fa69dc61c6",
+      "git_blob_sha": "3dcf9c67f549fc6de8192952f2f555d4d0cdea24"
     },
     {
       "path": "source/START_HERE.md",
@@ -664,9 +664,9 @@
     },
     {
       "path": "source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
-      "bytes": 40133,
-      "sha256": "1eca2c0be054e2e687a0370378cb469d0354f7eb9861ab039c1ecea14ece6057",
-      "git_blob_sha": "fd61abe363bde2f9a9ea4a9586ba46262b96570b"
+      "bytes": 45045,
+      "sha256": "e15337967bf538b5031281acc1dad41471a82931e02608e36c0ce3988ca01b6e",
+      "git_blob_sha": "6fc46cee5132474c8c11c2c294d05ef16b8630b6"
     },
     {
       "path": "source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/issuer_us_relations.py",
@@ -1253,8 +1253,8 @@
     {
       "path": "src/v5_shadow/m16_runtime.py",
       "bytes": 5888,
-      "sha256": "3d5b24c46730ba647edfa27fed622db310fa1c6b55dbea38245568244d04710a",
-      "git_blob_sha": "3b7531acdb331f75db3c872d4cdcb700ef091831"
+      "sha256": "3b27a50d5b5e20ec750fd3e823695478f946d9313ca068d7dda2bdc4974d5440",
+      "git_blob_sha": "b77ab22ec0f41dbbdb9ee86cb02867ca4fd2df97"
     },
     {
       "path": "src/v5_shadow/manager_factory.py",
@@ -1285,6 +1285,12 @@
       "bytes": 8197,
       "sha256": "ca84fb8902795bf2e6f15d351ac5c94e490c122f3cd43726ef164bfc4e3eeb96",
       "git_blob_sha": "69d1c210129ca7dc42587e0eead40643fc2a0375"
+    },
+    {
+      "path": "tests/fixtures/yunji_counter_evidence.json",
+      "bytes": 1626,
+      "sha256": "13cbafae7848c9a7202a166b6bd0544dd9fe8c8f9d64eebc6c663a65400e4a67",
+      "git_blob_sha": "8feb1fd4f04369e55477fe03bdc3e778a5a5bf60"
     },
     {
       "path": "tests/reference/p0_m16/SOURCE.json",
@@ -1369,6 +1375,12 @@
       "bytes": 10971,
       "sha256": "09d7a73d710a44de8dc5de3f0a28e44c5dec2bc3d8ae18ddf6dde9ff4d7cf745",
       "git_blob_sha": "ba4aa83242f68d57c0a792b33097d210e125b686"
+    },
+    {
+      "path": "tests/test_temporary_counter.py",
+      "bytes": 8594,
+      "sha256": "59e51d072b591fc327a2858d0283b9747136189c570c699fdd7217e21b89253a",
+      "git_blob_sha": "6550cd23a3645a13e0e02ec116977c462ebfe574"
     }
   ]
 }
