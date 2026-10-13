@@ -263,6 +263,8 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 
 - **同源计算与窗口页面最新验收（北京时间2026-10-14）：** 运行代码bbf3e43adc60ad41bdef95998f15483ff0988660、后续文档c9f8c7b41e492cb8017c68ac848cdc8f4ff35718；Mac33/33 PASS，复用690回执无新网络，40930行/690股，cutoff2026-10-13T18:40:58.776354Z。首次输出根未初始化在计算前失败保留，初始化后唯一实际owner run9c70cc6cb8e34afb9e34b366acf8becd及新旧冷读通过；仍strict0/near0/pending690，688历史缺口、2原始异常、另3 previous5重叠缺口，全690响应缺20260925，不改日历/补零/混源。初次reader投影展示缺口保留；a7eb3a9c4cf9f35ab7ba9830d41a29644201a788已4投影＋5Vue/typecheck/build及隔离/发布HTTP-DOM PASS，公开cutoff/行数/同源合同/scale1/原缺口，机器字段折叠。当前source58799/PID26199、54780/PID26268；13其他路由、732原文件、2760journal及owner产物不变，发布未重算。native visual NOT_RUN，单位/price basis/资格未证、自然与完整0/18不变。[合并增量验收](../../../../handoffs/P0/feedback/mac-m14-window-and-visibility-20261014/README.md)。
 
+- **P0槽修隔离验收（2026-10-13 UTC22:42）：** 固定0ac1e78ccb54049e0a4a66d6254e5ecb68810086，Mac槽8/8及原M14/API合成23/23 PASS，精确前后SHA/清单/正反patch通过，临时目录与进程已清理。真实690行读/发布/现役变更未执行：安全检查拒绝，具体用户批准请求Sentinel_7aaff2c41a408191a58afcfa40ed7e72待答。合成690不计真实验收，不改变页面或14/0计数。[派生隔离反馈](../../../../handoffs/P0/feedback/mac-m14-slot-isolated-20261014/README.md)。
+
 ### M15 美股到港股映射｜P1
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca4b1c-7bac-83ec-878c-d1fb0bd37b38)；`dev/m15-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。

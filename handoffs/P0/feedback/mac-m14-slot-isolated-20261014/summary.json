@@ -1,0 +1,47 @@
+{
+  "evidence_type": "DERIVED_SUMMARY",
+  "provenance": "Transcribed from controller-reported Mac result; documentation writer did not rerun tests or access real inputs.",
+  "candidate_commit": "0ac1e78ccb54049e0a4a66d6254e5ecb68810086",
+  "source_thread": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+  "source_turn_prefix": "01a1376d",
+  "tests": {
+    "slot": {
+      "start_utc": "2026-10-13T22:42:31.545Z",
+      "end_utc": "2026-10-13T22:42:36.031Z",
+      "passed": 8,
+      "total": 8
+    },
+    "original_m14_api_synthetic": {
+      "start_utc": "2026-10-13T22:42:36.031Z",
+      "end_utc": "2026-10-13T22:42:49.323Z",
+      "passed": 23,
+      "total": 23
+    }
+  },
+  "verification": {
+    "before_sha256": "94c1c26a36a7d1881602b7780077c056615344bf5ab21a54bf2b749904af1d21",
+    "after_sha256": "6435783655a1cca6f86e2a2f262510d87a7abd335b495f1be172cd7b8b12615c",
+    "exact_before_after_sha": "PASS",
+    "manifest": "PASS",
+    "forward_reverse_patch": "PASS",
+    "temporary_directory_cleared": true,
+    "temporary_processes_exited": true
+  },
+  "blocked_scope": {
+    "real_690_row_read": "NOT_RUN",
+    "publication": "NOT_RUN",
+    "active_runtime_change": "NOT_RUN",
+    "reason": "Safety check denied the real-data read/publication step; specific user approval remains unanswered.",
+    "pending_approval_message_id": "Sentinel_7aaff2c41a408191a58afcfa40ed7e72"
+  },
+  "limits": {
+    "synthetic_690_is_not_real_validation": true,
+    "current_page_unchanged": true,
+    "natural_verified": false,
+    "page_count": 14,
+    "complete_modules": 0,
+    "total_modules": 18,
+    "raw_data_uploaded": false,
+    "private_absolute_paths_uploaded": false
+  }
+}
