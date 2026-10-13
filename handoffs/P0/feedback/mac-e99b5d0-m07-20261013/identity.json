@@ -1,0 +1,17 @@
+{
+  "candidate": "e99b5d0d8d0dfc7c2e76d68057c735b4e5dc7c31",
+  "all_git_blob_files_verified": 159,
+  "source_unchanged_after_tests": true,
+  "source_materialization": "Authorized GitHub connector fixed-commit blobs; independent directory, not a Git worktree claim",
+  "M07_FIXED_COMMIT": "e99b5d0d8d0dfc7c2e76d68057c735b4e5dc7c31",
+  "python": "3.14.6",
+  "pytest": "9.1.1",
+  "PYTHONPATH": "src",
+  "PYTHONDONTWRITEBYTECODE": "1",
+  "tests_passed": 63,
+  "subtests_passed": 31,
+  "real_market_input": false,
+  "p0_deployed": false,
+  "formal_eligibility": false,
+  "natural_verified": false
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-c",
+      "import sys,pytest; print(sys.version); print(\"pytest\",pytest.__version__); assert sys.version_info >= (3,14)"
+    ],
+    "cwd": "candidate-m07-e99b",
+    "started_utc": "2026-10-13T05:59:54.748088+00:00",
+    "finished_utc": "2026-10-13T05:59:54.810068+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "handoffs/M07/delivery/verify_delivery.py"
+    ],
+    "cwd": "candidate-m07-e99b",
+    "started_utc": "2026-10-13T05:59:54.810582+00:00",
+    "finished_utc": "2026-10-13T05:59:54.833661+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "cwd": "candidate-m07-e99b/handoffs/M07/V5",
+    "started_utc": "2026-10-13T05:59:54.834142+00:00",
+    "finished_utc": "2026-10-13T06:00:08.076273+00:00",
+    "exit_code": 0
+  }
+]
