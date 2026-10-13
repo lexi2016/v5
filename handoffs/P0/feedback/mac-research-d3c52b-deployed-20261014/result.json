@@ -1,0 +1,114 @@
+{
+  "candidate": "d3c52b4f08cbe6af9f69326461109004ac36c95c",
+  "started_at": "2026-10-13T16:01:29.825422+00:00",
+  "source_origin": "http://127.0.0.1:51363",
+  "source_pid": 11000,
+  "native_visual": "NOT_RUN_BROWSER_TOOL_TIMEOUT",
+  "rollback": {
+    "frontend": "m14-c7-fac269-combined/checkout/frontend",
+    "source_origin": "http://127.0.0.1:56563",
+    "manager_origin": "http://127.0.0.1:63668",
+    "preview_port": 54780
+  },
+  "protected_ports": {
+    "56563": [
+      3337
+    ],
+    "63668": [
+      17107
+    ],
+    "8873": [
+      54701
+    ],
+    "8910": [
+      1093
+    ],
+    "54777": [
+      69093
+    ],
+    "54778": [
+      69094
+    ],
+    "54779": [
+      69095
+    ]
+  },
+  "old_preview_pid": 3345,
+  "protected_file_count": 2688,
+  "preview_pid": 11869,
+  "status": "DEPLOYED_HTTP_DOM_PASS",
+  "finished_at": "2026-10-13T16:01:43.496448+00:00",
+  "existing_routes_equal": 12,
+  "manager_descriptor_equal": true,
+  "protected_files_unchanged": true,
+  "protected_ports_unchanged": true,
+  "rollback_executed": false,
+  "preview_port": 54780,
+  "real_archive_articles": 18,
+  "out_of_scope_errors": 53,
+  "rapid_date_switch": "BUSY_503_FAIL_CLOSED_EXPLICIT_RETRY_RECOVERS",
+  "page_url": "http://127.0.0.1:54780/?view=research&date=20261012",
+  "m04_candidate": "8266c6ed9606b0912328670c7411743a85af5727",
+  "m04_release_sha256": "156d7f1ab030a8c7427a7c079eef62ed6615071d37e8c9fd41efa1d61ffdcbec",
+  "candidate_release_sha256": "7e9cca5b81ce093ca4d6741b83415d9ce05c1d58bfdb1c66ca5d9a0cdc77f1a4",
+  "checkout": "research-d3c52b-combined/checkout",
+  "source_config": "research-d3c52b-combined/evidence-retry/source-api.private.json",
+  "previous_test_evidence": "research-d4ff8d-isolated/result.safe.json",
+  "source_capture": "NOT_RUN",
+  "real_owner_computation": "NOT_RUN",
+  "wechat": "NOT_CONFIGURED",
+  "whole_module_acceptance": "NOT_CLAIMED",
+  "legacy_entry": "SOURCE_DISPATCH_UNCHANGED_ENTRY_TEST_PASS_NOT_LIVE_VISUAL",
+  "page_content": {
+    "research_date": "20261012",
+    "status": "LIVE_PERIPHERAL_ONLY",
+    "article_count": 18,
+    "articles_without_body_field": 18,
+    "body_display_when_missing": "原文正文未提供",
+    "acquisition_status": "UNKNOWN",
+    "missing_acquisition_time_count": 18,
+    "source_run_id": null,
+    "out_of_scope_record_errors": 53,
+    "hourly_research": "NOT_GENERATED",
+    "latest": "EXPLICIT_ONLY",
+    "missing_exact_date": "NOT_MATERIALIZED_NO_FALLBACK"
+  },
+  "checks": {
+    "frontend_focused": 61,
+    "bridge_unit": 6,
+    "preimage_guards": 3,
+    "entry": 3,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "isolated_manager_M02_M14_DOM": "PASS",
+    "isolated_research_DOM": "PASS",
+    "published_research_DOM": "PASS",
+    "browser_visual": "NOT_RUN_TOOL_TIMEOUT"
+  },
+  "harness_attempts": [
+    "Initial comparator did not recurse through HTTP tuples; fixed harness only, original source child stopped.",
+    "Initial DOM guard rejected same-origin asset preload; fixed harness only.",
+    "DOM resources had to enable same-origin CSS for Vite dynamic entry.",
+    "Rapid date switch returns busy503; retained original failure record, separately verified no stale data and explicit retry recovery."
+  ],
+  "dom_evidence": {
+    "research_isolated": {
+      "status": "PASS",
+      "sha256": "57e367e43506469718fda9b81b0055a893004b537b65e19e648ffa469c664c3c",
+      "bytes": 9755,
+      "private_snapshot_not_exported": true
+    },
+    "manager_isolated": {
+      "status": "PASS",
+      "sha256": "2c19ce7267f0aae3f28124d34f20b9688f4b6f963fa085679ff6eb3926e898c0",
+      "bytes": 1147448,
+      "private_snapshot_not_exported": true
+    },
+    "research_published": {
+      "status": "PASS",
+      "sha256": "dc63c8c0e62d1dae41c4fafd4055a13d935f6484df94c858f9eb6ad6b96a3912",
+      "bytes": 9755,
+      "private_snapshot_not_exported": true
+    }
+  }
+}
