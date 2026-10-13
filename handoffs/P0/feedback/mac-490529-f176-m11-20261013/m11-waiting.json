@@ -1,0 +1,40 @@
+{
+  "buy_gate_updated": false,
+  "module_id": "M11_INTRADAY_RESEARCH",
+  "natural_verified": false,
+  "orders_sent": false,
+  "production_allowed": false,
+  "reason_codes": [
+    "M11_SAVED_REFERENCE_NOT_CONFIGURED"
+  ],
+  "research_only": true,
+  "review_completed": false,
+  "schema_version": "v5.m11_saved_research.v1",
+  "slots": [
+    {
+      "slot": "09:25",
+      "status": "WAITING"
+    },
+    {
+      "slot": "09:35",
+      "status": "WAITING"
+    },
+    {
+      "slot": "10:00",
+      "status": "WAITING"
+    },
+    {
+      "slot": "11:30",
+      "status": "WAITING"
+    },
+    {
+      "slot": "14:00",
+      "status": "WAITING"
+    },
+    {
+      "slot": "15:00",
+      "status": "WAITING"
+    }
+  ],
+  "status": "WAITING"
+}

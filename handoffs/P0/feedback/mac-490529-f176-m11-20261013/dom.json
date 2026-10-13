@@ -1,0 +1,171 @@
+{
+  "behavior": {
+    "initial_sources_closed": true,
+    "result_before_sources": true,
+    "heading": "公告研究股票目标日 20261012已读取运行 46596b03c2ab4e29b1219fd2e5eb698f",
+    "m11": {
+      "opens_and_focuses": true,
+      "slots_waiting": 6,
+      "no_saved_content": true,
+      "reopen_does_not_fetch": true,
+      "real_owner_receipt": false
+    },
+    "m12": {
+      "real_original_transcript_and_segments_exact": true,
+      "identity_exact": true,
+      "asr_review_required": true,
+      "stockdict_not_available": true,
+      "reimported": false
+    },
+    "loading_in_result_before_sources": true,
+    "m04": {
+      "real_articles_exact": 18,
+      "first_click_opens_both_and_focuses": true,
+      "reopen_repeat_does_not_fetch": true,
+      "explicit_refresh_clears_rows_and_reads_once": true,
+      "outside_errors": 53,
+      "pit": "UNKNOWN"
+    },
+    "source_expand_and_focus": true,
+    "error_in_result_before_sources": true,
+    "error_clears_old_result": true,
+    "restored_same_run": true
+  },
+  "exit_code": 0,
+  "finished_utc": "2026-10-13T05:36:19.715Z",
+  "method": "Entire deployed built main bundle mounted in jsdom, real local HTTP; not browser visual validation",
+  "requests": [
+    {
+      "path": "/assets/_plugin-vue_export-helper-DlAUqK2U.js",
+      "status": 200,
+      "elapsed_ms": 6
+    },
+    {
+      "path": "/assets/style-DI6AXicP.js",
+      "status": 200,
+      "elapsed_ms": 11
+    },
+    {
+      "path": "/assets/reboundPanelObservation-rEOT8hV3.js",
+      "status": 200,
+      "elapsed_ms": 7
+    },
+    {
+      "path": "/assets/SavedManagerResultView-DJzC47Qa.js",
+      "status": 200,
+      "elapsed_ms": 8
+    },
+    {
+      "path": "/assets/runtime-dom.esm-bundler-Ds5LT4Of.js",
+      "status": 200,
+      "elapsed_ms": 13
+    },
+    {
+      "path": "/api/v4/manager/m18/v2?run_id=46596b03c2ab4e29b1219fd2e5eb698f",
+      "status": 200,
+      "elapsed_ms": 3
+    },
+    {
+      "path": "/api/v5/source-bundle/status",
+      "status": 200,
+      "elapsed_ms": 7
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-stage-observed",
+      "status": 200,
+      "elapsed_ms": 47
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-close-review",
+      "status": 200,
+      "elapsed_ms": 55
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-stage-observed?date=20261012&stage=STAGE_0925&run_id=run-ad1e0d8a968a1f609d23f874&import_sha256=574539e4fe64225e65c57c7693f36b21919c3c67acb2a01daa03aaaf4cfd2606",
+      "status": 200,
+      "elapsed_ms": 157
+    },
+    {
+      "path": "/api/v5/manager/close-recapture?source_trade_date=20261012&run_id=ca2c344b61334ad28f4b6146117643cd",
+      "status": 200,
+      "elapsed_ms": 260
+    },
+    {
+      "path": "/api/v5/source-bundle/a-close-replay",
+      "status": 200,
+      "elapsed_ms": 468
+    },
+    {
+      "path": "/api/v5/source-bundle/hk-preselection",
+      "status": 200,
+      "elapsed_ms": 814
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/overview?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a",
+      "status": 200,
+      "elapsed_ms": 4479
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+      "status": 200,
+      "elapsed_ms": 4759
+    },
+    {
+      "path": "/api/v5/source-bundle/intraday-research",
+      "status": 200,
+      "elapsed_ms": 3
+    },
+    {
+      "path": "/api/v5/source-bundle/video-fupan",
+      "status": 200,
+      "elapsed_ms": 78
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+      "status": 200,
+      "elapsed_ms": 4452
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=rebound_research_observation&projection=rebound_references&group=strict",
+      "status": 200,
+      "elapsed_ms": 4625
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=us_mapping_research&projection=us_mapping_matches",
+      "status": 200,
+      "elapsed_ms": 4598
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=summary",
+      "status": 200,
+      "elapsed_ms": 4388
+    },
+    {
+      "path": "/api/v5/source-bundle/research-intelligence",
+      "status": 200,
+      "elapsed_ms": 159
+    },
+    {
+      "path": "/api/v5/source-bundle/research-intelligence",
+      "status": 200,
+      "elapsed_ms": 180
+    },
+    {
+      "path": "/api/v4/manager/m18/v2?run_id=46596b03c2ab4e29b1219fd2e5eb698f",
+      "status": 200,
+      "elapsed_ms": 4
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/overview?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a",
+      "status": 200,
+      "elapsed_ms": 4514
+    },
+    {
+      "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+      "status": 200,
+      "elapsed_ms": 4510
+    }
+  ],
+  "logs": [],
+  "visual_verification": false
+}

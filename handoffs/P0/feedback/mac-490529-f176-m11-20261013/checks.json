@@ -1,0 +1,54 @@
+[
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/node",
+      "--test",
+      "tests/aCloseReplay.node.mjs",
+      "tests/m09FixtureEnvironment.node.mjs",
+      "tests/m11SavedResearch.node.mjs"
+    ],
+    "cwd": "candidate-m11-f176/frontend",
+    "started_utc": "2026-10-13T05:34:18.230757+00:00",
+    "finished_utc": "2026-10-13T05:34:19.500616+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "test",
+      "--",
+      "src/components/M11SavedResearch.spec.ts",
+      "src/views/SavedManagerResultView.m11.spec.ts",
+      "src/components/M12SavedVideo.spec.ts",
+      "src/views/SavedManagerResultView.m12.spec.ts",
+      "src/components/M04SavedResearch.spec.ts",
+      "src/views/SavedManagerResultView.navigation.spec.ts"
+    ],
+    "cwd": "candidate-m11-f176/frontend",
+    "started_utc": "2026-10-13T05:34:19.501166+00:00",
+    "finished_utc": "2026-10-13T05:34:21.449639+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "candidate-m11-f176/frontend",
+    "started_utc": "2026-10-13T05:34:21.450102+00:00",
+    "finished_utc": "2026-10-13T05:34:23.423778+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "build"
+    ],
+    "cwd": "candidate-m11-f176/frontend",
+    "started_utc": "2026-10-13T05:34:23.424270+00:00",
+    "finished_utc": "2026-10-13T05:34:24.623679+00:00",
+    "exit_code": 0
+  }
+]

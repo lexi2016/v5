@@ -1,0 +1,12 @@
+{
+  "product_commit": "490529f549324fb435af56d5f728672ad6390b72",
+  "fixture_fix_commit": "f176d7076d4a844b8203ee8aa664f182ee284fe7",
+  "original_candidate_files_verified": 95,
+  "fixture_test_files_verified": 2,
+  "runtime_files_verified": 74,
+  "m12_native_import_adapter_preserved": true,
+  "m12_original_binding_preserved": true,
+  "protected_files_after_dom_unchanged": 265,
+  "python117_rerun": false,
+  "full_node_suite_rerun": false
+}
