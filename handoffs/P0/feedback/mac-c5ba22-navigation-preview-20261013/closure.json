@@ -1,0 +1,18 @@
+[
+  {
+    "path": "frontend/src/views/SavedManagerResultView.navigation.spec.ts",
+    "sha256": "35a1b5efd43149a0cbf6192e50c0ec9bc574b44c824cdc705ec5d6df8fcdff1f"
+  },
+  {
+    "path": "frontend/src/views/SavedManagerResultView.spec.ts",
+    "sha256": "be714990932ab6c8d769c3b019ebf54faac39070f4a589f1c8df3a390213f648"
+  },
+  {
+    "path": "frontend/src/views/SavedManagerResultView.vue",
+    "sha256": "2f1fca202be484619982ecc4542102ed5997e45aa54a69b8d00b28d9600beab8"
+  },
+  {
+    "path": "frontend/tests/savedManagerNavigation.node.mjs",
+    "sha256": "371c81a29bdaed38deeb8cd9b86645f68bcc95d5fd624b12e7b807966fb14933"
+  }
+]

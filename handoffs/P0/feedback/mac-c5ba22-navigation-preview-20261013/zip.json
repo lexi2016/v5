@@ -1,0 +1,26 @@
+{
+  "filename": "v5-287de959-0332c6b-c5ba22fa-frontend-dist.zip",
+  "sha256": "30841b505f548608588068e14ceffc0f616167c99b162fa56c439636b9ea93fc",
+  "bytes": 270682,
+  "files": [
+    "assets/App-8NKFrO9R.js",
+    "assets/App-C8ZBy9MI.css",
+    "assets/ManagerSelectionView-DPqeaKxb.css",
+    "assets/ManagerSelectionView-Hp_a-sop.js",
+    "assets/SavedManagerResultView-B7YF6OsU.js",
+    "assets/SavedManagerResultView-DTEB0zkU.css",
+    "assets/_plugin-vue_export-helper-DlAUqK2U.js",
+    "assets/dailyResearchCommand-D13tk45Q.js",
+    "assets/dailyResearchCommand-D7J2FMsY.css",
+    "assets/main-B1p8LB6Q.js",
+    "assets/managerSelection-zGQNsZaI.js",
+    "assets/reboundPanelObservation-rEOT8hV3.js",
+    "assets/research_lane-t0CPXntR.js",
+    "assets/runtime-dom.esm-bundler-Ds5LT4Of.js",
+    "assets/style-BtNCnKLk.css",
+    "assets/style-DI6AXicP.js",
+    "daily-research-command/index.html",
+    "index.html",
+    "manager-selection/index.html"
+  ]
+}
