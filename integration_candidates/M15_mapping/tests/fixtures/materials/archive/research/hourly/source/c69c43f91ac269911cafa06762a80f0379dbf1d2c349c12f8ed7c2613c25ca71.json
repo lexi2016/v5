@@ -1,0 +1,280 @@
+{
+  "buy_gate_effect": "none",
+  "cannot_confirm": [
+    {
+      "module": "research_intelligence",
+      "reason": "RESEARCH_ONLY_NO_BUY_GATE"
+    }
+  ],
+  "default_status": "RESEARCH_ONLY",
+  "hourly_research": {
+    "latest_research_slot": "0900",
+    "latest_slot": "0900",
+    "row_count": 1,
+    "schema_version": "hourly_research_dashboard.v1",
+    "slot_count": 1,
+    "status": "READY_WITH_RESEARCH_POOL",
+    "trade_date": "20261013"
+  },
+  "integration_state": "generated_snapshot_live",
+  "lanes": [
+    {
+      "display_name": "v3.5 研报模块生成快照",
+      "lane_id": "v3_research_module_generated_snapshot",
+      "next_action": "生成完成后供 8872 只读页面读取。",
+      "opens_buy_gate": false,
+      "source_path": "research/hourly/latest.json",
+      "status": "RESEARCH_ONLY"
+    }
+  ],
+  "live_order_effect": "none",
+  "module_id": "research_intelligence",
+  "morning_news": {
+    "articles": [],
+    "articles_count": 0,
+    "buy_gate_effect": "none",
+    "cannot_confirm_items": [],
+    "live_order_effect": "none",
+    "status": "GENERATED_SNAPSHOT",
+    "write_policy": "read_only"
+  },
+  "news_workbench": {
+    "action_rows": [],
+    "buy_gate_effect": "none",
+    "cannot_confirm_items": [],
+    "live_order_effect": "none",
+    "quality_summary": {
+      "bridge_count": 1,
+      "cannot_confirm_count": 0,
+      "formal_overlap_count": 0,
+      "l1_weak_count": 0,
+      "l2_medium_count": 0,
+      "l3_strong_count": 1,
+      "raw_item_count": 1,
+      "research_item_count": 1,
+      "stock_daily_count": 1,
+      "stock_evidence_count": 1
+    },
+    "schema_version": "generated_snapshot.v1",
+    "source_health": {},
+    "status": "GENERATED_SNAPSHOT",
+    "write_policy": "read_only"
+  },
+  "ok": true,
+  "quality_status": "QUALITY_PASS",
+  "raw_items": [
+    {
+      "crawl_time": "2026-10-13T00:00:00+08:00",
+      "published_at": "2026-10-12T23:30:00+08:00",
+      "quality_flags": [],
+      "raw_id": "06da8872cd1c48d3",
+      "raw_payload": {
+        "crawl_time": "2026-10-13T00:00:00+08:00",
+        "display_event_time": "2026-10-12T23:30:00+08:00",
+        "first_seen_at": "2026-10-13T00:00:00+08:00",
+        "group_id": null,
+        "is_new_since_last_slot": true,
+        "is_recheck_duplicate": false,
+        "last_checked_at": "2026-10-13T00:00:00+08:00",
+        "mentioned_stock_candidates": [
+          "合成科技",
+          "00001"
+        ],
+        "published_at": "2026-10-12T23:30:00+08:00",
+        "raw_id": "06da8872cd1c48d3",
+        "raw_text": "合成科技与 NASDAQ:AVGO 签署光模块供货协议并交付光互连设备。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立 合成研究标题",
+        "slot": "0900",
+        "source_cannot_confirm": [],
+        "source_confidence": "HIGH",
+        "source_evidence_level": "L3_STRONG",
+        "source_name": "知识星球",
+        "source_path": "research_module/runtime_outputs/zsxq_hourly/20261013/0900/v35_zsxq_hourly_status_20261013_0900.json",
+        "source_published_at": "2026-10-12T23:30:00+08:00",
+        "source_type": "zsxq",
+        "stock": "合成科技",
+        "stock_code": "00001",
+        "stock_name": "合成科技",
+        "themes": [
+          "Optical"
+        ],
+        "title": "合成研究标题",
+        "topic_id": "12345678901234567",
+        "trade_date": "20261013",
+        "url": "https://wx.zsxq.com/dweb2/index/topic_detail/12345678901234567"
+      },
+      "raw_text": "合成科技与 NASDAQ:AVGO 签署光模块供货协议并交付光互连设备。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立 合成研究标题",
+      "source_name": "知识星球",
+      "source_path": "research_module/runtime_outputs/zsxq_hourly/20261013/0900/v35_zsxq_hourly_status_20261013_0900.json",
+      "source_type": "zsxq",
+      "title": "合成研究标题",
+      "trade_date": "20261013",
+      "url": "https://wx.zsxq.com/dweb2/index/topic_detail/12345678901234567"
+    }
+  ],
+  "research_cards": [],
+  "research_items": [
+    {
+      "cannot_confirm": [],
+      "dedup_key": "2e399a340025e8d1",
+      "display_event_time": "2026-10-12T23:30:00+08:00",
+      "event_time": "2026-10-12T23:30:00+08:00",
+      "first_seen_at": "2026-10-13T00:00:00+08:00",
+      "is_new_since_last_slot": true,
+      "is_recheck_duplicate": false,
+      "item_id": "b2b528ad0a83ca05",
+      "item_quality": "OK",
+      "last_checked_at": "2026-10-13T00:00:00+08:00",
+      "mentioned_stock_candidates": [
+        "合成科技",
+        "00001"
+      ],
+      "raw_id": "06da8872cd1c48d3",
+      "source_confidence": "HIGH",
+      "source_entity_receipts": [],
+      "source_evidence_level": "L3_STRONG",
+      "source_name": "知识星球",
+      "source_path": "research_module/runtime_outputs/zsxq_hourly/20261013/0900/v35_zsxq_hourly_status_20261013_0900.json",
+      "source_published_at": "2026-10-12T23:30:00+08:00",
+      "source_type": "zsxq",
+      "summary": "合成科技与 NASDAQ:AVGO 签署光模块供货协议并交付光互连设备。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立测试合成正文，没有真实业务含义。此处仅为独立 合成研究标题",
+      "themes": [
+        "Optical"
+      ],
+      "title": "合成研究标题",
+      "trade_date": "20261013",
+      "url": "https://wx.zsxq.com/dweb2/index/topic_detail/12345678901234567"
+    }
+  ],
+  "research_pool_bridge": [
+    {
+      "bridge_id": "7851ce4850fbadf2",
+      "buy_gate_effect": "none",
+      "default_status": "RESEARCH_ONLY",
+      "evidence_level": "L3_STRONG",
+      "formal_overlap": false,
+      "live_order_effect": "none",
+      "matched_pool": "NONE",
+      "matched_stage": "",
+      "next_action": "补盘口/分时/成交/复盘证据，等待正式池或人工审查确认。",
+      "reason": "研报/资讯证据已形成，但未命中池或阶段",
+      "research_score": 35,
+      "source_evidence_ids": [
+        "f161ca770e23a083"
+      ],
+      "stage_overlap": false,
+      "stock_code": "00001",
+      "stock_name": "合成科技",
+      "trade_date": "20261013",
+      "write_policy": "read_only"
+    }
+  ],
+  "research_quality_summary": {
+    "bridge_count": 1,
+    "cannot_confirm_count": 0,
+    "formal_overlap_count": 0,
+    "l1_weak_count": 0,
+    "l2_medium_count": 0,
+    "l3_strong_count": 1,
+    "raw_item_count": 1,
+    "research_item_count": 1,
+    "stock_daily_count": 1,
+    "stock_evidence_count": 1
+  },
+  "research_sections": [
+    {
+      "count": 1,
+      "display_name": "股票主线",
+      "section_id": "stock_research_daily",
+      "source_path": "stock_research_daily",
+      "status": "READY"
+    },
+    {
+      "count": 1,
+      "display_name": "股票时间线",
+      "section_id": "stock_research_timeline",
+      "source_path": "stock_research_timeline",
+      "status": "READY"
+    }
+  ],
+  "schema_version": "v3_research_lane.v2",
+  "source_health": {
+    "research_module_snapshot": "READY",
+    "stock_timeline": "READY"
+  },
+  "source_manifest": {
+    "event_id": "",
+    "generated_at": "2026-10-13T09:00:59+08:00",
+    "hourly_slot": "0900",
+    "module_path": "v3.5/domains/research_hourly",
+    "producer": "ops.collect_hourly_research_input",
+    "producer_oracle_sha256": "850fffdf16b7c0127852cbe9cc374aed353e8d7cb1c2ba73d2eff880c95d022e",
+    "published_at": "2026-10-13T09:00:59+08:00",
+    "source_types": [
+      "zsxq"
+    ],
+    "version": "20261013230700-fbc665c2"
+  },
+  "stock_research_daily": [
+    {
+      "evidence_count": 1,
+      "first_seen_time": "2026-10-12T23:30:00+08:00",
+      "last_seen_time": "2026-10-12T23:30:00+08:00",
+      "latest_evidence_sentence": "合成科技与 NASDAQ:AVGO 签署光模块供货协议并交付光互连设备。",
+      "medium_evidence_count": 0,
+      "next_action": "补盘口/分时/成交/复盘证据，等待正式池或人工审查确认。",
+      "pool_overlap": {},
+      "research_score": 35,
+      "research_status": "HOT",
+      "source_count": 1,
+      "source_types": [
+        "zsxq"
+      ],
+      "stock_code": "00001",
+      "stock_name": "合成科技",
+      "strong_evidence_count": 1,
+      "themes": [
+        "Optical"
+      ],
+      "top_catalysts": [
+        "Optical"
+      ],
+      "trade_date": "20261013",
+      "weak_evidence_count": 0
+    }
+  ],
+  "stock_research_timeline": [
+    {
+      "cannot_confirm": [],
+      "catalyst": "Optical",
+      "confidence": "HIGH",
+      "dedup_key": "56439c24c69c1eda",
+      "display_event_time": "2026-10-12T23:30:00+08:00",
+      "event_time": "2026-10-12T23:30:00+08:00",
+      "evidence_id": "f161ca770e23a083",
+      "evidence_level": "L3_STRONG",
+      "evidence_sentence": "合成科技与 NASDAQ:AVGO 签署光模块供货协议并交付光互连设备。",
+      "extractor": "dictionary",
+      "first_seen_at": "2026-10-13T00:00:00+08:00",
+      "is_direct_stock_mention": true,
+      "is_new_since_last_slot": true,
+      "is_recheck_duplicate": false,
+      "is_theme_only_mapping": false,
+      "last_checked_at": "2026-10-13T00:00:00+08:00",
+      "quality_flags": [],
+      "source_name": "知识星球",
+      "source_path": "research_module/runtime_outputs/zsxq_hourly/20261013/0900/v35_zsxq_hourly_status_20261013_0900.json",
+      "source_published_at": "2026-10-12T23:30:00+08:00",
+      "source_title": "合成研究标题",
+      "source_type": "zsxq",
+      "stock_code": "00001",
+      "stock_name": "合成科技",
+      "theme": "Optical",
+      "time_bucket": "AFTERHOURS",
+      "trade_date": "20261013",
+      "url": "https://wx.zsxq.com/dweb2/index/topic_detail/12345678901234567"
+    }
+  ],
+  "stock_timeline_available": true,
+  "trade_date": "20261013",
+  "write_policy": "read_only"
+}

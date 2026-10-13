@@ -1,0 +1,156 @@
+[
+  {
+    "candidate_path": "tests/original/test_daily_us_owner.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/tests/test_daily_us_owner.py",
+    "source_commit": "1dede80b4ff18781849e87e85ca693890ed57979",
+    "git_blob": "9e5b100aaf120c2012c7f662933ac14d3932ae2a"
+  },
+  {
+    "candidate_path": "tests/original/test_us_mapping_scope.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/tests/test_us_mapping_scope.py",
+    "source_commit": "1dede80b4ff18781849e87e85ca693890ed57979",
+    "git_blob": "484cc0fcd0c7458b1b74897450d404479d87ec21"
+  },
+  {
+    "candidate_path": "tests/original/test_us_mapping_recovery_evaluation.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/tests/test_us_mapping_recovery_evaluation.py",
+    "source_commit": "1dede80b4ff18781849e87e85ca693890ed57979",
+    "git_blob": "04847e4b5b8ab5e1d35918dbcef49376ce8eec41"
+  },
+  {
+    "candidate_path": "tests/original/test_current_us_research.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/tests/test_current_us_research.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "80a54221eb716f57fb6848d986eb48ad2b151a10"
+  },
+  {
+    "candidate_path": "runtime/V5/tests/test_archive_acquisition_producer.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/tests/test_archive_acquisition_producer.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "97fe034dc40c92156bb9dde384dc959b6287dc93"
+  },
+  {
+    "candidate_path": "runtime/V5/tests/test_archive_article_v2.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/tests/test_archive_article_v2.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "ccec69d3c9819de1a131d44430bceaaa6b77951c"
+  },
+  {
+    "candidate_path": "runtime/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py",
+    "repository": "lexi2016/v4",
+    "source_path": "V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py",
+    "source_commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+    "git_blob": "6b6d88cdc421a1f561fbbbdada3f33154f3a570f"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/ops/collect_hourly_research_input.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/ops/collect_hourly_research_input.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "b33b26db87f87cf3dea325901164a473a5a8b491"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/research.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/domains/research.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "e039fb39e602a907ab72408f43de259420d254ed"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/research_hourly.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/domains/research_hourly.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "9bbedc909d49860267abc9f54fc9201b913b19d5"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/trading_safety.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/trading_safety.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "5f10cfb51cb3dacd327447475964e0f6867ee89f"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/interprocess_lock.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/interprocess_lock.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "a97e733725834235fbcc9129639ae198fa8770cd"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/isolated_package_loader.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/isolated_package_loader.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "c351e33930bb5e7b8321940ec88afc42c34038fc"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/owned_path.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/owned_path.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "2d9873a41c09a05c62975210a13a59bf350a1a5a"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/market_time.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/market_time.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "bcac1bd49b6861d60f8820e0bbc7dd7fa42c8fd0"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/data_store.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/data_store.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/infrastructure/owned_io.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/infrastructure/owned_io.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "1b6666551980c44ebb0b05f133c189909d79c7df"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/_research_hourly_parts/lane_snapshot.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/domains/_research_hourly_parts/lane_snapshot.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "c32dd905f55eadc663893ef110bd8bcfd897cb00"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/_research_hourly_parts/rows_topics.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/domains/_research_hourly_parts/rows_topics.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "37c099f3f0b509665f2ff767a918fbd360dd1ca1"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/_research_hourly_parts/research_projection.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/domains/_research_hourly_parts/research_projection.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "b8af2708c0d217dcb3de45eb93fcff9a8d11a8a5"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/_research_hourly_parts/source_evidence.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/archive_builder_baseline/domains/_research_hourly_parts/source_evidence.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "090515271dcf8954e83b53b01c6255969570c85c"
+  },
+  {
+    "candidate_path": "tests/producer_dependencies/domains/_research_hourly_parts/_namespace.py",
+    "repository": "lexi2016/v5",
+    "source_path": "V5/vendor/a_preselection_baseline/domains/_preselection_materializer_parts/_namespace.py",
+    "source_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "git_blob": "55e1b3f744f80339298ac911073c67f3e549cf3c"
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "mode": "both",
+  "target_date": "20261014",
+  "cutoff": "2026-10-13T13:00:00+00:00",
+  "session_date": "20261012",
+  "us_root": "/ABSOLUTE/V5/private-us-input",
+  "materials": {"root": "/ABSOLUTE/V5/material-store", "files": []},
+  "native_master": {"root": "/ABSOLUTE/V5/native-master", "files": ["assets/hk_security_master/latest.json", "assets/hk_security_master/runs/20261013/EXACT_RUN/artifact.csv", "assets/hk_security_master/runs/20261013/EXACT_RUN/manifest.json", "assets/hk_security_master/runs/20261013/EXACT_RUN/receipt.json"]},
+  "archives": {"root": "/ABSOLUTE/V5/archive-input", "files": ["manifest.json", "research/archives/20261013.json", "receipts/research/archives/20261013.json"]}
+}

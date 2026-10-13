@@ -1,0 +1,47 @@
+{
+  "schema_version": "v5.m15.candidate_verification.v1",
+  "python": "3.12.14",
+  "python_candidate": {
+    "status": "PASS",
+    "tests": 17
+  },
+  "original_regression": {
+    "status": "PASS",
+    "tests": 40
+  },
+  "node_client": {
+    "status": "PASS",
+    "tests": 7
+  },
+  "original_capsule_bytes": {
+    "status": "PASS",
+    "seed_files": 39,
+    "manager_files": 80,
+    "native_files": 34,
+    "archive_files": 90
+  },
+  "p0_patch": {
+    "status": "PASS",
+    "base_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "files": 2
+  },
+  "mac": "NOT_RUN",
+  "python_314_lock_install": "NOT_RUN",
+  "vue_type_build_dom": "NOT_RUN",
+  "preview_deployment": "NOT_RUN",
+  "real_sources_materials": "NOT_RUN",
+  "natural_cross_day": "NOT_RUN",
+  "complete_module_acceptance": "NOT_RUN",
+  "historical_failures_corrected": [
+    "Missing original daily test helper closure packaged; original suite vendor PYTHONPATH isolated",
+    "Session negative initially changed only target, but original cutoff still selects same session; fixture cutoff corrected",
+    "Original archive builder rejects historical new capture; replaced synthetic fixture with actual-current-day original build. No owner time gate changed."
+  ],
+  "safety": {
+    "production_allowed": false,
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "natural_verified": false
+  },
+  "full_material_positive": "Original synthetic acquisition/builder/archive/native and market triplet -> original industry and individual accepted -> original workspace save -> immutable reader"
+}

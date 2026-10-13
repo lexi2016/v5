@@ -1,0 +1,27 @@
+--- a/frontend/src/views/SavedManagerResultView.vue
++++ b/frontend/src/views/SavedManagerResultView.vue
+@@ -1,5 +1,6 @@
+ <script setup lang="ts">
+ import M16SavedResearch from '../components/M16SavedResearch.vue';
++import M15SavedMapping from '../components/M15SavedMapping.vue';
+ import M11SavedResearch from '../components/M11SavedResearch.vue';
+ import M12SavedVideo from '../components/M12SavedVideo.vue';
+ import SourceBundleStatus from '../components/SourceBundleStatus.vue';
+@@ -163,6 +164,7 @@
+    <summary ref="sourceSummary">源模块实际状态 · 点击展开基础数据、预选池与复盘</summary>
+    <SourceBundleStatus />
+   </details>
++  <section aria-label="M15 两路径独立保存映射"><M15SavedMapping :target-date="state.descriptor?.target_date" /></section>
+   <section ref="publicResearchHost" aria-label="M16 公开资料研究入口"><M16SavedResearch /></section>
+   <section ref="intradayResearchHost" aria-label="M11 盘中研究入口"><M11SavedResearch /></section>
+   <section ref="videoHost" aria-label="M12 视频复盘入口"><M12SavedVideo /></section>
+--- a/frontend/vite.config.ts
++++ b/frontend/vite.config.ts
+@@ -23,6 +23,7 @@
+ const proxy: Record<string, ProxyOptions> = {};
+ if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);
+ if (sourceTarget) {
++ proxy['/api/v5/source-bundle/us-mapping-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/a-stage-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/manager-public-research'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/intraday-research'] = readonlyProxy(sourceTarget);

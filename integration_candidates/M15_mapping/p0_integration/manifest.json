@@ -1,0 +1,14 @@
+[
+  {
+    "path": "frontend/src/views/SavedManagerResultView.vue",
+    "preimage_sha256": "75d5554950d9934cde2fc1a86abea99af4cfc36379c04ab46a88a15fc828826c",
+    "candidate_sha256": "324dd104a155740318c27f791184230f3dadd73a751fed40059b1ac1676a9a77",
+    "base_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f"
+  },
+  {
+    "path": "frontend/vite.config.ts",
+    "preimage_sha256": "f5c3b6c0d5da0478e4dd0997cb87d4f3ba47657434d0eccc16bc2bcf7c639892",
+    "candidate_sha256": "097d2d5d92d2500844798697582e24b7df6731f91b697c7438ce00e3c85358c6",
+    "base_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f"
+  }
+]

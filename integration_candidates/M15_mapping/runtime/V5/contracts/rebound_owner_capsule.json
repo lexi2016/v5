@@ -1,0 +1,21 @@
+{
+  "schema_version": "v5.rebound_owner_capsule.v1",
+  "base_commit": "2719328494a9ec3177a7be56e7348f86dd0137f5",
+  "owner_entrypoint": "v4.manager_research.workspace_plan:read_rebound_screen",
+  "native_evidence_entrypoint": "v4.manager_research.workspace_plan:rebound_native_evidence",
+  "owner_source_sha256": "29c47c3836f0b26a9106626a990f03cae47c2ac22f2b4ca10be68c916c75f897",
+  "bindings": {
+    "contracts/rebound_source_manifest.json": "153c6dc8168e61bc73133ea1dd9a3bd1a8a27eb58b9d23c3869b2233623e13cd",
+    "uv.lock": "7cb690f890cc28b6a79311f07e724f61c3dc4411494d480c0041f075f0825bfd",
+    "pyproject.toml": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584",
+    "contracts/rebound_supplement_manifest.json": "6d2acc48a7cad917e1c8746735bea6a0a2dcf1b8a043e8973db2577aaab037ea"
+  },
+  "runtime_closure_status": "NOT_RUN",
+  "historical_process_identity": "NOT_PROVEN",
+  "formal_admission": "NOT_IMPLEMENTED_NO_UNIT_FINALITY_OR_TARGET_MEMBERSHIP_ATTESTATION",
+  "notes": [
+    "Retains byte-identical 18-file F baseline; owner overlays the separately bound stored-supplement consumer and original reader. Numeric observation still extracts unchanged F.",
+    "Original lock plus V5 uv.lock retained separately; runtime validates installed V5 packages.",
+    "New private snapshot proves bound bytes only, never an atomic live-authority lease."
+  ]
+}
