@@ -138,7 +138,7 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **下一条完整交付：** 用已过编排完成首批所需资料的采集/原builder/import/store/新进程reader闭环，交每lane入口与成功/缺失/恢复范围表、必要代码差异和定向测试；不重读18篇充数。
 - **验收标准：** 至少一个真实常规触发与失败续跑同原文/span/来源SHA，图片/OCR缺失明确；不补历史取得时间，消费者同SHA；随后覆盖原lane集合、普通页和实际触发/回滚。
 - **责任与交接：** M04原Chat/唯一实现者待排负责来源及原编排；P0负责合法材料引用/来源页；Mac按lane验固定候选，成功前置节点不重做，真实材料不随源码自动上传。
-- **最新候选验收（与旧已过编排分开）：** 固定候选9736bf（主控提供缩写，本处不扩写）Mac 8 PASS / 2 FAIL / 11 ERROR，涉及含空格sys.executable生成测试shebang；原实现者正在窄修，尚未通过，后续固定修复版本与实际复验另记，不沿用旧18篇/编排成功覆盖本次失败。
+- **最新候选验收（与旧已过编排分开）：** 原9736bf2e807b2aa22e2541a4375b182e1ddceb24的8 PASS / 2 FAIL / 11 ERROR原回执保留；含空格解释器测试shebang窄修后，固定8266c6ed9606b0912328670c7411743a85af5727于Mac22/22 PASS、0 FAIL/ERROR/SKIP，exit0，482 blob/481 manifest核验。只变测试夹具/report/log/RELEASE，业务与原owner字节不变；旧18篇/原scope suite未重跑，真实provider/network、部署/原生页面/自然未验，锁依赖NOT_RUN（pandas3.0.5/pyarrow25.0.1超声明上限）。[新旧原回执](../../../../handoffs/P0/feedback/mac-m04-8266c6-retest-20261013/README.md)。
 
 ### M05 A预选池｜P2
 

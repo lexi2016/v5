@@ -1,0 +1,152 @@
+{
+  "candidate": "8266c6ed9606b0912328670c7411743a85af5727",
+  "started_at": "2026-10-13T15:50:23.194715+00:00",
+  "ended_at": "2026-10-13T15:50:42.217944+00:00",
+  "elapsed_seconds": 19.031402249995153,
+  "command": [
+    "sh",
+    "candidate/test_offline.sh"
+  ],
+  "cwd_relative": "m04-8266c6-isolated",
+  "environment": {
+    "python": "3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "dependencies": {
+      "pandas": "3.0.5",
+      "pyarrow": "25.0.1"
+    }
+  },
+  "exit_code": 0,
+  "tests": [
+    {
+      "test": "test_bad_cli_pin_rejected_before_any_capture (test_capture.CaptureTests.test_bad_cli_pin_rejected_before_any_capture)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_capture_real_owner_default_analyzer_import_and_cold_reference (test_capture.CaptureTests.test_capture_real_owner_default_analyzer_import_and_cold_reference)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_cli_capture_requires_explicit_execution_flag (test_capture.CaptureTests.test_cli_capture_requires_explicit_execution_flag)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_concurrent_capture_rejected_without_owner (test_capture.CaptureTests.test_concurrent_capture_rejected_without_owner)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_config_unknown_field_and_overlap_rejected (test_capture.CaptureTests.test_config_unknown_field_and_overlap_rejected)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_failed_capture_is_not_blindly_refetched (test_capture.CaptureTests.test_failed_capture_is_not_blindly_refetched)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_ingest_saved_response_lost_resumes_original_success (test_capture.CaptureTests.test_ingest_saved_response_lost_resumes_original_success)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_initialize_recovers_only_marked_partial_layout (test_capture.CaptureTests.test_initialize_recovers_only_marked_partial_layout)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_interrupted_checkpoint_never_publishes_partial_final_file (test_capture.CaptureTests.test_interrupted_checkpoint_never_publishes_partial_final_file)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_material_tamper_and_unsafe_run_id_rejected (test_capture.CaptureTests.test_material_tamper_and_unsafe_run_id_rejected)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_old_acquisition_never_runs (test_capture.CaptureTests.test_old_acquisition_never_runs)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_repeated_capture_and_resume_never_refetch (test_capture.CaptureTests.test_repeated_capture_and_resume_never_refetch)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_reused_capture_id_requires_same_date_slot_and_claim_id (test_capture.CaptureTests.test_reused_capture_id_requires_same_date_slot_and_claim_id)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_spaced_interpreter_path_runs_original_capture_and_recovery (test_capture.CaptureTests.test_spaced_interpreter_path_runs_original_capture_and_recovery)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_status_saved_response_lost_recovers_without_cli (test_capture.CaptureTests.test_status_saved_response_lost_recovers_without_cli)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_unknown_legacy_time_is_not_backfilled (test_capture.CaptureTests.test_unknown_legacy_time_is_not_backfilled)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_bad_selected_archive_rejected_and_read_has_no_writes (test_research_lane.ResearchLaneTests.test_bad_selected_archive_rejected_and_read_has_no_writes)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_empty_latest_has_no_invented_date (test_research_lane.ResearchLaneTests.test_empty_latest_has_no_invented_date)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_exact_missing_never_falls_back (test_research_lane.ResearchLaneTests.test_exact_missing_never_falls_back)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_latest_and_exact_only_archive_lane_preserve_original (test_research_lane.ResearchLaneTests.test_latest_and_exact_only_archive_lane_preserve_original)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_original_v1_unknown_clocks_and_53_outside_errors_preserved (test_research_lane.ResearchLaneTests.test_original_v1_unknown_clocks_and_53_outside_errors_preserved)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_unknown_query_and_invalid_dates_rejected (test_research_lane.ResearchLaneTests.test_unknown_query_and_invalid_dates_rejected)",
+      "result": "PASS"
+    }
+  ],
+  "old_18_articles_and_original_scope_suite": "NOT_RUN",
+  "real_provider_network": "NOT_RUN",
+  "native_socket_browser_deployment": "NOT_RUN",
+  "product_modified": false,
+  "summary": {
+    "PASS": 22,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0
+  },
+  "unittest_seconds": 18.777,
+  "integrity": {
+    "git_blob_files_verified": 482,
+    "manifest_entries_verified": 481,
+    "release_sha256": "156d7f1ab030a8c7427a7c079eef62ed6615071d37e8c9fd41efa1d61ffdcbec",
+    "changed_or_added_from_9736bf": [
+      "RELEASE.json",
+      "TEST_REPORT.md",
+      "evidence/launcher-spaces-tests.txt",
+      "tests/test_capture.py"
+    ],
+    "deleted": [],
+    "business_and_original_owner_bytes_unchanged": true,
+    "after_test_manifest_pass": true
+  },
+  "test_environment": {
+    "PYTHON_BIN": "<existing-authorized-python>",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "m04-8266c6-isolated/tmp (absolute nonsymlink path)",
+    "PYTHONPATH": "unset",
+    "cwd": "outside candidate"
+  },
+  "dependency_acceptance": {
+    "python": "3.14.6 satisfies >=3.14",
+    "pandas": "3.0.5 outside >=2.3,<3",
+    "pyarrow": "25.0.1 outside >=21,<25",
+    "locked_dependency_acceptance": "NOT_RUN_NO_INSTALL"
+  },
+  "prior_failure_retained": {
+    "path": "m04-9736bf-isolated/result.safe.json",
+    "sha256": "af64331774c519de4677ac9f530e32ab358086e1c0261582c0d87f3904f5fee0"
+  }
+}
