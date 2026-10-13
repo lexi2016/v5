@@ -1,0 +1,18 @@
+test_actual_quota_delta_not_inferred (test_futu_history_canary.CanaryTests.test_actual_quota_delta_not_inferred) ... ok
+test_args_mode_no_sdk_import_no_connection (test_futu_history_canary.CanaryTests.test_args_mode_no_sdk_import_no_connection) ... ok
+test_exception_stops_history_no_retry_after_quota_attempted (test_futu_history_canary.CanaryTests.test_exception_stops_history_no_retry_after_quota_attempted) ... ok
+test_fixed_scope_and_source_window (test_futu_history_canary.CanaryTests.test_fixed_scope_and_source_window) ... ok
+test_hard_supervisor_kills_synthetic_blocking_process (test_futu_history_canary.CanaryTests.test_hard_supervisor_kills_synthetic_blocking_process) ... ok
+test_invalid_ohlc_nonfinite_negative_volume_missing_duplicate (test_futu_history_canary.CanaryTests.test_invalid_ohlc_nonfinite_negative_volume_missing_duplicate) ... ok
+test_no_overwrite_symlink_escape (test_futu_history_canary.CanaryTests.test_no_overwrite_symlink_escape) ... ok
+test_nonempty_page_key_partial_no_pagination (test_futu_history_canary.CanaryTests.test_nonempty_page_key_partial_no_pagination) ... ok
+test_official_quota_tuple_shape_counts_gate_no_detail_count_equality (test_futu_history_canary.CanaryTests.test_official_quota_tuple_shape_counts_gate_no_detail_count_equality) ... ok
+test_preflight_unoccupied_blocks_all_history_but_keeps_raw (test_futu_history_canary.CanaryTests.test_preflight_unoccupied_blocks_all_history_but_keeps_raw) ... ok
+test_reject_unknown_duplicate_empty_codes (test_futu_history_canary.CanaryTests.test_reject_unknown_duplicate_empty_codes) ... ok
+test_source_mutation_rejected (test_futu_history_canary.CanaryTests.test_source_mutation_rejected) ... ok
+test_success_exact_one_page_contract_spacing_all_columns (test_futu_history_canary.CanaryTests.test_success_exact_one_page_contract_spacing_all_columns) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.998s
+
+OK

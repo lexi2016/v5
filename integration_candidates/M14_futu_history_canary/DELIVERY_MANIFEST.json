@@ -1,0 +1,57 @@
+{
+  "schema": "m14_futu_history_canary_delivery.v1",
+  "parent_expected": "c9f8c7b41e492cb8017c68ac848cdc8f4ff35718",
+  "candidate_only": true,
+  "test_result": "13 PASS synthetic; readonly args PASS; real Futu NOT_RUN",
+  "source_contract": "FUTU_HISTORY_K_DAY_AUTYPE_NONE_SDK_NATIVE",
+  "files": {
+    "README.md": {
+      "sha256": "c0b0bda07b2fc073f35e5f777d9f79e7adc34896de51a9c89156a15b95a90044",
+      "bytes": 9525
+    },
+    "evidence/readonly-args.json": {
+      "sha256": "549c5102f4f412206fd76ea1119672a3fec0c72a1b86e53403d9019ab29c1af9",
+      "bytes": 4798
+    },
+    "evidence/synthetic-tests.stdout.txt": {
+      "sha256": "628bc4f9aad77dc37d3cfe8bccacd24946395b44d57c2cf63190a4f71b67e753",
+      "bytes": 1949
+    },
+    "futu_history_canary.py": {
+      "sha256": "54a7f0caabb7b220f09e4600596afb05e8f9b1414be702afc88734e67bf067f0",
+      "bytes": 24356
+    },
+    "pinned/contracts.py": {
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "bytes": 7256
+    },
+    "pinned/futu_quote_provider.py": {
+      "sha256": "b8ce38b6e255a0048a0028024c6c5bb376762e906a2dc4602c32dcb1ac91faae",
+      "bytes": 3710
+    },
+    "pinned/market_calendar_2026.json": {
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+      "bytes": 3473
+    },
+    "pinned/repair.py": {
+      "sha256": "9f547b8d2307b847b3d284eff2e5914d715283a06eb427044074b34bdc3114da",
+      "bytes": 43121
+    },
+    "pinned/safe_io.py": {
+      "sha256": "e1a5fc5dba23dd10c727f002848b38e6d688b98316c99480bbef95fd97c66312",
+      "bytes": 21374
+    },
+    "pinned/trading_calendar.py": {
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+      "bytes": 9291
+    },
+    "pinned/workspace_plan.py": {
+      "sha256": "be0d5e69ff72efd07d2caca4e68948245db4900a8c41f467e9c30f6899c044b1",
+      "bytes": 83579
+    },
+    "tests/test_futu_history_canary.py": {
+      "sha256": "07d17455a6a901eb29f1bf888f7b81bed2fc139776102f4e54ba78e204eadf34",
+      "bytes": 10636
+    }
+  }
+}
