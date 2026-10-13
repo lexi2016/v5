@@ -105,7 +105,7 @@ def prepare(request):
         rebound=copy.deepcopy(value.get('rebound')), rebound_owner=copy.deepcopy(value.get('rebound_owner')),
         us_mapping=(dict(manager_output_root=value['inputs']['manager']['root'],
             target_date=daily['target_trade_date'], run_id=daily['run_id'],
-            artifact_sha256=daily['artifact_sha256']) if daily else None))
+            artifact_sha256=daily['artifact_sha256']) if lanes['us_mapping']['accepted'] else None))
     actual = datetime.now(timezone.utc)
     hk = actual.astimezone(timezone(timedelta(hours=8)))
     in_window = (hk.strftime('%Y%m%d') == value['target_date']

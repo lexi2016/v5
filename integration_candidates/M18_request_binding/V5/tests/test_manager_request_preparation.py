@@ -5,6 +5,7 @@ from pathlib import Path
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
 import test_manager_plan as adapter_tests
 from v5_shadow.manager_plan import run_manager_plan
 from v5_shadow import manager_request_preparation as prep
@@ -21,6 +22,35 @@ class PreparationTests(adapter_tests.ManagerPlanAdapterTests):
         self.assertEqual(set(value['lanes']), {'announcement', 'rebound', 'us_mapping'})
         self.assertEqual(self.files(), before)
         self.assertFalse(value['natural_verified'])
+
+    def test_original_not_run_daily_without_artifact_sha_waits(self):
+        self.request['inputs']['manager']['files'] = {}
+        original = run_manager_plan(self.request)['payload']
+        daily = original['us_mapping_research']['daily_run']
+        self.assertEqual(daily['status'], 'NOT_RUN')
+        self.assertNotIn('artifact_sha256', daily)
+        before = self.files()
+        value = prep.prepare(self.request)
+        self.assertEqual(value['status'], 'WAITING_SOURCES')
+        self.assertIsNone(value['source_references']['us_mapping'])
+        self.assertIsNone(value['manager_request'])
+        self.assertIsNone(value['manager_template'])
+        self.assertFalse(value['lanes']['us_mapping']['accepted'])
+        self.assertEqual(value['lanes']['us_mapping']['daily_status'], 'NOT_RUN')
+        self.assertEqual(self.files(), before)
+
+    def test_partial_daily_identity_fields_fail_closed_without_crash(self):
+        original = run_manager_plan(self.request)
+        for key in ('target_trade_date', 'run_id', 'artifact_sha256', 'status', 'matches'):
+            with self.subTest(missing=key):
+                result = copy.deepcopy(original)
+                result['payload']['us_mapping_research']['daily_run'].pop(key, None)
+                with patch.object(prep, 'run_manager_plan', return_value=result):
+                    value = prep.prepare(self.request)
+                self.assertEqual(value['status'], 'WAITING_SOURCES')
+                self.assertIsNone(value['source_references']['us_mapping'])
+                self.assertIsNone(value['manager_template'])
+                self.assertIsNone(value['manager_request'])
 
     def test_bad_sha_rejected_before_owner_read(self):
         key = next(iter(self.request['inputs']['manager']['files']))

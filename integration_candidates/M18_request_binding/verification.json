@@ -9,17 +9,17 @@
   },
   "new_tests": {
     "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_manager_request_preparation",
-    "run": 12,
+    "run": 14,
     "status": "PASS"
   },
   "final_required_regression": {
     "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_manager_request_preparation test_manager_plan test_daily_manager_assembly test_m18_daily_publication",
-    "run": 38,
+    "run": 40,
     "failures": 0,
     "errors": 0,
     "skipped": 0,
     "status": "PASS",
-    "log": "release-final.log"
+    "log": "bugfix-final.log"
   },
   "broader_probe": {
     "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest discover -s V5/tests -p 'test_manager*.py'",
@@ -67,7 +67,7 @@
     ]
   },
   "source_comparison": {
-    "candidate_v5_git_tree": "5cc027c591e50cfcbaeb5d9f0a540b8aeb87225f",
+    "candidate_v5_git_tree": "7429f4d0e58ff3b4b0e9e56dad26f1f653ab142c",
     "baseline_file_count": 1353,
     "candidate_file_count": 1355,
     "modified_baseline_files": 0,
@@ -87,5 +87,36 @@
     "PIT",
     "natural_run",
     "complete_module_acceptance"
-  ]
+  ],
+  "previous_candidate_verification": {
+    "new_tests": {
+      "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_manager_request_preparation",
+      "run": 14,
+      "status": "PASS"
+    },
+    "final_required_regression": {
+      "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_manager_request_preparation test_manager_plan test_daily_manager_assembly test_m18_daily_publication",
+      "run": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "log": "bugfix-final.log"
+    }
+  },
+  "corrective_change": {
+    "issue": "Mac actual M15 NOT_RUN has no artifact_sha256; reference projection raised KeyError",
+    "fix": "Export US standard reference only after original lane admission; otherwise null and WAITING",
+    "red_log": "bug-red.log",
+    "red_result": "2 test methods: 2 failures, 4 errors including missing target/run/artifact; correct bug reproduced before fix",
+    "new_cases": [
+      "original owner NOT_RUN without artifact_sha256",
+      "five missing-field subcases: target_trade_date, run_id, artifact_sha256, status, matches"
+    ],
+    "mac_previous_candidate": "38 PASS reported; Python3.14.6/pandas2.3.3/pyarrow24.0.0",
+    "mac_safe_receipt_sha256": "26d6404a7035b81e1bfffc12b5797e5675062c9a64d353c1c82cd326cd253730",
+    "mac_diagnostic_sha256": "78b05dfd1fda92acadfde0ecf0f63a129b64e5ec0574cbfb67dadc800852d207",
+    "new_candidate_mac": "NOT_RUN",
+    "broader_probe": "Not rerun; previous limits retained"
+  }
 }

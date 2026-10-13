@@ -31,3 +31,9 @@ Stop/rollback: do not invoke the CLI, or remove the isolated candidate from the 
 New tests use temporary synthetic files. They cover missing inputs, SHA refusal, explicit date preservation, a refresh input forced to read-only, fresh preview despite a saved old plan, same-run saved cold binding, wrong-run refusal, CLI no writes and exit 2, original valid-empty projection, pending nonempty, cross-date, mismatched run, invalid empty-with-rows and missing fields. Original owner cold save/read is exercised only against synthetic temporary roots.
 
 See verification.json for exact executed commands and limitations. Real provider/model/owner production, live manager save, actual current-day sources, HTTP/DOM, Mac deployment, browser ACK, PIT, formal qualification, natural run and complete-module acceptance are NOT_RUN. No network collection or trading is introduced.
+
+## Corrective delivery after Mac 041375
+
+Mac passed the previous 38 tests but real target14 preparation correctly reached an M15 `NOT_RUN` daily shape without `artifact_sha256`. The reference projection previously indexed that absent key and exited 1. This delivery changes one production line: only an original accepted US lane may export a standard US reference. NOT_RUN, rejected or incomplete identities now retain WAITING_SOURCES, null US reference, null manager_template and null manager_request. Original refusal details stay in lanes.us_mapping.reference. No source or gate is synthesized.
+
+Two regression methods were added: a real pinned owner read against synthetic absent US inputs produces NOT_RUN without artifact SHA; five partial identity subcases must fail closed without a crash. Red reproduced 2 failures/4 errors before the fix. The same recommended command now runs 40 cases successfully. No 239-case expansion was rerun. The prior Mac receipt and diagnostic SHA are retained in verification.json; this corrected candidate still needs Mac retest.

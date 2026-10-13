@@ -1,0 +1,69 @@
+EEEEFF
+======================================================================
+ERROR: test_original_not_run_daily_without_artifact_sha_waits (test_manager_request_preparation.PreparationTests.test_original_not_run_daily_without_artifact_sha_waits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_request_preparation.py", line 33, in test_original_not_run_daily_without_artifact_sha_waits
+    value = prep.prepare(self.request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_request_preparation.py", line 108, in prepare
+    artifact_sha256=daily['artifact_sha256']) if daily else None))
+                    ~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'artifact_sha256'
+
+======================================================================
+ERROR: test_partial_daily_identity_fields_fail_closed_without_crash (test_manager_request_preparation.PreparationTests.test_partial_daily_identity_fields_fail_closed_without_crash) (missing='target_trade_date')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_request_preparation.py", line 49, in test_partial_daily_identity_fields_fail_closed_without_crash
+    value = prep.prepare(self.request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_request_preparation.py", line 107, in prepare
+    target_date=daily['target_trade_date'], run_id=daily['run_id'],
+                ~~~~~^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'target_trade_date'
+
+======================================================================
+ERROR: test_partial_daily_identity_fields_fail_closed_without_crash (test_manager_request_preparation.PreparationTests.test_partial_daily_identity_fields_fail_closed_without_crash) (missing='run_id')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_request_preparation.py", line 49, in test_partial_daily_identity_fields_fail_closed_without_crash
+    value = prep.prepare(self.request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_request_preparation.py", line 107, in prepare
+    target_date=daily['target_trade_date'], run_id=daily['run_id'],
+                                                   ~~~~~^^^^^^^^^^
+KeyError: 'run_id'
+
+======================================================================
+ERROR: test_partial_daily_identity_fields_fail_closed_without_crash (test_manager_request_preparation.PreparationTests.test_partial_daily_identity_fields_fail_closed_without_crash) (missing='artifact_sha256')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_request_preparation.py", line 49, in test_partial_daily_identity_fields_fail_closed_without_crash
+    value = prep.prepare(self.request)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_request_preparation.py", line 108, in prepare
+    artifact_sha256=daily['artifact_sha256']) if daily else None))
+                    ~~~~~^^^^^^^^^^^^^^^^^^^
+KeyError: 'artifact_sha256'
+
+======================================================================
+FAIL: test_partial_daily_identity_fields_fail_closed_without_crash (test_manager_request_preparation.PreparationTests.test_partial_daily_identity_fields_fail_closed_without_crash) (missing='status')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_request_preparation.py", line 51, in test_partial_daily_identity_fields_fail_closed_without_crash
+    self.assertIsNone(value['source_references']['us_mapping'])
+AssertionError: {'manager_output_root': '/tmp/tmp741xlapo/manager', 'target_date': '20261008', 'run_id': '11111111111111111111111111111111', 'artifact_sha256': 'b82601a3d12b69724397026d0088fc15546760c2f23a157d249d312804f5e456'} is not None
+
+======================================================================
+FAIL: test_partial_daily_identity_fields_fail_closed_without_crash (test_manager_request_preparation.PreparationTests.test_partial_daily_identity_fields_fail_closed_without_crash) (missing='matches')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_request_preparation.py", line 51, in test_partial_daily_identity_fields_fail_closed_without_crash
+    self.assertIsNone(value['source_references']['us_mapping'])
+AssertionError: {'manager_output_root': '/tmp/tmp741xlapo/manager', 'target_date': '20261008', 'run_id': '11111111111111111111111111111111', 'artifact_sha256': 'b82601a3d12b69724397026d0088fc15546760c2f23a157d249d312804f5e456'} is not None
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.777s
+
+FAILED (failures=2, errors=4)
