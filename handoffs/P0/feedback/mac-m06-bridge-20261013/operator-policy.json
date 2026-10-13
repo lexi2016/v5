@@ -1,0 +1,22 @@
+{
+  "schema_version": "v5.m06_evening_operator_draft.v1",
+  "origin": "NEW_EXPLICIT_V5_POLICY_NOT_ORIGINAL_VALUE",
+  "state": "DISABLED_BLOCKED_INPUT_CONTRACT",
+  "timezone": "Asia/Shanghai",
+  "scheduled_equals_signal": true,
+  "target_calendar": "unchanged original 2026 hk_securities next session",
+  "full_and_half_day_window": {
+    "start": "17:30",
+    "end": "18:30"
+  },
+  "check_interval_seconds": 300,
+  "complete_budget_seconds": 1200,
+  "per_process_timeout_seconds": 600,
+  "latest_budget_admission": "18:10 (snapshot/inspection/publication time can make it earlier)",
+  "owner_contract_cutoff_time": "target day 09:00+08; compatibility only",
+  "execution_hard_deadline": "scheduled day 18:30+08",
+  "completed_at": "actual future snapshot sealing time only; no snapshot sealed",
+  "migration_bridge": true,
+  "independent_of_v4_inputs": false,
+  "enablement_authorized_this_turn": false
+}

@@ -1,0 +1,105 @@
+{
+  "started_utc": "2026-10-13T04:42:53.279867+00:00",
+  "base_candidate": "5eddebf5c6ecf530ece3fdb31a054b56bf2f1d57",
+  "guard_candidate": "8a5d45c4b99fabeab55333052ea99cb547213f16",
+  "mode": "READ_ONLY_IDENTITY_ADMISSION_NO_SNAPSHOT",
+  "days": {
+    "20261012": {
+      "calendar": {
+        "state": "FULL_TRADING_DAY",
+        "scheduled_date": "20261012",
+        "signal_date": "20261012",
+        "target_date": "20261013"
+      },
+      "dispatcher_candidates": [
+        "20261012/1720/7e67ed3f7bd24fb09e3930072e89be05.dispatch-receipt.json"
+      ],
+      "lane_exists": true,
+      "exact_master_present": true,
+      "panel": {
+        "pointer_present": true,
+        "manifest_relative": "panels/20261012-f55689159261/manifest.json",
+        "manifest_sha256": "9141cf2220f618e67ec8cfae31a11119108408344b3fba2db5bc4d97920d4c55",
+        "panel_max_date": "20261012",
+        "production_allowed": false,
+        "panel_sha256": "f556891592618f32c6aa57d3d439663d2bebcabc2aae7ba559c82d3a9586154d",
+        "asset_schema_version": "v3_shared_data.hk_0_2_panel_asset.v2"
+      },
+      "model": {
+        "pointer_present": true,
+        "manifest_relative": "model/20260716/manifest.json",
+        "manifest_sha256": "5a97318af04b0e4246db17ef09a67677fb440b71a112bb86f8ab78bd65a165c3",
+        "production_allowed": false,
+        "bundle_sha256": "3b0d5d5239342439cabf25b30012365a64d78839bc3cd4d90bad7be6ff4aaa07",
+        "asset_schema_version": "v3_shared_data.hk_0_2_model_asset.v1"
+      },
+      "name": {
+        "pointer_present": true,
+        "manifest_relative": "names/runs/20260825/hk02-name-gap6-v1/manifest.json",
+        "manifest_sha256": "3c1bd5e288e87cbf50dfc43a456d37df823334173c5167130bf4368a91cc5cc3",
+        "production_allowed": false,
+        "dictionary_sha256": "f1954f72aafd33e1d542011f819bb4ae89e5035dde544c42fc35255cf1f91fe1",
+        "asset_schema_version": "v3_shared_data.hk_0_2_name_dictionary.v2"
+      },
+      "status": "NOT_READY",
+      "reason": "M06_DELIVERY_SAFETY",
+      "model_loaded": false,
+      "snapshot_sealed": false,
+      "completed_at": null
+    },
+    "20261013": {
+      "calendar": {
+        "state": "FULL_TRADING_DAY",
+        "scheduled_date": "20261013",
+        "signal_date": "20261013",
+        "target_date": "20261014"
+      },
+      "dispatcher_candidates": [],
+      "lane_exists": false,
+      "exact_master_present": false,
+      "panel": {
+        "pointer_present": true,
+        "manifest_relative": "panels/20261012-f55689159261/manifest.json",
+        "manifest_sha256": "9141cf2220f618e67ec8cfae31a11119108408344b3fba2db5bc4d97920d4c55",
+        "panel_max_date": "20261012",
+        "production_allowed": false,
+        "panel_sha256": "f556891592618f32c6aa57d3d439663d2bebcabc2aae7ba559c82d3a9586154d",
+        "asset_schema_version": "v3_shared_data.hk_0_2_panel_asset.v2"
+      },
+      "model": {
+        "pointer_present": true,
+        "manifest_relative": "model/20260716/manifest.json",
+        "manifest_sha256": "5a97318af04b0e4246db17ef09a67677fb440b71a112bb86f8ab78bd65a165c3",
+        "production_allowed": false,
+        "bundle_sha256": "3b0d5d5239342439cabf25b30012365a64d78839bc3cd4d90bad7be6ff4aaa07",
+        "asset_schema_version": "v3_shared_data.hk_0_2_model_asset.v1"
+      },
+      "name": {
+        "pointer_present": true,
+        "manifest_relative": "names/runs/20260825/hk02-name-gap6-v1/manifest.json",
+        "manifest_sha256": "3c1bd5e288e87cbf50dfc43a456d37df823334173c5167130bf4368a91cc5cc3",
+        "production_allowed": false,
+        "dictionary_sha256": "f1954f72aafd33e1d542011f819bb4ae89e5035dde544c42fc35255cf1f91fe1",
+        "asset_schema_version": "v3_shared_data.hk_0_2_name_dictionary.v2"
+      },
+      "status": "NOT_READY",
+      "reason": "M06_DELIVERY_PANEL_DATE",
+      "model_loaded": false,
+      "snapshot_sealed": false,
+      "completed_at": null
+    }
+  },
+  "configuration_shape_and_pins": "PASS_READ_ONLY_VALIDATORS",
+  "configured_process_timeout_seconds": 600,
+  "policy_origin": "NEW_EXPLICIT_V5_POLICY_NOT_ORIGINAL_VALUE",
+  "poll_interval_seconds": 300,
+  "window_checks": {
+    "17:29": "WAITING_M06_WINDOW",
+    "17:30": null,
+    "18:10": null,
+    "18:15": "M06_EXECUTION_BUDGET_INSUFFICIENT",
+    "18:30": "MISSED_M06_WINDOW_NO_BACKFILL"
+  },
+  "finished_utc": "2026-10-13T04:42:53.343880+00:00",
+  "exit_code": 0
+}
