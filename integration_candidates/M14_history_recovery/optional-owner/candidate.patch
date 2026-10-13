@@ -1,0 +1,275 @@
+--- a/V5/src/v5_shadow/rebound_owner.py
++++ b/V5/src/v5_shadow/rebound_owner.py
+@@ -38,6 +38,7 @@
+ PIN = 'f2f7c129410494c8f1bade0f2121d3c5396af49f28b9f94a73f34778b3eaf72c'
+ ROLES = ('panel_manifest', 'panel', 'master_manifest', 'master_artifact', 'master_receipt')
+ SUPPLEMENT_ROLES = ('supplement_pointer', 'supplement_manifest', 'supplement_capture')
++REPAIR_ROLES = ('panel_receipt', 'repair_parent_manifest', 'repair_parent_panel')
+ NAMESPACES = ('v4', 'contracts', 'infrastructure', 'v3_shared_data')
+ MARKER = b'v5.rebound-owner-root.v1\n'
+ SAFETY = dict(research_only=True, production_allowed=False, buy_gate_updated=False,
+@@ -79,7 +80,7 @@
+     for code_root in (BASE, Path(sys.prefix).resolve(), Path(sys.base_prefix).resolve()):
+         if root.is_relative_to(code_root) or code_root.is_relative_to(root):
+             raise ValueError('REBOUND_INPUT_CODE_OVERLAP')
+-    if not isinstance(value['paths'], dict) or set(value['paths']) not in (set(ROLES), set(ROLES + SUPPLEMENT_ROLES)):
++    if not isinstance(value['paths'], dict) or set(value['paths']) not in (set(ROLES), set(ROLES + SUPPLEMENT_ROLES), set(ROLES + REPAIR_ROLES)):
+         raise ValueError('REBOUND_REQUIRED_ROLES:panel_manifest,panel,master_manifest,master_artifact,master_receipt')
+     files = value['files']
+     if not isinstance(files, dict) or not 5 <= len(files) <= 32:
+@@ -87,13 +88,24 @@
+     for relative, digest in files.items():
+         checked_path(root, relative)
+         sha(digest)
+-        if not re.fullmatch(r'assets/(?:hk_0_2/panels/[A-Za-z0-9._-]+/(?:manifest\.json|hkconnect_vipdoc_daily_panel\.parquet)|hk_security_master/runs/[0-9]{8}/[A-Za-z0-9_-]+/(?:manifest\.json|artifact\.csv|receipt\.json)|hk_0_2/daily_supplements/(?:pointers/[0-9]{8}\.json|runs/[0-9]{8}/[A-Za-z0-9_-]+/(?:manifest\.json|raw_capture\.json)))', relative):
++        if not re.fullmatch(r'assets/(?:hk_0_2/panels/[A-Za-z0-9._-]+/(?:manifest\.json|receipt\.json|hkconnect_vipdoc_daily_panel\.parquet)|hk_security_master/runs/[0-9]{8}/[A-Za-z0-9_-]+/(?:manifest\.json|artifact\.csv|receipt\.json)|hk_0_2/daily_supplements/(?:pointers/[0-9]{8}\.json|runs/[0-9]{8}/[A-Za-z0-9_-]+/(?:manifest\.json|raw_capture\.json)))', relative):
+             raise ValueError('REBOUND_INPUT_PATH')
+     if len(set(value['paths'].values())) != len(value['paths']):
+         raise ValueError('REBOUND_DUPLICATE_ROLE')
+     for relative in value['paths'].values():
+         if relative not in files:
+             raise ValueError('REBOUND_ROLE_NOT_BOUND')
++    if 'panel_receipt' in value['paths']:
++        paths = value['paths']
++        if (set(files) != set(paths.values())
++                or paths['panel_receipt'] != str(Path(paths['panel']).with_name('receipt.json'))
++                or Path(paths['repair_parent_manifest']).parent != Path(paths['repair_parent_panel']).parent
++                or Path(paths['repair_parent_manifest']).name != 'manifest.json'
++                or Path(paths['repair_parent_panel']).name != 'hkconnect_vipdoc_daily_panel.parquet'
++                or not all(paths[k].startswith('assets/hk_0_2/panels/') for k in REPAIR_ROLES)):
++            raise ValueError('REBOUND_REPAIR_ROLE_BINDING')
++    elif any('/hk_0_2/panels/' in p and p.endswith('/receipt.json') for p in files):
++        raise ValueError('REBOUND_REPAIR_RECEIPT_UNBOUND')
+     supplement_files = {p for p in files if '/daily_supplements/' in p}
+     if 'supplement_pointer' in value['paths']:
+         paths = value['paths']; day = value['signal_date']
+@@ -178,6 +190,45 @@
+     return panel, master, receipt
+ 
+ 
++
++def _repaired_witness(root, request):
++    """Admit exact repaired bytes for research arithmetic, never formal status."""
++    if 'panel_receipt' not in request['paths']:
++        return None
++    from v5_shadow.rebound_panel_repair import (read_repaired_panel_witness,
++                                               SOURCE_CONTRACT, RAW_SOURCE_CONTRACT)
++    paths = request['paths']; prefix = 'assets/hk_0_2/'
++    manifest = _json(checked_path(root, paths['panel_manifest']).read_bytes())
++    line = manifest.get('internal_gap_repair', {})
++    if (manifest.get('source_contract') not in (SOURCE_CONTRACT, RAW_SOURCE_CONTRACT)
++            or prefix + str(line.get('parent_manifest_relative')) != paths['repair_parent_manifest']
++            or prefix + str(line.get('parent_panel_relative')) != paths['repair_parent_panel']):
++        raise ValueError('REBOUND_REPAIR_ROLE_BINDING')
++    roles = ('panel_manifest', 'panel') + REPAIR_ROLES
++    files = {paths[k].removeprefix(prefix): request['files'][paths[k]] for k in roles}
++    return read_repaired_panel_witness(root / 'assets/hk_0_2',
++        paths['panel_manifest'].removeprefix(prefix), expected_files=files,
++        cutoff=request['research_cutoff'])
++
++
++def _install_repaired_witness(original, private, request):
++    """Wire existing verified lineage into only this disposable worker reader."""
++    if 'panel_receipt' not in request['paths']:
++        return
++    def witness(root, day, *, research_cutoff=None, required_history_date=None):
++        if (no_symlinks(root) != private or day != request['signal_date']
++                or aware(research_cutoff) != aware(request['research_cutoff'])):
++            raise ValueError('REBOUND_REPAIR_READER_CONTEXT')
++        from v5_shadow.rebound_panel_repair import _history_window
++        if required_history_date != _history_window(day)['previous5'][-1]:
++            raise ValueError('REBOUND_REPAIR_READER_HISTORY_CONTEXT')
++        verified = _repaired_witness(private, request)
++        return verified, ['SCREEN_REPAIRED_HISTORY_RESEARCH_ONLY',
++            'REBOUND_HISTORY_PRICE_SCALE_CONSISTENCY_NOT_PROVEN',
++            'REBOUND_HISTORY_VOLUME_SCALE_CONSISTENCY_NOT_PROVEN']
++    original._read_hk02_panel_witness = witness
++
++
+ def prepare_snapshot(request, destination):
+     request = _request(request)
+     source = no_symlinks(request['input_root']); target = no_symlinks(destination)
+@@ -194,6 +245,7 @@
+             raise ValueError('REBOUND_SNAPSHOT_SIZE')
+         entries[relative] = identity
+     panel, master, _ = _metadata(target, request)
++    _repaired_witness(target, request)
+     if 'supplement_pointer' in request['paths']:
+         paths = request['paths']
+         pointer = _json(checked_path(target, paths['supplement_pointer']).read_bytes())
+@@ -289,10 +341,12 @@
+             exec(compile(raw, module.__file__, 'exec'), module.__dict__)
+ 
+ 
+-def _identity():
++def _identity(*, repaired=False):
+     names = ('rebound_owner.py', 'a_preselection.py', 'composition.py', 'contracts.py',
+              'digests.py', 'health.py', 'module_api.py', 'module_artifacts.py',
+              'api_gateway.py', 'provider_evidence.py', 'source_capsule.py', '__init__.py')
++    if repaired:
++        names += ('rebound_panel_repair.py', 'rebound_raw_repair.py')
+     return {name: hashlib.sha256((BASE / 'src/v5_shadow' / name).read_bytes()).hexdigest() for name in names}
+ 
+ 
+@@ -410,6 +464,8 @@
+         raise ValueError('REBOUND_SIGNAL_CALENDAR_MISMATCH')
+     _verify_private(private, snapshot)
+     panel, master, _ = _metadata(private, request)
++    _repaired_witness(private, request)
++    _install_repaired_witness(original, private, request)
+     violations = _guard(private)
+     native = original.rebound_native_evidence(panel, required_session=request['signal_date'],
+         observed_at=datetime.now(timezone.utc), master_captured_at=master['captured_at'])
+@@ -437,7 +493,7 @@
+     _sources(stored_supplement=True)
+     return dict(legacy_diagnostic=dict(status='UNTRUSTED_LEGACY_ASSERTIONS', payload=legacy),
+         research_observation=research_projection(legacy, native), dependencies=dependencies,
+-        context=context, implementation_identity=_identity(), source_capsule_sha256=PIN,
++        context=context, implementation_identity=_identity(repaired='panel_receipt' in request['paths']), source_capsule_sha256=PIN,
+         request_sha256=sha256_json(request), snapshot_sha256=snapshot['snapshot_sha256'])
+ 
+ 
+@@ -581,7 +637,7 @@
+             or not set(BLOCKERS).issubset(artifact['reason_codes'])):
+         raise ValueError('REBOUND_ARTIFACT_OBSERVATION_CONTRACT')
+     identity = artifact.get('implementation_identity')
+-    if not isinstance(identity, dict) or set(identity) != set(_identity()):
++    if not isinstance(identity, dict) or set(identity) != set(_identity(repaired='panel_receipt' in request.get('paths', {}))):
+         raise ValueError('REBOUND_ARTIFACT_IMPLEMENTATION_IDENTITY')
+     for digest in identity.values():
+         sha(digest)
+@@ -610,7 +666,7 @@
+     source = no_symlinks(request['input_root'])
+     if output.is_relative_to(source) or source.is_relative_to(output):
+         raise ValueError('REBOUND_INPUT_OUTPUT_OVERLAP')
+-    started = datetime.now(timezone.utc); identity = _identity()
++    started = datetime.now(timezone.utc); identity = _identity(repaired='panel_receipt' in request['paths'])
+     artifact = dict(schema_version='v5.rebound_owner.v1', run_id=uuid.uuid4().hex,
+         request=request, request_sha256=sha256_json(request), started_at=started.isoformat(),
+         source_capsule_sha256=PIN, implementation_identity=identity,
+@@ -636,7 +692,8 @@
+             if (value.get('request_sha256') != artifact['request_sha256']
+                     or value.get('snapshot_sha256') != snapshot['snapshot_sha256']
+                     or value.get('source_capsule_sha256') != PIN
+-                    or value.get('implementation_identity') != identity or _identity() != identity):
++                    or value.get('implementation_identity') != identity
++                    or _identity(repaired='panel_receipt' in request['paths']) != identity):
+                 raise ValueError('REBOUND_WORKER_IDENTITY')
+             _verify_private(private, snapshot)
+             artifact.update(value)
+--- a/V5/tests/test_rebound_repaired_owner.py
++++ b/V5/tests/test_rebound_repaired_owner.py
+@@ -0,0 +1,113 @@
++"""Synthetic request/transport tests; no provider, real owner or Parquet run."""
++import copy
++import hashlib
++import tempfile
++import unittest
++from pathlib import Path
++from types import SimpleNamespace
++from datetime import timedelta, timezone
++from unittest.mock import patch
++from v5_shadow import rebound_owner as owner, rebound_panel_repair as repair
++from v5_shadow.digests import canonical_bytes
++from test_rebound_owner import request_for
++
++class RepairedOwnerTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory(); self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name).resolve()
++        self.request = request_for(self.root/'inputs')
++        self.old = copy.deepcopy(self.request)
++        paths = self.request['paths']
++        paths['panel_receipt'] = str(Path(paths['panel']).with_name('receipt.json'))
++        paths['repair_parent_manifest'] = 'assets/hk_0_2/panels/SYNTHETIC-parent/manifest.json'
++        paths['repair_parent_panel'] = 'assets/hk_0_2/panels/SYNTHETIC-parent/hkconnect_vipdoc_daily_panel.parquet'
++        for key in owner.REPAIR_ROLES:
++            file = Path(self.request['input_root'])/paths[key]
++            file.parent.mkdir(parents=True,exist_ok=True); file.write_bytes(b'{}')
++            self.request['files'][paths[key]] = hashlib.sha256(file.read_bytes()).hexdigest()
++        manifest_path = Path(self.request['input_root'])/paths['panel_manifest']
++        manifest = owner._json(manifest_path.read_bytes())
++        manifest['source_contract'] = repair.RAW_SOURCE_CONTRACT
++        manifest['internal_gap_repair'] = {
++            'parent_manifest_relative': paths['repair_parent_manifest'].removeprefix('assets/hk_0_2/'),
++            'parent_panel_relative': paths['repair_parent_panel'].removeprefix('assets/hk_0_2/')}
++        manifest_path.write_bytes(canonical_bytes(manifest))
++        self.request['files'][paths['panel_manifest']] = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
++
++    def test_accepts_explicit_repair_roles_and_old_request(self):
++        self.assertEqual(owner._request(self.request),self.request)
++        self.assertEqual(owner._request(self.old),self.old)
++
++    def test_missing_or_extra_role_rejected(self):
++        for role in owner.REPAIR_ROLES:
++            req=copy.deepcopy(self.request); del req['paths'][role]
++            with self.subTest(role=role),self.assertRaises(ValueError):owner._request(req)
++        req=copy.deepcopy(self.request); req['files']['assets/hk_0_2/panels/unused/receipt.json']='a'*64
++        with self.assertRaises(ValueError): owner._request(req)
++
++    def test_repair_receipt_must_be_in_child_directory(self):
++        req=copy.deepcopy(self.request); prior=req['paths']['panel_receipt']
++        req['paths']['panel_receipt']='assets/hk_0_2/panels/elsewhere/receipt.json'
++        req['files'][req['paths']['panel_receipt']]=req['files'].pop(prior)
++        with self.assertRaisesRegex(ValueError,'REPAIR_ROLE_BINDING'):owner._request(req)
++
++    def test_no_combining_repair_and_supplement(self):
++        req=copy.deepcopy(self.request)
++        for role in owner.SUPPLEMENT_ROLES: req['paths'][role]='unused/'+role
++        with self.assertRaises(ValueError):owner._request(req)
++
++    def test_original_witness_exact_binding_and_cutoff(self):
++        with patch.object(repair,'read_repaired_panel_witness',return_value={'verified':'SYNTHETIC'}) as read:
++            self.assertEqual(owner._repaired_witness(Path(self.request['input_root']),self.request),{'verified':'SYNTHETIC'})
++        args,kw=read.call_args
++        self.assertEqual(args[0],Path(self.request['input_root'])/'assets/hk_0_2')
++        self.assertEqual(kw['cutoff'],self.request['research_cutoff'])
++        self.assertEqual(len(kw['expected_files']),5)
++        self.assertIn('panels/SYNTHETIC-parent/manifest.json',kw['expected_files'])
++
++    def test_wrong_parent_contract_and_witness_failure_fail_closed(self):
++        path=Path(self.request['input_root'])/self.request['paths']['panel_manifest']
++        data=owner._json(path.read_bytes());data['internal_gap_repair']['parent_panel_relative']='panels/wrong/hkconnect_vipdoc_daily_panel.parquet'
++        path.write_bytes(canonical_bytes(data))
++        with self.assertRaisesRegex(ValueError,'REPAIR_ROLE_BINDING'):owner._repaired_witness(Path(self.request['input_root']),self.request)
++
++    def test_unrepaired_read_does_not_enter_extension(self):
++        with patch.object(repair,'read_repaired_panel_witness',side_effect=AssertionError):
++            self.assertIsNone(owner._repaired_witness(Path(self.old['input_root']),self.old))
++
++    def test_identity_preserves_old_key_set_and_binds_extension(self):
++        old=owner._identity(); new=owner._identity(repaired=True)
++        self.assertEqual(set(new)-set(old),{'rebound_panel_repair.py','rebound_raw_repair.py'})
++        self.assertTrue(set(old).issubset(new))
++
++    def test_worker_hook_accepts_same_instant_in_hk_zone_not_wrong_context(self):
++        original=SimpleNamespace(_read_hk02_panel_witness='untouched')
++        root=Path(self.request['input_root'])
++        owner._install_repaired_witness(original,root,self.request)
++        cutoff=owner.aware(self.request['research_cutoff']).astimezone(timezone(timedelta(hours=8))).isoformat()
++        day=self.request['signal_date']; history=repair._history_window(day)['previous5'][-1]
++        with patch.object(owner,'_repaired_witness',return_value={'verified':'SYNTHETIC'}) as read:
++            result,gaps=original._read_hk02_panel_witness(root,day,research_cutoff=cutoff,required_history_date=history)
++            self.assertEqual(result,{'verified':'SYNTHETIC'})
++            self.assertIn('SCREEN_REPAIRED_HISTORY_RESEARCH_ONLY',gaps)
++            read.assert_called_once()
++            for wrong_root,wrong_day,wrong_cutoff,wrong_history in (
++                (self.root,day,cutoff,history),(root,'20261006',cutoff,history),
++                (root,day,'2020-01-01T00:00:00Z',history),(root,day,cutoff,'20200101')):
++                with self.assertRaises(ValueError):
++                    original._read_hk02_panel_witness(wrong_root,wrong_day,research_cutoff=wrong_cutoff,required_history_date=wrong_history)
++
++    def test_old_worker_hook_unchanged(self):
++        original=SimpleNamespace(_read_hk02_panel_witness='untouched')
++        owner._install_repaired_witness(original,Path(self.old['input_root']),self.old)
++        self.assertEqual(original._read_hk02_panel_witness,'untouched')
++
++    def test_snapshot_runs_existing_witness_before_private_copy_commit(self):
++        with patch.object(owner,'_repaired_witness',return_value={'verified':'SYNTHETIC'}) as witness:
++            snapshot=owner.prepare_snapshot(self.request,self.root/'private')
++        self.assertFalse(snapshot['owner_origin_verified'])
++        self.assertFalse(snapshot['owner_read_lease_verified'])
++        witness.assert_called_once()
++        self.assertIn(self.request['paths']['panel_receipt'],snapshot['files'])
++
++if __name__=='__main__':unittest.main()

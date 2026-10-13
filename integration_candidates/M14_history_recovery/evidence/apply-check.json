@@ -1,0 +1,17 @@
+[
+  {
+    "base_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "changed_files": 2,
+    "status": "PREIMAGES_VERIFIED"
+  },
+  {
+    "base_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "changed_files": 2,
+    "status": "APPLIED"
+  },
+  {
+    "base_commit": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+    "changed_files": 0,
+    "status": "APPLIED"
+  }
+]
