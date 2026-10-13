@@ -14,6 +14,7 @@ import importlib.util
 import json
 from pathlib import Path
 import re
+import unicodedata
 import sys
 import time
 import math
@@ -176,7 +177,7 @@ def extract_pdf_text(body: bytes) -> tuple[str, list[str]]:
 # standalone em/en dash as a missing-value marker.
 _NUMBER = r"(?:\([0-9][0-9,]*(?:\.\d+)?%?\)|[-−‐‑‒–—]?[0-9][0-9,]*(?:\.\d+)?|—|–|N/A)%?"
 _FINANCIAL_ROW_RE = re.compile(
-    rf"^(?P<label>[A-Za-z][A-Za-z0-9 &'(),./\-–—]+?)\s+(?P<values>{_NUMBER}(?:\s+{_NUMBER}){{1,5}})$"
+    rf"^(?P<label>[A-Za-z][A-Za-z0-9 &'(),.:/\-–—]+?(?:[^\x00-\x7f]+(?: [^\x00-\x7f]+)*)?)\s+(?P<values>{_NUMBER}(?:\s+{_NUMBER}){{1,5}})$"
 )
 _UNIT_RE = re.compile(
     r"\((?P<currency>[A-Z]{2,5})\s+in\s+(?P<unit>[A-Za-z ]+?)(?:,\s*except for\s+(?P<except>[^)]+))?\)",
@@ -187,8 +188,9 @@ _UNIT_HEADER_RE = re.compile(
     r"\bUnit\s*:\s*(?P<unit>[A-Za-z]+)\s+Currency\s*:\s*(?P<currency>[A-Z]{2,5}|S\$)\b",
     re.IGNORECASE,
 )
+_BARE_UNIT_HEADER_RE = re.compile(r"^\s*Unit\s*:\s*(?P<currency>RMB|CNY|HKD|USD)\s*$", re.IGNORECASE)
 _TRAILING_CURRENCY_RE = re.compile(r"\((?P<currency>RMB|CNY|HKD|USD|S\$)\)", re.IGNORECASE)
-_SYMBOL_THOUSANDS_RE = re.compile(r"(?<![A-Za-z])(?P<currency>S\$)\s*[’']?000\b", re.IGNORECASE)
+_SYMBOL_THOUSANDS_RE = re.compile(r"(?<![A-Za-z])(?P<currency>S\$|HK\$)\s*[’']?000\b", re.IGNORECASE)
 _YEAR_RE = re.compile(r"(?<!\d)(19\d{2}|20\d{2})(?!\d)")
 _CHANGE_RE = re.compile(r"\bchange(?:\s*(?:\(%\)|%))?(?=\s|\d|$)", re.IGNORECASE)
 _NOTE_MARKER_RE = re.compile(r"^\d+(?:\([a-z]\))?$", re.IGNORECASE)
@@ -462,7 +464,18 @@ def _column_context(lines: list[str], unit_index: int, unit_line: str) -> tuple[
     # columns.
     window_start = max(0, unit_index - 12)
     window_end = min(len(lines), unit_index + 16)
-    window = lines[window_start:window_end]
+    # Amounts such as 2025 and 2026 in body rows are not year headers.
+    for index in range(unit_index, window_end):
+        candidate = _FINANCIAL_ROW_RE.match(_normal_line(_TRAILING_CURRENCY_RE.sub("", lines[index])))
+        if candidate and any(token in candidate.group("label").lower() for token in _FINANCIAL_LABEL_TOKENS):
+            window_end = index
+            break
+    window = []
+    for line in lines[window_start:window_end]:
+        candidate = _FINANCIAL_ROW_RE.match(_normal_line(_TRAILING_CURRENCY_RE.sub("", line)))
+        if candidate and any(token in candidate.group("label").lower() for token in _FINANCIAL_LABEL_TOKENS):
+            continue
+        window.append(line)
     year_columns: list[str] = []
     year_line = ""
     for line in reversed(window):
@@ -508,13 +521,20 @@ def _column_context(lines: list[str], unit_index: int, unit_line: str) -> tuple[
         return year_line, columns
 
     joined = " ".join(window).lower()
-    if "same period" in joined and "yoy" in joined:
+    # This header is explicit, but without a year its period cannot be bound.
+    if ("this reporting period" in joined and "same period of last year" in joined
+            and _YEAR_RE.search(joined)):
+        columns = ["This Reporting Period", "Same Period of Last Year"]
+        if comparison_label:
+            columns.append(comparison_label)
+        return "This Reporting Period / Same Period of Last Year", columns
+    if "same period" in joined and "yoy" in joined and _YEAR_RE.search(joined):
         return "The Reporting Period / Same Period of the Previous Year / YoY Change (%)", [
             "The Reporting Period",
             "Same Period of the Previous Year",
             "YoY Change (%)",
         ]
-    if "reporting period" in joined and "corresponding" in joined:
+    if "reporting period" in joined and "corresponding" in joined and _YEAR_RE.search(joined):
         return "Reporting Period / Corresponding period of previous year / Change (%)", [
             "Reporting Period",
             "Corresponding period of previous year",
@@ -537,7 +557,10 @@ def _period_context(lines: list[str], unit_index: int, column_line: str) -> str:
     for line in window:
         if re.search(r"\breporting period\b|\bcorresponding period\b|\bsame period\b", line, re.IGNORECASE):
             return line
-    return column_line
+    half_year = re.search(r"\b(?:the\s+)?(?:first|second)\s+half\s+year\s+of\s+(?:19|20)\d{2}\b", joined, re.IGNORECASE)
+    if half_year:
+        return half_year.group(0)
+    return ""
 
 
 def _row_match(lines: list[str], row_index: int) -> tuple[re.Match[str] | None, int]:
@@ -587,7 +610,13 @@ def _financial_facts(page_number: int, text: str) -> list[dict[str, Any]]:
     facts: list[dict[str, Any]] = []
     seen: set[tuple[str, str]] = set()
     unit_contexts: list[tuple[int, str, str, str, str]] = []
+    ambiguous_unit_indexes: set[int] = set()
     for index, line in enumerate(lines):
+        header_currencies = {"HKD" if c.upper() == "HK$" else c.upper()
+                             for c in re.findall(r"(?<![A-Za-z])([A-Z]{2,5}|HK\$|S\$)\s*[’']?000\b", line)}
+        if len(header_currencies) > 1:
+            ambiguous_unit_indexes.add(index)
+            continue
         unit_match = _UNIT_RE.search(line)
         if unit_match:
             unit_contexts.append(
@@ -609,6 +638,9 @@ def _financial_facts(page_number: int, text: str) -> list[dict[str, Any]]:
                     line,
                 )
             )
+        elif (bare_header := _BARE_UNIT_HEADER_RE.fullmatch(line)):
+            currency = bare_header.group("currency").upper()
+            unit_contexts.append((index, currency, "yuan" if currency in {"RMB", "CNY"} else "units", "", line))
         elif index + 1 < len(lines) and _UNIT_OPEN_RE.search(line):
             # pypdf can expose a narrow table cell as ``(RMB in`` followed by
             # ``thousands)``.  Rejoin that presentation-only break while
@@ -630,7 +662,7 @@ def _financial_facts(page_number: int, text: str) -> list[dict[str, Any]]:
                 (
                     index,
                     trailing_match.group("currency").upper(),
-                    "yuan",
+                    "yuan" if trailing_match.group("currency").upper() in {"RMB", "CNY"} else "units",
                     "",
                     line,
                 )
@@ -640,25 +672,57 @@ def _financial_facts(page_number: int, text: str) -> list[dict[str, Any]]:
             if raw_currency:
                 unit_contexts.append((index, raw_currency.group(1), "thousands", "", line))
         elif (symbol_match := _SYMBOL_THOUSANDS_RE.search(line)):
-            unit_contexts.append((index, symbol_match.group("currency").upper(), "thousands", "", line))
+            unit_contexts.append((index, {"HK$": "HKD"}.get(symbol_match.group("currency").upper(), symbol_match.group("currency").upper()), "thousands", "", line))
     for unit_index, currency, unit, except_for, unit_line in unit_contexts:
         column_line, columns = _column_context(lines, unit_index, unit_line)
         period_line = _period_context(lines, unit_index, column_line)
-        if len(columns) < 2:
+        if len(columns) < 2 or not period_line:
             continue
         has_inline_unit = bool(_TRAILING_CURRENCY_RE.search(lines[unit_index]))
         row_start = unit_index if has_inline_unit else unit_index + 1
-        for row_index in range(row_start, min(len(lines), unit_index + 45)):
+        # Currency/unit changes and ambiguous headers end this table context.
+        boundaries = [i for i, *_ in unit_contexts if i > unit_index]
+        boundaries.extend(i for i in ambiguous_unit_indexes if i > unit_index)
+        row_end = min([len(lines), unit_index + 45, *boundaries])
+        if has_inline_unit:
+            row_end = min(row_end, unit_index + 1)
+        for row_index in range(row_start, row_end):
             row_match, row_span = _row_match(lines, row_index)
             if not row_match:
                 continue
-            label = _clean_metric_label(row_match.group("label"))
+            raw_label = row_match.group("label")
+            note_header = bool(re.search(r"\bNotes?\b", unit_line, re.IGNORECASE))
+            suffix_note = _FOOTNOTE_LABEL_SUFFIX_RE.search(raw_label)
+            if suffix_note and not note_header:
+                continue
+            label = _clean_metric_label(raw_label)
             values = row_match.group("values").split()
-            if len(values) == len(columns) + 1 and _NOTE_MARKER_RE.fullmatch(values[0]):
-                values = values[1:]
+            # An extra integer is a note only when the table explicitly labels
+            # its note column. Never silently discard an unmatched value column.
+            note_marker = _normal_line(suffix_note.group(0)) if suffix_note else None
+            if (note_header and not suffix_note and len(values) == len(columns)
+                    and _NOTE_MARKER_RE.fullmatch(values[0])):
+                continue  # Could be a note followed by a missing amount.
+            if (len(values) == len(columns) + 1
+                    and note_header and not suffix_note
+                    and _NOTE_MARKER_RE.fullmatch(values[0])):
+                note_marker = values.pop(0)
             if len(values) != len(columns) or len(values) < 2:
                 continue
+            # The numeric suffix remains fully anchored. Opaque PDF font glyphs
+            # may decorate an English metric, but must be letter/mark/number glyphs only;
+            # retain them verbatim, never guess their translation or values.
+            if any(ord(char) > 127 and char not in "–—" and
+                   unicodedata.category(char)[0] not in {"L", "M", "N"} for char in label):
+                continue
             lower_label = label.lower()
+            if ("revenue" in lower_label and
+                    (re.search(r"\b(?:profit|loss|cost|expenses?)\b", lower_label)
+                     or any(word in label for word in ("利润", "利潤", "成本", "费用", "費用", "亏损", "虧損")))):
+                continue
+            if (re.search(r"\bgross profit\s+loss\b", lower_label)
+                    or ("gross profit" in lower_label and any(word in label for word in ("亏损", "虧損")))):
+                continue
             if any(token in lower_label for token in ("unaudited", "page", "ended", "change (%)")):
                 continue
             if any(token in lower_label for token in _NON_OPERATING_LABEL_TOKENS):
@@ -682,7 +746,7 @@ def _financial_facts(page_number: int, text: str) -> list[dict[str, Any]]:
                 f"币种={_CURRENCY_CN.get(currency, currency)}；单位={unit_cn}{except_cn}；数值={values_cn}。"
             )
             excerpt = _safe_excerpt(
-                [period_line, column_line, unit_line, " ".join(lines[row_index : row_index + row_span])],
+                [period_line, column_line, unit_line, " ".join(lines[row_index - row_span + 1 : row_index + 1])],
                 limit=800,
             )
             if excerpt is None:
@@ -706,6 +770,7 @@ def _financial_facts(page_number: int, text: str) -> list[dict[str, Any]]:
                         "currency": currency,
                         "unit": unit,
                         "except_for": except_for or None,
+                        "note_marker": note_marker,
                         "values": value_items,
                     },
                 }

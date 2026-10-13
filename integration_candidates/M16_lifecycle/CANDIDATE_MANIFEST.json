@@ -1,5 +1,5 @@
 {
-  "base_commit": "ac1d1404ee76ca18a55dc65451b34868de6db552",
+  "base_commit": "2e49a397d99de8b0315628c97c01a4fd1a3a823a",
   "scope": "integration_candidates/M16_lifecycle",
   "files": [
     {
@@ -10,9 +10,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 14387,
-      "sha256": "6eb67bc14e3a5793ba7e3176a1754dd17d961d391d9a58d1022b5e0a2ffd2fc7",
-      "git_blob_sha": "549c64759d0abc7d3595d29a889fa1fde0b1daeb"
+      "bytes": 17371,
+      "sha256": "eb799c3824da74bcb4ab695dc7ba76fbc86d7a69c040d20f5602562a0a90dc7c",
+      "git_blob_sha": "2d0844cfb1d55d2688529c1039a28684126533a8"
     },
     {
       "path": "source/PACKAGE_CHECKS.json",
@@ -23,14 +23,14 @@
     {
       "path": "source/PACKAGE_SHA256.json",
       "bytes": 32905,
-      "sha256": "9cd96149bec5fbf98753dc258f1351782c8517b4765c216bc02e5df1c36e78f8",
-      "git_blob_sha": "fed6d9f613b17530d9f15e9a5004da36116905fc"
+      "sha256": "e0d6ef27acf18d442d558a6c55ec260c9c7913d635d182a11788ae96ddcad5ea",
+      "git_blob_sha": "113b9064df3aa183bcf2bc13250f9327d6256202"
     },
     {
       "path": "source/SOURCE_MANIFEST.json",
-      "bytes": 103763,
-      "sha256": "c8f72f9a64cb2dd0c1f37819156e7d26ec457097d3f2bffad79f2beeebeac2ea",
-      "git_blob_sha": "fd0048fc1cc3ac3c37072461b9657937a00529a4"
+      "bytes": 104540,
+      "sha256": "608ba375bd4402550aa083b330b1f23efa42de3dd340aab8935dc884e1827209",
+      "git_blob_sha": "cfee264883679856e8923d8cfeb280d4010b8161"
     },
     {
       "path": "source/START_HERE.md",
@@ -665,8 +665,8 @@
     {
       "path": "source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
       "bytes": 40133,
-      "sha256": "7bc565f9c7a210bc4966622cfde60875ec9f002f7b38a5d9063c467a9499d56d",
-      "git_blob_sha": "8b7aa95d7ff93a6aed32a92a0f0897b3cfaee240"
+      "sha256": "a36bb9e5a3ff39c3e5965e44d6130025573843055dbb0ebe515711ba95c32a03",
+      "git_blob_sha": "b28030586c9d73907caacf2d60a46f329e49413f"
     },
     {
       "path": "source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/issuer_us_relations.py",
@@ -694,9 +694,9 @@
     },
     {
       "path": "source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
-      "bytes": 41935,
-      "sha256": "0ddf7fd5510333c70060af7de2a25dd4e6c9ac2880a0d8b97d95e84542a03383",
-      "git_blob_sha": "0294e489d5f8fb58b36a086ba1787c0022e01fd0"
+      "bytes": 46258,
+      "sha256": "b4cfbf4c418231cd3eb569e0771e6e1292fbce5ad3aef0b0aed2a83f039f6dbd",
+      "git_blob_sha": "8ec1c9a28daa5bb25d283492cd6998a572c51afb"
     },
     {
       "path": "source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/plan_owner_dispatch.py",
@@ -1247,8 +1247,8 @@
     {
       "path": "src/v5_shadow/m16_runtime.py",
       "bytes": 5888,
-      "sha256": "d7d1e5db28b97ca3d327683238347f106241c7770d24af33c47933cba484c2c4",
-      "git_blob_sha": "69ccbd1ce9d542ecd57b16ff3e6d1700929fd556"
+      "sha256": "d4f48fb833ee3b6596211041b25941b7d38e178d50662867bca2e4df9ff06a99",
+      "git_blob_sha": "96adc115b66f66683468ef7b66ca1ff50b267249"
     },
     {
       "path": "src/v5_shadow/manager_factory.py",
@@ -1267,6 +1267,12 @@
       "bytes": 10829,
       "sha256": "26a8058fe9da8eedead4753a2328042c9e37064248e76b464a349fc3123c3114",
       "git_blob_sha": "1a4d9d285aa1b50edfcd35e586ff98624f105670"
+    },
+    {
+      "path": "tests/fixtures/real_pdf_fragments.json",
+      "bytes": 2505,
+      "sha256": "0b35b9079318ef815ee2bd35880df4144f4c3c6ef4bf7864e310243428787e1b",
+      "git_blob_sha": "8fe0899049c7cc72c0d4803570f5af5725d2890b"
     },
     {
       "path": "tests/stage_fixture.py",
@@ -1291,6 +1297,12 @@
       "bytes": 18898,
       "sha256": "e2076580d58a2cb6a18256cd4cbf0ec1b2896c0aca5e464fe20a7344d6b4134a",
       "git_blob_sha": "86718b15ce6ee949b14a41eca9b1f43cd6acb48e"
+    },
+    {
+      "path": "tests/test_pdf_layouts.py",
+      "bytes": 8056,
+      "sha256": "d16a79a2f46aea41d3f2cc5ab633da7f6f5e94a7b22d1d80af00b5f495e343f7",
+      "git_blob_sha": "1d719ec7f1e277c6629fba50a0f7a13bda1d3dd4"
     },
     {
       "path": "tests/test_prepare_stage.py",

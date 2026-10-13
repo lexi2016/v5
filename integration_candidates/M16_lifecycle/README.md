@@ -15,7 +15,7 @@ This delivery adds only `integration_candidates/M16_lifecycle/` and does not
 rewrite those files in their original location, P0, shared APIs/UI, other modules,
 or running V4. It does not re-import the already validated historical ten rows.
 
-## Existing owner coverage, retained byte-for-byte
+## Existing owner coverage (original delivery; parser patch noted below)
 
 Under `source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/`:
 
@@ -254,3 +254,48 @@ The earlier 31 lifecycle tests and their successful Mac run remain separate
 baseline evidence, not rerun or added to this round's count. Actual historical
 M08 export and read-only service binding on Mac remain pending this fixed
 candidate; no new business result, external PDF or production success is claimed.
+
+## PDF layout repair on the 2e49 candidate (2026-10-13)
+
+The candidate now patches only the packaged `pdf_parser.py` and the provider's
+`PDF_FACTS_CACHE_VERSION` (1 → 2). The original source locations elsewhere in
+V5/V4 are unchanged. `SOURCE_MANIFEST.json` marks these two files
+`M16_CANDIDATE_PATCHED_SOURCE`, retaining donor identities under `upstream_source`;
+the runtime pins the new manifest. Historical `source/PACKAGE_CHECKS.json` describes the original handoff.
+`source/PACKAGE_SHA256.json` is refreshed for its original source file subset;
+`CANDIDATE_MANIFEST.json` is the current complete package inventory.
+
+- Accept anchored numeric rows with bilingual/garbled Unicode label suffixes,
+  retaining the supplied glyphs verbatim. No numeric search through prose or
+  reconstruction/translation of garbled Chinese is performed.
+- Recognize exact `Unit: RMB` as yuan, split `first half / year of 2026` periods,
+  and `HK$’000` as HKD thousands, while retaining original header excerpts.
+- An extra integer is removed as a note only with an explicit Note(s) unit
+  header; `fields.note_marker` records it. Wrong column counts, missing period
+  or unit, and conflicting revenue/profit/cost labels fail closed.
+- `This Reporting Period / Same Period of Last Year` supports an explicit nearby
+  reporting year only. The actual HK.01081 page 5 fragment has no year and still
+  yields no financial facts. A synthetic added-year variant is separately tested.
+- Version 2 invalidates previous zero-fact parses without deleting raw materials
+  or version 1 evidence. The cache regression proves recompute once and reuse.
+
+`tests/fixtures/real_pdf_fragments.json` contains exactly four cached extraction
+fragments returned by the Mac, including physical PDF page, PDF SHA-256, and
+SHA-256 of each original UTF-8 text (no extra final newline). Tests verify all
+four hashes and retain every garbled glyph. No PDF was downloaded or re-extracted
+for this repair. Sources:
+
+- HK.02583 page 33: https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0921/2026092100448.pdf
+- HK.01081 pages 42 and 5: https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0831/2026083100586.pdf
+- HK.00376 page 57: https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0924/2026092401829.pdf
+
+The three period-bound fragments yield two financial facts each (six total),
+with original amounts, 2026/2025 columns, currencies/units, page locators and
+note numbers. This is offline fragment verification, not a claim that the three
+whole products are READY. HK.02915 remains unconfirmed; no mapping to HK.00928
+has been invented. The existing 10-row production result was not recollected.
+
+Run all candidate tests with the existing environment:
+`PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s tests -v`
+Then Mac may verify the same cached whole documents through the existing service
+integration. That separate verification determines final product readiness.

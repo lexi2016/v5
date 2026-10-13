@@ -48,7 +48,7 @@ _SUBSTANTIVE_REPORT_TOKENS = (
 )
 # Bump when extract_pdf_facts' observable output changes so cached parses of
 # immutable archived PDFs are recomputed instead of going stale.
-PDF_FACTS_CACHE_VERSION = 1
+PDF_FACTS_CACHE_VERSION = 2
 
 
 class ProviderError(RuntimeError):

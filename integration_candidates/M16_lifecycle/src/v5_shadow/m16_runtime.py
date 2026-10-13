@@ -19,7 +19,7 @@ from .manager_factory import M16RuntimeConfig, build_manager_jobs
 from .manager_loader import OwnerClosure, PREFIX, load_owner
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCE_MANIFEST_SHA256 = 'c8f72f9a64cb2dd0c1f37819156e7d26ec457097d3f2bffad79f2beeebeac2ea'
+SOURCE_MANIFEST_SHA256 = '608ba375bd4402550aa083b330b1f23efa42de3dd340aab8935dc884e1827209'
 DEPENDENCY_MANIFEST_SHA256 = '4fa44cbe32992f70cfcec6193e052a9288c87447770694478e2d79c72e3aa210'
 MAX_INPUT_BYTES = 8 * 1024 * 1024
 
