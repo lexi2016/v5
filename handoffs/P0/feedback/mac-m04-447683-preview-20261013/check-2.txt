@@ -1,0 +1,21 @@
+
+> v3-5-web@0.1.0 test
+> vitest run --run src/components/M04SavedResearch.spec.ts src/views/SavedManagerResultView.navigation.spec.ts src/components/SourceBundleStatus.m08.spec.ts src/components/SourceBundleStatus.m09.spec.ts src/components/SourceBundleStatus.m17.spec.ts
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.10 [39m[90m<TASK_ROOT>/candidate-m04-447683/frontend[39m
+
+ [32m✓[39m src/components/M04SavedResearch.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 82[2mms[22m[39m
+ [32m✓[39m src/components/SourceBundleStatus.m08.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 104[2mms[22m[39m
+ [32m✓[39m src/components/SourceBundleStatus.m17.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 104[2mms[22m[39m
+ [32m✓[39m src/components/SourceBundleStatus.m09.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 106[2mms[22m[39m
+ [32m✓[39m src/views/SavedManagerResultView.navigation.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 833[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m5 passed[39m[22m[90m (5)[39m
+[2m      Tests [22m [1m[32m13 passed[39m[22m[90m (13)[39m
+[2m   Start at [22m 11:40:44
+[2m   Duration [22m 1.65s[2m (transform 888ms, setup 0ms, import 1.70s, tests 1.23s, environment 1.82s)[22m
+
+[90mstderr[2m | src/views/SavedManagerResultView.navigation.spec.ts[2m > [22m[2mmakes content selection, gaps and materials shortcuts focus the same result heading
+[22m[39mUsing "fireEvent.change" may lead to unexpected results. Please use fireEvent.update() instead.
+

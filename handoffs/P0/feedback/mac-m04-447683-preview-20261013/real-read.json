@@ -1,0 +1,50 @@
+{
+  "status": "PASS_REAL_HISTORICAL18_COLD_HTTP",
+  "candidate": "98eeb6d247db238997989e0e4279c0fb16707113",
+  "product_commit": "447683268a289af9fe980b90807284de42f1ea13",
+  "started_utc": "2026-10-13T03:41:35.266166+00:00",
+  "finished_utc": "2026-10-13T03:41:35.641484+00:00",
+  "exit_code": 0,
+  "reader_calls": [
+    {
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-I",
+        "-B",
+        "V5/src/v5_shadow/archive_reader.py"
+      ],
+      "started_utc": "2026-10-13T03:41:35.274238+00:00",
+      "finished_utc": "2026-10-13T03:41:35.431856+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "<EXISTING_PYTHON>",
+        "-I",
+        "-B",
+        "V5/src/v5_shadow/archive_reader.py"
+      ],
+      "started_utc": "2026-10-13T03:41:35.448296+00:00",
+      "finished_utc": "2026-10-13T03:41:35.597399+00:00",
+      "exit_code": 0
+    }
+  ],
+  "article_count": 18,
+  "original_payload_exact": true,
+  "archive_date": "20261012",
+  "source_slot": "2100",
+  "source_run": "hip-49cb26f7f3a0661bde1d1440",
+  "missing_retrieved_at": 18,
+  "missing_available_at": 18,
+  "pit": "UNKNOWN",
+  "out_of_sample_errors": 53,
+  "runtime_pin_files": 110,
+  "original_copy_sha_size_mtime_unchanged": true,
+  "marked_copy_sha_size_mtime_unchanged": true,
+  "runtime_files_unchanged": true,
+  "builder_calls": 0,
+  "importer_calls": 0,
+  "provider_calls": 0,
+  "model_calls": 0,
+  "natural_verified": false
+}

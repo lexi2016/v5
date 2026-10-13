@@ -1,0 +1,43 @@
+test_each_get_cold_reads_exact_reference_and_ignores_latest (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_each_get_cold_reads_exact_reference_and_ignores_latest) ... ok
+test_fixed_identity_cannot_be_selected_from_http_or_config (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_fixed_identity_cannot_be_selected_from_http_or_config) ... ok
+test_missing_binding_reports_not_configured (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_missing_binding_reports_not_configured) ... ok
+test_missing_file_never_becomes_empty_success (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_missing_file_never_becomes_empty_success) ... ok
+test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes) ... ok
+test_payload_tamper_rejected_before_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_payload_tamper_rejected_before_original_reader) ... ok
+test_query_selector_and_mutating_methods_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_query_selector_and_mutating_methods_rejected) ... ok
+test_reader_timeout_releases_slot_and_next_get_recovers (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_reader_timeout_releases_slot_and_next_get_recovers) ... ok
+test_receipt_semantic_tamper_is_rejected_by_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_receipt_semantic_tamper_is_rejected_by_original_reader) ... ok
+test_runtime_closure_tamper_fails_before_execution (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_runtime_closure_tamper_fails_before_execution) ... ok
+test_undeclared_root_files_are_rejected_before_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_undeclared_root_files_are_rejected_before_original_reader) ... ok
+test_unexpected_sample_outcome_is_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_unexpected_sample_outcome_is_rejected) ... ok
+test_wrong_root_marker_and_symlink_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_wrong_root_marker_and_symlink_rejected) ... ok
+test_duplicate_query_rejected (V5.tests.test_module_api.ModuleApiTests.test_duplicate_query_rejected) ... ok
+test_fifo_record_rejected_without_waiting_for_writer (V5.tests.test_module_api.ModuleApiTests.test_fifo_record_rejected_without_waiting_for_writer) ... ok
+test_missing_record_is_not_empty_success (V5.tests.test_module_api.ModuleApiTests.test_missing_record_is_not_empty_success) ... ok
+test_original_payload_and_identity_headers (V5.tests.test_module_api.ModuleApiTests.test_original_payload_and_identity_headers) ... ok
+test_other_module_root_rejected (V5.tests.test_module_api.ModuleApiTests.test_other_module_root_rejected) ... ok
+test_release_header_injection_rejected (V5.tests.test_module_api.ModuleApiTests.test_release_header_injection_rejected) ... ok
+test_root_replacement_does_not_change_bound_directory (V5.tests.test_module_api.ModuleApiTests.test_root_replacement_does_not_change_bound_directory) ... ok
+test_symlink_response_directory_rejected (V5.tests.test_module_api.ModuleApiTests.test_symlink_response_directory_rejected) ... ok
+test_tamper_rejected (V5.tests.test_module_api.ModuleApiTests.test_tamper_rejected) ... ok
+test_unconfigured_route_rejected (V5.tests.test_module_api.ModuleApiTests.test_unconfigured_route_rejected) ... ok
+test_unsupported_methods_have_json_error (V5.tests.test_module_api.ModuleApiTests.test_unsupported_methods_have_json_error) ... ok
+test_dripping_headers_hit_total_deadline (V5.tests.test_api_gateway.GatewayTests.test_dripping_headers_hit_total_deadline) ... ok
+test_frontend_wrong_hash_rejected (V5.tests.test_api_gateway.GatewayTests.test_frontend_wrong_hash_rejected) ... ok
+test_json_preallocation_limit (V5.tests.test_api_gateway.GatewayTests.test_json_preallocation_limit) ... ok
+test_loopback_only (V5.tests.test_api_gateway.GatewayTests.test_loopback_only) ... ok
+test_non_utf8_and_overflow_rejected (V5.tests.test_api_gateway.GatewayTests.test_non_utf8_and_overflow_rejected) ... ok
+test_one_module_timeout_does_not_block_other (V5.tests.test_api_gateway.GatewayTests.test_one_module_timeout_does_not_block_other) ... ok
+test_original_frontend_bytes_served_without_api_fallback (V5.tests.test_api_gateway.GatewayTests.test_original_frontend_bytes_served_without_api_fallback) ... ok
+test_original_url_and_payload_preserved (V5.tests.test_api_gateway.GatewayTests.test_original_url_and_payload_preserved) ... ok
+test_post_bytes_and_header_allowlist (V5.tests.test_api_gateway.GatewayTests.test_post_bytes_and_header_allowlist) ... ok
+test_readonly_default_rejects_post (V5.tests.test_api_gateway.GatewayTests.test_readonly_default_rejects_post) ... ok
+test_truncated_json_is_not_success (V5.tests.test_api_gateway.GatewayTests.test_truncated_json_is_not_success) ... ok
+test_unknown_route_does_not_fall_back_to_v4 (V5.tests.test_api_gateway.GatewayTests.test_unknown_route_does_not_fall_back_to_v4) ... ok
+test_upstream_host_cannot_be_external (V5.tests.test_api_gateway.GatewayTests.test_upstream_host_cannot_be_external) ... ok
+test_wrong_origin_rejected (V5.tests.test_api_gateway.GatewayTests.test_wrong_origin_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 24.091s
+
+OK

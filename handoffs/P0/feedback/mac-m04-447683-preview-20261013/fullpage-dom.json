@@ -1,0 +1,164 @@
+{
+  "method": "Entire deployed built main bundle mounted in jsdom, real local HTTP; not browser visual validation",
+  "behavior": {
+    "initial_sources_closed": true,
+    "result_before_sources": true,
+    "heading": "公告研究股票目标日 20261012已读取运行 46596b03c2ab4e29b1219fd2e5eb698f",
+    "loading_in_result_before_sources": true,
+    "m04": {
+      "real_articles_exact": 18,
+      "first_click_opens_both_and_focuses": true,
+      "reopen_repeat_does_not_fetch": true,
+      "explicit_refresh_clears_rows_and_reads_once": true,
+      "outside_errors": 53,
+      "pit": "UNKNOWN"
+    },
+    "source_expand_and_focus": true,
+    "error_in_result_before_sources": true,
+    "error_clears_old_result": true,
+    "restored_same_run": true
+  },
+  "scrolls": [
+    {
+      "id": "saved-result-title",
+      "tag": "H2",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "saved-result-title",
+      "tag": "H2",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "saved-result-title",
+      "tag": "H2",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "saved-result-title",
+      "tag": "H2",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    },
+    {
+      "id": "",
+      "tag": "SUMMARY",
+      "opts": {
+        "block": "start",
+        "behavior": "auto"
+      }
+    }
+  ],
+  "exit_code": 0,
+  "finished_utc": "2026-10-13T03:44:07.924Z",
+  "logs": [],
+  "visual_verification": false,
+  "navigation": [
+    {
+      "label": "公告研究股票",
+      "manager_cards": 32,
+      "manager_table_rows": 0
+    },
+    {
+      "label": "超跌研究",
+      "manager_cards": 31,
+      "manager_table_rows": 0
+    },
+    {
+      "label": "美股驱动",
+      "manager_cards": 3,
+      "manager_table_rows": 0
+    },
+    {
+      "label": "经理已保存结果",
+      "manager_cards": 0,
+      "manager_table_rows": 1
+    }
+  ],
+  "http_statuses": [
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200,
+    200
+  ],
+  "protected_files_after_dom_unchanged": 200
+}

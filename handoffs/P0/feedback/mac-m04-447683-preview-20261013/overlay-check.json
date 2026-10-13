@@ -1,0 +1,67 @@
+[
+  {
+    "path": "V5/src/v5_shadow/m04_readonly.py",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "V5/contracts/m04_readonly_runtime.json",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "V5/src/v5_shadow/module_api.py",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/src/api/m04SavedResearch.ts",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/src/components/M04SavedResearch.vue",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/src/components/SourceBundleStatus.vue",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/src/views/SavedManagerResultView.vue",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/vite.config.ts",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "V5/tests/test_m04_readonly_api.py",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/tests/m04SavedResearch.node.mjs",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/src/components/M04SavedResearch.spec.ts",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "frontend/src/views/SavedManagerResultView.navigation.spec.ts",
+    "before_exact": true,
+    "after_exact": true
+  },
+  {
+    "path": "V5/examples/m04_saved_research_binding.example.json",
+    "before_exact": true,
+    "after_exact": true
+  }
+]
