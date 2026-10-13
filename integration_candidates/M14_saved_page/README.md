@@ -16,6 +16,16 @@ Seven runtime files are added/changed:
 
 Ten additional test/fixture/declaration files are included. See `verification.json` for every path and exact preimage. Source-only fixtures are explicitly synthetic; there are no real saved artifacts, account secrets, private owner roots or real run references in this package.
 
+## Mac feedback revision after 018827
+
+Mac's original redacted [result and typecheck feedback](evidence/mac-018827/README.md) are retained byte-for-byte with their verified SHA256. On 018827, check-only/apply and build succeeded; typecheck found two query-group typing errors, and Vue reported 372 passed / 24 failed / 3 skipped. The obsolete M07 navigation assertion was among the delivered-test failures. Missing default Python/private historical fixtures are recorded separately, not relabelled product failures.
+
+This revision changes only `m14SavedRebound.ts` and `SavedManagerResultView.spec.ts`, plus delivery manifests/patches/evidence. It fixes the typed group narrowing and tests the real M07 enabled/open/focused interaction. Node remains 182/182. Fixed Vue/typecheck are still NOT_RUN in the cloud; the prior Mac build pass applies to 018827, not this new revision. Backend sources and prior backend evidence are unchanged.
+
+If the isolated checkout already has 018827 applied, use `revisions/from_018827/apply_candidate.py --target /absolute/isolated-checkout --check-only`, then the same command without `--check-only`. That delta validates exactly the two prior candidate after-SHAs and is idempotent. For a pristine P0 base, continue to use the top-level full `apply_candidate.py`. Never use the full-base helper to overwrite unknown or mixed source bytes.
+
+The minimal next check is existing `$NODE node_modules/vue-tsc/bin/vue-tsc.js --noEmit`, followed by the four targeted new-M14/old-manager Vue files listed in the feedback. Use an existing explicit `$PY_M14` or `$PY_FUTU` when needed. No owner rerun, real fixture fabrication, P0 direct write or service deployment is included.
+
 ## Contributions and preserved source
 
 - Original M14 Chat supplied the adapter in `provenance/original_chat_4f3da9dd.py`, unchanged, SHA256 `954f614b2888b2c67961cd03d7f431fcc53c385ddf5d15d39e610fa3a20664b8`. Its contribution is the independent server-owned saved binding, per-request original reader call, corrected direct-artifact return shape, `no_symlinks`, four-reference/group cursors, research-state separation and no producer execution. Its original tests were NOT_RUN and its header explicitly excluded route/frontend wiring.

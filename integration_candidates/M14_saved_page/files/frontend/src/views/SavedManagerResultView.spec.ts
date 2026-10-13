@@ -1,17 +1,26 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, fireEvent } from '@testing-library/vue';
+import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/vue';
 import SavedManagerResultView from './SavedManagerResultView.vue';
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
 it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed', async () => {
  vi.stubGlobal('fetch',vi.fn(async () => new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503})));
- render(SavedManagerResultView);
+ const view = render(SavedManagerResultView);
  expect(screen.getByRole('heading',{name:'V5 经理选股'})).toBeTruthy();
  expect(await screen.findByRole('alert')).toHaveProperty('textContent',expect.stringContaining('CANNOT_CONFIRM'));
- expect(screen.getByText('阶段选股 · 未接入')).toHaveProperty('disabled',true);
+ const stageButton = screen.getByRole('button',{name:'A 股阶段选股 · M07 已保存结果'});
+ expect(stageButton).not.toHaveProperty('disabled',true);
  expect(screen.queryByRole('table')).toBeNull();
  expect(vi.mocked(fetch).mock.calls.filter(([url])=>String(url).startsWith('/api/v4/manager/m18/v2'))).toHaveLength(1);
  await fireEvent.click(screen.getByRole('button',{name:'源模块实际状态'}));
  expect(screen.getByRole('region',{name:'M17 收盘补采已保存观察'})).toBeTruthy();
+ await fireEvent.click(stageButton);
+ const stage = view.container.querySelector<HTMLDetailsElement>('#m07-saved-stage');
+ await waitFor(() => {
+  expect(stage?.open).toBe(true);
+  expect(document.activeElement).toBe(stage?.querySelector('summary'));
+ });
+ expect(screen.getByRole('region',{name:'M07 A 股阶段已保存结果'})).toBeTruthy();
+ expect(vi.mocked(fetch).mock.calls.filter(([url])=>String(url).startsWith('/api/v4/manager/m18/v2'))).toHaveLength(1);
 });
 it('opens consumed announcement references by default and reuses the stock reasons view', async () => {
  const run='46596b03c2ab4e29b1219fd2e5eb698f';

@@ -96,11 +96,13 @@ function validate(value: unknown, query: M14SavedQuery): M14SavedResult {
  return value as unknown as M14SavedRebound;
 }
 export async function readSavedRebound(query: M14SavedQuery = {}, fetcher: Fetcher = fetch, signal?: AbortSignal): Promise<M14SavedResult> {
- check(object(query) && Object.keys(query).every(key => ['group', 'cursor', 'reference'].includes(key)) && M14_REBOUND_GROUPS.includes(query.group ?? 'pending'), 'QUERY');
+ check(query !== null && typeof query === 'object' && !Array.isArray(query) && Object.keys(query).every(key => ['group', 'cursor', 'reference'].includes(key)), 'QUERY');
+ const group = query.group ?? 'pending';
+ check(M14_REBOUND_GROUPS.includes(group), 'QUERY');
  check(query.reference === undefined || reference(query.reference), 'QUERY_REFERENCE');
  check(query.cursor === undefined || query.cursor === null || (cursor(query.cursor) && query.reference !== undefined), 'QUERY_CURSOR');
  // Copy before awaiting: a caller cannot change the expected identity mid-request.
- const expected: M14SavedQuery = {group: query.group ?? 'pending', cursor: query.cursor ?? null, ...(query.reference ? {reference: {...query.reference}} : {})};
+ const expected: M14SavedQuery = {group, cursor: query.cursor ?? null, ...(query.reference ? {reference: {...query.reference}} : {})};
  const params = new URLSearchParams({group: expected.group!});
  if (expected.cursor) params.set('cursor', expected.cursor);
  if (expected.reference) for (const key of REFERENCE_KEYS) params.set(key, expected.reference[key]);

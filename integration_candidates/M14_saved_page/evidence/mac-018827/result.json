@@ -1,0 +1,108 @@
+{
+  "candidate": "018827908e6f5feae87d27dbc9e8d6f2a0935a8e",
+  "base": "386d5ce67a6a9914a96162cd47528290b8e7d75f",
+  "status": "BLOCKED_TYPECHECK_AND_VUE_NO_DEPLOYMENT",
+  "files_git_blob_verified": 33,
+  "preimages_verified": 17,
+  "after_images_unchanged": true,
+  "stages": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "<TASK_ROOT>/m14-018827-isolated/candidate/apply_candidate.py",
+        "--target",
+        "<TASK_ROOT>/m14-018827-isolated/checkout",
+        "--check-only"
+      ],
+      "started_at": "2026-10-13T13:58:20.462961+00:00",
+      "finished_at": "2026-10-13T13:58:20.522223+00:00",
+      "exit_code": 0,
+      "stage": "check-only"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "<TASK_ROOT>/m14-018827-isolated/candidate/apply_candidate.py",
+        "--target",
+        "<TASK_ROOT>/m14-018827-isolated/checkout"
+      ],
+      "started_at": "2026-10-13T13:58:37.227241+00:00",
+      "finished_at": "2026-10-13T13:58:37.273987+00:00",
+      "exit_code": 0,
+      "stage": "apply"
+    },
+    {
+      "command": [
+        "$NODE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "started_at": "2026-10-13T13:59:03.847901+00:00",
+      "finished_at": "2026-10-13T13:59:08.214088+00:00",
+      "exit_code": 2,
+      "stage": "typecheck"
+    },
+    {
+      "command": [
+        "$NODE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "started_at": "2026-10-13T13:59:03.848190+00:00",
+      "finished_at": "2026-10-13T13:59:07.665301+00:00",
+      "exit_code": 0,
+      "stage": "build"
+    },
+    {
+      "command": [
+        "$NODE",
+        "node_modules/vitest/vitest.mjs",
+        "run"
+      ],
+      "started_at": "2026-10-13T13:59:03.848280+00:00",
+      "finished_at": "2026-10-13T13:59:10.801694+00:00",
+      "exit_code": 1,
+      "stage": "vue"
+    }
+  ],
+  "typecheck_errors": [
+    "src/api/m14SavedRebound.ts(99,136): error TS2345: Argument of type '{}' is not assignable to parameter of type '\"strict\" | \"near\" | \"pending\" | \"excluded\" | \"screen_unresolved\"'.",
+    "src/api/m14SavedRebound.ts(103,35): error TS2322: Type '{}' is not assignable to type '\"strict\" | \"near\" | \"pending\" | \"excluded\" | \"screen_unresolved\" | undefined'."
+  ],
+  "vue": {
+    "passed": 372,
+    "failed": 24,
+    "skipped": 3,
+    "suites_failed": 10,
+    "suites_passed": 41,
+    "suites_skipped": 1
+  },
+  "product_test_failure": "Delivered SavedManagerResultView.spec.ts:10 expects 阶段选股 · 未接入; rendered page does not contain that text; baseline attribution not established",
+  "fixture_limitations": [
+    "M08/M09/M10/M17 synthetic fixture subprocess failures; PYTHON was not explicitly set by test harness; detailed attribution not established",
+    "Existing cloud recovery and issue8R2 private/synthetic fixture inputs missing; not fabricated or restored"
+  ],
+  "first_attempt": "Test tools not reached because isolation copy omitted node_modules/**/dist; original logs preserved; existing dependency copy repaired without product edits/install",
+  "real_M14_HTTP": "NOT_RUN",
+  "real_M14_pagination": "NOT_RUN",
+  "real_M14_DOM": "NOT_RUN",
+  "native_visual": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "owner_execution": "NOT_RUN",
+  "M02_generation_preserved": "18327ae3ac839284230437989c9418c326b8f850decc38448c354d0ddf8319f0",
+  "protected_files_verified_unchanged": 2671,
+  "service_start_stop": "NOT_RUN",
+  "pid_check": "NOT_RUN_THIS_TASK",
+  "recorded_at": "2026-10-13T14:00:11.132994+00:00",
+  "logs": {
+    "build.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "typecheck.stdout.txt": "f40aa5159a91d2f80b94a924398713cda1533c45e854a0fa70dbc1c9c0f4a112",
+    "vue.stderr.txt": "8edb163d1699976d49ba6a1486e19ffefe3fa6bb4b2c16b141b2d45a259e66c2",
+    "build.stdout.txt": "8174d574fecc352d4d910378f2694f7345404f1f6f969b15b26205778f65f43e",
+    "typecheck.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vue.stdout.txt": "c270d2a63c887de8d7ccb86fa9cb417bccca4691731d35683310635690eb629a"
+  },
+  "default_python_on_path": false
+}

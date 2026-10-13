@@ -70,8 +70,8 @@
       "path": "frontend/src/api/m14SavedRebound.ts",
       "before_blob": null,
       "before_sha256": null,
-      "after_sha256": "98fea1795ddcd56a561f3af9a223105bf083f46c4e55ee95af4dc82d8596bed5",
-      "bytes": 15094
+      "after_sha256": "3bdb33fb4d4b718a7203b5d13c78c493a44f221b9e7012cdc3af8ba7742c0500",
+      "bytes": 15160
     },
     {
       "path": "frontend/src/components/M14SavedRebound.vue",
@@ -105,8 +105,8 @@
       "path": "frontend/src/views/SavedManagerResultView.spec.ts",
       "before_blob": "01db246af516004b73f08e32c0a4f1c9d3a0685f",
       "before_sha256": "be714990932ab6c8d769c3b019ebf54faac39070f4a589f1c8df3a390213f648",
-      "after_sha256": "bd600ea23b8e4ee1f0b01c54e2f56aea673bf708bd982f5db36251ec28b8ae38",
-      "bytes": 8691
+      "after_sha256": "7a5e3a1aeaab70b84d3f397e4ab75741cc4cfd73b40ce8dcae3cb4fc699a77ef",
+      "bytes": 9248
     },
     {
       "path": "frontend/src/views/SavedManagerResultView.vue",
@@ -152,5 +152,36 @@
     "python": "3.12.14",
     "pytest": "9.1.1",
     "node": "24.19.0"
+  },
+  "revision": {
+    "previous_candidate_commit": "018827908e6f5feae87d27dbc9e8d6f2a0935a8e",
+    "scope": [
+      "frontend/src/api/m14SavedRebound.ts",
+      "frontend/src/views/SavedManagerResultView.spec.ts"
+    ],
+    "previous_after_images": [
+      {
+        "path": "frontend/src/api/m14SavedRebound.ts",
+        "before_sha256": "98fea1795ddcd56a561f3af9a223105bf083f46c4e55ee95af4dc82d8596bed5",
+        "after_sha256": "3bdb33fb4d4b718a7203b5d13c78c493a44f221b9e7012cdc3af8ba7742c0500",
+        "bytes": 15160
+      },
+      {
+        "path": "frontend/src/views/SavedManagerResultView.spec.ts",
+        "before_sha256": "bd600ea23b8e4ee1f0b01c54e2f56aea673bf708bd982f5db36251ec28b8ae38",
+        "after_sha256": "7a5e3a1aeaab70b84d3f397e4ab75741cc4cfd73b40ce8dcae3cb4fc699a77ef",
+        "bytes": 9248
+      }
+    ],
+    "mac_original_feedback_sha256": "3f34a1ac1f1055dbdbb78abf07abbca8615088b91e04c32e522a009af7db76cf",
+    "mac_original_typecheck_stdout_sha256": "f40aa5159a91d2f80b94a924398713cda1533c45e854a0fa70dbc1c9c0f4a112",
+    "fixed_cloud_node": {
+      "passed": 182,
+      "failed": 0
+    },
+    "fixed_typecheck": "NOT_RUN_CLOUD_VUE_TSC_ABSENT_MAC_RECHECK_REQUIRED",
+    "fixed_vue_targeted": "NOT_RUN_CLOUD_VITEST_ABSENT_MAC_RECHECK_REQUIRED",
+    "prior_mac_build": "EXIT_0_AT_018827_ONLY",
+    "prior_mac_vue": "372_PASSED_24_FAILED_3_SKIPPED_NOT_A_PASS"
   }
 }
