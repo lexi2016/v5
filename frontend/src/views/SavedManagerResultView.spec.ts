@@ -10,6 +10,7 @@ it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed'
  expect(screen.getByText('阶段选股 · 未接入')).toHaveProperty('disabled',true);
  expect(screen.queryByRole('table')).toBeNull();
  expect(vi.mocked(fetch).mock.calls.filter(([url])=>String(url).startsWith('/api/v4/manager/m18/v2'))).toHaveLength(1);
+ await fireEvent.click(screen.getByRole('button',{name:'源模块实际状态'}));
  expect(screen.getByRole('region',{name:'M17 收盘补采已保存观察'})).toBeTruthy();
 });
 it('opens consumed announcement references by default and reuses the stock reasons view', async () => {
@@ -61,3 +62,4 @@ it('opens consumed announcement references by default and reuses the stock reaso
  expect(await screen.findByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeTruthy();
  expect(screen.queryByRole('heading',{name:'合成美股驱动公司 · HK.09876'})).toBeNull();
 });
+
