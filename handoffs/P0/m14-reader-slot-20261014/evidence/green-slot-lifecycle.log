@@ -1,0 +1,14 @@
+test_actual_read_in_progress_still_rejects_concurrency (__main__.M14ReaderSlotTests.test_actual_read_in_progress_still_rejects_concurrency) ... ok
+test_m14_disconnect_releases_slot (__main__.M14ReaderSlotTests.test_m14_disconnect_releases_slot) ... ok
+test_m14_failure_response_releases_before_complete_error_body (__main__.M14ReaderSlotTests.test_m14_failure_response_releases_before_complete_error_body) ... ok
+test_m14_oversize_response_is_rejected_then_slot_recovers (__main__.M14ReaderSlotTests.test_m14_oversize_response_is_rejected_then_slot_recovers) ... ok
+test_m14_record_is_released_and_only_bounded_bytes_are_sent (__main__.M14ReaderSlotTests.test_m14_record_is_released_and_only_bounded_bytes_are_sent) ... ok
+test_m14_serialization_failure_releases_slot (__main__.M14ReaderSlotTests.test_m14_serialization_failure_releases_slot) ... ok
+test_next_page_after_complete_body_is_not_busy (__main__.M14ReaderSlotTests.test_next_page_after_complete_body_is_not_busy) ... {"case": "complete_body_before_old_handler_exit", "source_sha256": "6435783655a1cca6f86e2a2f262510d87a7abd335b495f1be172cd7b8b12615c", "first_status": 200, "next_status": 200, "next_reason": null, "retry_status": 200, "retry_offset": 32, "original_files_unchanged": true}
+ok
+test_non_m14_reply_retains_original_slot_lifecycle (__main__.M14ReaderSlotTests.test_non_m14_reply_retains_original_slot_lifecycle) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.257s
+
+OK

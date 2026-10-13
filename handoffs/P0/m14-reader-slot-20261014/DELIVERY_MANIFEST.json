@@ -1,0 +1,97 @@
+{
+  "schema_version": "v5.p0.m14_reader_slot_candidate.v1",
+  "parent_preimage_commit": "8318c3fe0a758fdf832ed790a8da82b76ce814b3",
+  "scope": "handoff_only_no_runtime_or_before_replacement",
+  "files": [
+    {
+      "path": "CANDIDATE.md",
+      "bytes": 4954,
+      "sha256": "84236b052ffd8303119941073a837df76d855fa44aca29862965fb563233038d",
+      "git_blob": "6db55a42298ed93f0d48f4da4ec5ce68a4fa9857"
+    },
+    {
+      "path": "PREIMAGE_AND_AFTER.json",
+      "bytes": 547,
+      "sha256": "fa93dbd406de72de529c838063935d1d70313e910cdc7f0af0d80842cf9d699b",
+      "git_blob": "65e098f128c15e69c52aba8b0d54f1d57e44c9a1"
+    },
+    {
+      "path": "TEST_COMMANDS.sh",
+      "bytes": 653,
+      "sha256": "b1b01527b0f6691c0be6bce9c63e6b9a416e976846ce274d7063fd74fddd572c",
+      "git_blob": "ef72e5e546d2811b935078248fe181f7ae5e27e9"
+    },
+    {
+      "path": "TEST_RESULTS.md",
+      "bytes": 2293,
+      "sha256": "3ff450762be74d1e4c7f0c2b1ce2874c5f43d972f2bf667f68cc541377f8d346",
+      "git_blob": "0f7ff506ebb197cfb06e88784ae37de5090fd41d"
+    },
+    {
+      "path": "after/module_api.py",
+      "bytes": 63870,
+      "sha256": "6435783655a1cca6f86e2a2f262510d87a7abd335b495f1be172cd7b8b12615c",
+      "git_blob": "41865d39eea11d622d083ffbda410fa6a2589aa9"
+    },
+    {
+      "path": "evidence/green-m14-api-regression.log",
+      "bytes": 3570,
+      "sha256": "6c13516e1655d06c7ef4b9810af86c9a39554e82ce3f97b2ea9d09d3392c6785",
+      "git_blob": "d931fdbbc3ce08e61665132089c95785609e0603"
+    },
+    {
+      "path": "evidence/green-slot-lifecycle.log",
+      "bytes": 1490,
+      "sha256": "d0eac9593cf94bd8768aee31302228741ea82060ae412acb4e552de25b0230ac",
+      "git_blob": "55da7d2f140ecee705bf4c879b3f94b157975825"
+    },
+    {
+      "path": "evidence/narrow-diff-check.json",
+      "bytes": 311,
+      "sha256": "ce12083a5a369ca3b5b828d693469b045aca9fb22015923439424340eb45a21d",
+      "git_blob": "9b899d83d0410ae1d32604373b34fb6e6e7289a0"
+    },
+    {
+      "path": "evidence/patch-roundtrip.json",
+      "bytes": 226,
+      "sha256": "c3697b55097032291fad4d7e5fb4f7d72f4a1ae0b8565aaa94c8b0f2ae6d129d",
+      "git_blob": "bff044a68bd60eb4a7ca972b201336897a9696fd"
+    },
+    {
+      "path": "evidence/red-exact-before.log",
+      "bytes": 4045,
+      "sha256": "7d8dfc6bf0c074fc946397e865bd9a8c703fd740754d714ba5f3de64b752b428",
+      "git_blob": "cb88cb60314d47aa850b86873a48bd06bdc5a451"
+    },
+    {
+      "path": "reverse.patch",
+      "bytes": 2976,
+      "sha256": "706a1143205554d5242d4e80b42522df192e35b2040079d9aace2e884dcc7c2a",
+      "git_blob": "f355be114fbbd6d426444b8f6534d7d04a2bf829"
+    },
+    {
+      "path": "runtime.patch",
+      "bytes": 2976,
+      "sha256": "4e145584cf273aa24a58674989a08e5ea7aab8b4b0ba564011361b1279f8bc9b",
+      "git_blob": "3f4bdfd7a30e588e31fc3bef59841356ee4801a6"
+    },
+    {
+      "path": "test_support/test_m14_saved_rebound.py",
+      "bytes": 13990,
+      "sha256": "af4238829e67596cdb4080f8c75bb0fb7f003ca974aa935e352f478a09e59eb0",
+      "git_blob": "a75ecd5b50f6f1aa5a79245391efaef0247eb010"
+    },
+    {
+      "path": "test_support/test_rebound_owner.py",
+      "bytes": 32964,
+      "sha256": "a3a712fc5e08931cb04401a76f2d6e763b44a0830c1115875fbba8ef98e6b15d",
+      "git_blob": "f93f2781c917b1e523db9ff30e61538421ccc7df"
+    },
+    {
+      "path": "tests/test_m14_reader_slot.py",
+      "bytes": 9367,
+      "sha256": "8339adcb8e71450b36ddd0a9f1ffa461ad6d3487d97fe21799ad102fea89af76",
+      "git_blob": "5b4d4bfa0a8c478fbfd4d3612e70c0f7fe860d6c"
+    }
+  ]
+}

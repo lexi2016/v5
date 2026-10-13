@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "change": "one_M14_only_method_and_dispatch",
+  "removed_for_comparison": {
+    "method": 1,
+    "dispatch": 1
+  },
+  "all_original_AST_unchanged": true,
+  "global_http_slots": 8,
+  "m14_heavy_read_slots": 1,
+  "max_m14_response_bytes": 262144,
+  "max_m14_loaded_values_bytes": 131072
+}

@@ -1,0 +1,28 @@
+test_690_pending_rows_and_history_gaps_remain_visible_across_all_pages (test_m14_saved_rebound.M14SavedBoundaryTests.test_690_pending_rows_and_history_gaps_remain_visible_across_all_pages) ... ok
+test_complete_sha_and_bounded_rows_progress_without_dropping_deferred_rows (test_m14_saved_rebound.M14SavedBoundaryTests.test_complete_sha_and_bounded_rows_progress_without_dropping_deferred_rows) ... ok
+test_cursor_duplicate_keys_noninteger_out_of_range_and_extra_keys_reject (test_m14_saved_rebound.M14SavedBoundaryTests.test_cursor_duplicate_keys_noninteger_out_of_range_and_extra_keys_reject) ... ok
+test_missing_observation_does_not_masquerade_as_five_empty_groups (test_m14_saved_rebound.M14SavedBoundaryTests.test_missing_observation_does_not_masquerade_as_five_empty_groups) ... ok
+test_public_projection_excludes_all_private_paths_and_unknown_nested_fields (test_m14_saved_rebound.M14SavedBoundaryTests.test_public_projection_excludes_all_private_paths_and_unknown_nested_fields) ... ok
+test_rehashed_cross_file_identity_tampering_is_rejected (test_m14_saved_rebound.M14SavedBoundaryTests.test_rehashed_cross_file_identity_tampering_is_rejected) ... ok
+test_every_get_rechecks_each_original_trio_sha (test_m14_saved_rebound.M14SavedTests.test_every_get_rechecks_each_original_trio_sha) ... ok
+test_independent_saved_pages_pin_four_refs_and_keep_gaps_without_m18_identity (test_m14_saved_rebound.M14SavedTests.test_independent_saved_pages_pin_four_refs_and_keep_gaps_without_m18_identity) ... ok
+test_missing_binding_is_waiting_not_an_empty_success (test_m14_saved_rebound.M14SavedTests.test_missing_binding_is_waiting_not_an_empty_success) ... ok
+test_old_reference_remains_readable_after_config_binds_another_run (test_m14_saved_rebound.M14SavedTests.test_old_reference_remains_readable_after_config_binds_another_run) ... ok
+test_paths_and_symlinks_reject_without_exposing_private_root (test_m14_saved_rebound.M14SavedTests.test_paths_and_symlinks_reject_without_exposing_private_root) ... ok
+test_unknown_queries_partial_refs_and_cross_group_cursor_reject (test_m14_saved_rebound.M14SavedTests.test_unknown_queries_partial_refs_and_cross_group_cursor_reject) ... ok
+test_duplicate_query_rejected (test_module_api.ModuleApiTests.test_duplicate_query_rejected) ... ok
+test_fifo_record_rejected_without_waiting_for_writer (test_module_api.ModuleApiTests.test_fifo_record_rejected_without_waiting_for_writer) ... ok
+test_missing_record_is_not_empty_success (test_module_api.ModuleApiTests.test_missing_record_is_not_empty_success) ... ok
+test_original_payload_and_identity_headers (test_module_api.ModuleApiTests.test_original_payload_and_identity_headers) ... ok
+test_other_module_root_rejected (test_module_api.ModuleApiTests.test_other_module_root_rejected) ... ok
+test_release_header_injection_rejected (test_module_api.ModuleApiTests.test_release_header_injection_rejected) ... ok
+test_root_replacement_does_not_change_bound_directory (test_module_api.ModuleApiTests.test_root_replacement_does_not_change_bound_directory) ... ok
+test_symlink_response_directory_rejected (test_module_api.ModuleApiTests.test_symlink_response_directory_rejected) ... ok
+test_tamper_rejected (test_module_api.ModuleApiTests.test_tamper_rejected) ... ok
+test_unconfigured_route_rejected (test_module_api.ModuleApiTests.test_unconfigured_route_rejected) ... ok
+test_unsupported_methods_have_json_error (test_module_api.ModuleApiTests.test_unsupported_methods_have_json_error) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 13.440s
+
+OK
