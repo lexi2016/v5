@@ -1,0 +1,24 @@
+{
+  "schema_version": "v5.m09_fixture_test_overlay.v1",
+  "m11_product_commit": "490529f549324fb435af56d5f728672ad6390b72",
+  "mac_failure_feedback": "347bbc10ca344ad96e47bdadb3715cecfefd29ce",
+  "runtime_files": 0,
+  "files": [
+    {
+      "path": "frontend/tests/aCloseReplay.node.mjs",
+      "bytes": 6794,
+      "sha256": "2bc2231a665fbb0150e316ae99bcced2241a8d76fd6cf5e3f255953fe5f7672f",
+      "git_blob": "e4916830352334cdceee43d44e145bfd17d5b751",
+      "overlay_base_git_blob": "f06adade851a4347db7d0c4489ff630540e2696f",
+      "deploy": false
+    },
+    {
+      "path": "frontend/tests/m09FixtureEnvironment.node.mjs",
+      "bytes": 1388,
+      "sha256": "b947b436c2a210004f3e37444d2bb54967d8473e147681150712afd8723e0279",
+      "git_blob": "ddf0597c8342859f6449c04182ae60d31392b4db",
+      "overlay_base_git_blob": null,
+      "deploy": false
+    }
+  ]
+}

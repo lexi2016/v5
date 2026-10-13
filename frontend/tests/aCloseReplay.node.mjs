@@ -8,7 +8,10 @@ const flags={research_only:true,production_allowed:false,buy_gate_updated:false,
 const response=(v,status=200)=>new Response(JSON.stringify(v),{status});
 const missing=()=>({status:'NOT_CONFIGURED',module_id:'M09_A_CLOSE_REPLAY',reason_codes:['M09_REFERENCE_NOT_CONFIGURED'],...flags});
 const root=fileURLToPath(new URL('../../',import.meta.url));
-const generated=spawnSync(process.env.PYTHON||'python',['-I','-B','V5/tests/export_m09_readonly_fixture.py'],{cwd:root,encoding:'utf8'});
+// This fixture deliberately carries None text values. Preserve the frozen
+// owner's legacy string inference in its producer and independent cold reader.
+// Scope the compatibility setting to this synthetic Python process tree only.
+const generated=spawnSync(process.env.PYTHON||'python',['-I','-B','V5/tests/export_m09_readonly_fixture.py'],{cwd:root,encoding:'utf8',env:{...process.env,PANDAS_FUTURE_INFER_STRING:'0'}});
 const fixture=generated.status===0?JSON.parse(generated.stdout):null;
 const sample=()=>structuredClone(fixture);
 test('M09 fixture comes from original synthetic producer/store/cold reader',()=>assert.equal(generated.status,0,generated.stderr));

@@ -1,0 +1,58 @@
+{
+  "schema_version": "v5.m09_fixture_repair_verification.v1",
+  "scope": "Synthetic test-launcher environment only. No product/owner/source input/assertion changes.",
+  "classification": "INHERITED_FIXTURE_ENVIRONMENT_COMPATIBILITY",
+  "mac_observed_failure": "M09_ADMITTED_FRAME_TEXT at pandas DataFrame default inference in original _validate_rows; no M11 code on the failing path",
+  "evidence": {
+    "pre_m11_base": "57523dd2c0e254c05b5e4aa8f9a069290f336c4c",
+    "unchanged_baseline_blobs": {
+      "V5/tests/fixtures/a_close_replay_factory.py": "bf2b094bb5c507465229eabf8c07f2c48ece5343",
+      "V5/source_owners/m09/V5/src/v5_shadow/a_close_daily_sources.py": "ba47089dc18a40ecceae4e2f0f3b14077aa447e4",
+      "V5/source_owners/m09/V5/src/v5_shadow/a_close_historical.py": "6b11fecb650f84aacb5abf479047bd8040760a22",
+      "frontend/tests/aCloseReplay.node.mjs": "f06adade851a4347db7d0c4489ff630540e2696f"
+    },
+    "cloud_pandas": "2.2.3",
+    "cloud_legacy_cell": "NoneType; original validator accepted",
+    "documented_new_inference_probe": "replace only the text missing sentinel with float NaN: identical M09_ADMITTED_FRAME_TEXT refusal",
+    "mac_pandas_scalar_probe": "PENDING_FROM_MAC"
+  },
+  "sources": [
+    "https://pandas.pydata.org/docs/user_guide/migration-3-strings.html",
+    "https://raw.githubusercontent.com/pandas-dev/pandas/v3.0.0/pandas/core/config_init.py"
+  ],
+  "fix": {
+    "setting": "PANDAS_FUTURE_INFER_STRING=0",
+    "scope": "env copied only for the M09 synthetic exporter subprocess and inherited by its producer/cold-reader descendants",
+    "inputs_preserved": [
+      "six original rows",
+      "None industry code",
+      "empty name and industry name",
+      "NaN close-position"
+    ],
+    "original_assertions": "UNCHANGED",
+    "product_code": "UNCHANGED"
+  },
+  "tests": [
+    {
+      "name": "new process-environment regression RED",
+      "status": "FAIL_EXPECTED",
+      "reason": "undefined !== '0' at actual exporter spawn boundary"
+    },
+    {
+      "name": "M09 fixture plus process-env regression plus M11 Node",
+      "passed": 26,
+      "failed": 0,
+      "exit_code": 0
+    },
+    {
+      "name": "full frontend Node",
+      "passed": 124,
+      "failed": 0,
+      "exit_code": 0
+    }
+  ],
+  "mac_python117": "Previously PASS; deliberately not rerun",
+  "mac_node_fix": "PENDING",
+  "dom_typecheck_build": "Still requires Mac continuation after narrow Node pass",
+  "raw_logs": "Not uploaded"
+}
