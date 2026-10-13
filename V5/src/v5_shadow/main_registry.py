@@ -34,7 +34,7 @@ MODULE_REGISTRY: tuple[ModuleRegistration, ...] = (
     ModuleRegistration("M13_ANNOUNCEMENT", "announcement_analysis", "daily_owner_adapters", "READY"),
     ModuleRegistration("M14_REBOUND", "rebound_shadow", "daily_owner_adapters", "READY"),
     ModuleRegistration("M15_US_MAPPING", "us_mapping", "daily_owner_adapters", "READY"),
-    ModuleRegistration("M16_PUBLIC_RESEARCH", "manager_public_research", "daily_owner_adapters", "NOT_READY"),
+    ModuleRegistration("M16_PUBLIC_RESEARCH", "manager_factory.build_manager_jobs", "m16_readonly", "READ_ONLY_SAVED_REQUIRES_BINDING"),
     ModuleRegistration("M17_CLOSE_RECAPTURE", "daily_close_recapture", "daily_tick", "READY"),
     ModuleRegistration("M18_MANAGER", "manager_plan", "m18_offline_v2", "READY", ("M13_ANNOUNCEMENT", "M14_REBOUND", "M15_US_MAPPING")),
 )

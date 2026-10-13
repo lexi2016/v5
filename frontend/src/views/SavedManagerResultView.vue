@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import M16SavedResearch from '../components/M16SavedResearch.vue';
 import M11SavedResearch from '../components/M11SavedResearch.vue';
 import M12SavedVideo from '../components/M12SavedVideo.vue';
 import SourceBundleStatus from '../components/SourceBundleStatus.vue';
@@ -14,6 +15,11 @@ const resultHeading=ref<HTMLElement|null>(null);
 const sourceDisclosure=ref<HTMLDetailsElement|null>(null);
 const sourceSummary=ref<HTMLElement|null>(null);
 const sourceExpanded=ref(false);
+const publicResearchHost=ref<HTMLElement|null>(null);
+async function openPublicResearch(){
+ const target=publicResearchHost.value?.querySelector<HTMLDetailsElement>('#m16-saved-research');
+ if(!target)return;target.open=true;await nextTick();focusAndReveal(target.querySelector<HTMLElement>('summary'));
+}
 const videoHost=ref<HTMLElement|null>(null);
 const intradayResearchHost=ref<HTMLElement|null>(null);
 async function openIntradayResearch(){
@@ -98,6 +104,7 @@ onBeforeUnmount(()=>session.close());
    <button type="button" :class="{active:isAnnouncement}" :aria-current="isAnnouncement ? 'page' : undefined" :disabled="!state.overview?.sections.announcement_reviewed_analysis" @click="selectSection('announcement_reviewed_analysis')">公告研究股票</button>
    <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">超跌研究</button>
    <button type="button" :class="{active:isUsMapping}" :aria-current="isUsMapping ? 'page' : undefined" :disabled="!state.overview?.sections.us_mapping_research" @click="selectSection('us_mapping_research')">美股驱动</button>
+   <button type="button" aria-controls="m16-saved-research" @click="openPublicResearch">公开资料研究 · M16</button>
    <button type="button" aria-controls="m11-saved-research" @click="openIntradayResearch">盘中研究 · M11</button>
    <button type="button" aria-controls="m12-saved-video" @click="openVideo">视频复盘 · M12</button>
    <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
@@ -148,6 +155,7 @@ onBeforeUnmount(()=>session.close());
    <summary ref="sourceSummary">源模块实际状态 · 点击展开基础数据、预选池与复盘</summary>
    <SourceBundleStatus />
   </details>
+  <section ref="publicResearchHost" aria-label="M16 公开资料研究入口"><M16SavedResearch /></section>
   <section ref="intradayResearchHost" aria-label="M11 盘中研究入口"><M11SavedResearch /></section>
   <section ref="videoHost" aria-label="M12 视频复盘入口"><M12SavedVideo /></section>
  </main>
