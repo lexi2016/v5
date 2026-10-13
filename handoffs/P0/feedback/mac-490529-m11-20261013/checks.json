@@ -1,0 +1,58 @@
+[
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "V5/tests/m11",
+      "V5/tests/test_m11_integration.py",
+      "V5/tests/test_m04_readonly_api.py",
+      "V5/tests/test_m12_integration.py",
+      "V5/tests/test_module_api.py",
+      "V5/tests/test_p0_main_registry.py",
+      "handoffs/M11/delivery/integration_candidate/tests"
+    ],
+    "cwd": "candidate-m11-490529",
+    "started_utc": "2026-10-13T05:04:35.110333+00:00",
+    "finished_utc": "2026-10-13T05:05:07.758066+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "V5/tools/build_m11_source_manifest.py",
+      "--check"
+    ],
+    "cwd": "candidate-m11-490529",
+    "started_utc": "2026-10-13T05:05:07.758609+00:00",
+    "finished_utc": "2026-10-13T05:05:07.790632+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "test:p0"
+    ],
+    "cwd": "candidate-m11-490529/frontend",
+    "started_utc": "2026-10-13T05:05:07.791285+00:00",
+    "finished_utc": "2026-10-13T05:05:08.046425+00:00",
+    "exit_code": 1
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "test:p0"
+    ],
+    "cwd": "candidate-m11-490529/frontend",
+    "started_utc": "2026-10-13T05:05:36.496185+00:00",
+    "finished_utc": "2026-10-13T05:05:40.799780+00:00",
+    "exit_code": 1
+  }
+]

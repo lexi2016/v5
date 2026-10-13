@@ -1,0 +1,36 @@
+{
+  "candidate": "490529f549324fb435af56d5f728672ad6390b72",
+  "checked_utc": "2026-10-13T05:06:34.609763+00:00",
+  "status": "BLOCKED_NODE_REGRESSION_NOT_DEPLOYED",
+  "python_targeted_passed": 117,
+  "source_manifest_check": "PASS",
+  "node_initial": {
+    "passed": 91,
+    "failed": 4,
+    "fixture_python_missing": true
+  },
+  "node_existing_python": {
+    "passed": 115,
+    "failed": 1,
+    "exit_code": 1,
+    "failure": "M09_ADMITTED_FRAME_TEXT"
+  },
+  "dom": "NOT_REACHED",
+  "typecheck": "NOT_REACHED",
+  "build": "NOT_REACHED",
+  "deployment": "NOT_RUN",
+  "http_dom": "NOT_RUN",
+  "source_allowlist_files": 95,
+  "runtime_allowlist_files": 74,
+  "source_files_unchanged_after_tests": true,
+  "protected_files_count": 111,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "active_preview_pid": 73753,
+  "active_source_pid": 73744,
+  "active_source_port": 59177,
+  "real_provider_called": false,
+  "real_generation_called": false,
+  "m11_binding_set": false,
+  "product_modified": false
+}

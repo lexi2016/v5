@@ -1,0 +1,11 @@
+# Mac M11 490529: targeted Python PASS, Node regression blocks deployment
+
+Fixed product 490529f549324fb435af56d5f728672ad6390b72. Strict 95-file acceptance overlay on current M04+M12 composition; only 74 entries are deploy-eligible. Existing M06 registration retained by applying M11-only registry increment. Original/runtime blob pins and all applied SHA values verified; no whole HEAD used. No deployment was performed.
+
+Python targeted command in checks.json:117 passed in32.47s,exit0. Original build manifest --check passed c824e9b9bfdbda716c7f2ce25e584866f99913c224662550d0e68deb8e4bd558. Initial npm run test:p0 lacked PYTHON and the explicit PATH had no python command:91 passed/4 fixture launcher failures. Harness only was corrected to point PYTHON to the existing V4 v3.5-mac interpreter; no product bytes changed and the117 passed tests were not repeated.
+
+With existing Python supplied, Node ran116 tests:115 passed,1 failed,exit1. The failed test is frontend/tests/aCloseReplay.node.mjs:14, M09 fixture comes from original synthetic producer/store/cold reader. Its V5/tests/export_m09_readonly_fixture.py subprocess exits1 with ValueError M09_ADMITTED_FRAME_TEXT at fixed M09 a_close_daily_sources.py:239 through a_close_historical._validate_rows. This is the observed failure; no claim is made yet about whether it is a dependency-specific or cross-module cause. Seven conditional M09 cases were not registered because fixture creation failed; do not call115/116 the full123-test pass.
+
+Reproduction from the isolated candidate frontend with existing tools: PYTHON=<EXISTING_V4_MAC_PYTHON> PATH=<EXISTING_NODE_BIN>:/usr/bin:/bin PYTHONDONTWRITEBYTECODE=1 TMPDIR=<ISOLATED_TASK_TMP> npm run test:p0. Existing Python is3.14 environment; no dependencies installed. Full sanitized logs and exact times/exits are attached.
+
+Per failure boundary, DOM, typecheck, build and actual HTTP/DOM deployment checks were NOT_REACHED. No local product repair, provider, real collection/generation, M11 acquisition service or V4 change. Current M12 preview54780/PID73753 and source59177/PID73744 remain active; M11 binding stays absent. Protected file SHA/size/mtime and listener PIDs unchanged. Broad auxiliary cloud pytest is not claimed green.

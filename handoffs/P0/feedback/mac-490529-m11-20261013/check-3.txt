@@ -1,0 +1,170 @@
+
+> v3-5-web@0.1.0 test:p0
+> node --test tests/*.node.mjs
+
+✖ M09 fixture comes from original synthetic producer/store/cold reader (0.562834ms)
+✔ M09 independent replay client exists (0.165125ms)
+✔ separate panel mounted alongside existing M06/M10, without replacing source cards (0.589542ms)
+✔ M17 fixtures come from original synthetic owner and exact cold reader (0.51875ms)
+✔ M17 has an independent exact-run client (0.103959ms)
+✔ M17 panel is mounted separately and source proxy preserves the legacy 1530 client (0.272334ms)
+✔ exact GET keeps original READY/PARTIAL rows and money units unchanged (11.301917ms)
+✔ invalid or extra query values never request a guessed date/run (0.263083ms)
+✔ wrong schema, exact identity, boundary, counts and malformed original rows are rejected (11.4595ms)
+✔ impossible calendar timestamps and hour 24 are rejected instead of normalized (0.7185ms)
+✔ HTTP, missing body, malformed UTF-8/JSON and both byte-limit paths fail closed (1.586792ms)
+✔ repeat clicks clear old success and earlier responses cannot overwrite a later run (1.04875ms)
+✔ reload failure and malformed response never retain success or become empty success (1.269916ms)
+✔ query snapshot is immutable across a pending load and close cancels without emission (0.804333ms)
+✔ M10 frozen original synthetic projection is available (0.551625ms)
+✔ M10 saved review frontend client exists (0.091083ms)
+✔ GET preserves real original projection shape and all20/100/70 rows without scalar conversion (11.628958ms)
+✔ wrong identity, date, unsafe outer flags and promoted partial metrics fail closed (7.902833ms)
+✔ NOT_CONFIGURED differs from empty rows and never carries stale review (0.579458ms)
+✔ HTTP error, invalid JSON, absent or oversized data is unconfirmed (6.937334ms)
+✔ refresh clears previous rows immediately and failed read leaves no stale result (0.579583ms)
+✔ late success cannot replace newer missing configuration and Close aborts (0.555208ms)
+✔ close ignores completion and prevents new reads (1.437125ms)
+✔ M10 panel stays in existing source page, distinguishes partial and renders original arrays (0.400791ms)
+✔ M06 source guard: reader false is explicitly scoped to this read, not the producer (0.327959ms)
+✔ M06 source guard: producer claims depend on the existing committed production method (0.124834ms)
+✔ M06 read-only frontend client exists (0.8835ms)
+✔ GET preserves all100 original rows, fields, dates, identities and source order (16.125083ms)
+✔ original CSV research_only True remains an unchanged string in all100 rows (2.175333ms)
+✔ CSV research_only compatibility is row-only and never widens top-level safety (5.230083ms)
+✔ original row trading flags stay required boolean false after CSV compatibility (7.520166ms)
+✔ 99 rows, duplicate symbols, wrong row identity and altered dates fail closed (3.938167ms)
+✔ unsafe claims are rejected at payload, reference, artifact and row boundaries (4.234041ms)
+✔ wrong committed, source and computation identities cannot be displayed (4.825042ms)
+✔ NOT_CONFIGURED is explicit and never represented as an empty successful pool (0.776667ms)
+✔ HTTP missing and corrupt results, invalid JSON, empty and oversized responses fail closed (9.349375ms)
+✔ new reads immediately clear old rows and a failed read leaves no stale result (0.682ms)
+✔ late success cannot overwrite newer missing configuration and old request is aborted (0.47175ms)
+✔ late failure cannot clear a newer valid result (0.407584ms)
+✔ closing aborts pending read, ignores completion and prevents additional reads (0.411042ms)
+✔ standalone panel renders original row fields and embeds only within source status (0.301833ms)
+✔ M08 fixture uses frozen original owner/store and observed cold reader (0.879333ms)
+✔ M08 independent observed client exists (0.1035ms)
+✔ catalog retains ten refs/eight stages and exact GET retains all rows/fields (11.183041ms)
+✔ status, reference, safety, capture and Stage8 tamper are rejected (1.671792ms)
+✔ catalog rejects dropped or duplicated references (0.256583ms)
+✔ unconfigured is distinct; disconnected/invalid/oversized clear data (0.286083ms)
+✔ stage/run switch clears old data and stale completion cannot win (0.389959ms)
+✔ reload disconnect clears old catalog and result; sessions have independent aborts (0.258875ms)
+✔ fixed GET reads all 18 synthetic articles and preserves unknown clocks (34.577875ms)
+✔ not configured remains missing and incomplete, false PIT or unsafe rows are rejected (2.343542ms)
+✔ retry clears old results and stale or closed requests cannot replace current state (0.497917ms)
+✔ source module and main navigation expose a lazy fixed-sample research disclosure (0.541458ms)
+✔ M04 route uses the existing read-only source proxy (0.14075ms)
+✔ saved capture uses explicit-date credential-free GET and preserves unreviewed owner evidence (36.847666ms)
+✔ unconfigured and legacy unpinned material remain WAITING with reasons and no content (0.559291ms)
+✔ saved generate and recorded owner data remain persistence-only unreviewed evidence (0.443875ms)
+✔ invalid dates fail before any request and supplied response date must match (0.833542ms)
+✔ all research boundary flags are mandatory and never inferred from owner success (1.157583ms)
+✔ malformed saved identities, unverified evidence, read_record and empty research are rejected (0.880166ms)
+✔ capture only marks its pinned slot SAVED and fixed six-slot coverage cannot be overstated (0.39625ms)
+✔ generate cannot mark any intraday slot SAVED (0.116958ms)
+✔ WAITING cannot carry saved identity or stale research (0.3255ms)
+✔ bounded stream rejects oversized content-length before reading any body (0.369ms)
+✔ stream byte limit applies without content-length and cancels overflow (0.4575ms)
+✔ HTTP, empty body, invalid UTF-8 and invalid JSON never become saved content (0.754291ms)
+✔ new loads clear old content immediately and cancel stale requests (0.305666ms)
+✔ stale completions cannot replace the latest date or publish after close (0.232917ms)
+✔ default navigation opens real lazy M11 component, preserves M04/M12 and loopback proxy (0.427625ms)
+✔ saved original ASR is explicit-date GET and remains unreviewed synthetic evidence (34.747375ms)
+✔ WAITING is preserved and successful-looking malformed or unsafe data is rejected (1.050917ms)
+✔ new requests clear old evidence and stale responses cannot overwrite current selected date (0.709041ms)
+✔ default saved-results navigation exposes the real lazy component (0.343209ms)
+✔ descriptor is requested only for the exact run using GET and no-store (12.7785ms)
+✔ invalid run is rejected before a network request (0.16825ms)
+✔ descriptor identity, target and route cannot be substituted (1.098917ms)
+✔ overview binds generation and all six identities without fetching content pages (1.091208ms)
+✔ section pages retain actual PARTIAL and gaps and never turn NOT_LOADED into empty success (0.738459ms)
+✔ section rejects wrong manifest, section, cursor and offset (0.555042ms)
+✔ HTTP missing/invalid remains CANNOT_CONFIRM with fixed reason; no fallback endpoint (0.199875ms)
+✔ response bytes are bounded even without Content-Length and abort is forwarded (0.5465ms)
+✔ section chooser prefers real stock rows, otherwise actual existing sections (0.094208ms)
+✔ null, empty arrays and false remain distinct values (0.123166ms)
+✔ newer runs cancel and suppress older results even if transport ignores abort (0.317125ms)
+✔ section navigation replaces rows and preserves opaque cursor history; failures show no stale data (0.311ms)
+✔ same-run announcement projection is the default and pages references, not the one container object (1.384083ms)
+✔ rebound closed group projection preserves announcement default and rejects wrong groups or counts (0.414584ms)
+✔ rebound group navigation resets cursors, keeps group across pages and suppresses a stale group result (0.204167ms)
+✔ rebound accepts byte-bounded variable pages and non-multiple-of-32 continuation offsets (0.461125ms)
+✔ rebound variable-page session preserves exact rows and opaque history through next and previous (0.822666ms)
+✔ rebound variable pages reject no progress, excess rows, gaps and wrong continuation selectors (0.5385ms)
+✔ US mapping requests only closed same-run daily matches and validates source, counts and plan reference (0.44875ms)
+✔ US mapping supports byte-bounded continuation without changing announcement default (0.508583ms)
+✔ saved references reuse V4 stock reasons and article facts while retaining dates, provenance and uncertainty (0.826458ms)
+✔ oversized/missing entries remain NOT_LOADED, never fabricated stocks (0.147584ms)
+✔ render replaces previous results and treats data as literal text (0.123875ms)
+✔ null and false references are shown as original values without invented stock rows (0.55375ms)
+✔ saved result content precedes a closed source disclosure and preserves the source component (0.684958ms)
+✔ result navigation has a visible heading, focus and scroll instead of only starting a request (0.169541ms)
+✔ the selected result exposes its verified date and run without enabling missing routes (0.193291ms)
+✔ saved rebound shows original numeric gates, reasons and unverified research scope without currency promotion (1.0115ms)
+✔ near, pending and excluded retain their distinct original failure reasons (0.280834ms)
+✔ empty, NOT_LOADED, null and false remain distinct; a new page replaces prior rows (0.789125ms)
+✔ legacy V4 card behavior is retained when no observation group is supplied (0.106625ms)
+✔ expanded observation evidence preserves source hashes without local paths or synthesized URLs (0.225583ms)
+✔ saved US relationships reuse V4 three-stock grouping, original reasons, stages and safe official sources (2.482625ms)
+✔ daily dates, cutoff, limited scope and frozen response plan state stay separate from historical seeds (0.30025ms)
+✔ missing and oversized values remain explicit without old stock cards or fabricated plan consumption (0.220208ms)
+✔ empty scoped matches and literal text keep the original V4 uncertainty behavior (0.102833ms)
+✔ original consumed reference is displayed without overriding qualification or scope gaps (0.227667ms)
+✔ source panel reads only saved route and preserves owner states and historical replay (12.68825ms)
+✔ missing or duplicate modules, wrong owner, promoted flags and malformed identity fail closed (0.7945ms)
+✔ HTTP errors, invalid JSON, absent and oversized streams stay unconfirmed (0.357084ms)
+✔ failed re-read clears previously valid source result (0.621542ms)
+✔ repeated reads do not let older completion replace new result (0.283584ms)
+✔ closing a pending read ignores later completion (0.120833ms)
+ℹ tests 116
+ℹ suites 0
+ℹ pass 115
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4200.69625
+
+✖ failing tests:
+
+test at tests/aCloseReplay.node.mjs:14:1
+✖ M09 fixture comes from original synthetic producer/store/cold reader (0.562834ms)
+  AssertionError [ERR_ASSERTION]: Traceback (most recent call last):
+    File "<TASK_ROOT>/candidate-m11-490529/V5/tests/export_m09_readonly_fixture.py", line 11, in <module>
+      binding,_=create_fixture(Path(temp).resolve()/'fixture')
+                ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "<TASK_ROOT>/candidate-m11-490529/V5/tests/fixtures/a_close_replay_factory.py", line 38, in create_fixture
+      if proc.returncode:raise AssertionError('M09_SYNTHETIC_FIXTURE_FAILED: '+proc.stderr[-3000:])
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  AssertionError: M09_SYNTHETIC_FIXTURE_FAILED: Traceback (most recent call last):
+    File "<string>", line 15, in <module>
+      h._write_snapshot(source,'20261009',rows,origin,None)
+      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "<TASK_ROOT>/candidate-m11-490529/V5/source_owners/m09/V5/src/v5_shadow/a_close_historical.py", line 94, in _write_snapshot
+      checked_date(target);_daily()._date_slot(target,'16:05');_validate_rows(rows,target)
+                                                               ~~~~~~~~~~~~~~^^^^^^^^^^^^^
+    File "<TASK_ROOT>/candidate-m11-490529/V5/source_owners/m09/V5/src/v5_shadow/a_close_historical.py", line 90, in _validate_rows
+      frozen._validate_frame(pd.DataFrame(rows,columns=list(frozen.COLUMNS)),target,historical_replay=True)
+      ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "<TASK_ROOT>/candidate-m11-490529/V5/source_owners/m09/V5/src/v5_shadow/a_close_daily_sources.py", line 239, in _validate_frame
+      raise ValueError("M09_ADMITTED_FRAME_TEXT")
+  ValueError: M09_ADMITTED_FRAME_TEXT
+  
+  
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file://<TASK_ROOT>/candidate-m11-490529/frontend/tests/aCloseReplay.node.mjs:14:88)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

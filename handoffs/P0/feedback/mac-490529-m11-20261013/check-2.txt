@@ -1,0 +1,185 @@
+
+> v3-5-web@0.1.0 test:p0
+> node --test tests/*.node.mjs
+
+✖ M09 fixture comes from original synthetic producer/store/cold reader (0.586167ms)
+✔ M09 independent replay client exists (0.182959ms)
+✔ separate panel mounted alongside existing M06/M10, without replacing source cards (0.672041ms)
+✖ M17 fixtures come from original synthetic owner and exact cold reader (0.704125ms)
+✔ M17 has an independent exact-run client (0.170375ms)
+✔ M17 panel is mounted separately and source proxy preserves the legacy 1530 client (0.355083ms)
+✖ M10 frozen original synthetic projection is available (0.740709ms)
+✔ M10 saved review frontend client exists (0.272542ms)
+✔ M10 panel stays in existing source page, distinguishes partial and renders original arrays (0.462459ms)
+✔ M06 source guard: reader false is explicitly scoped to this read, not the producer (0.406792ms)
+✔ M06 source guard: producer claims depend on the existing committed production method (0.1805ms)
+✔ M06 read-only frontend client exists (0.822208ms)
+✔ GET preserves all100 original rows, fields, dates, identities and source order (14.246667ms)
+✔ original CSV research_only True remains an unchanged string in all100 rows (2.091666ms)
+✔ CSV research_only compatibility is row-only and never widens top-level safety (5.03325ms)
+✔ original row trading flags stay required boolean false after CSV compatibility (5.797916ms)
+✔ 99 rows, duplicate symbols, wrong row identity and altered dates fail closed (3.698375ms)
+✔ unsafe claims are rejected at payload, reference, artifact and row boundaries (3.498334ms)
+✔ wrong committed, source and computation identities cannot be displayed (4.553791ms)
+✔ NOT_CONFIGURED is explicit and never represented as an empty successful pool (0.59725ms)
+✔ HTTP missing and corrupt results, invalid JSON, empty and oversized responses fail closed (6.806042ms)
+✔ new reads immediately clear old rows and a failed read leaves no stale result (1.77225ms)
+✔ late success cannot overwrite newer missing configuration and old request is aborted (0.442792ms)
+✔ late failure cannot clear a newer valid result (0.382167ms)
+✔ closing aborts pending read, ignores completion and prevents additional reads (0.381417ms)
+✔ standalone panel renders original row fields and embeds only within source status (0.294166ms)
+✖ M08 fixture uses frozen original owner/store and observed cold reader (0.732792ms)
+✔ M08 independent observed client exists (0.247334ms)
+✔ fixed GET reads all 18 synthetic articles and preserves unknown clocks (37.843334ms)
+✔ not configured remains missing and incomplete, false PIT or unsafe rows are rejected (1.947083ms)
+✔ retry clears old results and stale or closed requests cannot replace current state (0.329792ms)
+✔ source module and main navigation expose a lazy fixed-sample research disclosure (0.348083ms)
+✔ M04 route uses the existing read-only source proxy (0.076959ms)
+✔ saved capture uses explicit-date credential-free GET and preserves unreviewed owner evidence (37.836833ms)
+✔ unconfigured and legacy unpinned material remain WAITING with reasons and no content (0.489083ms)
+✔ saved generate and recorded owner data remain persistence-only unreviewed evidence (0.812416ms)
+✔ invalid dates fail before any request and supplied response date must match (0.66775ms)
+✔ all research boundary flags are mandatory and never inferred from owner success (1.04875ms)
+✔ malformed saved identities, unverified evidence, read_record and empty research are rejected (0.733625ms)
+✔ capture only marks its pinned slot SAVED and fixed six-slot coverage cannot be overstated (0.340208ms)
+✔ generate cannot mark any intraday slot SAVED (0.101834ms)
+✔ WAITING cannot carry saved identity or stale research (0.302333ms)
+✔ bounded stream rejects oversized content-length before reading any body (0.303792ms)
+✔ stream byte limit applies without content-length and cancels overflow (0.433708ms)
+✔ HTTP, empty body, invalid UTF-8 and invalid JSON never become saved content (0.668875ms)
+✔ new loads clear old content immediately and cancel stale requests (0.262792ms)
+✔ stale completions cannot replace the latest date or publish after close (0.197083ms)
+✔ default navigation opens real lazy M11 component, preserves M04/M12 and loopback proxy (0.331542ms)
+✔ saved original ASR is explicit-date GET and remains unreviewed synthetic evidence (39.606958ms)
+✔ WAITING is preserved and successful-looking malformed or unsafe data is rejected (0.985833ms)
+✔ new requests clear old evidence and stale responses cannot overwrite current selected date (0.773875ms)
+✔ default saved-results navigation exposes the real lazy component (0.281792ms)
+✔ descriptor is requested only for the exact run using GET and no-store (13.090291ms)
+✔ invalid run is rejected before a network request (0.131875ms)
+✔ descriptor identity, target and route cannot be substituted (1.073209ms)
+✔ overview binds generation and all six identities without fetching content pages (0.899958ms)
+✔ section pages retain actual PARTIAL and gaps and never turn NOT_LOADED into empty success (0.473041ms)
+✔ section rejects wrong manifest, section, cursor and offset (0.401ms)
+✔ HTTP missing/invalid remains CANNOT_CONFIRM with fixed reason; no fallback endpoint (0.126125ms)
+✔ response bytes are bounded even without Content-Length and abort is forwarded (0.396417ms)
+✔ section chooser prefers real stock rows, otherwise actual existing sections (0.069125ms)
+✔ null, empty arrays and false remain distinct values (0.078958ms)
+✔ newer runs cancel and suppress older results even if transport ignores abort (0.208458ms)
+✔ section navigation replaces rows and preserves opaque cursor history; failures show no stale data (0.235ms)
+✔ same-run announcement projection is the default and pages references, not the one container object (1.04125ms)
+✔ rebound closed group projection preserves announcement default and rejects wrong groups or counts (0.4115ms)
+✔ rebound group navigation resets cursors, keeps group across pages and suppresses a stale group result (0.188834ms)
+✔ rebound accepts byte-bounded variable pages and non-multiple-of-32 continuation offsets (0.490959ms)
+✔ rebound variable-page session preserves exact rows and opaque history through next and previous (0.805458ms)
+✔ rebound variable pages reject no progress, excess rows, gaps and wrong continuation selectors (0.751166ms)
+✔ US mapping requests only closed same-run daily matches and validates source, counts and plan reference (0.596542ms)
+✔ US mapping supports byte-bounded continuation without changing announcement default (0.707416ms)
+✔ saved references reuse V4 stock reasons and article facts while retaining dates, provenance and uncertainty (0.664666ms)
+✔ oversized/missing entries remain NOT_LOADED, never fabricated stocks (0.1165ms)
+✔ render replaces previous results and treats data as literal text (0.103417ms)
+✔ null and false references are shown as original values without invented stock rows (0.088416ms)
+✔ saved result content precedes a closed source disclosure and preserves the source component (0.519916ms)
+✔ result navigation has a visible heading, focus and scroll instead of only starting a request (0.1795ms)
+✔ the selected result exposes its verified date and run without enabling missing routes (0.15725ms)
+✔ saved rebound shows original numeric gates, reasons and unverified research scope without currency promotion (1.117292ms)
+✔ near, pending and excluded retain their distinct original failure reasons (0.316208ms)
+✔ empty, NOT_LOADED, null and false remain distinct; a new page replaces prior rows (0.987875ms)
+✔ legacy V4 card behavior is retained when no observation group is supplied (0.105333ms)
+✔ expanded observation evidence preserves source hashes without local paths or synthesized URLs (0.215792ms)
+✔ saved US relationships reuse V4 three-stock grouping, original reasons, stages and safe official sources (2.731167ms)
+✔ daily dates, cutoff, limited scope and frozen response plan state stay separate from historical seeds (0.229083ms)
+✔ missing and oversized values remain explicit without old stock cards or fabricated plan consumption (0.17275ms)
+✔ empty scoped matches and literal text keep the original V4 uncertainty behavior (0.086292ms)
+✔ original consumed reference is displayed without overriding qualification or scope gaps (0.40575ms)
+✔ source panel reads only saved route and preserves owner states and historical replay (12.220375ms)
+✔ missing or duplicate modules, wrong owner, promoted flags and malformed identity fail closed (0.769959ms)
+✔ HTTP errors, invalid JSON, absent and oversized streams stay unconfirmed (0.333625ms)
+✔ failed re-read clears previously valid source result (0.537625ms)
+✔ repeated reads do not let older completion replace new result (0.189917ms)
+✔ closing a pending read ignores later completion (0.097875ms)
+ℹ tests 95
+ℹ suites 0
+ℹ pass 91
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 123.072
+
+✖ failing tests:
+
+test at tests/aCloseReplay.node.mjs:14:1
+✖ M09 fixture comes from original synthetic producer/store/cold reader (0.586167ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 0
+  
+      at TestContext.<anonymous> (file://<TASK_ROOT>/candidate-m11-490529/frontend/tests/aCloseReplay.node.mjs:14:88)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/closeRecapture.node.mjs:11:1
+✖ M17 fixtures come from original synthetic owner and exact cold reader (0.704125ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 0
+  
+      at TestContext.<anonymous> (file://<TASK_ROOT>/candidate-m11-490529/frontend/tests/closeRecapture.node.mjs:12:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hkCloseReview.node.mjs:15:1
+✖ M10 frozen original synthetic projection is available (0.740709ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 0
+  
+      at TestContext.<anonymous> (file://<TASK_ROOT>/candidate-m11-490529/frontend/tests/hkCloseReview.node.mjs:15:73)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests/hkStageObserved.node.mjs:7:1
+✖ M08 fixture uses frozen original owner/store and observed cold reader (0.732792ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  null !== 0
+  
+      at TestContext.<anonymous> (file://<TASK_ROOT>/candidate-m11-490529/frontend/tests/hkStageObserved.node.mjs:7:89)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: null,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
