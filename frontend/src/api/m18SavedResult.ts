@@ -44,10 +44,10 @@ export class M18SavedClient {
  private fetcher: Fetcher;
  constructor(fetcher: Fetcher = (url, options) => fetch(url, options)) { this.fetcher = fetcher; }
  private async get(path: string, query: Record<string,string>, signal?: AbortSignal) { return boundedJson(await this.fetcher(M18_ROUTE + path + '?' + new URLSearchParams(query), {method:'GET', cache:'no-store', credentials:'same-origin', signal})); }
- async descriptor(run: string, signal?: AbortSignal): Promise<Descriptor> {
-  check(/^[0-9a-f]{32}$/.test(run), 'RUN_ID'); const value = await this.get('', {run_id:run}, signal);
+ async descriptor(run: string = '', signal?: AbortSignal): Promise<Descriptor> {
+  check(run === '' || /^[0-9a-f]{32}$/.test(run), 'RUN_ID'); const value = await this.get('', run === '' ? {} : {run_id:run}, signal);
   check(object(value) && value.schema_version === 'v5.m18.v2.descriptor.v1' && value.status === 'READY', 'DESCRIPTOR_NOT_READY'); identity(value.identity);
-  check(value.run_id === run && value.identity.run_id === run && value.target_date === value.identity.target_date && value.pages_route === M18_ROUTE + '/pages' && digest(value.generation_id) && digest(value.profile_sha256) && typeof value.generated_at === 'string' && Number.isFinite(Date.parse(value.generated_at)), 'DESCRIPTOR');
+  check((run === '' || value.run_id === run) && value.run_id === value.identity.run_id && value.target_date === value.identity.target_date && value.pages_route === M18_ROUTE + '/pages' && digest(value.generation_id) && digest(value.profile_sha256) && typeof value.generated_at === 'string' && Number.isFinite(Date.parse(value.generated_at)), 'DESCRIPTOR');
   return value as Descriptor;
  }
  async overview(expected: Descriptor, signal?: AbortSignal): Promise<Overview> {

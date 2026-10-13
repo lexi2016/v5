@@ -1,0 +1,55 @@
+{
+  "schema": "v5.manager_daily_m18_candidate.v1",
+  "product_base": "5846b3c117397431dbaed041af2d9e1533f9f631",
+  "commit_parent": "7eac09efd3ffcb0e48d58b8d10e7b92a525c41df",
+  "runtime_files": [
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "before_sha256": "12c21cbeeb5f62eeac9125c248743ac967fe0d2ce26550353d55d7213a3bce9e",
+      "after_sha256": "3a5122115da0c14a01f23d2b6020c49a6fdd4dc270fb4e346775e35a9932af34"
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_owner_adapters.py",
+      "before_sha256": "6fc01a13c75aa4a57bef4276e5662c12abc357b0f925320782ac317f21e57630",
+      "after_sha256": "e5d3e04e3c23173da8f2775c6c68ffbef7d4243dedec2ad14c0c2d3c7db0852e"
+    },
+    {
+      "path": "V5/src/v5_shadow/m18_v2_publication_bridge.py",
+      "before_sha256": "c921e7414aadc8500b0a5a2b26707cd55af320289ff3cfbbcb2d0514d0f305a9",
+      "after_sha256": "3a35844e6200954df2ebcf3a566eb0aaf255e1b5843bd2db7ca052a072ec26d4"
+    },
+    {
+      "path": "frontend/src/api/m18SavedResult.ts",
+      "before_sha256": "dbe57db63e7b40a5c4902354082b711d938e3550b0f9b58dc7460c5ad4f42978",
+      "after_sha256": "75a2c0c00ca9944231712f0a6fd52ca2ae0964d13e488572a6f281f68e046f36"
+    },
+    {
+      "path": "frontend/src/views/SavedManagerResultView.vue",
+      "before_sha256": "20138e0412dd1910c9c13acb37ec669858509c3c7238e9ae6b19d0e141e9c308",
+      "after_sha256": "75d5554950d9934cde2fc1a86abea99af4cfc36379c04ab46a88a15fc828826c"
+    }
+  ],
+  "backend_focused": {
+    "passed": 40,
+    "subtests_passed": 33,
+    "failed": 0,
+    "skipped": 0
+  },
+  "frontend_node": {
+    "passed": 164,
+    "failed": 0,
+    "skipped": 0
+  },
+  "frontend_vitest": "NOT_RUN_MISSING_VITEST",
+  "frontend_typecheck": "NOT_RUN_MISSING_VUE_TSC",
+  "frontend_build": "NOT_RUN_MISSING_VITE",
+  "backend_full": "COLLECTION_BLOCKED_MISSING_PYDANTIC_AND_PANDAS",
+  "evidence_kind": "SYNTHETIC_ISOLATED_CANDIDATE",
+  "mac_verified": false,
+  "deployed": false,
+  "actual_daily_manager_run": false,
+  "natural_verified": false,
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false
+}

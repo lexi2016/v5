@@ -70,12 +70,12 @@ function onSourceToggle(event:Event) {
  sourceExpanded.value=(event.currentTarget as HTMLDetailsElement).open;
 }
 const query = new URLSearchParams(window.location.search);
-const requestedRun = ref(query.get('run_id') ?? '46596b03c2ab4e29b1219fd2e5eb698f');
+const requestedRun = ref(query.get('run_id') ?? '');
 const state = shallowRef<SavedRunState>({phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false});
 const session = new SavedRunSession(new M18SavedClient(), next => { state.value=next; });
 async function reload() {
  const run=requestedRun.value.trim();
- if (/^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);url.searchParams.set('run_id',run);window.history.replaceState(null,'',url); }
+ if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
 }
 const isUsMapping=computed(()=>state.value.section==='us_mapping_research');

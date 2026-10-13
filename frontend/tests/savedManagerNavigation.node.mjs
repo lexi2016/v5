@@ -1,9 +1,37 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import { runInNewContext } from 'node:vm';
 
 const source = readFileSync(new URL('../src/views/SavedManagerResultView.vue', import.meta.url), 'utf8');
 const template = source.slice(source.indexOf('<template>'), source.indexOf('</template>\n<style'));
+
+// Execute the view's run-input and URL controls without requiring a Vue build.
+// Rendered identity and real-session integration are covered by the view spec.
+function runControls(href) {
+ const window={location:new URL(href),history:{replaceState(_state,_title,url){window.location=new URL(url);}}};
+ const requests=[];
+ const setup=source.slice(source.indexOf('const query ='),source.indexOf('const state ='));
+ const reload=source.match(/async function reload\(\) \{[\s\S]*?\n\}/)?.[0];
+ assert.ok(reload,'the run reload handler must exist');
+ const controls=runInNewContext(setup+'\n'+reload+'\n({requestedRun,reload})',{URL,URLSearchParams,window,ref:value=>({value}),session:{load:async run=>requests.push(run)}});
+ return {...controls,window,requests};
+}
+test('no run selector starts blank and requests the default without adding a historical run',async()=>{
+ const controls=runControls('https://fixture.invalid/manager-selection/?tab=saved#result');
+ assert.equal(controls.requestedRun.value,'');await controls.reload();
+ assert.equal(controls.window.location.href,'https://fixture.invalid/manager-selection/?tab=saved#result');
+ assert.deepEqual(controls.requests,['']);
+});
+test('clearing the run input removes only its URL selector before loading the default',async()=>{
+ const run='46596b03c2ab4e29b1219fd2e5eb698f';
+ const controls=runControls('https://fixture.invalid/manager-selection/?tab=saved&run_id='+run+'#result');
+ assert.equal(controls.requestedRun.value,run);await controls.reload();
+ assert.equal(controls.window.location.searchParams.get('run_id'),run);
+ controls.requestedRun.value=' ';await controls.reload();
+ assert.equal(controls.window.location.href,'https://fixture.invalid/manager-selection/?tab=saved#result');
+ assert.deepEqual(controls.requests,[run,'']);
+});
 
 test('saved result content precedes a closed source disclosure and preserves the source component', () => {
   const result = template.indexOf('id="saved-result-content"');

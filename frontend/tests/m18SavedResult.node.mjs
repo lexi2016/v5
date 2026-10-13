@@ -16,6 +16,48 @@ test('descriptor is requested only for the exact run using GET and no-store', as
  assert.equal(requests.length, 1); assert.equal(requests[0][0], '/api/v4/manager/m18/v2?run_id=' + RUN);
  assert.equal(requests[0][1].method, 'GET'); assert.equal(requests[0][1].cache, 'no-store');
 });
+test('empty or omitted run resolves the verified saved descriptor using an empty query', async () => {
+ for (const run of ['', undefined]) {
+  const {client, requests} = clientWith(descriptor);
+  assert.deepEqual(await client.descriptor(run), descriptor);
+  assert.equal(requests.length, 1);
+  assert.equal(requests[0][0], '/api/v4/manager/m18/v2?');
+  assert.equal(requests[0][1].method, 'GET'); assert.equal(requests[0][1].cache, 'no-store');
+ }
+});
+test('default descriptor still validates its six-field identity, run, target, route and generation', async () => {
+ const missingIdentity = {...identity}; delete missingIdentity.raw_sha256;
+ for (const patch of [{run_id:'0'.repeat(32)}, {target_date:'20261011'}, {pages_route:'https://elsewhere.invalid/pages'}, {generation_id:'wrong'}, {profile_sha256:'wrong'}, {identity:missingIdentity}, {identity:{...identity,extra:'unexpected'}}]) {
+  await assert.rejects(clientWith({...descriptor,...patch}).client.descriptor(''), /M18_(IDENTITY|DESCRIPTOR)$/);
+ }
+});
+test('explicit run never substitutes another valid saved run or falls back after an error', async () => {
+ const other='0'.repeat(32), {client,requests}=clientWith({...descriptor,run_id:other,identity:{...identity,run_id:other}});
+ await assert.rejects(client.descriptor(RUN), /M18_DESCRIPTOR$/);
+ assert.equal(requests.length,1); assert.equal(requests[0][0], '/api/v4/manager/m18/v2?run_id='+RUN);
+ for (const run of ['',RUN]) {
+  const calls=[];const failed=new M18SavedClient(async url=>{calls.push(url);return new Response(JSON.stringify({reason_codes:['NO_VERIFIED_SAVED_RUN']}),{status:503});});
+  await assert.rejects(failed.descriptor(run), /M18_HTTP_503: NO_VERIFIED_SAVED_RUN/);
+  assert.deepEqual(calls,['/api/v4/manager/m18/v2?'+(run?'run_id='+run:'')]);
+ }
+});
+test('default selection pins overview and page navigation to the selected run and generation', async () => {
+ const {SavedRunSession}=await import('../src/api/m18SavedResult.ts');
+ const selected='0'.repeat(32), selectedIdentity={...identity,run_id:selected,target_date:'20261013'}, generation='9'.repeat(64);
+ const selectedDescriptor={...descriptor,identity:selectedIdentity,run_id:selected,target_date:selectedIdentity.target_date,generation_id:generation};
+ const selectedBinding={...binding,identity:selectedIdentity,generation_id:generation};const requests=[];
+ const client=new M18SavedClient(async input=>{
+  const url=new URL(input,'http://fixture.invalid');requests.push(url);
+  if(url.pathname.endsWith('/overview'))return response({...overview,...selectedBinding});
+  if(url.pathname.endsWith('/sections'))return response(url.searchParams.has('cursor')?{...detail,...selectedBinding,cursor:'opaque-cursor',offset:32,not_loaded_count:32,entries:[{...entry,index:32}],next_cursor:null,remaining_entries:0}:{...detail,...selectedBinding});
+  return response(selectedDescriptor);
+ });
+ const session=new SavedRunSession(client);await session.load('');
+ assert.equal(session.state.phase,'LOADED');assert.deepEqual(session.state.descriptor,selectedDescriptor);
+ await session.next();assert.equal(session.state.page.offset,32);await session.previous();assert.equal(session.state.page.offset,0);
+ assert.equal(requests[0].search,'');assert.equal(requests.filter(url=>url.pathname==='/api/v4/manager/m18/v2').length,1);
+ for(const url of requests.slice(1)){assert.equal(url.searchParams.get('run_id'),selected);assert.equal(url.searchParams.get('generation_id'),generation);}
+});
 test('invalid run is rejected before a network request', async () => { const {client, requests} = clientWith(descriptor); await assert.rejects(client.descriptor('../wrong')); assert.equal(requests.length, 0); });
 test('descriptor identity, target and route cannot be substituted', async () => {
  for (const patch of [{run_id: '0'.repeat(32)}, {target_date: '20261011'}, {pages_route: 'https://elsewhere.invalid/pages'}, {identity: {...identity, run_id: '0'.repeat(32)}}]) {

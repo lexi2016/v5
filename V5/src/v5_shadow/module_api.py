@@ -60,6 +60,9 @@ def _m18_identity_from_descriptor(payload):
         'status',
         'generated_at',
     )
+    if 'manifest_sha256' in payload:
+        required += ('manifest_sha256',)
+        sha(payload['manifest_sha256'])
     exact_keys(payload, required)
     if payload['schema_version'] != 'v5.m18.v2.descriptor.v1':
         raise ValueError('M18_DESCRIPTOR_NOT_READY')
@@ -94,6 +97,28 @@ def _m18_read_page_binding(config, root, query):
     if descriptor['status_code'] != 200:
         raise ValueError('M18_DESCRIPTOR_NOT_READY')
     return _m18_identity_from_descriptor(descriptor['payload'])
+
+
+def _m18_binding_for_descriptor(config, descriptor):
+    """Pin every read to this descriptor, never a changing current pointer."""
+    if 'manifest_sha256' in descriptor:
+        if config.get('m18_v2_daily_publication') is not True:
+            raise ValueError('M18_DAILY_PUBLICATION_DISABLED')
+        # All names come from validated digests, not request paths or roots.
+        return dict(identity=descriptor['identity'],
+                    manifest_sha256=descriptor['manifest_sha256'],
+                    profile_sha256=descriptor['profile_sha256'],
+                    bundle_root=str(Path(config['data_root']) / 'm18-v2-bundles' /
+                                    descriptor['generation_id']))
+    binding = config.get('m18_v2_binding')
+    if not isinstance(binding, dict):
+        raise ValueError('M18_READER_NOT_READY')
+    exact_keys(binding, ('manifest_sha256', 'identity', 'profile_sha256', 'bundle_root'))
+    if binding['identity'] != descriptor['identity']:
+        raise ValueError('M18_IDENTITY_MISMATCH')
+    if binding['profile_sha256'] != descriptor['profile_sha256']:
+        raise ValueError('M18_PROFILE_MISMATCH')
+    return binding
 
 
 def _m18_disk_reader(binding, *, span_observer=None):
@@ -144,24 +169,7 @@ def _m18_page_response(config, root, query):
     descriptor = _m18_read_page_binding(config, root, query)
     page = _m18_page_query(query)
 
-    binding = config.get('m18_v2_binding')
-    if not isinstance(binding, dict):
-        raise ValueError('M18_READER_NOT_READY')
-
-    exact_keys(
-        binding,
-        (
-            'manifest_sha256',
-            'identity',
-            'profile_sha256',
-            'bundle_root',
-        ),
-    )
-
-    if binding['identity'] != descriptor['identity']:
-        raise ValueError('M18_IDENTITY_MISMATCH')
-    if binding['profile_sha256'] != descriptor['profile_sha256']:
-        raise ValueError('M18_PROFILE_MISMATCH')
+    binding = _m18_binding_for_descriptor(config, descriptor)
 
     value = _m18_read_value(binding, 'content', {'page': page})
 
@@ -290,10 +298,7 @@ def _m18_semantic_response(config, root, path, query):
     descriptor = _m18_read_page_binding(config, root, query)
     if query['generation_id'] != descriptor['generation_id']:
         raise ValueError('M18_GENERATION_MISMATCH')
-    binding = config['m18_v2_binding']
-    if (binding['identity'] != descriptor['identity']
-            or binding['profile_sha256'] != descriptor['profile_sha256']):
-        raise ValueError('M18_IDENTITY_MISMATCH')
+    binding = _m18_binding_for_descriptor(config, descriptor)
     kind = 'overview' if path == M18_ROUTE + '/overview' else 'section'
     if projection == M18_ANNOUNCEMENT_PROJECTION:kind = 'announcement'
     elif projection == M18_REBOUND_PROJECTION:kind = 'rebound'
@@ -687,6 +692,8 @@ def _config(value):
     keys = ('schema_version', 'module_id', 'release_id', 'data_root', 'routes')
     # Ordinary module APIs retain their original exact schema. Only an M18
     # pages route requires the extra immutable disk binding.
+    if isinstance(value, dict) and 'm18_v2_daily_publication' in value:
+        keys += ('m18_v2_daily_publication',)
     if isinstance(value, dict) and 'm18_v2_binding' in value:
         keys += ('m18_v2_binding',)
     if isinstance(value, dict) and 'm06_hk_preselection_binding' in value:
@@ -710,6 +717,10 @@ def _config(value):
     if isinstance(value, dict) and 'm16_saved_public_research_binding' in value:
         keys += ('m16_saved_public_research_binding',)
     exact_keys(value, keys)
+    if 'm18_v2_daily_publication' in value:
+        if (type(value['m18_v2_daily_publication']) is not bool
+                or value['module_id'] != 'manager' or M18_ROUTE not in value['routes']):
+            raise ValueError('M18_DAILY_PUBLICATION_CONFIG')
     if 'm16_saved_public_research_binding' in value:
         from .m16_readonly import validate_binding
         validate_binding(value)
@@ -897,6 +908,24 @@ def _validate_record(config,record,path,query):
 
 
 def read_response(config,root,path,query):
+    if config['module_id'] == 'manager' and path == M18_ROUTE:
+        if query == {} and config.get('m18_v2_daily_publication') is not True:
+            binding = config.get('m18_v2_binding')
+            if binding is None:
+                raise FileNotFoundError('M18_READER_NOT_READY')
+            return read_response(config, root, path, {'run_id': binding['identity']['run_id']})
+        if query != {}:
+            exact_keys(query, ('run_id',))
+            if not isinstance(query['run_id'], str) or not re.fullmatch('[0-9a-f]{32}', query['run_id']):
+                raise ValueError('M18_RUN_ID')
+        record, digest = _read_record(root, response_key(config['module_id'], path, query), config)
+        _validate_record(config, record, path, query)
+        descriptor = _m18_identity_from_descriptor(record['payload'])
+        if query and descriptor['run_id'] != query['run_id']:
+            raise ValueError('M18_IDENTITY_MISMATCH')
+        if 'manifest_sha256' in descriptor and config.get('m18_v2_daily_publication') is not True:
+            raise ValueError('M18_DAILY_PUBLICATION_DISABLED')
+        return record, digest
     if config['module_id']=='source_bundle' and path==M17_ROUTE:
         # This route can never fall back to a cached module-response record.
         # Every GET must cold-read the exact configured original ledger run.

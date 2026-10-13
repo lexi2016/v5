@@ -43,7 +43,7 @@ def run_manager_daily(request, ledger_root, binding_identity, *, publication=Non
     """Save via original workspace and its independent same-attempt reader.
 
     Caller must supply the exact post-owner request, including actual cutoff and
-    input/reference hashes. This never generates an earlier cutoff or publishes.
+    input/reference hashes. Publication is explicit and only follows same-run readback.
     """
     from v5_shadow.manager_plan import run_manager_plan
     now=datetime.now(timezone.utc)
@@ -73,10 +73,16 @@ def run_manager_daily(request, ledger_root, binding_identity, *, publication=Non
         from v5_shadow.manager_plan import publish_workspace_read
         if set(publication) != {'config', 'expected_generation'}:
             raise ValueError('DAILY_MANAGER_PUBLICATION_CONTRACT')
-        published = publish_workspace_read(dict(request, action='read', view='auto'),
-            publication['config'], expected_generation=publication['expected_generation'],
-            expected_run_id=product['run_id'], expected_plan_sha256=product['sha256'])
-        transport = published['publication']
+        if publication['config'].get('m18_v2_daily_publication') is True:
+            from v5_shadow.m18_v2_publication_bridge import publish_daily_manager_result
+            transport = publish_daily_manager_result(request=dict(request, action='read', view='auto'),
+                result=page, config=publication['config'], expected_generation=publication['expected_generation'],
+                expected_run_id=product['run_id'], expected_plan_sha256=product['sha256'])
+        else:
+            published = publish_workspace_read(dict(request, action='read', view='auto'),
+                publication['config'], expected_generation=publication['expected_generation'],
+                expected_run_id=product['run_id'], expected_plan_sha256=product['sha256'])
+            transport = published['publication']
     reference=dict(root=request['manager_output_root'],readback=readback,
         page_payload_sha256=sha256_json(page['payload']),page_readback='ORIGINAL_AUTO_WORKSPACE_READ_MATCHED_NOT_HTTP_DEPLOYMENT',
         plan_status=product.get('status'),natural_verified=False)
