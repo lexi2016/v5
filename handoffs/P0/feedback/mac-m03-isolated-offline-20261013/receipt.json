@@ -1,0 +1,85 @@
+{
+  "candidate": "handoffs/M03/integration_candidates/market_snapshot_20261013",
+  "commit": "efeaeb8fc04474b1f38ebda98b35953b580049df",
+  "credentials_accessed": false,
+  "dependencies_installed": false,
+  "dom": "NOT_RUN",
+  "environment": {
+    "M03_FIXED_SOURCE": "./candidate",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "./candidate/V5/src:./candidate/V5/tests",
+    "TMPDIR": "./tmp"
+  },
+  "executions": [
+    {
+      "command": [
+        "$PY",
+        "-I",
+        "-B",
+        "./candidate/verify_release.py"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "finished_at": "2026-10-13T13:59:26.695379+00:00",
+      "stage": "release",
+      "started_at": "2026-10-13T13:59:26.657973+00:00"
+    },
+    {
+      "command": [
+        "$PY",
+        "-B",
+        "-W",
+        "error::ResourceWarning",
+        "-m",
+        "unittest",
+        "-v",
+        "test_us_market_capture",
+        "test_market_source_entry",
+        "test_market_capture_recovery"
+      ],
+      "cwd": ".",
+      "exit_code": 0,
+      "finished_at": "2026-10-13T13:59:46.409228+00:00",
+      "stage": "targeted",
+      "started_at": "2026-10-13T13:59:26.695698+00:00"
+    }
+  ],
+  "git_blobs_verified": 75,
+  "http": "NOT_RUN",
+  "limits": [
+    "Synthetic clock and transport only; no natural or real provider acceptance",
+    "No shared output or ports; only isolated candidate verification",
+    "No product modifications or failure-repair loop"
+  ],
+  "logs_sha256": {
+    "release.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "release.stdout.txt": "537aa7f45fd35caf8372245b6ffb0e008111db60693dd9090c230960e3cac12d",
+    "targeted.stderr.txt": "9e1c5fed33f788132853db70e1353b2f92982c0bce22d579cf6753ded6ca3fe1",
+    "targeted.stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "manifest_file_hashes_verified": 74,
+  "native_visual": "NOT_RUN",
+  "old_48_tests": "NOT_RUN",
+  "platform": "Mac/POSIX",
+  "python": "3.14.6",
+  "real_network_capture": "NOT_RUN",
+  "real_provider": "NOT_RUN",
+  "release_sha256": "2c6f00bd8751c403f0aeaa737e2b905ae16723eeb40f6efb4bc9edd72aacc890",
+  "schema": "v5.m03.mac_offline_acceptance.v1",
+  "service_operations": false,
+  "service_or_preview_publish": "NOT_RUN",
+  "source_unchanged": true,
+  "status": "PASS_OFFLINE_ONLY",
+  "targeted_tests": {
+    "duration_seconds": 19.641,
+    "failed": 0,
+    "modules": [
+      "test_us_market_capture",
+      "test_market_source_entry",
+      "test_market_capture_recovery"
+    ],
+    "passed": 23,
+    "run": 23,
+    "skipped": 0
+  }
+}
