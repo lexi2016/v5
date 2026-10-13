@@ -82,3 +82,7 @@ NOT_RUN：Mac、锁定3.14环境安装、Vue type/build与原生页面交互、P
 ## 固定候选历史说明
 
 首版 `0d53c6d64299897fbfccaa5e4eca1e96ca285ed4` 的530件字节曾逐件远端回读，但当时冷读仅校验封存 envelope 和原owner字节，尚未在冷读子进程实际调用原 saved reader；因此不将它记为完整验收。本次修订只补该必要冷读接线和对应正反/独立进程证据，不改算法、共享P0或真实执行范围。
+
+## 保存结果覆盖诊断透传修复
+
+此修订仅补 overview 的 seed_coverage_diagnostics、seed_coverage_scope、seed_recovery_evaluation、seed_execution_kind，沿用原私有路径脱敏规则；缺字段为 null，不补推断原因。组件直接展示原诊断状态和 reason_codes，独立保留 seed_gaps，明确 seed-only 不含材料路径。对已保存 delivery reference 只需重新 export，不要重新 run，不改 owner artifact、run 或资格。P0 共享前像与 patch 均未修改；只需更新 API/component 候选与后端候选运行文件，再按当前 generation 做原 CAS 发布。新修订证据见 evidence/scope-export-results.json；Mac 本修订/typecheck/build/真实保存重导出尚待验，f7dd 既有 Mac 结果不冒充本修订验收。

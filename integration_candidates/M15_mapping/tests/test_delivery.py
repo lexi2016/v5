@@ -231,3 +231,35 @@ class OriginalManagerColdRejectionTests(unittest.TestCase):
   result['material']['readback']['plan_sha256']='0'*64
   forged=delivery.save_result(root,result,[root/p for p in envelope['owner_files']])
   with self.assertRaisesRegex(ValueError,'ORIGINAL_OWNER'):delivery.read_result(root,forged)
+
+class ScopePublicationTests(unittest.TestCase):
+ def test_saved_scope_and_recovery_are_not_recomputed_or_lost(self):
+  from unittest.mock import patch
+  import copy
+  scope=dict(schema_version='v5.us_mapping_scope.v1',status='PARTIAL',scope='PINNED_REVIEWED_RELATIONS_WITHIN_CONFIGURED_US_SAMPLE',
+   reason_codes=['BROADER_US_HK_RELATIONS_NOT_ASSESSED','TARGET_DATE_ELIGIBILITY_CANNOT_CONFIRM'],
+   reviewed_us_symbol_count=4,registry_readback={'cards':[{'report':'original'}],'formal_eligible':False},rows=None,
+   full_market_coverage=False,formal_eligible=False,natural_verified=False)
+  recovery=dict(scope='CURRENT_REPLAY_PRODUCT_NOT_HISTORICAL_AVAILABILITY',historical_availability='NOT_ESTABLISHED',formal_eligible=False,natural_verified=False)
+  result=dict(mode='seed',target_date='20261014',seed=dict(persisted_daily=dict(status='COMPLETED',gaps=[],matches=[{},{}],coverage_scope='ORIGINAL_SCOPE',target_date_eligibility='CANNOT_CONFIRM'),coverage_diagnostics=scope,recovery_evaluation=recovery,execution_kind='MANUAL_RECOVERY'),material=None)
+  before=copy.deepcopy(result)
+  ref=dict(run_id='a'*32,sha256='b'*64,target_date='20261014')
+  with patch.object(delivery,'read_result',return_value=result):
+   records=delivery.publication_records(None,ref,dict(module_id='source_bundle',release_id='test'),data_kind='RECORDED_INPUT_REPLAY')
+  overview=records[0]['payload']
+  self.assertEqual(overview['seed_coverage_diagnostics'],scope)
+  self.assertEqual(overview['seed_recovery_evaluation'],recovery)
+  self.assertEqual(overview['seed_coverage_scope'],'ORIGINAL_SCOPE')
+  self.assertEqual(overview['seed_execution_kind'],'MANUAL_RECOVERY')
+  self.assertEqual(overview['seed_gaps'],[])
+  self.assertEqual(overview['lanes'],dict(seed=2,industry=None,individual=None))
+  self.assertEqual(overview['target_date_eligibility'],'CANNOT_CONFIRM')
+  self.assertEqual(result,before)
+ def test_absent_scope_stays_unknown_not_empty_or_complete(self):
+  from unittest.mock import patch
+  result=dict(mode='seed',target_date='20261014',seed=dict(persisted_daily=dict(matches=[],gaps=[])),material=None)
+  with patch.object(delivery,'read_result',return_value=result):
+   overview=delivery.publication_records(None,dict(run_id='a'*32,sha256='b'*64,target_date='20261014'),dict(module_id='source_bundle',release_id='test'),data_kind='SYNTHETIC')[0]['payload']
+  for key in ('seed_coverage_diagnostics','seed_recovery_evaluation','seed_coverage_scope','seed_execution_kind'):
+   self.assertIsNone(overview[key])
+  self.assertIsNone(overview['lanes']['industry'])

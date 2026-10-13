@@ -9,9 +9,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 9581,
-      "sha256": "6eee1c3a1fe88e4a911b5ab9bc3875196c26632b202e3f0ba91cd995397c33b4",
-      "git_blob": "6a16603673edbf353b4b928991f7c99442cf2b31"
+      "bytes": 10372,
+      "sha256": "e31565b950bccc86e6801241ac992ec016f3ec2603bdc06c07f4f3672b04943e",
+      "git_blob": "c264b18ace70021bb90b36c36a34152b237dbdeb"
     },
     {
       "path": "SOURCE_ORIGINS.json",
@@ -32,6 +32,18 @@
       "git_blob": "bc416ff5bcd8dc16abc38a7b074123643f00a9a2"
     },
     {
+      "path": "evidence/scope-export-results.json",
+      "bytes": 516,
+      "sha256": "4ce76cebb1efc1c667ec03fe2d1e9a6121461364297742990299c5ed5fa6914b",
+      "git_blob": "ac55a11bd4ead677a23b093841dffb54b7e7a6a7"
+    },
+    {
+      "path": "evidence/scope-export-tests.log",
+      "bytes": 12418,
+      "sha256": "8f00c1e2adeab9c35581abaae47899d09938cd419cbb7dfa8defff4b987bfbfa",
+      "git_blob": "a529fb884566b3f3e774a9b0f1ee1445e4e373d8"
+    },
+    {
       "path": "examples/both.spec.json",
       "bytes": 707,
       "sha256": "15ad4120283554c3cce9c80c706bbedc4dad1d00ed7d3492e5b30e432b4b668d",
@@ -45,21 +57,21 @@
     },
     {
       "path": "frontend/src/api/m15Mapping.ts",
-      "bytes": 3909,
-      "sha256": "6890f55bcb3cb3a0d9d25afe6d62edba2e87b723ce1aafd37d6bf054294f8b6a",
-      "git_blob": "8a756e331743b204c4c2767f529458ecf4d33974"
+      "bytes": 4112,
+      "sha256": "05aff68cea42041ec80445f43f9a2ddd8e6c4533a5826f091a5544ee2f35e4d1",
+      "git_blob": "774bab5406012e4eb8eadd72393cfd0bbc22a23b"
     },
     {
       "path": "frontend/src/components/M15SavedMapping.vue",
-      "bytes": 4519,
-      "sha256": "29cc7c141711881cbd4797f5f0df19d527e51d86a054e78d0df7c8eadc30dbc3",
-      "git_blob": "9a9d18e4ce64ff3b1cbe3808f559afa254c27c3a"
+      "bytes": 5581,
+      "sha256": "6179f126e3ade38e9fde6aad44591e0a2c7f4ec4939b1b894d3f2395356b46af",
+      "git_blob": "00be5af9ae42abb0baee8ee0dcc7e667cf499702"
     },
     {
       "path": "frontend/tests/m15Mapping.node.mjs",
-      "bytes": 2515,
-      "sha256": "01a3fd25fe2efba843413886651173745f016152bb14f605b0f85dea5416ef9c",
-      "git_blob": "c14d89771c25414d872d0e3168f6a144c4920f61"
+      "bytes": 3798,
+      "sha256": "738703cd19529c072b9453a0117047df847d67b962e7ad2493f5134269a4a6f9",
+      "git_blob": "95d896698a7651bb4654efa908e28e2ff516dc37"
     },
     {
       "path": "p0_integration/candidate/frontend/src/views/SavedManagerResultView.vue",
@@ -339,9 +351,9 @@
     },
     {
       "path": "runtime/V5/src/v5_shadow/m15_delivery.py",
-      "bytes": 17002,
-      "sha256": "57c60deb652b19f6dd56c52a699250e3e5f7416f2d456eb7d93cb93e9a924f2c",
-      "git_blob": "92c7b284b81d3cd106a90cc05c9084411f9a0a37"
+      "bytes": 17279,
+      "sha256": "a032c3b9276d690cde0524ce1be27904e384f90541fce83ed7e6838163056d60",
+      "git_blob": "6b60734796983319e08ffffd7a4b9c50b24fd802"
     },
     {
       "path": "runtime/V5/src/v5_shadow/m15_owner_read.py",
@@ -3171,9 +3183,9 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "bytes": 16606,
-      "sha256": "413e445b40c2827bf61f615ff8bcf54c972583d2fcfd6e7731d536c36f427548",
-      "git_blob": "34c6a17510fb4b3d329c032041072bf49e858846"
+      "bytes": 19163,
+      "sha256": "295dbda9252905401f65604b2447a9d6deb8983047a9362fa44226893be9e020",
+      "git_blob": "10449888c86920a5c37ca5b679f98f7cdd75fbe4"
     },
     {
       "path": "verify_release.py",

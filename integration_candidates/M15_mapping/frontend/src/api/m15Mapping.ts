@@ -2,7 +2,7 @@
 export const M15_ROUTE='/api/v5/source-bundle/us-mapping-saved';
 export type M15Lane='seed'|'industry'|'individual';
 export type Reference={run_id:string;sha256:string;target_date:string};
-export type Overview={schema_version:string;target_date:string;reference:Reference;mode:string;seed_status:string;seed_run_id:string;seed_artifact_sha256:string;seed_source_status:string;seed_coverage:unknown;seed_gaps:unknown;us_session_date:string|null;target_date_eligibility:string;material_status:string|null;material_reasons:unknown;material_input:unknown;material_coverage:unknown;lanes:Record<M15Lane,number|null>;page_size:number;[key:string]:unknown};
+export type Overview={schema_version:string;target_date:string;reference:Reference;mode:string;seed_status:string;seed_run_id:string;seed_artifact_sha256:string;seed_source_status:string;seed_coverage:unknown;seed_coverage_diagnostics?:{status?:string;scope?:string;reason_codes?:string[];[key:string]:unknown}|null;seed_coverage_scope?:unknown;seed_recovery_evaluation?:unknown;seed_execution_kind?:string|null;seed_gaps:unknown;us_session_date:string|null;target_date_eligibility:string;material_status:string|null;material_reasons:unknown;material_input:unknown;material_coverage:unknown;lanes:Record<M15Lane,number|null>;page_size:number;[key:string]:unknown};
 export type Page={schema_version:string;target_date:string;reference:Reference;lane:M15Lane;offset:number;total:number;rows:unknown[];next_offset:number|null;[key:string]:unknown};
 type Fetcher=(url:string,init?:RequestInit)=>Promise<Response>;
 function check(value:unknown,message:string):asserts value {if(!value)throw new Error(message);}

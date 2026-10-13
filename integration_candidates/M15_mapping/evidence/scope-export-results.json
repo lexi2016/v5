@@ -1,0 +1,14 @@
+{
+  "baseline": "f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af",
+  "change": "Saved seed coverage and recovery pass-through only; no owner execution for re-export",
+  "python_candidate": 22,
+  "original_regression": 40,
+  "node": 10,
+  "status": "PASS",
+  "vue_sfc_compile": "PASS",
+  "mac_new_revision": "NOT_RUN",
+  "real_saved_reexport": "NOT_RUN",
+  "tests_are_synthetic_contract_shapes": true,
+  "red_before_fix": "2 KeyError seed_coverage_diagnostics failures",
+  "locked_dependencies": "NOT_RUN_NO_RANGE_CHANGE"
+}

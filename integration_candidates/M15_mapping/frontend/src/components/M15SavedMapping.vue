@@ -24,6 +24,15 @@ function json(v:unknown){return JSON.stringify(v,null,2);}onBeforeUnmount(clear)
     <p>摘要 {{ overview.reference.sha256 }} · 美股 session {{ overview.us_session_date ?? 'UNKNOWN' }}</p>
     <p>种子：{{ overview.seed_status }} / 来源 {{ overview.seed_source_status }} · 材料：{{ overview.material_status ?? 'NOT_RUN' }}</p>
     <p>目标资格：{{ overview.target_date_eligibility }} · RESEARCH_ONLY · formal_eligible=false · natural_verified=false</p>
+    <section aria-label="种子原覆盖诊断与恢复边界">
+     <p>本次路径：{{ overview.mode }}{{ overview.mode==='seed' ? ' · 仅四键种子，材料路径 NOT_RUN' : '' }}</p>
+     <p>种子覆盖诊断：{{ overview.seed_coverage_diagnostics?.status ?? 'UNKNOWN · 原保存未提供覆盖诊断' }}</p>
+     <p>诊断原因（独立于种子 gaps）：{{ overview.seed_coverage_diagnostics?.reason_codes == null ? 'UNKNOWN · 原保存未提供原因' : json(overview.seed_coverage_diagnostics.reason_codes) }}</p>
+     <p>覆盖范围：{{ json(overview.seed_coverage_scope ?? null) }} · {{ overview.seed_coverage_diagnostics?.scope ?? 'UNKNOWN' }}</p>
+     <p>执行类型：{{ overview.seed_execution_kind ?? 'UNKNOWN' }}</p>
+     <details><summary>完整原覆盖诊断（含 registry / scope）</summary><pre>{{ json(overview.seed_coverage_diagnostics ?? null) }}</pre></details>
+     <details><summary>原恢复评估与历史资格边界</summary><pre>{{ json(overview.seed_recovery_evaluation ?? null) }}</pre></details>
+    </section>
     <p>材料缺口：{{ json(overview.material_reasons) }} · 种子缺口：{{ json(overview.seed_gaps) }}</p>
     <nav aria-label="M15 路径"><button v-for="key in (['seed','industry','individual'] as const)" :key="key" type="button" :disabled="loading||overview.lanes[key]===null" @click="rows(key)">{{ key }} · {{ overview.lanes[key] ?? 'NOT_EVALUATED' }}</button></nav>
     <section v-if="page" :aria-label="lane+'映射行'"><p>{{ lane }} · {{ page.offset+1 }}–{{ page.offset+page.rows.length }} / {{ page.total }}</p>
