@@ -27,3 +27,9 @@ The intermediate new-suite failures (missing implementation, scoped legacy fixtu
 ## Not executed or claimed
 
 No real provider/CLI source call, model, credential access, real selector qualification, actual private body upload, V4 active root/service use, deployment, HTTP/DOM/native visual, natural schedule, full research-lane coverage, or whole-module acceptance. Original 18-article readback and original full-suite scope failures were not rerun; historical evidence remains attributed to the original Chat. Formal PIT and trading flags remain false. This candidate is ready for fixed-version Mac isolated verification, not final business acceptance.
+
+## Source-contract / healthy-Parquet increment
+
+Cloud Python 3.12.14: 27 tests, 26 PASS, 1 SKIPPED (46.029s). Healthy Parquet remains NOT_RUN here because pyarrow is not installed. All previous 22 tests passed. Four added executable envelope tests pass, including unknown envelope through the real capture boundary with no successful status and no recovery-as-success. Before repair, the added envelope subcases produced 6 failures / 2 errors; unknown dict envelopes had been accepted as zero rows.
+
+Mac existing 3.13.12 / pandas 2.3.3 / pyarrow 23.0.1 must run all 27, with no skips, to close the healthy-Parquet gap. No real CLI, new source acquisition, model, credentials, old 18-article rerun, full V5 dependency-lock test or deployment was performed for this increment. The 1001-row fixture is explicitly synthetic and uses selector date 20200102; assertions require the original analyzer to preserve it and report healthy lookup before body/clock/source-bound archive cold read. Full package Python >=3.14 metadata remains unchanged.

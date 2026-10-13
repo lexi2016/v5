@@ -1,0 +1,33 @@
+RELEASE hashes MATCHED
+test_bad_cli_pin_rejected_before_any_capture (test_capture.CaptureTests.test_bad_cli_pin_rejected_before_any_capture) ... ok
+test_capture_real_owner_default_analyzer_import_and_cold_reference (test_capture.CaptureTests.test_capture_real_owner_default_analyzer_import_and_cold_reference) ... ok
+test_cli_capture_requires_explicit_execution_flag (test_capture.CaptureTests.test_cli_capture_requires_explicit_execution_flag) ... ok
+test_concurrent_capture_rejected_without_owner (test_capture.CaptureTests.test_concurrent_capture_rejected_without_owner) ... ok
+test_config_unknown_field_and_overlap_rejected (test_capture.CaptureTests.test_config_unknown_field_and_overlap_rejected) ... ok
+test_failed_capture_is_not_blindly_refetched (test_capture.CaptureTests.test_failed_capture_is_not_blindly_refetched) ... ok
+test_ingest_saved_response_lost_resumes_original_success (test_capture.CaptureTests.test_ingest_saved_response_lost_resumes_original_success) ... ok
+test_initialize_recovers_only_marked_partial_layout (test_capture.CaptureTests.test_initialize_recovers_only_marked_partial_layout) ... ok
+test_interrupted_checkpoint_never_publishes_partial_final_file (test_capture.CaptureTests.test_interrupted_checkpoint_never_publishes_partial_final_file) ... ok
+test_material_tamper_and_unsafe_run_id_rejected (test_capture.CaptureTests.test_material_tamper_and_unsafe_run_id_rejected) ... ok
+test_old_acquisition_never_runs (test_capture.CaptureTests.test_old_acquisition_never_runs) ... ok
+test_repeated_capture_and_resume_never_refetch (test_capture.CaptureTests.test_repeated_capture_and_resume_never_refetch) ... ok
+test_reused_capture_id_requires_same_date_slot_and_claim_id (test_capture.CaptureTests.test_reused_capture_id_requires_same_date_slot_and_claim_id) ... ok
+test_spaced_interpreter_path_runs_original_capture_and_recovery (test_capture.CaptureTests.test_spaced_interpreter_path_runs_original_capture_and_recovery) ... ok
+test_status_saved_response_lost_recovers_without_cli (test_capture.CaptureTests.test_status_saved_response_lost_recovers_without_cli) ... ok
+test_unknown_legacy_time_is_not_backfilled (test_capture.CaptureTests.test_unknown_legacy_time_is_not_backfilled) ... ok
+test_bad_selected_archive_rejected_and_read_has_no_writes (test_research_lane.ResearchLaneTests.test_bad_selected_archive_rejected_and_read_has_no_writes) ... ok
+test_empty_latest_has_no_invented_date (test_research_lane.ResearchLaneTests.test_empty_latest_has_no_invented_date) ... ok
+test_exact_missing_never_falls_back (test_research_lane.ResearchLaneTests.test_exact_missing_never_falls_back) ... ok
+test_latest_and_exact_only_archive_lane_preserve_original (test_research_lane.ResearchLaneTests.test_latest_and_exact_only_archive_lane_preserve_original) ... ok
+test_original_v1_unknown_clocks_and_53_outside_errors_preserved (test_research_lane.ResearchLaneTests.test_original_v1_unknown_clocks_and_53_outside_errors_preserved) ... ok
+test_unknown_query_and_invalid_dates_rejected (test_research_lane.ResearchLaneTests.test_unknown_query_and_invalid_dates_rejected) ... ok
+test_healthy_parquet_original_analyzer_owner_and_cold_reader (test_source_contract.SourceContractTests.test_healthy_parquet_original_analyzer_owner_and_cold_reader) ... skipped 'NOT_RUN: existing pyarrow required; never install from this test'
+test_known_empty_envelopes_remain_empty (test_source_contract.SourceContractTests.test_known_empty_envelopes_remain_empty) ... ok
+test_known_nonempty_envelopes_preserve_body (test_source_contract.SourceContractTests.test_known_nonempty_envelopes_preserve_body) ... ok
+test_unknown_and_malformed_envelopes_fail_closed (test_source_contract.SourceContractTests.test_unknown_and_malformed_envelopes_fail_closed) ... ok
+test_unknown_cli_cannot_commit_success_or_archive (test_source_contract.SourceContractTests.test_unknown_cli_cannot_commit_success_or_archive) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 46.029s
+
+OK (skipped=1)

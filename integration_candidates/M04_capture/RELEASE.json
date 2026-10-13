@@ -1,12 +1,13 @@
 {
   "files": {
-    "PROVENANCE.json": "38d38441eb210f3efce26d9ef10bee416b749257556a9337d92864ee447f9649",
-    "README.md": "4ca72e43a66cf3c2a75fd3944c842dd926e40886e1fe0b52a7c3e011d3a71239",
-    "TEST_REPORT.md": "dc5dc94f743cbbe9d5d28670814358ec4129491fdb4b0378efbe7acbe875c4b8",
+    "PROVENANCE.json": "99e26cf488bd4f9c27cb08accc518936f3dab3e585648ec4e0986472227730e3",
+    "README.md": "b2583633774e95dee5d515dbb7728786dea6f09903cb92719af4b3be830506cc",
+    "TEST_REPORT.md": "a5be655079c2b5ac00982bed1c02105f43448fde76725560dbfe3ad353095c56",
     "capture_runtime.py": "00a20538b20458b2f17e6e9c8f2e9c1e7a79054283a76594b29d92edf92be6c2",
     "config.example.json": "eefea0772ba1af0e2c2724e69cd3cbc0b01512254364d1bc3761101487e0f066",
     "evidence/launcher-spaces-tests.txt": "ec030e672dfa255a2e6f6b9fd1c88202452a618249d7216035f77abdd627676c",
     "evidence/offline-tests.txt": "41f7dbf17c1ae9c24751030e1cda8dff8bf4312e3fdd87f4854ab17ca1221938",
+    "evidence/source-contract-tests.txt": "c61511d84658cac15100f4ccd96803f53e9bd48f55ee91734af32bb762a6062c",
     "launch.py": "bc4337cef08ea5faa0cefe4cfbdc781c26148351e4067089dbe88bbd00ab931c",
     "research_lane.py": "ec268472daba737d7c5b9880c356a856bb10c17c2f42874521dfb420e3891466",
     "source/V5/README.md": "7abaade6654d84cd93c378a609f4db3e9b9dec45db338ac7407f782ec34eee57",
@@ -32,7 +33,7 @@
     "source/V5/contracts/us_mapping_source_manifest.json": "a304682e3a48114058ddbc7fcb4c3cd2a272b354d90cce25dadcfbe2a264b3d6",
     "source/V5/docs/superpowers/plans/2026-10-10-archive-builder-identity.md": "a57413afc37be80275a42a0196866ce6caea34687fb7c9e1478df3ac88ac02d7",
     "source/V5/producers/archive-acquisition-v2/README.md": "736b3d645da095d15a40db231bef853fdb3ad79bf64d0b6f35cb1f82789229cc",
-    "source/V5/producers/archive-acquisition-v2/manifest.json": "3e0c745c614a0a13127ba053991f4171734f897ce90ccffdbbcb0ebb0dfbc876",
+    "source/V5/producers/archive-acquisition-v2/manifest.json": "f37c5ff36be67b319f0f869d6145efbb3392e4f8957df3c44c83666fd19c8037",
     "source/V5/producers/archive-acquisition-v2/producer.patch": "3f801f72246955d2d8f5b3cf5108be7b9f7a46fafdccd248910035381b0f8403",
     "source/V5/producers/archive-acquisition-v2/source/contracts/__init__.py": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d",
     "source/V5/producers/archive-acquisition-v2/source/contracts/research.py": "cd71bdd8ac24037627520c3cca6f658e83fc4e51c8a7934f6c6c9222f4b2f3c1",
@@ -56,7 +57,7 @@
     "source/V5/producers/archive-acquisition-v2/source/ops/collect_hourly_research_input.py": "767eaae79e2436284c0cf73626fd114a92448d3aff37b69c378862aae141a7fa",
     "source/V5/producers/archive-acquisition-v2/source/ops/import_research_archive.py": "0ca5347b663362ced3ab105ffb2319553db0ccff8fd70525c55d9f1c976fee58",
     "source/V5/producers/archive-acquisition-v2/source/ops/run_hourly_research.py": "eaf56ebec0d821fe5b8548ceeafe8070bd67245d3159f94d1431a7d87795f98a",
-    "source/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py": "1fe2caadfd6b2f67848b05393a02114583d0b05f6790a9b22872971dc6d7a288",
+    "source/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py": "07feefedf04c750e896c1c96f61d1ca23a5e98ae5091a2f31812539d6ea75d6c",
     "source/V5/producers/archive-acquisition-v2/source/upstreams/shared_research/__init__.py": "9c737adfb7698396391e7d19f2ecc804797fca12945450d93d1521475485cfcd",
     "source/V5/producers/archive-acquisition-v2/source/upstreams/shared_research/v3_zsxq_adapter.py": "23d79572bcbb979e7dc81db44c7e5854ad2ac670c45c52399f2e630f7ae1ee57",
     "source/V5/pyproject.toml": "0a1824d3b255ee7f8391919254b2c21bf0deaf6da11a1b8cfc3e3a58c6fd4584",
@@ -480,7 +481,8 @@
     "source/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_projection.py": "027d855613e675e1f569b401b9a8344e40766b88c31e987e791d05a0b3a2f200",
     "test_offline.sh": "e382c35af1ecdcc26dae704ee3e9d87dd72c3397efa17f59c1b6a5c49392b3f1",
     "tests/test_capture.py": "9e4ca1f3441009e18835711767bce52b3e1e0c9f4a37af2d1c47a1329edc524d",
-    "tests/test_research_lane.py": "0ae92e03b3d6a7be6f67ef5af5a261d176decd5ab275fdda26046a69fff2227a"
+    "tests/test_research_lane.py": "0ae92e03b3d6a7be6f67ef5af5a261d176decd5ab275fdda26046a69fff2227a",
+    "tests/test_source_contract.py": "34d99009a6da667de6c287bc0d71a19a75b0309b9de9f23755d6539214a41f39"
   },
   "original_branch_base": "8261160018537c71de0af17584d371a2d31913c8",
   "schema_version": "v5.m04_capture_release.v1"

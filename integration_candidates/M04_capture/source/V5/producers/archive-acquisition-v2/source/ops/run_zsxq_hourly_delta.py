@@ -125,9 +125,15 @@ def collect_paginated_topics(
                 payload = json.loads((completed.stdout or "").lstrip("\ufeff"))
             except json.JSONDecodeError as error:
                 raise RuntimeError(f"ZSXQ_CLI_JSON_INVALID:{group_id}") from error
+            if not isinstance(payload, dict) or not any(key in payload for key in ("topics_brief", "topics")):
+                raise RuntimeError(f"ZSXQ_CLI_ENVELOPE_INVALID:{group_id}")
+            for key in ("topics_brief", "topics"):
+                if key in payload and not isinstance(payload[key], list):
+                    raise RuntimeError(f"ZSXQ_CLI_ROWS_INVALID:{group_id}")
+            if "has_more" in payload and not isinstance(payload["has_more"], bool):
+                raise RuntimeError(f"ZSXQ_CLI_HAS_MORE_INVALID:{group_id}")
+            # Preserve known list precedence; an absent/unknown envelope is not empty.
             rows = payload.get("topics_brief") or payload.get("topics") or []
-            if not isinstance(rows, list):
-                raise RuntimeError(f"ZSXQ_CLI_ROWS_INVALID:{group_id}")
             pages += 1
             total_pages += 1
             page_times: list[tuple[datetime, str]] = []

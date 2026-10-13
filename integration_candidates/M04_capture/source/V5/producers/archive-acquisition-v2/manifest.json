@@ -4,7 +4,7 @@
   "source_path": "handoff/v4-running-source-20261005/canonical/ops/run_zsxq_hourly_delta.py",
   "target_path": "ops/run_zsxq_hourly_delta.py",
   "before_sha256": "7b984776bcdb26aec838419f8ce6cbf3cee77d9cdf3785cb46e64481ae5d3d38",
-  "after_sha256": "1fe2caadfd6b2f67848b05393a02114583d0b05f6790a9b22872971dc6d7a288",
+  "after_sha256": "07feefedf04c750e896c1c96f61d1ca23a5e98ae5091a2f31812539d6ea75d6c",
   "deployment_status": "NOT_DEPLOYED",
   "existing_archive_contract": "V1_UNCHANGED_V2_EXPLICIT_VALIDATOR_DISPATCH",
   "sidecar_schema": "v5.zsxq_acquisition_receipt.v3",
@@ -179,5 +179,11 @@
     "test_candidate_method_count": 51,
     "source_provenance_status": "UNCONFIRMED_WITHOUT_REAL_SAME_BATCH_OWNER_EVIDENCE",
     "historical_metadata_notes": "Top-level base_commit and before hashes retain original acquisition-candidate history; static_review_changes retains the prior review snapshot. This section records the exact cdd430 repair delta, excluding this manifest to avoid self-reference. Current after/new_source hashes describe the delivered files."
+  },
+  "m04_capture_envelope_repair": {
+    "base_commit": "8266c6ed9606b0912328670c7411743a85af5727",
+    "before_sha256": "1fe2caadfd6b2f67848b05393a02114583d0b05f6790a9b22872971dc6d7a288",
+    "after_sha256": "07feefedf04c750e896c1c96f61d1ca23a5e98ae5091a2f31812539d6ea75d6c",
+    "scope": "Reject unknown/malformed CLI envelope before any success receipt; preserve known lists. Other manifest sections are historical original snapshots."
   }
 }

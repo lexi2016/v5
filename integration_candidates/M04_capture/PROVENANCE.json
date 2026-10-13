@@ -143,12 +143,6 @@
       "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/README.md"
     },
     {
-      "path": "source/V5/producers/archive-acquisition-v2/manifest.json",
-      "git_blob_sha": "ad5d27f127db77a2dcadaab0b3b4795f30aa3c21",
-      "bytes": 12503,
-      "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/manifest.json"
-    },
-    {
       "path": "source/V5/producers/archive-acquisition-v2/producer.patch",
       "git_blob_sha": "d080e23199edf87c3a77cb246c005073307a1dfe",
       "bytes": 7352,
@@ -285,12 +279,6 @@
       "git_blob_sha": "647f6c29f465e1b2158a34f54b4b729c650c1b2d",
       "bytes": 20707,
       "original_path": "modules/M04/source/handoff/v4-running-source-20261005/canonical/ops/run_hourly_research.py"
-    },
-    {
-      "path": "source/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py",
-      "git_blob_sha": "6b6d88cdc421a1f561fbbbdada3f33154f3a570f",
-      "bytes": 20821,
-      "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py"
     },
     {
       "path": "source/V5/pyproject.toml",
@@ -2819,5 +2807,23 @@
       "bytes": 23303
     }
   ],
-  "note": "Additional files are unchanged pure shared_research analyzer and initializer from the original V4 fixed canonical/upstreams path. No original algorithm changes. New runtime glue is outside source/."
+  "note": "Additional files are unchanged pure shared_research analyzer and initializer from the original V4 fixed canonical/upstreams path. No original algorithm changes. New runtime glue is outside source/.",
+  "m04_modified_original_files": [
+    {
+      "path": "source/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py",
+      "git_blob_sha": "6b6d88cdc421a1f561fbbbdada3f33154f3a570f",
+      "bytes": 20821,
+      "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/source/ops/run_zsxq_hourly_delta.py",
+      "current_sha256": "07feefedf04c750e896c1c96f61d1ca23a5e98ae5091a2f31812539d6ea75d6c",
+      "change": "M04 fail-closed CLI envelope fix and producer manifest current identity"
+    },
+    {
+      "path": "source/V5/producers/archive-acquisition-v2/manifest.json",
+      "git_blob_sha": "ad5d27f127db77a2dcadaab0b3b4795f30aa3c21",
+      "bytes": 12503,
+      "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/manifest.json",
+      "current_sha256": "f37c5ff36be67b319f0f869d6145efbb3392e4f8957df3c44c83666fd19c8037",
+      "change": "M04 fail-closed CLI envelope fix and producer manifest current identity"
+    }
+  ]
 }
