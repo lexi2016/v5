@@ -1,0 +1,25 @@
+{
+  "schema_version": "v5.m06_guard_repair_source_closure.v1",
+  "entries": [
+    {
+      "path": "V5/src/v5_shadow/__init__.py",
+      "bytes": 83,
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c"
+    },
+    {
+      "path": "V5/src/v5_shadow/digests.py",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+    },
+    {
+      "path": "V5/src/v5_shadow/m06_deadline_process.py",
+      "bytes": 10586,
+      "sha256": "d8a4eb496298bc3013c3413186b4cbd0c8c9a271c68722350eb161c22c21668a"
+    },
+    {
+      "path": "V5/tests/test_m06_deadline_process.py",
+      "bytes": 14281,
+      "sha256": "585e4c44d38f61844f3895db011146d751060ee00f8eb60ef1a6fe803189be58"
+    }
+  ]
+}

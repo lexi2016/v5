@@ -1,0 +1,50 @@
+test_exited_unreaped_leader_does_not_need_live_getpgid (test_m06_deadline_process.M06DeadlineProcessTests.test_exited_unreaped_leader_does_not_need_live_getpgid) ... FAIL
+test_zombie_only_group_eperm_preserves_deadline_and_reaps (test_m06_deadline_process.M06DeadlineProcessTests.test_zombie_only_group_eperm_preserves_deadline_and_reaps) ... FAIL
+
+======================================================================
+FAIL: test_exited_unreaped_leader_does_not_need_live_getpgid (test_m06_deadline_process.M06DeadlineProcessTests.test_exited_unreaped_leader_does_not_need_live_getpgid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_deadline_process.py", line 175, in run_bounded
+    raise BoundedProcessError('DESCENDANT_LEAK')
+v5_shadow.m06_deadline_process.BoundedProcessError: M06_EXECUTION_OUTCOME_UNKNOWN:DESCENDANT_LEAK
+
+The above exception was the direct cause of the following exception:
+
+v5_shadow.m06_deadline_process.BoundedProcessError: M06_EXECUTION_OUTCOME_UNKNOWN:CLEANUP_NOT_CONFIRMED:ProcessLookupError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_deadline_process.py", line 186, in test_exited_unreaped_leader_does_not_need_live_getpgid
+    with self.assertRaisesRegex(self.guard.BoundedProcessError, 'OUTCOME_UNKNOWN.*DESCENDANT_LEAK'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "OUTCOME_UNKNOWN.*DESCENDANT_LEAK" does not match "M06_EXECUTION_OUTCOME_UNKNOWN:CLEANUP_NOT_CONFIRMED:ProcessLookupError"
+
+======================================================================
+FAIL: test_zombie_only_group_eperm_preserves_deadline_and_reaps (test_m06_deadline_process.M06DeadlineProcessTests.test_zombie_only_group_eperm_preserves_deadline_and_reaps)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_deadline_process.py", line 177, in run_bounded
+    code = process.wait(timeout=_remaining(execution_deadline, timeout_at))
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_deadline_process.py", line 43, in _remaining
+    raise BoundedProcessError('DEADLINE_EXPIRED')
+v5_shadow.m06_deadline_process.BoundedProcessError: M06_EXECUTION_OUTCOME_UNKNOWN:DEADLINE_EXPIRED
+
+The above exception was the direct cause of the following exception:
+
+v5_shadow.m06_deadline_process.BoundedProcessError: M06_EXECUTION_OUTCOME_UNKNOWN:CLEANUP_NOT_CONFIRMED:PermissionError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_deadline_process.py", line 206, in test_zombie_only_group_eperm_preserves_deadline_and_reaps
+    with self.assertRaisesRegex(self.guard.BoundedProcessError, 'OUTCOME_UNKNOWN.*DEADLINE_EXPIRED'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "OUTCOME_UNKNOWN.*DEADLINE_EXPIRED" does not match "M06_EXECUTION_OUTCOME_UNKNOWN:CLEANUP_NOT_CONFIRMED:PermissionError"
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.496s
+
+FAILED (failures=2)

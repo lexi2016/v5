@@ -130,12 +130,31 @@ def run_bounded(argv, *, input_bytes, timeout_seconds, execution_deadline):
             if process is None or process.returncode is not None:
                 return
             until = time.monotonic() + _CLEANUP_SECONDS
-            if os.getpgid(process.pid) != process.pid:
-                raise BoundedProcessError('GROUP_LEADER_OWNERSHIP_LOST')
-            os.killpg(process.pid, signal.SIGKILL)
-            if not process.stdin.closed:
-                close_pipe(process.stdin)
             try:
+                # waitid proves this is still our unreaped child. On Darwin,
+                # getpgid uses the live PID table and rejects a zombie leader;
+                # that does not release its PID or our fresh session identity.
+                exited = os.waitid(os.P_PID, process.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+                if exited is None:
+                    try:
+                        if os.getpgid(process.pid) != process.pid:
+                            raise BoundedProcessError('GROUP_LEADER_OWNERSHIP_LOST')
+                    except ProcessLookupError:
+                        # The live leader can exit between the two observations.
+                        exited = os.waitid(os.P_PID, process.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+                        if exited is None:
+                            raise BoundedProcessError('GROUP_LEADER_OWNERSHIP_LOST')
+                if exited is not None and exited.si_pid != process.pid:
+                    raise BoundedProcessError('GROUP_LEADER_OWNERSHIP_LOST')
+                signal_error = None
+                try:
+                    os.killpg(process.pid, signal.SIGKILL)
+                except (ProcessLookupError, PermissionError) as error:
+                    # XNU can return EPERM for a zombie-only group. Never treat
+                    # the error alone as success: independently prove all dead.
+                    signal_error = error
+                if not process.stdin.closed:
+                    close_pipe(process.stdin)
                 while True:
                     left = until - time.monotonic()
                     if left <= 0:
@@ -143,6 +162,8 @@ def run_bounded(argv, *, input_bytes, timeout_seconds, execution_deadline):
                     members = _members(process.pid, left)
                     if all(state.startswith(b'Z') for state in members.values()):
                         break
+                    if signal_error is not None:
+                        raise signal_error
                     pump(min(_POLL_SECONDS, left), collecting=False)
             finally:
                 # A failed membership probe still must not skip draining/reaping.
@@ -182,7 +203,8 @@ def run_bounded(argv, *, input_bytes, timeout_seconds, execution_deadline):
             try:
                 cleanup()
             except Exception as cleanup_error:
-                raise BoundedProcessError('CLEANUP_NOT_CONFIRMED:' + type(cleanup_error).__name__) from error
+                raise BoundedProcessError('CLEANUP_NOT_CONFIRMED:' + type(cleanup_error).__name__
+                    + ':after:' + getattr(error, 'reason', type(error).__name__)) from error
             if isinstance(error, (BoundedProcessError, KeyboardInterrupt, SystemExit)):
                 raise
             raise BoundedProcessError('PROCESS_ERROR:' + type(error).__name__) from error

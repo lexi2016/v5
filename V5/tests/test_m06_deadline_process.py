@@ -20,16 +20,17 @@ sys.path.insert(0, str(BASE / 'src'))
 WRITER = '''import os,subprocess,sys,time
 from pathlib import Path
 root=Path(sys.argv[1]); role=sys.argv[2]; mode=sys.argv[3]
+until=time.monotonic()+5
 (root/(role+'.pid')).write_text(str(os.getpid()))
 if role in ('owner','child'):
     next_role='child' if role=='owner' else 'grandchild'
     streams={'stdout':subprocess.DEVNULL,'stderr':subprocess.DEVNULL} if mode=='closed_leak' else {}
     subprocess.Popen([sys.executable,'-I','-B',__file__,str(root),next_role,mode],**streams)
 if role=='owner' and mode in ('leak','closed_leak'):
-    while not (root/'grandchild.heartbeat').exists(): time.sleep(.005)
+    while not (root/'grandchild.heartbeat').exists() and time.monotonic()<until: time.sleep(.005)
     print('owner finished',flush=True)
     sys.exit(0)
-while True:
+while time.monotonic()<until:
     with (root/(role+'.heartbeat')).open('ab',buffering=0) as handle: handle.write(b'x')
     time.sleep(.005)
 '''
@@ -66,13 +67,23 @@ class M06DeadlineProcessTests(unittest.TestCase):
             # Emergency fixture cleanup only while its leader is still ours.
             if proc.returncode is None:
                 try:
-                    os.killpg(proc.pid, signal.SIGKILL)
-                except ProcessLookupError:
-                    pass
-                proc.wait(timeout=2)
-                for pipe in (proc.stdin, proc.stdout, proc.stderr):
-                    if pipe is not None and not pipe.closed:
-                        pipe.close()
+                    try:
+                        os.killpg(proc.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    except PermissionError:
+                        exited = os.waitid(os.P_PID, proc.pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+                        members = self.guard._members(proc.pid, .2)
+                        if exited is None or any(not state.startswith(b'Z') for state in members.values()):
+                            raise
+                finally:
+                    # A failed signal must not skip reaping an exited leader.
+                    try:
+                        proc.wait(timeout=2)
+                    finally:
+                        for pipe in (proc.stdin, proc.stdout, proc.stderr):
+                            if pipe is not None and not pipe.closed:
+                                pipe.close()
 
     def deadline(self, seconds=5):
         return datetime.now(timezone.utc) + timedelta(seconds=seconds)
@@ -171,6 +182,57 @@ class M06DeadlineProcessTests(unittest.TestCase):
                 self.guard.run_bounded([sys.executable, '-I', '-B', '-c', 'print("done")'],
                     input_bytes=b'', timeout_seconds=3, execution_deadline=self.deadline(.1))
         self.assertTrue(all(proc.returncode is not None for proc in self.spawned))
+
+    def test_exited_unreaped_leader_does_not_need_live_getpgid(self):
+        # Darwin proc_find excludes zombies. Only this API failure is injected;
+        # the owner, descendants, output pipes and stopped-heartbeat check are real.
+        real_getpgid = os.getpgid
+        def darwin_getpgid(pid):
+            exited = os.waitid(os.P_PID, pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+            if exited is not None:
+                raise ProcessLookupError(3, 'exited leader is absent from live PID lookup')
+            return real_getpgid(pid)
+        with patch.object(self.guard.os, 'getpgid', side_effect=darwin_getpgid):
+            with self.assertRaisesRegex(self.guard.BoundedProcessError, 'OUTCOME_UNKNOWN.*DESCENDANT_LEAK'):
+                self.run_writer(mode='closed_leak')
+        self.assert_writers_stopped()
+
+    def test_zombie_only_group_eperm_preserves_deadline_and_reaps(self):
+        # XNU killpg1 excludes SZOMB and can report EPERM for an empty live set.
+        # It is safe to tolerate that only after independent all-dead evidence.
+        inspect = self.guard._members
+        real_killpg = os.killpg
+        def darwin_killpg(pgid, sig):
+            members = inspect(pgid, .2)
+            if all(state.startswith(b'Z') for state in members.values()):
+                raise PermissionError(1, 'no signalable group members')
+            return real_killpg(pgid, sig)
+        def slow_inspection(*args, **kwargs):
+            result = inspect(*args, **kwargs)
+            time.sleep(.15)
+            return result
+        with patch.object(self.guard.os, 'killpg', side_effect=darwin_killpg), \
+                patch.object(self.guard, '_members', side_effect=slow_inspection):
+            with self.assertRaisesRegex(self.guard.BoundedProcessError, 'OUTCOME_UNKNOWN.*DEADLINE_EXPIRED'):
+                self.guard.run_bounded([sys.executable, '-I', '-B', '-c', 'print("done")'],
+                    input_bytes=b'', timeout_seconds=3, execution_deadline=self.deadline(.1))
+        self.assertTrue(self.spawned)
+        self.assertTrue(all(proc.returncode is not None for proc in self.spawned))
+
+    def test_live_group_signal_denial_is_not_accepted_as_empty_group(self):
+        # Fault injection is limited to the signal syscall. Real live writers
+        # remain observable; only fixture cleanup signals them after the patch.
+        with patch.object(self.guard.os, 'killpg', side_effect=PermissionError(1, 'fixture denial')), \
+                patch.object(self.guard, '_CLEANUP_SECONDS', .2):
+            with self.assertRaisesRegex(self.guard.BoundedProcessError,
+                    'OUTCOME_UNKNOWN.*CLEANUP_NOT_CONFIRMED.*after:DEADLINE_EXPIRED'):
+                self.run_writer(execution_deadline=self.deadline(.4))
+        try:
+            members = self.guard._members(self.spawned[0].pid, .2)
+            self.assertTrue(any(not state.startswith(b'Z') for state in members.values()))
+        finally:
+            self.cleanup_owned()
+        self.assert_writers_stopped()
 
     def test_output_limit_aborts_and_reaps_actual_writer(self):
         with patch.object(self.guard, 'MAX_JSON_BYTES', 1024):

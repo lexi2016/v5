@@ -1,0 +1,44 @@
+{
+  "scope": "M06 deadline guard only; no previous 85 unrelated passes rerun",
+  "base_product": "5eddebf5c6ecf530ece3fdb31a054b56bf2f1d57",
+  "mac_failed_feedback": "bdef77a421f840c795b986896b4f4203e890aefd",
+  "mac_diagnostic": "9b73e0fcd29d200fa3f6376187bae7b5432ece3f",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_deadline_process",
+    "-v"
+  ],
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>"
+  },
+  "source_closure_sha256": "bea1dcfc5f3b669ad005aaac2051907b4d286fb4a104aeab4aa8de9ecde468b5",
+  "cloud": {
+    "status": "PASS_FOCUSED",
+    "run": 15,
+    "passed": 15,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "seconds": 5.096,
+    "red_cases_before_fix": 2,
+    "processes": "real isolated writers and descendants; platform syscall fault injection in 3 dedicated cases only"
+  },
+  "mac_repaired_candidate": "NOT_RUN",
+  "not_run": [
+    "previous 85 unrelated tests",
+    "real model/provider/input delivery",
+    "natural scheduler",
+    "deployment"
+  ],
+  "changed_product_paths": [
+    "V5/src/v5_shadow/m06_deadline_process.py",
+    "V5/tests/test_m06_deadline_process.py"
+  ]
+}
