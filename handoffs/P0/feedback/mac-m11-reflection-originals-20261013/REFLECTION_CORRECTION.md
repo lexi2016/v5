@@ -1,0 +1,11 @@
+# M11 exact reflection inventory correction
+
+The earlier missing-eight statement checked only state_root/reflections, the direct-runtime fallback. It did not establish absence under the actual assembly cache root and is superseded.
+
+Read-only lookup found the existing 20260911 date assembly configuration in the known V4 config/vibe directory. Using its cache_root/reflections, all eight filenames in the original authority receipt's reflection_manifest exist and match exact SHA-256 and byte counts: 2026-08-31, 2026-09-01, 09-02, 09-03, 09-04, 09-07, 09-08, 09-09. No recent-file subset or replacement was used.
+
+Only the 63 wrappers already referenced by that same receipt were inspected for schema/original_relative_path. Exactly one matching v4.vibe_cache_evidence.v1 wrapper exists for each required reflection. For these eight only, content_base64 was decoded in memory and matched both original_sha256/original_bytes and the original reflection_manifest SHA/bytes. Therefore all eight original byte streams are also recoverable from bound evidence. Decoded bytes were never written or uploaded; no model, collection, credential database or recovery action was invoked.
+
+The snapshot remains inputs/2026-09-11.json, schema v4.vibe_review_inputs.v1, 47,488 bytes, SHA 3dc7009a73d01705997452daf4114b1840088feab5bd7a71cc69b5028bdd848e. Its 18 source, 5 raw and63 cache refs were previously verified; settled calendar and get_market_facts/get_emotion_metrics/get_leader_data are READY. Noncore capital/macro/news CANNOT_CONFIRM are preserved. Other requested dates09/14,09/15,10/12 have no snapshot in the inspected state inputs root.
+
+This resolves the claimed reflection-file gap, not authorization or full preflight for a model run. The currently found date-config raw SHA is c8f03597a4755f66aff4495262073833a3e85d2f40e1835862f817585c9b255b, different from snapshot assembly_config_sha256 a412d1f1c8d2af7651eb3e5ca2885c8712c5c0142aaaa4d6b85c892184982790. This task used only its cache-root pointer and verified original bytes independently; it did not approve or reconstruct historical assembly configuration, check model credentials, or call assembly/model. Further generation requires its own exact approved configuration admission.
