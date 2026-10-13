@@ -1,0 +1,46 @@
+{
+  "candidate": "b5a832e165f5af72eba9347135a8525092c76fc0",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_native_pool_admission",
+    "test_m06_native_pool_owner",
+    "test_m06_dispatch_resolver.M06DispatchResolverTests.test_existing_pool_missing_safety_is_not_repaired_or_ignored",
+    "test_m06_dispatch_resolver.M06DispatchResolverTests.test_uuid_discovery_seals_actual_relative_bytes_without_invented_run_id",
+    "test_m06_dispatch_resolver.M06DispatchResolverTests.test_future_finished_candidate_is_not_admitted",
+    "-v"
+  ],
+  "working_directory": "candidate-m06-b5a8",
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_utc": "2026-10-13T05:50:17.027085+00:00",
+  "finished_utc": "2026-10-13T05:50:29.920534+00:00",
+  "duration_seconds": 12.893338041,
+  "exit_code": 0,
+  "source_before": {
+    "files": 163,
+    "sha256": "0175f6eda459025d6cc0b12ccf8a1f6a05f7f0507a1dbb5cae5bf0bdc6aafda7",
+    "verified": true
+  },
+  "source_after": {
+    "files": 163,
+    "sha256": "0175f6eda459025d6cc0b12ccf8a1f6a05f7f0507a1dbb5cae5bf0bdc6aafda7",
+    "verified": true
+  },
+  "protected_files_count": 156,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "real_model_run": false,
+  "collection_run": false,
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "binding_changed": false,
+  "natural_verified": false
+}

@@ -1,0 +1,25 @@
+{
+  "candidate": "b5a832e165f5af72eba9347135a8525092c76fc0",
+  "calendar": {
+    "state": "FULL_TRADING_DAY",
+    "scheduled_date": "20261013",
+    "signal_date": "20261013",
+    "target_date": "20261014"
+  },
+  "all_three_enabled": false,
+  "policy": "REUSE_VERIFIED_OR_GENERATE_IF_ABSENT",
+  "full_half_window": "17:30-18:30 Asia/Hong_Kong",
+  "complete_budget_seconds": 1200,
+  "process_timeout_seconds": 600,
+  "owner_contract_cutoff": "20261014 09:00+08 compatibility only",
+  "execution_deadline": "20261013 18:30+08",
+  "uuid_discovery": true,
+  "exact_locator_absent": true,
+  "verified_venv_pins": true,
+  "independent_daily_roots_markers_only": true,
+  "d12_delivery_reused_for_d13": false,
+  "daily_tick_called": false,
+  "scheduler_enabled": false,
+  "finished_utc": "2026-10-13T05:52:40.926897+00:00",
+  "exit_code": 0
+}
