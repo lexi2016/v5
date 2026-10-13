@@ -1,0 +1,77 @@
+test_uuid_discovery_seals_actual_relative_bytes_without_invented_run_id (test_m06_dispatch_resolver.M06DispatchResolverTests.test_uuid_discovery_seals_actual_relative_bytes_without_invented_run_id) ... FAIL
+test_absent_day_directory_waits_before_old_panel_is_misclassified (test_m06_dispatch_resolver.M06DispatchResolverTests.test_absent_day_directory_waits_before_old_panel_is_misclassified) ... FAIL
+
+======================================================================
+FAIL: test_uuid_discovery_seals_actual_relative_bytes_without_invented_run_id (test_m06_dispatch_resolver.M06DispatchResolverTests.test_uuid_discovery_seals_actual_relative_bytes_without_invented_run_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_dispatch_resolver.py", line 20, in prepare
+    return M06InputDeliveryTests.prepare(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_input_delivery.py", line 194, in prepare
+    return self.adapter.prepare_input_delivery(self.config, self.signal, self.target, now=self.now, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_input_delivery.py", line 460, in prepare_input_delivery
+    with _locked_roots(config) as (root_fd, delivery_fd):
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_input_delivery.py", line 297, in _locked_roots
+    snapshot, delivery = _configuration(config)
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_input_delivery.py", line 260, in _configuration
+    exact_keys(config, ('original_store_root', 'original_asset_root', 'dispatch_receipt_root',
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_dispatch_resolver.py", line 45, in test_uuid_discovery_seals_actual_relative_bytes_without_invented_run_id
+    result = self.prepare()
+             ^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_dispatch_resolver.py", line 23, in prepare
+    self.fail('The explicit UUID discovery configuration is not implemented')
+AssertionError: The explicit UUID discovery configuration is not implemented
+
+======================================================================
+FAIL: test_absent_day_directory_waits_before_old_panel_is_misclassified (test_m06_dispatch_resolver.M06DispatchResolverTests.test_absent_day_directory_waits_before_old_panel_is_misclassified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_dispatch_resolver.py", line 20, in prepare
+    return M06InputDeliveryTests.prepare(self, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_input_delivery.py", line 194, in prepare
+    return self.adapter.prepare_input_delivery(self.config, self.signal, self.target, now=self.now, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_input_delivery.py", line 460, in prepare_input_delivery
+    with _locked_roots(config) as (root_fd, delivery_fd):
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 137, in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_input_delivery.py", line 297, in _locked_roots
+    snapshot, delivery = _configuration(config)
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/m06_input_delivery.py", line 260, in _configuration
+    exact_keys(config, ('original_store_root', 'original_asset_root', 'dispatch_receipt_root',
+  File "<CLOUD_CHECKOUT>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_dispatch_resolver.py", line 56, in test_absent_day_directory_waits_before_old_panel_is_misclassified
+    self.assertEqual(self.prepare()['status'], 'WAITING_M06_INPUT_DELIVERY')
+                     ^^^^^^^^^^^^^^
+  File "<CLOUD_CHECKOUT>/V5/tests/test_m06_dispatch_resolver.py", line 23, in prepare
+    self.fail('The explicit UUID discovery configuration is not implemented')
+AssertionError: The explicit UUID discovery configuration is not implemented
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.037s
+
+FAILED (failures=2)

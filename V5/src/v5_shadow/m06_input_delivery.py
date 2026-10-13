@@ -11,6 +11,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import stat
 from string import Formatter
@@ -27,6 +28,9 @@ DELIVERY_SCHEMA = 'v5.m06_daily_input_delivery.v1'
 SEAL_SCHEMA = 'v5.m06_input_snapshot_seal.v1'
 MAX_FILE_BYTES = 4 * 1024**3
 MAX_FILES = 128
+MAX_DISPATCH_RECEIPTS = 64
+MAX_DISPATCH_BYTES = 64 * 1024**2
+DISPATCH_DISCOVERY = 'DAY_SLOT_UUID_V1'
 MAX_TOTAL_BYTES = 8 * 1024**3
 SAFETY = ('production_allowed', 'buy_gate_updated', 'orders_sent')
 HK_TIME = timezone(timedelta(hours=8))
@@ -244,6 +248,9 @@ def _recheck_capture(capture):
             actual = None
         if actual != expected:
             raise ValueError('M06_DELIVERY_INPUT_CHANGED')
+    if 'discovery_capture' in capture:
+        _recheck_capture(capture['discovery_capture'])
+        _check_dispatch_directory(capture['dispatch_directory'])
 
 
 def _locator(template, scheduled, target):
@@ -257,9 +264,14 @@ def _locator(template, scheduled, target):
 
 
 def _configuration(config):
+    locators = [key for key in ('dispatch_receipt_relative', 'dispatch_receipt_discovery') if key in config]
+    if len(locators) != 1:
+        raise ValueError('M06_DELIVERY_DISPATCH_LOCATOR')
+    if locators[0] == 'dispatch_receipt_discovery' and config[locators[0]] != DISPATCH_DISCOVERY:
+        raise ValueError('M06_DELIVERY_DISPATCH_LOCATOR')
     exact_keys(config, ('original_store_root', 'original_asset_root', 'dispatch_receipt_root',
-        'lane_receipt_root', 'dispatch_receipt_relative', 'lane_receipt_relative',
-        'dispatch_slot', 'snapshot_root', 'delivery_root'))
+        'lane_receipt_root', 'lane_receipt_relative', 'dispatch_slot', 'snapshot_root',
+        'delivery_root', locators[0]))
     originals = [no_symlinks(config[key]) for key in ('original_store_root', 'original_asset_root',
                   'dispatch_receipt_root', 'lane_receipt_root')]
     outputs = [no_symlinks(config[key]) for key in ('snapshot_root', 'delivery_root')]
@@ -464,8 +476,12 @@ def prepare_input_delivery(config, scheduled_date, target_date, *, now=None):
         if _json_optional(delivery_fd, target_date+'.json') is not None:
             raise ValueError('M06_DELIVERY_UNSEALED_EXISTING')
         try:
+            # No receipt for this close day is ordinary waiting, even while the
+            # previous day's panel remains current. Never relabel that old panel.
+            candidates = (_dispatch_candidates(config, scheduled_date)
+                if 'dispatch_receipt_discovery' in config else None)
             capture = _capture_inputs(config, scheduled_date, target_date)
-            _capture_upstream(capture, config, scheduled_date, target_date)
+            _capture_upstream(capture, config, scheduled_date, target_date, candidates=candidates)
             _recheck_capture(capture)
         except FileNotFoundError:
             return dict(status='WAITING_M06_INPUT_DELIVERY')
@@ -518,7 +534,7 @@ def _row_envelope(row):
     return envelope
 
 
-def _capture_upstream(capture, config, scheduled, target):
+def _capture_exact_upstream(capture, config, scheduled, target):
     workload = 'research_panel_daily_hk'
     capture['roots'].update(dispatch=config['dispatch_receipt_root'], lane=config['lane_receipt_root'])
     dispatch_relative = _locator(config['dispatch_receipt_relative'], scheduled, target)
@@ -584,3 +600,92 @@ def _capture_upstream(capture, config, scheduled, target):
         lane_receipt_sha256=lane_sha, lane_receipt_bytes=record['bytes'],
         panel_manifest_relative=capture['panel']['manifest_relative'],
         panel_sha256=capture['panel']['panel_sha256'])
+
+
+
+def _check_dispatch_directory(observed):
+    fd = _open_directory(observed['path'])
+    try:
+        if _identity(os.fstat(fd)) != observed['identity']:
+            raise ValueError('M06_DELIVERY_DISPATCH_DIRECTORY_CHANGED')
+    finally:
+        os.close(fd)
+
+
+def _dispatch_candidates(config, scheduled):
+    """Only the original scheduled-day/slot directory, never latest or mtime."""
+    if config.get('dispatch_receipt_discovery') != DISPATCH_DISCOVERY:
+        raise ValueError('M06_DELIVERY_DISPATCH_LOCATOR')
+    trade_date(scheduled)
+    relative = _relative(scheduled+'/'+config['dispatch_slot'])
+    path = Path(config['dispatch_receipt_root'])/relative
+    fd = _open_directory(path)
+    try:
+        observed = dict(path=str(path), identity=_identity(os.fstat(fd)), names=[])
+        # Bound iteration even if the directory contains unrelated temp files.
+        with os.scandir(fd) as entries:
+            for index, entry in enumerate(entries):
+                if index >= 256:
+                    raise ValueError('M06_DELIVERY_DISPATCH_SCAN_LIMIT')
+                if not re.fullmatch(r'[0-9a-f]{32}\.dispatch-receipt\.json', entry.name):
+                    continue
+                if not stat.S_ISREG(entry.stat(follow_symlinks=False).st_mode):
+                    raise ValueError('M06_DELIVERY_DISPATCH_FILE_TYPE')
+                observed['names'].append(relative+'/'+entry.name)
+                if len(observed['names']) > MAX_DISPATCH_RECEIPTS:
+                    raise ValueError('M06_DELIVERY_DISPATCH_SCAN_LIMIT')
+        _check_dispatch_directory(observed)
+    finally:
+        os.close(fd)
+    if not observed['names']:
+        raise FileNotFoundError('M06_DELIVERY_DISPATCH_NOT_DELIVERED')
+    observed['names'].sort()
+    return observed
+
+
+def _capture_upstream(capture, config, scheduled, target, *, candidates=None):
+    if 'dispatch_receipt_discovery' not in config:
+        return _capture_exact_upstream(capture, config, scheduled, target)
+    if 'dispatch_receipt_relative' in config:
+        raise ValueError('M06_DELIVERY_DISPATCH_LOCATOR')
+    directory = candidates if candidates is not None else _dispatch_candidates(config, scheduled)
+    observations = dict(roots=dict(dispatch=config['dispatch_receipt_root'],
+                                   lane=config['lane_receipt_root']), records={})
+    eligible = []
+    rejected = {'M06_DELIVERY_DISPATCH_IDENTITY', 'M06_DELIVERY_DISPATCH_WORKLOAD',
+        'M06_DELIVERY_DISPATCH_DATES', 'M06_DELIVERY_DISPATCH_FINISHED_AT',
+        'M06_DELIVERY_ENVELOPE_CONTRADICTION', 'M06_DELIVERY_ENVELOPE_IDENTITY',
+        'M06_DELIVERY_LANE_RAW_HASH', 'M06_DELIVERY_LANE_IDENTITY', 'M06_DELIVERY_PANEL_AUTHORITY'}
+    for relative in directory['names']:
+        trial = dict(capture, roots=dict(capture['roots']), records=dict(capture['records']),
+                     observed_times=list(capture['observed_times']))
+        exact = dict(config, dispatch_receipt_relative=relative)
+        try:
+            _capture_exact_upstream(trial, exact, scheduled, target)
+            finished = aware(trial['upstream_evidence']['panel_finished_at'])
+            if finished <= _utc_now():
+                eligible.append((finished, trial['upstream_evidence']['dispatch_sha256'], relative, trial))
+        except ValueError as error:
+            if str(error) not in rejected:
+                raise
+        finally:
+            for key, record in trial['records'].items():
+                if key[0] not in ('dispatch', 'lane'):
+                    continue
+                previous = observations['records'].get(key, record)
+                if record != previous:
+                    raise ValueError('M06_DELIVERY_INPUT_CHANGED')
+                observations['records'][key] = record
+            if sum(item['bytes'] for (family, _), item in observations['records'].items()
+                   if family == 'dispatch') > MAX_DISPATCH_BYTES:
+                raise ValueError('M06_DELIVERY_DISPATCH_BYTES_LIMIT')
+    _recheck_capture(observations)
+    _check_dispatch_directory(directory)
+    if not eligible:
+        raise FileNotFoundError('M06_DELIVERY_DISPATCH_NO_MATCHING_SUCCESS')
+    # Every eligible receipt binds the same captured lane raw hash and panel.
+    # This is a new explicit V5 selection policy, not an upstream latest rule.
+    selected = min(eligible, key=lambda item:item[:3])[3]
+    capture.update(selected)
+    capture['discovery_capture'] = observations
+    capture['dispatch_directory'] = directory

@@ -14,33 +14,33 @@
       "delivery_root": "${MARKED_UPSTREAM_M06_INPUT_DELIVERY_ROOT}",
       "full_day_window": {
         "start": "17:30",
-        "end": "${EXPLICIT_FULL_DAY_EXECUTION_END_HH_MM}"
+        "end": "18:30"
       },
       "half_day_window": {
         "start": "17:30",
-        "end": "${EXPLICIT_HALF_DAY_EXECUTION_END_HH_MM}"
+        "end": "18:30"
       },
-      "execution_budget_seconds": "${EXPLICIT_WHOLE_CHAIN_SECONDS_INCLUDING_INSPECTION_READBACK_AND_PUBLICATION}",
+      "execution_budget_seconds": 1200,
       "execution_mode": "NATURAL",
       "production_method": "GENERATE_IF_ABSENT",
       "date_contract": "CLOSE_TO_NEXT_HK_SESSION_V1",
-      "owner_contract_cutoff_time": "${EXPLICIT_TARGET_DAY_OWNER_COMPATIBILITY_HH_MM_NOT_PIT_OR_EXECUTION_DEADLINE}",
+      "owner_contract_cutoff_time": "09:00",
       "input_delivery": {
         "original_store_root": "${ORIGINAL_SOURCE_STORE}",
         "original_asset_root": "${ORIGINAL_HK02_ASSET_ROOT}",
         "dispatch_receipt_root": "${ORIGINAL_DISPATCH_RECEIPT_ROOT}",
         "lane_receipt_root": "${ORIGINAL_PANEL_LANE_RECEIPT_ROOT}",
-        "dispatch_receipt_relative": "${BOUNDED_RELATIVE_DISPATCH_RECEIPT_TEMPLATE}",
         "lane_receipt_relative": "hk-{signal_date}.json",
         "dispatch_slot": "1720",
-        "snapshot_root": "${INDEPENDENT_MARKED_INPUT_SNAPSHOT_ROOT}"
+        "snapshot_root": "${INDEPENDENT_MARKED_INPUT_SNAPSHOT_ROOT}",
+        "dispatch_receipt_discovery": "DAY_SLOT_UUID_V1"
       }
     },
     "hk_preselection": {
       "enabled": false,
       "python_executable": "${EXISTING_HK02_VENV_LAUNCH_PATH}",
       "python_sha256": "${EXISTING_PYTHON_RAW_SHA256}",
-      "timeout_seconds": "${EXPLICIT_EXISTING_PROCESS_TIMEOUT_SECONDS}",
+      "timeout_seconds": 600,
       "store_root": "${ORIGINAL_SOURCE_STORE}",
       "asset_root": "${ORIGINAL_HK02_ASSET_ROOT}",
       "private_root": "${NEW_MARKED_M06_OUTPUT_ROOT}",

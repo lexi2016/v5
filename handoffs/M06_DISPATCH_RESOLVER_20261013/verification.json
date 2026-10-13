@@ -1,0 +1,45 @@
+{
+  "base_feedback": "4bf6001332126870076eac1d1f827775fe6dfc57",
+  "dependencies_verified_at": "490529f549324fb435af56d5f728672ad6390b72",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_dispatch_resolver",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_new_delivery_copies_original_bytes_and_records_real_completion",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_sealed_delivery_reuses_without_refreshing_time_or_live_inventory",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_wrong_dispatch_dates_workload_status_and_duplicate_rows_rejected",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_lane_raw_bytes_mismatch_blocks_before_parsing",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_copy_rejects_symlink_destination_without_touching_original",
+    "-v"
+  ],
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>"
+  },
+  "source_closure_sha256": "3fab115c50f578c5f5d622f4b9c1e19a0365ae5c6e3390f523b0124e433f413f",
+  "cloud": {
+    "status": "PASS_FOCUSED",
+    "new_cases": 19,
+    "key_regressions": 5,
+    "run": 24,
+    "passed": 24,
+    "failed": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "seconds": 0.197,
+    "red_cases_before_fix": 2
+  },
+  "mac": "NOT_RUN",
+  "not_run": [
+    "old full suites",
+    "real input delivery/snapshot",
+    "model/provider",
+    "natural schedule",
+    "deployment"
+  ]
+}
