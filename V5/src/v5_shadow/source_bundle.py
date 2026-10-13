@@ -115,9 +115,13 @@ def run_source_bundle(bundle):
 
 
 def publish_source_result(result,config,*,expected_generation):
+    from .module_api import M04_ROUTE,M07_ROUTE,M11_ROUTE,M12_ROUTE,M16_ROUTE,M17_ROUTE
     routes=config.get('routes')
+    allowed={STATUS_ROUTE,M04_ROUTE,M07_ROUTE,M11_ROUTE,M12_ROUTE,M16_ROUTE,M17_ROUTE,
+        '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review',
+        '/api/v5/source-bundle/a-close-replay','/api/v5/source-bundle/hk-stage-observed'}
     if (config.get('module_id')!='source_bundle' or not isinstance(routes,list)
-        or STATUS_ROUTE not in routes or set(routes)-{STATUS_ROUTE,'/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review','/api/v5/source-bundle/a-close-replay','/api/v5/source-bundle/hk-stage-observed'}):
+        or STATUS_ROUTE not in routes or set(routes)-allowed):
         raise ValueError('SOURCE_MODULE_ID_REQUIRED')
     from .module_artifacts import publish_generation
     record=dict(schema_version='v5.module_response.v1',module_id='source_bundle',
