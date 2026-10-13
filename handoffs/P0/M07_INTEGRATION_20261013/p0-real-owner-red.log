@@ -1,0 +1,144 @@
+FFFFFFFFFF                                                               [100%]
+=================================== FAILURES ===================================
+_____________ M07P0Tests.test_actual_entry_and_reader_are_present ______________
+
+self = <test_m07_p0_integration.M07P0Tests testMethod=test_actual_entry_and_reader_are_present>
+
+    def test_actual_entry_and_reader_are_present(self):
+>    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.p0_a_stage'));self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m07_readonly'))
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: unexpectedly None
+
+tests/test_m07_p0_integration.py:10: AssertionError
+_______ M07P0Tests.test_execution_default_and_missing_binding_are_closed _______
+
+self = <test_m07_p0_integration.M07P0Tests testMethod=test_execution_default_and_missing_binding_are_closed>
+
+    def test_execution_default_and_missing_binding_are_closed(self):
+>    from v5_shadow.p0_a_stage import run_explicit
+E    ModuleNotFoundError: No module named 'v5_shadow.p0_a_stage'
+
+tests/test_m07_p0_integration.py:28: ModuleNotFoundError
+______________ M07P0Tests.test_registry_names_the_executable_gate ______________
+
+self = <test_m07_p0_integration.M07P0Tests testMethod=test_registry_names_the_executable_gate>
+
+    def test_registry_names_the_executable_gate(self):
+     from v5_shadow.main_registry import registry_by_id
+>    row=registry_by_id()['M07_A_STAGE'];self.assertEqual(row.owner_entry,'p0_a_stage.run_explicit');self.assertEqual(row.status,'CALLABLE_CANDIDATE_REQUIRES_INPUT')
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: 'a_stage' != 'p0_a_stage.run_explicit'
+E    - a_stage
+E    + p0_a_stage.run_explicit
+
+tests/test_m07_p0_integration.py:13: AssertionError
+______ M07P0Tests.test_unbound_http_is_specific_waiting_and_never_writes _______
+
+self = <test_m07_p0_integration.M07P0Tests testMethod=test_unbound_http_is_specific_waiting_and_never_writes>
+
+    def test_unbound_http_is_specific_waiting_and_never_writes(self):
+     from v5_shadow.module_api import create_module_server
+     with tempfile.TemporaryDirectory() as d:
+      root=Path(d);(root/'.v5-module-root').write_text('v5.module-root.v1:source_bundle\n')
+      cfg=dict(schema_version='v5.module_api.v1',module_id='source_bundle',release_id='test',data_root=str(root),routes=[ROUTE])
+      before={p.name:p.read_bytes() for p in root.iterdir()};server=create_module_server(cfg);threading.Thread(target=server.serve_forever,daemon=True).start()
+      try:
+       url='http://127.0.0.1:'+str(server.server_address[1])+ROUTE
+>      with urlopen(url) as r:payload=json.load(r)
+            ^^^^^^^^^^^^
+
+tests/test_m07_p0_integration.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py:521: in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py:630: in http_response
+    response = self.parent.error(
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py:559: in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <urllib.request.HTTPDefaultErrorHandler object at 0x7f7e86f30860>
+req = <urllib.request.Request object at 0x7f7e86f24c50>
+fp = <http.client.HTTPResponse object at 0x7f7e86f30e50>, code = 503
+msg = 'Service Unavailable'
+hdrs = <http.client.HTTPMessage object at 0x7f7e86f311f0>
+
+    def http_error_default(self, req, fp, code, msg, hdrs):
+>       raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E       urllib.error.HTTPError: HTTP Error 503: Service Unavailable
+
+/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/urllib/request.py:639: HTTPError
+_ M07P0OwnerTests.test_cold_original_readback_preserves_partial_without_any_writes _
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_cold_original_readback_preserves_partial_without_any_writes>
+
+    def test_cold_original_readback_preserves_partial_without_any_writes(self):
+>    from v5_shadow.m07_runtime import read_reference
+E    ModuleNotFoundError: No module named 'v5_shadow.m07_runtime'
+
+tests/test_m07_p0_integration.py:52: ModuleNotFoundError
+____ M07P0OwnerTests.test_explicit_gate_still_rejects_synthetic_and_natural ____
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_explicit_gate_still_rejects_synthetic_and_natural>
+
+    def test_explicit_gate_still_rejects_synthetic_and_natural(self):
+>    from v5_shadow.p0_a_stage import run_explicit
+E    ModuleNotFoundError: No module named 'v5_shadow.p0_a_stage'
+
+tests/test_m07_p0_integration.py:69: ModuleNotFoundError
+_ M07P0OwnerTests.test_recorded_label_cannot_override_explicit_synthetic_owner_evidence _
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_recorded_label_cannot_override_explicit_synthetic_owner_evidence>
+
+    def test_recorded_label_cannot_override_explicit_synthetic_owner_evidence(self):
+>    from v5_shadow.m07_readonly import read_record
+E    ModuleNotFoundError: No module named 'v5_shadow.m07_readonly'
+
+tests/test_m07_p0_integration.py:59: ModuleNotFoundError
+_ M07P0OwnerTests.test_synthetic_reference_cannot_be_exposed_as_real_saved_page _
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_synthetic_reference_cannot_be_exposed_as_real_saved_page>
+
+    def test_synthetic_reference_cannot_be_exposed_as_real_saved_page(self):
+>    from v5_shadow.m07_readonly import read_record
+E    ModuleNotFoundError: No module named 'v5_shadow.m07_readonly'
+
+tests/test_m07_p0_integration.py:56: ModuleNotFoundError
+________ M07P0OwnerTests.test_wrong_date_stage_never_reads_another_slot ________
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_wrong_date_stage_never_reads_another_slot>
+
+    def test_wrong_date_stage_never_reads_another_slot(self):
+>    from v5_shadow.m07_readonly import read_record
+E    ModuleNotFoundError: No module named 'v5_shadow.m07_readonly'
+
+tests/test_m07_p0_integration.py:66: ModuleNotFoundError
+_______ M07P0OwnerTests.test_wrong_saved_hash_is_rejected_by_real_reader _______
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_wrong_saved_hash_is_rejected_by_real_reader>
+
+    def test_wrong_saved_hash_is_rejected_by_real_reader(self):
+>    from v5_shadow.m07_runtime import read_reference
+E    ModuleNotFoundError: No module named 'v5_shadow.m07_runtime'
+
+tests/test_m07_p0_integration.py:62: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests/test_m07_p0_integration.py::M07P0Tests::test_actual_entry_and_reader_are_present
+FAILED tests/test_m07_p0_integration.py::M07P0Tests::test_execution_default_and_missing_binding_are_closed
+FAILED tests/test_m07_p0_integration.py::M07P0Tests::test_registry_names_the_executable_gate
+FAILED tests/test_m07_p0_integration.py::M07P0Tests::test_unbound_http_is_specific_waiting_and_never_writes
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_cold_original_readback_preserves_partial_without_any_writes
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_explicit_gate_still_rejects_synthetic_and_natural
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_recorded_label_cannot_override_explicit_synthetic_owner_evidence
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_synthetic_reference_cannot_be_exposed_as_real_saved_page
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_wrong_date_stage_never_reads_another_slot
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_wrong_saved_hash_is_rejected_by_real_reader
+10 failed in 2.00s

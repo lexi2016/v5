@@ -1,0 +1,32 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 test:p0
+> node --test tests/*.node.mjs
+
+✔ exact optional date/stage GET preserves original order, zero score, reasons and PARTIAL status (97.171203ms)
+✔ WAITING keeps concrete missing inputs and cannot carry old saved content (4.144409ms)
+✔ saved READY/READY_EMPTY/PARTIAL_WITH_ROWS/CANNOT_CONFIRM are returned without upgrade (2.288741ms)
+✔ invalid date/stage inputs fail before fetch; no HK-only Stage8 (0.743489ms)
+✔ owner identity, query mismatch, original selection and SHA tamper are refused (9.514712ms)
+✔ mandatory safety flags reject missing/true/string flags and nested elevation (4.630106ms)
+✔ SYNTHETIC data or nested classification and unknown data kinds never become recorded evidence (1.154375ms)
+✔ bad HTTP, JSON, UTF-8, empty body and oversize header fail closed (2.568017ms)
+✔ stream byte limit cancels overflow without content-length (2.02812ms)
+✔ reload clears old rows before reading and failed read never resurrects them (1.303521ms)
+✔ stale completion and closed sessions cannot publish results or start new reads (0.843774ms)
+✔ M07 navigation opens the real lazy source child and keeps M04/M11/M12/M16 (0.805809ms)
+✔ current frozen owner v2 selection and archived v1 selection are both preserved (0.564044ms)
+✔ schema/status arrays cannot be coerced into valid owner strings (0.837718ms)
+✔ generation is an exact lowercase SHA256, not a generic saved token (1.12855ms)
+✔ original row formal_eligible must explicitly remain false (0.733426ms)
+✔ saved result content precedes a closed source disclosure and preserves the source component (3.627053ms)
+✔ result navigation has a visible heading, focus and scroll instead of only starting a request (1.668452ms)
+✔ the selected result exposes its verified date and run without enabling missing routes (0.367304ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 275.166343

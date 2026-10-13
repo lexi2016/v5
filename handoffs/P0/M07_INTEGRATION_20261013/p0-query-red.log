@@ -1,0 +1,30 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____________ M07P0OwnerTests.test_optional_date_or_stage_filters ______________
+
+self = <test_m07_p0_integration.M07P0OwnerTests testMethod=test_optional_date_or_stage_filters>
+
+    def test_optional_date_or_stage_filters(self):
+     from v5_shadow.m07_readonly import read_record
+     for query in ({'date':'20261012'},{'stage':'STAGE_0930_0935'}):
+>     record,_=read_record(self.config(),query);self.assertEqual(record['payload']['status'],'WAITING');self.assertIn('M07_SYNTHETIC_NOT_DISPLAYABLE',record['payload']['reason_codes'])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_m07_p0_integration.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+src/v5_shadow/m07_readonly.py:33: in read_record
+    exact_keys(query,('date','stage'));trade_date(query['date'])
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+value = {'date': '20261012'}, keys = ('date', 'stage')
+
+    def exact_keys(value, keys):
+        if not isinstance(value, dict) or set(value) != set(keys):
+>           raise ValueError('CONTRACT_FIELDS_INVALID')
+E           ValueError: CONTRACT_FIELDS_INVALID
+
+src/v5_shadow/contracts.py:130: ValueError
+=========================== short test summary info ============================
+FAILED tests/test_m07_p0_integration.py::M07P0OwnerTests::test_optional_date_or_stage_filters
+1 failed, 13 deselected in 1.52s

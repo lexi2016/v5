@@ -1,0 +1,3 @@
+PASS: production navigation functions open both disclosures, focus/reveal M07, tolerate repeated clicks/reopen/missing host.
+(node:61) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

@@ -25,7 +25,7 @@ MODULE_REGISTRY: tuple[ModuleRegistration, ...] = (
     ModuleRegistration("M04_RESEARCH_ARCHIVE", "research_archive", "daily_owner_adapters", "NOT_READY"),
     ModuleRegistration("M05_A_PRESELECTION", "m05_a_preselection", "source_bundle", "READY"),
     ModuleRegistration("M06_HK_PRESELECTION", "p0_hk_preselection", "daily_tick", "READY"),
-    ModuleRegistration("M07_A_STAGE", "a_stage", "daily_owner_adapters", "READY"),
+    ModuleRegistration("M07_A_STAGE", "p0_a_stage.run_explicit", "m07_explicit_replay", "CALLABLE_CANDIDATE_REQUIRES_INPUT"),
     ModuleRegistration("M08_HK_STAGE", "hk_stage", "daily_owner_adapters", "NOT_READY"),
     ModuleRegistration("M09_A_CLOSE_REVIEW", "a_close_review", "daily_owner_adapters", "READY"),
     ModuleRegistration("M10_HK_CLOSE_REVIEW", "hk_close_review", "daily_owner_adapters", "NOT_READY"),

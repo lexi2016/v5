@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, shallowRef } from 'vue';
 import { SourceBundleSession, type SourceState } from '../api/sourceBundle';
+import M07SavedStage from './M07SavedStage.vue';
 import HkPreselectionPool from './HkPreselectionPool.vue';
 import HkCloseReview from './HkCloseReview.vue';
 import ACloseReplay from './ACloseReplay.vue';
@@ -29,6 +30,7 @@ function json(value:unknown){return JSON.stringify(value,null,2);}
    </article></div>
   </template>
   <M04SavedResearch />
+  <M07SavedStage />
   <HkPreselectionPool />
   <HkStageObserved />
   <HkCloseReview />

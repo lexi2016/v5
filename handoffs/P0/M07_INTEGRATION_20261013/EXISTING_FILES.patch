@@ -1,0 +1,153 @@
+--- a/V5/src/v5_shadow/main_registry.py
++++ b/V5/src/v5_shadow/main_registry.py
+@@ -25,7 +25,7 @@
+     ModuleRegistration("M04_RESEARCH_ARCHIVE", "research_archive", "daily_owner_adapters", "NOT_READY"),
+     ModuleRegistration("M05_A_PRESELECTION", "m05_a_preselection", "source_bundle", "READY"),
+     ModuleRegistration("M06_HK_PRESELECTION", "p0_hk_preselection", "daily_tick", "READY"),
+-    ModuleRegistration("M07_A_STAGE", "a_stage", "daily_owner_adapters", "READY"),
++    ModuleRegistration("M07_A_STAGE", "p0_a_stage.run_explicit", "m07_explicit_replay", "CALLABLE_CANDIDATE_REQUIRES_INPUT"),
+     ModuleRegistration("M08_HK_STAGE", "hk_stage", "daily_owner_adapters", "NOT_READY"),
+     ModuleRegistration("M09_A_CLOSE_REVIEW", "a_close_review", "daily_owner_adapters", "READY"),
+     ModuleRegistration("M10_HK_CLOSE_REVIEW", "hk_close_review", "daily_owner_adapters", "NOT_READY"),
+--- a/V5/src/v5_shadow/module_api.py
++++ b/V5/src/v5_shadow/module_api.py
+@@ -21,6 +21,7 @@
+                           _manager_response, MANAGER_WORKSPACE_PATH)
+ M18_ROUTE = "/api/v4/manager/m18/v2"
+ M17_ROUTE = "/api/v5/manager/close-recapture"
++M07_ROUTE = "/api/v5/source-bundle/a-stage-saved"
+ M16_ROUTE = "/api/v5/source-bundle/manager-public-research"
+ M11_ROUTE = "/api/v5/source-bundle/intraday-research"
+ M12_ROUTE = "/api/v5/source-bundle/video-fupan"
+@@ -702,6 +703,8 @@
+         keys += ('m04_saved_research_binding',)
+     if isinstance(value, dict) and 'm12_video_fupan_binding' in value:
+         keys += ('m12_video_fupan_binding',)
++    if isinstance(value, dict) and 'm07_a_stage_binding' in value:
++        keys += ('m07_a_stage_binding',)
+     if isinstance(value, dict) and 'm11_saved_research_binding' in value:
+         keys += ('m11_saved_research_binding',)
+     if isinstance(value, dict) and 'm16_saved_public_research_binding' in value:
+@@ -709,6 +712,9 @@
+     exact_keys(value, keys)
+     if 'm16_saved_public_research_binding' in value:
+         from .m16_readonly import validate_binding
++        validate_binding(value)
++    if 'm07_a_stage_binding' in value:
++        from .m07_readonly import validate_binding
+         validate_binding(value)
+     if 'm11_saved_research_binding' in value:
+         from .m11_readonly import validate_binding
+@@ -904,8 +910,10 @@
+             payload_sha256=sha256_json(payload),source_input_sha256=binding['identity']['input_sha256'],
+             data_kind='OWNER_RESULT',generated_at=payload['available_at'],status_code=200)
+         return _validate_record(config,record,path,query),sha256_json(record)
+-    if config['module_id']=='source_bundle' and path in (M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
+-        if path==M16_ROUTE:
++    if config['module_id']=='source_bundle' and path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
++        if path==M07_ROUTE:
++            from .m07_readonly import read_record,not_configured
++        elif path==M16_ROUTE:
+             from .m16_readonly import read_record,not_configured
+         elif path==M11_ROUTE:
+             from .m11_readonly import read_record,not_configured
+@@ -937,7 +945,7 @@
+     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
+     config,root=_config(value)
+     if any(route in config['routes'] for route in
+-           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
++           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M07_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
+         # Set at service startup, before any GET can spawn/import a reader.
+         # Also covers library callers that did not start their interpreter -B.
+         sys.dont_write_bytecode=True
+@@ -950,6 +958,7 @@
+     m09_read_slot=threading.BoundedSemaphore(1)
+     m08_read_slot=threading.BoundedSemaphore(1)
+     m17_read_slot=threading.BoundedSemaphore(1)
++    m07_read_slot=threading.BoundedSemaphore(1)
+     m16_read_slot=threading.BoundedSemaphore(1)
+     m11_read_slot=threading.BoundedSemaphore(1)
+     m12_read_slot=threading.BoundedSemaphore(1)
+@@ -1002,7 +1011,7 @@
+                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
+                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
+             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
++            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
+             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
+             reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
+             if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/a-close-replay':
+@@ -1013,6 +1022,8 @@
+                 reader_slot=m17_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M04_ROUTE:
+                 reader_slot=m04_read_slot
++            if config['module_id']=='source_bundle' and parsed.path==M07_ROUTE:
++                reader_slot=m07_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M16_ROUTE:
+                 reader_slot=m16_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M11_ROUTE:
+--- a/frontend/src/components/SourceBundleStatus.vue
++++ b/frontend/src/components/SourceBundleStatus.vue
+@@ -1,6 +1,7 @@
+ <script setup lang="ts">
+ import { onBeforeUnmount, onMounted, shallowRef } from 'vue';
+ import { SourceBundleSession, type SourceState } from '../api/sourceBundle';
++import M07SavedStage from './M07SavedStage.vue';
+ import HkPreselectionPool from './HkPreselectionPool.vue';
+ import HkCloseReview from './HkCloseReview.vue';
+ import ACloseReplay from './ACloseReplay.vue';
+@@ -29,6 +30,7 @@
+    </article></div>
+   </template>
+   <M04SavedResearch />
++  <M07SavedStage />
+   <HkPreselectionPool />
+   <HkStageObserved />
+   <HkCloseReview />
+--- a/frontend/src/views/SavedManagerResultView.vue
++++ b/frontend/src/views/SavedManagerResultView.vue
+@@ -49,6 +49,14 @@
+  sourceExpanded.value=true;
+  await nextTick();
+  focusAndReveal(sourceSummary.value);
++}
++async function openAStage() {
++ await openSources();
++ const target=sourceDisclosure.value?.querySelector<HTMLDetailsElement>('#m07-saved-stage');
++ if (!target) return;
++ target.open=true;
++ await nextTick();
++ focusAndReveal(target.querySelector<HTMLElement>('summary'));
+ }
+ async function openResearch() {
+  await openSources();
+@@ -109,7 +117,7 @@
+    <button type="button" aria-controls="m12-saved-video" @click="openVideo">视频复盘 · M12</button>
+    <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
+    <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
+-   <button type="button" disabled>阶段选股 · 未接入</button>
++   <button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果</button>
+    <button type="button" disabled>研报决策台 · 未接入</button>
+   </nav>
+   <p class="navigation-status">当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+--- a/frontend/tests/savedManagerNavigation.node.mjs
++++ b/frontend/tests/savedManagerNavigation.node.mjs
+@@ -28,7 +28,7 @@
+ test('the selected result exposes its verified date and run without enabling missing routes', () => {
+   assert.match(template, /已读取运行\s*\{\{\s*state\.descriptor\.run_id\s*\}\}/);
+   assert.match(template, /目标日\s*\{\{\s*state\.descriptor\.target_date\s*\}\}/);
+-  assert.match(template, /<button type="button" disabled>阶段选股 · 未接入<\/button>/);
++  assert.match(template, /<button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果<\/button>/);
+   assert.match(template, /<button type="button" disabled>研报决策台 · 未接入<\/button>/);
+   assert.match(template, /CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。\{\{ state.error \}\}/);
+ });
+--- a/frontend/vite.config.ts
++++ b/frontend/vite.config.ts
+@@ -23,6 +23,7 @@
+ const proxy: Record<string, ProxyOptions> = {};
+ if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);
+ if (sourceTarget) {
++ proxy['/api/v5/source-bundle/a-stage-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/manager-public-research'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/intraday-research'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/video-fupan'] = readonlyProxy(sourceTarget);

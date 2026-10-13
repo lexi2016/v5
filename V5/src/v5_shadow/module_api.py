@@ -21,6 +21,7 @@ from .api_gateway import (_parse_response, _precheck_json, _bounded_json,
                           _manager_response, MANAGER_WORKSPACE_PATH)
 M18_ROUTE = "/api/v4/manager/m18/v2"
 M17_ROUTE = "/api/v5/manager/close-recapture"
+M07_ROUTE = "/api/v5/source-bundle/a-stage-saved"
 M16_ROUTE = "/api/v5/source-bundle/manager-public-research"
 M11_ROUTE = "/api/v5/source-bundle/intraday-research"
 M12_ROUTE = "/api/v5/source-bundle/video-fupan"
@@ -702,6 +703,8 @@ def _config(value):
         keys += ('m04_saved_research_binding',)
     if isinstance(value, dict) and 'm12_video_fupan_binding' in value:
         keys += ('m12_video_fupan_binding',)
+    if isinstance(value, dict) and 'm07_a_stage_binding' in value:
+        keys += ('m07_a_stage_binding',)
     if isinstance(value, dict) and 'm11_saved_research_binding' in value:
         keys += ('m11_saved_research_binding',)
     if isinstance(value, dict) and 'm16_saved_public_research_binding' in value:
@@ -709,6 +712,9 @@ def _config(value):
     exact_keys(value, keys)
     if 'm16_saved_public_research_binding' in value:
         from .m16_readonly import validate_binding
+        validate_binding(value)
+    if 'm07_a_stage_binding' in value:
+        from .m07_readonly import validate_binding
         validate_binding(value)
     if 'm11_saved_research_binding' in value:
         from .m11_readonly import validate_binding
@@ -904,8 +910,10 @@ def read_response(config,root,path,query):
             payload_sha256=sha256_json(payload),source_input_sha256=binding['identity']['input_sha256'],
             data_kind='OWNER_RESULT',generated_at=payload['available_at'],status_code=200)
         return _validate_record(config,record,path,query),sha256_json(record)
-    if config['module_id']=='source_bundle' and path in (M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
-        if path==M16_ROUTE:
+    if config['module_id']=='source_bundle' and path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
+        if path==M07_ROUTE:
+            from .m07_readonly import read_record,not_configured
+        elif path==M16_ROUTE:
             from .m16_readonly import read_record,not_configured
         elif path==M11_ROUTE:
             from .m11_readonly import read_record,not_configured
@@ -937,7 +945,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
     config,root=_config(value)
     if any(route in config['routes'] for route in
-           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
+           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M07_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
         # Set at service startup, before any GET can spawn/import a reader.
         # Also covers library callers that did not start their interpreter -B.
         sys.dont_write_bytecode=True
@@ -950,6 +958,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
     m09_read_slot=threading.BoundedSemaphore(1)
     m08_read_slot=threading.BoundedSemaphore(1)
     m17_read_slot=threading.BoundedSemaphore(1)
+    m07_read_slot=threading.BoundedSemaphore(1)
     m16_read_slot=threading.BoundedSemaphore(1)
     m11_read_slot=threading.BoundedSemaphore(1)
     m12_read_slot=threading.BoundedSemaphore(1)
@@ -1002,7 +1011,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
+            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
             reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
             if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/a-close-replay':
@@ -1013,6 +1022,8 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 reader_slot=m17_read_slot
             if config['module_id']=='source_bundle' and parsed.path==M04_ROUTE:
                 reader_slot=m04_read_slot
+            if config['module_id']=='source_bundle' and parsed.path==M07_ROUTE:
+                reader_slot=m07_read_slot
             if config['module_id']=='source_bundle' and parsed.path==M16_ROUTE:
                 reader_slot=m16_read_slot
             if config['module_id']=='source_bundle' and parsed.path==M11_ROUTE:

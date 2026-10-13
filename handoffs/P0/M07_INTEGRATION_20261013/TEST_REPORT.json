@@ -1,0 +1,53 @@
+{
+  "schema_version": "v5.m07_p0_tests.v1",
+  "scope": "Sparse bounded task checkout; not all P0 repository tests",
+  "versions": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "pytest": "9.1.1",
+    "node": "v24.19.0"
+  },
+  "backend": {
+    "command": "PYTHONPATH=src /workspace/shared/manager_bi02_fix/.venv/bin/python -m pytest -q",
+    "cwd": "V5",
+    "exit_code": 0,
+    "result": "29 passed in 9.14s",
+    "m07_tests": 15,
+    "module_api_regression": 11,
+    "registry_regression": 3
+  },
+  "frontend": {
+    "command": "npm run test:p0",
+    "cwd": "frontend",
+    "exit_code": 0,
+    "passed": 19,
+    "scope": "16 M07 behavior checks and 3 existing navigation checks"
+  },
+  "navigation_dom": {
+    "result": "PASS",
+    "qualification": "Actual production navigation functions in jsdom; not Vue mount"
+  },
+  "not_run": [
+    "Full P0 repository suite",
+    "7 Vue mount cases",
+    "vue-tsc typecheck",
+    "vite build",
+    "Mac P0 integration tests",
+    "Real recorded input execution",
+    "Real saved-result page positive",
+    "Preview deployment",
+    "Natural automatic execution"
+  ],
+  "toolchain_blockers": {
+    "vitest": "NOT_INSTALLED",
+    "vue_tsc": "NOT_INSTALLED",
+    "vite": "NOT_INSTALLED",
+    "install_performed": false
+  },
+  "safety": {
+    "synthetic_inputs": "ONLY isolated owner and contract tests; public reader and worker reject SYNTHETIC",
+    "source_owner_and_ledger": "BYTE_IDENTICAL_TO_e99b5d0",
+    "http": "GET saved original-reader only; POST 405",
+    "formal_eligibility": "BLOCKED",
+    "module_complete": "NOT_COMPLETE"
+  }
+}
