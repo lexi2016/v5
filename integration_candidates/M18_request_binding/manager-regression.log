@@ -1,0 +1,515 @@
+...EE..EEEE..............E..EEEE.F..................F....ssssss......EEEEEEEEEEEE................F..............................................................................................................................................
+======================================================================
+ERROR: setUpClass (test_manager_announcement_binding.ManagerAnnouncementRealOwnerTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_announcement_binding.py", line 78, in setUpClass
+    raise RuntimeError('V5_ANNOUNCEMENT_REQUEST_PATH_REQUIRED_NO_SKIP')
+RuntimeError: V5_ANNOUNCEMENT_REQUEST_PATH_REQUIRED_NO_SKIP
+
+======================================================================
+ERROR: test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time (test_manager_archive_reader.ArchiveWiringTests.test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 37, in test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time
+    result=run_manager_plan(self.request);value=result['payload']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store (test_manager_archive_reader.ArchiveWiringTests.test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 48, in test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store
+    result=run_manager_plan(self.request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_hourly_and_daily_use_original_independent_trios (test_manager_archive_reader.ArchiveWiringTests.test_hourly_and_daily_use_original_independent_trios)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 68, in test_hourly_and_daily_use_original_independent_trios
+    out=run_manager_plan(self.request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_manifest_declared_missing_hourly_is_not_silent_empty (test_manager_archive_reader.ArchiveWiringTests.test_manifest_declared_missing_hourly_is_not_silent_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 74, in test_manifest_declared_missing_hourly_is_not_silent_empty
+    out=run_manager_plan(self.request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_refresh_saves_same_run_and_independent_readback_with_archive_materials (test_manager_archive_reader.ArchiveWiringTests.test_refresh_saves_same_run_and_independent_readback_with_archive_materials)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 58, in test_refresh_saves_same_run_and_independent_readback_with_archive_materials
+    self.request['action']='refresh';result=run_manager_plan(self.request)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time (test_manager_archive_reader.ArchiveWiringTests.test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 37, in test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time
+    result=run_manager_plan(self.request);value=result['payload']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store (test_manager_archive_reader.ArchiveWiringTests.test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 48, in test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store
+    result=run_manager_plan(self.request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_hourly_and_daily_use_original_independent_trios (test_manager_archive_reader.ArchiveWiringTests.test_hourly_and_daily_use_original_independent_trios)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 68, in test_hourly_and_daily_use_original_independent_trios
+    out=run_manager_plan(self.request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_manifest_declared_missing_hourly_is_not_silent_empty (test_manager_archive_reader.ArchiveWiringTests.test_manifest_declared_missing_hourly_is_not_silent_empty)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 74, in test_manifest_declared_missing_hourly_is_not_silent_empty
+    out=run_manager_plan(self.request)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_refresh_saves_same_run_and_independent_readback_with_archive_materials (test_manager_archive_reader.ArchiveWiringTests.test_refresh_saves_same_run_and_independent_readback_with_archive_materials)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_archive_reader.py", line 58, in test_refresh_saves_same_run_and_independent_readback_with_archive_materials
+    self.request['action']='refresh';result=run_manager_plan(self.request)
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+ERROR: test_1815_plan_2053_observation_2106_server_read_are_separate (test_manager_panel_observation.ManagerPanelObservationTests.test_1815_plan_2053_observation_2106_server_read_are_separate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_broken_receipt_is_optional_gap (test_manager_panel_observation.ManagerPanelObservationTests.test_broken_receipt_is_optional_gap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_date_guard_preserved_and_caller_now_not_observation_clock (test_manager_panel_observation.ManagerPanelObservationTests.test_date_guard_preserved_and_caller_now_not_observation_clock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_explicit_historical_view_hides_current_rows (test_manager_panel_observation.ManagerPanelObservationTests.test_explicit_historical_view_hides_current_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_full_695_rows_summarized_without_raising_workspace_budget (test_manager_panel_observation.ManagerPanelObservationTests.test_full_695_rows_summarized_without_raising_workspace_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_future_observation_rejected_against_real_read_clock (test_manager_panel_observation.ManagerPanelObservationTests.test_future_observation_rejected_against_real_read_clock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_missing_artifact_does_not_block_workspace (test_manager_panel_observation.ManagerPanelObservationTests.test_missing_artifact_does_not_block_workspace)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_refresh_observation_not_saved_with_plan (test_manager_panel_observation.ManagerPanelObservationTests.test_refresh_observation_not_saved_with_plan)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_root_overlap_and_reference_sha_rejected (test_manager_panel_observation.ManagerPanelObservationTests.test_root_overlap_and_reference_sha_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_same_saved_panel_is_hidden_on_next_calendar_day (test_manager_panel_observation.ManagerPanelObservationTests.test_same_saved_panel_is_hidden_on_next_calendar_day)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_saved_rows_read_twice_without_recompute_or_formal_change (test_manager_panel_observation.ManagerPanelObservationTests.test_saved_rows_read_twice_without_recompute_or_formal_change)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+ERROR: test_synthetic_kind_cannot_enter_observation (test_manager_panel_observation.ManagerPanelObservationTests.test_synthetic_kind_cannot_enter_observation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_panel_observation.py", line 28, in setUp
+    descriptor,_=owner._capsule();calendar=descriptor['bindings']['vendor/rebound_baseline/contracts/market_calendar_2026.json']
+                 ^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/rebound_observation.py", line 80, in _capsule
+    if hashlib.sha256(checked_path(BASE, relative).read_bytes()).hexdigest() != digest:
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/shared/m18-request-binding-20261014/V5/uv.lock'
+
+======================================================================
+FAIL: test_large_result_and_independent_cold_read_keep_complete_payload (test_manager_bounded_result.LargeManagerResultTests.test_large_result_and_independent_cold_read_keep_complete_payload)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_bounded_result.py", line 32, in test_large_result_and_independent_cold_read_keep_complete_payload
+    result=run_manager_plan(self.request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_plan.py", line 662, in run_manager_plan
+    value, transport = run_worker(
+                       ^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 434, in run_worker
+    value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 350, in read_result
+    start = _read_control(stream)
+            ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 342, in _read_control
+    _fail(**diagnostic)
+  File "/workspace/shared/m18-request-binding-20261014/V5/src/v5_shadow/manager_result_transport.py", line 107, in _fail
+    raise ResultTransportError(code, **fields)
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_bounded_result.py", line 34, in test_large_result_and_independent_cold_read_keep_complete_payload
+    self.fail('Complete synthetic result must cross local boundary: '+str(error))
+AssertionError: Complete synthetic result must cross local boundary: LOCAL_MANAGER_WORKER_FAILED
+
+======================================================================
+FAIL: test_closed_target_still_rejected_by_original_plan_gate (test_manager_membership.ManagerMembershipTests.test_closed_target_still_rejected_by_original_plan_gate)
+----------------------------------------------------------------------
+v5_shadow.manager_result_transport.ResultTransportError: LOCAL_MANAGER_WORKER_FAILED
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_membership.py", line 63, in test_closed_target_still_rejected_by_original_plan_gate
+    with self.assertRaisesRegex(ValueError,'PLAN_TARGET_NOT_VERIFIED_HK_TRADING_SESSION'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "PLAN_TARGET_NOT_VERIFIED_HK_TRADING_SESSION" does not match "LOCAL_MANAGER_WORKER_FAILED"
+
+======================================================================
+FAIL: test_original_owner_still_reproduces_five_admission_failures_without_errors (test_manager_plan_date_gate.ManagerDateGateProcessTests.test_original_owner_still_reproduces_five_admission_failures_without_errors)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/test_manager_plan_date_gate.py", line 15, in test_original_owner_still_reproduces_five_admission_failures_without_errors
+    self.assertEqual(result.returncode, 1, result.stderr)
+AssertionError: 5 != 1 : setUpClass (__main__.ManagerPlanDateGateTests) ... ERROR
+
+======================================================================
+ERROR: setUpClass (__main__.ManagerPlanDateGateTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/m18-request-binding-20261014/V5/tests/fixtures/manager_owner/check_original.py", line 38, in setUpClass
+    raise RuntimeError('MANAGER_RED_ORIGINAL_SOURCE_SHA:' + entry['relative_path'])
+RuntimeError: MANAGER_RED_ORIGINAL_SOURCE_SHA:v4/manager_research/announcement_analysis.py
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.015s
+
+FAILED (errors=1)
+
+
+----------------------------------------------------------------------
+Ran 239 tests in 302.595s
+
+FAILED (failures=3, errors=23, skipped=6)
+{"allocation_case": "escape_expansion", "peak_additional_bytes": 3557507}
+{"allocation_case": "oversize_string", "peak_additional_bytes": 1057150}

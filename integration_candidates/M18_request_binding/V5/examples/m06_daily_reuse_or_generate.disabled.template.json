@@ -1,0 +1,55 @@
+{
+  "runtime_root": "${ISOLATED_P0_RUNTIME_ROOT}",
+  "composition": "${P0_COMPOSITION_JSON}",
+  "module_api": {
+    "host": "127.0.0.1",
+    "mode": "READ_ONLY"
+  },
+  "daily": {
+    "enabled": false,
+    "bundle_root": "${INDEPENDENT_BUNDLE_ROOT}",
+    "ledger_root": "${INDEPENDENT_P0_LEDGER_ROOT}",
+    "hk_preselection_daily": {
+      "enabled": false,
+      "delivery_root": "${MARKED_UPSTREAM_M06_INPUT_DELIVERY_ROOT}",
+      "full_day_window": {
+        "start": "17:30",
+        "end": "18:30"
+      },
+      "half_day_window": {
+        "start": "17:30",
+        "end": "18:30"
+      },
+      "execution_budget_seconds": 1200,
+      "execution_mode": "NATURAL",
+      "production_method": "REUSE_VERIFIED_OR_GENERATE_IF_ABSENT",
+      "date_contract": "CLOSE_TO_NEXT_HK_SESSION_V1",
+      "owner_contract_cutoff_time": "09:00",
+      "input_delivery": {
+        "original_store_root": "${ORIGINAL_SOURCE_STORE}",
+        "original_asset_root": "${ORIGINAL_HK02_ASSET_ROOT}",
+        "dispatch_receipt_root": "${ORIGINAL_DISPATCH_RECEIPT_ROOT}",
+        "lane_receipt_root": "${ORIGINAL_PANEL_LANE_RECEIPT_ROOT}",
+        "lane_receipt_relative": "hk-{signal_date}.json",
+        "dispatch_slot": "1720",
+        "snapshot_root": "${INDEPENDENT_MARKED_INPUT_SNAPSHOT_ROOT}",
+        "dispatch_receipt_discovery": "DAY_SLOT_UUID_V1"
+      }
+    },
+    "hk_preselection": {
+      "enabled": false,
+      "python_executable": "${EXISTING_HK02_VENV_LAUNCH_PATH}",
+      "python_sha256": "${EXISTING_PYTHON_RAW_SHA256}",
+      "timeout_seconds": 600,
+      "store_root": "${ORIGINAL_SOURCE_STORE}",
+      "asset_root": "${ORIGINAL_HK02_ASSET_ROOT}",
+      "private_root": "${NEW_MARKED_M06_OUTPUT_ROOT}",
+      "python_venv": {
+        "root": "${EXISTING_VENV_CANONICAL_ROOT}",
+        "realpath": "${PINNED_REAL_BINARY_PATH}",
+        "pyvenv_cfg_sha256": "${PYVENV_CFG_RAW_SHA256}",
+        "symlink_sha256": "${LAUNCH_READLINK_TEXT_SHA256}"
+      }
+    }
+  }
+}

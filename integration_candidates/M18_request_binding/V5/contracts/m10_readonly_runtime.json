@@ -1,0 +1,15 @@
+{
+  "schema_version": "v5.m10_readonly_runtime.v1",
+  "origin_repository": "lexi2016/v5",
+  "origin_commit": "1c0d56d0ea350f8f2178d8b0c6b7e66dfa113585",
+  "scope": "Original stdlib-only HKCloseReviewReader/read_hk_close_projection. No builder dependency closure or production entrypoint. Namespace package matches original.",
+  "entries": [
+    {
+      "path": "source_owners/m10/V5/src/v5_shadow/hk_close_daily.py",
+      "origin_path": "V5/src/v5_shadow/hk_close_daily.py",
+      "bytes": 15974,
+      "sha256": "60e6c0b2561c732ea0eb7c7fc694fe9981833d5bc879760bacbfe84d22295027",
+      "git_blob_sha": "e5e936c8c4cc06008cff048bbe5c5afcbe9c3d7c"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "schema_version": "v5.m10_readonly_acceptance.v1",
+  "started_utc": "2026-10-12T17:56:33.336891+00:00",
+  "mode": "SYNTHETIC_ONLY",
+  "steps": [
+    {
+      "name": "targeted-python",
+      "started_utc": "2026-10-12T17:56:33.341953+00:00",
+      "ended_utc": "2026-10-12T17:56:52.432375+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "f3c7de1501260017a6eb3d45686d40ede638266310c4dbd39347cdb91f24466f",
+      "status": "PASS"
+    },
+    {
+      "name": "targeted-node",
+      "started_utc": "2026-10-12T17:56:52.432416+00:00",
+      "ended_utc": "2026-10-12T17:56:53.235160+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "dee757738dd1afa215362645c07c371101c9f06e311b1a613bf60091b918f7ba",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "status": "PASS"
+    }
+  ],
+  "real_read": {
+    "status": "NOT_RUN"
+  },
+  "frontend": {
+    "status": "NOT_RUN"
+  },
+  "network_collection": false,
+  "producer_invoked": false,
+  "services_changed": false,
+  "deployed": false,
+  "commit": null,
+  "source_files": [
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "sha256": "822aa9a66a4eb470d5234db0c33e194d9378774218aabf89e04646b11977d6be",
+      "bytes": 51973
+    },
+    {
+      "path": "V5/src/v5_shadow/source_bundle.py",
+      "sha256": "c2a7fde049c2179fce4ec3828f1793a1d84b978cfd40c3c529f494ac72e50bee",
+      "bytes": 7894
+    },
+    {
+      "path": "V5/src/v5_shadow/m10_readonly.py",
+      "sha256": "ac9e46ed8ee5b48a6918f14737f195f69d359c17f2b2651f847e9256eac9030c",
+      "bytes": 5421
+    },
+    {
+      "path": "V5/src/v5_shadow/m10_readonly_worker.py",
+      "sha256": "008d4934811b1cd2658c2c812a85a9be326c982a0774cc0d1f3c2ce091f0f04a",
+      "bytes": 1015
+    },
+    {
+      "path": "V5/contracts/m10_readonly_runtime.json",
+      "sha256": "8c5580a078e71f97664b2739aa67b1b1528aeef8ae5ff72a2175e8f3c8451b53",
+      "bytes": 659
+    },
+    {
+      "path": "V5/source_owners/m10/V5/src/v5_shadow/hk_close_daily.py",
+      "sha256": "60e6c0b2561c732ea0eb7c7fc694fe9981833d5bc879760bacbfe84d22295027",
+      "bytes": 15974
+    },
+    {
+      "path": "frontend/src/api/hkCloseReview.ts",
+      "sha256": "ea5bd2233bd1bbde9d072e98faac6dc0c5065e8704f46c15712806056f33fd30",
+      "bytes": 8206
+    },
+    {
+      "path": "frontend/src/components/HkCloseReview.vue",
+      "sha256": "969f3197b33ab7689c9f6f93d5bec3c1e793752d9b19fbc7d0b0b790a9eb3fc7",
+      "bytes": 5812
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.vue",
+      "sha256": "e1403619ab8f99321884e619f2a6a7e6e4fd97eed3c5ca40483b27c88c96f1b4",
+      "bytes": 2939
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "sha256": "6b77110f422118568eb326310dfa4d0864c1cbbae7b7c5ff3a9b264952965f85",
+      "bytes": 1852
+    },
+    {
+      "path": "V5/tests/run_m10_readonly_acceptance.py",
+      "sha256": "289f59c41697b34deec5412c0af5f20de588ad8c31818629bf19c7a4e8689fd4",
+      "bytes": 9897
+    },
+    {
+      "path": "V5/tests/test_m10_acceptance_runner.py",
+      "sha256": "30f1cc1f0210b75b5cdd99eb372e994f93155a258710696d630451d37ebb678b",
+      "bytes": 1898
+    },
+    {
+      "path": "V5/tests/test_m10_readonly_api.py",
+      "sha256": "7c03d4ae9e1b5f4251f77c6bde598ba8635c1be4a2c9a027af37039d2b70333b",
+      "bytes": 13148
+    },
+    {
+      "path": "V5/tests/export_m10_readonly_fixture.py",
+      "sha256": "53de5daf1d99afe17bc91e9b7766ff9e24528d406248d27868402abaee536232",
+      "bytes": 644
+    },
+    {
+      "path": "V5/tests/fixtures/hk_close_readonly_factory.py",
+      "sha256": "d97b7305c8b16275ea8359394f9fe2944d3e1f711a3a6770905df099b2543338",
+      "bytes": 4434
+    },
+    {
+      "path": "frontend/tests/hkCloseReview.node.mjs",
+      "sha256": "b2cf8efd321bd1480a2f208f5d6644a8a69bcbc83bec1c325ee1c23fb8fb0249",
+      "bytes": 6672
+    },
+    {
+      "path": "frontend/src/components/HkCloseReview.spec.ts",
+      "sha256": "0e4840bdbef5d51417c1a3c39067b009acb1ecc37fda3d26f6b512cb5685379f",
+      "bytes": 3562
+    }
+  ],
+  "ended_utc": "2026-10-12T17:56:53.235268+00:00",
+  "status": "PARTIAL_VERIFICATION",
+  "base_commit": "906aab90a932dfbb183919941a54a85f2c1be92f",
+  "cloud_only": true,
+  "mac_real_acceptance": "NOT_RUN",
+  "frontend_attempts": [
+    {
+      "name": "typecheck",
+      "exit_code": 127,
+      "status": "BLOCKED_MISSING_EXISTING_DEPENDENCY",
+      "missing_command": "vue-tsc"
+    },
+    {
+      "name": "component-dom",
+      "exit_code": 127,
+      "status": "BLOCKED_MISSING_EXISTING_DEPENDENCY",
+      "missing_command": "vitest"
+    },
+    {
+      "name": "build",
+      "exit_code": 127,
+      "status": "BLOCKED_MISSING_EXISTING_DEPENDENCY",
+      "missing_command": "vite"
+    }
+  ],
+  "python_test_count": 27,
+  "node_test_count": 31
+}

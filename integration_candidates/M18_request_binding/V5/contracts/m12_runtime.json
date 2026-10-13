@@ -1,0 +1,66 @@
+{
+  "schema_version": "v5.m12_runtime.v1",
+  "original_commit": "4bbf069b435d8f0ba28db8e2eba1d358ea5e283c",
+  "entries": [
+    {
+      "path": "src/v5_shadow/video_fupan_daily.py",
+      "bytes": 6072,
+      "sha256": "7ef5d28b6aa771f6cf1939f73201526bea11e1259fc2ca50a37b2dec9fd50184"
+    },
+    {
+      "path": "src/v5_shadow/video_fupan_reader.py",
+      "bytes": 5171,
+      "sha256": "a7261be6fc211f2563e36c01b24a9490cb1bd8c7ca67643855b4b87009f0f145"
+    },
+    {
+      "path": "src/v5_shadow/video_fupan_store.py",
+      "bytes": 3333,
+      "sha256": "96857265130c9372bc78f718ad3f31aadd79bacea50590492e9874be47ba1f3d"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/__init__.py",
+      "bytes": 984,
+      "sha256": "8261659887ffa4cae3cc53dfa6e4e072659aa2e36abe2cc14cadefad0b8231f6"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/config.py",
+      "bytes": 3145,
+      "sha256": "da9a7acd3381e9c87b7f5442eeb381b78fba352d4cd073ae373c50e4cc12751e"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/consumer.py",
+      "bytes": 18043,
+      "sha256": "6ed804d5ddc427596af17d66c192111c4f20a47fa341f206f1007d7dc113808c"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/core.py",
+      "bytes": 61380,
+      "sha256": "0af6ed5fb08520d9fc0547756dc0d26996c8f85fd84192d61bd5b52ec17ca51a"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/producer.py",
+      "bytes": 88342,
+      "sha256": "0d33b5d2ff728ffb1c58db2fc7c0ca89a2e62df357675f241c88648d21485012"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/review.py",
+      "bytes": 58050,
+      "sha256": "08d6c5e24e7c673be4c9dfa3a5882c4f1f5b0e03c6184c5d64b8d2a4ece37a38"
+    },
+    {
+      "path": "vendor/video_fupan_baseline/review_core/scheduler.py",
+      "bytes": 16049,
+      "sha256": "8e848508559d83fe35f997ef465f84ed7113dcff92d0b16e7889fda55adebbb7"
+    },
+    {
+      "path": "src/v5_shadow/m12_readonly_worker.py",
+      "bytes": 6273,
+      "sha256": "b5028bad048fa6ba5daaa4ae2ac6adae9f071da090d473d66eba2c650a585362"
+    },
+    {
+      "path": "src/v5_shadow/m12_daily_worker.py",
+      "bytes": 2419,
+      "sha256": "f54e24a11d92f0d192747a36fc6bc8479a04b7c0f5729eb3dbfc321e74547519"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema_version": "v5.m18_candidate_verification.v1",
+  "input_kind": "SYNTHETIC_TEMPORARY_ONLY",
+  "environment": {
+    "python": "3.12.14",
+    "pandas": "2.2.3",
+    "pyarrow": "NOT_INSTALLED",
+    "locked_declared_environment": "NOT_RUN"
+  },
+  "new_tests": {
+    "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_manager_request_preparation",
+    "run": 12,
+    "status": "PASS"
+  },
+  "final_required_regression": {
+    "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_manager_request_preparation test_manager_plan test_daily_manager_assembly test_m18_daily_publication",
+    "run": 38,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "status": "PASS",
+    "log": "release-final.log"
+  },
+  "broader_probe": {
+    "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest discover -s V5/tests -p 'test_manager*.py'",
+    "run": 239,
+    "failures": 3,
+    "errors": 23,
+    "skipped": 6,
+    "status": "NOT_FULL_GREEN",
+    "log": "manager-regression.log",
+    "findings": [
+      "ERROR: setUpClass (test_manager_announcement_binding.ManagerAnnouncementRealOwnerTests)",
+      "ERROR: test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time (test_manager_archive_reader.ArchiveWiringTests.test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time)",
+      "ERROR: test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store (test_manager_archive_reader.ArchiveWiringTests.test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store)",
+      "ERROR: test_hourly_and_daily_use_original_independent_trios (test_manager_archive_reader.ArchiveWiringTests.test_hourly_and_daily_use_original_independent_trios)",
+      "ERROR: test_manifest_declared_missing_hourly_is_not_silent_empty (test_manager_archive_reader.ArchiveWiringTests.test_manifest_declared_missing_hourly_is_not_silent_empty)",
+      "ERROR: test_refresh_saves_same_run_and_independent_readback_with_archive_materials (test_manager_archive_reader.ArchiveWiringTests.test_refresh_saves_same_run_and_independent_readback_with_archive_materials)",
+      "ERROR: test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time (test_manager_archive_reader.ArchiveWiringTests.test_actual_workspace_uses_original_archive_binding_and_preserves_missing_acquisition_time)",
+      "ERROR: test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store (test_manager_archive_reader.ArchiveWiringTests.test_hash_bound_but_semantically_wrong_receipt_is_rejected_by_original_store)",
+      "ERROR: test_hourly_and_daily_use_original_independent_trios (test_manager_archive_reader.ArchiveWiringTests.test_hourly_and_daily_use_original_independent_trios)",
+      "ERROR: test_manifest_declared_missing_hourly_is_not_silent_empty (test_manager_archive_reader.ArchiveWiringTests.test_manifest_declared_missing_hourly_is_not_silent_empty)",
+      "ERROR: test_refresh_saves_same_run_and_independent_readback_with_archive_materials (test_manager_archive_reader.ArchiveWiringTests.test_refresh_saves_same_run_and_independent_readback_with_archive_materials)",
+      "ERROR: test_1815_plan_2053_observation_2106_server_read_are_separate (test_manager_panel_observation.ManagerPanelObservationTests.test_1815_plan_2053_observation_2106_server_read_are_separate)",
+      "ERROR: test_broken_receipt_is_optional_gap (test_manager_panel_observation.ManagerPanelObservationTests.test_broken_receipt_is_optional_gap)",
+      "ERROR: test_date_guard_preserved_and_caller_now_not_observation_clock (test_manager_panel_observation.ManagerPanelObservationTests.test_date_guard_preserved_and_caller_now_not_observation_clock)",
+      "ERROR: test_explicit_historical_view_hides_current_rows (test_manager_panel_observation.ManagerPanelObservationTests.test_explicit_historical_view_hides_current_rows)",
+      "ERROR: test_full_695_rows_summarized_without_raising_workspace_budget (test_manager_panel_observation.ManagerPanelObservationTests.test_full_695_rows_summarized_without_raising_workspace_budget)",
+      "ERROR: test_future_observation_rejected_against_real_read_clock (test_manager_panel_observation.ManagerPanelObservationTests.test_future_observation_rejected_against_real_read_clock)",
+      "ERROR: test_missing_artifact_does_not_block_workspace (test_manager_panel_observation.ManagerPanelObservationTests.test_missing_artifact_does_not_block_workspace)",
+      "ERROR: test_refresh_observation_not_saved_with_plan (test_manager_panel_observation.ManagerPanelObservationTests.test_refresh_observation_not_saved_with_plan)",
+      "ERROR: test_root_overlap_and_reference_sha_rejected (test_manager_panel_observation.ManagerPanelObservationTests.test_root_overlap_and_reference_sha_rejected)",
+      "ERROR: test_same_saved_panel_is_hidden_on_next_calendar_day (test_manager_panel_observation.ManagerPanelObservationTests.test_same_saved_panel_is_hidden_on_next_calendar_day)",
+      "ERROR: test_saved_rows_read_twice_without_recompute_or_formal_change (test_manager_panel_observation.ManagerPanelObservationTests.test_saved_rows_read_twice_without_recompute_or_formal_change)",
+      "ERROR: test_synthetic_kind_cannot_enter_observation (test_manager_panel_observation.ManagerPanelObservationTests.test_synthetic_kind_cannot_enter_observation)",
+      "FAIL: test_large_result_and_independent_cold_read_keep_complete_payload (test_manager_bounded_result.LargeManagerResultTests.test_large_result_and_independent_cold_read_keep_complete_payload)",
+      "FAIL: test_closed_target_still_rejected_by_original_plan_gate (test_manager_membership.ManagerMembershipTests.test_closed_target_still_rejected_by_original_plan_gate)",
+      "FAIL: test_original_owner_still_reproduces_five_admission_failures_without_errors (test_manager_plan_date_gate.ManagerDateGateProcessTests.test_original_owner_still_reproduces_five_admission_failures_without_errors)",
+      "ERROR: setUpClass (__main__.ManagerPlanDateGateTests)"
+    ],
+    "limits": [
+      "Real announcement request path not supplied; no real owner was invoked to satisfy it.",
+      "Broader local materialization omitted uv.lock (12 panel setup errors); the remote candidate full V5 tree DOES preserve original uv.lock. No expanded rerun claimed.",
+      "Archive worker failures and bounded-result/membership failures report LOCAL_MANAGER_WORKER_FAILED; root cause not established.",
+      "Original RED date-gate fixture detects announcement_analysis.py source SHA mismatch. Baseline files not changed.",
+      "Six original announcement fixture cases skipped because separate upstream bundle not configured."
+    ]
+  },
+  "source_comparison": {
+    "candidate_v5_git_tree": "5cc027c591e50cfcbaeb5d9f0a540b8aeb87225f",
+    "baseline_file_count": 1353,
+    "candidate_file_count": 1355,
+    "modified_baseline_files": 0,
+    "new_files": 2,
+    "remote_recursive_tree_truncated": false
+  },
+  "not_run": [
+    "Mac",
+    "declared_locked_dependencies",
+    "real_provider",
+    "real_model",
+    "real_owner_production",
+    "live_manager_save",
+    "live_source_preparation",
+    "HTTP_DOM_deployment",
+    "native_visual",
+    "PIT",
+    "natural_run",
+    "complete_module_acceptance"
+  ]
+}

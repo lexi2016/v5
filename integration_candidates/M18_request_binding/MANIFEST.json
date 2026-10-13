@@ -1,0 +1,21 @@
+{
+  "schema_version": "v5.m18_candidate_manifest.v1",
+  "baseline_commit": "c7b815c065da83bd2db2b3023be4607ce9f194ec",
+  "m18_parent": "0b3495b5ded5c0a6a132de1b10108c4d7ff761f6",
+  "baseline_v5_git_tree": "49a1bf603b6021433a2847d4be556f159f1407de",
+  "candidate_v5_git_tree": "5cc027c591e50cfcbaeb5d9f0a540b8aeb87225f",
+  "baseline_files": 1353,
+  "candidate_files": 1355,
+  "added_files": {
+    "V5/src/v5_shadow/manager_request_preparation.py": {
+      "sha256": "d6c02050228f82a99f0851d9339b9a71225525ee7d34e0a11719b2be6f6512a8",
+      "bytes": 10036
+    },
+    "V5/tests/test_manager_request_preparation.py": {
+      "sha256": "0a7fbd33cc01f22d4c2bc4107d9b66268ddbc60a0ce3af5091b623418e102659",
+      "bytes": 6207
+    }
+  },
+  "modified_baseline_files": [],
+  "source_owners_preserved": true
+}

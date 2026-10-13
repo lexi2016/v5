@@ -1,0 +1,54 @@
+{
+  "schema_version": "v5.m06.p0_readonly_validation.v1",
+  "p0_input_commit": "aa59bfb8551b0d2f86ed88b28e9127354ff8b976",
+  "m06_source_commit": "08ed9de9ddb5fd2c62eb1762df2f6106464d823b",
+  "real_reference_feedback": "7006c6ab6e2b4f1f9f6a00da0b3b490dcd4d4fd8",
+  "private_original_runtime_files": 50,
+  "private_original_runtime_bytes": "ALL_UNCHANGED",
+  "checks": [
+    {
+      "name": "M06 read-only HTTP integration plus existing source publication",
+      "count": 9,
+      "passed": 9,
+      "exit_code": 0,
+      "log": "handoffs/P0/m06-readonly-20261012/evidence/m06-api-final.log"
+    },
+    {
+      "name": "Existing module API regressions",
+      "count": 11,
+      "passed": 11,
+      "exit_code": 0,
+      "log": "handoffs/P0/m06-readonly-20261012/evidence/module-api-regression.log"
+    },
+    {
+      "name": "M06 frontend plus unchanged source bundle frontend",
+      "count": 18,
+      "passed": 18,
+      "exit_code": 0,
+      "log": "handoffs/P0/m06-readonly-20261012/evidence/frontend-targeted-final.log"
+    },
+    {
+      "name": "Original synthetic publication payload consumed by frontend",
+      "status": "PASS_COMPLETE_DEEP_EQUALITY_ALL100",
+      "log": "handoffs/P0/m06-readonly-20261012/evidence/frontend-original-payload.log"
+    },
+    {
+      "name": "Cloud typecheck",
+      "status": "UNAVAILABLE",
+      "exit_code": 127,
+      "reason": "vue-tsc not installed in existing cloud dependencies",
+      "log": "handoffs/P0/m06-readonly-20261012/evidence/typecheck.log"
+    }
+  ],
+  "build": "NOT_RUN_VITE_ABSENT_EXISTING_CLOUD_DEPENDENCIES",
+  "vue_dom_mount": "NOT_RUN_EXISTING_CLOUD_DEPENDENCIES_ABSENT",
+  "mac_real_reference_api_and_dom": "NOT_RUN_PENDING_FIXED_COMMIT_HANDOFF",
+  "original_85_m06_suite": "NOT_RERUN_PER_SCOPE",
+  "existing_node_types": "PRESERVED",
+  "model_generation": "NOT_RUN",
+  "formal_eligibility_pit_natural": "NOT_UPGRADED",
+  "final_independent_v5_hk02_runtime": "PENDING_ENVIRONMENT_ASSEMBLY_AND_NEW_IDENTITY_PRODUCT",
+  "real_business_payload_uploaded": false,
+  "private_machine_paths_uploaded": false,
+  "data_writes_on_get": false
+}
