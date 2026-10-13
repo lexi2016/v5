@@ -151,3 +151,20 @@ it('clears the displayed identity when another run cannot be read', async () => 
   expect(screen.getByRole('heading', { name: '经理已保存结果', level: 2 })).toBeTruthy();
   expect(screen.getByRole('button', { name: '源模块实际状态' })).toBeTruthy();
 });
+
+
+it('M04 direct entry opens both disclosures, focuses the result and leaves the manager run unchanged', async () => {
+  const requests=transport();
+  const {container}=render(SavedManagerResultView);await ready();
+  const beforeRun=(screen.getByRole('textbox',{name:'运行 ID'}) as HTMLInputElement).value;
+  await fireEvent.click(screen.getByRole('button',{name:'研究情报 · M04'}));
+  const sources=container.querySelector<HTMLDetailsElement>('#source-module-content')!;
+  const research=container.querySelector<HTMLDetailsElement>('#m04-saved-research')!;
+  await waitFor(()=>{expect(sources.open).toBe(true);expect(research.open).toBe(true);});
+  await fireEvent(research,new Event('toggle'));
+  await waitFor(()=>expect(requests.filter(url=>url==='/api/v5/source-bundle/research-intelligence')).toHaveLength(1));
+  expect(document.activeElement).toBe(research.querySelector('summary'));
+  expect((screen.getByRole('textbox',{name:'运行 ID'}) as HTMLInputElement).value).toBe(beforeRun);
+  await fireEvent.click(screen.getByRole('button',{name:'研究情报 · M04'}));
+  expect(requests.filter(url=>url==='/api/v5/source-bundle/research-intelligence')).toHaveLength(1);
+});

@@ -1,0 +1,1151 @@
+--- /dev/null
++++ b/V5/src/v5_shadow/m04_readonly.py
+@@ -0,0 +1,138 @@
++"""Cold-read one fixed historical M04 sample with the unchanged archive owner.
++
++No latest selector, owner run/build/import, provider, model, publication, or writes.
++The configured root is an independently marked V5 copy of the exact saved trio.
++"""
++import hashlib
++import json
++import os
++from pathlib import Path
++import subprocess
++import time
++from .composition import no_symlinks
++from .contracts import exact_keys
++from .digests import canonical_bytes, sha256_json, MAX_JSON_BYTES
++
++ROUTE='/api/v5/source-bundle/research-intelligence'
++BINDING='m04_saved_research_binding'
++BASE=Path(__file__).resolve().parents[2]
++RUNTIME=BASE/'contracts/m04_readonly_runtime.json'
++RUNTIME_SHA256='2c66538a28864c919e6b43b5f73fce730d35c5236034ad930e0a58512b265a91'
++EXPECTED_OUT_OF_SAMPLE_ERRORS=53
++CAPSULE_SHA256='33a4b671c4b2b6b89db2c3e8bed7efdc8d1ee8fc983ff005d2ade2692d47b2a4'
++ARTICLE_SOURCE_SHA256='5c3f8dea7b25d12be209a809fbff49dfb85063be5a653b3ea4053397f12c0e5c'
++FILES={
++    'manifest.json':'b3018c40ba6ffb88f1eec00a48448b5f3414fd55f067fb39a7518febb012fb52',
++    'research/archives/20261012.json':'3fdf8ce89eefc4e6c39b03201e56dd3a4aaaefca125c5b3ae787228fa7bb21af',
++    'receipts/research/archives/20261012.json':'8b62a83a0dcc85879734af21a309a7e464ff0cbabbad6e68271b4d11a9766ecd',
++}
++REFERENCE=dict(archive_date='20261012',source_slot='2100',source_run_id='hip-49cb26f7f3a0661bde1d1440',
++    batch_fetched_at='2026-10-12T21:00:00+08:00',source_publication_available_at='2026-10-12T21:00:01.768546+08:00',
++    publication_time_is_not_article_availability=True,original_code_commit='8a3c1d2013e34b7e070fd924e1ee754f7dfd8de7',
++    verification_commit='8261160018537c71de0af17584d371a2d31913c8')
++FLAGS=dict(research_only=True,natural_verified=False,historical_pit_claimed=False,
++    formal_eligibility_verified=False,production_allowed=False,buy_gate_updated=False,orders_sent=False)
++
++
++def validate_binding(config):
++    binding=config.get(BINDING)
++    if binding is None:return
++    if config.get('module_id')!='source_bundle' or ROUTE not in config.get('routes',[]):
++        raise ValueError('M04_ROUTE_CONFIG')
++    exact_keys(binding,('archive_root','python_executable'))
++    for key in ('archive_root','python_executable'):
++        value=binding[key]
++        if not isinstance(value,str) or not value or not Path(value).is_absolute() or '..' in Path(value).parts:
++            raise ValueError('M04_BINDING_PATH')
++
++
++def _raw(path):
++    path=no_symlinks(path)
++    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
++    try:
++        from .module_api import _read_regular
++        return _read_regular(fd,MAX_JSON_BYTES)
++    finally:os.close(fd)
++
++
++def _runtime():
++    raw=_raw(RUNTIME)
++    if hashlib.sha256(raw).hexdigest()!=RUNTIME_SHA256:raise ValueError('M04_RUNTIME_MANIFEST')
++    for entry in json.loads(raw)['entries']:
++        relative=Path(entry['path'])
++        if relative.is_absolute() or '..' in relative.parts:raise ValueError('M04_RUNTIME_PATH')
++        content=_raw(BASE/relative)
++        if len(content)!=entry['bytes'] or hashlib.sha256(content).hexdigest()!=entry['sha256']:
++            raise ValueError('M04_RUNTIME_BYTES')
++
++
++def _sample(root):
++    expected=set(FILES)|{'.v5-m04-saved-root'}
++    for name in FILES:
++        expected.update(str(parent) for parent in Path(name).parents if str(parent)!='.')
++    actual={str(path.relative_to(root)) for path in root.rglob('*')}
++    if actual!=expected:raise ValueError('M04_PRIVATE_ROOT_INVENTORY')
++    for relative in actual:no_symlinks(root/relative)
++    if _raw(root/'.v5-m04-saved-root')!=b'v5.m04-saved-reference.v1\n':raise ValueError('M04_PRIVATE_ROOT_MARKER')
++    sample={}
++    for name,digest in FILES.items():
++        raw=_raw(root/name)
++        if hashlib.sha256(raw).hexdigest()!=digest:raise ValueError('M04_SAVED_SAMPLE_CHANGED')
++        sample[name]=raw
++    return sample
++
++
++def not_configured():
++    return dict(status='NOT_CONFIGURED',module_id='M04_RESEARCH_INTELLIGENCE',
++        reason_codes=['M04_SAVED_REFERENCE_NOT_CONFIGURED'],**FLAGS)
++
++
++def read_record(config,query):
++    if query:raise ValueError('M04_FIXED_REFERENCE_QUERY')
++    validate_binding(config);binding=config.get(BINDING)
++    if binding is None:return None
++    root=no_symlinks(Path(binding['archive_root']));sample=_sample(root);_runtime()
++    request=dict(root=str(root),files=FILES)
++    # Execute the original reader entrypoint directly. Its worker installs the
++    # original frozen store and read-only audit boundary, never the ingest CLI.
++    try:
++        proc=subprocess.run([binding['python_executable'],'-I','-B',str(BASE/'src/v5_shadow/archive_reader.py')],
++            input=canonical_bytes(request),stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30,
++            env={k:v for k,v in os.environ.items() if not k.startswith(('V4_','V35_'))})
++    except subprocess.TimeoutExpired as error:raise ValueError('M04_READER_TIMEOUT') from error
++    if proc.returncode or len(proc.stdout)>MAX_JSON_BYTES:raise ValueError('M04_ORIGINAL_READER_REJECTED')
++    try:readback=json.loads(proc.stdout)
++    except (ValueError,UnicodeError) as error:raise ValueError('M04_READER_JSON') from error
++    if (not isinstance(readback,dict) or readback.get('source_capsule_sha256')!=CAPSULE_SHA256
++        or readback.get('article_v2_source_sha256')!=ARTICLE_SOURCE_SHA256
++        or readback.get('request_sha256')!=sha256_json(request)):
++        raise ValueError('M04_READER_IDENTITY')
++    records=readback.get('records')
++    if not isinstance(records,dict) or any(not isinstance(row,dict) for row in records.values()):raise ValueError('M04_READER_RECORDS')
++    outside_errors=sum(bool(row.get('error')) for key,row in records.items() if key!='20261012/')
++    if outside_errors!=EXPECTED_OUT_OF_SAMPLE_ERRORS:raise ValueError('M04_OUT_OF_SAMPLE_CHANGED')
++    selected=records.get('20261012/',{})
++    if selected.get('error') or not isinstance(selected.get('payload'),dict):raise ValueError('M04_SAMPLE_NOT_READABLE')
++    archive=selected['payload']
++    if archive!=json.loads(sample['research/archives/20261012.json']):raise ValueError('M04_PAYLOAD_NOT_ORIGINAL')
++    articles=archive.get('articles')
++    if (archive.get('archive_date')!='20261012' or archive.get('article_count')!=18
++        or not isinstance(articles,list) or len(articles)!=18
++        or archive.get('recommendation_status')!='RESEARCH_ONLY'
++        or any(archive.get(key) is not False for key in ('production_allowed','buy_gate_updated','orders_sent'))):
++        raise ValueError('M04_SAMPLE_CONTRACT')
++    missing={key:sum(not a.get(key) or a.get(key)=='UNKNOWN' for a in articles) for key in ('retrieved_at','available_at')}
++    if missing!={'retrieved_at':18,'available_at':18}:raise ValueError('M04_SAMPLE_CLOCKS_CHANGED')
++    if _sample(root)!=sample:raise ValueError('M04_SAVED_SAMPLE_CHANGED')
++    _runtime()
++    payload=dict(schema_version='v5.m04_saved_research.v1',module_id='M04_RESEARCH_INTELLIGENCE',
++        status='SAVED_HISTORICAL_SAMPLE',data_kind='RECORDED_INPUT_REPLAY',coverage_scope='FIXED_18_ARTICLE_SAMPLE',
++        reference=REFERENCE,file_sha256=FILES,archive=archive,article_count=18,pit='UNKNOWN',
++        missing_retrieved_at=18,missing_available_at=18,
++        out_of_sample_record_errors=outside_errors,
++        source_capsule_sha256=CAPSULE_SHA256,article_v2_source_sha256=ARTICLE_SOURCE_SHA256,**FLAGS)
++    record=dict(schema_version='v5.module_response.v1',module_id=config['module_id'],release_id=config['release_id'],
++        path=ROUTE,query={},payload=payload,payload_sha256=sha256_json(payload),source_input_sha256=archive['source_input_sha256'],
++        data_kind='RECORDED_INPUT_REPLAY',generated_at=time.strftime('%Y-%m-%dT%H:%M:%SZ',time.gmtime()),status_code=200)
++    from .module_api import _validate_record
++    return _validate_record(config,record,ROUTE,{}),sha256_json(record)
+--- /dev/null
++++ b/V5/contracts/m04_readonly_runtime.json
+@@ -0,0 +1,558 @@
++{
++  "schema_version": "v5.m04_readonly_runtime.v1",
++  "original_commit": "8a3c1d2013e34b7e070fd924e1ee754f7dfd8de7",
++  "scope": "Exact preexisting original archive cold-reader closure; no builder, importer, or provider call.",
++  "entries": [
++    {
++      "path": "contracts/archive_builder_source_manifest.json",
++      "bytes": 4451,
++      "sha256": "47a7e7e2b4710c3db5e3185d02e2f291f5cf5aafb43077893627321c973403cb"
++    },
++    {
++      "path": "contracts/archive_reader_source_manifest.json",
++      "bytes": 34634,
++      "sha256": "6b1b7582efcfab9231ae99af019f35070ebd85dd97df69a0fea191ce62f27dae"
++    },
++    {
++      "path": "producers/archive-acquisition-v2/manifest.json",
++      "bytes": 12503,
++      "sha256": "3e0c745c614a0a13127ba053991f4171734f897ce90ccffdbbcb0ebb0dfbc876"
++    },
++    {
++      "path": "src/v5_shadow/__init__.py",
++      "bytes": 83,
++      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c"
++    },
++    {
++      "path": "src/v5_shadow/a_preselection.py",
++      "bytes": 29140,
++      "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b"
++    },
++    {
++      "path": "src/v5_shadow/archive_article_v2.py",
++      "bytes": 19898,
++      "sha256": "4b2fc99427ac9a69073e2761ee9f9d3e74a864c3b80c7e69eed6d505b9921371"
++    },
++    {
++      "path": "src/v5_shadow/archive_builder_v1.py",
++      "bytes": 24034,
++      "sha256": "7f8cff5dfb4fe66663d7dd9f7901089e802ef53b55b10e1c003f6e2300ebdd74"
++    },
++    {
++      "path": "src/v5_shadow/archive_reader.py",
++      "bytes": 8879,
++      "sha256": "3bc1bd71266a7a64314233eb4229a3cceaffde476bd39d608d4f9ddbc2eb6c28"
++    },
++    {
++      "path": "src/v5_shadow/composition.py",
++      "bytes": 5297,
++      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0"
++    },
++    {
++      "path": "src/v5_shadow/contracts.py",
++      "bytes": 7256,
++      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
++    },
++    {
++      "path": "src/v5_shadow/digests.py",
++      "bytes": 425,
++      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
++    },
++    {
++      "path": "src/v5_shadow/provider_evidence.py",
++      "bytes": 6446,
++      "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/_research_hourly_parts/_namespace.py",
++      "bytes": 527,
++      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/_research_hourly_parts/lane_snapshot.py",
++      "bytes": 5911,
++      "sha256": "f0279dcd3d9e64ca502f9d11d98f12e82e7c1031c82e61cd254a9471784e8e69"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/_research_hourly_parts/research_projection.py",
++      "bytes": 13774,
++      "sha256": "a892c5bdd28ff91f21bd6a341a5fe83f86f95b9f68585c4a9ed8a906e64c8ec3"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/_research_hourly_parts/rows_topics.py",
++      "bytes": 4816,
++      "sha256": "bcf4ae0995b65155dd390060448dd0b6108cd70f4359a592c988b710320c0d21"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/_research_hourly_parts/source_evidence.py",
++      "bytes": 10326,
++      "sha256": "b96109da48fae84ec8103066463a0fcb93aa2e35c62db97ef810883773b8be1e"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/research.py",
++      "bytes": 21832,
++      "sha256": "b77cc0d3c9ec36eeee3e6cab207945a783b0352a703efdb5c8e2f7f17966506f"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/domains/research_hourly.py",
++      "bytes": 16686,
++      "sha256": "daf3caa9ac13c4999551574575f4169a25631ab26a9a41c88af34cd99b6c221f"
++    },
++    {
++      "path": "vendor/archive_builder_baseline/ops/collect_hourly_research_input.py",
++      "bytes": 18078,
++      "sha256": "767eaae79e2436284c0cf73626fd114a92448d3aff37b69c378862aae141a7fa"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/__init__.py",
++      "bytes": 55,
++      "sha256": "6334176641872990a56b559f965a9dc6d65f29ab0a0efc0752ef1a73fe42bc7d"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/research.py",
++      "bytes": 13060,
++      "sha256": "cd71bdd8ac24037627520c3cca6f658e83fc4e51c8a7934f6c6c9222f4b2f3c1"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/research_day_product.py",
++      "bytes": 102936,
++      "sha256": "f0e4d36e30259db6bf94bb3374241ce9d96ea04a4cf5eb18f74b871decef277d"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/runtime_tasks.py",
++      "bytes": 3350,
++      "sha256": "f9923462342eaaeafba6255e9f8adda54f9852ea4996cf6da0cf82e4faf32965"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/stages.py",
++      "bytes": 2036,
++      "sha256": "d0ac1771a1005888e53e9a322da65f959cfbcbcc665357b8783d5eb4eda9c6df"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/trading_calendar.py",
++      "bytes": 9291,
++      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/contracts/us_equity_calendar.py",
++      "bytes": 3603,
++      "sha256": "73f223fb032e6c3a3a9f462f41b29fd029365ecfc98942bc5413a911faeba452"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/d1_review_lane_producer.py",
++      "bytes": 38806,
++      "sha256": "9bff043d44f186469869aac80c10211ee0c8d1de3ab28ba0d6571d812d182c03"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/d1_review_source_producer.py",
++      "bytes": 27903,
++      "sha256": "195ab9af387eae5c4dfe38bf9685cf566e27bbc74baab9e37cd736ec21903c8a"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/daily_research_review.py",
++      "bytes": 16330,
++      "sha256": "8541ec2696de3aac718979b72658f946ebe5eeda27778e4e627c6b586adeeaea"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/intraday_research.py",
++      "bytes": 35131,
++      "sha256": "aef3f038a67c11109e18616fd9c943265e79933c68ea2f1cf4beea22fc652fc2"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/preselection_materializer.py",
++      "bytes": 51134,
++      "sha256": "f090146f39eaaf1ea5baaa5da60cddc2aefe738be16eb1609f166b643953d84e"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_day_product.py",
++      "bytes": 65157,
++      "sha256": "de085c51b34946aedf9134fdb6edbbd48fee4dfb3386dab1d327768c4b73ea1f"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/__init__.py",
++      "bytes": 791,
++      "sha256": "f0c1d0aa21e9370ca6962dbf86a01e0325c55e718a73a7fa95e4d469f29c9855"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/_cache.py",
++      "bytes": 7557,
++      "sha256": "5080b2b9daec511877f90877c0682aa6ebb506ba536ee2f44740428bca2ae0f7"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/_evidence.py",
++      "bytes": 8875,
++      "sha256": "02ae017474bdb91af0bddb89684d567f90574112f6a93527007c54c05ad0400d"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/_owned_io.py",
++      "bytes": 3872,
++      "sha256": "dacd18dff80b84a13d98b1eae0ccb3d024f327a7d941d95bb068dd9331a15ec1"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/_snapshot.py",
++      "bytes": 7857,
++      "sha256": "248161565dd55f8dce3a46632ada3f0b1f88fde0e01904db4ad76ef4a91ccba6"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/assembly.py",
++      "bytes": 5780,
++      "sha256": "6b1c36ea8d22d8975fa0123c0e0ef1d12cf0c3323d9a4e7a37709e5d0c98de7e"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/__init__.py",
++      "bytes": 88,
++      "sha256": "0e7dce5ded9af6a90921df6c7670852894e6849275b25febae1cf5e73754ae59"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/breadth.py",
++      "bytes": 10065,
++      "sha256": "e74d0592856c14c10ceff97546ba5cd9ac528e9fe77022a0322a05ff473167e5"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/data.py",
++      "bytes": 18006,
++      "sha256": "f243a1f186b37ca2fa6c76b428c4597a2ebc9ab685a2d00dbf3ceb1e7d9fd2d7"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/emotion_metrics.py",
++      "bytes": 22793,
++      "sha256": "132e89d992f2f0a17fe23c9c8acc562659c5966f6e5be2e2d87ae01779682bac"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/fetchers.py",
++      "bytes": 12647,
++      "sha256": "350cdba92df688bfa827d8f115992a29c9dc4ca09093060fe5c3b47374afc168"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/fuyao_sources.py",
++      "bytes": 14948,
++      "sha256": "b08e40f5574189181221eae5a37ae4ca7a1d25b565986797a037b7c76cb54b85"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/market_facts.py",
++      "bytes": 27965,
++      "sha256": "f494b1788b5710b456e6fc2dca74c05a48e0910a2463b2adf33b2c174df3e7b4"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/stats_context.py",
++      "bytes": 13664,
++      "sha256": "9a9c1e80a617ed15009b58fcafd0dba7826992e78c3e7d10e0dcd607aa74d0d2"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/theme_tree.py",
++      "bytes": 13256,
++      "sha256": "51e42f77067315a94b0940bf7ce8608ec990a6c378be1bb2bc24c183bf1ffd9e"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/trade_calendar.py",
++      "bytes": 8089,
++      "sha256": "be67388f1fe1aa02701df783ee0e0aeb5dc81f0bb4a8423c138a738e8ae22c97"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/data_core/util.py",
++      "bytes": 3012,
++      "sha256": "bf773d20ec2edf398d083b1c6beedc5234ecff9440f4632ceeaf763e12fffc6b"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/generation.py",
++      "bytes": 17101,
++      "sha256": "b36dcbc550f31697391ed08d00b305b9291d51e8707532589f0e7bce0b1a20c2"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/model_provider.py",
++      "bytes": 8195,
++      "sha256": "8db1dcc867cbb758cc538c4419b75d199250d96a6f1bc163876ba7356d74a9a9"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/owned_authority.py",
++      "bytes": 19924,
++      "sha256": "7bd218fba2444085723a4d9290931463a14c6e16878cebb73e655ae4f2e98072"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/owned_runtime.py",
++      "bytes": 13098,
++      "sha256": "401291b45ce8a169f7027df5b49336c9bde7bb9a6634c7bce66189e01b90ced9"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/__init__.py",
++      "bytes": 75,
++      "sha256": "28c57552ab121d3a582bc59e716ed90996e97ecf2d334634011b3511be4a7853"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/analysts.py",
++      "bytes": 7605,
++      "sha256": "f1022ecaf5e4597683179c5e6eeed82d02b6da3a5d9c6a9e997a952e74cf520b"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/deepdive/__init__.py",
++      "bytes": 59,
++      "sha256": "e427831aaf0d571f7cb4e98723f0a00d145af60e3221afac6128dc6daa219d11"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/deepdive/schemas.py",
++      "bytes": 1878,
++      "sha256": "fd7706bb31276910ea7acc0c8ce393a7d5b7a3c86280fdc2a5ffdbe2a0a544ae"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/helpers.py",
++      "bytes": 816,
++      "sha256": "dffcb252a8cb80eb415136f550d0368791f630f411525639bf3f073c745c9aaf"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/llm_errors.py",
++      "bytes": 6049,
++      "sha256": "f48f74f3d03d537a28c0b82c11620971f2b1c41be28c7bebb7ec14ba5af131e8"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/preflight.py",
++      "bytes": 5042,
++      "sha256": "5f10839944af3e12d14a46e6a5a434a9d75475ebe74a05763cfca2d3d807dfca"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/prompts.py",
++      "bytes": 4233,
++      "sha256": "833962c06d4be62e9801474af6a5020d80e89f6c1460e360618361ad079a492a"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/reflection_context.py",
++      "bytes": 6701,
++      "sha256": "cfa7140d52d7494631d8537f797567f9e5e7a0ef81581c170f5e726b3621635f"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/review_graph.py",
++      "bytes": 777,
++      "sha256": "6a21ac2ddc5b82bf10f75e4d8b104c6ef29ea29972beb92bcbb8de1e9fa60fe6"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/roles.py",
++      "bytes": 1144,
++      "sha256": "cacc7b2a981e3c9a3f866e5a76d7cbd2257cd78bd01332311f4ab4f959fcd86a"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/schemas.py",
++      "bytes": 15331,
++      "sha256": "71c640384e6c02566e94454baf3686da49ce9ba905aca1a6cdf05bb35084ae85"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/serializer.py",
++      "bytes": 4471,
++      "sha256": "82b67b12fd2bfd21d3363e63ee487e5fc8d60e049cf362f0789bd7522c0d88bc"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/state.py",
++      "bytes": 1873,
++      "sha256": "0499048b06d1fe4376b8f82b64fb401412efed888527fc91d46a4907d5567624"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/structured.py",
++      "bytes": 3287,
++      "sha256": "f885d094e8c3ffaede8861ebdaa4d23b47f9624cdeff11b0336333bfb297b712"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/synthesizer.py",
++      "bytes": 3187,
++      "sha256": "b7116799db7f73a6443fa82ee0aa8b4a98e01bf84a78e1482a0e97d70669af06"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/util.py",
++      "bytes": 290,
++      "sha256": "71b03ab4727a209cd9b1c26b0bf7e7ce35617240b1df04fc19d986c14506222f"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/research_review_generation/vibe_core/verification.py",
++      "bytes": 6714,
++      "sha256": "1e369984953eed3ff96bc1df6299f5fa24ef48c4019f8d69037b2673dc9755ce"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/domains/runtime_policy.py",
++      "bytes": 5561,
++      "sha256": "bb571a0bd431a072f03d051ca919d21aab04f12bc5a0973da4edad61b9424c85"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/__init__.py",
++      "bytes": 68,
++      "sha256": "46068d69d6783fdcd33b3428ae3c7e8e690d5149f4f00837f6b1d1184dd6f47b"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/data_store.py",
++      "bytes": 10704,
++      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/formula_generation.py",
++      "bytes": 17448,
++      "sha256": "0904603912d6257cb02f41dfaf66c080e2f682e690b1c1901a86a7bafe1e74f0"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/historical_pool_sources.py",
++      "bytes": 33923,
++      "sha256": "dbee92a602619f923ef27def8200604fa14f074680c34d65031b69c55181fcf8"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/http_transport.py",
++      "bytes": 9429,
++      "sha256": "b34f906be69051da0f0f5e2f4980bf9b4c310d88ad9fc1b50b3246fceffccc69"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/interprocess_lock.py",
++      "bytes": 7514,
++      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/isolated_package_loader.py",
++      "bytes": 6946,
++      "sha256": "c714d4b95c03da061f592e076cd12188dbeefcd9f0fae7aeaae18c0450e915eb"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/market_time.py",
++      "bytes": 960,
++      "sha256": "e72e8eb1bef136859c5379fae2eab6d94c5612959b3a8ab8e75f101954a001f1"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/owned_io.py",
++      "bytes": 9354,
++      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/owned_path.py",
++      "bytes": 2251,
++      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/preselection_pool_store.py",
++      "bytes": 30341,
++      "sha256": "c96db1543e8b28e640b3c2d2a64aaae6a96d9a2a4a2401ca2780519233805171"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/research_lane_source.py",
++      "bytes": 24125,
++      "sha256": "2a58fe0db5c5d7915e7dbc884b8720e7d32a8c0084fe5e78b0e9e37f9e738cd4"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/research_peripheral_store.py",
++      "bytes": 73460,
++      "sha256": "1bcb74e9194932d5ec3d6ac24d7ec42979532cf495b270a1a04b09082706f4fe"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/research_store.py",
++      "bytes": 172644,
++      "sha256": "471ad4ceb0c34f080da674d147df5bb96045c5e7998ab41ba2845297ab63ab6f"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/scheduling/__init__.py",
++      "bytes": 348,
++      "sha256": "66f43516bae3998546285e3c757925a2d8c04c157f17309f13d53eef0668a425"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/scheduling/catalog.py",
++      "bytes": 11044,
++      "sha256": "96c1b7ec2a3c9a94b7f6ac094a5d0ad12ab3c92287201cc7143b42386846a417"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/scheduling/dispatcher.py",
++      "bytes": 18368,
++      "sha256": "7e61cbb234246bd88c9325fb0641c4bbead10debed09b924298e406b06854668"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/scheduling/execution_ledger.py",
++      "bytes": 22725,
++      "sha256": "966fba07ec9d32abcab5435441e4e574002bcdd7b63d6494ff94d7a7e7018007"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/scheduling/executor_registry.py",
++      "bytes": 101560,
++      "sha256": "f462a3254c15cfe9043783b6e07c88781ea4a3151a652c02509da3f2d9b870c9"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/secure_evidence_fs.py",
++      "bytes": 19294,
++      "sha256": "f12477fa19c2d8c308d3eb5bd5f1ba17adef2ba8d3b1ac00685bbb4245421d56"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/stage_acquisition_universe_commit.py",
++      "bytes": 98409,
++      "sha256": "5ca1b4219dfa7c0031c69eae8fa2af99d9ea16f60ecb603bbee1c55207c75c2b"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/stage_acquisition_universe_contracts.py",
++      "bytes": 57524,
++      "sha256": "8598dfbd3e739608370612fe276b9c282d22908b902188dbc2185421e06addf3"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/stage_store.py",
++      "bytes": 24016,
++      "sha256": "00d3dca6b90f86b7a6f6707f3150f2189e2eb15fcbb7eb5198db4ffd5e0392c4"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/infrastructure/trading_safety.py",
++      "bytes": 2597,
++      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/ops/daily_materialize.py",
++      "bytes": 27110,
++      "sha256": "e350f409b291bee26e2218dc0ace6436d7a85cc48a20569f7e6f3e987bb265d4"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/ops/materialize_research_peripherals.py",
++      "bytes": 86377,
++      "sha256": "e71d1db359f1153b179e86e09331a03d6263f00c9a23147f57d286a21cd12180"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/ops/us_market_digest.py",
++      "bytes": 99595,
++      "sha256": "7c73342d8e2cfff536d81faf7d616e507581b67f5bf5ff44d9a97380859577ea"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/__init__.py",
++      "bytes": 1098,
++      "sha256": "f5bc18e6c6143feaa23627ac8b66885810adbf77fb2135a295526fd188949955"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/acquisition.py",
++      "bytes": 13342,
++      "sha256": "33e5003faed8127ec3393eb36af473c0d63ee3a79843418ef1a950ce7b697397"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/calendar.py",
++      "bytes": 4721,
++      "sha256": "681aae5b50acb89620998acda372531971bd26ae346f0334f37ea6e5b1de8124"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/candidate_input.py",
++      "bytes": 17567,
++      "sha256": "59c6bb0ef13a5aaa576477708385ec4ac68b7d20a69e3fc61d984da4a8284aff"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/consumer.py",
++      "bytes": 33874,
++      "sha256": "61f8a3541aa7a2e698cc4374385e3d20d41b40ffd5a3cd7d87c9494cb8726cf4"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/contracts.py",
++      "bytes": 2331,
++      "sha256": "6880f6a82c7f4fb0fde5c0661bd5a8bb12b590661a4b8552bcb3d6be969ae83d"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/execution_evidence.py",
++      "bytes": 7682,
++      "sha256": "e4c4ea94d892158383620beab1825014f21e926b57907354475f8c9ff382704b"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/input_contracts.py",
++      "bytes": 2796,
++      "sha256": "9521a336709286ab301368a70e2c99f6db6a8ffe288347977328619de7611fd2"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/raw_store.py",
++      "bytes": 36595,
++      "sha256": "130fb1cf5a298fb03b0657ecd90ffdf4f5c9a24a4da4cfd079188c1bac9c1476"
++    },
++    {
++      "path": "vendor/archive_reader_baseline/stage_center/selection.py",
++      "bytes": 92532,
++      "sha256": "31e80e068890be03957920870719030463262c78911953541be3074f8650d4c9"
++    }
++  ]
++}
++
+--- a/V5/src/v5_shadow/module_api.py
++++ b/V5/src/v5_shadow/module_api.py
+@@ -21,6 +21,7 @@
+                           _manager_response, MANAGER_WORKSPACE_PATH)
+ M18_ROUTE = "/api/v4/manager/m18/v2"
+ M17_ROUTE = "/api/v5/manager/close-recapture"
++M04_ROUTE = "/api/v5/source-bundle/research-intelligence"
+ 
+ 
+ def response_key(module_id,path,query):
+@@ -694,7 +695,12 @@
+         keys += ('m10_hk_close_binding',)
+     if isinstance(value, dict) and 'm17_close_recapture_binding' in value:
+         keys += ('m17_close_recapture_binding',)
++    if isinstance(value, dict) and 'm04_saved_research_binding' in value:
++        keys += ('m04_saved_research_binding',)
+     exact_keys(value, keys)
++    if 'm04_saved_research_binding' in value:
++        from .m04_readonly import validate_binding
++        validate_binding(value)
+     if 'm17_close_recapture_binding' in value:
+         if value['module_id'] != 'source_bundle' or M17_ROUTE not in value['routes']:
+             raise ValueError('M17_READONLY_HOST_BINDING')
+@@ -880,8 +886,10 @@
+             payload_sha256=sha256_json(payload),source_input_sha256=binding['identity']['input_sha256'],
+             data_kind='OWNER_RESULT',generated_at=payload['available_at'],status_code=200)
+         return _validate_record(config,record,path,query),sha256_json(record)
+-    if config['module_id']=='source_bundle' and path in ('/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
+-        if path=='/api/v5/source-bundle/hk-stage-observed':
++    if config['module_id']=='source_bundle' and path in (M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
++        if path==M04_ROUTE:
++            from .m04_readonly import read_record,not_configured
++        elif path=='/api/v5/source-bundle/hk-stage-observed':
+             from .m08_readonly import read_record,not_configured
+         elif path=='/api/v5/source-bundle/a-close-replay':
+             from .m09_readonly import read_record,not_configured
+@@ -905,7 +913,7 @@
+     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
+     config,root=_config(value)
+     if any(route in config['routes'] for route in
+-           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
++           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
+         # Set at service startup, before any GET can spawn/import a reader.
+         # Also covers library callers that did not start their interpreter -B.
+         sys.dont_write_bytecode=True
+@@ -918,6 +926,7 @@
+     m09_read_slot=threading.BoundedSemaphore(1)
+     m08_read_slot=threading.BoundedSemaphore(1)
+     m17_read_slot=threading.BoundedSemaphore(1)
++    m04_read_slot=threading.BoundedSemaphore(1)
+     class Handler(BaseHTTPRequestHandler):
+         def setup(self):
+             super().setup();self.connection.settimeout(5)
+@@ -966,7 +975,7 @@
+                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
+                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
+             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in ('/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
++            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
+             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
+             reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
+             if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/a-close-replay':
+@@ -975,6 +984,8 @@
+                 reader_slot=m08_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M17_ROUTE:
+                 reader_slot=m17_read_slot
++            if config['module_id']=='source_bundle' and parsed.path==M04_ROUTE:
++                reader_slot=m04_read_slot
+             if heavy and not reader_slot.acquire(blocking=False):
+                 return self.error(503, 'MODULE_BUSY')
+             try:
+--- /dev/null
++++ b/frontend/src/api/m04SavedResearch.ts
+@@ -0,0 +1,47 @@
++/** Exact M04 saved sample, read only. No run, latest, capture, or model selector. */
++export const M04_ROUTE='/api/v5/source-bundle/research-intelligence';
++const MAX_BYTES=16*1024*1024;
++const FLAGS=['natural_verified','historical_pit_claimed','formal_eligibility_verified','production_allowed','buy_gate_updated','orders_sent'];
++type JsonObject=Record<string,unknown>;
++type Fetcher=(url:string,init?:RequestInit)=>Promise<Response>;
++export interface SavedResearchResult {
++ schema_version:'v5.m04_saved_research.v1';status:'SAVED_HISTORICAL_SAMPLE';
++ article_count:number;missing_retrieved_at:number;missing_available_at:number;pit:'UNKNOWN';
++ out_of_sample_record_errors:number;reference:{archive_date:string;source_slot:string;source_run_id:string;batch_fetched_at?:string;source_publication_available_at?:string};
++ archive:JsonObject&{articles:JsonObject[]};
++}
++export interface SavedResearchState {phase:'IDLE'|'LOADING'|'LOADED'|'NOT_CONFIGURED'|'CANNOT_CONFIRM';result:SavedResearchResult|null;error:string;}
++function check(ok:unknown,reason:string):asserts ok {if(!ok)throw new Error('M04_'+reason);}
++function object(value:unknown):value is Record<string,any>{return !!value&&typeof value==='object'&&!Array.isArray(value);}
++export async function readSavedResearch(fetcher:Fetcher=fetch,signal?:AbortSignal):Promise<SavedResearchResult|null>{
++ const response=await fetcher(M04_ROUTE,{method:'GET',cache:'no-store',credentials:'omit',signal});
++ check(response.ok,'HTTP_'+response.status);
++ const sizeHeader=response.headers.get('content-length');
++ check(!sizeHeader||(/^\d+$/.test(sizeHeader)&&Number(sizeHeader)<=MAX_BYTES),'RESPONSE_LIMIT');
++ check(response.body,'EMPTY_RESPONSE');const reader=response.body.getReader(),parts:Uint8Array[]=[];let size=0;
++ try{while(true){const item=await reader.read();if(item.done)break;size+=item.value.length;if(size>MAX_BYTES){await reader.cancel();throw new Error('M04_RESPONSE_LIMIT');}parts.push(item.value);}}finally{reader.releaseLock();}
++ const bytes=new Uint8Array(size);let offset=0;for(const part of parts){bytes.set(part,offset);offset+=part.length;}
++ let value:any;try{value=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));}catch{throw new Error('M04_RESPONSE_JSON');}
++ check(object(value)&&value.module_id==='M04_RESEARCH_INTELLIGENCE'&&value.research_only===true&&FLAGS.every(k=>value[k]===false),'RESEARCH_BOUNDARY');
++ if(value.status==='NOT_CONFIGURED'){check(Array.isArray(value.reason_codes)&&value.reason_codes.includes('M04_SAVED_REFERENCE_NOT_CONFIGURED'),'MISSING_CONTRACT');return null;}
++ check(value.schema_version==='v5.m04_saved_research.v1'&&value.status==='SAVED_HISTORICAL_SAMPLE'&&value.data_kind==='RECORDED_INPUT_REPLAY'&&value.coverage_scope==='FIXED_18_ARTICLE_SAMPLE','CONTRACT');
++ check(object(value.reference)&&value.reference.archive_date==='20261012'&&value.reference.source_slot==='2100'&&value.reference.source_run_id==='hip-49cb26f7f3a0661bde1d1440'&&value.reference.publication_time_is_not_article_availability===true,'REFERENCE');
++ check(value.article_count===18&&value.pit==='UNKNOWN'&&value.missing_retrieved_at===18&&value.missing_available_at===18,'PIT_BOUNDARY');
++ check(value.out_of_sample_record_errors===53,'OUT_OF_SAMPLE');
++ check(object(value.archive)&&value.archive.archive_date==='20261012'&&value.archive.article_count===18&&Array.isArray(value.archive.articles)&&value.archive.articles.length===18,'ARCHIVE');
++ check(['production_allowed','buy_gate_updated','orders_sent'].every(k=>value.archive[k]===false),'ARCHIVE_BOUNDARY');
++ value.archive.articles.forEach((row:unknown)=>check(object(row)&&typeof row.article_id==='string'&&row.article_id.length>0&&(!row.retrieved_at||row.retrieved_at==='UNKNOWN')&&(!row.available_at||row.available_at==='UNKNOWN'),'ARTICLE_CLOCKS'));
++ return value as SavedResearchResult;
++}
++export class SavedResearchSession {
++ private revision=0;private closed=false;private controller:AbortController|null=null;
++ private emit:(state:SavedResearchState)=>void;private fetcher:Fetcher;
++ constructor(emit:(state:SavedResearchState)=>void,fetcher:Fetcher=fetch){this.emit=emit;this.fetcher=fetcher;}
++ async load(){
++  if(this.closed)return;const revision=++this.revision;this.controller?.abort();this.controller=new AbortController();
++  this.emit({phase:'LOADING',result:null,error:''});
++  try{const result=await readSavedResearch(this.fetcher,this.controller.signal);if(!this.closed&&revision===this.revision)this.emit({phase:result?'LOADED':'NOT_CONFIGURED',result,error:''});}
++  catch(error){if(!this.closed&&revision===this.revision)this.emit({phase:'CANNOT_CONFIRM',result:null,error:error instanceof Error?error.message:'M04_READ_FAILED'});}
++ }
++ close(){this.closed=true;this.revision++;this.controller?.abort();}
++}
+--- /dev/null
++++ b/frontend/src/components/M04SavedResearch.vue
+@@ -0,0 +1,42 @@
++<script setup lang="ts">
++import {onBeforeUnmount,shallowRef} from 'vue';
++import {SavedResearchSession,type SavedResearchState} from '../api/m04SavedResearch';
++const state=shallowRef<SavedResearchState>({phase:'IDLE',result:null,error:''});
++const session=new SavedResearchSession(next=>{state.value=next;});
++function onToggle(event:Event){if((event.currentTarget as HTMLDetailsElement).open&&state.value.phase==='IDLE')void session.load();}
++function text(value:unknown){return typeof value==='string'&&value.trim()?value:'未提供';}
++function json(value:unknown){return JSON.stringify(value,null,2);}
++onBeforeUnmount(()=>session.close());
++</script>
++<template>
++ <details id="m04-saved-research" class="m04-research" @toggle="onToggle">
++  <summary>M04 研究情报 · 已保存历史样本 · 展开只读结果</summary>
++  <section aria-label="M04 已保存研究情报">
++   <p>固定历史样本；只读原存档，未启动新采集或模型。PIT UNKNOWN，不能据此确认当时可获得性或正式准入。</p>
++   <button type="button" @click="session.load()">重新读取 M04 已保存样本</button>
++   <p v-if="state.phase==='IDLE'">尚未读取保存样本。</p>
++   <p v-else-if="state.phase==='LOADING'" role="status" aria-live="polite">正在冷读原 M04 存档…</p>
++   <p v-else-if="state.phase==='NOT_CONFIGURED'" role="status">NOT_CONFIGURED · 尚未绑定这份已保存样本。</p>
++   <p v-else-if="state.phase==='CANNOT_CONFIRM'" role="alert">CANNOT_CONFIRM · 当前读取失败，未显示旧结果。{{ state.error }}</p>
++   <template v-if="state.result">
++    <h3>研究情报 · {{ state.result.reference.archive_date }} · {{ state.result.article_count }} 条</h3>
++    <p>来源时段：21:00（Asia/Shanghai） · 来源运行：{{ state.result.reference.source_run_id }}</p>
++    <p>保存状态：SAVED_HISTORICAL_SAMPLE · {{ state.result.missing_retrieved_at }}/18 缺 retrieved_at，{{ state.result.missing_available_at }}/18 缺 available_at · PIT UNKNOWN</p>
++    <p>完整 manifest 的样本外读取错误：{{ state.result.out_of_sample_record_errors }}。其他日期或产物未随这三份文件复制，未声明全量验证。</p>
++    <p>批次时间 {{ state.result.reference.batch_fetched_at ?? '未提供' }}；发布记录时间 {{ state.result.reference.source_publication_available_at ?? '未提供' }}。批次、发布时间不能替代逐条资料可获得时间。</p>
++    <ol class="m04-articles"><li v-for="article in state.result.archive.articles" :key="String(article.article_id)">
++     <h4>{{ text(article.source_title) }}</h4>
++     <p>{{ text(article.stock_code) }} · {{ text(article.stock_name) }} · {{ text(article.theme) }}</p>
++     <p>原催化：{{ text(article.catalyst) }}</p><p>原证据：{{ text(article.evidence_sentence) }}</p>
++     <p>来源：{{ text(article.source_name) }} · 原发布时间：{{ text(article.published_at) }}</p>
++     <p>retrieved_at：UNKNOWN · available_at：UNKNOWN</p>
++     <details><summary>完整原始研究条目</summary><pre>{{ json(article) }}</pre></details>
++    </li></ol>
++    <details><summary>原存档状态、身份与缺口</summary><pre>{{ json(state.result) }}</pre></details>
++   </template>
++  </section>
++ </details>
++</template>
++<style scoped>
++.m04-research{margin-top:18px;border:1px solid #c8d3dd;border-radius:8px;padding:14px;scroll-margin-top:16px}.m04-research>summary{font-weight:600;cursor:pointer;color:#254d71}.m04-research>summary:focus{outline:2px solid #254d71;outline-offset:4px}.m04-research p{font-size:13px;line-height:1.65;overflow-wrap:anywhere}.m04-research button{padding:8px 12px}.m04-articles{padding-left:24px}.m04-articles>li{padding:12px 0;border-bottom:1px solid #d6dde5}.m04-articles h4{margin:0;font-size:15px}.m04-research pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:360px;overflow:auto}.m04-research details summary{cursor:pointer}.m04-research h3{font-size:17px}
++</style>
+--- a/frontend/src/components/SourceBundleStatus.vue
++++ b/frontend/src/components/SourceBundleStatus.vue
+@@ -6,6 +6,7 @@
+ import ACloseReplay from './ACloseReplay.vue';
+ import HkStageObserved from './HkStageObserved.vue';
+ import CloseRecapture from './CloseRecapture.vue';
++import M04SavedResearch from './M04SavedResearch.vue';
+ const state=shallowRef<SourceState>({phase:'IDLE',result:null,error:''});
+ const session=new SourceBundleSession(next=>{state.value=next;});
+ const names:Record<string,string>={M01_A_MARKET:'M01 A 股基础数据',M02_HK_MARKET:'M02 港股基础数据',M03_US_MARKET:'M03 美股基础数据',M05_A_PRESELECTION:'M05 A 股预选池'};
+@@ -27,6 +28,7 @@
+     <details v-if="row.owner_result"><summary>模块原始结果、日期与缺口</summary><pre>{{ json(row.owner_result) }}</pre></details>
+    </article></div>
+   </template>
++  <M04SavedResearch />
+   <HkPreselectionPool />
+   <HkStageObserved />
+   <HkCloseReview />
+--- a/frontend/src/views/SavedManagerResultView.vue
++++ b/frontend/src/views/SavedManagerResultView.vue
+@@ -31,6 +31,14 @@
+  sourceExpanded.value=true;
+  await nextTick();
+  focusAndReveal(sourceSummary.value);
++}
++async function openResearch() {
++ await openSources();
++ const target=sourceDisclosure.value?.querySelector<HTMLDetailsElement>('#m04-saved-research');
++ if (!target) return;
++ target.open=true;
++ await nextTick();
++ focusAndReveal(target.querySelector<HTMLElement>('summary'));
+ }
+ function onSourceToggle(event:Event) {
+  sourceExpanded.value=(event.currentTarget as HTMLDetailsElement).open;
+@@ -78,6 +86,7 @@
+    <button type="button" :class="{active:isAnnouncement}" :aria-current="isAnnouncement ? 'page' : undefined" :disabled="!state.overview?.sections.announcement_reviewed_analysis" @click="selectSection('announcement_reviewed_analysis')">公告研究股票</button>
+    <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">超跌研究</button>
+    <button type="button" :class="{active:isUsMapping}" :aria-current="isUsMapping ? 'page' : undefined" :disabled="!state.overview?.sections.us_mapping_research" @click="selectSection('us_mapping_research')">美股驱动</button>
++   <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
+    <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
+    <button type="button" disabled>阶段选股 · 未接入</button>
+    <button type="button" disabled>研报决策台 · 未接入</button>
+--- a/frontend/vite.config.ts
++++ b/frontend/vite.config.ts
+@@ -25,6 +25,7 @@
+ if (sourceTarget) {
+  proxy['/api/v5/manager/close-recapture'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/status'] = readonlyProxy(sourceTarget);
++ proxy['/api/v5/source-bundle/research-intelligence'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/hk-preselection'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/hk-close-review'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/a-close-replay'] = readonlyProxy(sourceTarget);
+--- /dev/null
++++ b/V5/tests/test_m04_readonly_api.py
+@@ -0,0 +1,137 @@
++"""M04 exact historical archive seam. All fixture article content is synthetic."""
++import ast
++import copy
++import hashlib
++import http.client
++import importlib.util
++import json
++from pathlib import Path
++import sys
++import tempfile
++import threading
++import unittest
++from unittest.mock import patch
++from v5_shadow.digests import canonical_bytes, sha256_json
++
++BASE=Path(__file__).resolve().parents[1]
++ROUTE='/api/v5/source-bundle/research-intelligence'
++
++class M04ReadOnlyTests(unittest.TestCase):
++    def setUp(self):
++        self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
++        from v5_shadow import m04_readonly as m
++        self.m=m
++        self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
++        self.root=Path(self.tmp.name).resolve();self.archive=self.root/'archive';self.archive.mkdir()
++        (self.archive/'.v5-m04-saved-root').write_text('v5.m04-saved-reference.v1\n')
++        api=self.root/'api';api.mkdir();(api/'.v5-module-root').write_text('v5.module-root.v1:source_bundle\n')
++        self.config=dict(schema_version='v5.module_api.v1',module_id='source_bundle',release_id='m04-synthetic',data_root=str(api),routes=[ROUTE])
++        self.config[m.BINDING]=dict(archive_root=str(self.archive),python_executable=sys.executable)
++        tree=ast.parse((BASE/'vendor/archive_reader_baseline/contracts/research.py').read_text())
++        fields={n.targets[0].id:ast.literal_eval(n.value) for n in tree.body if isinstance(n,ast.Assign) and isinstance(n.targets[0],ast.Name) and n.targets[0].id in ('_ARTICLE_FIELDS','_POOL_FIELDS','DEDUPE_KEY_FIELDS')}
++        articles=[]
++        for i in range(18):
++            a={k:'' for k in fields['_ARTICLE_FIELDS']}
++            a.update(article_id=hashlib.sha256(str(i).encode()).hexdigest(),dedupe_key=hashlib.sha256(('dedupe'+str(i)).encode()).hexdigest(),source_path_sha256='c'*64,archive_date='20261012',stock_code='00001.HK',stock_name='SYNTHETIC',source_title='Synthetic saved research '+str(i),theme='Synthetic theme',published_at='2026-10-12T08:00:00+08:00',collected_at='2026-10-12T21:00:00+08:00',first_seen_at='2026-10-12T21:00:00+08:00',recommendation_status='RESEARCH_ONLY',duplicate_evidence_count=1,source_dedup_keys=['synthetic'])
++            articles.append(a)
++        pool={k:'' for k in fields['_POOL_FIELDS']};pool.update(stock_code='00001.HK',archive_date='20261012',first_seen_at=articles[0]['first_seen_at'],collected_at=articles[0]['collected_at'],recommendation_status='RESEARCH_ONLY',source_types=[],themes=[],top_catalysts=[])
++        self.payload=dict(schema_version='v3_5.research_archive.v1',archive_date='20261012',status='READY',timezone='Asia/Shanghai',source_input_sha256='d'*64,source_schema_version='SYNTHETIC',source_generated_at=articles[0]['collected_at'],dedupe_key_fields=list(fields['DEDUPE_KEY_FIELDS']),article_count=18,stock_pool_count=1,source_counts={},articles=articles,stock_pool=[pool],cannot_confirm=['SYNTHETIC'],write_policy='read_only',recommendation_status='RESEARCH_ONLY',production_allowed=False,buy_gate_updated=False,orders_sent=False)
++        rel='research/archives/20261012.json'
++        receipt=dict(schema_version='v3_5.research_archive_receipt.v1',archive_date='20261012',payload_path=rel,payload_sha256=sha256_json(self.payload),source_input_sha256='d'*64,article_count=18,stock_pool_count=1,production_allowed=False,buy_gate_updated=False,orders_sent=False)
++        self.files={}
++        self.put(rel,self.payload);self.put('receipts/'+rel,receipt)
++        self.put('manifest.json',{rel:sha256_json(self.payload),'research/archives/20261011.json':'e'*64})
++        self.pins=patch.object(m,'FILES',self.files);self.pins.start();self.addCleanup(self.pins.stop)
++        count=patch.object(m,'EXPECTED_OUT_OF_SAMPLE_ERRORS',1,create=True);count.start();self.addCleanup(count.stop)
++
++    def put(self,name,value):
++        path=self.archive/name;path.parent.mkdir(parents=True,exist_ok=True);raw=canonical_bytes(value);path.write_bytes(raw);self.files[name]=hashlib.sha256(raw).hexdigest()
++
++    def snapshot(self):
++        return {str(p.relative_to(self.root)):(hashlib.sha256(p.read_bytes()).hexdigest(),p.stat().st_mtime_ns) for p in self.root.rglob('*') if p.is_file()}
++
++    def request(self,path=ROUTE,method='GET'):
++        from v5_shadow.module_api import create_module_server
++        server=create_module_server(self.config);thread=threading.Thread(target=server.serve_forever);thread.start()
++        try:
++            client=http.client.HTTPConnection('127.0.0.1',server.server_address[1],timeout=30)
++            client.request(method,path);r=client.getresponse();result=(r.status,json.loads(r.read()),dict(r.getheaders()));client.close();return result
++        finally:server.shutdown();thread.join();server.server_close()
++
++    def test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes(self):
++        before=self.snapshot();status,value,headers=self.request()
++        self.assertEqual(status,200,value);self.assertEqual(value['archive'],self.payload)
++        self.assertEqual(value['article_count'],18);self.assertEqual(value['missing_retrieved_at'],18);self.assertEqual(value['missing_available_at'],18)
++        self.assertEqual(value['pit'],'UNKNOWN');self.assertEqual(value['out_of_sample_record_errors'],1)
++        self.assertEqual(value['reference']['source_run_id'],'hip-49cb26f7f3a0661bde1d1440')
++        self.assertEqual(headers['Cache-Control'],'no-store');self.assertNotIn(str(self.root),json.dumps(value))
++        self.assertEqual(before,self.snapshot())
++        for key in ('natural_verified','historical_pit_claimed','production_allowed','buy_gate_updated','orders_sent','formal_eligibility_verified'):self.assertIs(value[key],False)
++        self.assertNotIn('v5_shadow.archive_reader',sys.modules)
++
++    def test_missing_binding_reports_not_configured(self):
++        del self.config[self.m.BINDING];status,value,_=self.request()
++        self.assertEqual(status,200);self.assertEqual(value['status'],'NOT_CONFIGURED');self.assertNotIn('archive',value)
++
++    def test_each_get_cold_reads_exact_reference_and_ignores_latest(self):
++        first=self.request();(self.root/'latest.json').write_text('{"run_id":"other"}')
++        second=self.request();self.assertEqual(first[1],second[1]);self.assertEqual(second[0],200)
++
++    def test_undeclared_root_files_are_rejected_before_original_reader(self):
++        (self.archive/'latest.json').write_text('{}')
++        with patch.object(self.m.subprocess,'run',side_effect=AssertionError('reader must not start')):
++            self.assertEqual(self.request()[0],409)
++
++    def test_unexpected_sample_outcome_is_rejected(self):
++        with patch.object(self.m,'EXPECTED_OUT_OF_SAMPLE_ERRORS',53):
++            self.assertEqual(self.request()[0],409)
++
++    def test_payload_tamper_rejected_before_original_reader(self):
++        (self.archive/'research/archives/20261012.json').write_text('{}')
++        with patch.object(self.m.subprocess,'run',side_effect=AssertionError('reader must not start')):
++            status,value,_=self.request()
++        self.assertEqual(status,409);self.assertEqual(value['status'],'CANNOT_CONFIRM')
++
++    def test_receipt_semantic_tamper_is_rejected_by_original_reader(self):
++        rel='receipts/research/archives/20261012.json';receipt=json.loads((self.archive/rel).read_bytes());receipt['article_count']=99;self.put(rel,receipt)
++        status,value,_=self.request();self.assertEqual(status,409);self.assertEqual(value['status'],'CANNOT_CONFIRM')
++
++    def test_query_selector_and_mutating_methods_rejected(self):
++        self.assertEqual(self.request(ROUTE+'?run_id=latest')[0],409)
++        for method in ('POST','PUT','PATCH','DELETE','HEAD'):
++            if method=='HEAD':continue
++            self.assertEqual(self.request(method=method)[0],405)
++
++    def test_missing_file_never_becomes_empty_success(self):
++        (self.archive/'receipts/research/archives/20261012.json').unlink();status,value,_=self.request()
++        self.assertIn(status,(409,503));self.assertEqual(value['status'],'CANNOT_CONFIRM')
++
++    def test_wrong_root_marker_and_symlink_rejected(self):
++        (self.archive/'.v5-m04-saved-root').write_text('wrong')
++        self.assertEqual(self.request()[0],409)
++        (self.archive/'.v5-m04-saved-root').write_text('v5.m04-saved-reference.v1\n')
++        link=self.root/'alias';link.symlink_to(self.archive,target_is_directory=True)
++        self.config[self.m.BINDING]['archive_root']=str(link)
++        self.assertEqual(self.request()[0],409)
++
++    def test_runtime_closure_tamper_fails_before_execution(self):
++        with patch.object(self.m,'RUNTIME_SHA256','0'*64),patch.object(self.m.subprocess,'run',side_effect=AssertionError('reader must not start')):
++            self.assertEqual(self.request()[0],409)
++
++    def test_reader_timeout_releases_slot_and_next_get_recovers(self):
++        from v5_shadow.module_api import create_module_server
++        server=create_module_server(self.config);thread=threading.Thread(target=server.serve_forever);thread.start()
++        def get():
++            client=http.client.HTTPConnection('127.0.0.1',server.server_address[1],timeout=30)
++            client.request('GET',ROUTE);response=client.getresponse();value=json.loads(response.read());client.close();return response.status,value
++        try:
++            with patch.object(self.m.subprocess,'run',side_effect=self.m.subprocess.TimeoutExpired('original-reader',30)):
++                self.assertEqual(get()[0],409)
++            self.assertEqual(get()[0],200)
++        finally:server.shutdown();thread.join();server.server_close()
++
++    def test_fixed_identity_cannot_be_selected_from_http_or_config(self):
++        self.config[self.m.BINDING]['files']={}
++        with self.assertRaises(ValueError):self.request()
++
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/frontend/tests/m04SavedResearch.node.mjs
+@@ -0,0 +1,35 @@
++import assert from 'node:assert/strict';
++import { readFileSync, existsSync } from 'node:fs';
++import test from 'node:test';
++const apiUrl=new URL('../src/api/m04SavedResearch.ts',import.meta.url);
++let api;
++const FLAGS={research_only:true,natural_verified:false,historical_pit_claimed:false,formal_eligibility_verified:false,production_allowed:false,buy_gate_updated:false,orders_sent:false};
++function fixture(){return {schema_version:'v5.m04_saved_research.v1',module_id:'M04_RESEARCH_INTELLIGENCE',status:'SAVED_HISTORICAL_SAMPLE',data_kind:'RECORDED_INPUT_REPLAY',coverage_scope:'FIXED_18_ARTICLE_SAMPLE',article_count:18,pit:'UNKNOWN',missing_retrieved_at:18,missing_available_at:18,out_of_sample_record_errors:53,reference:{archive_date:'20261012',source_slot:'2100',source_run_id:'hip-49cb26f7f3a0661bde1d1440',publication_time_is_not_article_availability:true},archive:{archive_date:'20261012',article_count:18,articles:Array.from({length:18},(_,i)=>({article_id:String(i),source_title:'SYNTHETIC <script>alert(1)</script>',retrieved_at:null,available_at:null})),production_allowed:false,buy_gate_updated:false,orders_sent:false},...FLAGS};}
++async function load(){assert.ok(existsSync(apiUrl),'M04 client must exist');return api??=await import(apiUrl.href);}
++test('fixed GET reads all 18 synthetic articles and preserves unknown clocks',async()=>{
++ const m=await load();let called;const result=await m.readSavedResearch(async(url,init)=>{called={url,init};return new Response(JSON.stringify(fixture()));});
++ assert.equal(called.url,'/api/v5/source-bundle/research-intelligence');assert.equal(called.init.method,'GET');assert.equal(called.init.cache,'no-store');assert.equal(called.init.credentials,'omit');
++ assert.deepEqual(result,fixture());
++});
++test('not configured remains missing and incomplete, false PIT or unsafe rows are rejected',async()=>{
++ const m=await load();const missing={status:'NOT_CONFIGURED',module_id:'M04_RESEARCH_INTELLIGENCE',reason_codes:['M04_SAVED_REFERENCE_NOT_CONFIGURED'],...FLAGS};
++ assert.equal(await m.readSavedResearch(async()=>new Response(JSON.stringify(missing))),null);
++ for(const mutate of [v=>v.pit='PASS',v=>v.article_count=17,v=>v.archive.articles.pop(),v=>v.reference.source_run_id='latest',v=>v.production_allowed=true,v=>v.archive.orders_sent=true,v=>v.missing_available_at=0,v=>v.out_of_sample_record_errors=0,v=>v.archive.articles[0].available_at='2026-10-12T21:00:00+08:00']){
++  const value=fixture();mutate(value);await assert.rejects(m.readSavedResearch(async()=>new Response(JSON.stringify(value))));
++ }
++ await assert.rejects(m.readSavedResearch(async()=>new Response('{}',{status:503})),/M04_HTTP_503/);
++ await assert.rejects(m.readSavedResearch(async()=>new Response('{}',{headers:{'content-length':String(17*1024*1024)}})),/M04_RESPONSE_LIMIT/);
++});
++test('retry clears old results and stale or closed requests cannot replace current state',async()=>{
++ const m=await load();const calls=[],states=[];const session=new m.SavedResearchSession(s=>states.push(s),()=>new Promise(resolve=>calls.push(resolve)));
++ const old=session.load(),current=session.load();calls[1](new Response(JSON.stringify(fixture())));await current;calls[0](new Response('{}',{status:503}));await old;
++ assert.equal(states.at(-1).phase,'LOADED');const failing=session.load();assert.equal(states.at(-1).result,null);calls[2](new Response('{}',{status:503}));await failing;assert.equal(states.at(-1).phase,'CANNOT_CONFIRM');assert.equal(states.at(-1).result,null);
++ const closing=session.load();session.close();const length=states.length;calls[3](new Response(JSON.stringify(fixture())));await closing;assert.equal(states.length,length);
++});
++test('source module and main navigation expose a lazy fixed-sample research disclosure',async()=>{
++ const source=readFileSync(new URL('../src/components/SourceBundleStatus.vue',import.meta.url),'utf8');assert.match(source,/<M04SavedResearch\s*\/>/);
++ const component=readFileSync(new URL('../src/components/M04SavedResearch.vue',import.meta.url),'utf8');assert.match(component,/id="m04-saved-research"/);assert.match(component,/@toggle="onToggle"/);assert.doesNotMatch(component,/v-html|onMounted/);assert.match(component,/PIT UNKNOWN/);assert.match(component,/样本外/);
++ const view=readFileSync(new URL('../src/views/SavedManagerResultView.vue',import.meta.url),'utf8');assert.match(view,/@click="openResearch"/);assert.match(view,/研究情报 · M04/);assert.match(view,/target.open=true/);
++});
++
++test('M04 route uses the existing read-only source proxy',()=>{const vite=readFileSync(new URL('../vite.config.ts',import.meta.url),'utf8');assert.match(vite,/proxy\['\/api\/v5\/source-bundle\/research-intelligence'\] = readonlyProxy\(sourceTarget\)/);});
+--- /dev/null
++++ b/frontend/src/components/M04SavedResearch.spec.ts
+@@ -0,0 +1,20 @@
++import {afterEach,expect,it,vi} from 'vitest';
++import {cleanup,fireEvent,render,waitFor} from '@testing-library/vue';
++import M04SavedResearch from './M04SavedResearch.vue';
++const flags={research_only:true,natural_verified:false,historical_pit_claimed:false,formal_eligibility_verified:false,production_allowed:false,buy_gate_updated:false,orders_sent:false};
++function fixture(){return {schema_version:'v5.m04_saved_research.v1',module_id:'M04_RESEARCH_INTELLIGENCE',status:'SAVED_HISTORICAL_SAMPLE',data_kind:'RECORDED_INPUT_REPLAY',coverage_scope:'FIXED_18_ARTICLE_SAMPLE',article_count:18,pit:'UNKNOWN',missing_retrieved_at:18,missing_available_at:18,out_of_sample_record_errors:53,reference:{archive_date:'20261012',source_slot:'2100',source_run_id:'hip-49cb26f7f3a0661bde1d1440',publication_time_is_not_article_availability:true},archive:{archive_date:'20261012',article_count:18,articles:Array.from({length:18},(_,i)=>({article_id:String(i),source_title:`SYNTHETIC ${i} <script>alert(1)</script>`,evidence_sentence:'Synthetic original evidence',retrieved_at:null,available_at:null})),production_allowed:false,buy_gate_updated:false,orders_sent:false},...flags};}
++afterEach(()=>{cleanup();vi.unstubAllGlobals();});
++it('lazy disclosure reads 18 original rows, renders text safely and preserves the historical boundary',async()=>{
++ const fetcher=vi.fn(async()=>new Response(JSON.stringify(fixture())));vi.stubGlobal('fetch',fetcher);
++ const view=render(M04SavedResearch);expect(fetcher).not.toHaveBeenCalled();
++ const details=view.container.querySelector<HTMLDetailsElement>('#m04-saved-research')!;details.open=true;await fireEvent(details,new Event('toggle'));
++ await waitFor(()=>expect(view.container.querySelectorAll('.m04-articles>li')).toHaveLength(18));
++ expect(view.container.querySelector('script')).toBeNull();expect(view.container.textContent).toContain('<script>alert(1)</script>');
++ expect(view.container.textContent).toContain('PIT UNKNOWN');expect(view.container.textContent).toContain('18/18 缺 retrieved_at');expect(view.container.textContent).toContain('样本外读取错误：53');
++ details.open=false;await fireEvent(details,new Event('toggle'));details.open=true;await fireEvent(details,new Event('toggle'));expect(fetcher).toHaveBeenCalledTimes(1);
++});
++it('failed refresh removes all previous rows and exposes a recoverable error',async()=>{
++ const fetcher=vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(fixture()))).mockResolvedValueOnce(new Response('{}',{status:503}));vi.stubGlobal('fetch',fetcher);
++ const view=render(M04SavedResearch);await fireEvent.click(view.getByRole('button',{name:'重新读取 M04 已保存样本',hidden:true}));await waitFor(()=>expect(view.container.querySelectorAll('.m04-articles>li')).toHaveLength(18));
++ await fireEvent.click(view.getByRole('button',{name:'重新读取 M04 已保存样本',hidden:true}));await waitFor(()=>expect(view.container.textContent).toContain('M04_HTTP_503'));expect(view.container.querySelectorAll('.m04-articles>li')).toHaveLength(0);
++});
+--- a/frontend/src/views/SavedManagerResultView.navigation.spec.ts
++++ b/frontend/src/views/SavedManagerResultView.navigation.spec.ts
+@@ -152,3 +152,19 @@
+   expect(screen.getByRole('button', { name: '源模块实际状态' })).toBeTruthy();
+ });
+ 
++
++it('M04 direct entry opens both disclosures, focuses the result and leaves the manager run unchanged', async () => {
++  const requests=transport();
++  const {container}=render(SavedManagerResultView);await ready();
++  const beforeRun=(screen.getByRole('textbox',{name:'运行 ID'}) as HTMLInputElement).value;
++  await fireEvent.click(screen.getByRole('button',{name:'研究情报 · M04'}));
++  const sources=container.querySelector<HTMLDetailsElement>('#source-module-content')!;
++  const research=container.querySelector<HTMLDetailsElement>('#m04-saved-research')!;
++  await waitFor(()=>{expect(sources.open).toBe(true);expect(research.open).toBe(true);});
++  await fireEvent(research,new Event('toggle'));
++  await waitFor(()=>expect(requests.filter(url=>url==='/api/v5/source-bundle/research-intelligence')).toHaveLength(1));
++  expect(document.activeElement).toBe(research.querySelector('summary'));
++  expect((screen.getByRole('textbox',{name:'运行 ID'}) as HTMLInputElement).value).toBe(beforeRun);
++  await fireEvent.click(screen.getByRole('button',{name:'研究情报 · M04'}));
++  expect(requests.filter(url=>url==='/api/v5/source-bundle/research-intelligence')).toHaveLength(1);
++});
+--- /dev/null
++++ b/V5/examples/m04_saved_research_binding.example.json
+@@ -0,0 +1,4 @@
++{
++  "archive_root": "/REPLACE_WITH_EXISTING_INDEPENDENT_V5_M04_THREE_FILE_COPY",
++  "python_executable": "/REPLACE_WITH_EXISTING_APPROVED_PYTHON"
++}

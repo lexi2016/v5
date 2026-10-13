@@ -1,0 +1,97 @@
+✔ fixed GET reads all 18 synthetic articles and preserves unknown clocks (89.772088ms)
+✖ not configured remains missing and incomplete, false PIT or unsafe rows are rejected (4.410131ms)
+✔ retry clears old results and stale or closed requests cannot replace current state (2.180397ms)
+✔ source module and main navigation expose a lazy fixed-sample research disclosure (1.018645ms)
+✖ M04 route uses the existing read-only source proxy (0.861783ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 3
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 244.655229
+
+✖ failing tests:
+
+test at frontend/tests/m04SavedResearch.node.mjs:14:1
+✖ not configured remains missing and incomplete, false PIT or unsafe rows are rejected (4.410131ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///workspace/shared/v5-m04-integration-20261013/frontend/tests/m04SavedResearch.node.mjs:18:39)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at frontend/tests/m04SavedResearch.node.mjs:35:1
+✖ M04 route uses the existing read-only source proxy (0.861783ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /proxy\['\/api\/v5\/source-bundle\/research-intelligence'\] = readonlyProxy\(sourceTarget\)/. Input:
+  
+  "import { defineConfig } from 'vitest/config';\n" +
+    "import { resolve } from 'node:path';\n" +
+    "import vue from '@vitejs/plugin-vue';\n" +
+    "import type { ProxyOptions } from 'vite';\n" +
+    '\n' +
+    '// Optional loopback-only bridge to the existing read-only module API. No CORS,\n' +
+    '// remote origin, credentials, V4 port or API budget changes are needed.\n' +
+    'const target = process.env.V5_MODULE_API_ORIGIN;\n' +
+    'if (target && !/^http:\\/\\/(127\\.0\\.0\\.1|localhost):[1-9][0-9]{0,4}$/.test(target)) {\n' +
+    "  throw new Error('V5_MODULE_API_ORIGIN must be an explicit loopback HTTP origin');\n" +
+    '}\n' +
+    'const sourceTarget = process.env.V5_SOURCE_API_ORIGIN;\n' +
+    'if (sourceTarget && !/^http:\\/\\/(127\\.0\\.0\\.1|localhost):[1-9][0-9]{0,4}$/.test(sourceTarget)) {\n' +
+    "  throw new Error('V5_SOURCE_API_ORIGIN must be an explicit loopback HTTP origin');\n" +
+    '}\n' +
+    'function readonlyProxy(target: string): ProxyOptions {\n' +
+    ' return {target,changeOrigin:true,configure:server=>{\n' +
+    "  server.on('proxyReq',request=>{\n" +
+    "   request.removeHeader('origin');request.removeHeader('cookie');request.removeHeader('authorization');\n" +
+    '  });\n' +
+    ' }};\n' +
+    '}\n' +
+    'const proxy: Record<string, ProxyOptions> = {};\n' +
+    "if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);\n" +
+    'if (sourceTarget) {\n' +
+    " proxy['/api/v5/manager/close-recapture'] = readonlyProxy(sourceTarget);\n" +
+    " proxy['/api/v5/source-bundle/status'] = readonlyProxy(sourceTarget);\n" +
+    " proxy['/api/v5/source-bundle/hk-preselection'] = readonlyProxy(sourceTarget);\n" +
+    " proxy['/api/v5/source-bundle/hk-close-review'] = readonlyProxy(sourceTarget);\n" +
+    " proxy['/api/v5/source-bundle/a-close-replay'] = readonlyProxy(sourceTarget);\n" +
+    " proxy['/api/v5/source-bundle/hk-stage-observed'] = readonlyProxy(sourceTarget);\n" +
+    '}\n' +
+    'export default defineConfig({\n' +
+    '  plugins: [vue()],\n' +
+    "  test: { environment: 'jsdom' },\n" +
+    "  server: { host: '127.0.0.1', proxy },\n" +
+    "  preview: { host: '127.0.0.1', proxy },\n" +
+    '  build: {\n' +
+    '    rollupOptions: {\n' +
+    '      input: {\n' +
+    "        main: resolve(__dirname, 'index.html'),\n" +
+    "        dailyResearchCommand: resolve(__dirname, 'daily-research-command/index.html'),\n" +
+    "        managerSelection: resolve(__dirname, 'manager-selection/index.html'),\n" +
+    '      },\n' +
+    '    },\n' +
+    '  },\n' +
+    '});\n' +
+    '\n'
+  
+      at TestContext.<anonymous> (file:///workspace/shared/v5-m04-integration-20261013/frontend/tests/m04SavedResearch.node.mjs:35:148)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "import { defineConfig } from 'vitest/config';\nimport { resolve } from 'node:path';\nimport vue from '@vitejs/plugin-vue';\nimport type { ProxyOptions } from 'vite';\n\n// Optional loopback-only bridge to the existing read-only module API. No CORS,\n// remote origin, credentials, V4 port or API budget changes are needed.\nconst target = process.env.V5_MODULE_API_ORIGIN;\nif (target && !/^http:\\/\\/(127\\.0\\.0\\.1|localhost):[1-9][0-9]{0,4}$/.test(target)) {\n  throw new Error('V5_MODULE_API_ORIGIN must be an explicit loopback HTTP origin');\n}\nconst sourceTarget = process.env.V5_SOURCE_API_ORIGIN;\nif (sourceTarget && !/^http:\\/\\/(127\\.0\\.0\\.1|localhost):[1-9][0-9]{0,4}$/.test(sourceTarget)) {\n  throw new Error('V5_SOURCE_API_ORIGIN must be an explicit loopback HTTP origin');\n}\nfunction readonlyProxy(target: string): ProxyOptions {\n return {target,changeOrigin:true,configure:server=>{\n  server.on('proxyReq',request=>{\n   request.removeHeader('origin');request.removeHeader('cookie');request.removeHeader('authorization');\n  });\n }};\n}\nconst proxy: Record<string, ProxyOptions> = {};\nif (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);\nif (sourceTarget) {\n proxy['/api/v5/manager/close-recapture'] = readonlyProxy(sourceTarget);\n proxy['/api/v5/source-bundle/status'] = readonlyProxy(sourceTarget);\n proxy['/api/v5/source-bundle/hk-preselection'] = readonlyProxy(sourceTarget);\n proxy['/api/v5/source-bundle/hk-close-review'] = readonlyProxy(sourceTarget);\n proxy['/api/v5/source-bundle/a-close-replay'] = readonlyProxy(sourceTarget);\n proxy['/api/v5/source-bundle/hk-stage-observed'] = readonlyProxy(sourceTarget);\n}\nexport default defineConfig({\n  plugins: [vue()],\n  test: { environment: 'jsdom' },\n  server: { host: '127.0.0.1', proxy },\n  preview: { host: '127.0.0.1', proxy },\n  build: {\n    rollupOptions: {\n      input: {\n        main: resolve(__dirname, 'index.html'),\n        dailyResearchCommand: resolve(__dirname, 'daily-research-command/index.html'),\n        managerSelection: resolve(__dirname, 'manager-selection/index.html'),\n      },\n    },\n  },\n});\n\n",
+    expected: /proxy\['\/api\/v5\/source-bundle\/research-intelligence'\] = readonlyProxy\(sourceTarget\)/,
+    operator: 'match',
+    diff: 'simple'
+  }

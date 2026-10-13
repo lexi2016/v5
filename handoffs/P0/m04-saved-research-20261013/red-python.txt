@@ -1,0 +1,95 @@
+test_each_get_cold_reads_exact_reference_and_ignores_latest (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_each_get_cold_reads_exact_reference_and_ignores_latest) ... FAIL
+test_fixed_identity_cannot_be_selected_from_http_or_config (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_fixed_identity_cannot_be_selected_from_http_or_config) ... FAIL
+test_missing_binding_reports_not_configured (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_missing_binding_reports_not_configured) ... FAIL
+test_missing_file_never_becomes_empty_success (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_missing_file_never_becomes_empty_success) ... FAIL
+test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes) ... FAIL
+test_payload_tamper_rejected_before_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_payload_tamper_rejected_before_original_reader) ... FAIL
+test_query_selector_and_mutating_methods_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_query_selector_and_mutating_methods_rejected) ... FAIL
+test_receipt_semantic_tamper_is_rejected_by_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_receipt_semantic_tamper_is_rejected_by_original_reader) ... FAIL
+test_runtime_closure_tamper_fails_before_execution (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_runtime_closure_tamper_fails_before_execution) ... FAIL
+test_wrong_root_marker_and_symlink_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_wrong_root_marker_and_symlink_rejected) ... FAIL
+
+======================================================================
+FAIL: test_each_get_cold_reads_exact_reference_and_ignores_latest (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_each_get_cold_reads_exact_reference_and_ignores_latest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_fixed_identity_cannot_be_selected_from_http_or_config (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_fixed_identity_cannot_be_selected_from_http_or_config)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_missing_binding_reports_not_configured (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_missing_binding_reports_not_configured)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_missing_file_never_becomes_empty_success (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_missing_file_never_becomes_empty_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_original_cold_reader_preserves_18_articles_and_missing_clocks_without_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_payload_tamper_rejected_before_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_payload_tamper_rejected_before_original_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_query_selector_and_mutating_methods_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_query_selector_and_mutating_methods_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_receipt_semantic_tamper_is_rejected_by_original_reader (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_receipt_semantic_tamper_is_rejected_by_original_reader)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_runtime_closure_tamper_fails_before_execution (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_runtime_closure_tamper_fails_before_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+======================================================================
+FAIL: test_wrong_root_marker_and_symlink_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_wrong_root_marker_and_symlink_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 21, in setUp
+    self.assertIsNotNone(importlib.util.find_spec('v5_shadow.m04_readonly'), 'M04 read-only adapter is missing')
+AssertionError: unexpectedly None : M04 read-only adapter is missing
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.003s
+
+FAILED (failures=10)

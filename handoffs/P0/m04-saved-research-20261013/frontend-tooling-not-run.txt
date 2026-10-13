@@ -1,0 +1,18 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 test
+> vitest run --run src/components/M04SavedResearch.spec.ts src/views/SavedManagerResultView.navigation.spec.ts
+
+sh: 1: vitest: not found
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 typecheck
+> vue-tsc --noEmit
+
+sh: 1: vue-tsc: not found
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 build
+> vite build
+
+sh: 1: vite: not found

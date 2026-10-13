@@ -1,0 +1,93 @@
+[
+  {
+    "path": "V5/src/v5_shadow/m04_readonly.py",
+    "category": "production",
+    "bytes": 7821,
+    "sha256": "98de71876c4543f76f3a1f7a8a20887582eba63d3b5fb59fc07f9cee72fac5d7",
+    "before_sha256": null
+  },
+  {
+    "path": "V5/contracts/m04_readonly_runtime.json",
+    "category": "production",
+    "bytes": 22701,
+    "sha256": "2c66538a28864c919e6b43b5f73fce730d35c5236034ad930e0a58512b265a91",
+    "before_sha256": null
+  },
+  {
+    "path": "V5/src/v5_shadow/module_api.py",
+    "category": "production",
+    "bytes": 55701,
+    "sha256": "740239583f7554da6ac6be696daa426c3e05d78a083c267e694e33f7054e9e66",
+    "before_sha256": "98e8584d2910b6acf00a8441ff1771b8cced4d897260589bfb397e1717f1b752"
+  },
+  {
+    "path": "frontend/src/api/m04SavedResearch.ts",
+    "category": "production",
+    "bytes": 4759,
+    "sha256": "b96fefcc8f49029b7f3dac443464b60aa41b75d5d01d0dbcb76e62784df9b76c",
+    "before_sha256": null
+  },
+  {
+    "path": "frontend/src/components/M04SavedResearch.vue",
+    "category": "production",
+    "bytes": 3953,
+    "sha256": "8ddc389760b1d4a1d14cbae497c5673a32b627c583aff32f7f4d8dea28cbfab1",
+    "before_sha256": null
+  },
+  {
+    "path": "frontend/src/components/SourceBundleStatus.vue",
+    "category": "production",
+    "bytes": 3231,
+    "sha256": "7c2997114b2379475f164f43c168feb361bbf4387f7a84b111382398706e1570",
+    "before_sha256": "7512b725312af3e28239ea338090f5222b691edbf41fedb38f3ecec112eec19e"
+  },
+  {
+    "path": "frontend/src/views/SavedManagerResultView.vue",
+    "category": "production",
+    "bytes": 16783,
+    "sha256": "14b1d56562d8900b5d408e496868d52a122538a189a1f36b22bd9992d9f5e718",
+    "before_sha256": "4408e94e40b2284f5e523b4aafd3a1c602dec217cd1d97ef53b5b5988eeb06d2"
+  },
+  {
+    "path": "frontend/vite.config.ts",
+    "category": "production",
+    "bytes": 2170,
+    "sha256": "d9bcdc4bc8c14519c8cdb8d7afb3e35a200f1f7a3d333535b31a472efd9c3daf",
+    "before_sha256": "abf4aa601948fd0bfb41cc4c9995ef234de08df62b1964244735544e6f68c858"
+  },
+  {
+    "path": "V5/tests/test_m04_readonly_api.py",
+    "category": "test_or_example",
+    "bytes": 9859,
+    "sha256": "ce9b58037d61de4b53dd368783e9caeffbee1f889357ba5b5e587d84cdcee5ff",
+    "before_sha256": null
+  },
+  {
+    "path": "frontend/tests/m04SavedResearch.node.mjs",
+    "category": "test_or_example",
+    "bytes": 4725,
+    "sha256": "ddf15ad23795e2fcd68323fa1155fdb639f8e9c5dbe747a766ca834f8bc22e13",
+    "before_sha256": null
+  },
+  {
+    "path": "frontend/src/components/M04SavedResearch.spec.ts",
+    "category": "test_or_example",
+    "bytes": 3041,
+    "sha256": "3786f6229bc1b62b1534e65012e6425a8d7e83f624ebfa7bfc86cac1713a776a",
+    "before_sha256": null
+  },
+  {
+    "path": "frontend/src/views/SavedManagerResultView.navigation.spec.ts",
+    "category": "test_or_example",
+    "bytes": 12525,
+    "sha256": "f673fd78b06bbc3c0c3ec7a3bdae153175420783f489ff12ed66cc1aa61c2688",
+    "before_sha256": "264beec03cd45d0a87cc0fa592dd313468d6cbea5129bc9bf8c8ab77146291be"
+  },
+  {
+    "path": "V5/examples/m04_saved_research_binding.example.json",
+    "category": "test_or_example",
+    "bytes": 147,
+    "sha256": "4adcafb9ecb11b439512a24114c395297ad8aa51ee4181748d18352624bdae30",
+    "before_sha256": null
+  }
+]

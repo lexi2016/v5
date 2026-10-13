@@ -32,6 +32,14 @@ async function openSources() {
  await nextTick();
  focusAndReveal(sourceSummary.value);
 }
+async function openResearch() {
+ await openSources();
+ const target=sourceDisclosure.value?.querySelector<HTMLDetailsElement>('#m04-saved-research');
+ if (!target) return;
+ target.open=true;
+ await nextTick();
+ focusAndReveal(target.querySelector<HTMLElement>('summary'));
+}
 function onSourceToggle(event:Event) {
  sourceExpanded.value=(event.currentTarget as HTMLDetailsElement).open;
 }
@@ -78,6 +86,7 @@ onBeforeUnmount(()=>session.close());
    <button type="button" :class="{active:isAnnouncement}" :aria-current="isAnnouncement ? 'page' : undefined" :disabled="!state.overview?.sections.announcement_reviewed_analysis" @click="selectSection('announcement_reviewed_analysis')">公告研究股票</button>
    <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">超跌研究</button>
    <button type="button" :class="{active:isUsMapping}" :aria-current="isUsMapping ? 'page' : undefined" :disabled="!state.overview?.sections.us_mapping_research" @click="selectSection('us_mapping_research')">美股驱动</button>
+   <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
    <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
    <button type="button" disabled>阶段选股 · 未接入</button>
    <button type="button" disabled>研报决策台 · 未接入</button>
@@ -132,4 +141,5 @@ onBeforeUnmount(()=>session.close());
 .saved-run-view .control-panel{flex-wrap:wrap}.saved-run-view .control-panel input{width:min(36ch,75vw)}.saved-run-view .entry-nav{flex-wrap:wrap}.saved-run-view button:disabled{cursor:not-allowed}.saved-identity{padding:18px}.saved-identity h2{margin:0 0 12px;font-size:18px}.saved-identity dl{display:grid;gap:10px}.saved-identity dt{font-size:12px;color:#526579}.saved-identity dd{margin:4px 0;overflow-wrap:anywhere;font-size:13px}.saved-sections .control-panel{padding:16px}.saved-pagination{display:flex;gap:16px;align-items:center;padding:14px 18px}.saved-pagination button{padding:7px 12px}.saved-table-scroll{overflow:auto;margin:0 18px}.saved-table-scroll table{width:100%;border-collapse:collapse;font-size:13px}.saved-table-scroll th,.saved-table-scroll td{text-align:left;padding:12px;border:1px solid #c8d3dd;vertical-align:top}.saved-table-scroll thead{background:#e3ebf2}.saved-table-scroll th:first-child{min-width:130px}.saved-table-scroll pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;max-width:850px;font-family:inherit;line-height:1.6}.saved-table-scroll details{margin-top:12px}.saved-table-scroll details p{overflow-wrap:anywhere}.saved-table-scroll summary,.saved-identity summary{cursor:pointer;color:#254d71}@media(max-width:650px){.saved-run-view .page-header{padding:18px;flex-direction:column;gap:12px}.saved-run-view .control-panel,.saved-run-view .entry-nav{padding:12px 18px}.saved-run-view .task-status-view{margin:14px 12px}.saved-run-view .navigation-status{margin:12px}.saved-pagination{gap:8px;font-size:12px}}
 .saved-announcements{padding:0 18px}.saved-announcements :deep(article){border:1px solid #d6dde5;border-radius:8px;padding:14px;margin:12px 0}.saved-announcements :deep(h4){font-size:1.05rem;margin:0 0 10px}.saved-announcements :deep(p){line-height:1.65;overflow-wrap:anywhere}.saved-announcements :deep(details){margin:10px 0}.saved-announcements :deep(summary){cursor:pointer;line-height:1.6}.saved-announcements :deep(pre){white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem}
 </style>
+
 

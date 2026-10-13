@@ -1,0 +1,24 @@
+{
+  "status": "CANDIDATE_FOR_MAC_ACCEPTANCE",
+  "python_scope": "M04 original cold-reader HTTP plus existing module_api/api_gateway",
+  "python_tests_passed": 38,
+  "node_tests_passed": 8,
+  "vue_component_tests": "NOT_RUN: vitest absent",
+  "frontend_typecheck": "NOT_RUN: vue-tsc absent",
+  "frontend_build": "NOT_RUN: vite absent",
+  "whole_repository_suite": "NOT_RUN: task-local materialization contains the focused dependency closure, not the complete repository",
+  "real_sample": "NOT_RUN: exact private archive remains on Mac",
+  "preview": "NOT_DEPLOYED",
+  "original_runtime_files_byte_identical": 110,
+  "review_findings_fixed": [
+    "reject extra root content before original reader",
+    "require exact 53 out-of-sample errors",
+    "register existing read-only preview proxy"
+  ],
+  "data_kind": "SYNTHETIC_TESTS_ONLY",
+  "natural_verified": false,
+  "historical_pit_claimed": false,
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false
+}

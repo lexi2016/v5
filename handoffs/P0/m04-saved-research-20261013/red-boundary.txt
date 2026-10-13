@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_unexpected_sample_outcome_is_rejected (V5.tests.test_m04_readonly_api.M04ReadOnlyTests.test_unexpected_sample_outcome_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/shared/v5-m04-integration-20261013/V5/tests/test_m04_readonly_api.py", line 87, in test_unexpected_sample_outcome_is_rejected
+    self.assertEqual(self.request()[0],409)
+AssertionError: 200 != 409
+
+----------------------------------------------------------------------
+Ran 1 test in 0.557s
+
+FAILED (failures=1)
