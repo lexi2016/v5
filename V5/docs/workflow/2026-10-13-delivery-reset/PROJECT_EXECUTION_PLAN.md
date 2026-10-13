@@ -265,15 +265,17 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca4b1c-7bac-83ec-878c-d1fb0bd37b38)；`dev/m15-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
 - **已有代码与证据：** [1dede80b](https://github.com/lexi2016/v5/commit/1dede80b4ff18781849e87e85ca693890ed57979)；[页面证据](https://github.com/lexi2016/v5/commit/d53e0820318462806d9e67dae1818bb684b38ade)。 [最终完整候选f7dd8e63](https://github.com/lexi2016/v5/commit/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af)；[候选README](https://github.com/lexi2016/v5/blob/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af/integration_candidates/M15_mapping/README.md)。 [Mac原回执](../../../../handoffs/P0/feedback/mac-m15-f7dd-isolated-20261013/result.json)。
-- **已验证层级：** 原四关系/三HK保存读回与页面历史保留；最终f7dd8e63已531 blob/530 manifest核验，RELEASE SHA-256为8cb4cd4db7b9e8dccba527ec844dde9f7787d54ac1dd88cae0ded97e6db23507。Mac新增20 Python与7 Node、typecheck/build通过，候选字节未变；原40项复用此前云端证据，未在Mac重跑。两条原cold reader在合成fixture上MATCHED；该隔离轮未运行真实provider；后续原窗口seed真实消费/保存/冷读已通过（见末条），源资格、material、真实DOM/部署/自然仍未过，完整0。
-- **未完成缺口：** 首轮Mac使用超声明版本的历史保留；现已找到满足声明范围的3.14.6/2.3.3/24环境，新增20项各有通过证据（19初次PASS＋1沙箱loopback单项补跑PASS）。uv.lock未同步，完整锁安装不冒称通过；M03真实snapshot及seed消费现已通过；material正文span/取得时点与HK身份、PIT/资格、真实DOM和发布仍待验。
+- **已验证层级：** 原四关系/三HK保存读回与页面历史保留；最终f7dd8e63已531 blob/530 manifest核验，RELEASE SHA-256为8cb4cd4db7b9e8dccba527ec844dde9f7787d54ac1dd88cae0ded97e6db23507。Mac新增20 Python与7 Node、typecheck/build通过，候选字节未变；原40项复用此前云端证据，未在Mac重跑。两条原cold reader在合成fixture上MATCHED；该隔离轮未运行真实provider；后续原窗口seed真实消费/保存/冷读已通过（见末条），源资格、material、自然仍未过；后续821a25普通页HTTP/DOM及发布已过（见最新条），完整0。
+- **未完成缺口：** 首轮Mac使用超声明版本的历史保留；现已找到满足声明范围的3.14.6/2.3.3/24环境，新增20项各有通过证据（19初次PASS＋1沙箱loopback单项补跑PASS）。uv.lock未同步，完整锁安装不冒称通过；M03真实snapshot及seed消费现已通过；material正文span/取得时点与HK身份、PIT/资格、原生可视及完整验收仍待验；seed普通页HTTP/DOM与发布已通过。
 - **依赖：** M03同session行情、原种子/registry；M04原主体/正文/命题/真实可用时点及M02 native/目标资格；供M18。种子daily和材料（行业/主题、个股）路径分别验。
 - **下一条完整交付：** 复用f7dd8e63既有Node/typecheck/build与最新合规范围环境20项证据，不再把已消除的版本范围缺口当阻塞；复用已过M03真实三件与seed消费，按实际授权推进未完成的material路径、P0/M18合法消费及普通页。uv.lock/完整安装另记，不提前采集或owner。
 - **验收标准：** 两路径各有真实结果或按原合同准确拒绝，保存/普通页同身份；原范围外未知、目标资格和自然身份不变，M18同session合法消费，下一适用session/回滚过。
-- **责任与交接：** M15唯一实现者保留最终固定候选与依赖声明；Mac隔离检查回执已到，锁依赖/真实源/真实DOM/部署另行验收。P0负责必要标准引用与M18展示接线，不把合成或云端历史结果计为真实生产。
+- **责任与交接：** M15唯一实现者保留最终固定候选与依赖声明；Mac隔离检查回执已到，锁依赖/material真实源/原生视觉等剩余范围另行验收，seed真实来源消费及普通页发布已过。P0负责必要标准引用与M18展示接线，不把合成或云端历史结果计为真实生产。
 - **环境复验摘要（2026-10-13 18:09 UTC）：** 现有Python3.14.6/pandas2.3.3/pyarrow24.0.0及三时区符合README；首次19 PASS/1沙箱loopback错误、exit1，仅该项补跑PASS/exit0，20项各有证据而非一次全绿。530 release核验，544现有文件字节不变；旧40/Node/build未重跑，未安装/改声明/同步uv.lock，新采集及owner未运行。[派生摘要](../../../../handoffs/P0/feedback/mac-m14-canary-m15-environment-summary-20261014/summary.json)。
 
-- **原窗口seed真实增量（2026-10-13 UTC20:20）：** f7dd在20:20:00.011283之后prepare，20:20:00.704290冷读完成，prepare/init/run/persist/read全0、COMPLETED/MATCHED。delivery50eda19e511e4247ab07ac9ee2f647e1，owner08f7e457adb046df9db509df43326a29，原四关系仅2匹配；session13/target14、资格CANNOT_CONFIRM/覆盖PARTIAL、material=null，historical availability未建立。主控原窗口单次执行，非自然调度；尚未部署，普通页接入任务待回，不增加完整模块计数。[身份及指纹](../../../../handoffs/P0/feedback/mac-m03-m15-window-20261014/summary.json)。
+- **原窗口seed真实增量（2026-10-13 UTC20:20）：** f7dd在20:20:00.011283之后prepare，20:20:00.704290冷读完成，prepare/init/run/persist/read全0、COMPLETED/MATCHED。delivery50eda19e511e4247ab07ac9ee2f647e1，owner08f7e457adb046df9db509df43326a29，原四关系仅2匹配；session13/target14、资格CANNOT_CONFIRM/覆盖PARTIAL、material=null，historical availability未建立。主控原窗口单次执行，非自然调度；当时尚未部署；后续821a25发布见下一条，不增加完整模块计数。[身份及指纹](../../../../handoffs/P0/feedback/mac-m03-m15-window-20261014/summary.json)。
+
+- **seed普通页发布（2026-10-13 UTC20:38）：** 固定821a25b1667a28073360c96cf8702ab57dbd233f，532 manifest核验，仅重export、不producer；typecheck/build及隔离/发布HTTP-DOM PASS，原owner08f7e457adb046df9db509df43326a29/artifact/delivery保持。20:37:52–20:38:04发布source49527/PID28669、54780/PID28760，旧60473回退；14其他路由不变。session13/target14、2匹配/PARTIAL/两个原因/CANNOT_CONFIRM/材料NOT_RUN原样显示，native visual NOT_RUN，14页面和0完整不变。[派生发布增量](../../../../handoffs/P0/feedback/mac-m03-m15-window-20261014/README.md)。
 
 ### M16 经理候选公开资料任务｜P4
 
@@ -288,6 +290,8 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **新增真实输入接线（北京时间2026-10-14 01:11）：** 固定2e49a397d99de8b0315628c97c01a4fd1a3a823a，新增12/12定向通过，旧31未重跑；M08 date12/STAGE_0935_0940原10行完整导出，新输入身份与原字段保持。只读50024/PID22335三次GET200无写，NOT_MATERIALIZED、product/job=null，仅返回输入身份/数量；producer关闭、未ensure/PDF网络/主页面部署，PIT=false，不计研究产品或业务完成。[真实接线原回执](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/m16-service.json)。
 
 - **新增单次真实生产及部署（2026-10-13 19:26 UTC终态）：** 固定2e49a397d99de8b0315628c97c01a4fd1a3a823a，从job/product空执行一次ensure/attempt1，19:21:04–19:23:07 exit0，PARTIAL_WITH_ROWS 10条（6 READY/4 CANNOT_CONFIRM）、144结构化事实；1成员官方活跃主体未确认，3成员PDF未形成结构化事实。原事件9=1 eligible/8 unconfirmed，新闻156份覆盖9/10。历史20261012/cutoff09:40+08不改、PIT/historical_system_available=false、10条formal全false。新进程原reader及50024 API同product，54780 HTTP/DOM通过；source60473/PID26856、preview PID26954，旧58799回退。首次DOM资源加载检查失败自动回退，仅修验证脚本后通过，无改产品/重采集；候选/准备输入/M08及V4/M14/经理保持。新增真实生产与部署一次，页面仍14/18、完整仍0/18。[派生增量反馈](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/m16-production-summary.json)。
+
+- **单次apply及确证页面阻塞（2026-10-13 UTC20:38）：** 固定68e4ec21895ba534a043f035e259bcd29e8edc30在20:33:20.230–20:33:22.979仅apply一次exit0，无网络/ensure/retry/events；三目标行只变事实/指定财务字段，其他七行和新闻事件、PIT/cutoff保持。新generation e0dc3261f4b944b394454055a56ba2fb，原store冷读9 READY/1 CANNOT_CONFIRM、216facts；新receipt缺status触发m16_readonly_worker._members()的M16_TERMINAL_STATUS，新generation普通页未发布、仍旧6/4。50024 API虽9/1会重投影catalyst，不能称字节同product。未手补/重复apply，原作者正修合同；完整仍0。[派生apply及阻塞反馈](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/m16-apply-summary.json)。
 
 ### M17 尾盘量价发现与持续跟踪｜P4
 

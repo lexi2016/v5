@@ -1,0 +1,51 @@
+{
+  "evidence_type": "DERIVED_SUMMARY",
+  "source_thread": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+  "source_message": "msg_0b47eb1b0178a3a6016ace96c8380487d1bfeafc431b928802",
+  "provenance": "Summary of Mac report, not original receipt bytes; documentation writer did not apply or test.",
+  "candidate": "68e4ec21895ba534a043f035e259bcd29e8edc30",
+  "apply_calls": 1,
+  "apply_start_utc": "2026-10-13T20:33:20.230Z",
+  "apply_end_utc": "2026-10-13T20:33:22.979Z",
+  "exit_code": 0,
+  "network_calls": 0,
+  "ensure_calls": 0,
+  "retries": 0,
+  "event_calls": 0,
+  "diff_verification": "Three target rows changed facts and designated financial fields only; after removing those keys, nested news/events identical. Other seven rows, PIT, cutoff and original generation time unchanged.",
+  "store_cold_read": {
+    "ready": 9,
+    "cannot_confirm": 1,
+    "facts": 216,
+    "remaining_cannot_confirm": "HK.02915",
+    "generation": "e0dc3261f4b944b394454055a56ba2fb",
+    "job_id": "mr-pdf-20261012-a78f9ff40b74a61c-v3-c7f7744480b0",
+    "product_sha256": "403cd39a15aebb6deae2a34eeebe4c807bfb552d8fb01723a81c0cd168d56d65",
+    "commit_sha256": "0feea44ae9af760eb0f52c2eff0e3bce5861abd098c91db122116f0b01e69b9b",
+    "commit_file_sha256": "172c971165d3e1d83def3715ffeb0c858c96d75752cab36c4471675f700ccaa5"
+  },
+  "page_blocker": {
+    "code": "M16_TERMINAL_STATUS",
+    "cause": "New receipt lacks status required by m16_readonly_worker._members() to match receipt/job terminal states.",
+    "manual_receipt_patch": false,
+    "repeated_apply": false,
+    "old_commit_job_receipt_preserved": true,
+    "api_50024_ready": 9,
+    "api_50024_cannot_confirm": 1,
+    "api_payload_byte_identity_claimed": false,
+    "api_caveat": "API reprojects catalyst classifications and gaps; not byte-identical to saved product.",
+    "ordinary_page_ready": 6,
+    "ordinary_page_cannot_confirm": 4,
+    "new_generation_deployed": false,
+    "contract_fix": "In progress by original author; no fix acceptance claimed."
+  },
+  "reported_original_result_safe_sha256": "70c1d4e3f37c692410503826e669e935b662ed707d009e0bcf97372a53a0755d",
+  "limits": {
+    "pit": false,
+    "formal": false,
+    "natural_verified": false,
+    "native_visual": "NOT_RUN",
+    "page_count": 14,
+    "complete_modules": 0
+  }
+}

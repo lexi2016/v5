@@ -35,3 +35,13 @@
 候选、准备输入、M08原资料不变，V4/其他预览/M14/经理保留。此次新增实际生产及发布一次，已有M16页面不重复增加14/18页面计数；自然及完整模块0/18不变。原生视觉没有新增通过证据。
 
 身份与来源报告指纹见[m16-production-summary.json](m16-production-summary.json)。来源result.safe.json SHA256为`71141c89e0f9c64d3ebbb9c0d72b699758f1a32970f2c87b6a38127ae250e7bf`，原字节仍在Mac，不上传原事实/新闻/股票行或私有路径。
+
+## M16 单次apply与新generation页面阻塞（20:38 UTC增量）
+
+DERIVED_SUMMARY，来源Mac消息 `msg_0b47eb1b0178a3a6016ace96c8380487d1bfeafc431b928802`；精确身份见[m16-apply-summary.json](m16-apply-summary.json)，无原receipt字节同一性声明。
+
+固定68e4ec21895ba534a043f035e259bcd29e8edc30，仅apply一次，UTC20:33:20.230–20:33:22.979 exit0；network/ensure/retry/events全0。三目标行仅事实与指定财务派生字段变化；剔除财务键后新闻/事件嵌套对象完全相同，其余七行、PIT/cutoff/原生成时间不变。
+
+原store新进程冷读9 READY/1 CANNOT_CONFIRM、216facts，02915仍未确认；新generation e0dc3261f4b944b394454055a56ba2fb。确切阻塞：新receipt没有status，m16_readonly_worker._members()要求receipt/job终态一致，报M16_TERMINAL_STATUS。未手补receipt、未重复apply，旧commit/job/receipt保留。
+
+50024 API已显示9/1，但会重投影catalyst分类与缺口，不声称响应与保存product字节相同；普通页仍旧6/4引用，新generation未部署。原作者正在修合同，尚无修复通过结论。来源报告result.safe SHA256：`70c1d4e3f37c692410503826e669e935b662ed707d009e0bcf97372a53a0755d`。PIT/正式/自然及完整验收不提升，页面计数14、完整0。
