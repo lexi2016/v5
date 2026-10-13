@@ -295,6 +295,7 @@ def repair_missing_receipt_status(*, runtime_root: Path, input_path: Path, input
 def import_saved_provider_result(*, runtime_root: Path, input_path: Path, input_sha256: str,
         target_trade_date: str, expected_product_sha256: str, expected_commit_sha256: str,
         expected_commit_file_sha256: str, source_result_path: Path, source_result_sha256: str,
+        source_cache_root: Path | None = None, source_cache_sha256: str | None = None,
         apply: bool = False) -> dict:
     """Admit a pinned existing 02915 provider result, without collecting or parsing.
 
@@ -372,9 +373,30 @@ def import_saved_provider_result(*, runtime_root: Path, input_path: Path, input_
             or sha256(response.body).hexdigest()!=source['sha256'] or len(response.body)!=source.get('bytes')
             or not response.body.startswith(b'%PDF-')):
         raise ValueError('M16_PROVIDER_PDF_BINDING')
-    def missing_cache(_): raise ValueError('M16_PROVIDER_CURRENT_PARSE_CACHE_REQUIRED')
-    facts,pages=material_store.parsed(material,parser_id='hkex-pdf-facts',parser_version=provider.PDF_FACTS_CACHE_VERSION,
-        params={'title':str(source.get('document_title',''))},parse_fn=missing_cache)
+    cache_store=material_store
+    if (source_cache_root is None) != (source_cache_sha256 is None):
+        raise ValueError('M16_SOURCE_CACHE_ROOT_AND_SHA_REQUIRED')
+    if source_cache_root is not None:
+        if (not source_cache_root.is_absolute() or not source_cache_root.is_dir()
+                or any(p.is_symlink() for p in (source_cache_root,*source_cache_root.parents))
+                or not (source_cache_root/'parsed').is_dir() or (source_cache_root/'parsed').is_symlink()):
+            raise ValueError('M16_EXISTING_SOURCE_CACHE_ROOT_REQUIRED')
+        if not re.fullmatch('[0-9a-f]{64}',str(source_cache_sha256)):
+            raise ValueError('M16_SOURCE_CACHE_SHA_REQUIRED')
+        cache_store=components.material_store_class(source_cache_root)
+    cache_relative=cache_store._parsed_relative(material.sha256,'hkex-pdf-facts',provider.PDF_FACTS_CACHE_VERSION,
+        {'title':str(source.get('document_title',''))})
+    try:
+        cache_bytes=cache_store._io.read_bytes(cache_relative)
+    except FileNotFoundError as exc:
+        raise ValueError('M16_PROVIDER_CURRENT_PARSE_CACHE_REQUIRED') from exc
+    cache_sha=sha256(cache_bytes).hexdigest()
+    if source_cache_sha256 is not None and cache_sha!=source_cache_sha256:
+        raise ValueError('M16_SOURCE_CACHE_FILE_PIN')
+    try:
+        facts,pages=json.loads(cache_bytes)
+    except (ValueError,TypeError) as exc:
+        raise ValueError('M16_PROVIDER_CURRENT_PARSE_CACHE_REQUIRED') from exc
     if (digest(facts)!=digest(result['facts']) or len(pages)!=source.get('pdf_page_count')
             or source.get('text_locators')!=[f"PDF page {p['page']}" for p in pages][:12]):
         raise ValueError('M16_PROVIDER_FACT_CACHE_BINDING')
@@ -388,7 +410,9 @@ def import_saved_provider_result(*, runtime_root: Path, input_path: Path, input_
         previous_commit_sha256=expected_commit_sha256,previous_commit_file_sha256=expected_commit_file_sha256,
         source_result_sha256=source_result_sha256,code=code,new_fact_count=len(facts),pdf_sha256=source['sha256'],
         parser_cache_version=provider.PDF_FACTS_CACHE_VERSION,network_calls=0,pdf_parse_calls=0,
-        directory_validation='PINNED_ORIGINAL_PROVIDER_RESULT_NOT_POST_REPLAY')
+        directory_validation='PINNED_ORIGINAL_PROVIDER_RESULT_NOT_POST_REPLAY',
+        source_cache_sha256=cache_sha,source_cache_relative=cache_relative,
+        external_source_cache=source_cache_root is not None)
     if not apply:return report
     job_id=f'mr-import-{date}-{identity[:16]}-{source_result_sha256[:12]}'
     def unchanged(latest):
@@ -436,10 +460,12 @@ def main(argv=None):
     p.add_argument('--input-sha256',required=True);p.add_argument('--target-date',required=True)
     p.add_argument('--expected-product-sha256',required=True);p.add_argument('--code',action='append')
     p.add_argument('--source-result',type=Path);p.add_argument('--source-result-sha256')
+    p.add_argument('--source-cache-root',type=Path);p.add_argument('--source-cache-sha256')
     p.add_argument('--repair-receipt-job');p.add_argument('--repair-receipt-generation')
     p.add_argument('--expected-commit-sha256');p.add_argument('--expected-commit-file-sha256')
     p.add_argument('--apply',action='store_true',help='Explicitly admit and commit an offline recovery generation')
     args=p.parse_args(argv)
+    if (args.source_cache_root or args.source_cache_sha256) and not args.source_result:p.error("source cache parameters require --source-result")
     if args.source_result_sha256 and not args.source_result:p.error("--source-result-sha256 requires --source-result")
     common=dict(runtime_root=args.runtime_root,input_path=args.input,input_sha256=args.input_sha256,
         target_trade_date=args.target_date,expected_product_sha256=args.expected_product_sha256,apply=args.apply)
@@ -447,6 +473,7 @@ def main(argv=None):
         if args.code or args.repair_receipt_job or args.repair_receipt_generation or not all((args.source_result_sha256,args.expected_commit_sha256,args.expected_commit_file_sha256)):
             p.error('provider import requires result SHA and both commit pins, without other recovery modes')
         result=import_saved_provider_result(**common,source_result_path=args.source_result,source_result_sha256=args.source_result_sha256,
+            source_cache_root=args.source_cache_root,source_cache_sha256=args.source_cache_sha256,
             expected_commit_sha256=args.expected_commit_sha256,expected_commit_file_sha256=args.expected_commit_file_sha256)
     elif args.repair_receipt_job:
         if args.code or not all((args.repair_receipt_generation,args.expected_commit_sha256,args.expected_commit_file_sha256)):

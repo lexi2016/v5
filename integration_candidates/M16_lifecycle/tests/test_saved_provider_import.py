@@ -97,3 +97,28 @@ class SavedProviderImportTests(unittest.TestCase):
             return original(store,job,product,receipt,**kwargs)
         with patch.object(self.store.__class__,'commit_result',race),self.assertRaisesRegex(ValueError,'COMMIT_CHANGED'):self.invoke(apply=True)
         self.assertEqual(self.store.read_product(DATE,self.data['input_identity']),self.before['product'])
+
+    def external_cache(self):
+        import shutil
+        root=self.root/'independent-collection-materials';(root/'parsed').mkdir(parents=True)
+        source=next((self.runtime/'materials/parsed').glob('*.hkex-pdf-facts.v3.*.json'))
+        raw=source.read_bytes();(root/'parsed'/source.name).write_bytes(raw)
+        # Isolated fixture layout: the original runtime has only its v1 cache.
+        source.rename(self.root/'saved-original-cache-fixture.json')
+        return dict(source_cache_root=root,source_cache_sha256=sha256(raw).hexdigest())
+    def test_external_cache_readonly_preview_apply_and_original_worker(self):
+        external=self.external_cache();snapshot=file_snapshot(external['source_cache_root'])
+        before=file_snapshot(self.runtime)
+        preview=self.invoke(**external);self.assertFalse(preview['applied']);self.assertEqual(file_snapshot(self.runtime),before)
+        self.args.update(external)
+        self.test_preview_and_original_p0_worker_apply()
+        self.assertEqual(file_snapshot(external['source_cache_root']),snapshot)
+    def test_external_cache_wrong_sha_missing_root_and_symlink_refused(self):
+        external=self.external_cache()
+        cases=[dict(external,source_cache_sha256='0'*64),dict(external,source_cache_root=self.root/'absent'),
+               dict(source_cache_root=external['source_cache_root']),dict(source_cache_sha256=external['source_cache_sha256'])]
+        link=self.root/'cache-link';link.symlink_to(external['source_cache_root'],target_is_directory=True)
+        cases.append(dict(external,source_cache_root=link))
+        for case in cases:
+            with self.subTest(case=case),self.assertRaises(ValueError):self.invoke(**case,apply=True)
+        self.assertEqual(self.store._read_commit(DATE,self.data['input_identity']),self.before)
