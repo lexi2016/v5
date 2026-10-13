@@ -1,9 +1,15 @@
-import contextlib,hashlib,importlib.util,io,json,os,subprocess,sys,tempfile,unittest
+import contextlib,hashlib,importlib.util,io,json,os,shlex,subprocess,sys,tempfile,unittest
 from pathlib import Path
 from datetime import datetime,timedelta
 from zoneinfo import ZoneInfo
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
+
+def write_synthetic_cli(path, code):
+ # Kernels split a shebang at whitespace; a quoted POSIX exec keeps the existing
+ # interpreter path intact, including Mac Application Support and apostrophes.
+ path.write_text('#!/bin/sh\nexec '+shlex.quote(sys.executable)+' -B -c '+shlex.quote(code)+' "$@"\n')
+ path.chmod(0o700)
 
 class CaptureTests(unittest.TestCase):
  def setUp(self):
@@ -23,7 +29,7 @@ class CaptureTests(unittest.TestCase):
   now=datetime.now(ZoneInfo('Asia/Shanghai'));self.day=now.strftime('%Y%m%d')
   self.published=(now.replace(hour=0,minute=0,second=0,microsecond=0)-timedelta(hours=1)).isoformat()
   response={'topics':[{'topic_id':'12345678901234567','create_time':self.published,'content':self.body}],'has_more':False}
-  self.cli=self.root/'synthetic-cli';self.cli.write_text('#!'+sys.executable+'\nimport json\nprint('+repr(json.dumps(response,ensure_ascii=False))+')\n');self.cli.chmod(0o700)
+  self.cli=self.root/'synthetic-cli';write_synthetic_cli(self.cli,'print('+repr(json.dumps(response,ensure_ascii=False))+')\n')
   self.config={'schema_version':'v5.m04_capture_config.v1','runtime_root':str(self.runtime),'cli':{'path':str(self.cli),'sha256':self.sha(self.cli)},'selector_panel':{'path':str(self.panel),'sha256':self.sha(self.panel)},'groups':[['123','synthetic']],'page_limit':30,'max_pages':1,'lookback_days':4}
   self.m.initialize(self.config)
  def sha(self,p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -37,6 +43,19 @@ class CaptureTests(unittest.TestCase):
   self.assertIn(a['archive_file'],result['archive_binding']['files']);self.assertEqual(a['archive_sha256'],result['archive_binding']['files'][a['archive_file']])
   p=subprocess.run([sys.executable,'-B',str(ROOT/'launch.py'),'read'],input=json.dumps(result['archive_binding']).encode(),capture_output=True)
   self.assertEqual(p.returncode,0,p.stdout+p.stderr);self.assertEqual(json.loads(p.stdout)['articles'],product['articles'])
+ def test_spaced_interpreter_path_runs_original_capture_and_recovery(self):
+  from unittest.mock import patch
+  directory=self.root/"Application Support"/"quoted ' interpreter"
+  directory.mkdir(parents=True);interpreter=directory/'python';interpreter.symlink_to(sys.executable)
+  with patch.object(sys,'executable',str(interpreter)):
+   fixture=CaptureTests();fixture.setUp();self.addCleanup(fixture.doCleanups)
+   result=fixture.run_capture()
+   self.assertEqual(result['status'],'SUCCEEDED')
+   article=fixture.m.materials(result['archive_binding'])['articles'][0]
+   self.assertEqual(article['body_text'],fixture.body)
+   self.assertEqual(article['acquisition_status'],'RECORDED')
+   fixture.cli.write_text('removed synthetic provider')
+   self.assertEqual(fixture.m.resume(fixture.config,'case1'),result)
  def test_repeated_capture_and_resume_never_refetch(self):
   result=self.run_capture();self.cli.write_text('broken');before=(self.runtime/'captures/case1/status.json').read_bytes()
   self.assertEqual(self.m.resume(self.config,'case1'),result)
@@ -50,7 +69,7 @@ class CaptureTests(unittest.TestCase):
   c=dict(self.config);c['selector_panel']=dict(path=str(self.runtime/'selector'),sha256='0'*64)
   with self.assertRaisesRegex(ValueError,'INPUT_IN_RUNTIME'):self.m.validate(c)
  def test_failed_capture_is_not_blindly_refetched(self):
-  self.cli.write_text('#!'+sys.executable+'\nraise SystemExit(3)\n');self.cli.chmod(0o700);self.config['cli']['sha256']=self.sha(self.cli)
+  write_synthetic_cli(self.cli,'raise SystemExit(3)\n');self.config['cli']['sha256']=self.sha(self.cli)
   with self.assertRaises(Exception):self.run_capture()
   with self.assertRaisesRegex(ValueError,'CAPTURE_INCOMPLETE'):self.m.resume(self.config,'case1')
   with self.assertRaisesRegex(ValueError,'CAPTURE_INCOMPLETE'):self.run_capture()

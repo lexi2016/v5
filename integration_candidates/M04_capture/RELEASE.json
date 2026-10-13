@@ -2,9 +2,10 @@
   "files": {
     "PROVENANCE.json": "38d38441eb210f3efce26d9ef10bee416b749257556a9337d92864ee447f9649",
     "README.md": "4ca72e43a66cf3c2a75fd3944c842dd926e40886e1fe0b52a7c3e011d3a71239",
-    "TEST_REPORT.md": "c9ba3a9407e1ed374a427a6fb4255ed4ed991196b0f5484c91c1e5f0c0bc7a1f",
+    "TEST_REPORT.md": "dc5dc94f743cbbe9d5d28670814358ec4129491fdb4b0378efbe7acbe875c4b8",
     "capture_runtime.py": "00a20538b20458b2f17e6e9c8f2e9c1e7a79054283a76594b29d92edf92be6c2",
     "config.example.json": "eefea0772ba1af0e2c2724e69cd3cbc0b01512254364d1bc3761101487e0f066",
+    "evidence/launcher-spaces-tests.txt": "ec030e672dfa255a2e6f6b9fd1c88202452a618249d7216035f77abdd627676c",
     "evidence/offline-tests.txt": "41f7dbf17c1ae9c24751030e1cda8dff8bf4312e3fdd87f4854ab17ca1221938",
     "launch.py": "bc4337cef08ea5faa0cefe4cfbdc781c26148351e4067089dbe88bbd00ab931c",
     "research_lane.py": "ec268472daba737d7c5b9880c356a856bb10c17c2f42874521dfb420e3891466",
@@ -478,7 +479,7 @@
     "source/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_plan.py": "ef0269a8510b9168e2d135de6c1b4d28146a22d0d691aee8dd3fe80f95a698f0",
     "source/V5/vendor/us_mapping_baseline/v4/manager_research/workspace_projection.py": "027d855613e675e1f569b401b9a8344e40766b88c31e987e791d05a0b3a2f200",
     "test_offline.sh": "e382c35af1ecdcc26dae704ee3e9d87dd72c3397efa17f59c1b6a5c49392b3f1",
-    "tests/test_capture.py": "2f4bd209f6e41348fd77a6f0d8ed88004952d036cd02b03ef068d67af3c4de2f",
+    "tests/test_capture.py": "9e4ca1f3441009e18835711767bce52b3e1e0c9f4a37af2d1c47a1329edc524d",
     "tests/test_research_lane.py": "0ae92e03b3d6a7be6f67ef5af5a261d176decd5ab275fdda26046a69fff2227a"
   },
   "original_branch_base": "8261160018537c71de0af17584d371a2d31913c8",
