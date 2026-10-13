@@ -2135,10 +2135,23 @@
  STATUS_ROUTE='/api/v5/source-bundle/status'
  MODULES=(('M01_A_MARKET','m01'),('M02_HK_MARKET','m02'),('M03_US_MARKET','m03'),('M05_A_PRESELECTION','m05'))
  FLAGS=dict(natural_verified=False,formal_eligibility_verified=False,production_allowed=False,buy_gate_updated=False,orders_sent=False)
-@@ -131,93 +131,6 @@
+@@ -119,9 +119,7 @@
+     routes=config.get('routes')
+     allowed={STATUS_ROUTE,M04_ROUTE,M07_ROUTE,M11_ROUTE,M12_ROUTE,M16_ROUTE,M17_ROUTE,
+         '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review',
+-        '/api/v5/source-bundle/a-close-replay','/api/v5/source-bundle/hk-stage-observed',
+-        '/api/v5/source-bundle/rebound-saved','/api/v5/research/lane',
+-        '/api/v5/research/wechat/materials','/api/v5/source-bundle/us-mapping-saved'}
++        '/api/v5/source-bundle/a-close-replay','/api/v5/source-bundle/hk-stage-observed'}
+     if (config.get('module_id')!='source_bundle' or not isinstance(routes,list)
+         or STATUS_ROUTE not in routes or set(routes)-allowed):
+         raise ValueError('SOURCE_MODULE_ID_REQUIRED')
+@@ -131,93 +129,6 @@
+         payload_sha256=sha256_json(result),source_input_sha256=result['request_sha256'],
+         data_kind=result['data_kind'],generated_at=result['observed_at'],status_code=200)
      return publish_generation(config,[record],expected_generation=expected_generation)
- 
- 
+-
+-
 -
 -def _m03_saved_public_view(result):
 -    """Accept only the pinned saved-reader projection; no private roots."""
@@ -2224,11 +2237,9 @@
 -        previous_request_sha256=previous['request_sha256'],retained_modules=[MODULES[i][0] for i in (0,1,3)])
 -    publication=publish_source_result(result,checked,expected_generation=expected_generation)
 -    return dict(result=result,publication=publication)
--
--
+ 
+ 
  def run_config(config):
-     if config.get('enabled') is not True:return dict(status='SOURCE_BUNDLE_DISABLED',**FLAGS)
-     from .module_api import _open_directory,_read_at
 --- a/V5/src/v5_shadow/source_bundle_worker.py
 +++ b/V5/src/v5_shadow/source_bundle_worker.py
 @@ -43,15 +43,8 @@
@@ -2250,7 +2261,7 @@
      if any(name in values for name in ('owner_root','v5_src','capture_root','development_dates_file','allow_late_post_close')):
 --- a/V5/tests/test_source_bundle_m03_saved.py
 +++ /dev/null
-@@ -1,126 +0,0 @@
+@@ -1,139 +0,0 @@
 -"""Exact M03 saved-read dispatch and one-row publication; all market data synthetic."""
 -import copy
 -import json
@@ -2314,7 +2325,8 @@
 -        return {str(p.relative_to(self.data)):p.read_bytes() for p in self.data.rglob('*') if p.is_file()}
 -
 -    def test_real_saved_reader_updates_only_m03_and_retains_all_other_cards_routes(self):
--        before=self.data_bytes();old=self.fixture.tree()
+-        before=self.data_bytes();old=self.fixture.tree();config_before=copy.deepcopy(self.config)
+-        self.assertEqual(len(self.config['routes']),15)
 -        out=self.publish();result=out['result']
 -        self.assertEqual(self.data_bytes(),before)
 -        for i in (0,1,3):self.assertEqual(result['modules'][i],self.previous['modules'][i])
@@ -2327,6 +2339,8 @@
 -        self.assertNotIn(str(MARKET_RUNTIME),json.dumps(result))
 -        current=json.loads((self.root/'active.json').read_bytes())['generation_sha256']
 -        refs=json.loads((self.root/'generations'/(current+'.json')).read_bytes())['records']
+-        self.assertEqual(set(refs),set(self.siblings)|{route_fixture.response_key('source_bundle',STATUS_ROUTE,{})})
+-        self.assertEqual(self.config,config_before)
 -        for key,digest in self.siblings.items():self.assertEqual(refs[key],digest)
 -        for path,raw in old.items():
 -            if path!='active.json':self.assertEqual((self.root/path).read_bytes(),raw)
@@ -2377,3 +2391,13 @@
 -                with patch.object(source_bundle,'_call',return_value=dict(valid,**change)):
 -                    with self.assertRaisesRegex(ValueError,'M03_SAVED_RESULT_CONTRACT'):self.publish()
 -        self.assertEqual(self.fixture.tree(),before)
+-
+-    def test_unknown_route_in_current_full_config_never_publishes(self):
+-        before=self.fixture.tree();data_before=self.data_bytes()
+-        self.config['routes'].append('/api/v5/source-bundle/not-registered')
+-        config_before=copy.deepcopy(self.config)
+-        with self.assertRaisesRegex(ValueError,'^SOURCE_MODULE_ID_REQUIRED$'):
+-            self.publish()
+-        self.assertEqual(self.fixture.tree(),before)
+-        self.assertEqual(self.data_bytes(),data_before)
+-        self.assertEqual(self.config,config_before)

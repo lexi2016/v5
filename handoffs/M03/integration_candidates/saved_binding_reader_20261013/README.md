@@ -25,3 +25,5 @@ Exit 0: verified read-only public result on stdout. Exit 2: SOURCE_REJECTED and 
 Copy the new test into an isolated copy of the unchanged original candidate's V5/tests and the adapter into V5/src/v5_shadow, then use its existing test fixture and environment:
 `M03_FIXED_SOURCE=$RUNTIME PYTHONPATH=$RUNTIME/V5/src:$RUNTIME/V5/tests python -B -m unittest -v test_us_source_saved`.
 12/12 passed using actual original quote-only synthetic producer/store/binding/cold reader. No real provider, Mac production data, or page publication was executed here. All actual test sources, clocks, and Proxy responses are explicitly synthetic. No Mac private request or paths are committed.
+
+Route compatibility correction: see p0_integration/route_compatibility_fix/README.md for the exact e18 increment. The full P0 candidate now preserves the complete 15-route deployed inventory while rejecting unknown paths.

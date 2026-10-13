@@ -1,3 +1,14 @@
+# Route-compatibility correction evidence
+
+- Root cause reproduced before code change: the existing 15-route synthetic config raised SOURCE_MODULE_ID_REQUIRED in publish_source_result. The old allowlist omitted exactly four routes confirmed in the deployed config.
+- Minimal production diff: only four explicit route strings added; all other source_bundle code unchanged from e18.
+- Corrected joint regression: 25 run, 24 PASS, 1 existing M01 Mac Parquet skip, 28.076 seconds. Includes seven real synthetic saved-reader single-card tests, full 15-route config/all 14 sibling hashes retention, other three cards/config/original data unchanged, unknown route refusal and stale/racing CAS.
+- Initial rerun invocation omitted the pre-existing M03_FIXED_SOURCE fixture environment variable and had seven setup failures. Corrected invocation supplied it and M03_SAVED_TEST_RUNTIME; the final result above supersedes that invocation. No production change was made to resolve that test setup issue.
+- Exact original-to-corrected five-file patch and e18-to-corrected two-file increment both passed forward/after-SHA/reverse/before-SHA roundtrip.
+- Supplemental full staged-P0 unittest discovery was started after the joint regression. It was still running when this narrow fix was packaged; no full-P0-suite PASS is claimed here. Its result must be reported separately.
+- Independent focused review found no route-fix blocker. No loader redesign or broader route acceptance was introduced.
+- Mac reported e18 final adapter 12 PASS, six single-card tests PASS, exact five-file patch PASS, and real saved read VALIDATED_SOURCE_BINDING with 33 quotes/24 themes and original bytes unchanged. Its subsequent actual-config publisher was rejected before publication. These are retained earlier-version facts, not evidence that this corrected candidate was published.
+
 # M03 saved reader / P0 candidate test report
 
 Final adapter source SHA256: 7e2ce3f43b660a5d20b4bc52adf10c8da6770f148adb390b666cc47c132ad864.

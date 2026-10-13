@@ -61,7 +61,8 @@ class M03SavedPublicationTests(unittest.TestCase):
         return {str(p.relative_to(self.data)):p.read_bytes() for p in self.data.rglob('*') if p.is_file()}
 
     def test_real_saved_reader_updates_only_m03_and_retains_all_other_cards_routes(self):
-        before=self.data_bytes();old=self.fixture.tree()
+        before=self.data_bytes();old=self.fixture.tree();config_before=copy.deepcopy(self.config)
+        self.assertEqual(len(self.config['routes']),15)
         out=self.publish();result=out['result']
         self.assertEqual(self.data_bytes(),before)
         for i in (0,1,3):self.assertEqual(result['modules'][i],self.previous['modules'][i])
@@ -74,6 +75,8 @@ class M03SavedPublicationTests(unittest.TestCase):
         self.assertNotIn(str(MARKET_RUNTIME),json.dumps(result))
         current=json.loads((self.root/'active.json').read_bytes())['generation_sha256']
         refs=json.loads((self.root/'generations'/(current+'.json')).read_bytes())['records']
+        self.assertEqual(set(refs),set(self.siblings)|{route_fixture.response_key('source_bundle',STATUS_ROUTE,{})})
+        self.assertEqual(self.config,config_before)
         for key,digest in self.siblings.items():self.assertEqual(refs[key],digest)
         for path,raw in old.items():
             if path!='active.json':self.assertEqual((self.root/path).read_bytes(),raw)
@@ -124,3 +127,13 @@ class M03SavedPublicationTests(unittest.TestCase):
                 with patch.object(source_bundle,'_call',return_value=dict(valid,**change)):
                     with self.assertRaisesRegex(ValueError,'M03_SAVED_RESULT_CONTRACT'):self.publish()
         self.assertEqual(self.fixture.tree(),before)
+
+    def test_unknown_route_in_current_full_config_never_publishes(self):
+        before=self.fixture.tree();data_before=self.data_bytes()
+        self.config['routes'].append('/api/v5/source-bundle/not-registered')
+        config_before=copy.deepcopy(self.config)
+        with self.assertRaisesRegex(ValueError,'^SOURCE_MODULE_ID_REQUIRED$'):
+            self.publish()
+        self.assertEqual(self.fixture.tree(),before)
+        self.assertEqual(self.data_bytes(),data_before)
+        self.assertEqual(self.config,config_before)

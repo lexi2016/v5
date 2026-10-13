@@ -32,9 +32,9 @@
         "git_blob": "28f63d069c522c213a464a41a0beee9ed61a5455"
       },
       "after": {
-        "bytes": 13752,
-        "sha256": "16db7a5d3f74f92c90c8ca9f7800a4f63f35f6c0873dc48ecfdb6f243cc0f4dd",
-        "git_blob": "920243955a84d9f4dba275b9b9fc562d8a9e3be1"
+        "bytes": 13909,
+        "sha256": "592fd3f0e43b437f28b45c01a56499bd8ef466ba7222c553add09ec9d38dc049",
+        "git_blob": "f966b8791fb86241c6051daf41721ac9b8fdf684"
       }
     },
     {
@@ -54,9 +54,9 @@
       "path": "V5/tests/test_source_bundle_m03_saved.py",
       "before": "ABSENT",
       "after": {
-        "bytes": 7587,
-        "sha256": "02a298b7585fa46ea820c660813608befe7ad2307ed1bd12b474589a557e3259",
-        "git_blob": "0a531b43abdf400db27b337efc934ab8395478dd"
+        "bytes": 8385,
+        "sha256": "18f628a8b47e7eae784e5357c9f923e2ef98d87d4a5c8e27e9690790e8594dad",
+        "git_blob": "23034efb3c3ed420d7a9e7993642aad35d594185"
       }
     }
   ]

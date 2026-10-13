@@ -119,7 +119,9 @@ def publish_source_result(result,config,*,expected_generation):
     routes=config.get('routes')
     allowed={STATUS_ROUTE,M04_ROUTE,M07_ROUTE,M11_ROUTE,M12_ROUTE,M16_ROUTE,M17_ROUTE,
         '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review',
-        '/api/v5/source-bundle/a-close-replay','/api/v5/source-bundle/hk-stage-observed'}
+        '/api/v5/source-bundle/a-close-replay','/api/v5/source-bundle/hk-stage-observed',
+        '/api/v5/source-bundle/rebound-saved','/api/v5/research/lane',
+        '/api/v5/research/wechat/materials','/api/v5/source-bundle/us-mapping-saved'}
     if (config.get('module_id')!='source_bundle' or not isinstance(routes,list)
         or STATUS_ROUTE not in routes or set(routes)-allowed):
         raise ValueError('SOURCE_MODULE_ID_REQUIRED')
