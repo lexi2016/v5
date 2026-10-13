@@ -1,0 +1,27 @@
+{
+  "status": "ADMITTED_COLD_READ_VERIFIED",
+  "fixed_commit": "257ca6425c4d489e09430605ee82bf22a4e02da8",
+  "started_utc": "2026-10-13T06:18:41.623193+00:00",
+  "finished_utc": "2026-10-13T06:18:42.416914+00:00",
+  "raw_file_sha256": "3718d8113576ae028f3517412251879f09a24c1683b6723d7c81abf24e3a68b3",
+  "raw_bytes": 1333446,
+  "canonical_commit_sha256": "270f4bfc116266234d3c70edfd8fc159d22258035f065d41cf8c8977f71017cb",
+  "member_digests": {
+    "product_sha256": "b29666eacf4abbdfb20c083a129598a6079cab0d7368a524780295b8b687d6a5",
+    "job_sha256": "b39a87ff94b9e8a5f2eabdf605c549c20015d45f7e6f8e16e1b3915700321264",
+    "receipt_sha256": "4f4e39e35f66246db09e88c0505e67922dbc5f256e4b4ca53938de3bef936f53"
+  },
+  "rows": 10,
+  "business_status": "PARTIAL_WITH_ROWS",
+  "original_files_unchanged": 21,
+  "original_verifier_before_copy": true,
+  "byte_preserving_copy": true,
+  "read_only_cold_child": true,
+  "receipt_fields_not_invented": true,
+  "other_date_waiting": true,
+  "bad_pin_cannot_confirm_no_content": true,
+  "repeated_reads_exact": true,
+  "source_pdf_bytes_verified": false,
+  "natural_verified": false,
+  "exit_code": 0
+}

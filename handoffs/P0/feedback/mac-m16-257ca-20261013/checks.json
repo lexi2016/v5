@@ -1,0 +1,120 @@
+[
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "V5/tests",
+      "-p",
+      "test_m16_saved_integration.py",
+      "-q"
+    ],
+    "cwd": "candidate-m16-257ca",
+    "started_utc": "2026-10-13T06:17:03.082992+00:00",
+    "finished_utc": "2026-10-13T06:17:23.128611+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "V5/tests",
+      "-p",
+      "test_m11_integration.py",
+      "-q"
+    ],
+    "cwd": "candidate-m16-257ca",
+    "started_utc": "2026-10-13T06:17:23.129655+00:00",
+    "finished_utc": "2026-10-13T06:17:29.999935+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "V5/tests",
+      "-p",
+      "test_m12_integration.py",
+      "-q"
+    ],
+    "cwd": "candidate-m16-257ca",
+    "started_utc": "2026-10-13T06:17:30.001063+00:00",
+    "finished_utc": "2026-10-13T06:17:37.541167+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_PYTHON>",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "V5/tests/test_p0_main_registry.py",
+      "V5/tests/test_module_api.py"
+    ],
+    "cwd": "candidate-m16-257ca",
+    "started_utc": "2026-10-13T06:17:37.541852+00:00",
+    "finished_utc": "2026-10-13T06:17:43.265033+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "test:p0"
+    ],
+    "cwd": "candidate-m16-257ca/frontend",
+    "started_utc": "2026-10-13T06:17:43.265671+00:00",
+    "finished_utc": "2026-10-13T06:17:47.830840+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "test",
+      "--",
+      "src/components/M16SavedResearch.spec.ts",
+      "src/components/M11SavedResearch.spec.ts",
+      "src/components/M12SavedVideo.spec.ts"
+    ],
+    "cwd": "candidate-m16-257ca/frontend",
+    "started_utc": "2026-10-13T06:17:47.831412+00:00",
+    "finished_utc": "2026-10-13T06:17:48.731778+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "typecheck"
+    ],
+    "cwd": "candidate-m16-257ca/frontend",
+    "started_utc": "2026-10-13T06:17:48.732273+00:00",
+    "finished_utc": "2026-10-13T06:17:50.660598+00:00",
+    "exit_code": 0
+  },
+  {
+    "command": [
+      "<EXISTING_NODE_BIN>/npm",
+      "run",
+      "build"
+    ],
+    "cwd": "candidate-m16-257ca/frontend",
+    "started_utc": "2026-10-13T06:17:50.661086+00:00",
+    "finished_utc": "2026-10-13T06:17:51.832808+00:00",
+    "exit_code": 0
+  }
+]
