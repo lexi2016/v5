@@ -1,0 +1,358 @@
+{
+  "candidate": "fac269ade842eb1d9b54c604b77091b0cd58bd44",
+  "code_chain": [
+    "c7b815c065da83bd2db2b3023be4607ce9f194ec",
+    "52e71c8b85caef2874e4f3c9403e77592f5fb2c9",
+    "fac269ade842eb1d9b54c604b77091b0cd58bd44"
+  ],
+  "status": "DEPLOYED_HTTP_DOM_PASS",
+  "started_at": "2026-10-13T15:03:11.401118+00:00",
+  "finished_at": "2026-10-13T15:03:28.284426+00:00",
+  "source_pid": 3337,
+  "preview_pid": 3345,
+  "source_origin": "http://127.0.0.1:56563",
+  "preview_port": 54780,
+  "old_preview_pid_stopped": 80314,
+  "all11_status200_equal": true,
+  "manager_descriptor_exact": true,
+  "daily_opt_in": false,
+  "protected_ports": {
+    "8873": [
+      54701
+    ],
+    "8910": [
+      1093
+    ],
+    "54777": [
+      69093
+    ],
+    "54778": [
+      69094
+    ],
+    "54779": [
+      69095
+    ],
+    "61236": [
+      18570
+    ],
+    "63668": [
+      17107
+    ],
+    "11111": [
+      64775
+    ],
+    "58128": [
+      85509
+    ],
+    "51316": [
+      80787
+    ],
+    "49436": [
+      78855
+    ],
+    "59177": [
+      73744
+    ],
+    "62116": [
+      64688
+    ],
+    "65413": [
+      55204
+    ],
+    "64303": [
+      40157
+    ],
+    "62906": [
+      25440
+    ],
+    "55753": [
+      17111
+    ],
+    "62870": [
+      17109
+    ]
+  },
+  "protected_unchanged": true,
+  "M02_generation": "18327ae3ac839284230437989c9418c326b8f850decc38448c354d0ddf8319f0",
+  "rollback_plan": {
+    "frontend": "runtime-m07-eec/frontend",
+    "source_origin": "http://127.0.0.1:61236",
+    "manager_origin": "http://127.0.0.1:63668",
+    "port": 54780
+  },
+  "rollback_execution": "NOT_NEEDED",
+  "child_lifecycle": [
+    {
+      "pid": 3345,
+      "exit_code": null,
+      "state": "RUNNING_RETAINED",
+      "owned_popen_identity": true,
+      "at": "2026-10-13T15:03:28.284465+00:00"
+    },
+    {
+      "pid": 3337,
+      "exit_code": null,
+      "state": "RUNNING_RETAINED",
+      "owned_popen_identity": true,
+      "at": "2026-10-13T15:03:28.284470+00:00"
+    }
+  ],
+  "original_failure_cause": "UNPROVEN_THIS_SINGLE_OBSERVED_RETRY_PASSED",
+  "backend_vue_owner_collection_rerun": false,
+  "baseline": {
+    "status": "PASS",
+    "started_at": "2026-10-13T15:01:53.647Z",
+    "finished_at": "2026-10-13T15:01:58.449Z",
+    "predicates": {
+      "m06_rows": 100,
+      "m06_exact100": true,
+      "manager_container_present": true,
+      "manager_run_match": true
+    }
+  },
+  "live_dom": {
+    "status": "PASS",
+    "started_at": "2026-10-13T15:03:21.415Z",
+    "finished_at": "2026-10-13T15:03:26.848Z",
+    "predicates": {
+      "m06_rows": 100,
+      "m06_exact100": true,
+      "manager_container_present": true,
+      "manager_run_match": true
+    },
+    "consoleErrors": [],
+    "jsdomErrors": [],
+    "failure": null,
+    "fetch_request_count": 23,
+    "pending_fetches": [
+      {
+        "url": "http://127.0.0.1:54780/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+        "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=announcement_reviewed_analysis&projection=announcement_references",
+        "started_at": "2026-10-13T15:03:26.070Z",
+        "state": "PENDING"
+      },
+      {
+        "url": "http://127.0.0.1:54780/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=rebound_research_observation&projection=rebound_references&group=strict",
+        "path": "/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=8bf699c6bc1fc47a869d2e21d53989a5f5f18d31b52ddef24071c88c4c7ffa8a&section=rebound_research_observation&projection=rebound_references&group=strict",
+        "started_at": "2026-10-13T15:03:26.835Z",
+        "state": "PENDING"
+      }
+    ]
+  },
+  "m14_http": {
+    "status": "PASS",
+    "pages": [
+      {
+        "offset": 0,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 160524
+      },
+      {
+        "offset": 32,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161051
+      },
+      {
+        "offset": 64,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161120
+      },
+      {
+        "offset": 96,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161123
+      },
+      {
+        "offset": 128,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161040
+      },
+      {
+        "offset": 160,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161132
+      },
+      {
+        "offset": 192,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161125
+      },
+      {
+        "offset": 224,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161150
+      },
+      {
+        "offset": 256,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161193
+      },
+      {
+        "offset": 288,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161144
+      },
+      {
+        "offset": 320,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161116
+      },
+      {
+        "offset": 352,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161124
+      },
+      {
+        "offset": 384,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 160963
+      },
+      {
+        "offset": 416,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161129
+      },
+      {
+        "offset": 448,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 160969
+      },
+      {
+        "offset": 480,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161003
+      },
+      {
+        "offset": 512,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161124
+      },
+      {
+        "offset": 544,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161154
+      },
+      {
+        "offset": 576,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161075
+      },
+      {
+        "offset": 608,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161038
+      },
+      {
+        "offset": 640,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161112
+      },
+      {
+        "offset": 672,
+        "entries": 18,
+        "loaded": 18,
+        "bytes": 120554
+      }
+    ],
+    "count": 690,
+    "rejections": [
+      {
+        "query": {
+          "root": "forbidden"
+        },
+        "status": 409
+      },
+      {
+        "query": {
+          "group": "pending",
+          "run_id": "da7ae8f55b45416596e5c2d1e69b9b17",
+          "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+          "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e"
+        },
+        "status": 409
+      },
+      {
+        "query": {
+          "group": "pending",
+          "cursor": "bad"
+        },
+        "status": 409
+      }
+    ],
+    "other_routes_equal": 11,
+    "finished_at": "2026-10-13T15:03:21.098655+00:00"
+  },
+  "identity": {
+    "source_after_hashes": {
+      "V5/src/v5_shadow/module_api.py": "f4722594c27f6f614a3831de015e268ae48a400a5b3cf8a79706e38eb3bdd12c",
+      "V5/src/v5_shadow/m14_readonly.py": "15d25e8a589602b12a35e45fec3e93ee443403979533abdde78daa48104ee224",
+      "V5/tests/test_m14_saved_rebound.py": "af4238829e67596cdb4080f8c75bb0fb7f003ca974aa935e352f478a09e59eb0",
+      "V5/tests/test_m14_saved_launch.py": "de66201dafb002de4c68433417f47762ff9ccee2c73d713f57fb8105681900b9",
+      "frontend/vite.config.ts": "76df9236b995cb1276b1b144af35374b0fd05b2afed92d149662760396d1dbf9",
+      "frontend/tests/m14SavedReboundFixtures.mjs": "bae3095677badc17ec8c2487285d3b6eaee453dd509ffa263570c74a27128886",
+      "frontend/tests/m14SavedRebound.node.mjs": "6becb9a4085a8a39b53e7695367febb73fc20ac6192f479f6e539e22e573b544",
+      "frontend/tests/m14SavedReboundFixtures.d.mts": "5de9badc0bc6c2a4b2fc0a3f115d00fc1fb1fa162550a5a6ee9c51d13b0c6f9d",
+      "frontend/tests/savedRebound.node.mjs": "2520f47bf0e6ee496e15c83adad6017227d700ac08801f07131e558395df5ce8",
+      "frontend/src/api/m14SavedRebound.ts": "3bdb33fb4d4b718a7203b5d13c78c493a44f221b9e7012cdc3af8ba7742c0500",
+      "frontend/src/components/M14SavedRebound.vue": "8d7c313837d97fe6e5130cc2f4ecdcb8d4f9f8fe4de2432add7a1e24a272d010",
+      "frontend/src/components/M14SavedRebound.spec.ts": "a28c0d43f781c0b9ba49cbd08ae4b596dbac162bf670dae327f77311682555b1",
+      "frontend/src/views/SavedManagerResultView.navigation.spec.ts": "c1e5a9f2eb871f86ebe32d90066d3cb6f08296d095c0a5fc5721fc2458e54799",
+      "frontend/src/views/SavedManagerResultView.m14.spec.ts": "d7c4a40dff1a14f823e13ab9ce74458c5016ca5482181aa05ce542973dd7f7f3",
+      "frontend/src/views/SavedManagerResultView.spec.ts": "7a5e3a1aeaab70b84d3f397e4ab75741cc4cfd73b40ce8dcae3cb4fc699a77ef",
+      "frontend/src/views/SavedManagerResultView.vue": "d87126cc20523213247248f50bd2f253cb308041fbaec247e9760dc3d8cd0b15",
+      "frontend/src/manager-selection/reboundPanelObservation.ts": "e914cf15458d64413c5e3b978d04de853dafe5de4d2befe9e09d9938a0d45301"
+    },
+    "dist": {
+      "assets/App-7ebddp4S.js": "437546805a470afbb623b2602aaf953c49aa873e567a0bda78807303aea916cb",
+      "assets/App-C8ZBy9MI.css": "63b4a58d5e7c59ab32fcefd0e061bc5a859aa2c894ec1efec3e6e9e3bc56f17d",
+      "assets/ManagerSelectionView-Brl-BTKb.js": "50b8622aa9ceea51ed77c3df81438daa8450b3b333fb664e7d94abda049753ea",
+      "assets/ManagerSelectionView-DPqeaKxb.css": "937acb35ff2f5318182c43b1c045db2545b98d8486a17319913dde28331e83f5",
+      "assets/SavedManagerResultView-C6ESMG6U.css": "5089394c7538776468126f39b1c902b5c2fb08621c119319a7ca21476d6fbcd5",
+      "assets/SavedManagerResultView-DJaUVDnA.js": "18ed51474fe3be84b857287bbfd71f5fb424dd9f23eee42a3afe04f6ecae0ce8",
+      "assets/_plugin-vue_export-helper-DlAUqK2U.js": "cb85b0f263dbe24e857338301c0627076592e9f1f1a5662929f86d2c126444aa",
+      "assets/announcementAnalysis--KadxjCO.js": "aaa912437ec586cbe5b602f9d7d5026b5c81e2c7946052262efc3dd92a87734b",
+      "assets/dailyResearchCommand-CZXQsiMT.js": "bbbbb5d461216c69c02199c63d095d7999fb114024f95d3ccafd5f4d8382c9d3",
+      "assets/dailyResearchCommand-D7J2FMsY.css": "444542681a3575082c280eb30674e6550766a127bdd6da019b78e8f247125dfa",
+      "assets/main-B3_wdeJe.js": "81d403356181d4e2b1840961031242cf03f2d1f8f4d31a139dfb80e76bfd5f8d",
+      "assets/managerSelection-DuH0VMG8.js": "64138d2436de6318924765b62fabdd28c71d346171f696d0bfe838a517e434d6",
+      "assets/research_lane-t0CPXntR.js": "8651472ec9b303719d201e466e997fc2fadfc2f7169ec1a07c6ded932659f95b",
+      "assets/runtime-dom.esm-bundler-o9Es5alT.js": "d5d51dcb97e2bd39215e4f15862b0dd12fa757fe3f284169df97778dd77705b3",
+      "assets/style-BtNCnKLk.css": "511cff3d064c51a16261deb297bd8cd2cd4b58378b4eedf3fdcd210970a12fff",
+      "assets/style-DI6AXicP.js": "d887044e7c17fd90344fc4f74f53cac686584daf2a458ab2136d36f1946e9ab6",
+      "daily-research-command/index.html": "97ee9279a42986e6507c3c0e6e51abc03c1af695d725d9d8fef8b576d1edfd64",
+      "index.html": "5091427dfac368e32b9d74e07c93fff0ae24b1a8b6c0ffd586e013a877299307",
+      "manager-selection/index.html": "553bd45aa0963d52fc4d088a6db6de0fed07c05fed3bacec7def82731e71cc30"
+    },
+    "config_sha256": "551227fa769493565417e4a1eb27f978d0a3d87a9f92a94092bbf916937df947",
+    "probe_sha256": "24836880cd250d7046fa1fae68945365cf46823fee5b07a79901880047b18065"
+  },
+  "native_visual": "NOT_RUN",
+  "instrumentation_initial_attempt": "ResourceLoader export unavailable before DOM; observation adapter corrected to passive Node diagnostics; no service switch occurred in that attempt",
+  "original_receipt": {
+    "bytes": 6642,
+    "sha256": "6d8dce6271eaa9009ca38e8822f53e70acdc96e128e99cf2a01eccafd1a45e0e",
+    "unchanged": true
+  }
+}

@@ -1,0 +1,287 @@
+{
+  "schema": "v5.mac.combined-deployment-feedback.v1",
+  "code_chain": [
+    "c7b815c065da83bd2db2b3023be4607ce9f194ec",
+    "52e71c8b85caef2874e4f3c9403e77592f5fb2c9",
+    "fac269ade842eb1d9b54c604b77091b0cd58bd44"
+  ],
+  "status": "DEPLOYMENT_FAILED_ROLLED_BACK",
+  "c7_five_preimages": "PASS",
+  "fac269_17_preimages": "PASS_AFTER_HASH_CHECKED_52e71_TEST_CHAIN",
+  "build": [
+    {
+      "command": [
+        "NODE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "started_at": "2026-10-13T14:25:00.516228+00:00",
+      "finished_at": "2026-10-13T14:25:03.571218+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "NODE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "started_at": "2026-10-13T14:25:03.571244+00:00",
+      "finished_at": "2026-10-13T14:25:05.888558+00:00",
+      "exit_code": 0
+    }
+  ],
+  "started_at": "2026-10-13T14:27:14.054338+00:00",
+  "finished_at": "2026-10-13T14:28:17.444412+00:00",
+  "isolated_combination": {
+    "status": "PASS",
+    "http": {
+      "status": "PASS",
+      "pages": [
+        {
+          "offset": 0,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 160524
+        },
+        {
+          "offset": 32,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161051
+        },
+        {
+          "offset": 64,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161120
+        },
+        {
+          "offset": 96,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161123
+        },
+        {
+          "offset": 128,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161040
+        },
+        {
+          "offset": 160,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161132
+        },
+        {
+          "offset": 192,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161125
+        },
+        {
+          "offset": 224,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161150
+        },
+        {
+          "offset": 256,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161193
+        },
+        {
+          "offset": 288,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161144
+        },
+        {
+          "offset": 320,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161116
+        },
+        {
+          "offset": 352,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161124
+        },
+        {
+          "offset": 384,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 160963
+        },
+        {
+          "offset": 416,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161129
+        },
+        {
+          "offset": 448,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 160969
+        },
+        {
+          "offset": 480,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161003
+        },
+        {
+          "offset": 512,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161124
+        },
+        {
+          "offset": 544,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161154
+        },
+        {
+          "offset": 576,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161075
+        },
+        {
+          "offset": 608,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161038
+        },
+        {
+          "offset": 640,
+          "entries": 32,
+          "loaded": 32,
+          "bytes": 161112
+        },
+        {
+          "offset": 672,
+          "entries": 18,
+          "loaded": 18,
+          "bytes": 120554
+        }
+      ],
+      "count": 690,
+      "rejections": [
+        {
+          "query": {
+            "root": "forbidden"
+          },
+          "status": 409
+        },
+        {
+          "query": {
+            "group": "pending",
+            "run_id": "da7ae8f55b45416596e5c2d1e69b9b17",
+            "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+            "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e"
+          },
+          "status": 409
+        },
+        {
+          "query": {
+            "group": "pending",
+            "cursor": "bad"
+          },
+          "status": 409
+        }
+      ],
+      "other_routes_equal": 11,
+      "finished_at": "2026-10-13T14:27:23.049646+00:00"
+    },
+    "dom_exit": 0
+  },
+  "live": {
+    "http_11_routes_equal": true,
+    "dom_exit": 1,
+    "dom_started": "2026-10-13T14:27:33.136103+00:00",
+    "dom_finished": "2026-10-13T14:28:17.444365+00:00",
+    "error": "DOM_WAIT_TIMEOUT at initial wait for M06 100 rows and old manager run, probe_dom_fac269.mjs:12",
+    "product_code_modified_to_fix_failure": false
+  },
+  "child_lifecycle": [
+    {
+      "pid": 80100,
+      "exit_code": 143,
+      "state": "STOPPED",
+      "owned_popen_identity": true,
+      "at": "2026-10-13T14:28:17.453295+00:00"
+    },
+    {
+      "pid": 80055,
+      "exit_code": 143,
+      "state": "STOPPED",
+      "owned_popen_identity": true,
+      "at": "2026-10-13T14:28:17.453312+00:00"
+    },
+    {
+      "pid": 80011,
+      "exit_code": -15,
+      "state": "STOPPED",
+      "owned_popen_identity": true,
+      "at": "2026-10-13T14:28:17.461642+00:00"
+    }
+  ],
+  "rollback": {
+    "status": "RESTORED",
+    "pid": 80314
+  },
+  "daily_opt_in": false,
+  "native_visual": {
+    "status": "NOT_RUN",
+    "reason": "nodeRepl.fetch request failed"
+  },
+  "M03_rerun": false,
+  "original_fac269_receipt": {
+    "bytes": 10599,
+    "sha256": "35b11ec6d0a3c0d54c9c6fb2edc1395cae2f1b90c52355702b31f7e03a46a8d1",
+    "unchanged": true
+  },
+  "rollback_verification": {
+    "status": "ROLLBACK_VERIFIED",
+    "at": "2026-10-13T14:29:16.735641+00:00",
+    "preview_pid": 80314,
+    "protected_ports": {
+      "8873": [
+        54701
+      ],
+      "8910": [
+        1093
+      ],
+      "54777": [
+        69093
+      ],
+      "54778": [
+        69094
+      ],
+      "54779": [
+        69095
+      ],
+      "61236": [
+        18570
+      ],
+      "63668": [
+        17107
+      ],
+      "11111": [
+        64775
+      ]
+    },
+    "protected_files": 2671,
+    "protected_files_unchanged": true,
+    "M02_generation": "18327ae3ac839284230437989c9418c326b8f850decc38448c354d0ddf8319f0",
+    "old_manager_explicit_run_preserved": true,
+    "new_children_stopped": true,
+    "native_visual": "NOT_RUN"
+  }
+}
