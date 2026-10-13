@@ -1,0 +1,28 @@
+{
+  "repository": "lexi2016/v5",
+  "commit": "da43056ac49d399f5a4777955ed0e1a1f26394c7",
+  "repository_prefix": "V5/src/v5_shadow/",
+  "purpose": "Unmodified original P0 read-only contract integration tests",
+  "files": [
+    {
+      "path": "m16_readonly_worker.py",
+      "git_blob_sha": "0620ad16a409de3fc6dc9d18f0fffbeefe041181",
+      "sha256": "700d61ce6b12725f99cf45791887a3eec4f0d369d612b9df73a88920cb215b45"
+    },
+    {
+      "path": "m16_readonly.py",
+      "git_blob_sha": "6f487b132bc561ca16df67f0968bc25ac5082c75",
+      "sha256": "fdca747c7eebde6f35e059bf4993c2ebf8bb8d91d23c07604009fb8d28600d0c"
+    },
+    {
+      "path": "contracts.py",
+      "git_blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
+    },
+    {
+      "path": "digests.py",
+      "git_blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+    }
+  ]
+}

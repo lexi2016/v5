@@ -178,7 +178,7 @@ def reparse_saved(*, runtime_root: Path, input_path: Path, input_sha256: str,
         job.update(status='RUNNING',started_at=now); store.write_job(job)
         job.update(status=updated['status'],completed_at=service._now(),results={code:{'status':'READY','source':replacements[code]['source'],'facts':replacements[code]['facts']} for code in codes})
         receipt = dict(report, schema_version='v4.manager_research.receipt.v1',job_id=job_id,
-            generated_at=now,applied=True,previous_product=product,previous_job=original_job,
+            generated_at=now,status=job['status'],applied=True,previous_product=product,previous_job=original_job,
             previous_receipt=original_receipt,**service.FOUR_FLAGS)
         store.commit_result(job,updated,receipt,merge=require_unchanged)
     except Exception:
@@ -189,15 +189,118 @@ def reparse_saved(*, runtime_root: Path, input_path: Path, input_sha256: str,
     return {**report,'applied':True,'job_id':job_id,'generation':job['generation']}
 
 
+def repair_missing_receipt_status(*, runtime_root: Path, input_path: Path, input_sha256: str,
+        target_trade_date: str, expected_product_sha256: str, expected_commit_sha256: str,
+        expected_commit_file_sha256: str, job_id: str, generation: str, apply: bool = False) -> dict:
+    """Publish the same product with a new valid receipt; preserve the bad one.
+
+    Only the known OFFLINE_PDF_REPARSE missing-status defect is accepted. This
+    does not parse PDFs, reinterpret terminal states, or rewrite old receipts.
+    """
+    if (not runtime_root.is_absolute() or not runtime_root.is_dir()
+            or any(p.is_symlink() for p in (runtime_root,*runtime_root.parents))
+            or any(not (runtime_root/p).is_dir() or (runtime_root/p).is_symlink() for p in ('jobs','products','receipts'))):
+        raise ValueError('M16_INITIALIZED_RUNTIME_REQUIRED')
+    for value in (expected_product_sha256,expected_commit_sha256,expected_commit_file_sha256):
+        if not re.fullmatch('[0-9a-f]{64}',value): raise ValueError('M16_RECEIPT_RECOVERY_PIN_REQUIRED')
+    components=load_owner(closure())['components']; contracts=_module('contracts'); service=_module('service')
+    data=contracts.normalise_observation_input(PinnedObservationReader(input_path,input_sha256).read(target_trade_date))
+    date,identity=data['target_trade_date'],data['input_identity']; store=components.store_class(runtime_root)
+    relative=f'.commits/{date}/{identity}.json'
+    raw=store._io.read_bytes(relative,max_bytes=8*1024*1024)
+    if sha256(raw).hexdigest()!=expected_commit_file_sha256: raise ValueError('M16_RECEIPT_RECOVERY_FILE_PIN')
+    committed=store._read_commit(date,identity)
+    if (not committed or committed['sha256']!=expected_commit_sha256 or json.loads(raw)!=committed):
+        raise ValueError('M16_RECEIPT_RECOVERY_COMMIT_PIN')
+    product=committed['product']; old_job=committed['jobs'].get(job_id); old_receipt=committed['receipts'].get(job_id)
+    digest=contracts.sha256_json
+    if digest(product)!=expected_product_sha256: raise ValueError('M16_RECEIPT_RECOVERY_PRODUCT_PIN')
+    if (not isinstance(old_job,dict) or not isinstance(old_receipt,dict)
+            or old_job.get('generation')!=generation or old_job.get('mode')!='OFFLINE_PDF_REPARSE'
+            or old_job.get('schema_version')!='v4.manager_research.job.v1'
+            or product.get('schema_version')!='v4.manager_research.product.v1'
+            or product.get('kind')!='MANAGER_RESEARCH_PRODUCT'
+            or any(key in old_receipt and old_receipt[key]!=old_job.get(key) for key in ('generation','attempt'))
+            or old_job.get('status') not in {'READY','PARTIAL_WITH_ROWS','CANNOT_CONFIRM'}
+            or product.get('status')!=old_job['status'] or 'status' in old_receipt
+            or old_receipt.get('schema_version')!='v4.manager_research.receipt.v1'
+            or old_receipt.get('mode')!='OFFLINE_PDF_REPARSE' or old_receipt.get('applied') is not True
+            or old_receipt.get('parser_cache_version')!=3 or old_receipt.get('network_calls')!=0
+            or old_receipt.get('product_sha256')!=expected_product_sha256
+            or old_receipt.get('previous_product_sha256')!=digest(old_receipt.get('previous_product'))
+            or not isinstance(old_receipt.get('previous_job'),dict)
+            or not isinstance(old_receipt.get('previous_receipt'),dict)):
+        raise ValueError('M16_RECEIPT_RECOVERY_NOT_KNOWN_MISSING_STATUS')
+    for key in ('target_trade_date','input_identity','input_source_sha256','cutoff_at','stage_id','market','input_row_count'):
+        if product.get(key)!=data.get(key) or old_job.get(key)!=data.get(key):
+            raise ValueError('M16_RECEIPT_RECOVERY_INPUT_BINDING')
+    if product.get('historical_system_available') is not False:
+        raise ValueError('M16_HISTORICAL_BOUNDARY_REQUIRED')
+    report=dict(mode='OFFLINE_RECEIPT_RECOVERY',applied=False,target_trade_date=date,input_identity=identity,
+        product_sha256=expected_product_sha256,previous_commit_sha256=expected_commit_sha256,
+        previous_commit_file_sha256=expected_commit_file_sha256,previous_job_id=job_id,
+        previous_generation=generation,previous_receipt_sha256=digest(old_receipt),
+        product_unchanged=True,network_calls=0,pdf_parse_calls=0)
+    if not apply: return report
+    recovery_id=f'mr-receipt-{date}-{identity[:16]}-{expected_commit_file_sha256[:12]}'
+    archive=f'.receipt-recovery/{expected_commit_file_sha256}.json'
+    def unchanged(latest):
+        current=store._read_commit(date,identity)
+        if (not current or current['sha256']!=expected_commit_sha256 or digest(latest)!=expected_product_sha256
+                or sha256(store._io.read_bytes(relative,max_bytes=8*1024*1024)).hexdigest()!=expected_commit_file_sha256):
+            raise ValueError('M16_RECEIPT_RECOVERY_COMMIT_CHANGED')
+        if any(j.get('input_identity')==identity and j.get('job_id')!=recovery_id
+               and j.get('status') in {'QUEUED','RUNNING'} for j in store.list_jobs(date)):
+            raise ValueError('M16_OTHER_JOB_ACTIVE')
+        return product
+    now=service._now()
+    with store._transaction(date,identity):
+        unchanged(store.read_product(date,identity))
+        try:
+            if store._io.read_bytes(archive)!=raw: raise ValueError('M16_RECEIPT_RECOVERY_ARCHIVE_CONFLICT')
+        except FileNotFoundError:
+            store._io.write_bytes(archive,raw,require_absent=True)
+        prior=store.read_job(recovery_id)
+        job={key:deepcopy(old_job[key]) for key in ('schema_version','kind','target_trade_date','input_identity','input_source_sha256','stage_id','market','cutoff_at','input_row_count')}
+        job.update(job_id=recovery_id,generation=uuid4().hex,attempt=int(prior.get('attempt',0))+1 if prior else 1,
+            mode='OFFLINE_RECEIPT_RECOVERY',status='QUEUED',created_at=now,updated_at=now,can_retry=False,**service.FOUR_FLAGS)
+        store.admit_job(job)
+    try:
+        job.update(status='RUNNING',started_at=now);store.write_job(job)
+        job.update(status=product['status'],completed_at=service._now())
+        receipt=dict(report,schema_version='v4.manager_research.receipt.v1',job_id=recovery_id,
+            status=job['status'],generation=job['generation'],attempt=job['attempt'],applied=True,
+            recovery_reason='MISSING_STATUS_IN_OFFLINE_PDF_REPARSE_RECEIPT',generated_at=now,
+            previous_commit_archive=archive,**service.FOUR_FLAGS)
+        store.commit_result(job,product,receipt,merge=unchanged)
+    except Exception:
+        job.update(status='FAILED',error='OFFLINE_RECEIPT_RECOVERY_COMMIT_FAILED',completed_at=service._now())
+        try: store.write_job(job)
+        except Exception: pass
+        raise
+    return {**report,'applied':True,'job_id':recovery_id,'generation':job['generation'],'attempt':job['attempt']}
+
+
 def main(argv=None):
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--runtime-root',type=Path,required=True);p.add_argument('--input',type=Path,required=True)
     p.add_argument('--input-sha256',required=True);p.add_argument('--target-date',required=True)
-    p.add_argument('--expected-product-sha256',required=True);p.add_argument('--code',action='append',required=True)
+    p.add_argument('--expected-product-sha256',required=True);p.add_argument('--code',action='append')
+    p.add_argument('--repair-receipt-job');p.add_argument('--repair-receipt-generation')
+    p.add_argument('--expected-commit-sha256');p.add_argument('--expected-commit-file-sha256')
     p.add_argument('--apply',action='store_true',help='Explicitly admit and commit an offline recovery generation')
     args=p.parse_args(argv)
-    result=reparse_saved(runtime_root=args.runtime_root,input_path=args.input,input_sha256=args.input_sha256,
-        target_trade_date=args.target_date,expected_product_sha256=args.expected_product_sha256,codes=args.code,apply=args.apply)
+    common=dict(runtime_root=args.runtime_root,input_path=args.input,input_sha256=args.input_sha256,
+        target_trade_date=args.target_date,expected_product_sha256=args.expected_product_sha256,apply=args.apply)
+    if args.repair_receipt_job:
+        if args.code or not all((args.repair_receipt_generation,args.expected_commit_sha256,args.expected_commit_file_sha256)):
+            p.error('receipt recovery requires exact generation and both commit pins, without --code')
+        result=repair_missing_receipt_status(**common,job_id=args.repair_receipt_job,generation=args.repair_receipt_generation,
+            expected_commit_sha256=args.expected_commit_sha256,expected_commit_file_sha256=args.expected_commit_file_sha256)
+    else:
+        if not args.code or any((args.repair_receipt_generation,args.expected_commit_sha256,args.expected_commit_file_sha256)):
+            p.error('PDF reparse requires --code; receipt pins require --repair-receipt-job')
+        result=reparse_saved(**common,codes=args.code)
     print(json.dumps(result,ensure_ascii=False,sort_keys=True))
 
 if __name__=='__main__': main()

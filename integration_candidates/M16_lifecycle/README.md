@@ -389,3 +389,54 @@ both older entries and proves the current parser recomputes once. The saved-PDF
 recovery command automatically uses the current version. Production product
 publication remains the separate explicit `--apply` step, after Mac validation;
 no producer, network collection, or product update was performed for this patch.
+
+## Receipt status contract repair and existing-generation recovery
+
+The offline PDF producer now sets `receipt.status = job.status` before the
+original `commit_result`. The original P0 `_members` terminal validation is
+unchanged. Joint tests run its exact source, along with its original reference
+validator/contracts/digests, pinned to V5 commit
+`da43056ac49d399f5a4777955ed0e1a1f26394c7` in `tests/reference/p0_m16/SOURCE.json`.
+The only test seam binds its owner-loader to this candidate's verified original
+store. Its `raw`, `_read_commit`, `_members`, reference checks and public
+projection all run unchanged.
+
+For a previously committed **OFFLINE_PDF_REPARSE v3 receipt with missing status**,
+use the same command's narrow receipt-recovery mode. Do not edit that receipt,
+do not repeat the PDF apply, and do not relax reader validation:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m v5_shadow.m16_reparse_saved \
+  --runtime-root "$M16_RUNTIME_ROOT" \
+  --input "$M16_ORIGINAL_INPUT" --input-sha256 "$M16_INPUT_FILE_SHA256" \
+  --target-date "$TARGET_DATE" \
+  --expected-product-sha256 "$SAME_PRODUCT_SHA256" \
+  --expected-commit-sha256 "$ORIGINAL_COMMIT_CANONICAL_SHA256" \
+  --expected-commit-file-sha256 "$ORIGINAL_COMMIT_FILE_SHA256" \
+  --repair-receipt-job "$ORIGINAL_REPARSE_JOB_ID" \
+  --repair-receipt-generation "$ORIGINAL_REPARSE_GENERATION"
+```
+
+Default is read-only preview. Add `--apply` only for the explicit formal recovery.
+The function `repair_missing_receipt_status` accepts only the exact known
+missing-status defect with matching original input, product hash, committed job
+and generation, report product/predecessor hashes, cache version and zero-network
+record. An existing status, even a contradictory one, is refused rather than
+inferred or overwritten.
+
+Apply preserves the exact original commit bytes in
+`.receipt-recovery/<original-commit-file-sha256>.json` under the same private
+runtime, without overwriting an existing different archive. It then uses the
+original `admit_job` / `write_job` / `commit_result` path to publish a separate
+receipt-recovery generation with the **identical product object and product
+SHA-256**. Every prior committed job and receipt remains unchanged in the new
+commit. The new receipt binds the old canonical/file/receipt hashes and original
+job/generation and supplies the required terminal status. No PDF, provider,
+news/event projection, product timestamp or recommendation is regenerated.
+
+Before publication, original input-key locking plus exact commit/product/file
+CAS and active-owner/cancel fences are checked again. A failed write leaves the
+prior commit authoritative. The read-only page binding must subsequently point
+to the newly committed recovery job/generation and new commit hashes; the product
+hash stays unchanged. This binding update is a separate integration operation,
+not performed by the recovery function.

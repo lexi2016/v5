@@ -1,5 +1,5 @@
 {
-  "base_commit": "fce6848bef98137c8149e0ea7fc6b0d8a80f961c",
+  "base_commit": "68e4ec21895ba534a043f035e259bcd29e8edc30",
   "scope": "integration_candidates/M16_lifecycle",
   "files": [
     {
@@ -10,9 +10,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 22816,
-      "sha256": "d4a56dcfef642bc856505e14e996bb10a52462aa12004cb83fa60b965866737c",
-      "git_blob_sha": "0bd464f523464f6b8b2eba32caef6c8a76fafeca"
+      "bytes": 25728,
+      "sha256": "c2cc5faa947df2b380db5116b5ec9ed2eea26ea1f5cdbc2dfdc0c9878782a111",
+      "git_blob_sha": "de1fc38bff60a0c6b05bc218ea591bdc88e2e94a"
     },
     {
       "path": "source/PACKAGE_CHECKS.json",
@@ -1240,9 +1240,9 @@
     },
     {
       "path": "src/v5_shadow/m16_reparse_saved.py",
-      "bytes": 13926,
-      "sha256": "db0f1e7f4dcd6ff825c0603786aae45901ed86bc5f07281c4af2b29cbfd6a8e2",
-      "git_blob_sha": "78ccf356a34a984f1da25f48fd97c577b5ba0782"
+      "bytes": 21750,
+      "sha256": "4096fcc630b798f94b0e37318342e8557a1f106df4040b2f9bae1096be0ba515",
+      "git_blob_sha": "333747da593e49f22d5a46cbe5cfabbaf75c26fc"
     },
     {
       "path": "src/v5_shadow/m16_router.py",
@@ -1287,6 +1287,36 @@
       "git_blob_sha": "69d1c210129ca7dc42587e0eead40643fc2a0375"
     },
     {
+      "path": "tests/reference/p0_m16/SOURCE.json",
+      "bytes": 1006,
+      "sha256": "7592ff9837ad789043df64ecdbbb640b761470f1b35aca7aeb2b1271fbf769e4",
+      "git_blob_sha": "9046cf87ccfd4a93e69c07b112059a5ce6de12c2"
+    },
+    {
+      "path": "tests/reference/p0_m16/contracts.py",
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "git_blob_sha": "5efda704a231165255c4f6ab240a25385e5cff54"
+    },
+    {
+      "path": "tests/reference/p0_m16/digests.py",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "git_blob_sha": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925"
+    },
+    {
+      "path": "tests/reference/p0_m16/m16_readonly.py",
+      "bytes": 6318,
+      "sha256": "fdca747c7eebde6f35e059bf4993c2ebf8bb8d91d23c07604009fb8d28600d0c",
+      "git_blob_sha": "6f487b132bc561ca16df67f0968bc25ac5082c75"
+    },
+    {
+      "path": "tests/reference/p0_m16/m16_readonly_worker.py",
+      "bytes": 11120,
+      "sha256": "700d61ce6b12725f99cf45791887a3eec4f0d369d612b9df73a88920cb215b45",
+      "git_blob_sha": "0620ad16a409de3fc6dc9d18f0fffbeefe041181"
+    },
+    {
       "path": "tests/stage_fixture.py",
       "bytes": 5482,
       "sha256": "dda5b8403ca04c4a2e07d168d05577c0a9eae8f06e508fda9713f8fbfa0ff18e",
@@ -1327,6 +1357,12 @@
       "bytes": 6593,
       "sha256": "8d534b9622d3780db19b7ad7e99cf6b8d49ec47cbcdca822b7a5048bc5638f8c",
       "git_blob_sha": "467d0ea4061965b9a1e7f214ce69d6dd342df593"
+    },
+    {
+      "path": "tests/test_receipt_recovery.py",
+      "bytes": 10946,
+      "sha256": "d4ee7c5c2f59cd39b8a6701eb8e374b3585aa61c5428be273076881adbaa9279",
+      "git_blob_sha": "5e4ce1a91e032485442a37aaeb94836b83c827a4"
     },
     {
       "path": "tests/test_reparse_saved.py",
