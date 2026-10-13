@@ -1,0 +1,32 @@
+{
+  "candidate": "5bb1d635abe03cec61d0e52bf1150f2c70b5fe6a",
+  "command": [
+    "<EXISTING_PYTHON>",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "V5/tests/test_m16_owner_loader.py"
+  ],
+  "started_utc": "2026-10-13T05:30:46.167551+00:00",
+  "finished_utc": "2026-10-13T05:30:48.996992+00:00",
+  "exit_code": 0,
+  "protected_files_count": 136,
+  "protected_files_and_listener_pids_unchanged": true,
+  "environment_variables": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "V5/src",
+    "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>"
+  },
+  "passed": 32,
+  "failed": 0,
+  "source_after_all_171_files_exact": true,
+  "app_started": false,
+  "provider_called": false,
+  "collection_run": false,
+  "preview_changed": false,
+  "business_integration_verified": false
+}
