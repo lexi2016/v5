@@ -2,6 +2,7 @@ import copy, importlib.util, json, hashlib
 from datetime import datetime, timezone
 from pathlib import Path
 import unittest
+import tempfile
 P=Path(__file__).resolve().parents[1]/'prepare_history_batch.py'
 spec=importlib.util.spec_from_file_location('prepare',P);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 HISTORY={'prior60':[f'202607{d:02}' for d in range(1,31)]+[f'202608{d:02}' for d in range(1,31)],'previous5':[f'202608{d:02}' for d in range(26,31)]}
@@ -31,9 +32,15 @@ class PreparationTests(unittest.TestCase):
   self.assertEqual(task['valid_until'],'2026-10-13T20:00:00.000000+00:00');self.assertEqual(context['keys'],keys)
   expected=hashlib.sha256(json.dumps(keys,sort_keys=True,separators=(',',':')).encode()).hexdigest();self.assertEqual(task['keys_sha256'],expected)
  def test_output_must_be_separate_from_original_inputs(self):
-  self.assertEqual(str(m.require_separate_output('/tmp/capture-preparation',['/tmp/source'])), '/tmp/capture-preparation')
-  for p in ('/tmp/source','/tmp/source/new','/tmp','relative','/tmp/source/../new'):
-   with self.subTest(path=p),self.assertRaises(ValueError):m.require_separate_output(p,['/tmp/source'])
+  # macOS /tmp is normally a symlink; test physical paths without weakening
+  # the production no-symlink rule or depending on a platform's temp alias.
+  with tempfile.TemporaryDirectory() as directory:
+   base=Path(directory).resolve();source=base/'source';good=base/'capture-preparation'
+   self.assertEqual(m.require_separate_output(good,[source]),good)
+   for p in (source,source/'new',base,Path('relative'),source/'..'/'new'):
+    with self.subTest(path=str(p)),self.assertRaises(ValueError):m.require_separate_output(p,[source])
+   link=base/'symlink-output';link.symlink_to(good)
+   with self.assertRaisesRegex(ValueError,'OUTPUT_PATH'):m.require_separate_output(link,[source])
  def test_naive_preparation_clock_rejected(self):
   with self.assertRaises(ValueError):m.task_and_context(artifact=self.artifact(),reference={},parent={},members=[],keys=[],files={},reuse=[],now=datetime(2026,10,13))
 if __name__=='__main__':unittest.main()

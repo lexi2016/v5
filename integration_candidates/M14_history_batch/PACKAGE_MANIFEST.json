@@ -42,7 +42,7 @@
     {
       "path": "evidence/preparation-tests.txt",
       "before_sha256": null,
-      "sha256": "e1ee53ad79026afda74c8db1e512d84160de4bd4501e4e21d3bea97220302700",
+      "sha256": "485d1996135f945437b3e4b8e522e1e207bfe7ad96c0ea671ef99b68b36c7084",
       "bytes": 1278
     },
     {
@@ -60,8 +60,10 @@
     {
       "path": "preparation/tests/test_prepare_history_batch.py",
       "before_sha256": null,
-      "sha256": "ad144285515b8ae4cee2ff3278cad1042d1bf145a1a496fe1733fdf4af6f7d3c",
-      "bytes": 3494
+      "sha256": "64f58b0ccd61871646fb5979d5444d7af55f1509d76fbdbee7cc133fbac659e1",
+      "bytes": 3883
     }
-  ]
+  ],
+  "followup_base_commit": "bbf3e43adc60ad41bdef95998f15483ff0988660",
+  "followup_scope": "Portable preparation test; explicit unchanged-reader cold-read command and attributed Mac batch outcome. Runtime source unchanged."
 }

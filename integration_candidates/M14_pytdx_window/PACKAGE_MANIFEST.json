@@ -20,8 +20,8 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "c5c70c39e0ba7bcc2fd70790f2f74fd670be248b1103bb5d18aca1117b523366",
-      "bytes": 12416
+      "sha256": "d86d2739434d8ad162bcf33e2e9b9434bad98f6d1751b805b5246a3c781aa9f6",
+      "bytes": 16149
     },
     {
       "path": "apply_candidate.py",
@@ -118,5 +118,7 @@
       "sha256": "73602aa0173a190669f3d1bd89308eef874cdb30dd38cf60b910eaee0b243ab0",
       "bytes": 644
     }
-  ]
+  ],
+  "followup_base_commit": "bbf3e43adc60ad41bdef95998f15483ff0988660",
+  "followup_scope": "Portable preparation test; explicit unchanged-reader cold-read command and attributed Mac batch outcome. Runtime source unchanged."
 }

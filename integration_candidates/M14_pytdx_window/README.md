@@ -121,3 +121,51 @@ Packaged verification:
 - Exact apply/check/idempotence verification is recorded in evidence. Real 690-result owner and preview binding remain NOT_RUN in cloud.
 
 Original collector/decoder, calendar, strategy and saved-result reader contributions are retained. This delivery adds the explicit same-source research adapter, its minimal owner route and the offline audited batch-to-window preparation; original M14 Chat work and earlier page/capture deliveries remain separately attributed in their original handoffs.
+
+### Explicit cold read after the separate owner command
+
+Save the owner command's JSON stdout in a new `$OWNER_RESULT_JSON` file. Run this in a new process against the same isolated runtime; it selects no connector or calculator:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 "$PY_M14" -B - "$BASELINE" "$NEW_SAVED_M14_ROOT" "$OWNER_RESULT_JSON" <<'PY'
+import json, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(sys.argv[1]) / 'src'))
+from v5_shadow.rebound_owner import read_rebound_owner
+reference = json.loads(Path(sys.argv[3]).read_bytes())['reference']
+artifact = read_rebound_owner(sys.argv[2], reference)
+observation = artifact.get('research_observation')
+if not isinstance(observation, dict):
+    print(json.dumps({'status': 'NO_RESEARCH_OBSERVATION', 'reference': reference,
+                      'reason_codes': artifact['reason_codes']}))
+    raise SystemExit(2)
+groups = ('strict', 'near', 'pending', 'excluded', 'screen_unresolved')
+counts = {name: len(observation[name]) for name in groups}
+assert sum(counts.values()) == 690
+assert artifact['request']['target_date'] == '20261014'
+assert artifact['request']['signal_date'] == '20261013'
+assert artifact['request']['data_kind'] == 'RECORDED_INPUT_REPLAY'
+assert artifact['formal_status'] == 'CANNOT_CONFIRM'
+for key in ('production_allowed', 'buy_gate_updated', 'orders_sent'):
+    assert artifact[key] is False
+native = observation['native_evidence']
+assert native['source_contract']['name'] == 'pytdx_exhq_get_instrument_bars_category4_market71_sdk_decoded_native_v1'
+assert native['source_contract']['scale_applied'] == 1
+assert native['volume_unit'] is None
+print(json.dumps({'status': 'COLD_READ_VERIFIED_RESEARCH_ONLY', 'reference': reference,
+                  'groups': counts, 'formal_status': artifact['formal_status'],
+                  'research_cutoff': artifact['request']['research_cutoff'],
+                  'source_contract': native['source_contract'],
+                  'pending_reasons': native['pending_reasons']}, ensure_ascii=False, sort_keys=True))
+PY
+```
+
+The expected 690 is the already verified original pool, not a target-eligibility claim. Do not assert a particular pending/strict count before the real calculation. This command prints no private root and re-verifies the saved three hashes through the original reader contract.
+
+### Mac capture outcome supplied before this candidate's actual run
+
+The controller reported the original batch completed 2026-10-13 18:24:05–18:36:25 UTC in 739.96 seconds: 687 successful new responses plus 3 byte-identical reused responses, 690 receipts / 80,792 source rows, no failed, unknown, unattempted or retry codes, minimum start interval 1.046427 seconds. It recovered 2,223/2,574 requested keys; 351 keys across 24 codes remain absent, including HK.03469/20261012. Checkpoint/offline audit passed and 732 protected files were unchanged. These are collection facts, not a result from the new adapter or owner.
+
+Batch run `1896a7a023d64143b682c5a410adeb43`; plan SHA `d55c91362bdb6b895face0896e5ff411959196ccc1af7cb2c410be4de71c3166`; round-result SHA `a680e358a656bf875f888cbc10063ae0f5a1bb3a0c739735b00003ec80a8ab09`; checkpoint SHA `6a932ff96382486ff069085d71d0a5ec149c9b6630fce5af1ca86356fad9f112`. No raw market responses are uploaded here.
+
+Mac batch tests passed 28/28. Earlier preparation tests were 7/8 because one test incorrectly assumed `/tmp` was not a symlink on macOS; the equivalent real physical-path check passed. The follow-up changes only that test to a resolved temporary directory and retains explicit symlink rejection. Cloud rerun is 8/8; Mac rerun of the corrected test remains NOT_RUN. No capture-program or production path guard changed, and no recollection is required.

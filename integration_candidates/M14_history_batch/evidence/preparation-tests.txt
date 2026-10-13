@@ -8,6 +8,6 @@ test_target_omission_duplicate_and_extra_are_rejected (test_prepare_history_batc
 test_task_context_two_hour_expiry_and_canonical_keys (test_prepare_history_batch.PreparationTests.test_task_context_two_hour_expiry_and_canonical_keys) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.001s
+Ran 8 tests in 0.002s
 
 OK
