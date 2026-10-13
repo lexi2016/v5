@@ -1,0 +1,105 @@
+{
+  "evidence_type": "DERIVED_SUMMARY",
+  "provenance": "Read from Mac assistant reports. Documentation writer did not execute tests; no raw receipt byte/hash identity claimed.",
+  "source_thread": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+  "source_messages": [
+    "msg_0b47eb1b0178a3a6016ace7bd8763c87d1aae3d593c0b31eb7",
+    "msg_0b47eb1b0178a3a6016ace7c4f23b087d19c2f3805cbbb8c84",
+    "msg_0b47eb1b0178a3a6016ace7d284b6c87d1a73ccdeaaf5856b8",
+    "msg_0b47eb1b0178a3a6016ace7f76b9cc87d180c1089bbe0f35a2"
+  ],
+  "code_commit": "bbf3e43adc60ad41bdef95998f15483ff0988660",
+  "documentation_commit": "c9f8c7b41e492cb8017c68ac848cdc8f4ff35718",
+  "page_candidate": "a7eb3a9c4cf9f35ab7ba9830d41a29644201a788",
+  "calculation": {
+    "tests_passed": 33,
+    "environment": {
+      "python": "3.14.6",
+      "pandas": "2.3.3",
+      "pyarrow": "24.0.0"
+    },
+    "reused_capture_receipts": 690,
+    "new_network_requests": 0,
+    "panel_rows": 40930,
+    "members": 690,
+    "date_min": "20260720",
+    "date_max": "20261013",
+    "research_cutoff": "2026-10-13T18:40:58.776354Z",
+    "preflight": "Exited before calculation because new output root was uninitialized; original marker initialization then performed.",
+    "actual_calculations": 1,
+    "start_utc": "2026-10-13T18:41:42.547322Z",
+    "end_utc": "2026-10-13T18:41:50.805855Z",
+    "exit_code": 0,
+    "status": "READY_WITH_GAPS",
+    "formal_status": "CANNOT_CONFIRM",
+    "groups": {
+      "strict": 0,
+      "near": 0,
+      "pending": 690,
+      "excluded": 0,
+      "screen_unresolved": 0
+    },
+    "source_scale": 1,
+    "original_thresholds_unchanged": true
+  },
+  "reference": {
+    "run_id": "9c70cc6cb8e34afb9e34b366acf8becd",
+    "artifact_sha256": "4016375c939dbaabbfe4b18c724243dd771a924df019fea961449c9a866c3a2e",
+    "manifest_sha256": "e3ac4d97c4594c4fcf18ae156effb16b53bb13117a6e3864cd731be0c4d238a9",
+    "receipt_sha256": "65100c03cd675f966e22ecd8e4b213207a1de435edc595e2fcf39f3e5a4be080",
+    "new_and_old_cold_read": "MATCHED"
+  },
+  "gaps": {
+    "prior60_missing": 688,
+    "source_row_invalid": 2,
+    "previous5_missing_overlapping": 3,
+    "raw_responses_missing_20260925": 690,
+    "signal_null_rows": 690,
+    "calendar_changed": false,
+    "zero_fill": false,
+    "mixed_source_fill": false,
+    "units_price_basis_target_qualification": "NOT_PROVEN"
+  },
+  "reader_release": {
+    "http_dom_same_run": true,
+    "initial_projection_gap": "Initial reader release omitted cutoff/source contract/pending reasons, and page omitted panel row count; preserved as prior failure of visibility."
+  },
+  "visibility_release": {
+    "status": "DEPLOYED_HTTP_DOM_PASS",
+    "projection_tests_passed": 4,
+    "vue_tests_passed": 5,
+    "typecheck": "PASS",
+    "build": "PASS",
+    "isolated_and_deployed_http_dom": "PASS_SAME_RUN",
+    "cutoff_panel_counts_contract_scale_and_pending_reasons_visible": true,
+    "machine_fields_default_collapsed": true,
+    "unsaved_exact_missing_dates_or_ohlc_not_invented": true,
+    "native_visual": "NOT_RUN",
+    "source_port": 58799,
+    "source_pid": 26199,
+    "frontend_port": 54780,
+    "frontend_pid": 26268,
+    "rollback_source_port": 58025,
+    "rollback_source_pid": 25773,
+    "rollback_triggered": false,
+    "other_source_routes_unchanged": 13,
+    "protected_original_files_unchanged": 732,
+    "journal_files_unchanged": 2760,
+    "owner_artifacts_unchanged": true,
+    "new_capture_or_calculation_during_release": false
+  },
+  "reported_original_receipt_sha256": {
+    "window_result": "483cf2bcb21c9e6c52d2136caad2fbe966fd7d7c0b8d713d652d3191f2cc7a3c",
+    "reader_release": "321164192438eb2c818d8940fb0c4ad190fad21da575bcb3b01e59e6e3eed043",
+    "visibility_release": "cefabbd525ded060f18e9b81e73330535b54d036769b7066cee58a7b476e6b77"
+  },
+  "limits": {
+    "formal_admission": false,
+    "natural_verified": false,
+    "full_module_acceptance": false,
+    "completed_modules": 0,
+    "total_modules": 18,
+    "raw_market_rows_uploaded": false,
+    "private_absolute_paths_uploaded": false
+  }
+}
