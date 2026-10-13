@@ -4,7 +4,7 @@
 
 ## 构建与测试：保留失败
 
-19:29:08–19:29:11：vue-tsc --noEmit PASS，Vite build PASS。Vitest 的 SavedManagerResultView.default.spec.ts 与 navigation.spec.ts 合计 11 PASS、1 FAIL，exit 1；新 default 4 项通过。旧 navigation.spec.ts:68 仍期待“阶段选股 · 未接入”，当前 M07 已接入；原 P0 Chat 的窄范围测试返修待回。本回执不将该候选称为全部测试通过，也不以后续合成验证掩盖此失败。
+19:29:08–19:29:11：vue-tsc --noEmit PASS，Vite build PASS。Vitest 的 SavedManagerResultView.default.spec.ts 与 navigation.spec.ts 合计 11 PASS、1 FAIL，exit 1；新 default 4 项通过。旧 navigation.spec.ts:68 仍期待“阶段选股 · 未接入”，当前 M07 已接入；当时原 P0 Chat 的窄范围测试返修待回（后续结果见下文）。本回执不将该候选称为全部测试通过，也不以后续合成验证掩盖此失败。
 
 ## 获许可后的隔离 HTTP / DOM 验证
 
@@ -23,3 +23,11 @@ fixture 仅被读取、未修改。早期探针的静态资源加载及 Mac spaw
 - natural_verified=false，deployed=false。此次仅为候选的隔离合成验证，不构成真实自然运行或现役上线结论。
 
 来源：主控读取 Mac 线程 `01a12e51-a0ec-705c-96e5-26cfd89360f8`，turn `01a13504-33c9-7188-a6d1-28fdd1dba4e0` 与 `01a13509-a497-72c0-91cd-251851d0cc5f` 的回执。本提交只新增两份摘要文档，不包含真实数据或私有路径，不修改源码。
+
+## 后续 navigation 窄返修复核
+
+固定测试修复：`52e71c8b85caef2874e4f3c9403e77592f5fb2c9`，仅整理 Chat 片段断言与调度时序，产品代码不改。Mac 20:07:07.525–20:07:10.685 只运行 navigation.spec.ts，8/8 PASS、exit 0、stderr 空；前后 SHA 一致，5 个候选产品 SHA 不变。
+
+此前已通过的 typecheck、build、default 测试及 HTTP/DOM 验证未在此次重跑；不得表述为此次全部 12 项测试重跑通过。首次 11 PASS / 1 FAIL 历史保持原样；结合此前通过项与此次 navigation 8/8，既定隔离验收范围全部已覆盖。现役 opt-in、daily 均未启用，deployed=false、natural_verified=false 继续保留。
+
+本段来源为同一 Mac 线程 turn `01a13528-4721-7466-9e69-1e8b86f34907` 的主控回执转存，仅更新这两份反馈文档。

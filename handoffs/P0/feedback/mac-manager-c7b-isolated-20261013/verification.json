@@ -85,5 +85,33 @@
       "01a13504-33c9-7188-a6d1-28fdd1dba4e0",
       "01a13509-a497-72c0-91cd-251851d0cc5f"
     ]
+  },
+  "navigation_followup": {
+    "fixed_test_commit": "52e71c8b85caef2874e4f3c9403e77592f5fb2c9",
+    "change_scope": "chat_fragment_assertions_and_scheduling_order_only",
+    "product_code_changed": false,
+    "window": [
+      "20:07:07.525",
+      "20:07:10.685"
+    ],
+    "suite": "navigation.spec.ts",
+    "passed": 8,
+    "failed": 0,
+    "exit_code": 0,
+    "stderr_empty": true,
+    "before_after_sha_identical": true,
+    "candidate_product_shas_unchanged": 5,
+    "typecheck_rerun": false,
+    "build_rerun": false,
+    "default_tests_rerun": false,
+    "http_dom_rerun": false,
+    "all_12_tests_rerun": false,
+    "initial_11_pass_1_fail_history_preserved": true,
+    "previously_defined_isolated_acceptance_scope_fully_covered": true,
+    "active_optin_enabled": false,
+    "daily_enabled": false,
+    "deployed": false,
+    "natural_verified": false,
+    "source_turn": "01a13528-4721-7466-9e69-1e8b86f34907"
   }
 }
