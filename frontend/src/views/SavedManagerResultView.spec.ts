@@ -9,7 +9,8 @@ it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed'
  expect(await screen.findByRole('alert')).toHaveProperty('textContent',expect.stringContaining('CANNOT_CONFIRM'));
  expect(screen.getByText('阶段选股 · 未接入')).toHaveProperty('disabled',true);
  expect(screen.queryByRole('table')).toBeNull();
- expect(fetch).toHaveBeenCalledTimes(1);
+ expect(vi.mocked(fetch).mock.calls.filter(([url])=>String(url).startsWith('/api/v4/manager/m18/v2'))).toHaveLength(1);
+ expect(screen.getByRole('region',{name:'M17 收盘补采已保存观察'})).toBeTruthy();
 });
 it('opens consumed announcement references by default and reuses the stock reasons view', async () => {
  const run='46596b03c2ab4e29b1219fd2e5eb698f';
@@ -27,15 +28,16 @@ it('opens consumed announcement references by default and reuses the stock reaso
   us_mapping:{source_section_sha256:'6'.repeat(64),match_count:1,source:{orders_sent:false,registry_readback:{scope:'ORIGINAL_REVIEWED_RETROSPECTIVE_RESEARCH_NOT_CURRENT_SELECTION',seed_target_date:'20260930'}},daily_run:{status:'COMPLETED',target_trade_date:'20261012',us_session_date:'20261009',target_date_eligibility:'CANNOT_CONFIRM'},coverage_diagnostics:{schema_version:'v5.us_mapping_scope.v1',status:'PARTIAL',scope:'PINNED_REVIEWED_RELATIONS_WITHIN_CONFIGURED_US_SAMPLE',full_market_coverage:false,formal_eligible:false,natural_verified:false,reviewed_us_symbols:['SYNTHETIC_US'],reviewed_us_symbol_count:1,configured_sample_count:3,rising_individual_count:2,assessed_rising_symbol_count:1,unassessed_rising_symbol_count:1},plan_reference:{value_state:'NOT_LOADED',reason:'OWNER_CHAIN_MISSING'}},
   entries:[{...page.entries[0],value:{hk_symbol:'HK.09876',hk_name:'合成美股驱动公司',us_symbol:'SYNTHETIC_US',change_pct:1.25,relationship_type:'PRODUCT_PEER',reason:'合成原美股驱动理由',maturity:'合成产品阶段',limitations:['合成关系限制'],official_sources:[{title:'合成官方来源',url:'https://example.com/report'}]}}]};
  const requests:string[]=[];
- vi.stubGlobal('fetch',vi.fn(async (url:string)=>{requests.push(url);let value:unknown=url.includes('/overview?')?overview:url.includes('/sections?')?page:descriptor;if(url.includes('projection=rebound_references'))value=url.includes('group=near')?{...rebound,group:'near',matched_total:0,entries:[]}:rebound;if(url.includes('projection=us_mapping_matches'))value=usMapping;return new Response(JSON.stringify(value));}));
+ vi.stubGlobal('fetch',vi.fn(async (url:string)=>{requests.push(url);if(!url.startsWith('/api/v4/manager/m18/v2'))return new Response('{}',{status:503});let value:unknown=url.includes('/overview?')?overview:url.includes('/sections?')?page:descriptor;if(url.includes('projection=rebound_references'))value=url.includes('group=near')?{...rebound,group:'near',matched_total:0,entries:[]}:rebound;if(url.includes('projection=us_mapping_matches'))value=usMapping;return new Response(JSON.stringify(value));}));
  render(SavedManagerResultView);
  expect(await screen.findByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeTruthy();
  expect(screen.getByText('入选事件研究：合成逐篇理由。')).toBeTruthy();
  expect(screen.getByText('风险/限制：合成风险')).toBeTruthy();
  expect(screen.getByText('历史 PIT：CANNOT_CONFIRM；互联互通资格：NOT_ASSESSED。')).toBeTruthy();
  expect(screen.getByRole('button',{name:'公告研究股票'}).getAttribute('aria-current')).toBe('page');
- expect(requests).toHaveLength(3);
- expect(requests[2]).toContain('section=announcement_reviewed_analysis&projection=announcement_references');
+ const managerRequests=requests.filter(url=>url.startsWith('/api/v4/manager/m18/v2'));
+ expect(managerRequests).toHaveLength(3);
+ expect(managerRequests[2]).toContain('section=announcement_reviewed_analysis&projection=announcement_references');
  expect(screen.queryByRole('table')).toBeNull();
  expect(screen.queryByRole('link')).toBeNull();
  await fireEvent.click(screen.getByRole('button',{name:'超跌研究'}));

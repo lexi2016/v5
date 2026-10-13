@@ -1,0 +1,103 @@
+{
+  "schema_version": "v5.p0.m17-preview-verification.v1",
+  "authorship": "DISPATCH_SIDE_CONTINUATION",
+  "p0_base_commit": "ba8128830b1422e669f9f6d872e251a8d5a6e1cc",
+  "m17_adapter_commit": "64e112573eb5cbac47ff2db1dd0887f459f38213",
+  "environment": {
+    "python": "3.12.14",
+    "node": "v24.19.0",
+    "data": "SYNTHETIC_ORIGINAL_FIXTURES_ONLY"
+  },
+  "checks": [
+    {
+      "name": "M17 final adapter plus P0 HTTP seam",
+      "cwd": "V5",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tests python -B -m unittest test_m17_readonly test_m17_readonly_api -v",
+      "status": "PASS",
+      "passed": 22,
+      "breakdown": {
+        "inherited_final_adapter": 13,
+        "new_p0_api": 9
+      },
+      "evidence": "backend-green.txt"
+    },
+    {
+      "name": "Existing shared module API regression",
+      "cwd": "V5",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src:tests python -B -m unittest test_module_api -v",
+      "status": "PASS",
+      "passed": 11,
+      "evidence": "affected-regression.txt"
+    },
+    {
+      "name": "M18 route/binding/HTTP contract smoke",
+      "cwd": "V5",
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -B -c \"import runpy; [fn() for p in ['tests/test_m18_v2_module_api_binding.py','tests/test_m18_v2_http_bridge.py'] for name,fn in runpy.run_path(p).items() if name.startswith('test_')]\"",
+      "status": "PASS",
+      "passed": 7,
+      "evidence": "affected-regression.txt",
+      "note": "Direct function runner uses existing standard library; pytest is unavailable. Does not execute old M18 suite."
+    },
+    {
+      "name": "M17 frontend API/session and sourceBundle regression",
+      "cwd": "frontend",
+      "command": "node --test tests/closeRecapture.node.mjs tests/sourceBundle.node.mjs",
+      "status": "PASS",
+      "passed": 17,
+      "breakdown": {
+        "new_m17": 11,
+        "source_bundle_regression": 6
+      },
+      "evidence": "frontend-green.txt"
+    },
+    {
+      "name": "Vue component and affected mount tests",
+      "cwd": "frontend",
+      "command": "npm test -- src/components/CloseRecapture.spec.ts src/components/SourceBundleStatus.m17.spec.ts src/components/SourceBundleStatus.m08.spec.ts src/components/SourceBundleStatus.m09.spec.ts src/views/SavedManagerResultView.spec.ts",
+      "status": "NOT_RUN_TOOL_UNAVAILABLE",
+      "attempt_exit": 127,
+      "reason": "vitest not found",
+      "evidence": "frontend-tooling-not-run.txt"
+    },
+    {
+      "name": "Frontend typecheck",
+      "cwd": "frontend",
+      "command": "npm run typecheck",
+      "status": "NOT_RUN_TOOL_UNAVAILABLE",
+      "attempt_exit": 127,
+      "reason": "vue-tsc not found",
+      "evidence": "frontend-tooling-not-run.txt"
+    },
+    {
+      "name": "Frontend build",
+      "cwd": "frontend",
+      "command": "npm run build",
+      "status": "NOT_RUN_TOOL_UNAVAILABLE",
+      "attempt_exit": 127,
+      "reason": "vite not found",
+      "evidence": "frontend-tooling-not-run.txt"
+    }
+  ],
+  "tdd": {
+    "p0_api_red": "9 tests failed for absent binding/route and unsafe static-record fallback; 10 subtest failures",
+    "p0_api_green": 9,
+    "evidence": "backend-red.txt"
+  },
+  "unchanged": [
+    "V4",
+    "collector and owner code",
+    "ledger schema and writers",
+    "M18 manager routes and run binding",
+    "old historical 1530 frontend client",
+    "package.json",
+    "package-lock.json"
+  ],
+  "not_performed": [
+    "Mac real-product acceptance",
+    "preview deployment",
+    "natural scheduler execution",
+    "old 17/9/18 full suites",
+    "dependency installation or upgrades"
+  ],
+  "scope_note": "PASS applies only to the listed targeted checks. No cloud Vue rendering/build or Mac real-product success is claimed."
+}

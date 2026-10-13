@@ -1,0 +1,241 @@
+{
+  "schema_version": "v5.p0.m17-readonly-integration-pin.v1",
+  "implementation": "DISPATCH_SIDE_CONTINUATION",
+  "p0_implementation_base": "ba8128830b1422e669f9f6d872e251a8d5a6e1cc",
+  "adapter_commit": "64e112573eb5cbac47ff2db1dd0887f459f38213",
+  "adapter_source_prefix": "integration_candidates/M17_READONLY/after/",
+  "copied_byte_identical": [
+    {
+      "path": "V5/src/v5_shadow/m17_readonly.py",
+      "git_blob": "fd57ffe0bd06364c2d06c81c606e20165c4ae80f",
+      "sha256": "703a371d58589d05acc084b2e18adb59d261e6284e9707e92eb25b439ef00e22",
+      "bytes": 12125
+    },
+    {
+      "path": "V5/tests/test_m17_readonly.py",
+      "git_blob": "f500e2422ce640417247518fd1af8f769214a899",
+      "sha256": "1edb041eb99c51b905c72b60526ef73c0e7c00927e2c5143af3fbed8c41b5723",
+      "bytes": 13590
+    },
+    {
+      "path": "V5/examples/m17_readonly_binding.example.json",
+      "git_blob": "da0335d3d1c5eda0818af4f73258eb4b7b6afb7e",
+      "sha256": "71601de385d7a0699b16ea50b4eb4806e80982ea013dd0b33320db753f98e005",
+      "bytes": 908
+    }
+  ],
+  "unchanged_dependencies": [
+    {
+      "path": "V5/contracts/close_recapture_source_manifest.json",
+      "git_blob": "4574d6ffd9f33a2a838609f21e5965d94f396003",
+      "sha256": "f3c6eedee74ea4d2f72641e4c0e9386b844ff0dfd40506f8c2e1ba566a94cf50",
+      "bytes": 7499
+    },
+    {
+      "path": "V5/src/v5_shadow/__init__.py",
+      "git_blob": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "bytes": 83
+    },
+    {
+      "path": "V5/src/v5_shadow/api_gateway.py",
+      "git_blob": "ecda315f6c67c8e18e473fad9d91c77487aa9d37",
+      "sha256": "21f90aed9fb73d18874d3ec41a153c1a6dcab3189e5ee3a8c2afa4f3f8baa5ee",
+      "bytes": 16398
+    },
+    {
+      "path": "V5/src/v5_shadow/composition.py",
+      "git_blob": "d22723df42b71537210aa621afb05dfab6be517f",
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "bytes": 5297
+    },
+    {
+      "path": "V5/src/v5_shadow/contracts.py",
+      "git_blob": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "bytes": 7256
+    },
+    {
+      "path": "V5/src/v5_shadow/daily_close_recapture_owner.py",
+      "git_blob": "3976ce1b9900f298e21a6bd9f5d92d70e3a80108",
+      "sha256": "cfdb649ddf07dae4805e54e27645f71b6a5b104c1b8b1e436998357e0c7a909b",
+      "bytes": 25107
+    },
+    {
+      "path": "V5/src/v5_shadow/digests.py",
+      "git_blob": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "bytes": 425
+    },
+    {
+      "path": "V5/src/v5_shadow/module_artifacts.py",
+      "git_blob": "acf2195fee3711f594982269f1e6ab81da40a905",
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "bytes": 7936
+    },
+    {
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "git_blob": "9f839c31aa9be37583bc09f88af3c67898aa1ec7",
+      "sha256": "75eb32e06d412efc4e439efc2f876403a0c4804e57b22a1d3849756bd7a368e3",
+      "bytes": 6159
+    },
+    {
+      "path": "V5/tests/test_daily_close_recapture_owner.py",
+      "git_blob": "47a322db8e26d2f78b29933cb1cb195b9d62dc9c",
+      "sha256": "b72d20c680b6505c99cfb0e9ca7698595c0887aac88236abd54eebe96e8dbbe1",
+      "bytes": 12167
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/apps/api/v35_api/manager_workbench_router.py",
+      "git_blob": "793a8687601d34a042565f14b14b607bf0c46c10",
+      "sha256": "95ccda85ff50d44cffbb18fc655e417f926c14b27a60cfa4c5fad17a3cbd1b5e",
+      "bytes": 57619
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/contracts/market_calendar_2026.json",
+      "git_blob": "c8177cfdeb55c038a88e915f206780eeba8b0d32",
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+      "bytes": 3473
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/contracts/trading_calendar.py",
+      "git_blob": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1",
+      "bytes": 10239
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_catalyst_tracking.py",
+      "git_blob": "cbc1688cc08c48bcfe7dc395d1f00a42442b95ab",
+      "sha256": "3432d0c75b82dd4b06c1204cf59e378a32bc4ccc5403a695417ba47789dc05a7",
+      "bytes": 24351
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_close_discovery.py",
+      "git_blob": "4aae1db0cba7495a3b1997ecfda10146317e977c",
+      "sha256": "f983b5e2bea03d1d5309467e75c2e2da0157636813183221035fac5ef2704b6b",
+      "bytes": 16974
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_close_rebound.py",
+      "git_blob": "1c39affd1bfcf181654c4e9d00e2c501c1d5bfc5",
+      "sha256": "aef0a7a3b767d5f74e3ef24fb1205897032d4a3be9d9995a028207c02a708b95",
+      "bytes": 27594
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/domains/manager_research_evidence.py",
+      "git_blob": "9255d425083e3c3627d4940d7556eed79e3bc00f",
+      "sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d",
+      "bytes": 30848
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/infrastructure/interprocess_lock.py",
+      "git_blob": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "bytes": 7514
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/infrastructure/manager_input_attestation.py",
+      "git_blob": "d6968a2acf64d7f5cde17fa8e1f27cefb744b3dd",
+      "sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc",
+      "bytes": 10179
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/infrastructure/owned_io.py",
+      "git_blob": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "bytes": 9354
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py",
+      "git_blob": "27fcfedf0b0ef017f9ceb8036e32ee23db5e03e0",
+      "sha256": "998275df085d886a6c4b5a44b3737c6b31de40cbe5b791d561db93968c062bfd",
+      "bytes": 61132
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/contracts.py",
+      "git_blob": "2db1935847c4f7c4639442a9980004513230fe5b",
+      "sha256": "776569b71a9db060186362fe04cce3e8b0f707d8b4a77f80288f8031a2f14fcc",
+      "bytes": 3252
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/futu_minute.py",
+      "git_blob": "9518999f52a44d4b1c5c7fe8398413edb22cde9b",
+      "sha256": "af4cc0efea026eb3f6fa084389d6ee8351a286d38765e337147ced88fda150da",
+      "bytes": 4507
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq.py",
+      "git_blob": "62ca1b26929b77f17b433d5faccef268d8017ca8",
+      "sha256": "19946fd9c09033a77b460fe5a68f70969623d3b1c26f058091349e702d482fdd",
+      "bytes": 8534
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/scripts/live_acquisition/pytdx_exhq_probe.py",
+      "git_blob": "b5124bfee8068e77e873dff76d5b80da0ba207db",
+      "sha256": "9ce612fb06f022601841828bb25d11d1850cd4e3ab09de775babd56f7b8d0399",
+      "bytes": 5981
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/allowlist.py",
+      "git_blob": "afa173a579a48919b4653381fd528d901f3241d6",
+      "sha256": "a5e307f15416fe422a0ad36f60d6996f6a3f74753581dc589ef93149178dd206",
+      "bytes": 3011
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/collectors.py",
+      "git_blob": "5c234353c4c92f19ec39d928ae37f3603f06494d",
+      "sha256": "f59dc7f70939a033fcde715aef33c5e063cb10b20c98caf17ee3a42c4884c159",
+      "bytes": 8200
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/constants.py",
+      "git_blob": "2c9beeeaf2a748ac15df6c7b6c1ef2dade37ed77",
+      "sha256": "706ea95054bcfcf3bab12a234e79a1d25bb412ba32ab0e5b5a6f3f3f6b725df8",
+      "bytes": 2604
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/consumer.py",
+      "git_blob": "3e9fa17abafde3ebf70aab31f7fd21e5e53678b1",
+      "sha256": "bd3b19a188907a2273d09a51ee06c448f41ea94277c30a56658350ed6f3843ba",
+      "bytes": 2788
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/hashing.py",
+      "git_blob": "045b93ffb4311c431f1f43ee8223fde1d7a30266",
+      "sha256": "d4bce5d9337f07ec8c3594367b0203f4eb8de71b5380f14734b5944cf45dcca6",
+      "bytes": 1027
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/hk_0_2.py",
+      "git_blob": "b2b366c2cbfd89ba9fed437620057fdb01f1e561",
+      "sha256": "27da90f0e623e45fa1a27af7dcc3b6e5e1ff2320bae1c61bd903ed82050beb89",
+      "bytes": 67647
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/hk_auction_0920.py",
+      "git_blob": "e78eebac73deaf424c4b8dca630200915b1b3d4f",
+      "sha256": "879196347ca3691262b015c412e07ca0281a50e14bce24a45a5b52be02a5f09d",
+      "bytes": 24181
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/paths.py",
+      "git_blob": "9202f4dff68915569c9c25dd2bd34e1de476ff4e",
+      "sha256": "3007691db34aa721cf9549e79d9f9782bf7490ccb5d9f6ca2895f968525afdb3",
+      "bytes": 3986
+    },
+    {
+      "path": "V5/vendor/close_discovery_baseline/upstreams/v3_shared_data/shared_data/store.py",
+      "git_blob": "273dc301ff7e8fe9d91e9d3e3c7c427817dc3976",
+      "sha256": "87042083dad178442c75386e59ae4b2fd9bab0a3c92b5c3a090ddb90e6b52a16",
+      "bytes": 27895
+    }
+  ],
+  "shared_module_api": {
+    "policy": "PRESERVE_P0_WITH_MINIMAL_ROUTE_WIRING",
+    "base_blob": "b0fbdfea972880489cf69a1ed3671ffe61b9ad44",
+    "path": "V5/src/v5_shadow/module_api.py",
+    "git_blob": "78aab6ce46e92e3b0dff7d41fcf2ce947b8df707",
+    "sha256": "a522ec21a8c18b6cd4c03b29a43f27773569d05f416dfb865d58bded8717ba6b",
+    "bytes": 55093
+  }
+}

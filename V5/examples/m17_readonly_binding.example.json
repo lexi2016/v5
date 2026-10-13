@@ -1,0 +1,19 @@
+{
+  "schema_version": "v5.m17.readonly-binding.v1",
+  "state_root": "<INDEPENDENT_V5_M17_STATE_ROOT>",
+  "universe_root": "<INDEPENDENT_V5_UNIVERSE_ROOT>",
+  "ledger_root": "<INDEPENDENT_V5_LEDGER_ROOT>",
+  "python_executable": "<EXISTING_PYTHON_ABSOLUTE_PATH>",
+  "identity": {
+    "lane": "manager_close_recapture",
+    "target_date": "20261012",
+    "input_sha256": "1a1638c1eb07dfb3ecd090e125301b7e0f967f116396ecb54f8976c80cc2be10",
+    "research_cutoff": "2026-10-12T23:18:08.427624+00:00",
+    "code_sha256": "6db6ffb77c51d2fe6d9fead18d0ac13d77c7e81a409397e3102c113ceb9a7db0",
+    "config_sha256": "d23f28c9c73912f9d9d3e674229e6f1b685071a61ae2fa26b23bf786a027c232",
+    "dependency_sha256": "f8d8fad70c3a90597b623ebbc485e8efeeea9d65e8a58c2492b99072488093db"
+  },
+  "run_id": "ca2c344b61334ad28f4b6146117643cd",
+  "execution_label": "MANUAL_RECOVERY",
+  "operation": "EXISTING_VERIFIED_PRODUCT_REUSE"
+}

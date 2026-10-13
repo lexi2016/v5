@@ -1,0 +1,28 @@
+cwd: <REPOSITORY>/frontend
+
+COMMAND: npm run typecheck
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 typecheck
+> vue-tsc --noEmit
+
+sh: 1: vue-tsc: not found
+EXIT: 127
+
+COMMAND: npm run build
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 build
+> vite build
+
+sh: 1: vite: not found
+EXIT: 127
+
+COMMAND: npm test -- src/components/CloseRecapture.spec.ts src/components/SourceBundleStatus.m17.spec.ts src/components/SourceBundleStatus.m08.spec.ts src/components/SourceBundleStatus.m09.spec.ts src/views/SavedManagerResultView.spec.ts
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 test
+> vitest run src/components/CloseRecapture.spec.ts src/components/SourceBundleStatus.m17.spec.ts src/components/SourceBundleStatus.m08.spec.ts src/components/SourceBundleStatus.m09.spec.ts src/views/SavedManagerResultView.spec.ts
+
+sh: 1: vitest: not found
+EXIT: 127

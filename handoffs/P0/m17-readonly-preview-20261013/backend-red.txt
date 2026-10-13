@@ -1,0 +1,233 @@
+test_binding_cannot_attach_to_manager_or_unregistered_route (test_m17_readonly_api.M17ReadonlyAPITests.test_binding_cannot_attach_to_manager_or_unregistered_route) ... 
+  test_binding_cannot_attach_to_manager_or_unregistered_route (test_m17_readonly_api.M17ReadonlyAPITests.test_binding_cannot_attach_to_manager_or_unregistered_route) (change={'module_id': 'manager'}) ... FAIL
+  test_binding_cannot_attach_to_manager_or_unregistered_route (test_m17_readonly_api.M17ReadonlyAPITests.test_binding_cannot_attach_to_manager_or_unregistered_route) (change={'routes': ['/api/v5/source-bundle/status', '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-stage-observed', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-close-review']}) ... FAIL
+test_damage_after_success_fails_closed_without_stale_rows (test_m17_readonly_api.M17ReadonlyAPITests.test_damage_after_success_fails_closed_without_stale_rows) ... FAIL
+test_exact_get_cold_reads_original_rows_and_never_writes (test_m17_readonly_api.M17ReadonlyAPITests.test_exact_get_cold_reads_original_rows_and_never_writes) ... FAIL
+test_exact_query_required_no_date_run_or_1530_fallback (test_m17_readonly_api.M17ReadonlyAPITests.test_exact_query_required_no_date_run_or_1530_fallback) ... FAIL
+test_m17_busy_is_bounded_and_does_not_starve_m06 (test_m17_readonly_api.M17ReadonlyAPITests.test_m17_busy_is_bounded_and_does_not_starve_m06) ... FAIL
+test_methods_and_other_source_routes_preserved (test_m17_readonly_api.M17ReadonlyAPITests.test_methods_and_other_source_routes_preserved) ... FAIL
+test_missing_binding_cannot_fall_back_to_forged_saved_success (test_m17_readonly_api.M17ReadonlyAPITests.test_missing_binding_cannot_fall_back_to_forged_saved_success) ... FAIL
+test_oversize_response_rejected_at_http_boundary (test_m17_readonly_api.M17ReadonlyAPITests.test_oversize_response_rejected_at_http_boundary) ... FAIL
+test_partial_original_result_stays_partial_with_real_gap (test_m17_readonly_api.M17ReadonlyAPITests.test_partial_original_result_stays_partial_with_real_gap) ... FAIL
+
+======================================================================
+FAIL: test_binding_cannot_attach_to_manager_or_unregistered_route (test_m17_readonly_api.M17ReadonlyAPITests.test_binding_cannot_attach_to_manager_or_unregistered_route) (change={'module_id': 'manager'})
+----------------------------------------------------------------------
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 167, in test_binding_cannot_attach_to_manager_or_unregistered_route
+    with self.subTest(change=change), self.assertRaisesRegex(ValueError,'M17_READONLY_HOST_BINDING'):
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "M17_READONLY_HOST_BINDING" does not match "CONTRACT_FIELDS_INVALID"
+
+======================================================================
+FAIL: test_binding_cannot_attach_to_manager_or_unregistered_route (test_m17_readonly_api.M17ReadonlyAPITests.test_binding_cannot_attach_to_manager_or_unregistered_route) (change={'routes': ['/api/v5/source-bundle/status', '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-stage-observed', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-close-review']})
+----------------------------------------------------------------------
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 167, in test_binding_cannot_attach_to_manager_or_unregistered_route
+    with self.subTest(change=change), self.assertRaisesRegex(ValueError,'M17_READONLY_HOST_BINDING'):
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "M17_READONLY_HOST_BINDING" does not match "CONTRACT_FIELDS_INVALID"
+
+======================================================================
+FAIL: test_damage_after_success_fails_closed_without_stale_rows (test_m17_readonly_api.M17ReadonlyAPITests.test_damage_after_success_fails_closed_without_stale_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 138, in test_damage_after_success_fails_closed_without_stale_rows
+    self.configure();server=self.start();self.assertEqual(self.request(server)[0],200)
+                            ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_exact_get_cold_reads_original_rows_and_never_writes (test_m17_readonly_api.M17ReadonlyAPITests.test_exact_get_cold_reads_original_rows_and_never_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 82, in test_exact_get_cold_reads_original_rows_and_never_writes
+    self.configure(); before = self.inventory(); server = self.start()
+                                                          ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_exact_query_required_no_date_run_or_1530_fallback (test_m17_readonly_api.M17ReadonlyAPITests.test_exact_query_required_no_date_run_or_1530_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 107, in test_exact_query_required_no_date_run_or_1530_fallback
+    self.configure(); server=self.start(); before=self.inventory()
+                             ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_m17_busy_is_bounded_and_does_not_starve_m06 (test_m17_readonly_api.M17ReadonlyAPITests.test_m17_busy_is_bounded_and_does_not_starve_m06)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 171, in test_m17_busy_is_bounded_and_does_not_starve_m06
+    self.configure();server=self.start()
+                            ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_methods_and_other_source_routes_preserved (test_m17_readonly_api.M17ReadonlyAPITests.test_methods_and_other_source_routes_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 153, in test_methods_and_other_source_routes_preserved
+    self.configure();server=self.start();before=self.inventory()
+                            ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_missing_binding_cannot_fall_back_to_forged_saved_success (test_m17_readonly_api.M17ReadonlyAPITests.test_missing_binding_cannot_fall_back_to_forged_saved_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 128, in test_missing_binding_cannot_fall_back_to_forged_saved_success
+    self.assertEqual(status,503,value); self.assertEqual(value['status'],'CANNOT_CONFIRM');self.assertNotIn('rows',value)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 200 != 503 : {'rows': [], 'status': 'READY'}
+
+======================================================================
+FAIL: test_oversize_response_rejected_at_http_boundary (test_m17_readonly_api.M17ReadonlyAPITests.test_oversize_response_rejected_at_http_boundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 146, in test_oversize_response_rejected_at_http_boundary
+    self.configure();server=self.start()
+                            ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_partial_original_result_stays_partial_with_real_gap (test_m17_readonly_api.M17ReadonlyAPITests.test_partial_original_result_stays_partial_with_real_gap)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 63, in start
+    server = create_module_server(config or self.config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 885, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/src/v5_shadow/module_api.py", line 694, in _config
+    exact_keys(value, keys)
+  File "<REPOSITORY>/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 132, in test_partial_original_result_stays_partial_with_real_gap
+    status,value,_=self.request(self.start())
+                                ^^^^^^^^^^^^
+  File "<REPOSITORY>/V5/tests/test_m17_readonly_api.py", line 65, in start
+    self.fail('M17 binding/route must be accepted by P0: '+str(error))
+AssertionError: M17 binding/route must be accepted by P0: CONTRACT_FIELDS_INVALID
+
+----------------------------------------------------------------------
+Ran 9 tests in 17.242s
+
+FAILED (failures=10)

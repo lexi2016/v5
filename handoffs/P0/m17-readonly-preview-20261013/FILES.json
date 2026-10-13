@@ -1,0 +1,150 @@
+{
+  "schema_version": "v5.p0.m17-integration-files.v1",
+  "files": [
+    {
+      "path": "V5/examples/m17_readonly_binding.example.json",
+      "bytes": 908,
+      "git_blob": "da0335d3d1c5eda0818af4f73258eb4b7b6afb7e",
+      "sha256": "71601de385d7a0699b16ea50b4eb4806e80982ea013dd0b33320db753f98e005"
+    },
+    {
+      "path": "V5/src/v5_shadow/m17_readonly.py",
+      "bytes": 12125,
+      "git_blob": "fd57ffe0bd06364c2d06c81c606e20165c4ae80f",
+      "sha256": "703a371d58589d05acc084b2e18adb59d261e6284e9707e92eb25b439ef00e22"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "bytes": 55093,
+      "git_blob": "78aab6ce46e92e3b0dff7d41fcf2ce947b8df707",
+      "sha256": "a522ec21a8c18b6cd4c03b29a43f27773569d05f416dfb865d58bded8717ba6b"
+    },
+    {
+      "path": "V5/tests/test_m17_readonly.py",
+      "bytes": 13590,
+      "git_blob": "f500e2422ce640417247518fd1af8f769214a899",
+      "sha256": "1edb041eb99c51b905c72b60526ef73c0e7c00927e2c5143af3fbed8c41b5723"
+    },
+    {
+      "path": "V5/tests/test_m17_readonly_api.py",
+      "bytes": 11204,
+      "git_blob": "c56bfcf3d256c86cb8ea3cbe50b0e2af417fd697",
+      "sha256": "51be85081fb260d905060cdcd4717340f0ee7b74e086e9c79cbda61d1ad9d8e3"
+    },
+    {
+      "path": "frontend/src/api/closeRecapture.ts",
+      "bytes": 10580,
+      "git_blob": "b85be77e6dcffcceb1ed145b4a1efd08630b8642",
+      "sha256": "740f15f9b7eb2a2004e11420f0e95d9079323fdb8caae0c6a99d703f814ac9e5"
+    },
+    {
+      "path": "frontend/src/components/CloseRecapture.spec.ts",
+      "bytes": 4975,
+      "git_blob": "fca95c3c0b4d7b392b4d383e726a27475be753b1",
+      "sha256": "0ae95b0503b5cc06e6982694d0aa04e74de51d748f3785469ad262b522696251"
+    },
+    {
+      "path": "frontend/src/components/CloseRecapture.vue",
+      "bytes": 6577,
+      "git_blob": "84ff8f171d4a74457a9091d259d188249f7b15a1",
+      "sha256": "3e8fa99cae8d0e67c17b2c21a2c1465b5452064b4eb83735c8861e7ce4fd8939"
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.m08.spec.ts",
+      "bytes": 2866,
+      "git_blob": "da75f28de33a9163a3733e858b5a80e08437df6a",
+      "sha256": "f37129e18d2f291b745d84f90835c71c91558bbd39ff6a3972a632509df1a391"
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.m09.spec.ts",
+      "bytes": 2895,
+      "git_blob": "4e81108c6a903e3733989c1fb2129fd81f0ec680",
+      "sha256": "5082c0c2998a5dbad7d020c5e3353cae1c02b578c6e6b7002a59ee86016bcbb6"
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.m17.spec.ts",
+      "bytes": 2505,
+      "git_blob": "0e2b751e2669796a8ffaeb36db3d87eba8233e39",
+      "sha256": "74577757190419d10038b751001e11b754abaa25d4830414e53dfae153d18ba3"
+    },
+    {
+      "path": "frontend/src/components/SourceBundleStatus.vue",
+      "bytes": 3152,
+      "git_blob": "4bfd6355117011905fa1973c8e61769bd5194600",
+      "sha256": "9c9f72eed7df4b2481e4c4c45d6e350377bb1d2098cc11b79185e59a296bf7f7"
+    },
+    {
+      "path": "frontend/src/views/SavedManagerResultView.spec.ts",
+      "bytes": 8589,
+      "git_blob": "c7197192d2cc2b3eeab62770186d764b080dc327",
+      "sha256": "9bfa8ba01bb9577c7ebc5fba9897762e27c20f433a9c47c787844d9cd04d01f1"
+    },
+    {
+      "path": "frontend/tests/closeRecapture.node.mjs",
+      "bytes": 8701,
+      "git_blob": "31cbee27fca7d9c91f73e3f605767f4e15c36327",
+      "sha256": "f76f315d0c3ebf7a46fae3d8bb514b19b3ea31202e52c3edc397aee95e4e5699"
+    },
+    {
+      "path": "frontend/tests/export_m17_fixture.py",
+      "bytes": 1660,
+      "git_blob": "0a2b4ba28087989599516f0ddf6ed54122facf26",
+      "sha256": "ff65315f47b6f736c036d99f333f0f4321a429dd24a43c0949e4671d06f0f1cb"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "bytes": 2084,
+      "git_blob": "e3457149b36e0f1b00ab0a5b4729219f3611ddcd",
+      "sha256": "b88639fc1f257597cb3a42ee0527ce5321eb9e0faadfc4210437c794a856acc8"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/MAC_BINDING.md",
+      "bytes": 5789,
+      "git_blob": "43b8f5f5082ec4dcd976b60299fd6969d0e8e9c3",
+      "sha256": "e6d4f4c867b9dfbdea53b965e13f7ed5383e269ab5932a0fd0635e8d0e3470fa"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/SOURCE_PIN.json",
+      "bytes": 10426,
+      "git_blob": "3b58ce4421a221e3643c28880ff5979ad3f8ccc6",
+      "sha256": "cf7d29754f3c01be0b1c0cc872a0f0d2abf60277d0e7bec90600d4dfe2a4d4ae"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/VERIFICATION.json",
+      "bytes": 3753,
+      "git_blob": "10226addd8db1ddf630dada268bdae5bce1d2e99",
+      "sha256": "7dc7d3ac24d86a2cecd29ccd4703ecb0065fb826f4a0837067f22f9e06c33a06"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/affected-regression.txt",
+      "bytes": 1722,
+      "git_blob": "5f310acc606e60b50500c089dca6b319b15f3a47",
+      "sha256": "00d6ddc64a4e64bed1cd866b1bc340d3cd06d20aee5b975fcb6aec577a7672aa"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/backend-green.txt",
+      "bytes": 3507,
+      "git_blob": "ef04c164eef0bd0b0ec62c24a0e79251c58732d3",
+      "sha256": "2305d062b85a2598f5f056a4eb5d0bc58a9c154c1cf9eac5bb45031b3576c6a8"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/backend-red.txt",
+      "bytes": 15377,
+      "git_blob": "d67b6bd44df2ec398cfbf3a8aab298cd5eec3e72",
+      "sha256": "675e0eac875523023b36a78327ec7795ea244846cc86dcedac44610b3d06c63f"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/frontend-green.txt",
+      "bytes": 1642,
+      "git_blob": "b80c1c01c9a3017d612ef2b0f8e5043aad1b1d46",
+      "sha256": "58b40f22b98cbf7fc575765a4aec5ae5ba2e156a405bd06e300b71103ca341f0"
+    },
+    {
+      "path": "handoffs/P0/m17-readonly-preview-20261013/frontend-tooling-not-run.txt",
+      "bytes": 1059,
+      "git_blob": "2770db41a46c237383a46d55929ffe6e6c15b545",
+      "sha256": "063d4888e1978fdd8d00934ec4dd4398532e80b56c7c7bac2ce9ef386c30f891"
+    }
+  ],
+  "note": "This inventory excludes itself; all unchanged P0 files inherit the parent tree."
+}

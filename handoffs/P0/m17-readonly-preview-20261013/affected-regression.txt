@@ -1,0 +1,23 @@
+test_duplicate_query_rejected (test_module_api.ModuleApiTests.test_duplicate_query_rejected) ... ok
+test_fifo_record_rejected_without_waiting_for_writer (test_module_api.ModuleApiTests.test_fifo_record_rejected_without_waiting_for_writer) ... ok
+test_missing_record_is_not_empty_success (test_module_api.ModuleApiTests.test_missing_record_is_not_empty_success) ... ok
+test_original_payload_and_identity_headers (test_module_api.ModuleApiTests.test_original_payload_and_identity_headers) ... ok
+test_other_module_root_rejected (test_module_api.ModuleApiTests.test_other_module_root_rejected) ... ok
+test_release_header_injection_rejected (test_module_api.ModuleApiTests.test_release_header_injection_rejected) ... ok
+test_root_replacement_does_not_change_bound_directory (test_module_api.ModuleApiTests.test_root_replacement_does_not_change_bound_directory) ... ok
+test_symlink_response_directory_rejected (test_module_api.ModuleApiTests.test_symlink_response_directory_rejected) ... ok
+test_tamper_rejected (test_module_api.ModuleApiTests.test_tamper_rejected) ... ok
+test_unconfigured_route_rejected (test_module_api.ModuleApiTests.test_unconfigured_route_rejected) ... ok
+test_unsupported_methods_have_json_error (test_module_api.ModuleApiTests.test_unsupported_methods_have_json_error) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 5.769s
+
+OK
+PASS test_m18_routes_are_explicit_and_read_only
+PASS test_m18_binding_keeps_v2_identity_separate_from_publication
+PASS test_m18_config_rejects_missing_v2_binding
+PASS test_m18_config_keeps_pages_route_bounded
+PASS test_descriptor_only_small_payload
+PASS test_missing_descriptor_not_ready
+PASS test_pages_route_is_bounded_entry

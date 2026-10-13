@@ -1,0 +1,25 @@
+✔ M17 fixtures come from original synthetic owner and exact cold reader (2.432735ms)
+✔ M17 has an independent exact-run client (0.267252ms)
+✔ M17 panel is mounted separately and source proxy preserves the legacy 1530 client (0.863857ms)
+✔ exact GET keeps original READY/PARTIAL rows and money units unchanged (13.433958ms)
+✔ invalid or extra query values never request a guessed date/run (1.189821ms)
+✔ wrong schema, exact identity, boundary, counts and malformed original rows are rejected (47.001732ms)
+✔ impossible calendar timestamps and hour 24 are rejected instead of normalized (2.04502ms)
+✔ HTTP, missing body, malformed UTF-8/JSON and both byte-limit paths fail closed (5.66525ms)
+✔ repeat clicks clear old success and earlier responses cannot overwrite a later run (3.517692ms)
+✔ reload failure and malformed response never retain success or become empty success (5.530407ms)
+✔ query snapshot is immutable across a pending load and close cancels without emission (3.009829ms)
+✔ source panel reads only saved route and preserves owner states and historical replay (7.348018ms)
+✔ missing or duplicate modules, wrong owner, promoted flags and malformed identity fail closed (3.053808ms)
+✔ HTTP errors, invalid JSON, absent and oversized streams stay unconfirmed (1.265938ms)
+✔ failed re-read clears previously valid source result (0.710109ms)
+✔ repeated reads do not let older completion replace new result (1.582084ms)
+✔ closing a pending read ignores later completion (0.582607ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3829.084033
