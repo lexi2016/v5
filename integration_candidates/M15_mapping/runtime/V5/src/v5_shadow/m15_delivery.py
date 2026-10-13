@@ -10,6 +10,8 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
+import sys
 from uuid import uuid4
 from v5_shadow.composition import no_symlinks
 from v5_shadow.contracts import aware, trade_date, exact_keys
@@ -100,7 +102,38 @@ def read_result(root,reference):
         p=Path(name)
         if p.is_absolute() or '..' in p.parts:raise ValueError('M15_OWNER_PATH_INVALID')
         if hashlib.sha256(_bytes(root/p)).hexdigest()!=digest:raise ValueError('M15_OWNER_BYTES_CHANGED')
+    original_cold_readback(root,value)
     return value['result']
+
+def original_cold_readback(root,envelope):
+    """Invoke original saved validators on bound output bytes in new processes."""
+    result=envelope['result'];seed=result.get('seed') or {}
+    if seed.get('schema_version')!='v5.us_mapping_daily.v1':return []
+    target=result['target_date'];daily=seed['persisted_daily'];owners=envelope['owner_files']
+    requests=[]
+    def bound(kind,suffix,run,digest):
+        matches=[name for name in owners if name.startswith('attempts/') and name.endswith(suffix)]
+        if len(matches)!=1:raise ValueError('M15_ORIGINAL_OWNER_BINDING')
+        parent=Path(root)/matches[0][:-len(suffix)]
+        requests.append(dict(kind=kind,root=str(parent),target_date=target,run_id=run,artifact_sha256=digest))
+    bound('seed',f"us_mapping_research/{target}/runs/{daily['run_id']}.json",daily['run_id'],daily['artifact_sha256'])
+    material=result.get('material')
+    if material is not None:
+        identity=material['readback']
+        bound('material',f'workspace_plans/{target}/latest.json',identity['run_id'],identity['plan_sha256'])
+    receipts=[]
+    for request in requests:
+        process=subprocess.run([sys.executable,'-I','-B',str(Path(__file__).with_name('m15_owner_read.py'))],
+            input=canonical_bytes(request),capture_output=True,timeout=60,
+            env={k:v for k,v in os.environ.items() if not k.startswith(('V4_','V35_'))})
+        if process.returncode:raise ValueError('M15_ORIGINAL_OWNER_READ_FAILED:'+process.stderr.decode(errors='replace')[-2000:])
+        value=json.loads(process.stdout)
+        if (value.get('status')!='MATCHED' or value.get('run_id')!=request['run_id']
+                or value.get('artifact_sha256')!=request['artifact_sha256'] or value.get('read_only') is not True):
+            raise ValueError('M15_ORIGINAL_OWNER_READ_IDENTITY')
+        receipts.append(value)
+    return receipts
+
 
 def list_results(root):
     """Recover lost result receipts without calculating or promoting latest."""

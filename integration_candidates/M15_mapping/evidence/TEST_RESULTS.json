@@ -3,7 +3,7 @@
   "python": "3.12.14",
   "python_candidate": {
     "status": "PASS",
-    "tests": 17
+    "tests": 20
   },
   "original_regression": {
     "status": "PASS",
@@ -43,5 +43,19 @@
     "orders_sent": false,
     "natural_verified": false
   },
-  "full_material_positive": "Original synthetic acquisition/builder/archive/native and market triplet -> original industry and individual accepted -> original workspace save -> immutable reader"
+  "full_material_positive": "Original synthetic acquisition/builder/archive/native and market triplet -> original industry and individual accepted -> original workspace save -> immutable reader",
+  "original_cold_reader": {
+    "status": "PASS",
+    "readers": [
+      "us_mapping_research._read_saved",
+      "workspace._read_plan + verified_plan_attempt"
+    ],
+    "execution": "distinct fresh subprocesses",
+    "negative_tests": [
+      "resigned seed owner SHA",
+      "resigned material plan SHA"
+    ],
+    "writes": "DENIED_AND_DISK_UNCHANGED"
+  },
+  "supersedes_incomplete_cold_read_commit": "0d53c6d64299897fbfccaa5e4eca1e96ca285ed4"
 }

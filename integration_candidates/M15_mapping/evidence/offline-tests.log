@@ -9,6 +9,9 @@ test_future_and_missing_material_binding_rejected (test_delivery.MoreRejections.
 test_news_only_payload_is_not_market_snapshot (test_delivery.MoreRejections.test_news_only_payload_is_not_market_snapshot) ... ok
 test_wrong_session_request_rejected (test_delivery.MoreRejections.test_wrong_session_request_rejected) ... ok
 test_original_module_server_serves_same_identity_and_never_runs_owner (test_delivery.OrdinaryApiTests.test_original_module_server_serves_same_identity_and_never_runs_owner) ... ok
+test_seed_and_material_use_original_readers_in_distinct_fresh_processes (test_delivery.OriginalColdProcessTests.test_seed_and_material_use_original_readers_in_distinct_fresh_processes) ... ok
+test_resigned_delivery_cannot_misstate_original_owner_identity (test_delivery.OriginalColdReaderTests.test_resigned_delivery_cannot_misstate_original_owner_identity) ... ok
+test_resigned_material_identity_is_rejected_by_original_cold_reader (test_delivery.OriginalManagerColdRejectionTests.test_resigned_material_identity_is_rejected_by_original_cold_reader) ... ok
 test_original_body_parser_positive_and_refusals (test_delivery.OriginalMaterialContractTests.test_original_body_parser_positive_and_refusals) ... ok
 test_both_paths_execute_original_material_owner_and_preserve_missing_identity (test_delivery.OwnerEndToEndTests.test_both_paths_execute_original_material_owner_and_preserve_missing_identity) ... ok
 test_changed_source_refused_before_attempt_and_old_success_unchanged (test_delivery.OwnerEndToEndTests.test_changed_source_refused_before_attempt_and_old_success_unchanged) ... ok
@@ -17,9 +20,10 @@ test_three_paths_and_unknown_are_preserved_without_private_roots (test_delivery.
 test_lost_stdout_reference_can_be_recovered_without_repeating_owner (test_delivery.ReceiptRecoveryTests.test_lost_stdout_reference_can_be_recovered_without_repeating_owner) ... ok
 
 ----------------------------------------------------------------------
-Ran 17 tests in 10.222s
+Ran 20 tests in 19.154s
 
 OK
+ORIGINAL_COLD_READER_EVIDENCE [{"artifact_sha256": "4891b75633e6e798eb59b0f567f57296f1b51afc277163ef079dc77a2e9fb578", "buy_gate_updated": false, "kind": "seed", "orders_sent": false, "owner_source_pin": "6eab8e6d44b64e1668b795352dbf88a5176fdc826e532be07701be435abf01bb", "process_id": 33, "production_allowed": false, "read_only": true, "reader": "us_mapping_research._read_saved", "run_id": "a65fb007d7864600abaf64c7ee6c4d2b", "status": "MATCHED", "target_date": "20261012"}, {"artifact_sha256": "c6d6e85dfef08d8d507e05fe8a2c4d17f1a5783a1d5f371939305556a9771135", "buy_gate_updated": false, "kind": "material", "orders_sent": false, "owner_source_pin": "7a460e6f33b40630763d912affcedfe2c687d2b69e2924b55d8b8607298c69e5", "process_id": 34, "production_allowed": false, "read_only": true, "reader": "workspace._read_plan + verified_plan_attempt", "run_id": "4af10b0b83e5416c80e1be8411c7812f", "status": "MATCHED", "target_date": "20261012"}]
 test_archive_import_cannot_coexist_with_existing_archive_binding (test_current_us_research.CurrentUsResearchTests.test_archive_import_cannot_coexist_with_existing_archive_binding) ... ok
 test_historical_target_cannot_be_relabelled_current (test_current_us_research.CurrentUsResearchTests.test_historical_target_cannot_be_relabelled_current) ... ok
 test_missing_diagnostics_do_not_become_assessed_zero (test_current_us_research.CurrentUsResearchTests.test_missing_diagnostics_do_not_become_assessed_zero) ... ok
@@ -62,16 +66,16 @@ test_relation_not_available_at_cutoff_is_not_assessed (test_us_mapping_scope.UsM
 test_wrong_raw_sha_rejects_scope_counts (test_us_mapping_scope.UsMappingScopeTests.test_wrong_raw_sha_rejects_scope_counts) ... ok
 
 ----------------------------------------------------------------------
-Ran 40 tests in 0.368s
+Ran 40 tests in 0.407s
 
 OK
-✔ M15 API client exists (2.583325ms)
-✔ overview retains unknown lane distinct from zero (9.388741ms)
-✔ different target rejected (1.242711ms)
-✔ formal or natural upgrade rejected (4.476456ms)
-✔ failed API cannot return stale result (0.554236ms)
-✔ page identities and complete continuation (3.033992ms)
-✔ unknown lane cannot be silently relabelled a valid empty (0.545821ms)
+✔ M15 API client exists (2.011728ms)
+✔ overview retains unknown lane distinct from zero (5.410456ms)
+✔ different target rejected (0.921513ms)
+✔ formal or natural upgrade rejected (1.803653ms)
+✔ failed API cannot return stale result (0.601017ms)
+✔ page identities and complete continuation (3.002756ms)
+✔ unknown lane cannot be silently relabelled a valid empty (1.198765ms)
 ℹ tests 7
 ℹ suites 0
 ℹ pass 7
@@ -79,4 +83,4 @@ OK
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 243.561292
+ℹ duration_ms 219.022592

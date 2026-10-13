@@ -9,9 +9,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 8997,
-      "sha256": "9fd44613c632605c6ffc7d2f3ba839cfd5d32b8ccb3966ef105bfd0beea57568",
-      "git_blob": "5b7418fd91def879bcdfed07738d633b30d3635a"
+      "bytes": 9581,
+      "sha256": "6eee1c3a1fe88e4a911b5ab9bc3875196c26632b202e3f0ba91cd995397c33b4",
+      "git_blob": "6a16603673edbf353b4b928991f7c99442cf2b31"
     },
     {
       "path": "SOURCE_ORIGINS.json",
@@ -21,15 +21,15 @@
     },
     {
       "path": "evidence/TEST_RESULTS.json",
-      "bytes": 1564,
-      "sha256": "261eba213cbf0851fc4d629ed1b1b7b2f87eef078f65b02485892083895914de",
-      "git_blob": "d8fd8735d13d58dc6dccf095a0e5806538af9fd3"
+      "bytes": 2014,
+      "sha256": "4ee6ae7361ec7f4e6a4a09e4b1664bd6144b354325290d8e54bcbb23f8595bdd",
+      "git_blob": "2b6b9d0c48035c58855fceadd03c69f459808510"
     },
     {
       "path": "evidence/offline-tests.log",
-      "bytes": 10347,
-      "sha256": "de8df4aae81106bfc6bf0c7069a0163595f3670df3436d81fc54f1e4446d0296",
-      "git_blob": "b48aa1a707c6d1426dfa4b8ac1f52301e0f9125c"
+      "bytes": 11847,
+      "sha256": "10e4ee5ce4bd4dc8f730d164e625470619fb249855e564b2dc567063c0a2faba",
+      "git_blob": "bc416ff5bcd8dc16abc38a7b074123643f00a9a2"
     },
     {
       "path": "examples/both.spec.json",
@@ -339,9 +339,15 @@
     },
     {
       "path": "runtime/V5/src/v5_shadow/m15_delivery.py",
-      "bytes": 15052,
-      "sha256": "5860265feddfa22156f9cb0f8dab572f6fccb4705ab375d89c896a3010a314d0",
-      "git_blob": "e612263c1b028e32fd66e0a1d624a2906e8f0c06"
+      "bytes": 17002,
+      "sha256": "57c60deb652b19f6dd56c52a699250e3e5f7416f2d456eb7d93cb93e9a924f2c",
+      "git_blob": "92c7b284b81d3cd106a90cc05c9084411f9a0a37"
+    },
+    {
+      "path": "runtime/V5/src/v5_shadow/m15_owner_read.py",
+      "bytes": 3469,
+      "sha256": "1873447dcaa4c4734360d4e578caccf31b40cd7f24da722e51a4d8c09eb6e260",
+      "git_blob": "bad28e3ee8d269844a5da6b9f332267ec939a14b"
     },
     {
       "path": "runtime/V5/src/v5_shadow/manager_panel_observation.py",
@@ -3165,9 +3171,9 @@
     },
     {
       "path": "tests/test_delivery.py",
-      "bytes": 13776,
-      "sha256": "fc8d619c84aac61b720135c62a81db2d365d2ccf34627b4e655b3f15eca1e954",
-      "git_blob": "3ce1ac87823a6b391c1473762db5787c29c55167"
+      "bytes": 16606,
+      "sha256": "413e445b40c2827bf61f615ff8bcf54c972583d2fcfd6e7731d536c36f427548",
+      "git_blob": "34c6a17510fb4b3d329c032041072bf49e858846"
     },
     {
       "path": "verify_release.py",

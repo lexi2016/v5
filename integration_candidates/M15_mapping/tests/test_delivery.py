@@ -188,3 +188,46 @@ class ReceiptRecoveryTests(unittest.TestCase):
    before={str(p):p.read_bytes() for p in root.rglob('*') if p.is_file()}
    self.assertEqual(delivery.list_results(root),[reference])
    self.assertEqual({str(p):p.read_bytes() for p in root.rglob('*') if p.is_file()},before)
+
+class OriginalColdReaderTests(unittest.TestCase):
+ setUp=OwnerEndToEndTests.setUp
+ request=OwnerEndToEndTests.request
+ def test_resigned_delivery_cannot_misstate_original_owner_identity(self):
+  root=self.root/'out';delivery.initialize(root)
+  receipt=delivery.execute(self.request('seed'),root)
+  result=delivery.read_result(root,receipt['reference'])
+  envelope=json.loads((root/'results'/(receipt['reference']['run_id']+'.json')).read_text())
+  result['seed']['persisted_daily']['artifact_sha256']='0'*64
+  forged=delivery.save_result(root,result,[root/p for p in envelope['owner_files']])
+  with self.assertRaisesRegex(ValueError,'ORIGINAL_OWNER'):delivery.read_result(root,forged)
+
+class OriginalColdProcessTests(unittest.TestCase):
+ def test_seed_and_material_use_original_readers_in_distinct_fresh_processes(self):
+  import os
+  from unittest.mock import patch
+  with tempfile.TemporaryDirectory() as temporary:
+   root=Path(temporary);materials=root/'materials';materials.mkdir();out=root/'out';delivery.initialize(out)
+   request=delivery.prepare(dict(mode='both',target_date='20261012',cutoff='2026-10-10T01:00:00+00:00',
+    us_root=str(BASE/'tests/fixtures/quote_only'),session_date='20261009',materials=dict(root=str(materials),files=[]),native_master=None))
+   receipt=delivery.execute(request,out)
+   path=out/'results'/(receipt['reference']['run_id']+'.json');envelope=json.loads(path.read_bytes())
+   before={str(p):p.read_bytes() for p in out.rglob('*') if p.is_file()}
+   receipts=delivery.original_cold_readback(out,envelope)
+   self.assertEqual([r['kind'] for r in receipts],['seed','material'])
+   self.assertEqual(len({r['process_id'] for r in receipts}),2)
+   self.assertTrue(all(r['process_id']!=os.getpid() and r['read_only'] and r['status']=='MATCHED' for r in receipts))
+   self.assertEqual(receipts[0]['reader'],'us_mapping_research._read_saved')
+   self.assertEqual(receipts[1]['reader'],'workspace._read_plan + verified_plan_attempt')
+   self.assertEqual({str(p):p.read_bytes() for p in out.rglob('*') if p.is_file()},before)
+   print('ORIGINAL_COLD_READER_EVIDENCE '+json.dumps(receipts,sort_keys=True))
+
+class OriginalManagerColdRejectionTests(unittest.TestCase):
+ setUp=OwnerEndToEndTests.setUp
+ request=OwnerEndToEndTests.request
+ def test_resigned_material_identity_is_rejected_by_original_cold_reader(self):
+  root=self.root/'out';delivery.initialize(root)
+  receipt=delivery.execute(self.request('both'),root)
+  result=delivery.read_result(root,receipt['reference']);envelope=json.loads((root/'results'/(receipt['reference']['run_id']+'.json')).read_text())
+  result['material']['readback']['plan_sha256']='0'*64
+  forged=delivery.save_result(root,result,[root/p for p in envelope['owner_files']])
+  with self.assertRaisesRegex(ValueError,'ORIGINAL_OWNER'):delivery.read_result(root,forged)

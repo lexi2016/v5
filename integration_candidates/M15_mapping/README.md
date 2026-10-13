@@ -44,7 +44,7 @@ M03 的顶层 READY_EMPTY 是新闻条数为零；独立 market_snapshot 仍可�
 
     python3 /ABSOLUTE/.../run_mapping.py read --reference /ABSOLUTE/reference.json --root /ABSOLUTE/V5/m15-private-run
 
-`read` 只读已提交 envelope 和每个原 owner 文件的固定字节，校验 run/target/SHA，绝不重新计算。所有原结果保存于独立 attempts 下，生成过的 run 不覆盖。JSON 路径、符号链接、SHA、session、未来 cutoff、源/输出重叠均严格拒绝。输入哈希证明字节一致，不证明来源真实性。
+`read` 先校验已提交 envelope 和每个原 owner 文件的固定字节，再分别启动全新子进程调用原 `us_mapping_research._read_saved`、原 `workspace._read_plan` 与 `verified_plan_attempt`；匹配原 run/target/SHA。子进程禁止写入、网络和再派生进程，绝不重新计算。所有原结果保存于独立 attempts 下，生成过的 run 不覆盖。JSON 路径、符号链接、SHA、session、未来 cutoff、源/输出重叠均严格拒绝。输入哈希证明字节一致，不证明来源真实性。
 
 ## 普通 API / 原页面接入（P0 唯一集成者）
 
@@ -78,3 +78,7 @@ M03 的顶层 READY_EMPTY 是新闻条数为零；独立 market_snapshot 仍可�
 包含：M03 quote-only→seed→原保存与新进程冷读；当前合成资料经原 producer/builder/archive/native reader→原行业/个股映射→原 workspace 保存；缺正文/时点/身份、错 span/来源独立性、新闻冒行情、错 session、未来 cutoff、篡改字节、旧成功保留、stdout 丢失后的只读恢复；原 API GET/分页同 run、POST405、错日期503、GET 前后磁盘无变。
 
 NOT_RUN：Mac、锁定3.14环境安装、Vue type/build与原生页面交互、P0激活/预览部署、真实目标日三源及真实材料资格、经理当日窗口、新日自然/跨日与完整18模块 release 回归。旧 20261007 原真实测试需要其独立真实 request，未在本次以合成数据冒充重跑。此包是可运行完整代码候选，不是 M15 全业务/自然/正式验收完成。
+
+## 固定候选历史说明
+
+首版 `0d53c6d64299897fbfccaa5e4eca1e96ca285ed4` 的530件字节曾逐件远端回读，但当时冷读仅校验封存 envelope 和原owner字节，尚未在冷读子进程实际调用原 saved reader；因此不将它记为完整验收。本次修订只补该必要冷读接线和对应正反/独立进程证据，不改算法、共享P0或真实执行范围。
