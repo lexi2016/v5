@@ -1,0 +1,217 @@
+{
+  "candidate": "211fe3e38946bc07285c1a027f63f25b23c9eb1f",
+  "status": "MAC_30_TESTS_PASS_REAL_REGISTRATION_RUNTIME_BLOCKED",
+  "new_tests": {
+    "candidate": "211fe3e38946bc07285c1a027f63f25b23c9eb1f",
+    "command": [
+      "<EXISTING_HK02_PYTHON>",
+      "-B",
+      "-m",
+      "unittest",
+      "test_p0_hk_preselection_daily"
+    ],
+    "env": {
+      "PYTHONPATH": "V5/src:V5/tests",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "<TASK_TMP>"
+    },
+    "started_utc": "2026-10-13T01:13:37.976762+00:00",
+    "finished_utc": "2026-10-13T01:14:32.505597+00:00",
+    "exit_code": 0,
+    "closure_entries_verified": 146,
+    "closure_sha256": "75482f54ccc5e2fa0bd9216273fdc7ee2276a32171cc94cfd1c7ba6ca9e44ab9"
+  },
+  "targeted_regression": {
+    "candidate": "211fe3e38946bc07285c1a027f63f25b23c9eb1f",
+    "command": [
+      "<EXISTING_HK02_PYTHON>",
+      "-B",
+      "-m",
+      "unittest",
+      "test_daily_dispatch",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_manager_partial_is_saved_read_back_and_not_refreshed_twice",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_manager_wrong_attempt_never_commits_success",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_disabled_tick_does_not_touch_owners_or_roots",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_launchd_contract_is_separate_disabled_and_reuses_tick"
+    ],
+    "env": {
+      "PYTHONPATH": "V5/src:V5/tests",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "TMPDIR": "<TASK_TMP>"
+    },
+    "started_utc": "2026-10-13T01:16:11.753583+00:00",
+    "finished_utc": "2026-10-13T01:16:11.868217+00:00",
+    "exit_code": 0,
+    "closure_entries_verified": 146,
+    "closure_sha256": "75482f54ccc5e2fa0bd9216273fdc7ee2276a32171cc94cfd1c7ba6ca9e44ab9"
+  },
+  "tests_passed": 30,
+  "tests_failed": 0,
+  "new_test_count": 21,
+  "regression_count": 9,
+  "old85_rerun": false,
+  "m17_suite_rerun": false,
+  "real_call_executed": false,
+  "natural_verified": false,
+  "deployment_performed": false,
+  "product_modified": false,
+  "source_closure_entries": 146,
+  "source_closure_sha256": "75482f54ccc5e2fa0bd9216273fdc7ee2276a32171cc94cfd1c7ba6ca9e44ab9",
+  "input_asset_inventory": [
+    {
+      "kind": "input",
+      "relative": "latest.json",
+      "bytes": 143880,
+      "sha256": "25eca6aa624e2e8c54462d3de63532d6800e2f0166e6030e079c76b256fb24c6"
+    },
+    {
+      "kind": "input",
+      "relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/artifact.csv",
+      "bytes": 87283,
+      "sha256": "c8c78548dbeeb0cc6bdb2355de20de53ab2c73e86a84d3e0c918fd3d0d67a9d5"
+    },
+    {
+      "kind": "input",
+      "relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/manifest.json",
+      "bytes": 1359,
+      "sha256": "85d967f08ae5cd60d35e1394ea66e7877919f24eb601dbdc0bf9a06a7c57e87c"
+    },
+    {
+      "kind": "input",
+      "relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/receipt.json",
+      "bytes": 710,
+      "sha256": "8e14b92f0269a145ab5baa576661dc122af623e8dee6ca4e05360ac6661d4f12"
+    },
+    {
+      "kind": "input",
+      "relative": "assets/hk_security_master/latest.json",
+      "bytes": 7562,
+      "sha256": "f0f6b3592a6a2667677672fc6eead77ba3f29455e3ea41d6aca2a6624bc429d8"
+    },
+    {
+      "kind": "input",
+      "relative": "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/artifact.csv",
+      "bytes": 91540,
+      "sha256": "c5e1e7a1f5a335ddcfca48140715bda385e97326a41ce0d6ed5eeaf7660fdafe"
+    },
+    {
+      "kind": "input",
+      "relative": "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/manifest.json",
+      "bytes": 661,
+      "sha256": "cfd82041bc841e9a036090664160479c3b25e6e9461ddcf867ff3bf41f399f8c"
+    },
+    {
+      "kind": "input",
+      "relative": "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/receipt.json",
+      "bytes": 384,
+      "sha256": "f34ab3bfbfffa4b01bae33f610c8ddd07a6cc5b9b754657c06b0bd65442ca2e2"
+    },
+    {
+      "kind": "asset",
+      "relative": "panel_latest.json",
+      "bytes": 66,
+      "sha256": "a0cb59adf766b0aa23e21aa899a64665cbc756d95c7b469006d28ea26cbfca34"
+    },
+    {
+      "kind": "asset",
+      "relative": "panels/20261012-f55689159261/manifest.json",
+      "bytes": 113901,
+      "sha256": "9141cf2220f618e67ec8cfae31a11119108408344b3fba2db5bc4d97920d4c55"
+    },
+    {
+      "kind": "asset",
+      "relative": "panels/20261012-f55689159261/hkconnect_vipdoc_daily_panel.parquet",
+      "bytes": 20966489,
+      "sha256": "f556891592618f32c6aa57d3d439663d2bebcabc2aae7ba559c82d3a9586154d"
+    },
+    {
+      "kind": "asset",
+      "relative": "model_latest.json",
+      "bytes": 52,
+      "sha256": "e739e8dcdc15fdb0cc89ddba216757d972f2ffa280a282b37e19340f97ff89e7"
+    },
+    {
+      "kind": "asset",
+      "relative": "model/20260716/manifest.json",
+      "bytes": 3434,
+      "sha256": "5a97318af04b0e4246db17ef09a67677fb440b71a112bb86f8ab78bd65a165c3"
+    },
+    {
+      "kind": "asset",
+      "relative": "model/20260716/models.joblib",
+      "bytes": 33062913,
+      "sha256": "3b0d5d5239342439cabf25b30012365a64d78839bc3cd4d90bad7be6ff4aaa07"
+    },
+    {
+      "kind": "asset",
+      "relative": "name_latest.json",
+      "bytes": 996,
+      "sha256": "c8f9de5329a514467659f613fbdf768673c0ab98bdd9f731338ed146f1bea0e4"
+    },
+    {
+      "kind": "asset",
+      "relative": "names/runs/20260825/hk02-name-gap6-v1/manifest.json",
+      "bytes": 2033,
+      "sha256": "3c1bd5e288e87cbf50dfc43a456d37df823334173c5167130bf4368a91cc5cc3"
+    },
+    {
+      "kind": "asset",
+      "relative": "names/runs/20260825/hk02-name-gap6-v1/hk_name_dictionary.csv",
+      "bytes": 96765,
+      "sha256": "f1954f72aafd33e1d542011f819bb4ae89e5035dde544c42fc35255cf1f91fe1"
+    },
+    {
+      "kind": "asset",
+      "relative": "names/runs/20260825/hk02-name-gap6-v1/receipt.json",
+      "bytes": 1995,
+      "sha256": "ad3d1e7c871a0c7ad8639a0c58f1a3f8e2496c95d84bbb051704a329925e402d"
+    }
+  ],
+  "existing_m06": {
+    "status": "SUCCEEDED",
+    "attempt_count": 1,
+    "ledger_run_id": "f745c78857d54fa89849f2adbfa3602f",
+    "publication_digest": "f7d1e1d4f4472c5e0733f1ca5cbc32d2c297e651fd3d5a0e3874a6c7ba5cd92b",
+    "producer_receipt_sha256": "041c857b7f31c19e64e1e4bbed7ca29ba0d50b556445d5de82853d01c101abdc",
+    "identity": {
+      "lane": "hk_preselection",
+      "target_date": "20261013",
+      "input_sha256": "d43006256c3b932934d38a93c01554fa015445476b115b52c4dcc92bc707249d",
+      "research_cutoff": "2026-10-12T17:11:34.690550+00:00",
+      "code_sha256": "d8fae82edb8ef68fc502b6632ffe9e09c26fed3a5d20711e914251a34eb9cdb5",
+      "config_sha256": "1c99a0fb9f0c4fea3531010f3ac1d884f9feb21951cf3f974118a68bfe025c40",
+      "dependency_sha256": "1b07f33796f389ca9652f5743b8745d09fe2f0534a9a8fb93aad7efe196d5ee4"
+    },
+    "readback": "Raw bytes and saved ledger cross-check only; original owner/reader not invoked again",
+    "model_weights_reverified": false
+  },
+  "p0_ledger": {
+    "existing_run_count": 0,
+    "run_id": null
+  },
+  "prepared_at_utc": "2026-10-13T01:17:09.020656+00:00",
+  "slot": {
+    "start": "2026-10-13T10:00:00+08:00",
+    "deadline": "2026-10-13T10:30:00+08:00",
+    "enabled": false
+  },
+  "not_reached": [
+    "real P0 prepare/inspect and candidate-runtime identity comparison",
+    "real P0 tick/dispatch to existing-pool M06 reuse and fresh reader",
+    "real provider/model generation",
+    "natural scheduler"
+  ],
+  "runtime_blocker": {
+    "registration_python_symlink": true,
+    "candidate_registration_requirement": "no_symlinks(python_executable), p0_hk_preselection.py:25",
+    "candidate_worker_launch": "python_executable -I -B m06_daily_worker.py owner_root, p0_hk_preselection.py:41",
+    "original_venv_dependencies": "present",
+    "resolved_executable_dependencies": "numpy/pandas/scikit-learn/joblib/pyarrow all MISSING",
+    "product_fix_applied": false,
+    "real_owner_invoked": false,
+    "evidence": "interpreter-preflight.json",
+    "direct_no_symlinks_result": "SYMLINK_REJECTED",
+    "direct_check_utc": "2026-10-13T01:19:04.894405+00:00"
+  },
+  "diagnostic_harness_note": "An initial direct helper probe used host python3 and stopped at import (Python typing incompatibility, exit 1); corrected to existing HK02 Python, exit 0, SYMLINK_REJECTED. No product invocation."
+}

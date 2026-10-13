@@ -1,0 +1,14 @@
+{
+  "enabled": false,
+  "bundle_root": "<NEW_P0_TASK_ROOT>/bundles",
+  "ledger_root": "<NEW_P0_TASK_ROOT>/p0-ledger",
+  "hk_preselection": {
+    "enabled": false,
+    "python_executable": "<EXISTING_HK02_PYTHON_REALPATH>",
+    "python_sha256": "95fb891ec36d4022bdf62172f9d3c757fb3c7b1669a274cacc87fe261a535b7e",
+    "timeout_seconds": 1200,
+    "store_root": "<EXISTING_M06_TASK_ROOT>/inputs",
+    "asset_root": "<EXISTING_M06_TASK_ROOT>/assets",
+    "private_root": "<EXISTING_M06_TASK_ROOT>/output"
+  }
+}

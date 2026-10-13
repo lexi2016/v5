@@ -1,0 +1,43 @@
+{
+  "target_date": "20261013",
+  "jobs": [
+    {
+      "lane": "hk_preselection",
+      "scheduled_at": "2026-10-13T10:00:00+08:00",
+      "deadline": "2026-10-13T10:30:00+08:00",
+      "half_day_bound": true,
+      "max_attempts": 1,
+      "owner_request": {
+        "target_date": "20261013",
+        "signal_date": "20261012",
+        "eligibility_source_date": "20261012",
+        "admission_cutoff": "2026-10-13T01:17:09.020656+00:00",
+        "completion_cutoff": "2026-10-12T17:11:34.690550+00:00",
+        "execution_mode": "MANUAL_RECOVERY",
+        "production_method": "EXISTING_VERIFIED_POOL",
+        "source_files": {
+          "latest.json": "25eca6aa624e2e8c54462d3de63532d6800e2f0166e6030e079c76b256fb24c6",
+          "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/artifact.csv": "c8c78548dbeeb0cc6bdb2355de20de53ab2c73e86a84d3e0c918fd3d0d67a9d5",
+          "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/manifest.json": "85d967f08ae5cd60d35e1394ea66e7877919f24eb601dbdc0bf9a06a7c57e87c",
+          "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-b4a529e45fd4/receipt.json": "8e14b92f0269a145ab5baa576661dc122af623e8dee6ca4e05360ac6661d4f12",
+          "assets/hk_security_master/latest.json": "f0f6b3592a6a2667677672fc6eead77ba3f29455e3ea41d6aca2a6624bc429d8",
+          "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/artifact.csv": "c5e1e7a1f5a335ddcfca48140715bda385e97326a41ce0d6ed5eeaf7660fdafe",
+          "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/manifest.json": "cfd82041bc841e9a036090664160479c3b25e6e9461ddcf867ff3bf41f399f8c",
+          "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/receipt.json": "f34ab3bfbfffa4b01bae33f610c8ddd07a6cc5b9b754657c06b0bd65442ca2e2"
+        },
+        "files": {
+          "panel_latest.json": "a0cb59adf766b0aa23e21aa899a64665cbc756d95c7b469006d28ea26cbfca34",
+          "panels/20261012-f55689159261/manifest.json": "9141cf2220f618e67ec8cfae31a11119108408344b3fba2db5bc4d97920d4c55",
+          "panels/20261012-f55689159261/hkconnect_vipdoc_daily_panel.parquet": "f556891592618f32c6aa57d3d439663d2bebcabc2aae7ba559c82d3a9586154d",
+          "model_latest.json": "e739e8dcdc15fdb0cc89ddba216757d972f2ffa280a282b37e19340f97ff89e7",
+          "model/20260716/manifest.json": "5a97318af04b0e4246db17ef09a67677fb440b71a112bb86f8ab78bd65a165c3",
+          "model/20260716/models.joblib": "3b0d5d5239342439cabf25b30012365a64d78839bc3cd4d90bad7be6ff4aaa07",
+          "name_latest.json": "c8f9de5329a514467659f613fbdf768673c0ab98bdd9f731338ed146f1bea0e4",
+          "names/runs/20260825/hk02-name-gap6-v1/manifest.json": "3c1bd5e288e87cbf50dfc43a456d37df823334173c5167130bf4368a91cc5cc3",
+          "names/runs/20260825/hk02-name-gap6-v1/hk_name_dictionary.csv": "f1954f72aafd33e1d542011f819bb4ae89e5035dde544c42fc35255cf1f91fe1",
+          "names/runs/20260825/hk02-name-gap6-v1/receipt.json": "ad3d1e7c871a0c7ad8639a0c58f1a3f8e2496c95d84bbb051704a329925e402d"
+        }
+      }
+    }
+  ]
+}

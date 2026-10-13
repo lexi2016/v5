@@ -1,0 +1,42 @@
+[
+  {
+    "interpreter": "EXISTING_HK02_VENV",
+    "command": [
+      "EXISTING_HK02_VENV",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.metadata as m,json; names=['numpy','pandas','scikit-learn','joblib','pyarrow'];out={};\nfor n in names:\n try:out[n]=m.version(n)\n except m.PackageNotFoundError:out[n]='MISSING'\nprint(json.dumps(out))"
+    ],
+    "started_utc": "2026-10-13T01:18:11.027989+00:00",
+    "finished_utc": "2026-10-13T01:18:11.070422+00:00",
+    "exit_code": 0,
+    "packages": {
+      "numpy": "2.5.2",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.9.0",
+      "joblib": "1.5.3",
+      "pyarrow": "23.0.1"
+    }
+  },
+  {
+    "interpreter": "REQUIRED_NO_SYMLINK_REALPATH",
+    "command": [
+      "REQUIRED_NO_SYMLINK_REALPATH",
+      "-I",
+      "-B",
+      "-c",
+      "import importlib.metadata as m,json; names=['numpy','pandas','scikit-learn','joblib','pyarrow'];out={};\nfor n in names:\n try:out[n]=m.version(n)\n except m.PackageNotFoundError:out[n]='MISSING'\nprint(json.dumps(out))"
+    ],
+    "started_utc": "2026-10-13T01:18:11.070458+00:00",
+    "finished_utc": "2026-10-13T01:18:11.094217+00:00",
+    "exit_code": 0,
+    "packages": {
+      "numpy": "MISSING",
+      "pandas": "MISSING",
+      "scikit-learn": "MISSING",
+      "joblib": "MISSING",
+      "pyarrow": "MISSING"
+    }
+  }
+]
