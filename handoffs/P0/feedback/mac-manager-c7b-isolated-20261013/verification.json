@@ -1,0 +1,89 @@
+{
+  "record_type": "controller_mac_receipt_transcription",
+  "recorder_retested": false,
+  "date": "2026-10-13",
+  "timezone": "Asia/Shanghai",
+  "candidate": "c7b815c065da83bd2db2b3023be4607ce9f194ec",
+  "candidate_blobs_matched": 11,
+  "execution_preimages_matched": 5,
+  "build_and_vitest": {
+    "window": [
+      "19:29:08",
+      "19:29:11"
+    ],
+    "vue_tsc_no_emit": "PASS",
+    "vite_build": "PASS",
+    "vitest_suites": [
+      "SavedManagerResultView.default.spec.ts",
+      "navigation.spec.ts"
+    ],
+    "vitest_passed": 11,
+    "vitest_failed": 1,
+    "vitest_exit_code": 1,
+    "new_default_tests_passed": 4,
+    "failure": {
+      "location": "navigation.spec.ts:68",
+      "expected": "阶段选股 · 未接入",
+      "observed_context": "M07 already integrated",
+      "narrow_test_repair": "AWAITING_ORIGINAL_P0_CHAT_RESULT"
+    }
+  },
+  "http_dom": {
+    "execution_trigger": "separately_authorized_isolated_synthetic_validation",
+    "window": [
+      "19:40:07",
+      "19:41:02"
+    ],
+    "exit_code": 0,
+    "system_security_settings_changed": false,
+    "synthetic_scenarios": [
+      {
+        "name": "optin_off_empty_query",
+        "target": "20261012",
+        "behavior": "old_fixed_result_preserved"
+      },
+      {
+        "name": "optin_on_missing_current",
+        "http_status": 503,
+        "status": "CANNOT_CONFIRM",
+        "dom_falls_back_to_old_result": false
+      },
+      {
+        "name": "optin_on_current_present",
+        "run_kind": "new_synthetic_run",
+        "target": "20261013",
+        "navigation_six_fields_run_generation_consistent": true
+      },
+      {
+        "name": "explicit_old_run",
+        "behavior": "old_result_preserved_without_redirect"
+      }
+    ],
+    "bad_generation_http_status": 409,
+    "unknown_run_http_status": 503,
+    "fixtures_modified": false,
+    "validation_method": "HTTP_AND_JSDOM",
+    "native_browser_visual_validation": false,
+    "early_static_asset_and_mac_spawn_probe_logs_retained": true,
+    "probe_fixes_changed_test_scripts_not_product": true
+  },
+  "isolation": {
+    "file_hashes_unchanged": 2812,
+    "candidate_shas_unchanged": 5,
+    "pids_unchanged": true,
+    "temporary_services_stopped": true,
+    "real_owner_runs": 0,
+    "real_manager_runs": 0,
+    "real_daily_runs": 0,
+    "active_optin_enabled": false
+  },
+  "natural_verified": false,
+  "deployed": false,
+  "source": {
+    "mac_thread": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+    "turns": [
+      "01a13504-33c9-7188-a6d1-28fdd1dba4e0",
+      "01a13509-a497-72c0-91cd-251851d0cc5f"
+    ]
+  }
+}
