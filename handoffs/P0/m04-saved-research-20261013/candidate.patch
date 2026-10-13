@@ -771,6 +771,11 @@
              if heavy and not reader_slot.acquire(blocking=False):
                  return self.error(503, 'MODULE_BUSY')
              try:
+@@ -1033,3 +1044,4 @@
+     finally:server.server_close()
+ 
+ if __name__=='__main__':main()
++
 --- /dev/null
 +++ b/frontend/src/api/m04SavedResearch.ts
 @@ -0,0 +1,47 @@
@@ -884,6 +889,11 @@
    <HkPreselectionPool />
    <HkStageObserved />
    <HkCloseReview />
+@@ -37,3 +39,4 @@
+ <style scoped>
+ .source-status{padding:18px}.source-header{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}.source-header h2{font-size:18px;margin:0}.source-header button{padding:8px 12px}.source-status p{font-size:13px;line-height:1.65;overflow-wrap:anywhere}.source-digest{color:#526579}.source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.source-grid article{border:1px solid #c8d3dd;border-radius:8px;padding:14px;min-width:0}.source-grid h3{font-size:15px;margin:0}.source-grid summary{cursor:pointer;color:#254d71}.source-grid pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:320px;overflow:auto}@media(max-width:650px){.source-grid{grid-template-columns:1fr}}
+ </style>
++
 --- a/frontend/src/views/SavedManagerResultView.vue
 +++ b/frontend/src/views/SavedManagerResultView.vue
 @@ -31,6 +31,14 @@
@@ -909,6 +919,11 @@
     <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
     <button type="button" disabled>阶段选股 · 未接入</button>
     <button type="button" disabled>研报决策台 · 未接入</button>
+@@ -133,3 +142,4 @@
+ .saved-announcements{padding:0 18px}.saved-announcements :deep(article){border:1px solid #d6dde5;border-radius:8px;padding:14px;margin:12px 0}.saved-announcements :deep(h4){font-size:1.05rem;margin:0 0 10px}.saved-announcements :deep(p){line-height:1.65;overflow-wrap:anywhere}.saved-announcements :deep(details){margin:10px 0}.saved-announcements :deep(summary){cursor:pointer;line-height:1.6}.saved-announcements :deep(pre){white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem}
+ </style>
+ 
++
 --- a/frontend/vite.config.ts
 +++ b/frontend/vite.config.ts
 @@ -25,6 +25,7 @@
@@ -919,6 +934,11 @@
   proxy['/api/v5/source-bundle/hk-preselection'] = readonlyProxy(sourceTarget);
   proxy['/api/v5/source-bundle/hk-close-review'] = readonlyProxy(sourceTarget);
   proxy['/api/v5/source-bundle/a-close-replay'] = readonlyProxy(sourceTarget);
+@@ -45,3 +46,4 @@
+     },
+   },
+ });
++
 --- /dev/null
 +++ b/V5/tests/test_m04_readonly_api.py
 @@ -0,0 +1,137 @@
@@ -1122,10 +1142,11 @@
 +});
 --- a/frontend/src/views/SavedManagerResultView.navigation.spec.ts
 +++ b/frontend/src/views/SavedManagerResultView.navigation.spec.ts
-@@ -152,3 +152,19 @@
+@@ -151,3 +151,20 @@
+   expect(screen.getByRole('heading', { name: '经理已保存结果', level: 2 })).toBeTruthy();
    expect(screen.getByRole('button', { name: '源模块实际状态' })).toBeTruthy();
  });
- 
++
 +
 +it('M04 direct entry opens both disclosures, focuses the result and leaves the manager run unchanged', async () => {
 +  const requests=transport();
