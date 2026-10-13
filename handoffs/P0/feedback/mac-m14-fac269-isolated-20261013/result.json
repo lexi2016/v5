@@ -1,0 +1,346 @@
+{
+  "candidate": "fac269ade842eb1d9b54c604b77091b0cd58bd44",
+  "parent_candidate": "018827908e6f5feae87d27dbc9e8d6f2a0935a8e",
+  "status": "ISOLATED_REAL_PASS_DEPLOYMENT_BLOCKED_PREIMAGE",
+  "stages": [
+    {
+      "command": [
+        "python3",
+        "-B",
+        "./m14-018827-isolated/fac269-package/revisions/from_018827/apply_candidate.py",
+        "--target",
+        "./m14-018827-isolated/checkout",
+        "--check-only"
+      ],
+      "started_at": "2026-10-13T14:13:46.191824+00:00",
+      "finished_at": "2026-10-13T14:13:46.225027+00:00",
+      "exit_code": 0,
+      "stage": "check-only"
+    },
+    {
+      "command": [
+        "python3",
+        "-B",
+        "./m14-018827-isolated/fac269-package/revisions/from_018827/apply_candidate.py",
+        "--target",
+        "./m14-018827-isolated/checkout"
+      ],
+      "started_at": "2026-10-13T14:13:46.225151+00:00",
+      "finished_at": "2026-10-13T14:13:46.259206+00:00",
+      "exit_code": 0,
+      "stage": "apply"
+    },
+    {
+      "command": [
+        "$NODE",
+        "node_modules/vue-tsc/bin/vue-tsc.js",
+        "--noEmit"
+      ],
+      "started_at": "2026-10-13T14:13:47.444011+00:00",
+      "finished_at": "2026-10-13T14:13:50.596126+00:00",
+      "exit_code": 0,
+      "stage": "typecheck"
+    },
+    {
+      "command": [
+        "$NODE",
+        "node_modules/vitest/vitest.mjs",
+        "run",
+        "src/components/M14SavedRebound.spec.ts",
+        "src/views/SavedManagerResultView.m14.spec.ts",
+        "src/views/SavedManagerResultView.spec.ts",
+        "src/views/SavedManagerResultView.navigation.spec.ts"
+      ],
+      "started_at": "2026-10-13T14:13:47.444321+00:00",
+      "finished_at": "2026-10-13T14:13:50.905321+00:00",
+      "exit_code": 0,
+      "stage": "vue"
+    },
+    {
+      "command": [
+        "$NODE",
+        "node_modules/vite/bin/vite.js",
+        "build"
+      ],
+      "started_at": "2026-10-13T14:13:47.444209+00:00",
+      "finished_at": "2026-10-13T14:13:49.259728+00:00",
+      "exit_code": 0,
+      "stage": "build"
+    }
+  ],
+  "vue_passed": 15,
+  "vue_files_passed": 4,
+  "source_after_hashes": {
+    "V5/src/v5_shadow/module_api.py": "f4722594c27f6f614a3831de015e268ae48a400a5b3cf8a79706e38eb3bdd12c",
+    "V5/src/v5_shadow/m14_readonly.py": "15d25e8a589602b12a35e45fec3e93ee443403979533abdde78daa48104ee224",
+    "V5/tests/test_m14_saved_rebound.py": "af4238829e67596cdb4080f8c75bb0fb7f003ca974aa935e352f478a09e59eb0",
+    "V5/tests/test_m14_saved_launch.py": "de66201dafb002de4c68433417f47762ff9ccee2c73d713f57fb8105681900b9",
+    "frontend/vite.config.ts": "76df9236b995cb1276b1b144af35374b0fd05b2afed92d149662760396d1dbf9",
+    "frontend/tests/m14SavedReboundFixtures.mjs": "bae3095677badc17ec8c2487285d3b6eaee453dd509ffa263570c74a27128886",
+    "frontend/tests/m14SavedRebound.node.mjs": "6becb9a4085a8a39b53e7695367febb73fc20ac6192f479f6e539e22e573b544",
+    "frontend/tests/m14SavedReboundFixtures.d.mts": "5de9badc0bc6c2a4b2fc0a3f115d00fc1fb1fa162550a5a6ee9c51d13b0c6f9d",
+    "frontend/tests/savedRebound.node.mjs": "2520f47bf0e6ee496e15c83adad6017227d700ac08801f07131e558395df5ce8",
+    "frontend/src/api/m14SavedRebound.ts": "3bdb33fb4d4b718a7203b5d13c78c493a44f221b9e7012cdc3af8ba7742c0500",
+    "frontend/src/components/M14SavedRebound.vue": "8d7c313837d97fe6e5130cc2f4ecdcb8d4f9f8fe4de2432add7a1e24a272d010",
+    "frontend/src/components/M14SavedRebound.spec.ts": "a28c0d43f781c0b9ba49cbd08ae4b596dbac162bf670dae327f77311682555b1",
+    "frontend/src/views/SavedManagerResultView.navigation.spec.ts": "c1e5a9f2eb871f86ebe32d90066d3cb6f08296d095c0a5fc5721fc2458e54799",
+    "frontend/src/views/SavedManagerResultView.m14.spec.ts": "d7c4a40dff1a14f823e13ab9ce74458c5016ca5482181aa05ce542973dd7f7f3",
+    "frontend/src/views/SavedManagerResultView.spec.ts": "7a5e3a1aeaab70b84d3f397e4ab75741cc4cfd73b40ce8dcae3cb4fc699a77ef",
+    "frontend/src/views/SavedManagerResultView.vue": "d87126cc20523213247248f50bd2f253cb308041fbaec247e9760dc3d8cd0b15",
+    "frontend/src/manager-selection/reboundPanelObservation.ts": "e914cf15458d64413c5e3b978d04de853dafe5de4d2befe9e09d9938a0d45301"
+  },
+  "source_unchanged": true,
+  "configuration": {
+    "route": "/api/v5/source-bundle/rebound-saved",
+    "reference": {
+      "run_id": "da7ae8f55b45416596e5c2d1e69b9b17",
+      "artifact_sha256": "30d91c952ed0287155397da12bdaa456a11cbbc715e4914e1fd60e1a307098f9",
+      "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+      "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e"
+    },
+    "private_root": "SERVER_ONLY_EXISTING_OWNER_ROOT_NOT_EXPORTED",
+    "local_config_sha256": "551227fa769493565417e4a1eb27f978d0a3d87a9f92a94092bbf916937df947"
+  },
+  "http": {
+    "status": "PASS",
+    "pages": [
+      {
+        "offset": 0,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 160524
+      },
+      {
+        "offset": 32,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161051
+      },
+      {
+        "offset": 64,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161120
+      },
+      {
+        "offset": 96,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161123
+      },
+      {
+        "offset": 128,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161040
+      },
+      {
+        "offset": 160,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161132
+      },
+      {
+        "offset": 192,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161125
+      },
+      {
+        "offset": 224,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161150
+      },
+      {
+        "offset": 256,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161193
+      },
+      {
+        "offset": 288,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161144
+      },
+      {
+        "offset": 320,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161116
+      },
+      {
+        "offset": 352,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161124
+      },
+      {
+        "offset": 384,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 160963
+      },
+      {
+        "offset": 416,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161129
+      },
+      {
+        "offset": 448,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 160969
+      },
+      {
+        "offset": 480,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161003
+      },
+      {
+        "offset": 512,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161124
+      },
+      {
+        "offset": 544,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161154
+      },
+      {
+        "offset": 576,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161075
+      },
+      {
+        "offset": 608,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161038
+      },
+      {
+        "offset": 640,
+        "entries": 32,
+        "loaded": 32,
+        "bytes": 161112
+      },
+      {
+        "offset": 672,
+        "entries": 18,
+        "loaded": 18,
+        "bytes": 120554
+      }
+    ],
+    "count": 690,
+    "rejections": [
+      {
+        "query": {
+          "root": "forbidden"
+        },
+        "status": 409
+      },
+      {
+        "query": {
+          "group": "pending",
+          "run_id": "da7ae8f55b45416596e5c2d1e69b9b17",
+          "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+          "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e"
+        },
+        "status": 409
+      },
+      {
+        "query": {
+          "group": "pending",
+          "cursor": "bad"
+        },
+        "status": 409
+      }
+    ],
+    "other_routes_equal": 11,
+    "finished_at": "2026-10-13T14:17:03.962210+00:00"
+  },
+  "dom": {
+    "status": "PASS",
+    "finished_at": "2026-10-13T14:17:10.833Z",
+    "m14_run": "da7ae8f55b45416596e5c2d1e69b9b17",
+    "manager_run": "46596b03c2ab4e29b1219fd2e5eb698f",
+    "m02_run": "314b316261ef10e9a628f997c63eb728e119a9d803b0db3c09a982cc8342a93a",
+    "m06_rows": 100,
+    "errors": [],
+    "execution": {
+      "command": [
+        "$NODE",
+        "./m14-018827-isolated/probe_dom_fac269.mjs",
+        "./m14-018827-isolated/checkout",
+        "http://127.0.0.1:61676",
+        "./m14-018827-isolated/evidence/fac269/dom.safe.json"
+      ],
+      "started_at": "2026-10-13T14:17:04.284043+00:00",
+      "exit_code": 0,
+      "finished_at": "2026-10-13T14:17:10.915477+00:00"
+    }
+  },
+  "native_visual": {
+    "status": "NOT_RUN",
+    "reason": "Computer-use browser inventory returned nodeRepl.fetch request failed; no browser security or permission changes attempted"
+  },
+  "deployment": {
+    "status": "NOT_RUN",
+    "reason": "ACTIVE_PREIMAGE_MISMATCH",
+    "mismatches": [
+      {
+        "path": "V5/src/v5_shadow/module_api.py",
+        "actual": "12c21cbeeb5f62eeac9125c248743ac967fe0d2ce26550353d55d7213a3bce9e",
+        "expected": "3a5122115da0c14a01f23d2b6020c49a6fdd4dc270fb4e346775e35a9932af34"
+      },
+      {
+        "path": "frontend/src/views/SavedManagerResultView.vue",
+        "actual": "20138e0412dd1910c9c13acb37ec669858509c3c7238e9ae6b19d0e141e9c308",
+        "expected": "75d5554950d9934cde2fc1a86abea99af4cfc36379c04ab46a88a15fc828826c"
+      }
+    ]
+  },
+  "protection": {
+    "protected_bytes_unchanged": true,
+    "M02_generation": "18327ae3ac839284230437989c9418c326b8f850decc38448c354d0ddf8319f0",
+    "original_owner_artifacts_unchanged": true,
+    "other_source_routes_equal": 11,
+    "active_service_operations": false,
+    "temporary_children": [
+      {
+        "pid": 70549,
+        "exit_code": 143,
+        "owned_popen_identity": true,
+        "at": "2026-10-13T14:17:11.405668+00:00"
+      },
+      {
+        "pid": 70288,
+        "exit_code": -15,
+        "owned_popen_identity": true,
+        "at": "2026-10-13T14:17:11.414508+00:00"
+      }
+    ],
+    "active_pid_recheck": "NOT_RUN"
+  },
+  "flags": {
+    "natural_verified": false,
+    "formal_eligibility_verified": false,
+    "production_allowed": false,
+    "orders_sent": false,
+    "buy_gate_updated": false
+  },
+  "limits": [
+    "No owner execution",
+    "No active preview change",
+    "Real result READY_WITH_GAPS; pending690 strict0 near0 excluded0 screen_unresolved0; historical gaps retained",
+    "M03 not rerun"
+  ],
+  "recorded_at": "2026-10-13T14:18:28.999525+00:00"
+}
