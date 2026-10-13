@@ -1,0 +1,20 @@
+test_backward_wall_clock_cannot_extend_initial_deadline_budget (test_m06_deadline_process.M06DeadlineProcessTests.test_backward_wall_clock_cannot_extend_initial_deadline_budget) ... ok
+test_bad_deadline_and_timeout_are_rejected_before_launch (test_m06_deadline_process.M06DeadlineProcessTests.test_bad_deadline_and_timeout_are_rejected_before_launch) ... ok
+test_exceptional_inspection_timeout_still_reaps_and_stops_writers (test_m06_deadline_process.M06DeadlineProcessTests.test_exceptional_inspection_timeout_still_reaps_and_stops_writers) ... ok
+test_execution_deadline_stops_child_grandchild_and_keeps_sentinel_alive (test_m06_deadline_process.M06DeadlineProcessTests.test_execution_deadline_stops_child_grandchild_and_keeps_sentinel_alive) ... ok
+test_exited_unreaped_leader_does_not_need_live_getpgid (test_m06_deadline_process.M06DeadlineProcessTests.test_exited_unreaped_leader_does_not_need_live_getpgid) ... ok
+test_expired_deadline_never_starts_owner (test_m06_deadline_process.M06DeadlineProcessTests.test_expired_deadline_never_starts_owner) ... ok
+test_keyboard_cancellation_stops_all_owned_writers (test_m06_deadline_process.M06DeadlineProcessTests.test_keyboard_cancellation_stops_all_owned_writers) ... ok
+test_late_completion_is_unknown_even_after_owner_exits (test_m06_deadline_process.M06DeadlineProcessTests.test_late_completion_is_unknown_even_after_owner_exits) ... ok
+test_live_group_signal_denial_is_not_accepted_as_empty_group (test_m06_deadline_process.M06DeadlineProcessTests.test_live_group_signal_denial_is_not_accepted_as_empty_group) ... ok
+test_output_limit_aborts_and_reaps_actual_writer (test_m06_deadline_process.M06DeadlineProcessTests.test_output_limit_aborts_and_reaps_actual_writer) ... ok
+test_parent_success_with_closed_pipe_writer_is_unknown (test_m06_deadline_process.M06DeadlineProcessTests.test_parent_success_with_closed_pipe_writer_is_unknown) ... ok
+test_parent_success_with_inherited_pipe_writer_is_unknown (test_m06_deadline_process.M06DeadlineProcessTests.test_parent_success_with_inherited_pipe_writer_is_unknown) ... ok
+test_success_preserves_binary_input_stdout_stderr_and_exit_code (test_m06_deadline_process.M06DeadlineProcessTests.test_success_preserves_binary_input_stdout_stderr_and_exit_code) ... ok
+test_timeout_is_independent_of_later_execution_deadline (test_m06_deadline_process.M06DeadlineProcessTests.test_timeout_is_independent_of_later_execution_deadline) ... ok
+test_zombie_only_group_eperm_preserves_deadline_and_reaps (test_m06_deadline_process.M06DeadlineProcessTests.test_zombie_only_group_eperm_preserves_deadline_and_reaps) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 5.211s
+
+OK

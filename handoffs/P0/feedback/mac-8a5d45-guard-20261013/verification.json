@@ -1,0 +1,42 @@
+{
+  "candidate": "8a5d45c4b99fabeab55333052ea99cb547213f16",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_deadline_process",
+    "-v"
+  ],
+  "working_directory": "candidate-8a5d45",
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_utc": "2026-10-13T04:27:30.711794+00:00",
+  "finished_utc": "2026-10-13T04:27:35.971072+00:00",
+  "duration_seconds": 5.25914375,
+  "exit_code": 0,
+  "source_before": {
+    "files": 4,
+    "sha256": "bea1dcfc5f3b669ad005aaac2051907b4d286fb4a104aeab4aa8de9ecde468b5",
+    "verified": true
+  },
+  "source_after": {
+    "files": 4,
+    "sha256": "bea1dcfc5f3b669ad005aaac2051907b4d286fb4a104aeab4aa8de9ecde468b5",
+    "verified": true
+  },
+  "protected_files_count": 91,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "real_model_run": false,
+  "collection_run": false,
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "binding_changed": false,
+  "natural_verified": false
+}
