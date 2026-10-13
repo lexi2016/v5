@@ -36,9 +36,14 @@ def m01(request):
 
 def m02(request):
     from v5_shadow.hk_source_daily import build_binding,read_binding
-    result=build_binding(**request)
-    verified=read_binding(request['private_root'],request['target_date'],receipt_hash=result['receiptHash'])
-    if verified!=result:raise ValueError('M02_INDEPENDENT_BINDING_MISMATCH')
+    values=dict(request);action=values.pop('action','build')
+    if action=='read':
+        verified=read_binding(**values)
+    elif action=='build':
+        result=build_binding(**values)
+        verified=read_binding(values['private_root'],values['target_date'],receipt_hash=result['receiptHash'])
+        if verified!=result:raise ValueError('M02_INDEPENDENT_BINDING_MISMATCH')
+    else:raise ValueError('M02_SOURCE_ACTION')
     return dict(status=verified['binding']['purpose'],saved=verified,readback_verified=True)
 
 

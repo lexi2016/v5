@@ -131,6 +131,81 @@ def publish_source_result(result,config,*,expected_generation):
     return publish_generation(config,[record],expected_generation=expected_generation)
 
 
+def _m02_saved_public_view(result):
+    """Project an original-reader result; never expose private roots/identities."""
+    flags=('formal_eligibility_verified','historical_eligible','production_allowed','buy_gate_updated','orders_sent')
+    saved=result['saved'];binding=saved['binding'];sources=binding['sources']
+    if (result.get('status')!='SOURCE_IDENTITY_ONLY' or result.get('readback_verified') is not True
+        or binding.get('purpose')!='SOURCE_IDENTITY_ONLY' or binding.get('temporal_status')!='CANNOT_CONFIRM'
+        or any(binding.get(key) is not False for key in flags)
+        or set(sources)!={'panel','membership','native'}
+        or any(value.get('status')!='VERIFIED' or value.get('pit_verified') is not False for value in sources.values())):
+        raise ValueError('M02_SAVED_RESULT_CONTRACT')
+    projected={key:binding[key] for key in ('schema','run_id','request_sha256','purpose','temporal_status',*flags)}
+    projected['request']={key:binding['request'][key] for key in
+        ('target_date','signal_date','eligibility_source_date','cutoff','require_pit')}
+    projected['sources']={name:dict(status=value['status'],pit_verified=value['pit_verified'],
+        times={key:value['times'][key] for key in ('acquired_at','available_at','captured_at') if key in value['times']},
+        identity_metadata_canonical_sha256=sha256_json(value['identity'])) for name,value in sources.items()}
+    projected['sources']['membership']['member_count']=len(sources['membership']['identity']['codes'])
+    receipt={key:saved['receipt'][key] for key in
+        ('schema','target_date','run_id','binding_sha256','request_sha256','created_at')}
+    return dict(status=result['status'],readback_verified=True,projection_schema='v5.m02.saved_public_view.v1',
+        original_saved_result_sha256=sha256_json(saved),
+        saved=dict(binding=projected,receipt=receipt,receiptHash=saved['receiptHash']))
+
+
+def publish_m02_saved_binding(request,config,*,expected_generation,data_kind='RECORDED_INPUT_REPLAY'):
+    """Read only M02, replace only its status row, and use the original route CAS."""
+    from .contracts import exact_keys,sha,aware
+    from .module_api import (_config,_generation_head,_load_generation,_read_object,
+        _validate_record,response_key)
+    import os
+    request=json.loads(canonical_bytes(request))
+    exact_keys(request,('action','private_root','target_date','receipt_hash'))
+    if request['action']!='read':raise ValueError('M02_SAVED_READ_REQUIRED')
+    if data_kind not in {'SYNTHETIC','RECORDED_INPUT_REPLAY'}:raise ValueError('M02_SAVED_DATA_KIND')
+    sha(expected_generation)
+    checked,root=_config(config)
+    try:
+        if _generation_head(root,checked)!=expected_generation:raise ValueError('GENERATION_CONFLICT')
+        # Pin the object to this exact generation; read_response would select
+        # the then-current head and could admit a different A->B->A predecessor.
+        refs=_load_generation(root,checked,expected_generation)['records']
+        digest=refs[response_key('source_bundle',STATUS_ROUTE,{})]
+        record,_=_read_object(root,digest,checked)
+        _validate_record(checked,record,STATUS_ROUTE,{})
+    finally:os.close(root)
+    previous=record['payload'];rows=previous.get('modules')
+    owners=('m01_a_source','m02_hk_source','m03_us_source','m05_a_preselection')
+    if (checked['module_id']!='source_bundle' or previous.get('schema_version')!='v5.source_bundle.result.v1'
+        or previous.get('status')!='SOURCE_BUNDLE_ATTEMPTED'
+        or any(previous.get(key) is not False for key in FLAGS)
+        or not isinstance(rows,list) or len(rows)!=len(MODULES)
+        or any(not isinstance(row,dict) or row.get('module_id')!=MODULES[i][0]
+            or row.get('owner_entry')!=owners[i] or not isinstance(row.get('status'),str) or not row['status']
+            or any(row.get(key) is not False for key in FLAGS) for i,row in enumerate(rows))):
+        raise ValueError('M02_SAVED_PREDECESSOR_CONTRACT')
+    if previous.get('data_kind')!=data_kind or record['data_kind']!=data_kind:
+        raise ValueError('M02_SAVED_DATA_KIND_MISMATCH')
+    sha(previous['request_sha256']);aware(previous['observed_at'])
+    # The pinned original reader owns all receipt, source, and safety checks.
+    # Failure propagates before publication; there is no fallback to a build.
+    view=_m02_saved_public_view(_call('m02',request))
+    result=json.loads(canonical_bytes(previous))
+    result['modules'][1]=dict(module_id='M02_HK_MARKET',owner_entry='m02_hk_source',
+        status=view['status'],owner_result=view,**FLAGS)
+    result['observed_at']=datetime.now(timezone.utc).isoformat()
+    result['request_sha256']=sha256_json(dict(operation='M02_ONLY_SAVED_READ',
+        request=request,previous_generation=expected_generation,previous_record_sha256=digest))
+    result['m02_saved_publication']=dict(operation='M02_ONLY_SAVED_READ',
+        previous_generation=expected_generation,previous_record_sha256=digest,
+        previous_payload_sha256=record['payload_sha256'],previous_observed_at=previous['observed_at'],
+        previous_request_sha256=previous['request_sha256'],retained_modules=[MODULES[i][0] for i in (0,2,3)])
+    publication=publish_source_result(result,checked,expected_generation=expected_generation)
+    return dict(result=result,publication=publication)
+
+
 def run_config(config):
     if config.get('enabled') is not True:return dict(status='SOURCE_BUNDLE_DISABLED',**FLAGS)
     from .module_api import _open_directory,_read_at
