@@ -11,6 +11,9 @@
     "ledger_root": "/var/tmp/v5/ledger",
     "close_recapture": {
       "enabled": false
+    },
+    "hk_preselection": {
+      "enabled": false
     }
   }
 }

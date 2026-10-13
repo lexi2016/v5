@@ -1,0 +1,70 @@
+{
+  "schema_version": "v5.m06_p0_daily.verification.v1",
+  "p0_parent": "5b32a0916fbe486bbf7a33c1ce6ad9e3e4618e51",
+  "original_m06": "08ed9de9ddb5fd2c62eb1762df2f6106464d823b",
+  "delivery_author": "P0 coordinating implementation, not original M06 Chat",
+  "source_closure_sha256": "75482f54ccc5e2fa0bd9216273fdc7ee2276a32171cc94cfd1c7ba6ca9e44ab9",
+  "source_closure_entries": 146,
+  "original_m06_existing_tree_unchanged_files": 50,
+  "status": "FOCUSED_CLOUD_TESTS_PASS_MAC_CONTROLLED_VALIDATION_PENDING",
+  "new_tests": {
+    "count": 21,
+    "exit": 0,
+    "seconds": 150.341,
+    "command": "PYTHONPATH=V5/src:V5/tests python -B -m unittest test_p0_hk_preselection_daily"
+  },
+  "regression": {
+    "count": 16,
+    "exit": 0,
+    "seconds": 30.208,
+    "cases": [
+      "test_daily_dispatch (5)",
+      "test_p0_close_recapture_registration.RegistrationTests.test_tick_entrypoint_uses_explicit_late_job_and_source_date",
+      "test_p0_close_recapture_registration.RegistrationTests.test_m17_configuration_does_not_rekey_other_owner_success",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_manager_partial_is_saved_read_back_and_not_refreshed_twice",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_manager_wrong_attempt_never_commits_success",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_disabled_tick_does_not_touch_owners_or_roots",
+      "test_daily_owner_adapters.DailyOwnerAdapterTests.test_launchd_contract_is_separate_disabled_and_reuses_tick",
+      "test_m06_readonly_api.M06ReadOnlyAPITests.test_actual_original_cold_projection_all100_and_readonly",
+      "test_m08_readonly_api.M08ReadOnlyTests.test_catalog_retains_all_ten_references_and_duplicate_stages",
+      "test_m09_readonly_api.M09ReadOnlyAPITests.test_existing_source_m06_m10_routes_survive",
+      "test_m10_readonly_api.M10ReadOnlyAPITests.test_source_publication_and_m06_not_configured_survive_third_route",
+      "test_m17_readonly_api.M17ReadonlyAPITests.test_exact_get_cold_reads_original_rows_and_never_writes"
+    ]
+  },
+  "tdd_red": [
+    "missing executable M06 P0 binding/registry/config/lane isolation",
+    "ledger-only receipt mismatch",
+    "outside-window unverified state fallback",
+    "worker code drift after admission",
+    "omitted existing optional asset receipt"
+  ],
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.5.3",
+    "pyarrow": "MISSING",
+    "fastparquet": "MISSING"
+  },
+  "generated_branch": {
+    "implementation": "fixed original daily wrapper/provider worker, explicit GENERATE_IF_ABSENT",
+    "negative_admission_tests": "PASS",
+    "real_model_result": "NOT_RUN",
+    "cloud_runtime": "does not match original 3.13.12/scikit-learn 1.9.0; parquet dependency missing",
+    "mac_assets": "previously verified assets already exist on Mac; no missing-model claim"
+  },
+  "natural_verified": false,
+  "fixture_only": true,
+  "not_run": [
+    "real_model_deserialization_or_scoring",
+    "real_provider_collection",
+    "old_M06_85_suite",
+    "full_M17_suite",
+    "deployment",
+    "natural_scheduler_enablement",
+    "Mac_execution"
+  ],
+  "test_evidence_sha256": "2b619db48686f0fa7456d97f1200539f8d4ead2e5517e87e9f41d41e4251100b"
+}

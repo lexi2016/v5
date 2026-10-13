@@ -5,7 +5,7 @@ from v5_shadow.contracts import aware
 from v5_shadow.digests import sha256_json
 from v5_shadow.run_ledger import claim_run,finish_run
 
-LANES={'announcement','us_mapping','rebound','manager_close_recapture'}
+LANES={'announcement','us_mapping','rebound','manager_close_recapture','hk_preselection'}
 
 
 def dispatch_due(schedule,bindings,ledger_root):
@@ -40,7 +40,15 @@ def dispatch_due(schedule,bindings,ledger_root):
         elif lane=='us_mapping' and (job['owner_request'].get('target_date')!=today or aware(job['owner_request'].get('now'))!=aware(job['identity']['research_cutoff'])):reason='US_OWNER_DATE_CUTOFF_MISMATCH'
         if reason:
             return dict(lane=lane,status=reason)
+        if lane=='hk_preselection':
+            from .p0_hk_preselection import admission_reason
+            try: reason=admission_reason(job,bindings[lane],now,ledger_root)
+            except Exception:return dict(lane=lane,status='BLOCKED_M06_REGISTRATION')
+            if reason:return dict(lane=lane,status=reason)
         claim=claim_run(ledger_root,job['identity'],max_attempts=job['max_attempts'])
+        if lane=='hk_preselection' and claim['status']=='REUSED_SUCCESS':
+            from .p0_hk_preselection import read_saved
+            return dict(lane=lane,**read_saved(claim,job['owner_request'],bindings[lane]))
         if lane=='manager_close_recapture' and claim['status']=='REUSED_SUCCESS':
             from .p0_close_recapture import read_saved
             return dict(lane=lane,**read_saved(claim,job['owner_request'],bindings[lane]))
@@ -50,10 +58,13 @@ def dispatch_due(schedule,bindings,ledger_root):
             if lane=='manager_close_recapture':
                 from .p0_close_recapture import verify_receipt
                 verify_receipt(receipt,bindings[lane])
+            if lane=='hk_preselection':
+                from .p0_hk_preselection import verify_receipt
+                verify_receipt(receipt,job['owner_request'],bindings[lane],claim)
             state=finish_run(ledger_root,claim,receipt)
-            if lane=='manager_close_recapture':
+            if lane in {'manager_close_recapture','hk_preselection'}:
                 from .run_ledger import read_run
-                if read_run(ledger_root,job['identity'])!=state:raise ValueError('M17_LEDGER_READBACK_MISMATCH')
+                if read_run(ledger_root,job['identity'])!=state:raise ValueError('DAILY_LEDGER_READBACK_MISMATCH')
             return dict(lane=lane,status=state['attempts'][-1]['status'],state=state)
         except Exception as error:
             # Unknown outcome is NOT proof that a capture was not sent. Retain

@@ -39,7 +39,7 @@ def tick(config):
     from v5_shadow.announcement_offline_reader import PIN as ANNOUNCEMENT_PIN,REVISION_PIN
     from v5_shadow.manager_plan import PIN as MANAGER_PIN, _identity as manager_identity
     # M17's exact-date pool/runtime binding must not rekey unrelated owners.
-    ordinary_config={k:v for k,v in config.items() if k!='close_recapture'}
+    ordinary_config={k:v for k,v in config.items() if k not in {'close_recapture','hk_preselection'}}
     registration=adapter_identity(ordinary_config,dict(announcement=ANNOUNCEMENT_PIN,revision=REVISION_PIN,rebound=REBOUND_PIN,
         manager=MANAGER_PIN,manager_implementation=manager_identity()))
     bindings=dict(us_mapping=bind_us_owner(ordinary_config),
@@ -49,6 +49,10 @@ def tick(config):
     defaults=default_slots(today)
     for job in bundle['jobs']:
         try:
+            if job.get('lane')=='hk_preselection':
+                from v5_shadow.p0_hk_preselection import prepare_job
+                prepared,binding=prepare_job(job,config.get('hk_preselection'),today)
+                bindings[job['lane']]=binding;jobs.append(prepared);continue
             if job.get('lane')=='manager_close_recapture':
                 from v5_shadow.p0_close_recapture import prepare_job,validate_registration
                 registration_m17=config.get('close_recapture')
@@ -81,6 +85,9 @@ def tick(config):
     # remain readable for the plan. Never re-execute to recover their references.
     from v5_shadow.run_ledger import read_run
     for job,row in zip(jobs,result['lanes']):
+        # M06 success is attached only by its exact cold read path, never by
+        # generic ledger fallback outside an admitted slot.
+        if job['lane']=='hk_preselection':continue
         if 'state' not in row:
             state=read_run(config['ledger_root'],job['identity'])
             if state is not None:row['state']=state

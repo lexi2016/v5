@@ -19,7 +19,9 @@ def validate_config(config):
         if key not in config: raise ValueError('RUNTIME_CONFIG_REQUIRED')
     from .p0_close_recapture import validate_registration
     close_recapture=validate_registration(config.get('daily',{}).get('close_recapture'))
-    return {'close_recapture':close_recapture,'status':'CONFIGURATION_VALID','registry':registration_snapshot(),'config_sha256':sha256_json(config),'natural_verified':False}
+    from .p0_hk_preselection import validate_registration as validate_m06
+    hk_preselection=validate_m06(config.get('daily',{}).get('hk_preselection'))
+    return {'hk_preselection':hk_preselection,'close_recapture':close_recapture,'status':'CONFIGURATION_VALID','registry':registration_snapshot(),'config_sha256':sha256_json(config),'natural_verified':False}
 
 def _runtime_path(c): return Path(c['runtime_root'])/'runtime.json'
 

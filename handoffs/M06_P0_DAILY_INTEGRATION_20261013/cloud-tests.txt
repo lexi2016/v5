@@ -1,0 +1,13 @@
+New M06 daily integration, isolated synthetic inputs only:
+.....................
+----------------------------------------------------------------------
+Ran 21 tests in 150.341s
+
+OK
+
+Focused affected-lane regression:
+................
+----------------------------------------------------------------------
+Ran 16 tests in 30.208s
+
+OK

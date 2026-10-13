@@ -1,0 +1,27 @@
+{
+  "target_date": "${TARGET_YYYYMMDD}",
+  "jobs": [
+    {
+      "lane": "hk_preselection",
+      "scheduled_at": "${EXPLICIT_SLOT_START_WITH_TZ}",
+      "deadline": "${EXPLICIT_SLOT_END_WITH_TZ}",
+      "half_day_bound": true,
+      "max_attempts": 1,
+      "owner_request": {
+        "target_date": "${TARGET_YYYYMMDD}",
+        "signal_date": "${ORIGINAL_PREVIOUS_HK_SECURITIES_SESSION}",
+        "eligibility_source_date": "${ELIGIBILITY_YYYYMMDD}",
+        "admission_cutoff": "${OBSERVED_INPUT_ADMISSION_WITH_TZ}",
+        "completion_cutoff": "${ACTUAL_FUTURE_OWNER_COMPLETION_WITH_TZ}",
+        "execution_mode": "MANUAL_RECOVERY",
+        "production_method": "GENERATE_IF_ABSENT",
+        "source_files": {
+          "${DECLARED_SOURCE_RELATIVE_PATH}": "${RAW_BYTES_SHA256}"
+        },
+        "files": {
+          "${DECLARED_ASSET_RELATIVE_PATH}": "${RAW_BYTES_SHA256}"
+        }
+      }
+    }
+  ]
+}
