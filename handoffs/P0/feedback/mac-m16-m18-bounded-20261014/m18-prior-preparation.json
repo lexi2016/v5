@@ -1,0 +1,97 @@
+{
+  "candidate": "041375daf965b7e600d9ee1c8839a3de0c90e29f",
+  "start": "2026-10-13T17:14:55.360040+00:00",
+  "end": "2026-10-13T17:14:56.297470+00:00",
+  "exit_code": 1,
+  "target_date": "20261014",
+  "actual_now": "2026-10-13T17:14:54.702830+00:00",
+  "input_roots_and_real_output_unchanged": true,
+  "protected_files": 4590,
+  "m14_reference": {
+    "run_id": "da7ae8f55b45416596e5c2d1e69b9b17",
+    "artifact_sha256": "30d91c952ed0287155397da12bdaa456a11cbbc715e4914e1fd60e1a307098f9",
+    "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+    "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e"
+  },
+  "m06_reference": {
+    "artifact_relative": "hk_preselection/20261014/objects/278845c127c45e69ee37c7469d1a289df9926fe5de818ff935900d209ee93b54/artifact.json",
+    "artifact_sha256": "384af9db3a353574e5ee316701005ba345a0e5a4f8e52da984ac472f1f1b3d0a",
+    "business_status": "STRICT_0_2_READY",
+    "buy_gate_updated": false,
+    "computation_identity": {
+      "code_sha256": "3a07a22a36b89c6608fd643edb234058d48c3ce5854cefe34811c20fd21e7037",
+      "config_sha256": "f52931cdabe804d50de6690361f72dba69e2fc0c2f97bfd92bc7f8f07c1d3d06",
+      "dependency_sha256": "f85d90f249fa7529d78336535716465b26acb7c2f17012b59afa2f3a4ba8b8a0",
+      "input_sha256": "43b54d363522908e39ca7d618802518ca7a9aa4584e9390182257f9ec1bb21c0",
+      "lane": "hk_preselection",
+      "research_cutoff": "2026-10-14T09:00:00+08:00",
+      "target_date": "20261014"
+    },
+    "computation_sha256": "278845c127c45e69ee37c7469d1a289df9926fe5de818ff935900d209ee93b54",
+    "data_kind": "VERIFIED_SOURCE_SNAPSHOT",
+    "eligibility_source_date": "20261013",
+    "execution_mode": "NATURAL",
+    "fixture_only": false,
+    "formal_eligibility_verified": false,
+    "manifest_relative": "hk_preselection/20261014/objects/278845c127c45e69ee37c7469d1a289df9926fe5de818ff935900d209ee93b54/manifest.json",
+    "manifest_sha256": "80d21054579d07bfd22cc6ddfd033df3f78f22b97646385de330424becf5ae11",
+    "market": "HK",
+    "model_weights_reverified": false,
+    "natural_verified": false,
+    "orders_sent": false,
+    "owner": "M06",
+    "producer_computation_identity": {
+      "code_sha256": "d8fae82edb8ef68fc502b6632ffe9e09c26fed3a5d20711e914251a34eb9cdb5",
+      "config_sha256": "ee1ac64125c521a1e7d869f0ea9eb49043b87df2fbb9ebcc8e9fcdb08da27b05",
+      "dependency_sha256": "1b07f33796f389ca9652f5743b8745d09fe2f0534a9a8fb93aad7efe196d5ee4",
+      "input_sha256": "08aabf675e2bf1a517afb9c38c28713b23fec8210802d35e82b5767f77426dca",
+      "lane": "hk_preselection",
+      "research_cutoff": "2026-10-14T09:00:00+08:00",
+      "target_date": "20261014"
+    },
+    "producer_reference": {
+      "production_method": "EXISTING_VERIFIED_POOL",
+      "relative": "hk_preselection/20261014/objects/278845c127c45e69ee37c7469d1a289df9926fe5de818ff935900d209ee93b54/producer_receipt.json",
+      "sha256": "b979c3ddfb9a42babcf66379b6364708e053ad774715d33a64d8d2d9189146ff"
+    },
+    "production_allowed": false,
+    "reader_reference": {
+      "relative": "hk_preselection/20261014/objects/278845c127c45e69ee37c7469d1a289df9926fe5de818ff935900d209ee93b54/strict_reader_receipt.json",
+      "sha256": "812e70e8f1f66ae29cc41b8adbbe8a5675f529820d770be3251048976bca94f7"
+    },
+    "receipt_relative": "hk_preselection/20261014/objects/278845c127c45e69ee37c7469d1a289df9926fe5de818ff935900d209ee93b54/receipt.json",
+    "receipt_sha256": "290cd4165fa1f67f51eb4702b9461f56d21a435299a160f304d06845fbac9094",
+    "request_sha256": "0d6dc7247a6be731a64c931e49849565635ac2b309b45a244fef4b34b11bc8b9",
+    "research_cutoff": "2026-10-14T09:00:00+08:00",
+    "research_only": true,
+    "schema_version": "v5.hk_preselection_committed_reference.v1",
+    "signal_date": "20261013",
+    "status": "COMMITTED",
+    "target_date": "20261014",
+    "verified_source_reference": {
+      "artifact_relative": "runs/20261014/HK_CONNECT_D1_TOP100_0_2/20261014-hk-connect-d1-top100-0-2-c448bcd60ebe/artifact.csv",
+      "artifact_sha256": "136368738104d2c6860df810c914a759794db7601417649f77c11211ca608ef5",
+      "manifest_sha256": "883c217b007ec2e4fc2be068c8a479e9e7d4ecb7ebaac6a74f1c2fc244fe8c73",
+      "receipt_sha256": "ad88bb444cb1b54eb460e6f0362974203f8d4e42da92b7e532d3eefae5496939",
+      "role": "HK_CONNECT_D1_TOP100_0_2",
+      "run_id": "20261014-hk-connect-d1-top100-0-2-c448bcd60ebe"
+    }
+  },
+  "m06_used_as_m13_m14_m15_substitute": false,
+  "manager_target14_paths_absent": [
+    "us_mapping_research/20261014",
+    "workspace_announcements/20261014"
+  ],
+  "current_date_pins": {
+    "manager": 0,
+    "materials": 0,
+    "us": 0,
+    "native_master": 4
+  },
+  "production_owner_run": false,
+  "refresh_run": false,
+  "daily_enabled": false,
+  "deployed": false,
+  "result_status": "CLI_ERROR",
+  "error": "Traceback (most recent call last):\n  File \"<V5_TASK>/m18-041375-preparation/candidate/V5/src/v5_shadow/manager_request_preparation.py\", line 180, in <module>\n    raise SystemExit(main())\n                     ~~~~^^\n  File \"<V5_TASK>/m18-041375-preparation/candidate/V5/src/v5_shadow/manager_request_preparation.py\", line 174, in main\n    result=(bind_saved(request,_read_json(args.saved_reference)) if args.saved_reference else prepare(request))\n                                                                                              ~~~~~~~^^^^^^^^^\n  File \"<V5_TASK>/m18-041375-preparation/candidate/V5/src/v5_shadow/manager_request_preparation.py\", line 108, in prepare\n    artifact_sha256=daily['artifact_sha256']) if daily else None))\n                    ~~~~~^^^^^^^^^^^^^^^^^^^\nKeyError: 'artifact_sha256'\n"
+}

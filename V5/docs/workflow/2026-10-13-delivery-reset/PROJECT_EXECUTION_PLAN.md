@@ -72,7 +72,7 @@
 |A3 M14真实页|fac269隔离已过；23:03固定组合现役切换PASS，690行22页HTTP/DOM及11路200/JSON/旧manager身份过|native visual NOT_RUN，旧超时根因未证；独立公告请求曾503后200，不称无间歇故障|保留新预览及旧61236回退，继续剩余真实资格/视觉/自然验收，不重owner或放宽等待|
 |A4 M13公告|完整目录/正文/capture/审阅决策输入/导入/保存reader代码，先消费已有合法产品|新revision缺真实review决定时不能代填；缺决策不阻止离线合同与页面代码|原输入→已审核产品→消费引用同SHA；详情/分页失败状态和cutoff可定位|
 |A5 M15映射|f7dd8e63已核531 blob/530 manifest，Mac新20 Python/7 Node/typecheck/build PASS；原40复用云证未重跑|现有pandas3.0.5/pyarrow25.0.1超声明上限，锁依赖NOT_RUN；真实provider/资格/DOM/部署/自然未执行|保留原依赖上限，另证锁环境，再按授权核真实两路径与P0消费，不将隔离合成检查称全验收|
-|A6 P0/M18|沿已过c7b+52e71补合法request/template准备、标准引用导入与未完集成；仅必要差异测试|完整当日三策略引用、target/cutoff和原运行窗口；准备request不等于执行manager|不重做已过产品；普通API/页同run与显式历史保持，CAS双descriptor拒绝旧generation|
+|A6 P0/M18|请求准备5c327e已Mac40/40及同target14 WAITING_SOURCES/exit2；原KeyError保留|M13未消费、M14 690pending非正式筛选、M15 NOT_RUN；request/template null|复用已修拒绝路径，补合法三策略原消费后再验真实请求/经理保存；不将正常WAITING算业务通过|
 |A7 M04支撑|在已过完整编排上补首批13/15真正需要的来源/取得时间/正文引用缺口|缺历史取得时间不回填；未授权外传不做|原材料reader提供真实正文/来源/时点或明确UNKNOWN，供三策略同SHA消费|
 
 M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不是首批HK三策略页面的串行前置；M05新写门未获准只暂停该次真实生产，不停隔离开发。共享module_api、source_bundle、前端路由/主View和预览切换由P0唯一集成者按固定候选短批合入，不让A3/A6等同时覆盖同一文件。
@@ -275,6 +275,7 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **下一条完整交付：** 复用ac1d14的31项合成隔离证据与原32历史，按实际授权补完整锁环境、限定真实provider/PDF与运行绑定、保存reader/API及部署/生命周期剩余验收。保持GET无创建副作用、失败/取消/重试合同，不自动新外采。
 - **验收标准：** 限定既有候选真实任务的提交/运行/结果、失败重试、取消/事件更新可追踪；GET无副作用，长任务不阻塞经理读取，状态/原PDF未核边界保留、单job回退过。
 - **责任与交接：** M16唯一实现者保留固定生命周期候选；P0仅接请求/状态读取与长任务隔离，Mac后续按获准候选/调用范围验未覆盖部分。此次31 PASS不提升真实来源、部署、自然或全模块状态。
+- **新增真实输入接线（北京时间2026-10-14 01:11）：** 固定2e49a397d99de8b0315628c97c01a4fd1a3a823a，新增12/12定向通过，旧31未重跑；M08 date12/STAGE_0935_0940原10行完整导出，新输入身份与原字段保持。只读50024/PID22335三次GET200无写，NOT_MATERIALIZED、product/job=null，仅返回输入身份/数量；producer关闭、未ensure/PDF网络/主页面部署，PIT=false，不计研究产品或业务完成。[真实接线原回执](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/m16-service.json)。
 
 ### M17 尾盘量价发现与持续跟踪｜P4
 
@@ -290,13 +291,13 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 ### M18 经理决策账本、汇总与计划｜P1
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca3024-d568-83ee-9878-6698803373e3)；`dev/m18-bounded-manager-readback-20261012（已核开发分支，其他原主分支未知；共享框架在P0分支）`。原Chat/分支未知部分保持待核，不自创替代。
-- **已有代码与证据：** [daily/同run候选](https://github.com/lexi2016/v5/commit/c7b815c065da83bd2db2b3023be4607ce9f194ec)；[导航窄修](https://github.com/lexi2016/v5/commit/52e71c8b85caef2874e4f3c9403e77592f5fb2c9)；[最新Mac反馈](https://github.com/lexi2016/v5/commit/dd2962f869ed04562707f202aa11d0cd342ccba8)。
-- **已验证层级：** 接入已具备；真实/保存局部已证；数据页已有局部（见边界）；完整0。旧真实保存账本/三策略同run页已过；新候选云40+33子断言/Node164、Mactype/build、隔离HTTP/DOM四场景与导航8过，首轮Vitest11过1失败保留；尚未现役部署或真实新经理生产。
-- **未完成缺口：** 输入/业务合同：当日manager_request/template缺、旧三策略target12/source09不能接M06 target14；时窗：原08:45–09:00不能补跑。代码：合法request准备/完整标准引用及剩余模块集成需补，已过daily/同run产品不重做。
+- **已有代码与证据：** [daily/同run候选](https://github.com/lexi2016/v5/commit/c7b815c065da83bd2db2b3023be4607ce9f194ec)；[导航窄修](https://github.com/lexi2016/v5/commit/52e71c8b85caef2874e4f3c9403e77592f5fb2c9)；[最新Mac反馈](https://github.com/lexi2016/v5/commit/dd2962f869ed04562707f202aa11d0cd342ccba8)。 [原准备041375](https://github.com/lexi2016/v5/commit/041375daf965b7e600d9ee1c8839a3de0c90e29f)；[窄修5c327e](https://github.com/lexi2016/v5/commit/5c327e45d99468d0ade73ee4acff6e0130f02852)；[真实失败及复验](../../../../handoffs/P0/feedback/mac-m16-m18-bounded-20261014/README.md)。
+- **已验证层级：** 旧真实保存账本/三策略页及c7b框架证据保留；新增请求准备候选041375在真实target14缺M15时KeyError/exit1，失败保留。窄修5c327e已Mac40/40 PASS，原请求/原cutoff实际准备正常WAITING_SOURCES、exit2，request/template与US引用null；4,590保护文件字节/大小/mtime不变，未新经理owner、refresh、daily或部署，完整0。
+- **未完成缺口：** 请求准备代码及缺M15字段的拒绝路径已修复，不能再把所有缺请求归为未交代码。真实三lane均不准入：M13原公告分析未消费/PARTIAL；M14 CANNOT_CONFIRM且690 pending不构成合法空/正式筛选；M15 NOT_RUN。manager_request/template仍null，旧target12/source09不能改日，M06不得替代三策略，原08:45–09:00窗口不补跑。
 - **依赖：** 原计划context/target/cutoff及已提交04—17适用产物；首批是M13/M14/M15→M18，不反向拥有上游算法/采集。
-- **下一条完整交付：** 沿c7b+52e71补合法request/template准备与验证、三lane标准引用、可见缺口及原ledger/计划保存reader未完接线；为下一合法窗口准备但不自动生产，交真实合同负例/启动说明与必要固定差异。
+- **下一条完整交付：** 复用固定5c327e的40项和真实WAITING回执，优先解决三策略合法输入/原消费合同；到齐后才由原准备入口生成请求/模板并验原ledger/reader、P0同run接线。不能用合成引用或690 pending填平来源缺口，旧239未重跑，不重复已过框架。
 - **验收标准：** 13/14/15原产物经原经理保存，普通API/页及独立reader同run/SHA；显式旧run不跳，opt-in无current503、坏generation409/未知run503语义保持；六字段同run/PIT/窗口不变、读不执行、跨日/自然/回滚过。
-- **责任与交接：** M18原Chat/唯一模块实现者待排负责请求/原经理消费与计划owner；P0唯一实现者集成共享daily/descriptor/API/UI，不与模块双写；Mac沿已有候选仅验未过真实请求/业务/部署，不重做整套已过产品。
+- **责任与交接：** M18唯一实现者保留原KeyError与窄修证据；P0唯一集成共享框架，Mac后续只验合法真实来源与剩余业务/部署范围。当前正常WAITING是正确拒绝，不是经理业务成功或自然验收。
 
 ## 五、P0集成、Mac验收与唯一写入规则
 

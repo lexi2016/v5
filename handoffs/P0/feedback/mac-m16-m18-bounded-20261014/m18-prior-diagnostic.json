@@ -1,0 +1,119 @@
+{
+  "diagnostic_only": true,
+  "actual_candidate_prepare": "EXIT_1_KEYERROR_artifact_sha256",
+  "target_date": "20261014",
+  "manager_request": null,
+  "manager_template": null,
+  "daily_run_fields": [
+    "RESEARCH_ONLY",
+    "buy_gate_updated",
+    "coverage",
+    "gaps",
+    "generated_at",
+    "input_identity",
+    "matches",
+    "orders_sent",
+    "production_allowed",
+    "research_cutoff",
+    "run_id",
+    "schema_version",
+    "source_identity",
+    "status",
+    "target_trade_date",
+    "us_session_date"
+  ],
+  "daily_status": "NOT_RUN",
+  "missing_daily_fields": [
+    "artifact_sha256"
+  ],
+  "lanes": {
+    "announcement": {
+      "accepted": false,
+      "owner_status": "PARTIAL",
+      "reason_codes": [
+        "ANNOUNCEMENT_ORIGINAL_CONSUMPTION_NOT_COMPLETE"
+      ]
+    },
+    "rebound": {
+      "accepted": false,
+      "owner_status": "CANNOT_CONFIRM",
+      "reason_codes": [
+        "REBOUND_FORMAL_SCREEN_NOT_COMPLETE_PENDING_IS_NOT_EMPTY"
+      ]
+    },
+    "us_mapping": {
+      "accepted": false,
+      "owner_status": "NOT_RUN",
+      "reason_codes": [
+        "US_MAPPING_ORIGINAL_CONSUMPTION_NOT_COMPLETE"
+      ]
+    }
+  },
+  "rebound": {
+    "status": "CANNOT_CONFIRM",
+    "main_screen_ready": false,
+    "pending_count": 0,
+    "verified_session": "20261013",
+    "input_identity": null
+  },
+  "plan_context": {
+    "RESEARCH_ONLY": true,
+    "buy_gate_updated": false,
+    "calendar_owner": "contracts.trading_calendar / hk_securities",
+    "calendar_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "focus_window_basis": "TWO_COMPLETED_HK_SESSIONS_POST_CLOSE_WINDOW",
+    "focus_window_start": "2026-10-12T16:10:00+08:00",
+    "market_data_verified": false,
+    "market_session": "20261013",
+    "market_session_close": "2026-10-13T16:10:00+08:00",
+    "observation_phase": "PREOPEN_PLAN",
+    "orders_sent": false,
+    "plan_trade_date": "20261014",
+    "price_session_status": "EXPECTED_COMPLETED_SESSION_NOT_QUOTE_VERIFICATION",
+    "production_allowed": false,
+    "research_cutoff": "2026-10-14T01:14:54.702830+08:00",
+    "source_dates": [
+      "20261012",
+      "20261013",
+      "20261014"
+    ],
+    "us_market_coverage": "NOT_VERIFIED",
+    "us_market_session": null
+  },
+  "no_durable_writes": true,
+  "finished_utc": "2026-10-13T17:15:35.904380+00:00",
+  "m14_existing_observation": {
+    "source_run_id": "da7ae8f55b45416596e5c2d1e69b9b17",
+    "binding_reference": {
+      "artifact_sha256": "30d91c952ed0287155397da12bdaa456a11cbbc715e4914e1fd60e1a307098f9",
+      "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+      "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e",
+      "run_id": "da7ae8f55b45416596e5c2d1e69b9b17"
+    },
+    "status": "CANNOT_CONFIRM",
+    "pending_count": 690,
+    "main_screen_ready": false,
+    "formal_eligibility_verified": false,
+    "reason_codes": [
+      "REBOUND_AMOUNT_UNIT_NOT_PROVEN",
+      "REBOUND_HISTORY_PRICE_CURRENCY_NOT_PROVEN",
+      "REBOUND_HISTORY_VOLUME_UNIT_NOT_PROVEN",
+      "REBOUND_NATURAL_RUN_NOT_VERIFIED",
+      "REBOUND_PROVIDER_FINALITY_NOT_ATTESTED",
+      "REBOUND_TARGET_MEMBERSHIP_NOT_BOUND"
+    ]
+  },
+  "specific_missing_inputs": {
+    "M13": [
+      "ANNOUNCEMENT_ANALYSIS_NOT_IMPORTED_IN_PLAN_WINDOW"
+    ],
+    "M15": {
+      "daily_status": "NOT_RUN",
+      "missing_field": "artifact_sha256",
+      "reason": "DAILY_MAPPING_OWNER_STATUS_NOT_CONSUMABLE"
+    },
+    "M14_formal_screen": [
+      "SCREEN_AUTHORITY_ROOT_NOT_BOUND"
+    ]
+  }
+}

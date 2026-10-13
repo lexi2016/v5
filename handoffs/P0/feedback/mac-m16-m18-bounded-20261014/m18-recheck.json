@@ -1,0 +1,92 @@
+{
+  "candidate": "5c327e45d99468d0ade73ee4acff6e0130f02852",
+  "files_verified": 1362,
+  "v5_files_verified": 1355,
+  "files_reused": 1355,
+  "files_fetched": 7,
+  "manifest_sha256": "e19c2006bd86a69c6cb3768ca229c14c7e0466a35ddfd2acaa7a0dabdf46502e",
+  "candidate_unchanged_after": true,
+  "environment": {
+    "python": "3.14.6",
+    "pandas": "2.3.3",
+    "pyarrow": "24.0.0",
+    "existing_venv": "2026-10-11/task/m13-isolated/venv",
+    "m04_inventory_correction": "This existing combination was omitted earlier; M04 dedicated profile is already tested and was not rerun."
+  },
+  "tests": {
+    "command": "python -B -m unittest test_manager_request_preparation test_manager_plan test_daily_manager_assembly test_m18_daily_publication",
+    "start": "2026-10-13T17:25:10.994809+00:00",
+    "end": "2026-10-13T17:25:22.024448+00:00",
+    "exit_code": 0,
+    "PASS": 40,
+    "FAIL": 0,
+    "ERROR": 0,
+    "SKIP": 0,
+    "broader_239": "NOT_RUN"
+  },
+  "preparation": {
+    "command": "<existing-m13-python> -I -B m18-5c327e-recheck/candidate/V5/src/v5_shadow/manager_request_preparation.py --request m18-5c327e-recheck/request.private.json",
+    "start": "2026-10-13T17:25:22.606365+00:00",
+    "end": "2026-10-13T17:25:23.342755+00:00",
+    "exit_code": 2,
+    "status": "WAITING_SOURCES",
+    "target_date": "20261014",
+    "preserved_request_cutoff": "2026-10-13T17:14:54.702830+00:00",
+    "request_bytes_equal_to_prior": true,
+    "manager_request": null,
+    "manager_template": null,
+    "lanes": {
+      "announcement": {
+        "accepted": false,
+        "owner_status": "PARTIAL",
+        "reason_codes": [
+          "ANNOUNCEMENT_ORIGINAL_CONSUMPTION_NOT_COMPLETE"
+        ]
+      },
+      "rebound": {
+        "accepted": false,
+        "owner_status": "CANNOT_CONFIRM",
+        "reason_codes": [
+          "REBOUND_FORMAL_SCREEN_NOT_COMPLETE_PENDING_IS_NOT_EMPTY"
+        ]
+      },
+      "us_mapping": {
+        "accepted": false,
+        "owner_status": "NOT_RUN",
+        "reason_codes": [
+          "US_MAPPING_ORIGINAL_CONSUMPTION_NOT_COMPLETE"
+        ]
+      }
+    },
+    "source_references": {
+      "announcement": null,
+      "rebound": null,
+      "rebound_owner": {
+        "reference": {
+          "artifact_sha256": "30d91c952ed0287155397da12bdaa456a11cbbc715e4914e1fd60e1a307098f9",
+          "manifest_sha256": "78aa4f7cd9d93890ec67a8c34a1e672536d7d37fd9031aa10fa043762a249cba",
+          "receipt_sha256": "7236d16eb965e7be8d1f13ad280cc9e772350681ec34609fa3d15849351a8e8e",
+          "run_id": "da7ae8f55b45416596e5c2d1e69b9b17"
+        },
+        "root": "m14-real-20261014-signal13/owner"
+      },
+      "us_mapping": null
+    },
+    "us_refusal_reason": "DAILY_MAPPING_OWNER_STATUS_NOT_CONSUMABLE",
+    "three_lane_accepted": false
+  },
+  "protected_files": 4590,
+  "protected_files_bytes_size_mtime_unchanged": true,
+  "old_receipts_unchanged": {
+    "m16-2e49a3-readonly/service.safe.json": "777c5435fb233d97cf0d25318950418afb2d3e5a3d9729a3780438256a1eb4fd",
+    "m18-041375-preparation/targeted.safe.json": "3dc0b15364489b59f3a6cae42ed557556465db326232ac7007324dde6e6c3a5f",
+    "m18-041375-preparation/preparation.safe.json": "26d6404a7035b81e1bfffc12b5797e5675062c9a64d353c1c82cd326cd253730",
+    "m18-041375-preparation/diagnostic.safe.json": "78b05dfd1fda92acadfde0ecf0f63a129b64e5ec0574cbfb67dadc800852d207"
+  },
+  "refresh_run": false,
+  "production_owner_run": false,
+  "daily_enabled": false,
+  "deployed": false,
+  "m16_producer_changed": false,
+  "v4_processes_touched": false
+}
