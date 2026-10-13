@@ -1,0 +1,2 @@
+PASS apply: wrong preimage refused before writes, check-only, all after SHA, idempotence, symlink target refused
+PASS launcher: outside repository cwd, real GET, original synthetic saved trio, 32/70 pending, no PYTHONPATH

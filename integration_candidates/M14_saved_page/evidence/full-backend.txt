@@ -1,0 +1,33 @@
+
+==================================== ERRORS ====================================
+_________ ERROR collecting tests/m11/test_original_owner_contracts.py __________
+ImportError while importing test module '<isolated-checkout>/V5/tests/m11/test_original_owner_contracts.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+<python-runtime>/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/m11/test_original_owner_contracts.py:11: in <module>
+    from domains.intraday_research import aggregate_snapshot,_window,SLOTS
+vendor/research_review_baseline/domains/intraday_research.py:24: in <module>
+    from domains.research_review_generation.owned_runtime import verify_owned_sources
+vendor/research_review_baseline/domains/research_review_generation/owned_runtime.py:21: in <module>
+    from .vibe_core.prompts import RESEARCH_PACK
+vendor/research_review_baseline/domains/research_review_generation/vibe_core/prompts.py:9: in <module>
+    from pydantic import BaseModel
+E   ModuleNotFoundError: No module named 'pydantic'
+______________ ERROR collecting tests/test_rebound_date_compat.py ______________
+ImportError while importing test module '<isolated-checkout>/V5/tests/test_rebound_date_compat.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+<python-runtime>/lib/python3.12/importlib/__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests/test_rebound_date_compat.py:7: in <module>
+    import pandas as pd
+E   ModuleNotFoundError: No module named 'pandas'
+=========================== short test summary info ============================
+ERROR tests/m11/test_original_owner_contracts.py
+ERROR tests/test_rebound_date_compat.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!!
+2 errors in 2.03s

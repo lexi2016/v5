@@ -1,0 +1,18 @@
+{
+  "schema_version": "v5.module_api.v1",
+  "module_id": "source_bundle",
+  "release_id": "v5-m14-isolated-candidate",
+  "data_root": "/absolute/existing/marked-source-api-root",
+  "routes": [
+    "/api/v5/source-bundle/rebound-saved"
+  ],
+  "m14_rebound_binding": {
+    "private_root": "/absolute/existing/marked-m14-owner-root",
+    "reference": {
+      "run_id": "00000000000000000000000000000000",
+      "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "receipt_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  }
+}

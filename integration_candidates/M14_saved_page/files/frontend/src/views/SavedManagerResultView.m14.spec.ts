@@ -1,0 +1,32 @@
+import {afterEach, expect, it, vi} from 'vitest';
+import {cleanup, fireEvent, render, waitFor} from '@testing-library/vue';
+import SavedManagerResultView from './SavedManagerResultView.vue';
+import {saved, waiting} from '../../tests/m14SavedReboundFixtures.mjs';
+afterEach(() => {cleanup(); vi.unstubAllGlobals(); window.history.replaceState(null, '', '/');});
+it('M14 opens the real lazy independent saved component even when manager overview is unavailable', async () => {
+ const oldRun = '9'.repeat(32); window.history.replaceState(null, '', '/?run_id=' + oldRun);
+ const calls: string[] = [];
+ vi.stubGlobal('fetch', vi.fn(async (url: string) => {calls.push(url); return url.startsWith('/api/v5/source-bundle/rebound-saved') ? new Response(JSON.stringify(saved())) : new Response('{}', {status: 503});}));
+ const view = render(SavedManagerResultView);
+ expect(calls.filter(url => url.includes('/rebound-saved'))).toHaveLength(0);
+ const button = view.getByRole('button', {name: '超跌研究 · M14 已保存结果'});
+ expect(button).not.toHaveProperty('disabled', true);
+ await fireEvent.click(button);
+ const target = view.container.querySelector<HTMLDetailsElement>('#m14-saved-rebound')!;
+ await waitFor(() => expect(target.open).toBe(true)); await fireEvent(target, new Event('toggle'));
+ await waitFor(() => expect(target.textContent).toContain('SYNTHETIC_ONLY_0'));
+ expect(document.activeElement).toBe(target.querySelector('summary'));
+ expect((view.getByRole('textbox', {name: '运行 ID'}) as HTMLInputElement).value).toBe(oldRun);
+ expect(new URL(window.location.href).searchParams.get('run_id')).toBe(oldRun);
+ expect(view.getByRole('button', {name: '经理同次运行超跌引用'})).toHaveProperty('disabled', true);
+ expect(view.container.querySelector<HTMLDetailsElement>('#source-module-content')!.open).toBe(false);
+ for (const name of ['研究情报 · M04', '盘中研究 · M11', '视频复盘 · M12', '公开资料研究 · M16']) expect(view.getByRole('button', {name})).toBeTruthy();
+ await fireEvent.click(button); expect(calls.filter(url => url.includes('/rebound-saved'))).toEqual(['/api/v5/source-bundle/rebound-saved?group=pending']);
+});
+it('unbound independent M14 shows WAITING rather than a manager placeholder or a successful empty group', async () => {
+ vi.stubGlobal('fetch', vi.fn(async (url: string) => url.includes('/rebound-saved') ? new Response(JSON.stringify(waiting())) : new Response('{}', {status: 503})));
+ const view = render(SavedManagerResultView); await fireEvent.click(view.getByRole('button', {name: '超跌研究 · M14 已保存结果'}));
+ const target = view.container.querySelector<HTMLDetailsElement>('#m14-saved-rebound')!; await fireEvent(target, new Event('toggle'));
+ await waitFor(() => expect(target.textContent).toContain('M14_SAVED_REFERENCE_NOT_CONFIGURED'));
+ expect(target.textContent).not.toContain('原数组为 0 条'); expect(target.textContent).not.toContain('原运行 ID');
+});

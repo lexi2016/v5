@@ -1,0 +1,1112 @@
+--- a/V5/src/v5_shadow/module_api.py
++++ b/V5/src/v5_shadow/module_api.py
+@@ -25,6 +25,7 @@
+ M16_ROUTE = "/api/v5/source-bundle/manager-public-research"
+ M11_ROUTE = "/api/v5/source-bundle/intraday-research"
+ M12_ROUTE = "/api/v5/source-bundle/video-fupan"
++M14_ROUTE = "/api/v5/source-bundle/rebound-saved"
+ M04_ROUTE = "/api/v5/source-bundle/research-intelligence"
+ 
+ 
+@@ -708,6 +709,8 @@
+         keys += ('m17_close_recapture_binding',)
+     if isinstance(value, dict) and 'm04_saved_research_binding' in value:
+         keys += ('m04_saved_research_binding',)
++    if isinstance(value, dict) and 'm14_rebound_binding' in value:
++        keys += ('m14_rebound_binding',)
+     if isinstance(value, dict) and 'm12_video_fupan_binding' in value:
+         keys += ('m12_video_fupan_binding',)
+     if isinstance(value, dict) and 'm07_a_stage_binding' in value:
+@@ -729,6 +732,9 @@
+         validate_binding(value)
+     if 'm11_saved_research_binding' in value:
+         from .m11_readonly import validate_binding
++        validate_binding(value)
++    if 'm14_rebound_binding' in value:
++        from .m14_readonly import validate_binding
+         validate_binding(value)
+     if 'm12_video_fupan_binding' in value:
+         from .m12_readonly import validate_binding
+@@ -939,13 +945,15 @@
+             payload_sha256=sha256_json(payload),source_input_sha256=binding['identity']['input_sha256'],
+             data_kind='OWNER_RESULT',generated_at=payload['available_at'],status_code=200)
+         return _validate_record(config,record,path,query),sha256_json(record)
+-    if config['module_id']=='source_bundle' and path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
++    if config['module_id']=='source_bundle' and path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M14_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'):
+         if path==M07_ROUTE:
+             from .m07_readonly import read_record,not_configured
+         elif path==M16_ROUTE:
+             from .m16_readonly import read_record,not_configured
+         elif path==M11_ROUTE:
+             from .m11_readonly import read_record,not_configured
++        elif path==M14_ROUTE:
++            from .m14_readonly import read_record,not_configured
+         elif path==M12_ROUTE:
+             from .m12_readonly import read_record,not_configured
+         elif path==M04_ROUTE:
+@@ -974,7 +982,7 @@
+     if host!='127.0.0.1':raise ValueError('LOOPBACK_ONLY')
+     config,root=_config(value)
+     if any(route in config['routes'] for route in
+-           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M07_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
++           (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections', M17_ROUTE, M07_ROUTE, M11_ROUTE, M12_ROUTE, M14_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection', '/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed')):
+         # Set at service startup, before any GET can spawn/import a reader.
+         # Also covers library callers that did not start their interpreter -B.
+         sys.dont_write_bytecode=True
+@@ -991,6 +999,7 @@
+     m16_read_slot=threading.BoundedSemaphore(1)
+     m11_read_slot=threading.BoundedSemaphore(1)
+     m12_read_slot=threading.BoundedSemaphore(1)
++    m14_read_slot=threading.BoundedSemaphore(1)
+     m04_read_slot=threading.BoundedSemaphore(1)
+     class Handler(BaseHTTPRequestHandler):
+         def setup(self):
+@@ -1040,7 +1049,7 @@
+                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
+                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
+             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
++            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M14_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
+             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
+             reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
+             if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/a-close-replay':
+@@ -1057,6 +1066,8 @@
+                 reader_slot=m16_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M11_ROUTE:
+                 reader_slot=m11_read_slot
++            if config['module_id']=='source_bundle' and parsed.path==M14_ROUTE:
++                reader_slot=m14_read_slot
+             if config['module_id']=='source_bundle' and parsed.path==M12_ROUTE:
+                 reader_slot=m12_read_slot
+             if heavy and not reader_slot.acquire(blocking=False):
+--- /dev/null
++++ b/V5/src/v5_shadow/m14_readonly.py
+@@ -0,0 +1,274 @@
++"""Independent saved M14 pages; original owner cold-read verification per GET.
++
++Adapted from the original M14 Chat's 4f3da9dd adapter: retain server-owned
++binding, no_symlinks, direct artifact return and four-reference/group cursor.
++Integration adds closed queries, bounded public projections and module records.
++No producer, collection, build, model, daily execution or publication occurs here.
++"""
++from __future__ import annotations
++import base64
++import hashlib
++import json
++import re
++import time
++from dataclasses import dataclass
++from pathlib import Path
++from typing import Any, Mapping
++from .composition import no_symlinks
++from .contracts import exact_keys, sha, trade_date
++from .digests import canonical_bytes, sha256_json
++from .rebound_owner import read_rebound_owner, SAFETY
++
++ROUTE = '/api/v5/source-bundle/rebound-saved'
++BINDING = 'm14_rebound_binding'
++SCHEMA = 'v5.m14.saved_rebound.v1'
++GROUPS = ('strict', 'near', 'pending', 'excluded', 'screen_unresolved')
++REF_KEYS = ('run_id', 'artifact_sha256', 'manifest_sha256', 'receipt_sha256')
++PAGE_LIMIT = 32
++MAX_CURSOR_BYTES = 4096
++MAX_PAGE_BYTES = 256 * 1024
++MAX_ITEM_BYTES = 16 * 1024
++MAX_VALUES_BYTES = 128 * 1024
++MAX_ENTRIES = 10000
++
++
++class M14ReadonlyError(ValueError):
++    pass
++
++
++class WaitingBinding(M14ReadonlyError):
++    pass
++
++
++@dataclass(frozen=True)
++class SavedBinding:
++    private_root: Path
++    reference: dict[str, str]
++
++
++def _require(condition, reason):
++    if not condition:
++        raise M14ReadonlyError(reason)
++
++
++def _reference(reference):
++    exact_keys(reference, REF_KEYS)
++    _require(isinstance(reference['run_id'], str) and
++             re.fullmatch('[0-9a-f]{32}', reference['run_id']), 'M14_RUN_ID')
++    for key in REF_KEYS[1:]:
++        sha(reference[key])
++    return dict(reference)
++
++
++def parse_binding(binding: Mapping[str, Any] | None) -> SavedBinding:
++    if binding is None:
++        raise WaitingBinding('M14_SAVED_REFERENCE_NOT_CONFIGURED')
++    exact_keys(binding, ('private_root', 'reference'))
++    _require(isinstance(binding['private_root'], (str, Path)), 'M14_ROOT')
++    # Preserve the raw configured path until no_symlinks rejects relative/..
++    # and every symlink ancestor. The original reader owns marker/no-follow I/O.
++    return SavedBinding(no_symlinks(binding['private_root']), _reference(binding['reference']))
++
++
++def validate_binding(config):
++    if BINDING not in config:
++        return
++    _require(config['module_id'] == 'source_bundle' and ROUTE in config['routes'], 'M14_ROUTE')
++    parse_binding(config[BINDING])
++
++
++def _check_query(query):
++    _require(isinstance(query, dict) and all(isinstance(v, str) for v in query.values()), 'M14_QUERY')
++    _require(not set(query) - {'group', 'cursor', *REF_KEYS}, 'M14_QUERY')
++    present = set(query) & set(REF_KEYS)
++    _require(not present or present == set(REF_KEYS), 'M14_QUERY_REFERENCE')
++    if present:
++        _reference({key: query[key] for key in REF_KEYS})
++    _require(query.get('group', 'pending') in GROUPS, 'M14_GROUP')
++    if 'cursor' in query:
++        _require(0 < len(query['cursor']) <= MAX_CURSOR_BYTES, 'M14_CURSOR_SIZE')
++
++
++def _encode_cursor(binding, group, offset):
++    raw = canonical_bytes(dict(binding.reference, group=group, offset=offset))
++    result = base64.urlsafe_b64encode(raw).decode('ascii')
++    _require(len(result) <= MAX_CURSOR_BYTES, 'M14_CURSOR_SIZE')
++    return result
++
++
++def _decode_cursor(cursor, binding, group):
++    _require(isinstance(cursor, str) and 0 < len(cursor) <= MAX_CURSOR_BYTES, 'M14_CURSOR_SIZE')
++    def pairs(items):
++        value = {}
++        for key, item in items:
++            _require(key not in value, 'M14_CURSOR_DUPLICATE')
++            value[key] = item
++        return value
++    try:
++        raw = base64.b64decode(cursor.encode('ascii'), altchars=b'-_', validate=True)
++        _require(len(raw) <= MAX_CURSOR_BYTES, 'M14_CURSOR_SIZE')
++        value = json.loads(raw, object_pairs_hook=pairs)
++    except (ValueError, UnicodeError, TypeError) as error:
++        raise M14ReadonlyError('M14_CURSOR_INVALID') from error
++    exact_keys(value, (*REF_KEYS, 'group', 'offset'))
++    _require(all(value[key] == binding.reference[key] for key in REF_KEYS)
++             and value['group'] == group, 'M14_CURSOR_REFERENCE')
++    offset = value['offset']
++    _require(type(offset) is int and 0 < offset < MAX_ENTRIES, 'M14_CURSOR_OFFSET')
++    _require(cursor == _encode_cursor(binding, group, offset), 'M14_CURSOR_CANONICAL')
++    return offset
++
++
++# Only approved observation fields cross the API. In particular, artifact
++# request/snapshot/diagnostic/authority/private locations never cross it.
++ROW_FIELDS = (
++    'code', 'name', 'classification', 'qualification_status', 'connect_eligibility',
++    'observed_session', 'target_monday', 'target_trade_date', 'reason_for_group',
++    'amount_native', 'currency', 'amount_unit', 'volume_unit', 'price_currency',
++    'close', 'prev_close', 'day_positive_close_gt_prev_close', 'pct_change',
++    'current_volume', 'close_position_0_low_1_high', 'rebound_close_vs_low_pct',
++    'rebound_ge_3pct', 'recent_3_session_return_pct', 'recent_5_session_return_pct',
++    'history_status', 'history_unknown_reasons', 'history_raw_status',
++    'prior60_session_count', 'previous5_session_count', 'previous20_session_count',
++    'prior60_session_high', 'oversold_cutoff_80pct_prior60_high',
++    'previous5_mean_volume', 'volume_ratio_5d', 'volume_ratio_current_to_previous5_mean',
++    'previous20_mean_volume_background', 'volume_ratio_20d_background',
++    'volume_ratio_current_to_previous20_mean_background', 'background20_status',
++    'oversold_flag', 'oversold_close_le_80pct_prior60_high', 'volume_flag_5d_ge_1_5',
++    'high_volume_ratio_ge_1_5', 'oversold_rebound_watch', 'strict_two_gate_oversold_5dvolume',
++    'near_two_gate_one_missing', 'continuous_strength_highvolume_risk',
++    'history_source', 'history_adjustment', 'adjustment_consistency', 'near_failed_gate',
++    'near_failed_value', 'near_gate_value', 'near_gate_gap_ratio', 'near_gate_gap_value',
++    'exclusion_reason_code', 'reason_for_exclusion', 'volume_source',
++    'volume_unit_status', 'volume_scale_applied', 'research_boundary',
++    *SAFETY,
++)
++SOURCE_REF_FIELDS = ('owner', 'sha256', 'payload_sha256', 'artifact_sha256', 'manifest_sha256', 'receipt_sha256')
++
++
++def _public_scalar(value):
++    if isinstance(value, str):
++        # Even allowed reason/name fields must not reflect absolute paths or
++        # filesystem URLs supplied by a saved diagnostic. No URL synthesis.
++        if re.search(r'(^|[\s:=\'"(])(?:/|[A-Za-z]:[\\/])|file://', value):
++            return '[PRIVATE_PATH_REDACTED]'
++        return value
++    if value is None or type(value) in (bool, int, float):
++        return value
++    if isinstance(value, list):
++        _require(len(value) <= MAX_ENTRIES, 'M14_PUBLIC_LIST_SIZE')
++        return [_public_scalar(item) for item in value]
++    raise M14ReadonlyError('M14_PUBLIC_FIELD_SHAPE')
++
++
++def _fields(value, names):
++    _require(isinstance(value, dict), 'M14_PUBLIC_OBJECT')
++    return {key: _public_scalar(value[key]) for key in names if key in value}
++
++
++def _public_row(row):
++    if not isinstance(row, dict):
++        return _public_scalar(row)
++    result = _fields(row, ROW_FIELDS)
++    if 'source_refs' in row:
++        _require(isinstance(row['source_refs'], list) and len(row['source_refs']) <= 64, 'M14_SOURCE_REFS')
++        result['source_refs'] = [_fields(item, SOURCE_REF_FIELDS) for item in row['source_refs']]
++    if 'membership_source' in row:
++        result['membership_source'] = _fields(row['membership_source'], ('owner', 'source_date', 'payload_sha256', 'exchange'))
++    return result
++
++
++def _groups(artifact):
++    observation = artifact.get('research_observation')
++    _require(isinstance(observation, dict), 'M14_OBSERVATION_UNAVAILABLE')
++    _require(all(isinstance(observation.get(group), list) for group in GROUPS), 'M14_GROUP_SHAPE')
++    groups = {group: observation[group] for group in GROUPS}
++    _require(sum(map(len, groups.values())) <= MAX_ENTRIES, 'M14_GROUP_LIMIT')
++    return observation, groups
++
++
++def _state(artifact, observation, binding, counts):
++    # Reuse the existing saved rebound metadata field contract, not M18's
++    # generation/identity or bundle reader. This is an independent owner source.
++    from .module_api import (M18_REBOUND_OBSERVATION_FIELDS, M18_REBOUND_COVERAGE_FIELDS,
++                             M18_REBOUND_DATE_FIELDS, M18_REBOUND_UNIT_FIELDS)
++    public = _fields(observation, M18_REBOUND_OBSERVATION_FIELDS)
++    if 'coverage' in observation:
++        public['coverage'] = _fields(observation['coverage'], M18_REBOUND_COVERAGE_FIELDS)
++    if 'native_evidence' in observation:
++        native = observation['native_evidence']
++        public['native_evidence'] = _fields(native, ('volume_unit', 'price_currency', 'price_basis', 'gaps'))
++        for name, fields in (('date_evidence', M18_REBOUND_DATE_FIELDS), ('unit_evidence', M18_REBOUND_UNIT_FIELDS)):
++            if name in native:
++                public['native_evidence'][name] = _fields(native[name], fields)
++    source = dict(status=artifact['formal_status'], eligible_screen=None,
++                  source_run_id=artifact['run_id'], binding_reference=dict(binding.reference),
++                  scope='INDEPENDENT_SAVED_M14_OWNER_RESEARCH',
++                  reason_codes=_public_scalar(artifact['reason_codes']),
++                  **{key: artifact[key] for key in SAFETY})
++    return dict(source_section_sha256=sha256_json(observation), group_counts=counts,
++                source=source, observation=public)
++
++
++def not_configured():
++    return dict(schema_version=SCHEMA, status='WAITING', source_kind='M14_OWNER',
++                reason_codes=['M14_SAVED_REFERENCE_NOT_CONFIGURED'], **SAFETY)
++
++
++def read_saved_rebound(*, server_binding, query):
++    _check_query(query)
++    if server_binding is None:
++        return not_configured()
++    binding = parse_binding(server_binding)
++    if 'run_id' in query:
++        _require(all(query[key] == binding.reference[key] for key in REF_KEYS), 'M14_REFERENCE_MISMATCH')
++    group = query.get('group', 'pending')
++    cursor = query.get('cursor')
++    offset = _decode_cursor(cursor, binding, group) if cursor is not None else 0
++    # Critical boundary retained from original Chat: every GET re-reads and
++    # verifies artifact/manifest/receipt, returning the artifact directly.
++    artifact = read_rebound_owner(binding.private_root, binding.reference)
++    observation, groups = _groups(artifact)
++    target = trade_date(artifact['request']['target_date'])
++    signal = trade_date(artifact['request']['signal_date'])
++    _require(signal < target, 'M14_DATE_ORDER')
++    rows = groups[group]; total = len(rows)
++    _require(offset == 0 if cursor is None else offset < total, 'M14_OFFSET_RANGE')
++    entries = []; loaded = 0; loaded_bytes = 0
++    for index in range(offset, min(offset + PAGE_LIMIT, total)):
++        row = rows[index]; raw = canonical_bytes(row)
++        entry = dict(index=index, kind=('object' if isinstance(row, dict) else 'scalar'),
++                     bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest(), value_state='NOT_LOADED')
++        if len(raw) > MAX_ITEM_BYTES:
++            entry['reason'] = 'ITEM_BYTES_LIMIT'
++        elif loaded_bytes + len(raw) > MAX_VALUES_BYTES:
++            break
++        else:
++            value = _public_row(row)
++            entry.update(value=value, projection_sha256=sha256_json(value), value_state='LOADED')
++            loaded += 1; loaded_bytes += len(raw)
++        entries.append(entry)
++    next_offset = offset + len(entries)
++    response = dict(schema_version=SCHEMA, status='SAVED_RESEARCH', source_kind='M14_OWNER',
++                    reference=dict(binding.reference), target_date=target, signal_date=signal,
++                    data_kind=artifact['request']['data_kind'], execution_kind=artifact['execution_kind'],
++                    **{key: artifact[key] for key in SAFETY}, projection='rebound_references', group=group,
++                    rebound=_state(artifact, observation, binding, {key: len(value) for key, value in groups.items()}),
++                    cursor=cursor, offset=offset, limit=PAGE_LIMIT, matched_total=total, loaded_count=loaded,
++                    not_loaded_count=total-loaded, remaining_entries=total-next_offset, entries=entries,
++                    next_cursor=_encode_cursor(binding, group, next_offset) if next_offset < total else None)
++    _require(len(canonical_bytes(response)) <= MAX_PAGE_BYTES, 'M14_PAGE_SIZE')
++    return response
++
++
++def read_record(config, query):
++    validate_binding(config)
++    payload = read_saved_rebound(server_binding=config.get(BINDING), query=query)
++    reference = payload.get('reference')
++    record = dict(schema_version='v5.module_response.v1', module_id=config['module_id'],
++                  release_id=config['release_id'], path=ROUTE, query=query, payload=payload,
++                  payload_sha256=sha256_json(payload), source_input_sha256=reference['artifact_sha256'] if reference else sha256_json(payload),
++                  data_kind=payload.get('data_kind', 'OWNER_RESULT'),
++                  generated_at=time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()), status_code=200)
++    from .module_api import _validate_record
++    return _validate_record(config, record, ROUTE, query), sha256_json(record)
+--- /dev/null
++++ b/V5/tests/test_m14_saved_rebound.py
+@@ -0,0 +1,208 @@
++"""Synthetic persisted trios only; no owner calculation or real market data."""
++import base64
++import copy
++import hashlib
++import json
++import threading
++import unittest
++from pathlib import Path
++from urllib.error import HTTPError
++from urllib.parse import urlencode
++from urllib.request import urlopen
++from unittest.mock import patch
++import test_rebound_owner as fixture
++from v5_shadow import module_api, rebound_owner as owner
++from v5_shadow.digests import canonical_bytes, sha256_json
++
++ROUTE='/api/v5/source-bundle/rebound-saved'
++GROUPS=('strict','near','pending','excluded','screen_unresolved')
++
++class M14SavedTests(unittest.TestCase):
++    def setUp(self):
++        fixture.ReboundOwnerPersistenceTests.setUp(self)
++        self.artifact['run_id']='4'*32
++        legacy=self.artifact['legacy_diagnostic']['payload']
++        for group in GROUPS:legacy[group]=[]
++        legacy['cards']=[]
++        legacy['pending']=[dict(code=f'HK.{i:05}',name='SYNTHETIC',classification='PENDING',
++            target_monday=20261008,verified_session=20261007,prior60_session_count=57,
++            previous5_session_count=3,history_unknown_reasons='PREVIOUS_5_SESSIONS_INCOMPLETE:3',
++            source_refs=[dict(owner='SYNTHETIC',payload_path=str(self.output/'private'),
++                              payload_sha256='a'*64)],private_root=str(self.output)) for i in range(70)]
++        legacy['coverage']=dict(history_pending_count=70,strict_count=0,near_count=0)
++        self.artifact['research_observation']=owner.research_projection(legacy,{})
++        self.reference=owner._publish(self.output,self.artifact)
++        self.api_root=self.root/'api';self.api_root.mkdir()
++        (self.api_root/'.v5-module-root').write_text('v5.module-root.v1:source_bundle\n')
++        self.config=dict(schema_version='v5.module_api.v1',module_id='source_bundle',release_id='synthetic-m14',
++            data_root=str(self.api_root),routes=[ROUTE],
++            m14_rebound_binding=dict(private_root=str(self.output),reference=self.reference))
++
++    def start(self):
++        server=module_api.create_module_server(self.config)
++        thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
++        self.addCleanup(server.server_close);self.addCleanup(server.shutdown)
++        return f'http://127.0.0.1:{server.server_port}'
++
++    def get(self,url,query=None):
++        try:r=urlopen(url+ROUTE+'?'+urlencode(query or {}),timeout=5)
++        except HTTPError as error:r=error
++        with r:return r.status,json.load(r)
++
++    def snapshot(self):
++        return {str(p.relative_to(self.root)):hashlib.sha256(p.read_bytes()).hexdigest()
++                for p in self.root.rglob('*') if p.is_file() and not p.is_symlink()}
++
++    def test_independent_saved_pages_pin_four_refs_and_keep_gaps_without_m18_identity(self):
++        url=self.start();before=self.snapshot();cursor=None;seen=[]
++        with patch.object(owner,'run_rebound_owner',side_effect=AssertionError('must never calculate')):
++            for offset,size in ((0,32),(32,32),(64,6)):
++                query=dict(group='pending',**self.reference)
++                if cursor:query['cursor']=cursor
++                status,page=self.get(url,query);self.assertEqual(status,200,page)
++                self.assertEqual(page['reference'],self.reference)
++                self.assertEqual((page['target_date'],page['signal_date']),('20261008','20261007'))
++                self.assertEqual(page['rebound']['group_counts'],dict(strict=0,near=0,pending=70,excluded=0,screen_unresolved=0))
++                self.assertEqual(page['rebound']['observation']['original_computation_status'],'READY_WITH_GAPS')
++                self.assertEqual(page['rebound']['source']['status'],'CANNOT_CONFIRM')
++                self.assertIsNone(page['rebound']['source']['eligible_screen'])
++                self.assertEqual(page['offset'],offset);self.assertEqual(len(page['entries']),size)
++                self.assertFalse(set(('generation_id','identity','profile_sha256'))&set(page))
++                raw=json.dumps(page);self.assertNotIn(str(self.output),raw);self.assertNotIn('payload_path',raw)
++                self.assertLessEqual(len(canonical_bytes(page)),256*1024)
++                for entry in page['entries']:
++                    original=self.artifact['research_observation']['pending'][entry['index']]
++                    self.assertEqual(entry['sha256'],sha256_json(original))
++                    self.assertEqual(entry['projection_sha256'],sha256_json(entry['value']))
++                    self.assertEqual(entry['value']['previous5_session_count'],3)
++                    seen.append(entry['index'])
++                cursor=page['next_cursor']
++            self.assertIsNone(cursor);self.assertEqual(seen,list(range(70)))
++            for group in GROUPS:
++                status,page=self.get(url,dict(group=group));self.assertEqual(status,200)
++                self.assertEqual(page['group'],group)
++        self.assertEqual(before,self.snapshot())
++        self.assertEqual(owner.read_rebound_owner(self.output,self.reference),self.artifact)
++
++    def test_unknown_queries_partial_refs_and_cross_group_cursor_reject(self):
++        url=self.start();status,first=self.get(url,dict(group='pending'));self.assertEqual(status,200)
++        for query in (dict(root=str(self.output)),dict(run_id=self.reference['run_id']),dict(group='cards'),
++                      dict(group='strict',cursor=first['next_cursor']),dict(group='pending',cursor='bad'),
++                      dict(group='pending',**dict(self.reference,artifact_sha256='0'*64)),dict(date='20261014')):
++            with self.subTest(query=query):self.assertEqual(self.get(url,query)[0],409)
++        forged=json.loads(base64.urlsafe_b64decode(first['next_cursor']));forged['receipt_sha256']='0'*64
++        cursor=base64.urlsafe_b64encode(canonical_bytes(forged)).decode()
++        self.assertEqual(self.get(url,dict(group='pending',cursor=cursor))[0],409)
++
++    def test_every_get_rechecks_each_original_trio_sha(self):
++        url=self.start();self.assertEqual(self.get(url)[0],200)
++        for name in ('artifact','manifest','receipt'):
++            path=self.output/'runs'/self.reference['run_id']/(name+'.json');raw=path.read_bytes()
++            path.write_bytes(raw+b'\n')
++            self.assertEqual(self.get(url)[0],409)
++            path.write_bytes(raw);self.assertEqual(self.get(url)[0],200)
++
++    def test_paths_and_symlinks_reject_without_exposing_private_root(self):
++        config=copy.deepcopy(self.config);config['m14_rebound_binding']['private_root']=str(self.output)+'/../output'
++        with self.assertRaises(ValueError):module_api.create_module_server(config)
++        for target in (self.output,self.output/'runs',self.output/'runs'/self.reference['run_id'],
++                       self.output/'runs'/self.reference['run_id']/'artifact.json'):
++            with self.subTest(target=target):
++                actual=target.with_name(target.name+'-real');target.rename(actual);target.symlink_to(actual,target_is_directory=actual.is_dir())
++                try:
++                    try:server=self.start()
++                    except (ValueError,OSError):continue
++                    status,page=self.get(server);self.assertEqual(status,409);self.assertNotIn(str(self.output),json.dumps(page))
++                finally:target.unlink();actual.rename(target)
++
++    def test_missing_binding_is_waiting_not_an_empty_success(self):
++        del self.config['m14_rebound_binding'];url=self.start();status,page=self.get(url)
++        self.assertEqual(status,200);self.assertEqual(page['status'],'WAITING');self.assertNotIn('entries',page)
++        self.assertEqual(self.get(url,dict(root='/tmp'))[0],409)
++
++    def test_old_reference_remains_readable_after_config_binds_another_run(self):
++        old=copy.deepcopy(self.reference);old_artifact=copy.deepcopy(self.artifact)
++        self.artifact['run_id']='5'*32;new=owner._publish(self.output,self.artifact)
++        self.config['m14_rebound_binding']['reference']=new;url=self.start()
++        self.assertEqual(self.get(url)[1]['reference'],new)
++        self.assertEqual(self.get(url,old)[0],409)
++        self.assertEqual(owner.read_rebound_owner(self.output,old),old_artifact)
++
++
++class M14SavedBoundaryTests(unittest.TestCase):
++    setUp = M14SavedTests.setUp
++    start = M14SavedTests.start
++    get = M14SavedTests.get
++    snapshot = M14SavedTests.snapshot
++    # Reuse synthetic persisted setup, not the original owner calculation.
++    def republish(self, rows):
++        self.artifact['run_id']='6'*32
++        legacy=self.artifact['legacy_diagnostic']['payload'];legacy['pending']=rows
++        self.artifact['research_observation']=owner.research_projection(legacy,{})
++        self.reference=owner._publish(self.output,self.artifact)
++        self.config['m14_rebound_binding']['reference']=self.reference
++
++    def test_public_projection_excludes_all_private_paths_and_unknown_nested_fields(self):
++        self.republish([dict(code='SYNTHETIC',name='synthetic',history_unknown_reasons='GAP:/private/hidden/file',
++            payload_path='/private/hidden',manifest_path='/private/hidden',artifact_path='/private/hidden',
++            arbitrary={'secret':'not-public'},source_refs=[dict(owner='SYNTHETIC',payload_path='/private/hidden',
++            manifest_path='/private/hidden',artifact_path='/private/hidden',payload_sha256='b'*64)])])
++        status,page=self.get(self.start(),dict(group='pending'));self.assertEqual(status,200,page)
++        text=json.dumps(page);self.assertNotIn('/private/hidden',text);self.assertNotIn('not-public',text)
++        self.assertEqual(page['entries'][0]['value']['source_refs'],[dict(owner='SYNTHETIC',payload_sha256='b'*64)])
++
++    def test_complete_sha_and_bounded_rows_progress_without_dropping_deferred_rows(self):
++        rows=[dict(code='BIG',name='x'*17000)]+[dict(code=str(i),name='x'*10000) for i in range(32)]
++        self.republish(rows);url=self.start();cursor=None;seen=[]
++        while True:
++            query=dict(group='pending')
++            if cursor:query['cursor']=cursor
++            status,page=self.get(url,query);self.assertEqual(status,200,page)
++            self.assertLessEqual(len(canonical_bytes(page)),256*1024)
++            self.assertLessEqual(sum(e['bytes'] for e in page['entries'] if e['value_state']=='LOADED'),128*1024)
++            self.assertGreater(len(page['entries']),0);seen.extend(page['entries']);cursor=page['next_cursor']
++            if cursor is None:break
++        self.assertEqual([e['index'] for e in seen],list(range(len(rows))))
++        self.assertEqual(seen[0]['value_state'],'NOT_LOADED');self.assertNotIn('value',seen[0])
++        self.assertEqual(seen[0]['sha256'],sha256_json(self.artifact['research_observation']['pending'][0]))
++
++    def test_690_pending_rows_and_history_gaps_remain_visible_across_all_pages(self):
++        self.artifact['legacy_diagnostic']['payload']['gaps'] = [f'SYNTHETIC_HISTORY_MISSING:{i}' for i in range(690)]
++        self.artifact['legacy_diagnostic']['payload']['coverage'] = dict(history_pending_count=690,strict_count=0,near_count=0)
++        self.republish([dict(code=f'SYNTHETIC_{i}',previous5_session_count=3 if i<688 else 2,
++                            prior60_session_count=57,history_unknown_reasons='SYNTHETIC_INCOMPLETE_HISTORY') for i in range(690)])
++        url=self.start();seen=[];cursor=None
++        while True:
++            query=dict(group='pending')
++            if cursor:query['cursor']=cursor
++            status,page=self.get(url,query);self.assertEqual(status,200,page)
++            self.assertEqual(page['rebound']['group_counts'],dict(strict=0,near=0,pending=690,excluded=0,screen_unresolved=0))
++            self.assertGreaterEqual(len(page['rebound']['observation']['gaps']),690)
++            self.assertEqual(page['rebound']['observation']['original_computation_status'],'READY_WITH_GAPS')
++            self.assertFalse(page['formal_eligibility_verified']);self.assertFalse(page['natural_verified'])
++            seen.extend(e['value']['code'] for e in page['entries']);cursor=page['next_cursor']
++            if cursor is None:break
++        self.assertEqual(seen,[f'SYNTHETIC_{i}' for i in range(690)])
++        status,empty=self.get(url,dict(group='strict'));self.assertEqual(status,200)
++        self.assertEqual(empty['matched_total'],0);self.assertEqual(empty['rebound']['group_counts']['pending'],690)
++
++    def test_cursor_duplicate_keys_noninteger_out_of_range_and_extra_keys_reject(self):
++        url=self.start();status,page=self.get(url,dict(group='pending'));self.assertEqual(status,200)
++        value=json.loads(base64.urlsafe_b64decode(page['next_cursor']))
++        for key,bad in [('offset',True),('offset',32.5),('offset',70),('offset',-1),('other',1)]:
++            forged=dict(value,**{key:bad});cursor=base64.urlsafe_b64encode(canonical_bytes(forged)).decode()
++            with self.subTest(key=key,bad=bad):self.assertEqual(self.get(url,dict(group='pending',cursor=cursor))[0],409)
++        raw=canonical_bytes(value).decode();cursor=base64.urlsafe_b64encode((raw[:-1]+',"offset":32}').encode()).decode()
++        self.assertEqual(self.get(url,dict(group='pending',cursor=cursor))[0],409)
++
++    def test_rehashed_cross_file_identity_tampering_is_rejected(self):
++        path=self.output/'runs'/self.reference['run_id']/'receipt.json';receipt=json.loads(path.read_bytes());receipt['run_id']='7'*32
++        path.write_bytes(canonical_bytes(receipt));self.reference['receipt_sha256']=sha256_json(receipt)
++        self.assertEqual(self.get(self.start())[0],409)
++
++    def test_missing_observation_does_not_masquerade_as_five_empty_groups(self):
++        self.artifact.update(run_id='8'*32,research_observation=None,legacy_diagnostic=None,computation_status='CANNOT_CONFIRM')
++        self.reference=owner._publish(self.output,self.artifact);self.config['m14_rebound_binding']['reference']=self.reference
++        status,page=self.get(self.start());self.assertEqual(status,409);self.assertNotIn('entries',page)
++
++if __name__=='__main__':unittest.main()
+--- /dev/null
++++ b/V5/tests/test_m14_saved_launch.py
+@@ -0,0 +1,45 @@
++"""Launch existing module API outside repo cwd with synthetic saved artifacts."""
++import json
++import os
++from pathlib import Path
++import select
++import subprocess
++import sys
++import unittest
++from urllib.request import urlopen
++import test_m14_saved_rebound as fixture
++
++
++class StandaloneSavedLaunchTests(unittest.TestCase):
++    setUp = fixture.M14SavedTests.setUp
++    snapshot = fixture.M14SavedTests.snapshot
++
++    def test_module_cli_in_fresh_process_only_reads_exact_synthetic_reference(self):
++        config = self.root/'source-api.json';config.write_text(json.dumps(self.config))
++        before = self.snapshot()
++        checkout = Path(__file__).resolve().parents[2]
++        # The command uses the existing module entry; no app dependencies or
++        # provider setup are installed, and no original owner is executed.
++        command = [sys.executable, '-B', '-c',
++                   "import sys;sys.dont_write_bytecode=True;sys.path.insert(0,sys.argv.pop(1));"
++                   "from v5_shadow.module_api import main;main()",
++                   str(checkout/'V5/src'), '--config', str(config), '--port', '0']
++        process = subprocess.Popen(command, cwd=self.root, env={'PATH':os.defpath,'PYTHONDONTWRITEBYTECODE':'1'},
++                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
++        try:
++            self.assertTrue(select.select([process.stdout],[],[],10)[0], 'module launch timed out')
++            url = process.stdout.readline().strip()
++            self.assertTrue(url.startswith('http://127.0.0.1:'),url)
++            with urlopen(url+fixture.ROUTE+'?group=pending',timeout=10) as response:
++                page=json.load(response)
++            self.assertEqual(page['reference'],self.reference)
++            self.assertEqual(page['rebound']['group_counts']['pending'],70)
++            self.assertEqual(page['entries'][0]['value']['code'],'HK.00000')
++            self.assertFalse(page['natural_verified'])
++        finally:
++            process.terminate()
++            _,error=process.communicate(timeout=10)
++        self.assertEqual(error,'')
++        self.assertEqual(before,self.snapshot())
++
++if __name__=='__main__':unittest.main()
+--- a/frontend/vite.config.ts
++++ b/frontend/vite.config.ts
+@@ -23,6 +23,7 @@
+ const proxy: Record<string, ProxyOptions> = {};
+ if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);
+ if (sourceTarget) {
++ proxy['/api/v5/source-bundle/rebound-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/a-stage-saved'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/manager-public-research'] = readonlyProxy(sourceTarget);
+  proxy['/api/v5/source-bundle/intraday-research'] = readonlyProxy(sourceTarget);
+--- /dev/null
++++ b/frontend/tests/m14SavedReboundFixtures.mjs
+@@ -0,0 +1,7 @@
++// Transport-only synthetic fixtures; never represent a real run or market input.
++export const flags={research_only:true,production_allowed:false,buy_gate_updated:false,orders_sent:false,natural_verified:false,formal_eligibility_verified:false};
++export const reference={run_id:'1'.repeat(32),artifact_sha256:'a'.repeat(64),manifest_sha256:'b'.repeat(64),receipt_sha256:'c'.repeat(64)};
++export const counts={strict:0,near:0,pending:33,excluded:0,screen_unresolved:0};
++export function entry(index,value={code:'SYNTHETIC_ONLY_'+index,name:'合成观察',history_unknown_reasons:['HISTORY_SCALE_UNVERIFIED'],close:0,oversold_flag:false,volume_ratio_5d:null}){return {index,kind:value!==null&&typeof value==='object'&&!Array.isArray(value)?'object':'scalar',bytes:500,sha256:'d'.repeat(64),projection_sha256:'e'.repeat(64),value_state:'LOADED',value};}
++export function saved(group='pending',offset=0,total=group==='pending'?33:0){const groupCounts={...counts,[group]:total};const size=Math.min(32,total-offset);return {schema_version:'v5.m14.saved_rebound.v1',status:'SAVED_RESEARCH',source_kind:'M14_OWNER',reference:{...reference},target_date:'20261012',signal_date:'20261009',data_kind:'SYNTHETIC',execution_kind:'SYNTHETIC_TEST_ONLY',...flags,projection:'rebound_references',group,rebound:{source_section_sha256:'f'.repeat(64),group_counts:groupCounts,source:{status:'CANNOT_CONFIRM',eligible_screen:null,source_run_id:reference.run_id,...flags,binding_reference:{...reference},scope:'INDEPENDENT_SAVED_M14_OWNER_RESEARCH',reason_codes:['FORMAL_ELIGIBILITY_UNVERIFIED']},observation:{status:'CANNOT_CONFIRM',original_computation_status:'READY_WITH_GAPS',target_trade_date:'20261012',observed_session:'20261009',main_screen_ready:false,gaps:['HISTORY_SCALE_UNVERIFIED'],coverage:{},native_evidence:{unit_evidence:{status:'NOT_PROVEN'}},...flags}},cursor:offset?'fixture_cursor_32':null,offset,limit:32,matched_total:total,loaded_count:size,not_loaded_count:total-size,remaining_entries:total-offset-size,entries:Array.from({length:size},(_,i)=>entry(offset+i)),next_cursor:total-offset-size?'fixture_cursor_32':null};}
++export function waiting(){return {schema_version:'v5.m14.saved_rebound.v1',status:'WAITING',source_kind:'M14_OWNER',reason_codes:['M14_SAVED_REFERENCE_NOT_CONFIGURED'],...flags};}
+--- /dev/null
++++ b/frontend/tests/m14SavedRebound.node.mjs
+@@ -0,0 +1,25 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import {existsSync,readFileSync} from 'node:fs';
++import {saved,waiting,flags,reference,entry} from './m14SavedReboundFixtures.mjs';
++const apiUrl=new URL('../src/api/m14SavedRebound.ts',import.meta.url);
++async function api(){assert.ok(existsSync(apiUrl),'M14 independent saved API must exist');return import(apiUrl.href);}
++const response=value=>new Response(JSON.stringify(value));
++const reply=value=>async()=>response(value);
++test('independent default GET has no manager identity, credentials or execution request',async()=>{const {readSavedRebound}=await api();let request;const signal=new AbortController().signal;const value=saved();assert.deepEqual(await readSavedRebound({},async(url,init)=>{request={url,init};return response(value);},signal),value);assert.equal(request.url,'/api/v5/source-bundle/rebound-saved?group=pending');assert.deepEqual(request.init,{method:'GET',cache:'no-store',credentials:'omit',redirect:'error',signal});});
++test('group and cursor reads pin all four exact owner reference fields',async()=>{const {readSavedRebound}=await api();let url;assert.deepEqual(await readSavedRebound({group:'pending',cursor:'fixture_cursor_32',reference},async(u)=>{url=u;return response(saved('pending',32));}),saved('pending',32));const params=new URL(url,'http://fixture.invalid').searchParams;assert.deepEqual(Object.fromEntries(params),{group:'pending',cursor:'fixture_cursor_32',...reference});});
++test('WAITING has no saved content and remains distinct from an empty group',async()=>{const {readSavedRebound}=await api();assert.equal((await readSavedRebound({},reply(waiting()))).status,'WAITING');assert.equal((await readSavedRebound({group:'strict'},reply(saved('strict')))).matched_total,0);for(const key of ['reference','group','entries','rebound','target_date']){const value=waiting();value[key]=saved()[key];await assert.rejects(readSavedRebound({},reply(value)),/M14_WAITING/);}await assert.rejects(readSavedRebound({reference},reply(waiting())),/M14_WAITING/);});
++test('malformed query never reaches transport, including partial pinning and cursor without identity',async()=>{const {readSavedRebound}=await api();let calls=0;for(const query of [{group:'latest'},{group:['pending']},{reference:{run_id:reference.run_id}},{reference:{...reference,run_id:'../path'}},{reference:{...reference,artifact_sha256:'A'.repeat(64)}},{cursor:'cursor'},{reference,cursor:''},{reference,cursor:'x'.repeat(8193)},{reference,cursor:'../path'},{group:'pending',limit:99}])await assert.rejects(readSavedRebound(query,async()=>{calls++;return response(saved());}),/M14_QUERY/);assert.equal(calls,0);});
++test('identity, dates, source, groups and research boundaries fail closed',async()=>{const {readSavedRebound}=await api();const changes=[v=>v.reference.run_id='2'.repeat(32),v=>v.rebound.source.binding_reference.manifest_sha256='9'.repeat(64),v=>v.rebound.source.source_run_id='2'.repeat(32),v=>v.source_kind='M18',v=>v.schema_version='wrong',v=>v.target_date='20260230',v=>v.rebound.observation.observed_session='20261008',v=>v.rebound.observation.target_trade_date='20261011',v=>v.data_kind='OWNER_RESULT',v=>v.rebound.source.eligible_screen=[],v=>v.rebound.observation.main_screen_ready=true,v=>v.rebound.source.scope='SAVED_PLAN',v=>v.group='strict',v=>delete v.rebound.group_counts.excluded,v=>v.rebound.group_counts.extra=0,v=>v.rebound.source.reason_codes=[1],v=>v.rebound.observation.coverage.bad='count'];for(const change of changes){const value=saved();change(value);await assert.rejects(readSavedRebound({reference},reply(value)),/M14_/);}for(const where of [v=>v,v=>v.rebound.source,v=>v.rebound.observation])for(const key of Object.keys(flags)){const value=saved();where(value)[key]=!flags[key];await assert.rejects(readSavedRebound({},reply(value)),/M14_.*BOUNDARY/);}const elevated=saved();elevated.entries[0].value.natural_verified=true;await assert.rejects(readSavedRebound({},reply(elevated)),/M14_.*BOUNDARY/);});
++test('bounded pagination validates arithmetic, indices, original digest, projected digest and unloaded semantics',async()=>{const {readSavedRebound}=await api();for(const change of [v=>v.offset=1,v=>v.limit=33,v=>v.entries[0].index=9,v=>v.entries[0].offset=5,v=>v.entries[0].sha256='bad',v=>delete v.entries[0].projection_sha256,v=>v.loaded_count=1,v=>v.not_loaded_count=2,v=>v.remaining_entries=0,v=>v.next_cursor=null,v=>v.entries.push(entry(32)),v=>v.entries[0].kind='function',v=>v.entries[0].value_state='READY',v=>v.entries[0].bytes=-1]){const value=saved();change(value);await assert.rejects(readSavedRebound({},reply(value)),/M14_/);}const value=saved();value.entries[0]={index:0,kind:'object',bytes:20000,sha256:'d'.repeat(64),value_state:'NOT_LOADED',reason:'ITEM_BYTES_LIMIT'};value.loaded_count--;value.not_loaded_count++;assert.deepEqual(await readSavedRebound({},reply(value)),value);value.entries[0].value=null;await assert.rejects(readSavedRebound({},reply(value)),/M14_ENTRY/);});
++test('null, false, zero and absent values remain distinct',async()=>{const {readSavedRebound}=await api();const value=saved('pending',0,4);value.entries=[entry(0,null),entry(1,false),entry(2,0),entry(3,{close:0,volume_ratio_5d:null,oversold_flag:false})];assert.deepEqual((await readSavedRebound({},reply(value))).entries,value.entries);});
++test('entry size, loaded page bytes, depth and unsafe paths are bounded',async()=>{const {readSavedRebound}=await api();const large=saved('pending',0,1);large.entries[0].value={text:'x'.repeat(16384)};await assert.rejects(readSavedRebound({},reply(large)),/M14_ENTRY_LIMIT/);const aggregate=saved('pending',0,10);aggregate.entries.forEach(e=>{e.value={text:'x'.repeat(14000)};e.bytes=15000;});await assert.rejects(readSavedRebound({},reply(aggregate)),/M14_VALUES_LIMIT/);const nested=saved('pending',0,1);let cursor=nested.entries[0].value;for(let i=0;i<40;i++){cursor.child={};cursor=cursor.child;}await assert.rejects(readSavedRebound({},reply(nested)),/M14_RESPONSE_DEPTH/);const paths=saved();paths.entries[0].value.payload_path='/private/test';await assert.rejects(readSavedRebound({},reply(paths)),/M14_UNSAFE_FIELD/);});
++test('HTTP errors are generic and response bytes, JSON and UTF-8 are bounded',async()=>{const {readSavedRebound}=await api();for(const res of [new Response('{"error":"/private/secret"}',{status:409}),new Response('bad'),new Response(new Uint8Array([0xff])),new Response(null),new Response('{}',{headers:{'content-length':'262145'}})])await assert.rejects(readSavedRebound({},async()=>res),error=>/^M14_/.test(error.message)&&!error.message.includes('/private'));let cancelled=false;const stream=new ReadableStream({pull(c){c.enqueue(new Uint8Array(131073));},cancel(){cancelled=true;}});await assert.rejects(readSavedRebound({},async()=>new Response(stream)),/M14_RESPONSE_LIMIT/);assert.equal(cancelled,true);});
++function deferredSession(Session){const states=[],calls=[];const session=new Session(v=>states.push(v),(url,init)=>new Promise((resolve,reject)=>calls.push({url,init,resolve,reject})));return {session,states,calls};}
++test('session pins identity across group/page navigation and resets cursor history per group',async()=>{const {SavedReboundSession}=await api();const {session,states,calls}=deferredSession(SavedReboundSession);let work=session.load();calls[0].resolve(response(saved()));await work;work=session.next();assert.equal(states.at(-1).result,null);assert.equal(calls[0].init.signal.aborted,true);const query=new URL(calls[1].url,'http://fixture.invalid').searchParams;for(const [key,value] of Object.entries(reference))assert.equal(query.get(key),value);calls[1].resolve(response(saved('pending',32)));await work;assert.equal(states.at(-1).canPrevious,true);work=session.previous();calls[2].resolve(response(saved()));await work;work=session.select('strict');assert.equal(new URL(calls[3].url,'http://fixture.invalid').searchParams.has('cursor'),false);calls[3].resolve(response(saved('strict')));await work;assert.equal(states.at(-1).canPrevious,false);assert.equal(states.at(-1).result.group,'strict');work=session.load();assert.equal(new URL(calls[4].url,'http://fixture.invalid').searchParams.has('run_id'),false);calls[4].resolve(response(waiting()));await work;assert.equal(states.at(-1).phase,'WAITING');session.close();});
++test('latest request wins, stale success/failure is silent, error clears rows and private details, and close aborts',async()=>{const {SavedReboundSession}=await api();const {session,states,calls}=deferredSession(SavedReboundSession);const old=session.load(),fresh=session.select('strict');calls[1].resolve(response(saved('strict')));await fresh;calls[0].reject(new Error('/private/stale'));await old;assert.equal(states.at(-1).phase,'LOADED');const fail=session.select('pending');assert.deepEqual(states.at(-1),{phase:'LOADING',result:null,error:'',group:'pending',canPrevious:false});calls[2].reject(new Error('/private/network'));await fail;assert.equal(states.at(-1).result,null);assert.equal(states.at(-1).error,'M14_READ_FAILED');const a=session.select('near'),b=session.select('excluded');calls[4].resolve(response(saved('excluded')));await b;calls[3].resolve(response(saved('near')));await a;assert.equal(states.at(-1).group,'excluded');const pending=session.select('pending');session.close();assert.equal(calls[5].init.signal.aborted,true);const count=states.length;calls[5].resolve(response(saved()));await pending;await session.load();await session.select('pending');await session.next();assert.equal(states.length,count);assert.equal(calls.length,6);});
++test('page and reference substitution never commits and retry keeps the pinned owner',async()=>{const {SavedReboundSession}=await api();const {session,states,calls}=deferredSession(SavedReboundSession);let work=session.load();calls[0].resolve(response(saved()));await work;work=session.next();const bad=saved('pending',32);bad.reference.artifact_sha256='9'.repeat(64);calls[1].resolve(response(bad));await work;assert.equal(states.at(-1).phase,'CANNOT_CONFIRM');assert.equal(states.at(-1).result,null);work=session.select('pending');assert.equal(new URL(calls[2].url,'http://fixture.invalid').searchParams.get('artifact_sha256'),reference.artifact_sha256);calls[2].resolve(response(saved()));await work;session.close();});
++test('independent navigation stays enabled without a manager overview and lazily opens the actual M14 component',()=>{const view=readFileSync(new URL('../src/views/SavedManagerResultView.vue',import.meta.url),'utf8');assert.match(view,/import M14SavedRebound from/);assert.match(view,/<M14SavedRebound\s*\/>/);assert.match(view,/<button type="button" aria-controls="m14-saved-rebound" @click="openSavedRebound">超跌研究 · M14 已保存结果<\/button>/);assert.match(view,/async function openSavedRebound\(\)/);assert.match(view,/#m14-saved-rebound/);assert.match(view,/@click="selectRebound\(\)">经理同次运行超跌引用/);const component=readFileSync(new URL('../src/components/M14SavedRebound.vue',import.meta.url),'utf8');assert.match(component,/id="m14-saved-rebound"/);assert.match(component,/@toggle="onToggle"/);assert.doesNotMatch(component,/v-html|onMounted|POST/);for(const term of ['WAITING','60','SYNTHETIC','RECORDED_INPUT_REPLAY','natural_verified=false','formal_eligibility_verified=false','signal_date','target_date','projection_sha256'])assert.ok(component.includes(term),term);const config=readFileSync(new URL('../vite.config.ts',import.meta.url),'utf8');assert.match(config,/proxy\['\/api\/v5\/source-bundle\/rebound-saved'\] = readonlyProxy\(sourceTarget\)/);});
++test('backend-compatible numeric observation dates preserve raw values without date substitution',async()=>{const {readSavedRebound}=await api();const value=saved();value.rebound.observation.target_trade_date=20261012;value.rebound.observation.observed_session=20261009;assert.deepEqual(await readSavedRebound({},reply(value)),value);delete value.rebound.observation.target_trade_date;delete value.rebound.observation.observed_session;assert.deepEqual(await readSavedRebound({},reply(value)),value);value.signal_date='20261013';await assert.rejects(readSavedRebound({},reply(value)),/M14_DATE/);});
++test('server owner limits apply to original loaded bytes, total group counts and opaque cursor length',async()=>{const {readSavedRebound}=await api();const bytes=saved('pending',0,10);bytes.entries.forEach(e=>{e.bytes=15000;});await assert.rejects(readSavedRebound({},reply(bytes)),/M14_VALUES_LIMIT/);const counts=saved();counts.rebound.group_counts.strict=10001;await assert.rejects(readSavedRebound({},reply(counts)),/M14_GROUP_COUNTS/);await assert.rejects(readSavedRebound({reference,cursor:'x'.repeat(4097)},reply(saved())),/M14_QUERY/);});
++test('690 original per-row history gaps remain visible within the bounded page response',async()=>{const {readSavedRebound}=await api();const value=saved();value.rebound.group_counts.pending=690;value.matched_total=690;value.not_loaded_count=658;value.remaining_entries=658;value.rebound.observation.gaps=Array.from({length:690},(_,i)=>'SYNTHETIC_HISTORY_MISSING:'+i);assert.deepEqual(await readSavedRebound({},reply(value)),value);});
+--- /dev/null
++++ b/frontend/tests/m14SavedReboundFixtures.d.mts
+@@ -0,0 +1,7 @@
++import type {M14SavedRebound, M14SavedWaiting, M14SavedEntry, M14SavedReference, M14ReboundGroup} from '../src/api/m14SavedRebound';
++export const flags: {research_only: true; production_allowed: false; buy_gate_updated: false; orders_sent: false; natural_verified: false; formal_eligibility_verified: false};
++export const reference: M14SavedReference;
++export const counts: Record<M14ReboundGroup, number>;
++export function entry(index: number, value?: unknown): M14SavedEntry;
++export function saved(group?: M14ReboundGroup, offset?: number, total?: number): M14SavedRebound;
++export function waiting(): M14SavedWaiting;
+--- a/frontend/tests/savedRebound.node.mjs
++++ b/frontend/tests/savedRebound.node.mjs
+@@ -30,3 +30,9 @@
+  const host=render();function expand(node){if(node.tagName==='details'){node.open=true;node.listeners.toggle?.();}for(const child of node.children)if(typeof child!=='string')expand(child);}expand(host);
+  assert.match(host.textContent,/SYNTHETIC_OWNER/);assert.ok(host.textContent.includes('a'.repeat(64)));assert.doesNotMatch(host.textContent,/\/private\/SYNTHETIC|payload_path|https?:\/\//);
+ });
++
++test('independent M14 owner rendering needs no M18 identity, generation or invented byte offset',()=>{
++ const owner={...page,source_kind:'M14_OWNER',rebound:{...page.rebound,source:{...page.rebound.source,scope:'INDEPENDENT_SAVED_M14_OWNER_RESEARCH'}}};
++ const text=render(owner).textContent;assert.match(text,/M14 独立已保存超跌研究/);assert.doesNotMatch(text,/同次运行保存响应/);assert.match(render().textContent,/同次运行保存响应/);
++});
++test('saved owner renders original numeric dates accurately and never implies a fresh read-time calculation',()=>{const text=render({...page,source_kind:'M14_OWNER',entries:[{...entry,value:{...row,observed_session:20261009,target_monday:20261012}}]}).textContent;assert.match(text,/观察行情日 2026-10-09/);assert.match(text,/目标日 2026-10-12/);assert.doesNotMatch(text,/读取时研究观察/);});
+--- /dev/null
++++ b/frontend/src/api/m14SavedRebound.ts
+@@ -0,0 +1,160 @@
++/** Independent M14 owner saved research. GET only; never starts computation or a manager run. */
++export const M14_SAVED_REBOUND_ROUTE = '/api/v5/source-bundle/rebound-saved';
++export const M14_REBOUND_GROUPS = ['strict', 'near', 'pending', 'excluded', 'screen_unresolved'] as const;
++export type M14ReboundGroup = typeof M14_REBOUND_GROUPS[number];
++type JsonObject = Record<string, unknown>;
++type Fetcher = (url: string, init?: RequestInit) => Promise<Response>;
++const REFERENCE_KEYS = ['run_id', 'artifact_sha256', 'manifest_sha256', 'receipt_sha256'] as const;
++export type M14SavedReference = Record<typeof REFERENCE_KEYS[number], string>;
++interface ResearchBoundary {
++ research_only: true; production_allowed: false; buy_gate_updated: false; orders_sent: false;
++ natural_verified: false; formal_eligibility_verified: false;
++}
++interface M14Envelope extends ResearchBoundary {schema_version: 'v5.m14.saved_rebound.v1'; source_kind: 'M14_OWNER';}
++export interface M14SavedWaiting extends M14Envelope {status: 'WAITING'; reason_codes: string[];}
++export interface M14SavedEntry {index: number; kind: string; bytes: number; sha256: string; projection_sha256?: string; value_state: 'LOADED' | 'NOT_LOADED'; value?: unknown; reason?: 'ITEM_BYTES_LIMIT';}
++export interface M14SavedRebound extends M14Envelope {
++ status: 'SAVED_RESEARCH'; reference: M14SavedReference; target_date: string; signal_date: string;
++ data_kind: 'SYNTHETIC' | 'RECORDED_INPUT_REPLAY'; execution_kind: string; projection: 'rebound_references'; group: M14ReboundGroup;
++ rebound: {source_section_sha256: string; group_counts: Record<M14ReboundGroup, number>; source: JsonObject; observation: JsonObject};
++ cursor: string | null; offset: number; limit: 32; matched_total: number; loaded_count: number;
++ not_loaded_count: number; remaining_entries: number; entries: M14SavedEntry[]; next_cursor: string | null;
++}
++export type M14SavedResult = M14SavedWaiting | M14SavedRebound;
++export interface M14SavedQuery {group?: M14ReboundGroup; cursor?: string | null; reference?: M14SavedReference;}
++export interface M14SavedState {phase: 'IDLE' | 'LOADING' | 'WAITING' | 'LOADED' | 'CANNOT_CONFIRM'; result: M14SavedResult | null; error: string; group: M14ReboundGroup; canPrevious: boolean;}
++const MAX_RESPONSE = 256 * 1024, MAX_ITEM = 16 * 1024, MAX_VALUES = 128 * 1024;
++const FALSE_FLAGS = ['production_allowed', 'buy_gate_updated', 'orders_sent', 'natural_verified', 'formal_eligibility_verified'];
++const COVERAGE_FIELDS = ['input_candidate_count', 'history_complete_count', 'history_pending_count', 'strict_count', 'near_candidate_count', 'near_count', 'selected_count', 'panel_row_count', 'panel_code_count', 'excluded_count', 'screen_unresolved_count', 'row_accounted_count'];
++function check(ok: unknown, code: string): asserts ok {if (!ok) throw new Error('M14_' + code);}
++function object(value: unknown): value is JsonObject {return value !== null && typeof value === 'object' && !Array.isArray(value);}
++function integer(value: unknown): value is number {return typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;}
++function digest(value: unknown): value is string {return typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);}
++function text(value: unknown): value is string {return typeof value === 'string' && value.trim().length > 0 && value.length <= 2048;}
++function strings(value: unknown): value is string[] {return Array.isArray(value) && value.length <= 10000 && value.every(text);}
++function date(value: unknown): value is string {
++ if (typeof value !== 'string' || !/^\d{8}$/.test(value)) return false;
++ const iso = `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6)}`;
++ const parsed = new Date(iso + 'T00:00:00Z');
++ return Number.isFinite(parsed.getTime()) && parsed.toISOString().slice(0, 10) === iso;
++}
++function reference(value: unknown): value is M14SavedReference {
++ return object(value) && Object.keys(value).length === 4 && typeof value.run_id === 'string' && /^[a-f0-9]{32}$/.test(value.run_id) && REFERENCE_KEYS.slice(1).every(key => digest(value[key]));
++}
++function sameReference(a: M14SavedReference, b: M14SavedReference): boolean {return REFERENCE_KEYS.every(key => a[key] === b[key]);}
++function cursor(value: unknown): value is string {return typeof value === 'string' && value.length <= 4096 && /^[A-Za-z0-9_-]+={0,2}$/.test(value);}
++function boundary(value: unknown): asserts value is JsonObject {check(object(value) && value.research_only === true && FALSE_FLAGS.every(key => value[key] === false), 'RESEARCH_BOUNDARY');}
++function nestedBoundary(value: unknown, depth = 0): void {
++ check(depth <= 32, 'RESPONSE_DEPTH');
++ if (Array.isArray(value)) {for (const item of value) nestedBoundary(item, depth + 1); return;}
++ if (!object(value)) return;
++ for (const [key, item] of Object.entries(value)) {
++  check(!/(^path$|_path$|^root$|_root$|^__proto__$|^constructor$|^prototype$)/i.test(key), 'UNSAFE_FIELD');
++  if (FALSE_FLAGS.includes(key)) check(item === false, 'NESTED_BOUNDARY');
++  if (key === 'research_only') check(item === true, 'NESTED_BOUNDARY');
++  nestedBoundary(item, depth + 1);
++ }
++}
++function validate(value: unknown, query: M14SavedQuery): M14SavedResult {
++ boundary(value);
++ check(value.schema_version === 'v5.m14.saved_rebound.v1' && value.source_kind === 'M14_OWNER', 'CONTRACT');
++ nestedBoundary(value);
++ if (value.status === 'WAITING') {
++  check(!query.reference && value.reason_codes instanceof Array && value.reason_codes.length === 1 && value.reason_codes[0] === 'M14_SAVED_REFERENCE_NOT_CONFIGURED', 'WAITING');
++  const allowed = ['schema_version', 'status', 'source_kind', 'reason_codes', 'research_only', ...FALSE_FLAGS];
++  check(Object.keys(value).every(key => allowed.includes(key)), 'WAITING_CONTENT');
++  return value as unknown as M14SavedWaiting;
++ }
++ check(value.status === 'SAVED_RESEARCH' && ['SYNTHETIC', 'RECORDED_INPUT_REPLAY'].includes(String(value.data_kind)) && typeof value.data_kind === 'string' && text(value.execution_kind), 'CLASSIFICATION');
++ check(reference(value.reference) && (!query.reference || sameReference(value.reference, query.reference)), 'REFERENCE');
++ check(date(value.target_date) && date(value.signal_date) && value.signal_date < value.target_date, 'DATE');
++ const group = query.group ?? 'pending', meta = value.rebound;
++ check(value.projection === 'rebound_references' && value.group === group && object(meta) && digest(meta.source_section_sha256) && object(meta.group_counts), 'PROJECTION');
++ check(Object.keys(meta.group_counts).length === 5 && M14_REBOUND_GROUPS.every(key => integer((meta.group_counts as JsonObject)[key]) && Number((meta.group_counts as JsonObject)[key]) <= 10000), 'GROUP_COUNTS');
++ const source = meta.source, observation = meta.observation;
++ boundary(source); boundary(observation);
++ check(source.status === 'CANNOT_CONFIRM' && source.eligible_screen === null && source.source_run_id === value.reference.run_id && reference(source.binding_reference) && sameReference(source.binding_reference, value.reference) && source.scope === 'INDEPENDENT_SAVED_M14_OWNER_RESEARCH' && strings(source.reason_codes), 'SOURCE');
++ check(observation.status === 'CANNOT_CONFIRM' && typeof observation.original_computation_status === 'string' && ['READY', 'READY_WITH_GAPS', 'CANNOT_CONFIRM'].includes(observation.original_computation_status) && observation.main_screen_ready === false && strings(observation.gaps), 'OBSERVATION');
++ check((!Object.hasOwn(observation, 'target_trade_date') || ((typeof observation.target_trade_date === 'string' || typeof observation.target_trade_date === 'number') && String(observation.target_trade_date) === value.target_date)) && (!Object.hasOwn(observation, 'observed_session') || ((typeof observation.observed_session === 'string' || typeof observation.observed_session === 'number') && String(observation.observed_session) === value.signal_date)), 'OBSERVATION_DATE');
++ check(object(observation.coverage) && Object.entries(observation.coverage).every(([key, count]) => COVERAGE_FIELDS.includes(key) && integer(count)) && object(observation.native_evidence), 'COVERAGE');
++ const total = meta.group_counts[group];
++ check(integer(value.offset) && integer(total) && value.matched_total === total && value.limit === 32 && value.cursor === (query.cursor ?? null) && (value.cursor === null ? value.offset === 0 : value.offset > 0), 'PAGE');
++ check(Array.isArray(value.entries) && value.entries.length <= Math.min(32, total - value.offset) && (total === 0 ? value.offset === 0 && value.entries.length === 0 : value.offset < total && value.entries.length > 0), 'PAGE');
++ let loaded = 0, loadedBytes = 0;
++ for (const [position, entry] of value.entries.entries()) {
++  check(object(entry) && entry.index === value.offset + position && !Object.hasOwn(entry, 'offset') && typeof entry.kind === 'string' && ['object', 'scalar'].includes(entry.kind) && integer(entry.bytes) && entry.bytes > 0 && digest(entry.sha256), 'ENTRY');
++  if (entry.value_state === 'LOADED') {
++   check(Object.hasOwn(entry, 'value') && digest(entry.projection_sha256) && !Object.hasOwn(entry, 'reason'), 'ENTRY');
++   const kind = object(entry.value) ? 'object' : 'scalar';
++   check(kind === entry.kind, 'ENTRY_KIND');
++   const bytes = new TextEncoder().encode(JSON.stringify(entry.value)).length;
++   check(bytes <= MAX_ITEM && entry.bytes <= MAX_ITEM, 'ENTRY_LIMIT');
++   loaded++; loadedBytes += Math.max(bytes, entry.bytes); check(loadedBytes <= MAX_VALUES, 'VALUES_LIMIT');
++  } else check(entry.value_state === 'NOT_LOADED' && !Object.hasOwn(entry, 'value') && !Object.hasOwn(entry, 'projection_sha256') && entry.reason === 'ITEM_BYTES_LIMIT' && entry.bytes > MAX_ITEM, 'ENTRY');
++ }
++ check(value.loaded_count === loaded && value.not_loaded_count === total - loaded && value.remaining_entries === total - value.offset - value.entries.length && (value.next_cursor === null || cursor(value.next_cursor)) && (Number(value.remaining_entries) > 0) === (value.next_cursor !== null) && (value.next_cursor === null || value.next_cursor !== value.cursor), 'PAGE_COUNTS');
++ return value as unknown as M14SavedRebound;
++}
++export async function readSavedRebound(query: M14SavedQuery = {}, fetcher: Fetcher = fetch, signal?: AbortSignal): Promise<M14SavedResult> {
++ check(object(query) && Object.keys(query).every(key => ['group', 'cursor', 'reference'].includes(key)) && M14_REBOUND_GROUPS.includes(query.group ?? 'pending'), 'QUERY');
++ check(query.reference === undefined || reference(query.reference), 'QUERY_REFERENCE');
++ check(query.cursor === undefined || query.cursor === null || (cursor(query.cursor) && query.reference !== undefined), 'QUERY_CURSOR');
++ // Copy before awaiting: a caller cannot change the expected identity mid-request.
++ const expected: M14SavedQuery = {group: query.group ?? 'pending', cursor: query.cursor ?? null, ...(query.reference ? {reference: {...query.reference}} : {})};
++ const params = new URLSearchParams({group: expected.group!});
++ if (expected.cursor) params.set('cursor', expected.cursor);
++ if (expected.reference) for (const key of REFERENCE_KEYS) params.set(key, expected.reference[key]);
++ const response = await fetcher(M14_SAVED_REBOUND_ROUTE + '?' + params.toString(), {method: 'GET', cache: 'no-store', credentials: 'omit', redirect: 'error', signal});
++ check(response.ok, 'HTTP_' + response.status);
++ const advertised = response.headers.get('content-length');
++ check(!advertised || (/^\d+$/.test(advertised) && Number(advertised) <= MAX_RESPONSE), 'RESPONSE_LIMIT');
++ check(response.body, 'EMPTY_RESPONSE');
++ const reader = response.body.getReader(), parts: Uint8Array[] = [];
++ let size = 0;
++ try {while (true) {const part = await reader.read(); if (part.done) break; size += part.value.length; if (size > MAX_RESPONSE) {await reader.cancel(); throw new Error('M14_RESPONSE_LIMIT');} parts.push(part.value);}}
++ finally {reader.releaseLock();}
++ const bytes = new Uint8Array(size); let offset = 0;
++ for (const part of parts) {bytes.set(part, offset); offset += part.length;}
++ let value: unknown;
++ try {value = JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(bytes));} catch {throw new Error('M14_RESPONSE_JSON');}
++ return validate(value, expected);
++}
++/** One pinned M14 owner per browsing session; reload explicitly re-reads the configured binding. */
++export class SavedReboundSession {
++ private revision = 0; private closed = false; private controller: AbortController | null = null;
++ private pinned: M14SavedReference | null = null;
++ private history: {cursor: string | null; offset: number}[] = [{cursor: null, offset: 0}]; private position = 0;
++ private state: M14SavedState = {phase: 'IDLE', result: null, error: '', group: 'pending', canPrevious: false};
++ private emit: (state: M14SavedState) => void; private fetcher: Fetcher;
++ constructor(emit: (state: M14SavedState) => void, fetcher: Fetcher = fetch) {this.emit = emit; this.fetcher = fetcher;}
++ private publish(state: M14SavedState) {this.state = state; this.emit(state);}
++ private async page(group: M14ReboundGroup, position: number) {
++  if (this.closed) return;
++  const request = this.history[position]; if (!request) return;
++  const revision = ++this.revision; this.controller?.abort(); this.controller = new AbortController();
++  const query = {group, cursor: request.cursor, ...(this.pinned ? {reference: {...this.pinned}} : {})};
++  this.publish({phase: 'LOADING', result: null, error: '', group, canPrevious: false});
++  try {
++   const result = await readSavedRebound(query, this.fetcher, this.controller.signal);
++   if (this.closed || revision !== this.revision) return;
++   if (result.status === 'SAVED_RESEARCH') {
++    check(result.offset === request.offset, 'PAGE_OFFSET');
++    this.pinned = {...result.reference};
++   }
++   this.position = position;
++   this.publish({phase: result.status === 'WAITING' ? 'WAITING' : 'LOADED', result, error: '', group, canPrevious: position > 0});
++  } catch (error) {
++   if (!this.closed && revision === this.revision) this.publish({phase: 'CANNOT_CONFIRM', result: null, error: error instanceof Error && /^M14_[A-Z0-9_]+$/.test(error.message) ? error.message : 'M14_READ_FAILED', group, canPrevious: false});
++  }
++ }
++ async load(group: M14ReboundGroup = 'pending') {if (this.closed) return; this.pinned = null; this.history = [{cursor: null, offset: 0}]; this.position = 0; await this.page(group, 0);}
++ async select(group: M14ReboundGroup) {if (this.closed) return; this.history = [{cursor: null, offset: 0}]; this.position = 0; await this.page(group, 0);}
++ async next() {
++  const result = this.state.result;
++  if (this.closed || this.state.phase !== 'LOADED' || result?.status !== 'SAVED_RESEARCH' || !result.next_cursor) return;
++  this.history = this.history.slice(0, this.position + 1); this.history.push({cursor: result.next_cursor, offset: result.offset + result.entries.length});
++  await this.page(this.state.group, this.position + 1);
++ }
++ async previous() {if (this.closed || this.state.phase !== 'LOADED' || this.position < 1) return; await this.page(this.state.group, this.position - 1);}
++ close() {this.closed = true; this.revision++; this.controller?.abort();}
++}
+--- /dev/null
++++ b/frontend/src/components/M14SavedRebound.vue
+@@ -0,0 +1,56 @@
++<script setup lang="ts">
++import {computed, onBeforeUnmount, ref, shallowRef, watchEffect} from 'vue';
++import {M14_REBOUND_GROUPS, SavedReboundSession, type M14SavedState} from '../api/m14SavedRebound';
++import {renderSavedReboundReferences, reboundGroupLabels} from '../manager-selection/reboundPanelObservation';
++const state = shallowRef<M14SavedState>({phase: 'IDLE', result: null, error: '', group: 'pending', canPrevious: false});
++const host = ref<HTMLElement | null>(null);
++const session = new SavedReboundSession(next => {state.value = next;});
++const saved = computed(() => state.value.result?.status === 'SAVED_RESEARCH' ? state.value.result : null);
++function reload() {void session.load(state.value.group);}
++function onToggle(event: Event) {if ((event.currentTarget as HTMLDetailsElement).open && state.value.phase === 'IDLE') reload();}
++function day(value: string) {return `${value.slice(0, 4)}-${value.slice(4, 6)}-${value.slice(6)}`;}
++watchEffect(() => {if (host.value && saved.value) renderSavedReboundReferences(host.value, saved.value);}, {flush: 'post'});
++onBeforeUnmount(() => session.close());
++</script>
++<template>
++ <details id="m14-saved-rebound" class="m14-saved" @toggle="onToggle">
++  <summary>M14 独立超跌研究 · 已保存结果 · 展开只读</summary>
++  <section aria-label="M14 独立已保存研究结果">
++   <p>读取配置中精确绑定的 M14 原保存结果，独立于经理运行。切换分组和翻页固定同一运行与三份 SHA256；重新读取配置引用才会重新选择绑定。</p>
++   <p class="m14-boundary">只读研究，不触发行情采集、重算、生成候选或交易。SYNTHETIC 为合成输入，RECORDED_INPUT_REPLAY 为录制输入回放，均不证明自然运行或正式准入。</p>
++   <p class="m14-warning">待核数据/历史组保留历史缺口：此前 60 个交易日与前 5 日均量仍须核实。pending 不等于严格条件或近条件通过，也不表示正式候选。</p>
++   <div class="m14-controls" role="group" aria-label="M14 原研究分组">
++    <button v-for="group in M14_REBOUND_GROUPS" :key="group" type="button" :aria-pressed="state.group===group" @click="session.select(group)">{{ reboundGroupLabels[group] }} · {{ saved?.rebound.group_counts[group] ?? '未读取' }}</button>
++   </div>
++   <button type="button" @click="reload">重新读取 M14 配置引用</button>
++   <p v-if="state.phase==='IDLE'">尚未读取；展开后读取 M14 独立保存引用。</p>
++   <p v-else-if="state.phase==='LOADING'" role="status" aria-live="polite">正在读取 M14 已保存分组；旧行与显示身份已清空…</p>
++   <p v-else-if="state.phase==='CANNOT_CONFIRM'" role="alert">CANNOT_CONFIRM · 当前 M14 保存结果无法确认，未显示旧行。{{ state.error }}</p>
++   <template v-if="state.result?.status==='WAITING'">
++    <p role="status">WAITING · 尚未配置 M14 精确保存引用；不是分组为空，也不自动改读经理结果。</p>
++    <ul><li v-for="reason in state.result.reason_codes" :key="reason">{{ reason }}</li></ul>
++   </template>
++   <template v-if="saved">
++    <h3>保存信号日 {{ day(saved.signal_date) }} · 目标日 {{ day(saved.target_date) }}</h3>
++    <p>来源 {{ saved.source_kind }} · 保存状态 {{ saved.status }} · 输入类型 {{ saved.data_kind }} · 原执行类型 {{ saved.execution_kind }}</p>
++    <p>原运行 ID：{{ saved.reference.run_id }}</p>
++    <p class="m14-boundary">research_only=true；production_allowed=false；buy_gate_updated=false；orders_sent=false；natural_verified=false；formal_eligibility_verified=false。</p>
++    <div class="m14-pagination">
++     <button type="button" :disabled="!state.canPrevious" @click="session.previous()">M14 上一页</button>
++     <span>当前 {{ saved.entries.length ? saved.offset+1 : 0 }}–{{ saved.offset+saved.entries.length }} / {{ saved.matched_total }} 条 · 每页最多 32 条</span>
++     <button type="button" :disabled="!saved.next_cursor" @click="session.next()">M14 下一页</button>
++    </div>
++    <div ref="host" class="m14-rows"></div>
++    <p>本页已载入值 {{ saved.loaded_count }} 条；本分组未在本页载入值 {{ saved.not_loaded_count }} 条；本页之后尚余 {{ saved.remaining_entries }} 条。NOT_LOADED 保留原条目摘要，不当作空值。</p>
++    <details class="m14-identity"><summary>核对 M14 原保存引用与本页条目摘要</summary>
++     <dl><div v-for="(value,key) in saved.reference" :key="key"><dt>{{ key }}</dt><dd>{{ value }}</dd></div><div><dt>source_section_sha256</dt><dd>{{ saved.rebound.source_section_sha256 }}</dd></div></dl>
++     <p>原条目 SHA256 与安全展示值 SHA256 分别标识原值和展示投影；未提供原始字节位置。</p>
++     <ul><li v-for="entry in saved.entries" :key="entry.index">记录 {{ entry.index+1 }} · {{ entry.value_state }} · 原始 {{ entry.bytes }} bytes<br />原条目 SHA256：{{ entry.sha256 }}<br />展示投影 SHA256：{{ entry.projection_sha256 ?? '未载入展示值' }}</li></ul>
++    </details>
++   </template>
++  </section>
++ </details>
++</template>
++<style scoped>
++.m14-saved{margin:18px;border:1px solid #c8d3dd;border-radius:10px;background:#fff;color:#21384d}.m14-saved>summary{padding:18px;cursor:pointer;color:#254d71;font-weight:600;scroll-margin-top:16px}.m14-saved>summary:focus{outline:2px solid #254d71;outline-offset:4px}.m14-saved>section{padding:0 18px 18px}.m14-saved p{line-height:1.7;overflow-wrap:anywhere}.m14-boundary{padding:12px;background:#eef3f8;border-radius:6px}.m14-warning{padding:12px;background:#fff8e8;border-left:3px solid #ad791d}.m14-controls,.m14-pagination{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:14px 0}.m14-saved button{padding:8px 12px;cursor:pointer}.m14-controls button[aria-pressed=true]{background:#254d71;color:white}.m14-saved button:disabled{cursor:not-allowed;opacity:.55}.m14-identity{margin-top:16px}.m14-identity summary{cursor:pointer}.m14-identity dl{display:grid;gap:10px}.m14-identity dt{font-size:12px;color:#526579}.m14-identity dd{margin:4px 0;overflow-wrap:anywhere}.m14-identity li{margin:12px 0;overflow-wrap:anywhere}.m14-rows :deep(article){border:1px solid #d6dde5;border-radius:8px;padding:14px;margin:12px 0}.m14-rows :deep(p){line-height:1.65;overflow-wrap:anywhere}.m14-rows :deep(h4){font-size:1.05rem;margin:0 0 10px}.m14-rows :deep(summary){cursor:pointer}.m14-rows :deep(pre){white-space:pre-wrap;overflow-wrap:anywhere;font-size:.8rem}@media(max-width:650px){.m14-saved{margin:14px 12px}.m14-pagination{font-size:12px}}
++</style>
+--- /dev/null
++++ b/frontend/src/components/M14SavedRebound.spec.ts
+@@ -0,0 +1,63 @@
++import {afterEach, expect, it, vi} from 'vitest';
++import {cleanup, fireEvent, render, waitFor} from '@testing-library/vue';
++import M14SavedRebound from './M14SavedRebound.vue';
++import {saved, waiting, reference} from '../../tests/m14SavedReboundFixtures.mjs';
++const response = (value: unknown) => new Response(JSON.stringify(value));
++afterEach(() => {cleanup(); vi.unstubAllGlobals();});
++async function open(view: ReturnType<typeof render>) {
++ const details = view.container.querySelector<HTMLDetailsElement>('#m14-saved-rebound')!;
++ details.open = true; await fireEvent(details, new Event('toggle')); return details;
++}
++it('loads lazily, shows all five original counts and dates, and escapes saved row text', async () => {
++ const value = saved('pending', 0, 1);
++ value.entries[0].value = {code: 'SYNTHETIC_ONLY', name: '<script>test</script>', observed_session: 20261009, target_monday: 20261012, history_unknown_reasons: ['SYNTHETIC_HISTORY_MISSING']};
++ const fetcher = vi.fn(async () => response(value)); vi.stubGlobal('fetch', fetcher);
++ const view = render(M14SavedRebound); expect(fetcher).not.toHaveBeenCalled(); const details = await open(view);
++ await waitFor(() => expect(view.container.textContent).toContain('SYNTHETIC_ONLY'));
++ expect(view.container.querySelector('script')).toBeNull(); expect(view.container.textContent).toContain('<script>test</script>');
++ expect(view.container.textContent).toContain('保存信号日 2026-10-09 · 目标日 2026-10-12');
++ expect(view.getByRole('button', {name: '待核数据/历史 · 1'}).getAttribute('aria-pressed')).toBe('true');
++ expect(view.getByRole('button', {name: '严格条件研究观察 · 0'})).toBeTruthy();
++ expect(view.getByRole('button', {name: '近条件研究观察 · 0'})).toBeTruthy();
++ expect(view.getByRole('button', {name: '已排除观察 · 0'})).toBeTruthy();
++ expect(view.getByRole('button', {name: '未决观察 · 0'})).toBeTruthy();
++ for (const token of ['SYNTHETIC_HISTORY_MISSING', '60', 'natural_verified=false', 'formal_eligibility_verified=false', reference.run_id]) expect(view.container.textContent).toContain(token);
++ details.open = false; await fireEvent(details, new Event('toggle')); await open(view); expect(fetcher).toHaveBeenCalledTimes(1);
++});
++it('pins pagination and group changes, clears old rows while loading, and distinguishes empty from WAITING', async () => {
++ const requests: string[] = [];
++ let resolve!: (response: Response) => void;
++ vi.stubGlobal('fetch', vi.fn(async (url: string) => {
++  requests.push(url); const query = new URL(url, 'http://fixture.invalid').searchParams;
++  if (requests.length === 1) return response(saved());
++  if (query.has('cursor')) return new Promise<Response>(done => {resolve = done;});
++  return response(query.has('run_id') ? saved('strict') : waiting());
++ }));
++ const view = render(M14SavedRebound); await open(view);
++ await waitFor(() => expect(view.container.textContent).toContain('SYNTHETIC_ONLY_0'));
++ await fireEvent.click(view.getByRole('button', {name: 'M14 下一页'}));
++ expect(view.container.textContent).not.toContain('SYNTHETIC_ONLY_0'); expect(view.container.textContent).not.toContain(reference.run_id);
++ resolve(response(saved('pending', 32))); await waitFor(() => expect(view.container.textContent).toContain('SYNTHETIC_ONLY_32'));
++ const query = new URL(requests[1], 'http://fixture.invalid').searchParams;
++ for (const [key, value] of Object.entries(reference)) expect(query.get(key)).toBe(value);
++ expect(view.getByRole('button', {name: 'M14 上一页'})).not.toHaveProperty('disabled', true);
++ await fireEvent.click(view.getByRole('button', {name: '严格条件研究观察 · 0'}));
++ await waitFor(() => expect(view.container.textContent).toContain('原数组为 0 条'));
++ expect(view.container.textContent).not.toContain('SYNTHETIC_ONLY_32');
++ await fireEvent.click(view.getByRole('button', {name: '重新读取 M14 配置引用'}));
++ await waitFor(() => expect(view.container.textContent).toContain('M14_SAVED_REFERENCE_NOT_CONFIGURED'));
++ expect(view.container.textContent).not.toContain('原数组为 0 条'); expect(view.container.textContent).not.toContain(reference.run_id);
++});
++it('failed group reads clear evidence and unmount aborts the pending request', async () => {
++ let reject!: (reason: Error) => void; let signal: AbortSignal | null | undefined;
++ vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(response(saved())).mockImplementation((_url: string, init?: RequestInit) => {
++  signal = init?.signal; return new Promise<Response>((_resolve, fail) => {reject = fail;});
++ }));
++ const view = render(M14SavedRebound); await open(view);
++ await waitFor(() => expect(view.container.textContent).toContain('SYNTHETIC_ONLY_0'));
++ await fireEvent.click(view.getByRole('button', {name: '近条件研究观察 · 0'})); reject(new Error('/private/test'));
++ await waitFor(() => expect(view.getByRole('alert').textContent).toContain('M14_READ_FAILED'));
++ expect(view.container.textContent).not.toContain('/private/test'); expect(view.container.textContent).not.toContain('SYNTHETIC_ONLY_0');
++ await fireEvent.click(view.getByRole('button', {name: '重新读取 M14 配置引用'})); view.unmount(); expect(signal?.aborted).toBe(true);
++ reject(new DOMException('Aborted', 'AbortError'));
++});
+--- a/frontend/src/views/SavedManagerResultView.navigation.spec.ts
++++ b/frontend/src/views/SavedManagerResultView.navigation.spec.ts
+@@ -97,7 +97,7 @@
+ 
+ it('moves all four result entries to their actual heading and retains the requested run', async () => {
+   const requests = transport(); render(SavedManagerResultView); await ready();
+-  for (const [button, heading] of [['经理已保存结果', '经理候选股票'], ['超跌研究', '反弹研究观察'], ['美股驱动', '美股与港股映射'], ['公告研究股票', '公告研究股票']]) {
++  for (const [button, heading] of [['经理已保存结果', '经理候选股票'], ['经理同次运行超跌引用', '反弹研究观察'], ['美股驱动', '美股与港股映射'], ['公告研究股票', '公告研究股票']]) {
+     await fireEvent.click(screen.getByRole('button', { name: button }));
+     await waitFor(() => expect(document.activeElement).toBe(screen.getByRole('heading', { name: heading, level: 2 })));
+     await ready();
+--- /dev/null
++++ b/frontend/src/views/SavedManagerResultView.m14.spec.ts
+@@ -0,0 +1,32 @@
++import {afterEach, expect, it, vi} from 'vitest';
++import {cleanup, fireEvent, render, waitFor} from '@testing-library/vue';
++import SavedManagerResultView from './SavedManagerResultView.vue';
++import {saved, waiting} from '../../tests/m14SavedReboundFixtures.mjs';
++afterEach(() => {cleanup(); vi.unstubAllGlobals(); window.history.replaceState(null, '', '/');});
++it('M14 opens the real lazy independent saved component even when manager overview is unavailable', async () => {
++ const oldRun = '9'.repeat(32); window.history.replaceState(null, '', '/?run_id=' + oldRun);
++ const calls: string[] = [];
++ vi.stubGlobal('fetch', vi.fn(async (url: string) => {calls.push(url); return url.startsWith('/api/v5/source-bundle/rebound-saved') ? new Response(JSON.stringify(saved())) : new Response('{}', {status: 503});}));
++ const view = render(SavedManagerResultView);
++ expect(calls.filter(url => url.includes('/rebound-saved'))).toHaveLength(0);
++ const button = view.getByRole('button', {name: '超跌研究 · M14 已保存结果'});
++ expect(button).not.toHaveProperty('disabled', true);
++ await fireEvent.click(button);
++ const target = view.container.querySelector<HTMLDetailsElement>('#m14-saved-rebound')!;
++ await waitFor(() => expect(target.open).toBe(true)); await fireEvent(target, new Event('toggle'));
++ await waitFor(() => expect(target.textContent).toContain('SYNTHETIC_ONLY_0'));
++ expect(document.activeElement).toBe(target.querySelector('summary'));
++ expect((view.getByRole('textbox', {name: '运行 ID'}) as HTMLInputElement).value).toBe(oldRun);
++ expect(new URL(window.location.href).searchParams.get('run_id')).toBe(oldRun);
++ expect(view.getByRole('button', {name: '经理同次运行超跌引用'})).toHaveProperty('disabled', true);
++ expect(view.container.querySelector<HTMLDetailsElement>('#source-module-content')!.open).toBe(false);
++ for (const name of ['研究情报 · M04', '盘中研究 · M11', '视频复盘 · M12', '公开资料研究 · M16']) expect(view.getByRole('button', {name})).toBeTruthy();
++ await fireEvent.click(button); expect(calls.filter(url => url.includes('/rebound-saved'))).toEqual(['/api/v5/source-bundle/rebound-saved?group=pending']);
++});
++it('unbound independent M14 shows WAITING rather than a manager placeholder or a successful empty group', async () => {
++ vi.stubGlobal('fetch', vi.fn(async (url: string) => url.includes('/rebound-saved') ? new Response(JSON.stringify(waiting())) : new Response('{}', {status: 503})));
++ const view = render(SavedManagerResultView); await fireEvent.click(view.getByRole('button', {name: '超跌研究 · M14 已保存结果'}));
++ const target = view.container.querySelector<HTMLDetailsElement>('#m14-saved-rebound')!; await fireEvent(target, new Event('toggle'));
++ await waitFor(() => expect(target.textContent).toContain('M14_SAVED_REFERENCE_NOT_CONFIGURED'));
++ expect(target.textContent).not.toContain('原数组为 0 条'); expect(target.textContent).not.toContain('原运行 ID');
++});
+--- a/frontend/src/views/SavedManagerResultView.spec.ts
++++ b/frontend/src/views/SavedManagerResultView.spec.ts
+@@ -41,7 +41,7 @@
+  expect(managerRequests[2]).toContain('section=announcement_reviewed_analysis&projection=announcement_references');
+  expect(screen.queryByRole('table')).toBeNull();
+  expect(screen.queryByRole('link')).toBeNull();
+- await fireEvent.click(screen.getByRole('button',{name:'超跌研究'}));
++ await fireEvent.click(screen.getByRole('button',{name:'经理同次运行超跌引用'}));
+  expect(await screen.findByRole('heading',{name:'合成超跌公司 · 04321 · 严格条件研究观察'})).toBeTruthy();
+  expect(screen.queryByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeNull();
+  expect(screen.getByText('原分类 STRICT_REBOUND；分组理由：合成原分组理由。')).toBeTruthy();
+--- a/frontend/src/views/SavedManagerResultView.vue
++++ b/frontend/src/views/SavedManagerResultView.vue
+@@ -1,4 +1,5 @@
+ <script setup lang="ts">
++import M14SavedRebound from '../components/M14SavedRebound.vue';
+ import M16SavedResearch from '../components/M16SavedResearch.vue';
+ import M11SavedResearch from '../components/M11SavedResearch.vue';
+ import M12SavedVideo from '../components/M12SavedVideo.vue';
+@@ -15,6 +16,11 @@
+ const sourceDisclosure=ref<HTMLDetailsElement|null>(null);
+ const sourceSummary=ref<HTMLElement|null>(null);
+ const sourceExpanded=ref(false);
++const savedReboundHost=ref<HTMLElement|null>(null);
++async function openSavedRebound(){
++ const target=savedReboundHost.value?.querySelector<HTMLDetailsElement>('#m14-saved-rebound');
++ if(!target)return;target.open=true;await nextTick();focusAndReveal(target.querySelector<HTMLElement>('summary'));
++}
+ const publicResearchHost=ref<HTMLElement|null>(null);
+ async function openPublicResearch(){
+  const target=publicResearchHost.value?.querySelector<HTMLDetailsElement>('#m16-saved-research');
+@@ -110,7 +116,8 @@
+   <nav class="entry-nav" aria-label="功能入口">
+    <button type="button" :class="{active:!isAnnouncement&&!isRebound&&!isUsMapping}" :aria-current="!isAnnouncement&&!isRebound&&!isUsMapping ? 'page' : undefined" :disabled="!state.overview" @click="showManager">经理已保存结果</button>
+    <button type="button" :class="{active:isAnnouncement}" :aria-current="isAnnouncement ? 'page' : undefined" :disabled="!state.overview?.sections.announcement_reviewed_analysis" @click="selectSection('announcement_reviewed_analysis')">公告研究股票</button>
+-   <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">超跌研究</button>
++   <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">经理同次运行超跌引用</button>
++   <button type="button" aria-controls="m14-saved-rebound" @click="openSavedRebound">超跌研究 · M14 已保存结果</button>
+    <button type="button" :class="{active:isUsMapping}" :aria-current="isUsMapping ? 'page' : undefined" :disabled="!state.overview?.sections.us_mapping_research" @click="selectSection('us_mapping_research')">美股驱动</button>
+    <button type="button" aria-controls="m16-saved-research" @click="openPublicResearch">公开资料研究 · M16</button>
+    <button type="button" aria-controls="m11-saved-research" @click="openIntradayResearch">盘中研究 · M11</button>
+@@ -163,6 +170,7 @@
+    <summary ref="sourceSummary">源模块实际状态 · 点击展开基础数据、预选池与复盘</summary>
+    <SourceBundleStatus />
+   </details>
++  <section ref="savedReboundHost" aria-label="M14 独立超跌研究入口"><M14SavedRebound /></section>
+   <section ref="publicResearchHost" aria-label="M16 公开资料研究入口"><M16SavedResearch /></section>
+   <section ref="intradayResearchHost" aria-label="M11 盘中研究入口"><M11SavedResearch /></section>
+   <section ref="videoHost" aria-label="M12 视频复盘入口"><M12SavedVideo /></section>
+--- a/frontend/src/manager-selection/reboundPanelObservation.ts
++++ b/frontend/src/manager-selection/reboundPanelObservation.ts
+@@ -1,7 +1,7 @@
+ import type { JsonObject } from '../api/managerWorkspace';
+ const object=(value:unknown):JsonObject=>value!==null&&typeof value==='object'&&!Array.isArray(value)?value as JsonObject:{};
+ const label=(value:unknown):string=>value===null||value===undefined?'未知':String(value);
+-const day=(value:unknown):string=>typeof value==='string'&&/^\d{8}$/.test(value)?`${value.slice(0,4)}-${value.slice(4,6)}-${value.slice(6)}`:label(value);
++const day=(value:unknown):string=>{const text=typeof value==='number'?String(value):value;return typeof text==='string'&&/^\d{8}$/.test(text)?`${text.slice(0,4)}-${text.slice(4,6)}-${text.slice(6)}`:label(value);};
+ const strings=(value:unknown):string[]=>Array.isArray(value)?value.filter((v):v is string=>typeof v==='string'):[];
+ 
+ /** Full-row aggregate, never a formal screen or candidate count. */
+@@ -69,16 +69,26 @@
+   if(group&&row.near_failed_gate)node.append(cardEl('p',`原条件差值 ${cardNumber(row.near_gate_gap_value)}。`));
+   if(pending||group==='pending')node.append(cardEl('p',`待核原因：${group?label(row.history_unknown_reasons):cardText(row.history_unknown_reasons,'60日历史不足，不能完成严格或近条件判定。')}`));
+   if(group==='excluded')node.append(cardEl('p',`排除代码 ${label(row.exclusion_reason_code)}；排除理由：${label(row.reason_for_exclusion)}。`));
+-  node.append(cardEl('p',group?'独立读取时研究观察，未写入保存计划；单位、历史尺度与正式资格缺口保持原状。':'仅由已核验共享HK 0.2面板重算；研究筛选结果，不是买卖、下单或Stage门禁。'),cardDetails('该股筛选数值、差项与来源',group?withoutLocalPaths(row):row));
++  node.append(cardEl('p',group?'独立研究观察，未写入保存计划；单位、历史尺度与正式资格缺口保持原状。':'仅由已核验共享HK 0.2面板重算；研究筛选结果，不是买卖、下单或Stage门禁。'),cardDetails('该股筛选数值、差项与来源',group?withoutLocalPaths(row):row));
+   return node;
+ }
+-export function renderSavedReboundReferences(host:HTMLElement,page:import('../api/m18SavedResult').SectionPage):void{
+-  host.replaceChildren(cardEl('h3','超跌研究观察（同次运行保存响应）'));host.setAttribute('aria-label','同次运行超跌研究观察');
++/** Only the fields rendered here; independent owners need no invented M18 identity. */
++export interface SavedReboundPresentation {
++  source_kind?: string;
++  projection?: string;
++  group?: import('../api/m18SavedResult').ReboundGroup;
++  rebound?: import('../api/m18SavedResult').ReboundMetadata;
++  matched_total: number;
++  entries: Pick<import('../api/m18SavedResult').SavedEntry, 'index' | 'bytes' | 'sha256' | 'value_state' | 'reason' | 'value'>[];
++}
++export function renderSavedReboundReferences(host:HTMLElement,page:SavedReboundPresentation):void{
++  const independent=page.source_kind==='M14_OWNER';
++  host.replaceChildren(cardEl('h3',independent?'M14 独立已保存超跌研究':'超跌研究观察（同次运行保存响应）'));host.setAttribute('aria-label',independent?'M14 独立已保存超跌研究':'同次运行超跌研究观察');
+   const meta=page.rebound,group=page.group;
+   if(page.projection!=='rebound_references'||!meta||!group){host.append(cardEl('p','CANNOT_CONFIRM：研究观察尚未读取。'));return;}
+   const source=meta.source,observation=meta.observation;
+   host.append(cardEl('p',`外层状态 ${label(source.status)}；观察状态 ${label(observation.status)}；原计算状态 ${label(observation.original_computation_status)}。`),
+-    cardEl('p','这是独立读取时研究观察，不是保存计划消费或正式筛选。正式资格 CANNOT_CONFIRM，未改变 market_screen；单位和互联互通未核实，不能据研究分组推定可交易。'),
++    cardEl('p',independent?'这是 M14 原运行的独立已保存研究；读取不重新计算。正式资格 CANNOT_CONFIRM，未改变 market_screen；单位和互联互通未核实，不能据研究分组推定可交易。':'这是独立读取时研究观察，不是保存计划消费或正式筛选。正式资格 CANNOT_CONFIRM，未改变 market_screen；单位和互联互通未核实，不能据研究分组推定可交易。'),
+     cardEl('p',`原范围：${label(source.scope)}；eligible_screen=${source.eligible_screen===null?'null':label(source.eligible_screen)}。`),
+     cardEl('p',Object.entries(reboundGroupLabels).map(([key,title])=>`${title} ${meta.group_counts[key as import('../api/m18SavedResult').ReboundGroup]}`).join('；')+'。各原分组分开分页，不重复计入 cards 合并数组。'));
+   host.append(cardEl('p',`观察行情日 ${day(observation.observed_session)}；观察目标日 ${day(observation.target_trade_date)}。`));
