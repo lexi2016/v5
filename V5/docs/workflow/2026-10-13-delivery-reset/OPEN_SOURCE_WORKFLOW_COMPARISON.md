@@ -1,88 +1,106 @@
-# V5 工作流设计与成熟开源实践比较
+# V5 工作流设计与成熟开源实践比较（证据补件）
 
 日期：2026-10-13
 
-## 目的与边界
+## 范围
 
-本文只做架构研究与执行方案补充，不修改产品代码、不改变18模块目标、不改变PIT、交易、权限或凭据边界。
+本文为架构研究补件，不修改产品代码，不改变18模块、PIT、交易、安全、权限或凭据边界。
 
-基线：`PROJECT_EXECUTION_PLAN.md`（d9a484600f1db7acffbb5790d59e1e206f0cc01b）。当前计划要求保留18模块职责边界、P0-P5迁移路线，并优先完成 M13/M14/M15→M18 普通页面闭环。
+证据等级：
+- VERIFIED：实际读取的V5源码/官方文档。
+- INFERENCE：适配判断。
+- TODO：后续验收。
 
-## 外部案例选择
+## 外部官方来源（访问：2026-10-13）
 
-选择与V5约束最接近的三个方向：
+### Dagster
+官方：
+- https://docs.dagster.io/concepts/io-management/io-managers
 
-1. Apache Airflow
-   - 官方文档：https://airflow.apache.org/docs/
-   - 关注点：DAG调度、任务状态、重试、依赖编排。
+核验结论：IO manager用于分离业务计算和输入输出存储职责。
 
-2. Dagster
-   - 官方文档：https://docs.dagster.io/
-   - 关注点：软件定义资产、输入输出管理、可观察性。
+### Prefect
+官方：
+- https://docs.prefect.io/v3/concepts/caching
 
-3. Prefect
-   - 官方文档：https://docs.prefect.io/
-   - 关注点：任务状态、缓存、幂等恢复。
+核验结论：缓存键基于任务输入、代码定义、运行上下文，并要求结果持久化后复用。
 
-## 核心比较
+### Vite
+官方：
+- https://vite.dev/config/server-options
 
-|领域|V5当前设计|成熟实践|适用性|最小调整建议|
+核验结论：server.proxy提供开发期前后端路径代理，属于前端运行配置，不是业务接口层。
+
+## 六项比较
+
+|领域|V5当前证据|成熟实践证据|适用性|最小调整|
 |-|-|-|-|-|
-|模块职责|18模块按业务职责拆分，兼容层连接原owner/reader|Dagster强调资产边界和依赖声明|高|继续保持模块边界，不引入新平台|
-|不可变输入|run、identity、SHA、cold reader、保存产物|Dagster asset materialization强调持久资产；IO manager负责保存和加载|高|统一记录输入快照、产物引用，不改算法|
-|调度|P0 daily tick/dispatch，显式opt-in|Airflow通过DAG定义任务依赖和调度|中高|补充调度合同文档，不改现有dispatch语义|
-|重试恢复|ledger、CAS、readback、失败保留|Prefect cache/state机制强调持久结果和幂等恢复|高|继续强化run identity和幂等键|
-|页面接入|API只读读取保存结果|Dagster UI围绕资产状态展示|中|继续source→saved result链路|
-|配置隔离|模块配置、root、release identity|Airflow connections/config分离实践|中|保持现有配置合同，不引入全局配置中心|
+|模块职责|18模块按owner/reader/publication职责拆分；P0负责接线|Dagster IO manager分离业务计算与存储|适用原则|继续保持模块边界，不引入资产平台|
+|独立采集与不可变输入|V5使用run、identity、SHA、cold reader、immutable artifact|Dagster asset materialization强调持久化资产|适用原则|继续补模块输入输出合同|
+|幂等|V5使用ledger、CAS、generation、readback|Prefect cache key避免重复执行并复用持久结果|部分适用|保留V5业务identity，不采用通用cache替代|
+|调度/失败恢复|P0 daily tick、dispatch、ledger状态；失败不伪成功|Prefect state/cache恢复模型|部分适用|补状态文档，不替换P0 dispatch|
+|前后端只读接入|`V5/src/v5_shadow/module_api.py`提供只读API；`frontend/src/views/SavedManagerResultView.vue`读取保存结果|Vite proxy隔离开发请求路径|适用|保持source→saved result→page链路|
+|独立打包/配置|Python模块、配置合同、root/release identity|成熟项目分离运行配置与业务代码|适用|补entrypoint和配置说明，不引入平台|
 
-## 详细差距表
+## V5固定源码入口
 
-|V5证据|成熟实践|适用结论|调整|验收影响|
-|-|-|-|-|-|
-|`module_api.py`提供只读读取、身份校验、页面接口|Dagster IO manager分离存储读取职责|方向一致|不改接口，仅补文档化合同|页面必须验证SHA/run|
-|M18使用descriptor、bundle、reader|Dagster asset materialization|高度适配|保持immutable artifact模式|禁止页面触发计算|
-|P0 ledger记录run状态|Prefect cache key/state思想|部分适配|明确哪些状态可重用、哪些必须重新执行|避免重复owner执行|
-|daily dispatch显式lane|Airflow DAG依赖|部分适配|增加lane依赖说明|不改现有lane|
-|18模块独立owner/reader|Dagster asset graph|适配|维护模块职责图|避免平台化重构|
+已核路径：
 
-## 已可保留设计
+- `V5/src/v5_shadow/module_api.py`
+  - VERIFIED：只读模块API、identity校验、保存结果读取入口。
 
-1. 不可变产物 + SHA引用：符合成熟数据编排方向。
-2. reader与producer分离：符合资产读取/生成分离原则。
-3. 显式状态：READY、PARTIAL、CANNOT_CONFIRM优于隐藏失败。
-4. 独立模块合同：比重做统一大框架风险更低。
+- `V5/src/v5_shadow/daily_tick.py`
+  - VERIFIED：daily lane入口与显式opt-in控制。
 
-## 不采用的实践
+- `V5/src/v5_shadow/daily_owner_adapters.py`
+  - VERIFIED：owner消费、readback和publication接线。
 
-1. 不引入新的调度平台。
-   - 原因：V5已有P0 dispatch/ledger合同，替换会扩大范围。
+- `frontend/src/views/SavedManagerResultView.vue`
+  - VERIFIED：Vue保存结果展示入口。
 
-2. 不把18模块改造成单一资产图平台。
-   - 原因：会破坏已有owner、reader和验证边界。
+- `frontend/vite.config.ts`
+  - VERIFIED：Vite运行配置入口。
 
-3. 不把缓存结果当业务成功。
-   - 原因：V5要求真实输入、PIT、资格和readback验证。
+## 差距与调整结论
 
-## 实施建议（非代码变更）
+### 已可保留
 
-优先补齐：
+1. immutable artifact + SHA
 
-1. 每模块固定输入/输出/identity说明。
-2. 调度lane依赖和失败恢复说明。
-3. source→saved result→page验收清单。
-4. 运行状态与业务状态分离。
+理由：与资产持久化方向一致，但V5额外要求金融研究场景identity和PIT约束。
 
-不建议：
+2. producer/reader分离
 
-- 新建通用工作流平台。
-- 替换现有算法。
-- 改写PIT窗口。
-- 放宽失败状态。
+理由：与IO职责分离一致。
 
-## 证据等级
+3. ledger + CAS + readback
 
-已核：V5执行计划、GitHub源码路径、公开官方文档。
+理由：比普通缓存更适合需要审计的研究流程。
 
-推断：成熟实践对V5架构方向的启发。
+### 不采用
 
-待核：不同模块实际生产窗口、数据源稳定性、完整18模块终验。
+1. 不引入Airflow/Dagster/Prefect作为V5调度平台。
+
+理由：V5已有P0 dispatch、ledger和业务窗口合同。
+
+2. 不使用通用cache代替研究结果identity。
+
+理由：缓存命中不等于真实输入、资格和PIT满足。
+
+3. 不重构Vue/Vite体系。
+
+理由：当前只读结果页面已经存在明确source到saved result链路。
+
+## 验收影响
+
+需要继续验证：
+
+- 每模块 source snapshot → owner → immutable save → cold reader → API/page。
+- 调度状态与业务状态分离。
+- 页面刷新、日期切换不触发重新计算。
+- 缺数据保持WAITING/PARTIAL/CANNOT_CONFIRM。
+
+## 不产生代码调整的原因
+
+本补件发现的是架构原则差异，不是已确认产品缺陷。当前最小调整为文档化合同，而不是引入新框架或修改现有运行边界。
+
