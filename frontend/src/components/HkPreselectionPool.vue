@@ -4,6 +4,13 @@ import { HkPreselectionSession, type HkPreselectionState } from '../api/hkPresel
 
 const state = shallowRef<HkPreselectionState>({ phase: 'IDLE', result: null, error: '' });
 const session = new HkPreselectionSession(next => { state.value = next; });
+// The cold reader validates this method against the original producer receipt.
+// Its own model_weights_reverified=false does not undo producer verification.
+const productionMethod = computed(() => {
+ const producer = state.value.result?.committed_reference.producer_reference;
+ return producer && typeof producer === 'object' && !Array.isArray(producer)
+  ? (producer as Record<string, unknown>).production_method : undefined;
+});
 // Put identity fields first, then retain every other original field. Never sort rows or scores.
 const fields = computed(() => {
  const original = new Set((state.value.result?.artifact.rows ?? []).flatMap(row => Object.keys(row)));
@@ -27,12 +34,15 @@ onBeforeUnmount(() => session.close());
    <button type="button" @click="session.load()">读取 M06 已提交结果</button>
   </div>
   <p>只读已配置的 committed reference，按原始字段与原顺序展示全部 100 行。读取不会生成、重排或提交预选池。</p>
-  <p class="hk-boundary">仅供研究观察 · model_weights_reverified=false · formal_eligibility_verified=false · natural_verified=false。未重新验证模型权重，不代表正式准入、PIT 或自然运行验证。</p>
+  <p class="hk-boundary">仅供研究观察 · reader model_weights_reverified=false 仅表示本次读取不重验模型权重，不否定生产者已完成的模型验证。formal_eligibility_verified=false · natural_verified=false；不代表正式准入、PIT 或自然运行验证。</p>
   <p class="hk-boundary">research_only=true · production_allowed=false · buy_gate_updated=false · orders_sent=false。原始 stage_selection_eligible 字段不提升以上边界。</p>
   <p v-if="state.phase === 'LOADING'" role="status" aria-live="polite">正在读取 M06 已提交结果…</p>
   <p v-else-if="state.phase === 'NOT_CONFIGURED'" role="status">NOT_CONFIGURED · M06 尚未配置已提交引用。{{ state.error }}</p>
   <p v-else-if="!state.result" role="status">CANNOT_CONFIRM · 无法确认 M06 已提交结果。{{ state.error }}</p>
   <template v-if="state.result">
+   <p v-if="productionMethod === 'FROZEN_MODEL_PRODUCER'" class="hk-boundary">生产者回执 FROZEN_MODEL_PRODUCER：生产者已验证模型权重（producer model_weights_reverified=true）。</p>
+   <p v-else-if="productionMethod === 'EXISTING_VERIFIED_POOL'" class="hk-boundary">生产者回执 EXISTING_VERIFIED_POOL：生产者复用已验证预选池，未重新验证模型权重。</p>
+   <p v-else class="hk-boundary">无法确认生产者模型验证状态；以 producer_reference 对应的生产者回执为准。</p>
    <dl class="hk-identity">
     <div><dt>目标日期 target_date</dt><dd>{{ state.result.committed_reference.target_date }}</dd></div>
     <div><dt>信号日期 signal_date</dt><dd>{{ state.result.committed_reference.signal_date }}</dd></div>
