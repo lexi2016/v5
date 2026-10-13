@@ -22,3 +22,15 @@
 ## 仍未完成
 
 原同源完整窗口仍有缺口；此前跨源口径问题没有被采集或页面发布消除。正式准入、自然及完整模块验收均未通过，完整模块计数维持0/18。
+
+## Futu 三代码独立完整窗口补验（增量）
+
+本节同为DERIVED_SUMMARY，依据Mac消息 `msg_0b47eb1b0178a3a6016ace8327ff2487d1b63040313f80923d` 与 `msg_0b47eb1b0178a3a6016ace83caac4c87d18f103e002cf92e93`；未上传原始行情或重建原receipt。
+
+- 固定候选 [ad9a61d26c487748ba017b69250571ae5a38bbab](https://github.com/lexi2016/v5/commit/ad9a61d26c487748ba017b69250571ae5a38bbab)，Mac离线13/13 PASS。UTC2026-10-13 19:11:22.384–19:11:26.835唯一一次真实采集，exit0、无超时；同连接3请求，各单页，无重试/分页/订阅/交易。
+- HK.00001、HK.00376、HK.01191各覆盖原61/61交易日，均含20260925、OHLC异常0；两个指定异常日（00376的20260831、01191的20260724）在Futu原值中满足OHLC包络。仅记录校验结论，不上传原行情行。
+- 前后quota均96已用/4剩余，增量0。SDK10.06.6608，来源FUTU_HISTORY_K_DAY_AUTYPE_NONE_SDK_NATIVE，AuType.NONE_UNADJUSTED，价格/量/额scale1；UNIT_UNVERIFIED，币种未证明、provider finality未背书。
+- 732保护文件及原owner产物未变，无PyTDX混源、无改日历、无owner重跑或页面部署；repair_ready/owner_admission/formal/historical_pit均false，现役页面仍前述690pending。
+- 下一缺口：原owner要求原690成员集合一致，3码通过不等于全池；Futu剩余4代码quota不足全690。原量门同源比值不需据此乘100，但不能宣称单位或跨源等价已证。完整模块0/18不变。
+
+来源报告的原文件SHA256（不是本摘要SHA）：summary `e88b0972e02a08be2c59106b56a50981303e5669490d057ab7e46281830d7354`；supervisor `3fced8e9e5a19aa936b556f628e73dfc925e9ea47333458e8edff8fa9dd9096f`；result.safe `571d52e60c45712f5de57afef46f658898833bd9c117d27c7e51e0c93e38dc0c`。

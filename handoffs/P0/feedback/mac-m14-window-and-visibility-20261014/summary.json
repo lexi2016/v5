@@ -101,5 +101,64 @@
     "total_modules": 18,
     "raw_market_rows_uploaded": false,
     "private_absolute_paths_uploaded": false
+  },
+  "futu_canary_increment": {
+    "evidence_type": "DERIVED_SUMMARY",
+    "source_messages": [
+      "msg_0b47eb1b0178a3a6016ace8327ff2487d1b63040313f80923d",
+      "msg_0b47eb1b0178a3a6016ace83caac4c87d18f103e002cf92e93"
+    ],
+    "candidate": "ad9a61d26c487748ba017b69250571ae5a38bbab",
+    "offline_passed": 13,
+    "offline_total": 13,
+    "actual_capture": {
+      "start_utc": "2026-10-13T19:11:22.384Z",
+      "end_utc": "2026-10-13T19:11:26.835Z",
+      "exit_code": 0,
+      "history_requests": 3,
+      "pages_per_code": 1,
+      "retries": 0,
+      "timeout": false,
+      "quota_used_before_and_after": 96,
+      "quota_remaining_before_and_after": 4,
+      "quota_delta": 0,
+      "codes": [
+        "HK.00001",
+        "HK.00376",
+        "HK.01191"
+      ],
+      "required_sessions_each": 61,
+      "covered_sessions_each": 61,
+      "all_include_20260925": true,
+      "ohlc_errors": 0,
+      "specified_two_anomaly_dates_valid": true
+    },
+    "source_contract": {
+      "name": "FUTU_HISTORY_K_DAY_AUTYPE_NONE_SDK_NATIVE",
+      "sdk": "10.06.6608",
+      "adjustment": "AuType.NONE_UNADJUSTED",
+      "price_scale": 1,
+      "volume_scale": 1,
+      "amount_scale": 1,
+      "unit_status": "UNIT_UNVERIFIED",
+      "currency": "NOT_PROVEN",
+      "provider_finality": "NOT_ATTESTED"
+    },
+    "protected_files_unchanged": 732,
+    "owner_artifacts_unchanged": true,
+    "mixed_with_pytdx": false,
+    "calendar_changed": false,
+    "owner_rerun": false,
+    "deployed": false,
+    "repair_ready": false,
+    "owner_admission": false,
+    "formal": false,
+    "historical_pit": false,
+    "next_gap": "Original owner requires exact original 690-member set; three-code success is not full-pool readiness. Four remaining code slots cannot cover 690. Same-source ratio gate does not justify multiply-by-100 or prove units.",
+    "reported_original_sha256": {
+      "summary": "e88b0972e02a08be2c59106b56a50981303e5669490d057ab7e46281830d7354",
+      "supervisor": "3fced8e9e5a19aa936b556f628e73dfc925e9ea47333458e8edff8fa9dd9096f",
+      "result_safe": "571d52e60c45712f5de57afef46f658898833bd9c117d27c7e51e0c93e38dc0c"
+    }
   }
 }
