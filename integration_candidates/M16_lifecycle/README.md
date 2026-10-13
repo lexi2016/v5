@@ -164,3 +164,93 @@ collection, live provider/network, model calls, natural triggering and complete
 M16 business acceptance are NOT_RUN. Real official PDFs and legal candidate/input
 binding remain external evidence gaps. Formal/PIT/trading gates remain unchanged.
 This is an engineering lifecycle candidate, not full module acceptance.
+
+## Follow-on: prepare a new input from an already-saved M08 stage
+
+`m16_prepare_stage.py` closes the missing input-export boundary. It does not
+reconstruct an old manager input from product rows. Historical product input
+source digests are not treated as file hashes. A new observation file and its
+own byte SHA are prepared from a fully verified M08 saved stage.
+
+The existing M08 `hk_stage_observed.py read --include-artifact` is reused
+byte-for-byte, with its 58-file read-only dependency closure from M08 commit
+`01f1a6347722081cbbf97b54204bf033e6d01938`. Its read-entry blob remains
+`21182642efc71dda9532629597984bce8dfd8ce4`, the same as the previously deployed
+observed reader. `M08_READONLY_DEPENDENCY.json` pins every dependency. No M08
+producer, selector, importer, source-root modification, network or model is run.
+Only the original read verification of a named committed import is invoked.
+
+From this candidate directory, use the existing exact observed-reference JSON
+(`v5.hk_stage_observed_reference.v1`) and the existing M08 recorded root:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m v5_shadow.m16_prepare_stage \
+  --recorded-root /absolute/existing/m08-recorded-root \
+  --reference /absolute/existing/exact-m08-reference.json \
+  --output-directory /absolute/new/private-m16-preparation
+```
+
+The output directory must not already exist, its parent must exist, and it must
+be separate from the M08 store and source package. This command only accepts
+`HK_CONNECT / STAGE_0935_0940` and the reference's original date/run. It does not
+follow latest pointers, choose another date, rescan, fill missing fields, or
+accept rows copied from a manager product.
+
+The original reader first verifies import/receipt identities, exact artifact CSV,
+manifest and receipt hashes, original envelope/CSV consistency, algorithm/source
+identities and safety boundaries. The exporter then preserves the complete
+artifact and every complete row, adding only original-contract date/status
+aliases and observed-only limitations. Original ranks, source timestamps,
+source status, raw-artifact digest, artifact ID, eligibility and gaps are retained.
+The original M16 input contract validates the result without constructing a
+manager service. Empty rows or missing/late timestamps remain blocked; there is
+no fallback to product rows or reconstructed identity.
+
+Outputs are local-only:
+
+- `observation.json`: the new original-contract-compatible input. Its SHA-256
+  is printed as `input_file_sha256`, distinct from the original
+  `raw_artifact_sha256` source digest and the original CSV file SHA.
+- `receipt.json`: final preparation marker, `PREPARED_NOT_RUN`, carrying the
+  exact M08 reference/provenance, all three relevant SHA roles, complete row
+  count, newly derived M16 contract identity and explicit false job/network/
+  model flags. It makes no claim to the missing historical manager input or
+  its product identity. An incomplete directory without a receipt is not ready.
+
+Do not upload these private output files automatically. The new identity is
+calculated by the original M16 contract from this new input, not supplied by the
+caller. Historical/observed-only/PIT-false boundaries are retained.
+
+For separate, authorized read-only service binding, use the printed *new file*
+SHA and `observation.json` with the existing runtime entrypoint:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m v5_shadow.m16_runtime \
+  --runtime-root /absolute/separate/m16-runtime \
+  --input /absolute/new/private-m16-preparation/observation.json \
+  --input-sha256 <printed-input_file_sha256> --port 8816
+```
+
+Leave producer disabled. This creates no manager job, and does not make the old
+product magically match. Actual ensure/provider work is a separate operation.
+M08 writes and P0 routing/deployment remain outside this candidate's changes.
+
+Targeted preparation verification (12/12 PASS, exit 0, current cloud Python):
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover \
+  -s tests -p test_prepare_stage.py -v
+```
+
+These tests use a clearly synthetic, hand-serialized saved trio and the actual
+unchanged M08 cold reader. They do not run a selector/store publisher or manager
+producer. Positive tests verify full row/field preservation, three distinct SHA
+roles, original M16 normalization, startup-reader compatibility, command output
+and byte-for-byte source preservation. Negative tests cover wrong stage/date,
+trio tampering, source-write attempts, existing-output overwrite, symlink,
+dependency pin, duplicate JSON, empty stage and missing/post-cutoff timestamps.
+
+The earlier 31 lifecycle tests and their successful Mac run remain separate
+baseline evidence, not rerun or added to this round's count. Actual historical
+M08 export and read-only service binding on Mac remain pending this fixed
+candidate; no new business result, external PDF or production success is claimed.
