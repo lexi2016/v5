@@ -1,0 +1,71 @@
+{
+  "record_type": "DERIVED_SUMMARY_NOT_ORIGINAL_RAW_RECEIPT",
+  "date_utc": "2026-10-13",
+  "recorder_executed_work": false,
+  "m14": {
+    "candidate": "c52aca63e7aac5a1f450bd5d1e11ae805fe0cb31",
+    "owner_baseline": "884548fea0a0056483e8175564eaee015a964023",
+    "offline_passed": 18,
+    "capture_window_utc": [
+      "17:58:16.187751",
+      "17:58:17.039023"
+    ],
+    "connections": 1,
+    "code_requests": 3,
+    "bars_per_response": 120,
+    "retries": 0,
+    "target_keys": 11,
+    "covered_keys": 10,
+    "missing_key": "HK.03469/20261012",
+    "protected_files_unchanged": 726,
+    "decoder_available_keys": "PASS",
+    "decoder_all_keys": "RAW_REPAIR_EXACT_KEYS_MISSING",
+    "panel_sha256": "5f278c2d4d106f1c7085fc44cba89dab28f9ba91bc63de6fcf00ed86b3f45b51",
+    "panel_manifest_sha256": "b4857921d9c9333c3ee4a2f774f79c2ec3b6ba2b0de2063b97f55ddb869d7bb7",
+    "mixed_historical_sources": true,
+    "trade_scaling_proven": false,
+    "price_basis": "NOT_PROVEN",
+    "volume_unit": "NOT_PROVEN",
+    "mixed_source_repair_stopped": true,
+    "repair_ready": false,
+    "owner_run": false,
+    "batch_same_source_collection": "NOT_RUN_CODE_PREPARATION_ONLY",
+    "comparison_text_is_original_bytes": false
+  },
+  "m15": {
+    "candidate": "f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af",
+    "environment": {
+      "python": "3.14.6",
+      "pandas": "2.3.3",
+      "pyarrow": "24.0.0",
+      "declared_ranges": "MATCH",
+      "timezones": "HK_SHANGHAI_NEW_YORK_AVAILABLE"
+    },
+    "first_attempt": {
+      "start_utc": "18:09:24.155176",
+      "end_utc": "18:09:30.681644",
+      "passed": 19,
+      "sandbox_loopback_errors": 1,
+      "exit_code": 1
+    },
+    "single_test_retry": {
+      "start_utc": "18:09:51.908973",
+      "end_utc": "18:09:52.490063",
+      "passed": 1,
+      "exit_code": 0
+    },
+    "new_tests_with_pass_evidence": 20,
+    "old40_node_build_rerun": false,
+    "release_files_verified": 530,
+    "current_candidate_files_unchanged": 544,
+    "uv_lock_sync": "NOT_RUN",
+    "dependencies_installed": false,
+    "product_or_declarations_changed": false,
+    "real_source_or_owner_run": false
+  },
+  "source_message_ids": [
+    "msg_0b47eb1b0178a3a6016ace7160b68487d19d22cafc8acee64c",
+    "msg_0b47eb1b0178a3a6016ace72b7385887d1b8044941be2211f3",
+    "msg_0b47eb1b0178a3a6016ace7410cf9887d1a670f26ecc8f0b43"
+  ]
+}

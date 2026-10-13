@@ -71,7 +71,7 @@
 |A2 M03来源|固定efeaeb8完整候选已核75 blob/74 manifest，Mac release exit 0、新定向23/23 PASS、0 skip；原48项未重跑|真实provider/network、HTTP/DOM、发布及自然NOT_RUN；需适用US session与合法输入，新闻不能替代行情|复用离线CLI/持久化恢复证据，后续按授权验真实三件、P0/M15消费及服务页面；不把合成transport当真实采集|
 |A3 M14真实页|fac269隔离已过；23:03固定组合现役切换PASS，690行22页HTTP/DOM及11路200/JSON/旧manager身份过|native visual NOT_RUN，旧超时根因未证；独立公告请求曾503后200，不称无间歇故障|保留新预览及旧61236回退，继续剩余真实资格/视觉/自然验收，不重owner或放宽等待|
 |A4 M13公告|完整目录/正文/capture/审阅决策输入/导入/保存reader代码，先消费已有合法产品|新revision缺真实review决定时不能代填；缺决策不阻止离线合同与页面代码|原输入→已审核产品→消费引用同SHA；详情/分页失败状态和cutoff可定位|
-|A5 M15映射|f7dd8e63已核531 blob/530 manifest，Mac新20 Python/7 Node/typecheck/build PASS；原40复用云证未重跑|现有pandas3.0.5/pyarrow25.0.1超声明上限，锁依赖NOT_RUN；真实provider/资格/DOM/部署/自然未执行|保留原依赖上限，另证锁环境，再按授权核真实两路径与P0消费，不将隔离合成检查称全验收|
+|A5 M15映射|f7dd8e63已核531 blob/530 manifest，Mac新20 Python/7 Node/typecheck/build PASS；原40复用云证未重跑|合规范围3.14.6/2.3.3/24已补20项通过证据，uv.lock未同步；真实provider/资格/DOM/部署/自然未执行|保留原依赖上限，另证锁环境，再按授权核真实两路径与P0消费，不将隔离合成检查称全验收|
 |A6 P0/M18|请求准备5c327e已Mac40/40及同target14 WAITING_SOURCES/exit2；原KeyError保留|M13未消费、M14 690pending非正式筛选、M15 NOT_RUN；request/template null|复用已修拒绝路径，补合法三策略原消费后再验真实请求/经理保存；不将正常WAITING算业务通过|
 |A7 M04支撑|在已过完整编排上补首批13/15真正需要的来源/取得时间/正文引用缺口|缺历史取得时间不回填；未授权外传不做|原材料reader提供真实正文/来源/时点或明确UNKNOWN，供三策略同SHA消费|
 
@@ -253,17 +253,19 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **下一条完整交付：** 保留新预览与完整成功/失败证据，后续只处理剩余确证故障及原生视觉、合法输入/资格/自然与单模块验收；不为重试成功补造旧故障根因，不重owner或覆盖旧经理日期。
 - **验收标准：** 新进程原reader与API每页合并结果同run/SHA，无漏重/截断；690待核和历史不足清晰，非正常空候选；错ref/date/私有路径不泄露、日期切换清旧、GET无生成，旧M18/其他17保持且可回退。
 - **责任与交接：** P0保持固定组合现役发布；预览54780/PID3345、source56563/PID3337，旧61236留回退，M02 generation18327及V4/保护进程保持。Mac末次15:14:19 UTC健康200且进程存活；未改产品或400×100ms等待条件。剩余异常按原日志交唯一实现者，不推断根因。
+- **有限canary与来源口径问题（北京时间2026-10-14 01:58–02:04）：** 固定c52aca63e7aac5a1f450bd5d1e11ae805fe0cb31离线18 PASS，真实3码各120 bars、原端点一次连接无重试，11键仅覆盖10，缺HK.03469/20261012；原decoder10键PASS/全11键missing，726保护文件不变。与旧panel比较发现混合历史来源及trade显著差异，单位/price basis未证，不能乘100或混补；已停止混源修复，仅准备同源批量/窗口代码，尚未执行，不计资格或全验收。[派生摘要证据](../../../../handoffs/P0/feedback/mac-m14-canary-m15-environment-summary-20261014/README.md)。
 
 ### M15 美股到港股映射｜P1
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca4b1c-7bac-83ec-878c-d1fb0bd37b38)；`dev/m15-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
 - **已有代码与证据：** [1dede80b](https://github.com/lexi2016/v5/commit/1dede80b4ff18781849e87e85ca693890ed57979)；[页面证据](https://github.com/lexi2016/v5/commit/d53e0820318462806d9e67dae1818bb684b38ade)。 [最终完整候选f7dd8e63](https://github.com/lexi2016/v5/commit/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af)；[候选README](https://github.com/lexi2016/v5/blob/f7dd8e63a7c9fac67ad1cd84b3d6ebc2dbced5af/integration_candidates/M15_mapping/README.md)。 [Mac原回执](../../../../handoffs/P0/feedback/mac-m15-f7dd-isolated-20261013/result.json)。
 - **已验证层级：** 原四关系/三HK保存读回与页面历史保留；最终f7dd8e63已531 blob/530 manifest核验，RELEASE SHA-256为8cb4cd4db7b9e8dccba527ec844dde9f7787d54ac1dd88cae0ded97e6db23507。Mac新增20 Python与7 Node、typecheck/build通过，候选字节未变；原40项复用此前云端证据，未在Mac重跑。两条原cold reader在合成fixture上MATCHED；新候选真实provider/源资格/真实DOM/部署/自然均未执行，完整0。
-- **未完成缺口：** Mac隔离合成检查已通过，但Python 3.14.6环境使用pandas 3.0.5、pyarrow 25.0.1，超过README声明上限；locked dependency validation为NOT_RUN，不得为通过而改依赖上限。真实snapshot/正文span/取得时点与HK身份、PIT/资格、真实DOM及发布仍待验，新闻三件不能替代行情snapshot。
+- **未完成缺口：** 首轮Mac使用超声明版本的历史保留；现已找到满足声明范围的3.14.6/2.3.3/24环境，新增20项各有通过证据（19初次PASS＋1沙箱loopback单项补跑PASS）。uv.lock未同步，完整锁安装不冒称通过；真实snapshot/正文span/取得时点与HK身份、PIT/资格、真实DOM和发布仍待验。
 - **依赖：** M03同session行情、原种子/registry；M04原主体/正文/命题/真实可用时点及M02 native/目标资格；供M18。种子daily和材料（行业/主题、个股）路径分别验。
-- **下一条完整交付：** 复用f7dd8e63的20 Python/7 Node/typecheck/build隔离证据；在声明依赖范围内另证锁环境，不安装或放宽依赖来伪装本次已通过。按实际授权推进真实两路径输入→原reader保存冷读→P0/M18及普通页消费；不回退中间0d53或重写已过算法。
+- **下一条完整交付：** 复用f7dd8e63既有Node/typecheck/build与最新合规范围环境20项证据，不再把已消除的版本范围缺口当阻塞；按实际授权与原窗口验M03真实三件和两路径原消费、P0/M18及普通页。uv.lock/完整安装另记，不提前采集或owner。
 - **验收标准：** 两路径各有真实结果或按原合同准确拒绝，保存/普通页同身份；原范围外未知、目标资格和自然身份不变，M18同session合法消费，下一适用session/回滚过。
 - **责任与交接：** M15唯一实现者保留最终固定候选与依赖声明；Mac隔离检查回执已到，锁依赖/真实源/真实DOM/部署另行验收。P0负责必要标准引用与M18展示接线，不把合成或云端历史结果计为真实生产。
+- **环境复验摘要（2026-10-13 18:09 UTC）：** 现有Python3.14.6/pandas2.3.3/pyarrow24.0.0及三时区符合README；首次19 PASS/1沙箱loopback错误、exit1，仅该项补跑PASS/exit0，20项各有证据而非一次全绿。530 release核验，544现有文件字节不变；旧40/Node/build未重跑，未安装/改声明/同步uv.lock，新采集及owner未运行。[派生摘要](../../../../handoffs/P0/feedback/mac-m14-canary-m15-environment-summary-20261014/summary.json)。
 
 ### M16 经理候选公开资料任务｜P4
 
