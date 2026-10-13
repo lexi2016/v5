@@ -1,0 +1,67 @@
+{
+  "evidence_type": "DERIVED_SUMMARY",
+  "provenance": "Transcribed from the Mac task's final assistant message; not a raw receipt and not tests executed by this documentation writer.",
+  "source": {
+    "thread_id": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+    "message_id": "msg_0b47eb1b0178a3a6016ace7a63a8e487d1b7c70ae057a051de",
+    "candidate_commit": "02193d90221b24f59b0678fc3035eaa128791259",
+    "reported_result_safe_sha256": "ff419cb48d2b76a010fcb5f5a6c6875c021c2337ea01ea866b49ce22c1933912"
+  },
+  "capture": {
+    "status": "CAPTURED",
+    "exit_code": 0,
+    "run_id": "1896a7a023d64143b682c5a410adeb43",
+    "started_at_utc": "2026-10-13T18:24:05.309966Z",
+    "finished_at_utc": "2026-10-13T18:36:25.267216Z",
+    "duration_seconds": 739.96,
+    "new_requests": 687,
+    "new_successes": 687,
+    "reused_canary_receipts_byte_identical": 3,
+    "total_successful_receipts": 690,
+    "complete_response_rows": 80792,
+    "failed": 0,
+    "unknown": 0,
+    "not_executed": 0,
+    "retries": 0,
+    "connections": 1,
+    "minimum_request_start_interval_seconds": 1.046427
+  },
+  "coverage": {
+    "original_missing_keys": 2574,
+    "covered_keys": 2223,
+    "remaining_missing_keys": 351,
+    "remaining_codes": 24,
+    "known_still_missing": "HK.03469/20261012",
+    "zero_filling": false
+  },
+  "verification": {
+    "batch_offline_passed": 28,
+    "batch_offline_total": 28,
+    "preparer_passed": 7,
+    "preparer_total": 8,
+    "preparer_failure": "Hard-coded temporary-directory symlink assumption on Mac; candidate unchanged.",
+    "physical_path_equivalent_check": "PASS",
+    "actual_preparation": "690 members / 2574 missing keys prepared",
+    "checkpoint_resume_readonly_audit_exit_code": 0,
+    "protected_files_unchanged": 732,
+    "protected_day_files_included": 714
+  },
+  "reported_source_artifact_sha256": {
+    "plan": "d55c91362bdb6b895face0896e5ff411959196ccc1af7cb2c410be4de71c3166",
+    "round_result": "a680e358a656bf875f888cbc10063ae0f5a1bb3a0c739735b00003ec80a8ab09",
+    "checkpoint": "6a932ff96382486ff069085d71d0a5ec149c9b6630fce5af1ca86356fad9f112"
+  },
+  "limits": {
+    "repair_ready": false,
+    "repair_executed": false,
+    "owner_executed": false,
+    "published": false,
+    "formal_admission": false,
+    "natural_verified": false,
+    "full_module_acceptance": false,
+    "same_source_adapter": "Still in development; no downstream result claimed.",
+    "cross_source_trade_units_and_price_basis": "Still unproven; capture success does not resolve prior mixed-source discrepancies.",
+    "raw_market_data_uploaded": false,
+    "private_absolute_paths_uploaded": false
+  }
+}
