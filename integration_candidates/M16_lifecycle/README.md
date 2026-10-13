@@ -299,3 +299,56 @@ Run all candidate tests with the existing environment:
 `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m unittest discover -s tests -v`
 Then Mac may verify the same cached whole documents through the existing service
 integration. That separate verification determines final product readiness.
+
+## Offline saved-PDF recovery (after parser repair)
+
+Existing owner paths were inspected: `retry` calls `ensure(force=True)`, whose
+worker recollects sources; `ensure_events` collects events; `get` only reprojects
+stored facts. None is an offline PDF reparse-and-commit entry point.
+
+`python -m v5_shadow.m16_reparse_saved` now supplies that narrow recovery. It
+never constructs a provider, calls ensure/retry/events, or downloads. The original
+input JSON and its file SHA remain mandatory; product rows cannot reconstruct
+missing input. Pin the current product using original `contracts.sha256_json`
+(canonical object SHA, not raw file SHA). The original store's `read_product`
+returns that object. Recovery refuses a different input identity/source digest,
+changed product, missing issuer mapping/directory audit, later-than-cutoff filing,
+missing or changed cached envelope/PDF, mixed ownership, or no usable facts.
+
+From the candidate directory, with existing absolute paths and verified hashes:
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m v5_shadow.m16_reparse_saved \
+  --runtime-root "$M16_RUNTIME_ROOT" \
+  --input "$M16_ORIGINAL_INPUT" --input-sha256 "$M16_INPUT_FILE_SHA256" \
+  --target-date "$TARGET_DATE" \
+  --expected-product-sha256 "$ORIGINAL_CANONICAL_PRODUCT_SHA256" \
+  --code HK.02583 --code HK.01081 --code HK.00376
+```
+
+Default is a read-only preview, including parsing in memory with no parsed-cache
+writes. Only adding `--apply` enables version-2 parsed-cache writes and a new
+recovery generation. All selected sources are validated first. Recovery is
+all-or-nothing for product publication; a missing or still-unparseable selected
+PDF keeps the original product visible. A failed attempt may retain safe new
+parse-cache entries but never substitutes a fabricated product.
+
+The original `MaterialTransport.parsed`, recommendation/financial row builders,
+`ManagerResearchStore.admit_job`, `write_job`, and `commit_result(merge=...)` are
+reused. Compare-and-publish checks the pinned product again inside the original
+input-key lock; active owner jobs and cancellation block publication. Recovery
+uses a separate job ID/generation so original job records are retained. Its
+receipt includes the complete previous product, original job and receipt,
+PDF/envelope digests and parser version. Old material and version-1 cache bytes
+are not deleted. Existing cutoff, input/source identity, original generation
+time, retrieval/publication timestamps, historical availability and news/event
+records remain intact. Selected financial recommendations use the original
+builder and original generation time; this command does not rerank other rows.
+HK.02915 is outside this recovery scope and remains unchanged.
+
+Tests seed zero-fact results using the actual owner lifecycle with synthetic
+PDF bytes/offline transport, then exercise preview, apply, cache reuse, original
+record retention, unchanged unmatched row/news/PIT, missing materials, input
+and product digest failures, cancellation, an independently committed competing
+generation, active-owner exclusion, and receipt-write failure. Full-document
+Mac verification is separate and was not claimed while its executor was offline.

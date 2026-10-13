@@ -1,5 +1,5 @@
 {
-  "base_commit": "2e49a397d99de8b0315628c97c01a4fd1a3a823a",
+  "base_commit": "931c3ed90acf5473cf4ed0fdfc479667581e8a87",
   "scope": "integration_candidates/M16_lifecycle",
   "files": [
     {
@@ -10,9 +10,9 @@
     },
     {
       "path": "README.md",
-      "bytes": 17371,
-      "sha256": "eb799c3824da74bcb4ab695dc7ba76fbc86d7a69c040d20f5602562a0a90dc7c",
-      "git_blob_sha": "2d0844cfb1d55d2688529c1039a28684126533a8"
+      "bytes": 20582,
+      "sha256": "29cbe6ba005b472a8c59b14cef821bbf98fb8d03a0c30907d5270814dcca9791",
+      "git_blob_sha": "703fc8cba86cdd2354e6d0ae9716bfe3d97a25e0"
     },
     {
       "path": "source/PACKAGE_CHECKS.json",
@@ -1239,6 +1239,12 @@
       "git_blob_sha": "6578219b1be65b3f9dd09908bd750cd199c47a44"
     },
     {
+      "path": "src/v5_shadow/m16_reparse_saved.py",
+      "bytes": 13926,
+      "sha256": "db0f1e7f4dcd6ff825c0603786aae45901ed86bc5f07281c4af2b29cbfd6a8e2",
+      "git_blob_sha": "78ccf356a34a984f1da25f48fd97c577b5ba0782"
+    },
+    {
       "path": "src/v5_shadow/m16_router.py",
       "bytes": 5195,
       "sha256": "d21bb1deec00b85e9eb36f351c88bade35a4d8be21a8ced364bd2dc3e010cc95",
@@ -1309,6 +1315,12 @@
       "bytes": 6593,
       "sha256": "8d534b9622d3780db19b7ad7e99cf6b8d49ec47cbcdca822b7a5048bc5638f8c",
       "git_blob_sha": "467d0ea4061965b9a1e7f214ce69d6dd342df593"
+    },
+    {
+      "path": "tests/test_reparse_saved.py",
+      "bytes": 10971,
+      "sha256": "ee1ba7f978db1351e3ec33cae3882487cc62fe23df0334f32afb1d0a1ccf4f74",
+      "git_blob_sha": "512dce74871889728b98cfdd222238d9e6718696"
     }
   ]
 }

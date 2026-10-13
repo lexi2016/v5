@@ -1,0 +1,203 @@
+"""Explicit offline PDF recovery. No provider construction, ensure, or transport.
+
+Reads original input/product/material identities, previews by default, and uses
+original admission + commit_result fencing only on explicit apply.
+"""
+from __future__ import annotations
+import argparse
+from copy import deepcopy
+from datetime import datetime
+from hashlib import sha256
+import importlib
+import json
+from pathlib import Path
+import re
+from uuid import uuid4
+
+from .manager_loader import load_owner
+from .m16_runtime import closure, PinnedObservationReader
+
+ALLOWED_CODES = frozenset({'HK.02583', 'HK.01081', 'HK.00376'})
+
+
+def _module(name):
+    return importlib.import_module('m16_owner_manager_research.' + name)
+
+
+def reparse_saved(*, runtime_root: Path, input_path: Path, input_sha256: str,
+                  target_trade_date: str, expected_product_sha256: str,
+                  codes: list[str], apply: bool = False) -> dict:
+    """Reparse only selected, already-matched PDFs; never repair issuer identity."""
+    if not runtime_root.is_absolute() or not runtime_root.is_dir():
+        raise ValueError('M16_EXISTING_RUNTIME_REQUIRED')
+    if any(p.is_symlink() for p in (runtime_root, *runtime_root.parents)):
+        raise ValueError('M16_RUNTIME_SYMLINK_REFUSED')
+    for relative in ('jobs','products','receipts','materials','materials/index','materials/blobs'):
+        member = runtime_root / relative
+        if not member.is_dir() or member.is_symlink():
+            raise ValueError('M16_INITIALIZED_RUNTIME_REQUIRED')
+    if not codes or len(codes) != len(set(codes)) or not set(codes) <= ALLOWED_CODES:
+        raise ValueError('M16_REPARSE_CODE_SCOPE')
+    if not re.fullmatch('[0-9a-f]{64}', expected_product_sha256):
+        raise ValueError('M16_PRODUCT_SHA_REQUIRED')
+    components = load_owner(closure())['components']
+    contracts, service, provider = (_module(n) for n in ('contracts','service','hkex_provider'))
+    transport, materials, parser = (_module(n) for n in ('material_transport','materials','pdf_parser'))
+    original = PinnedObservationReader(input_path, input_sha256).read(target_trade_date)
+    data = contracts.normalise_observation_input(original)
+    store = components.store_class(runtime_root)
+    date, identity = data['target_trade_date'], data['input_identity']
+    product = store.read_product(date, identity)
+    digest = contracts.sha256_json
+    if product is None or digest(product) != expected_product_sha256:
+        raise ValueError('M16_PRODUCT_IDENTITY_OR_SHA_MISMATCH')
+    for key in ('target_trade_date','input_identity','input_source_sha256','cutoff_at','stage_id','market','input_row_count'):
+        if product.get(key) != data.get(key):
+            raise ValueError('M16_PRODUCT_INPUT_BINDING_MISMATCH')
+    if product.get('historical_system_available') is not False:
+        raise ValueError('M16_HISTORICAL_BOUNDARY_REQUIRED')
+    original_job_id = service.ManagerResearchJobService._job_id(data)
+    committed = store._read_commit(date, identity)
+    original_job = committed.get('jobs', {}).get(original_job_id) if committed else None
+    original_receipt = committed.get('receipts', {}).get(original_job_id) if committed else None
+    if (not original_job or not original_receipt or original_job.get('status') in {'QUEUED','RUNNING','CANCELLED'}
+            or original_receipt.get('job_id') != original_job_id
+            or original_receipt.get('input_identity') != identity or original_receipt.get('target_trade_date') != date):
+        raise ValueError('M16_ORIGINAL_COMMITTED_JOB_REQUIRED')
+    for key in ('target_trade_date','input_identity','input_source_sha256','cutoff_at','stage_id','market','input_row_count'):
+        if original_job.get(key) != data.get(key):
+            raise ValueError('M16_ORIGINAL_JOB_INPUT_BINDING_MISMATCH')
+    observations = {row['code']: row for row in data['rows']}
+    old_rows = {row['code']: row for row in product['rows']}
+    if len(old_rows) != len(product['rows']) or set(old_rows) != set(observations):
+        raise ValueError('M16_PRODUCT_ROW_BINDING_MISMATCH')
+    material_store = components.material_store_class(runtime_root / 'materials')
+    parsed_transport = transport.MaterialTransport(material_store, lambda *a, **k: (_ for _ in ()).throw(AssertionError('NETWORK_FORBIDDEN')), namespace='hkex-official')
+    replacements, evidence = {}, []
+    # Validate all bytes and provenance before any parser/cache/job writes.
+    prepared = []
+    for code in codes:
+        row = old_rows.get(code)
+        result = original_job.get('results', {}).get(code)
+        if not row or not isinstance(result, dict) or not isinstance(row.get('source'), dict):
+            raise ValueError('M16_SAVED_SOURCE_REQUIRED')
+        source = row['source']
+        if source != result.get('source'):
+            raise ValueError('M16_SOURCE_JOB_BINDING_MISMATCH')
+        if (source.get('source_kind') != 'HKEX_OFFICIAL_ISSUER_ANNOUNCEMENT'
+                or source.get('issuer_code') != code or not source.get('matching_basis')
+                or not source.get('issuer_mapping_sha256') or not source.get('directory_sha256')
+                or source.get('report_selection') != 'LATEST_EFFECTIVE_REPORT'
+                or not provider._safe_official_url(str(source.get('url', '')))
+                or not str(source.get('url', '')).lower().endswith('.pdf')):
+            raise ValueError('M16_SAVED_SOURCE_PROVENANCE_INVALID')
+        if datetime.fromisoformat(source['published_at']) > datetime.fromisoformat(data['cutoff_at']):
+            raise ValueError('M16_SOURCE_AFTER_CUTOFF')
+        key = 'hkex-official:' + source['url']
+        entry = material_store.stat_source(key)
+        if (not entry or entry.get('source_key') != key or entry.get('url') != source['url']
+                or entry.get('retrieved_at') != source.get('retrieved_at')
+                or not re.fullmatch('[0-9a-f]{64}', str(entry.get('sha256','')))):
+            raise ValueError('M16_SAVED_MATERIAL_INDEX_MISMATCH')
+        envelope = material_store._io.read_bytes(material_store._blob_relative(entry['sha256']))
+        if sha256(envelope).hexdigest() != entry['sha256']:
+            raise ValueError('M16_MATERIAL_ENVELOPE_HASH_MISMATCH')
+        material = materials.Material(key, source['url'], entry['sha256'], entry['retrieved_at'], entry.get('content_type'), envelope, True)
+        response = transport.response_from_material(material)
+        if (not 200 <= response.status_code < 300
+                or (response.final_url and not provider._safe_official_url(response.final_url))
+                or sha256(response.body).hexdigest() != source.get('sha256')
+                or len(response.body) != source.get('bytes') or not response.body.startswith(b'%PDF-')):
+            raise ValueError('M16_SAVED_PDF_HASH_OR_PROVENANCE_MISMATCH')
+        prepared.append((code, row, source, material, response.body))
+    updated = deepcopy(product)
+    for code, row, source, material, body in prepared:
+        title = str(source.get('document_title',''))
+        if apply:
+            facts, pages = parsed_transport.parsed(material, parser_id='hkex-pdf-facts', parser_version=provider.PDF_FACTS_CACHE_VERSION,
+                params={'title':title}, parse_fn=lambda raw, title=title: parser.extract_pdf_facts(raw,title=title))
+        else:
+            facts, pages = parser.extract_pdf_facts(body,title=title)
+        if not facts:
+            raise ValueError('M16_REPARSE_NO_STRUCTURED_FACTS')
+        new_source = deepcopy(source)
+        new_source.update(parse_status='STRUCTURED_FACTS',pdf_page_count=len(pages),text_locators=[f"PDF page {p['page']}" for p in pages][:12])
+        result = dict(status='READY',reason='OFFICIAL_PDF_FACTS_EXTRACTED',issuer=row.get('issuer'),source=new_source,facts=facts)
+        built = service.ManagerResearchJobService._build_product(data,[observations[code]],{code:result})['rows'][0]
+        if not built['facts'] or len(built['facts']) != len(facts):
+            raise ValueError('M16_REPARSE_FACT_CONTRACT_INVALID')
+        # Original recommendation builder, original generation time and PIT data.
+        built['research_recommendation'] = service.build_research_recommendation(
+            observation=observations[code],result={**result,'facts':built['facts']},target_trade_date=date,
+            cutoff_at=data['cutoff_at'],generated_at=product['generated_at'],input_source_sha256=data.get('input_source_sha256'),
+            stage_status=product.get('stage_status'),cannot_confirm=product.get('cannot_confirm',[]))
+        replacement = deepcopy(row)
+        for key in ('status','decision','direction','thesis_cn','facts','inferences_cn','counterevidence_cn',
+                    'confirmation_conditions','invalidation_conditions','research_next_action','source','source_url',
+                    'source_status','source_reason','source_failure_detail','research_recommendation'):
+            replacement[key] = built[key]
+        # Reuse the owner's pure financial projection on this row only.
+        # Existing event evidence/ranks and every unselected row remain intact.
+        replacement = service.ManagerResearchJobService._project_cached_financial_advice({'rows':[replacement]})['rows'][0]
+        replacements[code] = replacement
+        evidence.append(dict(code=code,pdf_sha256=source['sha256'],material_sha256=material.sha256,
+            old_fact_count=len(row.get('facts',[])),new_fact_count=len(facts),pdf_page_count=len(pages)))
+    updated['rows'] = [replacements.get(row['code'],row) for row in updated['rows']]
+    ready = sum(row.get('status') == 'READY' and bool(row.get('facts')) for row in updated['rows'])
+    total = len(updated['rows'])
+    updated['status'] = 'READY' if ready == total else 'PARTIAL_WITH_ROWS' if ready else 'CANNOT_CONFIRM'
+    updated['coverage'] = dict(requested_rows=total,ready_rows=ready,cannot_confirm_rows=total-ready,coverage_ratio=round(ready/total,6))
+    updated['recommendation_summary'] = service.recommendation_summary([row['research_recommendation'] for row in updated['rows'] if isinstance(row.get('research_recommendation'),dict)])
+    updated['source_receipts'] = [({**receipt,**replacements[receipt['code']]['source'],'status':'READY','reason':'OFFICIAL_PDF_FACTS_EXTRACTED'} if receipt.get('code') in replacements else receipt) for receipt in updated.get('source_receipts',[])]
+    if isinstance(updated.get('current_research'),dict):
+        updated['current_research']['financial_research_status'] = updated['status']
+    report = dict(mode='OFFLINE_PDF_REPARSE',applied=False,input_identity=identity,target_trade_date=date,
+        previous_product_sha256=expected_product_sha256,product_sha256=digest(updated),parser_cache_version=provider.PDF_FACTS_CACHE_VERSION,
+        rows=evidence,network_calls=0)
+    if not apply:
+        return report
+    job_id = f"mr-pdf-{date}-{identity[:16]}-v{provider.PDF_FACTS_CACHE_VERSION}-{expected_product_sha256[:12]}"
+    now = service._now()
+    def require_unchanged(latest):
+        if digest(latest) != expected_product_sha256:
+            raise ValueError('M16_PRODUCT_CHANGED_DURING_REPARSE')
+        for other in store.list_jobs(date):
+            if other.get('input_identity') == identity and other.get('job_id') != job_id and other.get('status') in {'QUEUED','RUNNING'}:
+                raise ValueError('M16_OTHER_JOB_ACTIVE')
+        return updated
+    with store._transaction(date, identity):
+        require_unchanged(store.read_product(date,identity))
+        prior = store.read_job(job_id)
+        job = dict(schema_version=service.JOB_SCHEMA_VERSION,kind='MANAGER_RESEARCH_JOB',mode='OFFLINE_PDF_REPARSE',
+            job_id=job_id,generation=uuid4().hex,attempt=int(prior.get('attempt',0))+1 if prior else 1,
+            target_trade_date=date,input_identity=identity,input_source_sha256=data.get('input_source_sha256'),
+            stage_id=data['stage_id'],market=data['market'],cutoff_at=data['cutoff_at'],input_row_count=total,
+            status='QUEUED',created_at=now,updated_at=now,can_retry=False,results={},**service.FOUR_FLAGS)
+        store.admit_job(job)
+    try:
+        job.update(status='RUNNING',started_at=now); store.write_job(job)
+        job.update(status=updated['status'],completed_at=service._now(),results={code:{'status':'READY','source':replacements[code]['source'],'facts':replacements[code]['facts']} for code in codes})
+        receipt = dict(report, schema_version='v4.manager_research.receipt.v1',job_id=job_id,
+            generated_at=now,applied=True,previous_product=product,previous_job=original_job,
+            previous_receipt=original_receipt,**service.FOUR_FLAGS)
+        store.commit_result(job,updated,receipt,merge=require_unchanged)
+    except Exception:
+        job.update(status='FAILED',error='OFFLINE_PDF_REPARSE_COMMIT_FAILED',completed_at=service._now())
+        try: store.write_job(job)
+        except Exception: pass
+        raise
+    return {**report,'applied':True,'job_id':job_id,'generation':job['generation']}
+
+
+def main(argv=None):
+    p=argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--runtime-root',type=Path,required=True);p.add_argument('--input',type=Path,required=True)
+    p.add_argument('--input-sha256',required=True);p.add_argument('--target-date',required=True)
+    p.add_argument('--expected-product-sha256',required=True);p.add_argument('--code',action='append',required=True)
+    p.add_argument('--apply',action='store_true',help='Explicitly admit and commit an offline recovery generation')
+    args=p.parse_args(argv)
+    result=reparse_saved(runtime_root=args.runtime_root,input_path=args.input,input_sha256=args.input_sha256,
+        target_trade_date=args.target_date,expected_product_sha256=args.expected_product_sha256,codes=args.code,apply=args.apply)
+    print(json.dumps(result,ensure_ascii=False,sort_keys=True))
+
+if __name__=='__main__': main()
