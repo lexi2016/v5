@@ -1226,12 +1226,12 @@
   {
     "commit": null,
     "repository_path": "integration_candidates/M16_lifecycle/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
-    "blob_sha": "b28030586c9d73907caacf2d60a46f329e49413f",
+    "blob_sha": "fd61abe363bde2f9a9ea4a9586ba46262b96570b",
     "expected_bytes": 40133,
     "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
     "role": "M16_CANDIDATE_PATCHED_SOURCE",
     "bytes": 40133,
-    "sha256": "a36bb9e5a3ff39c3e5965e44d6130025573843055dbb0ebe515711ba95c32a03",
+    "sha256": "1eca2c0be054e2e687a0370378cb469d0354f7eb9861ab039c1ecea14ece6057",
     "blob_verified": false,
     "url": null,
     "upstream_source": {
@@ -1294,12 +1294,12 @@
   {
     "commit": null,
     "repository_path": "integration_candidates/M16_lifecycle/source/fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
-    "blob_sha": "8ec1c9a28daa5bb25d283492cd6998a572c51afb",
-    "expected_bytes": 46258,
+    "blob_sha": "0f7e6e5a50b1cf0d1fff295ef174a3ad92d8f5d1",
+    "expected_bytes": 46699,
     "package_path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
     "role": "M16_CANDIDATE_PATCHED_SOURCE",
-    "bytes": 46258,
-    "sha256": "b4cfbf4c418231cd3eb569e0771e6e1292fbce5ad3aef0b0aed2a83f039f6dbd",
+    "bytes": 46699,
+    "sha256": "a33eb4d6ce74b320058b95dea8ab661a135602dfe79469d2107849ee18669444",
     "blob_verified": false,
     "url": null,
     "upstream_source": {

@@ -70,7 +70,7 @@ class PdfLayoutTests(unittest.TestCase):
                 self.assertEqual(fact['page'],row['pdf_page'])
                 self.assertEqual(fact['fields']['columns'],['2026','2025'])
 
-    def test_version_two_reparses_old_zero_facts_cache(self):
+    def test_current_version_reparses_legacy_cache(self):
         import tempfile
         from types import SimpleNamespace
         materials=importlib.import_module('m16_owner_manager_research.materials')
@@ -80,6 +80,7 @@ class PdfLayoutTests(unittest.TestCase):
             store=materials.MaterialStore(root)
             args=dict(parser_id='hkex-pdf-facts',params={'title':'Interim results'})
             self.assertEqual(store.parsed(material,parser_version=1,parse_fn=lambda _:[],**args),[])
+            self.assertEqual(store.parsed(material,parser_version=2,parse_fn=lambda _:['SYNTHETIC_OLD_TRUNCATED_LABEL'],**args),['SYNTHETIC_OLD_TRUNCATED_LABEL'])
             calls=[]
             def parse(raw):
                 calls.append(raw)

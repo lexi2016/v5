@@ -327,7 +327,7 @@ PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src python -m v5_shadow.m16_reparse_saved \
 ```
 
 Default is a read-only preview, including parsing in memory with no parsed-cache
-writes. Only adding `--apply` enables version-2 parsed-cache writes and a new
+writes. Only adding `--apply` enables current-version parsed-cache writes and a new
 recovery generation. All selected sources are validated first. Recovery is
 all-or-nothing for product publication; a missing or still-unparseable selected
 PDF keeps the original product visible. A failed attempt may retain safe new
@@ -352,3 +352,40 @@ record retention, unchanged unmatched row/news/PIT, missing materials, input
 and product digest failures, cancellation, an independently committed competing
 generation, active-owner exclusion, and receipt-write failure. Full-document
 Mac verification is separate and was not claimed while its executor was offline.
+
+## Semantic follow-up from whole-PDF Mac diagnostics (2026-10-13)
+
+The preceding parser fix was not treated as release acceptance. Cached whole-PDF
+inspection exposed two semantic truncations, now covered separately:
+
+- HK.01081 physical page 5: the original `2026 Interim Report` heading is retained
+  in `period_label` and `source_excerpt`, along with the complete comparison
+  column `Increase/Decrease in This Reporting Period over the Same Period of
+  Last Year`. The shorter earlier fragment without that heading still fails
+  closed. No reporting year is supplied from the target date.
+- HK.00376 physical page 94: bounded row joining retains both complete English
+  starts (`Net unrealised gain on financial asset and financial liabilities...`
+  and `Net realised loss ... amortised cost debt securities`) and every raw
+  garbled glyph. It does not promote `fair value through profit or loss` or
+  `amortised cost debt securities` tails to independent metrics. Numeric rows
+  prevent joining across different metrics; missing starts fail closed.
+
+The exact diagnostic JSON, including its old erroneous generated facts as
+regression evidence, is `tests/fixtures/real_pdf_semantics.json`, SHA-256
+`ca84fb8902795bf2e6f15d351ac5c94e490c122f3cd43726ef164bfc4e3eeb96`.
+Its source PDF digests are:
+
+- HK.01081: `25aa9f1fd901cf208432d2a35ee23798dc8a2e1103893c2cfc2f06b9cfac6727`
+- HK.00376: `05c5efe6b8e4710ab33a078c068234293420a033940b34f41ac0d9324750c215`
+
+The page-94 snippet supplied the full two labels and values, not its original
+unit/year header. Its exact row matcher regression uses only that snippet;
+a separate excerpt integration case explicitly labels its added header as
+synthetic. It is not presented as new original PDF evidence.
+
+`PDF_FACTS_CACHE_VERSION` is now **3**, so both version-1 zero-fact and version-2
+semantically truncated caches cannot mask this repair. Cache regression retains
+both older entries and proves the current parser recomputes once. The saved-PDF
+recovery command automatically uses the current version. Production product
+publication remains the separate explicit `--apply` step, after Mac validation;
+no producer, network collection, or product update was performed for this patch.

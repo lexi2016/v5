@@ -416,7 +416,7 @@ def _period_cn(period: str, columns: list[str]) -> str:
         flags=re.IGNORECASE,
     )
     if marker is None:
-        return f"公告财务表期间（列：{'、'.join(columns)}）" if columns else "公告财务表期间"
+        return f"公告财务表期间：{clean}（列：{'、'.join(columns)}）" if columns else f"公告财务表期间：{clean}"
     tail = clean[marker.end():]
     date_re = re.compile(
         rf"\b(?:[0-3]?\d\s+{_MONTH_PATTERN}(?:\s+\d{{4}})?|{_MONTH_PATTERN}\s+[0-3]?\d,?(?:\s+\d{{4}})?)\b",
@@ -512,6 +512,13 @@ def _column_context(lines: list[str], unit_index: int, unit_line: str) -> tuple[
                 "Increase/decrease",
             )
         )
+        full_comparison = re.search(
+            r"\bincrease\s*/\s*decrease\s+in\s+this\s+reporting\s+period\s+over\s+the\s+same\s+period\s+of\s+last\s+year\b",
+            joined_window, re.IGNORECASE)
+        if full_comparison:
+            comparison_label = _normal_line(full_comparison.group(0))
+        elif re.search(r"\bin\s+this\s*$", comparison_label, re.IGNORECASE):
+            comparison_label = ""  # Incomplete header cannot describe a column.
     elif has_change:
         comparison_label = "Change (%)"
     if len(year_columns) >= 2:
@@ -527,15 +534,17 @@ def _column_context(lines: list[str], unit_index: int, unit_line: str) -> tuple[
         columns = ["This Reporting Period", "Same Period of Last Year"]
         if comparison_label:
             columns.append(comparison_label)
-        return "This Reporting Period / Same Period of Last Year", columns
+        evidence = [line for line in window if _YEAR_RE.search(line)
+                    or re.search(r"this reporting period.*same period of last year", line, re.IGNORECASE)]
+        return " ".join([*evidence, comparison_label]), columns
     if "same period" in joined and "yoy" in joined and _YEAR_RE.search(joined):
-        return "The Reporting Period / Same Period of the Previous Year / YoY Change (%)", [
+        return " ".join(line for line in window if _YEAR_RE.search(line)) + " The Reporting Period / Same Period of the Previous Year / YoY Change (%)", [
             "The Reporting Period",
             "Same Period of the Previous Year",
             "YoY Change (%)",
         ]
     if "reporting period" in joined and "corresponding" in joined and _YEAR_RE.search(joined):
-        return "Reporting Period / Corresponding period of previous year / Change (%)", [
+        return " ".join(line for line in window if _YEAR_RE.search(line)) + " Reporting Period / Corresponding period of previous year / Change (%)", [
             "Reporting Period",
             "Corresponding period of previous year",
             "Change (%)",
@@ -548,15 +557,19 @@ def _period_context(lines: list[str], unit_index: int, column_line: str) -> str:
 
     window = lines[max(0, unit_index - 12) : min(len(lines), unit_index + 16)]
     joined = " ".join(window)
+    def bind_year(period):
+        if not _YEAR_RE.search(period) and _YEAR_RE.search(column_line):
+            return _normal_line(period + " " + column_line)
+        return period
     compact_period = re.search(r"\bthe reporting period\s*\([^)]{1,40}\)", joined, re.IGNORECASE)
     if compact_period:
-        return _normal_line(compact_period.group(0))
+        return bind_year(_normal_line(compact_period.group(0)))
     for line in window:
         if re.search(r"\b(?:for\s+the\s+)?(?:six|three)\s+months\s+ended\b|\byear\s+ended\b", line, re.IGNORECASE):
-            return line
+            return bind_year(line)
     for line in window:
         if re.search(r"\breporting period\b|\bcorresponding period\b|\bsame period\b", line, re.IGNORECASE):
-            return line
+            return bind_year(line)
     half_year = re.search(r"\b(?:the\s+)?(?:first|second)\s+half\s+year\s+of\s+(?:19|20)\d{2}\b", joined, re.IGNORECASE)
     if half_year:
         return half_year.group(0)
@@ -564,44 +577,32 @@ def _period_context(lines: list[str], unit_index: int, column_line: str) -> str:
 
 
 def _row_match(lines: list[str], row_index: int) -> tuple[re.Match[str] | None, int]:
-    """Match a financial row, joining only preceding presentation wraps."""
+    """Retain the complete English metric before bilingual presentation wraps.
 
-    # Prefer a complete current-line label.  This prevents a prose header such
-    # as ``Corresponding period of previous year`` from being joined to the
-    # first financial row below it.
+    A lowercase tail (e.g. "fair value through profit or loss") cannot be
+    promoted to an independent metric when its capitalized start is missing.
+    Unicode font glyphs are retained; ASCII numeric/header rows bound the join.
+    """
     current = _normal_line(_TRAILING_CURRENCY_RE.sub("", lines[row_index]))
-    current_match = _FINANCIAL_ROW_RE.match(current)
-    # A wrapped continuation often starts in lowercase (for example
-    # ``non-recurring gains and losses``).  Join it to the preceding label
-    # before accepting the shorter continuation as an independent metric.
-    if current_match is not None and current_match.group("label")[:1].islower():
-        earliest = max(0, row_index - 3)
-        for start in range(earliest, row_index):
-            if any(re.search(r"\d", lines[index]) for index in range(start, row_index)):
-                continue
-            joined = _normal_line(" ".join(lines[start : row_index + 1]))
-            joined = _TRAILING_CURRENCY_RE.sub("", joined)
-            joined_match = _FINANCIAL_ROW_RE.match(joined)
-            if joined_match is not None and any(
-                token in joined_match.group("label").lower() for token in _FINANCIAL_LABEL_TOKENS
-            ):
-                return joined_match, row_index - start + 1
-    if current_match is not None and any(
-        token in current_match.group("label").lower() for token in _FINANCIAL_LABEL_TOKENS
-    ):
-        return current_match, 1
-
-    earliest = max(0, row_index - 3)
-    for start in range(earliest, row_index + 1):
-        # A numeric line before the candidate marks a different financial row;
-        # do not join across it and accidentally merge two facts.
-        if any(re.search(r"\d", lines[index]) for index in range(start, row_index)):
-            continue
-        joined = _normal_line(" ".join(lines[start : row_index + 1]))
-        joined = _TRAILING_CURRENCY_RE.sub("", joined)
-        match = _FINANCIAL_ROW_RE.match(joined)
-        if match is not None:
-            return match, row_index - start + 1
+    match = _FINANCIAL_ROW_RE.match(current)
+    if match is not None and match.group("label")[:1].isupper():
+        if any(token in match.group("label").lower() for token in _FINANCIAL_LABEL_TOKENS):
+            return match, 1
+        return None, 1
+    for start in range(row_index - 1, max(-1, row_index - 9), -1):
+        line = _normal_line(lines[start])
+        if not line or re.search(r"[0-9]", line) or _UNIT_RE.search(line) or _BARE_UNIT_HEADER_RE.search(line):
+            break
+        # Stop at the nearest candidate metric start, never skip it and merge
+        # with a preceding metric or a prose section heading.
+        if re.match(r"[A-Z]", line):
+            if not any(token in line.lower() for token in _FINANCIAL_LABEL_TOKENS):
+                break
+            joined = _normal_line(" ".join(lines[start:row_index + 1]))
+            candidate = _FINANCIAL_ROW_RE.match(_TRAILING_CURRENCY_RE.sub("", joined))
+            if candidate is not None and any(token in candidate.group("label").lower() for token in _FINANCIAL_LABEL_TOKENS):
+                return candidate, row_index - start + 1
+            break
     return None, 1
 
 

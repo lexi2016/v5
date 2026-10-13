@@ -1,0 +1,121 @@
+[
+  {
+    "code": "HK.01081",
+    "page": 5,
+    "text": "4\nDajin Heavy Industry Co., Ltd. 2026 Interim Report\nFINANCIAL HIGHLIGHTS\nKEY FINANCIAL PERFORMANCE AND ACCOUNTING DATA\nRetrospective adjustment to or restatement of the accounting data for prior years by the Company\n\u00bd Yes \u221a No\nThis Reporting Period Same Period of Last Year\nIncrease/Decrease in This\nReporting Period\nover the Same Period\nof Last Year\nOperating revenue (RMB) 3,252,515,191.59 2,841,139,262.44 14.48%",
+    "generated_fact": {
+      "statement_cn": "\u8d22\u52a1\u8868\uff1a\u7ecf\u8425\u6536\u5165\uff1b\u671f\u95f4=\u516c\u544a\u8d22\u52a1\u8868\u671f\u95f4\uff08\u5217\uff1aThis Reporting Period\u3001Same Period of Last Year\u3001Increase/Decrease in This\uff09\uff1b\u5217\u5e8f=This Reporting Period\u3001Same Period of Last Year\u3001Increase/Decrease in This\uff1b\u5e01\u79cd=\u4eba\u6c11\u5e01\uff1b\u5355\u4f4d=\u5143\uff1b\u6570\u503c=This Reporting Period=3,252,515,191.59\uff1bSame Period of Last Year=2,841,139,262.44\uff1bIncrease/Decrease in This=14.48%\u3002",
+      "statement": "\u8d22\u52a1\u8868\uff1a\u7ecf\u8425\u6536\u5165\uff1b\u671f\u95f4=\u516c\u544a\u8d22\u52a1\u8868\u671f\u95f4\uff08\u5217\uff1aThis Reporting Period\u3001Same Period of Last Year\u3001Increase/Decrease in This\uff09\uff1b\u5217\u5e8f=This Reporting Period\u3001Same Period of Last Year\u3001Increase/Decrease in This\uff1b\u5e01\u79cd=\u4eba\u6c11\u5e01\uff1b\u5355\u4f4d=\u5143\uff1b\u6570\u503c=This Reporting Period=3,252,515,191.59\uff1bSame Period of Last Year=2,841,139,262.44\uff1bIncrease/Decrease in This=14.48%\u3002",
+      "fact_type": "OFFICIAL_FACT",
+      "fact_kind": "financial",
+      "locator": "PDF page 5",
+      "page": 5,
+      "source_excerpt": "This Reporting Period Same Period of Last Year This Reporting Period / Same Period of Last Year Operating revenue (RMB) 3,252,515,191.59 2,841,139,262.44 14.48% Operating revenue (RMB) 3,252,515,191.59 2,841,139,262.44 14.48%",
+      "fields": {
+        "kind": "financial",
+        "label": "Operating revenue",
+        "label_cn": "\u7ecf\u8425\u6536\u5165",
+        "period_label": "This Reporting Period Same Period of Last Year",
+        "period_label_cn": "\u516c\u544a\u8d22\u52a1\u8868\u671f\u95f4\uff08\u5217\uff1aThis Reporting Period\u3001Same Period of Last Year\u3001Increase/Decrease in This\uff09",
+        "columns": [
+          "This Reporting Period",
+          "Same Period of Last Year",
+          "Increase/Decrease in This"
+        ],
+        "currency": "RMB",
+        "unit": "yuan",
+        "except_for": null,
+        "note_marker": null,
+        "values": [
+          {
+            "column": "This Reporting Period",
+            "raw": "3,252,515,191.59"
+          },
+          {
+            "column": "Same Period of Last Year",
+            "raw": "2,841,139,262.44"
+          },
+          {
+            "column": "Increase/Decrease in This",
+            "raw": "14.48%"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "code": "HK.00376",
+    "page": 94,
+    "text": "Net unrealised gain on financial asset\nand financial liabilities measured at\nfair value through profit or loss\n\u025d\n\u0dc0\n\u0298\u034a\u0fbc\u0b24\u03d7\u0942\u0b0b\u1558 189,943 939,951\nNet realised loss on fair value through\nother comprehensive income and\namortised cost debt securities\n\u025d\n\u03d7\u0942\u02bf\u16c5\u1256\u03d3\u0349\u0298\n\u0dc0\u0a15\u15c7\u054e\u0298\u028a\u0fbc\u0b24\u1466\u0e26\u0b0b\u1558 (138,828) (13,880)",
+    "generated_facts": [
+      {
+        "statement_cn": "\u8d22\u52a1\u8868\uff1a\u8d22\u52a1\u9879\u76ee\u300cfair value through \u5229\u6da6 or \u4e8f\u635f \u025d \u0dc0 \u0298\u034a\u0fbc\u0b24\u03d7\u0942\u0b0b\u1558\u300d\uff1b\u671f\u95f4=\u622a\u81f3\u516d\u4e2a\u6708 6\u670830\u65e5\uff08\u5217\uff1a2026\u30012025\uff09\uff1b\u5217\u5e8f=2026\u30012025\uff1b\u5e01\u79cd=\u6e2f\u5143\uff1b\u5355\u4f4d=\u5343\uff1b\u6570\u503c=2026=189,943\uff1b2025=939,951\u3002",
+        "statement": "\u8d22\u52a1\u8868\uff1a\u8d22\u52a1\u9879\u76ee\u300cfair value through \u5229\u6da6 or \u4e8f\u635f \u025d \u0dc0 \u0298\u034a\u0fbc\u0b24\u03d7\u0942\u0b0b\u1558\u300d\uff1b\u671f\u95f4=\u622a\u81f3\u516d\u4e2a\u6708 6\u670830\u65e5\uff08\u5217\uff1a2026\u30012025\uff09\uff1b\u5217\u5e8f=2026\u30012025\uff1b\u5e01\u79cd=\u6e2f\u5143\uff1b\u5355\u4f4d=\u5343\uff1b\u6570\u503c=2026=189,943\uff1b2025=939,951\u3002",
+        "fact_type": "OFFICIAL_FACT",
+        "fact_kind": "financial",
+        "locator": "PDF page 94",
+        "page": 94,
+        "source_excerpt": "Six months ended 30 June 2026 2025 HK$\u2019000 HK$\u2019000 fair value through profit or loss \u025d \u0dc0 \u0298\u034a\u0fbc\u0b24\u03d7\u0942\u0b0b\u1558 189,943 939,951",
+        "fields": {
+          "kind": "financial",
+          "label": "fair value through profit or loss \u025d \u0dc0 \u0298\u034a\u0fbc\u0b24\u03d7\u0942\u0b0b\u1558",
+          "label_cn": "\u8d22\u52a1\u9879\u76ee\u300cfair value through \u5229\u6da6 or \u4e8f\u635f \u025d \u0dc0 \u0298\u034a\u0fbc\u0b24\u03d7\u0942\u0b0b\u1558\u300d",
+          "period_label": "Six months ended 30 June",
+          "period_label_cn": "\u622a\u81f3\u516d\u4e2a\u6708 6\u670830\u65e5\uff08\u5217\uff1a2026\u30012025\uff09",
+          "columns": [
+            "2026",
+            "2025"
+          ],
+          "currency": "HKD",
+          "unit": "thousands",
+          "except_for": null,
+          "note_marker": null,
+          "values": [
+            {
+              "column": "2026",
+              "raw": "189,943"
+            },
+            {
+              "column": "2025",
+              "raw": "939,951"
+            }
+          ]
+        }
+      },
+      {
+        "statement_cn": "\u8d22\u52a1\u8868\uff1a\u8d22\u52a1\u9879\u76ee\u300camortised \u6210\u672c debt securities \u025d \u03d7\u0942\u02bf\u16c5\u1256\u03d3\u0349\u0298 \u0dc0\u0a15\u15c7\u054e\u0298\u028a\u0fbc\u0b24\u1466\u0e26\u0b0b\u1558\u300d\uff1b\u671f\u95f4=\u622a\u81f3\u516d\u4e2a\u6708 6\u670830\u65e5\uff08\u5217\uff1a2026\u30012025\uff09\uff1b\u5217\u5e8f=2026\u30012025\uff1b\u5e01\u79cd=\u6e2f\u5143\uff1b\u5355\u4f4d=\u5343\uff1b\u6570\u503c=2026=(138,828)\uff1b2025=(13,880)\u3002",
+        "statement": "\u8d22\u52a1\u8868\uff1a\u8d22\u52a1\u9879\u76ee\u300camortised \u6210\u672c debt securities \u025d \u03d7\u0942\u02bf\u16c5\u1256\u03d3\u0349\u0298 \u0dc0\u0a15\u15c7\u054e\u0298\u028a\u0fbc\u0b24\u1466\u0e26\u0b0b\u1558\u300d\uff1b\u671f\u95f4=\u622a\u81f3\u516d\u4e2a\u6708 6\u670830\u65e5\uff08\u5217\uff1a2026\u30012025\uff09\uff1b\u5217\u5e8f=2026\u30012025\uff1b\u5e01\u79cd=\u6e2f\u5143\uff1b\u5355\u4f4d=\u5343\uff1b\u6570\u503c=2026=(138,828)\uff1b2025=(13,880)\u3002",
+        "fact_type": "OFFICIAL_FACT",
+        "fact_kind": "financial",
+        "locator": "PDF page 94",
+        "page": 94,
+        "source_excerpt": "Six months ended 30 June 2026 2025 HK$\u2019000 HK$\u2019000 amortised cost debt securities \u025d \u03d7\u0942\u02bf\u16c5\u1256\u03d3\u0349\u0298 \u0dc0\u0a15\u15c7\u054e\u0298\u028a\u0fbc\u0b24\u1466\u0e26\u0b0b\u1558 (138,828) (13,880)",
+        "fields": {
+          "kind": "financial",
+          "label": "amortised cost debt securities \u025d \u03d7\u0942\u02bf\u16c5\u1256\u03d3\u0349\u0298 \u0dc0\u0a15\u15c7\u054e\u0298\u028a\u0fbc\u0b24\u1466\u0e26\u0b0b\u1558",
+          "label_cn": "\u8d22\u52a1\u9879\u76ee\u300camortised \u6210\u672c debt securities \u025d \u03d7\u0942\u02bf\u16c5\u1256\u03d3\u0349\u0298 \u0dc0\u0a15\u15c7\u054e\u0298\u028a\u0fbc\u0b24\u1466\u0e26\u0b0b\u1558\u300d",
+          "period_label": "Six months ended 30 June",
+          "period_label_cn": "\u622a\u81f3\u516d\u4e2a\u6708 6\u670830\u65e5\uff08\u5217\uff1a2026\u30012025\uff09",
+          "columns": [
+            "2026",
+            "2025"
+          ],
+          "currency": "HKD",
+          "unit": "thousands",
+          "except_for": null,
+          "note_marker": null,
+          "values": [
+            {
+              "column": "2026",
+              "raw": "(138,828)"
+            },
+            {
+              "column": "2025",
+              "raw": "(13,880)"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

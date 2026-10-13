@@ -57,7 +57,7 @@ class SavedReparseTests(unittest.TestCase):
         receipt=self.store.read_receipt(DATE,result['job_id'])
         self.assertEqual(receipt['previous_product'],self.product)
         self.assertEqual(receipt['previous_job'],self.original_job)
-        self.assertEqual(receipt['parser_cache_version'],2)
+        self.assertEqual(receipt['parser_cache_version'],3)
         self.assertNotEqual(result['generation'],self.original_job['generation'])
         old_catalyst=self.product['rows'][0].get('catalyst_result',{});new_catalyst=current['rows'][0].get('catalyst_result',{})
         for key in old_catalyst:

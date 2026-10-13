@@ -8,7 +8,7 @@
     {
       "path": "SOURCE_MANIFEST.json",
       "bytes": 104540,
-      "sha256": "608ba375bd4402550aa083b330b1f23efa42de3dd340aab8935dc884e1827209"
+      "sha256": "136ccbcedccca4dd75b98d4acb8f47e3e18980b351c28f84b7e88228962a1dac"
     },
     {
       "path": "START_HERE.md",
@@ -528,7 +528,7 @@
     {
       "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/hkex_provider.py",
       "bytes": 40133,
-      "sha256": "a36bb9e5a3ff39c3e5965e44d6130025573843055dbb0ebe515711ba95c32a03"
+      "sha256": "1eca2c0be054e2e687a0370378cb469d0354f7eb9861ab039c1ecea14ece6057"
     },
     {
       "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/issuer_us_relations.py",
@@ -552,8 +552,8 @@
     },
     {
       "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/pdf_parser.py",
-      "bytes": 46258,
-      "sha256": "b4cfbf4c418231cd3eb569e0771e6e1292fbce5ad3aef0b0aed2a83f039f6dbd"
+      "bytes": 46699,
+      "sha256": "a33eb4d6ce74b320058b95dea8ab661a135602dfe79469d2107849ee18669444"
     },
     {
       "path": "fixed-f7cb731c/handoff/v4-running-source-20261005/canonical/v4/manager_research/plan_owner_dispatch.py",
