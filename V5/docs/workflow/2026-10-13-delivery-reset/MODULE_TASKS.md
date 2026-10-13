@@ -58,7 +58,7 @@
 ## M08 HK阶段选股
 原Chat：https://chatgpt.com/c/6acb9208-1504-83ee-a9fd-d8feb3dcfb48
 原分支：dev/m08-github-handoff-20261011
-最近已证固定版本（按来源/集成区分，非当前HEAD断言）：原owner8f08967ee01c2679dacd0d78d0a2a028867f1967；保存接线08c101d6e7f53d1d1519c3859c6b1d985c32d221；Mac bae6184b99d289f394b0cc3c3d5370e9f3155715
+最近已证固定版本（按来源/集成区分，非当前HEAD断言）：原owner [8f08967ee01c2679dacd0d78d0a2a028867f1967](https://github.com/lexi2016/v5/commit/8f08967ee01c2679dacd0d78d0a2a028867f1967)（[固定START_HERE](https://github.com/lexi2016/v5/blob/8f08967ee01c2679dacd0d78d0a2a028867f1967/handoffs/M08/START_HERE.md)）；保存接线08c101d6e7f53d1d1519c3859c6b1d985c32d221；Mac bae6184b99d289f394b0cc3c3d5370e9f3155715
 当前缺口：真池适配、10套八阶段保存读回和页面已过；Stage8完整重算输入，以及普通阶段时点/成员/单位、PIT/资格仍未闭环。
 下一项完整交付：先核独立八阶段owner/输入准备/保存reader与scheduler入口是否全交，只补未实现部分并给缺件拒绝/阶段一致性测试和启动说明；不重算已过历史样本、不补造Stage8来源。
 
