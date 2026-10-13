@@ -1,0 +1,43 @@
+{
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tests -v",
+  "environment": "isolated cloud workspace",
+  "fixture_kind": "SYNTHETIC_ONLY",
+  "launcher_tests": 25,
+  "not_run": [
+    "LIVE_FUTU_SDK_IMPORT_OR_NETWORK",
+    "MAC_DEPLOYMENT",
+    "REAL_CAPTURE",
+    "REAL_QUOTE_COVERAGE",
+    "NATURAL_SCHEDULER",
+    "FULL_M02_SUITE",
+    "M02_PREVIEW_INTEGRATION",
+    "TEMPORAL_OR_FORMAL_ACCEPTANCE"
+  ],
+  "observed_duration_seconds": 11.171,
+  "pipeline_tests": 13,
+  "python": "3.12.14",
+  "red_green": [
+    {
+      "reason": "ValueError: Out of range float values are not JSON compliant: nan",
+      "stage": "original_collector_with_nan_stock_owner",
+      "status": "EXPECTED_FAIL"
+    },
+    {
+      "reason": "SDK_PRODUCER_SHA",
+      "stage": "new_candidate_sdk_with_original_recovery",
+      "status": "EXPECTED_FAIL"
+    },
+    {
+      "stage": "metadata_fix_and_explicit_dual_version_recovery",
+      "status": "PASS"
+    }
+  ],
+  "safety": {
+    "buy_gate_updated": false,
+    "orders_sent": false,
+    "production_allowed": false
+  },
+  "schema_version": "v5.m02.capture_candidate.test_results.v1",
+  "status": "PASS",
+  "tests": 38
+}

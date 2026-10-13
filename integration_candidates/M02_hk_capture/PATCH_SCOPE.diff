@@ -1,0 +1,110 @@
+--- reference/hk_market_capture.original.py
++++ collector/ops/_macos_research_panel_daily_parts/hk_market_capture.py
+@@ -84,6 +84,31 @@
+ 
+ def _utc_now_iso() -> str:
+     return datetime.now(timezone.utc).isoformat(timespec="microseconds")
++
++
++def _normalize_security_master_metadata(value: Any) -> Any:
++    """
++    Normalize optional security-master metadata before canonical hashing.
++
++    - None stays None
++    - NaN/NaT-like missing values become JSON null
++    - finite values and strings are preserved
++    - infinity remains invalid
++    """
++    if value is None:
++        return None
++
++    if isinstance(value, float):
++        if math.isnan(value):
++            return None
++        if math.isinf(value):
++            raise ValueError("HK_SECURITY_MASTER_INFINITE_METADATA")
++        return value
++
++    if type(value).__name__ in {"NAType", "NaTType"}:
++        return None
++
++    return value
+ 
+ 
+ def _collect_hk_futu_rows_body(_v4_scope, /, target_date, *, context_factory, batch_size, minimum_universe_count, required_coverage_ratio, membership_ready_callback=None):
+@@ -511,7 +536,7 @@
+             field: (
+                 code
+                 if field == "code"
+-                else source.get(field)
++                else _normalize_security_master_metadata(source.get(field))
+                 if field != "name"
+                 else _v4_global(_v4_scope, 'str')(
+                     source.get("name") or universe.get(code) or ""
+--- reference/hk_membership_recovery.original.py
++++ recovery/V5/src/v5_shadow/hk_membership_recovery.py
+@@ -21,10 +21,35 @@
+ DESCRIPTOR=BASE/'contracts/hk_membership_source_manifest.json'
+ PIN='e06a2898a8d5247101acd8b85169d1d51e4d359d6e197ef55d52e0f1c4c7068d'
+ PRODUCER_SHA='0a9651f88bc8a50d4b5e8ec4b6775a5291918f9f2556cf37c05b80a55cdfd84a'
++PRODUCER_CONTRACT=BASE/'contracts/hk_capture_producers.json'
++PRODUCER_CONTRACT_SHA256='5655957feb033459af37ce2a4cb9d50a384fa0b9e9608138192b69360f702724'
+ FLAGS=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
+ 
+ 
++def _producer_contract():
++    """Candidate-local exact versions; the original owner capsule is unchanged."""
++    raw=no_symlinks(PRODUCER_CONTRACT).read_bytes()
++    if hashlib.sha256(raw).hexdigest()!=PRODUCER_CONTRACT_SHA256:
++        raise ValueError('SDK_PRODUCER_CONTRACT_SHA')
++    value=json.loads(raw)
++    if (set(value)!={'schema_version','workload_id','code_ref','sdk_schema_version','versions'}
++        or value['schema_version']!='v5.hk_capture.producer_contract.v1'):
++        raise ValueError('SDK_PRODUCER_CONTRACT')
++    return value
++
++
++def _producer_version(producer):
++    contract=_producer_contract()
++    if (not isinstance(producer,dict)
++        or producer.get('code_sha256') not in contract['versions']):
++        raise ValueError('SDK_PRODUCER_SHA')
++    if any(producer.get(k)!=contract[k] for k in ('workload_id','code_ref')):
++        raise ValueError('SDK_PRODUCER_IDENTITY')
++    return contract['versions'][producer['code_sha256']]
++
++
+ def _sources():
++    _producer_contract()
+     manifest=json.loads(DESCRIPTOR.read_bytes())
+     if sha256_json(manifest)!=PIN:raise ValueError('MEMBERSHIP_SOURCE_PIN')
+     result={}
+@@ -63,7 +88,7 @@
+         or sdk.get('target_date')!=target or any(sdk.get(k) is not False for k in FLAGS)):
+         raise ValueError('SDK_ENVELOPE_INVALID')
+     producer=sdk.get('producer_owner') or {}
+-    if producer.get('code_sha256')!=PRODUCER_SHA:raise ValueError('SDK_PRODUCER_SHA')
++    _producer_version(producer)
+     responses=sdk.get('plate_responses') or {}
+     if set(responses)!=set(owner.HKCONNECT_PLATE_CODES):raise ValueError('SDK_PLATE_SET')
+     plates={};counts={};digests={};completed=[]
+@@ -135,7 +160,8 @@
+         if persisted!=data:raise ValueError('MEMBERSHIP_FINAL_READBACK_MISMATCH')
+         actual_files[name]=hashlib.sha256(persisted).hexdigest()
+     _sources()
+-    return dict(status='PRIVATE_MEMBERSHIP_PUBLISHED',code_count=len(verified.codes),readback=dict(code_count=len(verified.codes),source=dict(verified.source)),
++    return dict(producer_version=_producer_version(producer),producer_contract_sha256=PRODUCER_CONTRACT_SHA256,
++        status='PRIVATE_MEMBERSHIP_PUBLISHED',code_count=len(verified.codes),readback=dict(code_count=len(verified.codes),source=dict(verified.source)),
+         capture_relative=built['capture_relative'],manifest_relative=paths['manifest_relative'],sdk_relative=sdk_relative,source_capsule_sha256=PIN,
+         files=actual_files,request_sha256=sha256_json(request),execution_kind='MANUAL_RECOVERY',natural_verified=False,
+         prior_cutoff_rejection=prior_cutoff_reason,quote_status='NOT_EVALUATED',panel_status='NOT_EVALUATED',security_master_status='NOT_EVALUATED',price_unit=None,market_finality=None,**FLAGS)
+@@ -150,6 +176,9 @@
+     except ValueError as exc:raise ValueError('MEMBERSHIP_RESPONSE:'+process.stderr.decode(errors='replace')[-1000:]) from exc
+     if process.returncode:raise ValueError(out.get('reason','MEMBERSHIP_WORKER_FAILED'))
+     if out.get('request_sha256')!=sha256_json(request) or out.get('source_capsule_sha256')!=PIN:raise ValueError('MEMBERSHIP_RESPONSE_IDENTITY')
++    if (out.get('producer_contract_sha256')!=PRODUCER_CONTRACT_SHA256
++        or out.get('producer_version') not in _producer_contract()['versions'].values()):
++        raise ValueError('MEMBERSHIP_PRODUCER_RESPONSE_IDENTITY')
+     _sources();return out
+ 
+ 

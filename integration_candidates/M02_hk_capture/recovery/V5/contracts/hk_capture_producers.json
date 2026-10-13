@@ -1,0 +1,10 @@
+{
+  "code_ref": "ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+  "schema_version": "v5.hk_capture.producer_contract.v1",
+  "sdk_schema_version": "v4.manager_hk_connect_capture.v2",
+  "versions": {
+    "0a9651f88bc8a50d4b5e8ec4b6775a5291918f9f2556cf37c05b80a55cdfd84a": "hk-capture-v2-original-0a9651",
+    "5a5d8a3867f6661c58a71ca01f43b90c734a6ad1b0f2ba4791011f22a830be66": "hk-capture-v2-metadata-null-v1"
+  },
+  "workload_id": "v35_dispatcher.research_panel_daily_hk"
+}

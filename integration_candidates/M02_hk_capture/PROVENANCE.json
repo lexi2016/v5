@@ -1,0 +1,248 @@
+{
+  "authorship": {
+    "integration": "Full frozen source closure, scope-preserving insertion, explicit versioned producer admission, controlled launcher, synthetic tests and delivery",
+    "original_chat": "Optional-metadata normalizer and security_master_rows projection replacement fragments"
+  },
+  "files": [
+    {
+      "candidate_path": "collector/infrastructure/formula_generation.py",
+      "candidate_sha256": "0904603912d6257cb02f41dfaf66c080e2f682e690b1c1901a86a7bafe1e74f0",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "b209a2a2ef63308772e3b922641c45e99907810e",
+      "original_sha256": "0904603912d6257cb02f41dfaf66c080e2f682e690b1c1901a86a7bafe1e74f0",
+      "relative": "infrastructure/formula_generation.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/formula_generation.py"
+    },
+    {
+      "candidate_path": "collector/infrastructure/interprocess_lock.py",
+      "candidate_sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "original_sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0",
+      "relative": "infrastructure/interprocess_lock.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py"
+    },
+    {
+      "candidate_path": "collector/infrastructure/owned_io.py",
+      "candidate_sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "original_sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0",
+      "relative": "infrastructure/owned_io.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py"
+    },
+    {
+      "candidate_path": "collector/infrastructure/owned_path.py",
+      "candidate_sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "original_sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30",
+      "relative": "infrastructure/owned_path.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py"
+    },
+    {
+      "candidate_path": "collector/ops/_macos_research_panel_daily_parts/__init__.py",
+      "candidate_sha256": "29b3765f63f15078432ca53a34b28cb726c961e7dd0839022b8a87b3d8b373d8",
+      "change": "BYTE_IDENTICAL_NAMESPACE_DONOR_VERIFIED_AGAINST_ORIGINAL_MAC_HASH",
+      "git_blob": "fc3ee50ef882264f475f280eb35bee556b0e840d",
+      "original_sha256": "29b3765f63f15078432ca53a34b28cb726c961e7dd0839022b8a87b3d8b373d8",
+      "source_path": "handoffs/M02/source/V5/vendor/hk_preselection_baseline/domains/_preselection_materializer_parts/__init__.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/vendor/hk_preselection_baseline/domains/_preselection_materializer_parts/__init__.py"
+    },
+    {
+      "candidate_path": "collector/ops/_macos_research_panel_daily_parts/_namespace.py",
+      "candidate_sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "change": "BYTE_IDENTICAL_NAMESPACE_DONOR_VERIFIED_AGAINST_ORIGINAL_MAC_HASH",
+      "git_blob": "55e1b3f744f80339298ac911073c67f3e549cf3c",
+      "original_sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1",
+      "source_path": "handoffs/M02/source/V5/vendor/hk_preselection_baseline/domains/_preselection_materializer_parts/_namespace.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/vendor/hk_preselection_baseline/domains/_preselection_materializer_parts/_namespace.py"
+    },
+    {
+      "candidate_path": "collector/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+      "candidate_sha256": "5a5d8a3867f6661c58a71ca01f43b90c734a6ad1b0f2ba4791011f22a830be66",
+      "change": "CHAT_HELPER_PLUS_PROJECTION_INTEGRATION",
+      "git_blob": "41abd49f836ab0e118b1eec3c68001e9915c415b",
+      "original_sha256": "0a9651f88bc8a50d4b5e8ec4b6775a5291918f9f2556cf37c05b80a55cdfd84a",
+      "relative": "ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/hk_market_capture.py"
+    },
+    {
+      "candidate_path": "collector/ops/_macos_research_panel_daily_parts/panel_primitives.py",
+      "candidate_sha256": "7ab4e0d3d9529e4e59cc875e44f4b368caaa2b2ae3cad45d8c11ad01a7326a03",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "05c9ae8cfaa2a2cf0989000e39a464f56706f0b3",
+      "original_sha256": "7ab4e0d3d9529e4e59cc875e44f4b368caaa2b2ae3cad45d8c11ad01a7326a03",
+      "relative": "ops/_macos_research_panel_daily_parts/panel_primitives.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/_macos_research_panel_daily_parts/panel_primitives.py"
+    },
+    {
+      "candidate_path": "collector/ops/macos_research_panel_daily.py",
+      "candidate_sha256": "bb4db8d0cafaf43c7080439a60b986bf0ed02d4e4cb3295bde3f7ad8a266377f",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "b9717c8a28a13b727658aee98cb12bc0ff5500cd",
+      "original_sha256": "bb4db8d0cafaf43c7080439a60b986bf0ed02d4e4cb3295bde3f7ad8a266377f",
+      "relative": "ops/macos_research_panel_daily.py",
+      "source_path": "handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py",
+      "source_ref": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "source_repo": "lexi2016/v4",
+      "source_url": "https://github.com/lexi2016/v4/blob/f7cb731c384ee6890a87d16c19a5b5a621779477/handoff/v4-running-source-20261005/canonical/ops/macos_research_panel_daily.py"
+    },
+    {
+      "candidate_path": "recovery/V5/contracts/hk_membership_source_manifest.json",
+      "candidate_sha256": "1d62f35a36785ed79d03b7bfa69df8f78315b9845242ece7357bce13fcbd9b52",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "4d80d4d7ac3a22d8320657cd738514c4206f35c3",
+      "original_sha256": "1d62f35a36785ed79d03b7bfa69df8f78315b9845242ece7357bce13fcbd9b52",
+      "source_path": "handoffs/M02/source/V5/contracts/hk_membership_source_manifest.json",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/contracts/hk_membership_source_manifest.json"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/__init__.py",
+      "candidate_sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "152582c71d7e49884749beb490e192ff4cb8ca6c",
+      "original_sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/__init__.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/__init__.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/a_preselection.py",
+      "candidate_sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "05dd0b28f14bd794890f514e130d8090a1b0438b",
+      "original_sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/a_preselection.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/a_preselection.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/composition.py",
+      "candidate_sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "d22723df42b71537210aa621afb05dfab6be517f",
+      "original_sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/composition.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/composition.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/contracts.py",
+      "candidate_sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "5efda704a231165255c4f6ab240a25385e5cff54",
+      "original_sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/contracts.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/contracts.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/digests.py",
+      "candidate_sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "e6bc1557cd96cee5b35cb20ed4f45d8a61a74925",
+      "original_sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/digests.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/digests.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/hk_membership_recovery.py",
+      "candidate_sha256": "9d323dfa5eabc7e745bfb00f608bad8f4647c6f5a795952840da616fa0f6979e",
+      "change": "VERSIONED_PRODUCER_ADMISSION_ONLY",
+      "git_blob": "9ac4edb45b73b950ca4fd52b62350970d9e5cb23",
+      "original_sha256": "3bc29c177adee3f4a663307ec033eb677bc6aa87d8c54ccf654531e610300d0e",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/hk_membership_recovery.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/hk_membership_recovery.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/membership_reader.py",
+      "candidate_sha256": "fc6dfacb2d965728b643dea51c7093904c1f970c78986edc2aa2cfb1927efbac",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "bb6c9421a50d034e99476f41dfe690c8f5625e92",
+      "original_sha256": "fc6dfacb2d965728b643dea51c7093904c1f970c78986edc2aa2cfb1927efbac",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/membership_reader.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/membership_reader.py"
+    },
+    {
+      "candidate_path": "recovery/V5/src/v5_shadow/provider_evidence.py",
+      "candidate_sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "5d72d3b2d54c0449576e46e7eba7be4fbc7884d6",
+      "original_sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5",
+      "source_path": "handoffs/M02/source/V5/src/v5_shadow/provider_evidence.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/src/v5_shadow/provider_evidence.py"
+    },
+    {
+      "candidate_path": "recovery/V5/vendor/hk_membership_baseline/domains/manager_research_evidence.py",
+      "candidate_sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "9255d425083e3c3627d4940d7556eed79e3bc00f",
+      "original_sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d",
+      "source_path": "handoffs/M02/source/V5/vendor/hk_membership_baseline/domains/manager_research_evidence.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/vendor/hk_membership_baseline/domains/manager_research_evidence.py"
+    },
+    {
+      "candidate_path": "recovery/V5/vendor/hk_membership_baseline/infrastructure/manager_input_attestation.py",
+      "candidate_sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "d6968a2acf64d7f5cde17fa8e1f27cefb744b3dd",
+      "original_sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc",
+      "source_path": "handoffs/M02/source/V5/vendor/hk_membership_baseline/infrastructure/manager_input_attestation.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/vendor/hk_membership_baseline/infrastructure/manager_input_attestation.py"
+    },
+    {
+      "candidate_path": "recovery/V5/vendor/hk_membership_baseline/stage_center/hk_universe_preflight.py",
+      "candidate_sha256": "2b121a55eeff37a1838f64e47a3ee5abf0a3f2e19afae87a6fcca4a22e08c7ef",
+      "change": "BYTE_IDENTICAL",
+      "git_blob": "b2dc4103614dd8a5a48f7e497174c5725ba873d9",
+      "original_sha256": "2b121a55eeff37a1838f64e47a3ee5abf0a3f2e19afae87a6fcca4a22e08c7ef",
+      "source_path": "handoffs/M02/source/V5/vendor/hk_membership_baseline/stage_center/hk_universe_preflight.py",
+      "source_ref": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+      "source_repo": "lexi2016/v5",
+      "source_url": "https://github.com/lexi2016/v5/blob/8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384/handoffs/M02/source/V5/vendor/hk_membership_baseline/stage_center/hk_universe_preflight.py"
+    }
+  ],
+  "original_chat_reply": "f528dbe5-6bdc-43ec-9d65-0f8203cdd07f",
+  "schema_version": "v5.m02.capture_candidate.provenance.v1"
+}

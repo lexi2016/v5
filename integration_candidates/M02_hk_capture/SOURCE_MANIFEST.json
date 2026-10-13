@@ -1,0 +1,139 @@
+{
+  "baseline_branch_head": "8a4a6cefde128c4cb21b73ae4afd6dc4b72eb384",
+  "files": {
+    "PATCH_SCOPE.diff": {
+      "bytes": 5439,
+      "sha256": "4c495a1a1a75d4c6b268028cfc30a683d8cddb457e91c6e0d9492328c871df3e"
+    },
+    "PROVENANCE.json": {
+      "bytes": 16789,
+      "sha256": "30ca78e5d0f05f5ade54765e7ec2ce2ad0b2d5014c0015685e3b9cf8e54aed5f"
+    },
+    "README.md": {
+      "bytes": 12071,
+      "sha256": "6e978bf7da53654e647fbbe663c447050d9ced215bb1365f5f2fbbcce83bb981"
+    },
+    "TEST_RESULTS.json": {
+      "bytes": 1180,
+      "sha256": "c01c565598fbaa45668c44f3f9e59005b46a6529dd789103855ad9ebfa92ae7c"
+    },
+    "collector/infrastructure/formula_generation.py": {
+      "bytes": 17448,
+      "sha256": "0904603912d6257cb02f41dfaf66c080e2f682e690b1c1901a86a7bafe1e74f0"
+    },
+    "collector/infrastructure/interprocess_lock.py": {
+      "bytes": 7514,
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0"
+    },
+    "collector/infrastructure/owned_io.py": {
+      "bytes": 9354,
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0"
+    },
+    "collector/infrastructure/owned_path.py": {
+      "bytes": 2251,
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30"
+    },
+    "collector/ops/_macos_research_panel_daily_parts/__init__.py": {
+      "bytes": 70,
+      "sha256": "29b3765f63f15078432ca53a34b28cb726c961e7dd0839022b8a87b3d8b373d8"
+    },
+    "collector/ops/_macos_research_panel_daily_parts/_namespace.py": {
+      "bytes": 527,
+      "sha256": "45da791482883c7c371268a99056960c577f299b43a5629394b3178fbea9f8b1"
+    },
+    "collector/ops/_macos_research_panel_daily_parts/hk_market_capture.py": {
+      "bytes": 32157,
+      "sha256": "5a5d8a3867f6661c58a71ca01f43b90c734a6ad1b0f2ba4791011f22a830be66"
+    },
+    "collector/ops/_macos_research_panel_daily_parts/panel_primitives.py": {
+      "bytes": 6403,
+      "sha256": "7ab4e0d3d9529e4e59cc875e44f4b368caaa2b2ae3cad45d8c11ad01a7326a03"
+    },
+    "collector/ops/macos_research_panel_daily.py": {
+      "bytes": 31048,
+      "sha256": "bb4db8d0cafaf43c7080439a60b986bf0ed02d4e4cb3295bde3f7ad8a266377f"
+    },
+    "launcher.py": {
+      "bytes": 17770,
+      "sha256": "83f8038cf4197596f612887ba6245de79f83ce09dd8e327f61869927a78ee756"
+    },
+    "original_chat/normalizer.py": {
+      "bytes": 645,
+      "sha256": "c23e010330496dd1adc01494519df115e3250c2797aa2424bea9c79805b3359a"
+    },
+    "original_chat/replacement.py": {
+      "bytes": 401,
+      "sha256": "fa9a73beb9f51936aae8ddc0bba0e2a42b741075c5b9827cce43551ed8209d08"
+    },
+    "recovery/V5/contracts/hk_capture_producers.json": {
+      "bytes": 487,
+      "sha256": "5655957feb033459af37ce2a4cb9d50a384fa0b9e9608138192b69360f702724"
+    },
+    "recovery/V5/contracts/hk_membership_source_manifest.json": {
+      "bytes": 1175,
+      "sha256": "1d62f35a36785ed79d03b7bfa69df8f78315b9845242ece7357bce13fcbd9b52"
+    },
+    "recovery/V5/src/v5_shadow/__init__.py": {
+      "bytes": 83,
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c"
+    },
+    "recovery/V5/src/v5_shadow/a_preselection.py": {
+      "bytes": 29140,
+      "sha256": "e666660830b2f088c51ba00b9fafdefcf966efb798c25a5c21b18ba1c74aa74b"
+    },
+    "recovery/V5/src/v5_shadow/composition.py": {
+      "bytes": 5297,
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0"
+    },
+    "recovery/V5/src/v5_shadow/contracts.py": {
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
+    },
+    "recovery/V5/src/v5_shadow/digests.py": {
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+    },
+    "recovery/V5/src/v5_shadow/hk_membership_recovery.py": {
+      "bytes": 12350,
+      "sha256": "9d323dfa5eabc7e745bfb00f608bad8f4647c6f5a795952840da616fa0f6979e"
+    },
+    "recovery/V5/src/v5_shadow/membership_reader.py": {
+      "bytes": 5702,
+      "sha256": "fc6dfacb2d965728b643dea51c7093904c1f970c78986edc2aa2cfb1927efbac"
+    },
+    "recovery/V5/src/v5_shadow/provider_evidence.py": {
+      "bytes": 6446,
+      "sha256": "e1dc88fa0095ebd17c274290340b562f8a03ef41bf8bfadf713d4a58452948e5"
+    },
+    "recovery/V5/vendor/hk_membership_baseline/domains/manager_research_evidence.py": {
+      "bytes": 30848,
+      "sha256": "4bfd8ec335eade9a97340fe17fc0742f2dba546d0e254fdfed2833ed324bb73d"
+    },
+    "recovery/V5/vendor/hk_membership_baseline/infrastructure/manager_input_attestation.py": {
+      "bytes": 10179,
+      "sha256": "d26211fd83db00c551be6c11d3bbed58d13d1db054d99699fc377ee5c335f3cc"
+    },
+    "recovery/V5/vendor/hk_membership_baseline/stage_center/hk_universe_preflight.py": {
+      "bytes": 41741,
+      "sha256": "2b121a55eeff37a1838f64e47a3ee5abf0a3f2e19afae87a6fcca4a22e08c7ef"
+    },
+    "reference/hk_market_capture.original.py": {
+      "bytes": 31474,
+      "sha256": "0a9651f88bc8a50d4b5e8ec4b6775a5291918f9f2556cf37c05b80a55cdfd84a"
+    },
+    "reference/hk_membership_recovery.original.py": {
+      "bytes": 10943,
+      "sha256": "3bc29c177adee3f4a663307ec033eb677bc6aa87d8c54ccf654531e610300d0e"
+    },
+    "tests/test_launcher.py": {
+      "bytes": 14916,
+      "sha256": "d220f2b289de165534e524c31e566c9021ce26b3a3324739a9ce6556a4bc299f"
+    },
+    "tests/test_pipeline.py": {
+      "bytes": 14851,
+      "sha256": "c8e6f57aff6c0e5c5254ecdf5ece47beb2d66ee9498a6584b3f91f58aaddc0a1"
+    }
+  },
+  "producer_version": "hk-capture-v2-metadata-null-v1",
+  "schema_version": "v5.m02.capture_candidate.sources.v1"
+}
