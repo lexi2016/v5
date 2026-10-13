@@ -45,3 +45,13 @@ DERIVED_SUMMARY，来源Mac消息 `msg_0b47eb1b0178a3a6016ace96c8380487d1bfeafc4
 原store新进程冷读9 READY/1 CANNOT_CONFIRM、216facts，02915仍未确认；新generation e0dc3261f4b944b394454055a56ba2fb。确切阻塞：新receipt没有status，m16_readonly_worker._members()要求receipt/job终态一致，报M16_TERMINAL_STATUS。未手补receipt、未重复apply，旧commit/job/receipt保留。
 
 50024 API已显示9/1，但会重投影catalyst分类与缺口，不声称响应与保存product字节相同；普通页仍旧6/4引用，新generation未部署。原作者正在修合同，尚无修复通过结论。来源报告result.safe SHA256：`70c1d4e3f37c692410503826e669e935b662ed707d009e0bcf97372a53a0755d`。PIT/正式/自然及完整验收不提升，页面计数14、完整0。
+
+## M16 receipt恢复与9/1普通页完成（20:52 UTC增量）
+
+DERIVED_SUMMARY，来源Mac普通消息 `msg_0b47eb1b0178a3a6016ace9a151b0087d18ece877dee868aba`，不冒称原字节。固定1666211d8f6471b992c6d501adc926c1fa4fd5e3，228 manifest核验、原P0联合回归9/9 PASS；默认preview通过且runtime未变。仅恢复一次，UTC20:50:28.990–20:50:32.741 exit0，无PDF重解析/network/ensure/retry/events。原product字节不变，旧commit原字节归档、旧jobs/receipts完整保留；这是receipt恢复，不是新采集或新产品。
+
+新job mr-receipt-20261012-a78f9ff40b74a61c-172c971165d3、generation a856bd7a2e1947e2871b4d04fdcc46d4、attempt1；完整三项指纹见[m16-apply-summary.json](m16-apply-summary.json)的receipt_recovery_increment。新进程原reader、原P0 project、隔离及发布HTTP/DOM均9 READY/1 CANNOT_CONFIRM、216facts通过。前述M16_TERMINAL_STATUS阻塞历史保留，此固定恢复已完成并接入普通页，不再将普通页记为旧6/4。
+
+UTC20:52:03–20:52:15最小发布source50490/PID29056、54780/PID29127，旧49527回退；前端文件未改，M15三条保存records及其余14路由/经理/保护端口保持。02915官方活跃主体未确认、历史PIT=false、财务缺口/资格限制保留，native visual NOT_RUN，14页面/0完整不变。
+
+来源报告result.safe SHA256：`c978416fb2a3eb0d9114a613040087883a9a0b914d4c66a6fc6bbaa7de907bbc`，不是本摘要指纹。

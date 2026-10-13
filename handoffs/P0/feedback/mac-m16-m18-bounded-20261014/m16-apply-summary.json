@@ -47,5 +47,69 @@
     "native_visual": "NOT_RUN",
     "page_count": 14,
     "complete_modules": 0
+  },
+  "receipt_recovery_increment": {
+    "evidence_type": "DERIVED_SUMMARY",
+    "source_message": "msg_0b47eb1b0178a3a6016ace9a151b0087d18ece877dee868aba",
+    "candidate": "1666211d8f6471b992c6d501adc926c1fa4fd5e3",
+    "manifest_files_verified": 228,
+    "p0_joint_regression_passed": 9,
+    "p0_joint_regression_total": 9,
+    "default_preview": "PASS_RUNTIME_UNCHANGED",
+    "recovery_calls": 1,
+    "start_utc": "2026-10-13T20:50:28.990Z",
+    "end_utc": "2026-10-13T20:50:32.741Z",
+    "exit_code": 0,
+    "pdf_reparse": false,
+    "network_calls": 0,
+    "ensure_calls": 0,
+    "retries": 0,
+    "event_calls": 0,
+    "product_bytes_unchanged": true,
+    "old_commit_byte_archive": "PASS",
+    "all_old_jobs_receipts_unchanged": true,
+    "identity": {
+      "job": "mr-receipt-20261012-a78f9ff40b74a61c-172c971165d3",
+      "generation": "a856bd7a2e1947e2871b4d04fdcc46d4",
+      "attempt": 1,
+      "product_sha256": "403cd39a15aebb6deae2a34eeebe4c807bfb552d8fb01723a81c0cd168d56d65",
+      "commit_sha256": "a8062072b30ca67765e8ce4d14f1d84570a2e3eb02961907bb9ed9c97edaafa7",
+      "commit_file_sha256": "45538734361a8645e24f2324fd9568703fe21c2e2bf80d6210a0577e05e09f26"
+    },
+    "verification": {
+      "fresh_original_reader": "PASS",
+      "original_p0_project": "PASS",
+      "isolated_http_dom": "PASS",
+      "published_http_dom": "PASS",
+      "ready": 9,
+      "cannot_confirm": 1,
+      "facts": 216
+    },
+    "deployment": {
+      "start_utc": "2026-10-13T20:52:03Z",
+      "end_utc": "2026-10-13T20:52:15Z",
+      "source_port": 50490,
+      "source_pid": 29056,
+      "frontend_port": 54780,
+      "frontend_pid": 29127,
+      "frontend_files_changed": false,
+      "rollback_source_port": 49527,
+      "m15_saved_records_unchanged": 3,
+      "other_routes_unchanged": 14,
+      "manager_and_protected_ports_unchanged": true
+    },
+    "reported_original_result_safe_sha256": "c978416fb2a3eb0d9114a613040087883a9a0b914d4c66a6fc6bbaa7de907bbc",
+    "limits": {
+      "remaining_member": "HK.02915",
+      "remaining_reason": "ISSUER_NOT_IN_OFFICIAL_ACTIVE_LIST",
+      "historical_pit": false,
+      "financial_gaps_and_qualification_restrictions_preserved": true,
+      "native_visual": "NOT_RUN",
+      "new_collection": false,
+      "new_product": false,
+      "natural_verified": false,
+      "complete_modules": 0,
+      "page_count": 14
+    }
   }
 }
