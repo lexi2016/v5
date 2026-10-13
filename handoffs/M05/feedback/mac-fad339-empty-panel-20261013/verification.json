@@ -1,0 +1,25 @@
+{
+  "fixed_test_commit": "fad33997c619d1c8239aecda64180aad81f5ccc9",
+  "runtime_commit": "2c5d1eb2c9572469bf04ad86fd61e92ee8674fe8",
+  "command": [
+    "<EXISTING_PYTHON>",
+    "-B",
+    "-m",
+    "unittest",
+    "-v",
+    "test_m05_v192_valid_empty"
+  ],
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TMPDIR": "<ISOLATED_TASK_TMP>"
+  },
+  "started_utc": "2026-10-13T07:12:15.677786+00:00",
+  "finished_utc": "2026-10-13T07:12:17.253641+00:00",
+  "exit_code": 1,
+  "expected_red_reached": true,
+  "classification": "EXPECTED_RED",
+  "runtime_and_test_files_verified_unchanged": 57,
+  "dependency_install": false,
+  "real_materialize": false
+}

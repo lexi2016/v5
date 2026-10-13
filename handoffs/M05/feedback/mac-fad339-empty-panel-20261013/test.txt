@@ -1,0 +1,16 @@
+DEFAULT_ORACLE_AND_STRICT_READER_ZERO; ORIGINAL_OWNER_EMPTY_STATUS_REJECTED
+test_default_oracle_zero_rows_publish_and_cold_read (test_m05_v192_valid_empty.V192ValidEmptyTests.test_default_oracle_zero_rows_publish_and_cold_read) ... FAIL
+
+======================================================================
+FAIL: test_default_oracle_zero_rows_publish_and_cold_read (test_m05_v192_valid_empty.V192ValidEmptyTests.test_default_oracle_zero_rows_publish_and_cold_read)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<TASK_ROOT>/candidate-m05-fad/V5/tests/test_m05_v192_valid_empty.py", line 198, in test_default_oracle_zero_rows_publish_and_cold_read
+    self.assertTrue(lane['accepted'], 'EXPECTED_RED:' + lane['reason'])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : EXPECTED_RED:LEGACY_EMPTY_STATUS_CONTRACT_MISMATCH
+
+----------------------------------------------------------------------
+Ran 1 test in 1.524s
+
+FAILED (failures=1)
