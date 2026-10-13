@@ -1,0 +1,10 @@
+{
+  "schema_version": "v5.m04_capture_config.v1",
+  "runtime_root": "/absolute/independent-v5/m04",
+  "cli": {"path": "/absolute/existing-approved/zsxq-cli", "sha256": "REPLACE_WITH_ACTUAL_FILE_SHA256"},
+  "selector_panel": {"path": "/absolute/migrated-v5-input/selector.parquet", "sha256": "REPLACE_WITH_ACTUAL_FILE_SHA256"},
+  "groups": [["15555851111822", "小牛研报纪要"], ["51111814525844", "乐晴行业观察"]],
+  "page_limit": 30,
+  "max_pages": 20,
+  "lookback_days": 4
+}
