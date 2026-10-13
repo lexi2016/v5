@@ -1,0 +1,13 @@
+# Mac M12 native saved import acceptance
+
+Fixed candidate: `345a75140d1a991b0e109bad4c90a1f5744434a1`. Applied exactly two new files to the existing Mac M12 c353334 composition; inherited runtime/frontend files remain byte-identical. No whole-HEAD deployment. Prior 59 tests were not rerun.
+
+The requested 22 native-import tests and 12 subtests passed, exit 0, at 2026-10-13 05:17:45–05:17:48 UTC using existing dependencies. Actual selected historical import ran once at 05:18:58 UTC and returned IMPORTED_SAVED_NATIVE. All 17 original files (15 artifacts plus manifest and receipt), totaling 46,728,759 bytes, were independently copied exactly. Original source SHA/size/mtime remained unchanged. No media, ASR text, raw original metadata, private binding or request is published here.
+
+Import identity: `55d4735e2c496cab5dd8acbf8250b357ff618132333d6d00f29513b258656d95`; actual imported_at `2026-10-13T05:18:58.681328+00:00`. Native manifest SHA `cb718159ee2a402ffba6541e7c54431d29f4d35303852fefd8c660a56bd908bc`; native receipt SHA `cbf5e82a0f89c64412368e0cec802e2318c4e5328f77f19b227680aaa2c4fd6e`. Separate import receipt and wrapper preserve original bytes and say NATIVE_SAVED_IMPORT / RECORDED_INPUT_REPLAY. Exact repeat returned REUSED_SAVED_NATIVE without changing files or import time. Original cold-reader and saved-reader passed.
+
+Only after those checks, a new isolated source API was launched at loopback 49436 (PID 78855), and the identity-verified task preview PID 73753 was replaced by PID 78859 on 54780. Previous source API PID 73744/59177 remains available. All other bindings/routes and frontend build remained unchanged; 111 protected files and all protected listener PIDs were unchanged. Existing V4 8873/8910 and previews 54777/54778/54779 were preserved.
+
+Actual HTTP and the entire existing built main bundle mounted in jsdom verified exact original transcript/segments, selected date and run, ASR_REVIEW_REQUIRED, NOT_AVAILABLE stock dictionary, and all 54 segments. Wrong-date request returned WAITING and cleared displayed content, then the selected date restored the same originals. No runtime/console errors. This is real HTTP/DOM evidence, not a native browser visual claim. The frontend ZIP did not change and was not rebuilt or reuploaded.
+
+No producer, download, ASR, model, real collection, scheduler, trading, V4 write, or original safety metadata amendment occurred. review_completed and natural_verified remain false. Historical saved-content acceptance does not establish natural daily completion or full P0–P5 acceptance. M11 failed independently and was not deployed; M06 resolver is separately recorded in f22517b.

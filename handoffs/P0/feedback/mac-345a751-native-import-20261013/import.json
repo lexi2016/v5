@@ -1,0 +1,29 @@
+{
+  "candidate": "345a75140d1a991b0e109bad4c90a1f5744434a1",
+  "command": [
+    "<EXISTING_PYTHON>",
+    "-I",
+    "-B",
+    "<CANDIDATE>/V5/src/v5_shadow/m12_native_import.py",
+    "--request",
+    "<PRIVATE_REQUEST>"
+  ],
+  "started_utc": "2026-10-13T05:18:58.584561+00:00",
+  "finished_utc": "2026-10-13T05:18:58.834788+00:00",
+  "exit_code": 0,
+  "source_17_files_unchanged": true,
+  "status": "IMPORTED_SAVED_NATIVE",
+  "import_id": "55d4735e2c496cab5dd8acbf8250b357ff618132333d6d00f29513b258656d95",
+  "imported_at": "2026-10-13T05:18:58.681328+00:00",
+  "producer_invoked": false,
+  "network_used": false,
+  "asr_executed": false,
+  "natural_verified": false,
+  "review_completed": false,
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false,
+  "copied_original_files": 17,
+  "copied_original_bytes": 46728759,
+  "copied_original_bytes_exact": true
+}

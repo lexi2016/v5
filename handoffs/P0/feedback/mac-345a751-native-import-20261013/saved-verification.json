@@ -1,0 +1,16 @@
+{
+  "started_utc": "2026-10-13T05:19:35.543661+00:00",
+  "finished_utc": "2026-10-13T05:19:35.799677+00:00",
+  "exit_code": 0,
+  "status": "SAVED_ASR_REVIEW_REQUIRED",
+  "asr_status": "ASR_REVIEW_REQUIRED",
+  "stockdict_status": "NOT_AVAILABLE",
+  "segments": 54,
+  "original_transcript_and_segments_exact": true,
+  "repeat_status": "REUSED_SAVED_NATIVE",
+  "repeat_imported_at_unchanged": true,
+  "import_files_unchanged": true,
+  "wrong_date_status": "WAITING",
+  "review_completed": false,
+  "natural_verified": false
+}

@@ -1,0 +1,18 @@
+{
+  "candidate": "345a75140d1a991b0e109bad4c90a1f5744434a1",
+  "command": [
+    "<EXISTING_PYTHON>",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "V5/tests/test_m12_native_import.py"
+  ],
+  "started_utc": "2026-10-13T05:17:45.433445+00:00",
+  "finished_utc": "2026-10-13T05:17:48.153945+00:00",
+  "exit_code": 0,
+  "protected_files_count": 111,
+  "protected_files_and_listener_pids_unchanged": true
+}

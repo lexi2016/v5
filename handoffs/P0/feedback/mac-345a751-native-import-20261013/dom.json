@@ -1,0 +1,33 @@
+{
+  "candidate": "345a75140d1a991b0e109bad4c90a1f5744434a1",
+  "finished_utc": "2026-10-13T05:20:56.546Z",
+  "exit_code": 0,
+  "method": "Existing deployed built main bundle mounted in jsdom with actual local HTTP; no browser visual claim",
+  "real_original_transcript_exact": true,
+  "real_original_segments_exact": true,
+  "identity_and_date_exact": true,
+  "asr_review_required_visible": true,
+  "stockdict_not_available_visible": true,
+  "wrong_date_waiting_clears_content": true,
+  "restored_selected_date": true,
+  "errors": [],
+  "requests": [
+    {
+      "path": "/api/v5/source-bundle/video-fupan",
+      "status": 200,
+      "elapsed_ms": 75
+    },
+    {
+      "path": "/api/v5/source-bundle/video-fupan?trade_date=20261013",
+      "status": 200,
+      "elapsed_ms": 3
+    },
+    {
+      "path": "/api/v5/source-bundle/video-fupan?trade_date=20261012",
+      "status": 200,
+      "elapsed_ms": 64
+    }
+  ],
+  "frontend_build_unchanged": true,
+  "visual_verification": false
+}
