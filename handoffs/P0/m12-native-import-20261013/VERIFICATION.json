@@ -1,0 +1,40 @@
+{
+  "schema_version": "v5.m12_native_import_verification.v1",
+  "status": "CANDIDATE_SYNTHETIC_TESTS_PASS",
+  "verified_against_p0_commit": "acf8d23f9c191e4cb2da5737ca715002e83648c2",
+  "targeted_tests": {
+    "passed": 81,
+    "subtests_passed": 33,
+    "failed": 0,
+    "status": "PASS"
+  },
+  "new_native_import_tests": {
+    "passed": 22,
+    "subtests_passed": 12,
+    "status": "PASS"
+  },
+  "separate_stdlib_native_tests": {
+    "passed": 22,
+    "status": "PASS"
+  },
+  "independent_review": {
+    "status": "NO_REMAINING_BLOCKING_FINDINGS",
+    "fixed_finding": "CUMULATIVE_READ_BUDGET",
+    "regression": "RED_THEN_GREEN"
+  },
+  "source_contract_commit": "23b49cc88dc4183519f00c9e3760e437b2476090",
+  "original_runtime_pins_unchanged": true,
+  "mac_native_import": "NOT_RUN",
+  "mac_binding": "NOT_RUN",
+  "mac_deployment": "NOT_RUN",
+  "real_saved_content_page": "NOT_RUN",
+  "real_provider": "NOT_RUN",
+  "new_video_download": "NOT_RUN",
+  "new_asr": "NOT_RUN",
+  "full_release_suite_verified": false,
+  "natural_verified": false,
+  "review_completed": false,
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false
+}

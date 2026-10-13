@@ -1,0 +1,29 @@
+{
+  "schema_version": "v5.m12_native_import_source_closure.v1",
+  "deployment": "TWO_NEW_FILES_ONLY",
+  "verified_against_p0_commit": "acf8d23f9c191e4cb2da5737ca715002e83648c2",
+  "original_runtime_commit": "4bbf069b435d8f0ba28db8e2eba1d358ea5e283c",
+  "requires_existing_m12_runtime_manifest": {
+    "path": "V5/contracts/m12_runtime.json",
+    "bytes": 2274,
+    "sha256": "62fc6d512b1c43bc247123e299cd0e27dae6c71bbfb7b31bc3b8f0b1a751a79c",
+    "git_blob_sha": "4a24c4be67f01770cb36976e85555a51cbe5dfb5"
+  },
+  "existing_m12_mac_feedback_commit": "57523dd2c0e254c05b5e4aa8f9a069290f336c4c",
+  "entries": [
+    {
+      "path": "V5/src/v5_shadow/m12_native_import.py",
+      "bytes": 14811,
+      "sha256": "a55e0f435b3e35decad2fe39d17ac9c6c26f7091dd6b6c523b90f05a9f69a14c",
+      "git_blob_sha": "f1906aff4ea5e92f228be151cd4e8a16f390b296"
+    },
+    {
+      "path": "V5/tests/test_m12_native_import.py",
+      "bytes": 13873,
+      "sha256": "c5b71ff35a8830087375162955138b278f92abe707c59f76687e3281ad69bef5",
+      "git_blob_sha": "c1c6573222d641f4e60c198d29280e138a33f512"
+    }
+  ],
+  "shared_files_changed": [],
+  "original_runtime_files_changed": []
+}
