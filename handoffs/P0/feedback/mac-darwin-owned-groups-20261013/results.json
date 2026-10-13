@@ -1,0 +1,193 @@
+[
+  {
+    "case": "alive_leader",
+    "waitid_wnowait": null,
+    "getpgid": {
+      "ok": true,
+      "value": 71262
+    },
+    "getsid": {
+      "ok": true,
+      "value": 71262
+    },
+    "initial_owned_identities": {
+      "leader": {
+        "pid": 71262,
+        "ppid": 71260,
+        "pgid": 71262,
+        "sid": 71262
+      },
+      "child": {
+        "pid": 71263,
+        "ppid": 71262,
+        "pgid": 71262,
+        "sid": 71262
+      },
+      "grandchild": {
+        "pid": 71264,
+        "ppid": 71263,
+        "pgid": 71262,
+        "sid": 71262
+      }
+    },
+    "ps_group_before": [
+      {
+        "pid": 71262,
+        "ppid": 71260,
+        "pgid": 71262,
+        "state": "Ss",
+        "command": "<EXISTING_HK02_PYTHON> -I -B <DIAGNOSTIC_ROOT>/finite_worker.py <DIAGNOSTIC_ROOT>/alive_leader leader alive_leader"
+      },
+      {
+        "pid": 71263,
+        "ppid": 71262,
+        "pgid": 71262,
+        "state": "S",
+        "command": "<EXISTING_HK02_PYTHON> -I -B <DIAGNOSTIC_ROOT>/finite_worker.py <DIAGNOSTIC_ROOT>/alive_leader child alive_leader"
+      },
+      {
+        "pid": 71264,
+        "ppid": 71263,
+        "pgid": 71262,
+        "state": "S",
+        "command": "<EXISTING_HK02_PYTHON> -I -B <DIAGNOSTIC_ROOT>/finite_worker.py <DIAGNOSTIC_ROOT>/alive_leader grandchild alive_leader"
+      }
+    ],
+    "ownership_confirmed": true,
+    "killpg_signal": "SIGTERM",
+    "killpg": {
+      "ok": true,
+      "value": null
+    },
+    "started_utc": "2026-10-13T04:18:32.960662+00:00",
+    "final_wait_exit": -15,
+    "ps_group_after": [],
+    "duration_seconds": 0.165
+  },
+  {
+    "case": "exited_leader_live_children",
+    "waitid_wnowait": {
+      "si_pid": 71268,
+      "si_uid": 0,
+      "si_signo": 20,
+      "si_status": 0,
+      "si_code": 1
+    },
+    "getpgid": {
+      "ok": false,
+      "type": "ProcessLookupError",
+      "errno": 3,
+      "message": "No such process"
+    },
+    "getsid": {
+      "ok": false,
+      "type": "ProcessLookupError",
+      "errno": 3,
+      "message": "No such process"
+    },
+    "initial_owned_identities": {
+      "leader": {
+        "pid": 71268,
+        "ppid": 71260,
+        "pgid": 71268,
+        "sid": 71268
+      },
+      "child": {
+        "pid": 71269,
+        "ppid": 71268,
+        "pgid": 71268,
+        "sid": 71268
+      },
+      "grandchild": {
+        "pid": 71270,
+        "ppid": 71269,
+        "pgid": 71268,
+        "sid": 71268
+      }
+    },
+    "ps_group_before": [
+      {
+        "pid": 71268,
+        "ppid": 71260,
+        "pgid": 71268,
+        "state": "Z",
+        "command": "<defunct>"
+      },
+      {
+        "pid": 71269,
+        "ppid": 1,
+        "pgid": 71268,
+        "state": "S",
+        "command": "<EXISTING_HK02_PYTHON> -I -B <DIAGNOSTIC_ROOT>/finite_worker.py <DIAGNOSTIC_ROOT>/exited_leader_live_children child exited_leader_live_children"
+      },
+      {
+        "pid": 71270,
+        "ppid": 71269,
+        "pgid": 71268,
+        "state": "S",
+        "command": "<EXISTING_HK02_PYTHON> -I -B <DIAGNOSTIC_ROOT>/finite_worker.py <DIAGNOSTIC_ROOT>/exited_leader_live_children grandchild exited_leader_live_children"
+      }
+    ],
+    "ownership_confirmed": true,
+    "killpg_signal": "SIGTERM",
+    "killpg": {
+      "ok": true,
+      "value": null
+    },
+    "started_utc": "2026-10-13T04:18:33.129200+00:00",
+    "final_wait_exit": 0,
+    "ps_group_after": [],
+    "duration_seconds": 0.166
+  },
+  {
+    "case": "zombie_only",
+    "waitid_wnowait": {
+      "si_pid": 71274,
+      "si_uid": 0,
+      "si_signo": 20,
+      "si_status": 0,
+      "si_code": 1
+    },
+    "getpgid": {
+      "ok": false,
+      "type": "ProcessLookupError",
+      "errno": 3,
+      "message": "No such process"
+    },
+    "getsid": {
+      "ok": false,
+      "type": "ProcessLookupError",
+      "errno": 3,
+      "message": "No such process"
+    },
+    "initial_owned_identities": {
+      "leader": {
+        "pid": 71274,
+        "ppid": 71260,
+        "pgid": 71274,
+        "sid": 71274
+      }
+    },
+    "ps_group_before": [
+      {
+        "pid": 71274,
+        "ppid": 71260,
+        "pgid": 71274,
+        "state": "Z",
+        "command": "<defunct>"
+      }
+    ],
+    "ownership_confirmed": true,
+    "killpg_signal": "SIGTERM",
+    "killpg": {
+      "ok": false,
+      "type": "PermissionError",
+      "errno": 1,
+      "message": "Operation not permitted"
+    },
+    "started_utc": "2026-10-13T04:18:33.261307+00:00",
+    "final_wait_exit": 0,
+    "ps_group_after": [],
+    "duration_seconds": 0.129
+  }
+]
