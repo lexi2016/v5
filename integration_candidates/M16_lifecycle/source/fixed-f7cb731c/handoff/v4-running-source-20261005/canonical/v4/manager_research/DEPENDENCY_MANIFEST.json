@@ -1,0 +1,9 @@
+{
+  "name": "pypdf",
+  "version": "6.10.0",
+  "vendor_path": "_vendor/pypdf",
+  "license": "BSD-3-Clause",
+  "package_tree_sha256": "871e199b87bd2d03c9de7819f76494e90876b458ae6b65a580557acf23000da6",
+  "license_sha256": "a97ac230e5f33ef10a5367a850eb01f91f1a0b064e34742c7794d2294557f524",
+  "assembly_note": "V5 M16 lifecycle assembly generated from existing pinned f7cb731c vendor bytes; not claimed as an original missing donor manifest."
+}
