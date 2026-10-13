@@ -1,0 +1,33 @@
+[
+  {
+    "command": [
+      "node",
+      "--test",
+      "tests/hkPreselectionModelCopy.node.mjs"
+    ],
+    "started_utc": "2026-10-13T02:15:03.744933+00:00",
+    "finished_utc": "2026-10-13T02:15:03.800639+00:00",
+    "exit": 0
+  },
+  {
+    "command": [
+      "npm",
+      "test",
+      "--",
+      "src/components/HkPreselectionPool.model-copy.spec.ts"
+    ],
+    "started_utc": "2026-10-13T02:15:03.801046+00:00",
+    "finished_utc": "2026-10-13T02:15:04.645432+00:00",
+    "exit": 0
+  },
+  {
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "started_utc": "2026-10-13T02:15:04.645796+00:00",
+    "finished_utc": "2026-10-13T02:15:05.695943+00:00",
+    "exit": 0
+  }
+]

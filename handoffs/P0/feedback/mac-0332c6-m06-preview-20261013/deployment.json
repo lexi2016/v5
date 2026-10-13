@@ -1,0 +1,66 @@
+{
+  "status": "DEPLOYED_HTTP_AND_DOM_VERIFIED_VISUAL_UNAVAILABLE",
+  "started_utc": "2026-10-13T02:17:19.896359+00:00",
+  "finished_utc": "2026-10-13T02:17:23.142474+00:00",
+  "backend_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+  "frontend_base_commit": "287de959ac160f6ae2792ca1f9684b4c86750012",
+  "component_overlay_commit": "0332c6b36157fe703c99fc1e1fc2c0e1f1b57a78",
+  "generation_product_commit": "4e05bd422d1f6bdedb7bff8b2faf5218fac9e58a",
+  "generation_publication": "d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b",
+  "source_pid": 55204,
+  "source_origin": "http://127.0.0.1:65413",
+  "preview_pid": 55214,
+  "preview_port": 54780,
+  "stopped_owned_preview_pid": 40161,
+  "old_source_retained": true,
+  "old_source_origin": "http://127.0.0.1:64303",
+  "manager_origin": "http://127.0.0.1:63668",
+  "m18_run": "46596b03c2ab4e29b1219fd2e5eb698f",
+  "other_source_routes_exact": true,
+  "m17_semantics_exact": true,
+  "m18_descriptor_exact": true,
+  "protected_listener_pids_unchanged": true,
+  "protected_files_unchanged": true,
+  "protected_files_count": 149,
+  "dist_files": 19,
+  "dist_manifest_sha256": "a40b3b982ecc5cd9d8786e03f18bb681d82536c8626058da249989ff2caa3c12",
+  "m06_full_reference_exact": true,
+  "m06_all100_original_rows_exact": true,
+  "model_generation_invoked": false,
+  "provider_collection_invoked": false,
+  "natural_scheduler_enabled": false,
+  "old_dist_and_binding_retained": true,
+  "exit_code": 0,
+  "post_dom_protected_files_unchanged": true,
+  "post_dom_ledgers": [
+    {
+      "run_id": "4c8295528ca7450daf2dc48b014f0af5",
+      "attempts": 1,
+      "status": "SUCCEEDED",
+      "sha256": "83882d12307ff0a33ab61c80e88857769d2ec13bad425c16476f292ef543f8a0"
+    },
+    {
+      "run_id": "1112ecbd4b95467799eaee153520f2f0",
+      "attempts": 1,
+      "status": "SUCCEEDED",
+      "sha256": "d7cea5f38d6c4f64b84edac63eb540a4e8419633e0097df9b237208a6cf5c0f3"
+    }
+  ],
+  "existing_product_source_changes": [
+    "src/components/HkPreselectionPool.vue"
+  ],
+  "new_node_tests": 2,
+  "new_vue_tests": 5,
+  "build_exit": 0,
+  "browser_attempts": 1,
+  "browser_error": "Chrome CUA Transport closed",
+  "browser_visual_verified": false,
+  "initial_harness_notes": [
+    "Initial command transport disconnected before tests started; no check outputs existed; same checks then ran once successfully.",
+    "Initial deployment baseline queried M17 without its required date/run; stopped before service changes. Harness corrected to verify exact existing M17 date/run, then deployed."
+  ],
+  "model_provider_scope": "No owner/generator/provider invoked by deployment; only original fixed read-only projection and saved-reference cold readers. No model-runtime profiling attached to serving API.",
+  "prior_generation_observability_limit_retained": true,
+  "dist_archive_sha256": "1839730140db540b1ab50e167473e7b99c0bf7bf69cc15891ad9ff168bcf88c4",
+  "dist_archive_bytes": 270087
+}

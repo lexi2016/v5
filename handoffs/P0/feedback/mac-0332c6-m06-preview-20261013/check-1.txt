@@ -1,0 +1,13 @@
+
+> v3-5-web@0.1.0 test
+> vitest run src/components/HkPreselectionPool.model-copy.spec.ts
+
+
+ RUN  v4.1.10 <TASK_ROOT>/preview-m06-0332/frontend
+
+
+ Test Files  1 passed (1)
+      Tests  5 passed (5)
+   Start at  10:15:04
+   Duration  559ms (transform 46ms, setup 0ms, import 148ms, tests 66ms, environment 290ms)
+

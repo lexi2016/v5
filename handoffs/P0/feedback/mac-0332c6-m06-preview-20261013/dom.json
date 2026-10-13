@@ -1,0 +1,15 @@
+{
+  "status": "PASS",
+  "real_preview_origin": "http://127.0.0.1:54780",
+  "real_http_reads": 2,
+  "all100_rows_and_all_rendered_fields_exact": true,
+  "original_order_preserved": true,
+  "new_publication_identity_displayed": true,
+  "producer_verified_text": true,
+  "reader_no_reverify_text": true,
+  "formal_pit_natural_boundaries_visible": true,
+  "loading_clears_rows_and_producer_claim": true,
+  "refresh_returns_same_rows": true,
+  "browser_visual_verified": false,
+  "dom_method": "jsdom renders exact fixed Vue SFC with real deployed HTTP; deployed dist separately byte-verified. Not a Chrome screenshot/visual check."
+}
