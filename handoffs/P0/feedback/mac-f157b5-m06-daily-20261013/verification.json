@@ -1,0 +1,55 @@
+{
+  "candidate": "f157b59833fc0a10bf04ae9ea5df5d6166be0c64",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-m",
+    "unittest",
+    "test_m06_daily_cycle",
+    "test_m06_current_success_reader",
+    "test_daily_dispatch",
+    "test_m06_readonly_api.M06ReadOnlyAPITests.test_actual_original_cold_projection_all100_and_readonly",
+    "test_m06_readonly_api.M06ReadOnlyAPITests.test_saved_artifact_tamper_rejected_and_no_republication",
+    "-v"
+  ],
+  "working_directory": "candidate-f157b5",
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_utc": "2026-10-13T03:09:55.653945+00:00",
+  "finished_utc": "2026-10-13T03:10:30.383216+00:00",
+  "duration_seconds": 34.728742583,
+  "exit_code": 0,
+  "source_before": {
+    "files": 150,
+    "sha256": "3fbc5607186f831e1d230b06512070f455a7fa39db71b9c8fb6fa60ba5c8783f",
+    "verified": true
+  },
+  "source_after": {
+    "files": 150,
+    "sha256": "3fbc5607186f831e1d230b06512070f455a7fa39db71b9c8fb6fa60ba5c8783f",
+    "verified": true
+  },
+  "protected_files_count": 64,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "real_model_run": false,
+  "collection_run": false,
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "binding_changed": false,
+  "natural_verified": false,
+  "tests": {
+    "daily_cycle_new": 24,
+    "current_reader_new": 27,
+    "dispatch_regression": 5,
+    "fixed_reader_regression": 2,
+    "total": 58,
+    "passed": 58,
+    "failed": 0,
+    "unittest_seconds": 34.588
+  },
+  "git_blob_identity_verified_count": 150
+}
