@@ -142,6 +142,27 @@ def _safety(value, *, required=True):
         raise ValueError('M06_DELIVERY_SAFETY')
 
 
+def _pool_safety(manifest, receipt, entry, signal):
+    # The fixed native writer puts safety flags on the hash-binding receipt,
+    # not on v3_shared_data.manifest.v1. Never manufacture source fields.
+    native_manifest = manifest.get('schema_version') == 'v3_shared_data.manifest.v1'
+    native_receipt = receipt.get('schema_version') == 'v3_shared_data.receipt.v1'
+    if native_manifest or native_receipt:
+        if not (native_manifest and native_receipt):
+            raise ValueError('M06_DELIVERY_POOL_SCHEMA')
+        if (not isinstance(entry.get('owner'), str) or not entry['owner']
+                or receipt.get('owner') != entry['owner']
+                or not isinstance(entry.get('run_id'), str) or not entry['run_id']
+                or manifest.get('signal_date') != signal
+                or manifest.get('temporal_cutoff_safe') is not True
+                or type(manifest.get('row_count')) is not int or manifest['row_count'] != 100):
+            raise ValueError('M06_DELIVERY_POOL_IDENTITY')
+        _safety(manifest, required=False)  # Explicit contradictory flags still fail.
+    else:
+        _safety(manifest)  # No compatibility exception for another schema.
+    _safety(receipt)
+
+
 def _payload(capture, family, relative, expected):
     sha(expected)
     if _observe(capture, family, relative) != expected:
@@ -216,16 +237,18 @@ def _capture_inputs(config, signal, target):
     if latest is not None:
         if not isinstance(latest.get('entries'), dict):
             raise ValueError('M06_DELIVERY_SOURCE_LATEST')
-        entry = latest['entries'].get(target+'/'+ROLE)
-        if entry is not None:
+        pool_key = target+'/'+ROLE
+        entry = latest['entries'].get(pool_key)
+        if pool_key in latest['entries']:
+            if not isinstance(entry, dict):
+                raise ValueError('M06_DELIVERY_POOL_IDENTITY')
             manifest = metadata('store', _relative(entry['manifest_relative']))
             receipt = metadata('store', _relative(entry['receipt_relative']))
             if (manifest.get('trade_date') != target or receipt.get('trade_date') != target
                     or receipt.get('status') != 'READY' or receipt.get('role') != ROLE
                     or receipt.get('run_id') != entry.get('run_id')):
                 raise ValueError('M06_DELIVERY_POOL_IDENTITY')
-            _safety(manifest)
-            _safety(receipt)
+            _pool_safety(manifest, receipt, entry, signal)
             if (sha256_json(manifest) != receipt.get('manifest_sha256')
                     or manifest.get('artifact_sha256') != receipt.get('artifact_sha256')
                     or manifest.get('artifact_relative') != entry['artifact_relative']):
@@ -406,6 +429,28 @@ def _verify_snapshot(snapshot, records):
             raise ValueError('M06_DELIVERY_SNAPSHOT_HASH')
 
 
+def _sealed_pool_method(snapshot, records, target):
+    # Decide only from the verified sealed latest bytes, never a live pointer.
+    key = 'store/latest.json'
+    if key not in records:
+        raise ValueError('M06_DELIVERY_SNAPSHOT_INVENTORY')
+    if records[key] is None:
+        return 'GENERATE_IF_ABSENT'
+    with _file(snapshot, key) as fd:
+        raw = _read_regular(fd, MAX_JSON_BYTES)
+    if hashlib.sha256(raw).hexdigest() != records[key]['sha256']:
+        raise ValueError('M06_DELIVERY_SNAPSHOT_HASH')
+    latest = _json(raw)
+    if not isinstance(latest, dict) or not isinstance(latest.get('entries'), dict):
+        raise ValueError('M06_DELIVERY_SOURCE_LATEST')
+    pool_key = target+'/'+ROLE
+    if pool_key not in latest['entries']:
+        return 'GENERATE_IF_ABSENT'
+    if not isinstance(latest['entries'][pool_key], dict):
+        raise ValueError('M06_DELIVERY_POOL_IDENTITY')
+    return 'EXISTING_VERIFIED_POOL'
+
+
 def _sealed_result(config, scheduled, target, pointer, delivery_fd, *, reused):
     exact_keys(pointer, ('snapshot_relative', 'seal_sha256'))
     relative = _relative(pointer['snapshot_relative'])
@@ -452,7 +497,8 @@ def _sealed_result(config, scheduled, target, pointer, delivery_fd, *, reused):
     return dict(status='REUSED_M06_INPUT_DELIVERY' if reused else 'READY',
         delivery=delivery, delivery_sha256=hashlib.sha256(raw_delivery).hexdigest(),
         store_root=str(snapshot/'store'), asset_root=str(snapshot/'assets'),
-        seal_sha256=pointer['seal_sha256'])
+        seal_sha256=pointer['seal_sha256'],
+        production_method=_sealed_pool_method(snapshot, seal['records'], target))
 
 
 def prepare_input_delivery(config, scheduled_date, target_date, *, now=None):

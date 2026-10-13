@@ -1,0 +1,50 @@
+{
+  "status": "CLOUD_SCOPED_PASS_MAC_PENDING",
+  "tested_parent": "39a903afbdd95f110463c8372aa493e81b7209cd",
+  "runtime_changed": [
+    "V5/src/v5_shadow/m06_input_delivery.py",
+    "V5/src/v5_shadow/p0_hk_preselection.py"
+  ],
+  "schema_compatibility": "Native manifest.v1 safety flags are optional; matching receipt.v1 requires all three boolean False; explicit manifest conflicts rejected",
+  "policy": "REUSE_VERIFIED_OR_GENERATE_IF_ABSENT",
+  "default_policy_unchanged": "GENERATE_IF_ABSENT",
+  "source_selection": "Verified sealed exact-target latest entry; no live drift or invalid-to-generate fallback",
+  "selected_request_methods": [
+    "EXISTING_VERIFIED_POOL",
+    "GENERATE_IF_ABSENT"
+  ],
+  "original_producer_receipt_methods": [
+    "EXISTING_VERIFIED_POOL",
+    "FROZEN_MODEL_PRODUCER"
+  ],
+  "tests": {
+    "red": 2,
+    "final_pass": 19,
+    "new_test_methods": 16,
+    "affected_regression_methods": 3,
+    "skips": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 40.791
+  },
+  "original_owner_files_unchanged": 50,
+  "original_owner_commit": "08ed9de9ddb5fd2c62eb1762df2f6106464d823b",
+  "actual_original_owner_synthetic_replay": {
+    "rows": 100,
+    "owner_calls": 1,
+    "second_tick": "REUSED_SUCCESS",
+    "two_ledgers": true,
+    "fresh_reader": true,
+    "current_success_cas": true,
+    "model_weights_reverified": false
+  },
+  "real_assets_auto_policy_end_to_end": "NOT_RUN_IN_CLOUD",
+  "generation": "NOT_RUN",
+  "natural_run": "NOT_RUN",
+  "activation": false,
+  "closure_files": 163,
+  "closure_sha256": "0175f6eda459025d6cc0b12ccf8a1f6a05f7f0507a1dbb5cae5bf0bdc6aafda7",
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false
+}

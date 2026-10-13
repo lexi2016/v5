@@ -1,0 +1,51 @@
+test_native_manifest_without_flags_is_admitted_by_bound_safe_receipt (test_m06_native_pool_admission.M06NativePoolAdmissionTests.test_native_manifest_without_flags_is_admitted_by_bound_safe_receipt) ... FAIL
+test_opt_in_is_accepted_only_with_evening_sealed_input_adapter (test_m06_native_pool_admission.M06PoolSelectionPolicyTests.test_opt_in_is_accepted_only_with_evening_sealed_input_adapter) ... FAIL
+
+======================================================================
+FAIL: test_native_manifest_without_flags_is_admitted_by_bound_safe_receipt (test_m06_native_pool_admission.M06NativePoolAdmissionTests.test_native_manifest_without_flags_is_admitted_by_bound_safe_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_REPO>/V5/tests/test_m06_native_pool_admission.py", line 49, in test_native_manifest_without_flags_is_admitted_by_bound_safe_receipt
+    result = self.prepare()
+             ^^^^^^^^^^^^^^
+  File "<ISOLATED_REPO>/V5/tests/test_m06_input_delivery.py", line 194, in prepare
+    return self.adapter.prepare_input_delivery(self.config, self.signal, self.target, now=self.now, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<ISOLATED_REPO>/V5/src/v5_shadow/m06_input_delivery.py", line 483, in prepare_input_delivery
+    capture = _capture_inputs(config, scheduled_date, target_date)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<ISOLATED_REPO>/V5/src/v5_shadow/m06_input_delivery.py", line 227, in _capture_inputs
+    _safety(manifest)
+  File "<ISOLATED_REPO>/V5/src/v5_shadow/m06_input_delivery.py", line 142, in _safety
+    raise ValueError('M06_DELIVERY_SAFETY')
+ValueError: M06_DELIVERY_SAFETY
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<ISOLATED_REPO>/V5/tests/test_m06_native_pool_admission.py", line 51, in test_native_manifest_without_flags_is_admitted_by_bound_safe_receipt
+    self.fail('Original receipt-authority schema must be admitted: '+str(error))
+AssertionError: Original receipt-authority schema must be admitted: M06_DELIVERY_SAFETY
+
+======================================================================
+FAIL: test_opt_in_is_accepted_only_with_evening_sealed_input_adapter (test_m06_native_pool_admission.M06PoolSelectionPolicyTests.test_opt_in_is_accepted_only_with_evening_sealed_input_adapter)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_REPO>/V5/tests/test_m06_native_pool_admission.py", line 138, in test_opt_in_is_accepted_only_with_evening_sealed_input_adapter
+    self.assertEqual(p0._candidate_policy(self.config)['production_method'], POLICY)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<ISOLATED_REPO>/V5/src/v5_shadow/p0_hk_preselection.py", line 350, in _candidate_policy
+    raise ValueError('M06_PRODUCTION_METHOD')
+ValueError: M06_PRODUCTION_METHOD
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<ISOLATED_REPO>/V5/tests/test_m06_native_pool_admission.py", line 140, in test_opt_in_is_accepted_only_with_evening_sealed_input_adapter
+    self.fail('Explicit sealed selection policy not implemented: '+str(error))
+AssertionError: Explicit sealed selection policy not implemented: M06_PRODUCTION_METHOD
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.119s
+
+FAILED (failures=2)

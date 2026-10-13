@@ -21,6 +21,7 @@ LANE='hk_preselection'
 TZ=timezone(timedelta(hours=8))
 IDENTITIES=('code_sha256','config_sha256','dependency_sha256')
 EVENING_CONTRACT='CLOSE_TO_NEXT_HK_SESSION_V1'
+SEALED_POOL_SELECTION='REUSE_VERIFIED_OR_GENERATE_IF_ABSENT'
 REQUEST_KEYS=('signal_date','target_date','eligibility_source_date','admission_cutoff','completion_cutoff',
     'files','source_files','execution_mode','production_method')
 
@@ -346,8 +347,10 @@ def _candidate_policy(config):
         raise ValueError('M06_EXECUTION_BUDGET_REQUIRED')
     if value['execution_mode'] not in ('NATURAL','MANUAL_RECOVERY','RECORDED_INPUT_REPLAY'):
         raise ValueError('M06_EXECUTION_MODE')
-    if value['production_method'] not in ('EXISTING_VERIFIED_POOL','GENERATE_IF_ABSENT'):
+    if value['production_method'] not in ('EXISTING_VERIFIED_POOL','GENERATE_IF_ABSENT',SEALED_POOL_SELECTION):
         raise ValueError('M06_PRODUCTION_METHOD')
+    if value['production_method']==SEALED_POOL_SELECTION and (not evening or 'input_delivery' not in value):
+        raise ValueError('M06_SEALED_POOL_SELECTION_REQUIRED')
     if value['execution_mode']=='RECORDED_INPUT_REPLAY' and value['production_method']!='EXISTING_VERIFIED_POOL':
         raise ValueError('M06_GENERATION_WINDOW')
     delivery=no_symlinks(value['delivery_root']);output=no_symlinks(registration['private_root'])
@@ -475,11 +478,15 @@ def prepare_daily_candidate(config,now):
     start,end=(aware(date+'T'+window[key]+':00+08:00') for key in ('start','end'))
     reason=_window_status(now,start,end,policy['execution_budget_seconds'])
     if reason:return dict(status=reason)
-    registration=config['hk_preselection']
+    registration=config['hk_preselection'];method=policy['production_method']
     if 'input_delivery' in policy:
         from .m06_input_delivery import prepare_input_delivery
         sealed=prepare_input_delivery(dict(policy['input_delivery'],delivery_root=policy['delivery_root']),scheduled,target,now=now)
         if sealed['status'] not in ('READY','REUSED_M06_INPUT_DELIVERY'):return dict(status=sealed['status'])
+        if method==SEALED_POOL_SELECTION:
+            method=sealed['production_method']
+            if method not in ('EXISTING_VERIFIED_POOL','GENERATE_IF_ABSENT'):
+                raise ValueError('M06_SEALED_POOL_SELECTION_INVALID')
         registration=dict(registration,store_root=sealed['store_root'],asset_root=sealed['asset_root'])
         now=_utc_now().astimezone(TZ)
         if now.strftime('%Y%m%d')!=scheduled:return dict(status='MISSED_M06_WINDOW_NO_BACKFILL')
@@ -507,7 +514,7 @@ def prepare_daily_candidate(config,now):
             if not start<=aware(admission)<=now:raise ValueError('M06_FROZEN_ADMISSION_TIME')
         else:admission=now.isoformat()
         request={key:delivery[key] for key in ('target_date','signal_date','eligibility_source_date','files','source_files')}
-        request.update(admission_cutoff=admission,execution_mode=policy['execution_mode'],production_method=policy['production_method'])
+        request.update(admission_cutoff=admission,execution_mode=policy['execution_mode'],production_method=method)
         if evening:
             day=f'{target[:4]}-{target[4:6]}-{target[6:]}'
             request.update(date_contract=EVENING_CONTRACT,scheduled_date=scheduled,execution_deadline=end.isoformat(),
