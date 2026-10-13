@@ -7,7 +7,7 @@
 - 原 M02 代码标识：`ce6cddce...`（主控提供的缩写，不补造完整 hash）。build/coldread：18:26:14.297–18:26:15.229，exit 0。target=20261013、signal=20261012、native E=20261013；membership 7 文件、698 条，native 4，HK02 九资产。
 - run：`37139d842d68ad1bfb6bb0144262d65411f4ad131bb1ea6a2155b53144a47297`。SOURCE_IDENTITY_ONLY；temporal=CANNOT_CONFIRM；三源 PIT 与正式历史资格均为 false。
 - 原 SDK 手动调用两板各 698、RET 0；RAW_CAPTURED SHA-256：`b4fdab446aa1083f44b4af909add39432fdbda6db766846671a5d121281a908c`。整体 collector 最终因 stock_owner NaN 失败，不能以局部成功替代整体通过。
-- 原 recovery：18:22:38.544–18:22:38.788，PRIVATE_MEMBERSHIP_PUBLISHED 七件；coldread 18:22:38.789–18:22:38.869 成功；过早 asof 仍拒绝，manual/natural 均 false。
+- 原 recovery：18:22:38.544–18:22:38.788，PRIVATE_MEMBERSHIP_PUBLISHED 七件；coldread 18:22:38.789–18:22:38.869 成功；过早 asof 仍拒绝；execution_trigger=manual_controlled、natural_verified=false。原 receipt.manual flag 未核实，本件不引用或赋值；手动受控执行不代表自然执行。
 
 ## 实际 saved binding 发布
 

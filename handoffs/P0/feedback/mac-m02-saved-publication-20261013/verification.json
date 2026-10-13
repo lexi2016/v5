@@ -45,8 +45,8 @@
     ],
     "coldread_success": true,
     "early_asof_rejected": true,
-    "manual": false,
-    "natural": false
+    "execution_trigger": "manual_controlled",
+    "natural_verified": false
   },
   "publication": {
     "candidate": "a451275c5eee5ec63139b7e8f886624ebdd4c7d5",
