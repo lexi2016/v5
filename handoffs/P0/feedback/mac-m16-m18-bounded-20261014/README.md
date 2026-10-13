@@ -55,3 +55,15 @@ DERIVED_SUMMARY，来源Mac普通消息 `msg_0b47eb1b0178a3a6016ace9a151b0087d18
 UTC20:52:03–20:52:15最小发布source50490/PID29056、54780/PID29127，旧49527回退；前端文件未改，M15三条保存records及其余14路由/经理/保护端口保持。02915官方活跃主体未确认、历史PIT=false、财务缺口/资格限制保留，native visual NOT_RUN，14页面/0完整不变。
 
 来源报告result.safe SHA256：`c978416fb2a3eb0d9114a613040087883a9a0b914d4c66a6fc6bbaa7de907bbc`，不是本摘要指纹。
+
+## M16独立缓存接纳失败及10/10普通页完成（21:55 UTC）
+
+DERIVED_SUMMARY，来源Mac消息 `msg_0b47eb1b0178a3a6016acea71fa53487d1b36cf04824e7873c`、`msg_0b47eb1b0178a3a6016acea8d7f22c87d1aae8133dfe203bac`；无原JSON字节同一性声明。
+
+22ca08ee138711ac91a731bf1458a0373b4a3a42清单231、6/6 PASS，但21:47:47–49原运行根preview失败M16_PROVIDER_CURRENT_PARSE_CACHE_REQUIRED；独立缓存已含24facts/65页、provider匹配，原runtime没有该缓存。未复制/重解析，未apply/冷读新generation/切页，旧9/1产品保持，保留此真实失败。
+
+d18469212c86bec95303ca746cb4b90dd9a863de显式只读cache-root＋SHA窄修后，231清单与8/8定向21:52:40–51 PASS；21:52:51–53 preview零写；唯一apply21:53:12–19 exit0；21:53:38原store/P0冷读及21:54:52–21:55:04普通页HTTP/DOM均PASS，现READY10/10、240facts。新generation d0b51df656b24e5d8d4e6d8d59960957，精确产品/commit指纹见[m16-apply-summary.json](m16-apply-summary.json)。
+
+仅02915财务与原允许派生字段变化，其他九行/新闻事件/PIT/历史/input及原生成时间保持；旧commit/provider原字节归档、旧jobs/receipts完整。无网络/重采/解析/复制，两处材料缓存未变。14兄弟routes/M15三records/经理保持，M03 active5ac3f270433899975fd7425149573a014d2dc1d8b32b619110cfdcab407a56fa，旧50490回退。仅GET、DOM零错。
+
+02915事实接纳已完成，不再将先前官方目录缺失作为当前行状态；历史PIT及财务资格边界未提升。目录POST独立复验、原生视觉、本次Mac全套回归NOT_RUN，页面14/完整0不变。来源报告result.safe SHA `11289b5e1fbef05cd4a8a1526bc9b7541d85500f352ada603d765c19a926f242`。

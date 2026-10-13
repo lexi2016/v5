@@ -111,5 +111,74 @@
       "complete_modules": 0,
       "page_count": 14
     }
+  },
+  "single_member_cache_import_increment": {
+    "evidence_type": "DERIVED_SUMMARY",
+    "source_messages": [
+      "msg_0b47eb1b0178a3a6016acea71fa53487d1b36cf04824e7873c",
+      "msg_0b47eb1b0178a3a6016acea8d7f22c87d1aae8133dfe203bac"
+    ],
+    "prior": {
+      "candidate": "22ca08ee138711ac91a731bf1458a0373b4a3a42",
+      "manifest": 231,
+      "tests_passed": 6,
+      "preview_exit": 1,
+      "preview_error": "M16_PROVIDER_CURRENT_PARSE_CACHE_REQUIRED",
+      "cause": "Required v3 parsed PDF cache existed independently, not in original runtime.",
+      "independent_cache_facts": 24,
+      "pages": 65,
+      "cache_sha256": "415d9ca2bd308e3b46061ea70c29fa9fbd3466e62236c15c22177a99d6c4f039",
+      "apply": "NOT_RUN",
+      "page_switch": "NOT_RUN",
+      "cache_copied": false,
+      "reparsed": false
+    },
+    "final": {
+      "candidate": "d18469212c86bec95303ca746cb4b90dd9a863de",
+      "fix": "Explicit read-only cache-root plus SHA verification",
+      "manifest": 231,
+      "tests_passed": 8,
+      "tests_total": 8,
+      "tests_utc": "2026-10-13 21:52:40–21:52:51",
+      "preview_utc": "2026-10-13 21:52:51–21:52:53",
+      "preview_writes": 0,
+      "apply_calls": 1,
+      "apply_utc": "2026-10-13 21:53:12–21:53:19",
+      "apply_exit": 0,
+      "original_store_p0_cold_read_utc": "2026-10-13 21:53:38",
+      "http_dom_publication_utc": "2026-10-13 21:54:52–21:55:04",
+      "status": "READY",
+      "ready": 10,
+      "cannot_confirm": 0,
+      "facts": 240,
+      "generation": "d0b51df656b24e5d8d4e6d8d59960957",
+      "product_sha256": "d687ec50fd0672292697a48fb861fed4c8741643acb21b36e3b1f52d1f6a1503",
+      "commit_canonical_sha256": "5365aecb9369d08d93aac822baf5535b6c7f7207452f781fff960e33d2f2a32e",
+      "commit_file_sha256": "b06ca9f45fea854fb98ff3abd742e11517ab7697c1d06789c10bc2028210518e",
+      "changed_scope": "HK.02915 financial and allowed derived fields only",
+      "other_nine_news_events_history_pit_input_original_time_unchanged": true,
+      "old_commit_provider_archived": true,
+      "old_jobs_receipts_preserved": true,
+      "network_calls": 0,
+      "reparse": false,
+      "recapture": false,
+      "cache_copy": false,
+      "both_material_caches_unchanged": true,
+      "sibling_routes_unchanged": 14,
+      "m15_records_unchanged": 3,
+      "manager_protected_ports_unchanged": true,
+      "m03_active_generation": "5ac3f270433899975fd7425149573a014d2dc1d8b32b619110cfdcab407a56fa",
+      "rollback_api_port": 50490,
+      "reported_result_safe_sha256": "11289b5e1fbef05cd4a8a1526bc9b7541d85500f352ada603d765c19a926f242"
+    },
+    "limits": {
+      "directory_post_independent_revalidation": "NOT_RUN",
+      "native_visual": "NOT_RUN",
+      "this_mac_full_regression": "NOT_RUN",
+      "historical_pit": false,
+      "formal_qualification_not_promoted": true,
+      "page_count": 14,
+      "complete_modules": 0
+    }
   }
 }

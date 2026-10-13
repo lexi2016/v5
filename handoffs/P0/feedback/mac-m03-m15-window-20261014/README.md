@@ -47,3 +47,7 @@ e18c6c9aa8e5ba84dd0b0b412ed7d62b5ebc2b67：五文件前后SHA及隔离应用通�
 native visual、广泛回归NOT_RUN；页面总数14、完整0不变。M16另有单码provider结果不计入此M03反馈或已保存9/1产品。
 
 来源报告result.safe SHA：e18失败 `6fb0e01bf8d29075a814c28b4479f1a37331d93bef3d898cd9d008620a83318d`；3020成功 `5adb2f9946bd6b4f827ee627dab6f3e89a0e39d7e11b58f43517c50905fc4e82`。
+
+## M03广泛回归口径补注
+
+主控补充的云端全P0终态：1378 tests，48 failures、89 errors、17 skips；不能写“广泛回归全部未跑”，也不能将所有失败笼统归为环境问题。M03新7项及15路由相关5项通过。前文“广泛回归NOT_RUN”仅指该次Mac单卡发布轮未运行广泛回归；云端失败/错误仍保留，原因不在本反馈推断，不抹除独立M03真实只读/单卡HTTP-DOM通过证据。本补注为主控已核结果的DERIVED_SUMMARY，非本写入者重测。
