@@ -1,0 +1,502 @@
+{
+  "files": [
+    {
+      "blob_sha": "4b25839e4668f726b8b45887272f26d33302e6a2",
+      "bytes": 3350,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "contracts/runtime_tasks.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/runtime_tasks.py",
+      "sha256": "f9923462342eaaeafba6255e9f8adda54f9852ea4996cf6da0cf82e4faf32965"
+    },
+    {
+      "blob_sha": "b0a6a32d8b2e14c7bb054a1ded35d93da1bc504c",
+      "bytes": 10239,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "contracts/trading_calendar.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/trading_calendar.py",
+      "sha256": "eca22a1e45271df45fc0a3b7cec28cec4e448d1af97b80371cc5c3c1953ec0f1"
+    },
+    {
+      "blob_sha": "7d9c15ee1fad991d69a81bff1cd1a1c836ac873c",
+      "bytes": 439,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "contracts/vibe_runtime_profile.json",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/contracts/vibe_runtime_profile.json",
+      "sha256": "1081c31d4f12e5ae62cbfe651c413c124d80794089a923c15e807e90170c249d"
+    },
+    {
+      "blob_sha": "1bcf1132e83e65f8e1b41aeb1b2767d864436761",
+      "bytes": 15620,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/daily_research_review.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/daily_research_review.py",
+      "sha256": "a2588e813bbefb8ab116ece63b7f02a7feb2eb1f21633f8ff6e631ee331b901d"
+    },
+    {
+      "blob_sha": "551dcbfb598ee4c2c07ff41740899be2e1ccc606",
+      "bytes": 33978,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/intraday_research.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/intraday_research.py",
+      "sha256": "da1fc98fc6303413e8df30e3aebe053b8706711e6093f18b06285dc807bc8b7e"
+    },
+    {
+      "blob_sha": "0a35ca1ee7a71e8dc9172f2b04c65a46888daec1",
+      "bytes": 791,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/__init__.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/__init__.py",
+      "sha256": "f0c1d0aa21e9370ca6962dbf86a01e0325c55e718a73a7fa95e4d469f29c9855"
+    },
+    {
+      "blob_sha": "600025633bf6ea76da4d0e212333d1a196bb5401",
+      "bytes": 7557,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/_cache.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/_cache.py",
+      "sha256": "5080b2b9daec511877f90877c0682aa6ebb506ba536ee2f44740428bca2ae0f7"
+    },
+    {
+      "blob_sha": "4f0fcc32dff352ca9639b2decb6d644cef03d4bc",
+      "bytes": 8875,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/_evidence.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/_evidence.py",
+      "sha256": "02ae017474bdb91af0bddb89684d567f90574112f6a93527007c54c05ad0400d"
+    },
+    {
+      "blob_sha": "6068ceb8805a9fe7f54e2fb338248d55cf906b40",
+      "bytes": 3872,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/_owned_io.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/_owned_io.py",
+      "sha256": "dacd18dff80b84a13d98b1eae0ccb3d024f327a7d941d95bb068dd9331a15ec1"
+    },
+    {
+      "blob_sha": "3f0f006056300fa22788bd9199d15015b8a12952",
+      "bytes": 7857,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/_snapshot.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/_snapshot.py",
+      "sha256": "248161565dd55f8dce3a46632ada3f0b1f88fde0e01904db4ad76ef4a91ccba6"
+    },
+    {
+      "blob_sha": "31e34483ba7a5b025225c33bb3090b6a5b38c8d4",
+      "bytes": 6830,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/assembly.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/assembly.py",
+      "sha256": "b0aac4ac8a6f20a32eb2be04faee11aea7895a0f405fde2d33d356d0d3274194"
+    },
+    {
+      "blob_sha": "1b93678137d05eb7f1e3f2667c5ca92f071a63f1",
+      "bytes": 88,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/__init__.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/__init__.py",
+      "sha256": "0e7dce5ded9af6a90921df6c7670852894e6849275b25febae1cf5e73754ae59"
+    },
+    {
+      "blob_sha": "bd0b736c428104f4ded20343f20255f744c6c833",
+      "bytes": 10065,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/breadth.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/breadth.py",
+      "sha256": "e74d0592856c14c10ceff97546ba5cd9ac528e9fe77022a0322a05ff473167e5"
+    },
+    {
+      "blob_sha": "3b97ccba63c82cc5601369e4a4ee09ee057a4ba1",
+      "bytes": 18006,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/data.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/data.py",
+      "sha256": "f243a1f186b37ca2fa6c76b428c4597a2ebc9ab685a2d00dbf3ceb1e7d9fd2d7"
+    },
+    {
+      "blob_sha": "16025cbea496649aa6edba71310e7c432f0c85fb",
+      "bytes": 22793,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/emotion_metrics.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/emotion_metrics.py",
+      "sha256": "132e89d992f2f0a17fe23c9c8acc562659c5966f6e5be2e2d87ae01779682bac"
+    },
+    {
+      "blob_sha": "8b963ee722b7eedca1466f585f8a5b2290005cf4",
+      "bytes": 12647,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/fetchers.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/fetchers.py",
+      "sha256": "350cdba92df688bfa827d8f115992a29c9dc4ca09093060fe5c3b47374afc168"
+    },
+    {
+      "blob_sha": "6aa3adbaf7a7b35f5142bc065a9019fe1adb7f7c",
+      "bytes": 14948,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/fuyao_sources.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/fuyao_sources.py",
+      "sha256": "b08e40f5574189181221eae5a37ae4ca7a1d25b565986797a037b7c76cb54b85"
+    },
+    {
+      "blob_sha": "fa6acca657824348bcad9078cd7dfb89d80a5425",
+      "bytes": 27965,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/market_facts.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/market_facts.py",
+      "sha256": "f494b1788b5710b456e6fc2dca74c05a48e0910a2463b2adf33b2c174df3e7b4"
+    },
+    {
+      "blob_sha": "f5ee793327e43461e152ed4992209a2b9a672853",
+      "bytes": 13664,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/stats_context.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/stats_context.py",
+      "sha256": "9a9c1e80a617ed15009b58fcafd0dba7826992e78c3e7d10e0dcd607aa74d0d2"
+    },
+    {
+      "blob_sha": "f4c7bbcfbe2916496f98af61802fe13bca9af764",
+      "bytes": 13256,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/theme_tree.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/theme_tree.py",
+      "sha256": "51e42f77067315a94b0940bf7ce8608ec990a6c378be1bb2bc24c183bf1ffd9e"
+    },
+    {
+      "blob_sha": "00bd365dc6efb7e78c6bad680f881b2bfec3b7c5",
+      "bytes": 8089,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/trade_calendar.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/trade_calendar.py",
+      "sha256": "be67388f1fe1aa02701df783ee0e0aeb5dc81f0bb4a8423c138a738e8ae22c97"
+    },
+    {
+      "blob_sha": "26e57889913ba912035058d64bab1d3f49cbb9b8",
+      "bytes": 3012,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/data_core/util.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/data_core/util.py",
+      "sha256": "bf773d20ec2edf398d083b1c6beedc5234ecff9440f4632ceeaf763e12fffc6b"
+    },
+    {
+      "blob_sha": "564d5d7570b6bb3d730c0fde4c7c6322adbf180b",
+      "bytes": 17101,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/generation.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/generation.py",
+      "sha256": "b36dcbc550f31697391ed08d00b305b9291d51e8707532589f0e7bce0b1a20c2"
+    },
+    {
+      "blob_sha": "f86f9fcb6e5b29553a11877e536a75a6854ac91c",
+      "bytes": 9813,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/iwencai_binding.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/iwencai_binding.py",
+      "sha256": "632aed509ac6d7389920e5f3dd02f5139c2991bf13dc21aa053347606b64d037"
+    },
+    {
+      "blob_sha": "c7e6cde095d27959b5d5f97ed7220b72fda91305",
+      "bytes": 8195,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/model_provider.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/model_provider.py",
+      "sha256": "8db1dcc867cbb758cc538c4419b75d199250d96a6f1bc163876ba7356d74a9a9"
+    },
+    {
+      "blob_sha": "36b262bcf4c7768ce0a55000fd69c9233356f226",
+      "bytes": 19924,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/owned_authority.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/owned_authority.py",
+      "sha256": "7bd218fba2444085723a4d9290931463a14c6e16878cebb73e655ae4f2e98072"
+    },
+    {
+      "blob_sha": "194d05812d92c78dced27ccbe622aa7498f87862",
+      "bytes": 13098,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/owned_runtime.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/owned_runtime.py",
+      "sha256": "401291b45ce8a169f7027df5b49336c9bde7bb9a6634c7bce66189e01b90ced9"
+    },
+    {
+      "blob_sha": "9eb4dbe831372d4f678108cd69b1f773e300a774",
+      "bytes": 75,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/__init__.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/__init__.py",
+      "sha256": "28c57552ab121d3a582bc59e716ed90996e97ecf2d334634011b3511be4a7853"
+    },
+    {
+      "blob_sha": "c2e0480877e454c8969ff56ffd870d953f5fe3b4",
+      "bytes": 7605,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/analysts.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/analysts.py",
+      "sha256": "f1022ecaf5e4597683179c5e6eeed82d02b6da3a5d9c6a9e997a952e74cf520b"
+    },
+    {
+      "blob_sha": "9d6c245d4cf9cb5be93f9e3b801243325ec4b278",
+      "bytes": 59,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/deepdive/__init__.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/deepdive/__init__.py",
+      "sha256": "e427831aaf0d571f7cb4e98723f0a00d145af60e3221afac6128dc6daa219d11"
+    },
+    {
+      "blob_sha": "246516125ed22bdebee716a51e5da3de15e41c12",
+      "bytes": 1878,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/deepdive/schemas.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/deepdive/schemas.py",
+      "sha256": "fd7706bb31276910ea7acc0c8ce393a7d5b7a3c86280fdc2a5ffdbe2a0a544ae"
+    },
+    {
+      "blob_sha": "5836893263f6d23154029c98bbbce8d395eca074",
+      "bytes": 816,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/helpers.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/helpers.py",
+      "sha256": "dffcb252a8cb80eb415136f550d0368791f630f411525639bf3f073c745c9aaf"
+    },
+    {
+      "blob_sha": "34a01b31e2533f15ca66ad624e25f721fcec645a",
+      "bytes": 6049,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/llm_errors.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/llm_errors.py",
+      "sha256": "f48f74f3d03d537a28c0b82c11620971f2b1c41be28c7bebb7ec14ba5af131e8"
+    },
+    {
+      "blob_sha": "cf7dba0255423cdff6b9afa5746abbc3d57139cf",
+      "bytes": 5042,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/preflight.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/preflight.py",
+      "sha256": "5f10839944af3e12d14a46e6a5a434a9d75475ebe74a05763cfca2d3d807dfca"
+    },
+    {
+      "blob_sha": "657a19d6156d8cefcd8eb8ef10132b7ca8646309",
+      "bytes": 4233,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/prompts.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/prompts.py",
+      "sha256": "833962c06d4be62e9801474af6a5020d80e89f6c1460e360618361ad079a492a"
+    },
+    {
+      "blob_sha": "54943cde793b8528e03a3fd5219ef9d1e8e22b93",
+      "bytes": 6701,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/reflection_context.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/reflection_context.py",
+      "sha256": "cfa7140d52d7494631d8537f797567f9e5e7a0ef81581c170f5e726b3621635f"
+    },
+    {
+      "blob_sha": "aadc926c15198da1f373680966d606c8cdabb32b",
+      "bytes": 777,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/review_graph.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/review_graph.py",
+      "sha256": "6a21ac2ddc5b82bf10f75e4d8b104c6ef29ea29972beb92bcbb8de1e9fa60fe6"
+    },
+    {
+      "blob_sha": "32839c1457682fbcfe4ebe4c9fdf6a52c42575a4",
+      "bytes": 1144,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/roles.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/roles.py",
+      "sha256": "cacc7b2a981e3c9a3f866e5a76d7cbd2257cd78bd01332311f4ab4f959fcd86a"
+    },
+    {
+      "blob_sha": "934609789b33296791ed491a329588eafeef167e",
+      "bytes": 15331,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/schemas.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/schemas.py",
+      "sha256": "71c640384e6c02566e94454baf3686da49ce9ba905aca1a6cdf05bb35084ae85"
+    },
+    {
+      "blob_sha": "49a6d2857f1354e820e9c1b0836027a84abe1af6",
+      "bytes": 4471,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/serializer.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/serializer.py",
+      "sha256": "82b67b12fd2bfd21d3363e63ee487e5fc8d60e049cf362f0789bd7522c0d88bc"
+    },
+    {
+      "blob_sha": "ac7cd4f0418304c4c9af9b5947c1b2024fba9d17",
+      "bytes": 1873,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/state.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/state.py",
+      "sha256": "0499048b06d1fe4376b8f82b64fb401412efed888527fc91d46a4907d5567624"
+    },
+    {
+      "blob_sha": "0a737d7e515990e8427f8e7162ab238848b64470",
+      "bytes": 3287,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/structured.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/structured.py",
+      "sha256": "f885d094e8c3ffaede8861ebdaa4d23b47f9624cdeff11b0336333bfb297b712"
+    },
+    {
+      "blob_sha": "c325606d974bb9019712f378315d8cf7450cc7f4",
+      "bytes": 3187,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/synthesizer.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/synthesizer.py",
+      "sha256": "b7116799db7f73a6443fa82ee0aa8b4a98e01bf84a78e1482a0e97d70669af06"
+    },
+    {
+      "blob_sha": "825aa1e187f4ee4b562c7750e60fc96e079318c0",
+      "bytes": 290,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/util.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/util.py",
+      "sha256": "71b03ab4727a209cd9b1c26b0bf7e7ce35617240b1df04fc19d986c14506222f"
+    },
+    {
+      "blob_sha": "34e987565eb42819142b0ac78a7d2df21367c67f",
+      "bytes": 6714,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "domains/research_review_generation/vibe_core/verification.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/domains/research_review_generation/vibe_core/verification.py",
+      "sha256": "1e369984953eed3ff96bc1df6299f5fa24ef48c4019f8d69037b2673dc9755ce"
+    },
+    {
+      "blob_sha": "c1cc44f6d6e70a363cf5722b145a805ff73e1e4d",
+      "bytes": 10704,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/data_store.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/data_store.py",
+      "sha256": "7cef1dba8fa2c917411220e123184950d2abc3b10dff8d608e70f8d52a61f2bd"
+    },
+    {
+      "blob_sha": "a97e733725834235fbcc9129639ae198fa8770cd",
+      "bytes": 7514,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/interprocess_lock.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/interprocess_lock.py",
+      "sha256": "9b0cb80a1fe1bcbdebb3936134c8f0bad258c9c9236356022551ff7753351df0"
+    },
+    {
+      "blob_sha": "1b6666551980c44ebb0b05f133c189909d79c7df",
+      "bytes": 9354,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/owned_io.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_io.py",
+      "sha256": "9a74731287ca7c9667643557d4ae42f63453a025665ba28f5b65fdbff7d54ee0"
+    },
+    {
+      "blob_sha": "2d9873a41c09a05c62975210a13a59bf350a1a5a",
+      "bytes": 2251,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/owned_path.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/owned_path.py",
+      "sha256": "c766e74a963818f32b0eadf964e262148ddb8d7f8b090a2ccbb5d83124164b30"
+    },
+    {
+      "blob_sha": "ef84af8248aa95405baf55e5c35fbaf152b29c0e",
+      "bytes": 5325,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/scheduling/_executor_registry_parts/intraday_jobs.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/intraday_jobs.py",
+      "sha256": "da2833a31595baaa56f0c1dd899562497771f3afb1390dfb4f943aa1826fbc3c"
+    },
+    {
+      "blob_sha": "b14d4eeaad4db5b735743c33651fb6b5d781a4c3",
+      "bytes": 7588,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/scheduling/_executor_registry_parts/research_jobs.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/scheduling/_executor_registry_parts/research_jobs.py",
+      "sha256": "ee4627b05cd969357fb16e7fd88b7eccbc24aa1e13a04c6ddf120038f801defc"
+    },
+    {
+      "blob_sha": "5f10cfb51cb3dacd327447475964e0f6867ee89f",
+      "bytes": 2597,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "infrastructure/trading_safety.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/infrastructure/trading_safety.py",
+      "sha256": "ae5d63d2ad6974dc4863dff6c5f56335bafe485f9b0b172bf929346a853ba7df"
+    },
+    {
+      "blob_sha": "cf83780ef2a67a3706aa16a66c54eca4677b96ab",
+      "bytes": 1756,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "ops/run_intraday_research.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/ops/run_intraday_research.py",
+      "sha256": "26d56dd55cdfd37126d03f2e3ed81394a328b63a2f0c6bc07ccfccdb603c65b3"
+    },
+    {
+      "blob_sha": "6bbccf14a7f202c0b5df910743e7e3e3646f04f0",
+      "bytes": 2537,
+      "commit": "f7cb731c384ee6890a87d16c19a5b5a621779477",
+      "path": "ops/run_research_review_generation.py",
+      "repository": "lexi2016/v4",
+      "repository_path": "handoff/v4-running-source-20261005/canonical/ops/run_research_review_generation.py",
+      "sha256": "b783bfc1c9d3c593c49a7f775c9e861767cc1f82373530536ec4df0f87e04622"
+    },
+    {
+      "blob_sha": "0f56c4491f2a960e9119711babe9bab40df334d6",
+      "bytes": 6796,
+      "commit": "NEW_BUILD_NOT_HISTORICAL_F",
+      "path": "domains/research_review_generation/OWNED_SOURCE_MANIFEST.json",
+      "repository": "lexi2016/v5",
+      "repository_path": "V5/tools/build_m11_source_manifest.py",
+      "sha256": "c824e9b9bfdbda716c7f2ce25e584866f99913c224662550d0e68deb8e4bd558"
+    }
+  ],
+  "original_owned_manifest_present": false,
+  "schema": "v5.m11.capsule_sources.v1",
+  "v5_build_manifest_present": true
+}
