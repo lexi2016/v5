@@ -1,6 +1,6 @@
 # V5项目方案与缺口执行计划
 
-版本：2026-10-13统一执行方案。状态基线为20:23台账，补入19个原Chat本轮均已结束/该轮新增有效代码交付0，以及随后M02独立实现的完整候选776acce9328aa102e3db6973405f01260f15239d，38/38离线测试通过、35文件回读完成。M02新候选Mac/真实采集/部署仍NOT_RUN。本文是后续执行依据，未启动的工作不记为已开工。
+版本：2026-10-13统一执行方案。状态基线为20:23台账，补入19个原Chat本轮均已结束/该轮新增有效代码交付0，以及随后M02独立实现的完整候选776acce9328aa102e3db6973405f01260f15239d，38/38离线测试通过、35文件回读完成。M02候选现已Mac 38/38通过，新真实capture→恢复→binding→只读页面发布通过；原生视觉NOT_RUN，SOURCE_IDENTITY_ONLY/CANNOT_CONFIRM、PIT/资格false，仍非自然或完整验收。本文是后续执行依据，未启动的工作不记为已开工。
 
 ## 一、业务目标与首批端到端交付
 
@@ -45,7 +45,7 @@
 |整链自然自动通过|0|M06有限自然步骤累计1单列；整体经理接续未过|
 |完整模块验收|0/18|0完成、18进行中，不因19条指令已保存而增加|
 
-**最新实际执行状态：** 19个原Chat的本轮回复均已结束，该轮新增有效代码交付0；不能称它们正在后台并行编码。随后指定实现者已完成M02完整候选[776acce9328aa102e3db6973405f01260f15239d](https://github.com/lexi2016/v5/commit/776acce9328aa102e3db6973405f01260f15239d)：原分支正常CAS并核HEAD、38/38离线测试通过、35文件回读完成（33项manifest）。这是新增完整代码候选1，Mac验证、真实采集和部署仍NOT_RUN，不能增加真实/页面/完整计数。其余下文工作是计划和待派工责任，不能当作已开工。
+**最新实际执行状态：** 19个原Chat的本轮回复均已结束，该轮新增有效代码交付0；不能称它们正在后台并行编码。随后指定实现者已完成M02完整候选[776acce9328aa102e3db6973405f01260f15239d](https://github.com/lexi2016/v5/commit/776acce9328aa102e3db6973405f01260f15239d)：原分支正常CAS并核HEAD、38/38离线测试通过、35文件回读完成（33项manifest）。这是新增完整代码候选1；随后Mac 38/38通过，真实capture取得690 quotes、698 master及双板各698，恢复/冷读698。21:48新binding与M02-only发布完成，HTTP/DOM通过，未重启或切换产品代码；native visual NOT_RUN。仍为SOURCE_IDENTITY_ONLY/CANNOT_CONFIRM、PIT/资格false，不增加模块自然或完整验收计数。其余下文工作是计划和待派工责任，不能当作已开工。
 
 **每模块完整验收必须同一条记录贯通：** 固定源码/依赖/配置 → 合法真实输入与原owner → 保存与新进程冷读 → 普通API/页面 → 实际触发/跨日/失败恢复 → 单模块回滚。源码、测试、部署、真实业务和自然结果分栏记证，不把测试数相加或用旧SHA证明当前HEAD。
 
@@ -63,11 +63,11 @@
 
 ### 2. 立即可排的并行工作
 
-下表是按本计划执行的队列，**M02完整候选已固定，等待Mac验收；其余未启动工作按队列推进**。主控按可用执行位启动，每模块一个实现者；不把19个已结束Chat当19条活跃代码线。
+下表是按本计划执行的队列，**M02已完成限定Mac、真实采集和只读页面发布验收；其余未启动工作按队列推进**。主控按可用执行位启动，每模块一个实现者；不把19个已结束Chat当19条活跃代码线。
 
 |并行工作流|现在可做的完整交付|真实运行前置/停止点|首个验收出口|
 |---|---|---|---|
-|A1 M02来源|以已固定776acce候选进入Mac定向验收：collector/launcher→原recovery→独立七件reader，38/38离线PASS、35文件已回读；不重写已交代码|真实SDK调用按当前授权范围；不能在旧身份下清洗NaN或放松validator|Mac验证固定候选独立启动、原/新身份兼容与严格拒绝；获准真实任务另证SDK→封存→恢复/三源消费，部署另记|
+|A1 M02来源|776acce已完成Mac 38/38及真实SDK→封存→恢复698→原binding/冷读→M02-only只读页面发布；不重复已验采集|SOURCE_IDENTITY_ONLY/CANNOT_CONFIRM；PIT/资格false、panel PENDING_PANEL_GATE，native visual NOT_RUN，后续真实调用仍按当前授权范围|保留新run/receipt与HTTP/DOM证据，继续按原合同解决目标资格/PIT及独立日常触发剩余验收；不把已成功限定链称全模块完成|
 |A2 M03来源|完整行情snapshot collector、payload/receipt/manifest默认保存/冷读、session/cutoff负例和启动交付|适用US session与可用provider输入；新闻不能替代行情|新进程默认入口可产生/拒绝正确三件，原reader与M15接口可消费；不只交dict validator|
 |A3 M14真实页|以已存在target14/signal13 run做独立root+4ref原reader、API分页、前端proxy/组件闭环|不依赖M02新collector完成；新manager聚合另需日期/窗口合同|不重owner，690待核/历史缺口/资格false准确显示，旧经理target12不被替换|
 |A4 M13公告|完整目录/正文/capture/审阅决策输入/导入/保存reader代码，先消费已有合法产品|新revision缺真实review决定时不能代填；缺决策不阻止离线合同与页面代码|原输入→已审核产品→消费引用同SHA；详情/分页失败状态和cutoff可定位|
@@ -107,13 +107,14 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 ### M02 HK行情、主表与资格来源｜P2
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca47c7-0bd4-83e8-ab3b-3d4c2cee272a)；`dev/m02-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
-- **已有代码与证据：** [原owner](https://github.com/lexi2016/v5/commit/ce6cddce1ef52d63241f0d8192b6adcc118ea750)；[保存接线](https://github.com/lexi2016/v5/commit/a451275c5eee5ec63139b7e8f886624ebdd4c7d5)；[更正回执](https://github.com/lexi2016/v5/commit/7eac09efd3ffcb0e48d58b8d10e7b92a525c41df)；[完整collector候选776acce](https://github.com/lexi2016/v5/commit/776acce9328aa102e3db6973405f01260f15239d)及[启动/交付说明](https://github.com/lexi2016/v5/blob/776acce9328aa102e3db6973405f01260f15239d/integration_candidates/M02_hk_capture/README.md)。
+- **已有代码与证据：** [原owner](https://github.com/lexi2016/v5/commit/ce6cddce1ef52d63241f0d8192b6adcc118ea750)；[保存接线](https://github.com/lexi2016/v5/commit/a451275c5eee5ec63139b7e8f886624ebdd4c7d5)；[更正回执](https://github.com/lexi2016/v5/commit/7eac09efd3ffcb0e48d58b8d10e7b92a525c41df)；[完整collector候选776acce](https://github.com/lexi2016/v5/commit/776acce9328aa102e3db6973405f01260f15239d)及[启动/交付说明](https://github.com/lexi2016/v5/blob/776acce9328aa102e3db6973405f01260f15239d/integration_candidates/M02_hk_capture/README.md)。 [新Mac真实采集至页面回执](../../../../handoffs/P0/feedback/mac-m02-capture-to-page-20261013/README.md)与[原始脱敏receipt](../../../../handoffs/P0/feedback/mac-m02-capture-to-page-20261013/receipt.json)。
 - **已验证层级：** 接入已具备；真实/保存局部已证；数据页已有局部（见边界）；完整0。部分入口、真实三源build/冷读、公共安全投影和页面已过；membership7件/698、native4/HK02九资产，SOURCE_IDENTITY_ONLY、temporal CANNOT_CONFIRM、PIT/正式历史资格false。执行manual_controlled、natural_verified=false，原receipt.manual未核不赋值。
-- **未完成缺口：** 验收：独立collector/launcher完整候选已固定776acce，38/38离线通过，35文件回读完成；新候选Mac/真实采集/部署NOT_RUN。旧原collector因stock_owner NaN严格JSON失败，RAW_CAPTURED独立恢复不等于collector成功。输入：完整目标资格/PIT仍未齐，不能靠新代码宣称历史证据有效。
+- **未完成缺口：** 验收：固定776acce已Mac 38/38通过，真实capture/七件恢复/原binding冷读/M02-only发布与HTTP/DOM通过；native visual NOT_RUN，独立日常/自然及全模块验收未过。旧collector因stock_owner NaN失败的历史保留，新严格producer的实际capture成功有独立回执。输入：完整目标资格/PIT仍未齐，panel_status=PENDING_PANEL_GATE，不能靠新代码宣称历史证据有效。
 - **依赖：** 原HK provider/SDK、panel/master/membership三类各自身份、HK/Connect日历与真实取得时点；供M06/M08/M10/M14及M15身份。
-- **下一条完整交付：** 将固定776acce的collector+controlled launcher+新producer严格身份/JSON/哈希/七件恢复冷读完整包交Mac定向验证，凭实际失败回唯一作者修复；通过后按已授权真实范围验证并接入V5独立来源合同。已有saved reader和安全接页不重做。
+- **下一条完整交付：** 复用固定776acce已通过的Mac、真实capture、恢复/冷读及页面发布证据，不重采或重做saved reader/安全页；按原合同补齐目标资格/PIT与独立日常触发/失败恢复的剩余输入、实现和验收，原生视觉单列待验。真实调用按实际授权与适用窗口推进。
 - **验收标准：** 固定候选默认启动不依赖V4进程；原/新producer身份明确，旧未知或不安全仍拒绝，原字节不在旧身份下被清洗；真实任务须分别证SDK取得、合法封存、三源原reader、目标日期与消费，错误状态不伪报成功。
-- **责任与交接：** 当前指定M02实现者已交固定候选，原Chat为来源责任；P0保留已过a451安全投影，仅集成必要新来源合同；Mac先固定候选定向验，再按单独获准范围验真实采集，不能自动扩大调用。
+- **责任与交接：** 当前指定M02实现者已交固定候选并获限定Mac/真实链回执，原Chat为来源责任；P0沿原a451安全投影已发布新binding，未重启/切代码；Mac后续只验尚未覆盖部分，不能自动扩大调用或重复采集。
+- **最新限定实测（2026-10-13北京时间）：** Mac 38/38；21:36真实capture为690 quotes、698 master、双板各698，恢复及独立冷reader 698。21:48新binding `314b316261ef10e9a628f997c63eb728e119a9d803b0db3c09a982cc8342a93a`，M02-only发布generation `18327ae3ac839284230437989c9418c326b8f850decc38448c354d0ddf8319f0`；HTTP直连/proxy/DOM通过、native visual NOT_RUN。M01/M03/M05 canonical与其他10路、M06 target14/100及旧经理run保持；无服务重启、无产品代码切换。SOURCE_IDENTITY_ONLY/CANNOT_CONFIRM、PIT/资格false，非自然/完整验收。
 
 ### M03 US行情来源｜P2
 
@@ -330,7 +331,7 @@ P0原Chat：[主框架原会话](https://chatgpt.com/c/6acc9a79-4364-83ee-8b6d-e
 |已交完整owner是否独立可启动（M04/08/09/10/11/12/16等）|固定commit的一次文件/入口/依赖/启动命令及阶段覆盖表|入口/测试足证则复用，不重写；缺失接口立即列入模块下一完整交付，不能无界扫描|
 |原计划未核训练入口/8910范围|只登记其是否属于现18职责及已授权迁移范围、来源证据|未核不静默删、不计入18或自创新模块；需要范围变化先明确影响|
 
-这些核查与其他独立代码流并行，不设“全项目审完才能编码”的门。M02已交候选直接进入对应验收；已确证M03collector、M14独立页等缺口直接实现，不再做一轮总审。
+这些核查与其他独立代码流并行，不设“全项目审完才能编码”的门。M02限定真实采集到页面链已验，保留PIT/资格、自然与原生视觉的剩余边界；已确证M03collector、M14独立页等缺口直接实现，不再做一轮总审。
 
 ### 3. 数据、权限、时窗分别处理
 
@@ -355,7 +356,7 @@ P5退出必须同时具备：当前固定release完整回归与API合同；18模
 ## 七、实施控制与下一步交付顺序
 
 1. 先完成本统一计划的轻量可执行性核对，由唯一文档writer固定主文档并在README给入口；不并行再造另一份项目总方案。
-2. 将已固定M02候选776acce（38/38离线通过、35文件回读）交Mac定向验收；新候选真实采集/部署尚未执行，按授权与实际回执分别推进。其余新派工按本方案A1–A7优先级锁定唯一实现者和完整交付，不重复已结束19Chat轮次。
+2. 保存M02固定776acce的Mac 38/38、新真实采集→恢复→原binding冷读→只读页面发布回执；不重复已过链。native visual NOT_RUN、PIT/资格false、自然及完整验收未过，按授权与实际回执推进剩余项。其余新派工按本方案A1–A7优先级锁定唯一实现者和完整交付，不重复已结束19Chat轮次。
 3. 优先补M14独立真实页、M03完整行情collector、M13/M15首批合同与P0/M18合法request；来源/页面/请求代码并行，共享文件串行合入。每条只以可运行固定交付进入Mac队列。
 4. 每次状态只报四件：实际固定了什么、实测了什么、原页面/业务变化、剩余确证缺口。收到新结果先更新对应Mxx一条记录；未commit、未跑、未部署分别说清，不用更多报告/催促替代执行。
 5. 首批业务闭环签收后推进原全范围阶段/研究辅助，再完成自然与独立release终验；已有输入可先验，不等所有未来来源齐才接页面。
