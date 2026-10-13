@@ -1,0 +1,57 @@
+{
+  "candidate": "acf8d23f9c191e4cb2da5737ca715002e83648c2",
+  "started_utc": "2026-10-13T05:10:45.523427+00:00",
+  "calls_allowed": [
+    "_dispatch_candidates",
+    "_capture_inputs",
+    "_capture_upstream",
+    "_recheck_capture"
+  ],
+  "prepare_called": false,
+  "seal_called": false,
+  "owner_called": false,
+  "model_called": false,
+  "days": {
+    "20261012": {
+      "calendar": {
+        "state": "FULL_TRADING_DAY",
+        "scheduled_date": "20261012",
+        "signal_date": "20261012",
+        "target_date": "20261013"
+      },
+      "completed_at": null,
+      "candidate_count": 1,
+      "candidate_relative_paths": [
+        "20261012/1720/7e67ed3f7bd24fb09e3930072e89be05.dispatch-receipt.json"
+      ],
+      "status": "BLOCKED_INPUT_CONTRACT",
+      "stage": "_capture_inputs",
+      "reason": "M06_DELIVERY_SAFETY"
+    },
+    "20261013": {
+      "calendar": {
+        "state": "FULL_TRADING_DAY",
+        "scheduled_date": "20261013",
+        "signal_date": "20261013",
+        "target_date": "20261014"
+      },
+      "completed_at": null,
+      "status": "WAITING_M06_INPUT_DELIVERY",
+      "stage": "_dispatch_candidates",
+      "reason": "FileNotFoundError"
+    }
+  },
+  "config_change": {
+    "removed": "dispatch_receipt_relative",
+    "added": {
+      "dispatch_receipt_discovery": "DAY_SLOT_UUID_V1"
+    },
+    "all_other_values_preserved": true,
+    "all_enable_switches": false,
+    "before_sha256": "2144c7054323887d6f584604095efc5b674b03be6f310dcd96a07f7c3c42ec32",
+    "after_sha256": "0378ff396b13dbaf292f4927cc3a558820bc57f78b057601346bb9051abd0ee7"
+  },
+  "all_runtime_roots_markers_only": true,
+  "finished_utc": "2026-10-13T05:10:45.578139+00:00",
+  "exit_code": 0
+}

@@ -1,0 +1,47 @@
+{
+  "candidate": "acf8d23f9c191e4cb2da5737ca715002e83648c2",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_dispatch_resolver",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_new_delivery_copies_original_bytes_and_records_real_completion",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_sealed_delivery_reuses_without_refreshing_time_or_live_inventory",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_wrong_dispatch_dates_workload_status_and_duplicate_rows_rejected",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_lane_raw_bytes_mismatch_blocks_before_parsing",
+    "test_m06_input_delivery.M06InputDeliveryTests.test_copy_rejects_symlink_destination_without_touching_original",
+    "-v"
+  ],
+  "working_directory": "candidate-acf8d23",
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_utc": "2026-10-13T05:10:06.532650+00:00",
+  "finished_utc": "2026-10-13T05:10:07.031769+00:00",
+  "duration_seconds": 0.498992416,
+  "exit_code": 0,
+  "source_before": {
+    "files": 12,
+    "sha256": "3fab115c50f578c5f5d622f4b9c1e19a0365ae5c6e3390f523b0124e433f413f",
+    "verified": true
+  },
+  "source_after": {
+    "files": 12,
+    "sha256": "3fab115c50f578c5f5d622f4b9c1e19a0365ae5c6e3390f523b0124e433f413f",
+    "verified": true
+  },
+  "protected_files_count": 111,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "real_model_run": false,
+  "collection_run": false,
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "binding_changed": false,
+  "natural_verified": false
+}

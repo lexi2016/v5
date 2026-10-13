@@ -1,0 +1,65 @@
+{
+  "schema_version": "v5.m06_dispatch_resolver_source_closure.v1",
+  "entries": [
+    {
+      "path": "V5/examples/m06_daily_runtime.template.json",
+      "bytes": 1950,
+      "sha256": "6cd5879ce0cfd852178db5f6bdffc9b4a829f032088b3e8250c42d88d42201d3"
+    },
+    {
+      "path": "V5/src/v5_shadow/__init__.py",
+      "bytes": 83,
+      "sha256": "c53107e04e471793978e7ea517445a937bf46fd8f3005452e34f683712c1774c"
+    },
+    {
+      "path": "V5/src/v5_shadow/api_gateway.py",
+      "bytes": 16398,
+      "sha256": "21f90aed9fb73d18874d3ec41a153c1a6dcab3189e5ee3a8c2afa4f3f8baa5ee"
+    },
+    {
+      "path": "V5/src/v5_shadow/composition.py",
+      "bytes": 5297,
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0"
+    },
+    {
+      "path": "V5/src/v5_shadow/contracts.py",
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
+    },
+    {
+      "path": "V5/src/v5_shadow/digests.py",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+    },
+    {
+      "path": "V5/src/v5_shadow/m06_input_delivery.py",
+      "bytes": 34395,
+      "sha256": "40ed8852c322cc401df42078ce99d1633eedc46ca5c2cce81b99f9e58c4072e2"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "bytes": 56892,
+      "sha256": "ef5f3190c7100585036293b3b0748f2978c03f401f3aef9b7269a09b7c97e72f"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_artifacts.py",
+      "bytes": 7936,
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17"
+    },
+    {
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "bytes": 6159,
+      "sha256": "75eb32e06d412efc4e439efc2f876403a0c4804e57b22a1d3849756bd7a368e3"
+    },
+    {
+      "path": "V5/tests/test_m06_dispatch_resolver.py",
+      "bytes": 12619,
+      "sha256": "1b73c7a099058fa1f3414ae092a87443cab32df1f3af21d67b26fc19fd416851"
+    },
+    {
+      "path": "V5/tests/test_m06_input_delivery.py",
+      "bytes": 27469,
+      "sha256": "bafa5a760f262e0709d0f60ad29289a69a6e2d61ffeaddd6c66c2032ff21f30c"
+    }
+  ]
+}
