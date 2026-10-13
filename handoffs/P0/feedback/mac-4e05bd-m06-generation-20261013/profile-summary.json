@@ -1,0 +1,41 @@
+{
+  "processes_observed": 27,
+  "child_launches": 26,
+  "calls": {
+    "v5_shadow.main_runtime:tick": 1,
+    "v5_shadow.daily_tick:tick": 1,
+    "v5_shadow.daily_dispatch:dispatch_due": 1,
+    "__main__:main": 4,
+    "v5_shadow.hk_preselection_daily:produce_hk02_daily": 1,
+    "v5_shadow.hk_preselection_publication:read_verified_hk_preselection_reference": 4,
+    "__main__:_producer_worker": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:materialize_frozen_hk_0_2": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:score_frozen_hk_0_2": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:_add_daily_features": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:_add_proxy_labels": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:_add_proxy_memory": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:_load_models": 1,
+    "joblib.numpy_pickle:load": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:_score_with_strategies": 1,
+    "upstreams.v3_shared_data.shared_data.hk_0_2:_probability": 4,
+    "sklearn.pipeline:predict_proba": 4,
+    "sklearn.ensemble._hist_gradient_boosting.gradient_boosting:predict_proba": 1,
+    "sklearn.ensemble._hist_gradient_boosting.predictor:predict": 93,
+    "sklearn._loss.loss:predict_proba": 1,
+    "sklearn.ensemble._forest:predict_proba": 2,
+    "sklearn.linear_model._logistic:predict_proba": 1,
+    "sklearn.linear_model._base:decision_function": 1
+  },
+  "provider_socket_dns_attempts": 0,
+  "blocked_unobserved_external_process_attempts": 1,
+  "blocked_external_command": "NOT_RETAINED; cannot classify retrospectively; process was blocked before launch; generation is not rerun",
+  "child_modes": {
+    "m06_daily_worker.py <ORIGINAL_M06_ROOT>": 4,
+    "hk_preselection_daily.py --assets": 12,
+    "hk_preselection_daily.py --calendar": 1,
+    "hk_preselection_daily.py --worker": 1,
+    "hk_preselection_verified.py --worker": 8
+  },
+  "child_failures": 0,
+  "coverage": "Recursive Python script launches; unchanged source/interpreter/flags/argv/stdin; stderr-only profiles. Network socket creation/connect/DNS/sendto guarded. Unobserved external launches and shell execution rejected. Profile counts main-thread calls per process; internal threaded estimator calls are not comprehensively counted."
+}

@@ -1,0 +1,64 @@
+{
+  "artifact_relative": "hk_preselection/20261013/objects/d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b/artifact.json",
+  "artifact_sha256": "83829f2554ad5ec29da5353745cea2a863e585c88d7d74eaf3857991e85ddc09",
+  "business_status": "STRICT_0_2_READY",
+  "buy_gate_updated": false,
+  "computation_identity": {
+    "code_sha256": "3a07a22a36b89c6608fd643edb234058d48c3ce5854cefe34811c20fd21e7037",
+    "config_sha256": "7da15ec9ffc6f2b23b17036c36edf3c92e0dd143a4a07789f457ba275ba8b85a",
+    "dependency_sha256": "f85d90f249fa7529d78336535716465b26acb7c2f17012b59afa2f3a4ba8b8a0",
+    "input_sha256": "9231daf75b9d12d1dcb21a602a5500588e8210bb200ddfb6a8a60cb361131a5c",
+    "lane": "hk_preselection",
+    "research_cutoff": "2026-10-13T02:17:48.017026+00:00",
+    "target_date": "20261013"
+  },
+  "computation_sha256": "d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b",
+  "data_kind": "VERIFIED_SOURCE_SNAPSHOT",
+  "eligibility_source_date": "20261012",
+  "execution_mode": "MANUAL_RECOVERY",
+  "fixture_only": false,
+  "formal_eligibility_verified": false,
+  "manifest_relative": "hk_preselection/20261013/objects/d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b/manifest.json",
+  "manifest_sha256": "e91f4b3f425a45ce022946b8a5eb0612b2cfa9880f0b389e58cfe0ad6a958e2b",
+  "market": "HK",
+  "model_weights_reverified": false,
+  "natural_verified": false,
+  "orders_sent": false,
+  "owner": "M06",
+  "producer_computation_identity": {
+    "code_sha256": "d8fae82edb8ef68fc502b6632ffe9e09c26fed3a5d20711e914251a34eb9cdb5",
+    "config_sha256": "1c99a0fb9f0c4fea3531010f3ac1d884f9feb21951cf3f974118a68bfe025c40",
+    "dependency_sha256": "1b07f33796f389ca9652f5743b8745d09fe2f0534a9a8fb93aad7efe196d5ee4",
+    "input_sha256": "40a4e67713f4cb3225fab6b646081a179f98997783a8fc36a52f5b93f944d5d3",
+    "lane": "hk_preselection",
+    "research_cutoff": "2026-10-13T02:17:48.017026+00:00",
+    "target_date": "20261013"
+  },
+  "producer_reference": {
+    "production_method": "FROZEN_MODEL_PRODUCER",
+    "relative": "hk_preselection/20261013/objects/d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b/producer_receipt.json",
+    "sha256": "4bb5a7ef33a9cca884ba7c64dd4118f93a511ddfc64d2fa4e90a6bf928ca6c30"
+  },
+  "production_allowed": false,
+  "reader_reference": {
+    "relative": "hk_preselection/20261013/objects/d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b/strict_reader_receipt.json",
+    "sha256": "9cc08224296a57f6e6781bb70ddae5e95e937f732e89d4df7bfe2ebe9abd57ca"
+  },
+  "receipt_relative": "hk_preselection/20261013/objects/d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b/receipt.json",
+  "receipt_sha256": "bb6ad7c0491682ed7232bf4ff4686ec05ebf684d82bb9b5e7d46a4670162d1db",
+  "request_sha256": "37374e6ece8c6295560c5699cc34208d81b439a78859d5bb6b6b57f49e7c1581",
+  "research_cutoff": "2026-10-13T02:17:48.017026+00:00",
+  "research_only": true,
+  "schema_version": "v5.hk_preselection_committed_reference.v1",
+  "signal_date": "20261012",
+  "status": "COMMITTED",
+  "target_date": "20261013",
+  "verified_source_reference": {
+    "artifact_relative": "runs/20261013/HK_CONNECT_D1_TOP100_0_2/20261013-hk-connect-d1-top100-0-2-7c48617a751f/artifact.csv",
+    "artifact_sha256": "2ddeee92734bf844594a296b2da2b99b5bc9c56f451bce0f79e8b0a9f62b414d",
+    "manifest_sha256": "a2648e92d8a685a5efadf4b7e026d405c02706920fb4ad0ae835171a9c4b50cf",
+    "receipt_sha256": "9b76330ca89d8ff4ab82c1d8fc7fac0fa55ae3441408ac7b45db948e8e643575",
+    "role": "HK_CONNECT_D1_TOP100_0_2",
+    "run_id": "20261013-hk-connect-d1-top100-0-2-7c48617a751f"
+  }
+}

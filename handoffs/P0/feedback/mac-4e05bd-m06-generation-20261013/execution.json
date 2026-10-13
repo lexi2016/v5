@@ -1,0 +1,99 @@
+{
+  "candidate": "4e05bd422d1f6bdedb7bff8b2faf5218fac9e58a",
+  "started_utc": "2026-10-13T01:47:48.017364+00:00",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "run_m06p_generation_4e05.py"
+  ],
+  "entrypoint": "v5_shadow.main_runtime.tick(config)",
+  "tick_calls": 1,
+  "admission_cutoff": "2026-10-13T01:47:48.017026+00:00",
+  "completion_cutoff": "2026-10-13T02:17:48.017026+00:00",
+  "slot": {
+    "scheduled_at": "2026-10-13T01:47:47.017026+00:00",
+    "deadline": "2026-10-13T02:22:48.017026+00:00",
+    "max_attempts": 1,
+    "half_day_bound": true
+  },
+  "registered_timeout_seconds": 1800,
+  "original_generator_worker_timeout_seconds": 600,
+  "model_pin": "3b0d5d5239342439cabf25b30012365a64d78839bc3cd4d90bad7be6ff4aaa07",
+  "original_files_verified": 18,
+  "copied_generation_files": 14,
+  "source_pool_present_at_start": false,
+  "tick_status": "DISPATCH_ATTEMPT_ONLY",
+  "lanes": [
+    {
+      "lane": "hk_preselection",
+      "status": "SUCCEEDED",
+      "reason": null
+    }
+  ],
+  "ledger_file_counts": {
+    "p0": 1,
+    "m06": 1
+  },
+  "attempt_statuses": {
+    "p0": [
+      "SUCCEEDED"
+    ],
+    "m06": [
+      "SUCCEEDED"
+    ]
+  },
+  "status": "CONTROLLED_FROZEN_MODEL_P0_SUCCESS",
+  "p0_run_id": "4c8295528ca7450daf2dc48b014f0af5",
+  "m06_run_id": "1112ecbd4b95467799eaee153520f2f0",
+  "publication_digest": "d6726881b5c4fc29c2753d45283968ea69bbb48f212d0bc8879efd233577580b",
+  "producer_receipt_sha256": "4bb5a7ef33a9cca884ba7c64dd4118f93a511ddfc64d2fa4e90a6bf928ca6c30",
+  "producer_pid": 51793,
+  "reader_pid": 51898,
+  "row_count": 100,
+  "production_method": "FROZEN_MODEL_PRODUCER",
+  "model_weights_reverified": true,
+  "owner_reused": false,
+  "p0_identity": {
+    "code_sha256": "3d234b1bf1066a4cac5b934d405073ddad493067f09cea7e64a0998135d4d3ce",
+    "config_sha256": "0beef7094082a58eacdac69b88ba231b05d4f64a38b53837298218db80dc4185",
+    "dependency_sha256": "a62be5f7ff4f4e1dbca65ae0487a22372c659dc7c78e0c63d4d45af6bfe0d7d6",
+    "input_sha256": "bd2f039f05039bc735a8147b06db7c5bdd2bfaf06b36b434ea64a8401c237c46",
+    "lane": "hk_preselection",
+    "research_cutoff": "2026-10-13T01:47:48.017026+00:00",
+    "target_date": "20261013"
+  },
+  "m06_identity": {
+    "code_sha256": "d8fae82edb8ef68fc502b6632ffe9e09c26fed3a5d20711e914251a34eb9cdb5",
+    "config_sha256": "1c99a0fb9f0c4fea3531010f3ac1d884f9feb21951cf3f974118a68bfe025c40",
+    "dependency_sha256": "1b07f33796f389ca9652f5743b8745d09fe2f0534a9a8fb93aad7efe196d5ee4",
+    "input_sha256": "40a4e67713f4cb3225fab6b646081a179f98997783a8fc36a52f5b93f944d5d3",
+    "lane": "hk_preselection",
+    "research_cutoff": "2026-10-13T02:17:48.017026+00:00",
+    "target_date": "20261013"
+  },
+  "fixture_only": false,
+  "natural_verified": false,
+  "exit_code": 0,
+  "finished_utc": "2026-10-13T01:48:37.848983+00:00",
+  "protected_files_count": 111,
+  "protected_files_unchanged": true,
+  "isolated_input_files_unchanged": true,
+  "source_pool_still_absent": true,
+  "source_closure_after_run_verified": 147,
+  "network_socket_dns_attempts": 0,
+  "blocked_unobserved_external_process_attempts": 1,
+  "observability_limitation": "One external process attempt was blocked before launch; command was not retained and cannot be classified retrospectively. No rerun.",
+  "source_timestamp_metadata": [
+    {
+      "kind": "security_master",
+      "relative": "assets/hk_security_master/runs/20261012/a9add41f40649816d4e0a7d6/manifest.json",
+      "timestamps": {
+        "captured_at": "2026-10-12T17:30:15+08:00"
+      }
+    }
+  ],
+  "PIT": "NOT_NEWLY_ESTABLISHED",
+  "formal_eligibility_verified": false,
+  "generation_source_run_id": "20261013-hk-connect-d1-top100-0-2-7c48617a751f",
+  "no_old_tests_rerun": true
+}

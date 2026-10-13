@@ -1,0 +1,31 @@
+{
+  "new_rows": 100,
+  "old_rows": 100,
+  "shared_codes": 100,
+  "identical_ranked_code_sequence": true,
+  "field_difference_counts_on_shared_codes": {
+    "rank": 0,
+    "pool_rank": 0,
+    "pool_score": 33,
+    "score_prob_active": 33,
+    "score_equal_4model": 35,
+    "score_hgb_depth6": 0,
+    "score_extra_trees": 66,
+    "score_random_forest": 63,
+    "score_logit": 0
+  },
+  "new_source_artifact_sha256": "2ddeee92734bf844594a296b2da2b99b5bc9c56f451bce0f79e8b0a9f62b414d",
+  "old_source_artifact_sha256": "c8c78548dbeeb0cc6bdb2355de20de53ab2c73e86a84d3e0c918fd3d0d67a9d5",
+  "old_result_replaced": false,
+  "maximum_absolute_numeric_difference": {
+    "rank": 0.0,
+    "pool_rank": 0.0,
+    "pool_score": 2.220446049250313e-16,
+    "score_prob_active": 2.220446049250313e-16,
+    "score_equal_4model": 2.220446049250313e-16,
+    "score_hgb_depth6": 0.0,
+    "score_extra_trees": 4.440892098500626e-16,
+    "score_random_forest": 3.3306690738754696e-16,
+    "score_logit": 0.0
+  }
+}
