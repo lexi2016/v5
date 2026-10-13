@@ -26,30 +26,59 @@ def default_slots(target):
         schedule_basis='NEW_V5_DEFAULT_NOT_VERIFIED_V4_SCHEDULE')
 
 
+def daily_config(config):
+    """The CLI accepts either a daily object or the existing main runtime config."""
+    if not isinstance(config,dict):raise ValueError('DAILY_CONFIG_INVALID')
+    if 'daily' not in config:return config
+    if any(key in config for key in ('enabled','bundle_root','ledger_root','hk_preselection','hk_preselection_daily','close_recapture')):
+        raise ValueError('DAILY_CONFIG_AMBIGUOUS')
+    if not isinstance(config['daily'],dict):raise ValueError('DAILY_CONFIG_INVALID')
+    return config['daily']
+
+
 def tick(config):
+    config=daily_config(config)
     if config.get('enabled') is not True:return dict(status='DISABLED',natural_verified=False)
-    today=datetime.now(timezone(timedelta(hours=8))).strftime('%Y%m%d')
+    observed=datetime.now(timezone(timedelta(hours=8)));today=observed.strftime('%Y%m%d')
+    candidate_enabled=config.get('hk_preselection_daily',{}).get('enabled') is True
     fd=_open_directory(config['bundle_root'])
     try:
         if _read_at(fd,None,'.v5-daily-bundles')!=b'v5.daily-bundles.v1\n':raise ValueError('DAILY_BUNDLE_MARKER')
         try:bundle=json.loads(_read_at(fd,None,today+'.json'))
-        except FileNotFoundError:return dict(status='BLOCKED_CURRENT_BUNDLE_MISSING',natural_verified=False)
+        except FileNotFoundError:
+            if not candidate_enabled:return dict(status='BLOCKED_CURRENT_BUNDLE_MISSING',natural_verified=False)
+            bundle=dict(target_date=today,jobs=[])
     finally:os.close(fd)
     if bundle['target_date']!=today:raise ValueError('DAILY_BUNDLE_TARGET')
     from v5_shadow.announcement_offline_reader import PIN as ANNOUNCEMENT_PIN,REVISION_PIN
     from v5_shadow.manager_plan import PIN as MANAGER_PIN, _identity as manager_identity
     # M17's exact-date pool/runtime binding must not rekey unrelated owners.
-    ordinary_config={k:v for k,v in config.items() if k not in {'close_recapture','hk_preselection'}}
+    ordinary_config={k:v for k,v in config.items() if k not in {'close_recapture','hk_preselection','hk_preselection_daily'}}
     registration=adapter_identity(ordinary_config,dict(announcement=ANNOUNCEMENT_PIN,revision=REVISION_PIN,rebound=REBOUND_PIN,
         manager=MANAGER_PIN,manager_implementation=manager_identity()))
     bindings=dict(us_mapping=bind_us_owner(ordinary_config),
         announcement=dict(registration,invoke=read_announcement_owner),
         rebound=dict(registration,invoke=run_rebound_owner))
-    jobs=[];rejected=[]
+    jobs=[];rejected=[];candidate=None
+    explicit_m06=any(job.get('lane')=='hk_preselection' for job in bundle['jobs'])
+    if candidate_enabled:
+        if explicit_m06:rejected.append(dict(lane='hk_preselection',status='BLOCKED_M06_DUPLICATE_SLOT'))
+        else:
+            from v5_shadow.p0_hk_preselection import prepare_daily_candidate
+            try:
+                candidate=prepare_daily_candidate(config,observed)
+                if candidate['status']=='PREPARED_M06_CANDIDATE':
+                    jobs.append(candidate['job']);bindings['hk_preselection']=candidate['binding']
+                else:rejected.append(dict(lane='hk_preselection',status=candidate['status']))
+            except Exception as error:
+                token=str(error).split(':',1)[0]
+                rejected.append(dict(lane='hk_preselection',status='BLOCKED_M06_DAILY_CANDIDATE',
+                    reason=token if token.isidentifier() else type(error).__name__))
     defaults=default_slots(today)
     for job in bundle['jobs']:
         try:
             if job.get('lane')=='hk_preselection':
+                if candidate_enabled:continue
                 from v5_shadow.p0_hk_preselection import prepare_job
                 prepared,binding=prepare_job(job,config.get('hk_preselection'),today)
                 bindings[job['lane']]=binding;jobs.append(prepared);continue
@@ -81,6 +110,11 @@ def tick(config):
             rejected.append(dict(lane=job.get('lane') if isinstance(job,dict) else None,
                                  status='BLOCKED_OWNER_CONTRACT',reason=type(error).__name__))
     result=dispatch_due(jobs,bindings,config['ledger_root'])
+    if candidate is not None and candidate['status']=='PREPARED_M06_CANDIDATE':
+        from v5_shadow.p0_hk_preselection import promote_current_success
+        row=result['lanes'][0]
+        try:row['current_success']=promote_current_success(config,candidate,row)
+        except Exception as error:row['current_success']=dict(status='CURRENT_SUCCESS_UNCHANGED_READBACK_FAILED',reason=type(error).__name__)
     # At 08:45 the execution window closes, but already saved owner products
     # remain readable for the plan. Never re-execute to recover their references.
     from v5_shadow.run_ledger import read_run
@@ -146,5 +180,6 @@ if __name__=='__main__':
         result=tick(json.loads(args.config.read_bytes()))
         # Operational logs contain statuses only, not raw private artifacts.
         print(canonical_bytes(dict(status=result['status'],natural_verified=False,
-            lanes=[dict(lane=row['lane'],status=row['status']) for row in result.get('lanes',[])],
+            lanes=[dict(lane=row['lane'],status=row['status'],
+                **({'current_success':row['current_success']['status']} if 'current_success' in row else {})) for row in result.get('lanes',[])],
             manager=result.get('manager'))).decode())

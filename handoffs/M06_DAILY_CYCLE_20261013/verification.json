@@ -1,0 +1,45 @@
+{
+  "schema_version": "v5.m06_daily_cycle_verification.v1",
+  "status": "CLOUD_SYNTHETIC_SCOPED_PASS_RUNTIME_DISABLED",
+  "base_commit": "af758f0beeb3e9518de05e62a0af23f9e032690c",
+  "source_closure_sha256": "3fbc5607186f831e1d230b06512070f455a7fa39db71b9c8fb6fa60ba5c8783f",
+  "source_closure_files": 150,
+  "tests": {
+    "new_daily_cycle": 24,
+    "new_current_reader": 27,
+    "existing_dispatch": 5,
+    "existing_fixed_reader": 2,
+    "total": 58,
+    "passed": 58,
+    "failed": 0,
+    "duration_seconds": 111.253,
+    "log_sha256": "60b1ca86330a5a7cf0b7ca904b3734d912a5c51ec0cdf24fba1e1e1904041b25"
+  },
+  "tdd": {
+    "initial_missing_apis": "13 new tests failed before implementation; no owner work occurred",
+    "delivery_completion_before_source_receipt": "expected red ValueError not raised, then green",
+    "post_inspection_budget": "expected red None vs insufficient budget, then green",
+    "ledger_root_io_identity": "3 expected red tests then green",
+    "fixture_adjustment": "CAS fixture now supplies its synthetic clock at the new dispatch budget boundary; production clock gate unchanged"
+  },
+  "not_run": [
+    "real model computation",
+    "provider collection",
+    "natural scheduler enablement",
+    "launchd installation",
+    "deployment",
+    "Mac acceptance of this backend candidate",
+    "full unrelated regression suites"
+  ],
+  "remaining_runtime_bindings": [
+    "verified real input-delivery publisher and path",
+    "explicit full-day window",
+    "explicit half-day window or skip",
+    "execution budget",
+    "original security-master date policy"
+  ],
+  "natural_verified": false,
+  "production_allowed": false,
+  "orders_sent": false,
+  "commit_parent": "78be1f4921cc68c1a653179287a5c057799b3187"
+}

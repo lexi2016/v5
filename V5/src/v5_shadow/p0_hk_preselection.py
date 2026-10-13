@@ -1,12 +1,17 @@
 """Explicit P0 M06 registration; fixed original owner, separate exact ledgers."""
 from datetime import datetime,timedelta,timezone
 from functools import partial
+from contextlib import contextmanager
+import fcntl
 import hashlib
 import json
 import os
 import stat
 from pathlib import Path
 import subprocess
+import sys
+import threading
+import types
 from .composition import no_symlinks,shadow_root
 from .contracts import aware,exact_keys,sha,trade_date
 from .digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
@@ -130,7 +135,7 @@ def _request(request):
 
 def _code_manifest():
     return {name:hashlib.sha256(no_symlinks(Path(__file__).with_name(name)).read_bytes()).hexdigest() for name in
-        ('p0_hk_preselection.py','m06_daily_worker.py','m06_readonly.py','daily_tick.py','daily_dispatch.py','run_ledger.py','main_registry.py','main_runtime.py','composition.py','contracts.py','digests.py')}
+        ('p0_hk_preselection.py','m06_daily_worker.py','m06_readonly.py','daily_tick.py','daily_dispatch.py','run_ledger.py','main_registry.py','main_runtime.py','composition.py','contracts.py','digests.py','module_api.py','module_artifacts.py')}
 
 
 def _check_code(expected):
@@ -166,9 +171,17 @@ def admission_reason(job,binding,now,ledger_root):
         raise ValueError('M06_SEPARATE_LEDGER_REQUIRED')
     if request['production_method']=='GENERATE_IF_ABSENT' and now>=aware(request['completion_cutoff']):
         return 'M06_GENERATION_COMPLETION_WINDOW_EXPIRED'
+    budget=binding.get('execution_budget_seconds')
+    if budget is not None and now+timedelta(seconds=budget)>aware(request['completion_cutoff']):
+        return 'M06_EXECUTION_BUDGET_INSUFFICIENT'
     prepared,current=prepare_job(job,binding['registration'],now.astimezone(TZ).strftime('%Y%m%d'))
     if prepared['identity']!=job['identity'] or any(current[k]!=binding[k] for k in IDENTITIES) or current['owner_snapshot']!=binding['owner_snapshot']:
         return 'OWNER_BINDING_IDENTITY_MISMATCH'
+    if budget is not None:
+        observed=_utc_now()
+        if observed<now:return 'M06_CLOCK_REGRESSION'
+        if observed+timedelta(seconds=budget)>aware(request['completion_cutoff']):
+            return 'M06_EXECUTION_BUDGET_INSUFFICIENT'
     return None
 
 
@@ -210,3 +223,261 @@ def read_saved(claim,request,binding):
         if any(product.get(key)!=value for key,value in read.items()):raise ValueError('M06_SAVED_PRODUCT_MISMATCH')
     except Exception:return dict(status='BLOCKED_SAVED_PRODUCT_INVALID',state=claim['state'],natural_verified=False)
     return dict(claim,readback_verified=True,natural_verified=False)
+
+
+# Candidate automation is separate from the explicit manual job/registration.
+# No upstream completion evidence, clock, calendar or window is synthesized.
+DELIVERY_SCHEMA='v5.m06_daily_input_delivery.v1'
+FROZEN_SCHEMA='v5.m06_daily_frozen_bundle.v1'
+_CALENDAR_LOCK=threading.RLock()
+
+
+def _utc_now():return datetime.now(timezone.utc)
+
+
+def calendar_day(target):
+    """Run the fixed original HK securities calendar, including previous_session."""
+    trade_date(target)
+    root=m06_readonly.owner_root()/'V5/vendor/hk_preselection_baseline/contracts'
+    name='_v5_m06_daily_candidate_calendar'
+    with _CALENDAR_LOCK:
+        previous=sys.modules.get(name);module=types.ModuleType(name)
+        module.__file__=str(root/'trading_calendar.py');sys.modules[name]=module
+        try:
+            raw=no_symlinks(root/'trading_calendar.py').read_bytes()
+            exec(compile(raw,module.__file__,'exec'),module.__dict__)
+            calendar=module.load_market_calendar(no_symlinks(root/'market_calendar_2026.json'))
+            state=module.resolve_market_states(calendar,target)['hk_securities'].value
+            signal=None
+            if state in ('FULL_TRADING_DAY','HALF_TRADING_DAY_AM'):
+                try:signal=module.previous_session(calendar,target,market='hk_securities')
+                except ValueError:state='UNKNOWN'
+            m06_readonly.owner_root()
+            return dict(state=state,signal_date=signal)
+        finally:
+            if previous is None:sys.modules.pop(name,None)
+            else:sys.modules[name]=previous
+
+
+def _candidate_policy(config):
+    value=config.get('hk_preselection_daily')
+    if value is None or value=={'enabled':False}:return None
+    if not isinstance(value,dict):raise ValueError('M06_DAILY_CONFIG')
+    if value.get('enabled') is False:return None
+    exact_keys(value,('enabled','delivery_root','full_day_window','half_day_window',
+        'execution_budget_seconds','execution_mode','production_method'))
+    if value['enabled'] is not True:raise ValueError('M06_DAILY_DISABLED_REQUIRED')
+    for key in ('full_day_window','half_day_window'):
+        window=value[key]
+        if window is None and key=='half_day_window':continue
+        exact_keys(window,('start','end'))
+        for stamp in window.values():
+            if (not isinstance(stamp,str) or len(stamp)!=5 or stamp[2]!=':'
+                    or not (stamp[:2]+stamp[3:]).isascii() or not (stamp[:2]+stamp[3:]).isdigit()
+                    or int(stamp[:2])>23 or int(stamp[3:])>59):raise ValueError('M06_EXPLICIT_WINDOW_REQUIRED')
+        if window['start']>=window['end']:raise ValueError('M06_EXPLICIT_WINDOW_REQUIRED')
+    registration=config.get('hk_preselection');_config(registration)
+    budget=value['execution_budget_seconds']
+    # Owner process plus independent reader process, with an explicit caller
+    # budget for inspection/publication overhead. Never infer it from a slot.
+    if type(budget) is not int or not 2*registration['timeout_seconds']<=budget<=86400:
+        raise ValueError('M06_EXECUTION_BUDGET_REQUIRED')
+    if value['execution_mode'] not in ('NATURAL','MANUAL_RECOVERY','RECORDED_INPUT_REPLAY'):
+        raise ValueError('M06_EXECUTION_MODE')
+    if value['production_method'] not in ('EXISTING_VERIFIED_POOL','GENERATE_IF_ABSENT'):
+        raise ValueError('M06_PRODUCTION_METHOD')
+    if value['execution_mode']=='RECORDED_INPUT_REPLAY' and value['production_method']!='EXISTING_VERIFIED_POOL':
+        raise ValueError('M06_GENERATION_WINDOW')
+    delivery=no_symlinks(value['delivery_root']);output=no_symlinks(registration['private_root'])
+    bundle=no_symlinks(config['bundle_root']);ledger=no_symlinks(config['ledger_root'])
+    roots=(delivery,output,bundle,ledger)
+    if any(a==b or a.is_relative_to(b) or b.is_relative_to(a) for i,a in enumerate(roots) for b in roots[i+1:]):
+        raise ValueError('M06_DAILY_ROOT_OVERLAP')
+    inputs=(no_symlinks(registration['store_root']),no_symlinks(registration['asset_root']))
+    if any(a==b or a.is_relative_to(b) or b.is_relative_to(a) for a in (output,bundle,ledger) for b in inputs):
+        raise ValueError('M06_DAILY_ROOT_OVERLAP')
+    return value
+
+
+def _window_status(now,start,end,budget):
+    if now<start:return 'WAITING_M06_WINDOW'
+    if now>=end:return 'MISSED_M06_WINDOW_NO_BACKFILL'
+    if now+timedelta(seconds=budget)>end:return 'M06_EXECUTION_BUDGET_INSUFFICIENT'
+    return None
+
+
+def _delivery(policy,target,signal,now):
+    from .module_api import _open_directory,_read_at
+    fd=_open_directory(no_symlinks(policy['delivery_root']))
+    try:
+        if _read_at(fd,None,'.v5-m06-input-deliveries')!=b'v5.m06-input-deliveries.v1\n':
+            raise ValueError('M06_DELIVERY_ROOT_MARKER')
+        try:raw=_read_at(fd,None,target+'.json')
+        except FileNotFoundError:return None
+    finally:os.close(fd)
+    value=json.loads(raw)
+    exact_keys(value,('schema_version','status','target_date','signal_date','eligibility_source_date',
+        'completed_at','files','source_files'))
+    if value['schema_version']!=DELIVERY_SCHEMA:raise ValueError('M06_INPUT_DELIVERY_SCHEMA')
+    if value['status']!='READY':raise ValueError('M06_INPUT_DELIVERY_NOT_READY')
+    if value['target_date']!=target or value['signal_date']!=signal:raise ValueError('M06_INPUT_DELIVERY_DATE')
+    trade_date(value['eligibility_source_date'])
+    if value['eligibility_source_date']>target:raise ValueError('M06_INPUT_DELIVERY_DATE')
+    if aware(value['completed_at'])>now:raise ValueError('M06_INPUT_DELIVERY_FUTURE')
+    return value,hashlib.sha256(raw).hexdigest()
+
+
+def _delivery_timing(request,registration,completed_at):
+    """Cross-check the new handoff time against original dated input evidence."""
+    from .module_api import _open_directory,_read_at
+    completed=aware(completed_at)
+    def metadata(root,relative,inventory):
+        if relative not in inventory:raise ValueError('M06_DELIVERY_REQUIRED_INPUT')
+        path=no_symlinks(Path(root)/relative);fd=_open_directory(path.parent)
+        try:raw=_read_at(fd,None,path.name)
+        finally:os.close(fd)
+        if hashlib.sha256(raw).hexdigest()!=inventory[relative]:raise ValueError('M06_DELIVERY_INPUT_CHANGED')
+        value=json.loads(raw)
+        if not isinstance(value,dict):raise ValueError('M06_DELIVERY_METADATA')
+        return value
+    for field,root in (('source_files',registration['store_root']),('files',registration['asset_root'])):
+        for relative in request[field]:
+            path=no_symlinks(Path(root)/relative)
+            if not path.exists():raise FileNotFoundError('M06_INPUT_NOT_DELIVERED')
+            if not path.is_file():raise ValueError('M06_INPUT_FILE_TYPE')
+    source=registration['store_root'];files=request['source_files'];prefix='assets/hk_security_master/'
+    entry=metadata(source,prefix+'latest.json',files)['entries'][request['eligibility_source_date']]
+    manifest=metadata(source,prefix+entry['manifest_relative'],files)
+    receipt=metadata(source,prefix+entry['receipt_relative'],files)
+    if receipt.get('status')!='READY' or receipt.get('trade_date')!=request['eligibility_source_date']:
+        raise ValueError('M06_MASTER_COMPLETION_IDENTITY')
+    observed=[manifest['captured_at']]
+    if request['production_method']=='EXISTING_VERIFIED_POOL':
+        entry=metadata(source,'latest.json',files)['entries'][request['target_date']+'/HK_CONNECT_D1_TOP100_0_2']
+        observed.extend((metadata(source,entry['manifest_relative'],files)['captured_at'],
+            metadata(source,entry['receipt_relative'],files)['finished_at']))
+    if any(aware(stamp)>completed for stamp in observed):raise ValueError('M06_INPUT_AFTER_DELIVERY_COMPLETION')
+    if request['files']:
+        assets=registration['asset_root'];inventory=request['files']
+        pointer=metadata(assets,'panel_latest.json',inventory)
+        panel=metadata(assets,pointer['manifest_relative'],inventory)
+        if panel.get('panel_max_date')!=request['signal_date']:raise ValueError('M06_PANEL_SIGNAL_DATE_MISMATCH')
+
+
+@contextmanager
+def _state_lock(root,marker,expected,lockname):
+    """Stable no-follow lock plus existing fd-relative atomic JSON writer."""
+    from .module_api import _open_directory,_read_at
+    fd=_open_directory(no_symlinks(root));lock=None
+    try:
+        if _read_at(fd,None,marker)!=expected:raise ValueError('M06_STATE_ROOT_MARKER')
+        flags=os.O_RDWR|os.O_NOFOLLOW|os.O_NONBLOCK
+        try:lock=os.open(lockname,flags|os.O_CREAT|os.O_EXCL,0o600,dir_fd=fd)
+        except FileExistsError:lock=os.open(lockname,flags,dir_fd=fd)
+        if not stat.S_ISREG(os.fstat(lock).st_mode):raise ValueError('M06_STATE_LOCK')
+        fcntl.flock(lock,fcntl.LOCK_EX)
+        yield fd
+    finally:
+        if lock is not None:os.close(lock)
+        os.close(fd)
+
+
+def _current_binding(config):
+    registration=config['hk_preselection']
+    return dict(bound_root=registration['private_root'],python_executable=registration['python_executable'],
+        python_sha256=registration['python_sha256'],current_success_ledger_root=config['ledger_root'],
+        **({'python_venv':registration['python_venv']} if 'python_venv' in registration else {}))
+
+
+def prepare_daily_candidate(config,now):
+    """Admit real delivery evidence, then freeze one immutable M06 job per day."""
+    policy=_candidate_policy(config)
+    if policy is None:return dict(status='DISABLED')
+    now=aware(now.isoformat()).astimezone(TZ);target=now.strftime('%Y%m%d')
+    calendar=calendar_day(target)
+    if calendar['state']=='UNKNOWN':return dict(status='M06_CALENDAR_UNKNOWN')
+    if calendar['state']=='NON_TRADING_DAY':return dict(status='M06_NON_TRADING_DAY')
+    half=calendar['state']=='HALF_TRADING_DAY_AM'
+    window=policy['half_day_window'] if half else policy['full_day_window']
+    if window is None:return dict(status='M06_HALF_DAY_NOT_ENABLED')
+    date=now.date().isoformat()
+    start,end=(aware(date+'T'+window[key]+':00+08:00') for key in ('start','end'))
+    reason=_window_status(now,start,end,policy['execution_budget_seconds'])
+    if reason:return dict(status=reason)
+    delivered=_delivery(policy,target,calendar['signal_date'],now)
+    if delivered is None:return dict(status='WAITING_M06_INPUT_DELIVERY')
+    from .module_api import _read_at
+    from .run_ledger import _write
+    registration=config['hk_preselection'];fingerprint=sha256_json(dict(policy=policy,registration=registration,
+        bundle_root=config['bundle_root'],ledger_root=config['ledger_root']))
+    with _state_lock(config['bundle_root'],'.v5-daily-bundles',b'v5.daily-bundles.v1\n','.m06-freeze.lock') as fd:
+        # Reread under the single M06 lock: callers cannot freeze two revisions.
+        repeated=_delivery(policy,target,calendar['signal_date'],now)
+        if repeated!=delivered:raise ValueError('M06_INPUT_DELIVERY_CHANGED')
+        delivery,delivery_sha=delivered;name='.m06-'+target+'.json'
+        try:frozen=json.loads(_read_at(fd,None,name))
+        except FileNotFoundError:frozen=None
+        if frozen is not None:
+            exact_keys(frozen,('schema_version','target_date','delivery_sha256','candidate_sha256','job','expected_current_sha256'))
+            if frozen['schema_version']!=FROZEN_SCHEMA or frozen['target_date']!=target:raise ValueError('M06_FROZEN_BUNDLE_IDENTITY')
+            if frozen['delivery_sha256']!=delivery_sha:raise ValueError('M06_FROZEN_INPUT_CHANGED')
+            if frozen['candidate_sha256']!=fingerprint:raise ValueError('M06_FROZEN_CONFIG_CHANGED')
+            admission=frozen['job']['owner_request']['admission_cutoff']
+            if not start<=aware(admission)<=now:raise ValueError('M06_FROZEN_ADMISSION_TIME')
+        else:admission=now.isoformat()
+        request={key:delivery[key] for key in ('target_date','signal_date','eligibility_source_date','files','source_files')}
+        request.update(admission_cutoff=admission,completion_cutoff=end.isoformat(),
+            execution_mode=policy['execution_mode'],production_method=policy['production_method'])
+        _request(request)
+        if aware(delivery['completed_at'])>aware(admission):raise ValueError('M06_INPUT_DELIVERY_AFTER_ADMISSION')
+        try:_delivery_timing(request,registration,delivery['completed_at'])
+        except FileNotFoundError:return dict(status='WAITING_M06_INPUT_FILES')
+        job=dict(lane=LANE,owner_request=request,scheduled_at=start.isoformat(),deadline=end.isoformat(),
+            half_day_bound=half,max_attempts=1)
+        prepared,binding=prepare_job(job,registration,target)
+        if frozen is not None and frozen['job']!=prepared:raise ValueError('M06_FROZEN_BINDING_CHANGED')
+        observed=_utc_now()
+        if observed<now:raise ValueError('M06_CLOCK_REGRESSION')
+        reason=_window_status(observed,start,end,policy['execution_budget_seconds'])
+        if reason:return dict(status=reason)
+        if _delivery(policy,target,calendar['signal_date'],observed)!=delivered:raise ValueError('M06_INPUT_DELIVERY_CHANGED')
+        if frozen is None:
+            current=m06_readonly.read_current_success(_current_binding(config))
+            if current is not None:m06_readonly.validate_current_success(_current_binding(config),current)
+            frozen=dict(schema_version=FROZEN_SCHEMA,target_date=target,delivery_sha256=delivery_sha,
+                candidate_sha256=fingerprint,job=prepared,expected_current_sha256=sha256_json(current) if current is not None else None)
+            _write(fd,name,frozen)
+            if json.loads(_read_at(fd,None,name))!=frozen:raise ValueError('M06_FROZEN_BUNDLE_READBACK')
+        binding['execution_budget_seconds']=policy['execution_budget_seconds']
+        return dict(status='PREPARED_M06_CANDIDATE',job=prepared,binding=binding,frozen=frozen)
+
+
+def promote_current_success(config,candidate,row):
+    """Only dual-ledger success plus another cold read can advance the private CAS."""
+    if row.get('status') not in ('SUCCEEDED','REUSED_SUCCESS'):return dict(status='CURRENT_SUCCESS_UNCHANGED')
+    from .run_ledger import read_run,_write
+    from .module_api import _read_at
+    job=candidate['job'];binding=candidate['binding'];state=read_run(config['ledger_root'],job['identity'])
+    if state is None or state!=row.get('state'):raise ValueError('M06_PROMOTION_P0_STATE_MISMATCH')
+    fresh=read_saved(dict(status='REUSED_SUCCESS',state=state),job['owner_request'],binding)
+    if fresh.get('readback_verified') is not True:raise ValueError('M06_PROMOTION_FRESH_READBACK_FAILED')
+    saved=state['latest_success'];product=saved['product_reference']
+    pointer=dict(schema_version='v5.m06_current_success.v1',p0_identity=job['identity'],p0_run_id=saved['run_id'],
+        m06_identity=product['m06_computation_identity'],m06_run_id=product['m06_ledger_run_id'],
+        committed_reference=product['committed_reference'],product_sha256=sha256_json(product))
+    current_binding=_current_binding(config)
+    with _state_lock(binding['registration']['private_root'],'.v5-shadow-root',b'v5.shadow-root.v1\n','.m06-current-success.lock') as fd:
+        m06_readonly.validate_current_success(current_binding,pointer)
+        if read_run(config['ledger_root'],job['identity'])!=state:raise ValueError('M06_PROMOTION_P0_STATE_CHANGED')
+        current=m06_readonly.read_current_success(current_binding)
+        if current==pointer:return dict(status='REUSED_CURRENT_SUCCESS',reference_sha256=sha256_json(pointer))
+        if _utc_now()>=aware(job['owner_request']['completion_cutoff']):return dict(status='CURRENT_SUCCESS_LATE_NOT_PROMOTED')
+        digest=sha256_json(current) if current is not None else None
+        if digest!=candidate['frozen']['expected_current_sha256']:return dict(status='CURRENT_SUCCESS_CAS_MISMATCH')
+        if current is not None:
+            m06_readonly.validate_current_success(current_binding,current)
+            if current['p0_identity']['target_date']>=job['identity']['target_date']:
+                return dict(status='CURRENT_SUCCESS_NOT_NEWER')
+        _write(fd,'.m06-current-success.json',pointer)
+        if json.loads(_read_at(fd,None,'.m06-current-success.json'))!=pointer:raise ValueError('M06_CURRENT_SUCCESS_READBACK')
+        return dict(status='CURRENT_SUCCESS_PROMOTED',reference_sha256=sha256_json(pointer))
