@@ -1,0 +1,61 @@
+{
+  "candidate": "5eddebf5c6ecf530ece3fdb31a054b56bf2f1d57",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_evening_cycle",
+    "test_m06_evening_reader",
+    "test_m06_input_delivery",
+    "test_m06_deadline_process",
+    "test_daily_dispatch",
+    "test_m06_daily_cycle.M06DailyCycleTests.test_tick_original_owner_dual_ledger_success_promotion_and_reuse",
+    "test_m06_readonly_api.M06ReadOnlyAPITests.test_actual_original_cold_projection_all100_and_readonly",
+    "test_m06_readonly_api.M06ReadOnlyAPITests.test_saved_artifact_tamper_rejected_and_no_republication",
+    "test_m06_current_success_reader.M06CurrentSuccessReaderTests.test_pinned_venv_leaf_retains_original_cold_reader_projection",
+    "-v"
+  ],
+  "working_directory": "candidate-5eddebf",
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_utc": "2026-10-13T04:08:37.916272+00:00",
+  "finished_utc": "2026-10-13T04:09:14.262096+00:00",
+  "duration_seconds": 36.342079999999996,
+  "exit_code": 1,
+  "source_before": {
+    "files": 158,
+    "sha256": "7c50df1697f5e46e82cc91358d150c007b0d4526b37fa3600d8fd70c321f500a",
+    "verified": true
+  },
+  "source_after": {
+    "files": 158,
+    "sha256": "7c50df1697f5e46e82cc91358d150c007b0d4526b37fa3600d8fd70c321f500a",
+    "verified": true
+  },
+  "protected_files_count": 91,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "real_model_run": false,
+  "collection_run": false,
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "binding_changed": false,
+  "natural_verified": false,
+  "status": "FAIL_MAC_DEADLINE_GUARD",
+  "tests": {
+    "run": 89,
+    "passed": 85,
+    "failed_test_cases": 4,
+    "failure_events": 4,
+    "additional_cleanup_errors": 1,
+    "skipped": 0,
+    "unittest_seconds": 36.182
+  },
+  "remote_git_blob_verified_count": 158
+}
