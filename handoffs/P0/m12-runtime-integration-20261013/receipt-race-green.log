@@ -1,0 +1,6 @@
+test_legacy_envelope_receipt_race_is_rejected (test_m12_integration.M12IntegrationTests.test_legacy_envelope_receipt_race_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.432s
+
+OK

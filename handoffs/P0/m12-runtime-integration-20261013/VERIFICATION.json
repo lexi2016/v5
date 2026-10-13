@@ -1,0 +1,49 @@
+{
+  "original_runtime_blobs_unchanged": 10,
+  "original_test_blob_unchanged": true,
+  "new_backend_integration_tests": 11,
+  "targeted_pytest": {
+    "passed": 59,
+    "subtests_passed": 21,
+    "scope": [
+      "M12 original lifecycle",
+      "M12 integration",
+      "module API",
+      "M04 reader",
+      "main registry"
+    ]
+  },
+  "frontend_targeted_node": {
+    "passed": 12,
+    "scope": [
+      "M12",
+      "M04",
+      "saved manager navigation"
+    ]
+  },
+  "full_pytest": {
+    "status": "BLOCKED_COLLECTION",
+    "test": "V5/tests/test_rebound_date_compat.py",
+    "reason": "pandas missing in existing cloud interpreter"
+  },
+  "frontend_vitest": {
+    "status": "NOT_RUN_DEPENDENCY_MISSING",
+    "reason": "vitest executable not installed in cloud; no dependencies installed"
+  },
+  "mac": "NOT_RUN",
+  "frontend_build": "NOT_RUN",
+  "deployment": "NOT_RUN",
+  "real_video": "NOT_RUN",
+  "real_provider": "NOT_RUN",
+  "natural_verified": false,
+  "review_completed": false,
+  "frontend_all_node": {
+    "passed": 108,
+    "failed": 0,
+    "scope": "All existing frontend node scripts, original synthetic owner fixtures included"
+  },
+  "stdlib_full_suite": {
+    "status": "RUNNING_WITH_EXISTING_ENVIRONMENT_ERRORS",
+    "full_result_pending": true
+  }
+}

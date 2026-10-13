@@ -1,0 +1,17 @@
+test_legacy_envelope_receipt_race_is_rejected (test_m12_integration.M12IntegrationTests.test_legacy_envelope_receipt_race_is_rejected) ... FAIL
+
+======================================================================
+FAIL: test_legacy_envelope_receipt_race_is_rejected (test_m12_integration.M12IntegrationTests.test_legacy_envelope_receipt_race_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<isolated-repo>/V5/tests/test_m12_integration.py", line 137, in test_legacy_envelope_receipt_race_is_rejected
+    self.assertEqual(result.stdout.strip(),'REJECTED')
+AssertionError: 'INCORRECTLY_ACCEPTED' != 'REJECTED'
+- INCORRECTLY_ACCEPTED
++ REJECTED
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.378s
+
+FAILED (failures=1)

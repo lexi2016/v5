@@ -30,7 +30,7 @@ MODULE_REGISTRY: tuple[ModuleRegistration, ...] = (
     ModuleRegistration("M09_A_CLOSE_REVIEW", "a_close_review", "daily_owner_adapters", "READY"),
     ModuleRegistration("M10_HK_CLOSE_REVIEW", "hk_close_review", "daily_owner_adapters", "NOT_READY"),
     ModuleRegistration("M11_INTRADAY_RESEARCH", "intraday_research", "daily_owner_adapters", "NOT_READY"),
-    ModuleRegistration("M12_VIDEO_FUPAN", "video_fupan", "daily_owner_adapters", "NOT_READY"),
+    ModuleRegistration("M12_VIDEO_FUPAN", "m12_daily.run_daily", "m12_readonly", "CALLABLE_CANDIDATE_REQUIRES_INPUT"),
     ModuleRegistration("M13_ANNOUNCEMENT", "announcement_analysis", "daily_owner_adapters", "READY"),
     ModuleRegistration("M14_REBOUND", "rebound_shadow", "daily_owner_adapters", "READY"),
     ModuleRegistration("M15_US_MAPPING", "us_mapping", "daily_owner_adapters", "READY"),

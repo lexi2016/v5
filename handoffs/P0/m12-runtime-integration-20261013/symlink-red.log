@@ -1,0 +1,20 @@
+test_daily_symlink_output_is_rejected_before_any_owner_writes (test_m12_integration.M12IntegrationTests.test_daily_symlink_output_is_rejected_before_any_owner_writes) ... FAIL
+
+======================================================================
+FAIL: test_daily_symlink_output_is_rejected_before_any_owner_writes (test_m12_integration.M12IntegrationTests.test_daily_symlink_output_is_rejected_before_any_owner_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<isolated-repo>/V5/tests/test_m12_integration.py", line 113, in test_daily_symlink_output_is_rejected_before_any_owner_writes
+    self.assertEqual(list(outside.rglob('*')),[],'original owner must not write through a symlink before rejection')
+AssertionError: Lists differ: [PosixPath('/tmp/v5-m12-integration-z7bjiy[2239 chars]on')] != []
+
+First list contains 19 additional elements.
+First extra element 0:
+PosixPath('/tmp/v5-m12-integration-z7bjiy2p/outside/20261011')
+
+Diff is 2348 characters long. Set self.maxDiff to None to see it. : original owner must not write through a symlink before rejection
+
+----------------------------------------------------------------------
+Ran 1 test in 0.310s
+
+FAILED (failures=1)

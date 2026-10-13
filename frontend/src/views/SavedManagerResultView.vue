@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import M12SavedVideo from '../components/M12SavedVideo.vue';
 import SourceBundleStatus from '../components/SourceBundleStatus.vue';
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watchEffect } from 'vue';
 import { M18SavedClient, SavedRunSession, type SavedEntry, type SavedRunState, chooseSection, REBOUND_GROUPS, type ReboundGroup } from '../api/m18SavedResult';
@@ -12,6 +13,11 @@ const resultHeading=ref<HTMLElement|null>(null);
 const sourceDisclosure=ref<HTMLDetailsElement|null>(null);
 const sourceSummary=ref<HTMLElement|null>(null);
 const sourceExpanded=ref(false);
+const videoHost=ref<HTMLElement|null>(null);
+async function openVideo(){
+ const target=videoHost.value?.querySelector<HTMLDetailsElement>('#m12-saved-video');
+ if(!target)return;target.open=true;await nextTick();focusAndReveal(target.querySelector<HTMLElement>('summary'));
+}
 function focusAndReveal(target:HTMLElement|null) {
  if (!target) return;
  target.focus({preventScroll:true});
@@ -86,6 +92,7 @@ onBeforeUnmount(()=>session.close());
    <button type="button" :class="{active:isAnnouncement}" :aria-current="isAnnouncement ? 'page' : undefined" :disabled="!state.overview?.sections.announcement_reviewed_analysis" @click="selectSection('announcement_reviewed_analysis')">公告研究股票</button>
    <button type="button" :class="{active:isRebound}" :aria-current="isRebound ? 'page' : undefined" :disabled="!state.overview?.sections.rebound_research_observation" @click="selectRebound()">超跌研究</button>
    <button type="button" :class="{active:isUsMapping}" :aria-current="isUsMapping ? 'page' : undefined" :disabled="!state.overview?.sections.us_mapping_research" @click="selectSection('us_mapping_research')">美股驱动</button>
+   <button type="button" aria-controls="m12-saved-video" @click="openVideo">视频复盘 · M12</button>
    <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
    <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
    <button type="button" disabled>阶段选股 · 未接入</button>
@@ -134,6 +141,7 @@ onBeforeUnmount(()=>session.close());
    <summary ref="sourceSummary">源模块实际状态 · 点击展开基础数据、预选池与复盘</summary>
    <SourceBundleStatus />
   </details>
+  <section ref="videoHost" aria-label="M12 视频复盘入口"><M12SavedVideo /></section>
  </main>
 </template>
 <style scoped>

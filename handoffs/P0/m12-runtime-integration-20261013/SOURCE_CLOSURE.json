@@ -1,0 +1,197 @@
+{
+  "schema_version": "v5.m12_integration_overlay.v1",
+  "base_p0": "a8bb8cdaf058deee9eacc5c6b1b11b2e21d081a3",
+  "github_parent": "9b73e0fcd29d200fa3f6376187bae7b5432ece3f",
+  "original_m12": "4bbf069b435d8f0ba28db8e2eba1d358ea5e283c",
+  "files": [
+    {
+      "path": "V5/src/v5_shadow/video_fupan_daily.py",
+      "bytes": 6072,
+      "sha256": "7ef5d28b6aa771f6cf1939f73201526bea11e1259fc2ca50a37b2dec9fd50184",
+      "git_blob": "a823b13250a1d52e3e13521550991037501d5e01",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/src/v5_shadow/video_fupan_reader.py",
+      "bytes": 5171,
+      "sha256": "a7261be6fc211f2563e36c01b24a9490cb1bd8c7ca67643855b4b87009f0f145",
+      "git_blob": "2726b1561e31c71fbca54ab50fe95c70d9521071",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/src/v5_shadow/video_fupan_store.py",
+      "bytes": 3333,
+      "sha256": "96857265130c9372bc78f718ad3f31aadd79bacea50590492e9874be47ba1f3d",
+      "git_blob": "e4ee2aa1db33f245df681eef55948eb65a91dda3",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/__init__.py",
+      "bytes": 984,
+      "sha256": "8261659887ffa4cae3cc53dfa6e4e072659aa2e36abe2cc14cadefad0b8231f6",
+      "git_blob": "43f6dff16592e7afb575546420834b6e23cfc986",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/config.py",
+      "bytes": 3145,
+      "sha256": "da9a7acd3381e9c87b7f5442eeb381b78fba352d4cd073ae373c50e4cc12751e",
+      "git_blob": "0364f336b24f0aebeea88dff6cd8ff3bbf084488",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/consumer.py",
+      "bytes": 18043,
+      "sha256": "6ed804d5ddc427596af17d66c192111c4f20a47fa341f206f1007d7dc113808c",
+      "git_blob": "e8a984d968b646820f790f15d5db5756bd79381a",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/core.py",
+      "bytes": 61380,
+      "sha256": "0af6ed5fb08520d9fc0547756dc0d26996c8f85fd84192d61bd5b52ec17ca51a",
+      "git_blob": "3bc3e9568d26853b70be4e327a1858adb24b9fda",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/producer.py",
+      "bytes": 88342,
+      "sha256": "0d33b5d2ff728ffb1c58db2fc7c0ca89a2e62df357675f241c88648d21485012",
+      "git_blob": "84081b65b2f7b6037ea89a9c7c0dec44a6cf790a",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/review.py",
+      "bytes": 58050,
+      "sha256": "08d6c5e24e7c673be4c9dfa3a5882c4f1f5b0e03c6184c5d64b8d2a4ece37a38",
+      "git_blob": "6ec7455df7348417777a1e52babfb33c5745ab70",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/vendor/video_fupan_baseline/review_core/scheduler.py",
+      "bytes": 16049,
+      "sha256": "8e848508559d83fe35f997ef465f84ed7113dcff92d0b16e7889fda55adebbb7",
+      "git_blob": "2e1fc092ad59075cad79e8ab647c4845f522613e",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "tests/m12/test_video_fupan_default_chain.py",
+      "bytes": 28800,
+      "sha256": "f4ec4f93de396570601139a7443d265ebeb0a98ac74ce2b8049a737fbc9dbefd",
+      "git_blob": "2c950b901efd07b027bb748d0843626d9d96613e",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/src/v5_shadow/m12_readonly.py",
+      "bytes": 3681,
+      "sha256": "63e06b5a36dd9a23ba9288aad9410b2f3b7471562602a310be0f8937268276de",
+      "git_blob": "21ed191754ae349592d41fd813135cbdf594d9ee",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/src/v5_shadow/m12_readonly_worker.py",
+      "bytes": 6273,
+      "sha256": "b5028bad048fa6ba5daaa4ae2ac6adae9f071da090d473d66eba2c650a585362",
+      "git_blob": "193ead83afe0b0aaf5f06f28d99e067a3f4c478c",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/src/v5_shadow/m12_daily.py",
+      "bytes": 1942,
+      "sha256": "1f8e1f4d7279068fd9043464d38298f55eef2e01b4395e916dee83d45429cdce",
+      "git_blob": "53ffa37e2908b34cf91dad078f928c6734f5643f",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/src/v5_shadow/m12_daily_worker.py",
+      "bytes": 2419,
+      "sha256": "f54e24a11d92f0d192747a36fc6bc8479a04b7c0f5729eb3dbfc321e74547519",
+      "git_blob": "e65edc10b87e37b7047c26628e9f89c1e064eb81",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/contracts/m12_runtime.json",
+      "bytes": 2274,
+      "sha256": "62fc6d512b1c43bc247123e299cd0e27dae6c71bbfb7b31bc3b8f0b1a751a79c",
+      "git_blob": "4a24c4be67f01770cb36976e85555a51cbe5dfb5",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/tests/test_m12_integration.py",
+      "bytes": 11125,
+      "sha256": "a93bf5fbb3cdb33c6c399a2a79486b2aed21f758411cd76626e08fec07e6744a",
+      "git_blob": "98e9d6d83bbbc88176eac4a318bfef523bd6d886",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "V5/tests/test_p0_main_registry.py",
+      "bytes": 712,
+      "sha256": "d7456f9df33ade3f0c7a829172215d387e70b9b29ac4a6ce3a43af2c48be85b7",
+      "git_blob": "ff23b737d2dd8424f0c6d30ae0d50681499daabe",
+      "overlay_base_git_blob": "d23ffadecf6cfb3616d64aad6648278b281b064d"
+    },
+    {
+      "path": "V5/src/v5_shadow/main_registry.py",
+      "bytes": 3190,
+      "sha256": "b32cdf36f0da1515e76852805f790ae2e89515cc0d7da9ebaf424580e443ff59",
+      "git_blob": "54c63c7bf28d91c62437096d1ec0ca26a41cb5f6",
+      "overlay_base_git_blob": "97cc2f62817224d274b4c863cf84d05bb5e11a15"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "bytes": 56289,
+      "sha256": "6eea74f3035eecafe64dad46373fa730bafe1aafd10cfc457a22b62ce201ae26",
+      "git_blob": "88ad0336ab0fdf8601c7137b75c2c44ab3b68630",
+      "overlay_base_git_blob": "00c08746e92700073c3d190ded6f445397ab8ef6"
+    },
+    {
+      "path": "frontend/src/api/m12SavedVideo.ts",
+      "bytes": 4306,
+      "sha256": "805259a33c8303268dcc53f0fa39300a5d299187ccd0626545bc3f7e44f8149b",
+      "git_blob": "cc89afb19eb7658b1fa8f441557a3a2398e2ff44",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "frontend/src/components/M12SavedVideo.vue",
+      "bytes": 3664,
+      "sha256": "2055d65ef166e6973e3748c99883c7e53931bd8403fd792700688fcb7e141254",
+      "git_blob": "fdfe9c0f7e5187b95665cc0330470fa90b8d5c90",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "frontend/src/components/M12SavedVideo.spec.ts",
+      "bytes": 2412,
+      "sha256": "5780256e80c31e7a2aafc5b5c7527da0996681aa82043397252e4bc1b9e41a54",
+      "git_blob": "d554de5285858c82566ff36aefffcaff254c6a6e",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "frontend/src/views/SavedManagerResultView.m12.spec.ts",
+      "bytes": 2209,
+      "sha256": "514819e864ba096543f5343cd5c72fd6a228c38310a2025c8524acccef87bb11",
+      "git_blob": "16511dad443a99e81725a8fccaa00ab35cc6bf94",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "frontend/tests/m12SavedVideo.node.mjs",
+      "bytes": 3587,
+      "sha256": "bbb7180f19a97f86f7f607a6fac9b5e17d036301253bebf4e07f736bffde54ba",
+      "git_blob": "00f74b5b99be214edcc4917bb56039eba45593fc",
+      "overlay_base_git_blob": null
+    },
+    {
+      "path": "frontend/src/views/SavedManagerResultView.vue",
+      "bytes": 17316,
+      "sha256": "845ff331728951ec6a27c654c6ae9f7de4764b0bb7ad6e4e4e6799cab4efc77b",
+      "git_blob": "16d66870682301dcb53fa80ef1284f567870788b",
+      "overlay_base_git_blob": "d0459be7136c86ca0ea2c00e931e5743a549cc69"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "bytes": 2245,
+      "sha256": "768f2d3f9189ec97c375b3f2508b40e70b3a489f008df9fdd5f294cc000eb1fc",
+      "git_blob": "06e3779b5277cb916d23c9070a4631367bf51729",
+      "overlay_base_git_blob": "8df3bc4b2bf1ee28230f4743c8efa1558f34d053"
+    }
+  ]
+}
