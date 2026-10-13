@@ -20,7 +20,7 @@ def inspect_request(request, registration):
     output=shadow_root(Path(registration['private_root']))
     daily._assert_separate(source,output);daily._assert_separate(assets,output)
     dates={k:request[k] for k in ('target_date','signal_date','eligibility_source_date')}
-    dates['research_cutoff']=request['completion_cutoff']
+    dates['research_cutoff']=request['owner_contract_cutoff'] if request.get('date_contract')=='CLOSE_TO_NEXT_HK_SESSION_V1' else request['completion_cutoff']
     daily._calendar(dates)
     code=daily._code_manifest();dependencies=daily._dependency_manifest()
     if code['run_ledger.py']!=daily.LEDGER_SHA256:raise ValueError('M06_LEDGER_SOURCE_MISMATCH')
@@ -79,7 +79,7 @@ def inspect_request(request, registration):
     input_manifest=dict(dates=dates,execution_mode=request['execution_mode'],data_kind='SOURCE_SNAPSHOT',
         source_files=source_files,asset_files=request['files'])
     identity=dict(lane='hk_preselection',target_date=request['target_date'],input_sha256=sha256_json(input_manifest),
-        research_cutoff=request['completion_cutoff'],code_sha256=sha256_json(code),
+        research_cutoff=request['owner_contract_cutoff'] if request.get('date_contract')=='CLOSE_TO_NEXT_HK_SESSION_V1' else request['completion_cutoff'],code_sha256=sha256_json(code),
         config_sha256=sha256_json(dict(execution_mode=request['execution_mode'],reader=verified.SCHEMA)),
         dependency_sha256=sha256_json(dependencies))
     return dict(computation_identity=identity,input_manifest=input_manifest,
@@ -131,7 +131,7 @@ def main():
         if action=='invoke':
             result=daily.produce_hk02_daily(**{k:registration[k] for k in ('store_root','asset_root','private_root')},
                 **{k:request[k] for k in ('signal_date','target_date','eligibility_source_date','files','execution_mode')},
-                cutoff=request['completion_cutoff'])
+                cutoff=(request['owner_contract_cutoff'] if request.get('date_contract')=='CLOSE_TO_NEXT_HK_SESSION_V1' else request['completion_cutoff']))
             if result['status']!='SUCCEEDED' or result['computation_identity']!=snapshot['computation_identity']:
                 raise ValueError('M06_OWNER_IDENTITY_MISMATCH')
             payload=read_product(request,registration,snapshot,result['committed_reference'],result['ledger_run_id'])

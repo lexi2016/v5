@@ -20,6 +20,7 @@ from . import m06_readonly
 LANE='hk_preselection'
 TZ=timezone(timedelta(hours=8))
 IDENTITIES=('code_sha256','config_sha256','dependency_sha256')
+EVENING_CONTRACT='CLOSE_TO_NEXT_HK_SESSION_V1'
 REQUEST_KEYS=('signal_date','target_date','eligibility_source_date','admission_cutoff','completion_cutoff',
     'files','source_files','execution_mode','production_method')
 
@@ -83,8 +84,13 @@ def _process(action,request,registration,snapshot=None,**extra):
     worker_sha=hashlib.sha256(no_symlinks(worker).read_bytes()).hexdigest()
     envelope=dict(action=action,request=request,registration=registration,**extra)
     if snapshot is not None:envelope['snapshot']=snapshot
-    process=subprocess.run([registration['python_executable'],'-I','-B',str(worker),str(root)],
-        input=canonical_bytes(envelope),stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=registration['timeout_seconds'])
+    argv=[registration['python_executable'],'-I','-B',str(worker),str(root)]
+    if request.get('date_contract')==EVENING_CONTRACT:
+        from .m06_deadline_process import run_bounded
+        process=run_bounded(argv,input_bytes=canonical_bytes(envelope),timeout_seconds=registration['timeout_seconds'],
+            execution_deadline=aware(request['execution_deadline']))
+    else:
+        process=subprocess.run(argv,input=canonical_bytes(envelope),stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=registration['timeout_seconds'])
     if len(process.stdout)>MAX_JSON_BYTES:raise ValueError('M06_DAILY_RESPONSE_LIMIT')
     try:result=json.loads(process.stdout)
     except (ValueError,UnicodeError) as error:raise ValueError('M06_DAILY_RESPONSE_INVALID') from error
@@ -114,11 +120,31 @@ def validate_registration(registration=None):
         return dict(status='BLOCKED_M06_REGISTRATION',natural_verified=False)
 
 
+def _owner_cutoff(request):
+    return request['owner_contract_cutoff'] if request.get('date_contract')==EVENING_CONTRACT else request['completion_cutoff']
+
+
+def _execution_deadline(request):
+    return request['execution_deadline'] if request.get('date_contract')==EVENING_CONTRACT else request['completion_cutoff']
+
+
 def _request(request):
-    exact_keys(request,REQUEST_KEYS)
+    evening=isinstance(request,dict) and 'date_contract' in request
+    exact_keys(request,tuple(k for k in REQUEST_KEYS if k!='completion_cutoff')+
+        ('date_contract','scheduled_date','execution_deadline','owner_contract_cutoff') if evening else REQUEST_KEYS)
     for key in ('signal_date','target_date','eligibility_source_date'):trade_date(request[key])
-    target=request['target_date'];admission=aware(request['admission_cutoff']);completion=aware(request['completion_cutoff'])
-    if any(v.astimezone(TZ).strftime('%Y%m%d')!=target for v in (admission,completion)):
+    target=request['target_date'];admission=aware(request['admission_cutoff']);completion=aware(_owner_cutoff(request))
+    if evening:
+        if request['date_contract']!=EVENING_CONTRACT:raise ValueError('M06_DATE_CONTRACT')
+        scheduled=trade_date(request['scheduled_date']);cycle=calendar_day(scheduled,evening=True)
+        deadline=aware(request['execution_deadline'])
+        if (cycle['target_date']!=target or cycle['state'] not in ('FULL_TRADING_DAY','HALF_TRADING_DAY_AM')
+                or request['signal_date']!=scheduled or request['eligibility_source_date']!=scheduled):
+            raise ValueError('M06_EVENING_DATE_MISMATCH')
+        if (any(v.astimezone(TZ).strftime('%Y%m%d')!=scheduled for v in (admission,deadline))
+                or completion.astimezone(TZ).strftime('%Y%m%d')!=target or not admission<deadline<completion):
+            raise ValueError('M06_EVENING_CUTOFF_MISMATCH')
+    elif any(v.astimezone(TZ).strftime('%Y%m%d')!=target for v in (admission,completion)):
         raise ValueError('M06_CUTOFF_DATE_MISMATCH')
     if request['execution_mode'] not in ('NATURAL','MANUAL_RECOVERY','RECORDED_INPUT_REPLAY'):raise ValueError('M06_EXECUTION_MODE')
     if request['production_method'] not in ('EXISTING_VERIFIED_POOL','GENERATE_IF_ABSENT'):raise ValueError('M06_PRODUCTION_METHOD')
@@ -135,7 +161,7 @@ def _request(request):
 
 def _code_manifest():
     return {name:hashlib.sha256(no_symlinks(Path(__file__).with_name(name)).read_bytes()).hexdigest() for name in
-        ('p0_hk_preselection.py','m06_daily_worker.py','m06_readonly.py','daily_tick.py','daily_dispatch.py','run_ledger.py','main_registry.py','main_runtime.py','composition.py','contracts.py','digests.py','module_api.py','module_artifacts.py')}
+        ('p0_hk_preselection.py','m06_deadline_process.py','m06_input_delivery.py','m06_daily_worker.py','m06_readonly.py','daily_tick.py','daily_dispatch.py','run_ledger.py','main_registry.py','main_runtime.py','composition.py','contracts.py','digests.py','module_api.py','module_artifacts.py')}
 
 
 def _check_code(expected):
@@ -149,10 +175,13 @@ def prepare_job(job,registration,today):
     if any(k not in job for k in ('scheduled_at','deadline','half_day_bound')) or type(job['half_day_bound']) is not bool:
         raise ValueError('M06_EXPLICIT_SLOT_REQUIRED')
     start,end=aware(job['scheduled_at']),aware(job['deadline'])
-    if (start>=end or request['target_date']!=today
+    scheduled=request.get('scheduled_date',request['target_date'])
+    if (start>=end or scheduled!=today
             or any(stamp.astimezone(TZ).strftime('%Y%m%d')!=today for stamp in (start,end))):
         raise ValueError('M06_CURRENT_SLOT_REQUIRED')
-    if request['production_method']=='GENERATE_IF_ABSENT' and aware(request['completion_cutoff'])>end:
+    if request.get('date_contract')==EVENING_CONTRACT:
+        if aware(request['execution_deadline'])!=end:raise ValueError('M06_EXECUTION_DEADLINE_MISMATCH')
+    elif request['production_method']=='GENERATE_IF_ABSENT' and aware(request['completion_cutoff'])>end:
         raise ValueError('M06_GENERATION_WINDOW')
     snapshot=_process('inspect',request,registration)['payload']
     code=_code_manifest();python_identity=_python_launch(registration)
@@ -160,7 +189,7 @@ def prepare_job(job,registration,today):
         config_sha256=sha256_json(registration),dependency_sha256=sha256_json(dict(owner=snapshot,python_launch=python_identity)),
         registration=registration,owner_snapshot=snapshot,p0_code_manifest=code,python_identity=python_identity)
     binding['invoke']=partial(run_owner,registration=registration,snapshot=snapshot,code_manifest=code,python_identity=python_identity)
-    identity=dict(lane=LANE,target_date=today,input_sha256=sha256_json(request),research_cutoff=request['admission_cutoff'],
+    identity=dict(lane=LANE,target_date=request['target_date'],input_sha256=sha256_json(request),research_cutoff=request['admission_cutoff'],
         **{k:binding[k] for k in IDENTITIES})
     return dict(job,identity=identity),binding
 
@@ -169,10 +198,10 @@ def admission_reason(job,binding,now,ledger_root):
     request=job['owner_request']
     if no_symlinks(ledger_root)==no_symlinks(Path(binding['registration']['private_root'])/'.m06-ledger'):
         raise ValueError('M06_SEPARATE_LEDGER_REQUIRED')
-    if request['production_method']=='GENERATE_IF_ABSENT' and now>=aware(request['completion_cutoff']):
+    if request['production_method']=='GENERATE_IF_ABSENT' and now>=aware(_execution_deadline(request)):
         return 'M06_GENERATION_COMPLETION_WINDOW_EXPIRED'
     budget=binding.get('execution_budget_seconds')
-    if budget is not None and now+timedelta(seconds=budget)>aware(request['completion_cutoff']):
+    if budget is not None and now+timedelta(seconds=budget)>aware(_execution_deadline(request)):
         return 'M06_EXECUTION_BUDGET_INSUFFICIENT'
     prepared,current=prepare_job(job,binding['registration'],now.astimezone(TZ).strftime('%Y%m%d'))
     if prepared['identity']!=job['identity'] or any(current[k]!=binding[k] for k in IDENTITIES) or current['owner_snapshot']!=binding['owner_snapshot']:
@@ -180,7 +209,7 @@ def admission_reason(job,binding,now,ledger_root):
     if budget is not None:
         observed=_utc_now()
         if observed<now:return 'M06_CLOCK_REGRESSION'
-        if observed+timedelta(seconds=budget)>aware(request['completion_cutoff']):
+        if observed+timedelta(seconds=budget)>aware(_execution_deadline(request)):
             return 'M06_EXECUTION_BUDGET_INSUFFICIENT'
     return None
 
@@ -195,12 +224,16 @@ def run_owner(request,p0_run_id,*,registration,snapshot,code_manifest,python_ide
     if read['payload']!={k:v for k,v in first.items() if k!='owner_reused'} or read['pid']==produced['pid']:
         raise ValueError('M06_INDEPENDENT_READBACK_MISMATCH')
     product=dict(first,owner='M06',p0_ledger_run_id=p0_run_id,request_sha256=sha256_json(request),
-        admission_cutoff=request['admission_cutoff'],completion_cutoff=request['completion_cutoff'],
+        admission_cutoff=request['admission_cutoff'],
+        **({k:request[k] for k in ('date_contract','scheduled_date','execution_deadline','owner_contract_cutoff')}
+           if request.get('date_contract')==EVENING_CONTRACT else dict(completion_cutoff=request['completion_cutoff'])),
         producer_pid=produced['pid'],reader_pid=read['pid'],bound_root=registration['private_root'])
     return dict(status='SUCCEEDED',product_reference=product,readback_verified=True,retry_safe_without_external_effect=False,reason_codes=[])
 
 
 def verify_receipt(receipt,request,binding,claim):
+    if request.get('date_contract')==EVENING_CONTRACT and _utc_now()>=aware(request['execution_deadline']):
+        raise TimeoutError('M06_EXECUTION_DEADLINE_EXPIRED')
     _check_code(binding['p0_code_manifest']);_check_python(binding['registration'],binding['python_identity'])
     if (claim['identity']['input_sha256']!=sha256_json(request)
             or claim['identity']['research_cutoff']!=request['admission_cutoff']):
@@ -211,6 +244,14 @@ def verify_receipt(receipt,request,binding,claim):
             or product['m06_computation_identity']!=binding['owner_snapshot']['computation_identity']
             or product['committed_reference']['producer_computation_identity']!=product['m06_computation_identity']):
         raise ValueError('M06_P0_RECEIPT_MAPPING_MISMATCH')
+
+
+def verify_finished_state(job,state):
+    request=job['owner_request']
+    if request.get('date_contract')==EVENING_CONTRACT:
+        deadline=aware(request['execution_deadline'])
+        if _utc_now()>=deadline or aware(state['latest_success']['finished_at'])>=deadline:
+            raise TimeoutError('M06_EXECUTION_DEADLINE_EXPIRED')
 
 
 def read_saved(claim,request,binding):
@@ -235,8 +276,8 @@ _CALENDAR_LOCK=threading.RLock()
 def _utc_now():return datetime.now(timezone.utc)
 
 
-def calendar_day(target):
-    """Run the fixed original HK securities calendar, including previous_session."""
+def calendar_day(target, *, evening=False):
+    """Fixed HK securities calendar; evening jobs target its next open session."""
     trade_date(target)
     root=m06_readonly.owner_root()/'V5/vendor/hk_preselection_baseline/contracts'
     name='_v5_m06_daily_candidate_calendar'
@@ -248,11 +289,21 @@ def calendar_day(target):
             exec(compile(raw,module.__file__,'exec'),module.__dict__)
             calendar=module.load_market_calendar(no_symlinks(root/'market_calendar_2026.json'))
             state=module.resolve_market_states(calendar,target)['hk_securities'].value
-            signal=None
+            signal=None;following=None
             if state in ('FULL_TRADING_DAY','HALF_TRADING_DAY_AM'):
-                try:signal=module.previous_session(calendar,target,market='hk_securities')
-                except ValueError:state='UNKNOWN'
+                if evening:
+                    signal=target;cursor=datetime.strptime(target,'%Y%m%d').date()+timedelta(days=1)
+                    while cursor.year==calendar.year:
+                        date8=cursor.strftime('%Y%m%d')
+                        if module.resolve_market_states(calendar,date8)['hk_securities'].value in ('FULL_TRADING_DAY','HALF_TRADING_DAY_AM'):
+                            following=date8;break
+                        cursor+=timedelta(days=1)
+                    if following is None:state='UNKNOWN'
+                else:
+                    try:signal=module.previous_session(calendar,target,market='hk_securities')
+                    except ValueError:state='UNKNOWN'
             m06_readonly.owner_root()
+            if evening:return dict(state=state,scheduled_date=target,signal_date=signal,target_date=following)
             return dict(state=state,signal_date=signal)
         finally:
             if previous is None:sys.modules.pop(name,None)
@@ -264,8 +315,13 @@ def _candidate_policy(config):
     if value is None or value=={'enabled':False}:return None
     if not isinstance(value,dict):raise ValueError('M06_DAILY_CONFIG')
     if value.get('enabled') is False:return None
+    evening='date_contract' in value
     exact_keys(value,('enabled','delivery_root','full_day_window','half_day_window',
-        'execution_budget_seconds','execution_mode','production_method'))
+        'execution_budget_seconds','execution_mode','production_method')+
+        (('date_contract','owner_contract_cutoff_time') if evening else ())+
+        (('input_delivery',) if 'input_delivery' in value else ()))
+    if evening and value['date_contract']!=EVENING_CONTRACT:raise ValueError('M06_DATE_CONTRACT')
+    if not evening and value['execution_mode']!='RECORDED_INPUT_REPLAY':raise ValueError('M06_DAILY_DATE_CONTRACT_REQUIRED')
     if value['enabled'] is not True:raise ValueError('M06_DAILY_DISABLED_REQUIRED')
     for key in ('full_day_window','half_day_window'):
         window=value[key]
@@ -276,6 +332,12 @@ def _candidate_policy(config):
                     or not (stamp[:2]+stamp[3:]).isascii() or not (stamp[:2]+stamp[3:]).isdigit()
                     or int(stamp[:2])>23 or int(stamp[3:])>59):raise ValueError('M06_EXPLICIT_WINDOW_REQUIRED')
         if window['start']>=window['end']:raise ValueError('M06_EXPLICIT_WINDOW_REQUIRED')
+    if evening:
+        stamp=value['owner_contract_cutoff_time']
+        if (not isinstance(stamp,str) or len(stamp)!=5 or stamp[2]!=':' or not (stamp[:2]+stamp[3:]).isascii()
+                or not (stamp[:2]+stamp[3:]).isdigit() or int(stamp[:2])>23 or int(stamp[3:])>59):
+            raise ValueError('M06_OWNER_CONTRACT_CUTOFF_REQUIRED')
+        if value['half_day_window'] is None:raise ValueError('M06_HALF_DAY_EVENING_WINDOW_REQUIRED')
     registration=config.get('hk_preselection');_config(registration)
     budget=value['execution_budget_seconds']
     # Owner process plus independent reader process, with an explicit caller
@@ -293,6 +355,13 @@ def _candidate_policy(config):
     roots=(delivery,output,bundle,ledger)
     if any(a==b or a.is_relative_to(b) or b.is_relative_to(a) for i,a in enumerate(roots) for b in roots[i+1:]):
         raise ValueError('M06_DAILY_ROOT_OVERLAP')
+    if 'input_delivery' in value:
+        adapter=value['input_delivery'];snapshot=no_symlinks(adapter['snapshot_root'])
+        if any(snapshot==root or snapshot.is_relative_to(root) or root.is_relative_to(snapshot) for root in roots):
+            raise ValueError('M06_DAILY_ROOT_OVERLAP')
+        if (registration['store_root']!=adapter['original_store_root']
+                or registration['asset_root']!=adapter['original_asset_root']):
+            raise ValueError('M06_DELIVERY_REGISTRATION_ROOTS')
     inputs=(no_symlinks(registration['store_root']),no_symlinks(registration['asset_root']))
     if any(a==b or a.is_relative_to(b) or b.is_relative_to(a) for a in (output,bundle,ledger) for b in inputs):
         raise ValueError('M06_DAILY_ROOT_OVERLAP')
@@ -393,8 +462,10 @@ def prepare_daily_candidate(config,now):
     """Admit real delivery evidence, then freeze one immutable M06 job per day."""
     policy=_candidate_policy(config)
     if policy is None:return dict(status='DISABLED')
-    now=aware(now.isoformat()).astimezone(TZ);target=now.strftime('%Y%m%d')
-    calendar=calendar_day(target)
+    now=aware(now.isoformat()).astimezone(TZ);scheduled=now.strftime('%Y%m%d')
+    evening=policy.get('date_contract')==EVENING_CONTRACT
+    calendar=calendar_day(scheduled,evening=evening)
+    target=calendar['target_date'] if evening else scheduled
     if calendar['state']=='UNKNOWN':return dict(status='M06_CALENDAR_UNKNOWN')
     if calendar['state']=='NON_TRADING_DAY':return dict(status='M06_NON_TRADING_DAY')
     half=calendar['state']=='HALF_TRADING_DAY_AM'
@@ -404,11 +475,21 @@ def prepare_daily_candidate(config,now):
     start,end=(aware(date+'T'+window[key]+':00+08:00') for key in ('start','end'))
     reason=_window_status(now,start,end,policy['execution_budget_seconds'])
     if reason:return dict(status=reason)
+    registration=config['hk_preselection']
+    if 'input_delivery' in policy:
+        from .m06_input_delivery import prepare_input_delivery
+        sealed=prepare_input_delivery(dict(policy['input_delivery'],delivery_root=policy['delivery_root']),scheduled,target,now=now)
+        if sealed['status'] not in ('READY','REUSED_M06_INPUT_DELIVERY'):return dict(status=sealed['status'])
+        registration=dict(registration,store_root=sealed['store_root'],asset_root=sealed['asset_root'])
+        now=_utc_now().astimezone(TZ)
+        if now.strftime('%Y%m%d')!=scheduled:return dict(status='MISSED_M06_WINDOW_NO_BACKFILL')
+        reason=_window_status(now,start,end,policy['execution_budget_seconds'])
+        if reason:return dict(status=reason)
     delivered=_delivery(policy,target,calendar['signal_date'],now)
     if delivered is None:return dict(status='WAITING_M06_INPUT_DELIVERY')
     from .module_api import _read_at
     from .run_ledger import _write
-    registration=config['hk_preselection'];fingerprint=sha256_json(dict(policy=policy,registration=registration,
+    fingerprint=sha256_json(dict(policy=policy,registration=registration,
         bundle_root=config['bundle_root'],ledger_root=config['ledger_root']))
     with _state_lock(config['bundle_root'],'.v5-daily-bundles',b'v5.daily-bundles.v1\n','.m06-freeze.lock') as fd:
         # Reread under the single M06 lock: callers cannot freeze two revisions.
@@ -426,15 +507,19 @@ def prepare_daily_candidate(config,now):
             if not start<=aware(admission)<=now:raise ValueError('M06_FROZEN_ADMISSION_TIME')
         else:admission=now.isoformat()
         request={key:delivery[key] for key in ('target_date','signal_date','eligibility_source_date','files','source_files')}
-        request.update(admission_cutoff=admission,completion_cutoff=end.isoformat(),
-            execution_mode=policy['execution_mode'],production_method=policy['production_method'])
+        request.update(admission_cutoff=admission,execution_mode=policy['execution_mode'],production_method=policy['production_method'])
+        if evening:
+            day=f'{target[:4]}-{target[4:6]}-{target[6:]}'
+            request.update(date_contract=EVENING_CONTRACT,scheduled_date=scheduled,execution_deadline=end.isoformat(),
+                owner_contract_cutoff=day+'T'+policy['owner_contract_cutoff_time']+':00+08:00')
+        else:request['completion_cutoff']=end.isoformat()
         _request(request)
         if aware(delivery['completed_at'])>aware(admission):raise ValueError('M06_INPUT_DELIVERY_AFTER_ADMISSION')
         try:_delivery_timing(request,registration,delivery['completed_at'])
         except FileNotFoundError:return dict(status='WAITING_M06_INPUT_FILES')
         job=dict(lane=LANE,owner_request=request,scheduled_at=start.isoformat(),deadline=end.isoformat(),
             half_day_bound=half,max_attempts=1)
-        prepared,binding=prepare_job(job,registration,target)
+        prepared,binding=prepare_job(job,registration,scheduled)
         if frozen is not None and frozen['job']!=prepared:raise ValueError('M06_FROZEN_BINDING_CHANGED')
         observed=_utc_now()
         if observed<now:raise ValueError('M06_CLOCK_REGRESSION')
@@ -459,6 +544,7 @@ def promote_current_success(config,candidate,row):
     from .module_api import _read_at
     job=candidate['job'];binding=candidate['binding'];state=read_run(config['ledger_root'],job['identity'])
     if state is None or state!=row.get('state'):raise ValueError('M06_PROMOTION_P0_STATE_MISMATCH')
+    if _utc_now()>=aware(_execution_deadline(job['owner_request'])):return dict(status='CURRENT_SUCCESS_LATE_NOT_PROMOTED')
     fresh=read_saved(dict(status='REUSED_SUCCESS',state=state),job['owner_request'],binding)
     if fresh.get('readback_verified') is not True:raise ValueError('M06_PROMOTION_FRESH_READBACK_FAILED')
     saved=state['latest_success'];product=saved['product_reference']
@@ -471,7 +557,7 @@ def promote_current_success(config,candidate,row):
         if read_run(config['ledger_root'],job['identity'])!=state:raise ValueError('M06_PROMOTION_P0_STATE_CHANGED')
         current=m06_readonly.read_current_success(current_binding)
         if current==pointer:return dict(status='REUSED_CURRENT_SUCCESS',reference_sha256=sha256_json(pointer))
-        if _utc_now()>=aware(job['owner_request']['completion_cutoff']):return dict(status='CURRENT_SUCCESS_LATE_NOT_PROMOTED')
+        if _utc_now()>=aware(_execution_deadline(job['owner_request'])):return dict(status='CURRENT_SUCCESS_LATE_NOT_PROMOTED')
         digest=sha256_json(current) if current is not None else None
         if digest!=candidate['frozen']['expected_current_sha256']:return dict(status='CURRENT_SUCCESS_CAS_MISMATCH')
         if current is not None:

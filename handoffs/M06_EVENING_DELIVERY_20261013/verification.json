@@ -1,0 +1,64 @@
+{
+  "schema_version": "v5.m06_evening_verification.v1",
+  "parent": "a8bb8cdaf058deee9eacc5c6b1b11b2e21d081a3",
+  "command": [
+    "$HK02_PYTHON",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_evening_cycle",
+    "test_m06_evening_reader",
+    "test_m06_input_delivery",
+    "test_m06_deadline_process",
+    "test_daily_dispatch",
+    "test_m06_daily_cycle.M06DailyCycleTests.test_tick_original_owner_dual_ledger_success_promotion_and_reuse",
+    "test_m06_readonly_api.M06ReadOnlyAPITests.test_actual_original_cold_projection_all100_and_readonly",
+    "test_m06_readonly_api.M06ReadOnlyAPITests.test_saved_artifact_tamper_rejected_and_no_republication",
+    "test_m06_current_success_reader.M06CurrentSuccessReaderTests.test_pinned_venv_leaf_retains_original_cold_reader_projection",
+    "-v"
+  ],
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "cloud_python": "3.12.14",
+    "cloud_platform": "linux"
+  },
+  "tests": {
+    "total": 89,
+    "passed": 89,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 118.983,
+    "new_evening_cycle": 13,
+    "new_evening_reader": 10,
+    "new_delivery": 45,
+    "new_deadline_guard": 12,
+    "selected_existing_regressions": 9
+  },
+  "source_closure": {
+    "files": 158,
+    "before_after_verified": true,
+    "file_sha256": "7c50df1697f5e46e82cc91358d150c007b0d4526b37fa3600d8fd70c321f500a",
+    "entries_sha256": "2e96c5e3a9be7333002518a9b6510d06a90209dea3b21402d4ebc5fd05258949"
+  },
+  "original_owner_and_manifest": {
+    "files": 51,
+    "unchanged_from_f157": true
+  },
+  "original_owner_existing_pool_synthetic_e2e": true,
+  "real_adapter_rejects_fake_model_before_claim": true,
+  "real_model_run": false,
+  "real_provider_run": false,
+  "real_receipt_frozen_asset_admission": "NOT_RUN",
+  "mac_deadline_guard_acceptance": "NOT_RUN",
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "natural_verified": false,
+  "runtime_decisions": [
+    "execution_window_ends",
+    "whole_chain_budget",
+    "owner_contract_cutoff_time",
+    "real_receipt_locators_and_isolated_roots"
+  ]
+}

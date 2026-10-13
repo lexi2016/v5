@@ -27,7 +27,7 @@ def dispatch_due(schedule,bindings,ledger_root):
             try: reason=admission_reason(job,bindings[lane],now)
             except Exception:return dict(lane=lane,status='BLOCKED_M17_REGISTRATION')
             if reason:return dict(lane=lane,status=reason)
-        if job['identity']['lane']!=lane or (lane!='manager_close_recapture' and job['identity']['target_date']!=today):reason='NOT_CURRENT_TARGET_DATE'
+        if job['identity']['lane']!=lane or (lane not in {'manager_close_recapture','hk_preselection'} and job['identity']['target_date']!=today):reason='NOT_CURRENT_TARGET_DATE'
         elif lane!='manager_close_recapture' and states['hk_securities'] not in {'FULL_TRADING_DAY','HALF_TRADING_DAY_AM'}:reason='HK_SECURITIES_CALENDAR_NOT_OPEN'
         elif lane!='manager_close_recapture' and states['hk_securities']=='HALF_TRADING_DAY_AM' and job.get('half_day_bound') is not True:reason='HALF_DAY_SLOT_NOT_BOUND'
         elif aware(job['identity']['research_cutoff'])>now:reason='FUTURE_RESEARCH_CUTOFF'
@@ -65,6 +65,9 @@ def dispatch_due(schedule,bindings,ledger_root):
             if lane in {'manager_close_recapture','hk_preselection'}:
                 from .run_ledger import read_run
                 if read_run(ledger_root,job['identity'])!=state:raise ValueError('DAILY_LEDGER_READBACK_MISMATCH')
+                if lane=='hk_preselection':
+                    from .p0_hk_preselection import verify_finished_state
+                    verify_finished_state(job,state)
             return dict(lane=lane,status=state['attempts'][-1]['status'],state=state)
         except Exception as error:
             # Unknown outcome is NOT proof that a capture was not sent. Retain

@@ -7,7 +7,7 @@ import subprocess
 from datetime import timedelta,timezone
 
 from .composition import no_symlinks
-from .contracts import aware,exact_keys,sha
+from .contracts import aware,exact_keys,sha,trade_date
 from .digests import MAX_JSON_BYTES,canonical_bytes,sha256_json
 
 ROUTE='/api/v5/source-bundle/hk-preselection'
@@ -81,9 +81,11 @@ def _current_success_snapshot(binding,pointer):
         raise ValueError('M06_CURRENT_REFERENCE')
     for identity in (p0_identity,m06_identity):
         run_ledger.identity_key(identity)
-        if (identity['lane']!='hk_preselection' or identity['target_date']!=reference.get('target_date')
-                or aware(identity['research_cutoff']).astimezone(timezone(timedelta(hours=8))).strftime('%Y%m%d')!=identity['target_date']):
+        if identity['lane']!='hk_preselection' or identity['target_date']!=reference.get('target_date'):
             raise ValueError('M06_CURRENT_IDENTITY')
+    tz=timezone(timedelta(hours=8))
+    if aware(m06_identity['research_cutoff']).astimezone(tz).strftime('%Y%m%d')!=m06_identity['target_date']:
+        raise ValueError('M06_CURRENT_IDENTITY')
     if (m06_identity!=reference.get('producer_computation_identity')
             or m06_identity['research_cutoff']!=reference.get('research_cutoff')):
         raise ValueError('M06_CURRENT_REFERENCE_IDENTITY')
@@ -111,13 +113,41 @@ def _current_success_snapshot(binding,pointer):
     if (sha256_json(product)!=pointer['product_sha256'] or product.get('bound_root')!=binding['bound_root']
             or product.get('p0_ledger_run_id')!=pointer['p0_run_id'] or product.get('m06_ledger_run_id')!=pointer['m06_run_id']
             or product.get('m06_computation_identity')!=m06_identity or product.get('request_sha256')!=p0_identity['input_sha256']
-            or product.get('admission_cutoff')!=p0_identity['research_cutoff']
-            or product.get('completion_cutoff')!=reference['research_cutoff']):
+            or product.get('admission_cutoff')!=p0_identity['research_cutoff']):
         raise ValueError('M06_CURRENT_PRODUCT_IDENTITY')
     producer=m06_product.get('producer_receipt');producer_reference=reference.get('producer_reference')
     if (not isinstance(producer,dict) or not isinstance(producer_reference,dict)
             or sha256_json(producer)!=producer_reference.get('sha256')):
         raise ValueError('M06_CURRENT_PRODUCER_RECEIPT')
+    if 'date_contract' in product:
+        from .p0_hk_preselection import EVENING_CONTRACT,calendar_day
+        if product['date_contract']!=EVENING_CONTRACT or 'completion_cutoff' in product:
+            raise ValueError('M06_CURRENT_DATE_CONTRACT')
+        scheduled=trade_date(product.get('scheduled_date'))
+        cycle=calendar_day(scheduled,evening=True)
+        if (cycle['state'] not in ('FULL_TRADING_DAY','HALF_TRADING_DAY_AM')
+                or cycle['scheduled_date']!=scheduled or cycle['signal_date']!=scheduled
+                or cycle['target_date']!=reference['target_date']
+                or reference.get('signal_date')!=scheduled or reference.get('eligibility_source_date')!=scheduled):
+            raise ValueError('M06_CURRENT_EVENING_DATES')
+        admission=aware(product['admission_cutoff']);deadline=aware(product.get('execution_deadline'))
+        owner_cutoff=aware(product.get('owner_contract_cutoff'))
+        if (any(stamp.astimezone(tz).strftime('%Y%m%d')!=scheduled for stamp in (admission,deadline))
+                or product['owner_contract_cutoff']!=reference['research_cutoff']
+                or not admission<deadline<owner_cutoff):
+            raise ValueError('M06_CURRENT_EVENING_CUTOFF')
+        if (product.get('owner')!='M06' or product.get('producer_receipt_sha256')!=producer_reference['sha256']
+                or producer.get('computation_identity')!=m06_identity):
+            raise ValueError('M06_CURRENT_PRODUCT_IDENTITY')
+        # Saved success remains readable after its window. Only the actual
+        # persisted ledger completion timestamps are bounded, never GET time.
+        if any(aware(state['latest_success'].get('finished_at'))>=deadline for state in states):
+            raise ValueError('M06_CURRENT_EXECUTION_DEADLINE')
+    else:
+        if aware(p0_identity['research_cutoff']).astimezone(tz).strftime('%Y%m%d')!=p0_identity['target_date']:
+            raise ValueError('M06_CURRENT_IDENTITY')
+        if product.get('completion_cutoff')!=reference['research_cutoff']:
+            raise ValueError('M06_CURRENT_PRODUCT_IDENTITY')
     fixed=dict(bound_root=binding['bound_root'],python_executable=binding['python_executable'],committed_reference=reference)
     canonical_bytes(pointer)
     return fixed,states
