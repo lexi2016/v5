@@ -52,9 +52,15 @@
     },
     {
       "name": "broad bare pytest",
-      "status": "RUNNING_WITH_FAILURES",
+      "status": "FAILED_DIAGNOSTIC_SOURCE_EXTENDED",
       "command": "PYTHONDONTWRITEBYTECODE=1 PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONPATH=V5/src:<existing-pytest-site> <existing-primary-python> -B -m pytest -q -p no:cacheprovider --continue-on-collection-errors",
-      "note": "No broad-pass claim. Terminal failure names and result will be recorded separately."
+      "note": "Not exact deployment-tree acceptance. Recovered V4 auxiliary tests and missing environment inputs are included; detailed sanitized node classification is in BROAD_DIAGNOSTIC.json.",
+      "failed": 138,
+      "passed": 1175,
+      "errors": 78,
+      "skipped": 17,
+      "subtests_passed": 758,
+      "seconds": 1316.63
     }
   ],
   "tdd": [
@@ -102,5 +108,10 @@
   "deployment": "NOT_PERFORMED",
   "real_provider": "NOT_RUN",
   "credentials": "NOT_ACCESSED",
-  "v4": "UNCHANGED"
+  "v4": "UNCHANGED",
+  "source_blob_readback": {
+    "commit": "490529f549324fb435af56d5f728672ad6390b72",
+    "verified_files": 98,
+    "status": "PASS"
+  }
 }
