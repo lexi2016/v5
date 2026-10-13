@@ -1,0 +1,44 @@
+{
+  "candidate": "c518d0c4bf8d947881586a7ed667f2a9ac5c6d1e",
+  "command": [
+    "<EXISTING_HK02_PYTHON>",
+    "-B",
+    "-W",
+    "error::ResourceWarning",
+    "-m",
+    "unittest",
+    "test_m06_current_update_outcome",
+    "test_m06_daily_cycle.M06DailyCycleTests.test_cas_and_late_promotion_preserve_pointer_without_new_owner",
+    "test_m06_evening_cycle.M06EveningCycleTests.test_evening_unknown_after_original_owner_does_not_restart_or_promote",
+    "-v"
+  ],
+  "working_directory": "candidate-m06-c518",
+  "environment": {
+    "PYTHONPATH": "V5/src:V5/tests",
+    "TMPDIR": "<ISOLATED_TASK_TEMP_ROOT>",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "started_utc": "2026-10-13T06:21:39.994760+00:00",
+  "finished_utc": "2026-10-13T06:22:08.674483+00:00",
+  "duration_seconds": 28.679566583,
+  "exit_code": 0,
+  "source_before": {
+    "files": 164,
+    "sha256": "49dba6d1d8e232cd7e154bfc7a5b32456a9e30e2393e0c87771823d4bd69457e",
+    "verified": true
+  },
+  "source_after": {
+    "files": 164,
+    "sha256": "49dba6d1d8e232cd7e154bfc7a5b32456a9e30e2393e0c87771823d4bd69457e",
+    "verified": true
+  },
+  "protected_files_count": 156,
+  "protected_files_unchanged": true,
+  "protected_listener_pids_unchanged": true,
+  "real_model_run": false,
+  "collection_run": false,
+  "scheduler_enabled": false,
+  "backend_deployed": false,
+  "binding_changed": false,
+  "natural_verified": false
+}

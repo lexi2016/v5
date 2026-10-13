@@ -1,0 +1,23 @@
+{
+  "changed_fields": [
+    [
+      "hk_preselection.enabled",
+      false,
+      true
+    ],
+    [
+      "enabled",
+      false,
+      true
+    ],
+    [
+      "hk_preselection_daily.enabled",
+      false,
+      true
+    ]
+  ],
+  "time_utc": "2026-10-13T06:28:29.608523+00:00",
+  "fixed_page_binding_retained": true,
+  "new_delivery_bundles_claims_created": false,
+  "backup_verified": true
+}

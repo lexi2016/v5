@@ -1,0 +1,15 @@
+{
+  "status": "LOADED_AWAITING_TWO_NATURAL_RUNS",
+  "fixed_commit": "c518d0c4bf8d947881586a7ed667f2a9ac5c6d1e",
+  "label": "com.lexi.v5.daily.candidate",
+  "enabled_utc": "2026-10-13T06:26:27.021520+00:00",
+  "loaded_utc": "2026-10-13T06:26:27.024828+00:00",
+  "configuration_sha256": "4dbfee79d364180b41784d21566b9d159110d3da783cd57e632ccbfb61432d0d",
+  "plist_sha256": "9cdcb1d40fae82838b507097d5e896d031d66aaff1ea6cddcabb8462810ef6c3",
+  "run_at_load": false,
+  "start_interval_seconds": 300,
+  "manual_tick": false,
+  "kickstart": false,
+  "natural_verified": false,
+  "exit_code": 0
+}

@@ -1,0 +1,47 @@
+{
+  "status": "TWO_NATURAL_WAITING_RUNS_VERIFIED",
+  "finished_utc": "2026-10-13T06:37:38.428646+00:00",
+  "runs": 2,
+  "completed_log_count": 2,
+  "all_lanes_waiting_m06_window": true,
+  "last_exit_code": 0,
+  "stderr_bytes": 0,
+  "manual_tick": false,
+  "kickstart": false,
+  "natural_business_success": false,
+  "natural_verified": false,
+  "observations": [
+    {
+      "observed_utc": "2026-10-13T06:27:24.547938+00:00",
+      "state": "not running",
+      "runs": 0,
+      "last_exit": "(never exited)",
+      "stderr_bytes": 0
+    },
+    {
+      "observed_utc": "2026-10-13T06:31:27.076388+00:00",
+      "state": "running",
+      "runs": 1,
+      "last_exit": "(never exited)",
+      "stderr_bytes": 0
+    },
+    {
+      "observed_utc": "2026-10-13T06:32:38.469666+00:00",
+      "state": "not running",
+      "runs": 1,
+      "last_exit": "0",
+      "stderr_bytes": 0
+    },
+    {
+      "observed_utc": "2026-10-13T06:37:38.427768+00:00",
+      "state": "not running",
+      "runs": 2,
+      "last_exit": "0",
+      "stderr_bytes": 0
+    }
+  ],
+  "configuration_sha256": "4dbfee79d364180b41784d21566b9d159110d3da783cd57e632ccbfb61432d0d",
+  "exit_code": 0,
+  "first_process_identity_verified": true,
+  "second_process_pid_captured": false
+}
