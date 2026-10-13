@@ -120,15 +120,17 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca49ea-c2fc-83ec-b79f-64ec937123e8)；`dev/m03-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
 - **已有代码与证据：** [3c3ed922](https://github.com/lexi2016/v5/commit/3c3ed922cb653bb8ef411bce685b1d47fb322f02)；[旧回放部署](https://github.com/lexi2016/v5/commit/aa59bfb8551b0d2f86ed88b28e9127354ff8b976)；[新交付不足反馈](https://github.com/lexi2016/v5/commit/528af98f28de0105f5d2229007cc93e345210311)。 [新完整候选efeaeb8](https://github.com/lexi2016/v5/commit/efeaeb8fc04474b1f38ebda98b35953b580049df)；[Mac离线回执](../../../../handoffs/P0/feedback/mac-m03-isolated-offline-20261013/README.md)及[receipt](../../../../handoffs/P0/feedback/mac-m03-isolated-offline-20261013/receipt.json)。
-- **已验证层级：** 原20261009 POST_CLOSE三件录制回放→snapshot→binding→API/页证据保留；新候选efeaeb8已核75个Git blob、74项manifest与release SHA，Mac verify_release exit 0，新3个定向测试模块23/23 PASS、0 skip，候选字节未变。旧48项历史测试未重跑；该离线轮尚未运行真实provider/network，后续原窗口真实来源与M15消费见本节末条；HTTP/DOM/原生视觉、新服务发布及自然尚未由该新结果证明。
-- **未完成缺口：** 新固定行情collector/默认入口候选已交且Mac离线23项通过，不能再标为仅字典validator或未交候选。已完成一次适用US session/cutoff真实采集、原三件保存/冷读及M15 seed消费；待验P0服务/普通页面接入、下一适用session自动更新及完整来源能力；12/13新闻三件仍不能替代行情snapshot。
+- **已验证层级：** 原20261009 POST_CLOSE三件录制回放→snapshot→binding→API/页证据保留；新候选efeaeb8已核75个Git blob、74项manifest与release SHA，Mac verify_release exit 0，新3个定向测试模块23/23 PASS、0 skip，候选字节未变。旧48项历史测试未重跑；该离线轮尚未运行真实provider/network，后续原窗口真实来源与M15消费见本节末条；后续3020单卡HTTP/DOM与CAS发布已过（见本节最新条）；原生视觉及自然仍未证明。
+- **未完成缺口：** 新固定行情collector/默认入口候选已交且Mac离线23项通过，不能再标为仅字典validator或未交候选。已完成一次适用US session/cutoff真实采集、原三件保存/冷读及M15 seed消费；普通页面单卡发布已完成；待验下一适用session自动更新、原生可视及完整来源能力；12/13新闻三件仍不能替代行情snapshot。
 - **依赖：** 原US provider、交易日/phase/session/DST与抓取cutoff；输出digest payload/manifest/receipt给M15，不能用US映射结果反充M03行情。
-- **下一条完整交付：** 复用固定efeaeb8及此次Mac离线证据，复用本节末条已过真实provider→原三件→M15 seed证据，继续尚未覆盖的普通页面、下一适用session自动更新与恢复验证，不重复采集或重算。已有23项与未受影响历史回放不重复运行。
+- **下一条完整交付：** 复用固定efeaeb8及此次Mac离线证据，复用本节末条已过真实provider→原三件→M15 seed证据，复用已过普通页面发布，继续下一适用session自动更新与剩余恢复验证，不重复采集或重算。已有23项与未受影响历史回放不重复运行。
 - **验收标准：** 三件同session、SHA/receipt/manifest一致，取得不晚于消费cutoff；错session/缺报价/假READY明确拒绝，下一适用session自动更新且旧成功保留；普通来源页和M15消费同identity。
 - **责任与交接：** M03候选已固定并完成本次Mac离线验收，产品失败仍回唯一实现者；P0负责来源→M15 request/页面接线；Mac后续只验尚未覆盖的真实session/服务与页面，不将合成transport测试称真实采集。
 - **最新限定实测：** 2026-10-13 21:59:26.657973–21:59:46.409228（北京时间），既有Python 3.14.6，无依赖安装；release exit 0、新测试23/23 PASS，包含独立CLI拒绝及保存后回执丢失恢复且不再请求quote。只用合成时钟与transport，未操作现役M03、V4、共享输出或监听端口；无产品修改。
 
-- **原窗口真实增量（2026-10-13 UTC20:15）：** 固定efeaeb8实际20:15:00.006819–20:15:01.191301 exit0，VALIDATED_SOURCE_BINDING，33/33报价＋24主题、HTTP200无fallback；capture b9bdd3ba013cb4bb3680f150，原三件/独立冷reader/磁盘binding通过，并于20:20后被M15 seed真实消费。仅主控单次原窗口执行，不是自然调度；新页面接线待回，不计部署或完整验收。[合并派生反馈](../../../../handoffs/P0/feedback/mac-m03-m15-window-20261014/README.md)。
+- **原窗口真实增量（2026-10-13 UTC20:15）：** 固定efeaeb8实际20:15:00.006819–20:15:01.191301 exit0，VALIDATED_SOURCE_BINDING，33/33报价＋24主题、HTTP200无fallback；capture b9bdd3ba013cb4bb3680f150，原三件/独立冷reader/磁盘binding通过，并于20:20后被M15 seed真实消费。仅主控单次原窗口执行，不是自然调度；此时新页面接线待回，后续3020单卡发布见下一条，不计完整验收。[合并派生反馈](../../../../handoffs/P0/feedback/mac-m03-m15-window-20261014/README.md)。
+
+- **普通页单卡最终发布（2026-10-13 UTC21:33）：** e18c6c9aa8e5ba84dd0b0b412ed7d62b5ebc2b67的12 adapter＋6单卡/真实只读通过，但隔离publish_source_result因四现役路由未列allowed报SOURCE_MODULE_ID_REQUIRED，未触现役；失败保留。3020bb6b0abd30fc9a243cfdee7ec0f121e2c178精确两文件增量补齐四路由，前后SHA匹配、7/7单卡PASS，21:33:31.808–44.075单卡CAS及HTTP/DOM通过；generation7c2529a5…→5ac3f270…，仅1状态record改变，其余3卡/14路由/M15三records/M16/经理不变。33quotes/24themes及原capture/run/binding/sourceSHA一致，无重采或重启，仍50490/PID29056、54780/PID29127；native visual/广泛回归NOT_RUN，14页面/0完整不变。[失败与最终发布证据](../../../../handoffs/P0/feedback/mac-m03-m15-window-20261014/README.md)。
 
 ### M04 研究情报与归档｜P4
 

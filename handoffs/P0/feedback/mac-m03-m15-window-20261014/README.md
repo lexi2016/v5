@@ -33,3 +33,17 @@ DERIVED_SUMMARY，来源Mac消息 `msg_0b47eb1b0178a3a6016ace96c8380487d1bfeafc4
 页面保留session13/target14、2匹配、PARTIAL、两个原原因、CANNOT_CONFIRM、材料NOT_RUN。UTC20:37:52–20:38:04发布：source49527/PID28669，54780/PID28760，旧60473及旧前端回退；其余14路由、经理及保护端口保持。native visual NOT_RUN，页面总数14不增、完整0不变。原“尚未部署”为20:20历史，本条为后续成功；M03新binding普通页接线尚无通过回执。
 
 来源报告result.safe SHA256：`69f5528271ad77af385c56ef4dcea733f3ba50998985c0f2cb597c9a54f985b8`，不是本派生摘要指纹。
+
+## M03原只读adapter隔离失败与最终单卡发布（21:33 UTC）
+
+DERIVED_SUMMARY，来源Mac消息 `msg_0b47eb1b0178a3a6016acea1c42ae087d1bec3d9b44ccff392`、`msg_0b47eb1b0178a3a6016acea3d56ba487d19b9baadc85649dd6`。原失败保留，不冒称原JSON字节。
+
+e18c6c9aa8e5ba84dd0b0b412ed7d62b5ebc2b67：五文件前后SHA及隔离应用通过，12 adapter＋6单卡测试通过；真实只读33quotes/24themes及原身份匹配、原输入不变。首次验证脚本误用系统Python3.9在导入失败，改既有3.14后暴露真实兼容缺口：publish_m03_saved_binding→publish_source_result→SOURCE_MODULE_ID_REQUIRED。旧allowed集合缺四条现役路由：/api/v5/source-bundle/rebound-saved、/api/v5/research/lane、/api/v5/research/wechat/materials、/api/v5/source-bundle/us-mapping-saved。没有删路由或绕过校验，现役发布0，原generation未变。
+
+最终3020bb6b0abd30fc9a243cfdee7ec0f121e2c178精确补齐四路由兼容；两文件增量前后SHA一致、7/7单卡回归通过，使用现役完整配置隔离发布及HTTP/DOM通过后，UTC21:33:31.808–21:33:44.075完成现役单卡CAS。
+
+旧generation 7c2529a505e078145a88e2d0a12e59b2e77f2ea1beff2a96f982f023167a304c → 新5ac3f270433899975fd7425149573a014d2dc1d8b32b619110cfdcab407a56fa。仅1状态record改变；其余3卡/14兄弟路由/M15三records/M16及经理不变。页面33quotes/24themes、原capture/run/binding/source SHA一致，未重采或重启API/前端；仍50490/PID29056、54780/PID29127，旧generation及完整回退保留。
+
+native visual、广泛回归NOT_RUN；页面总数14、完整0不变。M16另有单码provider结果不计入此M03反馈或已保存9/1产品。
+
+来源报告result.safe SHA：e18失败 `6fb0e01bf8d29075a814c28b4479f1a37331d93bef3d898cd9d008620a83318d`；3020成功 `5adb2f9946bd6b4f827ee627dab6f3e89a0e39d7e11b58f43517c50905fc4e82`。

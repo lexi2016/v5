@@ -109,5 +109,68 @@
     "reported_original_result_safe_sha256": "69f5528271ad77af385c56ef4dcea733f3ba50998985c0f2cb597c9a54f985b8",
     "natural_verified": false,
     "formal": false
+  },
+  "m03_page_increment": {
+    "evidence_type": "DERIVED_SUMMARY",
+    "source_messages": [
+      "msg_0b47eb1b0178a3a6016acea1c42ae087d1bec3d9b44ccff392",
+      "msg_0b47eb1b0178a3a6016acea3d56ba487d19b9baadc85649dd6"
+    ],
+    "prior_candidate": "e18c6c9aa8e5ba84dd0b0b412ed7d62b5ebc2b67",
+    "prior_validation": {
+      "adapter_tests": 12,
+      "single_card_tests": 6,
+      "exact_before_after_files": 5,
+      "real_readonly": "PASS_33_QUOTES_24_THEMES_ORIGINAL_IDENTITIES",
+      "initial_script_failure": "System Python3.9 import failure; switched to existing3.14.",
+      "isolated_publish_error": "SOURCE_MODULE_ID_REQUIRED",
+      "call_chain": "publish_m03_saved_binding -> publish_source_result",
+      "allowed_routes_missing": [
+        "/api/v5/source-bundle/rebound-saved",
+        "/api/v5/research/lane",
+        "/api/v5/research/wechat/materials",
+        "/api/v5/source-bundle/us-mapping-saved"
+      ],
+      "active_publish_calls": 0,
+      "routes_removed": false,
+      "validation_bypassed": false,
+      "reported_result_safe_sha256": "6fb0e01bf8d29075a814c28b4479f1a37331d93bef3d898cd9d008620a83318d"
+    },
+    "final_candidate": "3020bb6b0abd30fc9a243cfdee7ec0f121e2c178",
+    "final_validation": {
+      "exact_patch_files": 2,
+      "before_after_sha_match": true,
+      "single_card_tests_passed": 7,
+      "single_card_tests_total": 7,
+      "exit_code": 0,
+      "full_current_config_isolated_publish": "PASS",
+      "http_dom": "PASS",
+      "publish_start_utc": "2026-10-13T21:33:31.808Z",
+      "publish_end_utc": "2026-10-13T21:33:44.075Z",
+      "old_generation": "7c2529a505e078145a88e2d0a12e59b2e77f2ea1beff2a96f982f023167a304c",
+      "new_generation": "5ac3f270433899975fd7425149573a014d2dc1d8b32b619110cfdcab407a56fa",
+      "changed_status_records": 1,
+      "other_cards_unchanged": 3,
+      "sibling_routes_unchanged": 14,
+      "m15_exact_records_unchanged": 3,
+      "m16_manager_unchanged": true,
+      "quotes": 33,
+      "themes": 24,
+      "original_capture_run_binding_source_sha_match": true,
+      "input_bytes_unchanged": true,
+      "recapture": false,
+      "api_restart": false,
+      "frontend_restart": false,
+      "source_port": 50490,
+      "source_pid": 29056,
+      "frontend_port": 54780,
+      "frontend_pid": 29127,
+      "rollback_preserved": true,
+      "native_visual": "NOT_RUN",
+      "broad_regression": "NOT_RUN",
+      "reported_result_safe_sha256": "5adb2f9946bd6b4f827ee627dab6f3e89a0e39d7e11b58f43517c50905fc4e82"
+    },
+    "page_count": 14,
+    "complete_modules": 0
   }
 }
