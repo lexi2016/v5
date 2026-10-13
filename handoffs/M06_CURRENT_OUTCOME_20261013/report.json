@@ -1,0 +1,31 @@
+{
+  "status": "CLOUD_NARROW_PASS_MAC_PENDING",
+  "tested_parent": "257ca6425c4d489e09430605ee82bf22a4e02da8",
+  "runtime_changed": [
+    "V5/src/v5_shadow/daily_tick.py"
+  ],
+  "tests": {
+    "red_failures": 2,
+    "pass_count": 4,
+    "new_tests": 2,
+    "regression_tests": 2,
+    "skips": 0,
+    "errors": 0,
+    "exit_code": 0,
+    "elapsed_seconds": 100.435
+  },
+  "new_status": "CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN",
+  "action_required": "READ_ONLY_VERIFY_CURRENT_AND_BOTH_LEDGERS_NO_OWNER_RETRY",
+  "actual_owner_and_coldreaders": true,
+  "synthetic_input_only": true,
+  "owner_invocations_per_fault_scenario": 1,
+  "both_ledgers_retained": true,
+  "write_rollback_added": false,
+  "retry_added": false,
+  "source_closure_files": 164,
+  "source_closure_sha256": "49dba6d1d8e232cd7e154bfc7a5b32456a9e30e2393e0c87771823d4bd69457e",
+  "production_allowed": false,
+  "buy_gate_updated": false,
+  "orders_sent": false,
+  "scheduler_enabled": false
+}

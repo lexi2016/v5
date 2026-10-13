@@ -114,7 +114,12 @@ def tick(config):
         from v5_shadow.p0_hk_preselection import promote_current_success
         row=result['lanes'][0]
         try:row['current_success']=promote_current_success(config,candidate,row)
-        except Exception as error:row['current_success']=dict(status='CURRENT_SUCCESS_UNCHANGED_READBACK_FAILED',reason=type(error).__name__)
+        except Exception as error:
+            # Atomic replace may already have committed. Do not claim unchanged
+            # or undo/reinvoke; only independent pointer/ledger reads can decide.
+            row['current_success']=dict(status='CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN',
+                reason=type(error).__name__,
+                action_required='READ_ONLY_VERIFY_CURRENT_AND_BOTH_LEDGERS_NO_OWNER_RETRY')
     # At 08:45 the execution window closes, but already saved owner products
     # remain readable for the plan. Never re-execute to recover their references.
     from v5_shadow.run_ledger import read_run
@@ -181,5 +186,7 @@ if __name__=='__main__':
         # Operational logs contain statuses only, not raw private artifacts.
         print(canonical_bytes(dict(status=result['status'],natural_verified=False,
             lanes=[dict(lane=row['lane'],status=row['status'],
-                **({'current_success':row['current_success']['status']} if 'current_success' in row else {})) for row in result.get('lanes',[])],
+                **({'current_success':row['current_success']['status']} if 'current_success' in row else {}),
+                **({'current_success_action':row['current_success']['action_required']}
+                   if 'action_required' in row.get('current_success',{}) else {})) for row in result.get('lanes',[])],
             manager=result.get('manager'))).decode())

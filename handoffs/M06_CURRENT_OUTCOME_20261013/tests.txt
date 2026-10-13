@@ -1,0 +1,9 @@
+test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry (test_m06_current_update_outcome.M06CurrentUpdateOutcomeTests.test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry) ... ok
+test_readback_failure_after_replace_is_unknown_without_owner_retry (test_m06_current_update_outcome.M06CurrentUpdateOutcomeTests.test_readback_failure_after_replace_is_unknown_without_owner_retry) ... ok
+test_cas_and_late_promotion_preserve_pointer_without_new_owner (test_m06_daily_cycle.M06DailyCycleTests.test_cas_and_late_promotion_preserve_pointer_without_new_owner) ... ok
+test_evening_unknown_after_original_owner_does_not_restart_or_promote (test_m06_evening_cycle.M06EveningCycleTests.test_evening_unknown_after_original_owner_does_not_restart_or_promote) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 100.435s
+
+OK

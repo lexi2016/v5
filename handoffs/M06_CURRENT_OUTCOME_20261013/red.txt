@@ -1,0 +1,33 @@
+test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry (test_m06_current_update_outcome.M06CurrentUpdateOutcomeTests.test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry) ... FAIL
+test_readback_failure_after_replace_is_unknown_without_owner_retry (test_m06_current_update_outcome.M06CurrentUpdateOutcomeTests.test_readback_failure_after_replace_is_unknown_without_owner_retry) ... FAIL
+
+======================================================================
+FAIL: test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry (test_m06_current_update_outcome.M06CurrentUpdateOutcomeTests.test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_REPO>/V5/tests/test_m06_current_update_outcome.py", line 73, in test_directory_fsync_failure_after_replace_is_unknown_without_owner_retry
+    self.write_after_replace_fault('directory_fsync')
+  File "<ISOLATED_REPO>/V5/tests/test_m06_current_update_outcome.py", line 60, in write_after_replace_fault
+    self.assertEqual(first['current_success']['status'], 'CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN')
+AssertionError: 'CURRENT_SUCCESS_UNCHANGED_READBACK_FAILED' != 'CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN'
+- CURRENT_SUCCESS_UNCHANGED_READBACK_FAILED
++ CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN
+
+
+======================================================================
+FAIL: test_readback_failure_after_replace_is_unknown_without_owner_retry (test_m06_current_update_outcome.M06CurrentUpdateOutcomeTests.test_readback_failure_after_replace_is_unknown_without_owner_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<ISOLATED_REPO>/V5/tests/test_m06_current_update_outcome.py", line 76, in test_readback_failure_after_replace_is_unknown_without_owner_retry
+    self.write_after_replace_fault('readback')
+  File "<ISOLATED_REPO>/V5/tests/test_m06_current_update_outcome.py", line 60, in write_after_replace_fault
+    self.assertEqual(first['current_success']['status'], 'CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN')
+AssertionError: 'CURRENT_SUCCESS_UNCHANGED_READBACK_FAILED' != 'CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN'
+- CURRENT_SUCCESS_UNCHANGED_READBACK_FAILED
++ CURRENT_SUCCESS_UPDATE_OUTCOME_UNKNOWN
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 37.729s
+
+FAILED (failures=2)
