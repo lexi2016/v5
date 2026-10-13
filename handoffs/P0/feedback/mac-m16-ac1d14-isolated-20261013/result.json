@@ -1,0 +1,189 @@
+{
+  "candidate": "ac1d1404ee76ca18a55dc65451b34868de6db552",
+  "started_at": "2026-10-13T15:38:09.028864+00:00",
+  "ended_at": "2026-10-13T15:38:17.121253+00:00",
+  "elapsed_seconds": 8.098683875025017,
+  "command": [
+    "<existing-authorized-python>",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd_relative": "m16-ac1d14-isolated/candidate",
+  "environment": {
+    "python": "3.14.6 (main, Jul 18 2026, 17:05:49) [Clang 22.1.3 ]",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "dependencies": {
+      "fastapi": "0.141.1",
+      "httpx": "0.28.1",
+      "uvicorn": "0.52.1"
+    },
+    "dependency_comparison": {
+      "fastapi_httpx_uvicorn": "MATCH_README_RECORDED_VERSIONS",
+      "python": "3.14.6_DIFFERS_FROM_README_CLOUD_3.12.14",
+      "private_pypdf": "6.10.0_VENDOR_MANIFEST_AND_LICENSE_VALIDATED_BY_ORIGINAL_PARSER_TESTS",
+      "full_locked_environment": "NOT_RUN_NO_NEW_DEPENDENCIES_INSTALLED"
+    }
+  },
+  "exit_code": 0,
+  "tests": [
+    {
+      "test": "test_default_entrypoint_exists (test_entrypoint.EntrypointTests.test_default_entrypoint_exists)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_actual_pdf_provider_job_commit_and_cold_read (test_lifecycle.LifecycleTests.test_actual_pdf_provider_job_commit_and_cold_read)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_cancel_wins_over_late_transport (test_lifecycle.LifecycleTests.test_cancel_wins_over_late_transport)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_changed_input_bytes_fail_closed_without_writes (test_lifecycle.LifecycleTests.test_changed_input_bytes_fail_closed_without_writes)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_client_body_and_cross_origin_refused (test_lifecycle.LifecycleTests.test_client_body_and_cross_origin_refused)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_closed_service_refuses_new_jobs (test_lifecycle.LifecycleTests.test_closed_service_refuses_new_jobs)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_dates_required_and_real (test_lifecycle.LifecycleTests.test_dates_required_and_real)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_default_main_starts_single_loopback_app_without_submitting (test_lifecycle.LifecycleTests.test_default_main_starts_single_loopback_app_without_submitting)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_events_before_financial_result_do_not_create_job (test_lifecycle.LifecycleTests.test_events_before_financial_result_do_not_create_job)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_events_preserve_financial_document_and_do_not_fetch_pdf (test_lifecycle.LifecycleTests.test_events_preserve_financial_document_and_do_not_fetch_pdf)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_exact_ensure_deduplicates_saved_result (test_lifecycle.LifecycleTests.test_exact_ensure_deduplicates_saved_result)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_failed_provider_is_visible_and_retry_recovers (test_lifecycle.LifecycleTests.test_failed_provider_is_visible_and_retry_recovers)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_get_never_submits_or_writes (test_lifecycle.LifecycleTests.test_get_never_submits_or_writes)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_job_wrong_date_and_unknown_return_not_found (test_lifecycle.LifecycleTests.test_job_wrong_date_and_unknown_return_not_found)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_new_process_cold_reads_same_committed_product (test_lifecycle.LifecycleTests.test_new_process_cold_reads_same_committed_product)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_no_input_binding_cannot_create_job (test_lifecycle.LifecycleTests.test_no_input_binding_cannot_create_job)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_no_other_module_routes_exposed (test_lifecycle.LifecycleTests.test_no_other_module_routes_exposed)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_observation_path_validation (test_lifecycle.LifecycleTests.test_observation_path_validation)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_original_four_classes_are_used (test_lifecycle.LifecycleTests.test_original_four_classes_are_used)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_original_post_and_poll_interfaces_complete_offline (test_lifecycle.LifecycleTests.test_original_post_and_poll_interfaces_complete_offline)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_pdf_budget_and_invalid_bytes (test_lifecycle.LifecycleTests.test_pdf_budget_and_invalid_bytes)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_pdf_parser_extracts_actual_synthetic_bytes (test_lifecycle.LifecycleTests.test_pdf_parser_extracts_actual_synthetic_bytes)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_producer_defaults_read_only (test_lifecycle.LifecycleTests.test_producer_defaults_read_only)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_provider_future_publication_refused (test_lifecycle.LifecycleTests.test_provider_future_publication_refused)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_provider_wrong_cutoff_and_arbitrary_url_refused (test_lifecycle.LifecycleTests.test_provider_wrong_cutoff_and_arbitrary_url_refused)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_receipt_failure_keeps_previous_committed_product (test_lifecycle.LifecycleTests.test_receipt_failure_keeps_previous_committed_product)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_retry_uses_same_job_and_new_generation (test_lifecycle.LifecycleTests.test_retry_uses_same_job_and_new_generation)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_running_ensure_deduplicates_and_read_is_nonblocking (test_lifecycle.LifecycleTests.test_running_ensure_deduplicates_and_read_is_nonblocking)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_runtime_rejects_changed_dependency_manifest_pin (test_lifecycle.LifecycleTests.test_runtime_rejects_changed_dependency_manifest_pin)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_unowned_active_generation_is_not_silently_restarted (test_lifecycle.LifecycleTests.test_unowned_active_generation_is_not_silently_restarted)",
+      "result": "PASS"
+    },
+    {
+      "test": "test_wrong_date_and_post_cutoff_input_fail_closed (test_lifecycle.LifecycleTests.test_wrong_date_and_post_cutoff_input_fail_closed)",
+      "result": "PASS"
+    }
+  ],
+  "old_loader_32": "NOT_RUN",
+  "real_provider_network": "NOT_RUN",
+  "native_socket_browser_deployment": "NOT_RUN",
+  "product_modified": false,
+  "integrity": {
+    "commit": "ac1d1404ee76ca18a55dc65451b34868de6db552",
+    "git_blob_files_verified": 155,
+    "manifest_files_verified": 154,
+    "manifest_sha256": "e8a3f594664c979bac92931a1ab273bbcc3378857fad015e840680e9040cb065"
+  },
+  "candidate_unchanged_after_tests": true,
+  "test_environment": {
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "candidate/src (absolute at execution)",
+    "TMPDIR": "m16-ac1d14-isolated/tmp (absolute nonsymlink path at execution)"
+  },
+  "attempt1": {
+    "start": "2026-10-13T15:37:51.756415+00:00",
+    "end": "2026-10-13T15:37:52.762081+00:00",
+    "exit": 1,
+    "passed": 1,
+    "setup_errors": 30,
+    "reason": "macOS default TMPDIR traverses /var symlink; original owned_io O_NOFOLLOW raises NotADirectoryError var",
+    "business_assertions": "NOT_REACHED_FOR_30_LIFECYCLE_TESTS"
+  },
+  "summary": {
+    "PASS": 31,
+    "FAIL": 0,
+    "ERROR": 0
+  }
+}

@@ -138,6 +138,7 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 - **下一条完整交付：** 用已过编排完成首批所需资料的采集/原builder/import/store/新进程reader闭环，交每lane入口与成功/缺失/恢复范围表、必要代码差异和定向测试；不重读18篇充数。
 - **验收标准：** 至少一个真实常规触发与失败续跑同原文/span/来源SHA，图片/OCR缺失明确；不补历史取得时间，消费者同SHA；随后覆盖原lane集合、普通页和实际触发/回滚。
 - **责任与交接：** M04原Chat/唯一实现者待排负责来源及原编排；P0负责合法材料引用/来源页；Mac按lane验固定候选，成功前置节点不重做，真实材料不随源码自动上传。
+- **最新候选验收（与旧已过编排分开）：** 固定候选9736bf（主控提供缩写，本处不扩写）Mac 8 PASS / 2 FAIL / 11 ERROR，涉及含空格sys.executable生成测试shebang；原实现者正在窄修，尚未通过，后续固定修复版本与实际复验另记，不沿用旧18篇/编排成功覆盖本次失败。
 
 ### M05 A预选池｜P2
 
@@ -263,13 +264,13 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 ### M16 经理候选公开资料任务｜P4
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6acb9ad6-5dc8-83ec-b3bd-bd3a447de94a)；`dev/m16-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。
-- **已有代码与证据：** [loader](https://github.com/lexi2016/v5/commit/5bb1d635abe03cec61d0e52bf1150f2c70b5fe6a)；[只读接线](https://github.com/lexi2016/v5/commit/257ca6425c4d489e09430605ee82bf22a4e02da8)；[Mac](https://github.com/lexi2016/v5/commit/711d1cf68d26609a62241862f4f12291279e2f40)。
-- **已验证层级：** 接入已具备；真实/保存局部已证；数据页已有局部（见边界）；完整0。loader Mac32与真实10行PARTIAL_WITH_ROWS原reader/迁移/HTTP/页已过，原PDF/provider完整性及全producer生命周期未验；不能因此推定现有factory/owner不存在。
-- **未完成缺口：** 代码待核：默认worker/factory/ensure/events/retry/cancel/reader是否全部可独立运行；输入/provider：公开PDF与实际运行绑定未齐；GET不得创建任务。
+- **已有代码与证据：** [loader](https://github.com/lexi2016/v5/commit/5bb1d635abe03cec61d0e52bf1150f2c70b5fe6a)；[只读接线](https://github.com/lexi2016/v5/commit/257ca6425c4d489e09430605ee82bf22a4e02da8)；[Mac](https://github.com/lexi2016/v5/commit/711d1cf68d26609a62241862f4f12291279e2f40)。 [完整生命周期候选ac1d14](https://github.com/lexi2016/v5/commit/ac1d1404ee76ca18a55dc65451b34868de6db552)；[Mac隔离原回执](../../../../handoffs/P0/feedback/mac-m16-ac1d14-isolated-20261013/result.json)。
+- **已验证层级：** 原loader Mac32、真实10行PARTIAL_WITH_ROWS冷读/页历史保留。新固定ac1d14已155 blob/154 manifest核验，Mac31/31合成隔离PASS、exit0；首轮1 PASS/30 setup ERROR因TMPDIR经过/var symlink，改真实非symlink TMPDIR后通过，未改产品/候选字节。旧32未重跑，完整模块0。
+- **未完成缺口：** 新生命周期候选已有隔离成功证据，不再将ensure/events/retry/cancel/reader一律标为未交代码。完整锁环境、真实PDF/provider网络、部署/原生页面及自然NOT_RUN；Python3.14.6不同于README云端3.12.14，未安装依赖，不以合成PDF解析成功替代真实源资格。
 - **依赖：** 原固定候选、公开资料provider、事件与job状态机；不依赖所有经理计划先完成才核独立job工程。
-- **下一条完整交付：** 对固定现有job闭包做一次入口/文件/commit覆盖判定后，补实际缺失的独立任务全生命周期、保存reader/API与失败恢复测试/启动说明，不重做loader或10行读回。
+- **下一条完整交付：** 复用ac1d14的31项合成隔离证据与原32历史，按实际授权补完整锁环境、限定真实provider/PDF与运行绑定、保存reader/API及部署/生命周期剩余验收。保持GET无创建副作用、失败/取消/重试合同，不自动新外采。
 - **验收标准：** 限定既有候选真实任务的提交/运行/结果、失败重试、取消/事件更新可追踪；GET无副作用，长任务不阻塞经理读取，状态/原PDF未核边界保留、单job回退过。
-- **责任与交接：** M16原Chat/唯一实现者待排负责原job/provider；P0只做请求/状态读取与长任务隔离；Mac按获准候选/调用范围验，不自动新外采，不推M16全业务通过。
+- **责任与交接：** M16唯一实现者保留固定生命周期候选；P0仅接请求/状态读取与长任务隔离，Mac后续按获准候选/调用范围验未覆盖部分。此次31 PASS不提升真实来源、部署、自然或全模块状态。
 
 ### M17 尾盘量价发现与持续跟踪｜P4
 
