@@ -1,0 +1,533 @@
+{
+  "contract_kind": "OBSERVED_NATIVE_STRUCTURE_NOT_RECONSTRUCTABLE_SOURCE_DOCUMENT",
+  "source_date": "20261012",
+  "source_run_id": "rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71",
+  "bv_id": "BV1eKpR6TEAN",
+  "observed_utc": "2026-10-13T04:53:56.590116+00:00",
+  "original_manifest": {
+    "relative_path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/manifest.json",
+    "bytes": 21974,
+    "sha256": "cb718159ee2a402ffba6541e7c54431d29f4d35303852fefd8c660a56bd908bc",
+    "preserved_values": {
+      "schema_version": "VideoEvidenceV1",
+      "trade_date": "20261012",
+      "run_id": "rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71",
+      "bv_id": "BV1eKpR6TEAN",
+      "upload_date": "20261012",
+      "target_trade_date": "20261012",
+      "date_scope": "SAME_DAY_FUPAN",
+      "discovery_status": "TARGET_BV_LOCKED",
+      "capture_status": "CAPTURED",
+      "asr_status": "ASR_REVIEW_REQUIRED",
+      "asr_segment_count": 54,
+      "transcript_reviewed": false,
+      "gap_status": "VIDEO_GAP_AUDIT_EMPTY",
+      "gap_row_count": 0,
+      "stockdict_status": "NOT_AVAILABLE",
+      "production_allowed": false,
+      "buy_gate_updated": false,
+      "orders_sent": false
+    },
+    "observed_key_structure": {
+      "schema_version": "string",
+      "trade_date": "string",
+      "run_id": "string",
+      "bv_id": "string",
+      "title": "string",
+      "upload_date": "string",
+      "target_trade_date": "string",
+      "date_scope": "string",
+      "discovery_status": "string",
+      "discovery_error": "string",
+      "discovery_attempt": {
+        "status": "string",
+        "routes": {
+          "type": "array",
+          "observed_item_shapes": [
+            {
+              "route": "string",
+              "url": "string",
+              "error": "string",
+              "http_status": "integer"
+            },
+            {
+              "route": "string",
+              "url": "string",
+              "code": "integer",
+              "candidate_count": "integer"
+            }
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "observed_item_shapes": [
+            "string"
+          ]
+        },
+        "network_attempted": "boolean"
+      },
+      "discovery_routes": {
+        "type": "array",
+        "observed_item_shapes": [
+          {
+            "route": "string",
+            "url": "string",
+            "error": "string",
+            "http_status": "integer"
+          },
+          {
+            "route": "string",
+            "url": "string",
+            "code": "integer",
+            "candidate_count": "integer"
+          }
+        ]
+      },
+      "capture_status": "string",
+      "access_status": "string",
+      "ffmpeg_status": "string",
+      "asr_status": "string",
+      "asr_segment_count": "integer",
+      "transcript_reviewed": "boolean",
+      "gap_status": "string",
+      "gap_row_count": "integer",
+      "targeted_spotcheck_count": "integer",
+      "media_sha256": "string",
+      "transcript_sha256": "string",
+      "stockdict_status": "string",
+      "stockdict_aliases": {
+        "type": "array",
+        "observed_item_shapes": []
+      },
+      "stockdict_trace_path": "string",
+      "cannot_confirm": {
+        "type": "array",
+        "observed_item_shapes": [
+          "string"
+        ]
+      },
+      "producer_identity": {
+        "name": "string",
+        "module": "string",
+        "contract": "string"
+      },
+      "producer": {
+        "name": "string",
+        "module": "string"
+      },
+      "implementation_sha256": {
+        "core.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "cli.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "__init__.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "__main__.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "config.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "producer.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "scheduler.py": {
+          "path": "string",
+          "sha256": "string"
+        },
+        "scheduler_entry.py": {
+          "path": "string",
+          "sha256": "string"
+        }
+      },
+      "input_sha256": {
+        "review_core_implementation": {
+          "core.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "cli.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "__init__.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "__main__.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "config.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "producer.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "scheduler.py": {
+            "path": "string",
+            "sha256": "string"
+          },
+          "scheduler_entry.py": {
+            "path": "string",
+            "sha256": "string"
+          }
+        },
+        "acquisition_config": {
+          "data_root": "string",
+          "source_root": "string",
+          "funasr_path": "string",
+          "ffmpeg_path": "string",
+          "ytdlp_path": "string",
+          "python_path": "string",
+          "asr_python_path": "string",
+          "asr_fingerprint": {
+            "schema_version": "string",
+            "asr_python_path": {
+              "requested_path": "string",
+              "normalized_path": "string",
+              "resolved_path": "string",
+              "status": "string",
+              "sha256": "string",
+              "size": "integer"
+            },
+            "funasr_path": {
+              "requested_path": "string",
+              "normalized_path": "string",
+              "resolved_path": "string",
+              "status": "string",
+              "sha256": "string",
+              "size": "integer"
+            },
+            "ffmpeg_path": {
+              "requested_path": "string",
+              "normalized_path": "string",
+              "resolved_path": "string",
+              "status": "string",
+              "sha256": "string",
+              "size": "integer"
+            }
+          },
+          "target_mid": "string",
+          "target_uploader": "string",
+          "public_base_url": "string",
+          "network_allowed": "boolean",
+          "extra": {}
+        },
+        "acquisition_tools": {
+          "discover": {
+            "module": "string",
+            "qualname": "string",
+            "source_sha256": "string"
+          },
+          "capture": {
+            "module": "string",
+            "qualname": "string",
+            "source_sha256": "string"
+          },
+          "asr": {
+            "module": "string",
+            "qualname": "string",
+            "source_sha256": "string"
+          }
+        },
+        "candidate_sha256": "string",
+        "discovery_attempt": {
+          "status": "string",
+          "routes": {
+            "type": "array",
+            "observed_item_shapes": [
+              {
+                "route": "string"
+              }
+            ]
+          },
+          "network_attempted": "boolean"
+        }
+      },
+      "output_sha256": {
+        "type": "object",
+        "keys": "exact artifact_refs[].path; listed in artifact_inventory",
+        "values": "string SHA256"
+      },
+      "artifact_refs": {
+        "type": "array",
+        "observed_item_shapes": [
+          {
+            "kind": "string",
+            "path": "string",
+            "sha256": "string",
+            "size": "integer",
+            "import_mode": "string"
+          },
+          {
+            "kind": "string",
+            "path": "string",
+            "sha256": "string",
+            "size": "integer",
+            "import_mode": "string",
+            "source_path": "string"
+          }
+        ]
+      },
+      "media_refs": {
+        "type": "array",
+        "observed_item_shapes": [
+          {
+            "kind": "string",
+            "path": "string",
+            "sha256": "string",
+            "size": "integer",
+            "import_mode": "string"
+          }
+        ]
+      },
+      "audio_refs": {
+        "type": "array",
+        "observed_item_shapes": [
+          {
+            "kind": "string",
+            "path": "string",
+            "sha256": "string",
+            "size": "integer",
+            "import_mode": "string"
+          }
+        ]
+      },
+      "network_used": "boolean",
+      "network_allowed": "boolean",
+      "acquisition_mode": "string",
+      "acquisition_count": "integer",
+      "download_count": "integer",
+      "asr_execution_count": "integer",
+      "asr_count": "integer",
+      "independent_review": {},
+      "production_allowed": "boolean",
+      "buy_gate_updated": "boolean",
+      "orders_sent": "boolean",
+      "video_evidence_boundary": "string"
+    }
+  },
+  "original_owner_receipt": {
+    "relative_path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/receipt.json",
+    "bytes": 2007,
+    "sha256": "cbf5e82a0f89c64412368e0cec802e2318c4e5328f77f19b227680aaa2c4fd6e",
+    "preserved_values": {
+      "schema_version": "ReviewCoreReceiptV1",
+      "trade_date": "20261012",
+      "bv_id": "BV1eKpR6TEAN",
+      "run_id": "rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71",
+      "status": "ACQUIRED",
+      "manifest_sha256": "cb718159ee2a402ffba6541e7c54431d29f4d35303852fefd8c660a56bd908bc",
+      "asr_status": "ASR_REVIEW_REQUIRED",
+      "asr_segment_count": 54,
+      "safety_flags": {
+        "production_allowed": false,
+        "buy_gate_updated": false,
+        "orders_sent": false
+      }
+    },
+    "observed_key_structure": {
+      "schema_version": "string",
+      "trade_date": "string",
+      "bv_id": "string",
+      "run_id": "string",
+      "status": "string",
+      "input_digest": "string",
+      "acquisition_count": "integer",
+      "asr_execution_count": "integer",
+      "network_used": "boolean",
+      "discovery_attempt": {
+        "status": "string",
+        "routes": {
+          "type": "array",
+          "observed_item_shapes": [
+            {
+              "route": "string",
+              "url": "string",
+              "error": "string",
+              "http_status": "integer"
+            },
+            {
+              "route": "string",
+              "url": "string",
+              "code": "integer",
+              "candidate_count": "integer"
+            }
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "observed_item_shapes": [
+            "string"
+          ]
+        },
+        "network_attempted": "boolean"
+      },
+      "asr_status": "string",
+      "asr_segment_count": "integer",
+      "current_advanced": "boolean",
+      "manifest_sha256": "string",
+      "safety_flags": {
+        "production_allowed": "boolean",
+        "buy_gate_updated": "boolean",
+        "orders_sent": "boolean"
+      }
+    }
+  },
+  "artifact_inventory": [
+    {
+      "kind": "media",
+      "path": "media/BV1eKpR6TEAN/e8bf6c8ebc5a04d8ad604f535fa0f047824cbc40b9ca8c5e8fd6b12db46cbaa0/BV1eKpR6TEAN.mp4",
+      "sha256": "e8bf6c8ebc5a04d8ad604f535fa0f047824cbc40b9ca8c5e8fd6b12db46cbaa0",
+      "size": 22635840,
+      "import_mode": "MATERIALIZED",
+      "bytes": 22635840,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "audio",
+      "path": "audio/BV1eKpR6TEAN/7a6e2abeafab44129c1558b68a68ae38b2a9ba239abd30ce848c729df2fc3377/BV1eKpR6TEAN.wav",
+      "sha256": "7a6e2abeafab44129c1558b68a68ae38b2a9ba239abd30ce848c729df2fc3377",
+      "size": 23444558,
+      "import_mode": "MATERIALIZED",
+      "bytes": 23444558,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "source_index",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/source_index.json",
+      "sha256": "c340bcb6ca397614355478108406151523398c0e57c53207be4e2ffccb3a888a",
+      "size": 18612,
+      "import_mode": "MATERIALIZED",
+      "bytes": 18612,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "video_session",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/video_session.json",
+      "sha256": "6cd8cf572ef23d6cdaea9dc66edc4670297efc9cd74f076b511d00b94307e28f",
+      "size": 7419,
+      "import_mode": "MATERIALIZED",
+      "bytes": 7419,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "capture_manifest",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/capture_manifest.json",
+      "sha256": "b1409919e6be75821284ecf0dd1a50f8292dd956df94c78e15ec7492f1ca95f4",
+      "size": 751,
+      "import_mode": "MATERIALIZED",
+      "bytes": 751,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "phase_receipt",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/receipts/discovery.json",
+      "sha256": "7ff300ce8cfa344dba5cb828ccd1060f638562e99a2826b16619d866898f53d6",
+      "size": 2452,
+      "import_mode": "MATERIALIZED",
+      "bytes": 2452,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "phase_receipt",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/receipts/capture.json",
+      "sha256": "41f7d29e336aac4df2dcbae828793720f705a6392dc039454c1d312445dac396",
+      "size": 159,
+      "import_mode": "MATERIALIZED",
+      "bytes": 159,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "transcript",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/asr/raw_path",
+      "sha256": "a9b09a92469e46b97d472a9be9e4d656b601d808e833150fd86657b4f779928a",
+      "size": 10502,
+      "import_mode": "MATERIALIZED",
+      "bytes": 10502,
+      "source_path_present_but_value_omitted": true
+    },
+    {
+      "kind": "segment",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/asr/segments_path",
+      "sha256": "6dc7fedf03814ce1ba833a770bb9853b0f9b17750c07effb140ce059fe6e0108",
+      "size": 19722,
+      "import_mode": "MATERIALIZED",
+      "bytes": 19722,
+      "source_path_present_but_value_omitted": true
+    },
+    {
+      "kind": "asr_token",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/asr/tokens_path",
+      "sha256": "9b4f3617eafe47b163fad10c5d934ad7757e3698ef16661ef260402abe05d945",
+      "size": 561517,
+      "import_mode": "MATERIALIZED",
+      "bytes": 561517,
+      "source_path_present_but_value_omitted": true
+    },
+    {
+      "kind": "asr_trace",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/asr/trace_path",
+      "sha256": "412e7e5cc5606d87ef5c3a0ad25b54f94ef4bec3df698ed04f7adb7380cfb423",
+      "size": 1348,
+      "import_mode": "MATERIALIZED",
+      "bytes": 1348,
+      "source_path_present_but_value_omitted": true
+    },
+    {
+      "kind": "asr_pointer",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/asr/current_asr_pointer.json",
+      "sha256": "297223e09eceb8e23b31c5f78cefd23cb2325ce3768c59e4ba338d390e2db566",
+      "size": 1118,
+      "import_mode": "MATERIALIZED",
+      "bytes": 1118,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "phase_receipt",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/receipts/asr.json",
+      "sha256": "ee725c6b62ea095bd178d7920ea6bccb974f9486b4856f353f2f2fb257428ce1",
+      "size": 295,
+      "import_mode": "MATERIALIZED",
+      "bytes": 295,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "video_gap_audit",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/video_gap_audit.json",
+      "sha256": "e7909267a18cad5b25c60547d43883c7ae19ac9f3428849fc5e07207b4e45dac",
+      "size": 325,
+      "import_mode": "MATERIALIZED",
+      "bytes": 325,
+      "source_path_present_but_value_omitted": false
+    },
+    {
+      "kind": "phase_receipt",
+      "path": "review/20261012/runs/rcv1-20261012-BV1eKpR6TEAN-a802b45429651e71/receipts/gap_audit.json",
+      "sha256": "234bc1c70218a833a3606a0df0217e568daafbb4f71d1c6e5f18bd261bfeacaf",
+      "size": 160,
+      "import_mode": "MATERIALIZED",
+      "bytes": 160,
+      "source_path_present_but_value_omitted": false
+    }
+  ],
+  "artifact_count": 15,
+  "artifact_total_bytes": 46704778,
+  "original_data_copied": false,
+  "source_documents_uploaded": false,
+  "new_owner_execution": false,
+  "natural_verified": false,
+  "review_completed": false
+}
