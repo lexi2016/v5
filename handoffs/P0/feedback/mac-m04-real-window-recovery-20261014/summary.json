@@ -81,5 +81,60 @@
     "m14_pending_approval_unchanged": true,
     "raw_article_bodies_uploaded": false,
     "private_paths_uploaded": false
+  },
+  "isolated_page_and_blocked_release": {
+    "evidence_type": "DERIVED_SUMMARY",
+    "provenance": "Controller-reported Mac results; not original logs or receipt bytes.",
+    "candidate": "0bb46df890d4b1a57fcc17982a9800cac2f18146",
+    "release_entries": 503,
+    "release_sha256": "2bafef714a5d35352d54ff8a4d2dde0898fb1fb2ce48e71b3a0eafc4108828de",
+    "tests": {
+      "start_utc": "2026-10-14T01:26:02Z",
+      "end_utc": "2026-10-14T01:26:45Z",
+      "passed": 54,
+      "skipped": 0
+    },
+    "isolated_http_dom": {
+      "start_utc": "2026-10-14T01:28:20Z",
+      "end_utc": "2026-10-14T01:28:26Z",
+      "status": "PASS",
+      "old_date": "20261012",
+      "old_articles": 18,
+      "new_date": "20261014",
+      "new_articles": 8,
+      "latest_both_root_orders": "PASS",
+      "missing_date": "PASS",
+      "three_nonquotes_body_and_time": "PASS",
+      "duplicate_same_day_root_conflict": "REJECTED",
+      "unselected_root_tamper": "REJECTED",
+      "runtime_writes": 0
+    },
+    "bridge_sha256": {
+      "before": "bd368fa9ef2293d5be4d43021b75ff6cf8c80ca3b874b454506a8611107d0651",
+      "after": "c1d43dd72bb1493c996616e61216fdc097fa149fdf012a9a0be5efee49282540"
+    },
+    "reported_result_safe_sha256": {
+      "isolated": "a8da7b0569cff4142fd7f8d261b588cb3e14b8a42b0553fd87af66f59afa1f29",
+      "latest_blocked": "4126c968b665a8fe40c922bf5bdf2170cebdac6b80b32f9cff494994c3d3f152"
+    },
+    "release_blocker": {
+      "first_denied_utc": "2026-10-14T01:31:58Z",
+      "same_call_retry_after_authorization_transcript_denied_utc": "2026-10-14T01:33:25Z",
+      "retry_count": 1,
+      "commands_executed": 0,
+      "active_precheck_reached": false,
+      "postdeployment_readback_reached": false,
+      "deployed": false,
+      "requested_action": "Replace M04 preview on54780 and start new API, retaining54165 for rollback.",
+      "pending_user_approval_message": "Sentinel_02b5ffb2f2fc81918ee1861df0a74db7",
+      "further_retry_or_alternate_route": false
+    },
+    "limits": {
+      "m14_independent_approval_still_pending": true,
+      "available_module_count_unchanged": true,
+      "page_count": 14,
+      "complete_modules": 0,
+      "natural_verified": false
+    }
   }
 }

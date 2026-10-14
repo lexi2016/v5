@@ -150,6 +150,8 @@ M01/M05的A来源和预选代码可同时按其完整交付队列推进，但不
 
 - **真实窗口失败→保存capture恢复（2026-10-14 UTC01:00）：** 261cf在00:30仅capture一次，30topics/22effective/21raw/11research/8articles；首篇evidence换行失败，63c1 Mac37后既有guard阻，d19f Mac43复用checkpoint后第二档非连续builder摘要阻，均保留。全8只读归类后d5983dc7d3dfc6825b7d09b5fb976197943de40a表示合同修复，494清单/Mac47 PASS零skip，01:00:33.469–34.656原claim单次resume SUCCEEDED/exit0，01:00:55.679–56.171独立原reader读8档exit0零写。1原quote/4空白映射/3原builder摘要NOT_A_SOURCE_QUOTE，002430原tag/decoder/标题compact身份已证；原receipt/checkpoint/capture及旧失败不变，后续capture0。未改页或部署，natural/PIT/production=false、bounded_has_more保留，14页面/0完整不变，不把21raw记21archives或恢复算自然。[完整派生链](../../../../handoffs/P0/feedback/mac-m04-real-window-recovery-20261014/README.md)。
 
+- **多归档根隔离与发布阻塞（2026-10-14 UTC01:33）：** 固定0bb46df890d4b1a57fcc17982a9800cac2f18146，RELEASE503/Mac54 PASS零skip，01:28隔离HTTP-DOM核旧12日18篇/新14日8篇、LATEST正反root序/缺日及3非quote全文时间通过；同日root冲突/非选root篡改拒绝，runtime零写。实际发布01:31:58拒绝，补授权原文后同调用仅重试一次01:33:25仍拒绝，两次命令未执行、现役前检和部署后读回未到达。待用户具体批准Sentinel_02b5ffb2f2fc81918ee1861df0a74db7（替换54780/新API/保留54165回滚），部署0、不绕过；M14独立待批保持，可用模块/14页面/0完整不变。[派生隔离与拒绝记录](../../../../handoffs/P0/feedback/mac-m04-real-window-recovery-20261014/README.md)。
+
 ### M05 A预选池｜P2
 
 - **原责任入口与分支：** [原Chat](https://chatgpt.com/c/6aca4eef-525c-83e8-abb9-d8423024bf90)；`dev/m05-github-handoff-20261011`。原Chat/分支未知部分保持待核，不自创替代。

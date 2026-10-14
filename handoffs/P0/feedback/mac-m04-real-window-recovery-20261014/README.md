@@ -19,3 +19,15 @@
 - 002430原编码tag经原decoder发行人区间及标题compact转换核验身份；8档原body/来源page/采集时间匹配，本批无另一个已发现未覆盖的表示错误。
 
 原receipt与原checkpoint SHA保持不变，原capture/producer/旧失败记录保留；后续capture调用0，不把失败续接计新采集或自然完成。未改现役API/页面、部署0，natural/PIT/production=false、bounded_has_more保留，页面14/完整0不变。M14真实槽读/发布具体批准待答状态保持。
+
+## M04多归档根隔离通过，实际发布被拒绝（01:33 UTC增量）
+
+DERIVED_SUMMARY，仅依据主控已核Mac结果；不是原日志或原receipt字节。
+
+固定0bb46df890d4b1a57fcc17982a9800cac2f18146，RELEASE503项，SHA256 `2bafef714a5d35352d54ff8a4d2dde0898fb1fb2ce48e71b3a0eafc4108828de`。Mac UTC01:26:02–45共54 PASS/0skip；01:28:20–26隔离HTTP/DOM PASS：旧20261012=18篇、新20261014=8篇，LATEST在根列表正反序及缺日情况下正确；3篇非quote的全文和时间通过，重复root同日冲突、非选root篡改均拒绝，runtime零写。
+
+桥接前SHA `bd368fa9ef2293d5be4d43021b75ff6cf8c80ca3b874b454506a8611107d0651`，后SHA `c1d43dd72bb1493c996616e61216fdc097fa149fdf012a9a0be5efee49282540`。
+
+实际发布在01:31:58被拒绝；补入授权原文后，同一调用仅重试一次，于01:33:25仍拒绝。两次命令均未执行，现役前检及部署后读回均未到达，部署0。具体待批请求 `Sentinel_02b5ffb2f2fc81918ee1861df0a74db7`：M04替换54780预览、启动新API，保留54165回滚。停止该发布步骤，不改路径/命令绕过；M14独立批准仍待，不能用此请求覆盖。
+
+来源报告safe SHA：隔离 `a8da7b0569cff4142fd7f8d261b588cb3e14b8a42b0553fd87af66f59afa1f29`；最新阻塞 `4126c968b665a8fe40c922bf5bdf2170cebdac6b80b32f9cff494994c3d3f152`。可用模块数、14页面及0完整验收不变。
