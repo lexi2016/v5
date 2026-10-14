@@ -1,0 +1,27 @@
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/handoffs/P0/cloud-m17-dependencies-20261014/verify_cli.py", line 53, in <module>
+    started = execute([runtime, 'runtime', 'start', '--config', config], root)
+  File "/workspace/v5-cloud/handoffs/P0/cloud-m17-dependencies-20261014/verify_cli.py", line 23, in execute
+    raise RuntimeError(f'{argv}: {result.returncode}\n{result.stderr}\n{result.stdout}')
+RuntimeError: [PosixPath('/workspace/v5-cloud/V5/run_shadow.py'), 'runtime', 'start', '--config', PosixPath('/tmp/v5-m17-cli-icd7yqbt/runtime.json')]: 1
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/run_shadow.py", line 34, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/workspace/v5-cloud/V5/run_shadow.py", line 25, in main
+    return entry(args[1:])
+  File "/workspace/v5-cloud/V5/src/v5_shadow/main_runtime.py", line 191, in main
+    print(canonical_bytes({'validate':validate_config,'start':start,'status':status,'stop':stop,'tick':tick,'source-bundle':source_bundle}[a.command](c)).decode())
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "/workspace/v5-cloud/V5/src/v5_shadow/main_runtime.py", line 100, in start
+    validate_config(config)
+    ~~~~~~~~~~~~~~~^^^^^^^^
+  File "/workspace/v5-cloud/V5/src/v5_shadow/main_runtime.py", line 27, in validate_config
+    _,root_fd=_config(config['module_api'])
+              ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/v5-cloud/V5/src/v5_shadow/module_api.py", line 795, in _config
+    if value['schema_version']!='v5.module_api.v1' or not isinstance(value['module_id'],str) or not re.fullmatch('[a-z][a-z0-9_]{0,63}',value['module_id']):raise ValueError('MODULE_CONFIG_INVALID')
+                                                                                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: MODULE_CONFIG_INVALID
+
+

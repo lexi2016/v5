@@ -1,0 +1,24 @@
+Using CPython 3.14.7 interpreter at: /workspace/v5-test-env/bin/python
+Creating virtual environment at: /workspace/v5-m17-env
+Downloading pydantic-core (2.1MiB)
+ Downloaded pydantic-core
+Prepared 11 packages in 496ms
+Installed 18 packages in 17ms
+ + annotated-doc==0.0.5
+ + annotated-types==0.8.0
+ + anyio==4.15.1
+ + fastapi==0.143.0
+ + idna==3.20
+ + numpy==2.5.3
+ + opentelemetry-api==1.45.1
+ + pandas==2.3.3
+ + pyarrow==24.0.0
+ + pydantic==2.14.1
+ + pydantic-core==2.50.1
+ + python-dateutil==2.9.0.post0
+ + pytz==2026.5
+ + six==1.17.0
+ + starlette==1.8.0
+ + typing-extensions==4.16.0
+ + typing-inspection==0.4.4
+ + tzdata==2026.5

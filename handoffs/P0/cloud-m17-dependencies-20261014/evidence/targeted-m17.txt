@@ -1,0 +1,17 @@
+test_real_process_chain_and_reuse_cold_reader (test_daily_close_recapture_owner.LateRegistrationTests.test_real_process_chain_and_reuse_cold_reader) ... ok
+test_partial_coverage_is_not_upgraded (test_daily_close_recapture_owner.LateRegistrationTests.test_partial_coverage_is_not_upgraded) ... ok
+test_unbound_real_execution_is_blocked_without_workers (test_daily_close_recapture_owner.LateRegistrationTests.test_unbound_real_execution_is_blocked_without_workers) ... ok
+test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption (test_p0_close_recapture_registration.RegistrationTests.test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption) ... ok
+test_tick_entrypoint_uses_explicit_late_job_and_source_date (test_p0_close_recapture_registration.RegistrationTests.test_tick_entrypoint_uses_explicit_late_job_and_source_date) ... ok
+test_real_missing_binding_blocks_before_claim_or_worker (test_p0_close_recapture_registration.RegistrationTests.test_real_missing_binding_blocks_before_claim_or_worker) ... ok
+test_alive_wrong_release (test_health.HealthTests.test_alive_wrong_release) ... ok
+test_identity_not_business (test_health.HealthTests.test_identity_not_business) ... ok
+test_mismatch_and_missing_kept (test_health.HealthTests.test_mismatch_and_missing_kept) ... ok
+test_real_attestation (test_health.HealthTests.test_real_attestation) ... ok
+test_unknown_is_not_ready (test_health.HealthTests.test_unknown_is_not_ready) ... ok
+test_unverified_input_cannot_be_ready (test_health.HealthTests.test_unverified_input_cannot_be_ready) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 7.524s
+
+OK

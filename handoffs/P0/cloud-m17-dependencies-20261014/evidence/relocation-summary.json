@@ -1,0 +1,23 @@
+{
+  "m17": {
+    "first": "SUCCEEDED",
+    "second": "REUSED_SUCCESS"
+  },
+  "p0": {
+    "start": "STARTED",
+    "status": "RUNNING",
+    "stop": "STOPPED"
+  },
+  "package_check": "MATCH",
+  "source_resources": null,
+  "installed_packages": 18,
+  "v4_path_mentions": 0,
+  "original_checkout_mentions": 0,
+  "port_8873_mentions": 0,
+  "ipv4_addresses": [
+    "127.0.0.1"
+  ],
+  "trace_sha256": "7563a2bcb98ca59ea20b83fdcdc458aa19925d10148156613a8891f0c58e6401",
+  "trace_bytes": 5506051,
+  "scope": "Only this synthetic CLI scenario; no all-module or natural-runtime claim."
+}

@@ -1,0 +1,360 @@
+{
+  "complete_release_verified": false,
+  "input_kind": "SYNTHETIC",
+  "installed_distributions": [
+    [
+      "annotated-doc",
+      "0.0.5"
+    ],
+    [
+      "annotated-types",
+      "0.8.0"
+    ],
+    [
+      "anyio",
+      "4.15.1"
+    ],
+    [
+      "fastapi",
+      "0.143.0"
+    ],
+    [
+      "idna",
+      "3.20"
+    ],
+    [
+      "numpy",
+      "2.5.3"
+    ],
+    [
+      "opentelemetry-api",
+      "1.45.1"
+    ],
+    [
+      "pandas",
+      "2.3.3"
+    ],
+    [
+      "pyarrow",
+      "24.0.0"
+    ],
+    [
+      "pydantic",
+      "2.14.1"
+    ],
+    [
+      "pydantic_core",
+      "2.50.1"
+    ],
+    [
+      "python-dateutil",
+      "2.9.0.post0"
+    ],
+    [
+      "pytz",
+      "2026.5"
+    ],
+    [
+      "six",
+      "1.17.0"
+    ],
+    [
+      "starlette",
+      "1.8.0"
+    ],
+    [
+      "typing-inspection",
+      "0.4.4"
+    ],
+    [
+      "typing_extensions",
+      "4.16.0"
+    ],
+    [
+      "tzdata",
+      "2026.5"
+    ]
+  ],
+  "m17_cli": {
+    "first": "SUCCEEDED",
+    "product": {
+      "RESEARCH_ONLY": true,
+      "available_at": "2026-09-29T00:00:11.000000+08:00",
+      "buy_gate_updated": false,
+      "candidate_count": 100,
+      "cannot_confirm": [
+        "MARKET_CLOSE_NOT_CAPTURED_STAGE_WINDOW_ENDS_15_55_05",
+        "PYTDX_TURNOVER_CURRENCY_UNIT_UNVERIFIED"
+      ],
+      "captured_at": "2026-09-29T00:00:10.500000+08:00",
+      "execution_kind": "SIMULATED",
+      "files": {
+        "artifact": {
+          "artifact_ref": "workbench_research/20260928/close_recapture.json",
+          "sha256": "8f33ada930bd76264d35b941f31b44b924e30754822d4c5dd3a9248cebc9b5c0"
+        },
+        "candidate_overlay": {
+          "artifact_ref": "workbench_research/20260928/close_recapture.candidates.json",
+          "sha256": "15c934a93990aad8b837583ce6355dc7350b20df1215c69e19a4f627735ccc97"
+        },
+        "receipt": {
+          "artifact_ref": "workbench_research/20260928/close_recapture.receipt.json",
+          "sha256": "174cabbaf2c143bfd3eefe49a70e6a4da8fe33774530974f4aff65da5c1d7399"
+        },
+        "snapshot": {
+          "artifact_ref": "workbench_research/20260928/inputs/close_recapture_pytdx.json",
+          "sha256": "3fa2b03c875d487e3709320593030542d125366f8efe94917dcd0974f55e5968"
+        }
+      },
+      "ledger_run_id": "eafeba64e7224396a80488a45e76a629",
+      "natural_verified": false,
+      "orders_sent": false,
+      "owner_status": "READY",
+      "pid": 5468,
+      "plan_trade_date": "20260929",
+      "pool": {
+        "artifact_ref": "runs/20260928/HK_CONNECT_D1_TOP100_0_2/20260928-hk-connect-d1-top100-0-2-fixture/artifact.csv",
+        "artifact_sha256": "7568369875cc9518779b8fb8836de5dbb23a2eb037645a0f7867f6cfc964af7d",
+        "captured_at": "2026-09-24T17:30:43+08:00",
+        "manifest_ref": "runs/20260928/HK_CONNECT_D1_TOP100_0_2/20260928-hk-connect-d1-top100-0-2-fixture/manifest.json",
+        "manifest_sha256": "aab2968cb30c0af590529532980567912490fd10313bddbefd8fd85ee63d94d7",
+        "owner": "v3_shared_data",
+        "receipt_ref": "runs/20260928/HK_CONNECT_D1_TOP100_0_2/20260928-hk-connect-d1-top100-0-2-fixture/receipt.json",
+        "receipt_sha256": "d67ee26caf23e39a442f8a18895b561d744fe00e23087c4ea6168709306aa293",
+        "role": "HK_CONNECT_D1_TOP100_0_2",
+        "row_count": 100,
+        "run_id": "20260928-hk-connect-d1-top100-0-2-fixture",
+        "signal_date": "20260924",
+        "source_id": "hkconnect_0_2_frozen_prob_active",
+        "trade_date": "20260928"
+      },
+      "pool_run_id": "20260928-hk-connect-d1-top100-0-2-fixture",
+      "producer_pid": 5458,
+      "producer_status": "MATERIALIZED",
+      "production_allowed": false,
+      "reader_pid": 5468,
+      "received_not_historical_1530": true,
+      "request_sha256": "06ee391fdd02265b2fe854f640eba2b36f73c8359def2509855946e2e538d99d",
+      "root": "/tmp/v5-m17-cli-vkfejovo/state",
+      "source_trade_date": "20260928"
+    },
+    "second": "REUSED_SUCCESS"
+  },
+  "mac_acceptance": false,
+  "natural_verified": false,
+  "p0_cli": {
+    "health": {
+      "config_sha256": "b16939b72799ff81529ea3e204ce106de96a8d0e048203c29bdc5827370211f5",
+      "implementation_sha256": "f3ffd57449ba63a3759551b3b8afe8223ea0e3ce291dfe18d64383d556473645",
+      "module_id": "m17_dependency_smoke",
+      "pid": 5474,
+      "release_id": "synthetic-dependency-smoke",
+      "source_provenance_verified": false,
+      "status": "READ_ONLY_RESPONSE_SERVICE"
+    },
+    "start": "STARTED",
+    "status": "RUNNING",
+    "stop": "STOPPED"
+  },
+  "package_check": {
+    "business_verified": false,
+    "complete_release_verified": false,
+    "dependencies": {
+      "packages": [
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "0.0.5",
+          "name": "annotated-doc",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/annotated_doc/__init__.py",
+          "version": "0.0.5"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "0.8.0",
+          "name": "annotated-types",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/annotated_types/__init__.py",
+          "version": "0.8.0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "4.15.1",
+          "name": "anyio",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/anyio/__init__.py",
+          "version": "4.15.1"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "0.143.0",
+          "name": "fastapi",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/fastapi/__init__.py",
+          "version": "0.143.0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "3.20",
+          "name": "idna",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/idna/__init__.py",
+          "version": "3.20"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2.5.3",
+          "name": "numpy",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/numpy/__init__.py",
+          "version": "2.5.3"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "1.45.1",
+          "name": "opentelemetry-api",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/opentelemetry/trace/__init__.py",
+          "version": "1.45.1"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2.3.3",
+          "name": "pandas",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/pandas/__init__.py",
+          "version": "2.3.3"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "24.0.0",
+          "name": "pyarrow",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/pyarrow/__init__.py",
+          "version": "24.0.0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2.14.1",
+          "name": "pydantic",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/pydantic/__init__.py",
+          "version": "2.14.1"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2.50.1",
+          "name": "pydantic-core",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/pydantic_core/__init__.py",
+          "version": "2.50.1"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2.9.0.post0",
+          "name": "python-dateutil",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/dateutil/__init__.py",
+          "version": "2.9.0.post0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2026.5",
+          "name": "pytz",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/pytz/__init__.py",
+          "version": "2026.5"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "1.17.0",
+          "name": "six",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/six.py",
+          "version": "1.17.0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "1.8.0",
+          "name": "starlette",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/starlette/__init__.py",
+          "version": "1.8.0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "4.16.0",
+          "name": "typing-extensions",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/typing_extensions.py",
+          "version": "4.16.0"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "0.4.4",
+          "name": "typing-inspection",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/typing_inspection/__init__.py",
+          "version": "0.4.4"
+        },
+        {
+          "installation_root": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages",
+          "metadata_version": "2026.5",
+          "name": "tzdata",
+          "origin": "/workspace/v5-m17-relocated-env/lib/python3.14/site-packages/tzdata/__init__.py",
+          "version": "2026.5"
+        }
+      ],
+      "reason_codes": [],
+      "status": "MATCH"
+    },
+    "dependency_lock_sha256": "67d79c4f1be7fd449e934747e80e21c20eb447530dd3ca522695742d92183891",
+    "entry_references": 593,
+    "errors": [],
+    "manifests": [
+      {
+        "entries": 110,
+        "manifest": "contracts/m04_readonly_runtime.json",
+        "sha256": "2c66538a28864c919e6b43b5f73fce730d35c5236034ad930e0a58512b265a91"
+      },
+      {
+        "entries": 50,
+        "manifest": "contracts/m06_readonly_runtime.json",
+        "sha256": "6594ddff403e4ef268662021427ec74dcbc589b57bd2035bc0754dba8a02f303"
+      },
+      {
+        "entries": 113,
+        "manifest": "contracts/m07_runtime.json",
+        "sha256": "1e3302422d31a595eab83552efe3ba201f56f288f7072288f3e0067978e067c4"
+      },
+      {
+        "entries": 60,
+        "manifest": "contracts/m08_readonly_runtime.json",
+        "sha256": "907e0dfadd79d09083fcdf589d57763ac76530e047ee8d436c24db72a7922bdd"
+      },
+      {
+        "entries": 25,
+        "manifest": "contracts/m09_readonly_runtime.json",
+        "sha256": "d07a7a671ab7bd42b4b1778918c75e15c647ed954d30358125dac15327c056a0"
+      },
+      {
+        "entries": 1,
+        "manifest": "contracts/m10_readonly_runtime.json",
+        "sha256": "8c5580a078e71f97664b2739aa67b1b1528aeef8ae5ff72a2175e8f3c8451b53"
+      },
+      {
+        "entries": 66,
+        "manifest": "contracts/m11_runtime.json",
+        "sha256": "f602879a5b575e45de1168fb01f0492fd6c79e2dc4ecd46b9b863c5596212644"
+      },
+      {
+        "entries": 12,
+        "manifest": "contracts/m12_runtime.json",
+        "sha256": "62fc6d512b1c43bc247123e299cd0e27dae6c71bbfb7b31bc3b8f0b1a751a79c"
+      },
+      {
+        "entries": 25,
+        "manifest": "contracts/m16_readonly_runtime.json",
+        "sha256": "54e2e08ab806873bf0d24f4af72014c3ff7f14cb67208c7c636efc2746b8131a"
+      },
+      {
+        "entries": 131,
+        "manifest": "contracts/source_owner_runtime.json",
+        "sha256": "4742067f641a56df84d590c5036c4fd27e1cd7fa974519995589e8ecf7f54465"
+      }
+    ],
+    "natural_verified": false,
+    "owner_execution": "NOT_RUN",
+    "python_compatible": true,
+    "python_requirement": ">=3.14",
+    "python_version": "3.14.7",
+    "scope": "Ten existing P0 runtime resource manifests only",
+    "status": "MATCH",
+    "unique_files": 591
+  },
+  "python": "3.14.7 (main, Sep 24 2026, 17:58:18) [Clang 22.1.3 ]",
+  "repo": "/workspace/v5-m17-relocation/v5"
+}

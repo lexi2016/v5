@@ -1,0 +1,9 @@
+{"check": "installed_lock", "status": "MATCH", "packages": 18}
+{"check": "missing", "status": "UNVERIFIED", "reasons": ["DEPENDENCY_UNVERIFIED:fastapi"]}
+{"check": "version", "status": "UNVERIFIED", "reasons": ["DEPENDENCY_VERSION_MISMATCH:fastapi"]}
+{"check": "outside-origin", "status": "UNVERIFIED", "reasons": ["DEPENDENCY_UNVERIFIED:fastapi"]}
+{"check": "unrecorded-origin", "status": "UNVERIFIED", "reasons": ["DEPENDENCY_ORIGIN_MISMATCH:fastapi"]}
+{"check": "original_M17_bytes", "path": "V5/vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py", "equal_to": "6d459cbc"}
+{"check": "original_M17_bytes", "path": "V5/vendor/close_discovery_baseline/apps/api/v35_api/manager_workbench_router.py", "equal_to": "6d459cbc"}
+{"check": "existing_dependencies_unchanged", "old_count": 7, "new_count": 18}
+REVIEW PASS: scoped import/runtime dependencies only; provider, natural window, complete M17 acceptance NOT_RUN; explicit owner-root bootstrap matches production adapter at daily_close_recapture_owner.py:389.

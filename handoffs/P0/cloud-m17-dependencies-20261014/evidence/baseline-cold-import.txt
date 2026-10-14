@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys;sys.path.insert(0,"/workspace/v5-cloud/V5/vendor/close_discovery_baseline");from ops import materialize_manager_close_discovery
+                                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/v5-cloud/V5/vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py", line 26, in <module>
+    from apps.api.v35_api.manager_workbench_router import validate_workbench_payload, _empty_envelope
+  File "/workspace/v5-cloud/V5/vendor/close_discovery_baseline/apps/api/v35_api/manager_workbench_router.py", line 17, in <module>
+    from fastapi import APIRouter, HTTPException, Query
+ModuleNotFoundError: No module named 'fastapi'

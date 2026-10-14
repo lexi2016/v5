@@ -30,7 +30,13 @@ def observe_dependencies(lock:Path) -> dict:
     against a hostile administrator or that arbitrary future locks are supported.
     """
     names={'python-dateutil':'dateutil','numpy':'numpy','pandas':'pandas',
-           'pyarrow':'pyarrow','pytz':'pytz','six':'six','tzdata':'tzdata'}
+           'pyarrow':'pyarrow','pytz':'pytz','six':'six','tzdata':'tzdata',
+           'fastapi':'fastapi','starlette':'starlette','pydantic':'pydantic',
+           'pydantic-core':'pydantic_core','annotated-doc':'annotated_doc',
+           'annotated-types':'annotated_types','anyio':'anyio','idna':'idna',
+           'typing-extensions':'typing_extensions','typing-inspection':'typing_inspection',
+           # opentelemetry is a namespace; use a file owned by this distribution.
+           'opentelemetry-api':'opentelemetry.trace'}
     rows=[];reasons=[];seen=set()
     try:
         with lock.open('rb') as stream:packages=tomllib.load(stream)['package']

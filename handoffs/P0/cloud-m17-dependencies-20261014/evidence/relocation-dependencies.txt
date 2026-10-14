@@ -1,0 +1,10 @@
+test_fastapi_version_mismatch_is_unverified (__main__.RuntimeDependenciesTests.test_fastapi_version_mismatch_is_unverified) ... ok
+test_installed_runtime_matches_complete_lock (__main__.RuntimeDependenciesTests.test_installed_runtime_matches_complete_lock) ... ok
+test_m17_original_and_adapter_cli_help_outside_checkout (__main__.RuntimeDependenciesTests.test_m17_original_and_adapter_cli_help_outside_checkout) ... ok
+test_m17_original_owner_and_reader_cold_import_outside_checkout (__main__.RuntimeDependenciesTests.test_m17_original_owner_and_reader_cold_import_outside_checkout) ... ok
+test_missing_fastapi_lock_entry_is_unverified (__main__.RuntimeDependenciesTests.test_missing_fastapi_lock_entry_is_unverified) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.013s
+
+OK

@@ -1,0 +1,31 @@
+{
+  "schema": "v5.p0.cloud-m17-dependencies.v1",
+  "base_commit": "10ac74424fd7a0793cd1a51053a3a78231050aee",
+  "m17_original_head": "6d459cbc1e694eed413d142c75be64241a727e7f",
+  "environment": "Linux cloud Python 3.14.7",
+  "new_dependency_tests": 5,
+  "targeted_existing_tests": 12,
+  "relocation_repeated_dependency_tests": 5,
+  "m17_cli": [
+    "SUCCEEDED",
+    "REUSED_SUCCESS"
+  ],
+  "p0_cli": [
+    "STARTED",
+    "RUNNING",
+    "STOPPED"
+  ],
+  "package_check": "MATCH",
+  "runtime_distributions": 18,
+  "old_dependency_versions_unchanged": 7,
+  "m17_original_source_members_unchanged": 24,
+  "input_kind": "SYNTHETIC",
+  "execution_kind": "SIMULATED",
+  "natural_verified": false,
+  "business_verified": false,
+  "mac_acceptance": false,
+  "complete_release_verified": false,
+  "real_provider_execution": "NOT_RUN",
+  "independent_review": "PASS",
+  "v4_head_unchanged": "615d1ce5417ed65ca2c8b736435c5d4596b79b19"
+}

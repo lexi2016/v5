@@ -6,7 +6,9 @@ build-backend = "setuptools.build_meta"
 name = "v5-shadow"
 version = "0.1.0"
 requires-python = ">=3.14"
-dependencies = ["pandas>=2.3,<3", "pyarrow>=21,<25"]
+# The frozen M17 producer and cold reader import FastAPI through their shared
+# router module even when no HTTP service is started. Do not use service extras.
+dependencies = ["pandas>=2.3,<3", "pyarrow>=21,<25", "fastapi>=0.128,<1.0"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

@@ -1,0 +1,130 @@
+{
+  "schema": "v5.full-file-evidence-manifest.v1",
+  "files": [
+    {
+      "path": "V5/pyproject.toml",
+      "bytes": 444,
+      "sha256": "e269a6c54815472ab496291862c410762b0605f53f7fe22ab808d1ae6de2f912"
+    },
+    {
+      "path": "V5/uv.lock",
+      "bytes": 54887,
+      "sha256": "67d79c4f1be7fd449e934747e80e21c20eb447530dd3ca522695742d92183891"
+    },
+    {
+      "path": "V5/src/v5_shadow/health.py",
+      "bytes": 6908,
+      "sha256": "f666280bceb67d425ef47f8e19445ec7edbaed4febdf30ade8ad5355314700c3"
+    },
+    {
+      "path": "V5/tests/test_runtime_dependencies.py",
+      "bytes": 4001,
+      "sha256": "91569c216618b7c634f8c25d1951f395694794f08ad9e0c269b25c0477f6eeea"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/README.md",
+      "bytes": 5842,
+      "sha256": "a7ca1391523241e11c509d3402d416c6ff7d64db5e4ccf228202933e56559e09"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/VERIFICATION.json",
+      "bytes": 925,
+      "sha256": "f8e8e8df142e7fe9325e2b1c4623e027fd0dbe65d34c80ea99fbfd86f2cd6690"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/baseline-cold-import.txt",
+      "bytes": 825,
+      "sha256": "d3b53d3b0f3d3f64a9b96ff7cb8e8542fd23ef74e64964315049082425071bab"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/clean-install.txt",
+      "bytes": 632,
+      "sha256": "35a2cdb560c4078774f77eaa32e865f08c8c78fa01447b011e2e31edeb5d53d3"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/dependency-tests-green.txt",
+      "bytes": 823,
+      "sha256": "560f1018c715cf62d3a4b0c10d55733b21392b4155d5db24a1205814863ad7f5"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/dependency-tests-red.txt",
+      "bytes": 5758,
+      "sha256": "c55a094a35a056891dee4d328d543702608c880d8a52da6c9b06205f6ced848b"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/invalid-smoke-fixture.stderr",
+      "bytes": 2053,
+      "sha256": "4ceadfed3cedf71da034019ea32206e3e72973bb6863cf93a66636957e38ffbe"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/lock-resolution.txt",
+      "bytes": 386,
+      "sha256": "3d681a91b8c07acfa4c7e9adbdc54c94a65d5020552fd983f48f3521cfd8af2c"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/package-check.json",
+      "bytes": 6184,
+      "sha256": "24c9d325c0c1dd1a18bc37e087cca1a2fd59754e3f72c9a7e65b9f2f72f92d90"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/real-cli.json",
+      "bytes": 12521,
+      "sha256": "495360ae59416d65f9d79f5c452c92b208360ecc896b47ca6b00e164c14869ce"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/real-cli.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/relocation-cli.json",
+      "bytes": 12893,
+      "sha256": "92e83553c1422cb3c1cf51a41cc72a7fb44d29455dd86e29cf57734b7ba378cc"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/relocation-cli.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/relocation-dependencies.txt",
+      "bytes": 823,
+      "sha256": "2966fb4072c2b807c1b2e04c8af52dd82512ccea77725651d7c28fab5e9aa5c3"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/relocation-install.txt",
+      "bytes": 529,
+      "sha256": "9e38987488522ccdd6a5953ffb9bcfaf5a30660f5ec42fa03bd83769d5c049d0"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/relocation-summary.json",
+      "bytes": 576,
+      "sha256": "7d4862dcb14ddb3a64ec3fa048ad055d4b85bfc5daa73e49c59bf39c855b480b"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/relocation.strace.gz",
+      "bytes": 180027,
+      "sha256": "6bb1ba8d708c2aeecfdb8b1b19efb31336ebf2a50d04c30905f294cf69cb2124"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/reviewer.txt",
+      "bytes": 1034,
+      "sha256": "f5857ae500fd1d6de7f1dd9fe2d8404ea5c9b74957e5c50f61018c329c93d5f4"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/source-and-lock-audit.json",
+      "bytes": 7852,
+      "sha256": "c466b33a6fb6c4cd946c382a4b6473afba466801a15e9eb552196a72c5d3b24e"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/evidence/targeted-m17.txt",
+      "bytes": 1677,
+      "sha256": "4c5eb92a3c8246cc07a015033c02b5ba3b67c3f97dada3f778504c227a2e1d58"
+    },
+    {
+      "path": "handoffs/P0/cloud-m17-dependencies-20261014/verify_cli.py",
+      "bytes": 3441,
+      "sha256": "c7d11d049fb7a83e29277f955dd42b5401693ea43c888c93c4610499ef5632f4"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+test_fastapi_version_mismatch_is_unverified (__main__.RuntimeDependenciesTests.test_fastapi_version_mismatch_is_unverified) ... FAIL
+test_installed_runtime_matches_complete_lock (__main__.RuntimeDependenciesTests.test_installed_runtime_matches_complete_lock) ... FAIL
+test_m17_original_and_adapter_cli_help_outside_checkout (__main__.RuntimeDependenciesTests.test_m17_original_and_adapter_cli_help_outside_checkout) ... 
+  test_m17_original_and_adapter_cli_help_outside_checkout (__main__.RuntimeDependenciesTests.test_m17_original_and_adapter_cli_help_outside_checkout) (entry='vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py') ... FAIL
+test_m17_original_owner_and_reader_cold_import_outside_checkout (__main__.RuntimeDependenciesTests.test_m17_original_owner_and_reader_cold_import_outside_checkout) ... ok
+test_missing_fastapi_lock_entry_is_unverified (__main__.RuntimeDependenciesTests.test_missing_fastapi_lock_entry_is_unverified) ... FAIL
+
+======================================================================
+FAIL: test_fastapi_version_mismatch_is_unverified (__main__.RuntimeDependenciesTests.test_fastapi_version_mismatch_is_unverified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/tests/test_runtime_dependencies.py", line 43, in test_fastapi_version_mismatch_is_unverified
+    self.assertIn('DEPENDENCY_VERSION_MISMATCH:fastapi', result['reason_codes'])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'DEPENDENCY_VERSION_MISMATCH:fastapi' not found in ['DEPENDENCY_LOCK_UNSUPPORTED']
+
+======================================================================
+FAIL: test_installed_runtime_matches_complete_lock (__main__.RuntimeDependenciesTests.test_installed_runtime_matches_complete_lock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/tests/test_runtime_dependencies.py", line 18, in test_installed_runtime_matches_complete_lock
+    self.assertEqual(result['status'], 'MATCH', result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'UNVERIFIED' != 'MATCH'
+- UNVERIFIED
++ MATCH
+ : {'status': 'UNVERIFIED', 'packages': [{'name': 'numpy', 'version': '2.5.3', 'metadata_version': '2.5.3', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/numpy/__init__.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}, {'name': 'pandas', 'version': '2.3.3', 'metadata_version': '2.3.3', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/pandas/__init__.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}, {'name': 'pyarrow', 'version': '24.0.0', 'metadata_version': '24.0.0', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/pyarrow/__init__.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}, {'name': 'python-dateutil', 'version': '2.9.0.post0', 'metadata_version': '2.9.0.post0', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/dateutil/__init__.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}, {'name': 'pytz', 'version': '2026.5', 'metadata_version': '2026.5', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/pytz/__init__.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}, {'name': 'six', 'version': '1.17.0', 'metadata_version': '1.17.0', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/six.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}, {'name': 'tzdata', 'version': '2026.5', 'metadata_version': '2026.5', 'origin': '/workspace/v5-m17-env/lib/python3.14/site-packages/tzdata/__init__.py', 'installation_root': '/workspace/v5-m17-env/lib/python3.14/site-packages'}], 'reason_codes': ['DEPENDENCY_LOCK_UNSUPPORTED']}
+
+======================================================================
+FAIL: test_m17_original_and_adapter_cli_help_outside_checkout (__main__.RuntimeDependenciesTests.test_m17_original_and_adapter_cli_help_outside_checkout) (entry='vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/tests/test_runtime_dependencies.py", line 67, in test_m17_original_and_adapter_cli_help_outside_checkout
+    self.assertEqual(result.returncode, 0, result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py", line 26, in <module>
+    from apps.api.v35_api.manager_workbench_router import validate_workbench_payload, _empty_envelope
+ModuleNotFoundError: No module named 'apps'
+
+
+======================================================================
+FAIL: test_missing_fastapi_lock_entry_is_unverified (__main__.RuntimeDependenciesTests.test_missing_fastapi_lock_entry_is_unverified)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/tests/test_runtime_dependencies.py", line 30, in test_missing_fastapi_lock_entry_is_unverified
+    self.assertIn('DEPENDENCY_LOCK_INCOMPLETE', result['reason_codes'])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'DEPENDENCY_LOCK_INCOMPLETE' not found in ['DEPENDENCY_LOCK_UNSUPPORTED']
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.039s
+
+FAILED (failures=4)
