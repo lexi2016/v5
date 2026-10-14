@@ -54,7 +54,7 @@
   },
   "article_schema": "v5.research_archive.v2",
   "new_source_sha256": {
-    "V5/src/v5_shadow/archive_article_v2.py": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
+    "V5/src/v5_shadow/archive_article_v2.py": "2338876a72910e3daa44a34f356ca8c55b2416a66c68eff2942289981c3fe180",
     "V5/tests/test_archive_article_v2.py": "74ca5b7696ae1e6d5ec8343004eb7194ee5a5fa4236b2ae112afa69741968de0",
     "V5/contracts/archive_builder_source_manifest.json": "47a7e7e2b4710c3db5e3185d02e2f291f5cf5aafb43077893627321c973403cb",
     "V5/src/v5_shadow/archive_builder_v1.py": "7f8cff5dfb4fe66663d7dd9f7901089e802ef53b55b10e1c003f6e2300ebdd74",
@@ -190,5 +190,11 @@
     "base_commit": "261cf0123dd7175bfcc6031a5dc201604a98a609",
     "article_adapter_sha256": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
     "scope": "Only reversible unique whitespace-folded evidence mapping; original issuer and builder verification preserved; producer bytes unchanged"
+  },
+  "m04_representation_repair": {
+    "base_commit": "d19f3f9d955c5c65d26139b40edfeb90df214b03",
+    "article_adapter_sha256": "2338876a72910e3daa44a34f356ca8c55b2416a66c68eff2942289981c3fe180",
+    "decoder_source_sha256": "23d79572bcbb979e7dc81db44c7e5854ad2ac670c45c52399f2e630f7ae1ee57",
+    "scope": "Original summary is not a quote; fixed original decoder and title compaction, full owner replay required; no partial archive"
   }
 }

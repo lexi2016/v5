@@ -8,6 +8,7 @@ import copy
 from datetime import datetime
 import hashlib
 import importlib
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -165,6 +166,37 @@ def evidence_raw_span(body, evidence):
                 text=raw, sha256=hashlib.sha256(raw.encode('utf-8')).hexdigest())
 
 
+ANALYZER_SHA256 = '23d79572bcbb979e7dc81db44c7e5854ad2ac670c45c52399f2e630f7ae1ee57'
+
+
+def _raw_span(text, start, end):
+    raw = text[start:end]
+    return dict(char_start=start, char_end=end, utf8_start=len(text[:start].encode()),
+                utf8_end=len(text[:end].encode()), text=raw, sha256=hashlib.sha256(raw.encode()).hexdigest())
+
+
+def body_representation(body, issuer):
+    # Invoke the fixed original decoder; never unquote arbitrary source text.
+    path = Path(__file__).resolve().parents[2] / 'producers/archive-acquisition-v2/source/upstreams/shared_research/v3_zsxq_adapter.py'
+    if path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() != ANALYZER_SHA256:
+        raise ValueError('ARTICLE_V2_DECODER_SOURCE_SHA')
+    spec = importlib.util.spec_from_file_location('m04_original_body_decoder', path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    decoded = module._clean_zsxq_text(body)
+    if not isinstance(issuer, str) or not issuer or not decoded or issuer not in decoded:
+        raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
+    spans = [_raw_span(decoded, match.start(), match.end()) for match in re.finditer(re.escape(issuer), decoded)]
+    tags = [_raw_span(body, match.start(), match.end())
+            for match in re.finditer(r'<e\b[^>]*\btitle="([^"]*)"[^>]*/?>', body)
+            if issuer in module._clean_zsxq_text(match.group())]
+    return dict(raw_sha256=hashlib.sha256(body.encode()).hexdigest(),
+                decoded_text=decoded, decoded_sha256=hashlib.sha256(decoded.encode()).hexdigest(),
+                decoder_source_sha256=ANALYZER_SHA256, decoder_function='v3_zsxq_adapter._clean_zsxq_text',
+                issuer_binding='EXACT_DECODED_MENTION_ONLY_NOT_RELATION',
+                issuer_decoded_spans=spans, issuer_encoded_tags=tags)
+
+
 def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_source=None, builder_receipt=None):
     receipt, payloads, observations = capture(read, receipt_ref)
     available_at = receipt['source_payloads_available_at']
@@ -211,7 +243,7 @@ def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_sour
         if len(selected) != 1 or selected[0] != expected:
             raise ValueError('ARTICLE_V2_RECENT_RAW_MISMATCH')
         analyzed = [r for r in summary if str(r.get('topic_id')) == topic_id
-                    and r.get('title') == article['source_title']
+                    and re.sub(r'\s+', ' ', str(r.get('title') or '')).strip()[:300] == article['source_title']
                     and stamp(r.get('create_time')) == stamp(observation['published_at'])]
         if len(analyzed) != 1:
             raise ValueError('ARTICLE_V2_SUMMARY_BINDING_NOT_UNIQUE')
@@ -226,12 +258,28 @@ def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_sour
                    and collector_name(c.get('name')) == article['stock_name']]
         body = observation['body']
         evidence = article.get('evidence_sentence')
-        if (len(company) != 1 or not article['stock_name'] or article['stock_name'] not in body
+        if (len(company) != 1 or not article['stock_name']
                 or not isinstance(evidence, str) or not evidence.strip()):
             raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
-        # Preserve already-valid exact-body v2 payloads. Only the previously
-        # rejected compacted path adds a reversible raw-body span.
-        evidence_span = evidence_raw_span(body, evidence) if evidence not in body else None
+        representation = body_representation(body, article['stock_name'])
+        if topic.get('content_head') != representation['decoded_text'][:240]:
+            raise ValueError('ARTICLE_V2_DECODED_SUMMARY_HEAD_BINDING')
+        evidence_span = None
+        summary_semantics = None
+        if evidence not in body:
+            try:
+                evidence_span = evidence_raw_span(body, evidence)
+            except ValueError as exc:
+                if str(exc) != 'ARTICLE_V2_ISSUER_BODY_BINDING':
+                    raise
+                # This field comes from the original owner's compacted/truncated
+                # summary, which may append a title. Preserve it as a summary;
+                # full original owner replay below must still prove every byte.
+                summary_semantics = dict(kind='ORIGINAL_BUILDER_SUMMARY',
+                    quote_status='NOT_A_SOURCE_QUOTE',
+                    summary_sha256=hashlib.sha256(evidence.encode()).hexdigest(),
+                    proof='EXACT_ORIGINAL_BUILDER_REPLAY',
+                    issuer_scope='MENTION_ONLY_NOT_RELATION')
         themes = topic.get('themes') or []
         theme = ' / '.join(str(t.get('theme') or '').strip() for t in themes
                            if isinstance(t, dict) and str(t.get('theme') or '').strip())
@@ -251,6 +299,15 @@ def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_sour
                 summary_topic_sha256=sha256_json(topic), issuer_identity_status='ORIGINAL_CONSUMER_MUST_VERIFY'))
         if evidence_span is not None:
             article['acquisition_v2']['evidence_raw_span'] = evidence_span
+        if summary_semantics is not None:
+            article['acquisition_v2']['evidence_semantics'] = summary_semantics
+        if article['stock_name'] not in body or summary_semantics is not None:
+            article['acquisition_v2']['body_representation'] = representation
+        if topic.get('title') != article['source_title']:
+            article['acquisition_v2']['source_title_transform'] = dict(
+                transform='ORIGINAL_COMPACT_TEXT_300',
+                summary_title_sha256=hashlib.sha256(topic['title'].encode()).hexdigest(),
+                article_title_sha256=hashlib.sha256(article['source_title'].encode()).hexdigest())
     # The existing article/body/PIT gates above retain their original rejection
     # reasons. Complete owner-source and original-builder verification still
     # precedes every write and runs again on each independent v2 read.

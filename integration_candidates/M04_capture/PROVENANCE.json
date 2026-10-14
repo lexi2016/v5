@@ -2810,7 +2810,7 @@
       "git_blob_sha": "ad5d27f127db77a2dcadaab0b3b4795f30aa3c21",
       "bytes": 12503,
       "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/manifest.json",
-      "current_sha256": "38cb387622caf28e475034c5940a176e05b8e78e5c2297b3bb158b46b3d82286",
+      "current_sha256": "3768b7e3c68b641bfc917f1d1ee33c76a620bcd6092959c463da2afbe03b5b0a",
       "change": "M04 fail-closed CLI envelope fix and producer manifest current identity"
     },
     {
@@ -2818,7 +2818,7 @@
       "git_blob_sha": "f382350c66aeb434a53dad6cb8a378cf4b7ff817",
       "bytes": 19898,
       "original_path": "modules/M04/source/V5/src/v5_shadow/archive_article_v2.py",
-      "current_sha256": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
+      "current_sha256": "2338876a72910e3daa44a34f356ca8c55b2416a66c68eff2942289981c3fe180",
       "change": "Unique reversible original compact_text whitespace span, exact raw UTF8 offsets and SHA; original issuer/builder/source/time gates retained"
     },
     {
@@ -2834,5 +2834,6 @@
     "path": "source/V5/src/v5_shadow/research_ingest_builder_reuse.py",
     "sha256": "f07c860ee916df0417744693b1fd94217613540c43ce6d756b6260886dd785aa",
     "purpose": "Read-only isolated original verify_builder invocation; no acquisition or source writer"
-  }
+  },
+  "m04_representation_contract": "Raw body is preserved; fixed original decoder yields separately hashed decoded text and exact issuer spans/tag source locations; original owner-derived summary is labelled nonquote, not substituted. Full owner replay required."
 }
