@@ -11,6 +11,16 @@ from pathlib import Path
 import capture_runtime as runtime
 
 
+def _display_article(article):
+ # Add presentation only after original cold validation; preserve every stored
+ # article field and never relabel the summary as original body or quotation.
+ semantics=article.get('acquisition_v2',{}).get('evidence_semantics',{})
+ if semantics.get('quote_status')!='NOT_A_SOURCE_QUOTE':return article
+ if semantics.get('kind')!='ORIGINAL_BUILDER_SUMMARY':raise ValueError('RESEARCH_LANE_EVIDENCE_KIND')
+ if 'summary' in article or 'summary_display_only' in article:raise ValueError('RESEARCH_LANE_DISPLAY_FIELD_COLLISION')
+ return {**article,'summary':'原owner派生摘要（非原文引句）：'+article['evidence_sentence'],'summary_display_only':True}
+
+
 def research_lane(binding,query):
  if not isinstance(query,dict) or set(query) not in (set(),{'research_date'}):raise ValueError('RESEARCH_LANE_QUERY')
  requested=query.get('research_date')
@@ -41,5 +51,5 @@ def research_lane(binding,query):
  missing=sum(not a.get('retrieved_at') or a.get('retrieved_at')=='UNKNOWN' or not a.get('available_at') or a.get('available_at')=='UNKNOWN' for a in articles)
  if missing:gaps.append('M04_ARTICLE_ACQUISITION_TIME_UNKNOWN')
  gaps.extend(archive.get('cannot_confirm',[]))
- out.update(status='LIVE_PERIPHERAL_ONLY',reason='M04_BOUND_ARCHIVE_MATERIALS_ONLY',archive_materials={'status':archive.get('status'),'articles':articles,'article_count':archive['article_count'],'acquisition_status':'UNKNOWN' if missing else 'RECORDED','missing_acquisition_time_count':missing,'source_reference':refs,'source_counts':archive.get('source_counts',{}),'cannot_confirm':archive.get('cannot_confirm',[])})
+ out.update(status='LIVE_PERIPHERAL_ONLY',reason='M04_BOUND_ARCHIVE_MATERIALS_ONLY',archive_materials={'status':archive.get('status'),'articles':[_display_article(a) for a in articles],'article_count':archive['article_count'],'acquisition_status':'UNKNOWN' if missing else 'RECORDED','missing_acquisition_time_count':missing,'source_reference':refs,'source_counts':archive.get('source_counts',{}),'cannot_confirm':archive.get('cannot_confirm',[])})
  return out

@@ -36,6 +36,16 @@ class RepresentationTests(unittest.TestCase):
   self.assertNotIn(a['evidence_sentence'],meta['body_representation']['decoded_text'])
   self.assertEqual(meta['evidence_semantics']['summary_sha256'],hashlib.sha256(a['evidence_sentence'].encode()).hexdigest())
   self.assertIn('source_title_transform',meta);self.assertFalse(product['historical_pit_claimed'])
+  import research_lane
+  archive_root=fixture.Path(result['archive_binding']['root'])
+  before={str(p):p.read_bytes() for p in archive_root.rglob('*') if p.is_file()}
+  lane=research_lane.research_lane(result['archive_binding'],{'research_date':c.day})
+  display=lane['archive_materials']['articles'][0]
+  self.assertEqual(display['summary'],'原owner派生摘要（非原文引句）：'+a['evidence_sentence'])
+  self.assertTrue(display['summary_display_only'])
+  self.assertEqual({key:display[key] for key in a},a)
+  self.assertEqual(display['body_text'],body)
+  self.assertEqual(before,{str(p):p.read_bytes() for p in archive_root.rglob('*') if p.is_file()})
   # A hypothetical new issuer or fabricated summary still fails full owner replay.
   root=fixture.Path(result['archive_binding']['root']);payload=json.loads((root/product['articles'][0]['archive_file']).read_bytes());read=lambda name:(root/name).read_bytes()
   original=json.loads(read(payload['archive_input_v1']['path']));original['articles'][0]['evidence_sentence']='合成科技虚构合并结论'

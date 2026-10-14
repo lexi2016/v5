@@ -21,6 +21,11 @@ class ResearchLaneTests(unittest.TestCase):
   self.assertNotIn('morning_news',exact);self.assertNotIn('zsxq',exact)
   self.assertFalse(exact['production_allowed']);self.assertIn('M04_OTHER_LANES_NOT_CONFIGURED',exact['cannot_confirm'])
   self.assertEqual(exact['archive_materials']['source_reference']['archive_binding'],self.binding)
+ def test_literal_article_projection_preserves_original_without_summary_label(self):
+  lane=self.m.research_lane(self.binding,{'research_date':self.day})
+  original=self.fixture.m.materials(self.binding)['articles'][0]['source_article']
+  self.assertEqual(lane['archive_materials']['articles'][0],original)
+  self.assertNotIn('summary_display_only',lane['archive_materials']['articles'][0])
  def test_empty_latest_has_no_invented_date(self):
   root=self.fixture.root/'empty';root.mkdir();(root/'manifest.json').write_text('{}')
   binding={'root':str(root),'files':{'manifest.json':self.fixture.sha(root/'manifest.json')}}
