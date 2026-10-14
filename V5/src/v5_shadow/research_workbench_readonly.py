@@ -7,6 +7,7 @@ WECHAT='/api/v5/research/wechat/materials'
 ROUTES=(LANE,WECHAT)
 KEY='m04_research_lane_binding'
 LIMIT=16*1024*1024
+MANIFEST_LIMIT=4*1024*1024
 FLAGS=dict(production_allowed=False,buy_gate_updated=False,orders_sent=False)
 
 def query_date(query):
@@ -23,6 +24,17 @@ def _absolute(value):
  p=Path(value)
  if not p.is_absolute() or '..' in p.parts or any(x.is_symlink() for x in (p,*p.parents)):raise ValueError('RESEARCH_PATH')
  return p
+
+def _package_bytes(path,limit):
+ path=_absolute(str(path))
+ fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+ with os.fdopen(fd,'rb') as stream:
+  before=os.fstat(stream.fileno())
+  if not stat.S_ISREG(before.st_mode) or before.st_size>limit:raise ValueError('RESEARCH_PACKAGE_FILE_TYPE')
+  raw=stream.read(limit+1);after=os.fstat(stream.fileno())
+  fields=('st_ino','st_dev','st_size','st_mtime_ns','st_ctime_ns')
+  if len(raw)!=before.st_size or tuple(getattr(before,k) for k in fields)!=tuple(getattr(after,k) for k in fields):raise ValueError('RESEARCH_PACKAGE_CHANGED')
+  return raw
 
 def validate_binding(config):
  b=config.get(KEY)
@@ -62,7 +74,7 @@ def _lane(config,query):
  date=query_date(query);b=config.get(KEY)
  if b is None:return dict(schema_version='v3_5.research_lane.v1',endpoint_mode='EXACT' if date else 'LATEST',research_date=date,status='NOT_MATERIALIZED',reason='V5_M04_RESEARCH_BINDING_NOT_CONFIGURED',cannot_confirm=['V5_M04_RESEARCH_BINDING_NOT_CONFIGURED'],write_policy='read_only',recommendation_status='RESEARCH_ONLY',**FLAGS)
  validate_binding(config)
- package=_absolute(b['package_root']);manifest=(package/'RELEASE.json').read_bytes()
+ package=_absolute(b['package_root']);manifest=_package_bytes(package/'RELEASE.json',MANIFEST_LIMIT)
  if hashlib.sha256(manifest).hexdigest()!=b['package_manifest_sha256']:raise ValueError('RESEARCH_PACKAGE_PIN')
  files=json.loads(manifest).get('files')
  if not isinstance(files,dict) or not {'launch.py','research_lane.py','capture_runtime.py'}<=set(files):raise ValueError('RESEARCH_PACKAGE_FILES')
@@ -74,15 +86,14 @@ def _lane(config,query):
   relative=Path(name)
   if relative.is_absolute() or '..' in relative.parts:raise ValueError('RESEARCH_PACKAGE_PATH')
   target=_absolute(str(package/relative))
-  if not stat.S_ISREG(target.stat().st_mode) or target.stat().st_size>64*1024*1024:raise ValueError('RESEARCH_PACKAGE_FILE_TYPE')
-  if hashlib.sha256(target.read_bytes()).hexdigest()!=digest:raise ValueError('RESEARCH_PACKAGE_BYTES:'+name)
+  if hashlib.sha256(_package_bytes(target,64*1024*1024)).hexdigest()!=digest:raise ValueError('RESEARCH_PACKAGE_BYTES:'+name)
  command=[b['python_executable'],'-I','-B',str(package/'launch.py'),'lane']
  if date:command.extend(['--research-date',date])
  try:
   result=subprocess.run(command,input=json.dumps(b['archive_binding']).encode(),stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=30,env={k:v for k,v in os.environ.items() if not k.startswith(('V4_','V35_'))})
  except subprocess.TimeoutExpired as exc:raise TimeoutError('RESEARCH_READER_TIMEOUT') from exc
  if result.returncode or len(result.stdout)>LIMIT:raise ValueError('RESEARCH_READER_REJECTED')
- if (package/'RELEASE.json').read_bytes()!=manifest:raise ValueError('RESEARCH_PACKAGE_CHANGED')
+ if _package_bytes(package/'RELEASE.json',MANIFEST_LIMIT)!=manifest:raise ValueError('RESEARCH_PACKAGE_CHANGED')
  return validate_payload(json.loads(result.stdout),query)
 
 def _wechat(query):

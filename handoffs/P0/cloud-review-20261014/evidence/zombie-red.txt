@@ -1,0 +1,50 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_stop_reaps_exited_child_and_releases_stale_runtime ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-10/test_stop_reaps_exited_child_a0')
+
+    @pytest.mark.skipif(not hasattr(os, 'pidfd_open'), reason='Linux pidfd exit identity')
+    def test_stop_reaps_exited_child_and_releases_stale_runtime(tmp_path):
+        value = config(tmp_path)
+        root = Path(value['runtime_root'])
+        root.mkdir()
+        child = subprocess.Popen([sys.executable, '-c', 'pass'])
+        fd = os.pidfd_open(child.pid)
+        try:
+            assert select.select([fd], [], [], 3)[0]
+            (root/'runtime.json').write_bytes(canonical_bytes(dict(
+                marker=main_runtime.MARKER, module_pid=child.pid, port=1,
+                config_sha256=sha256_json(value))))
+>           assert main_runtime.stop(value)['status'] == 'STOPPED'
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+
+V5/tests/test_p0_runtime_safety.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+config = {'runtime_root': '/tmp/pytest-of-agent/pytest-10/test_stop_reaps_exited_child_a0/runtime', 'composition': 'SYNTHETIC',...ease_id': 'SYNTHETIC_SAFETY', 'data_root': '/tmp/pytest-of-agent/pytest-10/test_stop_reaps_exited_child_a0/data', ...}}
+
+    def stop(config):
+        path=_runtime_path(config)
+        if not path.is_file(): return {'status':'ALREADY_STOPPED','natural_verified':False}
+        with _lifecycle_lock(path.parent):
+            if not path.is_file():return {'status':'ALREADY_STOPPED','natural_verified':False}
+            value=json.loads(path.read_bytes())
+            if value.get('marker')!=MARKER or value.get('config_sha256')!=sha256_json(config): raise ValueError('RUNTIME_IDENTITY_MISMATCH')
+            pid=value.get('module_pid')
+            if type(pid) is not int or pid<=0:raise ValueError('RUNTIME_PROCESS_IDENTITY_UNVERIFIED')
+            fd=None
+            try:
+                try:
+                    if hasattr(os,'pidfd_open') and hasattr(signal,'pidfd_send_signal'):fd=os.pidfd_open(pid)
+                    else:os.kill(pid,0)
+                except ProcessLookupError:
+                    path.unlink();return {'status':'STOPPED','identity':value,'natural_verified':False}
+>               if not _health_matches(config,value):raise ValueError('RUNTIME_PROCESS_IDENTITY_UNVERIFIED')
+                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               ValueError: RUNTIME_PROCESS_IDENTITY_UNVERIFIED
+
+V5/src/v5_shadow/main_runtime.py:151: ValueError
+=========================== short test summary info ============================
+FAILED V5/tests/test_p0_runtime_safety.py::test_stop_reaps_exited_child_and_releases_stale_runtime
+1 failed in 0.08s

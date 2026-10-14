@@ -1,0 +1,18 @@
+...................F.                                                    [100%]
+=================================== FAILURES ===================================
+_ RegistrationTests.test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption _
+
+self = <test_p0_close_recapture_registration.RegistrationTests testMethod=test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption>
+
+    def test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption(self):
+        job,binding=self.prepared();result=self.dispatch(job,binding)
+>       self.assertEqual(result['status'],'SUCCEEDED',result)
+E       AssertionError: 'OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY' != 'SUCCEEDED'
+E       - OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY
+E       + SUCCEEDED
+E        : {'lane': 'manager_close_recapture', 'status': 'OUTCOME_UNKNOWN_NO_AUTOMATIC_RETRY', 'run_id': '21c9b0046fc246f2b5b115718b6701ae', 'reason': 'OutcomeUnknown'}
+
+V5/tests/test_p0_close_recapture_registration.py:101: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/test_p0_close_recapture_registration.py::RegistrationTests::test_previous_source_dispatch_real_process_cold_reuse_and_pool_corruption
+1 failed, 20 passed, 14 deselected in 6.28s

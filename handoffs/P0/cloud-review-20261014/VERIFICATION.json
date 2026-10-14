@@ -1,0 +1,34 @@
+{
+  "base": "bc11b542bbe83be5a3abc7756f93d0010dbfae46",
+  "input_kind": "SYNTHETIC",
+  "platform_scope": "Linux cloud, pidfd",
+  "targeted_tests": 28,
+  "m04_multi_root_http": 1,
+  "frontend": "UNCHANGED_NOT_RERUN",
+  "m04_full_suite": "UNCHANGED_NOT_RERUN",
+  "full_release_regression": "NOT_RUN",
+  "natural_verified": false,
+  "complete_release_verified": false,
+  "live_deployments": 0,
+  "real_provider_calls": 0,
+  "reviewers": [
+    "independent M04 read-safety reviewer",
+    "independent P0 lifecycle/package reviewer"
+  ],
+  "review_status": "No remaining Linux candidate blockers; platform and M17 dependency limitations preserved",
+  "known_failure": "M17 missing undeclared fastapi, reproduced on base",
+  "logs": {
+    "safety-red.txt": "fb047f76e9f439caef158e83f8c816632cb1a4a0fde891f03a24a20f179b3464",
+    "safety-green.txt": "f7f62e0fc1d67a4e17c9422a7136fdda37dc36e3c4277fe2df87f98ad2ba9f89",
+    "zombie-red.txt": "3a98834d8f04f98d6b387c198a06e33d67c986d0a24a3660ddcc64dc64bf841b",
+    "fd-red.txt": "4dc05215268f1d3272cd2c074ef498248536900eacc32ca280eb377a40f581a4",
+    "package-check-red.txt": "1feaa5a6269d475bf0c2f31287e248fee5c34ab6b2bf16e2dbc469807f4094e5",
+    "package-duplicate-red.txt": "19d50ec8b11447e249a6eb878005ac4b3211393596799960c46baaea9bb15da9",
+    "final-focused.txt": "fc320d314f6f85fa7ce43f767ad858004086cbbd7d7f84277d3a4e153b21a351",
+    "m04-multi-http.txt": "3a36ebd0f6bb404e54b618aec75cd5d39c5c4f59e570af49c3c8cf22e2d91289",
+    "package-check.json": "47f651b649f24a29614fb7cdf2285727524d2286b7ca4c2600f85ba6aaec41ee",
+    "runtime-regression.txt": "a145058ecba86268881e61df5461c83e746432017fde092401e22ade7a6e544f",
+    "unrelated-baseline.txt": "02d76eb4bf850645258eba2200fd764f8f5645831282dbc284a73f42b75e777f",
+    "m17-child-diagnostic.txt": "b945f813eccceb2bde85e750f82f0748320926e4a4e1c621bfee301459ff7428"
+  }
+}

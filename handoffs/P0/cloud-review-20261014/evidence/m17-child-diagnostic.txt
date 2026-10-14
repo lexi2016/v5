@@ -1,0 +1,18 @@
+COMMAND ['/workspace/v5-test-env/bin/python', '-I', '-B', '/workspace/v5-cloud/V5/src/v5_shadow/daily_close_recapture_owner.py', '--worker', 'producer']
+RETURN 1
+STDOUT
+
+STDERR
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/V5/src/v5_shadow/daily_close_recapture_owner.py", line 476, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/workspace/v5-cloud/V5/src/v5_shadow/daily_close_recapture_owner.py", line 465, in main
+    value = _worker(args.worker, packet)
+  File "/workspace/v5-cloud/V5/src/v5_shadow/daily_close_recapture_owner.py", line 390, in _worker
+    from ops import materialize_manager_close_discovery as owner
+  File "/workspace/v5-cloud/V5/vendor/close_discovery_baseline/ops/materialize_manager_close_discovery.py", line 26, in <module>
+    from apps.api.v35_api.manager_workbench_router import validate_workbench_payload, _empty_envelope
+  File "/workspace/v5-cloud/V5/vendor/close_discovery_baseline/apps/api/v35_api/manager_workbench_router.py", line 17, in <module>
+    from fastapi import APIRouter, HTTPException, Query
+ModuleNotFoundError: No module named 'fastapi'

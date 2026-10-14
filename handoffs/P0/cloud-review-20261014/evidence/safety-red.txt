@@ -1,0 +1,315 @@
+FFFFFFF                                                                  [100%]
+=================================== FAILURES ===================================
+__________ test_invalid_module_config_rejected_before_runtime_writes ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_invalid_module_config_rej0')
+
+    def test_invalid_module_config_rejected_before_runtime_writes(tmp_path):
+        value = config(tmp_path)
+        value["module_api"] = {"host": "127.0.0.1", "mode": "READ_ONLY"}
+>       with pytest.raises(ValueError, match="CONTRACT_FIELDS_INVALID"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+V5/tests/test_p0_runtime_safety.py:32: Failed
+___________ test_stop_preserves_unrelated_process_and_stale_identity ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_stop_preserves_unrelated_0')
+
+    def test_stop_preserves_unrelated_process_and_stale_identity(tmp_path):
+        value = config(tmp_path)
+        root = Path(value["runtime_root"])
+        root.mkdir()
+        sleeper = subprocess.Popen([sys.executable, "-c", "import time;time.sleep(30)"])
+        identity = root / "runtime.json"
+        raw = canonical_bytes(dict(marker=main_runtime.MARKER, module_pid=sleeper.pid,
+                                   port=1, config_sha256=sha256_json(value)))
+        identity.write_bytes(raw)
+        try:
+            assert main_runtime.status(value)["status"] == "STALE"
+>           with pytest.raises(ValueError, match="RUNTIME_PROCESS_IDENTITY_UNVERIFIED"):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE ValueError
+
+V5/tests/test_p0_runtime_safety.py:50: Failed
+_____________ test_managed_child_ignores_valid_timestamp_bytecode ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_managed_child_ignores_val0')
+
+    def test_managed_child_ignores_valid_timestamp_bytecode(tmp_path):
+        source = tmp_path / "V5"
+        source.mkdir()
+        shutil.copytree(BASE / "src", source / "src", ignore=shutil.ignore_patterns("__pycache__"))
+        shutil.copy2(BASE / "run_shadow.py", source / "run_shadow.py")
+        module = source / "src/v5_shadow/module_api.py"
+        original = module.read_bytes()
+        info = module.stat()
+        module.write_bytes(original.replace(b"READ_ONLY_RESPONSE_SERVICE", b"STALE_PYC_RESPONSE_SERVICE"))
+        os.utime(module, ns=(info.st_atime_ns, info.st_mtime_ns))
+        cache = Path(py_compile.compile(str(module), doraise=True))
+        cache_before = cache.read_bytes()
+        module.write_bytes(original)
+        os.utime(module, ns=(info.st_atime_ns, info.st_mtime_ns))
+        value = config(tmp_path)
+        cfg = tmp_path / "config.json"
+        cfg.write_text(json.dumps(value))
+    
+        def run(action):
+            result = subprocess.run([sys.executable, "-I", "-B", str(source / "run_shadow.py"),
+                                     "runtime", action, "--config", str(cfg)],
+                                    cwd=tmp_path, capture_output=True, text=True, timeout=20)
+            assert result.returncode == 0, result.stdout + result.stderr
+            return json.loads(result.stdout)
+    
+        started = run("start")
+        try:
+            with urlopen(f"http://127.0.0.1:{started['identity']['port']}/__v5/module-health", timeout=3) as response:
+                health = json.load(response)
+>           assert health["status"] == "READ_ONLY_RESPONSE_SERVICE"
+E           AssertionError: assert 'STALE_PYC_RESPONSE_SERVICE' == 'READ_ONLY_RESPONSE_SERVICE'
+E             
+E             - READ_ONLY_RESPONSE_SERVICE
+E             ? ^ -- ^^^
+E             + STALE_PYC_RESPONSE_SERVICE
+E             ? ^^^^  ^ +
+
+V5/tests/test_p0_runtime_safety.py:88: AssertionError
+________________ test_silent_child_start_is_bounded_and_reaped _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_silent_child_start_is_bou0')
+
+    def test_silent_child_start_is_bounded_and_reaped(tmp_path):
+        value = config(tmp_path)
+        # Inject a task-owned silent process at the OS boundary, not a fake READY.
+        code = """import json,subprocess,sys
+    sys.path.insert(0,sys.argv[1])
+    from v5_shadow import main_runtime as m
+    real=m.subprocess.Popen; children=[]
+    def silent(*args,**kwargs):
+     p=real([sys.executable,'-c','import time;time.sleep(30)'],**kwargs)
+     children.append(p);return p
+    m.subprocess.Popen=silent;m.START_TIMEOUT=.15
+    try:m.start(json.loads(sys.argv[2]))
+    except ValueError as e:
+     assert str(e)=='MODULE_API_START_FAILED',str(e)
+     assert children[0].poll() is not None
+     print('BOUNDED_AND_REAPED')
+    else:raise AssertionError('silent child accepted')
+    """
+        proc = subprocess.Popen([sys.executable, "-I", "-B", "-c", code, str(BASE / "src"), json.dumps(value)],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, start_new_session=True)
+        try:
+>           out, err = proc.communicate(timeout=3)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+V5/tests/test_p0_runtime_safety.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:1221: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:2154: in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: -9 args: ['/workspace/v5-test-env/bin/python', '-I', '-B...>
+endtime = 1282.699690385, orig_timeout = 3, stdout_seq = [b'']
+stderr_seq = [b''], skip_check_and_raise = False
+
+    def _check_timeout(self, endtime, orig_timeout, stdout_seq, stderr_seq,
+                       skip_check_and_raise=False):
+        """Convenience for checking if a timeout has expired."""
+        if endtime is None:
+            return
+        if skip_check_and_raise or _time() > endtime:
+>           raise TimeoutExpired(
+                    self.args, orig_timeout,
+                    output=b''.join(stdout_seq) if stdout_seq else None,
+                    stderr=b''.join(stderr_seq) if stderr_seq else None)
+E           subprocess.TimeoutExpired: Command '['/workspace/v5-test-env/bin/python', '-I', '-B', '-c', "import json,subprocess,sys\nsys.path.insert(0,sys.argv[1])\nfrom v5_shadow import main_runtime as m\nreal=m.subprocess.Popen; children=[]\ndef silent(*args,**kwargs):\n p=real([sys.executable,'-c','import time;time.sleep(30)'],**kwargs)\n children.append(p);return p\nm.subprocess.Popen=silent;m.START_TIMEOUT=.15\ntry:m.start(json.loads(sys.argv[2]))\nexcept ValueError as e:\n assert str(e)=='MODULE_API_START_FAILED',str(e)\n assert children[0].poll() is not None\n print('BOUNDED_AND_REAPED')\nelse:raise AssertionError('silent child accepted')\n", '/workspace/v5-cloud/V5/src', '{"runtime_root": "/tmp/pytest-of-agent/pytest-6/test_silent_child_start_is_bou0/runtime", "composition": "SYNTHETIC", "module_api": {"schema_version": "v5.module_api.v1", "module_id": "p0_test", "release_id": "SYNTHETIC_SAFETY", "data_root": "/tmp/pytest-of-agent/pytest-6/test_silent_child_start_is_bou0/data", "routes": []}}']' timed out after 3 seconds
+
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:1268: TimeoutExpired
+_______ test_manifest_type_and_size_fail_before_blocking_or_launch[fifo] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_manifest_type_and_size_fa0')
+kind = 'fifo'
+
+    @pytest.mark.parametrize("kind", ["fifo", "symlink", "oversize"])
+    def test_manifest_type_and_size_fail_before_blocking_or_launch(tmp_path, kind):
+        package = tmp_path / "package"
+        package.mkdir()
+        manifest = package / "RELEASE.json"
+        if kind == "fifo":
+            os.mkfifo(manifest)
+        elif kind == "symlink":
+            target = tmp_path / "outside.json"
+            target.write_text("{}")
+            manifest.symlink_to(target)
+        else:
+            with manifest.open("wb") as stream:
+                stream.truncate(4 * 1024 * 1024 + 1)
+        config = dict(module_id="source_bundle", routes=["/api/v5/research/lane"],
+                      m04_research_lane_binding=dict(package_root=str(package),
+                           package_manifest_sha256="0" * 64, archive_binding={"root": str(tmp_path), "files": {}},
+                           python_executable=str(Path(sys.executable).resolve())))
+        code = """import sys,json
+    sys.path.insert(0,sys.argv[1])
+    from v5_shadow.research_workbench_readonly import _lane
+    try:_lane(json.loads(sys.argv[2]),{})
+    except ValueError as e:
+     assert str(e) in ('RESEARCH_PACKAGE_FILE_TYPE','RESEARCH_PATH'),str(e)
+     print('REJECTED_BEFORE_LAUNCH')
+    else:raise AssertionError('invalid package accepted')
+    """
+>       result = subprocess.run([sys.executable, "-I", "-B", "-c", code, str(BASE / "src"), json.dumps(config)],
+                                capture_output=True, text=True, timeout=2)
+
+V5/tests/test_research_bridge_package_io.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:557: in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:1221: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:2154: in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: -9 args: ['/workspace/v5-test-env/bin/python', '-I', '-B...>
+endtime = 1284.744936864, orig_timeout = 2, stdout_seq = [], stderr_seq = []
+skip_check_and_raise = False
+
+    def _check_timeout(self, endtime, orig_timeout, stdout_seq, stderr_seq,
+                       skip_check_and_raise=False):
+        """Convenience for checking if a timeout has expired."""
+        if endtime is None:
+            return
+        if skip_check_and_raise or _time() > endtime:
+>           raise TimeoutExpired(
+                    self.args, orig_timeout,
+                    output=b''.join(stdout_seq) if stdout_seq else None,
+                    stderr=b''.join(stderr_seq) if stderr_seq else None)
+E           subprocess.TimeoutExpired: Command '['/workspace/v5-test-env/bin/python', '-I', '-B', '-c', "import sys,json\nsys.path.insert(0,sys.argv[1])\nfrom v5_shadow.research_workbench_readonly import _lane\ntry:_lane(json.loads(sys.argv[2]),{})\nexcept ValueError as e:\n assert str(e) in ('RESEARCH_PACKAGE_FILE_TYPE','RESEARCH_PATH'),str(e)\n print('REJECTED_BEFORE_LAUNCH')\nelse:raise AssertionError('invalid package accepted')\n", '/workspace/v5-cloud/V5/src', '{"module_id": "source_bundle", "routes": ["/api/v5/research/lane"], "m04_research_lane_binding": {"package_root": "/tmp/pytest-of-agent/pytest-6/test_manifest_type_and_size_fa0/package", "package_manifest_sha256": "0000000000000000000000000000000000000000000000000000000000000000", "archive_binding": {"root": "/tmp/pytest-of-agent/pytest-6/test_manifest_type_and_size_fa0", "files": {}}, "python_executable": "/workspace/.local/python/cpython-3.14.7-linux-x86_64-gnu/bin/python3.14"}}']' timed out after 2 seconds
+
+../.local/python/cpython-3.14.7-linux-x86_64-gnu/lib/python3.14/subprocess.py:1268: TimeoutExpired
+_____ test_manifest_type_and_size_fail_before_blocking_or_launch[symlink] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_manifest_type_and_size_fa1')
+kind = 'symlink'
+
+    @pytest.mark.parametrize("kind", ["fifo", "symlink", "oversize"])
+    def test_manifest_type_and_size_fail_before_blocking_or_launch(tmp_path, kind):
+        package = tmp_path / "package"
+        package.mkdir()
+        manifest = package / "RELEASE.json"
+        if kind == "fifo":
+            os.mkfifo(manifest)
+        elif kind == "symlink":
+            target = tmp_path / "outside.json"
+            target.write_text("{}")
+            manifest.symlink_to(target)
+        else:
+            with manifest.open("wb") as stream:
+                stream.truncate(4 * 1024 * 1024 + 1)
+        config = dict(module_id="source_bundle", routes=["/api/v5/research/lane"],
+                      m04_research_lane_binding=dict(package_root=str(package),
+                           package_manifest_sha256="0" * 64, archive_binding={"root": str(tmp_path), "files": {}},
+                           python_executable=str(Path(sys.executable).resolve())))
+        code = """import sys,json
+    sys.path.insert(0,sys.argv[1])
+    from v5_shadow.research_workbench_readonly import _lane
+    try:_lane(json.loads(sys.argv[2]),{})
+    except ValueError as e:
+     assert str(e) in ('RESEARCH_PACKAGE_FILE_TYPE','RESEARCH_PATH'),str(e)
+     print('REJECTED_BEFORE_LAUNCH')
+    else:raise AssertionError('invalid package accepted')
+    """
+        result = subprocess.run([sys.executable, "-I", "-B", "-c", code, str(BASE / "src"), json.dumps(config)],
+                                capture_output=True, text=True, timeout=2)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 4, in <module>
+E             try:_lane(json.loads(sys.argv[2]),{})
+E                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/v5-cloud/V5/src/v5_shadow/research_workbench_readonly.py", line 66, in _lane
+E             if hashlib.sha256(manifest).hexdigest()!=b['package_manifest_sha256']:raise ValueError('RESEARCH_PACKAGE_PIN')
+E                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         ValueError: RESEARCH_PACKAGE_PIN
+E         
+E         During handling of the above exception, another exception occurred:
+E         
+E         Traceback (most recent call last):
+E           File "<string>", line 6, in <module>
+E             assert str(e) in ('RESEARCH_PACKAGE_FILE_TYPE','RESEARCH_PATH'),str(e)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         AssertionError: RESEARCH_PACKAGE_PIN
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/workspace/v5-test-env/bin/python', '-I', '-B', '-c', "import sys,json\nsys.path.insert(0,sys....),str(e)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: RESEARCH_PACKAGE_PIN\n').returncode
+
+V5/tests/test_research_bridge_package_io.py:42: AssertionError
+_____ test_manifest_type_and_size_fail_before_blocking_or_launch[oversize] _____
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-6/test_manifest_type_and_size_fa2')
+kind = 'oversize'
+
+    @pytest.mark.parametrize("kind", ["fifo", "symlink", "oversize"])
+    def test_manifest_type_and_size_fail_before_blocking_or_launch(tmp_path, kind):
+        package = tmp_path / "package"
+        package.mkdir()
+        manifest = package / "RELEASE.json"
+        if kind == "fifo":
+            os.mkfifo(manifest)
+        elif kind == "symlink":
+            target = tmp_path / "outside.json"
+            target.write_text("{}")
+            manifest.symlink_to(target)
+        else:
+            with manifest.open("wb") as stream:
+                stream.truncate(4 * 1024 * 1024 + 1)
+        config = dict(module_id="source_bundle", routes=["/api/v5/research/lane"],
+                      m04_research_lane_binding=dict(package_root=str(package),
+                           package_manifest_sha256="0" * 64, archive_binding={"root": str(tmp_path), "files": {}},
+                           python_executable=str(Path(sys.executable).resolve())))
+        code = """import sys,json
+    sys.path.insert(0,sys.argv[1])
+    from v5_shadow.research_workbench_readonly import _lane
+    try:_lane(json.loads(sys.argv[2]),{})
+    except ValueError as e:
+     assert str(e) in ('RESEARCH_PACKAGE_FILE_TYPE','RESEARCH_PATH'),str(e)
+     print('REJECTED_BEFORE_LAUNCH')
+    else:raise AssertionError('invalid package accepted')
+    """
+        result = subprocess.run([sys.executable, "-I", "-B", "-c", code, str(BASE / "src"), json.dumps(config)],
+                                capture_output=True, text=True, timeout=2)
+>       assert result.returncode == 0, result.stdout + result.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "<string>", line 4, in <module>
+E             try:_lane(json.loads(sys.argv[2]),{})
+E                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/workspace/v5-cloud/V5/src/v5_shadow/research_workbench_readonly.py", line 66, in _lane
+E             if hashlib.sha256(manifest).hexdigest()!=b['package_manifest_sha256']:raise ValueError('RESEARCH_PACKAGE_PIN')
+E                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         ValueError: RESEARCH_PACKAGE_PIN
+E         
+E         During handling of the above exception, another exception occurred:
+E         
+E         Traceback (most recent call last):
+E           File "<string>", line 6, in <module>
+E             assert str(e) in ('RESEARCH_PACKAGE_FILE_TYPE','RESEARCH_PATH'),str(e)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         AssertionError: RESEARCH_PACKAGE_PIN
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['/workspace/v5-test-env/bin/python', '-I', '-B', '-c', "import sys,json\nsys.path.insert(0,sys....),str(e)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: RESEARCH_PACKAGE_PIN\n').returncode
+
+V5/tests/test_research_bridge_package_io.py:42: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/test_p0_runtime_safety.py::test_invalid_module_config_rejected_before_runtime_writes
+FAILED V5/tests/test_p0_runtime_safety.py::test_stop_preserves_unrelated_process_and_stale_identity
+FAILED V5/tests/test_p0_runtime_safety.py::test_managed_child_ignores_valid_timestamp_bytecode
+FAILED V5/tests/test_p0_runtime_safety.py::test_silent_child_start_is_bounded_and_reaped
+FAILED V5/tests/test_research_bridge_package_io.py::test_manifest_type_and_size_fail_before_blocking_or_launch[fifo]
+FAILED V5/tests/test_research_bridge_package_io.py::test_manifest_type_and_size_fail_before_blocking_or_launch[symlink]
+FAILED V5/tests/test_research_bridge_package_io.py::test_manifest_type_and_size_fail_before_blocking_or_launch[oversize]
+7 failed in 5.85s

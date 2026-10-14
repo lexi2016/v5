@@ -55,6 +55,9 @@ class RegistrationTests(unittest.TestCase):
 
     def test_config_default_is_disabled_and_enabled_invalid_is_blocked(self):
         c=dict(runtime_root=str(self.root/'runtime'),composition='unused',module_api={},daily={})
+        data=self.root/'api-data';data.mkdir()
+        (data/'.v5-module-root').write_text('v5.module-root.v1:p0_test\n')
+        c['module_api']=dict(schema_version='v5.module_api.v1',module_id='p0_test',release_id='SYNTHETIC',data_root=str(data),routes=[])
         self.assertIn('close_recapture',main_runtime.validate_config(c),'P0 config registration missing')
         self.assertEqual(main_runtime.validate_config(c)['close_recapture']['status'],'DISABLED')
         c['daily']['close_recapture']={'enabled':True}

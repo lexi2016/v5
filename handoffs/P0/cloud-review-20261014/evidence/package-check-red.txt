@@ -1,0 +1,62 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+_________ test_resource_check_keeps_scope_and_does_not_execute_source __________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-11/test_resource_check_keeps_scop0')
+
+    def test_resource_check_keeps_scope_and_does_not_execute_source(tmp_path):
+>       from v5_shadow.source_release import check_resources
+E       ModuleNotFoundError: No module named 'v5_shadow.source_release'
+
+V5/tests/test_source_release_check.py:22: ModuleNotFoundError
+______ test_resource_check_rejects_incomplete_or_unsafe_package[missing] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-11/test_resource_check_rejects_in0')
+fault = 'missing'
+
+    @pytest.mark.parametrize('fault', ['missing','tamper','symlink','unsafe-manifest-path'])
+    def test_resource_check_rejects_incomplete_or_unsafe_package(tmp_path,fault):
+>       from v5_shadow.source_release import check_resources, RUNTIME_MANIFESTS
+E       ModuleNotFoundError: No module named 'v5_shadow.source_release'
+
+V5/tests/test_source_release_check.py:35: ModuleNotFoundError
+_______ test_resource_check_rejects_incomplete_or_unsafe_package[tamper] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-11/test_resource_check_rejects_in1')
+fault = 'tamper'
+
+    @pytest.mark.parametrize('fault', ['missing','tamper','symlink','unsafe-manifest-path'])
+    def test_resource_check_rejects_incomplete_or_unsafe_package(tmp_path,fault):
+>       from v5_shadow.source_release import check_resources, RUNTIME_MANIFESTS
+E       ModuleNotFoundError: No module named 'v5_shadow.source_release'
+
+V5/tests/test_source_release_check.py:35: ModuleNotFoundError
+______ test_resource_check_rejects_incomplete_or_unsafe_package[symlink] _______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-11/test_resource_check_rejects_in2')
+fault = 'symlink'
+
+    @pytest.mark.parametrize('fault', ['missing','tamper','symlink','unsafe-manifest-path'])
+    def test_resource_check_rejects_incomplete_or_unsafe_package(tmp_path,fault):
+>       from v5_shadow.source_release import check_resources, RUNTIME_MANIFESTS
+E       ModuleNotFoundError: No module named 'v5_shadow.source_release'
+
+V5/tests/test_source_release_check.py:35: ModuleNotFoundError
+_ test_resource_check_rejects_incomplete_or_unsafe_package[unsafe-manifest-path] _
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-11/test_resource_check_rejects_in3')
+fault = 'unsafe-manifest-path'
+
+    @pytest.mark.parametrize('fault', ['missing','tamper','symlink','unsafe-manifest-path'])
+    def test_resource_check_rejects_incomplete_or_unsafe_package(tmp_path,fault):
+>       from v5_shadow.source_release import check_resources, RUNTIME_MANIFESTS
+E       ModuleNotFoundError: No module named 'v5_shadow.source_release'
+
+V5/tests/test_source_release_check.py:35: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED V5/tests/test_source_release_check.py::test_resource_check_keeps_scope_and_does_not_execute_source
+FAILED V5/tests/test_source_release_check.py::test_resource_check_rejects_incomplete_or_unsafe_package[missing]
+FAILED V5/tests/test_source_release_check.py::test_resource_check_rejects_incomplete_or_unsafe_package[tamper]
+FAILED V5/tests/test_source_release_check.py::test_resource_check_rejects_incomplete_or_unsafe_package[symlink]
+FAILED V5/tests/test_source_release_check.py::test_resource_check_rejects_incomplete_or_unsafe_package[unsafe-manifest-path]
+5 failed in 0.03s

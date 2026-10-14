@@ -6,6 +6,7 @@ def config(root):
 
 
 def test_validate_registry_contract(tmp_path):
+    (tmp_path / '.v5-module-root').write_text('v5.module-root.v1:p0_test\n')
     result = validate_config(config(tmp_path))
     assert result["status"] == "CONFIGURATION_VALID"
 

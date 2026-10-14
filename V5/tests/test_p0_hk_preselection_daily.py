@@ -53,7 +53,10 @@ class M06DailyIntegrationTests(unittest.TestCase):
     def test_registry_and_disabled_config(self):
         row=main_registry.registry_by_id()['M06_HK_PRESELECTION']
         self.assertEqual(row.runtime,'daily_tick')
-        c=dict(runtime_root='/unused',composition='/unused',module_api={},daily={})
+        data=self.root/'api-data';data.mkdir()
+        (data/'.v5-module-root').write_text('v5.module-root.v1:p0_test\n')
+        c=dict(runtime_root=str(self.root/'runtime'),composition='unused',daily={},
+               module_api=dict(schema_version='v5.module_api.v1',module_id='p0_test',release_id='SYNTHETIC',data_root=str(data),routes=[]))
         self.assertEqual(main_runtime.validate_config(c)['hk_preselection']['status'],'DISABLED')
     def test_original_owner_and_fresh_reader_finish_both_exact_ledgers(self):
         job,binding=self.prepared();first=self.dispatch(job,binding)

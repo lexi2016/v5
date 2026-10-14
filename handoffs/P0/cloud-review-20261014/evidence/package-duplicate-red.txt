@@ -1,0 +1,25 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_____ test_identical_repeated_source_references_are_counted_not_rewritten ______
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-14/test_identical_repeated_source0')
+
+    def test_identical_repeated_source_references_are_counted_not_rewritten(tmp_path):
+        from v5_shadow.source_release import check_resources, RUNTIME_MANIFESTS
+        fixture(tmp_path)
+        manifest=tmp_path/'contracts'/RUNTIME_MANIFESTS[0]
+        value=json.loads(manifest.read_text())
+        value['entries']*=3
+        manifest.write_text(json.dumps(value))
+        result=check_resources(tmp_path)
+>       assert result['status']=='MATCH'
+E       AssertionError: assert 'MISMATCH' == 'MATCH'
+E         
+E         - MATCH
+E         + MISMATCH
+E         ? +++
+
+V5/tests/test_source_release_check.py:41: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/test_source_release_check.py::test_identical_repeated_source_references_are_counted_not_rewritten
+1 failed in 0.04s
