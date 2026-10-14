@@ -335,12 +335,6 @@
       "original_path": "modules/M04/source/V5/src/v5_shadow/api_gateway.py"
     },
     {
-      "path": "source/V5/src/v5_shadow/archive_article_v2.py",
-      "git_blob_sha": "f382350c66aeb434a53dad6cb8a378cf4b7ff817",
-      "bytes": 19898,
-      "original_path": "modules/M04/source/V5/src/v5_shadow/archive_article_v2.py"
-    },
-    {
       "path": "source/V5/src/v5_shadow/archive_builder_v1.py",
       "git_blob_sha": "4550b530159785c7a28ba1c7321ef07f27e7846d",
       "bytes": 24034,
@@ -2822,8 +2816,16 @@
       "git_blob_sha": "ad5d27f127db77a2dcadaab0b3b4795f30aa3c21",
       "bytes": 12503,
       "original_path": "modules/M04/source/V5/producers/archive-acquisition-v2/manifest.json",
-      "current_sha256": "f37c5ff36be67b319f0f869d6145efbb3392e4f8957df3c44c83666fd19c8037",
+      "current_sha256": "38cb387622caf28e475034c5940a176e05b8e78e5c2297b3bb158b46b3d82286",
       "change": "M04 fail-closed CLI envelope fix and producer manifest current identity"
+    },
+    {
+      "path": "source/V5/src/v5_shadow/archive_article_v2.py",
+      "git_blob_sha": "f382350c66aeb434a53dad6cb8a378cf4b7ff817",
+      "bytes": 19898,
+      "original_path": "modules/M04/source/V5/src/v5_shadow/archive_article_v2.py",
+      "current_sha256": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
+      "change": "Unique reversible original compact_text whitespace span, exact raw UTF8 offsets and SHA; original issuer/builder/source/time gates retained"
     }
   ]
 }

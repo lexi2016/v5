@@ -130,6 +130,41 @@ def collector_name(value):
     return re.sub(r'[（(].*?[）)]', '', str(value or '')).replace(' ', '').strip()
 
 
+def evidence_raw_span(body, evidence):
+    """Invert only original compact_text whitespace folding, never fuzzy matching.
+
+    Half-open offsets refer to the unchanged CLI body (characters and UTF-8 bytes).
+    Every normalized character retains its original contiguous source interval.
+    """
+    if not isinstance(body, str) or not body.strip() or not isinstance(evidence, str) or not evidence.strip():
+        raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
+    normalized = []
+    positions = []
+    for match in re.finditer(r'\s+|\S', body):
+        normalized.append(' ' if match.group().isspace() else match.group())
+        positions.append((match.start(), match.end()))
+    text = ''.join(normalized)
+    # The original builder already compacted its evidence. Do not normalize
+    # arbitrary proposed evidence into a more convenient claim.
+    if re.sub(r'\s+', ' ', evidence) != evidence:
+        raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
+    start = text.find(evidence)
+    if start < 0:
+        raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
+    if text.find(evidence, start + 1) >= 0:
+        raise ValueError('ARTICLE_V2_EVIDENCE_SPAN_NOT_UNIQUE')
+    first = positions[start][0]
+    last = positions[start + len(evidence) - 1][1]
+    raw = body[first:last]
+    if re.sub(r'\s+', ' ', raw) != evidence:
+        raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
+    return dict(normalization='ORIGINAL_COMPACT_TEXT_WHITESPACE_ONLY',
+                char_start=first, char_end=last,
+                utf8_start=len(body[:first].encode('utf-8')),
+                utf8_end=len(body[:last].encode('utf-8')),
+                text=raw, sha256=hashlib.sha256(raw.encode('utf-8')).hexdigest())
+
+
 def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_source=None, builder_receipt=None):
     receipt, payloads, observations = capture(read, receipt_ref)
     available_at = receipt['source_payloads_available_at']
@@ -192,8 +227,11 @@ def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_sour
         body = observation['body']
         evidence = article.get('evidence_sentence')
         if (len(company) != 1 or not article['stock_name'] or article['stock_name'] not in body
-                or not isinstance(evidence, str) or not evidence.strip() or evidence not in body):
+                or not isinstance(evidence, str) or not evidence.strip()):
             raise ValueError('ARTICLE_V2_ISSUER_BODY_BINDING')
+        # Preserve already-valid exact-body v2 payloads. Only the previously
+        # rejected compacted path adds a reversible raw-body span.
+        evidence_span = evidence_raw_span(body, evidence) if evidence not in body else None
         themes = topic.get('themes') or []
         theme = ' / '.join(str(t.get('theme') or '').strip() for t in themes
                            if isinstance(t, dict) and str(t.get('theme') or '').strip())
@@ -211,6 +249,8 @@ def enrich(original, receipt_ref, input_ref, read, generated_at, *, builder_sour
                 page_sha256=observation['page']['sha256'], raw_topic_sha256=observation['raw_sha256'],
                 body_sha256=hashlib.sha256(body.encode()).hexdigest(),
                 summary_topic_sha256=sha256_json(topic), issuer_identity_status='ORIGINAL_CONSUMER_MUST_VERIFY'))
+        if evidence_span is not None:
+            article['acquisition_v2']['evidence_raw_span'] = evidence_span
     # The existing article/body/PIT gates above retain their original rejection
     # reasons. Complete owner-source and original-builder verification still
     # precedes every write and runs again on each independent v2 read.

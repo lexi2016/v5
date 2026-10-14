@@ -54,7 +54,7 @@
   },
   "article_schema": "v5.research_archive.v2",
   "new_source_sha256": {
-    "V5/src/v5_shadow/archive_article_v2.py": "4b2fc99427ac9a69073e2761ee9f9d3e74a864c3b80c7e69eed6d505b9921371",
+    "V5/src/v5_shadow/archive_article_v2.py": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
     "V5/tests/test_archive_article_v2.py": "74ca5b7696ae1e6d5ec8343004eb7194ee5a5fa4236b2ae112afa69741968de0",
     "V5/contracts/archive_builder_source_manifest.json": "47a7e7e2b4710c3db5e3185d02e2f291f5cf5aafb43077893627321c973403cb",
     "V5/src/v5_shadow/archive_builder_v1.py": "7f8cff5dfb4fe66663d7dd9f7901089e802ef53b55b10e1c003f6e2300ebdd74",
@@ -185,5 +185,10 @@
     "before_sha256": "1fe2caadfd6b2f67848b05393a02114583d0b05f6790a9b22872971dc6d7a288",
     "after_sha256": "07feefedf04c750e896c1c96f61d1ca23a5e98ae5091a2f31812539d6ea75d6c",
     "scope": "Reject unknown/malformed CLI envelope before any success receipt; preserve known lists. Other manifest sections are historical original snapshots."
+  },
+  "m04_evidence_span_repair": {
+    "base_commit": "261cf0123dd7175bfcc6031a5dc201604a98a609",
+    "article_adapter_sha256": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
+    "scope": "Only reversible unique whitespace-folded evidence mapping; original issuer and builder verification preserved; producer bytes unchanged"
   }
 }
