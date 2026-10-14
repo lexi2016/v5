@@ -21,6 +21,20 @@ def _display_article(article):
  return {**article,'summary':'原owner派生摘要（非原文引句）：'+article['evidence_sentence'],'summary_display_only':True}
 
 
+def _bindings(value):
+ if isinstance(value,dict) and set(value)=={'root','files'}:return [value],False
+ if not isinstance(value,dict) or set(value)!={'schema_version','bindings'} or value['schema_version']!='v5.m04_archive_bindings.v1':raise ValueError('RESEARCH_LANE_BINDING_SET')
+ rows=value['bindings']
+ if not isinstance(rows,list) or not 1<=len(rows)<=16:raise ValueError('RESEARCH_LANE_BINDING_COUNT')
+ seen=set()
+ for row in rows:
+  if not isinstance(row,dict) or set(row)!={'root','files'} or not isinstance(row['files'],dict):raise ValueError('RESEARCH_LANE_BINDING_FIELDS')
+  root=str(runtime._absolute(row['root']))
+  if root in seen:raise ValueError('RESEARCH_LANE_DUPLICATE_ROOT')
+  seen.add(root)
+ return rows,True
+
+
 def research_lane(binding,query):
  if not isinstance(query,dict) or set(query) not in (set(),{'research_date'}):raise ValueError('RESEARCH_LANE_QUERY')
  requested=query.get('research_date')
@@ -28,13 +42,25 @@ def research_lane(binding,query):
   if not isinstance(requested,str) or not re.fullmatch('[0-9]{8}',requested):raise ValueError('RESEARCH_LANE_DATE')
   try:datetime.strptime(requested,'%Y%m%d')
   except ValueError as exc:raise ValueError('RESEARCH_LANE_DATE') from exc
- checked,records,outside=runtime.verified_records(binding)
- days={key[:-1]:row for key,row in records.items() if key.endswith('/')}
+ bindings,multiple=_bindings(binding)
+ days={};diagnostics=[]
+ for one in bindings:
+  verified,records,errors=runtime.verified_records(one)
+  diagnostics.append({'root':one['root'],'out_of_scope_record_errors':errors})
+  for key,record in records.items():
+   if not key.endswith('/'):continue
+   date=key[:-1]
+   if date in days:raise ValueError('RESEARCH_LANE_DATE_CONFLICT:'+date)
+   days[date]=(one,verified,record,errors)
  day=requested if requested is not None else (max(days) if days else '')
+ outside=diagnostics[0]['out_of_scope_record_errors'] if not multiple else {}
  gaps=['M04_OTHER_LANES_NOT_CONFIGURED']
  out={'schema_version':'v3_5.research_lane.v1','research_date':day,'endpoint_mode':'EXACT' if requested is not None else 'LATEST','status':'NOT_MATERIALIZED','reason':'M04_ARCHIVE_DATE_NOT_MATERIALIZED','cannot_confirm':gaps,'write_policy':'read_only','recommendation_status':'RESEARCH_ONLY','source_run_id':None,'archive_materials':None,'out_of_scope_record_errors':outside,**runtime.SAFETY}
+ if multiple:out.update(available_archive_dates=sorted(days),archive_binding_diagnostics=diagnostics)
  if day not in days:return out
- record=days[day];archive=record['payload'];identity=record['binding']
+ binding,checked,record,outside=days[day]
+ out['out_of_scope_record_errors']=outside
+ archive=record['payload'];identity=record['binding']
  if archive.get('archive_date')!=day:raise ValueError('RESEARCH_LANE_ARCHIVE_DATE')
  if archive.get('article_count')!=len(archive.get('articles',[])):raise ValueError('RESEARCH_LANE_ARTICLE_COUNT')
  for key in ('production_allowed','buy_gate_updated','orders_sent'):

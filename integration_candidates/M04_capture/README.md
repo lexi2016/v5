@@ -117,3 +117,7 @@ The unchanged evidence_sentence remains the original builder result. Noncontinuo
 ## Existing research-page handoff
 
 See PAGE_BINDING.md for existing lane/read export commands and m04_research_lane_binding fields. The page-only lane projection adds an explicit nonquote summary label to verified owner summaries; raw fields and archive bytes remain intact. No source/V5 file or archived validator identity changes in this increment. Existing successful d598 archive_binding can be cold-read directly; do not resume/import again merely to update display. No shared live API/frontend or M14 files are changed.
+
+### Preserve historical and new independent archive roots
+
+The single-root binding cannot display both the old historical day and the new eight-article day. lane now supports the explicitly enumerated v5.m04_archive_bindings.v1 descriptor; each independent original binding is validated separately, never merged or rewritten. EXACT selects one verified date/root; LATEST selects the greatest verified date; same-date competing roots, duplicate roots and any invalid root fail closed. The existing single-binding contract remains unchanged. See PAGE_BINDING.md for the bounded schema, pure-read exports, and narrow candidate bridge/config tools. Public bridge changes are supplied only as a complete private candidate plus exact preimage/diff; no active shared API/frontend is modified here.

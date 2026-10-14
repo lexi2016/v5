@@ -1,0 +1,22 @@
+--- research_workbench_readonly.py
++++ research_workbench_readonly.py
+@@ -32,8 +32,17 @@
+  _absolute(b['package_root']);_absolute(b['python_executable'])
+  if not re.fullmatch('[0-9a-f]{64}',str(b['package_manifest_sha256'])):raise ValueError('RESEARCH_PACKAGE_PIN')
+  a=b['archive_binding']
+- if not isinstance(a,dict) or set(a)!={'root','files'} or not isinstance(a['files'],dict):raise ValueError('RESEARCH_ARCHIVE_BINDING')
+- _absolute(a['root'])
++ if isinstance(a,dict) and set(a)=={'root','files'}:rows=[a]
++ elif isinstance(a,dict) and set(a)=={'schema_version','bindings'} and a['schema_version']=='v5.m04_archive_bindings.v1':
++  rows=a['bindings']
++  if not isinstance(rows,list) or not 1<=len(rows)<=16:raise ValueError('RESEARCH_ARCHIVE_BINDING_COUNT')
++ else:raise ValueError('RESEARCH_ARCHIVE_BINDING')
++ seen=set()
++ for row in rows:
++  if not isinstance(row,dict) or set(row)!={'root','files'} or not isinstance(row['files'],dict):raise ValueError('RESEARCH_ARCHIVE_BINDING')
++  root=str(_absolute(row['root']))
++  if root in seen:raise ValueError('RESEARCH_ARCHIVE_DUPLICATE_ROOT')
++  seen.add(root)
+ 
+ def validate_payload(value,query):
+  date=query_date(query)
