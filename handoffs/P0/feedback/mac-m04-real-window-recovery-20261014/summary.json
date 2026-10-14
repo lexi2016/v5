@@ -1,0 +1,85 @@
+{
+  "evidence_type": "DERIVED_SUMMARY",
+  "provenance": "Controller-provided earlier failure chronology plus directly read final Mac assistant report; not original receipt bytes; documentation writer did not capture, resume or test.",
+  "source_thread": "01a12e51-a0ec-705c-96e5-26cfd89360f8",
+  "final_source_message": "msg_0b47eb1b0178a3a6016aced480999487d1924093c024a1a7e6",
+  "history": [
+    {
+      "candidate": "261cf0123dd7175bfcc6031a5dc201604a98a609",
+      "capture_utc": "2026-10-14 00:30",
+      "capture_calls": 1,
+      "topics": 30,
+      "effective": 22,
+      "raw": 21,
+      "research": 11,
+      "articles": 8,
+      "outcome": "First article evidence newline representation rejected."
+    },
+    {
+      "candidate_abbreviation": "63c1",
+      "mac_tests_passed": 37,
+      "outcome": "Resume blocked by existing guard."
+    },
+    {
+      "candidate_abbreviation": "d19f",
+      "mac_tests_passed": 43,
+      "outcome": "Reused original checkpoint successfully; second article non-contiguous original builder summary blocked."
+    },
+    {
+      "step": "All eight articles classified read-only once",
+      "outcome": "Representation categories established before final repair; no new capture."
+    }
+  ],
+  "final": {
+    "candidate": "d5983dc7d3dfc6825b7d09b5fb976197943de40a",
+    "manifest_files": 494,
+    "tests_passed": 47,
+    "tests_failed": 0,
+    "tests_skipped": 0,
+    "test_start_utc": "2026-10-14T00:59:56Z",
+    "test_end_utc": "2026-10-14T01:00:28Z",
+    "resume_calls": 1,
+    "resume_start_utc": "2026-10-14T01:00:33.469Z",
+    "resume_end_utc": "2026-10-14T01:00:34.656Z",
+    "resume_status": "SUCCEEDED",
+    "resume_exit": 0,
+    "cold_reader_start_utc": "2026-10-14T01:00:55.679Z",
+    "cold_reader_end_utc": "2026-10-14T01:00:56.171Z",
+    "cold_reader_articles": 8,
+    "cold_reader_exit": 0,
+    "cold_reader_writes": 0,
+    "raw_count": 21,
+    "research_count": 11,
+    "article_count": 8,
+    "representation": {
+      "original_contiguous_quote": 1,
+      "unique_whitespace_mapping": 4,
+      "original_builder_summary_not_source_quote": 3,
+      "summary_label": "ORIGINAL_BUILDER_SUMMARY / NOT_A_SOURCE_QUOTE",
+      "encoded_tag_identity": "002430 original tag, original decoder issuer interval and compact title transformation verified"
+    },
+    "original_body_source_page_capture_time_match": true,
+    "subsequent_capture_calls": 0,
+    "original_capture_producer_failure_records_unchanged": true
+  },
+  "sha256": {
+    "archive": "94102c4de488693d4baa5b010e9189fe55f58cab8d7e3cdf37bf14f1a6f0128b",
+    "cold_read_output": "b2c91aa7e3ec75da6e7bc57d6ed6d6cf00858d9f6026691689896bbb928898f1",
+    "unchanged_original_receipt": "79b0e724fffadf1aebfde02f093b56cd4b6c5e8188c44cf42c749c6fb8eb9255",
+    "unchanged_original_reused_checkpoint": "f33488dc7a31e8ad54bc05751a8813f8b27cd9849f0d12e7047530592e19ed1b",
+    "reported_original_result_safe": "6417498d11f77f40e34ca839192afe04df2f0fbe8451f6dced219e7948a7d2e4"
+  },
+  "limits": {
+    "natural": false,
+    "pit": false,
+    "production": false,
+    "bounded_has_more_preserved": true,
+    "page_changed": false,
+    "deployed": false,
+    "page_count": 14,
+    "complete_modules": 0,
+    "m14_pending_approval_unchanged": true,
+    "raw_article_bodies_uploaded": false,
+    "private_paths_uploaded": false
+  }
+}
