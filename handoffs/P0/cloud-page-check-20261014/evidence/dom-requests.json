@@ -1,0 +1,222 @@
+{
+  "layer": "JSDOM_NOT_BROWSER",
+  "input_kind": "SYNTHETIC",
+  "browser_screenshots": "NOT_RUN",
+  "requests": [
+    {
+      "url": "http://127.0.0.1:4177/api/v5/source-bundle/hk-preselection",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/source-bundle/hk-stage-observed",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/source-bundle/hk-close-review",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/source-bundle/a-close-replay",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/manager/close-recapture?source_trade_date=20261012&run_id=ca2c344b61334ad28f4b6146117643cd",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 409,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/source-bundle/status",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 503,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v4/manager/m18/v2?run_id=46596b03c2ab4e29b1219fd2e5eb698f",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+        "identity": {
+          "input_identity": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "plan_sha256": "00d12998715e6fe28b6b13d45212bc5f1aae98a2e0a78ca865dd2fb719f4be13",
+          "raw_sha256": "6cac6e5b094c2b97903555094564ee2f1a53577cddd8f2c87236d8f58efd8f04",
+          "response_sha256": "e44a124a12797e86c8859b7cbc7fb14dba9d8943dad7e2a5675b2b2130677a79",
+          "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+          "target_date": "20261012"
+        },
+        "generation_id": "960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v4/manager/m18/v2/overview?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "identity": {
+          "input_identity": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "plan_sha256": "00d12998715e6fe28b6b13d45212bc5f1aae98a2e0a78ca865dd2fb719f4be13",
+          "raw_sha256": "6cac6e5b094c2b97903555094564ee2f1a53577cddd8f2c87236d8f58efd8f04",
+          "response_sha256": "e44a124a12797e86c8859b7cbc7fb14dba9d8943dad7e2a5675b2b2130677a79",
+          "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+          "target_date": "20261012"
+        },
+        "generation_id": "960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f",
+        "manifest_sha256": "b7c23bfc4dd4990e1d210b9ddccd4ce3905abb3db5f1e58b6875c22c12d61a78"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f&section=stocks",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "identity": {
+          "input_identity": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "plan_sha256": "00d12998715e6fe28b6b13d45212bc5f1aae98a2e0a78ca865dd2fb719f4be13",
+          "raw_sha256": "6cac6e5b094c2b97903555094564ee2f1a53577cddd8f2c87236d8f58efd8f04",
+          "response_sha256": "e44a124a12797e86c8859b7cbc7fb14dba9d8943dad7e2a5675b2b2130677a79",
+          "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+          "target_date": "20261012"
+        },
+        "generation_id": "960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f",
+        "manifest_sha256": "b7c23bfc4dd4990e1d210b9ddccd4ce3905abb3db5f1e58b6875c22c12d61a78"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f&section=materials",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "identity": {
+          "input_identity": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "plan_sha256": "00d12998715e6fe28b6b13d45212bc5f1aae98a2e0a78ca865dd2fb719f4be13",
+          "raw_sha256": "6cac6e5b094c2b97903555094564ee2f1a53577cddd8f2c87236d8f58efd8f04",
+          "response_sha256": "e44a124a12797e86c8859b7cbc7fb14dba9d8943dad7e2a5675b2b2130677a79",
+          "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+          "target_date": "20261012"
+        },
+        "generation_id": "960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f",
+        "manifest_sha256": "b7c23bfc4dd4990e1d210b9ddccd4ce3905abb3db5f1e58b6875c22c12d61a78"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v4/manager/m18/v2/sections?run_id=46596b03c2ab4e29b1219fd2e5eb698f&generation_id=960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f&section=materials&cursor=eyJnZW5lcmF0aW9uX2lkIjoiOTYwZDExNzYzNTc1ZTRkM2YwM2E4ZTY5NGI0NjBiZjVlZmNhZjM2YWNmMzM3NjZjNTlhM2Q4MmZmMWMxMjE4ZiIsImlkZW50aXR5Ijp7ImlucHV0X2lkZW50aXR5IjoiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYiIsInBsYW5fc2hhMjU2IjoiMDBkMTI5OTg3MTVlNmZlMjhiNmIxM2Q0NTIxMmJjNWYxYWFlOThhMmUwYTc4Y2E4NjVkZDJmYjcxOWY0YmUxMyIsInJhd19zaGEyNTYiOiI2Y2FjNmU1YjA5NGMyYjk3OTAzNTU1MDk0NTY0ZWUyZjFhNTM1NzdjZGRkOGYyYzg3MjM2ZDhmNThlZmQ4ZjA0IiwicmVzcG9uc2Vfc2hhMjU2IjoiZTQ0YTEyNGExMjc5N2U4NmM4ODU5YjdjYmM3ZmIxNGRiYTlkODk0M2RhZDdlMmE1Njc1YjJiMjEzMDY3N2E3OSIsInJ1bl9pZCI6IjQ2NTk2YjAzYzJhYjRlMjliMTIxOWZkMmU1ZWI2OThmIiwidGFyZ2V0X2RhdGUiOiIyMDI2MTAxMiJ9LCJtYW5pZmVzdF9zaGEyNTYiOiJiN2MyM2JmYzRkZDQ5OTBlMWQyMTBiOWRkY2NkNGNlMzkwNWFiYjNkYjVmMWU1OGI2ODc1YzIyYzEyZDYxYTc4Iiwib2Zmc2V0IjozMiwic2VjdGlvbiI6Im1hdGVyaWFscyIsInNlbGVjdGlvbl9zaGEyNTYiOiI3NDIzNGU5OGFmZTc0OThmYjVkYWYxZjM2YWMyZDc4YWNjMzM5NDY0Zjk1MDcwM2I4YzAxOTg5MmY5ODJiOTBiIn0%3D",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "identity": {
+          "input_identity": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "plan_sha256": "00d12998715e6fe28b6b13d45212bc5f1aae98a2e0a78ca865dd2fb719f4be13",
+          "raw_sha256": "6cac6e5b094c2b97903555094564ee2f1a53577cddd8f2c87236d8f58efd8f04",
+          "response_sha256": "e44a124a12797e86c8859b7cbc7fb14dba9d8943dad7e2a5675b2b2130677a79",
+          "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+          "target_date": "20261012"
+        },
+        "generation_id": "960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f",
+        "manifest_sha256": "b7c23bfc4dd4990e1d210b9ddccd4ce3905abb3db5f1e58b6875c22c12d61a78"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v4/manager/m18/v2?run_id=ffffffffffffffffffffffffffffffff",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 503,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/research/lane?research_date=20261014",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 503,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/research/lane?research_date=20261014",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "research_date": "20261014"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/research/lane?research_date=20200102",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "research_date": "20200102"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/research/lane?research_date=19990101",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "research_date": "19990101"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/research/lane",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "research_date": "20261014"
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/manager/close-recapture?source_trade_date=20261012&run_id=ca2c344b61334ad28f4b6146117643cd",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 409,
+      "response_identity": {}
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/manager/close-recapture?source_trade_date=20260928&run_id=3635dd47eb9a4d49bd797a30cf9f7f2c",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 200,
+      "response_identity": {
+        "run_id": "3635dd47eb9a4d49bd797a30cf9f7f2c",
+        "identity": {
+          "code_sha256": "c88a10133d3ce7cbfadd57024fc2659ce7c1961ecb3e4b5a89fc109278d33d5b",
+          "config_sha256": "f19e8bb13963105978fde9046b37f7bebc0d3721ca93755bfb289b4a31bf952a",
+          "dependency_sha256": "f8d8fad70c3a90597b623ebbc485e8efeeea9d65e8a58c2492b99072488093db",
+          "input_sha256": "5201095225eceb9e6e1e42d01f5306c0cdfd744dcdf7500a4c4df6d3f90e88f5",
+          "lane": "manager_close_recapture",
+          "research_cutoff": "2026-09-29T00:00:05+08:00",
+          "target_date": "20260928"
+        }
+      }
+    },
+    {
+      "url": "http://127.0.0.1:4177/api/v5/manager/close-recapture?source_trade_date=20260928&run_id=ffffffffffffffffffffffffffffffff",
+      "method": "GET",
+      "layer": "REAL_HTTP_FROM_JSDOM",
+      "status": 409,
+      "response_identity": {}
+    }
+  ],
+  "component_console_errors": []
+}

@@ -1,0 +1,93 @@
+{
+  "input_kind": "SYNTHETIC",
+  "natural_verified": false,
+  "real_provider_execution": "NOT_RUN",
+  "m04_dates": [
+    "20261014",
+    "20200102"
+  ],
+  "m17_query": {
+    "source_trade_date": "20260928",
+    "run_id": "3635dd47eb9a4d49bd797a30cf9f7f2c"
+  },
+  "m17_reference": {
+    "RESEARCH_ONLY": true,
+    "available_at": "2026-09-29T00:00:11.000000+08:00",
+    "buy_gate_updated": false,
+    "candidate_count": 100,
+    "cannot_confirm": [
+      "MARKET_CLOSE_NOT_CAPTURED_STAGE_WINDOW_ENDS_15_55_05",
+      "PYTDX_TURNOVER_CURRENCY_UNIT_UNVERIFIED"
+    ],
+    "captured_at": "2026-09-29T00:00:10.500000+08:00",
+    "execution_kind": "SIMULATED",
+    "files": {
+      "artifact": {
+        "artifact_ref": "workbench_research/20260928/close_recapture.json",
+        "sha256": "8f33ada930bd76264d35b941f31b44b924e30754822d4c5dd3a9248cebc9b5c0"
+      },
+      "candidate_overlay": {
+        "artifact_ref": "workbench_research/20260928/close_recapture.candidates.json",
+        "sha256": "15c934a93990aad8b837583ce6355dc7350b20df1215c69e19a4f627735ccc97"
+      },
+      "receipt": {
+        "artifact_ref": "workbench_research/20260928/close_recapture.receipt.json",
+        "sha256": "174cabbaf2c143bfd3eefe49a70e6a4da8fe33774530974f4aff65da5c1d7399"
+      },
+      "snapshot": {
+        "artifact_ref": "workbench_research/20260928/inputs/close_recapture_pytdx.json",
+        "sha256": "3fa2b03c875d487e3709320593030542d125366f8efe94917dcd0974f55e5968"
+      }
+    },
+    "ledger_run_id": "3635dd47eb9a4d49bd797a30cf9f7f2c",
+    "natural_verified": false,
+    "orders_sent": false,
+    "owner_status": "READY",
+    "pid": 6184,
+    "plan_trade_date": "20260929",
+    "pool": {
+      "artifact_ref": "runs/20260928/HK_CONNECT_D1_TOP100_0_2/20260928-hk-connect-d1-top100-0-2-fixture/artifact.csv",
+      "artifact_sha256": "7568369875cc9518779b8fb8836de5dbb23a2eb037645a0f7867f6cfc964af7d",
+      "captured_at": "2026-09-24T17:30:43+08:00",
+      "manifest_ref": "runs/20260928/HK_CONNECT_D1_TOP100_0_2/20260928-hk-connect-d1-top100-0-2-fixture/manifest.json",
+      "manifest_sha256": "aab2968cb30c0af590529532980567912490fd10313bddbefd8fd85ee63d94d7",
+      "owner": "v3_shared_data",
+      "receipt_ref": "runs/20260928/HK_CONNECT_D1_TOP100_0_2/20260928-hk-connect-d1-top100-0-2-fixture/receipt.json",
+      "receipt_sha256": "d67ee26caf23e39a442f8a18895b561d744fe00e23087c4ea6168709306aa293",
+      "role": "HK_CONNECT_D1_TOP100_0_2",
+      "row_count": 100,
+      "run_id": "20260928-hk-connect-d1-top100-0-2-fixture",
+      "signal_date": "20260924",
+      "source_id": "hkconnect_0_2_frozen_prob_active",
+      "trade_date": "20260928"
+    },
+    "pool_run_id": "20260928-hk-connect-d1-top100-0-2-fixture",
+    "producer_pid": 6183,
+    "producer_status": "MATERIALIZED",
+    "production_allowed": false,
+    "reader_pid": 6184,
+    "received_not_historical_1530": true,
+    "request_sha256": "5201095225eceb9e6e1e42d01f5306c0cdfd744dcdf7500a4c4df6d3f90e88f5",
+    "root": "/workspace/v5-browser-preview/m17-synthetic/state",
+    "source_trade_date": "20260928"
+  },
+  "manager_descriptor": {
+    "schema_version": "v5.m18.v2.descriptor.v1",
+    "identity": {
+      "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+      "target_date": "20261012",
+      "plan_sha256": "00d12998715e6fe28b6b13d45212bc5f1aae98a2e0a78ca865dd2fb719f4be13",
+      "raw_sha256": "6cac6e5b094c2b97903555094564ee2f1a53577cddd8f2c87236d8f58efd8f04",
+      "response_sha256": "e44a124a12797e86c8859b7cbc7fb14dba9d8943dad7e2a5675b2b2130677a79",
+      "input_identity": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    "run_id": "46596b03c2ab4e29b1219fd2e5eb698f",
+    "target_date": "20261012",
+    "generation_id": "960d11763575e4d3f03a8e694b460bf5efcaf36acf33766c59a3d82ff1c1218f",
+    "profile_sha256": "a8b56161f6d19de0d5222775e132d78f75d7ad707a1824b4d2b861ff285ecc6c",
+    "pages_route": "/api/v4/manager/m18/v2/pages",
+    "status": "READY",
+    "generated_at": "2026-10-12T00:00:00+00:00"
+  },
+  "legal_real_archive_copy": "NOT_FOUND; no new acquisition requested or performed"
+}

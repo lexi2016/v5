@@ -1,0 +1,33 @@
+[
+  {
+    "url": "http://127.0.0.1:4177/",
+    "status": 200,
+    "body": "SYNTHETIC banner present: True"
+  },
+  {
+    "url": "http://127.0.0.1:4191/__v5/module-health",
+    "status": 200,
+    "body": {
+      "config_sha256": "1bb30b2b9209438e0c2eef469870921fabe849786a78568cd7c78ac61e7e96d1",
+      "implementation_sha256": "f3ffd57449ba63a3759551b3b8afe8223ea0e3ce291dfe18d64383d556473645",
+      "module_id": "source_bundle",
+      "pid": 6192,
+      "release_id": "SYNTHETIC_cloud_page_check",
+      "source_provenance_verified": false,
+      "status": "READ_ONLY_RESPONSE_SERVICE"
+    }
+  },
+  {
+    "url": "http://127.0.0.1:4192/__v5/module-health",
+    "status": 200,
+    "body": {
+      "config_sha256": "ff43150379dc6baf7ef85c8d56a9112ace172bcc255fc584bdc3c8dc369435c1",
+      "implementation_sha256": "f3ffd57449ba63a3759551b3b8afe8223ea0e3ce291dfe18d64383d556473645",
+      "module_id": "manager",
+      "pid": 6200,
+      "release_id": "SYNTHETIC_cloud_page_check",
+      "source_provenance_verified": false,
+      "status": "READ_ONLY_RESPONSE_SERVICE"
+    }
+  }
+]

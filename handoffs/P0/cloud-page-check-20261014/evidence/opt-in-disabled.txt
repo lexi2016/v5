@@ -1,0 +1,9 @@
+
+ RUN  v4.1.10 /workspace/v5-cloud/frontend
+
+
+ Test Files  1 skipped (1)
+      Tests  3 skipped (3)
+   Start at  04:30:48
+   Duration  1.55s (transform 811ms, setup 0ms, import 1.01s, tests 0ms, environment 439ms)
+

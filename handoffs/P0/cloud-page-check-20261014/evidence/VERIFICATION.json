@@ -1,0 +1,51 @@
+{
+  "schema": "v5.cloud-page-check.v1",
+  "runtime_base_commit": "afddbdf75b86f3669b9329e1bffdd77c03bb3c7c",
+  "input_kind": "SYNTHETIC",
+  "natural_verified": false,
+  "business_verified": false,
+  "mac_acceptance": false,
+  "real_browser": {
+    "status": "BLOCKED_BEFORE_PAGE_LOAD",
+    "chromium": "151.0.7922.173",
+    "sandbox_helper": "/usr/lib/chromium/chrome-sandbox owner=nobody mode=4755",
+    "user_namespace_probe": "unshare: cannot open /proc/self/uid_map: Read-only file system",
+    "screenshots": "NOT_RUN",
+    "console": "NOT_RUN",
+    "visual_acceptance": "NOT_RUN",
+    "security_settings_changed": false
+  },
+  "http": {
+    "status": "PASS",
+    "requests": 17,
+    "static_asset_requests": 18
+  },
+  "dom": {
+    "engine": "jsdom / vitest 4.1.10",
+    "status": "PASS",
+    "tests": 3,
+    "requests": 20,
+    "status_counts": {
+      "200": 14,
+      "409": 3,
+      "503": 3
+    },
+    "component_console_errors": [],
+    "browser_equivalent": false,
+    "m04_transient_503": "One 503 observed during concurrent checks, followed by same exact URL 200 via existing bounded retry; retained, not counted as zero request errors."
+  },
+  "saved_files_unchanged_after_http_and_dom": 42,
+  "production_source_changes": false,
+  "services": {
+    "scope": "Current cloud environment loopback only; no external publish or tunnel",
+    "frontend": "http://127.0.0.1:4177",
+    "source_api": "http://127.0.0.1:4191",
+    "manager_api": "http://127.0.0.1:4192"
+  },
+  "remaining_gaps": [
+    "Real browser sandbox startup unavailable without environment repair; no screenshot or browser console acceptance",
+    "Original real M04 old18/new8 archive copies absent in independent cloud checkout",
+    "Original real M17 saved-product/root/ledger binding absent; only synthetic production and readback verified"
+  ],
+  "prior_mac_acceptance_recounted": false
+}

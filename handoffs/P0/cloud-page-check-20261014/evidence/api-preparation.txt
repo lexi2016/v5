@@ -1,0 +1,1 @@
+{"status": "SYNTHETIC_FIXTURES_PREPARED", "m17_query": {"source_trade_date": "20260928", "run_id": "3635dd47eb9a4d49bd797a30cf9f7f2c"}, "m04_dates": ["20261014", "20200102"]}

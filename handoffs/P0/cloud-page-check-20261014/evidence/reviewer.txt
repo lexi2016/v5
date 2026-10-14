@@ -1,0 +1,20 @@
+READ-ONLY REVIEW: PASS within the stated synthetic HTTP + jsdom scope.
+Base: afddbdf75b86f3669b9329e1bffdd77c03bb3c7c.
+Reviewed frontend/tests/cloud-page-check.spec.ts, prepare_m04.py, prepare_api.py, check_http.py and saved HTTP/DOM/browser capability evidence. No shared P0 source changed; no whole-suite rerun.
+
+Confirmed:
+- 17 recorded HTTP checks and 3 passing jsdom component scenarios. DOM request ledger contains 20 actual loopback HTTP requests. It is not browser execution.
+- Chromium aborted because the SUID sandbox helper was not configured with root ownership; launch evidence does not contain --no-sandbox. Screenshots and browser console remain NOT_RUN. Component console_errors=[] does not stand for browser-console acceptance.
+- M04 preparation reuses the fixed original synthetic capture fixture/reader. Exact new/old dates, old UNKNOWN/source-run gaps, missing-date clearing, original text, and explicit latest are checked.
+- M17 preparation uses the original daily owner adapter and persisted product, explicitly execution_kind=SIMULATED. HTTP rows equal the saved candidate overlay (100 rows); exact run/files identity is compared. Wrong run/date returns refusal; DOM removes rows and loaded identity.
+- M18 uses the existing offline bundle builder/Reader/publication bridge into private synthetic roots. This is not execution of the actual manager production algorithm or three-strategy business completion. Descriptor, overview, and first two material pages agree on run/generation/manifest; invalid run clears manager rows.
+- Independent post-DOM inventory read compared all 42 saved files with saved-inventory-before.json: SHA256 and mtime_ns unchanged, no added or missing files. saved-readonly-summary.json confirms the same coverage.
+- No tracked product-source difference from the base; the opt-in test is the only added source artifact within this review.
+
+Preserve limitations:
+- dom-requests.json records one M04 exact-date 503 followed by 200. Do not claim zero HTTP errors or prove absence of intermittent failures. The ledger omits the error response body, so the exact reason is not independently established by this artifact alone.
+- Manager material pagination covers rows 1-64 of 70; the final six rows are not part of this test. Do not label this as exhaustive pagination acceptance.
+- The test mounts Vue components in jsdom and checks a navigation href. It does not execute built assets in a real browser, validate layout/visuals, or demonstrate actual top-level browser navigation. Static asset HTTP availability is separate evidence.
+- Original real old18/new8 archives are absent; no new real input/provider/window/PIT/business/natural or full-module acceptance is established.
+
+No blocking defect found for delivering this explicitly limited opt-in test and its accurately labelled evidence.

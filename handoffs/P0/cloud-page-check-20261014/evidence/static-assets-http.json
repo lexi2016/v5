@@ -1,0 +1,131 @@
+{
+  "layer": "REAL_HTTP_STATIC_ASSETS_NOT_BROWSER_EXECUTION",
+  "assets": [
+    {
+      "path": "/assets/App-BuL_jX7Z.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 175385,
+      "sha256": "ebf464b32fd7ca1b1ba635cf08ec339c48ffb87b329b3f558e09fe4e5fd53d1f"
+    },
+    {
+      "path": "/assets/App-C8ZBy9MI.css",
+      "status": 200,
+      "content_type": "text/css",
+      "bytes": 20334,
+      "sha256": "63b4a58d5e7c59ab32fcefd0e061bc5a859aa2c894ec1efec3e6e9e3bc56f17d"
+    },
+    {
+      "path": "/assets/ManagerSelectionView-BfgRQ__O.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 403994,
+      "sha256": "9f71dcebbbca2ce44082cc8e41894ac5eda0bb65702c464ff4a96d221e195d10"
+    },
+    {
+      "path": "/assets/ManagerSelectionView-DPqeaKxb.css",
+      "status": 200,
+      "content_type": "text/css",
+      "bytes": 48280,
+      "sha256": "937acb35ff2f5318182c43b1c045db2545b98d8486a17319913dde28331e83f5"
+    },
+    {
+      "path": "/assets/Root-BEUdDtK_.css",
+      "status": 200,
+      "content_type": "text/css",
+      "bytes": 10111,
+      "sha256": "57838f946f55ed1a09193e8fb0caa7dffffe64e59b513231bb1cca3cd4f7f1aa"
+    },
+    {
+      "path": "/assets/Root-DyxT0vAG.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 47333,
+      "sha256": "ad280b7ec2fe0e7920e4693db01b7b8c84b0825d42c6d1b85e3c01ee48f0be74"
+    },
+    {
+      "path": "/assets/SavedManagerResultView-A_ucQZeF.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 121695,
+      "sha256": "2cf4fb4b16b06e899074eedbeef9fa6384abe6a70d10239094a64ca95df07632"
+    },
+    {
+      "path": "/assets/SavedManagerResultView-B_xX4syl.css",
+      "status": 200,
+      "content_type": "text/css",
+      "bytes": 21946,
+      "sha256": "54d78e6b37a6728fff356b122ca91797d49cdfad43406b9d5766396b218ecf7c"
+    },
+    {
+      "path": "/assets/_plugin-vue_export-helper-DlAUqK2U.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 91,
+      "sha256": "cb85b0f263dbe24e857338301c0627076592e9f1f1a5662929f86d2c126444aa"
+    },
+    {
+      "path": "/assets/dailyResearchCommand-D7J2FMsY.css",
+      "status": 200,
+      "content_type": "text/css",
+      "bytes": 12281,
+      "sha256": "444542681a3575082c280eb30674e6550766a127bdd6da019b78e8f247125dfa"
+    },
+    {
+      "path": "/assets/dailyResearchCommand-DnNUE3hd.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 26611,
+      "sha256": "0ee65474e244827f2d03a6a956585b42a189f6f8cc334d4793398bd9b6a461c2"
+    },
+    {
+      "path": "/assets/main-vK9kJf8o.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 888,
+      "sha256": "bc514a3758447ee9ac49e4ea5dca4d8cf9f67769ba6acb0caa101e50b47edc92"
+    },
+    {
+      "path": "/assets/managerSelection-JNVtFm4l.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 822,
+      "sha256": "33c1f4e81d61a86c0bf805f7e3bef232205d189295371a0e46cbdddfd29224c5"
+    },
+    {
+      "path": "/assets/reboundPanelObservation-rEOT8hV3.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 30016,
+      "sha256": "ba9136e5557d7947053de18c1e13b30b1d39ce459119cfad9c565c2b2e7ff081"
+    },
+    {
+      "path": "/assets/research_lane-t0CPXntR.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 4268,
+      "sha256": "8651472ec9b303719d201e466e997fc2fadfc2f7169ec1a07c6ded932659f95b"
+    },
+    {
+      "path": "/assets/runtime-dom.esm-bundler-Da10y4tn.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 69045,
+      "sha256": "939ba86b28b5f7dd802f09d0e913009cb2349ae82b9e326716d84850442930c6"
+    },
+    {
+      "path": "/assets/style-BtNCnKLk.css",
+      "status": 200,
+      "content_type": "text/css",
+      "bytes": 18594,
+      "sha256": "511cff3d064c51a16261deb297bd8cd2cd4b58378b4eedf3fdcd210970a12fff"
+    },
+    {
+      "path": "/assets/style-DI6AXicP.js",
+      "status": 200,
+      "content_type": "text/javascript",
+      "bytes": 1110,
+      "sha256": "d887044e7c17fd90344fc4f74f53cac686584daf2a458ab2136d36f1946e9ab6"
+    }
+  ]
+}

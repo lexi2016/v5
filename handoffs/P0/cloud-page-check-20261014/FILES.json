@@ -1,0 +1,166 @@
+{
+  "schema": "v5.complete-file-evidence.v1",
+  "runtime_base_commit": "afddbdf75b86f3669b9329e1bffdd77c03bb3c7c",
+  "files": [
+    {
+      "path": "frontend/tests/cloud-page-check.spec.ts",
+      "bytes": 7789,
+      "sha256": "2787aeadb26627a0428792ed8fc0bbb1a303bd8f47d608539dad5669885c79b4"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/README.md",
+      "bytes": 7766,
+      "sha256": "9e1596beafc5e64812000180cba46804e0f9929b6a447058d515b76ca9123d33"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/VERIFICATION.json",
+      "bytes": 1873,
+      "sha256": "5d86ef5a07f19665863b27b1ce781999e56080a52c1ec7fa33e99b7c6981c8e8"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/api-preparation.txt",
+      "bytes": 175,
+      "sha256": "bebc1d0bc9a288e6a48a99a8555fcda37974bbe88ba6cabe5f1b2d78a9ed21d4"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/browser-capability.txt",
+      "bytes": 5461,
+      "sha256": "36886f2c9bd12c36a8eb7b096828ed079e222cc5213aa9501b9dde7a357c7220"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/dom-live-http.txt",
+      "bytes": 215,
+      "sha256": "55fd7c20a92ac5a44226f146becdf345b48af10fa2b8dcbd4f67873d211806ca"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/dom-requests.json",
+      "bytes": 10149,
+      "sha256": "1a7029e329fbb0c10dcdd76b420e6e940ae31fe92db65f1ff0f587967ba4caef"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/final-service-health.json",
+      "bytes": 1078,
+      "sha256": "6b4fdeae73a24324fcdb8e9609cac9c8a5878ab39dde05c87c24c9826962af73"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/fixture-info.json",
+      "bytes": 4098,
+      "sha256": "295f1c9aa032e5d9a1cdf56ca7bcf0702fb7e81fe7ef19e422abe754a9737ad1"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/frontend-build.txt",
+      "bytes": 2112,
+      "sha256": "9564d4eb938f1ad8676e116c2fcb42999f19328ae307ec51c57bae8d22c4abf5"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/http-check.txt",
+      "bytes": 69,
+      "sha256": "3fc35c869dd478399cb72c7c857aa33a7a3f01cd3883e6c22a9cc604f0df8240"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/http-results.json",
+      "bytes": 161849,
+      "sha256": "01ce5475042996532a7736c2ec0da69e858da7f5c3d9a77cc22cba7c7fbcb9b1"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m04-explicit-latest.dom.html",
+      "bytes": 16963,
+      "sha256": "c8550b44a26d4584c182e913c04a032dda7f5567a231df444cd7e8c597944e76"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m04-missing-date.dom.html",
+      "bytes": 4464,
+      "sha256": "8fc48b0d05f74655c4950f37c79945505b24b80afc9f4f7ff2a115ae585d6cce"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m04-new-original-detail.dom.html",
+      "bytes": 16889,
+      "sha256": "93111b73b47bf1df62d23d6e99b1179f458fe5c86dd984809143090e7d67d4fc"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m04-old-unknown-evidence.dom.html",
+      "bytes": 11524,
+      "sha256": "a149c931df51ed2ae08c38e9f7ea5d5fb08800cdf4000047a7dcee6a91217f8e"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m04-preparation.txt",
+      "bytes": 2953,
+      "sha256": "a1ac6fd491d0d01081245c2c812f4de044f4cbfb50e34f8cac525c9db4556794"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m17-exact-simulated.dom.html",
+      "bytes": 133490,
+      "sha256": "8daeb918445dff26c863339ce30596592b60bdc785d9ec5bf0c307c192873ed5"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/m17-wrong-run-error.dom.html",
+      "bytes": 1065,
+      "sha256": "6ac7a4d843e122942a5f282c31fc03a515cae25342880fb4cb1d5778e2a37ce7"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/manager-same-run-page2.dom.html",
+      "bytes": 38349,
+      "sha256": "e414fb7d19a1fe1f1a142f960053d556c74e922f3abaf1afd2da18a783e02451"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/manager-server.log",
+      "bytes": 42,
+      "sha256": "ee3b00844e2398252a5ce3b41b035184cfac0373ca15f19f2b85ce3bf25f2a07"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/manager-wrong-run-error.dom.html",
+      "bytes": 13769,
+      "sha256": "4de1fd58d9c142172e0a380a593d2cd6803d3a948ff3840eb30628b2910cd7a7"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/opt-in-disabled.txt",
+      "bytes": 215,
+      "sha256": "aab4a651cb6e3850a93812fa3acfe03a2663832b33c27b3dccbcb8072edee9fe"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/preview-server.log",
+      "bytes": 39,
+      "sha256": "0a78f38d67f4c2c485abaa90a79b5a50c10bbe92372554f0dd6333e7f91c829f"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/reviewer.txt",
+      "bytes": 2839,
+      "sha256": "4e3711cdb9eccb02b449ce3dedfd9eead15a95403f069cb7737b8860567685cb"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/saved-inventory-before.json",
+      "bytes": 8330,
+      "sha256": "8eec9ef221f3c89aaf836c34f8d8ff3fec25523f610546b95e8d3d576bf68c91"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/saved-readonly-summary.json",
+      "bytes": 126,
+      "sha256": "78d7e4e6f84bc4a74f1cbfb4fd4cbe1863a8d91f7355017d7a89fe014b4030bb"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/source-server.log",
+      "bytes": 42,
+      "sha256": "37c8656462cee687b564fc5a5e3db2ecc2c3cba96e68a69c9b7d15e26da38e69"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/evidence/static-assets-http.json",
+      "bytes": 4214,
+      "sha256": "1673b12e7ab256d51345642e94cbcb2ecae559f0c7cef3e5a5f7a443429ec1f6"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/scripts/check_http.py",
+      "bytes": 5075,
+      "sha256": "445fbfc2b1d94a63bdff3577160dfbab09a7cc49a7231dcbbd620c948e529279"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/scripts/prepare_api.py",
+      "bytes": 4299,
+      "sha256": "6dded4e67c2d4bdbc793ae1b8b2479c53fe22f595a9591b091b7f036285bf079"
+    },
+    {
+      "path": "handoffs/P0/cloud-page-check-20261014/scripts/prepare_m04.py",
+      "bytes": 1653,
+      "sha256": "b277fdf02a429bc9e913ea54025527cd843f86a7d4aeac9b509bf31fcbeb8703"
+    }
+  ]
+}
