@@ -36,7 +36,8 @@ def start(config):
     path=_runtime_path(config)
     if path.exists(): raise ValueError('RUNTIME_ALREADY_EXISTS')
     child_cfg=_child_config(config)
-    proc=subprocess.Popen([sys.executable,'-m','v5_shadow.module_process','--config',str(child_cfg),'--port',str(int(config['module_api'].get('port',0)))],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    child_entry=Path(__file__).resolve().with_name('module_process.py')
+    proc=subprocess.Popen([sys.executable,'-I','-B',str(child_entry),'--config',str(child_cfg),'--port',str(int(config['module_api'].get('port',0)))],stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     ready=None;deadline=time.time()+10
     while time.time()<deadline:
         line=proc.stdout.readline() if proc.stdout else ''

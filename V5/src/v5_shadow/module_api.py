@@ -716,7 +716,12 @@ def _config(value):
         keys += ('m11_saved_research_binding',)
     if isinstance(value, dict) and 'm16_saved_public_research_binding' in value:
         keys += ('m16_saved_public_research_binding',)
+    if isinstance(value, dict) and 'm04_research_lane_binding' in value:
+        keys += ('m04_research_lane_binding',)
     exact_keys(value, keys)
+    if 'm04_research_lane_binding' in value:
+        from .research_workbench_readonly import validate_binding
+        validate_binding(value)
     if 'm18_v2_daily_publication' in value:
         if (type(value['m18_v2_daily_publication']) is not bool
                 or value['module_id'] != 'manager' or M18_ROUTE not in value['routes']):
@@ -1042,6 +1047,8 @@ def create_module_server(value,host='127.0.0.1',port=0):
             if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
             heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
+            research_path = config['module_id']=='source_bundle' and parsed.path in ('/api/v5/research/lane','/api/v5/research/wechat/materials')
+            heavy = heavy or research_path
             reader_slot = m10_read_slot if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/hk-close-review' else m18_read_slot
             if config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/a-close-replay':
                 reader_slot=m09_read_slot
@@ -1059,10 +1066,16 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 reader_slot=m11_read_slot
             if config['module_id']=='source_bundle' and parsed.path==M12_ROUTE:
                 reader_slot=m12_read_slot
+            if research_path:
+                reader_slot=m04_read_slot
             if heavy and not reader_slot.acquire(blocking=False):
                 return self.error(503, 'MODULE_BUSY')
             try:
-                if parsed.path == M18_ROUTE + '/pages':
+                if research_path:
+                    from .research_workbench_readonly import response
+                    status,payload=response(config,parsed.path,query)
+                    self.reply(status,payload,sha256_json(payload))
+                elif parsed.path == M18_ROUTE + '/pages':
                     payload = _m18_page_response(config,root,query)
                     self.reply(200,payload,sha256_json(payload))
                 elif parsed.path in (M18_ROUTE + '/overview', M18_ROUTE + '/sections'):
@@ -1071,6 +1084,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 else:
                     record,digest=read_response(config,root,parsed.path,query)
                     self.reply(record['status_code'],record['payload'],digest)
+            except TimeoutError:self.error(503,'RESEARCH_READER_TIMEOUT')
             except FileNotFoundError:self.error(503,'MODULE_RESULT_NOT_AVAILABLE')
             except ValueError as error:
                 self.error(503,'MODULE_BUSY') if str(error)=='MODULE_PUBLICATION_BUSY' else self.error(409,'MODULE_RESULT_INVALID')

@@ -1,0 +1,53 @@
+{
+  "schema_version": "v5.cloud_isolation_evidence.v1",
+  "input_kind": "SYNTHETIC",
+  "p0_base": "1053e27b94cfdbd71abaa2edc69fc23b33cfcab4",
+  "m04_commit": "0bb46df890d4b1a57fcc17982a9800cac2f18146",
+  "environments": {
+    "P0": {
+      "python": "3.14.7 (main, Sep 24 2026, 17:58:18) [Clang 22.1.3 ]",
+      "dependencies": {
+        "numpy": "2.5.3",
+        "pandas": "2.3.3",
+        "pyarrow": "24.0.0"
+      }
+    },
+    "M04": {
+      "python": "3.13.12 (main, Mar 24 2026, 22:49:35) [Clang 22.1.1 ]",
+      "dependencies": {
+        "numpy": "2.5.4",
+        "pandas": "2.3.3",
+        "pyarrow": "23.0.1"
+      }
+    }
+  },
+  "v5_lock_sha256": "7cb690f890cc28b6a79311f07e724f61c3dc4411494d480c0041f075f0825bfd",
+  "tested_scope": "P0 source lifecycle and existing research UI/API plus fixed M04 multi-root read candidate",
+  "live_deployments": 0,
+  "real_captures": 0,
+  "mac_acceptance": "NOT_RUN",
+  "native_visual": "NOT_RUN",
+  "natural_verified": false,
+  "pit_accepted": false,
+  "full_release_regression": "NOT_RUN",
+  "logs": {
+    "p0-baseline-start.txt": "c3a27c46c281e9d572d317c0506434ed35aab686985cfcbbed8d10ea64b494dd",
+    "p0-source-red.txt": "bd47d7aff8293d574f791508867aec651b9b73ec02d360b8264c6f09ce9d641a",
+    "p0-source-green.txt": "6305a51e7616f2d02b43e8af1cb39b6d044873a78234dc4332eddc1962f740d0",
+    "p0-final-regression.txt": "6931136f382cb0bac133babe7632b97f2c68720e1619c370c9519c756f292199",
+    "p0-api-regression.txt": "6a2f0a42fb0ddc882a11bdcf24de93a23d79e6112298071804f7a22c84f5d725",
+    "p0-traced-test.txt": "06c187720de06339ed01b767991c6f1e71b3208e10025a1e56f938052e3eaa13",
+    "m04-cloud-offline.txt": "63afa47e5cd70421ac5bf7e925660ad2f6b9e768bccaac962dbb55bdd5cf4068",
+    "m04-supported-cloud.txt": "b428a6ab7638824ec391805e2ba6e905c69bc0377747e9ba009f32cbcf69f661",
+    "research-root-red.txt": "ece3a3b29b85489a8db7b2feaae43300a2419221c45e0919a9b4b0594777c89b",
+    "research-http-green.txt": "31d46ea18561f94b81654425057c74637acd02b2f55750cf6fc69d509e32eba0",
+    "m04-multi-http.txt": "6bb02c46b0c1e479723f9408a15b27c579d979b30db5550444fe99e4a929196f",
+    "frontend-base-manager.txt": "0ecc67ec4db43a29a548c8fa001459d4bf551ade6c0a6026688c900ef86c14fa",
+    "frontend-focused.txt": "2013a4163a46ec8108bfa3856d315f8581d771dfc6dc69b335db55305344ca29",
+    "frontend-focused-final.txt": "2f5feebb20d4d3b39d58c8a7394b93438c18d672e11dbf69344cabcb6404d4ee",
+    "frontend-node-final.txt": "388eee77037657b0c92dce497bb1898f14218fb1f056225a27f658a188e651e9",
+    "frontend-typecheck.txt": "2d2d4d4e451b6049d563051d9af39ea1e8953f956a19fc9f406671462db2f8f6",
+    "frontend-build.txt": "4241f75df45577465243a6568c8116e580c187f2bd0faa6ee0a049084607ba39",
+    "runtime-access-summary.json": "fab3f22c7ee63421347b8662e6bb82363a7de83d0dea6404797cb5e98845b84f"
+  }
+}

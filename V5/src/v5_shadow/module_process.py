@@ -5,6 +5,14 @@ producers, daily jobs, or ledger code.
 """
 from __future__ import annotations
 import argparse,json
+from pathlib import Path
+import sys
+
+# The source bundle is relocatable; a managed child must not rely on the
+# parent's in-memory sys.path or an inherited PYTHONPATH.
+if __package__ in (None, ''):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    __package__ = 'v5_shadow'
 from .module_api import create_module_server
 
 

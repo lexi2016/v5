@@ -2,6 +2,7 @@
 
 Usage: python -B run_shadow.py <CLI arguments>
        python -B run_shadow.py web --output-root <root> --port <port>
+       python -I -B run_shadow.py runtime <command> --config <config>
 Run this file directly; a timestamp cache is never used for the main script.
 """
 from pathlib import Path
@@ -15,6 +16,9 @@ def main():
         sys.dont_write_bytecode = True
         sys.path.insert(0, str(Path(__file__).resolve().parent / 'src'))
         args = sys.argv[1:]
+        if args and args[0] == 'runtime':
+            from v5_shadow.main_runtime import main as entry
+            return entry(args[1:])
         if args and args[0] == 'web':
             from v5_shadow.web import main as entry
             return entry(args[1:])

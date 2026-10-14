@@ -1,0 +1,235 @@
+
+> v3-5-web@0.1.0 test
+> vitest run src/research-workbench src/views/SavedManagerResultView.spec.ts src/views/SavedManagerResultView.navigation.spec.ts src/components/M04SavedResearch.spec.ts
+
+
+ RUN  v4.1.10 /workspace/v5-cloud/frontend
+
+ ❯ src/views/SavedManagerResultView.spec.ts (2 tests | 1 failed) 2042ms
+   × shows an ordinary V5 page and keeps missing API results visibly unconfirmed 437ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/views/SavedManagerResultView.spec.ts > shows an ordinary V5 page and keeps missing API results visibly unconfirmed
+TestingLibraryElementError: Unable to find an element with the text: 阶段选股 · 未接入. This could be because the text is broken up by multiple elements. In this case, you can provide a function for your text matcher to make your matcher more flexible.
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<main[39m
+      [33mclass[39m=[32m"dashboard-shell saved-run-view"[39m
+      [33mdata-v-edcb91f0[39m=[32m""[39m
+    [36m>[39m
+      [36m<header[39m
+        [33mclass[39m=[32m"page-header"[39m
+        [33mdata-v-edcb91f0[39m=[32m""[39m
+      [36m>[39m
+        [36m<div[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+        [36m>[39m
+          [36m<h1[39m
+            [33mdata-v-edcb91f0[39m=[32m""[39m
+          [36m>[39m
+            [0mV5 经理选股[0m
+          [36m</h1>[39m
+          [36m<p[39m
+            [33mdata-v-edcb91f0[39m=[32m""[39m
+          [36m>[39m
+            [0m读取已保存的同一次运行结果。结果中的 PARTIAL、CANNOT_CONFIRM 与资料缺口按原样保留；只读研究，不触发采集或交易。[0m
+          [36m</p>[39m
+        [36m</div>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"runtime-badge"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+        [36m>[39m
+          [0m已保存结果 · READ_ONLY[0m
+        [36m</span>[39m
+      [36m</header>[39m
+      [36m<form[39m
+        [33mclass[39m=[32m"control-panel"[39m
+        [33mdata-v-edcb91f0[39m=[32m""[39m
+      [36m>[39m
+        [36m<label[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+        [36m>[39m
+          [0m运行 ID[0m
+          [36m<input[39m
+            [33maria-label[39m=[32m"运行 ID"[39m
+            [33mautocomplete[39m=[32m"off"[39m
+            [33mdata-v-edcb91f0[39m=[32m""[39m
+            [33mspellcheck[39m=[32m"false"[39m
+          [36m/>[39m
+        [36m</label>[39m
+        [36m<button[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"submit"[39m
+        [36m>[39m
+          [0m读取已保存结果[0m
+        [36m</button>[39m
+        [36m<span[39m
+          [33mclass[39m=[32m"runtime-state"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+        [36m>[39m
+          [0m目标日尚未确认[0m
+        [36m</span>[39m
+      [36m</form>[39m
+      [36m<nav[39m
+        [33maria-label[39m=[32m"功能入口"[39m
+        [33mclass[39m=[32m"entry-nav"[39m
+        [33mdata-v-edcb91f0[39m=[32m""[39m
+      [36m>[39m
+        [36m<button[39m
+          [33maria-current[39m=[32m"page"[39m
+          [33mclass[39m=[32m"active"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mdisabled[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m经理已保存结果[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m""[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mdisabled[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m公告研究股票[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m""[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mdisabled[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m超跌研究[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33mclass[39m=[32m""[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mdisabled[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m美股驱动[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"m16-saved-research"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m公开资料研究 · M16[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"m11-saved-research"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m盘中研究 · M11[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"m12-saved-video"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m视频复盘 · M12[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"m04-saved-research"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m研究情报 · M04[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"source-module-content"[39m
+          [33maria-expanded[39m=[32m"false"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0m源模块实际状态[0m
+        [36m</button>[39m
+        [36m<button[39m
+          [33maria-controls[39m=[32m"m07-saved-stage"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mtype[39m=[32m"button"[39m
+        [36m>[39m
+          [0mA 股阶段选股 · M07 已保存结果[0m
+        [36m</button>[39m
+        [36m<a[39m
+          [33mclass[39m=[32m"entry-nav-link"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mhref[39m=[32m"?view=research"[39m
+        [36m>[39m
+          [0m研报决策台[0m
+        [36m</a>[39m
+      [36m</nav>[39m
+      [36m<p[39m
+        [33mclass[39m=[32m"navigation-status"[39m
+        [33mdata-v-edcb91f0[39m=[32m""[39m
+      [36m>[39m
+        [0m当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。[0m
+      [36m</p>[39m
+      [36m<section[39m
+        [33maria-labelledby[39m=[32m"saved-result-title"[39m
+        [33mdata-v-edcb91f0[39m=[32m""[39m
+        [33mid[39m=[32m"saved-result-content"[39m
+      [36m>[39m
+        [36m<header[39m
+          [33mclass[39m=[32m"saved-result-heading"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+        [36m>[39m
+          [36m<h2[39m
+            [33mdata-v-edcb91f0[39m=[32m""[39m
+            [33mid[39m=[32m"saved-result-title"[39m
+            [33mtabindex[39m=[32m"-1"[39m
+          [36m>[39m
+            [0m经理已保存结果[0m
+          [36m</h2>[39m
+        [36m</header>[39m
+        [36m<p[39m
+          [33mclass[39m=[32m"task-message task-error"[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+          [33mrole[39m=[32m"alert"[39m
+        [36m>[39m
+          [0mCANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。M18_HTTP_503: MODULE_RESULT_NOT_AVAILABLE[0m
+        [36m</p>[39m
+      [36m</section>[39m
+      [36m<details[39m
+        [33mclass[39m=[32m"task-status-view source-disclosure"[39m
+        [33mdata-v-edcb91f0[39m=[32m""[39m
+        [33mid[39m=[32m"source-module-content"[39m
+      [36m>[39m
+        [36m<summary[39m
+          [33mdata-v-edcb91f0[39m=[32m""[39m
+        [36m>[39m
+          [0m源模块实际状态 · 点击展开基础数据、预选池与复盘[0m
+        [36m</summary>[39m
+        [36m<section[39m
+          [33maria-label[39m=[32m"基础数据与 A 股预选池实际状态"[39m
+          [33mclass[39m=[32m"source-status task-status-view"[39m
+          [33mdata-v-1d5d3a59[39m=[32m""[39m
+      ...
+ ❯ Object.getElementError node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:76:38
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:52:17
+ ❯ node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/views/SavedManagerResultView.spec.ts:10:16
+      8|  expect(screen.getByRole('heading',{name:'V5 经理选股'})).toBeTruthy();
+      9|  expect(await screen.findByRole('alert')).toHaveProperty('textContent'…
+     10|  expect(screen.getByText('阶段选股 · 未接入')).toHaveProperty('disabled',true…
+       |                ^
+     11|  expect(screen.queryByRole('table')).toBeNull();
+     12|  expect(vi.mocked(fetch).mock.calls.filter(([url])=>String(url).starts…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 8 passed (9)
+      Tests  1 failed | 62 passed (63)
+   Start at  03:37:21
+   Duration  6.86s (transform 2.07s, setup 0ms, import 3.47s, tests 10.54s, environment 4.47s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

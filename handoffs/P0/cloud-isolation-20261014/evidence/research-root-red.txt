@@ -1,0 +1,33 @@
+FE
+======================================================================
+ERROR: test_real_m04_cli_cold_reader_with_synthetic_owner_archive (test_http.HttpTests.test_real_m04_cli_cold_reader_with_synthetic_owner_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/integration_candidates/research_workbench/tests/test_http.py", line 42, in test_real_m04_cli_cold_reader_with_synthetic_owner_archive
+    self.start();status,p=self.get('/api/v5/research/lane?research_date='+data['day'])
+    ^^^^^^^^^^^^
+  File "/workspace/v5-cloud/integration_candidates/research_workbench/tests/test_http.py", line 13, in start
+    self.server=create_module_server(self.config);self.thread=threading.Thread(target=self.server.serve_forever);self.thread.start()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/v5-cloud/V5/src/v5_shadow/module_api.py", line 975, in create_module_server
+    config,root=_config(value)
+                ^^^^^^^^^^^^^^
+  File "/workspace/v5-cloud/V5/src/v5_shadow/module_api.py", line 719, in _config
+    exact_keys(value, keys)
+  File "/workspace/v5-cloud/V5/src/v5_shadow/contracts.py", line 130, in exact_keys
+    raise ValueError('CONTRACT_FIELDS_INVALID')
+ValueError: CONTRACT_FIELDS_INVALID
+
+======================================================================
+FAIL: test_get_missing_latest_and_readonly (test_http.HttpTests.test_get_missing_latest_and_readonly)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/v5-cloud/integration_candidates/research_workbench/tests/test_http.py", line 20, in test_get_missing_latest_and_readonly
+    status,p=self.get('/api/v5/research/lane?research_date=20261012');self.assertEqual(status,200);self.assertEqual(p['research_date'],'20261012');self.assertEqual(p['status'],'NOT_MATERIALIZED')
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 503 != 200
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.992s
+
+FAILED (failures=1, errors=1)

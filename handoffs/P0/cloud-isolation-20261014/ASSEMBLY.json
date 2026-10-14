@@ -1,0 +1,59 @@
+{
+  "base": "1053e27b94cfdbd71abaa2edc69fc23b33cfcab4",
+  "m04": "0bb46df890d4b1a57fcc17982a9800cac2f18146",
+  "method": "Original research apply_candidate.transforms, all six current Git preimages verified; latest candidate namespace copied unchanged; original M04 multi-root bridge copied unchanged. No live config.",
+  "files": {
+    "frontend/src/main.ts": {
+      "before": "4e401b936164f505a1d68e8abe0886b7a7ce41849b8931f09a2684f444ccbbf2",
+      "after": "80080a667a856479f75393452916abb6369ae401d8efe6bdcd79539942ac0494"
+    },
+    "frontend/vite.config.ts": {
+      "before": "f5c3b6c0d5da0478e4dd0997cb87d4f3ba47657434d0eccc16bc2bcf7c639892",
+      "after": "d774625dea5acaf4a4fc28af3b91995f3fa3024a5d7b91f041b1fbc4d74b46a7"
+    },
+    "frontend/src/views/SavedManagerResultView.vue": {
+      "before": "75d5554950d9934cde2fc1a86abea99af4cfc36379c04ab46a88a15fc828826c",
+      "after": "3da461a13a72b7b314704a57d626c07956494700a6ab5ca2ec9a62ee8828732e"
+    },
+    "V5/src/v5_shadow/module_api.py": {
+      "before": "3a5122115da0c14a01f23d2b6020c49a6fdd4dc270fb4e346775e35a9932af34",
+      "after": "f3ffd57449ba63a3759551b3b8afe8223ea0e3ce291dfe18d64383d556473645"
+    },
+    "frontend/src/views/SavedManagerResultView.navigation.spec.ts": {
+      "before": "6d9417c3bc7cfe2d648e7edb995bbdd77d2a4cbc7580fb8c86cde5309d83b8e0",
+      "after": "ee0b416d847d9f9f2ad3f9b5b3e29958064049eeb4f32324e44c7165b8a5cb4b"
+    },
+    "frontend/src/views/SavedManagerResultView.spec.ts": {
+      "before": "be714990932ab6c8d769c3b019ebf54faac39070f4a589f1c8df3a390213f648",
+      "after": "e259276ef05ac5ea625b2539c02acbc13301d6a798102688647bb1f40da2922d"
+    }
+  },
+  "bridge_sha256": "c1d43dd72bb1493c996616e61216fdc097fa149fdf012a9a0be5efee49282540",
+  "namespace": {
+    "Root.spec.ts": "5807148ed38b67a3ec56085bb1193b1e8646c8c24224c2968c07b9f605baafa2",
+    "Root.vue": "6f901cc707e88d7bc88d3f30bc55b9c73c5238e328194579619bd53c7c81b63e",
+    "styles/v3-research-lane.css": "7c2fcd9656f3a633e4a16fabcf31e00235a4fe4f035d665fc1546b2d0cb02a08",
+    "composables/useResearchLane.spec.ts": "09c5b0dbfd13799d05e99da9ae03db89af2ef64fa99ed2e779c85506813ebeda",
+    "composables/useResearchLane.ts": "ac34f90a1e39c9777f292b7b6965bcf16f2e168205ef623a6142fe7fa387fec3",
+    "composables/latestReadQueue.spec.ts": "a9ace1ebfec42be131371145b760023e227dd1a3fb81d29466e7c0ff1cc90e9b",
+    "composables/latestReadQueue.ts": "e697be58c7ea78ceadcd6c070ee8e1d17dfd8fa3cc3676c96131aed39d6e3cc6",
+    "api/wechat_research.ts": "1c686afbf92c26b70baa3bf854dcf51e8ae1950b82ea8c2022408ca5051557ad",
+    "api/research_lane.spec.ts": "6a07194d5e9134dec16da090b29a9f25182739c82ef0b433755c6d4ca161d631",
+    "api/research_lane.ts": "77b2c2707f520dbcee7dae264a95066c8c1cbbbf3eecf422389f221042cf3e53",
+    "views/ResearchView.spec.ts": "f4d97837ca0a3fb859fbe1392a85bb06f133876805dd4176e333483ff5274f36",
+    "views/archive.spec.ts": "51a901f0fbbf42a6489ac940772dc374fc62b4b053a7b9237a743879dc90420a",
+    "views/ResearchView.vue": "865afe7d49f4e82a24aa71e3016d99bc37fecdb4bdec84e60effb74eb88b783f",
+    "components/research/ResearchImpactList.vue": "fdffb0c44bee977063932686d7ad6bb96d83404d7e32b6bb297a52714d85521f",
+    "components/research/ResearchContextPane.vue": "4989b5209ff2e00174cea659b08264afa80757e37c2c70e1c7d9395d3c0341f6",
+    "components/research/ResearchStatusStrip.vue": "1943e8681c6650422cb5e7a799b393574b561b068aa7d882fc1c0612bf8edebf",
+    "components/research/ResearchSourceColumns.vue": "7adeb7bfb215fb9cb50a4c636b6355d7e5211b3d0b4786fa24a52cfed5004229",
+    "components/research/ResearchFeedPane.vue": "af616ea6df6cb74d1989b101ce125ee7a82e3499f56c985ee5944aba03d1043d",
+    "components/research/ResearchFeedCard.vue": "beabd99564e59172ec625ca17712f67461d45fb8ade60429a33c9288ff587f7d",
+    "components/research/ResearchAppendix.vue": "af25a474325ba0457752fb81d63f0474fe893d81ec0044b041f13c3f8923374f",
+    "components/research/WechatResearchPanel.vue": "896917e3dea939d45514ba836c08d2a836791958864be1697f287151c872885f"
+  },
+  "post_assembly_test_updates": [
+    "frontend/src/views/SavedManagerResultView.spec.ts: existing M07 button plus research link",
+    "frontend/tests/savedManagerNavigation.node.mjs: enabled research link"
+  ]
+}

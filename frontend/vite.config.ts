@@ -23,6 +23,8 @@ function readonlyProxy(target: string): ProxyOptions {
 const proxy: Record<string, ProxyOptions> = {};
 if (target) proxy['/api/v4/manager/m18/v2'] = readonlyProxy(target);
 if (sourceTarget) {
+ proxy['/api/v5/research/lane'] = readonlyProxy(sourceTarget);
+ proxy['/api/v5/research/wechat/materials'] = readonlyProxy(sourceTarget);
  proxy['/api/v5/source-bundle/a-stage-saved'] = readonlyProxy(sourceTarget);
  proxy['/api/v5/source-bundle/manager-public-research'] = readonlyProxy(sourceTarget);
  proxy['/api/v5/source-bundle/intraday-research'] = readonlyProxy(sourceTarget);

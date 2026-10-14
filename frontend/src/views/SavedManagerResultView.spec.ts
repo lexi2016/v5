@@ -7,7 +7,8 @@ it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed'
  render(SavedManagerResultView);
  expect(screen.getByRole('heading',{name:'V5 经理选股'})).toBeTruthy();
  expect(await screen.findByRole('alert')).toHaveProperty('textContent',expect.stringContaining('CANNOT_CONFIRM'));
- expect(screen.getByText('阶段选股 · 未接入')).toHaveProperty('disabled',true);
+ expect(screen.getByRole('button',{name:'A 股阶段选股 · M07 已保存结果'})).toHaveProperty('disabled',false);
+ expect(screen.getByRole('link',{name:'研报决策台'}).getAttribute('href')).toBe('?view=research');
  expect(screen.queryByRole('table')).toBeNull();
  expect(vi.mocked(fetch).mock.calls.filter(([url])=>String(url).startsWith('/api/v4/manager/m18/v2'))).toHaveLength(1);
  await fireEvent.click(screen.getByRole('button',{name:'源模块实际状态'}));
@@ -40,7 +41,7 @@ it('opens consumed announcement references by default and reuses the stock reaso
  expect(managerRequests).toHaveLength(3);
  expect(managerRequests[2]).toContain('section=announcement_reviewed_analysis&projection=announcement_references');
  expect(screen.queryByRole('table')).toBeNull();
- expect(screen.queryByRole('link')).toBeNull();
+ expect(screen.getByRole('link',{name:'研报决策台'}).getAttribute('href')).toBe('?view=research');
  await fireEvent.click(screen.getByRole('button',{name:'超跌研究'}));
  expect(await screen.findByRole('heading',{name:'合成超跌公司 · 04321 · 严格条件研究观察'})).toBeTruthy();
  expect(screen.queryByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeNull();

@@ -1,0 +1,58 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________________ test_source_runtime_without_pythonpath ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-agent/pytest-0/test_source_runtime_without_py0')
+
+    def test_source_runtime_without_pythonpath(tmp_path):
+        data = tmp_path / "synthetic-data"
+        data.mkdir()
+        (data / ".v5-module-root").write_text("v5.module-root.v1:p0_test\n")
+        runtime = tmp_path / "runtime"
+        config = tmp_path / "config.json"
+        config.write_text(json.dumps({
+            "runtime_root": str(runtime), "composition": "unused-synthetic",
+            "module_api": {"schema_version": "v5.module_api.v1",
+                           "module_id": "p0_test", "release_id": "SYNTHETIC_CLOUD",
+                           "data_root": str(data), "routes": []},
+        }))
+        env = dict(os.environ)
+        env.pop("PYTHONPATH", None)
+        env.pop("PYTHONHOME", None)
+    
+        def command(action, check=True):
+            result = subprocess.run(
+                [sys.executable, "-I", "-B", str(BASE / "run_shadow.py"),
+                 "runtime", action, "--config", str(config)],
+                cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20,
+            )
+            if check:
+                assert result.returncode == 0, result.stdout + result.stderr
+                return json.loads(result.stdout)
+            return result
+    
+>       assert command("validate")["status"] == "CONFIGURATION_VALID"
+               ^^^^^^^^^^^^^^^^^^^
+
+V5/tests/test_p0_source_runtime.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+action = 'validate', check = True
+
+    def command(action, check=True):
+        result = subprocess.run(
+            [sys.executable, "-I", "-B", str(BASE / "run_shadow.py"),
+             "runtime", action, "--config", str(config)],
+            cwd=tmp_path, env=env, capture_output=True, text=True, timeout=20,
+        )
+        if check:
+>           assert result.returncode == 0, result.stdout + result.stderr
+E           AssertionError: {"reason_codes":["ARGUMENTS_INVALID"],"status":"REJECTED"}
+E             
+E           assert 3 == 0
+E            +  where 3 = CompletedProcess(args=['/workspace/v5-test-env/bin/python', '-I', '-B', '/workspace/v5-cloud/V5/run_shadow.py', 'runti...hout_py0/config.json'], returncode=3, stdout='{"reason_codes":["ARGUMENTS_INVALID"],"status":"REJECTED"}\n', stderr='').returncode
+
+V5/tests/test_p0_source_runtime.py:37: AssertionError
+=========================== short test summary info ============================
+FAILED V5/tests/test_p0_source_runtime.py::test_source_runtime_without_pythonpath
+1 failed in 0.40s

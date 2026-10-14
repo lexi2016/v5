@@ -74,7 +74,7 @@ it('puts saved results before collapsed, still-mounted source modules with verif
   const m07Stage = container.querySelector<HTMLDetailsElement>('#m07-saved-stage');
   await waitFor(() => expect(m07Stage?.open).toBe(true));
   expect(m07Stage).toBeTruthy();
-  expect(screen.getByText('研报决策台 · 未接入')).toHaveProperty('disabled', true);
+  expect(screen.getByRole('link',{name:'研报决策台'}).getAttribute('href')).toBe('?view=research');
 });
 
 it('opens and focuses the complete source disclosure without remounting its requests', async () => {

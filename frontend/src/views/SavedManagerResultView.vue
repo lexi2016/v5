@@ -118,7 +118,7 @@ onBeforeUnmount(()=>session.close());
    <button type="button" aria-controls="m04-saved-research" @click="openResearch">研究情报 · M04</button>
    <button type="button" aria-controls="source-module-content" :aria-expanded="sourceExpanded" @click="openSources">源模块实际状态</button>
    <button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果</button>
-   <button type="button" disabled>研报决策台 · 未接入</button>
+   <a class="entry-nav-link" href="?view=research">研报决策台</a>
   </nav>
   <p class="navigation-status">当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
   <section id="saved-result-content" aria-labelledby="saved-result-title">

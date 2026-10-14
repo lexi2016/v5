@@ -57,6 +57,6 @@ test('the selected result exposes its verified date and run without enabling mis
   assert.match(template, /已读取运行\s*\{\{\s*state\.descriptor\.run_id\s*\}\}/);
   assert.match(template, /目标日\s*\{\{\s*state\.descriptor\.target_date\s*\}\}/);
   assert.match(template, /<button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果<\/button>/);
-  assert.match(template, /<button type="button" disabled>研报决策台 · 未接入<\/button>/);
+  assert.match(template, /<a class="entry-nav-link" href="\?view=research">研报决策台<\/a>/);
   assert.match(template, /CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。\{\{ state.error \}\}/);
 });

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/workspace/v5-cloud/V5/src/v5_shadow/main_runtime.py", line 47, in start
+    proc.terminate();proc.wait(timeout=5);raise ValueError('MODULE_API_START_FAILED')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: MODULE_API_START_FAILED
