@@ -569,12 +569,6 @@
       "original_path": "modules/M04/source/V5/src/v5_shadow/registry_observation.py"
     },
     {
-      "path": "source/V5/src/v5_shadow/research_ingest_daily.py",
-      "git_blob_sha": "a8aab19f69852508d097ed1c17e99f39947d5449",
-      "bytes": 8645,
-      "original_path": "modules/M04/source/V5/src/v5_shadow/research_ingest_daily.py"
-    },
-    {
       "path": "source/V5/src/v5_shadow/review_bridge.py",
       "git_blob_sha": "e8195b5a4fa312c0af4fa6fff1daeee75808dfd2",
       "bytes": 8937,
@@ -2826,6 +2820,19 @@
       "original_path": "modules/M04/source/V5/src/v5_shadow/archive_article_v2.py",
       "current_sha256": "9847c3753b35e044e6a860b06090451c8f83918a153562ecc043aa10f7d69984",
       "change": "Unique reversible original compact_text whitespace span, exact raw UTF8 offsets and SHA; original issuer/builder/source/time gates retained"
+    },
+    {
+      "path": "source/V5/src/v5_shadow/research_ingest_daily.py",
+      "git_blob_sha": "a8aab19f69852508d097ed1c17e99f39947d5449",
+      "bytes": 8645,
+      "original_path": "modules/M04/source/V5/src/v5_shadow/research_ingest_daily.py",
+      "current_sha256": "c0b1b660659be5f3993e1b8c40bdc33e517c00d53c7c07048d2f7ceb07169a16",
+      "change": "Reuse completed bound builder checkpoints across adapter versions after isolated original owner replay; preserve slot guard"
     }
-  ]
+  ],
+  "m04_added_builder_reuse_worker": {
+    "path": "source/V5/src/v5_shadow/research_ingest_builder_reuse.py",
+    "sha256": "f07c860ee916df0417744693b1fd94217613540c43ce6d756b6260886dd785aa",
+    "purpose": "Read-only isolated original verify_builder invocation; no acquisition or source writer"
+  }
 }

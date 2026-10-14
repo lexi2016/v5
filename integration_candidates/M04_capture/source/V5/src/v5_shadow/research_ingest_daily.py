@@ -12,6 +12,8 @@ import fcntl
 import hashlib
 import json
 import os
+import re
+import subprocess
 import uuid
 from v5_shadow.archive_builder_v1 import run_build, builder_identity
 from v5_shadow.archive_article_v2 import run_import
@@ -78,6 +80,40 @@ def _verify_success(result):
     return result
 
 
+def _reuse_completed_builder(runs, request):
+    expected = sha256_json(request)
+    matches = []
+    for directory in sorted(runs.iterdir()):
+        if directory.is_symlink():
+            raise ValueError('INGEST_BUILDER_REUSE_PATH')
+        if not directory.is_dir() or not re.fullmatch(r'[0-9a-f]{64}', directory.name):
+            continue
+        path = directory/'builder.json'
+        if not path.exists():
+            continue
+        built = _json(path)
+        if built.get('request_sha256') == expected:
+            matches.append(built)
+    if not matches:
+        return None
+    if any(canonical_bytes(value) != canonical_bytes(matches[0]) for value in matches[1:]):
+        raise ValueError('INGEST_BUILDER_REUSE_CONFLICT')
+    built = matches[0]
+    process = subprocess.run([sys.executable, '-I', '-B', str(Path(__file__).with_name('research_ingest_builder_reuse.py'))],
+        input=canonical_bytes(dict(request=request, built=built)), stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE, timeout=120)
+    if len(process.stdout) > MAX_JSON_BYTES:
+        raise ValueError('INGEST_BUILDER_REUSE_RESPONSE_SIZE')
+    try:
+        checked = json.loads(process.stdout)
+    except ValueError as exc:
+        raise ValueError('INGEST_BUILDER_REUSE_RESPONSE_INVALID') from exc
+    if (process.returncode or checked.get('status') != 'MATCHED'
+            or checked.get('checkpoint_sha256') != sha256_json(built)):
+        raise ValueError('INGEST_BUILDER_REUSE_FAILED:' + str(checked.get('reason', 'UNKNOWN')))
+    return built
+
+
 def run(request):
     if not isinstance(request, dict) or set(request) != FIELDS:
         raise ValueError('INGEST_REQUEST_FIELDS')
@@ -102,7 +138,8 @@ def run(request):
         if hashlib.sha256(_raw_file(capture, name)).hexdigest() != digest:
             raise ValueError('INGEST_CAPTURE_CHANGED')
     code = dict(builder=builder_identity(), article=article_v2_identity(),
-                bridge=hashlib.sha256(Path(__file__).read_bytes()).hexdigest())
+                bridge=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                builder_reuse=hashlib.sha256(Path(__file__).with_name('research_ingest_builder_reuse.py').read_bytes()).hexdigest())
     identity = sha256_json(dict(request=request, code=code))
     lock_path = state/'writer.lock'
     if lock_path.is_symlink():
@@ -133,7 +170,10 @@ def run(request):
             if builder_path.exists():
                 built = _json(builder_path)
             else:
-                built = run_build({k:request[k] for k in ('capture_root','capture_files','receipt','status')})
+                builder_request = {k:request[k] for k in ('capture_root','capture_files','receipt','status')}
+                built = _reuse_completed_builder(runs, builder_request)
+                if built is None:
+                    built = run_build(builder_request)
                 _write(builder_path, built, immutable=True)
             # The unchanged import owner fully verifies source, clocks, owner
             # replay, acquisition receipt and every capture byte on each retry.
