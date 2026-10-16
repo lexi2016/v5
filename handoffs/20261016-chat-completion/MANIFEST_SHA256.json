@@ -1,0 +1,55 @@
+{
+  "schema": "v5.chat-handoff.files.v1",
+  "base_commit": "01d93717905813705732161d4d79062ae5af2d99",
+  "hash_scope": "All new handoff payload files except this manifest; verify manifest using its enclosing Git commit/blob. No product source bytes changed.",
+  "files": [
+    {
+      "path": "BRANCH_SNAPSHOT.json",
+      "bytes": 20897,
+      "sha256": "ec66eceb5aa710f9f01034f311d76447effbd97918fb9f94b68c755694a7d9bd",
+      "git_blob_sha1": "4dd18cd4d3bc554750f9babcfb07dc59cf591c5e"
+    },
+    {
+      "path": "DOCUMENT_VALIDATION.json",
+      "bytes": 798,
+      "sha256": "ac1d992b92d1183875329364b71a44e98a0a05f234e6f4669a7721abad875946",
+      "git_blob_sha1": "06b0417bd9a73578434e1fce8d79e8a572d2a718"
+    },
+    {
+      "path": "MODULE_MATRIX.md",
+      "bytes": 31471,
+      "sha256": "db3c83c5a8550881131759b111fc3b7cbeee4b798b1a019699775187e1b758be",
+      "git_blob_sha1": "0edad1253928cb1123c0141ca2f964df5758864b"
+    },
+    {
+      "path": "PROMPT.md",
+      "bytes": 9296,
+      "sha256": "6559c487ee82d7c6dedeca1f1290cc79c82636a1b0d738e915edbebcabe0b1e0",
+      "git_blob_sha1": "a5993c31fb45dd2b02d30da8dcc2b2127cdd10ce"
+    },
+    {
+      "path": "SOURCE_FILE_MANIFEST.json",
+      "bytes": 488651,
+      "sha256": "0b7de0136efdcb65a51644367e3f3240c90a721c927982e269e426d002912f48",
+      "git_blob_sha1": "4d4be52baad52367af56ac40176e14ebc997da54"
+    },
+    {
+      "path": "SOURCE_INDEX.md",
+      "bytes": 14564,
+      "sha256": "8b553e03caff7e2e7133b85d2bcef11a99e2b68bb6b23918ab551b2002dd6d99",
+      "git_blob_sha1": "9a731ff960b358b81d2bd7dcce6aed9d5d8d2426"
+    },
+    {
+      "path": "START_HERE.md",
+      "bytes": 3383,
+      "sha256": "ac125d2fc6ced88db063f73ab61b2751645b43ee6ed5fd8b793d3e8c1a43daf4",
+      "git_blob_sha1": "eec9d742e439da4ba3219269431d83bc6c395131"
+    },
+    {
+      "path": "VERIFIED_GAPS_AND_EVIDENCE.md",
+      "bytes": 11952,
+      "sha256": "2fc194569bf431b4a4325b178a45226efb1319fff31408d780b2bd7da67a5690",
+      "git_blob_sha1": "e8a75b6cb0e8debf2cee1cfa05bf1fcafc354690"
+    }
+  ]
+}

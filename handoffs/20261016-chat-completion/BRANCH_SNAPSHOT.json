@@ -1,0 +1,450 @@
+{
+  "checked_at_utc": "2026-10-16T13:20:56.216Z",
+  "repository": "lexi2016/v5",
+  "integration_branch": "dev/v5-main-integration-20261012",
+  "integration_commit": "01d93717905813705732161d4d79062ae5af2d99",
+  "integration_commit_date": "2026-10-14T13:34:13Z",
+  "integration_git_tree": "29e4de722ccf35bb789ba29ad32c883ce9df8adb",
+  "default_branch_commit": "d3ebf33c40d1b5f06e3729b11d5ece0506f34c91",
+  "branches": [
+    {
+      "branch": "dev/m01-github-handoff-20261011",
+      "commit": "ea96a80cf9d79e638ee08e15cb0bf92368261ada",
+      "url": "https://github.com/lexi2016/v5/tree/ea96a80cf9d79e638ee08e15cb0bf92368261ada"
+    },
+    {
+      "branch": "dev/m02-github-handoff-20261011",
+      "commit": "776acce9328aa102e3db6973405f01260f15239d",
+      "url": "https://github.com/lexi2016/v5/tree/776acce9328aa102e3db6973405f01260f15239d"
+    },
+    {
+      "branch": "dev/m03-github-handoff-20261011",
+      "commit": "3020bb6b0abd30fc9a243cfdee7ec0f121e2c178",
+      "url": "https://github.com/lexi2016/v5/tree/3020bb6b0abd30fc9a243cfdee7ec0f121e2c178"
+    },
+    {
+      "branch": "dev/m04-github-handoff-20261011",
+      "commit": "0bb46df890d4b1a57fcc17982a9800cac2f18146",
+      "url": "https://github.com/lexi2016/v5/tree/0bb46df890d4b1a57fcc17982a9800cac2f18146"
+    },
+    {
+      "branch": "dev/m05-github-handoff-20261011",
+      "commit": "5d868fc09fba7f7fe210e603a28015e271117077",
+      "url": "https://github.com/lexi2016/v5/tree/5d868fc09fba7f7fe210e603a28015e271117077"
+    },
+    {
+      "branch": "dev/m06-github-handoff-20261011",
+      "commit": "ddb07572e7bd24efff2a9624806e2487129d208a",
+      "url": "https://github.com/lexi2016/v5/tree/ddb07572e7bd24efff2a9624806e2487129d208a"
+    },
+    {
+      "branch": "dev/m07-github-handoff-20261011",
+      "commit": "e99b5d0d8d0dfc7c2e76d68057c735b4e5dc7c31",
+      "url": "https://github.com/lexi2016/v5/tree/e99b5d0d8d0dfc7c2e76d68057c735b4e5dc7c31"
+    },
+    {
+      "branch": "dev/m08-github-handoff-20261011",
+      "commit": "01f1a6347722081cbbf97b54204bf033e6d01938",
+      "url": "https://github.com/lexi2016/v5/tree/01f1a6347722081cbbf97b54204bf033e6d01938"
+    },
+    {
+      "branch": "dev/m10-github-handoff-20261011",
+      "commit": "9ab214b0ad5542111c04d10f50cac989644205f7",
+      "url": "https://github.com/lexi2016/v5/tree/9ab214b0ad5542111c04d10f50cac989644205f7"
+    },
+    {
+      "branch": "dev/m11-github-handoff-20261011",
+      "commit": "6abba1b36dce3d9696b5a0e401ba86a96d9b10ec",
+      "url": "https://github.com/lexi2016/v5/tree/6abba1b36dce3d9696b5a0e401ba86a96d9b10ec"
+    },
+    {
+      "branch": "dev/m12-github-handoff-20261011",
+      "commit": "385b1068054f3d20688344961b3a3cf34d6a7bb4",
+      "url": "https://github.com/lexi2016/v5/tree/385b1068054f3d20688344961b3a3cf34d6a7bb4"
+    },
+    {
+      "branch": "dev/m13-partial-pages-20261012",
+      "commit": "308af26862daf005c5c5800d15c5053c84275938",
+      "url": "https://github.com/lexi2016/v5/tree/308af26862daf005c5c5800d15c5053c84275938"
+    },
+    {
+      "branch": "dev/m14-github-handoff-20261011",
+      "commit": "ad9a61d26c487748ba017b69250571ae5a38bbab",
+      "url": "https://github.com/lexi2016/v5/tree/ad9a61d26c487748ba017b69250571ae5a38bbab"
+    },
+    {
+      "branch": "dev/m14-stored-supplement-20261012",
+      "commit": "a20ea3b04cac63fbbfc4610e891ae1f6e8c171ba",
+      "url": "https://github.com/lexi2016/v5/tree/a20ea3b04cac63fbbfc4610e891ae1f6e8c171ba"
+    },
+    {
+      "branch": "dev/m15-github-handoff-20261011",
+      "commit": "821a25b1667a28073360c96cf8702ab57dbd233f",
+      "url": "https://github.com/lexi2016/v5/tree/821a25b1667a28073360c96cf8702ab57dbd233f"
+    },
+    {
+      "branch": "dev/m16-github-handoff-20261011",
+      "commit": "d18469212c86bec95303ca746cb4b90dd9a863de",
+      "url": "https://github.com/lexi2016/v5/tree/d18469212c86bec95303ca746cb4b90dd9a863de"
+    },
+    {
+      "branch": "dev/m17-github-handoff-20261011",
+      "commit": "6d459cbc1e694eed413d142c75be64241a727e7f",
+      "url": "https://github.com/lexi2016/v5/tree/6d459cbc1e694eed413d142c75be64241a727e7f"
+    },
+    {
+      "branch": "dev/m18-bounded-manager-readback-20261012",
+      "commit": "5c327e45d99468d0ade73ee4acff6e0130f02852",
+      "url": "https://github.com/lexi2016/v5/tree/5c327e45d99468d0ade73ee4acff6e0130f02852"
+    },
+    {
+      "branch": "dev/m18-daily-assembly-20261012",
+      "commit": "eae78ea4d2842a71d64721ae0f633e5583e80642",
+      "url": "https://github.com/lexi2016/v5/tree/eae78ea4d2842a71d64721ae0f633e5583e80642"
+    },
+    {
+      "branch": "dev/m18-offline-pages-20261012",
+      "commit": "325730f0979a9989d53dd0ff3bade5b238912455",
+      "url": "https://github.com/lexi2016/v5/tree/325730f0979a9989d53dd0ff3bade5b238912455"
+    },
+    {
+      "branch": "dev/m18-offline-v2-20261012",
+      "commit": "8bea98c2bd506d42c00f2616dd04949d7a2b232d",
+      "url": "https://github.com/lexi2016/v5/tree/8bea98c2bd506d42c00f2616dd04949d7a2b232d"
+    },
+    {
+      "branch": "dev/p0-announcement-fixture-source-20261012",
+      "commit": "0fec605b5c0607f1433f9adaaf684c90f702606b",
+      "url": "https://github.com/lexi2016/v5/tree/0fec605b5c0607f1433f9adaaf684c90f702606b"
+    },
+    {
+      "branch": "dev/p0-cloud-browser-assets-20261012",
+      "commit": "e8c753b6109a8c26e8cf8c7cb843c789479260a0",
+      "url": "https://github.com/lexi2016/v5/tree/e8c753b6109a8c26e8cf8c7cb843c789479260a0"
+    },
+    {
+      "branch": "dev/p0-frontend-integration-20261012",
+      "commit": "5fb2bda609497a360d755bb36f67956393d2e5fc",
+      "url": "https://github.com/lexi2016/v5/tree/5fb2bda609497a360d755bb36f67956393d2e5fc"
+    },
+    {
+      "branch": "dev/p0-frontend-missing-source-20261012",
+      "commit": "41afab656086d51c68572322bff7716f9e5ac815",
+      "url": "https://github.com/lexi2016/v5/tree/41afab656086d51c68572322bff7716f9e5ac815"
+    },
+    {
+      "branch": "dev/p0-frontend-source-20261012",
+      "commit": "2489ea1e04a26a9e2f318f498ac3f5f8c970fe48",
+      "url": "https://github.com/lexi2016/v5/tree/2489ea1e04a26a9e2f318f498ac3f5f8c970fe48"
+    },
+    {
+      "branch": "dev/p0-integration-overlay-20261011",
+      "commit": "e6092e769d0d69fdbc731d338885c0b399f5e265",
+      "url": "https://github.com/lexi2016/v5/tree/e6092e769d0d69fdbc731d338885c0b399f5e265"
+    },
+    {
+      "branch": "dev/v5-main-integration-20261012",
+      "commit": "01d93717905813705732161d4d79062ae5af2d99",
+      "url": "https://github.com/lexi2016/v5/tree/01d93717905813705732161d4d79062ae5af2d99"
+    },
+    {
+      "branch": "dev/v5-standalone-packaging-20261012",
+      "commit": "76c4ebfc4f2e3bc0e48f575efb94e96be14a2c22",
+      "url": "https://github.com/lexi2016/v5/tree/76c4ebfc4f2e3bc0e48f575efb94e96be14a2c22"
+    },
+    {
+      "branch": "main",
+      "commit": "d3ebf33c40d1b5f06e3729b11d5ece0506f34c91",
+      "url": "https://github.com/lexi2016/v5/tree/d3ebf33c40d1b5f06e3729b11d5ece0506f34c91"
+    },
+    {
+      "branch": "v5/m09-candidate-20261011-r1",
+      "commit": "d0f9905940584777abbcae248850ebc487cade63",
+      "url": "https://github.com/lexi2016/v5/tree/d0f9905940584777abbcae248850ebc487cade63"
+    },
+    {
+      "branch": "v5/m09-handoff-20261011",
+      "commit": "3d1d04283f4d5ca05923b05c496a97e79145d275",
+      "url": "https://github.com/lexi2016/v5/tree/3d1d04283f4d5ca05923b05c496a97e79145d275"
+    }
+  ],
+  "candidate_comparison": [
+    {
+      "branch": "dev/m01-github-handoff-20261011",
+      "commit": "ea96a80cf9d79e638ee08e15cb0bf92368261ada",
+      "truncated": false,
+      "blob_count": 115,
+      "total_bytes": 1198172,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 1,
+      "absent_path": 114,
+      "same_blob_any_path": 21,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m02-github-handoff-20261011",
+      "commit": "776acce9328aa102e3db6973405f01260f15239d",
+      "truncated": false,
+      "blob_count": 149,
+      "total_bytes": 1666921,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 2,
+      "absent_path": 147,
+      "same_blob_any_path": 96,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m03-github-handoff-20261011",
+      "commit": "3020bb6b0abd30fc9a243cfdee7ec0f121e2c178",
+      "truncated": false,
+      "blob_count": 200,
+      "total_bytes": 1926195,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 1,
+      "absent_path": 199,
+      "same_blob_any_path": 120,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m04-github-handoff-20261011",
+      "commit": "0bb46df890d4b1a57fcc17982a9800cac2f18146",
+      "truncated": false,
+      "blob_count": 995,
+      "total_bytes": 15031437,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 2,
+      "absent_path": 993,
+      "same_blob_any_path": 887,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m05-github-handoff-20261011",
+      "commit": "5d868fc09fba7f7fe210e603a28015e271117077",
+      "truncated": false,
+      "blob_count": 152,
+      "total_bytes": 1804956,
+      "same_path_same_blob": 55,
+      "same_path_different_blob": 1,
+      "absent_path": 96,
+      "same_blob_any_path": 109,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m06-github-handoff-20261011",
+      "commit": "ddb07572e7bd24efff2a9624806e2487129d208a",
+      "truncated": false,
+      "blob_count": 212,
+      "total_bytes": 2502563,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 2,
+      "absent_path": 210,
+      "same_blob_any_path": 117,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m07-github-handoff-20261011",
+      "commit": "e99b5d0d8d0dfc7c2e76d68057c735b4e5dc7c31",
+      "truncated": false,
+      "blob_count": 159,
+      "total_bytes": 1541818,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 2,
+      "absent_path": 157,
+      "same_blob_any_path": 133,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m08-github-handoff-20261011",
+      "commit": "01f1a6347722081cbbf97b54204bf033e6d01938",
+      "truncated": false,
+      "blob_count": 214,
+      "total_bytes": 2792214,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 1,
+      "absent_path": 213,
+      "same_blob_any_path": 118,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m10-github-handoff-20261011",
+      "commit": "9ab214b0ad5542111c04d10f50cac989644205f7",
+      "truncated": false,
+      "blob_count": 189,
+      "total_bytes": 1560838,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 1,
+      "absent_path": 188,
+      "same_blob_any_path": 116,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m11-github-handoff-20261011",
+      "commit": "6abba1b36dce3d9696b5a0e401ba86a96d9b10ec",
+      "truncated": false,
+      "blob_count": 333,
+      "total_bytes": 2837221,
+      "same_path_same_blob": 81,
+      "same_path_different_blob": 1,
+      "absent_path": 251,
+      "same_blob_any_path": 237,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m12-github-handoff-20261011",
+      "commit": "385b1068054f3d20688344961b3a3cf34d6a7bb4",
+      "truncated": false,
+      "blob_count": 139,
+      "total_bytes": 1765015,
+      "same_path_same_blob": 11,
+      "same_path_different_blob": 1,
+      "absent_path": 127,
+      "same_blob_any_path": 45,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m13-partial-pages-20261012",
+      "commit": "308af26862daf005c5c5800d15c5053c84275938",
+      "truncated": false,
+      "blob_count": 10,
+      "total_bytes": 601036,
+      "same_path_same_blob": 8,
+      "same_path_different_blob": 2,
+      "absent_path": 0,
+      "same_blob_any_path": 8,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m14-github-handoff-20261011",
+      "commit": "ad9a61d26c487748ba017b69250571ae5a38bbab",
+      "truncated": false,
+      "blob_count": 220,
+      "total_bytes": 3058578,
+      "same_path_same_blob": 0,
+      "same_path_different_blob": 1,
+      "absent_path": 219,
+      "same_blob_any_path": 105,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m14-stored-supplement-20261012",
+      "commit": "a20ea3b04cac63fbbfc4610e891ae1f6e8c171ba",
+      "truncated": false,
+      "blob_count": 10,
+      "total_bytes": 216982,
+      "same_path_same_blob": 9,
+      "same_path_different_blob": 1,
+      "absent_path": 0,
+      "same_blob_any_path": 9,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m15-github-handoff-20261011",
+      "commit": "821a25b1667a28073360c96cf8702ab57dbd233f",
+      "truncated": false,
+      "blob_count": 681,
+      "total_bytes": 9942783,
+      "same_path_same_blob": 48,
+      "same_path_different_blob": 11,
+      "absent_path": 622,
+      "same_blob_any_path": 570,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m16-github-handoff-20261011",
+      "commit": "d18469212c86bec95303ca746cb4b90dd9a863de",
+      "truncated": false,
+      "blob_count": 403,
+      "total_bytes": 8539353,
+      "same_path_same_blob": 3,
+      "same_path_different_blob": 1,
+      "absent_path": 399,
+      "same_blob_any_path": 171,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m17-github-handoff-20261011",
+      "commit": "6d459cbc1e694eed413d142c75be64241a727e7f",
+      "truncated": false,
+      "blob_count": 314,
+      "total_bytes": 5230951,
+      "same_path_same_blob": 24,
+      "same_path_different_blob": 1,
+      "absent_path": 289,
+      "same_blob_any_path": 154,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m18-bounded-manager-readback-20261012",
+      "commit": "5c327e45d99468d0ade73ee4acff6e0130f02852",
+      "truncated": false,
+      "blob_count": 1370,
+      "total_bytes": 18028948,
+      "same_path_same_blob": 8,
+      "same_path_different_blob": 0,
+      "absent_path": 1362,
+      "same_blob_any_path": 1351,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m18-daily-assembly-20261012",
+      "commit": "eae78ea4d2842a71d64721ae0f633e5583e80642",
+      "truncated": false,
+      "blob_count": 4,
+      "total_bytes": 29558,
+      "same_path_same_blob": 1,
+      "same_path_different_blob": 1,
+      "absent_path": 2,
+      "same_blob_any_path": 1,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m18-offline-pages-20261012",
+      "commit": "325730f0979a9989d53dd0ff3bade5b238912455",
+      "truncated": false,
+      "blob_count": 4,
+      "total_bytes": 42448,
+      "same_path_same_blob": 2,
+      "same_path_different_blob": 1,
+      "absent_path": 1,
+      "same_blob_any_path": 2,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "dev/m18-offline-v2-20261012",
+      "commit": "8bea98c2bd506d42c00f2616dd04949d7a2b232d",
+      "truncated": false,
+      "blob_count": 17,
+      "total_bytes": 160094,
+      "same_path_same_blob": 13,
+      "same_path_different_blob": 4,
+      "absent_path": 0,
+      "same_blob_any_path": 13,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "v5/m09-candidate-20261011-r1",
+      "commit": "d0f9905940584777abbcae248850ebc487cade63",
+      "truncated": false,
+      "blob_count": 870,
+      "total_bytes": 24396043,
+      "same_path_same_blob": 18,
+      "same_path_different_blob": 8,
+      "absent_path": 844,
+      "same_blob_any_path": 319,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    },
+    {
+      "branch": "v5/m09-handoff-20261011",
+      "commit": "3d1d04283f4d5ca05923b05c496a97e79145d275",
+      "truncated": false,
+      "blob_count": 1099,
+      "total_bytes": 25742592,
+      "same_path_same_blob": 18,
+      "same_path_different_blob": 8,
+      "absent_path": 1073,
+      "same_blob_any_path": 344,
+      "interpretation": "Counts compare the complete candidate tree with the integration snapshot. Different source-root layouts and documentation affect counts; absence at the same path is not proof of missing functionality. Never auto-overlay."
+    }
+  ],
+  "disclaimer": "Read-only GitHub refs/tree inventory. File/blob presence is not runtime, acceptance, deployment, or proof that every candidate belongs in the integration snapshot. No code was merged."
+}
