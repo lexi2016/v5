@@ -5,7 +5,9 @@ from pathlib import Path
 from unittest.mock import patch
 from urllib.request import urlopen
 import pytest
-from V5.tests import test_manager_current_recovery as recovery_fixture
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "V5" / "tests"))
+import test_manager_current_recovery as recovery_fixture
 from v5_shadow.manager_plan import run_manager_plan,publish_workspace_read,ROUTE
 from v5_shadow.daily_owner_adapters import run_manager_daily
 from v5_shadow.module_api import create_module_server
