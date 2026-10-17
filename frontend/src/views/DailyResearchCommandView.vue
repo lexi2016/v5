@@ -36,7 +36,7 @@ const captureStatusSequence = ref(0);
 async function checkCaptureStatus() {
   const date=requestedDate.value;
   if(!date || !isCalendarDate(date)) {
-    captureStatusError.value="请先选择有效的目标交易日；检查状态不会启动采集.";
+    captureStatusError.value="请先选择有效的目标交易日；检查状态不会启动采集。";
     captureStatus.value=null;
     return;
   }
