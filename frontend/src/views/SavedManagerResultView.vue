@@ -87,6 +87,13 @@ watchEffect(()=>{const page=state.value.page,host=announcementHost.value;if(host
 function sectionChange(event: Event) { void selectSection((event.target as HTMLSelectElement).value); }
 const sectionLabels: Record<string,string> = { summary:'本次研究概览', stocks:'经理候选股票', gaps:'数据与证据缺口', materials:'研究材料', lanes:'研究任务', themes:'研究主题', market_screen:'市场筛选', announcement_reviewed_analysis:'公告研究股票', announcement_observation:'公告观察', us_mapping_research:'美股与港股映射', us_market_attention:'美股关注', rebound_research_observation:'反弹研究观察', plan_product:'已消费研究计划', runtime_gaps:'运行缺口', existing_material_bindings:'材料关联', rejected_relations:'未采用关联' };
 function sectionLabel(key:string) { return sectionLabels[key] ?? key; }
+function explainError(raw:string) {
+ if(/M18_HTTP_503|MODULE_RESULT_NOT_AVAILABLE|MODULE_BINDING_NOT_CONFIGURED/.test(raw)) return '当前没有可核验的已保存产物或来源绑定。请先确认真实输入、保存回执和运行 ID；这不代表结果为 0 条。';
+ if(/MODULE_RESULT_INVALID|CONTRACT_SHA_INVALID|SOURCE_IDENTITY_REQUIRED/.test(raw)) return '返回结果的身份或完整性校验未通过。请检查绑定、来源 SHA 和保存回执；旧结果不会作为本次成功展示。';
+ if(/ROUTE_NOT_CONFIGURED|404/.test(raw)) return '当前读取接口未接线或目标资源不存在。请检查部署版本和只读路由配置。';
+ if(/NETWORK|ECONNREFUSED|fetch/i.test(raw)) return '无法连接读取服务。请确认服务已启动且地址可达后重试。';
+ return '读取失败，系统未将其当作成功或空结果。请查看技术诊断并核对请求身份。';
+}
 function json(value:unknown):string { return JSON.stringify(value,null,2) ?? '未提供'; }
 function record(entry:SavedEntry):Record<string,unknown>|null { return entry.value!==null && typeof entry.value==='object' && !Array.isArray(entry.value) ? entry.value as Record<string,unknown> : null; }
 function title(entry:SavedEntry) { const row=record(entry);return row ? [row.symbol ?? row.stock_key ?? row.code, row.name ?? row.stock_name ?? row.title].filter(value=>typeof value==='string'||typeof value==='number').join(' · ') || `记录 ${entry.index+1}` : `记录 ${entry.index+1}`; }
@@ -120,14 +127,23 @@ onBeforeUnmount(()=>session.close());
    <button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果</button>
    <a class="entry-nav-link" href="?view=research">研报决策台</a>
   </nav>
-  <p class="navigation-status">当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+  <p class="navigation-status">当前页面只读取已保存结果，不启动采集。接口 READY 仅表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+  <div class="navigation-status" role="status">
+   <p v-if="!state.overview?.sections.announcement_reviewed_analysis">公告研究股票：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="!state.overview?.sections.rebound_research_observation">超跌研究：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="!state.overview?.sections.us_mapping_research">美股驱动：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+  </div>
   <section id="saved-result-content" aria-labelledby="saved-result-title">
    <header class="saved-result-heading">
     <h2 id="saved-result-title" ref="resultHeading" tabindex="-1">{{ state.section ? sectionLabel(state.section) : '经理已保存结果' }}</h2>
     <p v-if="state.descriptor"><span>目标日 {{ state.descriptor.target_date }}</span><span>已读取运行 {{ state.descriptor.run_id }}</span></p>
    </header>
   <p v-if="state.phase==='LOADING'" class="task-message" role="status" aria-live="polite">正在读取同一运行的有界数据页…</p>
-  <p v-if="state.phase==='CANNOT_CONFIRM'" class="task-message task-error" role="alert">CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。{{ state.error }}</p>
+  <div v-if="state.phase==='CANNOT_CONFIRM'" class="task-message task-error" role="alert">
+   <strong>CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。</strong>
+   <p>{{ explainError(state.error) }}</p>
+   <details v-if="state.error"><summary>技术诊断（原始错误）</summary><pre>{{ state.error }}</pre></details>
+  </div>
   <div v-if="state.overview && !isAnnouncement && !isRebound && !isUsMapping" class="task-counts"><article v-for="key in ['stocks','materials','gaps']" :key="key"><span>{{ sectionLabel(key) }}</span><strong>{{ state.overview.sections[key]?.total ?? '未提供' }}</strong></article></div>
   <section v-if="state.overview" class="task-status-view saved-sections" aria-label="已保存内容">
    <div class="control-panel"><label>内容分区<select :value="state.section" aria-label="内容分区" @change="sectionChange"><option v-for="(meta,key) in state.overview.sections" :key="key" :value="key">{{ sectionLabel(String(key)) }}{{ ['announcement_reviewed_analysis','rebound_research_observation','us_mapping_research'].includes(String(key)) ? ' · 同次运行研究引用' : ` · ${meta.total} 条 · ${meta.kind}` }}</option></select></label><span>按原始分区分页读取，每页最多 32 条</span><button v-if="state.overview.sections.gaps" type="button" @click="selectSection('gaps')">查看缺口 · {{ state.overview.sections.gaps.total }}</button><button v-if="state.overview.sections.materials" type="button" @click="selectSection('materials')">研究材料 · {{ state.overview.sections.materials.total }}</button></div>
