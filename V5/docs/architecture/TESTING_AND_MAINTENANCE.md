@@ -96,7 +96,17 @@ Before moving or deleting any file:
 5. Run focused tests, relevant integration tests and cold-read checks after the move.
 6. If a file is only a historical receipt or rejected candidate, keep it in place unless an archive migration has explicit, tested path mapping.
 
-## 8. Known exclusions
+## 8. Inventory consistency check
+
+A standard-library audit verifies that the pinned source inventory and duplicate-blob groups still match the exact Git tree:
+
+```bash
+python V5/tools/audit_repository_inventory.py --repo . --commit 01d93717905813705732161d4d79062ae5af2d99
+```
+
+The corresponding GitHub Actions workflow runs on pull requests that touch architecture inventory/docs or the audit script. It validates source inventory only; it does not run product tests.
+
+## 9. Known exclusions
 
 - The 2026-10-15 stopped-task checkpoint of 24 uncommitted files is not in the fixed integration source manifest. Do not reconstruct it from summaries.
 - The 2026-10-17 M18 plan-window patch is a separate Draft PR and is not part of the documented integration commit.
