@@ -50,7 +50,7 @@ Result:
 
 ## Publication module status
 
-The full six-test `integration_tests/test_plan_publication.py` module remains unresolved at sequence level. Individual test runs pass. In a sequence run, the first five tests passed but the sixth did not return reliably within the bounded run; earlier sequence attempts stalled at different worker calls. This is recorded as FAIL/BLOCKED for full-module acceptance, not as a pass. The next investigation must capture the exact final test's worker state and determine whether the issue is worker CPU-bound assembly, shared test-process state, or a leaked process/thread. Do not increase timeout alone or weaken tests.
+The full six-test `integration_tests/test_plan_publication.py` module remains flaky at sequence level. One run with test-local progress prints completed **6 passed in 65.14s**. A subsequent clean run timed out after only the first two test dots; earlier bounded runs stalled at different worker calls, with the parent waiting in `_Pipe.read` and the child consuming CPU before emitting the first protocol frame. The progress prints alter timing, so that single run is evidence of a possible pass, not stable acceptance. Record full-module status as FAIL/BLOCKED until repeated clean runs reliably exit 0. Next investigate the pre-first-frame worker computation, especially the path after `load_owner()` and before the owner action; capture stage timing without changing source identity or relying on timeout increases. Do not weaken tests.
 
 ## Scope of this evidence
 
