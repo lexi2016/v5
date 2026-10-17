@@ -70,7 +70,22 @@ function onSourceToggle(event:Event) {
  sourceExpanded.value=(event.currentTarget as HTMLDetailsElement).open;
 }
 const query = new URLSearchParams(window.location.search);
+function compactTargetDate(value:string):string|null {
+ const compact=value.replaceAll('-','');
+ if(!/^\d{8}$/.test(compact))return null;
+ const year=Number(compact.slice(0,4)),month=Number(compact.slice(4,6)),day=Number(compact.slice(6,8));
+ if(year<1||month<1||month>12||day<1)return null;
+ const leap=year%4===0&&(year%100!==0||year%400===0);
+ const days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31];
+ return day<=days[month-1]?compact:null;
+}
+function isoTargetDate(value:string):string {return value.length===8 ? value.slice(0,4)+'-'+value.slice(4,6)+'-'+value.slice(6,8) : '';}
 const requestedRun = ref(query.get('run_id') ?? '');
+const initialTargetDate=query.get('target_date') ?? query.get('date') ?? '';
+const targetDate=ref(compactTargetDate(initialTargetDate)===initialTargetDate ? initialTargetDate : '');
+const targetDateInput=computed(()=>isoTargetDate(targetDate.value));
+const dateLookup=ref('');
+const dateLookupBusy=ref(false);
 const state = shallowRef<SavedRunState>({phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false});
 const session = new SavedRunSession(new M18SavedClient(), next => { state.value=next; });
 async function reload() {
@@ -78,6 +93,41 @@ async function reload() {
  if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
 }
+async function loadRunForDate() {
+ const date=compactTargetDate(targetDate.value);
+ if(!date){dateLookup.value='目标交易日无效，请选择有效日期。';return;}
+ dateLookupBusy.value=true;
+ dateLookup.value='正在读取该日期的已保存经理结果…';
+ const url=new URL(window.location.href);
+ url.searchParams.set('target_date',date);
+ url.searchParams.set('date',date);
+ window.history.replaceState(null,'',url.pathname+url.search);
+ try {
+  const response=await fetch(`/api/v4/manager/research/workspace?date=${encodeURIComponent(date)}&view=auto`,{cache:'no-store'});
+  if(!response.ok)throw new Error(`MANAGER_DATE_LOOKUP_HTTP_${response.status}`);
+  const body=await response.json() as Record<string,unknown>;
+  const payload=(body.payload && typeof body.payload==='object' && !Array.isArray(body.payload) ? body.payload : body) as Record<string,unknown>;
+  const product=payload.plan_product as Record<string,unknown>|undefined;
+  if(payload.target_trade_date!==date || !product || product.consumed!==true ||
+    typeof product.run_id!=='string' || !/^[0-9a-f]{32}$/.test(product.run_id) ||
+    typeof product.sha256!=='string' || !/^[0-9a-f]{64}$/.test(product.sha256)) {
+   throw new Error('MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH');
+  }
+  requestedRun.value=product.run_id;
+  url.searchParams.set('run_id',product.run_id);
+  window.history.replaceState(null,'',url.pathname+url.search);
+  dateLookup.value=`找到目标日 ${date} 的已消费保存运行，正在核验完整结果…`;
+  await reload();
+  if(state.value.descriptor && state.value.descriptor.target_date===date && state.value.descriptor.run_id===product.run_id) {
+   dateLookup.value=`已读取目标日 ${date} 的保存运行；业务完整性仍以各原状态与缺口为准。`;
+  } else if(state.value.phase==='CANNOT_CONFIRM') {
+   dateLookup.value='已找到日期匹配的引用，但完整结果读取/身份核验未通过。请查看下方技术诊断。';
+  }
+ } catch(error) {
+  dateLookup.value=error instanceof Error ? `未能确认目标日 ${date} 的已保存运行：${error.message}` : '未能确认该日期的已保存运行。';
+ } finally {dateLookupBusy.value=false;}
+}
+
 const isUsMapping=computed(()=>state.value.section==='us_mapping_research');
 const isRebound=computed(()=>state.value.section==='rebound_research_observation');
 function selectRebound(group:ReboundGroup='strict') { void selectSection('rebound_research_observation',group); }
@@ -109,6 +159,11 @@ onBeforeUnmount(()=>session.close());
    <div><h1>V5 经理选股</h1><p>读取已保存的同一次运行结果。结果中的 PARTIAL、CANNOT_CONFIRM 与资料缺口按原样保留；只读研究，不触发采集或交易。</p></div>
    <span class="runtime-badge">已保存结果 · READ_ONLY</span>
   </header>
+  <form class="control-panel" @submit.prevent="loadRunForDate">
+   <label>目标交易日<input :value="targetDateInput" type="date" aria-label="目标交易日" @input="targetDate=($event.target as HTMLInputElement).value.replaceAll('-','')" /></label>
+   <button type="submit" :disabled="dateLookupBusy || !targetDate">{{ dateLookupBusy ? '正在查找…' : '按日期查找已保存运行' }}</button>
+   <span class="runtime-state" role="status">{{ dateLookup || '仅查找该日期已保存结果；不触发采集，不回退 latest。' }}</span>
+  </form>
   <form class="control-panel" @submit.prevent="reload">
    <label>运行 ID<input v-model="requestedRun" aria-label="运行 ID" spellcheck="false" autocomplete="off" /></label>
    <button type="submit">{{ state.phase==='LOADING' ? '重新读取' : '读取已保存结果' }}</button>
