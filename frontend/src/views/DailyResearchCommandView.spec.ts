@@ -270,7 +270,7 @@ describe("DailyResearchCommandView", () => {
     expect(await screen.findByText("NO DATE SELECTED")).toBeTruthy();
     expect(screen.getByRole("alert").textContent).toContain("日期目录没有返回有效的已验证日期");
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(fetchMock.mock.calls[0][0]).toBe("/api/v1/runs/date-list");
+    expect(fetchMock).toHaveBeenCalledWith("/api/v1/runs/date-list");
   });
 
   it("surfaces date catalog transport failure instead of silently reporting no date", async () => {
