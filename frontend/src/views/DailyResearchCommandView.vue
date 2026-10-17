@@ -36,13 +36,13 @@ const captureStatusSequence = ref(0);
 async function checkCaptureStatus() {
   const date=requestedDate.value;
   if(!date || !isCalendarDate(date)) {
-    captureStatusError="请先选择有效的目标交易日；检查状态不会启动采集。";
+    captureStatusError.value="请先选择有效的目标交易日；检查状态不会启动采集.";
     captureStatus.value=null;
     return;
   }
   const requestId=++captureStatusSequence.value;
   captureStatusBusy.value=true;
-  captureStatusError="";
+  captureStatusError.value="";
   try {
     const response=await fetch(`/api/v5/source-bundle/capture-status?target_date=${encodeURIComponent(date)}`,{cache:"no-store"});
     if(!response.ok)throw new Error(`CAPTURE_STATUS_HTTP_${response.status}`);
@@ -56,7 +56,7 @@ async function checkCaptureStatus() {
   } catch(error) {
     if(requestId!==captureStatusSequence.value)return;
     captureStatus.value=null;
-    captureStatusError=explainRequestError(error);
+    captureStatusError.value=explainRequestError(error);
   } finally {
     if(requestId===captureStatusSequence.value)captureStatusBusy.value=false;
   }
