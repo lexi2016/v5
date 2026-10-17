@@ -34,7 +34,7 @@ for path in (data_root, runtime_root):
     if path.is_symlink():
         raise SystemExit("SYMLINK_REJECTED: " + str(path))
 marker = data_root / ".v5-module-root"
-expected = b"v5.module-root.v1:source_bundle\\n"
+expected = b"v5.module-root.v1:source_bundle\n"
 if marker.exists():
     if marker.is_symlink() or not marker.is_file() or marker.read_bytes() != expected:
         raise SystemExit("MODULE_ROOT_IDENTITY: refusing to overwrite existing marker")
@@ -49,12 +49,12 @@ raw = raw.replace("/REPLACE_WITH_ABSOLUTE_USER_OWNED_PATH", str(root))
 config = json.loads(raw)
 out = root / "p0_runtime_config.json"
 if out.exists():
-    if out.is_symlink() or not out.is_file() or out.read_text() != json.dumps(config, indent=2) + "\\n":
+    if out.is_symlink() or not out.is_file() or out.read_text() != json.dumps(config, indent=2) + "\n":
         raise SystemExit("CONFIG_EXISTS_DIFFERENT: refusing to overwrite")
 else:
     fd = os.open(out, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
     with os.fdopen(fd, "w") as stream:
-        stream.write(json.dumps(config, indent=2) + "\\n")
+        stream.write(json.dumps(config, indent=2) + "\n")
 print(out)
 print("module_data_root=" + str(data_root))
 print("runtime_root=" + str(runtime_root))
