@@ -99,5 +99,11 @@ it('opens consumed announcement references by default and reuses the stock reaso
  await fireEvent.click(screen.getByRole('button',{name:'公告研究股票'}));
  expect(await screen.findByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeTruthy();
  expect(screen.queryByRole('heading',{name:'合成美股驱动公司 · HK.09876'})).toBeNull();
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/目标日 20261016 暂无可读取的已保存运行/)).toBeTruthy();
+ expect(screen.queryByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeNull();
+ expect(screen.queryByRole('heading',{name:'合成超跌公司 · 04321 · 严格条件研究观察'})).toBeNull();
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
 });
 
