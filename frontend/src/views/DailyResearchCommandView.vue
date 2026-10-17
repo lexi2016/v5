@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 
 import DailyResearchAlertPanel from "../components/daily-research-command/DailyResearchAlertPanel.vue";
 import DailyResearchHourlyDiagnostic from "../components/daily-research-command/DailyResearchHourlyDiagnostic.vue";
