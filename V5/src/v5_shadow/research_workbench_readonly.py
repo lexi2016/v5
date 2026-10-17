@@ -72,7 +72,7 @@ def validate_payload(value,query):
 
 def _lane(config,query):
  date=query_date(query);b=config.get(KEY)
- if b is None:return dict(schema_version='v3_5.research_lane.v1',endpoint_mode='EXACT' if date else 'LATEST',research_date=date,status='NOT_MATERIALIZED',reason='V5_M04_RESEARCH_BINDING_NOT_CONFIGURED',cannot_confirm=['V5_M04_RESEARCH_BINDING_NOT_CONFIGURED'],write_policy='read_only',recommendation_status='RESEARCH_ONLY',**FLAGS)
+ if b is None:return dict(schema_version='v3_5.research_lane.v1',endpoint_mode='EXACT' if date else 'LATEST',requested_date=date or None,research_date=None,status='NOT_MATERIALIZED',reason='V5_M04_RESEARCH_BINDING_NOT_CONFIGURED',cannot_confirm=['V5_M04_RESEARCH_BINDING_NOT_CONFIGURED'],write_policy='read_only',recommendation_status='RESEARCH_ONLY',**FLAGS)
  validate_binding(config)
  package=_absolute(b['package_root']);manifest=_package_bytes(package/'RELEASE.json',MANIFEST_LIMIT)
  if hashlib.sha256(manifest).hexdigest()!=b['package_manifest_sha256']:raise ValueError('RESEARCH_PACKAGE_PIN')
