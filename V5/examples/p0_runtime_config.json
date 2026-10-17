@@ -21,7 +21,8 @@
       "/api/v5/source-bundle/hk-preselection",
       "/api/v5/source-bundle/hk-close-review",
       "/api/v5/source-bundle/a-close-replay",
-      "/api/v5/source-bundle/hk-stage-observed"
+      "/api/v5/source-bundle/hk-stage-observed",
+      "/api/v5/source-bundle/capture-status"
     ]
   },
   "daily": {
