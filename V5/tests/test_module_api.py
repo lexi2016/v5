@@ -30,6 +30,17 @@ class ModuleApiTests(unittest.TestCase):
             with urlopen(url,timeout=3) as r:return r.status,json.load(r),dict(r.headers)
         except HTTPError as error:
             with error:return error.code,json.load(error),dict(error.headers)
+    def test_date_scoped_research_aliases_report_missing_saved_records_not_404(self):
+        _,url=self.setup_api(module='source_bundle')
+        for path in (
+            '/api/v3/research/day?archive_date=20261016',
+            '/api/v1/runs/date-list',
+        ):
+            status,body,_=self.read(url+path)
+            self.assertEqual(status,503,path)
+            self.assertEqual(body['status'],'CANNOT_CONFIRM',path)
+            self.assertEqual(body['reason_codes'],['MODULE_RESULT_NOT_AVAILABLE'],path)
+
     def test_original_payload_and_identity_headers(self):
         root,url=self.setup_api();path=self.record(root)
         status,body,headers=self.read(url+'/api/v3/preselection-pools?offset=0&limit=200&date=20261008')
