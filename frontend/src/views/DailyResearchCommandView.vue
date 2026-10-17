@@ -151,7 +151,7 @@ async function loadDate(date: string) {
   state.value = "LOADING";
 
   try {
-    const response = await fetch(`/api/v3/research/day?archive_date=${date}`);
+    const response = await fetch(`/api/v3/research/day?archive_date=${date}`, { cache: "no-store" });
     if (requestId !== requestSequence.value) return;
     if (!response.ok) {
       throw new Error(`strict day request failed (${response.status})`);
@@ -235,7 +235,7 @@ async function loadDefaultDate(): Promise<void> {
   // rest of the app uses (newest verified evidence date); the strict day API
   // still receives exactly that one date — no latest substitution happens.
   try {
-    const response = await fetch("/api/v1/runs/date-list");
+    const response = await fetch("/api/v1/runs/date-list", { cache: "no-store" });
     if (!response.ok) throw new Error("date-list request failed");
     const catalog = (await response.json()) as { default_date?: unknown; dates?: unknown };
     const candidate =
