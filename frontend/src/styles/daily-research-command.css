@@ -687,3 +687,36 @@ input {
     text-align: left;
   }
 }
+
+
+.daily-research-command__navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 0;
+}
+.daily-research-command__navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--line, #cbd5e1);
+  border-radius: 6px;
+  color: var(--ink, #1f2937);
+  background: #fff;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.daily-research-command__navigation a:focus-visible {
+  outline: 2px solid var(--blue, #2563eb);
+  outline-offset: 2px;
+}
+.daily-research-command__page .daily-research-command__empty-state p {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.daily-research-command__page .daily-research-command__empty-state button {
+  min-height: 36px;
+  margin-top: 8px;
+}
