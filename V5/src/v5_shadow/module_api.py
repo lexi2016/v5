@@ -950,7 +950,7 @@ def _research_date_catalog(config,root_fd):
                 names=os.listdir(directory)
                 if len(names)>10000:raise ValueError('RESEARCH_DATE_CATALOG_LIMIT')
                 for name in names:
-                    if not re.fullmatch(r'[0-9a-f]{64}\\.json',name):continue
+                    if not re.fullmatch(r'[0-9a-f]{64}\.json',name):continue
                     raw=_read_at(root_fd,'responses',name)
                     records.append(_parse_record(raw,config))
             finally:os.close(directory)
