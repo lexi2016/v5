@@ -193,6 +193,23 @@ describe("DailyResearchCommandView", () => {
     window.history.replaceState({}, "", "/daily-research-command/");
   });
 
+  it("preserves run and target-date identity when navigating between research and manager pages", async () => {
+    const run = "a".repeat(32);
+    window.history.replaceState({}, "", `/daily-research-command/?date=20261016&run_id=${run}&target_date=20261016`);
+    vi.stubGlobal("fetch", vi.fn(async () => ({ok:false,status:503,json:async()=>({})})));
+    render(DailyResearchCommandView);
+    const manager = screen.getByRole("link", {name:"返回经理工作台"});
+    const research = screen.getByRole("link", {name:"研报决策台"});
+    const managerQuery = new URLSearchParams(manager.getAttribute("href")?.split("?")[1] ?? "");
+    const researchQuery = new URLSearchParams(research.getAttribute("href")?.split("?")[1] ?? "");
+    expect(managerQuery.get("run_id")).toBe(run);
+    expect(managerQuery.get("target_date")).toBe("20261016");
+    expect(researchQuery.get("run_id")).toBe(run);
+    expect(researchQuery.get("target_date")).toBe("20261016");
+    expect(researchQuery.get("view")).toBe("research");
+    expect(researchQuery.get("date")).toBe("20261016");
+  });
+
   it("selects the canonical default date and reads only its strict day API", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (url: string) => {
