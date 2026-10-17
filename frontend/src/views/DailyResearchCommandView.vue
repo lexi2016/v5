@@ -28,6 +28,39 @@ const VALID_STATES = new Set<DailyResearchCommandState>([
 
 const requestedDate = ref<string | null>(null);
 const state = ref<DailyResearchCommandState>("NO_DATE_SELECTED");
+const captureStatus = ref<{status:string;target_date:string;reason_codes:string[];message?:string}|null>(null);
+const captureStatusBusy = ref(false);
+const captureStatusError = ref("");
+const captureStatusSequence = ref(0);
+
+async function checkCaptureStatus() {
+  const date=requestedDate.value;
+  if(!date || !isCalendarDate(date)) {
+    captureStatusError="请先选择有效的目标交易日；检查状态不会启动采集。";
+    captureStatus.value=null;
+    return;
+  }
+  const requestId=++captureStatusSequence.value;
+  captureStatusBusy.value=true;
+  captureStatusError="";
+  try {
+    const response=await fetch(`/api/v5/source-bundle/capture-status?target_date=${encodeURIComponent(date)}`,{cache:"no-store"});
+    if(!response.ok)throw new Error(`CAPTURE_STATUS_HTTP_${response.status}`);
+    const body=await response.json();
+    if(requestId!==captureStatusSequence.value)return;
+    if(!body || typeof body!=="object" || body.schema_version!=="v5.capture_readiness.v1" ||
+       body.target_date!==date || typeof body.status!=="string" || !Array.isArray(body.reason_codes)) {
+      throw new Error("CAPTURE_STATUS_RESPONSE_INVALID");
+    }
+    captureStatus.value=body as {status:string;target_date:string;reason_codes:string[];message?:string};
+  } catch(error) {
+    if(requestId!==captureStatusSequence.value)return;
+    captureStatus.value=null;
+    captureStatusError=explainRequestError(error);
+  } finally {
+    if(requestId===captureStatusSequence.value)captureStatusBusy.value=false;
+  }
+}
 const payload = ref<DailyResearchPayload | null>(null);
 const safetyFlags = ref<DailyResearchSafetyValues | null>(null);
 const errorMessage = ref<string | null>(null);
@@ -295,6 +328,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   ++requestSequence.value;
+  ++captureStatusSequence.value;
 });
 </script>
 
@@ -311,6 +345,31 @@ onBeforeUnmount(() => {
       :safety-flags="safetyFlags"
       @date-change="handleDateChange"
     />
+
+    <section class="daily-research-command__capture-gate" aria-labelledby="capture-gate-title">
+      <div>
+        <p class="daily-research-command__eyebrow">REAL DATA CAPTURE</p>
+        <h2 id="capture-gate-title">真实数据采集准入</h2>
+        <p>读取已保存结果是只读操作，不会抓取周五行情。当前页面不会伪装读取按钮为采集任务。</p>
+      </div>
+      <button type="button" :disabled="captureStatusBusy" @click="checkCaptureStatus">
+        {{ captureStatusBusy ? "检查中…" : "检查采集准入" }}
+      </button>
+      <p v-if="captureStatusError" role="alert">{{ captureStatusError }}</p>
+      <div v-if="captureStatus" class="daily-research-command__capture-status" role="status">
+        <strong>采集状态：{{ captureStatus.status }}</strong>
+        <p v-if="captureStatus.status === 'NOT_CONFIGURED'">M03 采集 worker 尚未注册，真实来源准入绑定也未配置。当前不能从此页面启动真实采集。</p>
+        <p v-else>后端返回状态不是已确认的真实采集成功；请按原状态和原因码处理。</p>
+        <details>
+          <summary>技术状态与原因码</summary>
+          <code>{{ captureStatus.target_date }} · {{ captureStatus.reason_codes.join(", ") }}</code>
+          <p v-if="captureStatus.message">{{ captureStatus.message }}</p>
+        </details>
+      </div>
+      <p v-else-if="!captureStatusError" class="daily-research-command__capture-status" role="status">
+        目标日：{{ requestedDate ?? "尚未选择" }}；尚未检查采集准入。状态检查本身不会触发采集。
+      </p>
+    </section>
 
     <div class="daily-research-command__content">
       <DailyResearchAlertPanel :state="state" :payload="payload" :error-message="errorMessage" />
