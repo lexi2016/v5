@@ -352,7 +352,7 @@ onBeforeUnmount(() => {
         <h2 id="capture-gate-title">真实数据采集准入</h2>
         <p>读取已保存结果是只读操作，不会抓取周五行情。当前页面不会伪装读取按钮为采集任务。</p>
       </div>
-      <button type="button" :disabled="captureStatusBusy" @click="checkCaptureStatus">
+      <button type="button" :disabled="captureStatusBusy || !requestedDate" @click="checkCaptureStatus">
         {{ captureStatusBusy ? "检查中…" : "检查采集准入" }}
       </button>
       <p v-if="captureStatusError" role="alert">{{ captureStatusError }}</p>
