@@ -3,7 +3,7 @@ import {computed, onBeforeUnmount, ref, shallowRef} from 'vue';
 import {SavedPublicResearchSession, type PublicResearchState} from '../api/m16SavedResearch';
 function compactDate(value: string): string | null {
  const compact=value.replaceAll('-','');
- if(!/^\\d{8}$/.test(compact))return null;
+ if(!/^\d{8}$/.test(compact))return null;
  const year=Number(compact.slice(0,4)),month=Number(compact.slice(4,6)),day=Number(compact.slice(6,8));
  if(year<1||month<1||month>12||day<1)return null;
  const leap=year%4===0&&(year%100!==0||year%400===0);
