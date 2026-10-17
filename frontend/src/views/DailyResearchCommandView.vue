@@ -55,6 +55,19 @@ function selectedQueryDate(): string | null {
   return isCalendarDate(value) ? value : null;
 }
 
+function explainRequestError(error: unknown): string {
+  const raw = error instanceof Error ? error.message : "未知错误";
+  if (/\\b404\\b/.test(raw)) return `接口未接线或目标资源不存在（${raw}）。请检查所选日期对应的只读接口。`;
+  if (/\\b503\\b/.test(raw)) return `后端暂不可用或缺少已绑定产物（${raw}）。请检查来源绑定和服务状态后重试。`;
+  if (/Failed to fetch|NetworkError|network request/i.test(raw)) return `无法连接后端（${raw}）。请确认服务可达后重试。`;
+  return `读取失败：${raw}`;
+}
+
+function retry() {
+  if (requestedDate.value) void loadDate(requestedDate.value);
+  else void loadDefaultDate();
+}
+
 function setBrowserDate(date: string | null) {
   const url = new URL(window.location.href);
   if (date) url.searchParams.set("date", date);
@@ -190,7 +203,7 @@ async function loadDate(date: string) {
     if (requestId !== requestSequence.value) return;
     payload.value = null;
     state.value = "ERROR";
-    errorMessage.value = error instanceof Error ? error.message : "strict day request failed";
+    errorMessage.value = explainRequestError(error);
   }
 }
 
@@ -232,13 +245,19 @@ async function loadDefaultDate(): Promise<void> {
           ? catalog.dates[0]
           : "";
     if (!isCalendarDate(candidate)) {
+      requestedDate.value = null;
       state.value = "NO_DATE_SELECTED";
+      errorMessage.value = "日期目录没有返回有效的已验证日期；请手动选择日期。";
       return;
     }
     setBrowserDate(candidate);
     void loadDate(candidate);
-  } catch {
-    state.value = "NO_DATE_SELECTED";
+  } catch (error) {
+    requestedDate.value = null;
+    payload.value = null;
+    safetyFlags.value = null;
+    state.value = "ERROR";
+    errorMessage.value = `日期目录读取失败：${explainRequestError(error)}`;
   }
 }
 
@@ -265,6 +284,10 @@ onBeforeUnmount(() => {
 
 <template>
   <main class="daily-research-command__page" :data-state="state">
+    <nav class="daily-research-command__navigation" aria-label="功能导航">
+      <a href="/">返回经理工作台</a>
+      <a :href="requestedDate ? `/?view=research&date=${requestedDate}` : '/?view=research'">研报决策台</a>
+    </nav>
     <DailyResearchHero
       :state="state"
       :requested-date="requestedDate"
@@ -288,8 +311,9 @@ onBeforeUnmount(() => {
       </section>
       <section v-else-if="state === 'ERROR' || state === 'REJECTED' || state === 'STALE'" class="daily-research-command__empty-state daily-research-command__empty-state--error">
         <p class="daily-research-command__eyebrow">FAIL CLOSED</p>
-        <h2>FAIL CLOSED · {{ state }}</h2>
-        <p>{{ errorMessage ?? "response was not promoted into the selected date" }}</p>
+        <h2>读取未完成 · {{ state }}</h2>
+        <p>{{ errorMessage ?? "所选日期没有可确认的保存结果。" }}</p>
+        <button type="button" @click="retry">重试读取</button>
       </section>
       <template v-else-if="payload">
         <DailyResearchMetrics :payload="payload" />
