@@ -98,9 +98,12 @@ async function loadRunForDate() {
  if(!date){dateLookup.value='目标交易日无效，请选择有效日期。';return;}
  dateLookupBusy.value=true;
  dateLookup.value='正在读取该日期的已保存经理结果…';
+ requestedRun.value='';
+ session.reset();
  const url=new URL(window.location.href);
  url.searchParams.set('target_date',date);
  url.searchParams.set('date',date);
+ url.searchParams.delete('run_id');
  window.history.replaceState(null,'',url.pathname+url.search);
  try {
   const response=await fetch(`/api/v4/manager/research/workspace?date=${encodeURIComponent(date)}&view=auto`,{cache:'no-store'});
