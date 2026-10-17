@@ -47,23 +47,23 @@ it('restores the selected date from the URL and persists it when submitting', as
   const fetcher = vi.fn(async () => response(waiting()));
   vi.stubGlobal('fetch', fetcher);
   const first = render(M16SavedResearch);
-  const input = first.getByLabelText('M16 交易日', {hidden: true}) as HTMLInputElement;
+  const input = first.container.querySelector('input[type="date"]')! as HTMLInputElement;
   expect(input.type).toBe('date');
   expect(input.value).toBe('2026-10-12');
   await fireEvent.update(input, '2026-10-13');
-  await fireEvent.click(first.getByRole('button', {name: '读取 M16 已保存研究', hidden: true}));
+  await fireEvent.click(first.getByRole('button', {name: '读取 M16 已保存研究'}));
   await waitFor(() => expect(fetcher).toHaveBeenCalledWith('/api/v5/source-bundle/manager-public-research?trade_date=20261013', expect.any(Object)));
   expect(new URLSearchParams(window.location.search).get('m16_date')).toBe('20261013');
   first.unmount();
   const second = render(M16SavedResearch);
-  expect((second.getByLabelText('M16 交易日', {hidden: true}) as HTMLInputElement).value).toBe('2026-10-13');
+  expect((second.container.querySelector('input[type="date"]')! as HTMLInputElement).value).toBe('2026-10-13');
 });
 
 it('keeps missing bindings WAITING and invalid artifacts CANNOT_CONFIRM without saved content', async () => {
   for (const status of ['WAITING', 'CANNOT_CONFIRM']) {
     vi.stubGlobal('fetch', vi.fn(async () => response(waiting(status))));
     const view = render(M16SavedResearch);
-    await fireEvent.click(view.getByRole('button', {name: '读取 M16 已保存研究', hidden: true}));
+    await fireEvent.click(view.getByRole('button', {name: '读取 M16 已保存研究'}));
     await waitFor(() => expect(view.container.textContent).toContain(status === 'WAITING' ? 'M16_SAVED_REFERENCE_NOT_CONFIGURED' : 'M16_SAVED_ARTIFACT_INVALID'));
     expect(view.queryByTestId('m16-saved-content')).toBeNull();
     expect(view.queryByTestId('m16-research-row')).toBeNull();
@@ -75,7 +75,7 @@ it('clears old rows during a new date read, rejects failures and leaves a workin
   const fetcher = vi.fn().mockResolvedValueOnce(response(fixture())).mockImplementationOnce(() => new Promise(resolve => {complete = resolve;})).mockResolvedValueOnce(response({...waiting(), requested_trade_date: '20261013'}));
   vi.stubGlobal('fetch', fetcher);
   const view = render(M16SavedResearch);
-  const button = view.getByRole('button', {name: '读取 M16 已保存研究', hidden: true});
+  const button = view.getByRole('button', {name: '读取 M16 已保存研究'});
   await fireEvent.click(button);
   await waitFor(() => expect(view.queryByTestId('m16-saved-content')).not.toBeNull());
   await fireEvent.update(view.getByLabelText('M16 交易日'), '2026-10-13');
@@ -92,7 +92,7 @@ it('ignores an older date response after the new date and aborts pending work on
   const calls: {resolve: (value: Response) => void; signal: AbortSignal}[] = [];
   vi.stubGlobal('fetch', vi.fn((url: string, init: RequestInit) => new Promise<Response>(resolve => calls.push({resolve, signal: init.signal as AbortSignal}))));
   const view = render(M16SavedResearch);
-  const button = view.getByRole('button', {name: '读取 M16 已保存研究', hidden: true});
+  const button = view.getByRole('button', {name: '读取 M16 已保存研究'});
   await fireEvent.update(view.getByLabelText('M16 交易日'), '2026-10-12'); await fireEvent.click(button);
   await fireEvent.update(view.getByLabelText('M16 交易日'), '2026-10-13'); await fireEvent.click(button);
   expect(calls[0].signal.aborted).toBe(true);
@@ -107,7 +107,7 @@ it('keeps saved business CANNOT_CONFIRM visible without claiming completed natur
   const value = fixture(); value.data_kind = 'OWNER_RESULT'; value.business_status = value.product.status = 'CANNOT_CONFIRM';
   vi.stubGlobal('fetch', vi.fn(async () => response(value)));
   const view = render(M16SavedResearch);
-  await fireEvent.click(view.getByRole('button', {name: '读取 M16 已保存研究', hidden: true}));
+  await fireEvent.click(view.getByRole('button', {name: '读取 M16 已保存研究'}));
   await waitFor(() => expect(view.queryByTestId('m16-saved-content')).not.toBeNull());
   expect(view.container.textContent).toContain('业务原状态：CANNOT_CONFIRM');
   expect(view.container.textContent).toContain('不代表真实业务完成');
