@@ -13,7 +13,7 @@ const fixture = () => ({
 });
 const waiting = (status = 'WAITING') => ({schema_version: 'v5.m16_saved_public_research.v1', module_id: 'M16_PUBLIC_RESEARCH', status, mode: 'READ_ONLY_SAVED_RESULT', reason_codes: [status === 'WAITING' ? 'M16_SAVED_REFERENCE_NOT_CONFIGURED' : 'M16_SAVED_ARTIFACT_INVALID'], ...flags});
 const response = (value: unknown) => new Response(JSON.stringify(value));
-afterEach(() => {cleanup(); vi.unstubAllGlobals();});
+afterEach(() => {cleanup(); vi.unstubAllGlobals(); window.history.replaceState({}, '', '/');});
 
 it('loads lazily, escapes saved facts and exposes original financial research with honest labels', async () => {
   const requests: string[] = [];
