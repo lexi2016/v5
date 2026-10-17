@@ -212,9 +212,9 @@ describe("DailyResearchCommandView", () => {
 
   it("shows capture as not configured instead of treating a saved read as collection", async () => {
     window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
-    const requests:string[]=[];
-    vi.stubGlobal("fetch",vi.fn(async (url:string) => {
-      requests.push(url);
+    const requests:Array<{url:string;method:string}>=[];
+    vi.stubGlobal("fetch",vi.fn(async (url:string,init?:RequestInit) => {
+      requests.push({url,method:init?.method ?? "GET"});
       if(url==="/api/v5/source-bundle/capture-status?target_date=20260824") {
         return response({
           schema_version:"v5.capture_readiness.v1",
@@ -238,8 +238,8 @@ describe("DailyResearchCommandView", () => {
     await fireEvent.click(screen.getByRole("button",{name:"检查采集准入"}));
     expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
     expect(screen.getByText(/M03_CAPTURE_WORKER_NOT_REGISTERED/)).toBeTruthy();
-    expect(requests).toContain("/api/v5/source-bundle/capture-status?target_date=20260824");
-    expect(requests.every(url=>!url.includes("POST"))).toBe(true);
+    expect(requests.some(request=>request.url==="/api/v5/source-bundle/capture-status?target_date=20260824")).toBe(true);
+    expect(requests.every(request=>request.method==="GET")).toBe(true);
   });
 
   it("selects the canonical default date and reads only its strict day API", async () => {
