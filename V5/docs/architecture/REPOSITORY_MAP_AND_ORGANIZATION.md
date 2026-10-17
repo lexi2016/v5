@@ -13,7 +13,7 @@ This is a structural inventory and organization proposal, not a claim that the p
 
 ## 2. Snapshot inventory
 
-The fixed integration tree has 2,363 blobs across 2,904 tree entries; the recursive tree was not truncated. A machine-readable [source file manifest](SOURCE_FILE_MANIFEST.json) records each path, mode, Git blob SHA-1 and byte size for this exact snapshot. This is Git object inventory, not a file SHA-256 manifest or acceptance receipt.
+The fixed integration tree has 2,363 blobs across 2,904 tree entries; the recursive tree was not truncated. A machine-readable [source file manifest](SOURCE_FILE_MANIFEST.json) records each path, mode, Git blob SHA-1 and byte size for this exact snapshot. The [duplicate blob inventory](DUPLICATE_BLOB_INVENTORY.json) groups identical Git blobs by path for review. This is Git object inventory, not a file SHA-256 manifest or acceptance receipt; duplicate groups are not deletion recommendations.
 
 | Path | Files | Responsibility |
 |---|---:|---|
