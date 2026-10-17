@@ -22,6 +22,7 @@ class P0RuntimeExampleTests(unittest.TestCase):
         self.assertEqual(len(module["routes"]), len(set(module["routes"])))
         self.assertIn("/api/v3/research/day", module["routes"])
         self.assertIn("/api/v1/runs/date-list", module["routes"])
+        self.assertIn("/api/v5/source-bundle/capture-status", module["routes"])
         self.assertEqual(config["daily"]["close_recapture"], {"enabled": False})
         self.assertEqual(config["daily"]["hk_preselection"], {"enabled": False})
 
