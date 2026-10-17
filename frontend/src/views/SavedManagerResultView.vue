@@ -70,7 +70,23 @@ function onSourceToggle(event:Event) {
  sourceExpanded.value=(event.currentTarget as HTMLDetailsElement).open;
 }
 const query = new URLSearchParams(window.location.search);
+function compactTargetDate(value:string):string|null {
+ const compact=value.replaceAll('-','');
+ if(!/^\d{8}$/.test(compact))return null;
+ const year=Number(compact.slice(0,4)),month=Number(compact.slice(4,6)),day=Number(compact.slice(6,8));
+ if(year<1||month<1||month>12||day<1)return null;
+ const leap=year%4===0&&(year%100!==0||year%400===0);
+ const days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31];
+ return day<=days[month-1]?compact:null;
+}
+function isoTargetDate(value:string):string {return value.length===8 ? value.slice(0,4)+'-'+value.slice(4,6)+'-'+value.slice(6,8) : '';}
 const requestedRun = ref(query.get('run_id') ?? '');
+const initialTargetDate=query.get('target_date') ?? query.get('date') ?? '';
+const targetDate=ref(compactTargetDate(initialTargetDate)===initialTargetDate ? initialTargetDate : '');
+const targetDateInput=computed(()=>isoTargetDate(targetDate.value));
+const dateLookup=ref('');
+const dateLookupBusy=ref(false);
+let dateLookupSequence=0;
 const state = shallowRef<SavedRunState>({phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false});
 const session = new SavedRunSession(new M18SavedClient(), next => { state.value=next; });
 async function reload() {
@@ -78,6 +94,55 @@ async function reload() {
  if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
 }
+async function loadRunForDate() {
+ const lookupId=++dateLookupSequence;
+ const date=compactTargetDate(targetDate.value);
+ if(!date){dateLookup.value='目标交易日无效，请选择有效日期。';return;}
+ dateLookupBusy.value=true;
+ dateLookup.value='正在读取该日期的已保存经理结果…';
+ requestedRun.value='';
+ session.reset();
+ const url=new URL(window.location.href);
+ url.searchParams.set('target_date',date);
+ url.searchParams.set('date',date);
+ url.searchParams.delete('run_id');
+ window.history.replaceState(null,'',url.pathname+url.search);
+ try {
+  const response=await fetch(`/api/v4/manager/research/workspace?date=${encodeURIComponent(date)}&view=auto`,{cache:'no-store'});
+  if(lookupId!==dateLookupSequence)return;
+  if(!response.ok)throw new Error(`MANAGER_DATE_LOOKUP_HTTP_${response.status}`);
+  const body=await response.json() as Record<string,unknown>;
+  if(lookupId!==dateLookupSequence)return;
+  const payload=(body.payload && typeof body.payload==='object' && !Array.isArray(body.payload) ? body.payload : body) as Record<string,unknown>;
+  const product=payload.plan_product as Record<string,unknown>|undefined;
+  if(!product || product.consumed!==true) throw new Error('MANAGER_DATE_LOOKUP_NOT_AVAILABLE');
+  if(payload.target_trade_date!==date ||
+    typeof product.run_id!=='string' || !/^[0-9a-f]{32}$/.test(product.run_id) ||
+    typeof product.sha256!=='string' || !/^[0-9a-f]{64}$/.test(product.sha256)) {
+   throw new Error('MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH');
+  }
+  requestedRun.value=product.run_id;
+  url.searchParams.set('run_id',product.run_id);
+  window.history.replaceState(null,'',url.pathname+url.search);
+  dateLookup.value=`找到目标日 ${date} 的已消费保存运行，正在核验完整结果…`;
+  await reload();
+  if(lookupId!==dateLookupSequence)return;
+  if(state.value.descriptor && state.value.descriptor.target_date===date && state.value.descriptor.run_id===product.run_id) {
+   dateLookup.value=`已读取目标日 ${date} 的保存运行；业务完整性仍以各原状态与缺口为准。`;
+  } else if(state.value.phase==='CANNOT_CONFIRM') {
+   dateLookup.value='已找到日期匹配的引用，但完整结果读取/身份核验未通过。请查看下方技术诊断。';
+  }
+ } catch(error) {
+  if(lookupId!==dateLookupSequence)return;
+  session.reset();
+  const raw=error instanceof Error ? error.message : 'UNKNOWN_ERROR';
+  if(raw.includes('MANAGER_DATE_LOOKUP_HTTP_404')) dateLookup.value=`目标日 ${date} 的只读查询接口未接线（${raw}）。`;
+  else if(raw.includes('MANAGER_DATE_LOOKUP_HTTP_503') || raw.includes('MANAGER_DATE_LOOKUP_NOT_AVAILABLE')) dateLookup.value=`目标日 ${date} 暂无可读取的已保存运行或来源绑定（${raw}）；未回退到 latest。`;
+  else if(raw.includes('MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH')) dateLookup.value=`目标日 ${date} 的返回日期、运行 ID 或 SHA 身份不一致（${raw}），已拒绝读取。`;
+  else dateLookup.value=`目标日 ${date} 的已保存运行读取失败（${raw}）。`;
+ } finally {if(lookupId===dateLookupSequence)dateLookupBusy.value=false;}
+}
+
 const isUsMapping=computed(()=>state.value.section==='us_mapping_research');
 const isRebound=computed(()=>state.value.section==='rebound_research_observation');
 function selectRebound(group:ReboundGroup='strict') { void selectSection('rebound_research_observation',group); }
@@ -87,6 +152,13 @@ watchEffect(()=>{const page=state.value.page,host=announcementHost.value;if(host
 function sectionChange(event: Event) { void selectSection((event.target as HTMLSelectElement).value); }
 const sectionLabels: Record<string,string> = { summary:'本次研究概览', stocks:'经理候选股票', gaps:'数据与证据缺口', materials:'研究材料', lanes:'研究任务', themes:'研究主题', market_screen:'市场筛选', announcement_reviewed_analysis:'公告研究股票', announcement_observation:'公告观察', us_mapping_research:'美股与港股映射', us_market_attention:'美股关注', rebound_research_observation:'反弹研究观察', plan_product:'已消费研究计划', runtime_gaps:'运行缺口', existing_material_bindings:'材料关联', rejected_relations:'未采用关联' };
 function sectionLabel(key:string) { return sectionLabels[key] ?? key; }
+function explainError(raw:string) {
+ if(/M18_HTTP_503|MODULE_RESULT_NOT_AVAILABLE|MODULE_BINDING_NOT_CONFIGURED/.test(raw)) return '当前没有可核验的已保存产物或来源绑定。请先确认真实输入、保存回执和运行 ID；这不代表结果为 0 条。';
+ if(/MODULE_RESULT_INVALID|CONTRACT_SHA_INVALID|SOURCE_IDENTITY_REQUIRED/.test(raw)) return '返回结果的身份或完整性校验未通过。请检查绑定、来源 SHA 和保存回执；旧结果不会作为本次成功展示。';
+ if(/ROUTE_NOT_CONFIGURED|404/.test(raw)) return '当前读取接口未接线或目标资源不存在。请检查部署版本和只读路由配置。';
+ if(/NETWORK|ECONNREFUSED|fetch/i.test(raw)) return '无法连接读取服务。请确认服务已启动且地址可达后重试。';
+ return '读取失败，系统未将其当作成功或空结果。请查看技术诊断并核对请求身份。';
+}
 function json(value:unknown):string { return JSON.stringify(value,null,2) ?? '未提供'; }
 function record(entry:SavedEntry):Record<string,unknown>|null { return entry.value!==null && typeof entry.value==='object' && !Array.isArray(entry.value) ? entry.value as Record<string,unknown> : null; }
 function title(entry:SavedEntry) { const row=record(entry);return row ? [row.symbol ?? row.stock_key ?? row.code, row.name ?? row.stock_name ?? row.title].filter(value=>typeof value==='string'||typeof value==='number').join(' · ') || `记录 ${entry.index+1}` : `记录 ${entry.index+1}`; }
@@ -102,6 +174,11 @@ onBeforeUnmount(()=>session.close());
    <div><h1>V5 经理选股</h1><p>读取已保存的同一次运行结果。结果中的 PARTIAL、CANNOT_CONFIRM 与资料缺口按原样保留；只读研究，不触发采集或交易。</p></div>
    <span class="runtime-badge">已保存结果 · READ_ONLY</span>
   </header>
+  <form class="control-panel" @submit.prevent="loadRunForDate">
+   <label>目标交易日<input :value="targetDateInput" type="date" aria-label="目标交易日" @input="targetDate=($event.target as HTMLInputElement).value.replaceAll('-','')" /></label>
+   <button type="submit" :disabled="dateLookupBusy || !targetDate">{{ dateLookupBusy ? '正在查找…' : '按日期查找已保存运行' }}</button>
+   <span class="runtime-state" role="status">{{ dateLookup || '仅查找该日期已保存结果；不触发采集，不回退 latest。' }}</span>
+  </form>
   <form class="control-panel" @submit.prevent="reload">
    <label>运行 ID<input v-model="requestedRun" aria-label="运行 ID" spellcheck="false" autocomplete="off" /></label>
    <button type="submit">{{ state.phase==='LOADING' ? '重新读取' : '读取已保存结果' }}</button>
@@ -120,14 +197,23 @@ onBeforeUnmount(()=>session.close());
    <button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果</button>
    <a class="entry-nav-link" href="?view=research">研报决策台</a>
   </nav>
-  <p class="navigation-status">当前页面只确认本次已保存结果的读取。接口 READY 表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+  <p class="navigation-status">当前页面只读取已保存结果，不启动采集。接口 READY 仅表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
+  <div class="navigation-status" role="status">
+   <p v-if="state.overview && !state.overview.sections.announcement_reviewed_analysis">公告研究股票：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="state.overview && !state.overview.sections.rebound_research_observation">超跌研究：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="state.overview && !state.overview.sections.us_mapping_research">美股驱动：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+  </div>
   <section id="saved-result-content" aria-labelledby="saved-result-title">
    <header class="saved-result-heading">
     <h2 id="saved-result-title" ref="resultHeading" tabindex="-1">{{ state.section ? sectionLabel(state.section) : '经理已保存结果' }}</h2>
     <p v-if="state.descriptor"><span>目标日 {{ state.descriptor.target_date }}</span><span>已读取运行 {{ state.descriptor.run_id }}</span></p>
    </header>
   <p v-if="state.phase==='LOADING'" class="task-message" role="status" aria-live="polite">正在读取同一运行的有界数据页…</p>
-  <p v-if="state.phase==='CANNOT_CONFIRM'" class="task-message task-error" role="alert">CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。{{ state.error }}</p>
+  <div v-if="state.phase==='CANNOT_CONFIRM'" class="task-message task-error" role="alert">
+   <strong>CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。</strong>
+   <p>{{ explainError(state.error) }}</p>
+   <details v-if="state.error"><summary>技术诊断（原始错误）</summary><pre>{{ state.error }}</pre></details>
+  </div>
   <div v-if="state.overview && !isAnnouncement && !isRebound && !isUsMapping" class="task-counts"><article v-for="key in ['stocks','materials','gaps']" :key="key"><span>{{ sectionLabel(key) }}</span><strong>{{ state.overview.sections[key]?.total ?? '未提供' }}</strong></article></div>
   <section v-if="state.overview" class="task-status-view saved-sections" aria-label="已保存内容">
    <div class="control-panel"><label>内容分区<select :value="state.section" aria-label="内容分区" @change="sectionChange"><option v-for="(meta,key) in state.overview.sections" :key="key" :value="key">{{ sectionLabel(String(key)) }}{{ ['announcement_reviewed_analysis','rebound_research_observation','us_mapping_research'].includes(String(key)) ? ' · 同次运行研究引用' : ` · ${meta.total} 条 · ${meta.kind}` }}</option></select></label><span>按原始分区分页读取，每页最多 32 条</span><button v-if="state.overview.sections.gaps" type="button" @click="selectSection('gaps')">查看缺口 · {{ state.overview.sections.gaps.total }}</button><button v-if="state.overview.sections.materials" type="button" @click="selectSection('materials')">研究材料 · {{ state.overview.sections.materials.total }}</button></div>

@@ -1,7 +1,44 @@
 import { afterEach, expect, it, vi } from 'vitest';
 import { cleanup, render, screen, fireEvent } from '@testing-library/vue';
 import SavedManagerResultView from './SavedManagerResultView.vue';
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); window.history.replaceState({}, '', '/'); });
+it('looks up the exact selected target date before opening the saved M18 run', async () => {
+ const run='a'.repeat(32);
+ const product={run_id:run,sha256:'b'.repeat(64),consumed:true};
+ const requests:string[]=[];
+ vi.stubGlobal('fetch',vi.fn(async (url:string) => {
+  requests.push(url);
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') {
+   return new Response(JSON.stringify({target_trade_date:'20261016',plan_product:product}));
+  }
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/已找到日期匹配的引用/)).toBeTruthy();
+ expect(requests).toContain('/api/v4/manager/research/workspace?date=20261016&view=auto');
+ expect(new URLSearchParams(window.location.search).get('target_date')).toBe('20261016');
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBe(run);
+ expect(requests.some(url=>url.startsWith('/api/v4/manager/m18/v2')&&url.includes(run))).toBe(true);
+});
+
+it('does not bind a date to a run when the saved workspace date identity differs', async () => {
+ vi.stubGlobal('fetch',vi.fn(async (url:string) => {
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') {
+   return new Response(JSON.stringify({target_trade_date:'20261015',plan_product:{run_id:'a'.repeat(32),sha256:'b'.repeat(64),consumed:true}}));
+  }
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH/)).toBeTruthy();
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
+});
+
 it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed', async () => {
  vi.stubGlobal('fetch',vi.fn(async () => new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503})));
  render(SavedManagerResultView);
@@ -62,5 +99,11 @@ it('opens consumed announcement references by default and reuses the stock reaso
  await fireEvent.click(screen.getByRole('button',{name:'公告研究股票'}));
  expect(await screen.findByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeTruthy();
  expect(screen.queryByRole('heading',{name:'合成美股驱动公司 · HK.09876'})).toBeNull();
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/目标日 20261016 暂无可读取的已保存运行/)).toBeTruthy();
+ expect(screen.queryByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeNull();
+ expect(screen.queryByRole('heading',{name:'合成超跌公司 · 04321 · 严格条件研究观察'})).toBeNull();
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
 });
 

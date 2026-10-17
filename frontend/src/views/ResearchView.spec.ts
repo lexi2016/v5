@@ -114,6 +114,30 @@ describe("ResearchView (research lane)", () => {
     expect(screen.getByText("LEGACY_NAIVE_TIMESTAMP_ASSUMED_ASIA_SHANGHAI")).toBeTruthy();
   });
 
+  it("does not present the requested date as a source date when no binding exists", async () => {
+    const missing = {
+      schema_version: "v3_5.research_lane.v1",
+      endpoint_mode: "EXACT",
+      requested_date: "20261016",
+      research_date: null,
+      status: "NOT_MATERIALIZED",
+      reason: "V5_M04_RESEARCH_BINDING_NOT_CONFIGURED",
+      cannot_confirm: ["V5_M04_RESEARCH_BINDING_NOT_CONFIGURED"],
+      write_policy: "read_only",
+      recommendation_status: "RESEARCH_ONLY",
+      production_allowed: false,
+      buy_gate_updated: false,
+      orders_sent: false,
+    };
+    stubResearchFetch(missing);
+    render(ResearchView, { props: { archiveDate: "20261016" } });
+
+    expect(await screen.findByText("NOT_MATERIALIZED")).toBeTruthy();
+    expect(screen.getByTestId("research-date-identity").textContent).toContain("所选日期：20261016");
+    expect(screen.getByTestId("research-date-identity").textContent).toContain("实际来源日期：CANNOT_CONFIRM");
+    expect(screen.getByTestId("research-date-identity").textContent).not.toContain("不是所选日期数据");
+  });
+
   it("renders the three-column desk and status strip", async () => {
     stubResearchFetch(lane());
     render(ResearchView, { props: { archiveDate: "20260804" } });

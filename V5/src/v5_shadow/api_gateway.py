@@ -22,6 +22,14 @@ MAX_RESPONSE=16*1024*1024
 DEFAULT_JSON_NODES=200000
 MANAGER_JSON_NODES=300000
 MANAGER_WORKSPACE_PATH='/api/v4/manager/research/workspace'
+# Read-only compatibility routes consumed by the date-scoped research UI.
+# They only cold-read exact published records from source_bundle; they never run
+# a producer or substitute latest data for a missing exact-date record.
+SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES = (
+    '/api/v3/research/day',
+    '/api/v1/runs/date-list',
+    '/api/v5/source-bundle/capture-status',
+)
 
 
 def _manager_response(module_id, path, method='GET', status=200):
@@ -100,6 +108,14 @@ def validate_config(value):
         if route['module_id'] not in value['modules']:raise ValueError('GATEWAY_MODULE_MISSING')
         if not isinstance(methods,list) or not methods or len(set(methods))!=len(methods) or set(methods)-{'GET','POST'}:raise ValueError('GATEWAY_METHODS_INVALID')
         seen.add(path)
+    # These legacy UI paths were present in the date-scoped UI but omitted
+    # from the gateway route table. Register only GET-only cold-read aliases,
+    # and only when the existing source_bundle module is configured.
+    if 'source_bundle' in value['modules']:
+        for path in SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES:
+            if path not in seen:
+                value['routes'].append(dict(path=path,module_id='source_bundle',methods=['GET']))
+                seen.add(path)
     canonical_bytes(value)
     return json.loads(canonical_bytes(value))
 

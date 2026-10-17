@@ -58,7 +58,7 @@ const panelTone = computed(() => {
       <span class="daily-research-command__gap-label">cannot_confirm</span>
       <span v-for="gap in gaps" :key="gap" class="daily-research-command__gap-value">{{ gap }}</span>
     </div>
-    <p v-if="errorMessage" class="daily-research-command__error-message">{{ errorMessage }}</p>
+    <p v-if="errorMessage" class="daily-research-command__error-message" role="alert">{{ errorMessage }}</p>
     <p v-if="!alerts.length && !gaps.length && !errorMessage" class="daily-research-command__alert-empty">
       没有额外声明的 gap；仍以六层 lineage 和 exact-date contract 为准。
     </p>

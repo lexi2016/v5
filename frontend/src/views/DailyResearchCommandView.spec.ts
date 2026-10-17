@@ -193,6 +193,91 @@ describe("DailyResearchCommandView", () => {
     window.history.replaceState({}, "", "/daily-research-command/");
   });
 
+  it("preserves run and target-date identity when navigating between research and manager pages", async () => {
+    const run = "a".repeat(32);
+    window.history.replaceState({}, "", `/daily-research-command/?date=20261016&run_id=${run}&target_date=20261016`);
+    vi.stubGlobal("fetch", vi.fn(async () => ({ok:false,status:503,json:async()=>({})})));
+    render(DailyResearchCommandView);
+    const manager = screen.getByRole("link", {name:"返回经理工作台"});
+    const research = screen.getByRole("link", {name:"研报决策台"});
+    const managerQuery = new URLSearchParams(manager.getAttribute("href")?.split("?")[1] ?? "");
+    const researchQuery = new URLSearchParams(research.getAttribute("href")?.split("?")[1] ?? "");
+    expect(managerQuery.get("run_id")).toBe(run);
+    expect(managerQuery.get("target_date")).toBe("20261016");
+    expect(researchQuery.get("run_id")).toBe(run);
+    expect(researchQuery.get("target_date")).toBe("20261016");
+    expect(researchQuery.get("view")).toBe("research");
+    expect(researchQuery.get("date")).toBe("20261016");
+  });
+
+  it("shows capture as not configured instead of treating a saved read as collection", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
+    const requests:Array<{url:string;method:string}>=[];
+    vi.stubGlobal("fetch",vi.fn(async (url:string,init?:RequestInit) => {
+      requests.push({url,method:init?.method ?? "GET"});
+      if(url==="/api/v5/source-bundle/capture-status?target_date=20260824") {
+        return response({
+          schema_version:"v5.capture_readiness.v1",
+          status:"NOT_CONFIGURED",
+          target_date:"20260824",
+          capture_enabled:false,
+          execution_kind:"READ_ONLY_STATUS_CHECK",
+          reason_codes:["M03_CAPTURE_WORKER_NOT_REGISTERED","M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND"],
+          message:"No authorized capture worker is registered.",
+          write_policy:"read_only",
+          production_allowed:false,
+          buy_gate_updated:false,
+          orders_sent:false,
+        });
+      }
+      if(url==="/api/v3/research/day?archive_date=20260824") return response(readyWithGap);
+      return response({ok:false,default_date:null,dates:[],stage_dates:[],future_target_dates:[]});
+    }));
+    render(DailyResearchCommandView);
+    await screen.findByText("READY_WITH_DECLARED_GAPS");
+    await fireEvent.click(screen.getByRole("button",{name:"检查采集准入"}));
+    expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
+    await fireEvent.click(screen.getByText("技术状态与原因码"));
+    expect(screen.getByText(/M03_CAPTURE_WORKER_NOT_REGISTERED/)).toBeTruthy();
+    expect(requests.some(request=>request.url==="/api/v5/source-bundle/capture-status?target_date=20260824")).toBe(true);
+    expect(requests.every(request=>request.method==="GET")).toBe(true);
+  });
+
+  it("ignores a late capture-status response after changing the target date", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
+    let resolveOld: ((value: unknown) => void) | undefined;
+    const status = (date: string) => response({
+      schema_version: "v5.capture_readiness.v1",
+      status: "NOT_CONFIGURED",
+      target_date: date,
+      reason_codes: ["M03_CAPTURE_WORKER_NOT_REGISTERED"],
+      message: "No authorized capture worker is registered.",
+    });
+    const fetchMock = vi.fn((url: string) => {
+      if (url.endsWith("capture-status?target_date=20260824")) {
+        return new Promise(resolve => { resolveOld = resolve; });
+      }
+      if (url.endsWith("capture-status?target_date=20260825")) return Promise.resolve(status("20260825"));
+      if (url === "/api/v3/research/day?archive_date=20260825") {
+        return Promise.resolve(response({ ...readyWithGap, archive_date: "20260825", requested_date: "20260825", resolved_date: "20260825" }));
+      }
+      return Promise.resolve(response(readyWithGap));
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    render(DailyResearchCommandView);
+    await fireEvent.click(await screen.findByRole("button", { name: "检查采集准入" }));
+    await fireEvent.update(screen.getByLabelText("研究日期"), "2026-08-25");
+    const button = screen.getByRole("button", { name: "检查采集准入" });
+    expect((button as HTMLButtonElement).disabled).toBe(false);
+    await fireEvent.click(button);
+    expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
+    await fireEvent.click(screen.getByText("技术状态与原因码"));
+    expect(screen.getByText("20260825 · M03_CAPTURE_WORKER_NOT_REGISTERED")).toBeTruthy();
+    resolveOld?.(status("20260824"));
+    await waitFor(() => expect(screen.getByText("20260825 · M03_CAPTURE_WORKER_NOT_REGISTERED")).toBeTruthy());
+    expect(screen.queryByText("20260824 · M03_CAPTURE_WORKER_NOT_REGISTERED")).toBeNull();
+  });
+
   it("selects the canonical default date and reads only its strict day API", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (url: string) => {
@@ -213,14 +298,26 @@ describe("DailyResearchCommandView", () => {
     expect(window.location.search).toBe("?date=20260824");
   });
 
-  it("stays on NO_DATE_SELECTED when the date catalog is unavailable", async () => {
+  it("does not trust a default date that is absent from the published date list", async () => {
+    const fetchMock = vi.fn(async () => response({ok:true,default_date:"20261016",dates:[],stage_dates:[],future_target_dates:[]}));
+    vi.stubGlobal("fetch",fetchMock);
+    render(DailyResearchCommandView);
+    expect(await screen.findByText("NO DATE SELECTED")).toBeTruthy();
+    expect(screen.getByRole("alert").textContent).toContain("日期目录没有返回有效的已验证日期");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock).toHaveBeenCalledWith("/api/v1/runs/date-list");
+  });
+
+  it("surfaces date catalog transport failure instead of silently reporting no date", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (_url: string) => ({ ok: false, status: 503, json: async () => ({}) }));
     vi.stubGlobal("fetch", fetchMock);
 
     render(DailyResearchCommandView);
 
-    expect(await screen.findByText("NO_DATE_SELECTED")).toBeTruthy();
+    expect(await screen.findByText("读取未完成 · ERROR")).toBeTruthy();
+    expect(screen.getByRole("alert").textContent).toContain("读取失败");
+    expect(screen.getByRole("button", {name: "重试读取"})).toBeTruthy();
     expect(fetchMock.mock.calls.map((call) => call[0])).toEqual(["/api/v1/runs/date-list"]);
   });
 
@@ -232,7 +329,7 @@ describe("DailyResearchCommandView", () => {
     const { container } = render(DailyResearchCommandView);
 
     expect(await screen.findByText("READY_WITH_DECLARED_GAPS")).toBeTruthy();
-    expect(fetchMock).toHaveBeenCalledWith("/api/v3/research/day?archive_date=20260824");
+    expect(fetchMock).toHaveBeenCalledWith("/api/v3/research/day?archive_date=20260824", { cache: "no-store" });
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls.flat().join(" ")).not.toContain("/articles");
     expect(fetchMock.mock.calls.flat().join(" ")).not.toContain("hourly");

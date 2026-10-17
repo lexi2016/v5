@@ -60,10 +60,13 @@ def validate_payload(value,query):
  date=query_date(query)
  if not isinstance(value,dict) or value.get('schema_version')!='v3_5.research_lane.v1':raise ValueError('RESEARCH_SCHEMA')
  if value.get('endpoint_mode')!=('EXACT' if date else 'LATEST'):raise ValueError('RESEARCH_MODE')
- if date and value.get('research_date')!=date:raise ValueError('RESEARCH_DATE_MISMATCH')
  actual=value.get('research_date')
+ missing_source=(value.get('status')=='NOT_MATERIALIZED' and actual in (None,''))
+ if date and actual!=date and not (missing_source and value.get('requested_date')==date):
+  raise ValueError('RESEARCH_DATE_MISMATCH')
  if actual:query_date({'research_date':actual})
  elif value.get('status')!='NOT_MATERIALIZED':raise ValueError('RESEARCH_DATE_MISSING')
+ if missing_source and date and value.get('requested_date')!=date:raise ValueError('RESEARCH_REQUESTED_DATE_MISMATCH')
  if value.get('status') not in ('READY','LIVE_HOURLY','LIVE_PERIPHERAL_ONLY','NOT_MATERIALIZED'):raise ValueError('RESEARCH_STATUS')
  if value.get('write_policy')!='read_only' or value.get('recommendation_status')!='RESEARCH_ONLY':raise ValueError('RESEARCH_READ_ONLY')
  if any(value.get(k) is not False for k in FLAGS):raise ValueError('RESEARCH_SAFETY')
@@ -72,7 +75,7 @@ def validate_payload(value,query):
 
 def _lane(config,query):
  date=query_date(query);b=config.get(KEY)
- if b is None:return dict(schema_version='v3_5.research_lane.v1',endpoint_mode='EXACT' if date else 'LATEST',research_date=date,status='NOT_MATERIALIZED',reason='V5_M04_RESEARCH_BINDING_NOT_CONFIGURED',cannot_confirm=['V5_M04_RESEARCH_BINDING_NOT_CONFIGURED'],write_policy='read_only',recommendation_status='RESEARCH_ONLY',**FLAGS)
+ if b is None:return dict(schema_version='v3_5.research_lane.v1',endpoint_mode='EXACT' if date else 'LATEST',requested_date=date or None,research_date=None,status='NOT_MATERIALIZED',reason='V5_M04_RESEARCH_BINDING_NOT_CONFIGURED',cannot_confirm=['V5_M04_RESEARCH_BINDING_NOT_CONFIGURED'],write_policy='read_only',recommendation_status='RESEARCH_ONLY',**FLAGS)
  validate_binding(config)
  package=_absolute(b['package_root']);manifest=_package_bytes(package/'RELEASE.json',MANIFEST_LIMIT)
  if hashlib.sha256(manifest).hexdigest()!=b['package_manifest_sha256']:raise ValueError('RESEARCH_PACKAGE_PIN')

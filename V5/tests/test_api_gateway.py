@@ -40,6 +40,25 @@ class GatewayTests(unittest.TestCase):
             with urlopen(url,timeout=3) as response:return response.status,json.load(response)
         except HTTPError as error:
             with error:return error.code,json.load(error)
+    def test_date_scoped_research_routes_are_get_only_cold_read_aliases(self):
+        from v5_shadow.api_gateway import create_gateway
+        paths=[]
+        upstream=self.upstream(body={'status':'NOT_MATERIALIZED','reason':'MODULE_RESULT_NOT_AVAILABLE'},paths=paths)
+        cfg=dict(schema_version='v5.api_gateway.v1',modules={
+            'source_bundle':dict(port=upstream,timeout_seconds=1,max_inflight=2,release_id='source-r1')
+        },routes=[])
+        server=create_gateway(cfg,port=0);server.daemon_threads=True
+        threading.Thread(target=server.serve_forever,daemon=True).start()
+        self.addCleanup(server.server_close);self.addCleanup(server.shutdown)
+        base='http://127.0.0.1:'+str(server.server_address[1])
+        status,body=self.read(base+'/api/v3/research/day?archive_date=20261016')
+        self.assertEqual(status,200)
+        self.assertEqual(paths,['/api/v3/research/day?archive_date=20261016'])
+        with self.assertRaises(HTTPError) as caught:
+            from urllib.request import Request
+            urlopen(Request(base+'/api/v3/research/day',data=b'{}',method='POST'),timeout=3)
+        self.assertEqual(caught.exception.code,405)
+
     def test_original_url_and_payload_preserved(self):
         paths=[];status,body=self.read(self.gateway(paths=paths)+'/api/v3/preselection-pools?date=20261008&limit=200&offset=0')
         self.assertEqual(paths,['/api/v3/preselection-pools?date=20261008&limit=200&offset=0'])
