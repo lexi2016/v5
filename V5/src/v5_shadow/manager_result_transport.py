@@ -412,9 +412,17 @@ class _Pipe:
             streams = ([self.process.stdout] if self.output_open else []) + ([self.process.stderr] if self.error_open else [])
             if not streams:
                 return b''
-            ready, _, _ = select.select(streams, [], [], remaining)
+            # When stdout has closed, process exit itself does not wake select
+            # if a descendant still owns stderr. Poll the worker state on a short
+            # bounded interval while keeping the original absolute deadline.
+            wait_for = remaining if self.output_open else min(remaining, 0.05)
+            ready, _, _ = select.select(streams, [], [], wait_for)
             if not ready:
-                _fail('LOCAL_RESULT_TIMEOUT')
+                if not self.output_open and self.process.poll() is not None:
+                    return b''
+                if time.monotonic() >= self.deadline:
+                    _fail('LOCAL_RESULT_TIMEOUT')
+                continue
             if self.error_open and self.process.stderr in ready:
                 raw = os.read(self.process.stderr.fileno(), min(CHUNK_BYTES, STDERR_BYTES + 1 - self.stderr_bytes))
                 self.stderr_bytes += len(raw)
