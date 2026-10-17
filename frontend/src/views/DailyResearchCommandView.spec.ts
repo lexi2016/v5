@@ -243,6 +243,39 @@ describe("DailyResearchCommandView", () => {
     expect(requests.every(request=>request.method==="GET")).toBe(true);
   });
 
+  it("ignores a late capture-status response after changing the target date", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
+    let resolveOld: ((value: unknown) => void) | undefined;
+    const status = (date: string) => response({
+      schema_version: "v5.capture_readiness.v1",
+      status: "NOT_CONFIGURED",
+      target_date: date,
+      reason_codes: ["M03_CAPTURE_WORKER_NOT_REGISTERED"],
+      message: "No authorized capture worker is registered.",
+    });
+    const fetchMock = vi.fn((url: string) => {
+      if (url.endsWith("capture-status?target_date=20260824")) {
+        return new Promise(resolve => { resolveOld = resolve; });
+      }
+      if (url.endsWith("capture-status?target_date=20260825")) return Promise.resolve(status("20260825"));
+      if (url === "/api/v3/research/day?archive_date=20260825") {
+        return Promise.resolve(response({ ...readyWithGap, archive_date: "20260825", requested_date: "20260825", resolved_date: "20260825" }));
+      }
+      return Promise.resolve(response(readyWithGap));
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    render(DailyResearchCommandView);
+    await fireEvent.click(await screen.findByRole("button", { name: "检查采集准入" }));
+    await fireEvent.update(screen.getByLabelText("研究日期"), "2026-08-25");
+    const button = screen.getByRole("button", { name: "检查采集准入" });
+    expect((button as HTMLButtonElement).disabled).toBe(false);
+    await fireEvent.click(button);
+    expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
+    resolveOld?.(status("20260824"));
+    await waitFor(() => expect(screen.getByText(/目标日：20260825/)).toBeTruthy().catch(() => {}));
+    expect(screen.queryByText(/20260824 · M03_CAPTURE_WORKER_NOT_REGISTERED/)).toBeNull();
+  });
+
   it("selects the canonical default date and reads only its strict day API", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (url: string) => {
