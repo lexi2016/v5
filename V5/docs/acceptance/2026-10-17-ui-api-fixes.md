@@ -35,6 +35,11 @@
 - Persists the compact date as `m16_date=YYYYMMDD`, restores it after refresh, validates calendar dates and keeps the requested date in the API query.
 - Added refresh/persistence test; NOT_RUN in this environment.
 
+### UI-006 — real collection is explicitly separated from saved-result reads
+- Added a read-only `GET /api/v5/source-bundle/capture-status?target_date=YYYYMMDD` status endpoint and a visible “真实数据采集准入” panel on the daily research page.
+- It explicitly returns `NOT_CONFIGURED` with `M03_CAPTURE_WORKER_NOT_REGISTERED` and `M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND`; the status check is GET-only and cannot start a producer.
+- This is a truthful readiness/status surface, **not** a completed capture-task entry. The actual M03 network capture worker and authorized source binding are not configured, so real Friday data remains BLOCKED. No provider call or network bypass was attempted.
+
 ### UI-006 — manager publication source identity contract
 - Missing or malformed `source_input_sha256` is rejected as `MANAGER_SOURCE_IDENTITY_REQUIRED`, rather than leaking the lower-level `CONTRACT_SHA_INVALID` error.
 - Added coverage for missing and malformed values; NOT_RUN in this environment.
@@ -61,6 +66,11 @@
 - This is a source-index correction only, not evidence that those features are missing or accepted.
 
 ### M17 read-only route error classification
+- Missing M17 binding is now a specific `503 M17_BINDING_NOT_CONFIGURED`; it cannot fall through to a forged/cached module-response record.
+- Malformed date/run/query is `400 M17_QUERY_INVALID`; wrong exact date/run identity is `409 M17_REQUEST_IDENTITY_MISMATCH`.
+- Missing saved success is `503 M17_SAVED_PRODUCT_NOT_AVAILABLE`; invalid product/ledger identity is `409 M17_PRODUCT_INVALID`; reader unavailable/timeout is a 503; unexpected internal errors are 500 `M17_INTERNAL_ERROR` instead of being mislabeled as invalid product.
+- Updated `V5/tests/test_m17_readonly_api.py` to pin these distinctions. NOT_RUN in this environment.
+
 - Missing M17 binding is now a specific `503 M17_BINDING_NOT_CONFIGURED`; it cannot fall through to a forged/cached module-response record.
 - Malformed date/run/query is `400 M17_QUERY_INVALID`; wrong exact date/run identity is `409 M17_REQUEST_IDENTITY_MISMATCH`.
 - Missing saved success is `503 M17_SAVED_PRODUCT_NOT_AVAILABLE`; invalid product/ledger identity is `409 M17_PRODUCT_INVALID`; reader unavailable/timeout is a 503; unexpected internal errors are 500 `M17_INTERNAL_ERROR` instead of being mislabeled as invalid product.
