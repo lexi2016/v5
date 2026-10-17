@@ -13,7 +13,7 @@ This is a structural inventory and organization proposal, not a claim that the p
 
 ## 2. Snapshot inventory
 
-The fixed integration tree has 2,363 blobs across 2,904 tree entries; the recursive tree was not truncated.
+The fixed integration tree has 2,363 blobs across 2,904 tree entries; the recursive tree was not truncated. A machine-readable [source file manifest](SOURCE_FILE_MANIFEST.json) records each path, mode, Git blob SHA-1 and byte size for this exact snapshot. This is Git object inventory, not a file SHA-256 manifest or acceptance receipt.
 
 | Path | Files | Responsibility |
 |---|---:|---|
@@ -22,7 +22,7 @@ The fixed integration tree has 2,363 blobs across 2,904 tree entries; the recurs
 | `frontend/` | 214 | Integrated Vue/Vite application, frontend tests and runtime code |
 | `integration_candidates/` | 84 | Isolated candidate overlays and bounded integration artifacts; not all are release code |
 | `integration_tests/` | 3 | Root-level P0 integration checks |
-| root support files | 4 | `README.md`, `START_HERE.md`, `P0_INTEGRATION_TASK.md`, `SOURCE_MANIFEST.json`, plus the root readback/schedule support files listed in the source manifest |
+| root support files | 6 | `README.md`, `START_HERE.md`, `P0_INTEGRATION_TASK.md`, `SOURCE_MANIFEST.json`, plus the root readback/schedule support files listed in the source manifest |
 
 The inventory is descriptive. It does not label any file safe to delete.
 
@@ -92,11 +92,11 @@ A test receipt must include commit SHA, environment/dependency identity, command
 - Use `V5/docs/workflow/2026-10-13-delivery-reset/PROJECT_EXECUTION_PLAN.md` as the execution-plan entry, while checking its dated evidence and append-only updates.
 - Use the handoff folder's source index and evidence matrix for module candidate provenance.
 
-### O2 — Add a per-module registry (next step)
-Create one registry row for M01–M18 with: canonical owner path, current integration commit, source/manifest PIN, entry point, consumer, lane, configuration schema, tests, current evidence tier and outstanding blocker. Derive the row from actual manifests and receipts; unknowns remain UNKNOWN.
+### O2 — Per-module registry (initial index created)
+See [MODULE_REGISTRY.md](MODULE_REGISTRY.md). It records M01–M18 candidate source refs and bounded known evidence. It is a navigation aid, not a runtime registry; owner paths, PINs and branch HEADs must be freshly verified before implementation.
 
-### O3 — Separate candidate and history
-- Keep rejected candidates and historical source trees in their existing locations for now.
+### O3 — Candidate and historical source index (initial index created)
+See [CANDIDATE_SOURCE_INDEX.md](CANDIDATE_SOURCE_INDEX.md). It distinguishes proposed, partial and bounded-evidence candidates. Keep rejected candidates and historical source trees in their existing locations for now.
 - Add a small candidate index with statuses `PROPOSED`, `REJECTED`, `PARTIALLY_INTEGRATED`, `INTEGRATED`, `SUPERSEDED`.
 - A candidate is `INTEGRATED` only when its actual required files and tests are present in the selected integration tree; branch existence is not enough.
 
