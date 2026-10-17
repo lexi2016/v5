@@ -252,13 +252,14 @@ async function loadDefaultDate(): Promise<void> {
   try {
     const response = await fetch("/api/v1/runs/date-list", { cache: "no-store" });
     if (!response.ok) throw new Error("date-list request failed");
-    const catalog = (await response.json()) as { default_date?: unknown; dates?: unknown };
+    const catalog = (await response.json()) as { default_date?: unknown; dates?: unknown; status?: unknown };
+    const dates = Array.isArray(catalog?.dates)
+      ? [...new Set(catalog.dates.filter((value): value is string => typeof value === "string" && isCalendarDate(value)))]
+      : [];
     const candidate =
-      typeof catalog?.default_date === "string" && catalog.default_date
+      typeof catalog?.default_date === "string" && dates.includes(catalog.default_date)
         ? catalog.default_date
-        : Array.isArray(catalog?.dates) && typeof catalog.dates[0] === "string"
-          ? catalog.dates[0]
-          : "";
+        : dates[0] ?? "";
     if (!isCalendarDate(candidate)) {
       requestedDate.value = null;
       state.value = "NO_DATE_SELECTED";
