@@ -39,9 +39,7 @@ M17_PRODUCT_ERROR_CODES = frozenset((
     'M17_READONLY_PRODUCT_CHANGED', 'M17_READONLY_RESPONSE_MISMATCH',
     'M17_READONLY_RESPONSE_INVALID', 'M17_READONLY_LEDGER_CHANGED',
 ))
-M17_UNAVAILABLE_ERROR_CODES = frozenset((
-    'M17_READONLY_SAVED_SUCCESS_REQUIRED', 'M17_READONLY_EXACT_REFERENCE_REQUIRED',
-))
+M17_UNAVAILABLE_ERROR_CODES = frozenset(('M17_READONLY_SAVED_SUCCESS_REQUIRED',))
 M17_READER_ERROR_CODES = frozenset((
     'M17_READONLY_READER_UNAVAILABLE', 'M17_READONLY_RESPONSE_LIMIT',
     'M17_READONLY_PACKET_LIMIT',
@@ -1178,6 +1176,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
                         except ValueError as error:
                             code=str(error)
                             if code in M17_BINDING_ERROR_CODES:self.error(409,'M17_BINDING_INVALID')
+                            elif code=='M17_READONLY_EXACT_REFERENCE_REQUIRED':self.error(409,'M17_REQUEST_IDENTITY_MISMATCH')
                             elif code in M17_UNAVAILABLE_ERROR_CODES:self.error(503,'M17_SAVED_PRODUCT_NOT_AVAILABLE')
                             elif code in M17_READER_ERROR_CODES:self.error(503,'M17_READER_UNAVAILABLE')
                             elif code in M17_PRODUCT_ERROR_CODES:self.error(409,'M17_PRODUCT_INVALID')
