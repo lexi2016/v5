@@ -86,7 +86,7 @@
       "v4_source_path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/app.py",
       "v4_git_blob_sha1": "e1b58a34bd73297008a7b3d318d4ddd4ae5ea6ee",
       "v4_observable_behavior": "GET /api/v3/preselection-pools",
-      "v5_candidate_mapping": "V5/src/v5_shadow/a_preselection_daily.py;V5/src/v5_shadow/hk_source_daily.py",
+      "v5_candidate_mapping": "V5/src/v5_shadow/a_preselection_daily.py;V5/src/v5_shadow/hk_preselection.py;V5/src/v5_shadow/p0_hk_preselection.py",
       "input_pit_qualification_date_session": "PIT and membership not fully mapped",
       "algorithm_semantics": "Preserve original pool assembly and qualification",
       "persistence_cold_read": "Save/cold-read not fully verified",
@@ -96,7 +96,7 @@
       "failure_recovery_rollback": "Not verified",
       "test_evidence": "NOT_RUN",
       "real_input_sha": "NOT_CAPTURED",
-      "blocking_gap": "Need six-pool/source identity and saved artifact readback",
+      "blocking_gap": "Previous hk_source_daily.py path was incorrect; actual candidates are hk_preselection.py and p0_hk_preselection.py. Mapping correction only, not proof of feature absence. Need six-pool/source identity and saved artifact readback",
       "acceptance": "NOT_ACCEPTED"
     },
     {
@@ -306,7 +306,7 @@
       "v4_source_path": "handoff/v4-running-source-20261005/canonical/apps/api/v35_api/_review_router_parts/http_routes.py",
       "v4_git_blob_sha1": "f884abb7215902e8e42b8d598458a14ca49dfbc9",
       "v4_observable_behavior": "POST /review/generate and GET /review",
-      "v5_candidate_mapping": "V5/src/v5_shadow/a_close_review_daily.py;V5/src/v5_shadow/hk_close_review_daily.py",
+      "v5_candidate_mapping": "V5/src/v5_shadow/a_close_review.py;V5/src/v5_shadow/hk_close_review.py",
       "input_pit_qualification_date_session": "Date/session and partial state not fully mapped",
       "algorithm_semantics": "Preserve original close-review algorithm and partial/null",
       "persistence_cold_read": "Cold read not fully verified",
@@ -316,7 +316,7 @@
       "failure_recovery_rollback": "Partial/null and rollback semantics not verified",
       "test_evidence": "NOT_RUN",
       "real_input_sha": "NOT_CAPTURED",
-      "blocking_gap": "Need exact schedule and saved result comparisons",
+      "blocking_gap": "Previous a_close_review_daily.py/hk_close_review_daily.py paths were incorrect; actual candidates are a_close_review.py and hk_close_review.py. Mapping correction only, not proof of feature absence. Need exact schedule and saved result comparisons",
       "acceptance": "NOT_ACCEPTED"
     },
     {
