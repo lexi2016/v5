@@ -5,10 +5,13 @@
 ## 从这里开始
 
 1. **仓库结构与维护规则**：[V5 Repository Map](V5/docs/architecture/REPOSITORY_MAP_AND_ORGANIZATION.md)
-2. **固定集成源码**：[dev/v5-main-integration-20261012 @ `01d93717905813705732161d4d79062ae5af2d99`](https://github.com/lexi2016/v5/tree/01d93717905813705732161d4d79062ae5af2d99)
-3. **当前交接入口**：[2026-10-16 START_HERE](handoffs/20261016-chat-completion/START_HERE.md) · [完整执行 Prompt](handoffs/20261016-chat-completion/PROMPT.md)
-4. **统一执行计划**：[PROJECT_EXECUTION_PLAN.md](V5/docs/workflow/2026-10-13-delivery-reset/PROJECT_EXECUTION_PLAN.md)
-5. **原始集成来源清单**：[SOURCE_MANIFEST.json](SOURCE_MANIFEST.json) · [P0 集成任务书](P0_INTEGRATION_TASK.md)
+2. **M01–M18 模块注册表**：[MODULE_REGISTRY.md](V5/docs/architecture/MODULE_REGISTRY.md)
+3. **候选/历史来源索引**：[CANDIDATE_SOURCE_INDEX.md](V5/docs/architecture/CANDIDATE_SOURCE_INDEX.md)
+4. **固定集成文件清单**：[SOURCE_FILE_MANIFEST.json](V5/docs/architecture/SOURCE_FILE_MANIFEST.json)
+5. **固定集成源码**：[dev/v5-main-integration-20261012 @ `01d93717905813705732161d4d79062ae5af2d99`](https://github.com/lexi2016/v5/tree/01d93717905813705732161d4d79062ae5af2d99)
+6. **当前交接入口**：[2026-10-16 START_HERE](handoffs/20261016-chat-completion/START_HERE.md) · [完整执行 Prompt](handoffs/20261016-chat-completion/PROMPT.md)
+7. **统一执行计划**：[PROJECT_EXECUTION_PLAN.md](V5/docs/workflow/2026-10-13-delivery-reset/PROJECT_EXECUTION_PLAN.md)
+8. **原始集成来源清单**：[SOURCE_MANIFEST.json](SOURCE_MANIFEST.json) · [P0 集成任务书](P0_INTEGRATION_TASK.md)
 
 > 注意：仓库默认分支 `main` 不是完整 V5 集成基线。开始任何开发前，应读取目标分支最新 HEAD，并记录所用的完整 commit SHA。
 
