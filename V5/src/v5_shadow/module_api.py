@@ -1153,6 +1153,21 @@ def create_module_server(value,host='127.0.0.1',port=0):
                     if query:raise ValueError('RESEARCH_DATE_CATALOG_QUERY')
                     payload=_research_date_catalog(config,root)
                     self.reply(200,payload,sha256_json(payload))
+                elif config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/capture-status':
+                    if set(query)!={'target_date'} or not re.fullmatch(r'[0-9]{8}',query.get('target_date','')):
+                        self.error(400,'CAPTURE_STATUS_QUERY_INVALID')
+                    else:
+                        date=query['target_date']
+                        try: valid_date=datetime.strptime(date,'%Y%m%d').strftime('%Y%m%d')==date
+                        except ValueError: valid_date=False
+                        if not valid_date:self.error(400,'CAPTURE_STATUS_QUERY_INVALID')
+                        else:
+                            payload=dict(schema_version='v5.capture_readiness.v1',status='NOT_CONFIGURED',
+                                target_date=date,capture_enabled=False,execution_kind='READ_ONLY_STATUS_CHECK',
+                                reason_codes=['M03_CAPTURE_WORKER_NOT_REGISTERED','M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND'],
+                                message='No authorized M03 capture worker or source-admission binding is configured; this API will not start collection.',
+                                write_policy='read_only',production_allowed=False,buy_gate_updated=False,orders_sent=False)
+                            self.reply(200,payload,sha256_json(payload))
                 elif config['module_id']=='source_bundle' and parsed.path==M17_ROUTE:
                     required={'source_trade_date','run_id'}
                     source_date=query.get('source_trade_date')
