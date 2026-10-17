@@ -11,6 +11,9 @@ This matrix is evidence-first. It currently contains 22 source/feature rows, inc
 
 ## Evidence basis
 
+> Scope limitation: the separate 1,814-source-file Drive package mentioned in the latest handoff has not yet been extracted and compared byte-for-byte in this connected session. The matrix currently cites the pinned GitHub V4 snapshot; it is not evidence that this tree is identical to the Drive package or the currently deployed V4 runtime.
+
+
 The initial inventory uses `lexi2016/v4@24c6d60d524f43fcf4209ec8b078ec02cb34417e`, whose recursive Git tree reported 2,124 paths and was not truncated. The following file blob identities were read directly:
 
 - `canonical/apps/api/v35_api/app.py`: `e1b58a34bd73297008a7b3d318d4ddd4ae5ea6ee`
