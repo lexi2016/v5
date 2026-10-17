@@ -135,13 +135,17 @@ input {
 }
 
 .daily-research-command__summary-value {
-  overflow: hidden;
+  display: block;
+  min-width: 0;
+  overflow: visible;
   color: #1c2a33;
   font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 0.88rem;
   font-weight: 700;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .daily-research-command__hero-footer {
