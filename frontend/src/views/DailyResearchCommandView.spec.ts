@@ -210,6 +210,38 @@ describe("DailyResearchCommandView", () => {
     expect(researchQuery.get("date")).toBe("20261016");
   });
 
+  it("shows capture as not configured instead of treating a saved read as collection", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
+    const requests:string[]=[];
+    vi.stubGlobal("fetch",vi.fn(async (url:string) => {
+      requests.push(url);
+      if(url==="/api/v5/source-bundle/capture-status?target_date=20260824") {
+        return response({
+          schema_version:"v5.capture_readiness.v1",
+          status:"NOT_CONFIGURED",
+          target_date:"20260824",
+          capture_enabled:false,
+          execution_kind:"READ_ONLY_STATUS_CHECK",
+          reason_codes:["M03_CAPTURE_WORKER_NOT_REGISTERED","M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND"],
+          message:"No authorized capture worker is registered.",
+          write_policy:"read_only",
+          production_allowed:false,
+          buy_gate_updated:false,
+          orders_sent:false,
+        });
+      }
+      if(url==="/api/v3/research/day?archive_date=20260824") return response(readyWithGap);
+      return response({ok:false,default_date:null,dates:[],stage_dates:[],future_target_dates:[]});
+    }));
+    render(DailyResearchCommandView);
+    await screen.findByText("READY_WITH_DECLARED_GAPS");
+    await fireEvent.click(screen.getByRole("button",{name:"检查采集准入"}));
+    expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
+    expect(screen.getByText(/M03_CAPTURE_WORKER_NOT_REGISTERED/)).toBeTruthy();
+    expect(requests).toContain("/api/v5/source-bundle/capture-status?target_date=20260824");
+    expect(requests.every(url=>!url.includes("POST"))).toBe(true);
+  });
+
   it("selects the canonical default date and reads only its strict day API", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (url: string) => {
