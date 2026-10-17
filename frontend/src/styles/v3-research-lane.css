@@ -411,3 +411,19 @@
 .hourly-source-columns {
   grid-template-columns: 1fr;
 }
+
+/* Keep Chinese research headings readable at common desktop breakpoints. */
+.hourly-desk-grid {
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.5fr) minmax(0, 0.95fr);
+}
+.hourly-desk-grid > * { min-width: 0; }
+.hourly-feed-title, .hourly-impact-title, .hourly-panel-head h3,
+.hourly-feed-toolbar h3, .hourly-context-pane h3 {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+@media (max-width: 900px) {
+  .hourly-desk-grid { grid-template-columns: minmax(0, 1fr); }
+  .hourly-priority-pane, .hourly-context-pane { position: static; }
+}
