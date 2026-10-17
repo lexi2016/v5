@@ -26,8 +26,8 @@ for part in (root, *root.parents):
     if part.is_symlink():
         raise SystemExit("SYMLINK_REJECTED: " + str(part))
 root.mkdir(parents=True, exist_ok=True)
-data_root = root / "module-data"
-runtime_root = root / "runtime"
+data_root = root / "v5-module-data"
+runtime_root = root / "v5-runtime"
 data_root.mkdir(exist_ok=True)
 runtime_root.mkdir(exist_ok=True)
 for path in (data_root, runtime_root):
