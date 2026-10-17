@@ -138,7 +138,15 @@ class ResultTransportTests(unittest.TestCase):
 
         def small_stderr_pipe(*args, **kwargs):
             process = real_popen(*args, **kwargs)
-            fcntl.fcntl(process.stderr.fileno(), fcntl.F_SETPIPE_SZ, 4096)
+            # Linux exposes F_SETPIPE_SZ; macOS does not. On platforms without
+            # this optional knob, retain the same 60 KB stderr regression using
+            # the platform's native pipe capacity instead of failing at import/run.
+            set_pipe_size = getattr(fcntl, 'F_SETPIPE_SZ', None)
+            if set_pipe_size is not None:
+                try:
+                    fcntl.fcntl(process.stderr.fileno(), set_pipe_size, 4096)
+                except OSError:
+                    pass  # Kernel may not permit resizing; transport contract still applies.
             return process
 
         with patch.object(transport.subprocess, "Popen", side_effect=small_stderr_pipe):
