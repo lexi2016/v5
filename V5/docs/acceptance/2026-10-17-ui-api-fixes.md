@@ -60,6 +60,12 @@
 - Close-review candidates are `a_close_review.py` and `hk_close_review.py`, not the obsolete `*_daily.py` paths.
 - This is a source-index correction only, not evidence that those features are missing or accepted.
 
+### M17 read-only route error classification
+- Missing M17 binding is now a specific `503 M17_BINDING_NOT_CONFIGURED`; it cannot fall through to a forged/cached module-response record.
+- Malformed date/run/query is `400 M17_QUERY_INVALID`; wrong exact date/run identity is `409 M17_REQUEST_IDENTITY_MISMATCH`.
+- Missing saved success is `503 M17_SAVED_PRODUCT_NOT_AVAILABLE`; invalid product/ledger identity is `409 M17_PRODUCT_INVALID`; reader unavailable/timeout is a 503; unexpected internal errors are 500 `M17_INTERNAL_ERROR` instead of being mislabeled as invalid product.
+- Updated `V5/tests/test_m17_readonly_api.py` to pin these distinctions. NOT_RUN in this environment.
+
 ### P0 runtime example
 - Replaced the stale `module_api.host/mode` example with the actual `v5.module_api.v1` schema, absolute placeholder paths, read-only routes, and disabled daily registrations.
 - Added `V5/docs/operations/p0-runtime-example.md` with non-symlink root checks, marker initialization without overwrite, frozen dependency instructions and `runtime validate/start/status/stop` commands.
