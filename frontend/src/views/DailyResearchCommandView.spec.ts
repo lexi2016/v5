@@ -271,9 +271,11 @@ describe("DailyResearchCommandView", () => {
     expect((button as HTMLButtonElement).disabled).toBe(false);
     await fireEvent.click(button);
     expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
+    await fireEvent.click(screen.getByText("技术状态与原因码"));
+    expect(screen.getByText("20260825 · M03_CAPTURE_WORKER_NOT_REGISTERED")).toBeTruthy();
     resolveOld?.(status("20260824"));
-    await waitFor(() => expect(screen.getByText(/目标日：20260825/)).toBeTruthy().catch(() => {}));
-    expect(screen.queryByText(/20260824 · M03_CAPTURE_WORKER_NOT_REGISTERED/)).toBeNull();
+    await waitFor(() => expect(screen.getByText("20260825 · M03_CAPTURE_WORKER_NOT_REGISTERED")).toBeTruthy());
+    expect(screen.queryByText("20260824 · M03_CAPTURE_WORKER_NOT_REGISTERED")).toBeNull();
   });
 
   it("selects the canonical default date and reads only its strict day API", async () => {
