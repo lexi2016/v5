@@ -1,6 +1,9 @@
 // Research decision-desk lane API (aligned to the V3 research lane).
 export interface ResearchLane {
-  research_date: string;
+  /** Actual source date; null means no source artifact is bound. */
+  research_date: string | null;
+  /** Caller-selected date; this is not evidence of a captured source. */
+  requested_date?: string | null;
   endpoint_mode: string;
   status?: string;
   reason?: string;
@@ -198,14 +201,24 @@ export function validateResearchLaneResponse(
   if (expectedEndpointMode && endpointMode !== expectedEndpointMode) {
     invalidResponse("research lane endpoint_mode does not match the request");
   }
-  if (typeof payload.research_date !== "string") invalidResponse("research lane research_date is missing");
   const status = payload.status as ResearchLaneStatus;
-  const emptyLatestDate = endpointMode === "LATEST" && status === "NOT_MATERIALIZED" && payload.research_date === "";
-  if (!emptyLatestDate && !isGregorianDate(payload.research_date)) {
-    invalidResponse("research lane research_date is invalid");
+  const sourceDate = payload.research_date;
+  const missingSourceDate = status === "NOT_MATERIALIZED" && (sourceDate === null || sourceDate === "");
+  if (typeof sourceDate !== "string" && !missingSourceDate) {
+    invalidResponse("research lane research_date is missing");
+  }
+  if (typeof sourceDate === "string") {
+    const emptyLatestDate = endpointMode === "LATEST" && status === "NOT_MATERIALIZED" && sourceDate === "";
+    if (!emptyLatestDate && !isGregorianDate(sourceDate)) invalidResponse("research lane research_date is invalid");
+  }
+  if (payload.requested_date !== undefined && payload.requested_date !== null && !isGregorianDate(payload.requested_date)) {
+    invalidResponse("research lane requested_date is invalid");
   }
   if (expectedResearchDate !== undefined) {
-    if (!isGregorianDate(expectedResearchDate) || payload.research_date !== expectedResearchDate) {
+    if (!isGregorianDate(expectedResearchDate)) invalidResponse("research lane request date is invalid");
+    if (missingSourceDate) {
+      if (payload.requested_date !== expectedResearchDate) invalidResponse("research lane requested_date does not match the request");
+    } else if (sourceDate !== expectedResearchDate) {
       invalidResponse("research lane research_date does not match the request");
     }
   }
