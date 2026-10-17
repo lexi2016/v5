@@ -1,0 +1,25 @@
+name: V5 repository inventory audit
+
+on:
+  pull_request:
+    paths:
+      - "V5/docs/architecture/**"
+      - "V5/tools/audit_repository_inventory.py"
+      - ".github/workflows/repository-inventory-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Validate manifests against fixed integration tree
+        run: python V5/tools/audit_repository_inventory.py --repo . --commit 01d93717905813705732161d4d79062ae5af2d99
