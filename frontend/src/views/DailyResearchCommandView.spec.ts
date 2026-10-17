@@ -237,6 +237,7 @@ describe("DailyResearchCommandView", () => {
     await screen.findByText("READY_WITH_DECLARED_GAPS");
     await fireEvent.click(screen.getByRole("button",{name:"检查采集准入"}));
     expect(await screen.findByText("采集状态：NOT_CONFIGURED")).toBeTruthy();
+    await fireEvent.click(screen.getByText("技术状态与原因码"));
     expect(screen.getByText(/M03_CAPTURE_WORKER_NOT_REGISTERED/)).toBeTruthy();
     expect(requests.some(request=>request.url==="/api/v5/source-bundle/capture-status?target_date=20260824")).toBe(true);
     expect(requests.every(request=>request.method==="GET")).toBe(true);
