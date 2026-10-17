@@ -78,6 +78,6 @@ Run on the intended isolated machine with Python >=3.14 and frontend dependencie
 
 1. `PYTHONPATH=V5/src pytest -q V5/tests/test_manager_result_transport.py`
 2. `PYTHONPATH=V5/src pytest -q V5/tests/test_p0_manager_publication_bridge.py V5/tests/test_api_gateway.py V5/tests/test_module_api.py V5/tests/test_research_workbench_readonly.py`
-3. Run focused frontend specs for `research_lane.spec.ts`, `ResearchView.spec.ts`, `DailyResearchCommandView.spec.ts`, `M16SavedResearch.spec.ts`, and `SavedManagerResultView.spec.ts`, then the full frontend suite and production build using the actual scripts in `frontend/package.json`.
+3. `cd frontend && npm test -- src/research-workbench/api/research_lane.spec.ts src/research-workbench/views/ResearchView.spec.ts src/views/DailyResearchCommandView.spec.ts src/components/M16SavedResearch.spec.ts src/views/SavedManagerResultView.spec.ts`; then `npm run typecheck`, `npm test`, `npm run test:p0`, and `npm run build`.
 4. Run the full publication integration module repeatedly with a hard process deadline and confirm clean exit code 0 and no leaked child/thread.
 5. Deploy only the reviewed candidate under the existing authorized process, then verify real HTTP response codes, browser screenshots, date-bound saved product hashes, exact-date no-data behavior, M16 refresh persistence, and a real Friday data capture. No source record or synthetic fixture can substitute for the last item.
