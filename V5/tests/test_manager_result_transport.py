@@ -8,6 +8,8 @@ from pathlib import Path
 import struct
 import sys
 import tempfile
+import time
+import subprocess
 import unittest
 from v5_shadow import manager_result_transport as transport
 
@@ -105,6 +107,21 @@ class ResultTransportTests(unittest.TestCase):
             self.assertEqual(d['allowed_bytes'],transport.RESULT_BYTES)
             self.assertGreater(d['actual_bytes'],transport.RESULT_BYTES)
             self.assertNotIn('XXXX',str(d))
+
+    def test_stdout_eof_does_not_wait_for_descendant_stderr_eof(self):
+        child = "import subprocess,sys; subprocess.Popen([sys.executable, '-I', '-B', '-c', 'import time;time.sleep(2)'], stdout=subprocess.DEVNULL); sys.stdout.close()"
+        process = subprocess.Popen([sys.executable, '-I', '-B', '-c', child], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        deadline = time.monotonic() + 5
+        started = time.monotonic()
+        try:
+            self.assertEqual(transport._Pipe(process, deadline).read(1), b'')
+            self.assertLess(time.monotonic() - started, 1.0)
+        finally:
+            if process.poll() is None:
+                process.kill()
+            process.wait(timeout=2)
+            process.stdout.close()
+            process.stderr.close()
 
     def test_pipe_timeout_is_bounded(self):
         with self.assertRaisesRegex(ValueError,'TIMEOUT'):
