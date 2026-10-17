@@ -36,6 +36,22 @@ def daily_config(config):
     return config['daily']
 
 
+def manager_plan_window_status(now, slots):
+    """Apply the same bounded plan window to either prepared requests or templates.
+
+    A prebuilt manager_request is not permission to bypass the scheduled window.
+    Before the slot, wait; after it, never backfill. The caller may assemble a
+    template or consume a prebuilt request only while the window is open.
+    """
+    start=aware(slots['plan_at'])
+    deadline=aware(slots['plan_deadline'])
+    if now < start:
+        return 'WAITING_0845_PLAN_WINDOW'
+    if now >= deadline:
+        return 'MISSED_PLAN_WINDOW_NO_BACKFILL'
+    return None
+
+
 def tick(config):
     config=daily_config(config)
     if config.get('enabled') is not True:return dict(status='DISABLED',natural_verified=False)
@@ -137,11 +153,10 @@ def tick(config):
     else:
         try:
             now=datetime.now(timezone.utc)
+            window_status=manager_plan_window_status(now, defaults)
+            if window_status is not None:
+                result['manager']=dict(status=window_status);return result
             if template is not None:
-                if now<aware(defaults['plan_at']):
-                    result['manager']=dict(status='WAITING_0845_PLAN_WINDOW');return result
-                if now>=aware(defaults['plan_deadline']):
-                    result['manager']=dict(status='MISSED_PLAN_WINDOW_NO_BACKFILL');return result
                 from v5_shadow.daily_manager_assembly import assemble_manager_request
                 manager=assemble_manager_request(template,result['lanes'],config['ledger_root'],registration)
             publication_config = config.get('manager_publication')
