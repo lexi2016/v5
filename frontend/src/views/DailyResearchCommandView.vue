@@ -55,6 +55,21 @@ function selectedQueryDate(): string | null {
   return isCalendarDate(value) ? value : null;
 }
 
+const managerHref = computed(() => {
+  const url = new URL(window.location.href);
+  url.pathname = "/";
+  url.searchParams.delete("view");
+  return `${url.pathname}${url.search}`;
+});
+const researchHref = computed(() => {
+  const url = new URL(window.location.href);
+  url.pathname = "/";
+  url.searchParams.set("view", "research");
+  if (requestedDate.value) url.searchParams.set("date", requestedDate.value);
+  else url.searchParams.delete("date");
+  return `${url.pathname}${url.search}`;
+});
+
 function explainRequestError(error: unknown): string {
   const raw = error instanceof Error ? error.message : "未知错误";
   if (/\b404\b/.test(raw)) return `接口未接线或目标资源不存在（${raw}）。请检查所选日期对应的只读接口。`;
@@ -285,8 +300,8 @@ onBeforeUnmount(() => {
 <template>
   <main class="daily-research-command__page" :data-state="state">
     <nav class="daily-research-command__navigation" aria-label="功能导航">
-      <a href="/">返回经理工作台</a>
-      <a :href="requestedDate ? `/?view=research&date=${requestedDate}` : '/?view=research'">研报决策台</a>
+      <a :href="managerHref">返回经理工作台</a>
+      <a :href="researchHref">研报决策台</a>
     </nav>
     <DailyResearchHero
       :state="state"
