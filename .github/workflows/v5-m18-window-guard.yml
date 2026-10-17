@@ -27,4 +27,4 @@ jobs:
       - name: Run M18 plan-window boundary tests
         env:
           PYTHONPATH: V5/src:V5/tests
-        run: python -m pytest -q V5/tests/test_manager_plan_window.py
+        run: python -m pytest -q V5/tests/test_manager_plan_window.py V5/tests/test_daily_manager_assembly.py V5/tests/test_m18_daily_publication.py
