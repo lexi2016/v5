@@ -92,3 +92,17 @@ Run on the intended isolated machine with Python >=3.14 and frontend dependencie
 3. `cd frontend && npm test -- src/research-workbench/api/research_lane.spec.ts src/research-workbench/views/ResearchView.spec.ts src/views/DailyResearchCommandView.spec.ts src/components/M16SavedResearch.spec.ts src/views/SavedManagerResultView.spec.ts`; then `npm run typecheck`, `npm test`, `npm run test:p0`, and `npm run build`.
 4. Run the full publication integration module repeatedly with a hard process deadline and confirm clean exit code 0 and no leaked child/thread.
 5. Deploy only the reviewed candidate under the existing authorized process, then verify real HTTP response codes, browser screenshots, date-bound saved product hashes, exact-date no-data behavior, M16 refresh persistence, and a real Friday data capture. No source record or synthetic fixture can substitute for the last item.
+
+
+## Follow-up repair pass — 2026-10-18
+
+Fixed candidate changes on the same PR branch (parent remains the pinned integration baseline):
+
+- `DailyResearchCommandView.vue`: corrected `captureStatusError.value` assignments; invalidates in-flight capture-status requests and clears old status/busy state on target-date changes. Added a late-response regression in `DailyResearchCommandView.spec.ts`.
+- `SavedRunSession`: added an explicit `reset()` that aborts/invalidate in-flight reads and clears descriptor, overview, page, and section. The manager date lookup now clears the selected run ID and visible saved rows before lookup, ignores superseded lookup responses, and clears the session on lookup failure. Added a regression that starts from rendered saved rows, forces date lookup failure, and asserts the previous rows/run identity are absent.
+- `m17_readonly.py` and `module_api.py`: the isolated worker now returns a bounded allowlisted reason code and the parent preserves it; response/packet limit violations are classified as HTTP 409 `M17_PRODUCT_INVALID`, consistent with the existing fail-closed oversize test. No rows are returned on rejection.
+- `test_manager_result_transport.py`: small-pipe sizing now checks whether `F_SETPIPE_SZ` exists and handles a kernel refusal without failing solely on platforms lacking the Linux-specific option.
+- `savedManagerNavigation.node.mjs`: transpiles the extracted Vue TypeScript with the project's TypeScript dependency before running the isolated controls, and asserts the updated visible error/diagnostic markup rather than the obsolete template string.
+- `M16SavedResearch.spec.ts` and `DailyResearchCommandView.spec.ts`: removed unsupported hidden-option usage from label queries and removed the zero-argument mock tuple index assertion.
+
+**Verification for this follow-up pass:** source edits and GitHub readback were confirmed. No shell/test-runner is exposed in this connected session; therefore targeted Vitest, `npm run typecheck`, full Vitest, `npm run test:p0`, build, Python tests, and macOS execution are all `NOT_RUN`. GitHub Actions and commit statuses returned no runs/statuses for the checked candidate before this follow-up; no PASS is inferred. PR remains Draft and unmerged. Real provider capture, deployment/browser verification, and existing preview replacement remain out of scope and unclaimed.
