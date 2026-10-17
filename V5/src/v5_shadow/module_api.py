@@ -18,7 +18,8 @@ from .composition import no_symlinks
 from .contracts import exact_keys,aware,sha
 from .digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
 from .api_gateway import (_parse_response, _precheck_json, _bounded_json,
-                          _manager_response, MANAGER_WORKSPACE_PATH)
+                          _manager_response, MANAGER_WORKSPACE_PATH,
+                          SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES)
 M18_ROUTE = "/api/v4/manager/m18/v2"
 M17_ROUTE = "/api/v5/manager/close-recapture"
 M07_ROUTE = "/api/v5/source-bundle/a-stage-saved"
@@ -1044,7 +1045,9 @@ def create_module_server(value,host='127.0.0.1',port=0):
             if parsed.path=='/__v5/module-health':
                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
-            if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+            if parsed.path not in config['routes'] and not (
+                    config['module_id']=='source_bundle' and parsed.path in SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES
+            ):return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
             heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
             research_path = config['module_id']=='source_bundle' and parsed.path in ('/api/v5/research/lane','/api/v5/research/wechat/materials')
