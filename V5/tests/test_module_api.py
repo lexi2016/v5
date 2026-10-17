@@ -30,6 +30,18 @@ class ModuleApiTests(unittest.TestCase):
             with urlopen(url,timeout=3) as r:return r.status,json.load(r),dict(r.headers)
         except HTTPError as error:
             with error:return error.code,json.load(error),dict(error.headers)
+    def test_capture_status_is_explicitly_not_configured_and_read_only(self):
+        _,url=self.setup_api(module='source_bundle')
+        status,body,_=self.read(url+'/api/v5/source-bundle/capture-status?target_date=20261016')
+        self.assertEqual(status,200)
+        self.assertEqual(body['status'],'NOT_CONFIGURED')
+        self.assertEqual(body['target_date'],'20261016')
+        self.assertEqual(body['reason_codes'],['M03_CAPTURE_WORKER_NOT_REGISTERED','M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND'])
+        self.assertIs(body['capture_enabled'],False)
+        status,body,_=self.read(url+'/api/v5/source-bundle/capture-status?target_date=20261399')
+        self.assertEqual(status,400)
+        self.assertEqual(body['reason_codes'],['CAPTURE_STATUS_QUERY_INVALID'])
+
     def test_date_scoped_research_aliases_report_missing_day_as_unavailable_and_catalog_as_empty(self):
         _,url=self.setup_api(module='source_bundle')
         status,body,_=self.read(url+'/api/v3/research/day?archive_date=20261016')
