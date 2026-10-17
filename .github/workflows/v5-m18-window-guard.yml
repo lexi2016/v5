@@ -1,0 +1,30 @@
+name: V5 M18 plan-window regression
+
+on:
+  pull_request:
+    paths:
+      - "V5/src/v5_shadow/daily_tick.py"
+      - "V5/tests/test_manager_plan_window.py"
+      - "V5/pyproject.toml"
+      - ".github/workflows/v5-m18-window-guard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  m18-plan-window:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Install isolated V5 package and test runner
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ./V5 pytest
+      - name: Run M18 plan-window boundary tests
+        env:
+          PYTHONPATH: V5/src:V5/tests
+        run: python -m pytest -q V5/tests/test_manager_plan_window.py
