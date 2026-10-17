@@ -36,6 +36,8 @@ const captureStatusSequence = ref(0);
 async function checkCaptureStatus() {
   const date=requestedDate.value;
   if(!date || !isCalendarDate(date)) {
+    ++captureStatusSequence.value;
+    captureStatusBusy.value=false;
     captureStatusError.value="请先选择有效的目标交易日；检查状态不会启动采集。";
     captureStatus.value=null;
     return;
@@ -256,6 +258,10 @@ async function loadDate(date: string) {
 }
 
 function handleDateChange(value: string) {
+  ++captureStatusSequence.value;
+  captureStatusBusy.value = false;
+  captureStatus.value = null;
+  captureStatusError.value = "";
   const date = compactDate(value);
   ++requestSequence.value;
   payload.value = null;
