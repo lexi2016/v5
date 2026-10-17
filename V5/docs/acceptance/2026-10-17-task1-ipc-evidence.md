@@ -16,7 +16,7 @@
 - Linux x86_64
 - Python 3.13.5, pytest 9.0.2
 - Project declares Python >=3.14; strict environment gate therefore remains BLOCKED.
-- Frontend dependencies/vitest not installed.
+- Frontend dependencies/vitest not installed.\n- Attempted official isolated interpreter install with `uv python install 3.14.3`; blocked by DNS/network failure fetching the official python-build-standalone release. No lockfile/guard was changed. Strict Python >=3.14 gate remains BLOCKED.
 
 ## Regression: stdout EOF while descendant retains stderr
 
