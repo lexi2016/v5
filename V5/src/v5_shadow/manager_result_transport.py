@@ -399,16 +399,19 @@ class _Pipe:
         self.process = process; self.deadline = deadline; self.stderr_bytes = 0
         self.error_open = True; self.output_open = True
     def read(self, size):
-        # stdout defines the framed protocol boundary. A descendant may inherit
-        # stderr after the worker exits; waiting for stderr EOF here can hold the
-        # protocol parser hostage even though stdout has definitively ended.
-        while self.output_open:
+        # Keep draining stderr while the worker is alive, even after stdout EOF.
+        # Otherwise a worker blocked writing diagnostics to a bounded pipe cannot
+        # exit and run_worker waits until the deadline. Do not wait for stderr EOF
+        # after the worker exits: descendants may have inherited the descriptor.
+        while self.output_open or (self.process.poll() is None and self.error_open):
             if self.stderr_bytes > STDERR_BYTES:
                 _fail('LOCAL_RESULT_STDERR_LIMIT')
             remaining = self.deadline - time.monotonic()
             if remaining <= 0:
                 _fail('LOCAL_RESULT_TIMEOUT')
             streams = ([self.process.stdout] if self.output_open else []) + ([self.process.stderr] if self.error_open else [])
+            if not streams:
+                return b''
             ready, _, _ = select.select(streams, [], [], remaining)
             if not ready:
                 _fail('LOCAL_RESULT_TIMEOUT')
@@ -424,7 +427,8 @@ class _Pipe:
                 if raw:
                     return raw
                 self.output_open = False
-                return b''
+                if self.process.poll() is not None or not self.error_open:
+                    return b''
         return b''
 
     def drain_stderr_after_worker_exit(self):
