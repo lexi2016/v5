@@ -230,6 +230,16 @@ describe("DailyResearchCommandView", () => {
     expect(window.location.search).toBe("?date=20260824");
   });
 
+  it("does not trust a default date that is absent from the published date list", async () => {
+    const fetchMock = vi.fn(async () => response({ok:true,default_date:"20261016",dates:[],stage_dates:[],future_target_dates:[]}));
+    vi.stubGlobal("fetch",fetchMock);
+    render(DailyResearchCommandView);
+    expect(await screen.findByText("NO DATE SELECTED")).toBeTruthy();
+    expect(screen.getByRole("alert").textContent).toContain("日期目录没有返回有效的已验证日期");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/v1/runs/date-list");
+  });
+
   it("surfaces date catalog transport failure instead of silently reporting no date", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (_url: string) => ({ ok: false, status: 503, json: async () => ({}) }));
