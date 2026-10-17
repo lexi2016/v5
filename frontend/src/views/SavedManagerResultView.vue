@@ -129,9 +129,9 @@ onBeforeUnmount(()=>session.close());
   </nav>
   <p class="navigation-status">当前页面只读取已保存结果，不启动采集。接口 READY 仅表示保存产物可读取，不代表业务完整、全部模块可用或交易许可。</p>
   <div class="navigation-status" role="status">
-   <p v-if="!state.overview?.sections.announcement_reviewed_analysis">公告研究股票：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
-   <p v-if="!state.overview?.sections.rebound_research_observation">超跌研究：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
-   <p v-if="!state.overview?.sections.us_mapping_research">美股驱动：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="state.overview && !state.overview.sections.announcement_reviewed_analysis">公告研究股票：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="state.overview && !state.overview.sections.rebound_research_observation">超跌研究：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
+   <p v-if="state.overview && !state.overview.sections.us_mapping_research">美股驱动：尚未确认当前运行存在合格的已保存结果；按钮禁用不代表 0 条。</p>
   </div>
   <section id="saved-result-content" aria-labelledby="saved-result-title">
    <header class="saved-result-heading">
