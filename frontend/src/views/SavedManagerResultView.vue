@@ -108,7 +108,8 @@ async function loadRunForDate() {
   const body=await response.json() as Record<string,unknown>;
   const payload=(body.payload && typeof body.payload==='object' && !Array.isArray(body.payload) ? body.payload : body) as Record<string,unknown>;
   const product=payload.plan_product as Record<string,unknown>|undefined;
-  if(payload.target_trade_date!==date || !product || product.consumed!==true ||
+  if(!product || product.consumed!==true) throw new Error('MANAGER_DATE_LOOKUP_NOT_AVAILABLE');
+  if(payload.target_trade_date!==date ||
     typeof product.run_id!=='string' || !/^[0-9a-f]{32}$/.test(product.run_id) ||
     typeof product.sha256!=='string' || !/^[0-9a-f]{64}$/.test(product.sha256)) {
    throw new Error('MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH');
@@ -124,7 +125,11 @@ async function loadRunForDate() {
    dateLookup.value='已找到日期匹配的引用，但完整结果读取/身份核验未通过。请查看下方技术诊断。';
   }
  } catch(error) {
-  dateLookup.value=error instanceof Error ? `未能确认目标日 ${date} 的已保存运行：${error.message}` : '未能确认该日期的已保存运行。';
+  const raw=error instanceof Error ? error.message : 'UNKNOWN_ERROR';
+  if(raw.includes('MANAGER_DATE_LOOKUP_HTTP_404')) dateLookup.value=`目标日 ${date} 的只读查询接口未接线（${raw}）。`;
+  else if(raw.includes('MANAGER_DATE_LOOKUP_HTTP_503') || raw.includes('MANAGER_DATE_LOOKUP_NOT_AVAILABLE')) dateLookup.value=`目标日 ${date} 暂无可读取的已保存运行或来源绑定（${raw}）；未回退到 latest。`;
+  else if(raw.includes('MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH')) dateLookup.value=`目标日 ${date} 的返回日期、运行 ID 或 SHA 身份不一致（${raw}），已拒绝读取。`;
+  else dateLookup.value=`目标日 ${date} 的已保存运行读取失败（${raw}）。`;
  } finally {dateLookupBusy.value=false;}
 }
 
