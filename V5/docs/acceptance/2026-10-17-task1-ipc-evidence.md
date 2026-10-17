@@ -35,6 +35,8 @@ After implementation:
 1 passed in 0.68s
 ```
 
+> **Freshness note:** The results below were observed before the latest bounded 50 ms worker-exit polling adjustment and the newest UI/API commits. The current candidate's IPC tests have not been rerun after that last transport edit; the historical PASS lines below are not current-candidate acceptance.
+
 ## Transport suite
 
 Command:
