@@ -28,6 +28,7 @@ MANAGER_WORKSPACE_PATH='/api/v4/manager/research/workspace'
 SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES = (
     '/api/v3/research/day',
     '/api/v1/runs/date-list',
+    '/api/v5/source-bundle/capture-status',
 )
 
 
