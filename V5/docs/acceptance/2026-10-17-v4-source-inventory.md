@@ -2,6 +2,9 @@
 
 ## Scope and source identity
 
+> Scope limitation: the separate 1,814-source-file Drive package described in the 2026-10-17 handoff has not been extracted and compared byte-for-byte in this connected session. This inventory is based on the pinned GitHub V4 snapshot below; it must not be treated as equivalent to that Drive package or the currently deployed V4 runtime.
+
+
 Read-only Git tree inventory of `lexi2016/v4` at fixed commit `24c6d60d524f43fcf4209ec8b078ec02cb34417e`.
 
 - Git tree API reported `truncated=false`, 2,124 paths.
