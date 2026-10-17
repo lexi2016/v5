@@ -1,5 +1,7 @@
 """Synthetic protocol negatives; no product return or original reader mocked."""
 import copy
+import base64
+import fcntl
 import hashlib
 import io
 import json
@@ -11,6 +13,7 @@ import tempfile
 import time
 import subprocess
 import unittest
+from unittest.mock import patch
 from v5_shadow import manager_result_transport as transport
 
 
@@ -122,6 +125,31 @@ class ResultTransportTests(unittest.TestCase):
             process.wait(timeout=2)
             process.stdout.close()
             process.stderr.close()
+
+    def test_run_worker_drains_bounded_stderr_after_stdout_protocol_eof(self):
+        wire = base64.b64encode(self.wire()).decode("ascii")
+        code = (
+            "import base64,sys,time;"
+            + "sys.stdout.buffer.write(base64.b64decode('" + wire + "'));"
+            + "sys.stdout.flush();sys.stdout.close();time.sleep(.05);"
+            + "sys.stderr.buffer.write(b'x'*60000);sys.stderr.flush()"
+        )
+        real_popen = subprocess.Popen
+
+        def small_stderr_pipe(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            fcntl.fcntl(process.stderr.fileno(), fcntl.F_SETPIPE_SZ, 4096)
+            return process
+
+        with patch.object(transport.subprocess, "Popen", side_effect=small_stderr_pipe):
+            value, receipt = transport.run_worker(
+                [sys.executable, "-I", "-B", "-c", code],
+                self.request,
+                os.environ.copy(),
+                timeout=5,
+            )
+        self.assertEqual(value["payload"]["plan_product"]["run_id"], self.saved["run_id"])
+        self.assertEqual(receipt["saved"]["run_id"], self.saved["run_id"])
 
     def test_pipe_timeout_is_bounded(self):
         with self.assertRaisesRegex(ValueError,'TIMEOUT'):
