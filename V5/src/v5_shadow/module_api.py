@@ -28,6 +28,24 @@ M16_ROUTE = "/api/v5/source-bundle/manager-public-research"
 M11_ROUTE = "/api/v5/source-bundle/intraday-research"
 M12_ROUTE = "/api/v5/source-bundle/video-fupan"
 M04_ROUTE = "/api/v5/source-bundle/research-intelligence"
+M17_BINDING_ERROR_CODES = frozenset((
+    'M17_READONLY_BINDING', 'M17_READONLY_CONFIG_LIMIT', 'M17_READONLY_LANE',
+    'M17_READONLY_RUN_ID', 'M17_READONLY_ROOT_OVERLAP',
+))
+M17_PRODUCT_ERROR_CODES = frozenset((
+    'M17_READONLY_PRODUCT_IDENTITY', 'M17_READONLY_FILES',
+    'M17_READONLY_FILE_REFERENCE', 'M17_READONLY_FILES_CHANGED',
+    'M17_READONLY_ORIGINAL_READER_REJECTED', 'M17_READONLY_EXTERNAL_POOL_CHANGED',
+    'M17_READONLY_PRODUCT_CHANGED', 'M17_READONLY_RESPONSE_MISMATCH',
+    'M17_READONLY_RESPONSE_INVALID', 'M17_READONLY_LEDGER_CHANGED',
+))
+M17_UNAVAILABLE_ERROR_CODES = frozenset((
+    'M17_READONLY_SAVED_SUCCESS_REQUIRED', 'M17_READONLY_EXACT_REFERENCE_REQUIRED',
+))
+M17_READER_ERROR_CODES = frozenset((
+    'M17_READONLY_READER_UNAVAILABLE', 'M17_READONLY_RESPONSE_LIMIT',
+    'M17_READONLY_PACKET_LIMIT',
+))
 
 
 def response_key(module_id,path,query):
@@ -1137,6 +1155,35 @@ def create_module_server(value,host='127.0.0.1',port=0):
                     if query:raise ValueError('RESEARCH_DATE_CATALOG_QUERY')
                     payload=_research_date_catalog(config,root)
                     self.reply(200,payload,sha256_json(payload))
+                elif config['module_id']=='source_bundle' and parsed.path==M17_ROUTE:
+                    required={'source_trade_date','run_id'}
+                    source_date=query.get('source_trade_date')
+                    run_id=query.get('run_id')
+                    valid_date=False
+                    if isinstance(source_date,str) and re.fullmatch(r'[0-9]{8}',source_date):
+                        try: valid_date=datetime.strptime(source_date,'%Y%m%d').strftime('%Y%m%d')==source_date
+                        except ValueError: valid_date=False
+                    if set(query)!=required or not valid_date or not isinstance(run_id,str) or not re.fullmatch(r'[0-9a-f]{32}',run_id):
+                        self.error(400,'M17_QUERY_INVALID')
+                    elif config.get('m17_close_recapture_binding') is None:
+                        self.error(503,'M17_BINDING_NOT_CONFIGURED')
+                    else:
+                        try:
+                            record,digest=read_response(config,root,parsed.path,query)
+                            self.reply(record['status_code'],record['payload'],digest)
+                        except TimeoutError:
+                            self.error(503,'M17_READER_TIMEOUT')
+                        except FileNotFoundError:
+                            self.error(503,'M17_SAVED_PRODUCT_NOT_AVAILABLE')
+                        except ValueError as error:
+                            code=str(error)
+                            if code in M17_BINDING_ERROR_CODES:self.error(409,'M17_BINDING_INVALID')
+                            elif code in M17_UNAVAILABLE_ERROR_CODES:self.error(503,'M17_SAVED_PRODUCT_NOT_AVAILABLE')
+                            elif code in M17_READER_ERROR_CODES:self.error(503,'M17_READER_UNAVAILABLE')
+                            elif code in M17_PRODUCT_ERROR_CODES:self.error(409,'M17_PRODUCT_INVALID')
+                            else:self.error(500,'M17_INTERNAL_ERROR')
+                        except (TypeError,KeyError,OSError,RecursionError):
+                            self.error(500,'M17_INTERNAL_ERROR')
                 elif parsed.path == M18_ROUTE + '/pages':
                     payload = _m18_page_response(config,root,query)
                     self.reply(200,payload,sha256_json(payload))
