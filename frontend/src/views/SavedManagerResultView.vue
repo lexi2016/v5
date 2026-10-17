@@ -86,6 +86,7 @@ const targetDate=ref(compactTargetDate(initialTargetDate)===initialTargetDate ? 
 const targetDateInput=computed(()=>isoTargetDate(targetDate.value));
 const dateLookup=ref('');
 const dateLookupBusy=ref(false);
+let dateLookupSequence=0;
 const state = shallowRef<SavedRunState>({phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false});
 const session = new SavedRunSession(new M18SavedClient(), next => { state.value=next; });
 async function reload() {
@@ -94,6 +95,7 @@ async function reload() {
  await session.load(run);
 }
 async function loadRunForDate() {
+ const lookupId=++dateLookupSequence;
  const date=compactTargetDate(targetDate.value);
  if(!date){dateLookup.value='目标交易日无效，请选择有效日期。';return;}
  dateLookupBusy.value=true;
@@ -107,8 +109,10 @@ async function loadRunForDate() {
  window.history.replaceState(null,'',url.pathname+url.search);
  try {
   const response=await fetch(`/api/v4/manager/research/workspace?date=${encodeURIComponent(date)}&view=auto`,{cache:'no-store'});
+  if(lookupId!==dateLookupSequence)return;
   if(!response.ok)throw new Error(`MANAGER_DATE_LOOKUP_HTTP_${response.status}`);
   const body=await response.json() as Record<string,unknown>;
+  if(lookupId!==dateLookupSequence)return;
   const payload=(body.payload && typeof body.payload==='object' && !Array.isArray(body.payload) ? body.payload : body) as Record<string,unknown>;
   const product=payload.plan_product as Record<string,unknown>|undefined;
   if(!product || product.consumed!==true) throw new Error('MANAGER_DATE_LOOKUP_NOT_AVAILABLE');
@@ -122,18 +126,21 @@ async function loadRunForDate() {
   window.history.replaceState(null,'',url.pathname+url.search);
   dateLookup.value=`找到目标日 ${date} 的已消费保存运行，正在核验完整结果…`;
   await reload();
+  if(lookupId!==dateLookupSequence)return;
   if(state.value.descriptor && state.value.descriptor.target_date===date && state.value.descriptor.run_id===product.run_id) {
    dateLookup.value=`已读取目标日 ${date} 的保存运行；业务完整性仍以各原状态与缺口为准。`;
   } else if(state.value.phase==='CANNOT_CONFIRM') {
    dateLookup.value='已找到日期匹配的引用，但完整结果读取/身份核验未通过。请查看下方技术诊断。';
   }
  } catch(error) {
+  if(lookupId!==dateLookupSequence)return;
+  session.reset();
   const raw=error instanceof Error ? error.message : 'UNKNOWN_ERROR';
   if(raw.includes('MANAGER_DATE_LOOKUP_HTTP_404')) dateLookup.value=`目标日 ${date} 的只读查询接口未接线（${raw}）。`;
   else if(raw.includes('MANAGER_DATE_LOOKUP_HTTP_503') || raw.includes('MANAGER_DATE_LOOKUP_NOT_AVAILABLE')) dateLookup.value=`目标日 ${date} 暂无可读取的已保存运行或来源绑定（${raw}）；未回退到 latest。`;
   else if(raw.includes('MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH')) dateLookup.value=`目标日 ${date} 的返回日期、运行 ID 或 SHA 身份不一致（${raw}），已拒绝读取。`;
   else dateLookup.value=`目标日 ${date} 的已保存运行读取失败（${raw}）。`;
- } finally {dateLookupBusy.value=false;}
+ } finally {if(lookupId===dateLookupSequence)dateLookupBusy.value=false;}
 }
 
 const isUsMapping=computed(()=>state.value.section==='us_mapping_research');
