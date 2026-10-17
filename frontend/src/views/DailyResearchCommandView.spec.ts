@@ -213,14 +213,16 @@ describe("DailyResearchCommandView", () => {
     expect(window.location.search).toBe("?date=20260824");
   });
 
-  it("stays on NO_DATE_SELECTED when the date catalog is unavailable", async () => {
+  it("surfaces date catalog transport failure instead of silently reporting no date", async () => {
     window.history.replaceState({}, "", "/daily-research-command/");
     const fetchMock = vi.fn(async (_url: string) => ({ ok: false, status: 503, json: async () => ({}) }));
     vi.stubGlobal("fetch", fetchMock);
 
     render(DailyResearchCommandView);
 
-    expect(await screen.findByText("NO_DATE_SELECTED")).toBeTruthy();
+    expect(await screen.findByText("读取未完成 · ERROR")).toBeTruthy();
+    expect(screen.getByRole("alert").textContent).toContain("读取失败");
+    expect(screen.getByRole("button", {name: "重试读取"})).toBeTruthy();
     expect(fetchMock.mock.calls.map((call) => call[0])).toEqual(["/api/v1/runs/date-list"]);
   });
 
