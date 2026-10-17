@@ -21,6 +21,20 @@ The initial inventory uses `lexi2016/v4@24c6d60d524f43fcf4209ec8b078ec02cb34417e
 
 The source tree confirms route families for health/readiness, run dates, preselection pools, workbench stages, stage-center selection, manager stage selection, manager research job lifecycle, catalyst observations, manager workspace refresh, announcements, article/day/hourly research, review generation/read, scheduler operations, and HK Stage 8 capture. This is historical source evidence, not proof of the currently deployed V4 version.
 
+## Corrected source-path mappings
+
+The earlier candidate path labels for V5 preselection and close-review modules were incorrect. The actual source candidates are:
+
+- HK preselection: `V5/src/v5_shadow/hk_preselection.py` and `V5/src/v5_shadow/p0_hk_preselection.py`; do not infer feature absence from the obsolete `hk_source_daily.py` label.
+- A-share close review: `V5/src/v5_shadow/a_close_review.py`; do not infer feature absence from the obsolete `a_close_review_daily.py` label.
+- HK close review: `V5/src/v5_shadow/hk_close_review.py`; do not infer feature absence from the obsolete `hk_close_review_daily.py` label.
+
+These are path-mapping corrections only. Their behavior and end-to-end acceptance remain separately unverified until original algorithms, real input identities, save/cold-read, ordinary API/UI and scheduled-run evidence are checked.
+
+## Newly wired date-scoped read paths
+
+The API gateway now provides GET-only compatibility aliases for `/api/v3/research/day` and `/api/v1/runs/date-list` to the existing `source_bundle` read-only module. The day route returns only the exact published `archive_date` record; a missing record remains `503 CANNOT_CONFIRM`. The catalog enumerates only exact published research-day products and explicitly reports that the broader V4 run-date catalog has not been migrated. This prevents 404s for the known UI paths without inventing data or falling back to latest.
+
 ## Current acceptance state
 
 - Fixed historical V4 tree inventory: PASS for tree completeness only.
