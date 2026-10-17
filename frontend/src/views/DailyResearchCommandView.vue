@@ -57,8 +57,8 @@ function selectedQueryDate(): string | null {
 
 function explainRequestError(error: unknown): string {
   const raw = error instanceof Error ? error.message : "未知错误";
-  if (/\\b404\\b/.test(raw)) return `接口未接线或目标资源不存在（${raw}）。请检查所选日期对应的只读接口。`;
-  if (/\\b503\\b/.test(raw)) return `后端暂不可用或缺少已绑定产物（${raw}）。请检查来源绑定和服务状态后重试。`;
+  if (/\b404\b/.test(raw)) return `接口未接线或目标资源不存在（${raw}）。请检查所选日期对应的只读接口。`;
+  if (/\b503\b/.test(raw)) return `后端暂不可用或缺少已绑定产物（${raw}）。请检查来源绑定和服务状态后重试。`;
   if (/Failed to fetch|NetworkError|network request/i.test(raw)) return `无法连接后端（${raw}）。请确认服务可达后重试。`;
   return `读取失败：${raw}`;
 }
