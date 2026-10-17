@@ -234,7 +234,7 @@ describe("DailyResearchCommandView", () => {
     const { container } = render(DailyResearchCommandView);
 
     expect(await screen.findByText("READY_WITH_DECLARED_GAPS")).toBeTruthy();
-    expect(fetchMock).toHaveBeenCalledWith("/api/v3/research/day?archive_date=20260824");
+    expect(fetchMock).toHaveBeenCalledWith("/api/v3/research/day?archive_date=20260824", { cache: "no-store" });
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock.mock.calls.flat().join(" ")).not.toContain("/articles");
     expect(fetchMock.mock.calls.flat().join(" ")).not.toContain("hourly");
