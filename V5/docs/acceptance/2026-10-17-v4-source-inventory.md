@@ -2,7 +2,7 @@
 
 ## Scope and source identity
 
-> Scope limitation: the separate 1,814-source-file Drive package described in the 2026-10-17 handoff has not been extracted and compared byte-for-byte in this connected session. This inventory is based on the pinned GitHub V4 snapshot below; it must not be treated as equivalent to that Drive package or the currently deployed V4 runtime.
+> Drive archive verification completed in this session: the two supplied parts were concatenated in binary order into an 8,491,779-byte ZIP; SHA256 `1090744dc0b808e96916f1ea95538ffc6e74e2ccd916f5a5fe8a2db32278c0ed` matched the handoff manifest and `unzip -t` passed. All 1,814 included source files matched manifest byte counts, SHA256 and Git blob SHA1; all 22 feature-map source paths/hashes also matched. This verifies the fixed reference package, not the currently deployed V4 runtime.
 
 
 Read-only Git tree inventory of `lexi2016/v4` at fixed commit `24c6d60d524f43fcf4209ec8b078ec02cb34417e`.
@@ -11,6 +11,14 @@ Read-only Git tree inventory of `lexi2016/v4` at fixed commit `24c6d60d524f43fcf
 - This is a fixed historical repository snapshot, not proof of the currently deployed V4 runtime version.
 - No V4 files, active runtime, scheduler, or data roots were modified.
 - The exact current deployed V4 release/entrypoint and its read-only health/config snapshot remain unverified and must remain a parity acceptance blocker until authorized evidence is available.
+
+## Drive package integrity verification
+
+- Archive SHA256: `1090744dc0b808e96916f1ea95538ffc6e74e2ccd916f5a5fe8a2db32278c0ed`.
+- Included source files: 1,814; verified: 1,814; byte/SHA256/Git-blob-SHA1 mismatches: 0.
+- Feature map entries: 22; verified paths and hashes: 22/22.
+- ZIP CRC/read test: PASS.
+- Scope remains a historical fixed source reference. It does not prove the active production V4 process runs this commit.
 
 ## V4 entrypoint families confirmed in the fixed tree
 
