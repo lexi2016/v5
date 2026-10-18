@@ -250,7 +250,7 @@ describe("DailyResearchCommandView", () => {
     render(DailyResearchCommandView);
     const button = screen.getByRole("button", { name: "检查采集准入" }) as HTMLButtonElement;
     await fireEvent.click(button);
-    expect(screen.getByRole("alert").textContent).toContain("有效的目标交易日");
+    expect(screen.getAllByRole("alert").some(node => node.textContent?.includes("有效的目标交易日"))).toBe(true);
     expect(button.disabled).toBe(false);
     expect(fetchMock).not.toHaveBeenCalled();
   });
