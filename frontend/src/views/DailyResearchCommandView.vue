@@ -34,6 +34,9 @@ const captureStatusError = ref("");
 const captureStatusSequence = ref(0);
 
 async function checkCaptureStatus() {
+  // Guard at the handler boundary as well as disabling the button; two rapid
+  // clicks before Vue paints the disabled state must not create two reads.
+  if (captureStatusBusy.value) return;
   const date=requestedDate.value;
   if(!date || !isCalendarDate(date)) {
     ++captureStatusSequence.value;
