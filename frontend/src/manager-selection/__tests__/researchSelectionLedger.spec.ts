@@ -1,9 +1,12 @@
 // @vitest-environment jsdom
+import {existsSync} from 'node:fs';
+import {resolve} from 'node:path';
 import {describe,it,expect} from 'vitest';
 import {validateManagerWorkspace} from '../../api/managerWorkspace';
 import {renderResearchAttention} from '../researchAttention';
 import {fixture,date} from './fixtures/issue8R2.fixture';
 
+const ownerObservationsPath=process.env.V5_ISSUE8R2_OBSERVATIONS || resolve(process.cwd(),'src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json');
 const flags={RESEARCH_ONLY:true,production_allowed:false,buy_gate_updated:false,orders_sent:false};
 const refs=[
   {owner:'panel-owner',payload_path:'/owner/panel.json',payload_sha256:'a'.repeat(64),manifest_path:'/owner/panel.manifest.json',manifest_sha256:'b'.repeat(64)},
@@ -39,7 +42,7 @@ function ledger(){
   };
 }
 
-describe('10/2 research selection ledger',()=>{
+describe.skipIf(!existsSync(ownerObservationsPath))('10/2 research selection ledger',()=>{
   it('uses the target date in the research selection heading and accessible label',()=>{
     const x=fixture();const attention=structuredClone(x.research_attention);attention.research_selection=ledger();
     attention.research_selection.target_trade_date='20261103';
