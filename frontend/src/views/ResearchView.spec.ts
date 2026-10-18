@@ -135,7 +135,7 @@ describe("ResearchView (research lane)", () => {
     expect(await screen.findByText("NOT_MATERIALIZED")).toBeTruthy();
     expect(screen.getByTestId("research-date-identity").textContent).toContain("所选日期：20261016");
     expect(screen.getByTestId("research-date-identity").textContent).toContain("实际来源日期：CANNOT_CONFIRM");
-    expect(screen.getByTestId("research-date-identity").textContent).not.toContain("不是所选日期数据");
+    expect(screen.getByTestId("research-date-identity").textContent).not.toContain("来源日期与所选日期不同");
   });
 
   it("renders the three-column desk and status strip", async () => {
