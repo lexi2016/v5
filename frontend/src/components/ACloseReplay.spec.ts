@@ -10,7 +10,7 @@ function savedProjection(){
  const privateFile=process.env.V5_M09_RESPONSE_FILE;
  if(privateFile)return JSON.parse(readFileSync(privateFile,'utf8'));
  const proc=spawnSync(process.env.PYTHON||'python',['-I','-B','V5/tests/export_m09_readonly_fixture.py'],{cwd:resolve(process.cwd(),'..'),encoding:'utf8'});
- if(proc.status!==0)throw new Error('M09_SYNTHETIC_FIXTURE_FAILED');
+ if(proc.status!==0)throw new Error('M09_SYNTHETIC_FIXTURE_FAILED: '+(proc.stderr||proc.stdout||'no subprocess diagnostics'));
  return JSON.parse(proc.stdout);
 }
 const missing={status:'NOT_CONFIGURED',module_id:'M09_A_CLOSE_REPLAY',reason_codes:['M09_REFERENCE_NOT_CONFIGURED'],research_only:true,production_allowed:false,buy_gate_updated:false,orders_sent:false,natural_verified:false,formal_eligibility_verified:false,strict_1500_pit_verified:false,source_time_verified:false,membership_qualification_verified:false};
