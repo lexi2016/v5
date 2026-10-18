@@ -89,7 +89,8 @@ const dateLookupBusy=ref(false);
 let dateLookupSequence=0;
 const state = shallowRef<SavedRunState>({phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false});
 const session = new SavedRunSession(new M18SavedClient(), next => { state.value=next; });
-async function reload() {
+async function reload(options:{userInitiated?:boolean}={}) {
+ if(options.userInitiated){++dateLookupSequence;dateLookupBusy.value=false;}
  const run=requestedRun.value.trim();
  if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
@@ -193,7 +194,7 @@ onBeforeUnmount(()=>session.close());
    <button type="submit" :disabled="dateLookupBusy || !targetDate">{{ dateLookupBusy ? '正在查找…' : '按日期查找已保存运行' }}</button>
    <span class="runtime-state" role="status">{{ dateLookup || '仅查找该日期已保存结果；不触发采集，不回退 latest。' }}</span>
   </form>
-  <form class="control-panel" @submit.prevent="reload">
+  <form class="control-panel" @submit.prevent="reload({userInitiated:true})">
    <label>运行 ID<input v-model="requestedRun" aria-label="运行 ID" spellcheck="false" autocomplete="off" /></label>
    <button type="submit">{{ state.phase==='LOADING' ? '重新读取' : '读取已保存结果' }}</button>
    <span class="runtime-state">{{ state.descriptor ? `目标日 ${state.descriptor.target_date}` : '目标日尚未确认' }}</span>
