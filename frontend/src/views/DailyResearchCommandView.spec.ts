@@ -243,6 +243,57 @@ describe("DailyResearchCommandView", () => {
     expect(requests.every(request=>request.method==="GET")).toBe(true);
   });
 
+  it("rejects an invalid capture date without issuing a request", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20261340");
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    render(DailyResearchCommandView);
+    const button = screen.getByRole("button", { name: "检查采集准入" }) as HTMLButtonElement;
+    await fireEvent.click(button);
+    expect(screen.getByRole("alert").textContent).toContain("有效的目标交易日");
+    expect(button.disabled).toBe(false);
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("deduplicates capture status checks and releases busy state after HTTP failure", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
+    let finish!: (value: unknown) => void;
+    const fetchMock = vi.fn((url: string) => {
+      if (url === "/api/v5/source-bundle/capture-status?target_date=20260824") {
+        return new Promise(resolve => { finish = resolve; });
+      }
+      return Promise.resolve(response(readyWithGap));
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    render(DailyResearchCommandView);
+    await screen.findByText("READY_WITH_DECLARED_GAPS");
+    const button = screen.getByRole("button", { name: "检查采集准入" }) as HTMLButtonElement;
+    await fireEvent.click(button);
+    await fireEvent.click(button);
+    expect(fetchMock.mock.calls.filter(([url]) => String(url).includes("capture-status"))).toHaveLength(1);
+    expect(button.disabled).toBe(true);
+    finish({ ok: false, status: 503, json: async () => ({}) });
+    expect(await screen.findByRole("alert")).toBeTruthy();
+    await waitFor(() => expect(button.disabled).toBe(false));
+    expect(screen.getByRole("alert").textContent).toContain("503");
+  });
+
+  it("releases busy state after a capture status network failure", async () => {
+    window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
+    const fetchMock = vi.fn(async (url: string) => {
+      if (url.includes("capture-status")) throw new Error("Failed to fetch");
+      return response(readyWithGap);
+    });
+    vi.stubGlobal("fetch", fetchMock);
+    render(DailyResearchCommandView);
+    await screen.findByText("READY_WITH_DECLARED_GAPS");
+    const button = screen.getByRole("button", { name: "检查采集准入" }) as HTMLButtonElement;
+    await fireEvent.click(button);
+    expect(await screen.findByRole("alert")).toBeTruthy();
+    await waitFor(() => expect(button.disabled).toBe(false));
+    expect(screen.getByRole("alert").textContent).toContain("无法连接后端");
+  });
+
   it("ignores a late capture-status response after changing the target date", async () => {
     window.history.replaceState({}, "", "/daily-research-command/?date=20260824");
     let resolveOld: ((value: unknown) => void) | undefined;
