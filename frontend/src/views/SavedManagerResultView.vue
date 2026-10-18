@@ -90,7 +90,7 @@ let dateLookupSequence=0;
 const state = shallowRef<SavedRunState>({phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false});
 const session = new SavedRunSession(new M18SavedClient(), next => { state.value=next; });
 async function reload(options:{userInitiated?:boolean}={}) {
- if(options.userInitiated){++dateLookupSequence;dateLookupBusy.value=false;}
+ if(options.userInitiated){++dateLookupSequence;dateLookupBusy.value=false;dateLookup.value='已切换到手动运行 ID 查询；先前日期查询已取消。';}
  const run=requestedRun.value.trim();
  if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
