@@ -1,10 +1,10 @@
-import {existsSync,readFileSync} from 'node:fs';
+import {readFileSync} from 'node:fs';
 import {afterEach,expect,it,vi} from 'vitest';
 import {waitFor} from '@testing-library/vue';
 import {mountCatalystObservations} from './catalystObservationPanel';
 let dispose:(()=>void)|undefined;
 afterEach(()=>{dispose?.();vi.unstubAllGlobals();document.body.replaceChildren();window.history.replaceState({},'', '/');});
-it.skipIf(!process.env.V5_CLOUD_WORKSPACE_RESPONSE || !existsSync(process.env.V5_CLOUD_WORKSPACE_RESPONSE))('renders the saved cloud auto response with the same run and honest missing-source state',async()=>{
+it('renders the saved cloud auto response with the same run and honest missing-source state',async()=>{
  const path=process.env.V5_CLOUD_WORKSPACE_RESPONSE;
  if(!path) throw new Error('V5_CLOUD_WORKSPACE_RESPONSE_REQUIRED');
  const payload=JSON.parse(readFileSync(path,'utf8'));
