@@ -39,6 +39,26 @@ it('does not bind a date to a run when the saved workspace date identity differs
  expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
 });
 
+it('ignores an older date lookup after the date input changes again', async () => {
+ let complete!:(value:Response)=>void;
+ const run='a'.repeat(32);
+ vi.stubGlobal('fetch',vi.fn(async (url:string) => {
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') return await new Promise<Response>(resolve=>{complete=resolve;});
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ const input=screen.getByLabelText('目标交易日');
+ await fireEvent.update(input,'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ await fireEvent.update(input,'2026-10-17');
+ complete(new Response(JSON.stringify({target_trade_date:'20261016',plan_product:{run_id:run,sha256:'b'.repeat(64),consumed:true}})));
+ await waitFor(()=>expect(screen.getByText(/目标交易日已变更为 20261017/)).toBeTruthy());
+ expect(new URLSearchParams(window.location.search).get('target_date')).toBe('20261017');
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
+ expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
+});
+
 it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed', async () => {
  vi.stubGlobal('fetch',vi.fn(async () => new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503})));
  render(SavedManagerResultView);
