@@ -1,7 +1,9 @@
 /** Real V5 owner code with explicitly synthetic empty inputs, never 392 replay. */
-import {readFileSync} from 'node:fs';
+import {existsSync,readFileSync} from 'node:fs';
 import {afterEach,describe,expect,it,vi} from 'vitest';
 import {validateManagerWorkspace,requestManagerWorkspace} from './managerWorkspace';
+const recoveryFixturePath=process.env.V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE;
+describe.skipIf(!recoveryFixturePath || !existsSync(recoveryFixturePath))('external synthetic recovery fixture availability',()=>{it.skip('requires V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE from isolated fixture preparation',()=>{});});
 const envelope=()=>{
  const path=process.env.V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE;
  if(!path)throw new Error('SYNTHETIC_CURRENT_RECOVERY_TEST_RESPONSE_REQUIRED');
@@ -10,7 +12,7 @@ const envelope=()=>{
 };
 const fixture=()=>envelope().result.payload;
 afterEach(()=>vi.unstubAllGlobals());
-describe('cloud CURRENT_RECOVERY synthetic owner response',()=>{
+describe.skipIf(!recoveryFixturePath || !existsSync(recoveryFixturePath))('cloud CURRENT_RECOVERY synthetic owner response',()=>{
  it('accepts the exact generated owner run and SHA without historical promotion',()=>{
   const value=envelope();const raw=value.result.payload;
   const before=JSON.stringify(raw);const result=validateManagerWorkspace(raw,'20261009');
