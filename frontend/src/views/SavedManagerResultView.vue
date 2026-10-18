@@ -94,6 +94,20 @@ async function reload() {
  if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
 }
+function handleTargetDateInput(value:string) {
+ targetDate.value=value.replaceAll('-','');
+ ++dateLookupSequence;
+ dateLookupBusy.value=false;
+ requestedRun.value='';
+ session.reset();
+ const date=compactTargetDate(targetDate.value);
+ const url=new URL(window.location.href);
+ if(date){url.searchParams.set('target_date',date);url.searchParams.set('date',date);}
+ else {url.searchParams.delete('target_date');url.searchParams.delete('date');}
+ url.searchParams.delete('run_id');
+ window.history.replaceState(null,'',url.pathname+url.search);
+ dateLookup.value=date ? '目标交易日已变更为 '+date+'；旧结果已清除，请重新查询。' : '目标交易日已清除；旧结果已清除，请重新选择日期。';
+}
 async function loadRunForDate() {
  const lookupId=++dateLookupSequence;
  const date=compactTargetDate(targetDate.value);
@@ -175,7 +189,7 @@ onBeforeUnmount(()=>session.close());
    <span class="runtime-badge">已保存结果 · READ_ONLY</span>
   </header>
   <form class="control-panel" @submit.prevent="loadRunForDate">
-   <label>目标交易日<input :value="targetDateInput" type="date" aria-label="目标交易日" @input="targetDate=($event.target as HTMLInputElement).value.replaceAll('-','')" /></label>
+   <label>目标交易日<input :value="targetDateInput" type="date" aria-label="目标交易日" @input="handleTargetDateInput(($event.target as HTMLInputElement).value)" /></label>
    <button type="submit" :disabled="dateLookupBusy || !targetDate">{{ dateLookupBusy ? '正在查找…' : '按日期查找已保存运行' }}</button>
    <span class="runtime-state" role="status">{{ dateLookup || '仅查找该日期已保存结果；不触发采集，不回退 latest。' }}</span>
   </form>
