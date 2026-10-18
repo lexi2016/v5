@@ -303,6 +303,7 @@ describe("DailyResearchCommandView", () => {
     vi.stubGlobal("fetch",fetchMock);
     render(DailyResearchCommandView);
     expect(await screen.findByText("NO DATE SELECTED")).toBeTruthy();
+    expect(await screen.findByText("日期目录没有返回有效的已验证日期；请手动选择日期。")).toBeTruthy();
     expect(screen.getByRole("alert").textContent).toContain("日期目录没有返回有效的已验证日期");
     expect(fetchMock).toHaveBeenCalledTimes(1);
     expect(fetchMock).toHaveBeenCalledWith("/api/v1/runs/date-list");
