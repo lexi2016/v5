@@ -138,9 +138,33 @@ jobs:
           src/components/M16SavedResearch.spec.ts
           src/views/SavedManagerResultView.spec.ts
 
-      - name: Run complete frontend verification
+      - name: Run complete frontend verification without masking independent results
+        shell: bash
         run: |
-          npm run typecheck
-          npm test
-          npm run test:p0
-          npm run build
+          set +e
+          mkdir -p verification-logs
+          failed=0
+          run_check() {
+            name="$1"; shift
+            log="verification-logs/${name}.log"
+            echo "=== ${name} ===" | tee "${log}"
+            "$@" >> "${log}" 2>&1
+            code=$?
+            echo "exit_code=${code}" | tee -a "${log}"
+            tail -n 45 "${log}"
+            if [ "${code}" -ne 0 ]; then failed=1; fi
+          }
+          run_check typecheck npm run typecheck
+          run_check full-vitest npm test
+          run_check test-p0 npm run test:p0
+          run_check build npm run build
+          exit "${failed}"
+
+      - name: Upload frontend verification logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v5-frontend-verification
+          path: frontend/verification-logs/
+          if-no-files-found: warn
+          retention-days: 14
