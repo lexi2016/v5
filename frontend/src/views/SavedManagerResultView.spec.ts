@@ -1,5 +1,5 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, fireEvent } from '@testing-library/vue';
+import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/vue';
 import SavedManagerResultView from './SavedManagerResultView.vue';
 afterEach(() => { cleanup(); vi.unstubAllGlobals(); window.history.replaceState({}, '', '/'); });
 it('looks up the exact selected target date before opening the saved M18 run', async () => {
