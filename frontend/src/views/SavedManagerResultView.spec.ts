@@ -92,6 +92,7 @@ it.each(['late-success','late-503','late-no-product','late-identity-mismatch','l
  await fireEvent.click(screen.getByRole('button',{name:'读取已保存结果'}));
  await waitFor(()=>expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun));
  await waitFor(()=>expect(screen.getByRole('alert').textContent).toContain('M18_HTTP_503'));
+ expect(screen.getByText('已切换到手动运行 ID 查询；先前日期查询已取消。')).toBeTruthy();
  if(mode!=='late-json'){
   if(mode==='late-503') lookup.resolve({ok:false,status:503,json:async()=>({})} as Response);
   if(mode==='late-no-product') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261016'})} as Response);
