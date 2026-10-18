@@ -40,7 +40,7 @@
 - It explicitly returns `NOT_CONFIGURED` with `M03_CAPTURE_WORKER_NOT_REGISTERED` and `M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND`; the status check is GET-only and cannot start a producer.
 - This is a truthful readiness/status surface, **not** a completed capture-task entry. The actual M03 network capture worker and authorized source binding are not configured, so real Friday data remains BLOCKED. No provider call or network bypass was attempted.
 
-### UI-006 — manager publication source identity contract
+### BUG-BRIDGE-001 — manager publication source identity contract
 - Missing or malformed `source_input_sha256` is rejected as `MANAGER_SOURCE_IDENTITY_REQUIRED`, rather than leaking the lower-level `CONTRACT_SHA_INVALID` error.
 - Added coverage for missing and malformed values; NOT_RUN in this environment.
 
@@ -50,7 +50,11 @@
 - Missing lane references are explained as unconfirmed, not as zero rows.
 - Tests updated; NOT_RUN in this environment.
 
-### UI-008 — IPC stderr backpressure
+### UI-008 — research report Chinese column layout
+- Original acceptance meaning remains the 1173 / 1024 / 768 viewport layout and readable Chinese columns. This ID is not assigned to IPC.
+- Screenshot/browser acceptance at all three widths remains `NOT_RUN`; CSS presence alone is not a pass.
+
+### BUG-IPC-001 — IPC stderr backpressure
 - `_Pipe.read` drains stderr while the worker remains alive after stdout EOF, preventing a worker blocked on a full stderr pipe from deadlocking parent `wait()`.
 - It polls worker exit on a bounded 50 ms interval after stdout EOF so descendant-held stderr does not block indefinitely; it does not wait for descendant EOF after the worker exits.
 - Added a small-pipe, 60 KB stderr regression in addition to the stdout/descendant-held-stderr test; NOT_RUN in this environment.
