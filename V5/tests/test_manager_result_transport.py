@@ -1,5 +1,7 @@
 """Synthetic protocol negatives; no product return or original reader mocked."""
 import copy
+import base64
+import fcntl
 import hashlib
 import io
 import json
@@ -8,7 +10,10 @@ from pathlib import Path
 import struct
 import sys
 import tempfile
+import time
+import subprocess
 import unittest
+from unittest.mock import patch
 from v5_shadow import manager_result_transport as transport
 
 
@@ -105,6 +110,54 @@ class ResultTransportTests(unittest.TestCase):
             self.assertEqual(d['allowed_bytes'],transport.RESULT_BYTES)
             self.assertGreater(d['actual_bytes'],transport.RESULT_BYTES)
             self.assertNotIn('XXXX',str(d))
+
+    def test_stdout_eof_does_not_wait_for_descendant_stderr_eof(self):
+        child = "import subprocess,sys; subprocess.Popen([sys.executable, '-I', '-B', '-c', 'import time;time.sleep(2)'], stdout=subprocess.DEVNULL); sys.stdout.close()"
+        process = subprocess.Popen([sys.executable, '-I', '-B', '-c', child], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        deadline = time.monotonic() + 5
+        started = time.monotonic()
+        try:
+            self.assertEqual(transport._Pipe(process, deadline).read(1), b'')
+            self.assertLess(time.monotonic() - started, 1.0)
+        finally:
+            if process.poll() is None:
+                process.kill()
+            process.wait(timeout=2)
+            process.stdout.close()
+            process.stderr.close()
+
+    def test_run_worker_drains_bounded_stderr_after_stdout_protocol_eof(self):
+        wire = base64.b64encode(self.wire()).decode("ascii")
+        code = (
+            "import base64,sys,time;"
+            + "sys.stdout.buffer.write(base64.b64decode('" + wire + "'));"
+            + "sys.stdout.flush();sys.stdout.close();time.sleep(.05);"
+            + "sys.stderr.buffer.write(b'x'*60000);sys.stderr.flush()"
+        )
+        real_popen = subprocess.Popen
+
+        def small_stderr_pipe(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            # Linux exposes F_SETPIPE_SZ; macOS does not. On platforms without
+            # this optional knob, retain the same 60 KB stderr regression using
+            # the platform's native pipe capacity instead of failing at import/run.
+            set_pipe_size = getattr(fcntl, 'F_SETPIPE_SZ', None)
+            if set_pipe_size is not None:
+                try:
+                    fcntl.fcntl(process.stderr.fileno(), set_pipe_size, 4096)
+                except OSError:
+                    pass  # Kernel may not permit resizing; transport contract still applies.
+            return process
+
+        with patch.object(transport.subprocess, "Popen", side_effect=small_stderr_pipe):
+            value, receipt = transport.run_worker(
+                [sys.executable, "-I", "-B", "-c", code],
+                self.request,
+                os.environ.copy(),
+                timeout=5,
+            )
+        self.assertEqual(value["payload"]["plan_product"]["run_id"], self.saved["run_id"])
+        self.assertEqual(receipt["saved"]["run_id"], self.saved["run_id"])
 
     def test_pipe_timeout_is_bounded(self):
         with self.assertRaisesRegex(ValueError,'TIMEOUT'):

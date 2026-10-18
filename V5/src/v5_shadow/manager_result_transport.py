@@ -399,16 +399,30 @@ class _Pipe:
         self.process = process; self.deadline = deadline; self.stderr_bytes = 0
         self.error_open = True; self.output_open = True
     def read(self, size):
-        # A stdout EOF is not a worker EOF: drain stderr within the same
-        # budget/deadline before returning the final empty read to the parser.
-        while self.output_open or self.error_open:
+        # Keep draining stderr while the worker is alive, even after stdout EOF.
+        # Otherwise a worker blocked writing diagnostics to a bounded pipe cannot
+        # exit and run_worker waits until the deadline. Do not wait for stderr EOF
+        # after the worker exits: descendants may have inherited the descriptor.
+        while self.output_open or (self.process.poll() is None and self.error_open):
+            if self.stderr_bytes > STDERR_BYTES:
+                _fail('LOCAL_RESULT_STDERR_LIMIT')
             remaining = self.deadline - time.monotonic()
             if remaining <= 0:
                 _fail('LOCAL_RESULT_TIMEOUT')
             streams = ([self.process.stdout] if self.output_open else []) + ([self.process.stderr] if self.error_open else [])
-            ready, _, _ = select.select(streams, [], [], remaining)
+            if not streams:
+                return b''
+            # When stdout has closed, process exit itself does not wake select
+            # if a descendant still owns stderr. Poll the worker state on a short
+            # bounded interval while keeping the original absolute deadline.
+            wait_for = remaining if self.output_open else min(remaining, 0.05)
+            ready, _, _ = select.select(streams, [], [], wait_for)
             if not ready:
-                _fail('LOCAL_RESULT_TIMEOUT')
+                if not self.output_open and self.process.poll() is not None:
+                    return b''
+                if time.monotonic() >= self.deadline:
+                    _fail('LOCAL_RESULT_TIMEOUT')
+                continue
             if self.error_open and self.process.stderr in ready:
                 raw = os.read(self.process.stderr.fileno(), min(CHUNK_BYTES, STDERR_BYTES + 1 - self.stderr_bytes))
                 self.stderr_bytes += len(raw)
@@ -421,7 +435,25 @@ class _Pipe:
                 if raw:
                     return raw
                 self.output_open = False
+                if self.process.poll() is not None or not self.error_open:
+                    return b''
         return b''
+
+    def drain_stderr_after_worker_exit(self):
+        # Called only after wait() confirms the worker itself has exited. Drain
+        # bytes already emitted by that worker without requiring inherited pipe
+        # handles in unrelated descendants to close.
+        while self.error_open:
+            ready, _, _ = select.select([self.process.stderr], [], [], 0)
+            if not ready:
+                return
+            raw = os.read(self.process.stderr.fileno(), min(CHUNK_BYTES, STDERR_BYTES + 1 - self.stderr_bytes))
+            self.stderr_bytes += len(raw)
+            if self.stderr_bytes > STDERR_BYTES:
+                _fail('LOCAL_RESULT_STDERR_LIMIT')
+            if not raw:
+                self.error_open = False
+                return
 
 
 def run_worker(argv, request, env, *, timeout=120):
@@ -430,13 +462,15 @@ def run_worker(argv, request, env, *, timeout=120):
         source.write(canonical_bytes(request)); source.seek(0)
         with subprocess.Popen(argv, stdin=source, stdout=subprocess.PIPE, stderr=subprocess.PIPE, env=env) as process:
             deadline = time.monotonic() + timeout
+            pipe = _Pipe(process, deadline)
             try:
-                value, receipt = read_result(_Pipe(process, deadline), request, deadline)
+                value, receipt = read_result(pipe, request, deadline)
                 _check_deadline(deadline)
                 try:
                     status = process.wait(timeout=deadline-time.monotonic())
                 except subprocess.TimeoutExpired:
                     _fail('LOCAL_RESULT_TIMEOUT')
+                pipe.drain_stderr_after_worker_exit()
                 if status != 0:
                     _fail('LOCAL_RESULT_WORKER_EXIT')
                 _check_deadline(deadline)

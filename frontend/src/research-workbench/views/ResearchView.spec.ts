@@ -483,6 +483,25 @@ describe("ResearchView (research lane)", () => {
     expect(screen.getByText("RESEARCH_LANE_SNAPSHOT_NOT_FOUND")).toBeTruthy();
   });
 
+  it("does not use a requested date as source evidence when the lane binding is absent", async () => {
+    stubResearchFetch({
+      ...lane("20261016"),
+      status: "NOT_MATERIALIZED",
+      requested_date: "20261016",
+      research_date: null,
+      reason: "V5_M04_RESEARCH_BINDING_NOT_CONFIGURED",
+      cannot_confirm: ["V5_M04_RESEARCH_BINDING_NOT_CONFIGURED"],
+    });
+
+    render(ResearchView, { props: { archiveDate: "20261016" } });
+
+    expect(await screen.findByText("NOT_MATERIALIZED")).toBeTruthy();
+    const identity = screen.getByTestId("research-date-identity");
+    expect(identity.textContent).toContain("所选日期：20261016");
+    expect(identity.textContent).toContain("实际来源日期：CANNOT_CONFIRM");
+    expect(identity.textContent).not.toContain("不是所选日期数据");
+  });
+
   it("keeps the archive toolbar reachable when the daily lane is not materialized", async () => {
     const wechatList = {
       ...wechatListing(),
@@ -586,7 +605,7 @@ describe("0915 research identity boundary", () => {
     await fireEvent.click(screen.getByRole("button", {name:"查看 latest"}));
     await waitFor(() => expect(screen.getByTestId("research-date-identity").textContent).toContain("20260914"));
     const banner = screen.getByTestId("research-date-identity").textContent;
-    expect(banner).toContain("20260915"); expect(banner).toContain("不是所选日期数据");
+    expect(banner).toContain("20260915"); expect(banner).toContain("来源日期与所选日期不同");
     await rerender({archiveDate:"20260911"});
     await waitFor(() => expect(vi.mocked(fetch).mock.calls.some(([url]) => url === "/api/v5/research/lane?research_date=20260911")).toBe(true));
   });

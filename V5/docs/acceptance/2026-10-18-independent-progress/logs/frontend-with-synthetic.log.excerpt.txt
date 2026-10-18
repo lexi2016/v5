@@ -1,0 +1,61 @@
+Excerpt: first 38 and last 18 lines; middle omitted. Local root replaced with <TEST_ROOT>.
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 test
+> vitest run --reporter=verbose
+
+
+ RUN  v4.1.10 <TEST_ROOT>/repo-91f1dbe/frontend
+
+ × src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts the saved real recovery payload without changing its plan SHA 5ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/evidence/manager-read-publication.json'
+ × src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > rejects incomplete or falsely historical recovery identities 1ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/evidence/manager-read-publication.json'
+ × src/api/managerWorkspace.currentRecovery.spec.ts > CURRENT_RECOVERY source-bound read > accepts ordinary auto and refuses explicit historical or dynamic relabeling 15ms
+   → promise rejected "Error: ENOENT: no such file or directory,… { …(4) }" instead of resolving
+ × src/manager-selection/__tests__/actualResearchSelectionProjection.spec.ts > actual Oct 2 owner projection through the Manager DTO and renderer > validates and renders the complete owner-derived 689-row selection 6ms
+   → ORIGINAL_OCT2_RESEARCH_SELECTION_PROJECTION_REQUIRED
+ × src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > uses the target date in the research selection heading and accessible label 8ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json'
+ × src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > keeps unavailable screen coverage unknown rather than rendering an observed zero 1ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json'
+ × src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > does not attach a fixed date when the selection ledger is absent 1ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json'
+ × src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > validates and renders the complete ledger beyond the old 30-card cap 1ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json'
+ × src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > rejects duplicate stock decisions and broken row accounting 0ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json'
+ × src/manager-selection/__tests__/researchSelectionLedger.spec.ts > 10/2 research selection ledger > binds a strict research selection to the existing attention card priority 0ms
+   → ENOENT: no such file or directory, open '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json'
+ × src/manager-selection/cloudActualReadback.spec.ts > renders the saved cloud auto response with the same run and honest missing-source state 20ms
+   → V5_CLOUD_WORKSPACE_RESPONSE_REQUIRED
+ ✓ src/views/SavedManagerResultView.spec.ts > looks up the exact selected target date before opening the saved M18 run 545ms
+ ✓ src/views/DailyResearchCommandView.spec.ts > DailyResearchCommandView > preserves run and target-date identity when navigating between research and manager pages 242ms
+ ✓ src/research-workbench/views/ResearchView.spec.ts > ResearchView (research lane) > loads only the selected exact research date 160ms
+ ✓ src/research-workbench/views/ResearchView.spec.ts > ResearchView (research lane) > renders the three-column desk and status strip 67ms
+ ✓ src/views/ResearchView.spec.ts > ResearchView (research lane) > loads only the selected exact research date 129ms
+ ✓ src/views/ResearchView.spec.ts > ResearchView (research lane) > does not present the requested date as a source date when no binding exists 17ms
+ ✓ src/views/ResearchView.spec.ts > ResearchView (research lane) > renders the three-column desk and status strip 39ms
+ ✓ src/views/SavedManagerResultView.navigation.spec.ts > puts saved results before collapsed, still-mounted source modules with verified run and date 824ms
+
+[... middle omitted ...]
+
+ ❯ fixture src/manager-selection/__tests__/fixtures/issue8R2.fixture.ts:22:31
+ ❯ src/manager-selection/__tests__/researchSelectionLedger.spec.ts:103:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -2, code: 'ENOENT', syscall: 'open', path: '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/11]⎯
+
+
+ Test Files  4 failed | 55 passed | 2 skipped (61)
+      Tests  11 failed | 474 passed | 6 skipped (491)
+   Start at  11:38:45
+   Duration  17.81s (transform 7.55s, setup 0ms, import 23.31s, tests 63.58s, environment 34.42s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

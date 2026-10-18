@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 
 import DailyResearchAlertPanel from "../components/daily-research-command/DailyResearchAlertPanel.vue";
 import DailyResearchHourlyDiagnostic from "../components/daily-research-command/DailyResearchHourlyDiagnostic.vue";
@@ -28,6 +28,44 @@ const VALID_STATES = new Set<DailyResearchCommandState>([
 
 const requestedDate = ref<string | null>(null);
 const state = ref<DailyResearchCommandState>("NO_DATE_SELECTED");
+const captureStatus = ref<{status:string;target_date:string;reason_codes:string[];message?:string}|null>(null);
+const captureStatusBusy = ref(false);
+const captureStatusError = ref("");
+const captureStatusSequence = ref(0);
+
+async function checkCaptureStatus() {
+  // Guard at the handler boundary as well as disabling the button; two rapid
+  // clicks before Vue paints the disabled state must not create two reads.
+  if (captureStatusBusy.value) return;
+  const date=requestedDate.value;
+  if(!date || !isCalendarDate(date)) {
+    ++captureStatusSequence.value;
+    captureStatusBusy.value=false;
+    captureStatusError.value="请先选择有效的目标交易日；检查状态不会启动采集。";
+    captureStatus.value=null;
+    return;
+  }
+  const requestId=++captureStatusSequence.value;
+  captureStatusBusy.value=true;
+  captureStatusError.value="";
+  try {
+    const response=await fetch(`/api/v5/source-bundle/capture-status?target_date=${encodeURIComponent(date)}`,{cache:"no-store"});
+    if(!response.ok)throw new Error(`CAPTURE_STATUS_HTTP_${response.status}`);
+    const body=await response.json();
+    if(requestId!==captureStatusSequence.value)return;
+    if(!body || typeof body!=="object" || body.schema_version!=="v5.capture_readiness.v1" ||
+       body.target_date!==date || typeof body.status!=="string" || !Array.isArray(body.reason_codes)) {
+      throw new Error("CAPTURE_STATUS_RESPONSE_INVALID");
+    }
+    captureStatus.value=body as {status:string;target_date:string;reason_codes:string[];message?:string};
+  } catch(error) {
+    if(requestId!==captureStatusSequence.value)return;
+    captureStatus.value=null;
+    captureStatusError.value=explainRequestError(error);
+  } finally {
+    if(requestId===captureStatusSequence.value)captureStatusBusy.value=false;
+  }
+}
 const payload = ref<DailyResearchPayload | null>(null);
 const safetyFlags = ref<DailyResearchSafetyValues | null>(null);
 const errorMessage = ref<string | null>(null);
@@ -53,6 +91,37 @@ function selectedQueryDate(): string | null {
   const value = new URLSearchParams(window.location.search).get("date");
   if (!value) return null;
   return isCalendarDate(value) ? value : null;
+}
+
+const managerHref = computed(() => {
+  const url = new URL(window.location.href);
+  url.pathname = "/";
+  url.searchParams.delete("view");
+  return `${url.pathname}${url.search}`;
+});
+const researchHref = computed(() => {
+  const url = new URL(window.location.href);
+  url.pathname = "/";
+  url.searchParams.set("view", "research");
+  // Keep the date from the current URL available immediately on first render,
+  // before the async exact-day request has populated requestedDate.
+  const date = requestedDate.value ?? selectedQueryDate();
+  if (date) url.searchParams.set("date", date);
+  else url.searchParams.delete("date");
+  return `${url.pathname}${url.search}`;
+});
+
+function explainRequestError(error: unknown): string {
+  const raw = error instanceof Error ? error.message : "未知错误";
+  if (/\b404\b/.test(raw)) return `接口未接线或目标资源不存在（${raw}）。请检查所选日期对应的只读接口。`;
+  if (/\b503\b/.test(raw)) return `后端暂不可用或缺少已绑定产物（${raw}）。请检查来源绑定和服务状态后重试。`;
+  if (/Failed to fetch|NetworkError|network request/i.test(raw)) return `无法连接后端（${raw}）。请确认服务可达后重试。`;
+  return `读取失败：${raw}`;
+}
+
+function retry() {
+  if (requestedDate.value) void loadDate(requestedDate.value);
+  else void loadDefaultDate();
 }
 
 function setBrowserDate(date: string | null) {
@@ -138,7 +207,7 @@ async function loadDate(date: string) {
   state.value = "LOADING";
 
   try {
-    const response = await fetch(`/api/v3/research/day?archive_date=${date}`);
+    const response = await fetch(`/api/v3/research/day?archive_date=${date}`, { cache: "no-store" });
     if (requestId !== requestSequence.value) return;
     if (!response.ok) {
       throw new Error(`strict day request failed (${response.status})`);
@@ -190,11 +259,15 @@ async function loadDate(date: string) {
     if (requestId !== requestSequence.value) return;
     payload.value = null;
     state.value = "ERROR";
-    errorMessage.value = error instanceof Error ? error.message : "strict day request failed";
+    errorMessage.value = explainRequestError(error);
   }
 }
 
 function handleDateChange(value: string) {
+  ++captureStatusSequence.value;
+  captureStatusBusy.value = false;
+  captureStatus.value = null;
+  captureStatusError.value = "";
   const date = compactDate(value);
   ++requestSequence.value;
   payload.value = null;
@@ -222,23 +295,30 @@ async function loadDefaultDate(): Promise<void> {
   // rest of the app uses (newest verified evidence date); the strict day API
   // still receives exactly that one date — no latest substitution happens.
   try {
-    const response = await fetch("/api/v1/runs/date-list");
+    const response = await fetch("/api/v1/runs/date-list", { cache: "no-store" });
     if (!response.ok) throw new Error("date-list request failed");
-    const catalog = (await response.json()) as { default_date?: unknown; dates?: unknown };
+    const catalog = (await response.json()) as { default_date?: unknown; dates?: unknown; status?: unknown };
+    const dates = Array.isArray(catalog?.dates)
+      ? [...new Set(catalog.dates.filter((value): value is string => typeof value === "string" && isCalendarDate(value)))]
+      : [];
     const candidate =
-      typeof catalog?.default_date === "string" && catalog.default_date
+      typeof catalog?.default_date === "string" && dates.includes(catalog.default_date)
         ? catalog.default_date
-        : Array.isArray(catalog?.dates) && typeof catalog.dates[0] === "string"
-          ? catalog.dates[0]
-          : "";
+        : dates[0] ?? "";
     if (!isCalendarDate(candidate)) {
+      requestedDate.value = null;
       state.value = "NO_DATE_SELECTED";
+      errorMessage.value = "日期目录没有返回有效的已验证日期；请手动选择日期。";
       return;
     }
     setBrowserDate(candidate);
     void loadDate(candidate);
-  } catch {
-    state.value = "NO_DATE_SELECTED";
+  } catch (error) {
+    requestedDate.value = null;
+    payload.value = null;
+    safetyFlags.value = null;
+    state.value = "ERROR";
+    errorMessage.value = `日期目录读取失败：${explainRequestError(error)}`;
   }
 }
 
@@ -260,11 +340,16 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   ++requestSequence.value;
+  ++captureStatusSequence.value;
 });
 </script>
 
 <template>
   <main class="daily-research-command__page" :data-state="state">
+    <nav class="daily-research-command__navigation" aria-label="功能导航">
+      <a :href="managerHref">返回经理工作台</a>
+      <a :href="researchHref">研报决策台</a>
+    </nav>
     <DailyResearchHero
       :state="state"
       :requested-date="requestedDate"
@@ -273,6 +358,31 @@ onBeforeUnmount(() => {
       @date-change="handleDateChange"
     />
 
+    <section class="daily-research-command__capture-gate" aria-labelledby="capture-gate-title">
+      <div>
+        <p class="daily-research-command__eyebrow">REAL DATA CAPTURE</p>
+        <h2 id="capture-gate-title">真实数据采集准入</h2>
+        <p>读取已保存结果是只读操作，不会抓取周五行情。当前页面不会伪装读取按钮为采集任务。</p>
+      </div>
+      <button type="button" :disabled="captureStatusBusy || !requestedDate" @click="checkCaptureStatus">
+        {{ captureStatusBusy ? "检查中…" : "检查采集准入" }}
+      </button>
+      <p v-if="captureStatusError" role="alert">{{ captureStatusError }}</p>
+      <div v-if="captureStatus" class="daily-research-command__capture-status" role="status">
+        <strong>采集状态：{{ captureStatus.status }}</strong>
+        <p v-if="captureStatus.status === 'NOT_CONFIGURED'">M03 采集 worker 尚未注册，真实来源准入绑定也未配置。当前不能从此页面启动真实采集。</p>
+        <p v-else>后端返回状态不是已确认的真实采集成功；请按原状态和原因码处理。</p>
+        <details>
+          <summary>技术状态与原因码</summary>
+          <code>{{ captureStatus.target_date }} · {{ captureStatus.reason_codes.join(", ") }}</code>
+          <p v-if="captureStatus.message">{{ captureStatus.message }}</p>
+        </details>
+      </div>
+      <p v-else-if="!captureStatusError" class="daily-research-command__capture-status" role="status">
+        目标日：{{ requestedDate ?? "尚未选择" }}；尚未检查采集准入。状态检查本身不会触发采集。
+      </p>
+    </section>
+
     <div class="daily-research-command__content">
       <DailyResearchAlertPanel :state="state" :payload="payload" :error-message="errorMessage" />
 
@@ -280,6 +390,7 @@ onBeforeUnmount(() => {
         <p class="daily-research-command__eyebrow">NO DATE SELECTED</p>
         <h2>请选择 exact research date</h2>
         <p>此页面不会读取 latest；选择日期后才会发起 strict day 请求。</p>
+        <button type="button" @click="retry">重试读取日期目录</button>
       </section>
       <section v-else-if="state === 'LOADING'" class="daily-research-command__loading-state" aria-busy="true">
         <span class="daily-research-command__loading-bar"></span>
@@ -288,8 +399,9 @@ onBeforeUnmount(() => {
       </section>
       <section v-else-if="state === 'ERROR' || state === 'REJECTED' || state === 'STALE'" class="daily-research-command__empty-state daily-research-command__empty-state--error">
         <p class="daily-research-command__eyebrow">FAIL CLOSED</p>
-        <h2>FAIL CLOSED · {{ state }}</h2>
-        <p>{{ errorMessage ?? "response was not promoted into the selected date" }}</p>
+        <h2>读取未完成 · {{ state }}</h2>
+        <p>{{ errorMessage ?? "所选日期没有可确认的保存结果。" }}</p>
+        <button type="button" @click="retry">重试读取</button>
       </section>
       <template v-else-if="payload">
         <DailyResearchMetrics :payload="payload" />

@@ -13,7 +13,7 @@ const fixture = () => ({
 });
 const waiting = (status = 'WAITING') => ({schema_version: 'v5.m16_saved_public_research.v1', module_id: 'M16_PUBLIC_RESEARCH', status, mode: 'READ_ONLY_SAVED_RESULT', reason_codes: [status === 'WAITING' ? 'M16_SAVED_REFERENCE_NOT_CONFIGURED' : 'M16_SAVED_ARTIFACT_INVALID'], ...flags});
 const response = (value: unknown) => new Response(JSON.stringify(value));
-afterEach(() => {cleanup(); vi.unstubAllGlobals();});
+afterEach(() => {cleanup(); vi.unstubAllGlobals(); window.history.replaceState({}, '', '/');});
 
 it('loads lazily, escapes saved facts and exposes original financial research with honest labels', async () => {
   const requests: string[] = [];
@@ -42,6 +42,23 @@ it('loads lazily, escapes saved facts and exposes original financial research wi
   expect(view.container.textContent).toContain('generation-1');
   expect(view.container.textContent).toContain('1'.repeat(64));
 });
+it('restores the selected date from the URL and persists it when submitting', async () => {
+  window.history.replaceState({}, '', '/?m16_date=20261012');
+  const fetcher = vi.fn(async () => response(waiting()));
+  vi.stubGlobal('fetch', fetcher);
+  const first = render(M16SavedResearch);
+  const input = first.container.querySelector('input[type="date"]')! as HTMLInputElement;
+  expect(input.type).toBe('date');
+  expect(input.value).toBe('2026-10-12');
+  await fireEvent.update(input, '2026-10-13');
+  await fireEvent.click(first.getByRole('button', {name: '读取 M16 已保存研究', hidden: true}));
+  await waitFor(() => expect(fetcher).toHaveBeenCalledWith('/api/v5/source-bundle/manager-public-research?trade_date=20261013', expect.any(Object)));
+  expect(new URLSearchParams(window.location.search).get('m16_date')).toBe('20261013');
+  first.unmount();
+  const second = render(M16SavedResearch);
+  expect((second.container.querySelector('input[type="date"]')! as HTMLInputElement).value).toBe('2026-10-13');
+});
+
 it('keeps missing bindings WAITING and invalid artifacts CANNOT_CONFIRM without saved content', async () => {
   for (const status of ['WAITING', 'CANNOT_CONFIRM']) {
     vi.stubGlobal('fetch', vi.fn(async () => response(waiting(status))));
@@ -61,7 +78,7 @@ it('clears old rows during a new date read, rejects failures and leaves a workin
   const button = view.getByRole('button', {name: '读取 M16 已保存研究', hidden: true});
   await fireEvent.click(button);
   await waitFor(() => expect(view.queryByTestId('m16-saved-content')).not.toBeNull());
-  await fireEvent.update(view.getByLabelText('M16 交易日'), '20261013');
+  await fireEvent.update(view.getByLabelText('M16 交易日'), '2026-10-13');
   await fireEvent.click(button);
   expect(view.queryByTestId('m16-saved-content')).toBeNull();
   expect(view.queryByTestId('m16-research-row')).toBeNull();
@@ -76,8 +93,8 @@ it('ignores an older date response after the new date and aborts pending work on
   vi.stubGlobal('fetch', vi.fn((url: string, init: RequestInit) => new Promise<Response>(resolve => calls.push({resolve, signal: init.signal as AbortSignal}))));
   const view = render(M16SavedResearch);
   const button = view.getByRole('button', {name: '读取 M16 已保存研究', hidden: true});
-  await fireEvent.update(view.getByLabelText('M16 交易日'), '20261012'); await fireEvent.click(button);
-  await fireEvent.update(view.getByLabelText('M16 交易日'), '20261013'); await fireEvent.click(button);
+  await fireEvent.update(view.getByLabelText('M16 交易日'), '2026-10-12'); await fireEvent.click(button);
+  await fireEvent.update(view.getByLabelText('M16 交易日'), '2026-10-13'); await fireEvent.click(button);
   expect(calls[0].signal.aborted).toBe(true);
   calls[1].resolve(response({...waiting(), requested_trade_date: '20261013'}));
   await waitFor(() => expect(view.container.textContent).toContain('M16_SAVED_REFERENCE_NOT_CONFIGURED'));

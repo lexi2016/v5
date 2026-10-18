@@ -23,7 +23,7 @@ def build(partial=False):
             capture['completed_code_count'] = 2
         saved = original.run_close_recapture_daily(request, str(ledger),
                     original.bind_close_recapture_owner(request['config']))
-        assert saved['status'] == 'SUCCEEDED', saved['status']
+        assert saved['status'] == 'SUCCEEDED', json.dumps({'status': saved.get('status'), 'reason_codes': saved.get('reason_codes'), 'state': saved.get('state')}, ensure_ascii=False, default=str)
         config = dict(schema_version='v5.m17.readonly-binding.v1',
             **{key: request['config'][key] for key in ('state_root', 'universe_root')},
             ledger_root=str(ledger), python_executable=sys.executable,
