@@ -94,6 +94,13 @@ async function reload(options:{userInitiated?:boolean}={}) {
  const run=requestedRun.value.trim();
  if (run === '' || /^[0-9a-f]{32}$/.test(run)) { const url=new URL(window.location.href);if(run)url.searchParams.set('run_id',run);else url.searchParams.delete('run_id');window.history.replaceState(null,'',url); }
  await session.load(run);
+ if(options.userInitiated && state.value.descriptor && state.value.descriptor.run_id===run){
+  const date=state.value.descriptor.target_date;
+  targetDate.value=date;
+  const url=new URL(window.location.href);
+  url.searchParams.set('target_date',date);url.searchParams.set('date',date);
+  window.history.replaceState(null,'',url.pathname+url.search);
+ }
 }
 function handleTargetDateInput(value:string) {
  targetDate.value=value.replaceAll('-','');
