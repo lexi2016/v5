@@ -92,7 +92,9 @@ jobs:
   frontend:
     name: Frontend focused, full suite, typecheck and build
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
+    env:
+      PYTHON: ${{ github.workspace }}/V5/.venv/bin/python
     defaults:
       run:
         working-directory: frontend
@@ -104,6 +106,18 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.14"
+
+      - name: Set up uv for frozen V5 owner dependencies
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: V5/uv.lock
+
+      - name: Install frozen V5 owner dependencies
+        run: |
+          uv sync --project ../V5 --frozen --python 3.14
+          uv pip install --python ../V5/.venv/bin/python pytest==9.1.1
+          "$PYTHON" --version
 
       - name: Set up Node 24
         uses: actions/setup-node@v4
