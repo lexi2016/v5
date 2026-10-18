@@ -98,8 +98,8 @@ it.each(['late-success','late-503','late-no-product','late-identity-mismatch','l
  await fireEvent.update(runInput,manualRun);
  await fireEvent.click(screen.getByRole('button',{name:'读取已保存结果'}));
  await waitFor(()=>expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun));
- expect(await screen.findByText('B股测试行')).toBeTruthy();
- expect(screen.getByText('目标日 20261015')).toBeTruthy();
+ expect(await screen.findByRole('row',{name:/HK\.B0001 · B股测试行/})).toBeTruthy();
+ expect(screen.getAllByText('目标日 20261015').length).toBeGreaterThan(0);
  expect(screen.getByText('已切换到手动运行 ID 查询；先前日期查询已取消。')).toBeTruthy();
  if(mode!=='late-json'){
   if(mode==='late-503') lookup.resolve({ok:false,status:503,json:async()=>({})} as Response);
