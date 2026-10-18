@@ -59,6 +59,47 @@ it('ignores an older date lookup after the date input changes again', async () =
  expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
 });
 
+const manualRun='b'.repeat(32);
+const deferredResponse=()=>{let resolve!:(value:Response)=>void;const promise=new Promise<Response>(r=>{resolve=r;});return {promise,resolve};};
+
+it.each(['late-success','late-503','late-no-product','late-identity-mismatch','late-json'] as const)('manual run submission wins over %s date lookup',async mode=>{
+ const lookup=deferredResponse();
+ let finishJson!:(value:unknown)=>void;
+ let jsonStarted!:()=>void;
+ const jsonReady=new Promise<void>(r=>{jsonStarted=r;});
+ const requests:string[]=[];
+ vi.stubGlobal('fetch',vi.fn(async(url:string)=>{
+  requests.push(url);
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') return lookup.promise;
+  if(url.startsWith('/api/v4/manager/m18/v2')) return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ const dateInput=screen.getByLabelText('目标交易日');
+ await fireEvent.update(dateInput,'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ if(mode==='late-json'){
+  lookup.resolve({ok:true,status:200,json:()=>{jsonStarted();return new Promise(resolve=>{finishJson=resolve;});}} as Response);
+  await jsonReady;
+ }
+ const runInput=screen.getByLabelText('运行 ID');
+ await fireEvent.update(runInput,manualRun);
+ await fireEvent.click(screen.getByRole('button',{name:'读取已保存结果'}));
+ await waitFor(()=>expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun));
+ await waitFor(()=>expect(screen.getByRole('alert').textContent).toContain('M18_HTTP_503'));
+ if(mode!=='late-json'){
+  if(mode==='late-503') lookup.resolve({ok:false,status:503,json:async()=>({})} as Response);
+  if(mode==='late-no-product') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261016'})} as Response);
+  if(mode==='late-identity-mismatch') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261015',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}})} as Response);
+  if(mode==='late-success') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261016',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}})} as Response);
+ } else finishJson({target_trade_date:'20261016',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}});
+ await waitFor(()=>expect((screen.getByLabelText('运行 ID') as HTMLInputElement).value).toBe(manualRun));
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun);
+ expect(screen.getByRole('alert').textContent).toContain('M18_HTTP_503');
+ expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
+});
+
 it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed', async () => {
  vi.stubGlobal('fetch',vi.fn(async () => new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503})));
  render(SavedManagerResultView);
