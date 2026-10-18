@@ -387,7 +387,6 @@ onBeforeUnmount(() => {
         <p class="daily-research-command__eyebrow">NO DATE SELECTED</p>
         <h2>请选择 exact research date</h2>
         <p>此页面不会读取 latest；选择日期后才会发起 strict day 请求。</p>
-        <p v-if="errorMessage" role="alert">{{ errorMessage }}</p>
         <button type="button" @click="retry">重试读取日期目录</button>
       </section>
       <section v-else-if="state === 'LOADING'" class="daily-research-command__loading-state" aria-busy="true">
