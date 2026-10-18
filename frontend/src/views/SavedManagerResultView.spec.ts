@@ -109,7 +109,9 @@ it.each(['late-success','late-503','late-no-product','late-identity-mismatch','l
  } else finishJson({target_trade_date:'20261016',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}});
  await waitFor(()=>expect((screen.getByLabelText('运行 ID') as HTMLInputElement).value).toBe(manualRun));
  expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun);
- expect(screen.getByRole('alert').textContent).toContain('M18_HTTP_503');
+ expect(screen.queryByRole('alert')).toBeNull();
+ expect(screen.getByRole('row',{name:/HK\.B0001 · B股测试行/})).toBeTruthy();
+ expect(screen.getAllByText('目标日 20261015').length).toBeGreaterThan(0);
  expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
 });
 
