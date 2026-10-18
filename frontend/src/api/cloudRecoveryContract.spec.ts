@@ -3,7 +3,6 @@ import {existsSync,readFileSync} from 'node:fs';
 import {afterEach,describe,expect,it,vi} from 'vitest';
 import {validateManagerWorkspace,requestManagerWorkspace} from './managerWorkspace';
 const recoveryFixturePath=process.env.V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE;
-describe.skipIf(!recoveryFixturePath || !existsSync(recoveryFixturePath))('external synthetic recovery fixture availability',()=>{it.skip('requires V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE from isolated fixture preparation',()=>{});});
 const envelope=()=>{
  const path=process.env.V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE;
  if(!path)throw new Error('SYNTHETIC_CURRENT_RECOVERY_TEST_RESPONSE_REQUIRED');
