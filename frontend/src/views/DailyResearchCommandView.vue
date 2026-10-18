@@ -100,7 +100,10 @@ const researchHref = computed(() => {
   const url = new URL(window.location.href);
   url.pathname = "/";
   url.searchParams.set("view", "research");
-  if (requestedDate.value) url.searchParams.set("date", requestedDate.value);
+  // Keep the date from the current URL available immediately on first render,
+  // before the async exact-day request has populated requestedDate.
+  const date = requestedDate.value ?? selectedQueryDate();
+  if (date) url.searchParams.set("date", date);
   else url.searchParams.delete("date");
   return `${url.pathname}${url.search}`;
 });
