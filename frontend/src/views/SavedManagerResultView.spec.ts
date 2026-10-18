@@ -57,6 +57,10 @@ it('ignores an older date lookup after the date input changes again', async () =
  expect(new URLSearchParams(window.location.search).get('target_date')).toBe('20261017');
  expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
  expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-17');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/目标日 20261017 暂无可读取的已保存运行/)).toBeTruthy();
+ await waitFor(()=>expect((screen.getByRole('button',{name:'按日期查找已保存运行'}) as HTMLButtonElement).disabled).toBe(false));
 });
 
 const manualRun='b'.repeat(32);
