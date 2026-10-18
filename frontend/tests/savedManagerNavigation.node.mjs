@@ -13,7 +13,7 @@ function runControls(href) {
  const window={location:new URL(href),history:{replaceState(_state,_title,url){window.location=new URL(url);}}};
  const requests=[];
  const setup=source.slice(source.indexOf('const query ='),source.indexOf('const state ='));
- const reload=source.match(/async function reload\(\) \{[\s\S]*?\n\}/)?.[0];
+ const reload=source.match(/async function reload(?:\([^)]*\))? \{[\s\S]*?\n\}/)?.[0];
  assert.ok(reload,'the run reload handler must exist');
  const executable=ts.transpile(setup+'\n'+reload+'\n({requestedRun,reload})',{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.None});
  const controls=runInNewContext(executable,{URL,URLSearchParams,window,ref:value=>({value}),computed:fn=>({get value(){return fn();}}),session:{load:async run=>requests.push(run)}});
