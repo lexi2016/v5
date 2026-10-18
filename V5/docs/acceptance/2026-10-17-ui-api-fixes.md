@@ -110,3 +110,32 @@ Fixed candidate changes on the same PR branch (parent remains the pinned integra
 - `M16SavedResearch.spec.ts` and `DailyResearchCommandView.spec.ts`: removed unsupported hidden-option usage from label queries and removed the zero-argument mock tuple index assertion.
 
 **Verification for this follow-up pass:** source edits and GitHub readback were confirmed. No shell/test-runner is exposed in this connected session; therefore targeted Vitest, `npm run typecheck`, full Vitest, `npm run test:p0`, build, Python tests, and macOS execution are all `NOT_RUN`. GitHub Actions and commit statuses returned no runs/statuses for the checked candidate before this follow-up; no PASS is inferred. PR remains Draft and unmerged. Real provider capture, deployment/browser verification, and existing preview replacement remain out of scope and unclaimed.
+
+
+## Follow-up against PR #4 head `5bd50fc89394f910147653cec6b9f9cdb8a271f1` — 2026-10-18
+
+### P1 manual-run/date-lookup race
+
+- `frontend/src/views/SavedManagerResultView.vue`: `reload({userInitiated:true})` is used only by the manual run-ID form. It invalidates `dateLookupSequence` and releases the date lookup busy state before starting the manual run read. The date lookup's own internal `await reload()` uses the default options and therefore does not invalidate its own sequence. This prevents stale date lookup success/failure/JSON completion from changing a newer manual run selection.
+- `frontend/src/views/SavedManagerResultView.spec.ts`: added five cases for a pending date lookup followed by manual run submission, then late success, late HTTP 503, missing product, identity mismatch, and delayed JSON completion. The cases assert the manual run ID/URL and manual read failure remain unchanged, and then verify a fresh date lookup can run.
+- `frontend/tests/savedManagerNavigation.node.mjs`: replaced the obsolete exact template-string assertion with semantic assertions for CANNOT_CONFIRM/no-old-result, actionable explanation, and expandable raw diagnostics. Existing assertions remain; no safety assertion was removed.
+- `frontend/src/views/ResearchView.spec.ts`: updated the outdated latest-date mismatch wording assertion to match the current explicit wording.
+
+### Evidence from the previous fixed candidate (not this follow-up head)
+
+Workflow [39085426752](https://github.com/lexi2016/v5/actions/runs/39085426752), commit `5bd50fc89394f910147653cec6b9f9cdb8a271f1`, completed with `failure` at 2026-10-18 01:11:52 UTC. Backend focused contracts and all three clean publication integration rounds completed successfully. Frontend focused tests passed (5 files / 75 tests). The full frontend step exited 1 with Vitest summary `8 failed | 51 passed | 2 skipped` test files and `18 failed | 453 passed | 6 skipped` tests. The captured job log identifies:
+
+- Three CURRENT_RECOVERY tests requiring `V5_SYNTHETIC_CURRENT_RECOVERY_RESPONSE` (not provided in CI).
+- Three CURRENT_RECOVERY tests requiring `evidence/manager-read-publication.json` (not present in the checkout).
+- Three M09 tests failing because `export_m09_readonly_fixture.py` returns `M09_SYNTHETIC_FIXTURE_FAILED`.
+- One M17 synthetic fixture failure: owner runner returned `IN_PROGRESS_OR_OUTCOME_UNKNOWN` instead of a fixture success.
+- One cloud workspace readback test requiring `V5_CLOUD_WORKSPACE_RESPONSE` (not provided).
+- One outdated `ResearchView.spec.ts` wording assertion (fixed in this follow-up).
+- One owner-derived 689-row projection requiring `OCT2_RESEARCH_SELECTION_PROJECTION` (not provided).
+- Six selection-ledger tests failing to read `issue8R2.ownerObservations.json` (not present).
+
+The fixture-dependent tests remain explicit failures until their original evidence is made available. No synthetic replacements were fabricated, and no skip was added to hide missing evidence. These counts and logs are evidence for `5bd50fc...` only, not this follow-up head.
+
+### Current follow-up verification status
+
+The follow-up source was committed on the same PR branch. The new manual-run race suite, navigation harness, `npm run typecheck`, complete frontend suite, `npm run test:p0`, build, and affected Python suites have not yet produced a completed Actions result for the current head. Mark all of them `NOT_RUN` for this follow-up until logs tied to the exact head are available. No preview replacement, browser visual acceptance, real provider capture, or natural schedule acceptance is claimed. PR remains Draft and unmerged.
