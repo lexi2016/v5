@@ -1,11 +1,11 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { validateManagerWorkspace, requestManagerWorkspace } from './managerWorkspace';
 const recoveryPath=resolve(process.env.V5_REAL_CURRENT_RECOVERY_RESPONSE || '../evidence/manager-read-publication.json');
 const fixture=()=>JSON.parse(readFileSync(recoveryPath,'utf8')).result.payload;
 afterEach(()=>vi.unstubAllGlobals());
-describe.skipIf(!existsSync(recoveryPath))('CURRENT_RECOVERY source-bound read',()=>{
+describe('CURRENT_RECOVERY source-bound read',()=>{
  it('accepts the saved real recovery payload without changing its plan SHA',()=>{
   const raw=fixture();const result=validateManagerWorkspace(raw,'20261009');
   expect(result.plan_product).toMatchObject({status:'CURRENT_RECOVERY',run_id:'5b4feaf7ef7d4d13bec639e90b6d3db0',sha256:'56556a67ddc1a562e82b38e750be92fcfda070945397cc4eacffd1c79f42bcf0',consumed:true,historical_eligible:false});
