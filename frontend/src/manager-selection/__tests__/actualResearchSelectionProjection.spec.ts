@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import {createHash} from 'node:crypto';
-import {existsSync,readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync} from 'node:fs';
 import {gunzipSync} from 'node:zlib';
 import {describe,it,expect} from 'vitest';
 import {validateManagerWorkspace} from '../../api/managerWorkspace';
@@ -11,7 +11,7 @@ const artifactPath=process.env.OCT2_RESEARCH_SELECTION_PROJECTION;
 const outputPath=process.env.OCT2_DTO_RENDER_RECEIPT;
 
 describe('actual Oct 2 owner projection through the Manager DTO and renderer',()=>{
-  it.skipIf(!artifactPath || !existsSync(artifactPath))('validates and renders the complete owner-derived 689-row selection',()=>{
+  it('validates and renders the complete owner-derived 689-row selection',()=>{
     if(!artifactPath)throw new Error('ORIGINAL_OCT2_RESEARCH_SELECTION_PROJECTION_REQUIRED');
     const compressed=readFileSync(artifactPath);
     const artifact=JSON.parse(gunzipSync(compressed).toString('utf8'));
