@@ -1,0 +1,19 @@
+test_example_uses_complete_module_api_schema_and_read_only_routes (test_p0_runtime_example.P0RuntimeExampleTests.test_example_uses_complete_module_api_schema_and_read_only_routes) ... ok
+test_p0_runtime_safety (unittest.loader._FailedTest.test_p0_runtime_safety) ... ERROR
+
+======================================================================
+ERROR: test_p0_runtime_safety (unittest.loader._FailedTest.test_p0_runtime_safety)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_p0_runtime_safety
+Traceback (most recent call last):
+  File "<TEST_ROOT>/python/cpython-3.14.8-linux-x86_64-gnu/lib/python3.14/unittest/loader.py", line 141, in loadTestsFromName
+    module = __import__(module_name)
+  File "<TEST_ROOT>/repo-91f1dbe/V5/tests/test_p0_runtime_safety.py", line 15, in <module>
+    import pytest
+ModuleNotFoundError: No module named 'pytest'
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (errors=1)
