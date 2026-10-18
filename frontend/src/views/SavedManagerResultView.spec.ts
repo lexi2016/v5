@@ -72,10 +72,17 @@ it.each(['late-success','late-503','late-no-product','late-identity-mismatch','l
  let jsonStarted!:()=>void;
  const jsonReady=new Promise<void>(r=>{jsonStarted=r;});
  const requests:string[]=[];
+ const identity={run_id:manualRun,target_date:'20261015',plan_sha256:'a'.repeat(64),raw_sha256:'b'.repeat(64),response_sha256:'c'.repeat(64),input_identity:'d'.repeat(64)};
+ const binding={identity,generation_id:'e'.repeat(64),profile_sha256:'f'.repeat(64),manifest_sha256:'1'.repeat(64)};
+ const descriptor={...binding,schema_version:'v5.m18.v2.descriptor.v1',run_id:manualRun,target_date:'20261015',pages_route:'/api/v4/manager/m18/v2/pages',status:'READY',generated_at:'2026-10-15T00:00:00Z'};
+ const overview={...binding,schema:'v5.m18.offline.v2.overview',content_chunks:1,sections:{stocks:{kind:'array',total:1,loaded_count:0,not_loaded_count:1,state:'NOT_LOADED'}}};
+ const page={...binding,schema:'v5.m18.offline.v2.detail',section:'stocks',selection:null,cursor:null,offset:0,matched_total:1,not_loaded_count:0,remaining_entries:0,next_cursor:null,entries:[{index:0,kind:'object',offset:0,bytes:64,sha256:'2'.repeat(64),value_state:'LOADED',value:{symbol:'HK.B0001',name:'B股测试行',status:'READY'}}]};
  vi.stubGlobal('fetch',vi.fn(async(url:string)=>{
   requests.push(url);
   if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') return lookup.promise;
-  if(url.startsWith('/api/v4/manager/m18/v2')) return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+  if(url==='/api/v4/manager/m18/v2?run_id='+manualRun) return new Response(JSON.stringify(descriptor));
+  if(url.startsWith('/api/v4/manager/m18/v2/overview?')) return new Response(JSON.stringify(overview));
+  if(url.startsWith('/api/v4/manager/m18/v2/sections?')) return new Response(JSON.stringify(page));
   return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
  }));
  render(SavedManagerResultView);
@@ -91,7 +98,8 @@ it.each(['late-success','late-503','late-no-product','late-identity-mismatch','l
  await fireEvent.update(runInput,manualRun);
  await fireEvent.click(screen.getByRole('button',{name:'读取已保存结果'}));
  await waitFor(()=>expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun));
- await waitFor(()=>expect(screen.getByRole('alert').textContent).toContain('M18_HTTP_503'));
+ expect(await screen.findByText('B股测试行')).toBeTruthy();
+ expect(screen.getByText('目标日 20261015')).toBeTruthy();
  expect(screen.getByText('已切换到手动运行 ID 查询；先前日期查询已取消。')).toBeTruthy();
  if(mode!=='late-json'){
   if(mode==='late-503') lookup.resolve({ok:false,status:503,json:async()=>({})} as Response);
