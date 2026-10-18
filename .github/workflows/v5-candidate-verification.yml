@@ -1,0 +1,127 @@
+name: V5 candidate verification
+
+on:
+  pull_request:
+    branches:
+      - dev/v5-main-integration-20261012
+    paths:
+      - "V5/**"
+      - "frontend/**"
+      - ".github/workflows/v5-candidate-verification.yml"
+      - "integration_tests/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v5-candidate-verification-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Backend focused contracts and publication stability
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.14
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: V5/uv.lock
+
+      - name: Install frozen project dependencies
+        run: |
+          uv sync --project V5 --frozen --python 3.14
+          uv pip install --python V5/.venv/bin/python pytest==9.1.1
+          V5/.venv/bin/python --version
+          V5/.venv/bin/python -m pytest --version
+
+      - name: Run focused backend regression suite
+        shell: bash
+        run: |
+          set -o pipefail
+          mkdir -p verification-logs
+          PYTHONPATH=V5/src V5/.venv/bin/python -m pytest -vv -p no:cacheprovider \
+            V5/tests/test_manager_result_transport.py \
+            V5/tests/test_p0_manager_publication_bridge.py \
+            V5/tests/test_api_gateway.py \
+            V5/tests/test_module_api.py \
+            V5/tests/test_research_workbench_readonly.py \
+            V5/tests/test_m17_readonly_api.py \
+            V5/tests/test_p0_runtime_example.py \
+            2>&1 | tee verification-logs/backend-focused.log
+
+      - name: Repeat clean publication integration three times
+        shell: bash
+        run: |
+          set -u
+          mkdir -p verification-logs
+          failed=0
+          for round in 1 2 3; do
+            echo "=== publication clean round ${round} ===" | tee "verification-logs/publication-${round}.log"
+            set +e
+            PYTHONPATH=V5/src timeout --signal=TERM --kill-after=5s 180s \
+              V5/.venv/bin/python -m pytest -vv -p no:cacheprovider \
+              integration_tests/test_plan_publication.py \
+              2>&1 | tee -a "verification-logs/publication-${round}.log"
+            code=${PIPESTATUS[0]}
+            set -e
+            echo "exit_code=${code}" | tee -a "verification-logs/publication-${round}.log"
+            if [ "${code}" -ne 0 ]; then failed=1; fi
+          done
+          exit "${failed}"
+
+      - name: Upload backend evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v5-backend-verification
+          path: verification-logs/
+          if-no-files-found: warn
+          retention-days: 14
+
+  frontend:
+    name: Frontend focused, full suite, typecheck and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout candidate
+        uses: actions/checkout@v4
+
+      - name: Set up Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install locked frontend dependencies
+        run: npm ci
+
+      - name: Run focused UI regression tests
+        run: >
+          npm test --
+          src/research-workbench/api/research_lane.spec.ts
+          src/research-workbench/views/ResearchView.spec.ts
+          src/views/DailyResearchCommandView.spec.ts
+          src/components/M16SavedResearch.spec.ts
+          src/views/SavedManagerResultView.spec.ts
+
+      - name: Run complete frontend verification
+        run: |
+          npm run typecheck
+          npm test
+          npm run test:p0
+          npm run build
