@@ -1,0 +1,51 @@
+{
+  "schema": "PUBLIC_MORNING_SOURCE_CARDS_COMPONENTS_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "python_normal": 7,
+    "python_optimized": 7,
+    "node_fake_dom": 2
+  },
+  "real_source_material_included": false,
+  "identity_confirmed": false,
+  "browser_verified": false,
+  "production_admission": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1610,
+      "sha256": "f49bb93edc8af30112e1861cb2fb1b0797f3bb0d677ce2ede3a32482541b71db"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3645,
+      "sha256": "65de01e637e574085efa1603e59db08c46dae802b19d2648a5ebf07b6eb8e39d"
+    },
+    {
+      "path": "build_cards.py",
+      "bytes": 4772,
+      "sha256": "65ec82993357c8c4c74c1645e6dad9cc1b4887324d22365969881be54b7a4b27"
+    },
+    {
+      "path": "node-result-view.mjs",
+      "bytes": 3052,
+      "sha256": "f00a0d579aba1557012d4be19dbb5072c35863db769444071f7fd662769328fe"
+    },
+    {
+      "path": "node_results_api.py",
+      "bytes": 2409,
+      "sha256": "83d476e5ae4b0829e52e4ae1b92f4e38aaee61c2a43c28e6f4c9c738b26537af"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 2926,
+      "sha256": "bcbd3163de7fc487c167f35598d2442a9f45b07a969372963142f8ec092b577c"
+    },
+    {
+      "path": "view.test.mjs",
+      "bytes": 1171,
+      "sha256": "6c2db59d7f73a8557baf581c3bb545382d9640bf05a3f541b8a3c0958dfc6489"
+    }
+  ]
+}

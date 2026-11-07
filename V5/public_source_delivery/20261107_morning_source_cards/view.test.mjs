@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';import{mountNodeResult}from'./node-result-view.mjs';
+class El{constructor(){this.children=[];this.textContent='';}append(...x){this.children.push(...x);}replaceChildren(...x){this.children=x;}}
+const document={createElement:()=>new El};
+test('unbound view does not fetch or claim identity',async()=>{let fetches=0;const previous=globalThis.fetch;globalThis.fetch=()=>{fetches++;throw Error('unexpected');};try{const root=new El;mountNodeResult({document,parent:root,nodeId:'morning-materials'});await root.children[0].children[0].onclick();assert.match(root.children[0].children[1].children[0].textContent,/UNKNOWN/);assert.equal(fetches,0);}finally{globalThis.fetch=previous;}});
+test('caller result cannot bypass absent exact record binding',async()=>{const root=new El;mountNodeResult({document,parent:root,nodeId:'morning-materials',loader:async n=>({schema:'EXISTING_MANUAL_NODE_RESULT_V1',node_id:n,record_date:null,natural_verified:false,delivery_status:'NOT_SENT'})});await root.children[0].children[0].onclick();assert.match(root.children[0].children[1].children[0].textContent,/UNKNOWN/);});
