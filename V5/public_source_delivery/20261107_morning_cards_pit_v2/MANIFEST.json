@@ -1,0 +1,44 @@
+{
+  "schema": "PUBLIC_MORNING_PIT_DELTA_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "python_normal": 4,
+    "python_optimized": 4,
+    "node_fake_dom": 3
+  },
+  "browser_verified": false,
+  "production_admission": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1215,
+      "sha256": "a544f61e5c402b7bb668eaaac57e686e5c546c204c1e2307bd0f0133ac186e57"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2387,
+      "sha256": "086c3bed9307d6b2af3154b5ada5baccf52286db1f669574cc7418193b59802a"
+    },
+    {
+      "path": "node-result-view.mjs",
+      "bytes": 3397,
+      "sha256": "37ff96d150755fcad712c83840a61755aa728f56c8b01ec1dee184de4990ff1c"
+    },
+    {
+      "path": "node_results_api.py",
+      "bytes": 2651,
+      "sha256": "02e31f5a9f7c695e40dbb59b843392071063c9b35f3baf0ab61c0d602a440af4"
+    },
+    {
+      "path": "pit-view.test.mjs",
+      "bytes": 1929,
+      "sha256": "557323fc6af30cfc4f25e52ec6d48cfdc628a689da8b1d10aafd2b3d1c0c64a3"
+    },
+    {
+      "path": "test_pit.py",
+      "bytes": 1823,
+      "sha256": "08a1065cde591dfcf3adebcc792a4248083af02ecfa7014507efa96d5585a98a"
+    }
+  ]
+}

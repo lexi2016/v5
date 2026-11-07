@@ -1,0 +1,24 @@
+{
+  "files": [
+    {
+      "source_component": "node_results_api.py",
+      "source_sha256": "ae316343bd4792e23c981c1f050c7bc79165c004838bfca916b2031c87eda606",
+      "export_file": "node_results_api.py",
+      "export_sha256": "02e31f5a9f7c695e40dbb59b843392071063c9b35f3baf0ab61c0d602a440af4",
+      "byte_identical": false
+    },
+    {
+      "source_component": "node-result-view.mjs",
+      "source_sha256": "6fc573a2a7a9b161ed6a7ad132275c074bac051c0dc9aec860dbbb5ce439be5c",
+      "export_file": "node-result-view.mjs",
+      "export_sha256": "37ff96d150755fcad712c83840a61755aa728f56c8b01ec1dee184de4990ff1c",
+      "byte_identical": false
+    }
+  ],
+  "supersedes_for_pit_gate": "20261107_morning_source_cards node API/view only; historical batch retained",
+  "differences": [
+    "Same private binding/date removal and default UI loader refusal as previous public export; private counts/time example labels generalized.",
+    "New original PIT guard unchanged: ranking source G4, historical_PIT strictly false, source_admission strictly false; missing/wrong flags refuse.",
+    "Post-hoc/not-preopen-known warning retained. No real notice, publication-time evidence, source article or data included."
+  ]
+}
