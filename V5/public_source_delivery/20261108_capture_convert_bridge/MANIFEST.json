@@ -1,0 +1,34 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_python_each_mode": 7,
+  "actual_capture_verified": false,
+  "business_verified": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "pipeline.py",
+      "bytes": 10697,
+      "sha256": "bb408300df4309f6584b8121b4454fa3345a51089115aff5f187f3f611b70ed3"
+    },
+    {
+      "path": "controlled_node_execution.py",
+      "bytes": 7875,
+      "sha256": "16b38d443f831324f903df6f676c5f18ec108a3cd948d307cf201095cef3d994"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 3105,
+      "sha256": "3901ee3fe9f9b5ea9a8f3bf61cc53725f003ae7d90d67c0a61c12fc0de04cf6d"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 770,
+      "sha256": "bd7788956939452ea87750e592e48f6dd3e51a8c8a8240416bbcf631b0c7922d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2527,
+      "sha256": "cccbb025079b4d8261d0502eb217c4dce09337012fe6107b8972194882681d88"
+    }
+  ]
+}

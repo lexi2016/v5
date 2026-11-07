@@ -1,0 +1,19 @@
+{
+  "original_sha256": {
+    "pipeline_v2": "78f7537bb84430d76aee2ec464f32330facb560cd48ce1b14dd3bfe0c29f9400",
+    "controlled_dispatch_latest": "c1367791378ae6b7e61ba853febd19e768cceade0963422f11e339947a0b8ba7"
+  },
+  "changes": [
+    "Removed private root, original lock-domain path, source hashes and source paths",
+    "Explicit fail-closed source chain, prepare entry and runtime namespace binding",
+    "Daily dispatcher selects exactly one reviewed stage, no automatic next stage"
+  ],
+  "excluded": [
+    "Private capture, converter, source_chain and prepare closures",
+    "Real source and independent reviews",
+    "Actual registries, input pins and receipts"
+  ],
+  "real_capture_verified": false,
+  "business_verified": false,
+  "natural_verified": false
+}
