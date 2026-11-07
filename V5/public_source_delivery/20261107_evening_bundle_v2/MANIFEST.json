@@ -1,0 +1,44 @@
+{
+  "schema": "PUBLIC_EVENING_BUNDLE_SOURCE_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "normal": 23,
+    "optimized": 23,
+    "status": "PASS"
+  },
+  "production_admission": false,
+  "shared_resource_gate": "NOT_IMPLEMENTED_REQUIRES_ORIGINAL_AUTHORIZED_ORCHESTRATOR",
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1455,
+      "sha256": "c84a4609a9822e366fa5ffd49b55848de94ef8173f8d8cef4d5ff8232d7fd7da"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3061,
+      "sha256": "b88b2f35349745fd161a1d529d34fd1fc84c99a3d433a25e9d2dfedbbe8e2eb2"
+    },
+    {
+      "path": "bundle.py",
+      "bytes": 7601,
+      "sha256": "402f6f29d4821f79ec7fdc06c420f3bffa989036b312fe9ef14df56e0e5a6307"
+    },
+    {
+      "path": "safeio.py",
+      "bytes": 8097,
+      "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5"
+    },
+    {
+      "path": "test_bundle.py",
+      "bytes": 4439,
+      "sha256": "7dda24eba6f53a894c4ad3b87f000b9ed57f3c96792c3289d33489f15687c5f6"
+    },
+    {
+      "path": "test_public_boundary.py",
+      "bytes": 604,
+      "sha256": "b128f8672035720169cd4760e83abd788691067d59e5b64108de26c6efcdff47"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "scope": "PUBLIC_SOURCE_EXPORT_NOT_PRIVATE_BINDING_OR_PRODUCTION_ADMISSION",
+  "files": [
+    {
+      "source_component": "evening_delivery_bundle_v2/bundle.py",
+      "source_sha256": "38db71a2c56be47cf14f4ba3d451c35b1138f82da8a77d53a4c1dc09ca5fda7a",
+      "export_file": "bundle.py",
+      "export_sha256": "402f6f29d4821f79ec7fdc06c420f3bffa989036b312fe9ef14df56e0e5a6307",
+      "byte_identical": false
+    },
+    {
+      "source_component": "evening_delivery_bundle_v2/safeio.py",
+      "source_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "export_file": "safeio.py",
+      "export_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "byte_identical": true
+    },
+    {
+      "source_component": "evening_delivery_bundle_v2/test_bundle.py",
+      "source_sha256": "7dda24eba6f53a894c4ad3b87f000b9ed57f3c96792c3289d33489f15687c5f6",
+      "export_file": "test_bundle.py",
+      "export_sha256": "7dda24eba6f53a894c4ad3b87f000b9ed57f3c96792c3289d33489f15687c5f6",
+      "byte_identical": true
+    }
+  ],
+  "differences": [
+    "bundle.py DATA and ADMISSION private references removed; both None. load() explicitly rejects absent binding after unchanged safeio code pin check. No caller configuration or source admission relaxation added.",
+    "safeio.py and original synthetic tests byte-identical; original manifests, runtime output, actual data and receipts excluded."
+  ]
+}
