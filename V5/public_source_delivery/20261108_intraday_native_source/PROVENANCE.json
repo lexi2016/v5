@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "path": "intraday/exporter.py",
+      "bytes": 3346,
+      "sha256": "d359b9fbc88a459ae52b1895df2725506fdc29183bcaa2c912c6e6721507ae04",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "intraday/test_exporter.py",
+      "bytes": 3117,
+      "sha256": "66e7a577d9579550a04e909a60552ac4631d56e4485b19571848e42408a2b986",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "native_probe/controller.py",
+      "bytes": 4343,
+      "sha256": "83df90a4dfc94ed3edcb7c0abb644537d09cbe3d4db8267656e1ba453f6844d7",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "native_probe/worker.py",
+      "bytes": 2673,
+      "sha256": "b1417482b70f070e672d7fe7c9f6e49a78630d602d9df8ce21bb95ebd1b4b9cd",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "real_data_included": false,
+  "production_admitted": false,
+  "natural_verified": false
+}
