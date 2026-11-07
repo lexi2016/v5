@@ -1,0 +1,29 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_tests_each_mode": 8,
+  "browser_verified": false,
+  "production_allowed": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "preview_adapter.py",
+      "bytes": 8538,
+      "sha256": "193aded5478f4b970f72ca8b946a3e15acffc07514a9d54685f49339588d2094"
+    },
+    {
+      "path": "test_adapter.py",
+      "bytes": 2957,
+      "sha256": "bf7ac61317c4a307e9f4952c24bbc9572736f6e11619e340e11b4a897473e7ef"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 869,
+      "sha256": "18c66b4b2d3110553ad6feec4972cc528b71658c51a2513512ac6f38f7236623"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2379,
+      "sha256": "c44f47356629ee70211b859e06ecee7100bd268fb4907693aff2fdfdff0865ea"
+    }
+  ]
+}

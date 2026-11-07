@@ -1,0 +1,19 @@
+{
+  "source_component": "isolated partial preview adapter",
+  "original_sha256": "9a5fab069d1f0c4a2d49701c91c746561a84d3a8db830b77ba4694b7e44b77fc",
+  "changes": [
+    "Removed absolute project paths, original dates and versions",
+    "Explicit fail-closed whole-closure SHA bindings before dependency import",
+    "Retained original timeline shell, route allowlist, loopback Host/Origin identity and original service classes",
+    "Preserved original resource callbacks and added initial 1GiB/256MiB guard; original full startup gate unchanged",
+    "Local lifecycle lock and 600-second shutdown retained"
+  ],
+  "excluded": [
+    "Private dependency closure",
+    "Original research data and articles",
+    "Original browser evidence and lifecycle receipts"
+  ],
+  "public_export_browser_verified": false,
+  "production_allowed": false,
+  "natural_verified": false
+}
