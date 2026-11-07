@@ -1,0 +1,22 @@
+[
+  {
+    "path": "PROVENANCE.json",
+    "bytes": 319,
+    "sha256": "b497a70a8464584beb82dbe80f55a56984580e80e030b2933a3f9e504cdff22f"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1112,
+    "sha256": "658c4d87b94f9276d4d99e06b42603b0c5a6c395de61b65e72dff51aa4da1d0f"
+  },
+  {
+    "path": "generator.py",
+    "bytes": 3945,
+    "sha256": "dfeef45af8d2cb430554183fedc442257c5e34b8559fd11e2657260e71b57ba4"
+  },
+  {
+    "path": "test_generator.py",
+    "bytes": 2488,
+    "sha256": "753ebae94bd463da297709026a3dd32d40b4d8ea2b4d87aa4b18981120eeca68"
+  }
+]
