@@ -1,0 +1,37 @@
+[
+  {
+    "path": "PROVENANCE.json",
+    "bytes": 455,
+    "sha256": "ba6b1d3ee1f781aefd403eed8248eab90c218fa987392884e236554957514366"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1129,
+    "sha256": "963a5f8db01c6ddb159b3036e8c14f16fe6e455cf2ddadc751214ccf465147f1"
+  },
+  {
+    "path": "bridge.py",
+    "bytes": 3958,
+    "sha256": "cedbe99e6a39c8c3a5c69db85fc6890e7356379e061832c8ff79a025f59ba9c3"
+  },
+  {
+    "path": "capture.py",
+    "bytes": 8311,
+    "sha256": "8bb3e919b4d218491113fceb8e13e62b1244956afdda868e385e8cbad50affd3"
+  },
+  {
+    "path": "test_capture.py",
+    "bytes": 4589,
+    "sha256": "861e1e21a4bfaa346dc58d50c6d383577b6549ac8b9f61afedcddb2810d455e8"
+  },
+  {
+    "path": "test_hk09_v4.py",
+    "bytes": 2475,
+    "sha256": "43f89a6f868bc24ecb4d9712ac48618559abae6772d505b7effa9d3fc6ddbab3"
+  },
+  {
+    "path": "test_public.py",
+    "bytes": 1486,
+    "sha256": "19e9308c98799ecd73cb4ae9f48c7ca19ae787e188f3c40e7a75f573bd03aff2"
+  }
+]

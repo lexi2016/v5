@@ -1,0 +1,10 @@
+{
+  "source_files": {
+    "bridge.py": "5e39ecca81f5d598e75a4908ddaff0a69a5523f6d6482bb5bc4d00482af8486c",
+    "capture.py": "b7ef4b012dd69ec6e376051e7bf122f1120259d904f86e3b75b6b069eb1b71b2",
+    "test_capture.py": "861e1e21a4bfaa346dc58d50c6d383577b6549ac8b9f61afedcddb2810d455e8",
+    "test_hk09_v4.py": "43f89a6f868bc24ecb4d9712ac48618559abae6772d505b7effa9d3fc6ddbab3"
+  },
+  "scope": "authorized project source-only export",
+  "production": false
+}
