@@ -1,0 +1,44 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_python_each_mode": 7,
+  "dispatch_paths": 21,
+  "completed_business_nodes": null,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "controlled_node_execution.py",
+      "bytes": 6832,
+      "sha256": "c0f2fb55d8e2f45b415afa564f25a3b8ea7403e43e566bddf12ebcfaf108bcaf"
+    },
+    {
+      "path": "workflow_node_api.py",
+      "bytes": 7911,
+      "sha256": "9c946e4cda73f30149face111afe4821a0c8396352b978868c0fdb71b21ffdc5"
+    },
+    {
+      "path": "workflow-node-controls.mjs",
+      "bytes": 3668,
+      "sha256": "b9883505d20c44413bf2e6f6b7785991a8e736946c573acdd9b9cf29f24ae8cf"
+    },
+    {
+      "path": "NODE_MATRIX.json",
+      "bytes": 10948,
+      "sha256": "4ee0f9ef455846f41725a4fba08b2a318aabb46c5479a3f352708c21e22d23a5"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 4265,
+      "sha256": "38b769818e77f502401d8d9444675f3c92fc62ba2b8564cf9aed1b928864eb15"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 938,
+      "sha256": "e4437707f760a6fae1fc683d69c0d696c0e3845171b11d51e59028a7029406b5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2324,
+      "sha256": "a7dc85359bce5a782f97acf3d8c7b4225dbc5590aec2f4e1dffd834b7b1c0e51"
+    }
+  ]
+}

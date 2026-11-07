@@ -1,0 +1,267 @@
+{
+  "meaning": "21 source dispatch paths, not 21 completed business nodes",
+  "nodes": [
+    {
+      "node": "night",
+      "code_scope": "USER_LIST_PROMPT_ONLY_OR_UNBOUND_A0915_RECORDED_READER",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "remaining"
+    },
+    {
+      "node": "us-close",
+      "code_scope": "RAW_US_CAPTURE_FIXED_BOUND_HISTORICAL_DATE",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "freeze",
+      "code_scope": "FIXED_BOUND_HISTORICAL_DATE_HISTORICAL_COMPUTATION_NOT_CURRENT_OR_NATURAL",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "morning-materials",
+      "code_scope": "USER_LIST_PROMPT_ONLY_OR_UNBOUND_A0915_RECORDED_READER",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "remaining"
+    },
+    {
+      "node": "jk-verify",
+      "code_scope": "FIXED_BOUND_HISTORICAL_DATE_HISTORICAL_COMPUTATION_NOT_CURRENT_OR_NATURAL",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "morning-delivery",
+      "code_scope": "FIXED_BOUND_HISTORICAL_DATE_HISTORICAL_COMPUTATION_NOT_CURRENT_OR_NATURAL",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "opening-prep",
+      "code_scope": "FIXED_BOUND_HISTORICAL_DATE_HISTORICAL_COMPUTATION_NOT_CURRENT_OR_NATURAL",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "hk-open",
+      "code_scope": "HK_RECORDED_COLD_READ_BRIDGE_PRODUCTION_OWNER_UNBOUND",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "a-auction",
+      "code_scope": "USER_LIST_PROMPT_ONLY_OR_UNBOUND_A0915_RECORDED_READER",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "remaining"
+    },
+    {
+      "node": "a-auction-close",
+      "code_scope": "ORIGINAL_M07_REPLAY_ONLY_STAGE_0925",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "m07"
+    },
+    {
+      "node": "a-open",
+      "code_scope": "ORIGINAL_M07_REPLAY_ONLY_STAGE_0930_0935",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "m07"
+    },
+    {
+      "node": "a-top200",
+      "code_scope": "USER_LIST_PROMPT_ONLY_OR_UNBOUND_A0915_RECORDED_READER",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "remaining"
+    },
+    {
+      "node": "daily-update",
+      "code_scope": "ISOLATED_SOURCE_PREPARATION_NOT_DAILY_COMPUTE",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "hk-continuous-close",
+      "code_scope": "HK_RECORDED_COLD_READ_BRIDGE_PRODUCTION_OWNER_UNBOUND",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "hk-auction-final",
+      "code_scope": "HK_RECORDED_COLD_READ_BRIDGE_PRODUCTION_OWNER_UNBOUND",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "retry-1610",
+      "code_scope": "ZERO_EFFECT_RETRY_ONLY",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "retry-1640",
+      "code_scope": "ZERO_EFFECT_RETRY_ONLY",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "terminal-1700",
+      "code_scope": "READ_DATED_STATE_NOT_DELIVERY",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "generic"
+    },
+    {
+      "node": "evening-prepare",
+      "code_scope": "EXISTING_BOUND_HISTORICAL_DATE_EXPORT_NOT_NEW_SELECTION_NOT_SENT",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "evening"
+    },
+    {
+      "node": "evening-check",
+      "code_scope": "EXISTING_BOUND_HISTORICAL_DATE_EXPORT_NOT_NEW_SELECTION_NOT_SENT",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "evening"
+    },
+    {
+      "node": "evening-delivery",
+      "code_scope": "EXISTING_BOUND_HISTORICAL_DATE_EXPORT_NOT_NEW_SELECTION_NOT_SENT",
+      "trusted_registry": "EMPTY_BLOCKED",
+      "browser_execute": "False",
+      "business_acceptance": "UNKNOWN_NOT_ACCEPTED",
+      "natural_acceptance": "False",
+      "trusted_entry": "controlled_node_execution.py:dispatch",
+      "read_only_entry": "workflow_node_api.py:WorkflowNodeService.get",
+      "private_dependencies_included": false,
+      "dispatch_group": "evening"
+    }
+  ],
+  "recurring_obligations": [
+    {
+      "name": "intraday_every_10_minutes",
+      "implementation": "ORIGINAL_SOURCE_AND_TRUSTED_RUN_BINDING_UNVERIFIED"
+    },
+    {
+      "name": "hourly_incremental_backup",
+      "implementation": "EXISTING_TASK_NOT_CHANGED_OR_PROVED_BY_THIS_EXPORT"
+    }
+  ]
+}

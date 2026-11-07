@@ -1,0 +1,11 @@
+# All-21 controlled dispatch source and read-only workflow controls
+
+This package maps 21 code paths, not 21 completed business nodes. Source matrix states empty trust registration, browser execution disabled, business UNKNOWN and natural false. Existing intraday ten-minute and hourly backup obligations are listed separately, not newly implemented or scheduled.
+
+Public source has no private root, adapter registry, workflow registry, input pins, source records, database, receipt, trusted run or credentials. Defaults fail closed. The original private 210 tests and browser history do not validate this changed export. Missing dependencies or registrations do not mean a job is running or merely awaiting successful acceptance.
+
+`controlled_node_execution.dispatch` is a trusted-process-only interface, never a browser command API. TRUSTED_RUNS remains empty. Only separately code-reviewed immutable release registration can bind exact node/run/environment, adapter hash and original contract. Source, resource gate, 95-second lock, original owner reconciliation, timeout-UNKNOWN/no automatic retry and original natural restrictions remain. Required private adapters and their complete dependency closures are excluded and must receive new binding review. The resource callback does not replace original thresholds or shared process locks. No server or deployment change is included.
+
+`WorkflowNodeService.get` exposes only inspect or research_request. User research nodes supply a list and prompt only: no external announcements/fundamental lookup, reselection, scoring, trading or message sending. Historical scope/date and full 200 denominator stay explicit; it is not a current/preopen-known list. UI never calls dispatch. Missing date/queue bindings refuse historical sections. Source byte checks do not prove code execution or eligibility.
+
+Run `PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_public`, then repeat with `PYTHONOPTIMIZE=1`. Seven synthetic tests cover 21 distinct paths, default refusal, all-21 empty-registration block, mocked routing groups, resource/hash refusal, synthetic 200-row list+prompt and source tamper. Mock routing is not execution of private adapters, collection, real computation or business acceptance. No production, browser, realtime or natural-trigger verification claimed.

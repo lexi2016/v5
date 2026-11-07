@@ -1,0 +1,18 @@
+{
+  "original_source_sha256": {
+    "controlled_node_execution.py": "bdd47cde834f1b69d7ed2fe88267a069ae22ade0d71d126189ed8365af686fdb",
+    "workflow_node_api.py": "0932cdcca62233b05a03d396e276b7ceec954d69de66e61606ae2df79b747465",
+    "local/public/research-system/workflow-node-controls.mjs": "4daf7ac43abf48a1f8980dd422af272329907d07c3142db51f1111feb1054f56",
+    "CURRENT_21_NODE_MATRIX.csv": "dfc1e8e33230d81eca25a8d03c1c78dca2b44f3d5297272e82e5d6ad1f3f476d"
+  },
+  "changes": [
+    "All real registrations, source roots, input pins and historical dates/counts removed",
+    "Explicit unbound workflow/adapter/source refusal added",
+    "Existing dispatch grouping, source hash checks, resource callbacks and lock scopes retained",
+    "Only read-only UI controls, no server activation included"
+  ],
+  "private_210_tests_transferred": false,
+  "browser_verified": false,
+  "production_allowed": false,
+  "natural_verified": false
+}
