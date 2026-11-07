@@ -1,0 +1,13 @@
+const GAP={night:'夜间材料链未接入本模块', 'us-close':'美股自动采集及本日来源准入未验',freeze:'跨源核对候选未接入生产冻结', 'morning-materials':'材料候选已另存，自动取材未接入', 'jk-verify':'日韩有效源时点未验', 'morning-delivery':'正式送达回执 UNKNOWN','opening-prep':'开盘准备产物 UNKNOWN','hk-open':'港股当前快照 UNKNOWN','a-auction':'本日冻结观察名单/采集准入 UNKNOWN','a-auction-close':'本日竞价快照 UNKNOWN','a-open':'本日开盘快照 UNKNOWN','a-top200':'原 Top200 历史研究可打开；本业务日复盘回执另核','daily-update':'Par 冻结结果可读；自然日更计算链仍待验','hk-continuous-close':'连续收盘不等最终竞价结束','hk-auction-final':'实际竞价结束证据 UNKNOWN','retry-1610':'缺本日未完成项重试回执','retry-1640':'缺本日第二次重试回执','terminal-1700':'本业务日终态回执单独核验','evening-prepare':'候选准备程序未接入此页面执行','evening-check':'候选核件程序未接入此页面执行','evening-delivery':'本地生成不等已送达；送达 UNKNOWN'};
+export function mountNodeModule({document,parent,node,businessDate,store,getInput,openLane,catalogLoader=null}){
+ const el=(tag,text='')=>{const e=document.createElement(tag);e.textContent=text;return e;};
+ const section=el('section');section.className='shared-par-node-module';section.dataset.moduleId=node.id;
+ section.append(el('h4',`${node.planned_label} · 独立节点模块`),el('p','数据底座：原 Par 研究面板，只读共享投影。模块查询不采源、不重算、不启动作业。'));
+ const catalogStatus=el('p','物理数据库索引：尚未查询；准入不因索引存在而提升。');section.append(catalogStatus);
+ const status=el('p','尚未查询共享数据；执行资格 UNKNOWN。'),read=el('button','读取共享 Par 数据');read.type='button';
+ let revision=0;
+ read.onclick=async()=>{const run=++revision;read.disabled=true;status.textContent='正在核验共享 Par 来源…';const input=getInput();catalogStatus.textContent='物理数据库索引：正在核验…';try{const s=await store.snapshot(input);if(run!==revision)return;const c=s.counts;status.textContent=`业务日 ${businessDate}；数据日 ${s.source_date}；观察目标日 ${s.observation_date??'UNKNOWN'}。完整分母 ${s.scope_count}；四组去重 ${c.union}；待核 ${c.pending}（可重叠）；同日 ${c.current}，保留 ${c.retained}，待补 ${c.blocked}。版本 ${s.selection_version}。${businessDate!==s.source_date?'历史数据，不计本业务日完成。':''} 人工图审 UNKNOWN；买入资格否。`;}catch{status.textContent='UNKNOWN · 共享 Par 读取/版本校验失败；未借用旧数据。';}finally{if(run===revision)read.disabled=false;}if(catalogLoader){try{const c=await catalogLoader(input);if(run===revision)catalogStatus.textContent=`SQLite 物理索引：${c.scope_count} 股 / ${c.selected_count} 候选 / ${c.any_unknown_count} 待核 / Top${c.top_count}；${c.nodes.length} 节点。索引日 ${c.source_date}；SHA256 ${c.database_sha256}。来源字节本轮未重验；运行验收 ${c.runtime_acceptance}。`;}catch{if(run===revision)catalogStatus.textContent='物理数据库索引 UNKNOWN · 当前日期/版本无可核验索引，不借用其他版本。';}}};
+ section.append(read,status,el('p',`节点业务缺口：${GAP[node.id]??'UNKNOWN'}。自然触发验收统一待验证。`));
+ for(const [lane,label]of [['par','打开原四组 / 个股 K 线'],['top200','打开原 Top200 研究']]){const b=el('button',label);b.type='button';b.onclick=()=>openLane(lane);section.append(b);}
+ parent.append(section);return section;
+}

@@ -1,0 +1,45 @@
+{
+  "files": [
+    {
+      "source_component": "par-screen-data.mjs",
+      "source_sha256": "5e895dd64a054afbd7198079890859dda2914189e36e6fefc6a9aec6c2afdfce",
+      "export_file": "js/par-screen-data.mjs",
+      "export_sha256": "6a246b9f00794573e3f10f5ef706b5a5e69ed41e26cadc54fa4a4b5d46807ccd",
+      "byte_identical": false
+    },
+    {
+      "source_component": "shared-par-store.mjs",
+      "source_sha256": "c0d6ee61dd646aa3d4a88e507557032debceab95730892ec6cb8dcc17caa4f7b",
+      "export_file": "js/shared-par-store.mjs",
+      "export_sha256": "e5790d587fefda8180b198d4e8caa7f5a40e317d01d98e28b0b2b90bdfc13fec",
+      "byte_identical": false
+    },
+    {
+      "source_component": "timeline-module-view.mjs",
+      "source_sha256": "e0f87c1b07f715933ad4ca88357368d84b07c5fb566c7d37f1c185e9e2d7e956",
+      "export_file": "js/timeline-module-view.mjs",
+      "export_sha256": "e0f87c1b07f715933ad4ca88357368d84b07c5fb566c7d37f1c185e9e2d7e956",
+      "byte_identical": true
+    },
+    {
+      "source_component": "database.py",
+      "source_sha256": "e134812fed2b466f3993d528959cd9d9b7ab971b4f96d5dd8218d211f334e8ac",
+      "export_file": "python/database.py",
+      "export_sha256": "fa64a2b20a0aebfb0aef6db02e5537a3894b956ce3be6d52f501782375f57636",
+      "byte_identical": false
+    },
+    {
+      "source_component": "catalog_api.py",
+      "source_sha256": "5206ab092118a740b3e6246fc87be38943cd7c1567b3b86f3ac6c8d2dd30e97b",
+      "export_file": "python/catalog_api.py",
+      "export_sha256": "80321a0aaf5621e63e81f4d90aaaa2bcc491ae33dc7e89acd1756c05d8b906d6",
+      "byte_identical": false
+    }
+  ],
+  "differences": [
+    "Par validation/count/filter code retained; private loader implementation omitted and replaced with unconditional refusal, supported dates empty. No real payload or admission pin distributed.",
+    "Shared store import query stripped only. Node module unchanged.",
+    "SQLite private INPUTS binding unset; build/default connection/summary refuse when absent. Explicit temporary test database connection remains read-only. Schema, build resource threshold/lock and no-overwrite logic retained.",
+    "Catalog private path/binding removed. Original version, 95-second lock, resource-gate/pin checks retained; no binding registration API."
+  ]
+}

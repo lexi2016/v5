@@ -1,0 +1,61 @@
+{
+  "schema": "PUBLIC_SHARED_PAR_COMPONENTS_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "python_normal": 7,
+    "python_optimized": 7,
+    "javascript": 3
+  },
+  "browser_verified": false,
+  "production_admission": false,
+  "natural_verified": false,
+  "real_sqlite_included": false,
+  "full_workbench_export": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 2284,
+      "sha256": "52bfca03f9f85f1ffe7063862f0606fffaa0989090fe24239e0483253c35dcd5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4352,
+      "sha256": "373f5ff4b41c01e768ad57a9ffe230913f191c9ba8676092ca3acf8a4656e50e"
+    },
+    {
+      "path": "js/par-screen-data.mjs",
+      "bytes": 4553,
+      "sha256": "6a246b9f00794573e3f10f5ef706b5a5e69ed41e26cadc54fa4a4b5d46807ccd"
+    },
+    {
+      "path": "js/public.test.mjs",
+      "bytes": 2732,
+      "sha256": "1df4dcd1193d1b5adf4a9875f14729cc05ff9b24e61c8b7621192ae67717287f"
+    },
+    {
+      "path": "js/shared-par-store.mjs",
+      "bytes": 1386,
+      "sha256": "e5790d587fefda8180b198d4e8caa7f5a40e317d01d98e28b0b2b90bdfc13fec"
+    },
+    {
+      "path": "js/timeline-module-view.mjs",
+      "bytes": 3756,
+      "sha256": "e0f87c1b07f715933ad4ca88357368d84b07c5fb566c7d37f1c185e9e2d7e956"
+    },
+    {
+      "path": "python/catalog_api.py",
+      "bytes": 1360,
+      "sha256": "80321a0aaf5621e63e81f4d90aaaa2bcc491ae33dc7e89acd1756c05d8b906d6"
+    },
+    {
+      "path": "python/database.py",
+      "bytes": 7342,
+      "sha256": "fa64a2b20a0aebfb0aef6db02e5537a3894b956ce3be6d52f501782375f57636"
+    },
+    {
+      "path": "python/test_public.py",
+      "bytes": 2206,
+      "sha256": "3c3949d10ee2e6b41208c8ba42fa8baba984679021ccfd9a775da8e34c03fefe"
+    }
+  ]
+}
