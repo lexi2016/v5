@@ -1,0 +1,19 @@
+{
+  "source_sha256": {
+    "intraday_history_api.py": "6d81a32aa33b121ece2eb87fae25d7d6f34572287928f08eba0c984e865fa920",
+    "local/public/research-system/intraday-history-view.mjs": "95f2be5b34a84e7a30c8a15ec62c0fe307db40236869b3128dc8e899515e2c30"
+  },
+  "changes": [
+    "Removed private reader path, code pins, historical date/slot/count and implicit validator import",
+    "Default missing source/validator bindings fail closed",
+    "Current endpoint remains HTTP409 without historical fallback",
+    "Original reader verification, lock, gate callbacks and historical qualification labels retained"
+  ],
+  "excluded": [
+    "Historical observations and contract",
+    "Original validators/readers and their private closure",
+    "Receipts and research data"
+  ],
+  "business_verified": false,
+  "natural_verified": false
+}

@@ -1,0 +1,39 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_python_each_mode": 4,
+  "synthetic_js_tests": 1,
+  "business_verified": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "intraday_history_api.py",
+      "bytes": 2827,
+      "sha256": "732d27a53c00c2ffeb0cab60f4bc8fc31062a39a7e4b160270f220ac0da436a9"
+    },
+    {
+      "path": "intraday-history-view.mjs",
+      "bytes": 3859,
+      "sha256": "0cd2a9c93f5984f6c64ec219636b06207875ace1a5871297506da961cd81ba0b"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 1428,
+      "sha256": "3a8d9122ecc8d29ff68bd53f46e48fab1fb0d7f19f0bfcafb9430ec4814aca7e"
+    },
+    {
+      "path": "test_view.mjs",
+      "bytes": 304,
+      "sha256": "aafe9dc5a34a905ceccfa66838325c5acd64ff427c5305df5fe5890e82067af5"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 830,
+      "sha256": "b7c3af0db1592a96cd269cf884d35a6ad305b852e32ff5617e27a24062973acb"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1738,
+      "sha256": "30f4fce3bb360cfcce973c80d3192b6ed43d2460a1abce1ae5a8c48a048d8da8"
+    }
+  ]
+}
