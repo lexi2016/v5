@@ -1,0 +1,37 @@
+{
+  "files": [
+    {
+      "path": "hk_v3/bridge.py",
+      "bytes": 3915,
+      "sha256": "5e39ecca81f5d598e75a4908ddaff0a69a5523f6d6482bb5bc4d00482af8486c",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "hk_v3/capture.py",
+      "bytes": 7064,
+      "sha256": "35fb85e356b979eb0e68e690844c4ec49be2304ca2d2d4e01ee0d942678f7cb5",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "hk_v3/test_capture.py",
+      "bytes": 4589,
+      "sha256": "861e1e21a4bfaa346dc58d50c6d383577b6549ac8b9f61afedcddb2810d455e8",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "a0915/execution.py",
+      "bytes": 3124,
+      "sha256": "ae45112dd097f7ee3ffccbbc2b8a6f1f3375d90d7cf0cb3a6ba827d022be8d97",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "four_groups/adapter.py",
+      "bytes": 10703,
+      "sha256": "23bb980bc806dd6b6981f5da19a8020b7b523c500ac0b927fca585e7e7465411",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "data_included": false,
+  "production_admitted": false,
+  "natural_verified": false
+}
