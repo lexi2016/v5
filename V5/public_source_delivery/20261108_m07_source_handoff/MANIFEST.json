@@ -1,0 +1,32 @@
+{
+  "schema": "PUBLIC_M07_SOURCE_HANDOFF_V1",
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 483,
+      "sha256": "ccf8aa2ea52b03a698b01d4f3db3f9ec5d441ec0bdbb171f292845f5e3ca4fe0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2746,
+      "sha256": "5cf7817af87ba30b27a66d022107ae02f3642482f3051500694c0b7cc94a6501"
+    },
+    {
+      "path": "adapter.py",
+      "bytes": 3662,
+      "sha256": "7207c65736edaaa9d6ffc51d5394ce2edbf821f388eb4a6f3f734883d6ac37b9"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 2391,
+      "sha256": "bc8bcfdf8da93319cceeaffb9f9d947d23bc6559bd223110c646eb8022f91b14"
+    },
+    {
+      "path": "verify_worker.py",
+      "bytes": 2304,
+      "sha256": "0218b3692773192bacb009f5c9ca96c9de69a46e3cf93cc33590f6f228e5550f"
+    }
+  ],
+  "production_admitted": false,
+  "natural_verified": false
+}

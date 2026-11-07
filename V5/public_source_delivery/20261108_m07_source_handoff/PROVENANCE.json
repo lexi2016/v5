@@ -1,0 +1,19 @@
+{
+  "files": [
+    {
+      "path": "adapter.py",
+      "bytes": 3662,
+      "sha256": "7207c65736edaaa9d6ffc51d5394ce2edbf821f388eb4a6f3f734883d6ac37b9",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "verify_worker.py",
+      "bytes": 2304,
+      "sha256": "0218b3692773192bacb009f5c9ca96c9de69a46e3cf93cc33590f6f228e5550f",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "production_admitted": false,
+  "natural_verified": false,
+  "provider_included": false
+}
