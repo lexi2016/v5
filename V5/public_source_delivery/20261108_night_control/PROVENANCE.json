@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "night_handoff.py",
+      "source_sha256": "865a544f523011ffcdc038de68d6817d2cad7940125b227c66a30009513848c6",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "controlled_node_execution.py",
+      "source_sha256": "fe5fcaed572cd3e3b4198ea7efb819160f69af99faa23022981b8a0dd8ed5247",
+      "source_bytes_unchanged": false,
+      "changes": [
+        "Remove private sibling binding loader and derived project root",
+        "Use explicit empty ROOT/ADAPTER_BINDINGS refusing absent reviewed binding; original gates unchanged"
+      ]
+    }
+  ],
+  "source_data_included": false,
+  "production_admitted": false,
+  "natural_verified": false
+}

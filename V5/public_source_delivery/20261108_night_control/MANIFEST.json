@@ -1,0 +1,32 @@
+{
+  "schema": "PUBLIC_NIGHT_CONTROL_INCREMENT_V1",
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 689,
+      "sha256": "2cc3e7e9a43f6dd7b33b20b49f61c829188ac1a6176b78804089ab6f605ce1c0"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2751,
+      "sha256": "ca3d0293254dafea34021c20c2d9db67540ea990b366b6c6f50ac00728948a13"
+    },
+    {
+      "path": "controlled_node_execution.py",
+      "bytes": 9941,
+      "sha256": "23a77ce72834b1e1e468d1fc7278e65dcc30d1f7070287d257cbad8d5411c464"
+    },
+    {
+      "path": "night_handoff.py",
+      "bytes": 4638,
+      "sha256": "865a544f523011ffcdc038de68d6817d2cad7940125b227c66a30009513848c6"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 2109,
+      "sha256": "8536e281a689a6a7434943844706e3a380b88a11c2645cec3a7a27dab0efa7c6"
+    }
+  ],
+  "production_admitted": false,
+  "natural_verified": false
+}

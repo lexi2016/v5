@@ -1,0 +1,13 @@
+# Night/material handoff and latest controlled-node routing source
+
+This increment archives the local night (01–03) and morning-material (07–08) handoff plus current controlled adapter routing. It is not a deployed dashboard, full source closure, live collector, scheduler or business completion.
+
+`night_handoff.py` is unchanged source. It only produces a fixed, complete 200-name user list and distinct prompts from reviewed local inputs. It does not research announcements/materials or send anything. Its real REGISTRY remains empty; original safeio, owner locks, resource policy, actual authorized source and scope are deliberately not bundled. Historical sources remain non-PIT and do not acquire current selection authority. Source qualification is UNKNOWN; prepared research handoff status is still BLOCKED_RESEARCH_HANDOFF_READY.
+
+`controlled_node_execution.py` preserves the current adapter-routing logic. The only export changes remove its private JSON binding loader and derived project root, replacing them with explicit empty ROOT/ADAPTER_BINDINGS that reject missing bindings. Real registration remains empty. The previously published workflow_node_api and adapter source packages are dependencies, not duplicated here; their exact reviewed private deployment bindings are excluded. Do not combine code versions or populate empty registrations without original owner/source/calendar/resource/lock review. Tests use a clearly synthetic workflow_node_api stub, not a replacement production dependency.
+
+The control layer passes identities to night/morning, Top200, 09:15, morning, HK and US adapters, preserves separate evening local-export status and refuses internal daily compute/persist/finalize/selection while runtime/E1 binding is absent. Its Python threading lock is only local serialization, not evidence that original business locks are held. It does not make the 21 nodes operational merely by providing routes.
+
+Run `PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_public`, then `python -O -m unittest -v test_public`. Five tests verify missing binding/resource refusal, empty handoff registry, synthetic identity-only forwarding and daily internal-kernel refusal. These tests do not validate original dependencies, actual data, original locks, live execution, browser switching, natural triggers or delivery. No actual market data, private bindings, receipts, credentials, internal instructions, private memory or absolute local paths are included.
+
+PROVENANCE records source SHA and the two export edits; MANIFEST records this allowlist. Prior public packages and old production/V4 remain unchanged. Roll back only this incremental commit if necessary. Production, natural and business acceptance remain unverified.
