@@ -1,0 +1,28 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_tests_each_mode": 7,
+  "execution_permitted": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "preflight.py",
+      "bytes": 3508,
+      "sha256": "ab510bff2bf12bfe85f9a321ceea27bd0d665486ed0c786f5ce91bb7ca8a1574"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 2859,
+      "sha256": "aa032a72729ae51f7074edae055a116ded9671bb364b10de7cfc00a951b31b3e"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 574,
+      "sha256": "9570a0f01dea3f75e37c4943acd4bd739a4e2982cb6875b92062f96f56a50d3a"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2004,
+      "sha256": "c8d6e4df4e749f22bb937e568ce57f9c2423c10d989435594d9553bcf358cc97"
+    }
+  ]
+}

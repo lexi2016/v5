@@ -1,0 +1,16 @@
+{
+  "source": "read-only 15:40 bridge",
+  "original_sha256": "c9671e8b08cd12798a12a2aa1c53af71d61e6df2ad96fe7df5afcb22de54d068",
+  "changes": [
+    "Removed project paths, original pins and default source binding",
+    "Explicit coordinator and dated preflight roles must both be pinned",
+    "Added fail-closed path, descriptor and binding completeness validation"
+  ],
+  "excluded": [
+    "Private source closure",
+    "Input manifest and actual historical results",
+    "Independent review receipts"
+  ],
+  "execution_permitted": false,
+  "natural_run_verified": false
+}
