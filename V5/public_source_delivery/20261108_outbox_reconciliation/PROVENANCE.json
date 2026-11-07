@@ -1,0 +1,32 @@
+{
+  "files": [
+    {
+      "path": "delivery/outbox.py",
+      "bytes": 7889,
+      "sha256": "50a7fee95e2b24911ee3c205b5e402316a764e7d7d1ece2a634bb78552ac5891",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "delivery/test_outbox.py",
+      "bytes": 3819,
+      "sha256": "57326c6228b7888edda75d47a1e2ee58cf17c22497de4ccc47c39967bd0befaa",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "reconciliation/reconcile.py",
+      "bytes": 3830,
+      "sha256": "273a8958680b475a4bd9360c9afc531ebe3db2672a0c316bfcbeb36dc6a376d0",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "reconciliation/test_reconcile.py",
+      "bytes": 1922,
+      "sha256": "147960a5c40dc144bd502d339ed0bac6c11c3906232e3fcbd7af4b473bd8b54f",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "actual_destination_included": false,
+  "actual_data_included": false,
+  "production_admitted": false,
+  "natural_verified": false
+}
