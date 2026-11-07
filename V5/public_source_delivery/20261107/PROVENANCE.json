@@ -1,0 +1,66 @@
+[
+  {
+    "source_component": "handoff/evening_nodes_candidate_v3_20261107/adapter.py",
+    "source_sha256": "90bbd06de04b00f37c08812d0fe27b0f065be7a222d1e8a6fc7a30a922b850f1",
+    "export_path": "handoff/evening_nodes_candidate_v3_20261107/adapter.py",
+    "export_sha256": "47e459eba850c31bce29a06a1d09b12b34ca3c6ef591868f46670e4c985a5237",
+    "byte_identical": false
+  },
+  {
+    "source_component": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+    "source_sha256": "9d909b35bd1113aeabc0eb10ee2eb6e815df7734b862ef55ba7806a8fd2726db",
+    "export_path": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+    "export_sha256": "13947ea62d98874df5404fafb95a8a56a38554eeb23d3a49520c7b9b0514c067",
+    "byte_identical": false
+  },
+  {
+    "source_component": "handoff/evening_nodes_candidate_v3_20261107/vendor/trading_calendar.py",
+    "source_sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+    "export_path": "handoff/evening_nodes_candidate_v3_20261107/vendor/trading_calendar.py",
+    "export_sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f",
+    "byte_identical": true
+  },
+  {
+    "source_component": "handoff/evening_nodes_candidate_v3_20261107/vendor/market_calendar_2026.json",
+    "source_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "export_path": "handoff/evening_nodes_candidate_v3_20261107/vendor/market_calendar_2026.json",
+    "export_sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb",
+    "byte_identical": true
+  },
+  {
+    "source_component": "handoff/evening_target_date_guard_20261107/guard.py",
+    "source_sha256": "6a002ecb64f9c87837e97e53ee186003060b2f104064f18a9a9f7db564e48272",
+    "export_path": "handoff/evening_target_date_guard_20261107/guard.py",
+    "export_sha256": "6a002ecb64f9c87837e97e53ee186003060b2f104064f18a9a9f7db564e48272",
+    "byte_identical": true
+  },
+  {
+    "source_component": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+    "source_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+    "export_path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+    "export_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+    "byte_identical": true
+  },
+  {
+    "source_component": "handoff/timeline_material_pack_v2_20261107/test_material_pack.py",
+    "source_sha256": "816a4379803512404c7b84b239f813fb5617fd10e34a36a2257712cb54e23e29",
+    "export_path": "handoff/timeline_material_pack_v2_20261107/test_material_pack.py",
+    "export_sha256": "816a4379803512404c7b84b239f813fb5617fd10e34a36a2257712cb54e23e29",
+    "byte_identical": true
+  },
+  {
+    "source_component": "handoff/timeline_material_pack_v2_20261107/test_races.py",
+    "source_sha256": "bbe4240423026f1f24feda95abf3e7257b3010de608ce8bdc77f06ad6ed3de6d",
+    "export_path": "handoff/timeline_material_pack_v2_20261107/test_races.py",
+    "export_sha256": "bbe4240423026f1f24feda95abf3e7257b3010de608ce8bdc77f06ad6ed3de6d",
+    "byte_identical": true
+  },
+  {
+    "source_component": "handoff/timeline_material_pack_v2_20261107/FULL_TIMELINE_GAPS.json",
+    "source_sha256": "13ea977be8ba8c6e6223dd6d0f8136f643fd0b5230343ef04a3063d64467bb87",
+    "export_path": "FULL_TIMELINE_MAP.json",
+    "export_sha256": "3425676fd7aaff2d425ba7f97f6a113d3265c0aff95f9d9ad40b27529bec7619",
+    "byte_identical": false,
+    "difference": "Only node contract, public historical code URLs and exported-code SHA mappings retained. Removed local-only evidence/input pins and timestamps. No business success inferred. Explicit intraday 10-minute and hourly-backup cross-cutting obligations are included without private task identity; both remain unimplemented in export and current/natural state UNKNOWN."
+  }
+]

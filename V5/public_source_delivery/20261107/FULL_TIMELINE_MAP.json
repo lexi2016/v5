@@ -1,0 +1,484 @@
+{
+  "schema": "PUBLIC_FULL_TIMELINE_SOURCE_MAP_V1",
+  "timezone_note": "Preserve each node timezone; do not infer fixed UTC times",
+  "source_matrix_sha256": "13ea977be8ba8c6e6223dd6d0f8136f643fd0b5230343ef04a3063d64467bb87",
+  "nodes": [
+    {
+      "node": "night",
+      "time": "01:00–03:00及夜间",
+      "timezone": "Asia/Shanghai",
+      "requirement": "材料身份、逻辑风险、业务映射与A/C就绪项并行；基础卡先行，不等数据全链。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/research_review_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/research_review_daily.py",
+          "blob_sha": "eb93cb52bea69dd2c77f28677e23a3da4db0bc45",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "材料组装候选；真实材料清单、身份/逻辑风险/业务映射审核未绑定",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+          "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "us-close",
+      "time": "纽约16:15至北京时间06:30",
+      "timezone": "America/New_York",
+      "requirement": "以实际美股收盘+15分钟为准；正常16:15按纽约夏冬令时转换。仅核既有环境/行业支持、分化与反证；缺数据不假验证。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/cloud_us_collector.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/cloud_us_collector.py",
+          "blob_sha": "7647e20aaa7b4cc4f56aa638596c3aea2f3c8b12",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "V5/src/v5_shadow/current_us_research.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/current_us_research.py",
+          "blob_sha": "1e4483e91551dc08ae5954a8cce2d18842195a19",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "V5/src/v5_shadow/us_mapping_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/us_mapping_daily.py",
+          "blob_sha": "366190eaeeaf65ed51e5bda5da6c17cd5b5d5f1e",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "原采集器与云端V5r2候选的准入、当前真实数据、自然触发终态待核",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "freeze",
+      "time": "06:30–07:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "交叉核验、冻结原版；盘中或封版后变化另记增量和理由。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/research_review_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/research_review_daily.py",
+          "blob_sha": "eb93cb52bea69dd2c77f28677e23a3da4db0bc45",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "候选不可覆盖快照已实现；正式交叉核验决策/封版未绑定",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+          "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "morning-materials",
+      "time": "07:00–08:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "公告、开盘必读资讯、盘前纪要、盘前解读；未发布/缺件明确，晚到另补。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/daily_tick.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/daily_tick.py",
+          "blob_sha": "669583674627684e5383f41cf1d8e5d7a3ab4049",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "四类材料按日期与SHA核件；当前来源登记及内容审查未绑定",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+          "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "jk-verify",
+      "time": "08:00–08:10",
+      "timezone": "Asia/Shanghai",
+      "requirement": "核既有日韩节点真实数据；来源时点、采集和送达分开，不以旧日材料替代。",
+      "historical_github_sources": [],
+      "remaining_gap": "日韩真实来源/采集器/当日回执未定位；不得借美股或旧材料替代",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "morning-delivery",
+      "time": "08:10",
+      "timezone": "Asia/Shanghai",
+      "requirement": "08:10是正式首版交付点，不是才开始准备；就绪结果和缺口如实交付。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/daily_tick.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/daily_tick.py",
+          "blob_sha": "669583674627684e5383f41cf1d8e5d7a3ab4049",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "原daily_tick默认08:00-08:45非08:10合同；显式节点适配和真实送达未绑定",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "opening-prep",
+      "time": "08:50",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅既有开盘准备/观察范围；先核各市场交易日历，不回填漏采。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/a_preselection_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/a_preselection_daily.py",
+          "blob_sha": "abaae8d6516cf798188ca3003d8766e537944dba",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "V5/src/v5_shadow/m06_daily_worker.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/m06_daily_worker.py",
+          "blob_sha": "52782d719f3a6ad1106e7b0ba8f2ad71799f443e",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "当日完整预选输入/来源核验与执行环境尚未在本候选绑定",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "hk-open",
+      "time": "HK 09:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅既有范围；实际采集时点与送达分别留档，休市不冒采样成功。",
+      "historical_github_sources": [
+        {
+          "path": "V5/source_owners/m02/V5/src/v5_shadow/hk_source_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m02/V5/src/v5_shadow/hk_source_daily.py",
+          "blob_sha": "73383409b70bc8341b6287146136f90025ee54dd",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "证券资格/交易日历/当日09:00采样与交付证据未绑定",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "a-auction",
+      "time": "A 09:15",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅既有观察范围；采集回执与计划分开，不回填历史桶。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/m07_runtime.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/m07_runtime.py",
+          "blob_sha": "b522bfb151696b08b327b93a1cde9310040b534f",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+          "blob_sha": "bcbbf09b63459e666e46bcc396ad97a1ef2e3eb9",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "当日09:15真实来源与锁/作业登记未绑定",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "a-auction-close",
+      "time": "A 09:25",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅既有观察范围；需要当日真实来源和实际采集回执。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/m07_runtime.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/m07_runtime.py",
+          "blob_sha": "b522bfb151696b08b327b93a1cde9310040b534f",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+          "blob_sha": "bcbbf09b63459e666e46bcc396ad97a1ef2e3eb9",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "当日09:25真实来源与竞价结果未绑定",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "a-open",
+      "time": "A 09:30",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅既有观察范围。盘中十分钟快照须当日冻结名单、真实交易时段和桶去重；午休/收市不采源。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/m07_runtime.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/m07_runtime.py",
+          "blob_sha": "b522bfb151696b08b327b93a1cde9310040b534f",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+          "blob_sha": "bcbbf09b63459e666e46bcc396ad97a1ef2e3eb9",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "09:30及盘中10分钟真实采集器和去重桶未验收；页面刷新不算采集",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "a-top200",
+      "time": "A 15:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "先按完整授权范围复盘Top200，不能用观察池前200替代。",
+      "historical_github_sources": [
+        {
+          "path": "V5/source_owners/m09/V5/src/v5_shadow/a_close_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m09/V5/src/v5_shadow/a_close_daily.py",
+          "blob_sha": "6f20c8a2a4f23101da267006c972e8d8b051abcf",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "完整授权分母Top200结果与日期需单独验收，不用观察池200代替",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "daily-update",
+      "time": "15:40",
+      "timezone": "Asia/Shanghai",
+      "requirement": "同源增量 → 数据验收 → 复盘/原式选股 → 原图与历史统计 → 下一交易日冻结名单 → 看板与备份。只展示，不启动链。",
+      "historical_github_sources": [
+        {
+          "path": "V5/source_owners/m01/V5/src/v5_shadow/a_source_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m01/V5/src/v5_shadow/a_source_daily.py",
+          "blob_sha": "e31147c383bb75e2f9ca55024cfc3b80d8f32364",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        },
+        {
+          "path": "history/2026-10-27/code-tree/panel_rebuild_20261023/daily_pipeline/daily_entry/entry.py",
+          "url": "https://github.com/lexi2016/perfect-chart-research-panel/blob/3c9a53b54d3a382efa416fe5eddb74c17db92d8c/history/2026-10-27/code-tree/panel_rebuild_20261023/daily_pipeline/daily_entry/entry.py",
+          "blob_sha": "c7693ee15ce444319d59b8d794b56f8d2976d743",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "自然同源增量→验收→原式选股→原图统计→冻结名单→看板备份整链未验",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "hk-continuous-close",
+      "time": "HK 16:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "16:00只代表连续交易结束，不代表收市竞价已完。",
+      "historical_github_sources": [
+        {
+          "path": "V5/source_owners/m10/V5/src/v5_shadow/hk_close_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m10/V5/src/v5_shadow/hk_close_daily.py",
+          "blob_sha": "e5e936c8c4cc06008cff048bbe5c5afcbe9c3d7c",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "16:00连续收市与实际竞价终结必须分开",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "hk-auction-final",
+      "time": "实际竞价结束后",
+      "timezone": "Asia/Shanghai",
+      "requirement": "适用证券需真实竞价终结证据；没有证据时截止时点UNKNOWN，不捏造16:10固定终点。",
+      "historical_github_sources": [
+        {
+          "path": "V5/source_owners/m10/V5/src/v5_shadow/hk_close_daily.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m10/V5/src/v5_shadow/hk_close_daily.py",
+          "blob_sha": "e5e936c8c4cc06008cff048bbe5c5afcbe9c3d7c",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "实际竞价结束事件和截止时间证据未绑定，不能固定16:10",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "retry-1610",
+      "time": "16:10",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅重试未完成项，保留成功项及每次真实attempt，不把未触发当失败。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/daily_close_recapture_owner.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/daily_close_recapture_owner.py",
+          "blob_sha": "3976ce1b9900f298e21a6bd9f5d92d70e3a80108",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "仅未完成项重试；真实attempt和活动作业/锁未在本检查核验",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "retry-1640",
+      "time": "16:40",
+      "timezone": "Asia/Shanghai",
+      "requirement": "仅重试未完成项，不覆盖历史失败记录。",
+      "historical_github_sources": [
+        {
+          "path": "V5/src/v5_shadow/daily_close_recapture_owner.py",
+          "url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/src/v5_shadow/daily_close_recapture_owner.py",
+          "blob_sha": "3976ce1b9900f298e21a6bd9f5d92d70e3a80108",
+          "scope": "HISTORICAL_REMOTE_SOURCE_NOT_CURRENT_CLOUD_MAPPING"
+        }
+      ],
+      "remaining_gap": "仅未完成项重试；保留此前失败，不重复成功项",
+      "exported_candidate_sources": [],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "terminal-1700",
+      "time": "17:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "分别报告完成、失败、未执行和未知，告警需实际送达回执。",
+      "historical_github_sources": [],
+      "remaining_gap": "晚间只读候选存在；业务终态/当日冻结名单/实时页面/正式送达不由报告器证明",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+          "sha256": "13947ea62d98874df5404fafb95a8a56a38554eeb23d3a49520c7b9b0514c067",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "evening-prepare",
+      "time": "18:30",
+      "timezone": "Asia/Shanghai",
+      "requirement": "依项目AGENTS第7节：19:00交付前30分钟准备。此为原规则派生时点，不是新增调度。",
+      "historical_github_sources": [],
+      "remaining_gap": "晚间只读候选存在；业务终态/当日冻结名单/实时页面/正式送达不由报告器证明",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+          "sha256": "13947ea62d98874df5404fafb95a8a56a38554eeb23d3a49520c7b9b0514c067",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "evening-check",
+      "time": "18:50",
+      "timezone": "Asia/Shanghai",
+      "requirement": "依项目AGENTS第7节：19:00交付前10分钟核件；公开未通过部分。",
+      "historical_github_sources": [],
+      "remaining_gap": "晚间只读候选存在；业务终态/当日冻结名单/实时页面/正式送达不由报告器证明",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+          "sha256": "13947ea62d98874df5404fafb95a8a56a38554eeb23d3a49520c7b9b0514c067",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    },
+    {
+      "node": "evening-delivery",
+      "time": "19:00",
+      "timezone": "Asia/Shanghai",
+      "requirement": "公告/名单补核；19:00为成果交付点，已有结果和缺口准时交，不等所有未知清零。生成和发送尝试不等实际送达。",
+      "historical_github_sources": [],
+      "remaining_gap": "晚间只读候选存在；业务终态/当日冻结名单/实时页面/正式送达不由报告器证明",
+      "exported_candidate_sources": [
+        {
+          "path": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+          "sha256": "13947ea62d98874df5404fafb95a8a56a38554eeb23d3a49520c7b9b0514c067",
+          "status": "PUBLIC_EXPORT_SOURCE_ONLY_NOT_DEPLOYED"
+        }
+      ],
+      "business_execution": "NOT_EXECUTED_BY_EXPORT",
+      "natural_acceptance": "UNKNOWN",
+      "mapping_scope": "HISTORICAL_SOURCE_AND_PUBLIC_CANDIDATE_INDEX_ONLY"
+    }
+  ],
+  "complete_timeline_index": true,
+  "all_nodes_implemented": false,
+  "business_accepted": false,
+  "natural_verified": false,
+  "excluded": "Private local bindings, original receipts and source input pins are not distributed.",
+  "cross_cutting_recurring_items": [
+    {
+      "id": "intraday_10min",
+      "timing": "Every 10 minutes during applicable trading sessions only",
+      "timezone": "Asia/Shanghai",
+      "requirement": "Original frozen-list scope, trading-session boundaries, bucket deduplication, source admission and protected job ownership must be preserved. Page refresh is not collection.",
+      "implementation_in_this_export": "NOT_IMPLEMENTED",
+      "current_execution": "UNKNOWN",
+      "manual_business_test": "NOT_RUN",
+      "natural_acceptance": "UNKNOWN",
+      "scheduler_change": "NONE"
+    },
+    {
+      "id": "hourly_backup",
+      "timing": "Existing hourly backup schedule; exact minute and task identity not distributed",
+      "timezone": "UNKNOWN_REQUIRES_EXISTING_TASK_METADATA",
+      "requirement": "Reuse the original backup task and SOP. Reconcile uncertain uploads and active locks before retry; deduplicate frozen authorized results, verify remote ID/size/available checksums, preserve history, check disk space. No routine download verification.",
+      "implementation_in_this_export": "NOT_IMPLEMENTED",
+      "current_execution": "UNKNOWN",
+      "manual_business_test": "NOT_RUN",
+      "natural_acceptance": "UNKNOWN",
+      "scheduler_change": "NONE"
+    }
+  ]
+}

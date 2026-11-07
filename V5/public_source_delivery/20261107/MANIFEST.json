@@ -1,0 +1,90 @@
+{
+  "schema": "PUBLIC_CODE_EXPORT_V3",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "evening_contract": 17,
+    "timeline_mapping": 2,
+    "material_pack": 30,
+    "normal": "PASS",
+    "optimized": "PASS"
+  },
+  "original_input_tests": "NOT_RUN_NOT_INCLUDED",
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "FULL_TIMELINE_MAP.json",
+      "bytes": 24398,
+      "sha256": "3425676fd7aaff2d425ba7f97f6a113d3265c0aff95f9d9ad40b27529bec7619"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 3829,
+      "sha256": "34c8e70e0700abfc9ad30cd1f630719ec4213f55122184cbacd089174d50f52b"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4236,
+      "sha256": "f10c0445c180e5a719b30109e93913949a74ced5561224b10dd4d27e817e36f3"
+    },
+    {
+      "path": "handoff/evening_nodes_candidate_v3_20261107/INPUT_PINS.json",
+      "bytes": 3,
+      "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    },
+    {
+      "path": "handoff/evening_nodes_candidate_v3_20261107/adapter.py",
+      "bytes": 4077,
+      "sha256": "47e459eba850c31bce29a06a1d09b12b34ca3c6ef591868f46670e4c985a5237"
+    },
+    {
+      "path": "handoff/evening_nodes_candidate_v3_20261107/evening.py",
+      "bytes": 6034,
+      "sha256": "13947ea62d98874df5404fafb95a8a56a38554eeb23d3a49520c7b9b0514c067"
+    },
+    {
+      "path": "handoff/evening_nodes_candidate_v3_20261107/vendor/market_calendar_2026.json",
+      "bytes": 3473,
+      "sha256": "9e2638b69e25495478cecb6ed551713178fcb989a63ebb4ecfd59689615f0acb"
+    },
+    {
+      "path": "handoff/evening_nodes_candidate_v3_20261107/vendor/trading_calendar.py",
+      "bytes": 9291,
+      "sha256": "584f28d18273a8824c5f68a701aa4404123b5c71900caada3e2772828991ee8f"
+    },
+    {
+      "path": "handoff/evening_target_date_guard_20261107/V3_PINS.json",
+      "bytes": 260,
+      "sha256": "2ec28c6d52ea26c2f1dc1e060619fd9aacd10ba55fa29ac0f60e37a6a4bbbddb"
+    },
+    {
+      "path": "handoff/evening_target_date_guard_20261107/guard.py",
+      "bytes": 2845,
+      "sha256": "6a002ecb64f9c87837e97e53ee186003060b2f104064f18a9a9f7db564e48272"
+    },
+    {
+      "path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+      "bytes": 8097,
+      "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5"
+    },
+    {
+      "path": "handoff/timeline_material_pack_v2_20261107/test_material_pack.py",
+      "bytes": 4006,
+      "sha256": "816a4379803512404c7b84b239f813fb5617fd10e34a36a2257712cb54e23e29"
+    },
+    {
+      "path": "handoff/timeline_material_pack_v2_20261107/test_races.py",
+      "bytes": 4109,
+      "sha256": "bbe4240423026f1f24feda95abf3e7257b3010de608ce8bdc77f06ad6ed3de6d"
+    },
+    {
+      "path": "test_public_contract.py",
+      "bytes": 4223,
+      "sha256": "122390d73cddb146220d7621a99e0f312c9def5de29fd15076fcf0fabb22cc16"
+    },
+    {
+      "path": "test_timeline_map.py",
+      "bytes": 1611,
+      "sha256": "e5f730dd6521af5d67a3b94ff333d468ee2b9a104c680446cc74da8ac99a768c"
+    }
+  ]
+}
