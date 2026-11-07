@@ -1,0 +1,6 @@
+{
+  "source": "user-authorized project candidate",
+  "source_sha256": "ec052a4105998a8611d7bb7b55d14768ac33b0a261c27065fd1e978a168c04a4",
+  "transformation": "Unbind project-local ROOT and add explicit missing-dependency refusal; no business gate relaxation",
+  "production": false
+}
