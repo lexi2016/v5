@@ -1,0 +1,28 @@
+{
+  "schema": "PUBLIC_HK09_ORIGINAL_SOURCE_V1",
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 341,
+      "sha256": "a17f31575dad0e40409b368c77521b197fb51512b05077067d76407203115bd9"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3190,
+      "sha256": "7c3eb526ddcb5b9b2156334300929990f5b40c78860d9a7109b32230dcf78ac7"
+    },
+    {
+      "path": "runner.py",
+      "bytes": 17804,
+      "sha256": "2df55abdb06f58f4dc2a877d39537467bfbcd0cc223539587d507ffcf040144a"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 1578,
+      "sha256": "390d2c8e81b16a75772bd32fc9b0a2c67660a26c10b2e7526f357bc2288e89fb"
+    }
+  ],
+  "actual_network_called": false,
+  "production_admitted": false,
+  "natural_verified": false
+}
