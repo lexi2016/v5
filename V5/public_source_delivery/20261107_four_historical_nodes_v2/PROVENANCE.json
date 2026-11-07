@@ -1,0 +1,52 @@
+{
+  "files": [
+    {
+      "source_component": "workbench_1500_review_v1_20261107/node_results_api.py",
+      "source_sha256": "37ee7972a391288da37d07e30b2972653cf584272047c010c9fe76fc368d7bde",
+      "export_file": "node_results_api.py",
+      "export_sha256": "331518a8ddd754d2505a10bca5d159cf171af92472ddcc13fd5994fa751f8190",
+      "byte_identical": false
+    },
+    {
+      "source_component": "research-system/announcement-annotation-view.mjs",
+      "source_sha256": "d14c992b252abad511424923ea904351db813f7ddd717d3efe8c45cf71b17595",
+      "export_file": "announcement-annotation-view.mjs",
+      "export_sha256": "fa78b5d2653b2f20e846ee2fe9a598ca9560e8207895f74e63a234c3e58d89d4",
+      "byte_identical": false
+    },
+    {
+      "source_component": "research-system/group-review-view.mjs",
+      "source_sha256": "02b600e2701b9ce17dfaeb978ff44984a8f65a0fa5fdf7e568c60d51a8f06ff4",
+      "export_file": "group-review-view.mjs",
+      "export_sha256": "417527028f321af5dbb9668000f9ce4c87c23e3cc5bd97287cbfe0aea9a11ed4",
+      "byte_identical": false
+    },
+    {
+      "source_component": "research-system/hk-close-history-view.mjs",
+      "source_sha256": "6c653b695fa42ee75c5d0a1f0a3d2588a2366f5bc9f66197fb16a005f066ef26",
+      "export_file": "hk-close-history-view.mjs",
+      "export_sha256": "77d7167311446549c79ef86e188296f5c707305bee11746989679552b79da52e",
+      "byte_identical": false
+    },
+    {
+      "source_component": "research-system/consolidated-review-view.mjs",
+      "source_sha256": "f6967656a9aee9982fd6df2171ab964e92121678896663aa0972e570f19feca6",
+      "export_file": "consolidated-review-view.mjs",
+      "export_sha256": "1058738ef4819f2c14051d4c4c0c39824e2e29d29a7fc32638210b20dbe72e00",
+      "byte_identical": false
+    },
+    {
+      "source_component": "research-system/node-result-view.mjs",
+      "source_sha256": "9058a175b0fdba69abfcea99db78aafc0821e904b8e6ab40b6734e1fcf5eda52",
+      "export_file": "node-result-view.mjs",
+      "export_sha256": "66557c84100a1276006f5e44656eecb41fd91e818d2a4fa17c81d9d323d6378f",
+      "byte_identical": false
+    }
+  ],
+  "differences": [
+    "Cumulative API and router from final reviewed 15:00 delta; earlier four node components sourced from their owning reviewed deltas.",
+    "Private record/source dates, event symbol, annotation dates and HK final-event key are unset; default API/router/components refuse absent binding. Actual data/text bindings excluded.",
+    "Literal historical timing/count/stock labels generalized; post-hoc/PIT=false, UNKNOWN, source-admission false and no-buy rules retained.",
+    "Pinned annotation executable closure not included; no private binding is restored or dynamically executed by public defaults."
+  ]
+}

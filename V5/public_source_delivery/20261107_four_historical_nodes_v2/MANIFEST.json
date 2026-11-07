@@ -1,0 +1,63 @@
+{
+  "schema": "PUBLIC_FOUR_HISTORICAL_NODE_COMPONENTS_V2",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "python_each_mode": 11,
+    "node_fake_dom": 3
+  },
+  "browser_verified": false,
+  "production_admission": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 2732,
+      "sha256": "cfaad6e38d1ea1542b6b0c67dea4f3bb584c67d6184ad86f354a1867651080b6"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3484,
+      "sha256": "de41006b5172939e18c36e0c1537d9b328446bb3075310c7bc2daddf1e7acc91"
+    },
+    {
+      "path": "announcement-annotation-view.mjs",
+      "bytes": 2256,
+      "sha256": "fa78b5d2653b2f20e846ee2fe9a598ca9560e8207895f74e63a234c3e58d89d4"
+    },
+    {
+      "path": "consolidated-review-view.mjs",
+      "bytes": 1841,
+      "sha256": "1058738ef4819f2c14051d4c4c0c39824e2e29d29a7fc32638210b20dbe72e00"
+    },
+    {
+      "path": "group-review-view.mjs",
+      "bytes": 1654,
+      "sha256": "417527028f321af5dbb9668000f9ce4c87c23e3cc5bd97287cbfe0aea9a11ed4"
+    },
+    {
+      "path": "hk-close-history-view.mjs",
+      "bytes": 1798,
+      "sha256": "77d7167311446549c79ef86e188296f5c707305bee11746989679552b79da52e"
+    },
+    {
+      "path": "node-result-view.mjs",
+      "bytes": 4585,
+      "sha256": "66557c84100a1276006f5e44656eecb41fd91e818d2a4fa17c81d9d323d6378f"
+    },
+    {
+      "path": "node_results_api.py",
+      "bytes": 7872,
+      "sha256": "afca4d4f6c60c2e8da7ae6097731d3b61cf7328c874903a5723315d7c7be8239"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 4595,
+      "sha256": "1f2478230a7636c58f5df9c31921d8138d27efb6d15699483e7a1be007243647"
+    },
+    {
+      "path": "views.test.mjs",
+      "bytes": 2126,
+      "sha256": "287e4eb3c0e9717f830e3e9bb89e858148bb524e996724d8405ffbe5be591327"
+    }
+  ]
+}
