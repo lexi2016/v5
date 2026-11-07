@@ -1,0 +1,18 @@
+{
+  "original_sha256": {
+    "dated_source_decision.py": "980b61b0156b2f3a5124f19c179c696f6460902a56f74837491202b6afaa2462",
+    "source_chain.py": "60e49e43f879d4356353dc473f14376eca50596a9b5e70b3441efb64d9ca2a2e"
+  },
+  "changes": [
+    "Removed private locations, source pins, original date and scope defaults",
+    "Added explicit missing-binding, path containment and core-pin refusals",
+    "Retained original immutable V3 function extraction and read-only status boundaries"
+  ],
+  "excluded": [
+    "All real source receipts and calendar inputs",
+    "Private V3/capture/reader closure",
+    "Unselected drafts"
+  ],
+  "business_verified": false,
+  "natural_verified": false
+}

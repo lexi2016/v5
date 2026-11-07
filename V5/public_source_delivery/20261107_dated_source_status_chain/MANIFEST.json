@@ -1,0 +1,33 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_python_each_mode": 5,
+  "business_verified": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "dated_source_decision.py",
+      "bytes": 3002,
+      "sha256": "13455e75e9d8af7703824b5e6c842297c85dc82ad5918c19bbea8624b5e096e8"
+    },
+    {
+      "path": "source_chain.py",
+      "bytes": 4719,
+      "sha256": "d39539c9eb6626c9248d774228cefa878205b8a8a5e6140d23aa2168e3f08652"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 1604,
+      "sha256": "e1610060e15df487b098cf41a0b0426dd1cee6721014de21dea4baf978130ec1"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 685,
+      "sha256": "5e4e56bcc2a35e21beee07f171a8c225f50cd8be5b3edb29dd642ee47c691ae4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1891,
+      "sha256": "16770f2ac85895a5948ab979ebf5af0009e5e6edc1175c0d32e08e3d91a61033"
+    }
+  ]
+}

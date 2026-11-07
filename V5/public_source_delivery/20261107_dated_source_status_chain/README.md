@@ -1,0 +1,9 @@
+# Dated decision context and read-only status chain
+
+Public-safe source export only. It checks status, not daily updates, collection, formula execution, model training or business admission. Historical source preparation can be reused without recomputation; other dates stay blocked. Future-session blockers are retained. UNKNOWN is not evidence of global absence and never authorization to retry. No lock is acquired, so this does not prove lock ownership or absence of active work.
+
+Original private root, pins, calendar, source receipts, historical date, scope and dependency implementations are omitted. Both modules refuse by default. An approved private integration must separately bind both modules to the original reviewed closure with exact hashes, pin the imported core files and all original dependencies, and preserve the original ordered calendar/receipt pin contract. Source identity is not approval of arbitrary replacement code. The unchanged V3 pure functions are extracted only from the bound hash-verified original source; they are not reimplemented. Original same-source review, resource thresholds, owner lock-domain and event provenance remain mandatory for any later business execution, which this status-only tool never enables.
+
+The CLI can only report status after bindings are independently reviewed; it has no new-date execution switch. No production scheduler or registry changes are included. Natural/business verification remains false.
+
+Run `PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_public`, then repeat with `PYTHONOPTIMIZE=1`. Five synthetic tests cover refusal and mocked status outcomes. The actual private V3 function closure, real calendars/receipts and production scheduling are not tested here; previous private validation does not transfer to the changed export. No live/current collection, browser or natural-trigger acceptance claimed.
