@@ -1,0 +1,9 @@
+# Historical JK reference and risk-card source increment
+
+Source-only incremental modules, not deployment or current market collection. This API extends the previously reviewed public historical node API, retaining its original lock/resource callbacks, pin checks, partial-binding refusal, strict false PIT/admission checks and no-buy boundaries. The view has no default historical date or card count. Private bindings and all original records, announcements, source values, database and receipts are excluded. Default behavior refuses access/rendering.
+
+Approved private bindings must supply original reviewed source closure, date identities and explicit risk-card count. Missing inputs are not fabricated. Original annotation-code closure remains excluded and unverified. Installing these modules or changing bindings requires new affected source/closure tests and deployment review. No server/router activation is included.
+
+JK post-session cross-semantic discrepancy remains unresolved with unified value null, never an average. Event, publication and observation times remain separate and unknown timezone stays UNKNOWN. Risk cards remain historical late additions, publication time UNKNOWN, non-Top200, no PIT/source/natural admission and no change to selection. No original announcement text or market value is bundled.
+
+Run `PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_public`, repeat with `PYTHONOPTIMIZE=1`, and `node --test test_view.mjs`. Five Python synthetic tests cover JK null/qualification/resource behavior; two JS tests cover missing-binding refusal. The annotation execution closure and populated risk-card rendering are not exercised. Earlier private browser acceptance is not acceptance of this changed public export. No production, real-time, business or natural-trigger success claimed.

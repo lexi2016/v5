@@ -1,0 +1,39 @@
+{
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NOT_UPLOADED",
+  "synthetic_python_each_mode": 5,
+  "synthetic_js_tests": 2,
+  "business_verified": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "node_results_api.py",
+      "bytes": 9375,
+      "sha256": "723eeeb91e6176d63968883518a7dce52460816799fc71bebc58351c141609b5"
+    },
+    {
+      "path": "jk-risk-view.mjs",
+      "bytes": 2680,
+      "sha256": "423cffc75b29ee2b07a9cca3c1da6ef0a51bd126277713faaca738f8d8942044"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 1819,
+      "sha256": "5fc16c900af8450d504cf5fe28f661898ed27f46c5ceea310e88161bf2d09f9a"
+    },
+    {
+      "path": "test_view.mjs",
+      "bytes": 341,
+      "sha256": "6dd15805920e5fb5965cdcb393a78bb12944d6b7709635870c8b90d19061f668"
+    },
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 680,
+      "sha256": "e3970b13cbe1ae1b38de8c4688b89ff32ece9823029eb2c345e2795e6e8ab2b4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1820,
+      "sha256": "42e550040d10576f7d2780de272a90bd67214cfb7fbd144035de6c98bd2186fd"
+    }
+  ]
+}

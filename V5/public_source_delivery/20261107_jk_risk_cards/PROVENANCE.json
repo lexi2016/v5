@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "private_incremental_api": "69c0e2ae4ba584070d6aa9b87777133700bb54b36b3859f4f065209ea252316e",
+    "private_view": "66e3215e079110c2e99979a8c41d1a6e940bbe16bf316e56e656154f0cafb75d",
+    "prior_public_v2_api": "afca4d4f6c60c2e8da7ae6097731d3b61cf7328c874903a5723315d7c7be8239"
+  },
+  "changes": [
+    "JK/risk branches applied to prior reviewed public fail-closed API",
+    "Removed original dates, observed market values, default count and private source identities",
+    "No actual observations, announcement text, bindings, database or receipts included"
+  ],
+  "browser_verified": false,
+  "production_allowed": false,
+  "natural_verified": false
+}
