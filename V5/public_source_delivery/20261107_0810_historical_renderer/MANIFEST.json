@@ -1,0 +1,30 @@
+{
+  "schema": "PUBLIC_HISTORICAL_0810_RENDERER_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests_each_mode": 6,
+  "browser_verified": false,
+  "production_admission": false,
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 333,
+      "sha256": "67ebc649159d07917074b5898cb784d88ad0605e119b4bc2b8f69c0a01abf553"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2317,
+      "sha256": "14264762525e8f32011536c95e7f003a012d801b24143e9fe9547b3ea803ff6e"
+    },
+    {
+      "path": "render.py",
+      "bytes": 2972,
+      "sha256": "59b2eb0f37b77b4f0a94f6af8027668df24e86cb5b03de1110b2c434ed062779"
+    },
+    {
+      "path": "test_render.py",
+      "bytes": 2730,
+      "sha256": "69badfb881381071b60d3c1dad939579f6db0d3452ef49cbafe7415d2fefd729"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "source_component": "morning_0810_historical_brief/render.py",
+  "source_sha256": "59b2eb0f37b77b4f0a94f6af8027668df24e86cb5b03de1110b2c434ed062779",
+  "export_file": "render.py",
+  "export_sha256": "59b2eb0f37b77b4f0a94f6af8027668df24e86cb5b03de1110b2c434ed062779",
+  "byte_identical": true,
+  "private_input_included": false
+}
