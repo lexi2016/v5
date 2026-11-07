@@ -1,0 +1,78 @@
+{
+  "schema": "PUBLIC_INTRADAY_TIMING_SOURCE_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests_each_mode": {
+    "intraday": 13,
+    "source_time_gate": 9
+  },
+  "production_admission": false,
+  "current_route": "409_IN_SYNTHETIC_HARNESS_ONLY_NO_PRODUCTION_PROOF",
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 3052,
+      "sha256": "714dc4fee4d605a6fd366981e8bc9b71d64eb5f94210209212945806ebff556e"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4085,
+      "sha256": "8e2f07abae22eabbc21fc4d1eef43277006185962847389dc884f28c46bf4d13"
+    },
+    {
+      "path": "intraday/observation_api.py",
+      "bytes": 6519,
+      "sha256": "8d57ba95497cb1b4eb6a73994ba875ff8715f9e0fe7d2ec84f4b1a816f8338bf"
+    },
+    {
+      "path": "intraday/safeio.py",
+      "bytes": 8097,
+      "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5"
+    },
+    {
+      "path": "intraday/synthetic_cli.py",
+      "bytes": 209,
+      "sha256": "bf06dbbb87c6378aca9259487fe61882f4be67468889b2cc33827ae97185a3d7"
+    },
+    {
+      "path": "intraday/synthetic_fixture.py",
+      "bytes": 684,
+      "sha256": "c179db8d5c6cd46aa1b0b0ee62bdc507b9e0c1c7c90af25314dfa0621f9b3065"
+    },
+    {
+      "path": "intraday/test_api.py",
+      "bytes": 2078,
+      "sha256": "c65d8c4cf554300c417bf8435618245b251cff15d5b92c398b0b59c68cce705d"
+    },
+    {
+      "path": "intraday/test_deadlines.py",
+      "bytes": 2021,
+      "sha256": "e0121fd3280de712eb07a67a88fccf78ed1c2f5aa525e3a212bf6afe8a08e0d8"
+    },
+    {
+      "path": "intraday/test_public_binding.py",
+      "bytes": 431,
+      "sha256": "5779f4c91532fbb98b7b0149ed63ff3b5b2c214bd95d85ff944a941be0f5d035"
+    },
+    {
+      "path": "source_time_gate/ORIGINAL_SOURCE.json",
+      "bytes": 267,
+      "sha256": "2f51d89ed915ffde67bdbd5e64ac5a66eda4983ab681db18055144ce776b3985"
+    },
+    {
+      "path": "source_time_gate/original_time_predicates.py",
+      "bytes": 951,
+      "sha256": "82069091c8c8b317552e5b3efeec831da90a9832415bbfc393afe6c4f138d0a8"
+    },
+    {
+      "path": "source_time_gate/source_time_gate.py",
+      "bytes": 1803,
+      "sha256": "1e2c48f0b52f3bc75e8dc391007f51e78eb4928ff2921cf7b363b5df485e158f"
+    },
+    {
+      "path": "source_time_gate/test_source_time_gate.py",
+      "bytes": 1917,
+      "sha256": "6c6868253c46e2434e6b8f47e09acf40c3322e0bb7cfef14e583de9e6efa6555"
+    }
+  ]
+}

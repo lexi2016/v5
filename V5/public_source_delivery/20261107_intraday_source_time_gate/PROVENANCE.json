@@ -1,0 +1,58 @@
+{
+  "files": [
+    {
+      "source_component": "intraday_readonly_api_v2_20261107/observation_api.py",
+      "source_sha256": "6de3d90d98825d102cd605cd1f496e0e16a800f3c60368ec43ae2a0cbdf3e82b",
+      "export_file": "intraday/observation_api.py",
+      "export_sha256": "8d57ba95497cb1b4eb6a73994ba875ff8715f9e0fe7d2ec84f4b1a816f8338bf",
+      "byte_identical": false
+    },
+    {
+      "source_component": "intraday_readonly_api_v2_20261107/safeio.py",
+      "source_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "export_file": "intraday/safeio.py",
+      "export_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "byte_identical": true
+    },
+    {
+      "source_component": "intraday_readonly_api_v2_20261107/test_api.py",
+      "source_sha256": "5dbb84cf1ef6e66d72ce6bbab709efea0f399acf41700a14712da0d0517f31e1",
+      "export_file": "intraday/test_api.py",
+      "export_sha256": "c65d8c4cf554300c417bf8435618245b251cff15d5b92c398b0b59c68cce705d",
+      "byte_identical": false
+    },
+    {
+      "source_component": "intraday_readonly_api_v2_20261107/test_deadlines.py",
+      "source_sha256": "494feeb6f9b2eb06cf2305e6990789fcfff346a7a19d35c2c0a3a2a435da765a",
+      "export_file": "intraday/test_deadlines.py",
+      "export_sha256": "e0121fd3280de712eb07a67a88fccf78ed1c2f5aa525e3a212bf6afe8a08e0d8",
+      "byte_identical": false
+    },
+    {
+      "source_component": "original_owner_reuse_20261107/source_time_gate.py",
+      "source_sha256": "1e2c48f0b52f3bc75e8dc391007f51e78eb4928ff2921cf7b363b5df485e158f",
+      "export_file": "source_time_gate/source_time_gate.py",
+      "export_sha256": "1e2c48f0b52f3bc75e8dc391007f51e78eb4928ff2921cf7b363b5df485e158f",
+      "byte_identical": true
+    },
+    {
+      "source_component": "original_owner_reuse_20261107/test_source_time_gate.py",
+      "source_sha256": "8f0aed7c9b3a888382eecc4b28a0026e5a456ec4402f6b0f4693b92b471303e1",
+      "export_file": "source_time_gate/test_source_time_gate.py",
+      "export_sha256": "6c6868253c46e2434e6b8f47e09acf40c3322e0bb7cfef14e583de9e6efa6555",
+      "byte_identical": false
+    },
+    {
+      "source_component": "original_owner_reuse_20261107/m11_daily.py",
+      "source_sha256": "172bd92cf7ed46fd37ea904e56cd00c612ff9187278b60e846e93748069beee4",
+      "export_file": "source_time_gate/original_time_predicates.py",
+      "export_sha256": "82069091c8c8b317552e5b3efeec831da90a9832415bbfc393afe6c4f138d0a8",
+      "byte_identical": false
+    }
+  ],
+  "differences": [
+    "Private intraday pins and real historical binding dates/counts are unset; load fails closed after safeio SHA check. All underlying contract/date/member and HTTP/deadline mechanisms retained.",
+    "API and deadline tests use a separately labelled synthetic-only two-row fixture, never original history. Unmodified CLI cannot start without private binding.",
+    "M11 wrapper byte-identical. Exact original two-function excerpt substitutes full owner for AST equality test; owner is not executed."
+  ]
+}
