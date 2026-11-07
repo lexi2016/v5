@@ -1,0 +1,31 @@
+{
+  "scope": "PUBLIC_SOURCE_EXPORT_NOT_PRIVATE_BINDING_OR_PRODUCTION_ADMISSION",
+  "files": [
+    {
+      "source_component": "morning_source_crosscheck_v2/crosscheck.py",
+      "source_sha256": "33cf7a11ca87142c6fd2ea6081c90e4a097828b54b2524c33da6bd542e6cc1cb",
+      "export_file": "crosscheck.py",
+      "export_sha256": "6eac778b906cc1aabb691934745083807ab56d0cd8928cc0f8904f7140a0ccc8",
+      "byte_identical": false
+    },
+    {
+      "source_component": "morning_source_crosscheck_v2/safeio.py",
+      "source_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "export_file": "safeio.py",
+      "export_sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "byte_identical": true
+    },
+    {
+      "source_component": "morning_source_crosscheck_v2/test_crosscheck.py",
+      "source_sha256": "6f29974857d8447a356bba18d89b5ddf00d8c0a5d22bab235e26ed4d15cb30bd",
+      "export_file": "test_crosscheck.py",
+      "export_sha256": "6f29974857d8447a356bba18d89b5ddf00d8c0a5d22bab235e26ed4d15cb30bd",
+      "byte_identical": true
+    }
+  ],
+  "differences": [
+    "Removed private source/admission path, digest and size constants; replaced with None and explicit missing-binding refusal after unchanged safeio pin gate. No input registration/CLI bypass interface added.",
+    "All audit, failure/exit, freeze and source-admission checks retained. safeio and original 18 tests byte-identical.",
+    "Original real-data packages, private paths, qa receipts, runtime identities and credentials excluded."
+  ]
+}

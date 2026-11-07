@@ -1,0 +1,46 @@
+{
+  "schema": "PUBLIC_MORNING_CROSSCHECK_SOURCE_V1",
+  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "synthetic_tests": {
+    "original_normal": 18,
+    "original_optimized": 18,
+    "discovery_normal": 20,
+    "discovery_optimized": 20,
+    "status": "PASS"
+  },
+  "production_admission": false,
+  "shared_resource_gate": "NOT_IMPLEMENTED_REQUIRES_ORIGINAL_AUTHORIZED_ORCHESTRATOR",
+  "natural_verified": false,
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1570,
+      "sha256": "2e3e2a502a99edc8fa955cee0e87bcc3758039e9c38594ef43205ca92b3efdf1"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2789,
+      "sha256": "f3c27443a1035073e3812f7d86822ea1b9dbe46bef4694da3631aae9a360e9b3"
+    },
+    {
+      "path": "crosscheck.py",
+      "bytes": 6822,
+      "sha256": "6eac778b906cc1aabb691934745083807ab56d0cd8928cc0f8904f7140a0ccc8"
+    },
+    {
+      "path": "safeio.py",
+      "bytes": 8097,
+      "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5"
+    },
+    {
+      "path": "test_crosscheck.py",
+      "bytes": 4592,
+      "sha256": "6f29974857d8447a356bba18d89b5ddf00d8c0a5d22bab235e26ed4d15cb30bd"
+    },
+    {
+      "path": "test_public_boundary.py",
+      "bytes": 860,
+      "sha256": "f0c2c199ba9922496e613c46f9648cb4c3e6d2eb794916b89f58ad59cfc15f7f"
+    }
+  ]
+}
