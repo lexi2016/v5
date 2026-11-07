@@ -1,0 +1,32 @@
+{
+  "schema": "PUBLIC_HK_OFFLINE_OWNER_SOURCE_V1",
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 495,
+      "sha256": "678693dc7fe77a109a6859d51b406a8a8c6e5523b5354fefd79593c27e9275e4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2925,
+      "sha256": "eb44e7862e4eaa949abbf15d4b1e4d0eeaea9263bd318d3c5324e756691a4bf6"
+    },
+    {
+      "path": "hk_close_owner_candidate.py",
+      "bytes": 5234,
+      "sha256": "734a2559ffc58d1684dc97464771f75acf4adb7264dd5bc4cdaaa959ef3981b1"
+    },
+    {
+      "path": "test_owner.py",
+      "bytes": 2554,
+      "sha256": "3fcde60af5876d45c372251607488d5df3e0008017cea7bafc407901ecbd305f"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 1386,
+      "sha256": "8b986b26d99abcaa2a9d6b6b84c34915000d1660dbeab83b2ed69221c572caf3"
+    }
+  ],
+  "production_admitted": false,
+  "natural_verified": false
+}

@@ -1,0 +1,19 @@
+{
+  "files": [
+    {
+      "path": "hk_close_owner_candidate.py",
+      "bytes": 5234,
+      "sha256": "734a2559ffc58d1684dc97464771f75acf4adb7264dd5bc4cdaaa959ef3981b1",
+      "source_bytes_unchanged": true
+    },
+    {
+      "path": "test_owner.py",
+      "bytes": 2554,
+      "sha256": "3fcde60af5876d45c372251607488d5df3e0008017cea7bafc407901ecbd305f",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "production_admitted": false,
+  "live_collection": false,
+  "natural_verified": false
+}
