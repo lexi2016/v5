@@ -1,0 +1,6 @@
+{
+  "adapter_sha256": "30943c1c71fe327d093518014534141ae84b4addd657ca1fb9067ebf7b03b691",
+  "adapter_changed": false,
+  "tests": "new synthetic only",
+  "production": false
+}

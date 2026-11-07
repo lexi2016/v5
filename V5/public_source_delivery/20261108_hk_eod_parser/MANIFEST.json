@@ -1,0 +1,22 @@
+[
+  {
+    "path": "PROVENANCE.json",
+    "bytes": 175,
+    "sha256": "417f7eeab2540a1e38ba9f060710fa541d8cca426846eb4654c08fb080ce5ed1"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1150,
+    "sha256": "69c546af5803952b5723014774d47128c8f2c755f45e5b5225f20e65523031bf"
+  },
+  {
+    "path": "adapter.py",
+    "bytes": 5658,
+    "sha256": "30943c1c71fe327d093518014534141ae84b4addd657ca1fb9067ebf7b03b691"
+  },
+  {
+    "path": "test_public.py",
+    "bytes": 2279,
+    "sha256": "f39bc89dd4bfd40e6d91aedbc24ea190db0a48e102a74552fe8e0d4aef1f94c0"
+  }
+]
