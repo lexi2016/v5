@@ -1,0 +1,62 @@
+{
+  "schema": "PUBLIC_EXECUTION_SOURCE_INCREMENT_V1",
+  "files": [
+    {
+      "path": "PROVENANCE.json",
+      "bytes": 1678,
+      "sha256": "115c3b0f0720211c624ecf3280df9b48d2cc2ad587bd9f20118100f3ea058105"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2804,
+      "sha256": "ce621c8d6e8ed95af260a4ba2fdd46b5622e416eef869e436d2c62f528ef9562"
+    },
+    {
+      "path": "daily1540/stages.py",
+      "bytes": 9356,
+      "sha256": "a61ab831ea4ec4aa1185e79dd5fc4b09809adac54f92a75c9207095d05700026"
+    },
+    {
+      "path": "evening/execution.py",
+      "bytes": 4756,
+      "sha256": "cedafe9551b61e6a14fccb4c385724eaa62cfc3cfa4667e3aa38923b843003e3"
+    },
+    {
+      "path": "morning/registered.py",
+      "bytes": 10214,
+      "sha256": "6994912c3cfe28c29f51e249eec68cba8e1299ac2263346300fbded8e9e29ca7"
+    },
+    {
+      "path": "test_public.py",
+      "bytes": 2207,
+      "sha256": "ac53987a2c072c75801607b171cdf63bb455ce63bb97d7d4318cf9d0b220f81f"
+    },
+    {
+      "path": "top200/ranking.py",
+      "bytes": 4797,
+      "sha256": "1c629a3a77a2c35fabe1b451ad3aa93de49cfc7b587744ad6d770b0b6927b24a"
+    },
+    {
+      "path": "top200/registered.py",
+      "bytes": 6134,
+      "sha256": "7a02fc94b115da45d18d0bb33113931eb439a52549dd98783303758849d3acf3"
+    },
+    {
+      "path": "us_v3/bridge.py",
+      "bytes": 4679,
+      "sha256": "87032309699c160c4827414ecd6eff1c04a03ce16627130e7edb6959192297c8"
+    },
+    {
+      "path": "us_v3/entrypoint.py",
+      "bytes": 1936,
+      "sha256": "2e55d7c8327100181225100004d1b571e85ab1b9f95e8c91f5c3958744a27f37"
+    },
+    {
+      "path": "us_v3/launcher.py",
+      "bytes": 19869,
+      "sha256": "cc19ae4822353999389c4791726ee3b14d7e3f6e38131d7bb33ff9db19eb8db0"
+    }
+  ],
+  "production_admitted": false,
+  "natural_verified": false
+}
