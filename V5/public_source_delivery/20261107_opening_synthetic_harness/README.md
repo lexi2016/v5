@@ -1,0 +1,9 @@
+# Original M07 synthetic replay harness
+
+Reuse the existing GitHub owner at fixed commit `01d93717905813705732161d4d79062ae5af2d99`, directory `V5/source_owners/m07/`. Do not copy the existing 97 owner files into this export. Entrypoint is beneath that directory at `V5/src/v5_shadow/a_stage_daily.py`, not the repository's top-level V5 path. Public source pins cover the original entry, seven dependencies, original fixture and closure manifest; the closure manifest verifies its original 97 owner entries. No actual source readback receipt or market data is included.
+
+Provide an explicit isolated original owner root to `python -B synthetic_check.py --owner-root PATH`. Missing, changed or symlinked files refuse before fixture import. No default private path or data binding exists. This uses only the original explicitly SYNTHETIC two-row fixture. CLI outputs go in a temporary synthetic directory and are cleaned automatically, never on a business board. It creates the original required output/ledger markers only inside that new fixture root. No existing production locks, ledger or output is altered.
+
+Two original stages: STAGE_0925 and STAGE_0930_0935. The latter is the 09:30–09:35 opening window, not an instantaneous 09:30 result. Each must SUCCEED first, REUSED_SUCCESS on repetition, and reject natural=true as NATURAL_EXECUTION_NOT_BOUND. This is replay-only, not real-time collection or a natural scheduler. Original algorithms and safety requirements remain unchanged. HK09:00 and A09:15 are not implemented by this owner. No new collectors or invented stages are added.
+
+Run `PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_public` in normal and optimized mode for two refusal tests. Original fixture replay is a separate synthetic integration test; neither proves real quote/raw-store/M05 inputs, production admission, browser refresh or natural-trigger business acceptance. Real/private credentials and source inputs are not requested or uploaded.

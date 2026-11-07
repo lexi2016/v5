@@ -1,0 +1,65 @@
+{
+  "fixed_commit": "01d93717905813705732161d4d79062ae5af2d99",
+  "entries": [
+    {
+      "path": "V5/src/v5_shadow/a_stage_daily.py",
+      "bytes": 32644,
+      "sha256": "01c791dee6547e5e1a54ef3c412ac3102dfcafdf7e78be34c702b053f6fb5791",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/contracts.py",
+      "bytes": 7256,
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/contracts.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/digests.py",
+      "bytes": 425,
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/digests.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/composition.py",
+      "bytes": 5297,
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/composition.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "bytes": 6133,
+      "sha256": "d3ba8dc00de2525ccfc2756193be1338bb800c796c2302f6c97f525a76b5748e",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/run_ledger.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_api.py",
+      "bytes": 15282,
+      "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/module_api.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/module_artifacts.py",
+      "bytes": 7936,
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/module_artifacts.py"
+    },
+    {
+      "path": "V5/src/v5_shadow/api_gateway.py",
+      "bytes": 16003,
+      "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/src/v5_shadow/api_gateway.py"
+    },
+    {
+      "path": "V5/tests/m07_fixture.py",
+      "bytes": 10669,
+      "sha256": "692ece6190c4dd721ca375abb37d370cde60f8b26f9376f3289fed0fb6a32408",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/V5/tests/m07_fixture.py"
+    },
+    {
+      "path": "OWNER_CLOSURE.json",
+      "bytes": 57969,
+      "sha256": "dc63874f8d9e8307ee30a50d398d3c31d3fbac0d124702786b240d7059c6c301",
+      "source_url": "https://github.com/lexi2016/v5/blob/01d93717905813705732161d4d79062ae5af2d99/V5/source_owners/m07/OWNER_CLOSURE.json"
+    }
+  ]
+}
