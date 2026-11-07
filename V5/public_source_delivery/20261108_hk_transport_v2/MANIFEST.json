@@ -1,0 +1,27 @@
+[
+  {
+    "path": "PROVENANCE.json",
+    "bytes": 415,
+    "sha256": "7dbb9d8d15c3a100c3043fc29240f4818b97a476aa2de39b3c1cb867d461b598"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1280,
+    "sha256": "5fccec393be95d756e6d8dfff6e91d1a92ad813a53afececf4eb0fd2ef7776da"
+  },
+  {
+    "path": "adapter.py",
+    "bytes": 5658,
+    "sha256": "30943c1c71fe327d093518014534141ae84b4addd657ca1fb9067ebf7b03b691"
+  },
+  {
+    "path": "test_transport.py",
+    "bytes": 5015,
+    "sha256": "483e158ab3f986b1c4150d3e0acfc5abe45d9f2041b9ffb709361557dfcb68a1"
+  },
+  {
+    "path": "transport.py",
+    "bytes": 6221,
+    "sha256": "1651699569dd21463476ba46cb55d85c75a26ef19b3c55eaab43987c62486719"
+  }
+]

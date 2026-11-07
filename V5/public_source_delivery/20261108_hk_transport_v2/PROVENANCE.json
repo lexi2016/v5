@@ -1,0 +1,10 @@
+{
+  "source_sha256": {
+    "adapter.py": "30943c1c71fe327d093518014534141ae84b4addd657ca1fb9067ebf7b03b691",
+    "transport.py": "1651699569dd21463476ba46cb55d85c75a26ef19b3c55eaab43987c62486719",
+    "test_transport.py": "bb394cd2b1c37e4f32be157ee30c52456263a00f4641cc87e8b9f28654746714"
+  },
+  "source_unchanged": true,
+  "test_transformation": "Synthetic dates and symbols changed only",
+  "production": false
+}
