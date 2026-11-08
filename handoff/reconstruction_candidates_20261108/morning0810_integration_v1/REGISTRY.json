@@ -1,0 +1,32 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "business_accepted": false,
+  "delivery_status": "NOT_SENT",
+  "scope": "SYNTHETIC_LOCAL_PREPARATION_ONLY",
+  "merged_dispatch_changed": false,
+  "files": {
+    "bridge.py": {
+      "sha256": "d668ff906822a229259892869baeb868ea9fe8316ef964daaf6edefc0db4e29e",
+      "bytes": 2760
+    },
+    "outbox.py": {
+      "sha256": "50a7fee95e2b24911ee3c205b5e402316a764e7d7d1ece2a634bb78552ac5891",
+      "bytes": 7889
+    },
+    "bundle_candidate.py": {
+      "sha256": "0eb3bb66f5589dc8a48faf6484ff675f8e990c7addf2e8cf7aa46056885c2121",
+      "bytes": 2082
+    },
+    "test_bridge.py": {
+      "sha256": "8d012cd60e37e4e19f8e6b036a100512d50767dd9b9a78daf57a4cd98d3b5ba6",
+      "bytes": 3568
+    }
+  },
+  "synthetic_tests": {
+    "normal_passed": 10,
+    "optimized_passed": 10
+  },
+  "real_inputs_included": false
+}
