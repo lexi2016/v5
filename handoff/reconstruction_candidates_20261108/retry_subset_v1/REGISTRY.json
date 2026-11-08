@@ -1,0 +1,27 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "issue_id": "RETRY-001",
+  "scope": [
+    "16:10",
+    "16:40"
+  ],
+  "production_bound": false,
+  "natural_business_verified": false,
+  "business_accepted": false,
+  "dispatchable": false,
+  "files": {
+    "subset_plan.py": {
+      "sha256": "7048db9c7a17498fba8f4e259ff7ba0aabf5c69b03f13651d5882cec353a5cd0",
+      "bytes": 6619
+    },
+    "test_subset.py": {
+      "sha256": "9f5a9bd9ae53ef7b168de0c3883944af2cd3124f2d2a829a8751ffa0ca00ec9d",
+      "bytes": 4225
+    }
+  },
+  "synthetic_tests": {
+    "normal_passed": 19,
+    "optimized_passed": 19
+  },
+  "real_inputs_included": false
+}
