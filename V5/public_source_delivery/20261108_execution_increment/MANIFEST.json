@@ -4,7 +4,7 @@
     {
       "path": "PROVENANCE.json",
       "bytes": 1886,
-      "sha256": "0629eb7e45fc3618bdaad8246a215ad5630e4c92854f3b9acbd72bc3f8e90de6"
+      "sha256": "f1b4025ee5989cb01921e3bff274a9d61335045505f9081b02dc7437cc1ece5d"
     },
     {
       "path": "README.md",
@@ -23,8 +23,8 @@
     },
     {
       "path": "morning/registered.py",
-      "bytes": 35302,
-      "sha256": "90c890c8e2ad4a198cf84519e8651095d2822c486bc7453ae1c3d52819d0a62f"
+      "bytes": 35694,
+      "sha256": "e1fa577a3b138f4a6e57155e89c8fd38a0ec719c0b36cd4198d5b544e2ec1c21"
     },
     {
       "path": "test_public.py",
@@ -55,6 +55,11 @@
       "path": "us_v3/launcher.py",
       "bytes": 19869,
       "sha256": "cc19ae4822353999389c4791726ee3b14d7e3f6e38131d7bb33ff9db19eb8db0"
+    },
+    {
+      "path": "morning/test_late_index.py",
+      "bytes": 1287,
+      "sha256": "817bc41f792fd957522d5c67235fe560e3107f753a4b5628a40e0935f10ae552"
     }
   ],
   "production_admitted": false,
