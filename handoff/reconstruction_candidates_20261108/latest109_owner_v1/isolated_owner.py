@@ -19,6 +19,23 @@ def seal_terminal(path,report):
  try:os.fsync(directory)
  finally:os.close(directory)
 
+def checked_native_runner(runner,monitor,path,expected_sha):
+ if not isinstance(expected_sha,str) or len(expected_sha)!=64 or any(c not in '0123456789abcdef' for c in expected_sha):
+  raise ValueError('NATIVE_CODE_PIN')
+ path=str(path)
+ bootstrap=("import sys,hashlib,pathlib; p=sys.argv[1]; h=sys.argv[2]; "
+            "raw=pathlib.Path(p).read_bytes(); "
+            "(hashlib.sha256(raw).hexdigest()==h) or sys.exit(73); "
+            "sys.argv=[p,'--worker']; sys.path[0]=str(pathlib.Path(p).resolve().parent); "
+            "exec(compile(raw,p,'exec'),{'__name__':'__main__','__file__':p,'__package__':None})")
+ expected=[sys.executable,'-B',path,'--worker']
+ command=[sys.executable,'-B','-c',bootstrap,path,expected_sha]
+ native=runner.NativeRunner(monitor,command)
+ def invoke(args,**kwargs):
+  if args!=expected:raise ValueError('EXACT_ORIGINAL_NATIVE_ARGV')
+  return native.run(command,**kwargs)
+ return native,invoke
+
 def run(project,isolated,adapter_dir,input_wire,out):
  if out.exists():raise ValueError('EXISTING_ATTEMPT_INSPECT_NO_RETRY')
  out.mkdir();(out/'spill').mkdir();stock=out/'stock';stock.mkdir()
@@ -50,7 +67,7 @@ def run(project,isolated,adapter_dir,input_wire,out):
   context={'symbol':d['symbol'],'currency':'CNY','asof':rows[-1]['event_date'],'observation_date':'20261108','prefix_complete':True}
   mods,_=candidate.producer.module_candidates();prior=regression.original_state(mods,rows[:-1]);checkpoint={'test_only_original_history_initialization':True,'state':prior,'prefix_sha256':adapter.digest(rows[:-1])}
   cp=stock/'CHECKPOINT.json';w.save(cp,checkpoint);cpraw=cp.read_bytes();cppin=hashlib.sha256(cpraw).hexdigest();cold=json.loads(cpraw)
-  native=runner.NativeRunner(monitor,[sys.executable,'-B',str(candidate.__file__),'--worker']);candidate.subprocess=types.SimpleNamespace(run=native.run)
+  native,checked_native=checked_native_runner(runner,monitor,candidate.__file__,adapter.CANDIDATE_SHA);candidate.subprocess=types.SimpleNamespace(run=checked_native)
   compute=adapter.build(candidate,candidate.producer,mods,original_monitor_gate=monitor.gate)
   current,facts=compute(rows,context,prior_state=cold['state'],checkpoint_prefix_sha256=cold['prefix_sha256']);monitor.gate()
   if hashlib.sha256(cp.read_bytes()).hexdigest()!=cppin:raise ValueError('CHECKPOINT_CHANGED')
