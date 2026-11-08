@@ -187,10 +187,11 @@ def calculate(reg,policy,docs,safe):
  if str(top['source_date'])!=reg['source_date'] or panel['source_date']!=reg['source_date']:raise ValueError('TOP_PANEL_DATE')
  if top['schema']!=policy['top_schema']:raise ValueError('TOP_SCHEMA_POLICY')
  if top['schema']=='DATED_FIXED_REFERENCE_TOP200_V1':
-  # Original join only recognizes its historical schema label. No values/dates are changed.
-  top=dict(top,schema='NOV6_FIXED_REFERENCE_TOP200_V1')
- elif top['schema']!='NOV6_FIXED_REFERENCE_TOP200_V1':raise ValueError('TOP_SCHEMA_UNSUPPORTED')
- rows=module('prep',safe).annotate(top,panel)
+  # Explicit pinned daily scope input; never relabel a new pool as the Nov6 5575 pool.
+  rows=module('prep',safe).annotate_dated(top,panel,docs['pool_scope'])
+ elif top['schema']=='NOV6_FIXED_REFERENCE_TOP200_V1':
+  rows=module('prep',safe).annotate(top,panel)
+ else:raise ValueError('TOP_SCHEMA_UNSUPPORTED')
  prompt='请按名单核查目标交易日 '+reg['business_date']+' 的用户提供资料；分别列原始URL、披露时刻及时区、事件日期、事实/观点、风险与UNKNOWN。不得改四组公式或把事后数据倒填盘前；不表示买入或监测激活。名单行情日 '+reg['source_date']+'；截止 '+reg['cutoff']+'。\n'+'\n'.join(f"{x['rank']}. {x['symbol']} {x['name']}" for x in rows)
  return {'status':'LIST_AND_PROMPT_READY','rows':rows,'prompt':prompt,'target_date':reg['business_date'],'source_date':reg['source_date'],'monitor_list_frozen':False,'source_calls':0,'delivery_status':'NOT_SENT'}
 
@@ -211,4 +212,4 @@ def dispatch(node,run_id,environment_id,gate):
   if relative.is_absolute() or '..' in relative.parts or not relative.parts:raise ValueError('OUTPUT_SCOPE')
   gate();saved=safe.freeze(ROOT/relative,report)
  return {'status':result['status'],'saved':saved,'node':node,'domain':reg['domain'],'natural_verified':False,'business_accepted':False,'delivery_status':'NOT_SENT'}
-CODE_BINDINGS_SHA='32cf66923cc2c3de8c300f82f7bd6df2d74155f8e2c7ed8f6823d030672a3f6d'
+CODE_BINDINGS_SHA='f291a8c87611625e05c37c6b11c0f996488b83a004f18f742835311922f7383e'
