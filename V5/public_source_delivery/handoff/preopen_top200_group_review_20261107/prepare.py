@@ -21,6 +21,36 @@ def annotate(top,selection):
   result.append({'rank':r['rank'],'symbol':r['symbol'],'name':s['name'],'name_date_semantics':'PRESERVED_OLD_DISPLAY_NAME_NOT_REFRESHED','change_pct':r['change_pct_display'],'rank_actual_date':r['actual_date'],'selection_actual_date':s['actual_date'],'owner_outcome':s['owner_outcome'],'source_family':s['source_family'],'groups':dict(zip(GROUPS,states)),'existing_selected':any(x=='TRUE' for x in states),'has_unknown':any(x=='UNKNOWN' for x in states),'manual_chart_review':'UNKNOWN','no_buy':True})
  return result
 
+def annotate_dated(top,selection,scope):
+ """Explicit dated research pool join; no fixed historical denominator or activation.
+ Pool membership/version is caller-supplied input, not new source authorization.
+ Existing dispatch authenticates references under its unchanged review/owner gates.
+ """
+ import re
+ def date(value):
+  if type(value) is not str or not re.fullmatch(r'[0-9]{8}',value):raise ValueError('DATED_DATE')
+  return dt.datetime.strptime(value,'%Y%m%d').date()
+ if scope.get('schema')!='DATED_RESEARCH_POOL_V1' or top.get('schema')!='DATED_FIXED_REFERENCE_TOP200_V1' or selection.get('schema')!='PAR_SCREEN_DISPLAY_V1':raise ValueError('DATED_SCHEMA')
+ source=date(scope['source_date']);version=scope['pool_version'];symbols=scope['symbols']
+ if type(version) is not str or not version.strip():raise ValueError('POOL_VERSION')
+ if type(symbols) is not list or not 200<=len(symbols)<=20000 or any(type(s) is not str or not re.fullmatch(r'[0-9]{6}\.(SZ|SH|BJ)',s) for s in symbols) or len(set(symbols))!=len(symbols):raise ValueError('POOL_IDENTITIES')
+ for obj in (top,selection):
+  if obj.get('source_date')!=scope['source_date'] or obj.get('pool_version')!=version or type(obj.get('scope_count')) is not int or obj['scope_count']!=len(symbols):raise ValueError('DATED_POOL_BINDING')
+ rows=top['rows'];all_rows=selection['rows']
+ if type(rows) is not list or type(all_rows) is not list:raise ValueError('DATED_ROWS')
+ by={r['symbol']:r for r in all_rows}
+ if len(by)!=len(all_rows) or set(by)!=set(symbols) or len(rows)!=200 or len({r['symbol'] for r in rows})!=200 or not all(type(r['rank']) is int and r['rank']==i for i,r in enumerate(rows,1)) or any(r['symbol'] not in by for r in rows):raise ValueError('DATED_IDENTITY_RANK')
+ result=[]
+ for r in rows:
+  s=by[r['symbol']]
+  # Missing historical row date remains disclosed; future data cannot join this date.
+  for value in (r['actual_date'],s['actual_date']):
+   if value is not None and date(value)>source:raise ValueError('DATED_FUTURE_ROW')
+  states=[s['layers'][g]['after_risk'] for g in GROUPS]
+  if any(x not in ('TRUE','FALSE','UNKNOWN') for x in states):raise ValueError('STATE')
+  result.append({'rank':r['rank'],'symbol':r['symbol'],'name':s['name'],'name_date_semantics':'PRESERVED_OLD_DISPLAY_NAME_NOT_REFRESHED','change_pct':r['change_pct_display'],'rank_actual_date':r['actual_date'],'selection_actual_date':s['actual_date'],'owner_outcome':s['owner_outcome'],'source_family':s['source_family'],'groups':dict(zip(GROUPS,states)),'existing_selected':any(x=='TRUE' for x in states),'has_unknown':any(x=='UNKNOWN' for x in states),'manual_chart_review':'UNKNOWN','no_buy':True})
+ return result
+
 def main():
  if sha(safeio.local_bytes(HERE,'safeio.py'))!='facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5':raise ValueError('SAFEIO')
  data=[]
