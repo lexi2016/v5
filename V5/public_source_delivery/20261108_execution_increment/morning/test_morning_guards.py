@@ -11,6 +11,10 @@ class MorningGuardTests(unittest.TestCase):
         self.policy = {'required_comparisons':[{'symbol':'X','field':'open','source_ids':['S1','S2']}], 'max_observation_age_seconds':600}
         self.doc = {'records':[{'symbol':'X','field':'open','source_id':s,'observed_at':'2026-11-09T08:05:00+08:00','available_at':'2026-11-09T08:06:00+08:00'} for s in ('S1','S2')]}
 
+        self.policy['provider_catalog']={s:{'independence_group':s,'allowed_urls':['https://'+s.lower()+'.example.invalid/quote']} for s in ('S1','S2')}
+        self.policy['required_comparisons'][0]['semantic_contract']={'unit':'index_points','basis':'unadjusted','currency':'JPY','raw_fields':{s:['open'] for s in ('S1','S2')}}
+        for row in self.doc['records']:row.update(id='observation-'+row['source_id'],url=self.policy['provider_catalog'][row['source_id']]['allowed_urls'][0],unit='index_points',basis='unadjusted',currency='JPY',value='1')
+
     def validate(self):
         return module.validate_jk_observations(self.doc,self.policy,module.time(self.reg['cutoff']))
 
