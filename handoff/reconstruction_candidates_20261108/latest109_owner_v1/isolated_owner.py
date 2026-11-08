@@ -7,6 +7,11 @@ def load(path,name,sha=None):
  s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);sys.modules[name]=m;# Execute the verified snapshot without reopening the path.
  exec(compile(raw,str(path),'exec'),m.__dict__);return m
 
+def load_candidate(adapter,candidate_path,action_path):
+ # Retain the adapter's rule gate, but never let its loader reopen checked code.
+ adapter.checked(action_path,adapter.ACTION_SHA)
+ return load(candidate_path,'registered_latest109_candidate',adapter.CANDIDATE_SHA)
+
 def seal_terminal(path,report):
  # Publish complete immutable bytes; leave evidence on an uncertain commit.
  raw=json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False).encode()
@@ -43,7 +48,7 @@ def run(project,isolated,adapter_dir,input_wire,out):
  monitor=None;con=None;lockfd=None;lock_acquired=False
  try:
   adapter=load(adapter_dir/'latest109_rebuild.py','registered_rebuild','3a4a960fd2995d35298474f52b7cd3006ef35cc4de673c552e0290f75d8226e2')
-  candidate=adapter.load(isolated/'handoff/latest109_rebuild_v1_20261106/latest109_candidate.py',isolated/'handoff/panel_field_algorithms_20261102/foundation_action_candidate/ACTION_RULES.json')
+  candidate=load_candidate(adapter,isolated/'handoff/latest109_rebuild_v1_20261106/latest109_candidate.py',isolated/'handoff/panel_field_algorithms_20261102/foundation_action_candidate/ACTION_RULES.json')
   source=load(project/'handoff/unified_candidate_20261102/source.py','source','5f5932db843a723e976dbea26bd79e05b1a2f494228ed2462fd5403c1d6ffe35')
   regression=load(isolated/'handoff/latest109_rebuild_v1_20261106/real_regression_301683.py','regression','01966d226fcbdf060b43b1e8d787a1b91e3147f4171583f07273edb0665633ea')
   bridge_module=load(project/'handoff/portable_par_reader_v1_20261106/portable_par_reader.py','bridge','1011b538bc888723cee4129a8b0161420064dc292d7a04a689578fdcb0077470')
