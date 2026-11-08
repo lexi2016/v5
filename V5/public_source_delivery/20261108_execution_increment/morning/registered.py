@@ -152,7 +152,7 @@ def project_user_materials(manifest,business_date,section_observed,assembly_cuto
  if type(mapping)is not dict or set(mapping)!=categories or any(type(v)is not str or not v.strip() for v in mapping.values()) or len(set(mapping.values()))!=3:raise ValueError('MATERIAL_COLUMN_MAP')
  rows=manifest['records'];late=manifest['late_records'];count=manifest['scope_count']
  if type(rows)is not list or type(late)is not list or type(count)is not int or len(rows)!=count or count!=200:raise ValueError('MATERIAL_FULL_RESEARCH_SCOPE')
- seen=set();late_keys=set()
+ seen=set();late_keys=set();late_bindings={}
  for row in rows:
   if type(row)is not dict or set(row)!={'symbol','columns'} or not re.fullmatch(r'[0-9]{6}\.(SZ|SH|BJ)',str(row['symbol'])) or row['symbol'] in seen:raise ValueError('MATERIAL_SYMBOL_ROWS')
   seen.add(row['symbol']);columns=row['columns'];found=set()
@@ -166,6 +166,7 @@ def project_user_materials(manifest,business_date,section_observed,assembly_cuto
     if status=='LATE_NOT_AVAILABLE_AT_CUTOFF':
      if set(item)!={'symbol','category','status','reported_status','available_at','details'} or item.get('reported_status') not in ('AVAILABLE','NOT_PUBLISHED','NOT_OBSERVED','BODY_UNAVAILABLE','UNKNOWN') or item.get('details') is not None or time(item['available_at'])<=cutoff:raise ValueError('MATERIAL_LATE_ISOLATION')
      late_keys.add((row['symbol'],category))
+     late_bindings[(row['symbol'],category)]=(item['reported_status'],item['available_at'])
     elif status not in ('AVAILABLE','NOT_PUBLISHED','NOT_OBSERVED','BODY_UNAVAILABLE','UNKNOWN'):raise ValueError('MATERIAL_STATUS')
     elif item.get('reason')=='USER_RESULT_NOT_SUPPLIED':
      if set(item)!={'symbol','category','status','details','reason'} or status!='UNKNOWN' or item.get('details') is not None:raise ValueError('MATERIAL_MISSING_STATE')
@@ -184,6 +185,9 @@ def project_user_materials(manifest,business_date,section_observed,assembly_cuto
  for item in late:
   key=(item['symbol'],item['category'])
   if key not in late_keys or key in declared or time(item['available_at'])<=cutoff:raise ValueError('MATERIAL_LATE_INDEX')
+  # Original producer copies status and available_at unchanged into the placeholder.
+  # A self-hash cannot establish that these two views still describe the same row.
+  if (item.get('status'),item['available_at'])!=late_bindings[key]:raise ValueError('MATERIAL_LATE_INDEX_BINDING')
   declared.append(key)
  if set(declared)!=late_keys:raise ValueError('MATERIAL_LATE_INDEX')
  return {'schema':'MORNING_USER_MATERIAL_PROJECTION_V1','source_manifest_identity':identity,
