@@ -1,0 +1,70 @@
+{
+  "schema": "CANDIDATE_PUBLICATION_RECEIPT_V1",
+  "status": "UPLOADED_AND_REMOTE_TEXT_BYTES_MATCH",
+  "repository": "lexi2016/v5",
+  "branch": "dev/v5-main-integration-20261012",
+  "candidates": [
+    {
+      "name": "a0915_v2",
+      "commit": "e1559949a9604121785c5794d3c9b90d571f555e",
+      "files": [
+        {
+          "name": "candidate.py",
+          "match": true,
+          "blob": "61d39c2f8e62de370c2313d0469b4ceb707d4843",
+          "url": "https://github.com/lexi2016/v5/blob/e1559949a9604121785c5794d3c9b90d571f555e/handoff/reconstruction_candidates_20261108/a0915_v2/candidate.py"
+        },
+        {
+          "name": "test_candidate.py",
+          "match": true,
+          "blob": "1b6451cc9adb7ddf187131507aeb0fa417a782a6",
+          "url": "https://github.com/lexi2016/v5/blob/e1559949a9604121785c5794d3c9b90d571f555e/handoff/reconstruction_candidates_20261108/a0915_v2/test_candidate.py"
+        },
+        {
+          "name": "README.md",
+          "match": true,
+          "blob": "e2f6dd0e2a8c87627a4689bc80a98242e0242d70",
+          "url": "https://github.com/lexi2016/v5/blob/e1559949a9604121785c5794d3c9b90d571f555e/handoff/reconstruction_candidates_20261108/a0915_v2/README.md"
+        },
+        {
+          "name": "REGISTRATION_PROPOSAL.json",
+          "match": true,
+          "blob": "2447ee52a67d94ba5f826699ed97423ff346a5ca",
+          "url": "https://github.com/lexi2016/v5/blob/e1559949a9604121785c5794d3c9b90d571f555e/handoff/reconstruction_candidates_20261108/a0915_v2/REGISTRATION_PROPOSAL.json"
+        }
+      ]
+    },
+    {
+      "name": "latest109_v2",
+      "commit": "bfcba5da678d5401c695f90c54b510b4b6cfb9bb",
+      "files": [
+        {
+          "name": "latest109_rebuild.py",
+          "match": true,
+          "blob": "3dc1064be7ed4dbe35d73f33790f08ed52d40313",
+          "url": "https://github.com/lexi2016/v5/blob/bfcba5da678d5401c695f90c54b510b4b6cfb9bb/handoff/reconstruction_candidates_20261108/latest109_v2/latest109_rebuild.py"
+        },
+        {
+          "name": "test_rebuild.py",
+          "match": true,
+          "blob": "278a2a4d41337408606ed18630f4381e2da46da6",
+          "url": "https://github.com/lexi2016/v5/blob/bfcba5da678d5401c695f90c54b510b4b6cfb9bb/handoff/reconstruction_candidates_20261108/latest109_v2/test_rebuild.py"
+        },
+        {
+          "name": "README.md",
+          "match": true,
+          "blob": "0b63b43074cbcaa70b41ca9f050522075e1ee46d",
+          "url": "https://github.com/lexi2016/v5/blob/bfcba5da678d5401c695f90c54b510b4b6cfb9bb/handoff/reconstruction_candidates_20261108/latest109_v2/README.md"
+        },
+        {
+          "name": "REGISTRY.json",
+          "match": true,
+          "blob": "8668cce92f805be9ab29c612b3e218301524e594",
+          "url": "https://github.com/lexi2016/v5/blob/bfcba5da678d5401c695f90c54b510b4b6cfb9bb/handoff/reconstruction_candidates_20261108/latest109_v2/REGISTRY.json"
+        }
+      ]
+    }
+  ],
+  "note": "Candidate registration documents are immutable pre-publication snapshots. This receipt supersedes their github_uploaded:false status only. No production admission, deployment, native109 or natural business acceptance is claimed.",
+  "production_deployed": false
+}
