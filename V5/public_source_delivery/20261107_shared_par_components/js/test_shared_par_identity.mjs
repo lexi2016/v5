@@ -47,3 +47,20 @@ test('unregistered date stays blocked',async()=>{
 test('public default loader remains unbound',async()=>{
  await assert.rejects(loadScreen(),/PUBLIC_EXPORT_NO_APPROVED_PRIVATE_BINDING/);
 });
+test('concurrent consumers cannot contaminate each other or loader ownership',async()=>{
+ const raw=screen();let calls=0;
+ const store=createSharedParStore({loader:async()=>{calls++;return raw;}});
+ const [a,b,snap]=await Promise.all([store.read(request),store.read(request),store.snapshot(request)]);
+ assert.equal(calls,1);
+ a.rows[0].layers.original.after_risk='TRUE';a.sources.selection.bytes=0;a.qualifications.production_allowed=true;
+ assert.equal(b.rows[0].layers.original.after_risk,'UNKNOWN');
+ assert.equal(b.sources.selection.bytes,24541169);
+ assert.equal(b.qualifications.production_allowed,false);
+ assert.equal(snap.sources.selection.bytes,24541169);
+ assert.equal(snap.qualifications.production_allowed,false);
+ assert.equal(raw.rows[0].layers.original.after_risk,'UNKNOWN');
+ snap.sources.catalog.bytes=999;
+ assert.equal(b.sources.catalog.bytes,1);assert.equal(raw.sources.catalog.bytes,1);
+ raw.rows[0].layers.original.after_risk='TRUE';
+ assert.equal(b.rows[0].layers.original.after_risk,'UNKNOWN');
+});
