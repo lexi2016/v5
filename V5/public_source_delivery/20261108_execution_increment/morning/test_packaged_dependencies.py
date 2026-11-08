@@ -13,6 +13,9 @@ class PackagedTests(unittest.TestCase):
   reg={'node':'jk-verify','source_date':'20261109','business_date':'20261109','cutoff':cut}
   policy={'source_ids':['S1','S2'],'required_comparisons':[{'symbol':'X','field':'open','source_ids':['S1','S2']}],'max_observation_age_seconds':600}
   rows=[{'id':s,'source_id':s,'source_date':'2026-11-09','symbol':'X','field':'open','value':'1','url':'https://example.org/'+s,'observed_at':'2026-11-09T07:59:00+08:00','available_at':'2026-11-09T07:59:30+08:00'} for s in ['S1','S2']]
+  policy['provider_catalog']={s:{'independence_group':s,'allowed_urls':['https://example.org/'+s]} for s in ('S1','S2')}
+  policy['required_comparisons'][0]['semantic_contract']={'unit':'index_points','basis':'unadjusted','currency':'JPY','raw_fields':{s:['open'] for s in ('S1','S2')}}
+  for row in rows:row.update(unit='index_points',basis='unadjusted',currency='JPY')
   result=m.calculate(reg,policy,{'observations':{'source_day':'2026-11-09','records':rows}},safe)
   self.assertEqual(result['status'],'RECONCILED');self.assertFalse(result['source_admission']);self.assertEqual(result['collector_calls'],0)
  def test_delivery_stays_unbound(self):
