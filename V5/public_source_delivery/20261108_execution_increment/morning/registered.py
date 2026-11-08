@@ -342,6 +342,8 @@ def validate_freeze_panel_freshness(reg,policy,docs):
   if type(s) is not str or not re.fullmatch('[0-9]{8}',s):raise ValueError('PANEL_CALENDAR_DATE')
   return dt.datetime.strptime(s,'%Y%m%d').date()
  source=date(reg['source_date']);local_day=cutoff.astimezone(tz).date()
+ business_day=date(reg['business_date'])
+ if business_day!=local_day:raise ValueError('PANEL_BUSINESS_DATE')
  cal=docs.get('market_calendar')
  if type(cal) is not dict or set(cal)!={'schema','market','timezone','version','coverage_start','coverage_end','source_reference','sessions'} or cal['schema']!='MARKET_SESSION_CALENDAR_V1':raise ValueError('PANEL_CALENDAR_REQUIRED')
  if (cal['market'],cal['timezone'],cal['version'])!=(cfg['market'],cfg['timezone'],cfg['calendar_version']):raise ValueError('PANEL_CALENDAR_BINDING')
@@ -356,6 +358,7 @@ def validate_freeze_panel_freshness(reg,policy,docs):
   if not start<=day<=end or close.astimezone(tz).date()!=day or (last is not None and day<=last):raise ValueError('PANEL_SESSION_ORDER')
   last=day;close_by_date[day]=close
   if close<=cutoff:completed.append(day)
+ if business_day not in close_by_date:raise ValueError('PANEL_BUSINESS_SESSION')
  if source not in completed or len(completed)-1-completed.index(source)>cfg['max_completed_session_lag']:raise ValueError('PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE')
  evidence=docs.get('panel_evidence')
  if type(evidence) is not dict or set(evidence)!={'schema','panel_identity','source_date','calendar_version','event_at','observed_at','available_at','source_reference'} or evidence['schema']!='FREEZE_PANEL_EVIDENCE_V1':raise ValueError('PANEL_EVIDENCE_REQUIRED')
@@ -434,3 +437,4 @@ def dispatch(node,run_id,environment_id,gate):
   gate();saved=safe.freeze(ROOT/relative,report)
  return {'status':result['status'],'saved':saved,'node':node,'domain':reg['domain'],'natural_verified':False,'business_accepted':False,'delivery_status':'NOT_SENT'}
 CODE_BINDINGS_SHA='f291a8c87611625e05c37c6b11c0f996488b83a004f18f742835311922f7383e'
+
