@@ -68,7 +68,7 @@ def run(project,isolated,adapter_dir,input_wire,out):
  report={'production_allowed':False,'source_admission':False,'selection_admission':False,'scope':'ISOLATED_ONE_HISTORICAL_STOCK','original_owner_restored':False}
  monitor=None;con=None;lockfd=None;lock_acquired=False;writer_started=False
  try:
-  adapter=load(adapter_dir/'latest109_rebuild.py','registered_rebuild','3652a14cb0cb543f6b25a2bbd510f130f3fd6dbe0b4f4ae03538291ce619cf40')
+  adapter=load(adapter_dir/'latest109_rebuild.py','registered_rebuild','455998334bc933b4b0faa2e2a9a0f530e6ddb3f4b6f9d4070f64389b930e3c00')
   candidate=load_candidate(adapter,isolated/'handoff/latest109_rebuild_v1_20261106/latest109_candidate.py',isolated/'handoff/panel_field_algorithms_20261102/foundation_action_candidate/ACTION_RULES.json')
   source=load(project/'handoff/unified_candidate_20261102/source.py','source','5f5932db843a723e976dbea26bd79e05b1a2f494228ed2462fd5403c1d6ffe35')
   regression=load(isolated/'handoff/latest109_rebuild_v1_20261106/real_regression_301683.py','regression','01966d226fcbdf060b43b1e8d787a1b91e3147f4171583f07273edb0665633ea')
