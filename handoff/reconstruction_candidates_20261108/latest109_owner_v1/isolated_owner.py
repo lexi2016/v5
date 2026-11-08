@@ -7,6 +7,18 @@ def load(path,name,sha=None):
  s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);sys.modules[name]=m;# Execute the verified snapshot without reopening the path.
  exec(compile(raw,str(path),'exec'),m.__dict__);return m
 
+def seal_terminal(path,report):
+ # Publish complete immutable bytes; leave evidence on an uncertain commit.
+ raw=json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False).encode()
+ temp=path.with_name(path.name+'.pending')
+ fd=os.open(temp,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)
+ with os.fdopen(fd,'wb') as stream:
+  stream.write(raw);stream.flush();os.fsync(stream.fileno())
+ os.link(temp,path,follow_symlinks=False);os.unlink(temp)
+ directory=os.open(path.parent,os.O_RDONLY|os.O_DIRECTORY)
+ try:os.fsync(directory)
+ finally:os.close(directory)
+
 def run(project,isolated,adapter_dir,input_wire,out):
  if out.exists():raise ValueError('EXISTING_ATTEMPT_INSPECT_NO_RETRY')
  out.mkdir();(out/'spill').mkdir();stock=out/'stock';stock.mkdir()
@@ -63,13 +75,16 @@ def run(project,isolated,adapter_dir,input_wire,out):
   try:
    if monitor is not None:monitor.con=None;monitor.stop();report['monitor']=monitor.facts()
   except Exception as e:cleanup.append('MONITOR:'+repr(e))
-  try:
-   if lockfd is not None:
-    if lock_acquired:fcntl.flock(lockfd,fcntl.LOCK_UN)
-    os.close(lockfd);report['isolated_lock_released']=lock_acquired
-  except Exception as e:cleanup.append('LOCK:'+repr(e))
   if cleanup:report.update(status='CLEANUP_UNCERTAIN_INSPECT_NO_RETRY',cleanup_errors=cleanup)
-  (out/'RESULT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2));print(json.dumps({k:v for k,v in report.items() if k not in ('traceback','facts','original_writer_receipt')},ensure_ascii=False))
+  report['lock_held_during_terminal']=lock_acquired
+  try:
+   # Keep the existing lock domain until terminal publication and directory sync.
+   seal_terminal(out/'RESULT.json',report)
+  finally:
+   if lockfd is not None:os.close(lockfd)
+  # Only the returned/printed result can attest to the subsequent release.
+  report['isolated_lock_released']=lock_acquired
+  print(json.dumps({k:v for k,v in report.items() if k not in ('traceback','facts','original_writer_receipt')},ensure_ascii=False))
  return report
 if __name__=='__main__':
  p=argparse.ArgumentParser();p.add_argument('--project',type=pathlib.Path,required=True);p.add_argument('--isolated',type=pathlib.Path,required=True);p.add_argument('--adapter-dir',type=pathlib.Path,required=True);p.add_argument('--input-wire',type=pathlib.Path,required=True);p.add_argument('--out',type=pathlib.Path,required=True);a=p.parse_args();r=run(a.project,a.isolated,a.adapter_dir,a.input_wire,a.out);sys.exit(0 if r["status"].startswith("PASS_") else 1)
