@@ -3,6 +3,7 @@ No acquisition, persistence, locks, production registration or lowered resource 
 """
 import hashlib, importlib.util, json
 from pathlib import Path
+from datetime import datetime
 CANDIDATE_SHA='4acf301445ce3c63fc0a3116e76a24bc9f7410474aa50de990ddc8cc350a25cd'
 ACTION_SHA='16457c1ebda6096652dc356d8f7044ce0e5a323fe5ebf16733423dabca0fb6ec'
 FLAGS={'production_allowed':False,'source_admission':False,'selection_admission':False,'original_latest109_restored':False}
@@ -22,8 +23,20 @@ def load(candidate_path,action_path):
  return module
 
 def validate_checkpoint(rows,context,state,checkpoint_prefix_sha256):
+ if not isinstance(rows,list) or len(rows)<2 or not all(isinstance(row,dict) for row in rows):raise ValueError('CHECKPOINT_ROWS')
+ if not isinstance(context,dict) or not isinstance(state,dict):raise ValueError('REVIEWED_PRIOR_COMPONENT_REQUIRED')
+ symbol=context.get('symbol')
+ if not isinstance(symbol,str) or not symbol or any(row.get('symbol')!=symbol for row in rows):raise ValueError('CHECKPOINT_ROW_SYMBOL')
+ if type(state.get('count')) is not int:raise ValueError('PRIOR_COUNT_TYPE')
+ previous=None
+ for row in rows:
+  date=row.get('event_date')
+  if not isinstance(date,str) or len(date)!=8 or not date.isascii() or not date.isdigit():raise ValueError('CHECKPOINT_DATE_FORMAT')
+  try:datetime.strptime(date,'%Y%m%d')
+  except ValueError as exc:raise ValueError('CHECKPOINT_DATE_FORMAT') from exc
+  if previous is not None and date<=previous:raise ValueError('CHECKPOINT_DATE_ORDER')
+  previous=date
  if checkpoint_prefix_sha256 != digest(rows[:-1]):raise ValueError("PRIOR_PREFIX_COMMITMENT")
- if len(rows)<2 or not isinstance(state,dict):raise ValueError('REVIEWED_PRIOR_COMPONENT_REQUIRED')
  if (state.get('symbol'),state.get('count'),state.get('last_date'))!=(context.get('symbol'),len(rows)-1,rows[-2].get('event_date')):raise ValueError('PRIOR_IDENTITY')
  if rows[-1].get('symbol')!=context.get('symbol') or rows[-1].get('event_date')!=context.get('asof'):raise ValueError('TARGET_IDENTITY')
  # Hashes bind the new result to exact caller input, without claiming source admission.
