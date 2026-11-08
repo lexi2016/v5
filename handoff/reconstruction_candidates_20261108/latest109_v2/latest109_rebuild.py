@@ -6,6 +6,9 @@ from pathlib import Path
 from datetime import datetime
 CANDIDATE_SHA='4acf301445ce3c63fc0a3116e76a24bc9f7410474aa50de990ddc8cc350a25cd'
 ACTION_SHA='16457c1ebda6096652dc356d8f7044ce0e5a323fe5ebf16733423dabca0fb6ec'
+# Existing frozen candidate DEPENDENCIES.json, not a new admission contract.
+SCHEMA_SHA='d491b09892efd98e74a96c01d239e1df84ccb5887912ff2bb8a3294f3b578466'
+SCHEMA_BYTES=5468
 FLAGS={'production_allowed':False,'source_admission':False,'selection_admission':False,'original_latest109_restored':False}
 
 def digest(value):
@@ -25,6 +28,13 @@ def load(candidate_path,action_path):
  # Execute the exact verified snapshot, never reopen code via the loader.
  exec(compile(raw,str(path),'exec'),module.__dict__)
  return module
+
+def load_schema(path):
+ raw=Path(path).read_bytes()
+ if len(raw)!=SCHEMA_BYTES or hashlib.sha256(raw).hexdigest()!=SCHEMA_SHA:raise ValueError('SCHEMA_PIN')
+ schema=json.loads(raw)
+ if not isinstance(schema,dict) or len(schema)!=109:raise ValueError('FIELD_COUNT_109')
+ return schema
 
 def validate_checkpoint(rows,context,state,checkpoint_prefix_sha256):
  if not isinstance(rows,list) or len(rows)<2 or not all(isinstance(row,dict) for row in rows):raise ValueError('CHECKPOINT_ROWS')
@@ -54,8 +64,7 @@ def build(candidate,producer,modules,*,original_monitor_gate):
  checked(candidate.__file__,CANDIDATE_SHA)
  actual_action=Path(candidate.__file__).resolve().parent.parent/'panel_field_algorithms_20261102/foundation_action_candidate/ACTION_RULES.json'
  checked(actual_action,ACTION_SHA)
- schema=json.loads((Path(producer.H)/'FIELD_SCHEMA_109.json').read_bytes())
- if len(schema)!=109:raise ValueError('FIELD_COUNT_109')
+ schema=load_schema(Path(producer.H)/'FIELD_SCHEMA_109.json')
  original_monitor_gate()
  compute=candidate.build(producer,modules,gate=original_monitor_gate)
  def run(rows,context,prior_state=None,*,checkpoint_prefix_sha256):
