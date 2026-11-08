@@ -60,6 +60,11 @@
       "path": "morning/test_late_index.py",
       "bytes": 1287,
       "sha256": "817bc41f792fd957522d5c67235fe560e3107f753a4b5628a40e0935f10ae552"
+    },
+    {
+      "path": "daily1540/owner_bridge.py",
+      "bytes": 16540,
+      "sha256": "6fd39c651689f61151f78e8fa3de99a0d2550a7d07a86e4c8c863e9158b2e2e4"
     }
   ],
   "production_admitted": false,

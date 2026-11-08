@@ -34,6 +34,14 @@ def _need(ok, reason):
         raise ValueError(reason)
 
 
+def _error_reason_after_reconciliation(error):
+    """Best-effort display only, after the owner's context saw the primary."""
+    try:
+        return str(error)
+    except BaseException:
+        return 'EXCEPTION_TEXT_UNAVAILABLE_PRIMARY_PRESERVED'
+
+
 def _key(ref):
     return json.dumps(ref, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
 
@@ -282,7 +290,8 @@ def dispatch(run_id, environment_id, stage=None):
                         result['jobs_started'] += int(bool(attempt and attempt.events))
                         value = {'symbol': item['symbol'], 'target_date': item['target_date'],
                                  'phase': getattr(attempt, 'phase', 'BLOCKED_BEFORE_STAGE'),
-                                 'error_type': type(error).__name__, 'reason': str(error),
+                                 'error_type': type(error).__name__,
+                                 'reason': 'OWNER_STAGE_EXCEPTION_REQUIRES_RECONCILIATION',
                                  'automatic_retry_allowed': False}
                         result['items'].append(value)
                         result.update(status='UNKNOWN_RECONCILIATION_REQUIRED',
@@ -319,6 +328,7 @@ def dispatch(run_id, environment_id, stage=None):
             _need(record['verify_contracts'](record) is None, 'OWNER_VERIFIER_PROTOCOL')
     except Exception as error:
         result.update(status='UNKNOWN_RECONCILIATION_REQUIRED' if result['stage_calls']
-                      else 'BLOCKED_OWNER_CONTRACT', error_type=type(error).__name__, reason=str(error),
+                      else 'BLOCKED_OWNER_CONTRACT', error_type=type(error).__name__,
+                      reason=_error_reason_after_reconciliation(error),
                       automatic_retry_allowed=False)
     return result
