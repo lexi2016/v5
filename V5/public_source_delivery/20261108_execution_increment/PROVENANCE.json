@@ -26,9 +26,12 @@
     },
     {
       "path": "morning/registered.py",
-      "bytes": 10214,
-      "sha256": "6994912c3cfe28c29f51e249eec68cba8e1299ac2263346300fbded8e9e29ca7",
-      "source_bytes_unchanged": true
+      "bytes": 35302,
+      "sha256": "90c890c8e2ad4a198cf84519e8651095d2822c486bc7453ae1c3d52819d0a62f",
+      "source_bytes_unchanged": false,
+      "original_source_bytes": 10214,
+      "original_source_sha256": "6994912c3cfe28c29f51e249eec68cba8e1299ac2263346300fbded8e9e29ca7",
+      "source_revision": "045209b7a6147cc6bbc9e125cafd8b3434c736ee"
     },
     {
       "path": "evening/execution.py",
