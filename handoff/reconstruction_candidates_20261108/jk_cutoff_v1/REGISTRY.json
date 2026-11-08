@@ -1,0 +1,16 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "standalone_dependency_closure": false,
+  "files": {
+    "isolated/handoff/morning_registered_execution_v2_20261107/registered.py": {
+      "bytes": 12442,
+      "sha256": "3e2d995cb283325eb8818c33c37d8c18c6fe5fa507f40176b2469a152ad6064d"
+    },
+    "test_jk.py": {
+      "bytes": 3684,
+      "sha256": "4b191ea3d2111ae55d2a3971f584ab34c6a642e7a9011cf9651e227aec6b38b8"
+    }
+  }
+}
