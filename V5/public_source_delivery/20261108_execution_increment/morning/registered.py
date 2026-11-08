@@ -65,6 +65,9 @@ def semantic_compare(doc,policy,cutoff):
  """Exact normalized fields from independently approved policy; no scoring/estimation."""
  expected=policy['semantic_keys'];sources=policy['source_ids']
  if len(sources)<2 or len(set(sources))!=len(sources) or not expected or len(set(expected))!=len(expected):raise ValueError('MULTISOURCE_POLICY')
+ # Per-fact temporal contract is mandatory; an early envelope cannot admit late facts.
+ ages=policy.get('semantic_max_age_seconds')
+ if type(ages) is not dict or set(ages)!=set(expected) or any(type(v) is not int or v<=0 for v in ages.values()):raise ValueError('SEMANTIC_FRESHNESS_POLICY_REQUIRED')
  if set(doc['sources'])!=set(sources):raise ValueError('SOURCE_SET_MISMATCH')
  maps={};unknown=[];conflicts=[]
  for source in sources:
@@ -78,6 +81,12 @@ def semantic_compare(doc,policy,cutoff):
    definition=policy['key_definitions'][row['key']]
    if set(definition)!={'symbol','field','unit','basis','currency','asof'} or any(not definition[k] for k in ('symbol','field','unit','basis','asof')):raise ValueError('SEMANTIC_DEFINITION_REQUIRED')
    if row['definition']!=definition:raise ValueError('SEMANTIC_DEFINITION_MISMATCH')
+   try:
+    observed=time(row['observed_at']);available=time(row['available_at']);envelope=time(d['available_at'])
+    if not observed<=available<=envelope<=cutoff:raise ValueError('SEMANTIC_FACT_TIME_ORDER_OR_CUTOFF')
+    if (cutoff-observed).total_seconds()>ages[row['key']]:raise ValueError('SEMANTIC_FACT_STALE')
+   except (KeyError,TypeError,OverflowError) as exc:
+    raise ValueError('SEMANTIC_FACT_TIMING_REQUIRED') from exc
    value=row['value']
    if value is None:unknown.append([source,row['key']]);values[row['key']]=None;continue
    number=Decimal(str(value))
