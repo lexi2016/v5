@@ -16,6 +16,10 @@ class Tests(unittest.TestCase):
  def setUp(self):
   self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup)
   pathlib.Path(self.tmp.name,"FIELD_SCHEMA_109.json").write_text(json.dumps({str(i):{} for i in range(109)}))
+  import hashlib
+  raw=pathlib.Path(self.tmp.name,"FIELD_SCHEMA_109.json").read_bytes()
+  for key,value in [('SCHEMA_SHA',hashlib.sha256(raw).hexdigest()),('SCHEMA_BYTES',len(raw))]:
+   fixture_pin=patch.object(m,key,value);fixture_pin.start();self.addCleanup(fixture_pin.stop)
   self.producer=types.SimpleNamespace(H=pathlib.Path(self.tmp.name),core=types.SimpleNamespace(check_field=lambda value,spec:None))
   self.pinpatch=patch.object(m,"checked",side_effect=lambda path,sha:path);self.pinpatch.start();self.addCleanup(self.pinpatch.stop)
  def test_positive_synthetic_interface(self):
