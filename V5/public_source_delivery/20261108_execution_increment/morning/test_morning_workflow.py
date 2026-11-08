@@ -7,6 +7,7 @@ class Workflow(unittest.TestCase):
   if not package:self.skipTest('explicit current packaged source required')
   with tempfile.TemporaryDirectory() as tmp:
    root=pathlib.Path(tmp)/'public';shutil.copytree(package,root);entry=root/'20261108_execution_increment/morning/registered.py'
+   shutil.copyfile(pathlib.Path(__file__).with_name('registered.py'),entry)
    spec=importlib.util.spec_from_file_location('workflow_registered',entry);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);safe=m.module('safeio')
    symbols=[f'{i:06d}.SZ' for i in range(1,202)];groups=('original','nav_smallk','nav_pullback','nav_breakout')
    panel={'schema':'PAR_SCREEN_DISPLAY_V1','source_date':'20261109','pool_version':'SYNTHETIC_POOL_V1','scope_count':201,'partitions':{'COMPUTED_CURRENT':201},'dedup_selected':0,'dedup_pending':201,'counts':{g:{'after_risk':{'TRUE':0,'FALSE':0,'UNKNOWN':201}} for g in groups},'rows':[{'symbol':s,'name':'SYNTHETIC','owner_outcome':'COMPUTED_CURRENT','source_family':'SYNTHETIC_TEST','actual_date':'20261109','layers':{g:{'after_risk':'UNKNOWN'} for g in groups}} for s in symbols]}
@@ -20,7 +21,9 @@ class Workflow(unittest.TestCase):
    reg['cutoff']='2026-11-09T07:00:00+08:00';policy['freeze_chain'].update(mode='DELTA',version='TEST_V2',expected_parent_identity=first['lineage']['identity']);docs['freeze_parent']=first['lineage'];panel['rows'][0]['name']='SYNTHETIC corrected';docs['freeze_changes']={symbols[0]:'Synthetic name correction'}
    delta=m.calculate(reg,policy,docs,safe);self.assertEqual(delta['lineage']['parent_identity'],first['lineage']['identity']);self.assertEqual(len(delta['lineage']['changes']),1)
    jkpolicy={'required_comparisons':[{'symbol':'JK_TEST','field':'open','source_ids':['synthetic1','synthetic2']}],'max_observation_age_seconds':60}
-   observations={'source_day':'2026-11-09','records':[{'id':'fixture_'+s,'source_id':s,'source_date':'2026-11-09','symbol':'JK_TEST','field':'open','value':'1','url':'https://example.invalid/synthetic','observed_at':'2026-11-09T07:59:00+08:00','available_at':'2026-11-09T07:59:30+08:00'} for s in ('synthetic1','synthetic2')]}
+   jkpolicy['provider_catalog']={s:{'independence_group':s,'allowed_urls':['https://'+s+'.example.invalid/quote']} for s in ('synthetic1','synthetic2')}
+   jkpolicy['required_comparisons'][0]['semantic_contract']={'unit':'index_points','basis':'unadjusted','currency':'JPY','raw_fields':{s:['open'] for s in ('synthetic1','synthetic2')}}
+   observations={'source_day':'2026-11-09','records':[{'id':'fixture_'+s,'source_id':s,'source_date':'2026-11-09','symbol':'JK_TEST','field':'open','value':'1','url':'https://'+s+'.example.invalid/quote','unit':'index_points','basis':'unadjusted','currency':'JPY','observed_at':'2026-11-09T07:59:00+08:00','available_at':'2026-11-09T07:59:30+08:00'} for s in ('synthetic1','synthetic2')]}
    jkreg=dict(reg,node='jk-verify',cutoff='2026-11-09T08:00:00+08:00');jk=m.calculate(jkreg,jkpolicy,{'observations':observations},safe);self.assertEqual(jk['status'],'RECONCILED');self.assertFalse(jk['source_admission'])
    sections={}
    for name,content,observed in [('freeze',delta,'07:00:00'),('jk-verify',jk,'08:00:00'),('morning-materials',{'status':'USER_RESEARCH_HANDOFF_PENDING','source':'SYNTHETIC_TEST'},'08:00:00')]:
