@@ -21,6 +21,8 @@ def ingest_user_results(target_date,list_sha,symbols,policy,doc,parent=None):
     from urllib.parse import urlsplit
     categories={'announcements','essential_news','preopen_memo','preopen_analysis'}
     def stamp(value):
+        # Refuse unsupported precision rather than moving late evidence before cutoff.
+        if type(value)is not str or re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})?',value) is None:raise ValueError('RESULT_TIME_FORMAT_OR_PRECISION')
         parsed=dt.datetime.fromisoformat(value)
         if parsed.tzinfo is None:raise ValueError('RESULT_TIMEZONE_REQUIRED')
         return parsed
