@@ -123,6 +123,43 @@ def validate_jk_observations(doc,policy,cutoff):
          'source_identity_independence':'REQUIRES_TRUSTED_POLICY_REVIEW',
          'source_admission':False,'production_bound':False}
 
+def assemble_morning_preview(reg,policy,docs):
+ """NEW synthetic-only 08:10 assembly contract; not original delivery authority.
+ Structured sections preserve their reported status/content. No sends or collection.
+ The existing dispatch still requires its unchanged owner/review/source gates.
+ """
+ names=('freeze','morning-materials','jk-verify')
+ cutoff=time(reg['cutoff']);local=cutoff.astimezone(ZoneInfo('Asia/Shanghai'))
+ day=dt.datetime.strptime(reg['business_date'],'%Y%m%d').date()
+ if local.date()!=day or local.time()!=dt.time(8,10):raise ValueError('ASSEMBLY_0810_CUTOFF')
+ if reg.get('domain')!='synthetic' or policy.get('assembly_schema')!='MORNING_0810_PREVIEW_V1':raise ValueError('ASSEMBLY_PREVIEW_ONLY')
+ ages=policy['section_max_age_seconds'];inputs=docs['assembly_sections']
+ if type(ages) is not dict or set(ages)!=set(names) or any(type(v) is not int or v<=0 for v in ages.values()):raise ValueError('ASSEMBLY_AGE_POLICY')
+ if type(inputs) is not dict or set(inputs)-set(names):raise ValueError('ASSEMBLY_SECTIONS')
+ sections=[];missing=[]
+ for name in names:
+  if name not in inputs:
+   missing.append(name);sections.append({'name':name,'status':'UNKNOWN','content':None,'input_identity':None});continue
+  doc=inputs[name]
+  if type(doc) is not dict or set(doc)!={'business_date','source_date','observed_at','available_at','status','content','source_reference'}:raise ValueError('ASSEMBLY_SECTION_SCHEMA')
+  if doc['business_date']!=reg['business_date']:raise ValueError('ASSEMBLY_TARGET_DAY')
+  source=dt.datetime.strptime(doc['source_date'],'%Y%m%d').date()
+  if source>day:raise ValueError('ASSEMBLY_SOURCE_AFTER_TARGET')
+  observed=time(doc['observed_at']);available=time(doc['available_at'])
+  if not observed<=available<=cutoff or (cutoff-observed).total_seconds()>ages[name]:raise ValueError('ASSEMBLY_SECTION_TIMING')
+  if any(type(doc[k]) is not str or not doc[k].strip() for k in ('status','source_reference')):raise ValueError('ASSEMBLY_STATUS_SOURCE')
+  if type(doc['content']) is not dict:raise ValueError('ASSEMBLY_STRUCTURED_CONTENT')
+  raw=canonical(doc)
+  if len(raw)>2*1024*1024:raise ValueError('ASSEMBLY_SECTION_SIZE')
+  sections.append(dict(json.loads(raw),name=name,input_identity=sha(raw)))
+ result={'schema':'MORNING_0810_PREVIEW_RESULT_V1','contract_kind':'NEW_SYNTHETIC_ONLY_NOT_ORIGINAL_DELIVERY',
+         'status':'PARTIAL_PREVIEW_NOT_ADMITTED' if missing else 'PREVIEW_ASSEMBLED_NOT_ADMITTED',
+         'business_date':reg['business_date'],'cutoff':reg['cutoff'],'sections':sections,'missing':missing,
+         'delivery_status':'NOT_SENT','source_admission':'UNKNOWN','source_calls':0,'formal_freeze':False,
+         'business_accepted':False,'production_allowed':False,'natural_verified':False}
+ result['identity']=sha(canonical(result))
+ return result
+
 def calculate(reg,policy,docs,safe):
  node=reg['node']
  if node=='freeze':
@@ -142,6 +179,8 @@ def calculate(reg,policy,docs,safe):
   ok=actual==expected and all(x['status']=='OBSERVED_VALUES_AGREE' for x in result['comparisons'])
   return {'status':'RECONCILED' if ok else 'BLOCKED_MISSING_OR_CONFLICTING_SOURCE','observations':result,'timing_review':timing,'source_admission':False,'collector_calls':0}
  if node=='morning-delivery':
+  if reg.get('domain')=='synthetic' and policy.get('assembly_schema')=='MORNING_0810_PREVIEW_V1':
+   return assemble_morning_preview(reg,policy,docs)
   return {'status':'BLOCKED_DELIVERY_ASSEMBLY_NOT_BOUND','delivery_status':'NOT_SENT','source_calls':0,'business_accepted':False}
  # opening-prep ONLY creates names+prompt. 08:10 cannot fall through here.
  panel=docs['panel'];top=docs['top']
