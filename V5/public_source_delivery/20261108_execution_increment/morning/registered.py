@@ -266,16 +266,60 @@ def build_freeze_lineage(reg,policy,docs):
  result['identity']=sha(canonical(result))
  return result
 
+def validate_freeze_panel_freshness(reg,policy,docs):
+ """Explicit reviewed calendar + panel evidence contract; never infer trading days.
+ Calendar completeness and provider authenticity remain the original review's job.
+ """
+ import re
+ cfg=policy.get('panel_freshness')
+ keys={'schema','market','timezone','calendar_version','max_completed_session_lag','max_observation_age_seconds','max_available_age_seconds'}
+ if type(cfg) is not dict or set(cfg)!=keys or cfg['schema']!='FREEZE_PANEL_FRESHNESS_V1':raise ValueError('PANEL_FRESHNESS_POLICY_REQUIRED')
+ for key in ('market','timezone','calendar_version'):
+  if type(cfg[key]) is not str or not cfg[key].strip():raise ValueError('PANEL_FRESHNESS_DEFINITION')
+ for key in ('max_completed_session_lag','max_observation_age_seconds','max_available_age_seconds'):
+  if type(cfg[key]) is not int or cfg[key]<0:raise ValueError('PANEL_FRESHNESS_LIMIT')
+ tz=ZoneInfo(cfg['timezone']);cutoff=time(reg['cutoff'])
+ def date(s):
+  if type(s) is not str or not re.fullmatch('[0-9]{8}',s):raise ValueError('PANEL_CALENDAR_DATE')
+  return dt.datetime.strptime(s,'%Y%m%d').date()
+ source=date(reg['source_date']);local_day=cutoff.astimezone(tz).date()
+ cal=docs.get('market_calendar')
+ if type(cal) is not dict or set(cal)!={'schema','market','timezone','version','coverage_start','coverage_end','source_reference','sessions'} or cal['schema']!='MARKET_SESSION_CALENDAR_V1':raise ValueError('PANEL_CALENDAR_REQUIRED')
+ if (cal['market'],cal['timezone'],cal['version'])!=(cfg['market'],cfg['timezone'],cfg['calendar_version']):raise ValueError('PANEL_CALENDAR_BINDING')
+ start,end=date(cal['coverage_start']),date(cal['coverage_end'])
+ if not start<=source<=local_day<=end or type(cal['source_reference']) is not str or not cal['source_reference'].strip():raise ValueError('PANEL_CALENDAR_COVERAGE')
+ sessions=cal['sessions']
+ if type(sessions) is not list or not sessions:raise ValueError('PANEL_CALENDAR_SESSIONS')
+ completed=[];close_by_date={};last=None
+ for session in sessions:
+  if type(session) is not dict or set(session)!={'trade_date','close_at'}:raise ValueError('PANEL_SESSION_SCHEMA')
+  day=date(session['trade_date']);close=time(session['close_at'])
+  if not start<=day<=end or close.astimezone(tz).date()!=day or (last is not None and day<=last):raise ValueError('PANEL_SESSION_ORDER')
+  last=day;close_by_date[day]=close
+  if close<=cutoff:completed.append(day)
+ if source not in completed or len(completed)-1-completed.index(source)>cfg['max_completed_session_lag']:raise ValueError('PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE')
+ evidence=docs.get('panel_evidence')
+ if type(evidence) is not dict or set(evidence)!={'schema','panel_identity','source_date','calendar_version','event_at','observed_at','available_at','source_reference'} or evidence['schema']!='FREEZE_PANEL_EVIDENCE_V1':raise ValueError('PANEL_EVIDENCE_REQUIRED')
+ if evidence['panel_identity']!=sha(canonical(docs['panel'])) or evidence['source_date']!=reg['source_date'] or evidence['calendar_version']!=cal['version'] or type(evidence['source_reference']) is not str or not evidence['source_reference'].strip():raise ValueError('PANEL_EVIDENCE_BINDING')
+ event,observed,available=(time(evidence[k]) for k in ('event_at','observed_at','available_at'))
+ if event!=close_by_date[source] or not event<=observed<=available<=cutoff:raise ValueError('PANEL_EVIDENCE_TIME_ORDER')
+ if (cutoff-observed).total_seconds()>cfg['max_observation_age_seconds'] or (cutoff-available).total_seconds()>cfg['max_available_age_seconds']:raise ValueError('PANEL_EVIDENCE_STALE')
+ return {'contract':'FREEZE_PANEL_FRESHNESS_V1','calendar_version':cal['version'],'calendar_identity':sha(canonical(cal)),
+         'panel_identity':evidence['panel_identity'],'source_date':reg['source_date'],'latest_completed_session':completed[-1].strftime('%Y%m%d'),
+         'completed_session_lag':len(completed)-1-completed.index(source),'event_at':evidence['event_at'],'observed_at':evidence['observed_at'],'available_at':evidence['available_at'],
+         'source_admission':False,'calendar_authority':'REQUIRES_EXISTING_INDEPENDENT_REVIEW'}
+
 def calculate(reg,policy,docs,safe):
  node=reg['node']
  if node=='freeze':
   panel=docs['panel']
   if panel['source_date']!=reg['source_date'] or panel['scope_count']!=policy['panel_denominator']:raise ValueError('PANEL_DATE_SCOPE')
+  panel_timing=validate_freeze_panel_freshness(reg,policy,docs)
   audit=module('crosscheck',safe).audit(panel,reg['business_date'])
   semantic=semantic_compare(docs['multi_source'],policy,time(reg['cutoff']))
   if audit['errors'] or not semantic['passed']:return {'status':'BLOCKED_SOURCE_REVIEW','row_audit':audit,'semantic_review':semantic,'formal_freeze':False}
   lineage=build_freeze_lineage(reg,policy,docs)
-  return {'lineage':lineage,'status':'REVIEWED_FREEZE_MANIFEST_READY','row_audit':audit,'semantic_review':semantic,'formal_freeze':reg['domain']=='production','freeze_manifest':{'contract_sha256':contract_identity(reg),'business_date':reg['business_date'],'source_date':reg['source_date'],'scope_count':panel['scope_count'],'source_inputs':reg['inputs'],'review':reg['review'],'policy':reg['policy'],'missing_and_unknown_preserved':True}}
+  return {'panel_timing':panel_timing,'lineage':lineage,'status':'REVIEWED_FREEZE_MANIFEST_READY','row_audit':audit,'semantic_review':semantic,'formal_freeze':reg['domain']=='production','freeze_manifest':{'contract_sha256':contract_identity(reg),'business_date':reg['business_date'],'source_date':reg['source_date'],'scope_count':panel['scope_count'],'source_inputs':reg['inputs'],'review':reg['review'],'policy':reg['policy'],'missing_and_unknown_preserved':True}}
  if node=='jk-verify':
   if reg['source_date']!=reg['business_date']:raise ValueError('JK_CURRENT_DAY_REQUIRED')
   day=dt.datetime.strptime(reg['source_date'],'%Y%m%d').date().isoformat()
