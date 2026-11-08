@@ -12,6 +12,9 @@ NODES=('freeze','jk-verify','morning-delivery','opening-prep')
 def sha(raw):return hashlib.sha256(raw).hexdigest()
 def canonical(v):return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
 def time(v):
+ # Exact supported precision only: never silently truncate a post-cutoff timestamp.
+ import re
+ if type(v)is not str or re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})?',v) is None:raise ValueError('TIME_FORMAT_OR_PRECISION')
  t=dt.datetime.fromisoformat(v)
  if t.tzinfo is None:raise ValueError('TIMEZONE_REQUIRED')
  return t
