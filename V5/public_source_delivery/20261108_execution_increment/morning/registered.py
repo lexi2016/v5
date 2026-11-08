@@ -132,6 +132,58 @@ def validate_jk_observations(doc,policy,cutoff):
          'source_identity_independence':'REQUIRES_TRUSTED_POLICY_REVIEW',
          'source_admission':False,'production_bound':False}
 
+def project_user_materials(manifest,business_date,section_observed,assembly_cutoff):
+ """Consume the versioned user-return manifest without promoting late evidence."""
+ import re
+ if manifest.get('schema')!='USER_RESEARCH_INGESTED_V1':raise ValueError('MATERIAL_CONSUMER_SCHEMA')
+ identity=sha(canonical({k:v for k,v in manifest.items() if k!='identity'}))
+ if manifest.get('identity')!=identity:raise ValueError('MATERIAL_MANIFEST_IDENTITY')
+ if manifest.get('target_date')!=business_date:raise ValueError('MATERIAL_TARGET_DATE')
+ if type(manifest.get('version'))is not str or not manifest['version'].strip() or not re.fullmatch(r'[0-9a-f]{64}',str(manifest.get('list_sha256'))) or (manifest.get('parent_identity') is not None and not re.fullmatch(r'[0-9a-f]{64}',str(manifest['parent_identity']))):raise ValueError('MATERIAL_VERSION_IDENTITY')
+ cutoff=time(manifest['cutoff'])
+ if not cutoff<=section_observed<=assembly_cutoff:raise ValueError('MATERIAL_CUTOFF_ORDER')
+ expected={'status':'USER_RESULTS_INGESTED_UNVERIFIED','source_admission':'UNKNOWN','delivery_status':'NOT_SENT'}
+ if any(manifest.get(k)!=v for k,v in expected.items()) or any(manifest.get(k) is not False for k in ('research_complete','business_accepted','natural_verified')) or type(manifest.get('source_calls')) is not int or manifest['source_calls']!=0:raise ValueError('MATERIAL_UNVERIFIED_STATE_REQUIRED')
+ mapping=manifest['column_map'];categories={'announcements','essential_news','preopen_memo','preopen_analysis'}
+ if type(mapping)is not dict or set(mapping)!=categories or any(type(v)is not str or not v.strip() for v in mapping.values()) or len(set(mapping.values()))!=3:raise ValueError('MATERIAL_COLUMN_MAP')
+ rows=manifest['records'];late=manifest['late_records'];count=manifest['scope_count']
+ if type(rows)is not list or type(late)is not list or type(count)is not int or len(rows)!=count or count!=200:raise ValueError('MATERIAL_FULL_RESEARCH_SCOPE')
+ seen=set();late_keys=set()
+ for row in rows:
+  if type(row)is not dict or set(row)!={'symbol','columns'} or not re.fullmatch(r'[0-9]{6}\.(SZ|SH|BJ)',str(row['symbol'])) or row['symbol'] in seen:raise ValueError('MATERIAL_SYMBOL_ROWS')
+  seen.add(row['symbol']);columns=row['columns'];found=set()
+  if type(columns)is not dict or set(columns)!=set(mapping.values()):raise ValueError('MATERIAL_COLUMNS')
+  for column,items in columns.items():
+   if type(items)is not list:raise ValueError('MATERIAL_ITEMS')
+   for item in items:
+    category=item['category'];status=item['status']
+    if category not in categories or category in found or mapping[category]!=column or item['symbol']!=row['symbol']:raise ValueError('MATERIAL_CATEGORY_SCOPE')
+    found.add(category)
+    if status=='LATE_NOT_AVAILABLE_AT_CUTOFF':
+     if set(item)!={'symbol','category','status','reported_status','available_at','details'} or item.get('reported_status') not in ('AVAILABLE','NOT_PUBLISHED','NOT_OBSERVED','BODY_UNAVAILABLE','UNKNOWN') or item.get('details') is not None or time(item['available_at'])<=cutoff:raise ValueError('MATERIAL_LATE_ISOLATION')
+     late_keys.add((row['symbol'],category))
+    elif status not in ('AVAILABLE','NOT_PUBLISHED','NOT_OBSERVED','BODY_UNAVAILABLE','UNKNOWN'):raise ValueError('MATERIAL_STATUS')
+    elif item.get('reason')=='USER_RESULT_NOT_SUPPLIED':
+     if set(item)!={'symbol','category','status','details','reason'} or status!='UNKNOWN' or item.get('details') is not None:raise ValueError('MATERIAL_MISSING_STATE')
+    else:
+     if set(item)!={'symbol','category','status','event_at','observed_at','available_at','details'}:raise ValueError('MATERIAL_EFFECTIVE_SCHEMA')
+     available=time(item['available_at']);observed=time(item['observed_at'])
+     if not observed<=available<=cutoff or (item['event_at'] is not None and time(item['event_at'])>observed):raise ValueError('MATERIAL_EFFECTIVE_AFTER_CUTOFF')
+     if status=='AVAILABLE' and (item['event_at'] is None or type(item['details']) is not dict or set(item['details'])!={'source_url','title','body_reference','facts','inferences','counterevidence'}):raise ValueError('MATERIAL_AVAILABLE_EVIDENCE')
+  if found!=categories:raise ValueError('MATERIAL_CATEGORY_MISSING')
+ declared=[]
+ for item in late:
+  key=(item['symbol'],item['category'])
+  if key not in late_keys or key in declared or time(item['available_at'])<=cutoff:raise ValueError('MATERIAL_LATE_INDEX')
+  declared.append(key)
+ if set(declared)!=late_keys:raise ValueError('MATERIAL_LATE_INDEX')
+ return {'schema':'MORNING_USER_MATERIAL_PROJECTION_V1','source_manifest_identity':identity,
+         'target_date':business_date,'list_sha256':manifest['list_sha256'],'version':manifest['version'],
+         'parent_identity':manifest['parent_identity'],'cutoff':manifest['cutoff'],'column_map':mapping,
+         'scope_count':count,'records':rows,'late_count':len(late),'late_records_identity':sha(canonical(late)),
+         'status':'USER_RESULTS_INGESTED_UNVERIFIED','source_admission':'UNKNOWN','research_complete':False,
+         'business_accepted':False,'natural_verified':False,'source_calls':0,'delivery_status':'NOT_SENT'}
+
 def assemble_morning_preview(reg,policy,docs):
  """NEW synthetic-only 08:10 assembly contract; not original delivery authority.
  Structured sections preserve their reported status/content. No sends or collection.
@@ -160,7 +212,11 @@ def assemble_morning_preview(reg,policy,docs):
   if type(doc['content']) is not dict:raise ValueError('ASSEMBLY_STRUCTURED_CONTENT')
   raw=canonical(doc)
   if len(raw)>2*1024*1024:raise ValueError('ASSEMBLY_SECTION_SIZE')
-  sections.append(dict(json.loads(raw),name=name,input_identity=sha(raw)))
+  section=dict(json.loads(raw),name=name,input_identity=sha(raw))
+  if name=='morning-materials' and doc['content'].get('schema')=='USER_RESEARCH_INGESTED_V1':
+   if doc['status']!=doc['content'].get('status'):raise ValueError('MATERIAL_SECTION_STATUS')
+   section['content']=project_user_materials(section['content'],reg['business_date'],observed,cutoff)
+  sections.append(section)
  result={'schema':'MORNING_0810_PREVIEW_RESULT_V1','contract_kind':'NEW_SYNTHETIC_ONLY_NOT_ORIGINAL_DELIVERY',
          'status':'PARTIAL_PREVIEW_NOT_ADMITTED' if missing else 'PREVIEW_ASSEMBLED_NOT_ADMITTED',
          'business_date':reg['business_date'],'cutoff':reg['cutoff'],'sections':sections,'missing':missing,
