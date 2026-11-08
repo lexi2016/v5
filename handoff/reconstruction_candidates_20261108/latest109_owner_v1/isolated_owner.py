@@ -4,7 +4,8 @@ import argparse,pathlib,sys,importlib.util,json,gzip,hashlib,fcntl,os,types,time
 def load(path,name,sha=None):
  raw=path.read_bytes()
  if sha and hashlib.sha256(raw).hexdigest()!=sha:raise ValueError('SOURCE_PIN:'+name)
- s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);sys.modules[name]=m;s.loader.exec_module(m);return m
+ s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);sys.modules[name]=m;# Execute the verified snapshot without reopening the path.
+ exec(compile(raw,str(path),'exec'),m.__dict__);return m
 
 def run(project,isolated,adapter_dir,input_wire,out):
  if out.exists():raise ValueError('EXISTING_ATTEMPT_INSPECT_NO_RETRY')
