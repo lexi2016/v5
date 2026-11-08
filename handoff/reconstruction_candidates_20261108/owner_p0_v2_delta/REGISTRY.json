@@ -1,0 +1,33 @@
+{
+  "schema": "ISOLATED_CANDIDATE_DELTA_REGISTRY_V1",
+  "base_commit": "066a27d1c81d127e061fbf585f33e6bd6a715ae1",
+  "base_path": "handoff/reconstruction_candidates_20261108/owner_p0_v1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "standalone_dependency_closure": false,
+  "files": {
+    "stage_candidate/stages.py": {
+      "bytes": 12674,
+      "sha256": "3b03df4eeac87ba7e7efea4977a85beee06e4f7bcb017b00c0531208ad34db4e"
+    },
+    "stage_candidate/test_checkpoint_audit.py": {
+      "bytes": 2823,
+      "sha256": "e35e5a5f4cace92947647ab21be8dcb3ffbfda6615e80de68ea6e806e6580c05"
+    },
+    "fault_matrix/run_matrix.py": {
+      "bytes": 2963,
+      "sha256": "628cd221501a6639addb474cf155f66adf6f30cb2cf84e1ae52c7017ef9f1c0d"
+    },
+    "fault_matrix/worker.py": {
+      "bytes": 1423,
+      "sha256": "60ead82c75766942543c086cb12650ad0eae4dc47d8adfc6857869bb24717b1f"
+    }
+  },
+  "tests": {
+    "stage_discovery_normal": 17,
+    "stage_discovery_optimized": 17,
+    "synthetic_fault_scenarios_normal": 6,
+    "synthetic_fault_scenarios_optimized": 6
+  },
+  "dependency_note": "Delta requires unchanged base files at corresponding relative paths. Audit additionally imports the existing external V2 adapter via its current local path. This delta is not standalone."
+}
