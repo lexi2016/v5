@@ -284,6 +284,13 @@ def dispatch(run_id, environment_id, stage=None):
                                  'phase': getattr(attempt, 'phase', 'BLOCKED_BEFORE_STAGE'),
                                  'error_type': type(error).__name__, 'reason': str(error),
                                  'automatic_retry_allowed': False}
+                        result['items'].append(value)
+                        result.update(status='UNKNOWN_RECONCILIATION_REQUIRED',
+                                      automatic_retry_allowed=False)
+                        # Let the original owner's context observe the exact error
+                        # and attached Attempt before it reconciles/releases locks.
+                        # UNKNOWN stops this shared side-effect chain, not other jobs.
+                        raise
                     else:
                         result['jobs_started'] += int(value['phase'] != 'REUSE_COMPLETED_NO_RECOMPUTE')
                     result['items'].append(value)
