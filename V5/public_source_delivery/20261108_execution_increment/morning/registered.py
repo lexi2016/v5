@@ -169,6 +169,62 @@ def assemble_morning_preview(reg,policy,docs):
  result['identity']=sha(canonical(result))
  return result
 
+def normalize_jk_semantics(doc,policy):
+ """Reviewed provider/field mapping only. No inferred aliases or independence.
+ Source authority still requires existing policy review and source gates.
+ """
+ from urllib.parse import urlsplit
+ import copy
+ from decimal import InvalidOperation
+ catalog=policy.get('provider_catalog');required=policy['required_comparisons']
+ if type(catalog) is not dict or not catalog:raise ValueError('JK_PROVIDER_CATALOG_REQUIRED')
+ expected={};used=set()
+ for comparison in required:
+  key=(comparison['symbol'],comparison['field']);providers=comparison['source_ids'];semantic=comparison.get('semantic_contract')
+  if type(semantic) is not dict or set(semantic)!={'unit','basis','currency','raw_fields'}:raise ValueError('JK_SEMANTIC_CONTRACT_REQUIRED')
+  if any(type(semantic[k]) is not str or not semantic[k].strip() for k in ('unit','basis','currency')):raise ValueError('JK_SEMANTIC_DEFINITION')
+  mapping=semantic['raw_fields']
+  if type(mapping) is not dict or set(mapping)!=set(providers):raise ValueError('JK_FIELD_MAPPING_PROVIDER_SCOPE')
+  groups=[]
+  for provider in providers:
+   entry=catalog.get(provider)
+   if type(entry) is not dict or set(entry)!={'independence_group','allowed_urls'} or type(entry['independence_group']) is not str or not entry['independence_group'].strip():raise ValueError('JK_PROVIDER_DEFINITION')
+   urls=entry['allowed_urls']
+   if type(urls) is not list or not urls or len(set(urls))!=len(urls):raise ValueError('JK_PROVIDER_URL_POLICY')
+   for url in urls:
+    parsed=urlsplit(url)
+    if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.fragment:raise ValueError('JK_PROVIDER_URL_POLICY')
+   fields=mapping[provider]
+   if type(fields) is not list or not fields or any(type(x) is not str or not x.strip() or x=='UNKNOWN' for x in fields) or len(set(fields))!=len(fields):raise ValueError('JK_RAW_FIELD_POLICY')
+   groups.append(entry['independence_group']);used.add(provider)
+  if len(groups)!=len(set(groups)):raise ValueError('JK_SHARED_UPSTREAM_NOT_INDEPENDENT')
+  expected[key]=semantic
+ if set(catalog)!=used:raise ValueError('JK_PROVIDER_CATALOG_SCOPE')
+ normalized=copy.deepcopy(doc);evidence={};gaps=[];urls_seen={};ids=set()
+ for row in normalized['records']:
+  key=(row['symbol'],row.get('comparison_group',row['field']));provider=row['source_id'];semantic=expected[key]
+  raw_field=row['field']
+  if type(raw_field) is not str or raw_field not in semantic['raw_fields'][provider]:raise ValueError('JK_RAW_FIELD_SEMANTICS')
+  if any(row.get(k)!=semantic[k] for k in ('unit','basis','currency')):raise ValueError('JK_UNIT_BASIS_CURRENCY')
+  url=row.get('url');entry=catalog[provider]
+  if url not in entry['allowed_urls']:raise ValueError('JK_PROVIDER_URL_BINDING')
+  if (key,url) in urls_seen and urls_seen[(key,url)]!=provider:raise ValueError('JK_SHARED_URL_NOT_INDEPENDENT')
+  urls_seen[(key,url)]=provider
+  observation=row.get('id')
+  if type(observation) is not str or not observation.strip() or observation in ids:raise ValueError('JK_OBSERVATION_ID')
+  ids.add(observation)
+  evidence.setdefault(key,[]).append({'provider_id':provider,'observation_id':observation,'raw_field':raw_field,'normalized_field':key[1],'unit':row['unit'],'basis':row['basis'],'currency':row['currency'],'url':url,'independence_group':entry['independence_group']})
+  value=row.get('value')
+  try:
+   if value is None or type(value) is bool:raise ValueError('UNKNOWN_VALUE')
+   number=Decimal(str(value))
+   if not number.is_finite() or number<=0:raise ValueError('INVALID_VALUE')
+   row['value']=str(number) # numeric representation only; no unit/scaling conversion
+  except (ValueError,InvalidOperation):
+   gaps.append({'provider_id':provider,'observation_id':observation,'symbol':key[0],'field':key[1],'reason':'UNKNOWN_OR_INVALID_VALUE'})
+  row['field']=key[1];row['comparison_group']=key[1]
+ return normalized,evidence,gaps
+
 def build_freeze_lineage(reg,policy,docs):
  """New explicit ancestry/delta contract. Consistency never establishes source authority.
  Existing dispatch must pin parent+change documents and independently review policy.
@@ -224,7 +280,18 @@ def calculate(reg,policy,docs,safe):
   if reg['source_date']!=reg['business_date']:raise ValueError('JK_CURRENT_DAY_REQUIRED')
   day=dt.datetime.strptime(reg['source_date'],'%Y%m%d').date().isoformat()
   timing=validate_jk_observations(docs['observations'],policy,time(reg['cutoff']))
-  result=module('jk',safe).reconcile(docs['observations'],day)
+  normalized,provenance,gaps=normalize_jk_semantics(docs['observations'],policy)
+  if gaps:return {'status':'BLOCKED_MISSING_OR_CONFLICTING_SOURCE','value_gaps':gaps,'timing_review':timing,'source_admission':False,'collector_calls':0}
+  result=module('jk',safe).reconcile(normalized,day)
+  for comparison in result['comparisons']:
+   evidence=provenance[(comparison['symbol'],comparison['field'])]
+   comparison.pop('source_ids',None) # legacy field contained observation IDs, not providers
+   comparison['provider_ids']=[x['provider_id'] for x in evidence]
+   comparison['observation_ids']=[x['observation_id'] for x in evidence]
+   comparison['raw_source_fields']=sorted({x['raw_field'] for x in evidence})
+   comparison['semantic_provenance']=evidence
+  result['identity_schema']='JK_PROVIDER_OBSERVATION_IDENTITIES_V1'
+  result['source_independence']='DECLARED_BY_REVIEWED_POLICY_NOT_PROVED_BY_ID_STRINGS'
   expected={(x['symbol'],x['field']) for x in policy['required_comparisons']}
   actual={(x['symbol'],x['field']) for x in result['comparisons']}
   ok=actual==expected and all(x['status']=='OBSERVED_VALUES_AGREE' for x in result['comparisons'])
