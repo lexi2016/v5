@@ -4,7 +4,7 @@
   "synthetic_tests": {
     "python_normal": 7,
     "python_optimized": 7,
-    "javascript": 12,
+    "javascript": 13,
     "javascript_command": "node --test js/public.test.mjs js/test_shared_par_identity.mjs"
   },
   "browser_verified": false,
@@ -15,8 +15,8 @@
   "files": [
     {
       "path": "PROVENANCE.json",
-      "bytes": 2422,
-      "sha256": "15fb0b4fbec7a560f6e5ae6005bb814a3797dcb9bbf459d86950c831302f514f"
+      "bytes": 2492,
+      "sha256": "17a2df60662ff03f6a2261f37a1c76cbc3f47c772a2611ed33d0426afeaf56b0"
     },
     {
       "path": "README.md",
@@ -35,8 +35,8 @@
     },
     {
       "path": "js/shared-par-store.mjs",
-      "bytes": 2425,
-      "sha256": "79af86de40a899899d8b48a92764c5ade150279b676b3d1840f1028db9c83be3"
+      "bytes": 2588,
+      "sha256": "35c349d3801fc3491fa77e851d57c56935a00dd3c35cf426ac74e4f63789a9dd"
     },
     {
       "path": "js/timeline-module-view.mjs",
@@ -60,8 +60,8 @@
     },
     {
       "path": "js/test_shared_par_identity.mjs",
-      "bytes": 4571,
-      "sha256": "23322ee85f5e345ac7ad9a23611486455b4e7b9e1d397fdcbc4cb6dcbecbc2b1"
+      "bytes": 5571,
+      "sha256": "ecd881390b28922046c68283a9681bbb62bc647ed7d522ec141b1649b37aa51a"
     }
   ],
   "runtime_dependency": "structuredClone; isolated validation on Node.js; browser runtime not verified"
