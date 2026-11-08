@@ -3,7 +3,7 @@ import registered as m
 class Consumer(unittest.TestCase):
  def setUp(self):
   raw=pathlib.Path(os.environ['USER_INGESTION_SOURCE']).read_bytes()
-  self.assertEqual(hashlib.sha256(raw).hexdigest(),'d8da9c4cedaf76a44b1f9c3daca312db811ab6d0c1c60789c64e7bc4f5652db7')
+  self.assertEqual(hashlib.sha256(raw).hexdigest(),'4d8f360a6f0f388079ad218c2039bd5d7679447b9807601e2bc204dd3ceab05d')
   producer=types.ModuleType('original_user_ingestion');exec(compile(raw,'user_ingestion','exec'),producer.__dict__)
   mapping={'announcements':'announcements','essential_news':'news','preopen_memo':'notes','preopen_analysis':'notes'}
   self.policy={'schema':'USER_RESULT_INGESTION_POLICY_V1','version':'v1','cutoff':'2026-11-09T08:00:00+08:00','column_map':mapping,'expected_parent_identity':None}
