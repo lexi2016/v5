@@ -1,0 +1,37 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "issue_id": "RETRY-001",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "business_accepted": false,
+  "production_dispatchable": false,
+  "files": {
+    "coordinator.py": {
+      "sha256": "5ca12fb6d449f9307fc99516ab7c441dee140d548c461231b7606dd37dbf0914",
+      "bytes": 10331
+    },
+    "subset_plan.py": {
+      "sha256": "7048db9c7a17498fba8f4e259ff7ba0aabf5c69b03f13651d5882cec353a5cd0",
+      "bytes": 6619
+    },
+    "test_atomic.py": {
+      "sha256": "36cd035f78d5f04ec153823f92ee4e56f32aa8bc6191757113da94f3519016ba",
+      "bytes": 7198
+    },
+    "test_subset.py": {
+      "sha256": "9f5a9bd9ae53ef7b168de0c3883944af2cd3124f2d2a829a8751ffa0ca00ec9d",
+      "bytes": 4225
+    },
+    "test_review_paths.py": {
+      "sha256": "39038d5999968b14218fd42404d3290db2e0f2fc7aa29141a03cb05639e70bae",
+      "bytes": 1357
+    }
+  },
+  "synthetic_tests": {
+    "distinct_normal_passed": 43,
+    "distinct_optimized_passed": 43,
+    "command": "python -m unittest test_subset.Tests test_atomic.AtomicTests test_review_paths.ReviewPaths.test_review_moved_day_does_not_reset test_review_paths.ReviewPaths.test_review_moved_lock_does_not_split"
+  },
+  "real_inputs_included": false,
+  "scope": "ISOLATED_FAKE_EXECUTOR_ONLY"
+}
