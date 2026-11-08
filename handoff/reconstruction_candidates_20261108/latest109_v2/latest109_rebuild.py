@@ -17,9 +17,13 @@ def checked(path,sha):
  return path
 
 def load(candidate_path,action_path):
- path=checked(candidate_path,CANDIDATE_SHA);checked(action_path,ACTION_SHA)
+ path=Path(candidate_path);raw=path.read_bytes()
+ if hashlib.sha256(raw).hexdigest()!=CANDIDATE_SHA:raise ValueError('CODE_OR_RULE_PIN')
+ checked(action_path,ACTION_SHA)
  spec=importlib.util.spec_from_file_location('registered_latest109_candidate',path)
- module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+ module=importlib.util.module_from_spec(spec)
+ # Execute the exact verified snapshot, never reopen code via the loader.
+ exec(compile(raw,str(path),'exec'),module.__dict__)
  return module
 
 def validate_checkpoint(rows,context,state,checkpoint_prefix_sha256):
