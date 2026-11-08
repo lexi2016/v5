@@ -1,0 +1,33 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "issue_id": "DELIV-001",
+  "node": "terminal-1700",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "business_accepted": false,
+  "sent_in_this_call": false,
+  "delivery_verified": false,
+  "files": {
+    "terminal_alert.py": {
+      "sha256": "05b4029fc6916cf9c3b65ac534902653dc08405c7c1f7e8c68b5d3c827867384",
+      "bytes": 3314
+    },
+    "outbox.py": {
+      "sha256": "50a7fee95e2b24911ee3c205b5e402316a764e7d7d1ece2a634bb78552ac5891",
+      "bytes": 7889
+    },
+    "test_terminal_alert.py": {
+      "sha256": "46030d672e9ed1aeff99ad2b2dec9a12960c6d4b3f0f8e7b18ed452fc7c8ffd4",
+      "bytes": 3824
+    }
+  },
+  "synthetic_tests": {
+    "local_normal_passed": 14,
+    "local_optimized_passed": 14,
+    "included_portable_tests": 13,
+    "excluded_local_bridge_tests": 1
+  },
+  "excluded_test": "test_original_bridge.py depends on absolute local restored source path; not included.",
+  "real_inputs_included": false,
+  "scope": "SYNTHETIC_PREPARATION_ONLY"
+}
