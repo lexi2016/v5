@@ -40,6 +40,10 @@ def pinned(raw, sha):
 
 
 def aware(value):
+    # fromisoformat truncates excess fractional digits, including UTC offsets.
+    # Reject rather than round evidence across the exact retry cooldown boundary.
+    need(isinstance(value, str), 'AWARE_TIME_REQUIRED')
+    need(re.search(r'[.,][0-9]{7,}', value) is None, 'UNSUPPORTED_TIME_PRECISION')
     result = dt.datetime.fromisoformat(value)
     need(result.tzinfo is not None and result.utcoffset() is not None, 'AWARE_TIME_REQUIRED')
     return result

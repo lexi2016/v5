@@ -1,0 +1,27 @@
+{
+  "schema": "RETRY_PRECISION_CODE_INCREMENT_V1",
+  "baseline_commit": "9983c903ffbc885012cf51d48bf448e6eceaaa51",
+  "files": {
+    "subset_plan.py": {
+      "bytes": 7245,
+      "sha256": "f3f376c079519da895a064ab12d90d698897dc2c20cccfe637d9932bb9514c3f"
+    },
+    "test_precision.py": {
+      "bytes": 2201,
+      "sha256": "9714c85d5457235a61e1baed58430f33125fa27f4580a37d1479b851a73e7ddf"
+    }
+  },
+  "scope": "Development code only: reject unsupported timestamp precision; no production dependency binding.",
+  "tests": {
+    "normal": 23,
+    "optimized": 23,
+    "command": "python -B -m unittest test_subset test_precision",
+    "kind": "SYNTHETIC_PLANNER_ONLY"
+  },
+  "runtime_dependency_pins_changed": false,
+  "authoritative_registration_created": false,
+  "historical_registry_and_patch_manifest_changed": false,
+  "production_allowed": false,
+  "business_accepted": false,
+  "natural_verified": false
+}
