@@ -20,6 +20,8 @@ def strict(raw):
  return json.loads(raw,object_pairs_hook=pairs,parse_constant=lambda _:(_ for _ in ()).throw(ValueError('NONFINITE')))
 def timestamp(value):
  require(type(value)is str,'TIME_TYPE')
+ # Explicit seconds and at most microseconds; never truncate finer precision.
+ require(re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(?:\.[0-9]{1,6})?(?:Z|[+-][0-9]{2}:[0-9]{2})?',value) is not None,'TIME_FORMAT_OR_PRECISION')
  value=dt.datetime.fromisoformat(value)
  require(value.tzinfo is not None and value.utcoffset() is not None,'TIMEZONE_REQUIRED')
  return value
