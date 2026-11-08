@@ -11,7 +11,7 @@
       "source_component": "shared-par-store.mjs",
       "source_sha256": "c0d6ee61dd646aa3d4a88e507557032debceab95730892ec6cb8dcc17caa4f7b",
       "export_file": "js/shared-par-store.mjs",
-      "export_sha256": "79af86de40a899899d8b48a92764c5ade150279b676b3d1840f1028db9c83be3",
+      "export_sha256": "35c349d3801fc3491fa77e851d57c56935a00dd3c35cf426ac74e4f63789a9dd",
       "byte_identical": false
     },
     {
@@ -38,7 +38,7 @@
   ],
   "differences": [
     "Par validation/count/filter code retained; private loader implementation omitted and replaced with unconditional refusal, supported dates empty. No real payload or admission pin distributed.",
-    "Shared store preserves date/version/identity gates and loader deduplication; loader output and per-consumer returns are cloned to isolate mutable display state. No private loader binding is introduced.",
+    "Shared store preserves date/version/identity gates and loader deduplication. Loader output is cloned before validation; full reads clone the owned projection, while snapshots clone only summary fields to avoid repeated row copies. No private loader binding is introduced.",
     "SQLite private INPUTS binding unset; build/default connection/summary refuse when absent. Explicit temporary test database connection remains read-only. Schema, build resource threshold/lock and no-overwrite logic retained.",
     "Catalog private path/binding removed. Original version, 95-second lock, resource-gate/pin checks retained; no binding registration API."
   ]
