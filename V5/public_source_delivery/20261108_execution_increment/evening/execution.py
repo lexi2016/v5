@@ -19,7 +19,7 @@ def helpers():
  ns={'csv':csv,'dt':dt,'hashlib':hashlib,'io':io,'json':json,'re':re,'safeio':m,'GROUPS':('original','nav_smallk','nav_pullback','nav_breakout'),'STATES':('TRUE','FALSE','UNKNOWN')}
  exec(compile(ast.Module(body=nodes,type_ignores=[]),'pinned_original_renderer','exec'),ns)
  return m,ns['render']
-def run(stage,registration_id,package_id=None):
+def _run_local(stage,registration_id,package_id=None):
  if stage not in ('1830','1850','1900'):raise ValueError('STAGE')
  if registration_id not in REGISTRY:return {'status':'BLOCKED','reason':'NO_REVIEWED_OWNER_BINDING','stage':stage,'natural_verified':False,'sent':False}
  cfg=REGISTRY[registration_id];s,render=helpers()
@@ -58,3 +58,27 @@ def run(stage,registration_id,package_id=None):
    if child is not None:os.close(child)
    os.close(root)
   return {'status':'LOCAL_EXPORT_VERIFIED','stage':stage,'package_id':key,'path':str(Path(cfg['output_root'])/key),'data_date':date,'observation_date':obs,'reused':reused,'byte_readback':'PASS','natural_verified':False,'formal_freeze':False,'sent':False,'uploaded':False,'business_accepted':False,'trigger_source':'MANUAL_OR_CALLER_UNKNOWN_NOT_NATURAL_PROOF'}
+
+
+# This is a new reviewed contract, not a relabelled legacy hash or registration.
+CONTROLLED_CHAIN_SHA = '2c777fdd48e44843000e9dd9b5c9228e0390686a3b87cd4556dffda9f0c0765e'
+
+
+def run(stage, registration_id, package_id=None, *, action='deliver'):
+ if stage not in ('1830','1850','1900'):raise ValueError('STAGE')
+ cfg=REGISTRY.get(registration_id)
+ if not cfg or cfg.get('schema')!='EVENING_CONTROLLED_BINDING_V2':
+  if action!='deliver':raise ValueError('CONTROLLED_DELIVERY_BINDING_REQUIRED')
+  return _run_local(stage,registration_id,package_id)
+ module=_controlled_chain()
+ io,render=helpers()
+ versions={'adapter':sha(io.local_bytes(HERE,'execution.py')),'chain':CONTROLLED_CHAIN_SHA,
+           'bridge':module.DELIVERY_BRIDGE_SHA,'renderer':BUNDLE_SHA,'safeio':SAFEIO_SHA}
+ return module.run(stage,registration_id,package_id,cfg,io,render,versions,action)
+
+def _controlled_chain():
+ path=HERE/'controlled_chain.py';raw=path.read_bytes()
+ if sha(raw)!=CONTROLLED_CHAIN_SHA:raise ValueError('CONTROLLED_CHAIN_CHANGED')
+ module=types.ModuleType('evening_controlled_chain');module.__file__=str(path)
+ exec(compile(raw,str(path),'exec'),module.__dict__)
+ return module

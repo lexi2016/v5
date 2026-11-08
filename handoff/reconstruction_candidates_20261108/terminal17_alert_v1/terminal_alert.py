@@ -51,3 +51,91 @@ def prepare(key, raw):
     return {'status':'SYNTHETIC_PREPARATION_ONLY','alert':alert,'outbox':item,
             'delivery_state':item['state'],'sent_in_this_call':False,
             'delivery_verified':False,'natural_verified':False,'business_accepted':False}
+
+
+# New explicit contract; the legacy synthetic prepare() above remains unchanged.
+DELIVERY_BRIDGE_SHA = 'a9369a26d5ca8f016f62d3484db543687b7afdc68de7ef1f14371fd7b0d38ca0'
+
+
+def _delivery_bridge():
+    path = Path(__file__).with_name('controlled_delivery.py')
+    raw = path.read_bytes()
+    if sha(raw) != DELIVERY_BRIDGE_SHA:
+        raise ValueError('DELIVERY_BRIDGE_CHANGED')
+    module = types.ModuleType('terminal_controlled_delivery')
+    module.__file__ = str(path)
+    exec(compile(raw, str(path), 'exec'), module.__dict__)
+    return module
+
+
+def run(registration_id, action='prepare'):
+    """Registered 17:00 report -> unchanged outbox -> explicit delivery proof.
+
+    The original terminal owner still creates/reviews RETRY_TERMINAL_NODE_V1.
+    This adapter reads its pinned report and independent review callback; it
+    cannot manufacture that owner, source contract or recipient registration.
+    """
+    if registration_id not in REGISTRY:
+        return dict(status='BLOCKED', reason='NO_REVIEWED_OWNER_BINDING',
+                    delivery_state='NOT_ATTEMPTED', sent_in_this_call=False,
+                    delivery_verified=False, natural_verified=False, business_accepted=False)
+    bridge = _delivery_bridge()
+    binding = REGISTRY[registration_id]
+    try:
+        bridge.validate_binding(binding, 'TERMINAL_ALERT_BINDING_V2')
+        if action not in ('prepare', 'deliver', 'reconcile'):
+            raise ValueError('DELIVERY_ACTION')
+        if not callable(binding.get('review_report')):
+            raise ValueError('MISSING_INDEPENDENT_REPORT_REVIEW')
+        io = bridge.safeio()
+
+        def load_reviewed():
+            now = bridge.clock_gate(binding, '1700', allow_later=action == 'reconcile')
+            raw = bridge.checked_pin(io, binding['input_root'], binding['report'])
+            report = json.loads(raw)
+            item = assemble(raw, binding['report']['sha256'], binding['run_date'],
+                            binding['report_identity'])
+            if dt.datetime.fromisoformat(report['checked_at']) > now:
+                raise ValueError('REPORT_FROM_FUTURE')
+            proof = binding['review_report'](
+                report=json.loads(raw), report_sha256=binding['report']['sha256'])
+            expected = dict(schema='TERMINAL_REPORT_REVIEW_V2', status='VERIFIED',
+                            report_sha256=binding['report']['sha256'],
+                            report_identity=binding['report_identity'],
+                            target_date=binding['run_date'],
+                            source_contract_ref=binding['source_contract_ref'])
+            if (not isinstance(proof, dict) or any(proof.get(k) != v for k, v in expected.items())
+                    or not bridge.text_identity(proof.get('reviewer_id'))
+                    or proof['reviewer_id'] == binding['owner_id']
+                    or not bridge.text_identity(proof.get('evidence_ref'))
+                    or type(proof.get('generation_independently_verified')) is not bool):
+                raise ValueError('INDEPENDENT_REPORT_REVIEW_MISMATCH')
+            item.update(schema='TERMINAL_ALERT_V2', evidence_domain=binding['domain'],
+                        source_contract_ref=binding['source_contract_ref'], report_review=proof,
+                        generation_independently_verified=proof['generation_independently_verified'])
+            item['alert_required'] = (item['reported_generation_status'] != 'COMPLETED_REVIEW_VERIFIED'
+                                      or not proof['generation_independently_verified'])
+            return item
+
+        with binding['owner_context']():
+            bridge.original_gate(binding)
+            item = load_reviewed()
+        frozen_alert = bridge.canonical(item)
+
+        def preflight():
+            # Called again while the original outbox holds the original owner.
+            if bridge.canonical(load_reviewed()) != frozen_alert:
+                raise ValueError('REPORT_REVIEW_CHANGED')
+
+        version = bridge.sha(bridge.canonical(dict(
+            adapter=sha(Path(__file__).read_bytes()), bridge=DELIVERY_BRIDGE_SHA,
+            outbox=PIN, safeio=bridge.SAFEIO_SHA)))
+        result = bridge.dispatch(binding, node='1700', input_sha256=binding['report']['sha256'],
+                                 code_version=version, payload=item, preflight=preflight, action=action)
+        return result | {'node': 'terminal-1700', 'alert': item}
+    except (ValueError, KeyError, TypeError, FileNotFoundError) as error:
+        return bridge.blocked(type(error).__name__ + ':' + str(error), node='terminal-1700')
+    except OSError as error:
+        return dict(status='UNKNOWN_RECONCILIATION_REQUIRED', node='terminal-1700',
+                    reason=type(error).__name__, delivery_state='UNKNOWN', sent_in_this_call=None,
+                    delivery_verified=False, natural_verified=False, business_accepted=False)
