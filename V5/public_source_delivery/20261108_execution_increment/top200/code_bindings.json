@@ -1,0 +1,17 @@
+{
+  "original_rank": {
+    "path": "handoff/nov6_top200_projection_v1_20261106/top200.py",
+    "bytes": 12053,
+    "sha256": "60dddd1656edead1b36181fb8573d6d4606090426d30bea7ae8022cea50bf07d"
+  },
+  "ranking": {
+    "path": "handoff/top200_dated_execution_v1_20261108/ranking.py",
+    "bytes": 4797,
+    "sha256": "1c629a3a77a2c35fabe1b451ad3aa93de49cfc7b587744ad6d770b0b6927b24a"
+  },
+  "safeio": {
+    "path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+    "bytes": 8097,
+    "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5"
+  }
+}
