@@ -1,0 +1,1 @@
+from registered import *
