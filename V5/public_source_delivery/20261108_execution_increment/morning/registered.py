@@ -144,6 +144,7 @@ def project_user_materials(manifest,business_date,section_observed,assembly_cuto
  if manifest.get('target_date')!=business_date:raise ValueError('MATERIAL_TARGET_DATE')
  if type(manifest.get('version'))is not str or not manifest['version'].strip() or not re.fullmatch(r'[0-9a-f]{64}',str(manifest.get('list_sha256'))) or (manifest.get('parent_identity') is not None and not re.fullmatch(r'[0-9a-f]{64}',str(manifest['parent_identity']))):raise ValueError('MATERIAL_VERSION_IDENTITY')
  cutoff=time(manifest['cutoff'])
+ if cutoff.astimezone(ZoneInfo('Asia/Shanghai')).strftime('%Y%m%d')!=business_date:raise ValueError('MATERIAL_CUTOFF_TARGET_DATE')
  if not cutoff<=section_observed<=assembly_cutoff:raise ValueError('MATERIAL_CUTOFF_ORDER')
  expected={'status':'USER_RESULTS_INGESTED_UNVERIFIED','source_admission':'UNKNOWN','delivery_status':'NOT_SENT'}
  if any(manifest.get(k)!=v for k,v in expected.items()) or any(manifest.get(k) is not False for k in ('research_complete','business_accepted','natural_verified')) or type(manifest.get('source_calls')) is not int or manifest['source_calls']!=0:raise ValueError('MATERIAL_UNVERIFIED_STATE_REQUIRED')
