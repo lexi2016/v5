@@ -89,6 +89,40 @@ def semantic_compare(doc,policy,cutoff):
   if len(observed)>1:conflicts.append(key)
  return {'compared_keys':len(expected),'sources':sources,'unknown':unknown,'conflicts':conflicts,'passed':not unknown and not conflicts}
 
+def validate_jk_observations(doc,policy,cutoff):
+ """New fail-closed candidate contract, NOT recovered production source authority.
+ source_ids are reviewed provider identities, not arbitrary observation IDs.
+ Freshness limit must be supplied by reviewed policy; no guessed default.
+ """
+ try:
+  required=policy['required_comparisons'];age=policy['max_observation_age_seconds']
+  if type(required) is not list or not required:raise ValueError('JK_NONEMPTY_SCOPE_REQUIRED')
+  if type(age) is not int or age<=0:raise ValueError('JK_FRESHNESS_POLICY_REQUIRED')
+  expected={}
+  for c in required:
+   key=(c['symbol'],c['field']);sources=c['source_ids']
+   if any(type(v) is not str or not v for v in key) or key in expected:raise ValueError('JK_UNIQUE_SCOPE_REQUIRED')
+   if type(sources) is not list or len(sources)<2 or any(type(v) is not str or not v for v in sources) or len(set(sources))!=len(sources):raise ValueError('JK_INDEPENDENT_SOURCE_POLICY_REQUIRED')
+   expected[key]=set(sources)
+  rows=doc['records']
+  if type(rows) is not list or not rows:raise ValueError('JK_OBSERVATIONS_REQUIRED')
+  seen={key:set() for key in expected}
+  for row in rows:
+   key=(row['symbol'],row.get('comparison_group',row['field']));source=row['source_id']
+   if key not in expected or source not in expected[key]:raise ValueError('JK_SOURCE_SCOPE_MISMATCH')
+   if source in seen[key]:raise ValueError('JK_DUPLICATE_SOURCE')
+   observed=time(row['observed_at']);available=time(row['available_at'])
+   if available<observed:raise ValueError('JK_TIME_ORDER')
+   if observed>cutoff or available>cutoff:raise ValueError('JK_AFTER_CUTOFF')
+   if (cutoff-observed).total_seconds()>age:raise ValueError('JK_STALE_OBSERVATION')
+   seen[key].add(source)
+  if seen!=expected:raise ValueError('JK_SOURCE_COVERAGE_INCOMPLETE')
+ except (KeyError,TypeError,OverflowError) as exc:
+  raise ValueError('JK_INPUT_OR_POLICY_SCHEMA') from exc
+ return {'per_record_cutoff_checked':True,'max_observation_age_seconds':age,
+         'source_identity_independence':'REQUIRES_TRUSTED_POLICY_REVIEW',
+         'source_admission':False,'production_bound':False}
+
 def calculate(reg,policy,docs,safe):
  node=reg['node']
  if node=='freeze':
@@ -101,12 +135,15 @@ def calculate(reg,policy,docs,safe):
  if node=='jk-verify':
   if reg['source_date']!=reg['business_date']:raise ValueError('JK_CURRENT_DAY_REQUIRED')
   day=dt.datetime.strptime(reg['source_date'],'%Y%m%d').date().isoformat()
+  timing=validate_jk_observations(docs['observations'],policy,time(reg['cutoff']))
   result=module('jk',safe).reconcile(docs['observations'],day)
   expected={(x['symbol'],x['field']) for x in policy['required_comparisons']}
   actual={(x['symbol'],x['field']) for x in result['comparisons']}
   ok=actual==expected and all(x['status']=='OBSERVED_VALUES_AGREE' for x in result['comparisons'])
-  return {'status':'RECONCILED' if ok else 'BLOCKED_MISSING_OR_CONFLICTING_SOURCE','observations':result,'source_admission':False,'collector_calls':0}
- # Both nodes ONLY create names+prompt. No articles fetched or external delivery.
+  return {'status':'RECONCILED' if ok else 'BLOCKED_MISSING_OR_CONFLICTING_SOURCE','observations':result,'timing_review':timing,'source_admission':False,'collector_calls':0}
+ if node=='morning-delivery':
+  return {'status':'BLOCKED_DELIVERY_ASSEMBLY_NOT_BOUND','delivery_status':'NOT_SENT','source_calls':0,'business_accepted':False}
+ # opening-prep ONLY creates names+prompt. 08:10 cannot fall through here.
  panel=docs['panel'];top=docs['top']
  if str(top['source_date'])!=reg['source_date'] or panel['source_date']!=reg['source_date']:raise ValueError('TOP_PANEL_DATE')
  if top['schema']!=policy['top_schema']:raise ValueError('TOP_SCHEMA_POLICY')
