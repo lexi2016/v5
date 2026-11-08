@@ -1,0 +1,30 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "standalone_test_data_included": false,
+  "files": {
+    "local/public/research-system/shared-par-store.mjs": {
+      "sha256": "a312d1f77196997dbc6c4267051f60e3f0589d525181bc5eca4d703e1a4bcf47",
+      "bytes": 2477
+    },
+    "local/public/research-system/par-screen-data.mjs": {
+      "sha256": "5e895dd64a054afbd7198079890859dda2914189e36e6fefc6a9aec6c2afdfce",
+      "bytes": 8403
+    },
+    "local/public/research-system/verified-json.mjs": {
+      "sha256": "24dd6360dd4a4e2f048341979fb9798ae5179b2ac1cd438715ea0b64177ab96f",
+      "bytes": 1134
+    },
+    "tests/shared-par-store.test.mjs": {
+      "sha256": "7d8225312b8a9c6086d36d95abd3577ecc545cf7d1684fb7e4c371bbc80ab761",
+      "bytes": 4831
+    }
+  },
+  "tests": {
+    "command": "node --test tests/shared-par-store.test.mjs",
+    "passed": 11,
+    "failed": 0
+  },
+  "dependency_note": "Tests require existing frozen par-screen-data fixtures; no data fixtures are included in this code publication."
+}
