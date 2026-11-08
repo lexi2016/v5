@@ -1,0 +1,43 @@
+{
+  "id": "latest109-isolated-coordinator-20261108",
+  "registered_at_utc": "2026-11-08T10:15:04.568553+00:00",
+  "scope": "tiny_fixture_single_trusted_coordination_root",
+  "production_integrated": false,
+  "original_locks_modified": false,
+  "formulas_modified": false,
+  "github_uploaded": false,
+  "tests_per_mode": 11,
+  "files": [
+    {
+      "path": "ledger.py",
+      "sha256": "9b734d3339c2b31f15210dfa271dd68176a4daa53b2f042d3e10bb43f83a28f7",
+      "bytes": 3612
+    },
+    {
+      "path": "test_ledger.py",
+      "sha256": "6b7365d0c0fd74320b03d5c5a87a36e33dec4faf96c8613f9c7583c4a42d3a0b",
+      "bytes": 3588
+    },
+    {
+      "path": "README.md",
+      "sha256": "5d23ae183002d439151c9ee4062cb3040580576327a777ee741efee983137399",
+      "bytes": 2650
+    },
+    {
+      "path": "TEST_NORMAL.log",
+      "sha256": "993aa68ad9f0a5956459cb9a524241a656e59fd6822094b4ed535c75ed76c528",
+      "bytes": 1112
+    },
+    {
+      "path": "TEST_OPTIMIZED.log",
+      "sha256": "6bc31913c249bd69f8316481820edfc3ef3cee2c5bbf2de9f305039757c26770",
+      "bytes": 1112
+    }
+  ],
+  "review": {
+    "path": "REVIEW.md",
+    "sha256": "05803a2feeb314b3266b30dbef72d8d4e7dcd6f1be21bdf2131ad18e61ee67bb",
+    "scope": "independent_read_only_two_rounds",
+    "status": "PASS_LIMITED_FIXTURE_SCOPE"
+  }
+}
