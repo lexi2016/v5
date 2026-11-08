@@ -1,10 +1,11 @@
 {
   "schema": "PUBLIC_SHARED_PAR_COMPONENTS_V1",
-  "status": "PREPARED_NOT_UPLOADED_PENDING_INDEPENDENT_REVIEW",
+  "status": "DEVELOPMENT_BRANCH_CODE_PENDING_INDEPENDENT_REVIEW",
   "synthetic_tests": {
     "python_normal": 7,
     "python_optimized": 7,
-    "javascript": 3
+    "javascript": 12,
+    "javascript_command": "node --test js/public.test.mjs js/test_shared_par_identity.mjs"
   },
   "browser_verified": false,
   "production_admission": false,
@@ -14,8 +15,8 @@
   "files": [
     {
       "path": "PROVENANCE.json",
-      "bytes": 2284,
-      "sha256": "52bfca03f9f85f1ffe7063862f0606fffaa0989090fe24239e0483253c35dcd5"
+      "bytes": 2422,
+      "sha256": "15fb0b4fbec7a560f6e5ae6005bb814a3797dcb9bbf459d86950c831302f514f"
     },
     {
       "path": "README.md",
@@ -29,13 +30,13 @@
     },
     {
       "path": "js/public.test.mjs",
-      "bytes": 2732,
-      "sha256": "1df4dcd1193d1b5adf4a9875f14729cc05ff9b24e61c8b7621192ae67717287f"
+      "bytes": 3067,
+      "sha256": "ee411fb6c683ab2081f960037f9b5f71c0a4bd5283f92aabaf9f7dbac2376130"
     },
     {
       "path": "js/shared-par-store.mjs",
-      "bytes": 1386,
-      "sha256": "e5790d587fefda8180b198d4e8caa7f5a40e317d01d98e28b0b2b90bdfc13fec"
+      "bytes": 2425,
+      "sha256": "79af86de40a899899d8b48a92764c5ade150279b676b3d1840f1028db9c83be3"
     },
     {
       "path": "js/timeline-module-view.mjs",
@@ -56,6 +57,12 @@
       "path": "python/test_public.py",
       "bytes": 2206,
       "sha256": "3c3949d10ee2e6b41208c8ba42fa8baba984679021ccfd9a775da8e34c03fefe"
+    },
+    {
+      "path": "js/test_shared_par_identity.mjs",
+      "bytes": 4571,
+      "sha256": "23322ee85f5e345ac7ad9a23611486455b4e7b9e1d397fdcbc4cb6dcbecbc2b1"
     }
-  ]
+  ],
+  "runtime_dependency": "structuredClone; isolated validation on Node.js; browser runtime not verified"
 }
