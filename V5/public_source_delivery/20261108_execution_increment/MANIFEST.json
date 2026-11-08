@@ -3,8 +3,8 @@
   "files": [
     {
       "path": "PROVENANCE.json",
-      "bytes": 1678,
-      "sha256": "115c3b0f0720211c624ecf3280df9b48d2cc2ad587bd9f20118100f3ea058105"
+      "bytes": 1886,
+      "sha256": "0629eb7e45fc3618bdaad8246a215ad5630e4c92854f3b9acbd72bc3f8e90de6"
     },
     {
       "path": "README.md",
@@ -23,8 +23,8 @@
     },
     {
       "path": "morning/registered.py",
-      "bytes": 10214,
-      "sha256": "6994912c3cfe28c29f51e249eec68cba8e1299ac2263346300fbded8e9e29ca7"
+      "bytes": 35302,
+      "sha256": "90c890c8e2ad4a198cf84519e8651095d2822c486bc7453ae1c3d52819d0a62f"
     },
     {
       "path": "test_public.py",
