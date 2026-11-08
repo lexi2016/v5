@@ -1,0 +1,24 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "standalone_dependency_closure": false,
+  "files": {
+    "registered_candidate.py": {
+      "bytes": 10367,
+      "sha256": "399a55a336bbbf528981e56bdfcdb57f91f0b113050ed4a9ebfc38a881664e20"
+    },
+    "bundle_candidate.py": {
+      "bytes": 2082,
+      "sha256": "0eb3bb66f5589dc8a48faf6484ff675f8e990c7addf2e8cf7aa46056885c2121"
+    },
+    "test_assembly.py": {
+      "bytes": 533,
+      "sha256": "890479175ded8a7d9c81e5b86767a093bf426ceeae342919b0f2f75df07c6c3e"
+    },
+    "test_bundle.py": {
+      "bytes": 2027,
+      "sha256": "3b6a52575c2e807792b05edc389a7ad6650b28124b570a54424114dacb20df15"
+    }
+  }
+}
