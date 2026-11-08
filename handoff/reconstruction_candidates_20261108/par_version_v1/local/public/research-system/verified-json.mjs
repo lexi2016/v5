@@ -1,0 +1,5 @@
+export async function readVerifiedJSON(url,{signal,fetcher=fetch,cryptoImpl=crypto,maxBytes=16*1024*1024,expectedHash,expectedBytes}={}){
+ const r=await fetcher(url,{credentials:'same-origin',cache:'no-store',redirect:'error',signal});if(!r.ok||r.redirected)throw Error('READ_FAILED');const sha=expectedHash??r.headers.get('X-Content-SHA256');if(!/^[a-f0-9]{64}$/.test(sha??''))throw Error('HASH_HEADER');const reader=r.body?.getReader();if(!reader)throw Error('STREAM');const parts=[];let size=0;
+ try{while(true){const{done,value}=await reader.read();if(done)break;size+=value.length;if(size>maxBytes||(expectedBytes&&size>expectedBytes)){await reader.cancel();throw Error('SIZE');}parts.push(value);}}finally{reader.releaseLock();}
+ if(expectedBytes&&size!==expectedBytes)throw Error('SIZE');const bytes=new Uint8Array(size);let at=0;for(const part of parts){bytes.set(part,at);at+=part.length;}const got=Array.from(new Uint8Array(await cryptoImpl.subtle.digest('SHA-256',bytes)),n=>n.toString(16).padStart(2,'0')).join('');if(got!==sha)throw Error('HASH');return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
+}
