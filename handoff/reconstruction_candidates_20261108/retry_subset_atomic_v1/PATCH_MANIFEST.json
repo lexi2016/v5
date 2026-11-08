@@ -1,0 +1,106 @@
+{
+  "schema": "ISOLATED_RETRY_PATCH_MANIFEST_V1",
+  "baseline_commit": "71666f8d6c04ffea387c8d2273f5c63d1463f571",
+  "implementation": "NEW_REVIEWED_SUBSET_ENTRY_NOT_RECOVERED_ORIGINAL",
+  "authoritative_registry_created": false,
+  "old_REGISTRY_json": "UNCHANGED_HISTORICAL_BASELINE_ONLY",
+  "production_allowed": false,
+  "business_accepted": false,
+  "natural_verified": false,
+  "files": {
+    "coordinator.py": {
+      "sha256": "801269b74cc771d705d51d64531a2abd18b49bdaaecaabf231a7af044c110d62",
+      "bytes": 10633,
+      "baseline_sha256": "5ca12fb6d449f9307fc99516ab7c441dee140d548c461231b7606dd37dbf0914"
+    },
+    "subset_plan.py": {
+      "sha256": "fb2e4197d7dadd43e55ddc6e597a0b079b32c219f786d03ba343180373235666",
+      "bytes": 6945,
+      "baseline_sha256": "7048db9c7a17498fba8f4e259ff7ba0aabf5c69b03f13651d5882cec353a5cd0"
+    },
+    "entrypoint.py": {
+      "sha256": "c8291b0178f34e2dda265bf927d5957499755e40e08e19a4c2ae0a243831cd09",
+      "bytes": 13956,
+      "baseline_sha256": null
+    },
+    "test_completion_reuse.py": {
+      "sha256": "6623ca83b9942d8c0ca3b9779e94b1c4c404484f147c887248c34511cc3fefb5",
+      "bytes": 2128,
+      "baseline_sha256": null
+    },
+    "test_entrypoint.py": {
+      "sha256": "0b6a9e992604a8d16f4bfe079687dcbdb84fac7181d0ad9d0011ee2c366bf258",
+      "bytes": 18403,
+      "baseline_sha256": null
+    },
+    "test_daily_bridge_integration.py": {
+      "sha256": "d11512a260ef63fa1728361ea81c53abab6bf0828c13014e1da750f3268fbd37",
+      "bytes": 9372,
+      "baseline_sha256": null
+    },
+    "ENTRY_CONTRACT.md": {
+      "sha256": "ca35bd16eabd52cf6383de465a97a1c48d05a92ab601df87b761f0c38aff78ba",
+      "bytes": 9479,
+      "baseline_sha256": null
+    }
+  },
+  "tests": {
+    "distinct_normal_passed": 75,
+    "distinct_optimized_passed": 75,
+    "command": "python -m unittest test_subset.Tests test_atomic.AtomicTests test_review_paths.ReviewPaths.test_review_moved_day_does_not_reset test_review_paths.ReviewPaths.test_review_moved_lock_does_not_split test_completion_reuse.CompletionReuseTests test_entrypoint.EntryTests test_daily_bridge_integration.DailyBridgeIntegrationTests",
+    "optimized_command": "python -O -m unittest test_subset.Tests test_atomic.AtomicTests test_review_paths.ReviewPaths.test_review_moved_day_does_not_reset test_review_paths.ReviewPaths.test_review_moved_lock_does_not_split test_completion_reuse.CompletionReuseTests test_entrypoint.EntryTests test_daily_bridge_integration.DailyBridgeIntegrationTests",
+    "data_kind": "SYNTHETIC_TEMP_FILES_NO_NATIVE_NO_REAL_PARQUET",
+    "red_completion": "2 failures before patch: attempt limit on completed third run; cooldown on completed reuse",
+    "red_entry": "new entrypoint absent at baseline",
+    "baseline_existing_tests_passed": 43
+  },
+  "tested_companion_snapshot": [
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/daily1540/owner_bridge.py",
+      "sha256": "76ac666f2bfc584bc2e2bf932bf7eccbe64ed1b91959140d40ab832cc028a598",
+      "bytes": 15679
+    },
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/daily1540/stages.py",
+      "sha256": "827ee261ad7b7ef978ddb89d1e4eeba5e8c2081e6a73a01bc94633e4ffe055cd",
+      "bytes": 14107
+    },
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/daily1540/synthetic_owner_fixture.py",
+      "sha256": "5d5fe50946708a1038cd237b2fadadd7316cdf17c3ec0fe3dad8488530a33595",
+      "bytes": 9072
+    },
+    {
+      "path": "V5/public_source_delivery/handoff/par_daily_chain_repair_20261106/provider/continuation_provider.py",
+      "sha256": "84feb79cb762e85dea34e4e732feb541e798bd0b0943ff28378f01611d7a3040",
+      "bytes": 14895
+    },
+    {
+      "path": "handoff/reconstruction_candidates_20261108/checkpoint_binding_v1/binding.py",
+      "sha256": "bde55ad9cce694d0eaabad85369d2d8ac43a6e7f12ce20adfb782730e7e477e2",
+      "bytes": 3229
+    },
+    {
+      "path": "handoff/reconstruction_candidates_20261108/isolated_coordinator_v1/ledger.py",
+      "sha256": "9b734d3339c2b31f15210dfa271dd68176a4daa53b2f042d3e10bb43f83a28f7",
+      "bytes": 3612
+    },
+    {
+      "path": "handoff/reconstruction_candidates_20261108/latest109_v2/latest109_rebuild.py",
+      "sha256": "39572d4fc75eed097e38b31337fdc608226d50cfbe92984ef1b5917e905b5543",
+      "bytes": 5064
+    }
+  ],
+  "remaining": [
+    "No actual production registration or original owner callbacks",
+    "No real target-day source/calendar/reconciliation receipt",
+    "No native or actual writer/Parquet execution",
+    "No natural scheduled trigger acceptance"
+  ],
+  "test_log_sha256": {
+    "final_normal.log": "5fc54e59e0e09b1e0d3680e4428492c025c66900657631cbb4f4a7649a976542",
+    "final_optimized.log": "18eaf48ef29cc37a553bf9f7bb87dae2ebdf26374613c4e622cbe81a8685934c",
+    "red_completion.log": "24e4a5ad4af1728b73ad49f0486a2c1b7b0ceaf18114c6310df2cd059e8c42d1",
+    "red_entrypoint.log": "5ca54c6029214c0b46cb499dfd7797cc56ce8c0e02f0a70c099916a00ec25e51"
+  }
+}

@@ -1,7 +1,9 @@
-"""Isolated subset coordinator experiment. No production argv/locks or scheduler.
+"""Isolated subset coordinator candidate. No production argv or scheduler.
 One trusted test root per owner, not per run/slot/version/output. Registry pins
 and independent reconciliation are caller trust-boundary inputs, not generated
-from an executor's return code. Only synthetic executors may be supplied.
+from an executor's return code. Direct calls remain isolated test seams. The
+separate entrypoint owns the new reviewed original-owner callback contract;
+its real-run registry stays empty. This module grants no production approval.
 """
 import contextlib
 import fcntl
@@ -146,7 +148,9 @@ class Coordinator:
         return fd, name
 
     def execute(self, binding, review_raw, review_sha, outputs, node, now, fake_executor):
-        """Synthetic-only seam; never accepts a production argv or command.
+        """Low-level candidate seam; never accepts an argv or command.
+        The legacy argument name fake_executor remains API compatible. A real
+        owner hook may only be bound by the separate reviewed entry interface.
         New independently pinned review must include all locally claimed attempts.
         Partial/unknown results never synthesize safe-retry approval.
         """

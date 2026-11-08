@@ -11,11 +11,82 @@ import json
 import types
 from pathlib import Path
 from dataclasses import dataclass, field
+from datetime import datetime
 
 
 def need(ok, message):
     if not ok:
         raise ValueError(message)
+
+
+def _canonical_sha(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
+                                    ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+
+
+def _hexsha(value):
+    return isinstance(value, str) and len(value) == 64 and all(c in '0123456789abcdef' for c in value)
+
+
+def _checkpoint_prefix(prepared, prior_selection, runtime):
+    """Read a checkpoint already bound by the original owner's private registry.
+
+    Reuses the owner_p0_v2_delta checkpoint contract; strengthens count and full
+    prefix identity validation. No checkpoint is synthesized from current input
+    and no caller hash or boolean becomes source/owner authority here.
+    """
+    binder = getattr(runtime, 'bound_checkpoint_ref', None)
+    checked = getattr(runtime, 'checked', None)
+    need(callable(binder) and callable(checked), 'CHECKPOINT_BINDING_REQUIRED')
+    ref = binder(prior_selection)
+    need(isinstance(ref, dict) and _hexsha(ref.get('sha256'))
+         and type(ref.get('bytes')) is int and 0 < ref['bytes'] <= 4 * 1024**2,
+         'CHECKPOINT_BINDING_REQUIRED')
+    raw = checked(ref)
+    need(isinstance(raw, bytes) and len(raw) == ref['bytes']
+         and hashlib.sha256(raw).hexdigest() == ref['sha256'], 'CHECKPOINT_BYTES')
+    checkpoint = json.loads(raw)
+    need(isinstance(checkpoint, dict)
+         and checkpoint.get('schema') == 'OWNER_CHECKPOINT_PREFIX_V1', 'CHECKPOINT_SCHEMA')
+    prior_sha = prior_selection.get('continuation_ref', {}).get('sha256')
+    need(_hexsha(prior_sha) and checkpoint.get('prior_continuation_sha256') == prior_sha,
+         'CHECKPOINT_PRIOR')
+    need('state' in checkpoint
+         and _canonical_sha(checkpoint['state']) == _canonical_sha(prepared['prior_component_state']),
+         'CHECKPOINT_STATE')
+    prefix = checkpoint.get('prefix_sha256')
+    rows, context, state = prepared['rows'], prepared['context'], prepared['prior_component_state']
+    need(_hexsha(prefix) and isinstance(rows, list) and len(rows) >= 2
+         and _canonical_sha(rows[:-1]) == prefix, 'CHECKPOINT_PREFIX')
+    need(isinstance(context, dict) and isinstance(state, dict), 'CHECKPOINT_IDENTITY')
+    symbol = context.get('symbol')
+    need(isinstance(symbol, str) and bool(symbol.strip()) and state.get('symbol') == symbol,
+         'PRIOR_IDENTITY')
+    need(type(state.get('count')) is int, 'PRIOR_COUNT_TYPE')
+    previous = None
+    for row in rows:
+        need(isinstance(row, dict) and row.get('symbol') == symbol, 'CHECKPOINT_ROW_SYMBOL')
+        date = row.get('event_date')
+        need(isinstance(date, str) and len(date) == 8 and date.isascii() and date.isdigit(),
+             'CHECKPOINT_DATE_FORMAT')
+        try:
+            datetime.strptime(date, '%Y%m%d')
+        except ValueError as error:
+            raise ValueError('CHECKPOINT_DATE_FORMAT') from error
+        need(previous is None or date > previous, 'CHECKPOINT_DATE_ORDER')
+        previous = date
+    need(state['count'] == len(rows) - 1 and state.get('last_date') == rows[-2]['event_date'],
+         'PRIOR_IDENTITY')
+    need(context.get('asof') == rows[-1]['event_date'], 'TARGET_IDENTITY')
+    return prefix
+
+
+def compute_with_checkpoint(prepared, prior_selection, runtime):
+    """Forward the saved prefix commitment using the existing V2 keyword API."""
+    prefix = _checkpoint_prefix(prepared, prior_selection, runtime)
+    return runtime.compute(prepared['rows'], prepared['context'],
+                           prior_state=prepared['prior_component_state'],
+                           checkpoint_prefix_sha256=prefix)
 
 
 def original_provider():
@@ -89,13 +160,15 @@ def advance_stock(attempt, runtime, prior_selection, input_ref, expected_input_s
             attempt.phase = 'RETAINED_NO_VALID_BAR'
             return attempt.objects['retained_ref']
         need(prepared['status'] == 'PREPARED_ONE_SESSION', 'PREPARED_STATUS')
+        need(prepared['context'].get('symbol') == attempt.symbol and
+             prepared['context'].get('asof') == str(attempt.target), 'PREPARED_TARGET')
         attempt.enter('PREPARE_RETURNED', 'COMPUTE_STARTED', runtime)
         # Exact original objects, no clone/cross-attempt substitutions.
-        row, facts = runtime.compute(prepared['rows'], prepared['context'],
-                                     prior_state=prepared['prior_component_state'])
+        row, facts = compute_with_checkpoint(prepared, prior_selection, runtime)
         attempt.objects.update(row=row, facts=facts)
         need(row['event_date'] == str(attempt.target), 'NEW_DATE_EXACT')
-        need(facts['historical109_rows_evaluated'] == 0 and
+        need(type(facts.get('historical109_rows_evaluated')) is int and
+             facts['historical109_rows_evaluated'] == 0 and
              facts['prior_component_state_reused'] is True, 'LATEST_ONLY_PRIOR_COMPONENTS')
         component = facts['component_state']
         attempt.objects['component'] = component
@@ -127,14 +200,28 @@ def advance_stock(attempt, runtime, prior_selection, input_ref, expected_input_s
             attempt.objects['receipt'] = receipt
         need(receipt['symbol'] == attempt.symbol and receipt['event_dates'] == [str(attempt.target)] and
              str(receipt['calculation_asof']) == str(attempt.target), 'PARQUET_DATE_IDENTITY')
-        need(receipt['field_rows'] == 109 and receipt['metadata_rows'] == 1 and
+        need(type(receipt.get('field_rows')) is int and type(receipt.get('metadata_rows')) is int and
+             receipt['field_rows'] == 109 and receipt['metadata_rows'] == 1 and
              receipt['full_objects_context_types_ieee_bits_key_orders_exact'] is True,
              'ORIGINAL_PARQUET_ROUNDTRIP')
         runtime.gate()
         cleanup = runtime.remove_committed_temporary_links(receipt)
+        # Capture the exact successful continuation for a later reviewed day.
+        # This is evidence, not a registry entry or authority to resume: the
+        # enclosing owner still has to seal and independently review the attempt.
+        # No checkpoint is published when the writer/roundtrip fails.
+        checkpoint = dict(schema='OWNER_CHECKPOINT_PREFIX_V1',
+                          prior_continuation_sha256=state_ref['sha256'],
+                          state=component, prefix_sha256=_canonical_sha(prepared['rows']))
+        checkpoint_ref = runtime.save('CHECKPOINT.json', checkpoint)
+        attempt.objects['checkpoint_ref'] = checkpoint_ref
+        need(_canonical_sha(json.loads(runtime.checked(checkpoint_ref))) ==
+             _canonical_sha(checkpoint), 'CHECKPOINT_READBACK')
+        runtime.gate()
         result = dict(status='COMPUTED_SAME_BASIS_NEXT_SESSION_WITH_CONTINUATION',
                       symbol=attempt.symbol, event_date=str(attempt.target),
                       continuation_ref=state_ref,
+                      checkpoint_ref=checkpoint_ref,
                       parquet_receipt_ref=runtime.receipt_ref(),
                       temporary_link_cleanup=cleanup, compute_facts=facts, **runtime.flags)
         attempt.objects['success_ref'] = runtime.save('SUCCESS.json', result)

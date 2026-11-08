@@ -1,7 +1,7 @@
 """Pure candidate planner; never launches owners or mutates their state/locks.
 All byte pins must come from an independently reviewed trusted registry, not
-from the evidence document itself. Existing coordinator cannot execute this
-plan until a separate reviewed subset contract is implemented.
+from the evidence document itself. Dispatch requires the new reviewed subset-owner
+contract in entrypoint.py; its actual-run registry remains empty.
 """
 import datetime as dt
 import hashlib
@@ -78,7 +78,7 @@ def plan(binding, review_bytes, review_sha, output_bytes, node, now):
     need(e.get('activity') == 'CONFIRMED_ENDED' and e.get('unresolved_attempts') == [],
          'UNKNOWN_OR_ACTIVE_BLOCKS')
     attempts = e.get('attempt_ids')
-    need(isinstance(attempts,list) and 1 <= len(attempts) < 3 and
+    need(isinstance(attempts,list) and 1 <= len(attempts) <= 3 and
          all(isinstance(a,str) and a for a in attempts) and len(set(attempts)) == len(attempts),
          'ATTEMPT_COUNT_OR_ID')
     need(e.get('last_attempt_id') == attempts[-1], 'LATEST_ATTEMPT_MISMATCH')
@@ -87,8 +87,8 @@ def plan(binding, review_bytes, review_sha, output_bytes, node, now):
     need(local.date() == date, 'WRONG_LOCAL_DATE')
     need(local.time().replace(tzinfo=None) >= dt.time.fromisoformat(
         {'retry-1610':'16:10','retry-1640':'16:40'}[node]), 'RETRY_TIME_GATE')
-    need(ended.astimezone(ZoneInfo('Asia/Shanghai')).date() == date and
-         now-ended >= dt.timedelta(minutes=30), 'RETRY_COOLDOWN')
+    need(ended.astimezone(ZoneInfo('Asia/Shanghai')).date() == date and ended <= now,
+         'RECONCILIATION_END_TIME')
     rows = e.get('stocks')
     need(isinstance(rows,list) and len(rows) == len(symbols) and
          all(isinstance(r,dict) for r in rows), 'INCOMPLETE_STOCK_RECONCILIATION')
@@ -113,15 +113,21 @@ def plan(binding, review_bytes, review_sha, output_bytes, node, now):
             failed.append(s)
         else:
             raise ValueError('UNKNOWN_STOCK_BLOCKS')
+    # Completion consumes no new attempt.  It remains reusable after attempt 3
+    # and immediately after reconciliation; the retry limits apply only to work.
+    if failed:
+        need(len(attempts) < 3, 'SHARED_ATTEMPT_LIMIT')
+        need(now-ended >= dt.timedelta(minutes=30), 'RETRY_COOLDOWN')
+    ordinal = len(attempts)+1 if failed else None
     result = {'schema':'ISOLATED_RETRY_SUBSET_PLAN_V1', 'binding':binding,
               'reconciliation_sha256':review_sha, 'node':node, 'checked_at':now.isoformat(),
-              'next_attempt_ordinal':len(attempts)+1, 'retry_symbols':failed,
+              'next_attempt_ordinal':ordinal, 'retry_symbols':failed,
               'reuse_success':reused, 'status':'CANDIDATE_SUBSET' if failed else 'NO_RETRY_NEEDED',
               'dispatchable':False, 'natural_verified':False, 'business_accepted':False,
-              'integration_required':['original coordinator frozen subset argv approval',
+              'integration_required':['new reviewed subset-owner interface approval',
                   'same owner count/state/locks under atomic claim',
                   'original start and runtime resource gates', 'per-stock terminal reconciliation']}
     # No new retry identity: a stable intent can be deduplicated by the original
     # coordinator, which alone owns actual claim and attempt accounting.
-    result['intent_id'] = digest({'binding':binding,'review':review_sha,'attempt':len(attempts)+1})
+    result['intent_id'] = digest({'binding':binding,'review':review_sha,'attempt':ordinal})
     return result
