@@ -1,0 +1,29 @@
+{
+  "schema": "M07_REPLAY_PRECISION_DELIVERY_V1",
+  "baseline_commit": "434b10019442d57ef1a7cedab4ae125b49f485c8",
+  "scope": "existing standalone recorded-input replay; no original owner or unified controller changes",
+  "original_code_pins_unchanged": true,
+  "candidate_tests": {
+    "normal": 22,
+    "optimized": 22,
+    "independent_normal": 11,
+    "independent_precision_optimized": 9,
+    "synthetic_only": true
+  },
+  "production_allowed": false,
+  "natural_verified": false,
+  "source_admission": "UNKNOWN",
+  "files": [
+    {
+      "path": "replay.py",
+      "bytes": 5787,
+      "sha256": "ddde836f490b3a6cec28c2fd64da519193744b2ecacbf5120db8b1f6b6f5f08f"
+    },
+    {
+      "path": "test_precision.py",
+      "bytes": 1971,
+      "sha256": "6a19abb03ced7c2595585a451fb8cc2879421587b7e2a83bc015db78ce4754e6"
+    }
+  ],
+  "fix": "Reject fractions beyond six digits in cutoff/captured_at/acquired_at before original datetime parsing; retain original date/window/source validation."
+}

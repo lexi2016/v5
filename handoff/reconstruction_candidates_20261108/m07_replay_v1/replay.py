@@ -3,7 +3,7 @@ Runs original pinned selectors over explicit recorded input snapshots. No provid
 CURRENT, ledger, formal authority, shared locks, scheduling or production changes.
 Must run as a fresh CLI process: the original in-process guard is permanent.
 """
-import argparse,hashlib,importlib.abc,importlib.util,json,pathlib,sys,tempfile,types
+import re,argparse,hashlib,importlib.abc,importlib.util,json,pathlib,sys,tempfile,types
 HERE=pathlib.Path(__file__).resolve().parent
 PINS_SHA='6b2e566bd77b03403b2d82487a3abf05571e8bf91b547a84fba0cad1f12be6f3'
 MAX_REQUEST=2*1024*1024
@@ -43,10 +43,22 @@ class FrozenV5(importlib.abc.MetaPathFinder,importlib.abc.Loader):
   if module.__name__=='v5_shadow':module.__path__=[];return
   path,raw=self.sources[module.__name__];module.__file__=str(self.root/path);exec(compile(raw,module.__file__,'exec'),module.__dict__)
 
+def precise_request_times(request):
+ # datetime.fromisoformat truncates beyond microseconds (including comma and
+ # fractional UTC offsets). Never silently turn a late/nonexact time into a
+ # cutoff-equal time. Original parsers still own syntax, date and timezone.
+ recording=request.get('recording')
+ values=[request.get('cutoff')]
+ if isinstance(recording,dict):values.extend(recording.get(k) for k in ('captured_at','acquired_at'))
+ for value in values:
+  if isinstance(value,str) and re.search(r'[.,][0-9]{7,}',value):
+   raise ValueError('M07_TIME_PRECISION_UNSUPPORTED')
+
 def replay(root,raw):
  need(type(raw)is bytes and 0<len(raw)<=MAX_REQUEST,'REQUEST_SIZE')
  request=strict(raw)
  need(type(request)is dict and request.get('stage_id') in ('STAGE_0925','STAGE_0930_0935'),'STAGE_SCOPE')
+ precise_request_times(request)
  need(not any(n=='v5_shadow' or n.startswith('v5_shadow.') for n in sys.modules),'FRESH_PROCESS_REQUIRED')
  pins=safe_bytes(HERE/'CODE_PINS.json',65536);need(hashlib.sha256(pins).hexdigest()==PINS_SHA,'NEW_CODE_MANIFEST_PIN')
  manifest=strict(pins);need(manifest['schema']=='NEW_M07_REPLAY_CODE_IDENTITY_V1' and manifest['not_original_source_manifest'] is True,'NEW_CONTRACT_IDENTITY')
