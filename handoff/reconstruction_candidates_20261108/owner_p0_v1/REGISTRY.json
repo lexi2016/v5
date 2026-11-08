@@ -1,0 +1,35 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "standalone_dependency_closure": false,
+  "files": {
+    "owner_candidate.py": {
+      "bytes": 10203,
+      "sha256": "1ea29186a6c094a0715331bb3434d332e92ae47e5c660a953c8e8153250d7b85"
+    },
+    "adapter_checked_bytes.py": {
+      "bytes": 3728,
+      "sha256": "35e406d1818845aa52984210bf326ba5309e6d7c2e28c71db4b00bae7dd41fa2"
+    },
+    "test_security.py": {
+      "bytes": 3711,
+      "sha256": "e2d75bd266f9a7272ee6cacc9e7f77dfa83e36c7f92ed61342bc47f2bafba0e8"
+    },
+    "stage_candidate/stages.py": {
+      "bytes": 11469,
+      "sha256": "46faafc4584d094bd1dfd9945ee7700bc456ceb50556b953f9db30e81c2be2eb"
+    },
+    "stage_candidate/test_checkpoint.py": {
+      "bytes": 4113,
+      "sha256": "112c3606fade44341454ec6a4f644f05fb17be263c800885466047149ab4c4de"
+    }
+  },
+  "tests": {
+    "owner_discovery_normal": 11,
+    "owner_discovery_optimized": 11,
+    "stage_discovery_normal": 7,
+    "stage_discovery_optimized": 7,
+    "stage_direct_script_skips_route_test": true
+  }
+}
