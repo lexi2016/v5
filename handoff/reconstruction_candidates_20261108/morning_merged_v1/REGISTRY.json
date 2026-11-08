@@ -1,0 +1,69 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "business_accepted": false,
+  "delivery_status": "NOT_SENT",
+  "morning_dispatch_status": "BLOCKED_DELIVERY_ASSEMBLY_NOT_BOUND",
+  "assembler_registered": false,
+  "files": {
+    "run_tests.sh": {
+      "sha256": "626eb5c179ce5cad34bc9d347fb0dd15cb21a88af3ed5bad35ed86bd90f5b725",
+      "bytes": 329
+    },
+    "isolated/handoff/morning_source_crosscheck_v2_20261107/crosscheck.py": {
+      "sha256": "33cf7a11ca87142c6fd2ea6081c90e4a097828b54b2524c33da6bd542e6cc1cb",
+      "bytes": 7056
+    },
+    "isolated/handoff/preopen_top200_group_review_20261107/prepare.py": {
+      "sha256": "45dde371e066913d8698d493130af26b8204e8806150a9e53baca1c7358dd6b5",
+      "bytes": 4493
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/test_bundle.py": {
+      "sha256": "3b6a52575c2e807792b05edc389a7ad6650b28124b570a54424114dacb20df15",
+      "bytes": 2027
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/bundle_candidate.py": {
+      "sha256": "0eb3bb66f5589dc8a48faf6484ff675f8e990c7addf2e8cf7aa46056885c2121",
+      "bytes": 2082
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/registered_candidate.py": {
+      "sha256": "b81e410b4661875331cecf3bba41840e409e4abcf4e13a2fdd9658feb3ac8392",
+      "bytes": 25
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/code_bindings.json": {
+      "sha256": "32cf66923cc2c3de8c300f82f7bd6df2d74155f8e2c7ed8f6823d030672a3f6d",
+      "bytes": 698
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/registered.py": {
+      "sha256": "a59b4302a0c46802454f488151c9483b9a2cf8a4e3e5bb721c1b53c03c13a759",
+      "bytes": 12595
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/test_assembly.py": {
+      "sha256": "890479175ded8a7d9c81e5b86767a093bf426ceeae342919b0f2f75df07c6c3e",
+      "bytes": 533
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/test_jk.py": {
+      "sha256": "4b191ea3d2111ae55d2a3971f584ab34c6a642e7a9011cf9651e227aec6b38b8",
+      "bytes": 3684
+    },
+    "isolated/handoff/morning_registered_execution_v2_20261107/test_combined_dispatch.py": {
+      "sha256": "5e4da529343f9352283564e20a31e70765cbf6e266aee190ad0592475abe9862",
+      "bytes": 6152
+    },
+    "isolated/handoff/timeline_material_pack_v2_20261107/material_pack.py": {
+      "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5",
+      "bytes": 8097
+    },
+    "isolated/handoff/jk_open_source_observations_v2_20261107/reconcile.py": {
+      "sha256": "d41342aaa553ddbf905e5f32cd5fa60fc96795127fa3c56f34e5944193c790db",
+      "bytes": 2366
+    }
+  },
+  "synthetic_tests": {
+    "normal_passed": 41,
+    "optimized_passed": 41,
+    "command": "sh run_tests.sh"
+  },
+  "excluded_obsolete_test": "test_registered.py expects obsolete LIST_AND_PROMPT_READY for morning-delivery; test_combined_dispatch.py supplies explicit BLOCKED/NOT_SENT regression instead. Original obsolete suite remains locally preserved."
+}
