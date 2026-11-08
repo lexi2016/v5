@@ -19,7 +19,7 @@ export function createSharedParStore({loader=loadScreen}={}){
   if(!SCREEN_DATES.includes(sourceDate)||!['merge407','main406'].includes(selectionVersion))throw Error('SHARED_PAR_VERSION');
   return `${sourceDate}:${selectionVersion}`;
  }
- async function read(input){
+ async function validated(input){
   input={...input,selectionVersion:input.selectionVersion??'merge407'};
   const key=keyOf(input);
   if(!inflight.has(key)){
@@ -28,9 +28,11 @@ export function createSharedParStore({loader=loadScreen}={}){
     return verifyIdentity(s,input);
    });inflight.set(key,pending);const clear=()=>{if(inflight.get(key)===pending)inflight.delete(key);};pending.then(clear,clear);
   }
-  // Share loading, not mutable display state or loader-owned references.
-  return structuredClone(await inflight.get(key));
+  return inflight.get(key);
  }
- async function snapshot(input){const s=await read(input);return {source_date:s.source_date,observation_date:s.observation_date??null,selection_version:s.selection_version??'HISTORICAL',scope_count:s.scope_count,counts:countScreen(s),sources:s.sources,qualifications:s.qualifications};}
+ // Never expose the owned projection; full readers receive isolated copies.
+ async function read(input){return structuredClone(await validated(input));}
+ // Timeline consumers need only summaries, not 21 copies of all display rows.
+ async function snapshot(input){const s=await validated(input);return structuredClone({source_date:s.source_date,observation_date:s.observation_date??null,selection_version:s.selection_version??'HISTORICAL',scope_count:s.scope_count,counts:countScreen(s),sources:s.sources,qualifications:s.qualifications});}
  return {read,snapshot};
 }
