@@ -381,7 +381,7 @@ def calculate(reg,policy,docs,safe):
   semantic=semantic_compare(docs['multi_source'],policy,time(reg['cutoff']))
   if audit['errors'] or not semantic['passed']:return {'status':'BLOCKED_SOURCE_REVIEW','row_audit':audit,'semantic_review':semantic,'formal_freeze':False}
   lineage=build_freeze_lineage(reg,policy,docs)
-  return {'panel_timing':panel_timing,'lineage':lineage,'status':'REVIEWED_FREEZE_MANIFEST_READY','row_audit':audit,'semantic_review':semantic,'formal_freeze':reg['domain']=='production','freeze_manifest':{'contract_sha256':contract_identity(reg),'business_date':reg['business_date'],'source_date':reg['source_date'],'scope_count':panel['scope_count'],'source_inputs':reg['inputs'],'review':reg['review'],'policy':reg['policy'],'missing_and_unknown_preserved':True}}
+  return {'panel_timing':panel_timing,'lineage':lineage,'status':'REVIEWED_FREEZE_MANIFEST_READY','row_audit':audit,'semantic_review':semantic,'formal_freeze':False,'freeze_manifest':{'contract_sha256':contract_identity(reg),'business_date':reg['business_date'],'source_date':reg['source_date'],'scope_count':panel['scope_count'],'source_inputs':reg['inputs'],'review':reg['review'],'policy':reg['policy'],'missing_and_unknown_preserved':True}}
  if node=='jk-verify':
   if reg['source_date']!=reg['business_date']:raise ValueError('JK_CURRENT_DAY_REQUIRED')
   day=dt.datetime.strptime(reg['source_date'],'%Y%m%d').date().isoformat()
