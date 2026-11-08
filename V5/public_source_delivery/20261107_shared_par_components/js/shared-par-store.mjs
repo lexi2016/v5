@@ -23,12 +23,13 @@ export function createSharedParStore({loader=loadScreen}={}){
   input={...input,selectionVersion:input.selectionVersion??'merge407'};
   const key=keyOf(input);
   if(!inflight.has(key)){
-   const pending=Promise.resolve().then(()=>loader({...input})).then(validateScreen).then(s=>{
+   const pending=Promise.resolve().then(()=>loader({...input})).then(s=>structuredClone(s)).then(validateScreen).then(s=>{
     if(s.source_date!==input.sourceDate)throw Error('SHARED_PAR_DATE');
     return verifyIdentity(s,input);
    });inflight.set(key,pending);const clear=()=>{if(inflight.get(key)===pending)inflight.delete(key);};pending.then(clear,clear);
   }
-  return inflight.get(key);
+  // Share loading, not mutable display state or loader-owned references.
+  return structuredClone(await inflight.get(key));
  }
  async function snapshot(input){const s=await read(input);return {source_date:s.source_date,observation_date:s.observation_date??null,selection_version:s.selection_version??'HISTORICAL',scope_count:s.scope_count,counts:countScreen(s),sources:s.sources,qualifications:s.qualifications};}
  return {read,snapshot};
