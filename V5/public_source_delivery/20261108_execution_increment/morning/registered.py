@@ -172,7 +172,12 @@ def project_user_materials(manifest,business_date,section_observed,assembly_cuto
      if set(item)!={'symbol','category','status','event_at','observed_at','available_at','details'}:raise ValueError('MATERIAL_EFFECTIVE_SCHEMA')
      available=time(item['available_at']);observed=time(item['observed_at'])
      if not observed<=available<=cutoff or (item['event_at'] is not None and time(item['event_at'])>observed):raise ValueError('MATERIAL_EFFECTIVE_AFTER_CUTOFF')
-     if status=='AVAILABLE' and (item['event_at'] is None or type(item['details']) is not dict or set(item['details'])!={'source_url','title','body_reference','facts','inferences','counterevidence'}):raise ValueError('MATERIAL_AVAILABLE_EVIDENCE')
+     if type(item['details']) is not dict:raise ValueError('MATERIAL_EFFECTIVE_DETAILS')
+     if status=='AVAILABLE':
+      if item['event_at'] is None or set(item['details'])!={'source_url','title','body_reference','facts','inferences','counterevidence'} or any(type(v) is not str or not v.strip() for v in item['details'].values()):raise ValueError('MATERIAL_AVAILABLE_EVIDENCE')
+      from urllib.parse import urlsplit
+      url=urlsplit(item['details']['source_url'])
+      if url.scheme!='https' or not url.hostname or url.username or url.password:raise ValueError('MATERIAL_SOURCE_URL')
   if found!=categories:raise ValueError('MATERIAL_CATEGORY_MISSING')
  declared=[]
  for item in late:
