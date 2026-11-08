@@ -1,0 +1,19 @@
+{
+  "schema": "PROJECT_CANDIDATE_INVENTORY_V1",
+  "candidate_id": "a0915_synthetic_validator_v2_20261108",
+  "node": "A_09:15",
+  "role": "SYNTHETIC_INPUT_VALIDATOR_NOT_COLLECTOR",
+  "entry": "candidate.py:inspect_synthetic",
+  "supersedes_experiment": "a0915_candidate_20261108",
+  "production_registered": false,
+  "original_pins_changed": false,
+  "uploaded": false,
+  "source_admission": "UNKNOWN",
+  "business_accepted": false,
+  "natural_verified": false,
+  "required_before_integration": [
+    "original_contract_or_reviewed_replacement_contract",
+    "real_source_and_monitoring_scope",
+    "owner_resource_scheduler_qualification"
+  ]
+}
