@@ -16,7 +16,8 @@ class TerminalTests(unittest.TestCase):
         self.root = pathlib.Path(self.tmp.name)
         bridge = types.SimpleNamespace(load_code=lambda: None, load_runtime=lambda: None, gate=lambda: None)
         self.modules = {
-            'registered_rebuild': types.SimpleNamespace(load=lambda *args: object()),
+            'registered_rebuild': types.SimpleNamespace(checked=lambda *args: None, ACTION_SHA='fixture', CANDIDATE_SHA='fixture'),
+            'registered_latest109_candidate': object(),
             'source': object(), 'regression': object(),
             'bridge': types.SimpleNamespace(Bridge=lambda p: bridge, MIN_MEMORY=0),
             'runner': types.SimpleNamespace(check_start=lambda *args: None, make_monitor=self.fail_after_lock),
