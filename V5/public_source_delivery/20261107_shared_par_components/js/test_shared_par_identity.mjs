@@ -64,3 +64,15 @@ test('concurrent consumers cannot contaminate each other or loader ownership',as
  raw.rows[0].layers.original.after_risk='TRUE';
  assert.equal(b.rows[0].layers.original.after_risk,'UNKNOWN');
 });
+test('snapshot clones only summary per consumer, without weakening nested isolation',async()=>{
+ const clone=globalThis.structuredClone;let fullClones=0;
+ globalThis.structuredClone=value=>{if(value?.schema==='PAR_SCREEN_DISPLAY_V1')fullClones++;return clone(value);};
+ try{
+  let calls=0;const raw=screen(),store=createSharedParStore({loader:async()=>{calls++;return raw;}});
+  const values=await Promise.all(Array.from({length:21},()=>store.snapshot(request)));
+  assert.equal(calls,1);assert.equal(fullClones,1);
+  values[0].counts.groups.original.UNKNOWN=999;values[0].sources.selection.bytes=0;values[0].qualifications.production_allowed=true;
+  for(const s of values.slice(1)){assert.equal(s.counts.groups.original.UNKNOWN,1);assert.equal(s.sources.selection.bytes,24541169);assert.equal(s.qualifications.production_allowed,false);}
+  assert.equal(raw.sources.selection.bytes,24541169);assert.equal(raw.qualifications.production_allowed,false);
+ }finally{globalThis.structuredClone=clone;}
+});
