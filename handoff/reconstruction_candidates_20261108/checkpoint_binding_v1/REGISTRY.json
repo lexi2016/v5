@@ -1,0 +1,20 @@
+{
+  "schema": "ISOLATED_CANDIDATE_PUBLICATION_REGISTRY_V1",
+  "production_bound": false,
+  "natural_business_verified": false,
+  "files": {
+    "binding.py": {
+      "sha256": "bde55ad9cce694d0eaabad85369d2d8ac43a6e7f12ce20adfb782730e7e477e2",
+      "bytes": 3229
+    },
+    "test_binding.py": {
+      "sha256": "0316c63bacc6bb13ca97f385d3bf647f00382f67995adc4e8225a0d217123ff7",
+      "bytes": 3688
+    }
+  },
+  "synthetic_tests": {
+    "normal_passed": 14,
+    "optimized_passed": 14
+  },
+  "real_checkpoint_or_registry_included": false
+}
