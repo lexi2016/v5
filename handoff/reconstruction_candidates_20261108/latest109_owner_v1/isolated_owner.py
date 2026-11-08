@@ -12,6 +12,27 @@ def load_candidate(adapter,candidate_path,action_path):
  adapter.checked(action_path,adapter.ACTION_SHA)
  return load(candidate_path,'registered_latest109_candidate',adapter.CANDIDATE_SHA)
 
+def inspect_writer_failure(folder):
+ # Read-only evidence while the caller still holds its original lock.
+ # Presence or even a matching receipt cannot prove a failed fsync succeeded.
+ import stat
+ result={'state':'UNKNOWN_RECONCILE_NO_RETRY','automatic_retry_allowed':False,'objects':{}}
+ for name in ('field_rows.parquet','row_metadata.parquet','.field_rows.parquet.pending','.row_metadata.parquet.pending','RECEIPT.json'):
+  path=folder/name
+  try:
+   fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+   with os.fdopen(fd,'rb') as stream:
+    before=os.fstat(stream.fileno())
+    if not stat.S_ISREG(before.st_mode) or before.st_size>16*1024**2:raise ValueError('AUDIT_FILE_BOUND')
+    raw=stream.read(16*1024**2+1);after=os.fstat(stream.fileno())
+   identity=lambda x:(x.st_dev,x.st_ino,x.st_size,x.st_mtime_ns,x.st_ctime_ns)
+   if identity(before)!=identity(after) or identity(after)!=identity(path.stat(follow_symlinks=False)) or len(raw)!=before.st_size:raise ValueError('AUDIT_CHANGED')
+   item={'state':'OBSERVED_NOT_ACCEPTED','bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'device':after.st_dev,'inode':after.st_ino}
+  except FileNotFoundError:item={'state':'ABSENT'}
+  except Exception as error:item={'state':'UNKNOWN','error':type(error).__name__}
+  result['objects'][name]=item
+ return result
+
 def seal_terminal(path,report):
  # Publish complete immutable bytes; leave evidence on an uncertain commit.
  raw=json.dumps(report,ensure_ascii=False,indent=2,allow_nan=False).encode()
@@ -45,7 +66,7 @@ def run(project,isolated,adapter_dir,input_wire,out):
  if out.exists():raise ValueError('EXISTING_ATTEMPT_INSPECT_NO_RETRY')
  out.mkdir();(out/'spill').mkdir();stock=out/'stock';stock.mkdir()
  report={'production_allowed':False,'source_admission':False,'selection_admission':False,'scope':'ISOLATED_ONE_HISTORICAL_STOCK','original_owner_restored':False}
- monitor=None;con=None;lockfd=None;lock_acquired=False
+ monitor=None;con=None;lockfd=None;lock_acquired=False;writer_started=False
  try:
   adapter=load(adapter_dir/'latest109_rebuild.py','registered_rebuild','3652a14cb0cb543f6b25a2bbd510f130f3fd6dbe0b4f4ae03538291ce619cf40')
   candidate=load_candidate(adapter,isolated/'handoff/latest109_rebuild_v1_20261106/latest109_candidate.py',isolated/'handoff/panel_field_algorithms_20261102/foundation_action_candidate/ACTION_RULES.json')
@@ -79,6 +100,7 @@ def run(project,isolated,adapter_dir,input_wire,out):
   writer=bridge.writer;writer.ROOT=out;writer.EVENT_DATES=(context['asof'],);writer.CALCULATION_ASOF=context['asof'];writer.VERSION='ISOLATED_REBUILD_HISTORICAL_LONG13_META6_V1'
   con=bridge.db.connect(':memory:');con.execute('SET threads=1');con.execute("SET memory_limit='96MB'");con.execute("SET temp_directory='"+str(out/'spill')+"'");con.execute("SET max_temp_directory_size='32MB'");monitor.con=con
   provenance={'symbol':context['symbol'],'calculation_asof':context['asof'],'observation_date':context['observation_date'],'source_kind':'HISTORICAL_DISPLAY_RESEARCH_FIXTURE','input_ref':report['input'],'checkpoint_sha256':cppin,'production_allowed':False}
+  writer_started=True
   receipt=writer.write_stock(con,[current],provenance,stock/'parquet',bridge.mods,bridge.schema,monitor);con.close();con=None;monitor.con=None
   # Fresh connection and original codec reconstruct both original output and context.
   monitor.gate();con=bridge.db.connect(':memory:');monitor.con=con;con.execute('SET threads=1');con.execute("SET memory_limit='96MB'");monitor.gate()
@@ -89,6 +111,9 @@ def run(project,isolated,adapter_dir,input_wire,out):
  except Exception as e:
   import traceback
   report.update(status='FAILED_OR_BLOCKED_PRESERVED',error=type(e).__name__+':'+str(e),traceback=traceback.format_exc())
+  if writer_started:
+   report['writer_reconciliation']=inspect_writer_failure(stock/'parquet')
+   report['status']='WRITER_OUTCOME_UNKNOWN_INSPECT_NO_RETRY'
  finally:
   cleanup=[]
   try:
