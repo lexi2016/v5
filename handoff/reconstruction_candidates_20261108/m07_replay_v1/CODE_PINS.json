@@ -1,0 +1,46 @@
+{
+  "not_original_source_manifest": true,
+  "refs": [
+    {
+      "bytes": 32644,
+      "path": "V5/src/v5_shadow/a_stage_daily.py",
+      "sha256": "01c791dee6547e5e1a54ef3c412ac3102dfcafdf7e78be34c702b053f6fb5791"
+    },
+    {
+      "bytes": 16003,
+      "path": "V5/src/v5_shadow/api_gateway.py",
+      "sha256": "9bdb76f8cbbdd020ba414f183fc8e8af9ad5306baf6ccc7f9458d45c660cc225"
+    },
+    {
+      "bytes": 5297,
+      "path": "V5/src/v5_shadow/composition.py",
+      "sha256": "258462c4ee53a3ee7acc4f8e0e0f35b4b20994f9ec4dd6ee48f37a6a68c981b0"
+    },
+    {
+      "bytes": 7256,
+      "path": "V5/src/v5_shadow/contracts.py",
+      "sha256": "eee026873e0d765fcedf52077daea823edf6ee7013f37c106c82b66a4582d85a"
+    },
+    {
+      "bytes": 425,
+      "path": "V5/src/v5_shadow/digests.py",
+      "sha256": "134b1a13b7ff677afef6f556e2a750d94cc54a396cbdcff111c5d67e645280e5"
+    },
+    {
+      "bytes": 15282,
+      "path": "V5/src/v5_shadow/module_api.py",
+      "sha256": "8ce7e4ce59a724629cdc25e407e1b66f2d2aed79e7ae6779b6c3145de020b6ca"
+    },
+    {
+      "bytes": 7936,
+      "path": "V5/src/v5_shadow/module_artifacts.py",
+      "sha256": "07c1ab119367abbdb73363ca4f4d0af2d05e3bbef5e02be911a77a6a31f02e17"
+    },
+    {
+      "bytes": 6133,
+      "path": "V5/src/v5_shadow/run_ledger.py",
+      "sha256": "d3ba8dc00de2525ccfc2756193be1338bb800c796c2302f6c97f525a76b5748e"
+    }
+  ],
+  "schema": "NEW_M07_REPLAY_CODE_IDENTITY_V1"
+}
