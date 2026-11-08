@@ -169,6 +169,47 @@ def assemble_morning_preview(reg,policy,docs):
  result['identity']=sha(canonical(result))
  return result
 
+def build_freeze_lineage(reg,policy,docs):
+ """New explicit ancestry/delta contract. Consistency never establishes source authority.
+ Existing dispatch must pin parent+change documents and independently review policy.
+ """
+ import re
+ contract=policy.get('freeze_chain')
+ if type(contract) is not dict or set(contract)!={'schema','version','mode','expected_parent_identity'} or contract['schema']!='FREEZE_CHAIN_POLICY_V1':raise ValueError('FREEZE_CHAIN_POLICY_REQUIRED')
+ version=contract['version']
+ if type(version) is not str or not version.strip():raise ValueError('FREEZE_VERSION')
+ def date(value):
+  if type(value) is not str or not re.fullmatch('[0-9]{8}',value):raise ValueError('FREEZE_DATE')
+  return dt.datetime.strptime(value,'%Y%m%d').date()
+ day=date(reg['business_date']);source=date(reg['source_date']);cutoff=time(reg['cutoff'])
+ if source>day or cutoff.astimezone(ZoneInfo('Asia/Shanghai')).date()!=day:raise ValueError('FREEZE_DATE_ORDER')
+ rows=docs['panel']['rows'];current={}
+ for row in rows:
+  symbol=row['symbol']
+  if type(symbol) is not str or not re.fullmatch(r'[0-9]{6}\.(SZ|SH|BJ)',symbol) or symbol in current:raise ValueError('FREEZE_ROW_IDENTITY')
+  current[symbol]=sha(canonical(row))
+ parent=docs.get('freeze_parent');old={};parent_identity=None
+ if contract['mode']=='GENESIS':
+  if parent is not None or contract['expected_parent_identity'] is not None:raise ValueError('FREEZE_GENESIS_PARENT')
+ elif contract['mode']=='DELTA':
+  keys={'schema','version','business_date','source_date','cutoff','parent_identity','row_sha256','changes','identity'}
+  if type(parent) is not dict or set(parent)!=keys or parent['schema']!='DATED_FREEZE_LINEAGE_V1':raise ValueError('FREEZE_PARENT_REQUIRED')
+  parent_identity=sha(canonical({k:v for k,v in parent.items() if k!='identity'}))
+  if parent_identity!=parent['identity'] or parent_identity!=contract['expected_parent_identity']:raise ValueError('FREEZE_PARENT_IDENTITY')
+  if type(parent['version']) is not str or not parent['version'].strip() or parent['version']==version:raise ValueError('FREEZE_PARENT_VERSION')
+  parent_day=date(parent['business_date']);parent_source=date(parent['source_date']);parent_cutoff=time(parent['cutoff'])
+  if not parent_source<=parent_day<=day or parent_source>source or parent_cutoff>cutoff or parent_cutoff.astimezone(ZoneInfo('Asia/Shanghai')).date()!=parent_day:raise ValueError('FREEZE_PARENT_DATE_ORDER')
+  old=parent['row_sha256']
+  if type(old) is not dict or any(type(k) is not str or not re.fullmatch(r'[0-9]{6}\.(SZ|SH|BJ)',k) or type(v) is not str or not re.fullmatch('[0-9a-f]{64}',v) for k,v in old.items()):raise ValueError('FREEZE_PARENT_ROWS')
+ else:raise ValueError('FREEZE_CHAIN_MODE')
+ added=sorted(set(current)-set(old));removed=sorted(set(old)-set(current));changed=sorted(k for k in set(old)&set(current) if old[k]!=current[k])
+ reasons=docs.get('freeze_changes')
+ if type(reasons) is not dict or set(reasons)!=set(added+removed+changed) or any(type(v) is not str or not v.strip() for v in reasons.values()):raise ValueError('FREEZE_EXACT_CHANGE_REASONS')
+ changes=[{'symbol':k,'kind':kind,'before':old.get(k),'after':current.get(k),'reason':reasons[k]} for kind,items in [('ADDED',added),('REMOVED',removed),('CHANGED',changed)] for k in items]
+ result={'schema':'DATED_FREEZE_LINEAGE_V1','version':version,'business_date':reg['business_date'],'source_date':reg['source_date'],'cutoff':reg['cutoff'],'parent_identity':parent_identity,'row_sha256':current,'changes':changes}
+ result['identity']=sha(canonical(result))
+ return result
+
 def calculate(reg,policy,docs,safe):
  node=reg['node']
  if node=='freeze':
@@ -177,7 +218,8 @@ def calculate(reg,policy,docs,safe):
   audit=module('crosscheck',safe).audit(panel,reg['business_date'])
   semantic=semantic_compare(docs['multi_source'],policy,time(reg['cutoff']))
   if audit['errors'] or not semantic['passed']:return {'status':'BLOCKED_SOURCE_REVIEW','row_audit':audit,'semantic_review':semantic,'formal_freeze':False}
-  return {'status':'REVIEWED_FREEZE_MANIFEST_READY','row_audit':audit,'semantic_review':semantic,'formal_freeze':reg['domain']=='production','freeze_manifest':{'contract_sha256':contract_identity(reg),'business_date':reg['business_date'],'source_date':reg['source_date'],'scope_count':panel['scope_count'],'source_inputs':reg['inputs'],'review':reg['review'],'policy':reg['policy'],'missing_and_unknown_preserved':True}}
+  lineage=build_freeze_lineage(reg,policy,docs)
+  return {'lineage':lineage,'status':'REVIEWED_FREEZE_MANIFEST_READY','row_audit':audit,'semantic_review':semantic,'formal_freeze':reg['domain']=='production','freeze_manifest':{'contract_sha256':contract_identity(reg),'business_date':reg['business_date'],'source_date':reg['source_date'],'scope_count':panel['scope_count'],'source_inputs':reg['inputs'],'review':reg['review'],'policy':reg['policy'],'missing_and_unknown_preserved':True}}
  if node=='jk-verify':
   if reg['source_date']!=reg['business_date']:raise ValueError('JK_CURRENT_DAY_REQUIRED')
   day=dt.datetime.strptime(reg['source_date'],'%Y%m%d').date().isoformat()
