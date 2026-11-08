@@ -1,0 +1,18 @@
+{
+  "safeio": {
+    "path": "handoff/timeline_material_pack_v2_20261107/material_pack.py",
+    "sha256": "facce7970f4919034d62e59dde8375e94d7a6a165de214f2e5178dbb5615fff5"
+  },
+  "crosscheck": {
+    "path": "handoff/morning_source_crosscheck_v2_20261107/crosscheck.py",
+    "sha256": "33cf7a11ca87142c6fd2ea6081c90e4a097828b54b2524c33da6bd542e6cc1cb"
+  },
+  "jk": {
+    "path": "handoff/jk_open_source_observations_v2_20261107/reconcile.py",
+    "sha256": "d41342aaa553ddbf905e5f32cd5fa60fc96795127fa3c56f34e5944193c790db"
+  },
+  "prep": {
+    "path": "handoff/preopen_top200_group_review_20261107/prepare.py",
+    "sha256": "45dde371e066913d8698d493130af26b8204e8806150a9e53baca1c7358dd6b5"
+  }
+}
