@@ -13,6 +13,6 @@
   },
   "prep": {
     "path": "handoff/preopen_top200_group_review_20261107/prepare.py",
-    "sha256": "45dde371e066913d8698d493130af26b8204e8806150a9e53baca1c7358dd6b5"
+    "sha256": "117103a73b21b586fbb860bace10add3bf8485ad3396ce767a970e4dfc98afc4"
   }
 }
