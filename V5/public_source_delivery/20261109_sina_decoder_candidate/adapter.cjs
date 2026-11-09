@@ -1,6 +1,6 @@
 'use strict';
 // Project-owned wrapper only. Vendor decoder must be supplied locally, never fetched/evaluated as SDK.
-const fs=require('fs'),vm=require('vm'),crypto=require('crypto');
+const fs=require('fs'),vm=require('vm'),crypto=require('crypto'),path=require('path');
 const DECODER_SHA='0effc9a3924b63f8c7f10c6ac4ed8b2654599ebc3ec762348bf96a42f056f48a';
 const LIMITS=Object.freeze({raw:8*1024*1024,decoder:64*1024,rows:100000,output:32*1024*1024,timeout:3000});
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
@@ -38,17 +38,33 @@ function validateRows(rows){
 
  return rows;
 }
+// Static/observed link and identity checks, not hostile directory-rename atomicity.
+function parentSnapshot(file){
+ if(typeof file!=='string'||file.includes('\0'))throw Error('FILE_PATH');
+ // Reject lexical traversal rather than silently normalize symlink/.. paths.
+ if(file.split(path.sep).includes('..'))throw Error('FILE_PATH');
+ const absolute=path.resolve(file);const parents=[];let cursor=path.dirname(absolute);
+ while(true){const stat=fs.lstatSync(cursor,{bigint:true});if(!stat.isDirectory()||stat.isSymbolicLink())throw Error('PARENT_TYPE');parents.push([cursor,stat.dev,stat.ino]);const next=path.dirname(cursor);if(next===cursor)break;cursor=next;}
+ return {absolute,parents};
+}
+function sameParents(snapshot){
+ const now=parentSnapshot(snapshot.absolute);if(now.parents.length!==snapshot.parents.length)throw Error('PARENT_CHANGED');
+ for(let i=0;i<now.parents.length;i++)if(now.parents[i][1]!==snapshot.parents[i][1]||now.parents[i][2]!==snapshot.parents[i][2])throw Error('PARENT_CHANGED');
+}
 function readBoundedRegular(file,limit){
- const before=fs.lstatSync(file);if(!before.isFile()||before.isSymbolicLink())throw Error('FILE_TYPE');
- if(before.size===0||before.size>limit)throw Error('FILE_SIZE');
+ if(!Number.isSafeInteger(limit)||limit<1||limit>LIMITS.raw)throw Error('READ_LIMIT');
+ const parents=parentSnapshot(file);file=parents.absolute;
+ const before=fs.lstatSync(file,{bigint:true});if(!before.isFile()||before.isSymbolicLink())throw Error('FILE_TYPE');
+ if(before.size===0n||before.size>BigInt(limit))throw Error('FILE_SIZE');
  if(typeof fs.constants.O_NOFOLLOW!=='number')throw Error('NOFOLLOW_UNAVAILABLE');
  const fd=fs.openSync(file,fs.constants.O_RDONLY|fs.constants.O_NOFOLLOW|fs.constants.O_NONBLOCK);
  try{
-  const stat=fs.fstatSync(fd);if(!stat.isFile()||stat.dev!==before.dev||stat.ino!==before.ino)throw Error('FILE_CHANGED');
-  if(stat.size===0||stat.size>limit)throw Error('FILE_SIZE');
+  const stat=fs.fstatSync(fd,{bigint:true});if(!stat.isFile()||stat.dev!==before.dev||stat.ino!==before.ino)throw Error('FILE_CHANGED');
+  if(stat.size===0n||stat.size>BigInt(limit))throw Error('FILE_SIZE');
   const chunks=[];let total=0;
   while(true){const buf=Buffer.alloc(Math.min(65536,limit+1-total));const n=fs.readSync(fd,buf,0,buf.length,null);if(!n)break;total+=n;if(total>limit)throw Error('FILE_SIZE');chunks.push(buf.subarray(0,n));}
-  const after=fs.fstatSync(fd);if(total!==stat.size||after.size!==stat.size||after.mtimeMs!==stat.mtimeMs||after.ctimeMs!==stat.ctimeMs)throw Error('FILE_CHANGED');
+  const after=fs.fstatSync(fd,{bigint:true});if(BigInt(total)!==stat.size||after.size!==stat.size||after.mtimeNs!==stat.mtimeNs||after.ctimeNs!==stat.ctimeNs)throw Error('FILE_CHANGED');
+  sameParents(parents);
   return Buffer.concat(chunks,total);
  }finally{fs.closeSync(fd);}
 }
