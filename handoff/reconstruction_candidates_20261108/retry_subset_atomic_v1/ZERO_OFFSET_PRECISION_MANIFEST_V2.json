@@ -1,0 +1,63 @@
+{
+  "schema": "RETRY_ENTRY_REGRESSION_EVIDENCE_V2",
+  "status": "CURRENT_DEVELOPMENT_INVENTORY_NOT_RUNTIME_APPROVAL",
+  "base_commit": "9b7a9a2c6defcf1c90c0e7e31b393a9a16c132f7",
+  "supersedes_current_inventory_of": "ZERO_OFFSET_PRECISION_MANIFEST.json",
+  "historical_manifest": {
+    "path": "ZERO_OFFSET_PRECISION_MANIFEST.json",
+    "bytes": 1950,
+    "sha256": "15a1e97bbcc7ae3dc8ee8cfe05d08606a7e6ced6aaaf937084f91670b5fb9ed9"
+  },
+  "history_policy": "V1 remains unchanged evidence of its original increment; its test hash and counts are not the current inventory.",
+  "files": [
+    {
+      "path": "subset_plan.py",
+      "bytes": 7579,
+      "sha256": "5ca0429a695e83f5f15e8ef7b26ed10764efbd7d466316096a99a9bcb1793c93"
+    },
+    {
+      "path": "entrypoint.py",
+      "bytes": 13956,
+      "sha256": "c8291b0178f34e2dda265bf927d5957499755e40e08e19a4c2ae0a243831cd09"
+    },
+    {
+      "path": "coordinator.py",
+      "bytes": 10633,
+      "sha256": "801269b74cc771d705d51d64531a2abd18b49bdaaecaabf231a7af044c110d62"
+    },
+    {
+      "path": "test_zero_offset.py",
+      "bytes": 2366,
+      "sha256": "1bb254cad07f5a158c19041f1b19058cbd138fceca88b093fb7166e7f264a84e"
+    },
+    {
+      "path": "test_zero_offset_precision.py",
+      "bytes": 4711,
+      "sha256": "7472b849253f441deb1159b9fa836fdd19d21af6e320cd6e61b919aefbd7981b"
+    },
+    {
+      "path": "test_manifest_versions.py",
+      "bytes": 2681,
+      "sha256": "49c5eecc7b828076d6430cac08a6b6133ffcc2646da7ddff06433e60f6e37994"
+    },
+    {
+      "path": "ZERO_OFFSET_MANIFEST.json",
+      "bytes": 659,
+      "sha256": "753349865c029c1d3452ea6a4dac62324b696e8ad60577f379ce689712dcd218"
+    }
+  ],
+  "tests": {
+    "command": "python [-O] -m unittest test_zero_offset_precision test_manifest_versions",
+    "methods_by_file": {
+      "test_zero_offset_precision.py": 4,
+      "test_manifest_versions.py": 3
+    },
+    "direct_methods_per_mode": 7,
+    "scope": "SYNTHETIC_ISOLATED_NOT_RUNTIME_RECEIPT"
+  },
+  "production_dependency_pins_changed": false,
+  "authoritative_registration_created": false,
+  "production_allowed": false,
+  "business_accepted": false,
+  "natural_verified": false
+}
