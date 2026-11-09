@@ -8,14 +8,30 @@ def add_contract(reg,policy,docs):
  return reg,policy,docs
 
 def fixture():return add_contract({'business_date':'20261109','source_date':'20261106','cutoff':'2026-11-09T06:30:00+08:00'},{},{'panel':{'source_date':'20261106','rows':[{'symbol':'000001.SZ','actual_date':'20261106'}]}})
+def rebind_source(reg,docs,day):
+ # Keep all identities consistent so stale-source tests reach the intended guard.
+ reg['source_date']=day
+ docs['panel']['source_date']=day
+ for row in docs['panel']['rows']:row['actual_date']=day
+ stamp=day[:4]+'-'+day[4:6]+'-'+day[6:]
+ docs['panel_evidence'].update(source_date=day,panel_identity=r.sha(r.canonical(docs['panel'])),event_at=stamp+'T15:00:00+08:00',observed_at=stamp+'T15:01:00+08:00',available_at=stamp+'T15:02:00+08:00')
+
 class Test(unittest.TestCase):
- def test_weekend_uses_friday(self):x=r.validate_freeze_panel_freshness(*fixture());self.assertEqual(x['latest_completed_session'],'20261106');self.assertEqual(x['completed_session_lag'],0)
+ def test_monday_premarket_uses_completed_friday(self):x=r.validate_freeze_panel_freshness(*fixture());self.assertEqual(x['latest_completed_session'],'20261106');self.assertEqual(x['completed_session_lag'],0)
  def test_old_panel(self):
-  a,b,c=fixture();a['source_date']='20261001'
-  with self.assertRaises(ValueError):r.validate_freeze_panel_freshness(a,b,c)
+  a,b,c=fixture();rebind_source(a,c,'20261001')
+  with self.assertRaisesRegex(ValueError,'^PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE$'):r.validate_freeze_panel_freshness(a,b,c)
  def test_uncompleted_current_session(self):
-  a,b,c=fixture();a['source_date']='20261109'
-  with self.assertRaises(ValueError):r.validate_freeze_panel_freshness(a,b,c)
+  a,b,c=fixture();rebind_source(a,c,'20261109')
+  with self.assertRaisesRegex(ValueError,'^PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE$'):r.validate_freeze_panel_freshness(a,b,c)
+ def test_two_completed_sessions_lag_rejected(self):
+  a,b,c=fixture();day='20261104';rebind_source(a,c,day)
+  c['market_calendar']['sessions'].insert(1,{'trade_date':day,'close_at':'2026-11-04T15:00:00+08:00'})
+  # All bindings and the source close are valid; only the completed-session lag fails.
+  with self.assertRaisesRegex(ValueError,'^PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE$'):r.validate_freeze_panel_freshness(a,b,c)
+ def test_weekend_business_date_is_not_monday_test(self):
+  a,b,c=fixture();a.update(business_date='20261108',cutoff='2026-11-08T06:30:00+08:00')
+  with self.assertRaisesRegex(ValueError,'^PANEL_BUSINESS_SESSION$'):r.validate_freeze_panel_freshness(a,b,c)
  def test_panel_identity(self):
   a,b,c=fixture();c['panel']['rows'][0]['actual_date']='20261001'
   with self.assertRaises(ValueError):r.validate_freeze_panel_freshness(a,b,c)
