@@ -44,6 +44,11 @@ def aware(value):
     # Reject rather than round evidence across the exact retry cooldown boundary.
     need(isinstance(value, str), 'AWARE_TIME_REQUIRED')
     need(re.search(r'[.,][0-9]{7,}', value) is None, 'UNSUPPORTED_TIME_PRECISION')
+    # CPython loses a nonzero fractional offset when its integer part is zero.
+    # Refuse this unfaithful form instead of rounding it across a time gate.
+    offset = re.search(r'[+-](0{2}(?::?0{2}){0,2})[.,]([0-9]{1,6})$', value)
+    need(offset is None or int(offset.group(2)) == 0,
+         'UNSUPPORTED_ZERO_FRACTIONAL_OFFSET')
     result = dt.datetime.fromisoformat(value)
     need(result.tzinfo is not None and result.utcoffset() is not None, 'AWARE_TIME_REQUIRED')
     return result

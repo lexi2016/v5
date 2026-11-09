@@ -1,0 +1,21 @@
+{
+  "status": "DEVELOPMENT_CODE_ONLY_NOT_RUNTIME_APPROVAL",
+  "base_commit": "4766425d4a2cfaf9c6452f8f87278194e1203dc5",
+  "files": [
+    {
+      "path": "subset_plan.py",
+      "bytes": 7579,
+      "sha256": "5ca0429a695e83f5f15e8ef7b26ed10764efbd7d466316096a99a9bcb1793c93"
+    },
+    {
+      "path": "test_zero_offset.py",
+      "bytes": 2366,
+      "sha256": "1bb254cad07f5a158c19041f1b19058cbd138fceca88b093fb7166e7f264a84e"
+    }
+  ],
+  "tests": "python [-O] -m unittest test_subset test_precision test_zero_offset",
+  "test_methods_per_mode": 27,
+  "runtime_dependency_pins_changed": false,
+  "production_allowed": false,
+  "natural_verified": false
+}
