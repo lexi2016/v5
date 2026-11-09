@@ -53,6 +53,10 @@ def precise_request_times(request):
  for value in values:
   if isinstance(value,str) and re.search(r'[.,][0-9]{7,}',value):
    raise ValueError('M07_TIME_PRECISION_UNSUPPORTED')
+  # CPython drops a fractional UTC offset when its whole-second part is zero.
+  # Reject fractional offsets rather than allowing the parser to move an instant.
+  if isinstance(value,str) and re.search(r'[+-][0-9:]+[.,][0-9]+$',value):
+   raise ValueError('M07_OFFSET_PRECISION_UNSUPPORTED')
 
 def replay(root,raw):
  need(type(raw)is bytes and 0<len(raw)<=MAX_REQUEST,'REQUEST_SIZE')

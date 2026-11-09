@@ -1,0 +1,27 @@
+{
+  "schema": "M07_REPLAY_OFFSET_FIX_V1",
+  "baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+  "reason": "Reject fractional timezone offsets because CPython ignores their fraction when whole offset seconds are zero; cannot move a late timestamp onto cutoff",
+  "original_code_pins_changed": false,
+  "original_M07_changed": false,
+  "production_allowed": false,
+  "natural_verified": false,
+  "business_accepted": false,
+  "independent_review": "PASS_ISOLATED_REPLAY_OFFSET_CANDIDATE_ONLY",
+  "tests": {
+    "normal": 24,
+    "optimized": 24,
+    "independent_offset_methods": 2,
+    "independent_extra_spellings": 3
+  },
+  "files": {
+    "replay.py": {
+      "bytes": 6078,
+      "sha256": "3b070adfcc9236aab0a17817e3f454901d2474913e932020f9c13b78f3574a39"
+    },
+    "test_offset.py": {
+      "bytes": 1062,
+      "sha256": "2136bf4a5df9aa93d6cec4f671ac018e4ce1a6b0f539b3b73a0f7e9dbc3c2bb9"
+    }
+  }
+}
