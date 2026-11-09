@@ -61,7 +61,7 @@ def _run_local(stage,registration_id,package_id=None):
 
 
 # This is a new reviewed contract, not a relabelled legacy hash or registration.
-CONTROLLED_CHAIN_SHA = '2c777fdd48e44843000e9dd9b5c9228e0390686a3b87cd4556dffda9f0c0765e'
+CONTROLLED_CHAIN_SHA = 'e9e8b5071187477321a7f126467031218ed6ea6c713a837ad1439738df9f791e'
 
 
 def run(stage, registration_id, package_id=None, *, action='deliver'):

@@ -1,0 +1,55 @@
+{
+  "schema": "RETRY_UPSTREAM_GUARD_CONSUMER_REGRESSION_V1",
+  "initial_investigation_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+  "adopted_upstream_commit": "07da0f8e38458a1dc4b67266432eb36681dbfd4c",
+  "subset_implementation_changed_by_this_increment": false,
+  "files": {
+    "subset_plan.py": {
+      "bytes": 7579,
+      "sha256": "5ca0429a695e83f5f15e8ef7b26ed10764efbd7d466316096a99a9bcb1793c93"
+    },
+    "test_zero_offset_precision.py": {
+      "bytes": 2164,
+      "sha256": "eb6bccbcd7a96815a49c6a3fd72927f56c2700bacc901ea016bb5664a9df9690"
+    },
+    "ZERO_OFFSET_PRECISION.md": {
+      "bytes": 2778,
+      "sha256": "da595cf082c3a3ea12a9a443ebe00d46421a4a75f84c6405763767ebc9d32321"
+    }
+  },
+  "upstream_and_consumer_files_unchanged": {
+    "test_zero_offset.py": {
+      "bytes": 2366,
+      "sha256": "1bb254cad07f5a158c19041f1b19058cbd138fceca88b093fb7166e7f264a84e"
+    },
+    "ZERO_OFFSET_MANIFEST.json": {
+      "bytes": 659,
+      "sha256": "753349865c029c1d3452ea6a4dac62324b696e8ad60577f379ce689712dcd218"
+    },
+    "PRECISION_MANIFEST.json": {
+      "bytes": 919,
+      "sha256": "c0a3530d89a2edef196c001796c80929356779df4bdcde5a39e7cc4fdf09574f"
+    },
+    "entrypoint.py": {
+      "bytes": 13956,
+      "sha256": "c8291b0178f34e2dda265bf927d5957499755e40e08e19a4c2ae0a243831cd09"
+    },
+    "coordinator.py": {
+      "bytes": 10633,
+      "sha256": "801269b74cc771d705d51d64531a2abd18b49bdaaecaabf231a7af044c110d62"
+    }
+  },
+  "consumer_binding_kind": "REAL_ENTRY_LOADER_WITH_SYNTHETIC_EXACT_DEPENDENCY_PINS",
+  "production_dependency_pins_changed": false,
+  "authoritative_registration_created": false,
+  "production_allowed": false,
+  "business_accepted": false,
+  "natural_verified": false,
+  "tests": {
+    "normal": 51,
+    "optimized": 51,
+    "new_real_entry_regressions": 1,
+    "scope": "ISOLATED_NOT_RUNTIME_RECEIPT"
+  },
+  "independent_review": "PASS_SOURCE_CONTRACT_AND_CONSUMER_BOUNDARY_ONLY"
+}

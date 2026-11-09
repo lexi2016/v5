@@ -1,0 +1,24 @@
+{
+  "schema": "M07_REPOSITORY_SOURCE_REBIND_V1",
+  "baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+  "replaces": {
+    "binding": "MISSING_RESTORED_DIRECTORY",
+    "original_manifest_sha256": "46b9d71a8cd1f43afe41f472d320d0245f3cf9ff0e5909dc2ea020a657ac8807",
+    "original_manifest_recovered": false
+  },
+  "new_binding": {
+    "manifest": "V5/contracts/m07_runtime.json",
+    "sha256": "1e3302422d31a595eab83552efe3ba201f56f288f7072288f3e0067978e067c4",
+    "entry": "V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py",
+    "entry_sha256": "01c791dee6547e5e1a54ef3c412ac3102dfcafdf7e78be34c702b053f6fb5791",
+    "runtime_files": 113,
+    "original_owner_files": 97
+  },
+  "scope": "RECORDED_SOURCE_ADMISSION_ONLY",
+  "live_owner_bound": false,
+  "source_authority": "UNKNOWN",
+  "production_allowed": false,
+  "natural_verified": false,
+  "collector_executed": false,
+  "formula_changes": false
+}

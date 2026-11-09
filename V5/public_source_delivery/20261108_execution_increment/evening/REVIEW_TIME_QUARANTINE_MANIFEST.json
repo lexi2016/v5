@@ -1,0 +1,39 @@
+{
+  "schema": "EVENING_REVIEW_TIME_CONTAINMENT_CODE_V1",
+  "baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+  "files": [
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/evening/controlled_chain.py",
+      "bytes": 15556,
+      "sha256": "e9e8b5071187477321a7f126467031218ed6ea6c713a837ad1439738df9f791e"
+    },
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/evening/execution.py",
+      "bytes": 5933,
+      "sha256": "447602ec6ad9cc8250a413e029a14392fddd1985545269dd563d9c0f30e04c7e"
+    },
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/evening/test_review_time_quarantine.py",
+      "bytes": 5103,
+      "sha256": "9be12483f82fbd4d87561300e931f281b529c4e059bfafc355cf98121186b6f4"
+    },
+    {
+      "path": "V5/public_source_delivery/20261108_execution_increment/evening/REVIEW_TIME_QUARANTINE.md",
+      "bytes": 4175,
+      "sha256": "2a108a5349403d5103347a57fdd8531fa461268ac2cd92d03ea61d9dcbfe2fb5"
+    }
+  ],
+  "scope": "ISOLATED_CONTAINMENT_NOT_LIVE_AUTHORITY",
+  "tests": {
+    "evening_normal": 14,
+    "evening_optimized": 14,
+    "unchanged_no_send_normal": 8,
+    "unchanged_no_send_optimized": 8
+  },
+  "formal_preparation_enabled": false,
+  "production_registration_created": false,
+  "authority_recovered": false,
+  "natural_verified": false,
+  "business_accepted": false,
+  "delivery_verified": false
+}

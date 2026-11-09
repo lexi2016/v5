@@ -2,7 +2,7 @@ import unittest,copy
 import registered as r
 
 def fixture():
- reg={'business_date':'20261109','source_date':'20261106','cutoff':'2026-11-09T06:30:00+08:00'}
+ reg={'domain':'synthetic','business_date':'20261109','source_date':'20261106','cutoff':'2026-11-09T06:30:00+08:00'}
  policy={'freeze_chain':{'schema':'FREEZE_CHAIN_POLICY_V1','version':'v1','mode':'GENESIS','expected_parent_identity':None}}
  docs={'panel':{'rows':[{'symbol':'000001.SZ','value':1}]},'freeze_changes':{'000001.SZ':'Initial explicit snapshot'}}
  return reg,policy,docs

@@ -3,18 +3,18 @@
   "files": [
     {
       "path": "PROVENANCE.json",
-      "bytes": 1065,
-      "sha256": "7dfd2ed7a7bbffbab98bc1bffb9ee3cee0e1911313cebaf4b3ba515dccbab522"
+      "bytes": 2591,
+      "sha256": "b392ce1444e35cb315ef2a4bedf4cb585b29852dedd35198a5619237376bec53"
     },
     {
       "path": "README.md",
-      "bytes": 3086,
-      "sha256": "322d5594d3eb9f2854e8a59565ca2dab702530e38b0d5d40083ef4389c2cb0c3"
+      "bytes": 3858,
+      "sha256": "20476970ac1a907331e0b7a7ac07ee93e6ef365f270c1d97f5bc90bdd2c172fa"
     },
     {
       "path": "a0915/execution.py",
-      "bytes": 3124,
-      "sha256": "ae45112dd097f7ee3ffccbbc2b8a6f1f3375d90d7cf0cb3a6ba827d022be8d97"
+      "bytes": 7017,
+      "sha256": "30b4f27c6a3aa24b268759f6efbdaade3ffdabb7c0a76482f03d505dccddbe18"
     },
     {
       "path": "four_groups/adapter.py",
@@ -22,19 +22,29 @@
       "sha256": "23bb980bc806dd6b6981f5da19a8020b7b523c500ac0b927fca585e7e7465411"
     },
     {
+      "path": "hk_v3/TIME_PRECISION_CONTRACT.md",
+      "bytes": 2582,
+      "sha256": "3afe549565d68319a53660ea27e29d7b7cd3cf6fd07114ed9f1c87a38596bccd"
+    },
+    {
       "path": "hk_v3/bridge.py",
-      "bytes": 3915,
-      "sha256": "5e39ecca81f5d598e75a4908ddaff0a69a5523f6d6482bb5bc4d00482af8486c"
+      "bytes": 4512,
+      "sha256": "d13a36c8da8b9b6848c36e7b511f07309ab4222ac22810cf289a99daab09798f"
     },
     {
       "path": "hk_v3/capture.py",
-      "bytes": 7064,
-      "sha256": "35fb85e356b979eb0e68e690844c4ec49be2304ca2d2d4e01ee0d942678f7cb5"
+      "bytes": 7830,
+      "sha256": "a4ce98351b585b10729f5251d52fdd5ddf1d896d6792ee9982c52e7c2e4444ed"
     },
     {
       "path": "hk_v3/test_capture.py",
       "bytes": 4589,
       "sha256": "861e1e21a4bfaa346dc58d50c6d383577b6549ac8b9f61afedcddb2810d455e8"
+    },
+    {
+      "path": "hk_v3/test_time_precision.py",
+      "bytes": 4455,
+      "sha256": "682e7e4f7fc829e17d7c253d379132f4c270345073a8c3ba0bd4744cc5d10b30"
     },
     {
       "path": "test_public.py",
@@ -43,5 +53,7 @@
     }
   ],
   "production_admitted": false,
-  "natural_verified": false
+  "natural_verified": false,
+  "inventory_scope": "ALLOWLIST_NOT_COMPLETE_DEPLOYMENT_CLOSURE",
+  "inventory_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
 }

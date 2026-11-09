@@ -298,6 +298,9 @@ def build_freeze_lineage(reg,policy,docs):
  """New explicit ancestry/delta contract. Consistency never establishes source authority.
  Existing dispatch must pin parent+change documents and independently review policy.
  """
+ # This pure preview builder has no authoritative chain head or atomic registration.
+ # It must not be used as production GENESIS/DELTA admission.
+ if reg.get('domain')!='synthetic':raise ValueError('FREEZE_LINEAGE_SYNTHETIC_ONLY')
  import re
  contract=policy.get('freeze_chain')
  if type(contract) is not dict or set(contract)!={'schema','version','mode','expected_parent_identity'} or contract['schema']!='FREEZE_CHAIN_POLICY_V1':raise ValueError('FREEZE_CHAIN_POLICY_REQUIRED')
@@ -335,9 +338,30 @@ def build_freeze_lineage(reg,policy,docs):
  result['identity']=sha(canonical(result))
  return result
 
+def validate_calendar_completeness(cal,coverage,start,end,close_by_date,date):
+ """New structural input contract, not recovered exchange/closure authority.
+ Every civil date is explicitly OPEN/CLOSED. Never infer missing dates as closed.
+ Input pins/review must include this ledger; a self-hash does not prove its truth.
+ """
+ keys={'schema','calendar_identity','market','timezone','version','coverage_start','coverage_end','days'}
+ if type(coverage) is not dict or set(coverage)!=keys or coverage['schema']!='MARKET_CALENDAR_COVERAGE_V1':raise ValueError('PANEL_CALENDAR_COMPLETENESS_REQUIRED')
+ if coverage['calendar_identity']!=sha(canonical(cal)) or any(coverage[k]!=cal[k] for k in ('market','timezone','version','coverage_start','coverage_end')):raise ValueError('PANEL_CALENDAR_COMPLETENESS_BINDING')
+ rows=coverage['days'];count=(end-start).days+1
+ if type(rows) is not list or len(rows)!=count:raise ValueError('PANEL_CALENDAR_DAY_COVERAGE')
+ opened=set()
+ for offset,row in enumerate(rows):
+  if type(row) is not dict or set(row)!={'date','state','source_reference'}:raise ValueError('PANEL_CALENDAR_DAY_COVERAGE')
+  day=date(row['date'])
+  if day!=start+dt.timedelta(days=offset):raise ValueError('PANEL_CALENDAR_DAY_COVERAGE')
+  reference=row['source_reference']
+  if row['state'] not in ('OPEN','CLOSED') or type(reference) is not str or not reference.strip() or reference.strip()=='UNKNOWN':raise ValueError('PANEL_CALENDAR_DAY_UNRESOLVED')
+  if row['state']=='OPEN':opened.add(day)
+ if opened!=set(close_by_date):raise ValueError('PANEL_CALENDAR_SESSION_COVERAGE_MISMATCH')
+ return sha(canonical(coverage))
+
 def validate_freeze_panel_freshness(reg,policy,docs):
  """Explicit reviewed calendar + panel evidence contract; never infer trading days.
- Calendar completeness and provider authenticity remain the original review's job.
+ Structural completeness is checked here; provider authenticity remains unproved.
  """
  import re
  cfg=policy.get('panel_freshness')
@@ -368,6 +392,7 @@ def validate_freeze_panel_freshness(reg,policy,docs):
   if not start<=day<=end or close.astimezone(tz).date()!=day or (last is not None and day<=last):raise ValueError('PANEL_SESSION_ORDER')
   last=day;close_by_date[day]=close
   if close<=cutoff:completed.append(day)
+ coverage_identity=validate_calendar_completeness(cal,docs.get('calendar_coverage'),start,end,close_by_date,date)
  if business_day not in close_by_date:raise ValueError('PANEL_BUSINESS_SESSION')
  if source not in completed or len(completed)-1-completed.index(source)>cfg['max_completed_session_lag']:raise ValueError('PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE')
  evidence=docs.get('panel_evidence')
@@ -377,13 +402,23 @@ def validate_freeze_panel_freshness(reg,policy,docs):
  if event!=close_by_date[source] or not event<=observed<=available<=cutoff:raise ValueError('PANEL_EVIDENCE_TIME_ORDER')
  if (cutoff-observed).total_seconds()>cfg['max_observation_age_seconds'] or (cutoff-available).total_seconds()>cfg['max_available_age_seconds']:raise ValueError('PANEL_EVIDENCE_STALE')
  return {'contract':'FREEZE_PANEL_FRESHNESS_V1','calendar_version':cal['version'],'calendar_identity':sha(canonical(cal)),
+         'calendar_coverage_identity':coverage_identity,'calendar_completeness':'STRUCTURE_VERIFIED_NOT_AUTHORITY',
          'panel_identity':evidence['panel_identity'],'source_date':reg['source_date'],'latest_completed_session':completed[-1].strftime('%Y%m%d'),
          'completed_session_lag':len(completed)-1-completed.index(source),'event_at':evidence['event_at'],'observed_at':evidence['observed_at'],'available_at':evidence['available_at'],
          'source_admission':False,'calendar_authority':'REQUIRES_EXISTING_INDEPENDENT_REVIEW'}
 
+def freeze_authority_block():
+ # No local-file CAS or caller-provided approval can replace the original authority.
+ return {'status':'BLOCKED_FREEZE_AUTHORITY_NOT_BOUND','jobs_started':0,'formal_freeze':False,
+         'business_accepted':False,'natural_verified':False,'delivery_status':'NOT_SENT',
+         'missing_authority':['EXCHANGE_CALENDAR_AND_TEMPORARY_CLOSURE_ADMISSION',
+                              'TRUSTED_CHAIN_HEAD','GENESIS_INITIALIZATION_AUTHORIZATION',
+                              'ATOMIC_UNIQUE_CHAIN_REGISTRATION']}
+
 def calculate(reg,policy,docs,safe):
  node=reg['node']
  if node=='freeze':
+  if reg.get('domain')!='synthetic':return freeze_authority_block()
   panel=docs['panel']
   if panel['source_date']!=reg['source_date'] or panel['scope_count']!=policy['panel_denominator']:raise ValueError('PANEL_DATE_SCOPE')
   panel_timing=validate_freeze_panel_freshness(reg,policy,docs)
@@ -433,6 +468,8 @@ def dispatch(node,run_id,environment_id,gate):
  if node not in NODES:raise ValueError('NODE')
  matches=[r for r in TRUSTED_RUNS if (r['node'],r['run_id'],r['environment_id'])==(node,run_id,environment_id)]
  if len(matches)!=1:return {'status':'BLOCKED_NO_TRUSTED_REGISTRATION','node':node,'jobs_started':0,'natural_verified':False}
+ # Block before loading inputs, starting a job, taking an owner claim or writing.
+ if node=='freeze' and matches[0].get('domain')!='synthetic':return dict(freeze_authority_block(),node=node)
  if not callable(gate):raise ValueError('ORIGINAL_RESOURCE_GATE_REQUIRED')
  reg=matches[0];safe=module('safeio')
  if hasattr(gate,'start'):gate.start()

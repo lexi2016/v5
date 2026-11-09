@@ -3,33 +3,113 @@
   "files": [
     {
       "path": "PROVENANCE.json",
-      "bytes": 1886,
-      "sha256": "f1b4025ee5989cb01921e3bff274a9d61335045505f9081b02dc7437cc1ece5d"
+      "bytes": 4362,
+      "sha256": "7f1f1c8bca8ff255ccb889026d0f74dc2560e42e56c93fb7ca775044156a961f"
     },
     {
       "path": "README.md",
-      "bytes": 2804,
-      "sha256": "ce621c8d6e8ed95af260a4ba2fdd46b5622e416eef869e436d2c62f528ef9562"
+      "bytes": 3794,
+      "sha256": "c39ebb2756d4af63573e6d1ce60fbbfb35d1bcf1d3c07d0010e6e87edd6f9017"
+    },
+    {
+      "path": "daily1540/owner_bridge.py",
+      "bytes": 16540,
+      "sha256": "6fd39c651689f61151f78e8fa3de99a0d2550a7d07a86e4c8c863e9158b2e2e4"
     },
     {
       "path": "daily1540/stages.py",
-      "bytes": 9356,
-      "sha256": "a61ab831ea4ec4aa1185e79dd5fc4b09809adac54f92a75c9207095d05700026"
+      "bytes": 14107,
+      "sha256": "827ee261ad7b7ef978ddb89d1e4eeba5e8c2081e6a73a01bc94633e4ffe055cd"
+    },
+    {
+      "path": "evening/REVIEW_TIME_QUARANTINE.md",
+      "bytes": 4175,
+      "sha256": "2a108a5349403d5103347a57fdd8531fa461268ac2cd92d03ea61d9dcbfe2fb5"
+    },
+    {
+      "path": "evening/REVIEW_TIME_QUARANTINE_MANIFEST.json",
+      "bytes": 1422,
+      "sha256": "da10dcaa17527065d7be6dad096958f51cbf94206713c1335ba2e64e89b4a04e"
+    },
+    {
+      "path": "evening/controlled_chain.py",
+      "bytes": 15556,
+      "sha256": "e9e8b5071187477321a7f126467031218ed6ea6c713a837ad1439738df9f791e"
     },
     {
       "path": "evening/execution.py",
-      "bytes": 4756,
-      "sha256": "cedafe9551b61e6a14fccb4c385724eaa62cfc3cfa4667e3aa38923b843003e3"
+      "bytes": 5933,
+      "sha256": "447602ec6ad9cc8250a413e029a14392fddd1985545269dd563d9c0f30e04c7e"
+    },
+    {
+      "path": "evening/test_review_time_quarantine.py",
+      "bytes": 5103,
+      "sha256": "9be12483f82fbd4d87561300e931f281b529c4e059bfafc355cf98121186b6f4"
+    },
+    {
+      "path": "morning/FREEZE_RECOVERY_CONTRACT.md",
+      "bytes": 5185,
+      "sha256": "21bb46570188631f06e78615903b80a186f8fdf3e967b4e50d22582a2a07ded1"
     },
     {
       "path": "morning/registered.py",
-      "bytes": 35694,
-      "sha256": "e1fa577a3b138f4a6e57155e89c8fd38a0ec719c0b36cd4198d5b544e2ec1c21"
+      "bytes": 38579,
+      "sha256": "8dd435d4e0e72a9128819457fa4491a9138f1917824b76495653d085ed911968"
+    },
+    {
+      "path": "morning/test_business_day.py",
+      "bytes": 1471,
+      "sha256": "ee09bf005248a35d725299534e904804042928cb7353b5fab82653774ab50955"
+    },
+    {
+      "path": "morning/test_calendar_completeness.py",
+      "bytes": 4054,
+      "sha256": "a013e92c48ac534a87bca9c8f1ad856768d2d8557bb3369fd5c48392276f3518"
+    },
+    {
+      "path": "morning/test_freeze_authority_boundary.py",
+      "bytes": 2191,
+      "sha256": "ea9f170106e85fa3f17bf65c24feac34d717fd7185ddc9a253573cd3caa5957e"
+    },
+    {
+      "path": "morning/test_freeze_authority_claim.py",
+      "bytes": 2865,
+      "sha256": "eddb2549cb64aece2fce920e88879ef7a25c3b0f217e389eba2224758c8ff6ad"
+    },
+    {
+      "path": "morning/test_freeze_integration.py",
+      "bytes": 4954,
+      "sha256": "3e33b807ee3f10624a4e6bb4f3353954db6bfb7fb3a89a0fb3733a8b7202058f"
+    },
+    {
+      "path": "morning/test_freeze_lineage.py",
+      "bytes": 3185,
+      "sha256": "656eea281685cbfee6b637e64a2511b3d54caee0a1c0bab6dd53e297de4f7f41"
+    },
+    {
+      "path": "morning/test_late_index.py",
+      "bytes": 1287,
+      "sha256": "817bc41f792fd957522d5c67235fe560e3107f753a4b5628a40e0935f10ae552"
+    },
+    {
+      "path": "morning/test_panel_freshness.py",
+      "bytes": 5931,
+      "sha256": "cb7ef4c449dd357709bdabd24d1f861476800b96a988fcb02c5d888585966f1d"
+    },
+    {
+      "path": "morning/test_persistence_crossprocess.py",
+      "bytes": 10271,
+      "sha256": "cb8bb48188585bd56136d5fb666c215d2af1a56e4c0281d5db935821d471f494"
     },
     {
       "path": "test_public.py",
       "bytes": 2207,
       "sha256": "ac53987a2c072c75801607b171cdf63bb455ce63bb97d7d4318cf9d0b220f81f"
+    },
+    {
+      "path": "test_public_inventory.py",
+      "bytes": 1482,
+      "sha256": "19b520f3e4088b38e29249a7aa71e11df4a55e986e7a9876805899563be172c9"
     },
     {
       "path": "top200/ranking.py",
@@ -38,8 +118,8 @@
     },
     {
       "path": "top200/registered.py",
-      "bytes": 6134,
-      "sha256": "7a02fc94b115da45d18d0bb33113931eb439a52549dd98783303758849d3acf3"
+      "bytes": 9596,
+      "sha256": "718b3e6513cea24677a4baf7431e5462cc9c2ffb19eaa394097716e511ff2d80"
     },
     {
       "path": "us_v3/bridge.py",
@@ -55,18 +135,10 @@
       "path": "us_v3/launcher.py",
       "bytes": 19869,
       "sha256": "cc19ae4822353999389c4791726ee3b14d7e3f6e38131d7bb33ff9db19eb8db0"
-    },
-    {
-      "path": "morning/test_late_index.py",
-      "bytes": 1287,
-      "sha256": "817bc41f792fd957522d5c67235fe560e3107f753a4b5628a40e0935f10ae552"
-    },
-    {
-      "path": "daily1540/owner_bridge.py",
-      "bytes": 16540,
-      "sha256": "6fd39c651689f61151f78e8fa3de99a0d2550a7d07a86e4c8c863e9158b2e2e4"
     }
   ],
   "production_admitted": false,
-  "natural_verified": false
+  "natural_verified": false,
+  "inventory_scope": "ALLOWLIST_NOT_COMPLETE_DEPLOYMENT_CLOSURE",
+  "inventory_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
 }

@@ -2,18 +2,39 @@
   "files": [
     {
       "path": "adapter.py",
-      "bytes": 3662,
-      "sha256": "7207c65736edaaa9d6ffc51d5394ce2edbf821f388eb4a6f3f734883d6ac37b9",
-      "source_bytes_unchanged": true
+      "bytes": 3644,
+      "sha256": "297bcbd1ccac90b6d8c5f522dfc2a2358fa8288d05da5ab51dc6bde04f2541db",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "adapter.py",
+        "bytes": 3662,
+        "sha256": "7207c65736edaaa9d6ffc51d5394ce2edbf821f388eb4a6f3f734883d6ac37b9",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 3662,
+      "original_source_sha256": "7207c65736edaaa9d6ffc51d5394ce2edbf821f388eb4a6f3f734883d6ac37b9",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     },
     {
       "path": "verify_worker.py",
-      "bytes": 2304,
-      "sha256": "0218b3692773192bacb009f5c9ca96c9de69a46e3cf93cc33590f6f228e5550f",
-      "source_bytes_unchanged": true
+      "bytes": 6491,
+      "sha256": "a27f1ce0ecd5cceeecb9d0d14c1783887a59f70764963958a3211d61c260f908",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "verify_worker.py",
+        "bytes": 2304,
+        "sha256": "0218b3692773192bacb009f5c9ca96c9de69a46e3cf93cc33590f6f228e5550f",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 2304,
+      "original_source_sha256": "0218b3692773192bacb009f5c9ca96c9de69a46e3cf93cc33590f6f228e5550f",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     }
   ],
   "production_admitted": false,
   "natural_verified": false,
-  "provider_included": false
+  "provider_included": false,
+  "inventory_scope": "CURRENT_ALLOWLIST_IDENTITY_NOT_RUNTIME_ADMISSION",
+  "inventory_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+  "business_accepted": false
 }

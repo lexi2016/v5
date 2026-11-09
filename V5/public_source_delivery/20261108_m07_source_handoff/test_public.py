@@ -27,7 +27,10 @@ class Tests(unittest.TestCase):
   def deny():raise ValueError('SYNTHETIC_GATE')
   with patch.object(a.subprocess,'run',side_effect=AssertionError('no process')):
    with self.assertRaisesRegex(ValueError,'SYNTHETIC_GATE'):a.verify_registered_recording(replace(self.binding(),gate=deny))
- def test_worker_dependencies_absent(self):
+ def test_worker_missing_manifest_stays_closed(self):
   import verify_worker as w
-  with self.assertRaises(OSError):w.main()
+  import tempfile
+  from pathlib import Path
+  with tempfile.TemporaryDirectory() as temp, patch.object(w,'MANIFEST',Path(temp)/'missing-manifest.json'):
+   with self.assertRaises(OSError):w.main()
 if __name__=='__main__':unittest.main()

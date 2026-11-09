@@ -1,16 +1,83 @@
-# M07 recorded-source handoff source archive
+# M07 recorded-source handoff and repository closure binding
 
-This increment contains unchanged adapter and verifier-worker source plus public synthetic wrapper tests. It is not a provider, live quote collector, new M05 pool, natural opening executor or completed business node.
+This entry validates an already recorded four-root input descriptor. It does not
+collect quotes, calculate new stock-selection rules, activate live execution,
+publish a production result or send a message. REGISTRY remains empty.
 
-The adapter's REGISTRY is empty. A separately reviewed original-owner binding would have to identify the actual job/environment, named source, exact original M05 scope, source/owner review identities, four physical input roots, completed RawStore trio, original locks and resource gate. No binding, actual configuration, quote data, account, credential, private record or internal instruction is included.
+## 2026-11-09 repair and replacement relationship
 
-The worker is designed to verify pinned original M07 entry plus original dependency manifest, import the unchanged 97-file closure in a fresh subprocess, snapshot source inputs into temporary storage and invoke unchanged original `_admit`. The original source closure and manifest are deliberately excluded here. Therefore standalone execution cannot complete verification. Do not replace missing dependencies with guessed files or fabricate source/owner review. The Python guard is not an OS sandbox claim.
+At baseline fc9ea68a2432dcfb279745d65819d3d853f5321a, verify_worker.py pointed to
+public_source_delivery/opening_owner_code_restore_20261107/m07 and required the
+historical SOURCE_MANIFEST.json with SHA-256
+46b9d71a8cd1f43afe41f472d320d0245f3cf9ff0e5909dc2ea020a657ac8807.
+Those paths were absent from this repository checkout. The historical manifest
+has not been reconstructed or declared recovered.
 
-The result remains source-recording-only, source authority UNKNOWN and production/natural/business false. Known synthetic evidence cannot be relabelled real; an unclassified recording remains input-kind UNKNOWN. No data collection, stock selection, monitoring activation, original input mutation or production-store update occurs. Current-day provider schema/units, lawful M05 pool and live scheduling evidence remain missing. Par, Top200, machine candidates or historical monitoring lists are not substitutes for the required original M05 scope.
+The repository already contains the same original entry and complete original
+owner closure. This repair explicitly uses:
 
-Original replay `_request` and rejection of natural execution remain unchanged. Historical source validation does not make a historical replay a current live execution. This archive neither changes that restriction nor supplies live orchestration.
+- V5/contracts/m07_runtime.json, pinned SHA-256
+  1e3302422d31a595eab83552efe3ba201f56f288f7072288f3e0067978e067c4.
+- All 113 files in that manifest, checked for regular-file type, bounded size,
+  exact bytes and SHA-256; symbolic links and invalid paths are refused.
+- V5/source_owners/m07/V5/src/v5_shadow/a_stage_daily.py, unchanged SHA-256
+  01c791dee6547e5e1a54ef3c412ac3102dfcafdf7e78be34c702b053f6fb5791.
+- The unchanged 97-file original owner closure, independently checked by its
+  original loader.
 
-## Export checks
-Run `PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_public`, repeat with `python -O`. Seven checks exercise empty registry, mocked source-only response, synthetic relabel/scope/source refusal, resource refusal before process start and missing-original-dependency failure. No subprocess/provider/network/real original `_admit` is executed by these public tests. Prior private tests of the original synthetic M05/RawStore closure are not transferred as verification of this standalone archive.
+The worker compiles the verified v5_shadow byte snapshots rather than reopening
+them for import. It rechecks the repository closure after admission. It copies
+the registered inputs to temporary storage and calls only original _admit.
+The original natural-execution refusal and source admission rules are unchanged.
 
-PROVENANCE and MANIFEST record allowlisted byte hashes. Roll back only this incremental commit if needed; old source, main, V4 and production data remain untouched. Production, actual collection, delivery and natural business acceptance are unverified.
+This is a new repository binding recorded in REPLACEMENT_BINDING.json.
+It does not replace the missing historical manifest with a file bearing its
+name, fabricate a source identity or recover any cloud job/lock/receipt.
+
+## Input, output and existing caller
+
+Existing call path: adapter.dispatch(job_id, environment_id) finds an exact
+private Binding; verify_registered_recording(binding) enters the supplied
+original gate and lock, then launches verify_worker.py in a fresh interpreter.
+
+The Binding must identify the job/environment, named source, original scope
+and its identity, independent source/owner review references, four pinned roots
+(pool, live, research, morning), completed RawStore references, original lock
+and resource gate. A hash-shaped review reference alone is not source authority.
+
+Output remains SOURCE_RECORDING_VERIFIED_ONLY, with production_allowed,
+natural_verified, business_verified and collector_executed all false.
+source_authority remains UNKNOWN. Known synthetic inputs cannot be relabelled
+as real. RawStore, M05 frozen pools, current quotes and an actual live owner
+must still come from the original system or an independently admitted provider.
+
+## Verification
+
+Run from this directory in a complete repository checkout:
+
+    python3 -B -m unittest -v test_public test_repository_closure
+    python3 -O -B -m unittest -v test_public test_repository_closure
+
+The repository tests create explicitly synthetic 09:25 and 09:30/09:35 inputs
+in temporary directories using the original fixture. They exercise the real
+adapter subprocess and original _admit, verify both stages and unchanged input
+bytes, and separately run the worker with explicit -O because the adapter's
+fixed -I/-B command does not inherit the parent optimization flag.
+Manifest/dependency tampering, symlinks, empty registry, source/scope mismatch,
+synthetic relabelling and the unchanged natural-execution refusal are covered.
+
+The source verifier also rejects fractions beyond microseconds and fractional
+UTC offsets before original owner loading and input snapshots. The original
+owner's parser can otherwise discard precision before its cutoff comparison.
+The separate M07 replay correction in parent commit 84e7843 is retained; it
+does not protect this source-verification entry by itself. The additional
+regression exercises actual adapter calls and explicit optimized child calls
+for cutoff, captured_at and acquired_at in both stages. Eight cutoff/acquired-at
+cases were accepted before this boundary guard; four captured-at variants
+were already rejected by the original window rule and now receive the earlier
+precision error. Original formulas, owner bytes and original window checks
+remain unchanged.
+
+These tests establish repository source wiring only. Real data collection,
+deployment, current-day source admission and natural business acceptance are
+not established. The Python write guard is not an OS sandbox certification.

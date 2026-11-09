@@ -1,11 +1,10 @@
 """Synthetic recorded cross-node contracts, original packaged functions, no activation."""
 import importlib.util,json,os,pathlib,shutil,tempfile,unittest,copy,subprocess,sys
 
+from test_panel_freshness import add_contract as add_calendar_contract
+
 def add_contract(reg,policy,docs,r):
- policy['panel_freshness']={'schema':'FREEZE_PANEL_FRESHNESS_V1','market':'A_SHARE','timezone':'Asia/Shanghai','calendar_version':'SYNTHETIC_CAL','max_completed_session_lag':0,'max_observation_age_seconds':300000,'max_available_age_seconds':300000}
- docs['market_calendar']={'schema':'MARKET_SESSION_CALENDAR_V1','market':'A_SHARE','timezone':'Asia/Shanghai','version':'SYNTHETIC_CAL','coverage_start':'20261001','coverage_end':'20261110','source_reference':'SYNTHETIC_FIXTURE_NOT_REAL_CALENDAR','sessions':[{'trade_date':d,'close_at':d[:4]+'-'+d[4:6]+'-'+d[6:]+'T15:00:00+08:00'} for d in ['20261001','20261105','20261106','20261109','20261110']]}
- docs['panel_evidence']={'schema':'FREEZE_PANEL_EVIDENCE_V1','panel_identity':r.sha(r.canonical(docs['panel'])),'source_date':reg['source_date'],'calendar_version':'SYNTHETIC_CAL','event_at':'2026-11-06T15:00:00+08:00','observed_at':'2026-11-06T15:01:00+08:00','available_at':'2026-11-06T15:02:00+08:00','source_reference':'SYNTHETIC_PROVIDER_RECEIPT'}
- return reg,policy,docs
+ return add_calendar_contract(reg,policy,docs)
 
 
 class Workflow(unittest.TestCase):

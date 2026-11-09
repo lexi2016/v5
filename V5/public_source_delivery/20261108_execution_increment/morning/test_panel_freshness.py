@@ -1,10 +1,34 @@
 import unittest,copy
+import datetime as dt
 import registered as r
+
+def add_coverage(docs):
+    cal = docs['market_calendar']
+    opened = {row['trade_date'] for row in cal['sessions']}
+    start = dt.datetime.strptime(cal['coverage_start'], '%Y%m%d').date()
+    end = dt.datetime.strptime(cal['coverage_end'], '%Y%m%d').date()
+    days = []
+    day = start
+    while day <= end:
+        value = day.strftime('%Y%m%d')
+        days.append({'date': value, 'state': 'OPEN' if value in opened else 'CLOSED',
+                     'source_reference': 'SYNTHETIC_EXPLICIT_DAY_NOT_EXCHANGE_AUTHORITY'})
+        day += dt.timedelta(days=1)
+    docs['calendar_coverage'] = {
+        'schema': 'MARKET_CALENDAR_COVERAGE_V1',
+        'calendar_identity': r.sha(r.canonical(cal)),
+        'market': cal['market'], 'timezone': cal['timezone'], 'version': cal['version'],
+        'coverage_start': cal['coverage_start'], 'coverage_end': cal['coverage_end'],
+        'days': days,
+    }
+    return docs
+
 
 def add_contract(reg,policy,docs):
  policy['panel_freshness']={'schema':'FREEZE_PANEL_FRESHNESS_V1','market':'A_SHARE','timezone':'Asia/Shanghai','calendar_version':'SYNTHETIC_CAL','max_completed_session_lag':0,'max_observation_age_seconds':300000,'max_available_age_seconds':300000}
  docs['market_calendar']={'schema':'MARKET_SESSION_CALENDAR_V1','market':'A_SHARE','timezone':'Asia/Shanghai','version':'SYNTHETIC_CAL','coverage_start':'20261001','coverage_end':'20261110','source_reference':'SYNTHETIC_FIXTURE_NOT_REAL_CALENDAR','sessions':[{'trade_date':d,'close_at':d[:4]+'-'+d[4:6]+'-'+d[6:]+'T15:00:00+08:00'} for d in ['20261001','20261105','20261106','20261109','20261110']]}
  docs['panel_evidence']={'schema':'FREEZE_PANEL_EVIDENCE_V1','panel_identity':r.sha(r.canonical(docs['panel'])),'source_date':reg['source_date'],'calendar_version':'SYNTHETIC_CAL','event_at':'2026-11-06T15:00:00+08:00','observed_at':'2026-11-06T15:01:00+08:00','available_at':'2026-11-06T15:02:00+08:00','source_reference':'SYNTHETIC_PROVIDER_RECEIPT'}
+ add_coverage(docs)
  return reg,policy,docs
 
 def fixture():return add_contract({'business_date':'20261109','source_date':'20261106','cutoff':'2026-11-09T06:30:00+08:00'},{},{'panel':{'source_date':'20261106','rows':[{'symbol':'000001.SZ','actual_date':'20261106'}]}})
@@ -27,6 +51,7 @@ class Test(unittest.TestCase):
  def test_two_completed_sessions_lag_rejected(self):
   a,b,c=fixture();day='20261104';rebind_source(a,c,day)
   c['market_calendar']['sessions'].insert(1,{'trade_date':day,'close_at':'2026-11-04T15:00:00+08:00'})
+  add_coverage(c)
   # Exact error checks the session gate even though receipt age is also excessive.
   with self.assertRaisesRegex(ValueError,'^PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE$'):r.validate_freeze_panel_freshness(a,b,c)
  def test_weekend_business_date_is_not_monday_test(self):
@@ -35,6 +60,7 @@ class Test(unittest.TestCase):
  def test_two_session_threshold_with_recent_retrieval(self):
   a,b,c=fixture();rebind_source(a,c,'20261104')
   c['market_calendar']['sessions'].insert(1,{'trade_date':'20261104','close_at':'2026-11-04T15:00:00+08:00'})
+  add_coverage(c)
   c['panel_evidence'].update(observed_at='2026-11-09T06:28:00+08:00',available_at='2026-11-09T06:29:00+08:00')
   b['panel_freshness']['max_completed_session_lag']=1
   with self.assertRaisesRegex(ValueError,'^PANEL_SOURCE_SESSION_STALE_OR_INCOMPLETE$'):

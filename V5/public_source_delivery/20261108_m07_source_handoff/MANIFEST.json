@@ -3,30 +3,42 @@
   "files": [
     {
       "path": "PROVENANCE.json",
-      "bytes": 483,
-      "sha256": "ccf8aa2ea52b03a698b01d4f3db3f9ec5d441ec0bdbb171f292845f5e3ca4fe0"
+      "bytes": 1553,
+      "sha256": "7423909f9fcc7df6228d1e2b0dc03b71cb37f13f7c70364136d451cea4dd2f3a"
     },
     {
       "path": "README.md",
-      "bytes": 2746,
-      "sha256": "5cf7817af87ba30b27a66d022107ae02f3642482f3051500694c0b7cc94a6501"
+      "bytes": 4640,
+      "sha256": "985fa6b0123d7f2e5397b731291bea78218891c34ee2780dcfa5eed8f202e1ff"
+    },
+    {
+      "path": "REPLACEMENT_BINDING.json",
+      "bytes": 919,
+      "sha256": "1ce8c31bd732b60cf195beaf2f98a78b1e555587b7548f60f16cf9cc0cb24008"
     },
     {
       "path": "adapter.py",
-      "bytes": 3662,
-      "sha256": "7207c65736edaaa9d6ffc51d5394ce2edbf821f388eb4a6f3f734883d6ac37b9"
+      "bytes": 3644,
+      "sha256": "297bcbd1ccac90b6d8c5f522dfc2a2358fa8288d05da5ab51dc6bde04f2541db"
     },
     {
       "path": "test_public.py",
-      "bytes": 2391,
-      "sha256": "bc8bcfdf8da93319cceeaffb9f9d947d23bc6559bd223110c646eb8022f91b14"
+      "bytes": 2556,
+      "sha256": "af9ee1e0094e100d4697c17cac25fae6e0bcddc1bdd7a409013deb2ed1323c94"
+    },
+    {
+      "path": "test_repository_closure.py",
+      "bytes": 8602,
+      "sha256": "bf4937bfd7595d837e7518accd9082fa0d909b253d052450047159362525e077"
     },
     {
       "path": "verify_worker.py",
-      "bytes": 2304,
-      "sha256": "0218b3692773192bacb009f5c9ca96c9de69a46e3cf93cc33590f6f228e5550f"
+      "bytes": 6491,
+      "sha256": "a27f1ce0ecd5cceeecb9d0d14c1783887a59f70764963958a3211d61c260f908"
     }
   ],
   "production_admitted": false,
-  "natural_verified": false
+  "natural_verified": false,
+  "inventory_scope": "ALLOWLIST_NOT_COMPLETE_DEPLOYMENT_CLOSURE",
+  "inventory_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
 }

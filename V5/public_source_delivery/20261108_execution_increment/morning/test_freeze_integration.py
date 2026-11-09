@@ -1,6 +1,6 @@
 import unittest,os,pathlib,tempfile,shutil,importlib.util
 from test_freeze_fact_timing import fixture
-from test_panel_freshness import add_contract
+from test_panel_freshness import add_contract,add_coverage
 class Integration(unittest.TestCase):
  def test_real_crosscheck_and_freeze_branch(self):
   package=os.environ.get('MORNING_PACKAGE_ROOT')
@@ -34,6 +34,7 @@ class Integration(unittest.TestCase):
    from test_panel_freshness import rebind_source
    rebind_source(reg,docs,'20261104')
    docs['market_calendar']['sessions'].insert(1,{'trade_date':'20261104','close_at':'2026-11-04T15:00:00+08:00'})
+   add_coverage(docs)
    # Recent retrieval of an old panel: event date remains Nov4, not rewritten to today.
    docs['panel_evidence'].update(observed_at='2026-11-09T06:28:00+08:00',available_at='2026-11-09T06:29:00+08:00')
    safe=m.module('safeio')

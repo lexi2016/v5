@@ -13,7 +13,9 @@ class AuthorityClaim(unittest.TestCase):
    policy['panel_denominator']=1
    policy['freeze_chain']={'schema':'FREEZE_CHAIN_POLICY_V1','version':'SYNTHETIC_V1','mode':'GENESIS','expected_parent_identity':None}
    reg={'node':'freeze','run_id':'SYNTHETIC','environment_id':'TEMP','domain':'production','business_date':'20261109','source_date':'20261106','cutoff':cutoff.isoformat(),'inputs':{},'policy':{},'review':{},'owner_identity':'SYNTHETIC','output_relative':'unused','adapter_sha256':m.sha((here/'registered.py').read_bytes())}
-   docs={'panel':panel,'multi_source':multi,'freeze_changes':{'000001.SZ':'SYNTHETIC initial snapshot'}};add_contract(reg,policy,docs);safe=m.module('safeio');x=m.calculate(reg,policy,docs,safe)
+   docs={'panel':panel,'multi_source':multi,'freeze_changes':{'000001.SZ':'SYNTHETIC initial snapshot'}};add_contract(reg,policy,docs);safe=m.module('safeio');blocked=m.calculate(reg,policy,docs,safe)
+   self.assertEqual(blocked['status'],'BLOCKED_FREEZE_AUTHORITY_NOT_BOUND');self.assertNotIn('lineage',blocked);self.assertFalse(blocked['formal_freeze'])
+   reg['domain']='synthetic';x=m.calculate(reg,policy,docs,safe)
    self.assertEqual(x['status'],'REVIEWED_FREEZE_MANIFEST_READY');self.assertFalse(x['formal_freeze']);self.assertEqual(x['row_audit']['pending_count'],1)
    parent=x['lineage'];policy['freeze_chain'].update(mode='DELTA',version='SYNTHETIC_V2',expected_parent_identity=parent['identity']);docs['freeze_parent']=parent;docs['freeze_changes']={};y=m.calculate(reg,policy,docs,safe);self.assertEqual(y['lineage']['changes'],[]);self.assertEqual(y['lineage']['parent_identity'],parent['identity'])
    multi['sources']['s1']['facts'][0]['available_at']='2026-11-09T06:31:00+08:00'

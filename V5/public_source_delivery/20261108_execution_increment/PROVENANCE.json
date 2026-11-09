@@ -20,24 +20,52 @@
     },
     {
       "path": "daily1540/stages.py",
-      "bytes": 9356,
-      "sha256": "a61ab831ea4ec4aa1185e79dd5fc4b09809adac54f92a75c9207095d05700026",
-      "source_bytes_unchanged": true
+      "bytes": 14107,
+      "sha256": "827ee261ad7b7ef978ddb89d1e4eeba5e8c2081e6a73a01bc94633e4ffe055cd",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "daily1540/stages.py",
+        "bytes": 9356,
+        "sha256": "a61ab831ea4ec4aa1185e79dd5fc4b09809adac54f92a75c9207095d05700026",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 9356,
+      "original_source_sha256": "a61ab831ea4ec4aa1185e79dd5fc4b09809adac54f92a75c9207095d05700026",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     },
     {
       "path": "morning/registered.py",
-      "bytes": 35694,
-      "sha256": "e1fa577a3b138f4a6e57155e89c8fd38a0ec719c0b36cd4198d5b544e2ec1c21",
+      "bytes": 38579,
+      "sha256": "8dd435d4e0e72a9128819457fa4491a9138f1917824b76495653d085ed911968",
       "source_bytes_unchanged": false,
       "original_source_bytes": 10214,
       "original_source_sha256": "6994912c3cfe28c29f51e249eec68cba8e1299ac2263346300fbded8e9e29ca7",
-      "source_revision": "32b7d0a694d79d5aa3ee1df2d41dbd6ceb57ffaf"
+      "previous_declared_identity": {
+        "path": "morning/registered.py",
+        "bytes": 35694,
+        "sha256": "e1fa577a3b138f4a6e57155e89c8fd38a0ec719c0b36cd4198d5b544e2ec1c21",
+        "source_bytes_unchanged": false,
+        "original_source_bytes": 10214,
+        "original_source_sha256": "6994912c3cfe28c29f51e249eec68cba8e1299ac2263346300fbded8e9e29ca7",
+        "source_revision": "32b7d0a694d79d5aa3ee1df2d41dbd6ceb57ffaf"
+      },
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+      "original_recorded_source_revision": "32b7d0a694d79d5aa3ee1df2d41dbd6ceb57ffaf"
     },
     {
       "path": "evening/execution.py",
-      "bytes": 4756,
-      "sha256": "cedafe9551b61e6a14fccb4c385724eaa62cfc3cfa4667e3aa38923b843003e3",
-      "source_bytes_unchanged": true
+      "bytes": 5933,
+      "sha256": "447602ec6ad9cc8250a413e029a14392fddd1985545269dd563d9c0f30e04c7e",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "evening/execution.py",
+        "bytes": 4756,
+        "sha256": "cedafe9551b61e6a14fccb4c385724eaa62cfc3cfa4667e3aa38923b843003e3",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 4756,
+      "original_source_sha256": "cedafe9551b61e6a14fccb4c385724eaa62cfc3cfa4667e3aa38923b843003e3",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     },
     {
       "path": "top200/ranking.py",
@@ -47,13 +75,33 @@
     },
     {
       "path": "top200/registered.py",
-      "bytes": 6134,
-      "sha256": "7a02fc94b115da45d18d0bb33113931eb439a52549dd98783303758849d3acf3",
-      "source_bytes_unchanged": true
+      "bytes": 9596,
+      "sha256": "718b3e6513cea24677a4baf7431e5462cc9c2ffb19eaa394097716e511ff2d80",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "top200/registered.py",
+        "bytes": 6134,
+        "sha256": "7a02fc94b115da45d18d0bb33113931eb439a52549dd98783303758849d3acf3",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 6134,
+      "original_source_sha256": "7a02fc94b115da45d18d0bb33113931eb439a52549dd98783303758849d3acf3",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
+    },
+    {
+      "path": "evening/controlled_chain.py",
+      "bytes": 15556,
+      "sha256": "e9e8b5071187477321a7f126467031218ed6ea6c713a837ad1439738df9f791e",
+      "source_bytes_unchanged": false,
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+      "original_source_bytes": 15689,
+      "original_source_sha256": "2c777fdd48e44843000e9dd9b5c9228e0390686a3b87cd4556dffda9f0c0765e"
     }
   ],
   "production_admitted": false,
   "natural_verified": false,
   "business_accepted": false,
-  "source_data_included": false
+  "source_data_included": false,
+  "inventory_scope": "CURRENT_ALLOWLIST_IDENTITY_NOT_RUNTIME_ADMISSION",
+  "inventory_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
 }

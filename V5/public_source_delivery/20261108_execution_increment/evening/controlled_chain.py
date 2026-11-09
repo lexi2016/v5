@@ -101,31 +101,26 @@ def _review(proof, schema, manifest, key, cfg, bridge):
     return proof
 
 
+def _require_review_time_authority():
+    """Quarantine formal preparation until original review time is recoverable.
+
+    Neither the registered current clock nor a local checked_at proves when an
+    independent review occurred. No reviewed authority binds that original event
+    to this package, stage and run with rollback protection. Caller flags, new
+    callbacks and local file hashes cannot supply that missing authority.
+    Local-only exports remain available through execution._run_local.
+    """
+    raise ValueError('INDEPENDENT_REVIEW_TIME_AUTHORITY_UNBOUND_NO_FORMAL_RECEIPT')
+
+
 def _receipt(io, fd, name, core, now, create, cfg, slot, bridge):
-    try:
-        raw = io.read_at(fd, name)
-    except FileNotFoundError:
-        if not create:
-            raise ValueError('MISSING_' + name.upper())
-        raw = io.canonical(core | {'checked_at': now.isoformat()})
-        io.write_at(fd, name, raw)
-        os.fsync(fd)
-        if io.read_at(fd, name) != raw:
-            raise ValueError('RECEIPT_READBACK')
-    record = json.loads(raw)
-    if {k: v for k, v in record.items() if k != 'checked_at'} != core:
-        raise ValueError('REVIEW_CHANGED_REQUIRES_NEW_PACKAGE')
-    checked = dt.datetime.fromisoformat(record['checked_at'])
-    if checked.utcoffset() is None or checked > now:
-        raise ValueError('RECEIPT_TIME')
-    boundary = dt.datetime.fromisoformat(
-        bridge.date(cfg['run_date']).isoformat() + 'T' + slot[:2] + ':' + slot[2:] + ':00+08:00')
-    if checked < boundary or checked.astimezone(boundary.tzinfo).date() != boundary.date():
-        raise ValueError('RECEIPT_DATE_TIME_GATE')
-    return record, bridge.sha(raw)
+    # Keep the private call boundary blocked as well: do not create a receipt
+    # from now, or accept an old one after editing its unbound checked_at field.
+    _require_review_time_authority()
 
 
 def _package(cfg, stage, registration_id, package_id, io, render, versions, now, bridge, allow_later=False):
+    _require_review_time_authority()
     manifest, raw, key, payloads = _snapshot(cfg, registration_id, io, render, versions, bridge)
     if stage != '1830' and package_id != key:
         raise ValueError('PACKAGE_VERSION_REQUIRES_PREPARE')
@@ -225,6 +220,7 @@ def run(stage, registration_id, package_id, cfg, io, render, versions, action='d
                 raise ValueError('MISSING_INDEPENDENT_REVIEW:' + name)
         allow_later = stage == '1900' and action == 'reconcile'
         bridge.clock_gate(cfg, stage, allow_later=allow_later)
+        _require_review_time_authority()
         with cfg['owner_context']():
             bridge.original_gate(cfg)
             now = bridge.clock_gate(cfg, stage, allow_later=allow_later)

@@ -2,15 +2,33 @@
   "files": [
     {
       "path": "hk_v3/bridge.py",
-      "bytes": 3915,
-      "sha256": "5e39ecca81f5d598e75a4908ddaff0a69a5523f6d6482bb5bc4d00482af8486c",
-      "source_bytes_unchanged": true
+      "bytes": 4512,
+      "sha256": "d13a36c8da8b9b6848c36e7b511f07309ab4222ac22810cf289a99daab09798f",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "hk_v3/bridge.py",
+        "bytes": 3915,
+        "sha256": "5e39ecca81f5d598e75a4908ddaff0a69a5523f6d6482bb5bc4d00482af8486c",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 3915,
+      "original_source_sha256": "5e39ecca81f5d598e75a4908ddaff0a69a5523f6d6482bb5bc4d00482af8486c",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     },
     {
       "path": "hk_v3/capture.py",
-      "bytes": 7064,
-      "sha256": "35fb85e356b979eb0e68e690844c4ec49be2304ca2d2d4e01ee0d942678f7cb5",
-      "source_bytes_unchanged": true
+      "bytes": 7830,
+      "sha256": "a4ce98351b585b10729f5251d52fdd5ddf1d896d6792ee9982c52e7c2e4444ed",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "hk_v3/capture.py",
+        "bytes": 7064,
+        "sha256": "35fb85e356b979eb0e68e690844c4ec49be2304ca2d2d4e01ee0d942678f7cb5",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 7064,
+      "original_source_sha256": "35fb85e356b979eb0e68e690844c4ec49be2304ca2d2d4e01ee0d942678f7cb5",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     },
     {
       "path": "hk_v3/test_capture.py",
@@ -20,9 +38,18 @@
     },
     {
       "path": "a0915/execution.py",
-      "bytes": 3124,
-      "sha256": "ae45112dd097f7ee3ffccbbc2b8a6f1f3375d90d7cf0cb3a6ba827d022be8d97",
-      "source_bytes_unchanged": true
+      "bytes": 7017,
+      "sha256": "30b4f27c6a3aa24b268759f6efbdaade3ffdabb7c0a76482f03d505dccddbe18",
+      "source_bytes_unchanged": false,
+      "previous_declared_identity": {
+        "path": "a0915/execution.py",
+        "bytes": 3124,
+        "sha256": "ae45112dd097f7ee3ffccbbc2b8a6f1f3375d90d7cf0cb3a6ba827d022be8d97",
+        "source_bytes_unchanged": true
+      },
+      "original_source_bytes": 3124,
+      "original_source_sha256": "ae45112dd097f7ee3ffccbbc2b8a6f1f3375d90d7cf0cb3a6ba827d022be8d97",
+      "derivation_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a"
     },
     {
       "path": "four_groups/adapter.py",
@@ -33,5 +60,8 @@
   ],
   "data_included": false,
   "production_admitted": false,
-  "natural_verified": false
+  "natural_verified": false,
+  "inventory_scope": "CURRENT_ALLOWLIST_IDENTITY_NOT_RUNTIME_ADMISSION",
+  "inventory_baseline_commit": "fc9ea68a2432dcfb279745d65819d3d853f5321a",
+  "business_accepted": false
 }

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 import hashlib,json,re,subprocess,sys
 HERE=Path(__file__).resolve().parent
-M07=HERE.parent/'opening_owner_code_restore_20261107/m07'
+M07=HERE.parents[1]/'source_owners/m07'
 ENTRY_SHA='01c791dee6547e5e1a54ef3c412ac3102dfcafdf7e78be34c702b053f6fb5791'
 REGISTRY={}
 def encode(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()

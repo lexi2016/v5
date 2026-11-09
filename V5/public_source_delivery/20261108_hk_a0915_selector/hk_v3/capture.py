@@ -11,8 +11,18 @@ NODES={'hk-open','hk-continuous-close','hk-auction-final'}
 def encode(x):return json.dumps(x,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
 def sha(x):return hashlib.sha256(x).hexdigest()
 def stamp(s):
+ # fromisoformat silently truncates finer fractions, including UTC offsets.
+ # Reject evidence that cannot retain its stated instant before any time gate.
+ if type(s) is not str or re.search(r'[.,][0-9]{7,}',s):raise ValueError('TIME_PRECISION_UNSUPPORTED')
  t=dt.datetime.fromisoformat(s)
  if t.tzinfo is None:raise ValueError('TIMEZONE_REQUIRED')
+ if not s.endswith('Z'):
+  offset=re.search(r'([+-])([0-9]{2})(?::?([0-9]{2}))?(?::?([0-9]{2}))?(?:[.,]([0-9]{1,6}))?$',s)
+  if offset is None:raise ValueError('TIME_OFFSET_FORMAT_UNSUPPORTED')
+  sign,hours,minutes,seconds,fraction=offset.groups()
+  declared=dt.timedelta(hours=int(hours),minutes=int(minutes or 0),seconds=int(seconds or 0),microseconds=int((fraction or '').ljust(6,'0') or 0))
+  if sign=='-':declared=-declared
+  if t.utcoffset()!=declared:raise ValueError('TIME_OFFSET_NOT_REPRESENTABLE')
  return t.astimezone(TZ)
 @dataclass(frozen=True)
 class Binding:

@@ -5,12 +5,25 @@ import json
 from pathlib import Path
 import runpy
 import tempfile
+import types
 
 HERE=Path(__file__).resolve().parent
 SOURCE=HERE.parent/'hk_close_source_recovery_20261107/hk_close_daily.py.reference'
 SOURCE_SHA='60e6c0b2561c732ea0eb7c7fc694fe9981833d5bc879760bacbfe84d22295027'
 NODES={'hk-continuous-close','hk-auction-final'}
 TRUSTED_RUNS={} # no guessed paths, runtime source authority or calendar bindings
+CAPTURE_SHA='a4ce98351b585b10729f5251d52fdd5ddf1d896d6792ee9982c52e7c2e4444ed'
+
+def _capture_execute():
+    """Consume the same capture bytes whose release pin was checked."""
+    path=HERE/'capture.py'
+    if path.is_symlink():raise ValueError('CAPTURE_CODE_SYMLINK')
+    with path.open('rb') as source:raw=source.read(65537)
+    if len(raw)>65536 or hashlib.sha256(raw).hexdigest()!=CAPTURE_SHA:
+        raise ValueError('CAPTURE_CODE_CHANGED')
+    module=types.ModuleType('_hk_pinned_capture');module.__file__=str(path)
+    exec(compile(raw,str(path),'exec'),module.__dict__)
+    return module.execute
 
 def original():
     if SOURCE.is_symlink() or any(p.is_symlink() for p in SOURCE.parents):
@@ -62,8 +75,7 @@ def dispatch(node,run_key):
     if run_key not in TRUSTED_RUNS:return blocked(node,'TRUSTED_RUN_NOT_REGISTERED')
     binding=TRUSTED_RUNS[run_key]
     if binding.node!=node:return blocked(node,'REGISTERED_NODE_MISMATCH')
-    from capture import execute
-    try:return execute(binding)
+    try:return _capture_execute()(binding)
     except (ValueError,OSError,KeyError,TypeError) as error:
         return blocked(node,str(error))
 
