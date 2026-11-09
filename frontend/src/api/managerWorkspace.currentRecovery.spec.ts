@@ -2,7 +2,8 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { validateManagerWorkspace, requestManagerWorkspace } from './managerWorkspace';
-const fixture=()=>JSON.parse(readFileSync(resolve(process.env.V5_REAL_CURRENT_RECOVERY_RESPONSE || '../evidence/manager-read-publication.json'),'utf8')).result.payload;
+const recoveryPath=resolve(process.env.V5_REAL_CURRENT_RECOVERY_RESPONSE || '../evidence/manager-read-publication.json');
+const fixture=()=>JSON.parse(readFileSync(recoveryPath,'utf8')).result.payload;
 afterEach(()=>vi.unstubAllGlobals());
 describe('CURRENT_RECOVERY source-bound read',()=>{
  it('accepts the saved real recovery payload without changing its plan SHA',()=>{

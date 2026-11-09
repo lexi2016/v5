@@ -79,6 +79,51 @@ describe("research lane JSON transport", () => {
     );
   });
 
+  it("accepts an exact requested date without claiming an unbound source date", async () => {
+    const missing = {
+      schema_version: "v3_5.research_lane.v1",
+      status: "NOT_MATERIALIZED",
+      endpoint_mode: "EXACT",
+      requested_date: "20261016",
+      research_date: null,
+      reason: "V5_M04_RESEARCH_BINDING_NOT_CONFIGURED",
+      cannot_confirm: ["V5_M04_RESEARCH_BINDING_NOT_CONFIGURED"],
+      write_policy: "read_only",
+      recommendation_status: "RESEARCH_ONLY",
+      production_allowed: false,
+      buy_gate_updated: false,
+      orders_sent: false,
+    };
+    vi.stubGlobal("fetch", vi.fn(async () => response(missing)));
+    await expect(loadResearchLane("20261016", {})).resolves.toMatchObject({
+      requested_date: "20261016",
+      research_date: null,
+      status: "NOT_MATERIALIZED",
+    });
+  });
+
+  it("rejects an unbound request when its requested date differs", async () => {
+    const missing = {
+      schema_version: "v3_5.research_lane.v1",
+      status: "NOT_MATERIALIZED",
+      endpoint_mode: "EXACT",
+      requested_date: "20261015",
+      research_date: null,
+      reason: "V5_M04_RESEARCH_BINDING_NOT_CONFIGURED",
+      cannot_confirm: ["V5_M04_RESEARCH_BINDING_NOT_CONFIGURED"],
+      write_policy: "read_only",
+      recommendation_status: "RESEARCH_ONLY",
+      production_allowed: false,
+      buy_gate_updated: false,
+      orders_sent: false,
+    };
+    vi.stubGlobal("fetch", vi.fn(async () => response(missing)));
+    await expect(loadResearchLane("20261016", {})).rejects.toMatchObject({
+      name: "ResearchLaneRequestError",
+      kind: "INVALID_RESPONSE",
+    });
+  });
+
   it("keeps legacy exact/latest calls unbound to the strict validator and request options", async () => {
     const legacyPayload = { status: "READY", research_date: "20260804", producer_extension: true };
     const fetchMock = vi.fn()

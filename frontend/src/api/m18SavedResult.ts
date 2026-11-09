@@ -112,5 +112,6 @@ export class SavedRunSession {
  }
  async next() { const page=this.state.page;if(this.state.phase==='LOADING'||!page?.next_cursor)return;this.history=this.history.slice(0,this.position+1);this.history.push({cursor:page.next_cursor,offset:page.offset+page.entries.length});await this.pageAt(this.state.section,this.position+1); }
  async previous() { if(this.state.phase==='LOADING'||this.position<1)return;await this.pageAt(this.state.section,this.position-1); }
+ reset() { this.abort?.abort();this.serial++;this.history=[];this.position=0;this.state={phase:'IDLE',descriptor:null,overview:null,section:'',page:null,error:'',canPrevious:false};this.changed(this.state); }
  close() { this.abort?.abort();this.serial++; }
 }

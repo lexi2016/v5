@@ -105,14 +105,17 @@ class M17ReadonlyAPITests(unittest.TestCase):
 
     def test_exact_query_required_no_date_run_or_1530_fallback(self):
         self.configure(); server=self.start(); before=self.inventory()
-        invalid=[{}, {'source_trade_date':self.query['source_trade_date']},
-            dict(self.query,source_trade_date='20260929'), dict(self.query,run_id='f'*32),
-            dict(self.query,source_trade_date='20261399'), dict(self.query,source_trade_date=''),
-            dict(self.query,slot='1530'), dict(self.query,limit='100')]
-        for query in invalid:
+        invalid=[
+            ({},400), ({'source_trade_date':self.query['source_trade_date']},400),
+            (dict(self.query,source_trade_date='20260929'),409), (dict(self.query,run_id='f'*32),409),
+            (dict(self.query,source_trade_date='20261399'),400), (dict(self.query,source_trade_date=''),400),
+            (dict(self.query,slot='1530'),400), (dict(self.query,limit='100'),400)]
+        for query,expected_status in invalid:
             with self.subTest(query=query):
                 status,value,_=self.request(server,ROUTE+'?'+urlencode(query))
-                self.assertEqual(status,409,value); self.assertEqual(value['status'],'CANNOT_CONFIRM'); self.assertNotIn('rows',value)
+                self.assertEqual(status,expected_status,value); self.assertEqual(value['status'],'CANNOT_CONFIRM'); self.assertNotIn('rows',value)
+                expected_reason='M17_QUERY_INVALID' if expected_status==400 else 'M17_REQUEST_IDENTITY_MISMATCH'
+                self.assertEqual(value['reason_codes'],[expected_reason])
         self.assertEqual(self.request(server,self.path+'&run_id='+self.query['run_id'])[0],400)
         self.assertEqual(self.inventory(),before)
 
@@ -125,7 +128,9 @@ class M17ReadonlyAPITests(unittest.TestCase):
         root=Path(self.config['data_root']); (root/'responses').mkdir()
         (root/'responses'/(response_key('source_bundle',ROUTE,query)+'.json')).write_bytes(canonical_bytes(record))
         status,value,_=self.request(self.start(),ROUTE+'?'+urlencode(query))
-        self.assertEqual(status,503,value); self.assertEqual(value['status'],'CANNOT_CONFIRM');self.assertNotIn('rows',value)
+        self.assertEqual(status,503,value); self.assertEqual(value['status'],'CANNOT_CONFIRM')
+        self.assertEqual(value['reason_codes'],['M17_BINDING_NOT_CONFIGURED'])
+        self.assertNotIn('rows',value)
 
     def test_partial_original_result_stays_partial_with_real_gap(self):
         self.configure(partial=True)

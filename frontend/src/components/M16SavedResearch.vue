@@ -1,11 +1,29 @@
 <script setup lang="ts">
 import {computed, onBeforeUnmount, ref, shallowRef} from 'vue';
 import {SavedPublicResearchSession, type PublicResearchState} from '../api/m16SavedResearch';
-const date = ref('');
+function compactDate(value: string): string | null {
+ const compact=value.replaceAll('-','');
+ if(!/^\d{8}$/.test(compact))return null;
+ const year=Number(compact.slice(0,4)),month=Number(compact.slice(4,6)),day=Number(compact.slice(6,8));
+ if(year<1||month<1||month>12||day<1)return null;
+ const leap=year%4===0&&(year%100!==0||year%400===0);
+ const days=[31,leap?29:28,31,30,31,30,31,31,30,31,30,31];
+ return day<=days[month-1]?compact:null;
+}
+function isoDate(compact: string): string {return compact.slice(0,4)+'-'+compact.slice(4,6)+'-'+compact.slice(6,8);}
+const initialDate=new URLSearchParams(window.location.search).get('m16_date') ?? '';
+const date = ref(compactDate(initialDate)===initialDate && initialDate ? isoDate(initialDate) : '');
 const state = shallowRef<PublicResearchState>({phase: 'IDLE', result: null, error: ''});
 const saved = computed(() => state.value.phase === 'LOADED' && state.value.result?.status === 'SAVED_PUBLIC_RESEARCH_REVIEW_REQUIRED' ? state.value.result : null);
 const session = new SavedPublicResearchSession(next => {state.value = next;});
-function load() {void session.load(date.value.trim());}
+function load() {
+ const compact=date.value ? compactDate(date.value) : '';
+ if(date.value && !compact){state.value={phase:'CANNOT_CONFIRM',result:null,error:'M16_DATE_INVALID'};return;}
+ const url=new URL(window.location.href);
+ if(compact)url.searchParams.set('m16_date',compact);else url.searchParams.delete('m16_date');
+ window.history.replaceState({},'',url.pathname+url.search);
+ void session.load(compact ?? '');
+}
 function onToggle(event: Event) {
   if ((event.currentTarget as HTMLDetailsElement).open && state.value.phase === 'IDLE') load();
 }
@@ -40,7 +58,7 @@ onBeforeUnmount(() => session.close());
    <p>只读取已绑定的原经理公开资料研究 product、job 与 receipt。不启动 provider 或 ensure，不生成新研究，不触发交易；缺少合格保存材料时保留 WAITING。</p>
    <p>VERIFIED_PERSISTENCE_ONLY 仅确认保存证据，不代表真实业务完成、自然日验收通过或可执行。原业务状态与资料缺口按原样保留，研究结论仍待复核。</p>
    <form @submit.prevent="load">
-    <label>交易日（可留空读取已绑定结果）<input v-model="date" placeholder="YYYYMMDD" inputmode="numeric" maxlength="8" aria-label="M16 交易日" /></label>
+    <label>交易日（可留空读取已绑定结果）<input v-model="date" type="date" aria-label="M16 交易日" /></label>
     <button type="submit">读取 M16 已保存研究</button>
    </form>
    <p v-if="state.phase === 'IDLE'">尚未读取保存结果。</p>

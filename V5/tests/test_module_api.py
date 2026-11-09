@@ -30,6 +30,54 @@ class ModuleApiTests(unittest.TestCase):
             with urlopen(url,timeout=3) as r:return r.status,json.load(r),dict(r.headers)
         except HTTPError as error:
             with error:return error.code,json.load(error),dict(error.headers)
+    def test_capture_status_is_explicitly_not_configured_and_read_only(self):
+        _,url=self.setup_api(module='source_bundle')
+        status,body,_=self.read(url+'/api/v5/source-bundle/capture-status?target_date=20261016')
+        self.assertEqual(status,200)
+        self.assertEqual(body['status'],'NOT_CONFIGURED')
+        self.assertEqual(body['target_date'],'20261016')
+        self.assertEqual(body['reason_codes'],['M03_CAPTURE_WORKER_NOT_REGISTERED','M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND'])
+        self.assertIs(body['capture_enabled'],False)
+        status,body,_=self.read(url+'/api/v5/source-bundle/capture-status?target_date=20261399')
+        self.assertEqual(status,400)
+        self.assertEqual(body['reason_codes'],['CAPTURE_STATUS_QUERY_INVALID'])
+
+    def test_date_scoped_research_aliases_report_missing_day_as_unavailable_and_catalog_as_empty(self):
+        _,url=self.setup_api(module='source_bundle')
+        status,body,_=self.read(url+'/api/v3/research/day?archive_date=20261016')
+        self.assertEqual(status,503)
+        self.assertEqual(body['status'],'CANNOT_CONFIRM')
+        self.assertEqual(body['reason_codes'],['MODULE_RESULT_NOT_AVAILABLE'])
+        status,catalog,_=self.read(url+'/api/v1/runs/date-list')
+        self.assertEqual(status,200)
+        self.assertEqual(catalog['status'],'NOT_MATERIALIZED')
+        self.assertIsNone(catalog['default_date'])
+        self.assertEqual(catalog['dates'],[])
+        self.assertEqual(catalog['catalog_scope'],'PUBLISHED_EXACT_RESEARCH_DAY_PRODUCTS_ONLY')
+
+    def test_date_catalog_and_day_route_use_exact_published_record(self):
+        from v5_shadow.module_api import response_key
+        root,url=self.setup_api(module='source_bundle')
+        query={'archive_date':'20261016'}
+        payload={'schema_version':'v3_5.research_day_product.v1','endpoint_mode':'EXACT',
+                 'date_mode':'EXACT','archive_date':'20261016','requested_date':'20261016',
+                 'resolved_date':'20261016','status':'NOT_MATERIALIZED'}
+        record={'schema_version':'v5.module_response.v1','module_id':'source_bundle','release_id':'r1',
+                'path':'/api/v3/research/day','query':query,'payload':payload,
+                'payload_sha256':sha256_json(payload),'source_input_sha256':'a'*64,
+                'data_kind':'RECORDED_INPUT_REPLAY','generated_at':'2026-10-16T09:00:00+08:00','status_code':200}
+        key=response_key('source_bundle','/api/v3/research/day',query)
+        target=root/'responses'/(key+'.json')
+        target.parent.mkdir(parents=True,exist_ok=True)
+        target.write_bytes(canonical_bytes(record))
+        status,body,_=self.read(url+'/api/v3/research/day?archive_date=20261016')
+        self.assertEqual(status,200)
+        self.assertEqual(body,payload)
+        status,catalog,_=self.read(url+'/api/v1/runs/date-list')
+        self.assertEqual(status,200)
+        self.assertEqual(catalog['default_date'],'20261016')
+        self.assertEqual(catalog['dates'],['20261016'])
+
     def test_original_payload_and_identity_headers(self):
         root,url=self.setup_api();path=self.record(root)
         status,body,headers=self.read(url+'/api/v3/preselection-pools?offset=0&limit=200&date=20261008')

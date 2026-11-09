@@ -1,0 +1,3 @@
+HEAD=91f1dbe18e9da1d6abbdb974c600c8196a9b796e
+v24.19.0
+Python 3.14.8

@@ -1,5 +1,6 @@
 """One independent, read-only API process for one module's immutable responses."""
 import argparse
+from datetime import datetime
 import base64
 import fcntl
 import time
@@ -18,7 +19,8 @@ from .composition import no_symlinks
 from .contracts import exact_keys,aware,sha
 from .digests import canonical_bytes,sha256_json,MAX_JSON_BYTES
 from .api_gateway import (_parse_response, _precheck_json, _bounded_json,
-                          _manager_response, MANAGER_WORKSPACE_PATH)
+                          _manager_response, MANAGER_WORKSPACE_PATH,
+                          SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES)
 M18_ROUTE = "/api/v4/manager/m18/v2"
 M17_ROUTE = "/api/v5/manager/close-recapture"
 M07_ROUTE = "/api/v5/source-bundle/a-stage-saved"
@@ -26,6 +28,22 @@ M16_ROUTE = "/api/v5/source-bundle/manager-public-research"
 M11_ROUTE = "/api/v5/source-bundle/intraday-research"
 M12_ROUTE = "/api/v5/source-bundle/video-fupan"
 M04_ROUTE = "/api/v5/source-bundle/research-intelligence"
+M17_BINDING_ERROR_CODES = frozenset((
+    'M17_READONLY_BINDING', 'M17_READONLY_CONFIG_LIMIT', 'M17_READONLY_LANE',
+    'M17_READONLY_RUN_ID', 'M17_READONLY_ROOT_OVERLAP',
+))
+M17_PRODUCT_ERROR_CODES = frozenset((
+    'M17_READONLY_PRODUCT_IDENTITY', 'M17_READONLY_FILES',
+    'M17_READONLY_FILE_REFERENCE', 'M17_READONLY_FILES_CHANGED',
+    'M17_READONLY_ORIGINAL_READER_REJECTED', 'M17_READONLY_EXTERNAL_POOL_CHANGED',
+    'M17_READONLY_PRODUCT_CHANGED', 'M17_READONLY_RESPONSE_MISMATCH',
+    'M17_READONLY_RESPONSE_INVALID', 'M17_READONLY_LEDGER_CHANGED',
+    'M17_READONLY_RESPONSE_LIMIT', 'M17_READONLY_PACKET_LIMIT',
+))
+M17_UNAVAILABLE_ERROR_CODES = frozenset(('M17_READONLY_SAVED_SUCCESS_REQUIRED',))
+M17_READER_ERROR_CODES = frozenset((
+    'M17_READONLY_READER_UNAVAILABLE',
+))
 
 
 def response_key(module_id,path,query):
@@ -903,13 +921,67 @@ def _validate_record(config,record,path,query):
     exact_keys(record,('schema_version','module_id','release_id','path','query','payload','payload_sha256','source_input_sha256','data_kind','generated_at','status_code'))
     if (record['schema_version']!='v5.module_response.v1' or record['module_id']!=config['module_id']
         or record['release_id']!=config['release_id'] or record['path']!=path or record['query']!=query):raise ValueError('MODULE_RECORD_IDENTITY')
-    if path not in config['routes']:raise ValueError('MODULE_ROUTE_NOT_CONFIGURED')
+    if path not in config['routes'] and not (
+            config['module_id']=='source_bundle' and path in SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES
+    ):raise ValueError('MODULE_ROUTE_NOT_CONFIGURED')
     if (not isinstance(query,dict) or len(query)>128 or any(not isinstance(k,str) or not isinstance(v,str) for k,v in query.items())):raise ValueError('MODULE_QUERY_INVALID')
     if record['data_kind'] not in ('SYNTHETIC','RECORDED_INPUT_REPLAY','OWNER_RESULT'):raise ValueError('MODULE_DATA_KIND')
     if type(record['status_code']) is not int or record['status_code'] not in (200,400,404,409,422,429,499,500,502,503,504):raise ValueError('MODULE_HTTP_STATUS')
     aware(record['generated_at']);sha(record['source_input_sha256']);sha(record['payload_sha256'])
     if not isinstance(record['payload'],dict) or sha256_json(record['payload'])!=record['payload_sha256']:raise ValueError('MODULE_PAYLOAD_DIGEST')
     return record
+
+
+def _research_date_catalog(config,root_fd):
+    """List only exact-date day products that already exist in the source-bundle store."""
+    dates=set()
+    generation=_generation_head(root_fd,config)
+    if generation is not None:
+        refs=_load_generation(root_fd,config,generation)['records']
+        records=[_read_object(root_fd,digest,config)[0] for digest in refs.values()]
+    else:
+        try:
+            directory=os.open('responses',os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW,dir_fd=root_fd)
+        except FileNotFoundError:
+            directory=None
+        records=[]
+        if directory is not None:
+            try:
+                names=os.listdir(directory)
+                if len(names)>10000:raise ValueError('RESEARCH_DATE_CATALOG_LIMIT')
+                for name in names:
+                    if not re.fullmatch(r'[0-9a-f]{64}\.json',name):continue
+                    raw=_read_at(root_fd,'responses',name)
+                    records.append(_parse_record(raw,config))
+            finally:os.close(directory)
+    for record in records:
+        if record.get('path')!='/api/v3/research/day' or record.get('status_code')!=200:
+            continue
+        query=record.get('query')
+        if not isinstance(query,dict) or set(query)!={'archive_date'}:
+            continue
+        date=query.get('archive_date')
+        if not isinstance(date,str) or not re.fullmatch(r'[0-9]{8}',date):
+            continue
+        try:
+            if datetime.strptime(date,'%Y%m%d').strftime('%Y%m%d')!=date:continue
+        except ValueError:
+            continue
+        _validate_record(config,record,'/api/v3/research/day',query)
+        payload=record.get('payload')
+        if not isinstance(payload,dict) or payload.get('schema_version')!='v3_5.research_day_product.v1':
+            continue
+        if payload.get('endpoint_mode')!='EXACT' or payload.get('archive_date')!=date or payload.get('requested_date')!=date:
+            continue
+        dates.add(date)
+    ordered=sorted(dates,reverse=True)
+    return dict(schema_version='v5.research_date_catalog.v1',
+        status='READY_WITH_DECLARED_GAPS' if ordered else 'NOT_MATERIALIZED',
+        default_date=ordered[0] if ordered else None,dates=ordered,
+        stage_dates=[],future_target_dates=[],
+        catalog_scope='PUBLISHED_EXACT_RESEARCH_DAY_PRODUCTS_ONLY',
+        cannot_confirm=['V4_RUN_DATE_CATALOG_NOT_MIGRATED'],
+        read_only=True,production_allowed=False,buy_gate_updated=False,orders_sent=False)
 
 
 def read_response(config,root,path,query):
@@ -1044,8 +1116,10 @@ def create_module_server(value,host='127.0.0.1',port=0):
             if parsed.path=='/__v5/module-health':
                 return self.reply(200,dict(status='READ_ONLY_RESPONSE_SERVICE',module_id=config['module_id'],release_id=config['release_id'],pid=os.getpid(),
                     implementation_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),config_sha256=sha256_json(config),source_provenance_verified=False))
-            if parsed.path not in config['routes']:return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
-            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed'))
+            if parsed.path not in config['routes'] and not (
+                    config['module_id']=='source_bundle' and parsed.path in SOURCE_BUNDLE_READ_ONLY_COMPAT_ROUTES
+            ):return self.error(404,'MODULE_ROUTE_NOT_CONFIGURED')
+            heavy = parsed.path in (M18_ROUTE + '/pages', M18_ROUTE + '/overview', M18_ROUTE + '/sections') or (config['module_id']=='source_bundle' and parsed.path in (M07_ROUTE, M16_ROUTE, M11_ROUTE, M12_ROUTE, M04_ROUTE, '/api/v5/source-bundle/hk-preselection','/api/v5/source-bundle/hk-close-review', '/api/v5/source-bundle/a-close-replay', '/api/v5/source-bundle/hk-stage-observed', '/api/v3/research/day', '/api/v1/runs/date-list'))
             heavy = heavy or (config['module_id']=='source_bundle' and parsed.path==M17_ROUTE)
             research_path = config['module_id']=='source_bundle' and parsed.path in ('/api/v5/research/lane','/api/v5/research/wechat/materials')
             heavy = heavy or research_path
@@ -1066,7 +1140,7 @@ def create_module_server(value,host='127.0.0.1',port=0):
                 reader_slot=m11_read_slot
             if config['module_id']=='source_bundle' and parsed.path==M12_ROUTE:
                 reader_slot=m12_read_slot
-            if research_path:
+            if research_path or (config['module_id']=='source_bundle' and parsed.path in ('/api/v3/research/day','/api/v1/runs/date-list')):
                 reader_slot=m04_read_slot
             if heavy and not reader_slot.acquire(blocking=False):
                 return self.error(503, 'MODULE_BUSY')
@@ -1075,6 +1149,55 @@ def create_module_server(value,host='127.0.0.1',port=0):
                     from .research_workbench_readonly import response
                     status,payload=response(config,parsed.path,query)
                     self.reply(status,payload,sha256_json(payload))
+                elif config['module_id']=='source_bundle' and parsed.path=='/api/v1/runs/date-list':
+                    if query:raise ValueError('RESEARCH_DATE_CATALOG_QUERY')
+                    payload=_research_date_catalog(config,root)
+                    self.reply(200,payload,sha256_json(payload))
+                elif config['module_id']=='source_bundle' and parsed.path=='/api/v5/source-bundle/capture-status':
+                    if set(query)!={'target_date'} or not re.fullmatch(r'[0-9]{8}',query.get('target_date','')):
+                        self.error(400,'CAPTURE_STATUS_QUERY_INVALID')
+                    else:
+                        date=query['target_date']
+                        try: valid_date=datetime.strptime(date,'%Y%m%d').strftime('%Y%m%d')==date
+                        except ValueError: valid_date=False
+                        if not valid_date:self.error(400,'CAPTURE_STATUS_QUERY_INVALID')
+                        else:
+                            payload=dict(schema_version='v5.capture_readiness.v1',status='NOT_CONFIGURED',
+                                target_date=date,capture_enabled=False,execution_kind='READ_ONLY_STATUS_CHECK',
+                                reason_codes=['M03_CAPTURE_WORKER_NOT_REGISTERED','M03_CAPTURE_SOURCE_ADMISSION_NOT_BOUND'],
+                                message='No authorized M03 capture worker or source-admission binding is configured; this API will not start collection.',
+                                write_policy='read_only',production_allowed=False,buy_gate_updated=False,orders_sent=False)
+                            self.reply(200,payload,sha256_json(payload))
+                elif config['module_id']=='source_bundle' and parsed.path==M17_ROUTE:
+                    required={'source_trade_date','run_id'}
+                    source_date=query.get('source_trade_date')
+                    run_id=query.get('run_id')
+                    valid_date=False
+                    if isinstance(source_date,str) and re.fullmatch(r'[0-9]{8}',source_date):
+                        try: valid_date=datetime.strptime(source_date,'%Y%m%d').strftime('%Y%m%d')==source_date
+                        except ValueError: valid_date=False
+                    if set(query)!=required or not valid_date or not isinstance(run_id,str) or not re.fullmatch(r'[0-9a-f]{32}',run_id):
+                        self.error(400,'M17_QUERY_INVALID')
+                    elif config.get('m17_close_recapture_binding') is None:
+                        self.error(503,'M17_BINDING_NOT_CONFIGURED')
+                    else:
+                        try:
+                            record,digest=read_response(config,root,parsed.path,query)
+                            self.reply(record['status_code'],record['payload'],digest)
+                        except TimeoutError:
+                            self.error(503,'M17_READER_TIMEOUT')
+                        except FileNotFoundError:
+                            self.error(503,'M17_SAVED_PRODUCT_NOT_AVAILABLE')
+                        except ValueError as error:
+                            code=str(error)
+                            if code in M17_BINDING_ERROR_CODES:self.error(409,'M17_BINDING_INVALID')
+                            elif code=='M17_READONLY_EXACT_REFERENCE_REQUIRED':self.error(409,'M17_REQUEST_IDENTITY_MISMATCH')
+                            elif code in M17_UNAVAILABLE_ERROR_CODES:self.error(503,'M17_SAVED_PRODUCT_NOT_AVAILABLE')
+                            elif code in M17_READER_ERROR_CODES:self.error(503,'M17_READER_UNAVAILABLE')
+                            elif code in M17_PRODUCT_ERROR_CODES:self.error(409,'M17_PRODUCT_INVALID')
+                            else:self.error(500,'M17_INTERNAL_ERROR')
+                        except (TypeError,KeyError,OSError,RecursionError):
+                            self.error(500,'M17_INTERNAL_ERROR')
                 elif parsed.path == M18_ROUTE + '/pages':
                     payload = _m18_page_response(config,root,query)
                     self.reply(200,payload,sha256_json(payload))

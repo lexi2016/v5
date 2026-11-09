@@ -32,3 +32,17 @@ def test_missing_saved_identity_rejects():
         assert str(error) == "MANAGER_SOURCE_IDENTITY_REQUIRED"
     else:
         raise AssertionError("missing identity must reject")
+
+def test_absent_saved_identity_rejects_with_same_public_contract():
+    for source_input_sha256 in (None, ""):
+        try:
+            build_manager_record(
+                config={"module_id": "manager", "release_id": "test"},
+                payload={},
+                source_input_sha256=source_input_sha256,
+                date="20261012",
+            )
+        except ValueError as error:
+            assert str(error) == "MANAGER_SOURCE_IDENTITY_REQUIRED"
+        else:
+            raise AssertionError("absent identity must reject")

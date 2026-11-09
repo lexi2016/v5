@@ -135,13 +135,17 @@ input {
 }
 
 .daily-research-command__summary-value {
-  overflow: hidden;
+  display: block;
+  min-width: 0;
+  overflow: visible;
   color: #1c2a33;
   font-family: "SFMono-Regular", Consolas, monospace;
   font-size: 0.88rem;
   font-weight: 700;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
 }
 
 .daily-research-command__hero-footer {
@@ -686,4 +690,66 @@ input {
   .daily-research-command__diagnostic-value {
     text-align: left;
   }
+}
+
+
+.daily-research-command__navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 0;
+}
+.daily-research-command__navigation a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--line, #cbd5e1);
+  border-radius: 6px;
+  color: var(--ink, #1f2937);
+  background: #fff;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.daily-research-command__navigation a:focus-visible {
+  outline: 2px solid var(--blue, #2563eb);
+  outline-offset: 2px;
+}
+.daily-research-command__page .daily-research-command__empty-state p {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+.daily-research-command__page .daily-research-command__empty-state button {
+  min-height: 36px;
+  margin-top: 8px;
+}
+
+
+.daily-research-command__capture-gate {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px 18px;
+  margin: 16px 18px;
+  padding: 16px;
+  border: 1px solid var(--line, #cbd5e1);
+  border-radius: 8px;
+  background: #fff;
+}
+.daily-research-command__capture-gate h2 { margin: 0 0 6px; font-size: 1.05rem; }
+.daily-research-command__capture-gate p { margin: 6px 0; overflow-wrap: anywhere; }
+.daily-research-command__capture-gate button {
+  align-self: start;
+  min-height: 36px;
+  padding: 6px 12px;
+}
+.daily-research-command__capture-status { min-width: 0; overflow-wrap: anywhere; }
+.daily-research-command__capture-status code {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.daily-research-command__capture-gate details { margin-top: 8px; }
+@media (max-width: 720px) {
+  .daily-research-command__capture-gate { grid-template-columns: minmax(0, 1fr); }
 }

@@ -5,6 +5,8 @@ from pathlib import Path
 from unittest.mock import patch
 from urllib.request import urlopen
 import pytest
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "V5" / "tests"))
 import test_manager_current_recovery as recovery_fixture
 from v5_shadow.manager_plan import run_manager_plan,publish_workspace_read,ROUTE
 from v5_shadow.daily_owner_adapters import run_manager_daily
@@ -40,7 +42,7 @@ def test_actual_daily_save_publish_http_reuse_and_changed_request(setup):
         again=run_manager_daily(f.request,ledger,binding,publication={'config':cfg,'expected_generation':generation(cfg)})
         assert again['status']=='RETRY_BLOCKED' and head(cfg)==old_head
         assert len(again['state']['attempts'])==1
-        server=create_module_server(cfg);threading.Thread(target=server.serve_forever,daemon=True).start()
+        server=create_module_server(cfg);server.daemon_threads=True;server_thread=threading.Thread(target=server.serve_forever,daemon=True);server_thread.start()
         before=f.snapshot()
         try:
             for _ in range(2):
@@ -50,12 +52,15 @@ def test_actual_daily_save_publish_http_reuse_and_changed_request(setup):
                     assert body['plan_product']['sha256']==product['sha256']
                     assert response.headers['X-V5-Workspace-Access']=='READ_ONLY'
             assert f.snapshot()==before
-        finally:server.shutdown();server.server_close()
+        finally:
+            server.shutdown();server.server_close();server_thread.join(timeout=2)
+            assert not server_thread.is_alive(), 'TEST_HTTP_SERVER_THREAD_LEAK'
         f.request['now']='2026-10-09T08:46:00+08:00'
         second=run_manager_daily(f.request,ledger,binding,publication={'config':cfg,'expected_generation':generation(cfg)})
         assert second['result']['payload']['plan_product']['run_id']!=product['run_id']
         assert second['publication']['previous_generation']==json.loads(old_head)['generation_sha256']
         evidence=Path(__file__).resolve().parents[1]/'evidence/publication-chain-receipt.json'
+        evidence.parent.mkdir(parents=True, exist_ok=True)
         evidence.write_text(json.dumps({'fixture_kind':'SYNTHETIC_EMPTY_OWNER_INPUTS','saved_plan':product,
             'first_publication':first['publication'],'http_product':body['plan_product'],
             'repeated_request_status':again['status'],'changed_cutoff_product':second['result']['payload']['plan_product'],
@@ -121,7 +126,7 @@ def test_tick_retains_publication_receipt_and_stable_config_identity(setup):
     (bundles/'20261009.json').write_text(json.dumps({'target_date':'20261009','jobs':[],'manager_request':f.request}))
     config={'enabled':True,'bundle_root':str(bundles),'ledger_root':str(ledger),'manager_publication':cfg}
     with patch('v5_shadow.daily_tick.datetime') as tick_clock,patch('v5_shadow.daily_owner_adapters.datetime') as owner_clock,patch('v5_shadow.daily_dispatch.datetime') as dispatch_clock:
-        tick_clock.now.return_value=owner_clock.now.return_value=dispatch_clock.now.return_value=datetime(2026,10,9,2,tzinfo=timezone.utc)
+        tick_clock.now.return_value=owner_clock.now.return_value=dispatch_clock.now.return_value=datetime(2026,10,9,0,50,tzinfo=timezone.utc)
         first=tick(config);old=head(cfg);second=tick(config)
     assert first['manager']['status']=='BLOCKED'
     assert first['manager']['publication']['generation_sha256']==json.loads(old)['generation_sha256']

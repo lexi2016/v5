@@ -1,7 +1,122 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { cleanup, render, screen, fireEvent } from '@testing-library/vue';
+import { cleanup, render, screen, fireEvent, waitFor } from '@testing-library/vue';
 import SavedManagerResultView from './SavedManagerResultView.vue';
-afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); window.history.replaceState({}, '', '/'); });
+it('looks up the exact selected target date before opening the saved M18 run', async () => {
+ const run='a'.repeat(32);
+ const product={run_id:run,sha256:'b'.repeat(64),consumed:true};
+ const requests:string[]=[];
+ vi.stubGlobal('fetch',vi.fn(async (url:string) => {
+  requests.push(url);
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') {
+   return new Response(JSON.stringify({target_trade_date:'20261016',plan_product:product}));
+  }
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/已找到日期匹配的引用/)).toBeTruthy();
+ expect(requests).toContain('/api/v4/manager/research/workspace?date=20261016&view=auto');
+ expect(new URLSearchParams(window.location.search).get('target_date')).toBe('20261016');
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBe(run);
+ expect(requests.some(url=>url.startsWith('/api/v4/manager/m18/v2')&&url.includes(run))).toBe(true);
+});
+
+it('does not bind a date to a run when the saved workspace date identity differs', async () => {
+ vi.stubGlobal('fetch',vi.fn(async (url:string) => {
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') {
+   return new Response(JSON.stringify({target_trade_date:'20261015',plan_product:{run_id:'a'.repeat(32),sha256:'b'.repeat(64),consumed:true}}));
+  }
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/MANAGER_DATE_LOOKUP_IDENTITY_MISMATCH/)).toBeTruthy();
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
+});
+
+it('ignores an older date lookup after the date input changes again', async () => {
+ let complete!:(value:Response)=>void;
+ const run='a'.repeat(32);
+ vi.stubGlobal('fetch',vi.fn(async (url:string) => {
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') return await new Promise<Response>(resolve=>{complete=resolve;});
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ const input=screen.getByLabelText('目标交易日');
+ await fireEvent.update(input,'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ await fireEvent.update(input,'2026-10-17');
+ complete(new Response(JSON.stringify({target_trade_date:'20261016',plan_product:{run_id:run,sha256:'b'.repeat(64),consumed:true}})));
+ await waitFor(()=>expect(screen.getByText(/目标交易日已变更为 20261017/)).toBeTruthy());
+ expect(new URLSearchParams(window.location.search).get('target_date')).toBe('20261017');
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
+ expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-17');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/目标日 20261017 暂无可读取的已保存运行/)).toBeTruthy();
+ await waitFor(()=>expect((screen.getByRole('button',{name:'按日期查找已保存运行'}) as HTMLButtonElement).disabled).toBe(false));
+});
+
+const manualRun='b'.repeat(32);
+const deferredResponse=()=>{let resolve!:(value:Response)=>void;const promise=new Promise<Response>(r=>{resolve=r;});return {promise,resolve};};
+
+it.each(['late-success','late-503','late-no-product','late-identity-mismatch','late-json'] as const)('manual run submission wins over %s date lookup',async mode=>{
+ const lookup=deferredResponse();
+ let finishJson!:(value:unknown)=>void;
+ let jsonStarted!:()=>void;
+ const jsonReady=new Promise<void>(r=>{jsonStarted=r;});
+ const requests:string[]=[];
+ const identity={run_id:manualRun,target_date:'20261015',plan_sha256:'a'.repeat(64),raw_sha256:'b'.repeat(64),response_sha256:'c'.repeat(64),input_identity:'d'.repeat(64)};
+ const binding={identity,generation_id:'e'.repeat(64),profile_sha256:'f'.repeat(64),manifest_sha256:'1'.repeat(64)};
+ const descriptor={...binding,schema_version:'v5.m18.v2.descriptor.v1',run_id:manualRun,target_date:'20261015',pages_route:'/api/v4/manager/m18/v2/pages',status:'READY',generated_at:'2026-10-15T00:00:00Z'};
+ const overview={...binding,schema:'v5.m18.offline.v2.overview',content_chunks:1,sections:{stocks:{kind:'array',total:1,loaded_count:0,not_loaded_count:1,state:'NOT_LOADED'}}};
+ const page={...binding,schema:'v5.m18.offline.v2.detail',section:'stocks',selection:null,cursor:null,offset:0,matched_total:1,not_loaded_count:0,remaining_entries:0,next_cursor:null,entries:[{index:0,kind:'object',offset:0,bytes:64,sha256:'2'.repeat(64),value_state:'LOADED',value:{symbol:'HK.B0001',name:'B股测试行',status:'READY'}}]};
+ vi.stubGlobal('fetch',vi.fn(async(url:string)=>{
+  requests.push(url);
+  if(url==='/api/v4/manager/research/workspace?date=20261016&view=auto') return lookup.promise;
+  if(url==='/api/v4/manager/m18/v2?run_id='+manualRun) return new Response(JSON.stringify(descriptor));
+  if(url.startsWith('/api/v4/manager/m18/v2/overview?')) return new Response(JSON.stringify(overview));
+  if(url.startsWith('/api/v4/manager/m18/v2/sections?')) return new Response(JSON.stringify(page));
+  return new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503});
+ }));
+ render(SavedManagerResultView);
+ await screen.findByRole('alert');
+ const dateInput=screen.getByLabelText('目标交易日');
+ await fireEvent.update(dateInput,'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ if(mode==='late-json'){
+  lookup.resolve({ok:true,status:200,json:()=>{jsonStarted();return new Promise(resolve=>{finishJson=resolve;});}} as Response);
+  await jsonReady;
+ }
+ const runInput=screen.getByLabelText('运行 ID');
+ await fireEvent.update(runInput,manualRun);
+ await fireEvent.click(screen.getByRole('button',{name:'读取已保存结果'}));
+ await waitFor(()=>expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun));
+ expect(await screen.findByRole('row',{name:/HK\.B0001 · B股测试行/})).toBeTruthy();
+ expect(screen.getAllByText('目标日 20261015').length).toBeGreaterThan(0);
+ expect(screen.getByText('已切换到手动运行 ID 查询；先前日期查询已取消。')).toBeTruthy();
+ if(mode!=='late-json'){
+  if(mode==='late-503') lookup.resolve({ok:false,status:503,json:async()=>({})} as Response);
+  if(mode==='late-no-product') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261016'})} as Response);
+  if(mode==='late-identity-mismatch') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261015',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}})} as Response);
+  if(mode==='late-success') lookup.resolve({ok:true,status:200,json:async()=>({target_trade_date:'20261016',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}})} as Response);
+ } else finishJson({target_trade_date:'20261016',plan_product:{run_id:'a'.repeat(32),sha256:'c'.repeat(64),consumed:true}});
+ await waitFor(()=>expect((screen.getByLabelText('运行 ID') as HTMLInputElement).value).toBe(manualRun));
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBe(manualRun);
+ expect(new URLSearchParams(window.location.search).get('target_date')).toBe('20261015');
+ expect(new URLSearchParams(window.location.search).get('date')).toBe('20261015');
+ expect(screen.queryByRole('alert')).toBeNull();
+ expect(screen.getByRole('row',{name:/HK\.B0001 · B股测试行/})).toBeTruthy();
+ expect(screen.getAllByText('目标日 20261015').length).toBeGreaterThan(0);
+ expect(screen.queryByText(/已找到日期匹配的引用/)).toBeNull();
+});
+
 it('shows an ordinary V5 page and keeps missing API results visibly unconfirmed', async () => {
  vi.stubGlobal('fetch',vi.fn(async () => new Response(JSON.stringify({status:'CANNOT_CONFIRM',reason_codes:['MODULE_RESULT_NOT_AVAILABLE']}),{status:503})));
  render(SavedManagerResultView);
@@ -62,5 +177,11 @@ it('opens consumed announcement references by default and reuses the stock reaso
  await fireEvent.click(screen.getByRole('button',{name:'公告研究股票'}));
  expect(await screen.findByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeTruthy();
  expect(screen.queryByRole('heading',{name:'合成美股驱动公司 · HK.09876'})).toBeNull();
+ await fireEvent.update(screen.getByLabelText('目标交易日'),'2026-10-16');
+ await fireEvent.click(screen.getByRole('button',{name:'按日期查找已保存运行'}));
+ expect(await screen.findByText(/目标日 20261016 暂无可读取的已保存运行/)).toBeTruthy();
+ expect(screen.queryByRole('heading',{name:'01234 合成公告公司｜入选研究名单'})).toBeNull();
+ expect(screen.queryByRole('heading',{name:'合成超跌公司 · 04321 · 严格条件研究观察'})).toBeNull();
+ expect(new URLSearchParams(window.location.search).get('run_id')).toBeNull();
 });
 

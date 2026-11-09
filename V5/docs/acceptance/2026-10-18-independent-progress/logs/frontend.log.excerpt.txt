@@ -1,0 +1,61 @@
+Excerpt: first 38 and last 18 lines; middle omitted. Local root replaced with <TEST_ROOT>.
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> v3-5-web@0.1.0 test
+> vitest run --reporter=verbose
+
+
+ RUN  v4.1.10 <TEST_ROOT>/repo-91f1dbe/frontend
+
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > returns five fixed contributions and keeps the 02718 semantics human-readable 5ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > does not infer an individual join from a matching title or from an inexact ref 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > keeps request failure distinct from an exact lane with missing upstream sources 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > treats zero and empty backend source shapes as upstream missing 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > requires a per-stock locator and never promotes an envelope ref to a row join 2ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > rejects conflicting aliases and bare tickers, while ah_mapping remains non-identity data 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > preserves two-digit and three-digit D1 ranks instead of trimming zeroes 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > keeps d1_score neutral and cannot call it a prob_active score 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > does not choose between inconsistent d1_prob_active and prob_active fields 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > never treats an explanatory string as a D1 source reference 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > rejects a stale row date even when its source ref names the requested date 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > does not join failed lanes or failed source refs 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > fails closed when the stage row itself reports any known failure status 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > fails closed when an exact lane individual row reports a failure status 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > keeps missing or non-materialized stage and D1 rows upstream-missing 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > requires the stage row target date even when source references are exact 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > shows V4 HKEX acquisition and parse state without claiming a historical stage join 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > keeps parsed V4 facts available while retaining the no-stage-receipt boundary 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > keeps every known V4 failure status fail-closed across row and nested source fields 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > rejects missing or wrong direct V4 stage and market scope 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > marks duplicate exact-code V4 rows as ambiguous rather than upstream missing 0ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > projects morning_news articles and preserves the exact 09:40 boundary 1ms
+ ✓ src/manager-selection/adapters/stageReasonContributions.spec.ts > stage reason contribution adapter > deduplicates US background and marks later zsxq items as supplements 0ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > accepts a NOT_RUN owner projection through requestManagerWorkspace only when unknown coverage is explicit null 7ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > renders persisted daily US mapping fields for the matching target date without borrowing the retrospective seed 36ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > labels the retrospective target date, US source session, review date, and explicit priority versus watch tiers 36ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > validates the four US mapping assessment states and nullable count contract 4ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > accepts a valid cross-group score increase and makes the validated cards renderable 10ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > rejects score increases within the same evidence group 4ms
+ ✓ src/api/managerWorkspace.attention.spec.ts > Manager workspace evidence-state API contract > rejects an unknown state, illegal group mapping, and a decision missing required explanation fields 2ms
+
+[... middle omitted ...]
+
+ ❯ fixture src/manager-selection/__tests__/fixtures/issue8R2.fixture.ts:22:31
+ ❯ src/manager-selection/__tests__/researchSelectionLedger.spec.ts:103:13
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+Serialized Error: { errno: -2, code: 'ENOENT', syscall: 'open', path: '<TEST_ROOT>/repo-91f1dbe/frontend/src/manager-selection/__tests__/fixtures/issue8R2.ownerObservations.json' }
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[14/14]⎯
+
+
+ Test Files  5 failed | 54 passed | 2 skipped (61)
+      Tests  14 failed | 471 passed | 6 skipped (491)
+   Start at  11:36:55
+   Duration  26.53s (transform 11.54s, setup 0ms, import 33.94s, tests 83.31s, environment 47.41s)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

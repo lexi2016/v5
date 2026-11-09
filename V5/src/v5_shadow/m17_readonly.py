@@ -179,6 +179,15 @@ def read_m17(config, *, source_trade_date, run_id):
     if len(child.stdout) > MAX_RESPONSE_BYTES:
         raise ValueError('M17_READONLY_RESPONSE_LIMIT')
     if child.returncode:
+        # The isolated worker emits only a bounded, allowlisted reason code;
+        # preserve that cause instead of collapsing every rejection to one code.
+        try:
+            failure = json.loads(child.stdout)
+            code = failure.get('reason_code') if isinstance(failure, dict) else None
+        except (UnicodeError, json.JSONDecodeError):
+            code = None
+        if isinstance(code, str) and re.fullmatch(r'M17_READONLY_[A-Z0-9_]{1,80}', code):
+            raise ValueError(code)
         raise ValueError('M17_READONLY_READER_REJECTED')
     try:
         result = json.loads(child.stdout)
@@ -225,9 +234,12 @@ def main(argv=None):
             result = read_m17(json.loads(raw), source_trade_date=args.source_trade_date, run_id=args.run_id)
         print(canonical_bytes(result).decode())
         return 0
-    except (OSError, ValueError, KeyError, TypeError):
-        # Never publish private config paths or raw child tracebacks.
-        print('{"status":"REJECTED","reason_code":"M17_READONLY_REFERENCE_REJECTED"}')
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        # Return only a stable reason code; never expose paths or child tracebacks.
+        code = str(error)
+        if not re.fullmatch(r'M17_READONLY_[A-Z0-9_]{1,80}', code):
+            code = 'M17_READONLY_REFERENCE_REJECTED'
+        print(json.dumps({'status': 'REJECTED', 'reason_code': code}, separators=(',', ':')))
         return 2
 
 

@@ -1,19 +1,42 @@
 {
-  "runtime_root": "/var/tmp/v5-runtime",
-  "composition": "/var/tmp/v5/composition.json",
+  "runtime_root": "/REPLACE_WITH_ABSOLUTE_USER_OWNED_PATH/v5-runtime",
+  "composition": "/REPLACE_WITH_ABSOLUTE_USER_OWNED_PATH/v5-composition.json",
   "module_api": {
-    "host": "127.0.0.1",
-    "mode": "READ_ONLY"
+    "schema_version": "v5.module_api.v1",
+    "module_id": "source_bundle",
+    "release_id": "p0-readonly-example",
+    "data_root": "/REPLACE_WITH_ABSOLUTE_USER_OWNED_PATH/v5-module-data",
+    "routes": [
+      "/api/v5/source-bundle/status",
+      "/api/v5/research/lane",
+      "/api/v5/research/wechat/materials",
+      "/api/v3/research/day",
+      "/api/v1/runs/date-list",
+      "/api/v5/source-bundle/a-stage-saved",
+      "/api/v5/source-bundle/manager-public-research",
+      "/api/v5/source-bundle/intraday-research",
+      "/api/v5/source-bundle/video-fupan",
+      "/api/v5/source-bundle/research-intelligence",
+      "/api/v5/manager/close-recapture",
+      "/api/v5/source-bundle/hk-preselection",
+      "/api/v5/source-bundle/hk-close-review",
+      "/api/v5/source-bundle/a-close-replay",
+      "/api/v5/source-bundle/hk-stage-observed",
+      "/api/v5/source-bundle/capture-status"
+    ]
   },
   "daily": {
     "enabled": false,
-    "bundle_root": "/var/tmp/v5/daily",
-    "ledger_root": "/var/tmp/v5/ledger",
+    "bundle_root": "/REPLACE_WITH_ABSOLUTE_USER_OWNED_PATH/v5-daily",
+    "ledger_root": "/REPLACE_WITH_ABSOLUTE_USER_OWNED_PATH/v5-ledger",
     "close_recapture": {
       "enabled": false
     },
     "hk_preselection": {
       "enabled": false
     }
+  },
+  "source_bundle": {
+    "enabled": false
   }
 }

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { runInNewContext } from 'node:vm';
+import ts from 'typescript';
 
 const source = readFileSync(new URL('../src/views/SavedManagerResultView.vue', import.meta.url), 'utf8');
 const template = source.slice(source.indexOf('<template>'), source.indexOf('</template>\n<style'));
@@ -12,9 +13,10 @@ function runControls(href) {
  const window={location:new URL(href),history:{replaceState(_state,_title,url){window.location=new URL(url);}}};
  const requests=[];
  const setup=source.slice(source.indexOf('const query ='),source.indexOf('const state ='));
- const reload=source.match(/async function reload\(\) \{[\s\S]*?\n\}/)?.[0];
+ const reload=source.match(/async function reload(?:\([^)]*\))? \{[\s\S]*?\n\}/)?.[0];
  assert.ok(reload,'the run reload handler must exist');
- const controls=runInNewContext(setup+'\n'+reload+'\n({requestedRun,reload})',{URL,URLSearchParams,window,ref:value=>({value}),session:{load:async run=>requests.push(run)}});
+ const executable=ts.transpile(setup+'\n'+reload+'\n({requestedRun,reload})',{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.None});
+ const controls=runInNewContext(executable,{URL,URLSearchParams,window,ref:value=>({value}),computed:fn=>({get value(){return fn();}}),session:{load:async run=>requests.push(run)}});
  return {...controls,window,requests};
 }
 test('no run selector starts blank and requests the default without adding a historical run',async()=>{
@@ -58,5 +60,9 @@ test('the selected result exposes its verified date and run without enabling mis
   assert.match(template, /目标日\s*\{\{\s*state\.descriptor\.target_date\s*\}\}/);
   assert.match(template, /<button type="button" aria-controls="m07-saved-stage" @click="openAStage">A 股阶段选股 · M07 已保存结果<\/button>/);
   assert.match(template, /<a class="entry-nav-link" href="\?view=research">研报决策台<\/a>/);
-  assert.match(template, /CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。\{\{ state.error \}\}/);
+  assert.match(template, /CANNOT_CONFIRM · 当前请求未能确认，未显示旧结果。/);
+  assert.match(template, /explainError\(state\.error\)/);
+  assert.match(source, /function explainError\(raw:string\)/);
+  assert.match(source, /当前没有可核验的已保存产物或来源绑定/);
+  assert.match(template, /<details v-if="state\.error"><summary>技术诊断（原始错误）<\/summary><pre>\{\{ state\.error \}\}<\/pre><\/details>/);
 });

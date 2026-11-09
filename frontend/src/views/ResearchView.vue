@@ -39,11 +39,17 @@ const wechatArticleCount = computed(() => {
 
 function validateResearchDate(result: ResearchLane, expectedDate?: string) {
   const actualDate = result?.research_date;
+  if (result?.status === "NOT_MATERIALIZED" && (actualDate === null || actualDate === "")) {
+    if (expectedDate && result.requested_date !== expectedDate) {
+      throw new Error(`研报决策台请求日期证据错误：响应 requested_date=${String(result.requested_date ?? "CANNOT_CONFIRM")}，请求=${expectedDate}，未展示该响应。`);
+    }
+    return;
+  }
   if (typeof actualDate !== "string" || !actualDate) {
-    throw new Error("研报决策台日期证据错误：响应缺少 research_date，未展示该响应。");
+    throw new Error("研报决策台日期证据错误：响应缺少真实来源日期，未展示该响应。");
   }
   if (expectedDate && actualDate !== expectedDate) {
-    throw new Error(`研报决策台日期证据错误：响应 research_date=${actualDate}，请求=${expectedDate}，未展示该响应。`);
+    throw new Error(`研报决策台日期证据错误：响应来源日期=${actualDate}，请求=${expectedDate}，未展示该响应。`);
   }
 }
 
@@ -116,7 +122,7 @@ onMounted(() => {
 
     <p data-testid="research-date-identity" class="research-message" role="status">
       所选日期：{{ archiveDate }} · 请求模式：{{ requestedMode }} · 实际来源日期：{{ payload?.research_date || "CANNOT_CONFIRM" }}
-      <strong v-if="payload && payload.research_date !== archiveDate"> · 不是所选日期数据；仅展示显式 latest 读取的来源日。</strong>
+      <strong v-if="payload?.research_date && payload.research_date !== archiveDate"> · 来源日期与所选日期不同；仅展示显式 latest 读取的来源日。</strong>
     </p>
     <p v-if="updateDiagnostic" class="research-message" role="status"><strong>{{ updateDiagnostic.state }}</strong> · <span>{{ updateDiagnostic.message }}</span></p>
     <p v-if="loading" class="research-message" role="status">正在读取研报决策台。</p>

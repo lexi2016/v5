@@ -7,6 +7,7 @@ identity remain separate.
 from __future__ import annotations
 
 from datetime import datetime, timezone
+import re
 
 from .digests import sha256_json
 from .module_artifacts import publish_generation
@@ -18,7 +19,9 @@ ROUTE = "/api/v4/manager/research/workspace"
 def build_manager_record(*, config, payload, source_input_sha256, date, view="auto"):
     if not isinstance(payload, dict):
         raise ValueError("MANAGER_PAYLOAD_REQUIRED")
-    if not isinstance(source_input_sha256, str):
+    # Missing or malformed source identity is an admission failure, not a
+    # lower-level digest syntax error. Keep one stable public error contract.
+    if not isinstance(source_input_sha256, str) or re.fullmatch(r"[0-9a-f]{64}", source_input_sha256) is None:
         raise ValueError("MANAGER_SOURCE_IDENTITY_REQUIRED")
     sha(source_input_sha256)
     query = {"date": date, "view": view}
