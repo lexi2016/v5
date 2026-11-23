@@ -1,0 +1,103 @@
+{
+  "schema": "MORNING_BOARD_COLD_RESTORE_V1",
+  "roles": {
+    "workflow": {
+      "remote_id": "19R4at74gfoP_XtR2gw4voQLV9qNHY8c3",
+      "file_name": "PAR_BACKUP_V2_905e83970fd93b6ea6f19642.zip",
+      "sha256": "010e237c8c6f31f4c73ab84b440194755ac3fb1b81f8bd6c9b9b26a0ab997894",
+      "bytes": 53507
+    },
+    "service": {
+      "remote_id": "17pQlr-o-0-c0cGppoq7HH_8Uj5JGObRc",
+      "file_name": "PAR_BACKUP_V2_08ee7e5672b5ecb9feacbb41.zip",
+      "sha256": "dd4d2688dc1fe2be66f018adfedf94a93f1a55e6ebfa2630d8da91d6e53e7548",
+      "bytes": 62401
+    },
+    "contract": {
+      "remote_id": "1A74H1ukvGeQRAwRjkXM7PFKaATkaJEWB",
+      "file_name": "PAR_BACKUP_V2_dbe11f6a772162ca67839109.zip",
+      "sha256": "c384a10deb8123438dd7028ebebb543d34abf4abe68a5db9c342e205c71e5336",
+      "bytes": 3068949
+    },
+    "patch": {
+      "remote_id": "1ghIY_29NDkWfTah1MAYMaZq1y9LGbj4f",
+      "file_name": "PAR_BACKUP_V2_e2d5b40e82825d436b7dcfdc.zip",
+      "bytes": 12256,
+      "sha256": "f7df08590e439adb19f217639e42ba5ad49e1ef2877e1f45e401218907198103"
+    }
+  },
+  "files": [
+    {
+      "role": "workflow",
+      "destination": "workflow_api_smoke_20261120/workflow_runtime_20261119/runtime.py",
+      "member": "backup_runtime_20261112/frozen_project/original21_cloud_wiring_20261119/dashboard_continue_20261117/workflow_runtime_20261119/runtime.py",
+      "bytes": 6548,
+      "sha256": "98a649d519ffac83db1968d23d5b79b30d3bb3e54b72281f50ea954b6d80564d"
+    },
+    {
+      "role": "workflow",
+      "destination": "workflow_api_smoke_20261120/workflow_runtime_20261119/BINDINGS.json",
+      "member": "backup_runtime_20261112/frozen_project/original21_cloud_wiring_20261119/dashboard_continue_20261117/workflow_runtime_20261119/BINDINGS.json",
+      "bytes": 3087,
+      "sha256": "bafc50fa7d8444717585aaa9641f50fcc4d146adeb3c3c34be80abec8e32a434"
+    },
+    {
+      "role": "workflow",
+      "destination": "workflow_api_smoke_20261120/workflow_runtime_20261119/preview.py",
+      "member": "backup_runtime_20261112/frozen_project/original21_cloud_wiring_20261119/dashboard_continue_20261117/workflow_runtime_20261119/preview.py",
+      "bytes": 1918,
+      "sha256": "4afb2267e523b714b68fd0ea4e07a0def4dafc91c831360eddd048dddda38088"
+    },
+    {
+      "role": "service",
+      "destination": "workflow_api_smoke_20261120/full_board_nov18_v11/serve.py",
+      "member": "backup_runtime_20261112/frozen_project/top200_history44_ui/dashboard_continue_20261117/top200_history44_ui_20261118/serve.py",
+      "bytes": 5555,
+      "sha256": "bdc5000055889db3a7a118c8c7a2ece5d51e01588063d8c212b8cd4d87beaba3"
+    },
+    {
+      "role": "contract",
+      "destination": "workflow_api_smoke_20261120/node21_restore_20261118/overlay/local/public/research-system/timeline-data/contract.json",
+      "member": "backup_runtime_20261112/frozen_project/dashboard_continue_20261117/full_board_nov18_v10/overlay/local/public/research-system/timeline-data/contract.json",
+      "bytes": 26187,
+      "sha256": "45661c39fc24b661c90cfa50894fa599896a91d0d6a91abe75d46cd096439cb5"
+    },
+    {
+      "role": "patch",
+      "destination": "morning_board_wiring_20261123/morning_projection.py",
+      "member": "backup_runtime_20261112/frozen_project/morning_board_wiring_20261123/morning_projection.py",
+      "bytes": 2744,
+      "sha256": "aa6989dba93bc56730bb6aebc44a20a21068df1a1794e02b986bb984ded602ba"
+    },
+    {
+      "role": "patch",
+      "destination": "morning_board_wiring_20261123/test_projection.py",
+      "member": "backup_runtime_20261112/frozen_project/morning_board_wiring_20261123/test_projection.py",
+      "bytes": 2596,
+      "sha256": "7637eefabb09eb96cdf21bf249d32e5d4df6c7623cd32b0cdcdaa3715300d775"
+    },
+    {
+      "role": "patch",
+      "destination": "morning_board_wiring_20261123/verify_original_http.py",
+      "member": "backup_runtime_20261112/frozen_project/morning_board_wiring_20261123/verify_original_http.py",
+      "bytes": 4502,
+      "sha256": "26c88faccefccb96ae09d267099b5eea8fb72007ecc08bb3021ff107a365ab67"
+    },
+    {
+      "role": "patch",
+      "destination": "morning_board_wiring_20261123/HTTP_SMOKE_RECEIPT.json",
+      "member": "backup_runtime_20261112/frozen_project/morning_board_wiring_20261123/HTTP_SMOKE_RECEIPT.json",
+      "bytes": 366,
+      "sha256": "0ce293557790d9713fcaf0e21fa468d03d3390d181cb9684d500f1d50eabca8d"
+    }
+  ],
+  "exact_checker_receipt": {
+    "destination": "FIXED_SLOT_CHECK_20261123T001000Z_MORNING_DELIVERY.json",
+    "bytes": 900,
+    "sha256": "348e9e6de2156de53558c0f603efb9f6dd99baae84482a49d6fa64a1d7d32f19"
+  },
+  "prior_index_id": "1WnNzdafhhhz4fmPPCy1uEYjoBxeyaiUR",
+  "prior_index_sha256": "1322a5d0364c33bb7ababf5994b58f33544efd008fe186052c9e286e02adb22c",
+  "git_patch_commit": "728958b046ef93c5a692e722951b334113c0e243",
+  "scope": "V5_EXISTING_BOARD_HTTP_VERIFY_ONLY"
+}
