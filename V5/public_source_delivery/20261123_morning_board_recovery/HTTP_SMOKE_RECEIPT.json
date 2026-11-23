@@ -1,0 +1,12 @@
+{
+  "exact_original_api": true,
+  "checks_passed": 6,
+  "nodes": 21,
+  "natural_verified_count": 0,
+  "same_day_0810": "CHECK_BLOCKED_NOT_EXECUTED",
+  "0850": "UNKNOWN_NOT_YET_CHECKED",
+  "production": false,
+  "new_owner": false,
+  "unrelated_nodes_unchanged": true,
+  "composed_runtime_sha256": "08392dfaa4c56dd9cf2efe4d6b2638434d5a259e83668e3fbbe84f2b09981fea"
+}
