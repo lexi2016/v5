@@ -1,0 +1,33 @@
+{
+  "schema": "V5_M07_1300_SYNTHETIC_V1",
+  "stage": "STAGE_1300_1315",
+  "window_bjt": "13:00-13:15",
+  "cutoff_bjt": "13:15:00",
+  "fixture_business_date": "20261012",
+  "a_side_quotes": 3,
+  "excluded_lane": "HK_EXECUTION_NOT_TESTED",
+  "rejected": [
+    {
+      "case": "missed_cutoff",
+      "reason": "M07_RECORDING_OUTSIDE_WINDOW_OR_FUTURE"
+    },
+    {
+      "case": "lunch_not_stage",
+      "reason": "M07_RECORDING_OUTSIDE_WINDOW_OR_FUTURE"
+    },
+    {
+      "case": "no_auction_slack",
+      "reason": "M07_ORIGINAL_CUTOFF_MISMATCH"
+    },
+    {
+      "case": "wrong_raw_receipt",
+      "reason": "M07_RAW_RECEIPT_BINDING"
+    }
+  ],
+  "owner_closure_sha256": "dc63874f8d9e8307ee30a50d398d3c31d3fbac0d124702786b240d7059c6c301",
+  "admit_sha256": "01c791dee6547e5e1a54ef3c412ac3102dfcafdf7e78be34c702b053f6fb5791",
+  "fixture_sha256": "692ece6190c4dd721ca375abb37d370cde60f8b26f9376f3289fed0fb6a32408",
+  "market_requests": 0,
+  "business_start": false,
+  "formal": false
+}
