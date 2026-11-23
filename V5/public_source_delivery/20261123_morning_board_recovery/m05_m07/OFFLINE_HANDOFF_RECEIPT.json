@@ -1,0 +1,16 @@
+{
+  "schema": "M05_M07_EXACT_OFFLINE_HANDOFF_V1",
+  "release_sha256": "f77c0ead2053a15cbd089c02cce2cf0c7bea59ac2fb0e86ad2cc032c9d87adbb",
+  "runtime_files_verified": 50,
+  "original_tests_files_verified": 5,
+  "manifest_trios_match": 4,
+  "written_rows": 253,
+  "reader_unique_codes": 1,
+  "changed_after_read": 0,
+  "other_day_denied": true,
+  "synthetic_day": "20261008",
+  "full_six_lane_test": "BLOCKED_EXISTING_PYARROW_MISSING",
+  "production": false,
+  "live_requests": 0,
+  "actual_today_pool": false
+}
