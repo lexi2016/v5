@@ -1,0 +1,40 @@
+{
+  "schema": "M05_PYARROW_ISOLATED_TEST_RECEIPT_V1",
+  "recorded_utc": "2026-11-23T02:54:42.246765+00:00",
+  "python": "3.12.14",
+  "pyarrow": "22.0.0",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "venv_only": true,
+  "base_python_pyarrow": false,
+  "wheel": "pyarrow-22.0.0-cp312-cp312-manylinux_2_28_x86_64.whl",
+  "wheel_sha256": "c6c791b09c57ed76a18b03f2631753a4960eefbbca80f846da8baefc6491fcfe",
+  "pinned_original_m05_sha256": "f77c0ead2053a15cbd089c02cce2cf0c7bea59ac2fb0e86ad2cc032c9d87adbb",
+  "original_runtime_files_verified": 50,
+  "original_test_files_verified": 5,
+  "disk_parquet_roundtrip": "PASS",
+  "extra_bytesio_smoke": "ROWS_MATCHED_BUT_PROCESS_ABORTED_AT_SHUTDOWN_EXIT_134_NOT_A_PASS",
+  "test_runs": [
+    {
+      "name": "ORIGINAL_M05_TESTS.txt",
+      "sha256": "86dbcdc5f2b68544aba88eb0f03f84f5aa9c94fc93479e66885aaa9a392d3e6b",
+      "count": 58,
+      "passed": 58,
+      "exit": 0,
+      "duration_seconds": 99.19,
+      "original_six_lane_writer_test": "PASS"
+    },
+    {
+      "name": "SIX_AND_V192.txt",
+      "sha256": "83fcfb090c0024503f3ab5259d30f6c04108033863d30977e27d4b0673299053",
+      "count": 7,
+      "passed": 7,
+      "exit": 0,
+      "duration_seconds": 24.673,
+      "original_six_lane_writer_test": "PASS"
+    }
+  ],
+  "production": false,
+  "natural_execution": false,
+  "m07_admission": "NOT_TESTED_BY_M05_SUITE"
+}
