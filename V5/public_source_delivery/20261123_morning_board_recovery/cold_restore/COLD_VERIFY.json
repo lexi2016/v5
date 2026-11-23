@@ -1,0 +1,24 @@
+{
+  "schema": "MORNING_BOARD_COLD_RESTORE_RESULT_V1",
+  "manifest_sha256": "8294faa8011c6d805fbaa30e7d941833859a0f85e280a9e847116f626378c98b",
+  "four_verified_zip_carriers": 4,
+  "exact_original_inputs": 6,
+  "empty_stage_root": true,
+  "unit_tests": 6,
+  "http": {
+    "exact_original_api": true,
+    "checks_passed": 6,
+    "nodes": 21,
+    "natural_verified_count": 0,
+    "same_day_0810": "CHECK_BLOCKED_NOT_EXECUTED",
+    "0850": "UNKNOWN_NOT_YET_CHECKED",
+    "production": false,
+    "new_owner": false,
+    "unrelated_nodes_unchanged": true,
+    "composed_runtime_sha256": "08392dfaa4c56dd9cf2efe4d6b2638434d5a259e83668e3fbbe84f2b09981fea"
+  },
+  "same_as_original_smoke_receipt": true,
+  "production": false,
+  "actual_0810_run": false,
+  "remote_reuploads": 0
+}
