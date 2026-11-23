@@ -1,0 +1,22 @@
+{
+  "schema": "D20_ISOLATED_BOARD_CANDIDATE_V1",
+  "target_date": "20261120",
+  "ordinary_tests_passed": 2,
+  "optimized_tests_passed": 2,
+  "original_nodes": 21,
+  "d20_http": 200,
+  "top200_count": 200,
+  "rankable": 5566,
+  "pool": 5575,
+  "unknown": 9,
+  "d19_unchanged": true,
+  "wrong_unbound_day_http": 422,
+  "official_8785": "CONNECTION_REFUSED",
+  "production": false,
+  "natural_acceptance": false,
+  "board_core_asset_modified": false,
+  "d20_groups": "UNKNOWN",
+  "d20_chart": "UNKNOWN",
+  "d20_score": "UNKNOWN",
+  "top_sha256": "9e6626a38b5df40d404d3e8a7a6f10c7b7b2c5e3df2d5c658e277c5df4d556b2"
+}
