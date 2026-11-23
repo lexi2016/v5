@@ -1,0 +1,13 @@
+{
+  "schema": "D20_BOARD_PREVIEW_LABEL_V2_RECEIPT",
+  "normal_http_tests_passed": 2,
+  "optimized_http_tests_passed": 2,
+  "pre_fix_regression_failed": true,
+  "dom_cases_passed": 3,
+  "d20_rows": 200,
+  "d19_rows": 200,
+  "d18_rows": 0,
+  "preview_sha256": "805baaa37b4571e0ea10f3780fb0e2eacb1555ec85da33f5dbd0f3b4a5e3be7e",
+  "production": false,
+  "natural_acceptance": false
+}
